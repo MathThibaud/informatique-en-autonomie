@@ -3,3 +3,6 @@ site/
 .cache/
 __pycache__/
 .DS_Store
+# copies de synchronisation macOS/iCloud
+* [0-9].*
+* [0-9]

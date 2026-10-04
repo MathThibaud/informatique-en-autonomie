@@ -430,6 +430,8 @@ class Site:
         if self.out.exists():
             for p in self.out.glob('**/*.md'):
                 p.unlink()
+            for p in self.out.glob('**/* [0-9].*'):   # copies de synchronisation iCloud
+                p.unlink()
         for page, md in self.pages.items():
             md = self.finalize(md, page)
             p = DOCS / page
