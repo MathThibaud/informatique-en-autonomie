@@ -7,5 +7,3 @@ Frise chronologique — de la photographie à Internet
 Frise chronologique — du Web aux objets connectés
 
 ![](figures/c771f5f3af2f7d07.svg){ .tikz loading=lazy }
-
-QQSLOTA0QQ

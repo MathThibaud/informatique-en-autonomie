@@ -67,5 +67,3 @@ Chapitre 12 — Les $k$ plus proches voisins
 
 *Iris virginica* — Frank Mayfield — CC BY-SA 2.0  
 <https://commons.wikimedia.org/wiki/File:Iris_virginica.jpg>
-
-QQSLOTA0QQ

@@ -85,5 +85,3 @@ Chapitre 8 — Informatique embarquée et objets connectés
 
 *Carte micro:bit (v2)* — SimonWaldherr — CC BY 4.0  
 <https://commons.wikimedia.org/wiki/File:BBC_micro_bit_v2.jpg>
-
-QQSLOTA0QQ

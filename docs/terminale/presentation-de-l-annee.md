@@ -127,5 +127,3 @@ Comme les épreuves ont lieu **en fin d’année**, on dispose de **toute l’an
     - le site de **David Roche** : `pixees.fr/informatiquelycee`.
 
 *Une année exigeante, mais passionnante. À la fin, vous saurez vraiment programmer — et penser comme un informaticien.*
-
-QQSLOTA0QQ
