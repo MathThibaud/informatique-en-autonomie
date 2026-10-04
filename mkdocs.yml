@@ -1,0 +1,348 @@
+site_name: Informatique en autonomie
+site_description: Cours d'informatique au lycée (SNT, NSI) — cours, exercices corrigés, TP
+site_author: Mathieu Thibaud
+site_url: https://maththibaud.github.io/informatique-en-autonomie/
+repo_url: https://github.com/MathThibaud/informatique-en-autonomie
+repo_name: informatique-en-autonomie
+edit_uri: ''
+copyright: © 2026 Mathieu Thibaud — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr">CC BY-NC-SA 4.0</a>
+theme:
+  name: material
+  language: fr
+  custom_dir: overrides
+  font: false
+  logo: assets/favicon.svg
+  favicon: assets/favicon-32.png
+  palette:
+  - media: '(prefers-color-scheme: dark)'
+    scheme: slate
+    primary: custom
+    accent: custom
+    toggle:
+      icon: material/weather-sunny
+      name: Passer en mode clair
+  - media: '(prefers-color-scheme: light)'
+    scheme: default
+    primary: custom
+    accent: custom
+    toggle:
+      icon: material/weather-night
+      name: Passer en mode sombre
+  features:
+  - navigation.tabs
+  - navigation.tabs.sticky
+  - navigation.indexes
+  - navigation.top
+  - navigation.footer
+  - navigation.tracking
+  - navigation.instant
+  - navigation.instant.progress
+  - toc.follow
+  - search.highlight
+  - search.suggest
+  - content.code.copy
+extra_css:
+- stylesheets/v3.css
+extra_javascript:
+- javascripts/mathjax.js
+- https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+markdown_extensions:
+- abbr
+- attr_list
+- md_in_html
+- tables
+- def_list
+- footnotes
+- admonition
+- toc:
+    permalink: '#'
+    toc_depth: 3
+- pymdownx.details
+- pymdownx.superfences: {}
+- pymdownx.highlight:
+    anchor_linenums: false
+    use_pygments: true
+- pymdownx.inlinehilite
+- pymdownx.arithmatex:
+    generic: true
+    inline_syntax:
+    - dollar
+    block_syntax:
+    - dollar
+- pymdownx.emoji:
+    emoji_index: !!python/name:material.extensions.emoji.twemoji
+    emoji_generator: !!python/name:material.extensions.emoji.to_svg
+- pymdownx.tasklist:
+    custom_checkbox: true
+- pymdownx.caret
+- pymdownx.tilde
+plugins:
+- search:
+    lang: fr
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
+extra:
+  generator: false
+nav:
+- Accueil: index.md
+- Seconde:
+  - Accueil Seconde: seconde/index.md
+  - Présentation de l'année: seconde/presentation-de-l-annee.md
+  - Frise chronologique: seconde/frise-chronologique.md
+  - 1. Les bases de la programmation Python:
+    - seconde/01-les-bases-de-la-programmation-python/index.md
+    - Cours: seconde/01-les-bases-de-la-programmation-python/cours.md
+    - Exercices: seconde/01-les-bases-de-la-programmation-python/exercices.md
+  - 'Complément : dessiner avec la tortue':
+    - seconde/dessiner-avec-la-tortue/index.md
+    - Cours: seconde/dessiner-avec-la-tortue/cours.md
+    - Exercices: seconde/dessiner-avec-la-tortue/exercices.md
+  - 2. Les réseaux sociaux:
+    - seconde/02-les-reseaux-sociaux/index.md
+    - Cours: seconde/02-les-reseaux-sociaux/cours.md
+    - Exercices: seconde/02-les-reseaux-sociaux/exercices.md
+  - 3. La photographie numérique:
+    - seconde/03-la-photographie-numerique/index.md
+    - Cours: seconde/03-la-photographie-numerique/cours.md
+    - Exercices: seconde/03-la-photographie-numerique/exercices.md
+  - 4. Le Web:
+    - seconde/04-le-web/index.md
+    - Cours: seconde/04-le-web/cours.md
+    - Exercices: seconde/04-le-web/exercices.md
+  - 5. Les données structurées et leur traitement:
+    - seconde/05-les-donnees-structurees-et-leur-traiteme/index.md
+    - Cours: seconde/05-les-donnees-structurees-et-leur-traiteme/cours.md
+    - Exercices: seconde/05-les-donnees-structurees-et-leur-traiteme/exercices.md
+  - 6. Internet:
+    - seconde/06-internet/index.md
+    - Cours: seconde/06-internet/cours.md
+    - Exercices: seconde/06-internet/exercices.md
+  - 7. Localisation, cartographie et mobilité:
+    - seconde/07-localisation-cartographie-et-mobilite/index.md
+    - Cours: seconde/07-localisation-cartographie-et-mobilite/cours.md
+    - Exercices: seconde/07-localisation-cartographie-et-mobilite/exercices.md
+  - 8. Informatique embarquée et objets connectés:
+    - seconde/08-informatique-embarquee-et-objets-connect/index.md
+    - Cours: seconde/08-informatique-embarquee-et-objets-connect/cours.md
+    - Exercices: seconde/08-informatique-embarquee-et-objets-connect/exercices.md
+  - Lexique: seconde/lexique.md
+  - Crédits iconographiques: seconde/credits.md
+- Première:
+  - Accueil Première: premiere/index.md
+  - Présentation de l'année: premiere/presentation-de-l-annee.md
+  - Charte d'usage de l'intelligence artificielle: premiere/charte.md
+  - 1. Les bases de la programmation Python:
+    - premiere/01-les-bases-de-la-programmation-python/index.md
+    - Activités préparatoires: premiere/01-les-bases-de-la-programmation-python/activites.md
+    - Cours: premiere/01-les-bases-de-la-programmation-python/cours.md
+    - Exercices: premiere/01-les-bases-de-la-programmation-python/exercices.md
+    - TP et projets: premiere/01-les-bases-de-la-programmation-python/tp.md
+    - Défis Advent of Code: premiere/01-les-bases-de-la-programmation-python/defis.md
+  - 'Complément : dessiner avec la tortue':
+    - premiere/dessiner-avec-la-tortue/index.md
+    - Activités préparatoires: premiere/dessiner-avec-la-tortue/activites.md
+    - Cours: premiere/dessiner-avec-la-tortue/cours.md
+    - Exercices: premiere/dessiner-avec-la-tortue/exercices.md
+    - TP et projets: premiere/dessiner-avec-la-tortue/tp.md
+  - 2. Le binaire et l'écriture des nombres:
+    - premiere/02-le-binaire-et-l-ecriture-des-nombres/index.md
+    - Activités préparatoires: premiere/02-le-binaire-et-l-ecriture-des-nombres/activites.md
+    - Cours: premiere/02-le-binaire-et-l-ecriture-des-nombres/cours.md
+    - Exercices: premiere/02-le-binaire-et-l-ecriture-des-nombres/exercices.md
+    - TP et projets: premiere/02-le-binaire-et-l-ecriture-des-nombres/tp.md
+    - Défis Advent of Code: premiere/02-le-binaire-et-l-ecriture-des-nombres/defis.md
+  - 3. Les types construits:
+    - premiere/03-les-types-construits/index.md
+    - Activités préparatoires: premiere/03-les-types-construits/activites.md
+    - Cours: premiere/03-les-types-construits/cours.md
+    - Exercices: premiere/03-les-types-construits/exercices.md
+    - TP et projets: premiere/03-les-types-construits/tp.md
+    - Défis Advent of Code: premiere/03-les-types-construits/defis.md
+  - '4. Algorithmique : le parcours séquentiel':
+    - premiere/04-algorithmique-le-parcours-sequentiel/index.md
+    - Activités préparatoires: premiere/04-algorithmique-le-parcours-sequentiel/activites.md
+    - Cours: premiere/04-algorithmique-le-parcours-sequentiel/cours.md
+    - Exercices: premiere/04-algorithmique-le-parcours-sequentiel/exercices.md
+    - TP et projets: premiere/04-algorithmique-le-parcours-sequentiel/tp.md
+    - Défis Advent of Code: premiere/04-algorithmique-le-parcours-sequentiel/defis.md
+  - 5. Spécifier et mettre au point ses programmes:
+    - premiere/05-specifier-et-mettre-au-point-ses-program/index.md
+    - Activités préparatoires: premiere/05-specifier-et-mettre-au-point-ses-program/activites.md
+    - Cours: premiere/05-specifier-et-mettre-au-point-ses-program/cours.md
+    - Exercices: premiere/05-specifier-et-mettre-au-point-ses-program/exercices.md
+    - TP et projets: premiere/05-specifier-et-mettre-au-point-ses-program/tp.md
+    - Défis Advent of Code: premiere/05-specifier-et-mettre-au-point-ses-program/defis.md
+  - 6. Les algorithmes de tri:
+    - premiere/06-les-algorithmes-de-tri/index.md
+    - Activités préparatoires: premiere/06-les-algorithmes-de-tri/activites.md
+    - Cours: premiere/06-les-algorithmes-de-tri/cours.md
+    - Exercices: premiere/06-les-algorithmes-de-tri/exercices.md
+    - TP et projets: premiere/06-les-algorithmes-de-tri/tp.md
+    - Défis Advent of Code: premiere/06-les-algorithmes-de-tri/defis.md
+  - 7. La recherche dichotomique:
+    - premiere/07-la-recherche-dichotomique/index.md
+    - Activités préparatoires: premiere/07-la-recherche-dichotomique/activites.md
+    - Cours: premiere/07-la-recherche-dichotomique/cours.md
+    - Exercices: premiere/07-la-recherche-dichotomique/exercices.md
+    - TP et projets: premiere/07-la-recherche-dichotomique/tp.md
+    - Défis Advent of Code: premiere/07-la-recherche-dichotomique/defis.md
+  - 8. Les données en tables:
+    - premiere/08-les-donnees-en-tables/index.md
+    - Activités préparatoires: premiere/08-les-donnees-en-tables/activites.md
+    - Cours: premiere/08-les-donnees-en-tables/cours.md
+    - Exercices: premiere/08-les-donnees-en-tables/exercices.md
+    - TP et projets: premiere/08-les-donnees-en-tables/tp.md
+    - Défis Advent of Code: premiere/08-les-donnees-en-tables/defis.md
+  - 9. Architecture des ordinateurs et systèmes d'exploitation:
+    - premiere/09-architecture-des-ordinateurs-et-systemes/index.md
+    - Activités préparatoires: premiere/09-architecture-des-ordinateurs-et-systemes/activites.md
+    - Cours: premiere/09-architecture-des-ordinateurs-et-systemes/cours.md
+    - Exercices: premiere/09-architecture-des-ordinateurs-et-systemes/exercices.md
+    - TP et projets: premiere/09-architecture-des-ordinateurs-et-systemes/tp.md
+    - Défis Advent of Code: premiere/09-architecture-des-ordinateurs-et-systemes/defis.md
+  - '10. Le Web : réseaux et interactions homme-machine':
+    - premiere/10-le-web-reseaux-et-interactions-homme-mac/index.md
+    - Activités préparatoires: premiere/10-le-web-reseaux-et-interactions-homme-mac/activites.md
+    - Cours: premiere/10-le-web-reseaux-et-interactions-homme-mac/cours.md
+    - Exercices: premiere/10-le-web-reseaux-et-interactions-homme-mac/exercices.md
+    - TP et projets: premiere/10-le-web-reseaux-et-interactions-homme-mac/tp.md
+    - Défis Advent of Code: premiere/10-le-web-reseaux-et-interactions-homme-mac/defis.md
+  - 11. Les algorithmes gloutons:
+    - premiere/11-les-algorithmes-gloutons/index.md
+    - Activités préparatoires: premiere/11-les-algorithmes-gloutons/activites.md
+    - Cours: premiere/11-les-algorithmes-gloutons/cours.md
+    - Exercices: premiere/11-les-algorithmes-gloutons/exercices.md
+    - TP et projets: premiere/11-les-algorithmes-gloutons/tp.md
+    - Défis Advent of Code: premiere/11-les-algorithmes-gloutons/defis.md
+  - 12. Les $k$k plus proches voisins:
+    - premiere/12-les-k-k-plus-proches-voisins/index.md
+    - Activités préparatoires: premiere/12-les-k-k-plus-proches-voisins/activites.md
+    - Cours: premiere/12-les-k-k-plus-proches-voisins/cours.md
+    - Exercices: premiere/12-les-k-k-plus-proches-voisins/exercices.md
+    - TP et projets: premiere/12-les-k-k-plus-proches-voisins/tp.md
+    - Défis Advent of Code: premiere/12-les-k-k-plus-proches-voisins/defis.md
+  - Problèmes de synthèse et exercices type bac:
+    - premiere/synthese/index.md
+    - Exercices: premiere/synthese/exercices.md
+  - Crédits iconographiques: premiere/credits.md
+- Terminale:
+  - Accueil Terminale: terminale/index.md
+  - Présentation de l'année: terminale/presentation-de-l-annee.md
+  - Charte d'usage de l'intelligence artificielle: terminale/charte.md
+  - 1. Récursivité:
+    - terminale/01-recursivite/index.md
+    - Activités préparatoires: terminale/01-recursivite/activites.md
+    - Cours: terminale/01-recursivite/cours.md
+    - Exercices: terminale/01-recursivite/exercices.md
+    - TP et projets: terminale/01-recursivite/tp.md
+    - Défis Advent of Code: terminale/01-recursivite/defis.md
+  - 2. Programmation orientée objet et paradigmes:
+    - terminale/02-programmation-orientee-objet-et-paradigm/index.md
+    - Activités préparatoires: terminale/02-programmation-orientee-objet-et-paradigm/activites.md
+    - Cours: terminale/02-programmation-orientee-objet-et-paradigm/cours.md
+    - Exercices: terminale/02-programmation-orientee-objet-et-paradigm/exercices.md
+    - TP et projets: terminale/02-programmation-orientee-objet-et-paradigm/tp.md
+    - Défis Advent of Code: terminale/02-programmation-orientee-objet-et-paradigm/defis.md
+  - '3. Structures linéaires : piles, files, listes chaînées':
+    - terminale/03-structures-lineaires-piles-files-listes/index.md
+    - Activités préparatoires: terminale/03-structures-lineaires-piles-files-listes/activites.md
+    - Cours: terminale/03-structures-lineaires-piles-files-listes/cours.md
+    - Exercices: terminale/03-structures-lineaires-piles-files-listes/exercices.md
+    - TP et projets: terminale/03-structures-lineaires-piles-files-listes/tp.md
+    - Défis Advent of Code: terminale/03-structures-lineaires-piles-files-listes/defis.md
+  - 4. Arbres:
+    - terminale/04-arbres/index.md
+    - Activités préparatoires: terminale/04-arbres/activites.md
+    - Cours: terminale/04-arbres/cours.md
+    - Exercices: terminale/04-arbres/exercices.md
+    - TP et projets: terminale/04-arbres/tp.md
+    - Défis Advent of Code: terminale/04-arbres/defis.md
+  - 5. Diviser pour régner:
+    - terminale/05-diviser-pour-regner/index.md
+    - Activités préparatoires: terminale/05-diviser-pour-regner/activites.md
+    - Cours: terminale/05-diviser-pour-regner/cours.md
+    - Exercices: terminale/05-diviser-pour-regner/exercices.md
+    - TP et projets: terminale/05-diviser-pour-regner/tp.md
+    - Défis Advent of Code: terminale/05-diviser-pour-regner/defis.md
+  - 6. Bases de données et SQL:
+    - terminale/06-bases-de-donnees-et-sql/index.md
+    - Activités préparatoires: terminale/06-bases-de-donnees-et-sql/activites.md
+    - Cours: terminale/06-bases-de-donnees-et-sql/cours.md
+    - Exercices: terminale/06-bases-de-donnees-et-sql/exercices.md
+    - TP et projets: terminale/06-bases-de-donnees-et-sql/tp.md
+    - Défis Advent of Code: terminale/06-bases-de-donnees-et-sql/defis.md
+  - 7. Graphes:
+    - terminale/07-graphes/index.md
+    - Activités préparatoires: terminale/07-graphes/activites.md
+    - Cours: terminale/07-graphes/cours.md
+    - Exercices: terminale/07-graphes/exercices.md
+    - TP et projets: terminale/07-graphes/tp.md
+    - Défis Advent of Code: terminale/07-graphes/defis.md
+  - 8. Programmation dynamique:
+    - terminale/08-programmation-dynamique/index.md
+    - Activités préparatoires: terminale/08-programmation-dynamique/activites.md
+    - Cours: terminale/08-programmation-dynamique/cours.md
+    - Exercices: terminale/08-programmation-dynamique/exercices.md
+    - TP et projets: terminale/08-programmation-dynamique/tp.md
+    - Défis Advent of Code: terminale/08-programmation-dynamique/defis.md
+  - 9. Recherche textuelle:
+    - terminale/09-recherche-textuelle/index.md
+    - Activités préparatoires: terminale/09-recherche-textuelle/activites.md
+    - Cours: terminale/09-recherche-textuelle/cours.md
+    - Exercices: terminale/09-recherche-textuelle/exercices.md
+    - TP et projets: terminale/09-recherche-textuelle/tp.md
+    - Défis Advent of Code: terminale/09-recherche-textuelle/defis.md
+  - 10. Processus et ordonnancement:
+    - terminale/10-processus-et-ordonnancement/index.md
+    - Activités préparatoires: terminale/10-processus-et-ordonnancement/activites.md
+    - Cours: terminale/10-processus-et-ordonnancement/cours.md
+    - Exercices: terminale/10-processus-et-ordonnancement/exercices.md
+    - TP et projets: terminale/10-processus-et-ordonnancement/tp.md
+    - Défis Advent of Code: terminale/10-processus-et-ordonnancement/defis.md
+  - 11. Réseaux:
+    - terminale/11-reseaux/index.md
+    - Activités préparatoires: terminale/11-reseaux/activites.md
+    - Cours: terminale/11-reseaux/cours.md
+    - Exercices: terminale/11-reseaux/exercices.md
+    - TP et projets: terminale/11-reseaux/tp.md
+    - Défis Advent of Code: terminale/11-reseaux/defis.md
+  - 12. Cryptographie:
+    - terminale/12-cryptographie/index.md
+    - Activités préparatoires: terminale/12-cryptographie/activites.md
+    - Cours: terminale/12-cryptographie/cours.md
+    - Exercices: terminale/12-cryptographie/exercices.md
+    - TP et projets: terminale/12-cryptographie/tp.md
+    - Défis Advent of Code: terminale/12-cryptographie/defis.md
+  - 13. Calculabilité et décidabilité:
+    - terminale/13-calculabilite-et-decidabilite/index.md
+    - Activités préparatoires: terminale/13-calculabilite-et-decidabilite/activites.md
+    - Cours: terminale/13-calculabilite-et-decidabilite/cours.md
+    - Exercices: terminale/13-calculabilite-et-decidabilite/exercices.md
+    - TP et projets: terminale/13-calculabilite-et-decidabilite/tp.md
+    - Défis Advent of Code: terminale/13-calculabilite-et-decidabilite/defis.md
+  - 14. Systèmes sur puce et informatique embarquée:
+    - terminale/14-systemes-sur-puce-et-informatique-embarq/index.md
+    - Activités préparatoires: terminale/14-systemes-sur-puce-et-informatique-embarq/activites.md
+    - Cours: terminale/14-systemes-sur-puce-et-informatique-embarq/cours.md
+    - Exercices: terminale/14-systemes-sur-puce-et-informatique-embarq/exercices.md
+    - TP et projets: terminale/14-systemes-sur-puce-et-informatique-embarq/tp.md
+    - Défis Advent of Code: terminale/14-systemes-sur-puce-et-informatique-embarq/defis.md
+  - Problèmes de synthèse et exercices type bac:
+    - terminale/synthese/index.md
+    - Exercices: terminale/synthese/exercices.md
+  - Épreuve pratique:
+    - terminale/pratique/index.md
+    - Sujet 24: terminale/pratique/sujet-24.md
+    - Sujet 25: terminale/pratique/sujet-25.md
+    - Sujet 26: terminale/pratique/sujet-26.md
+    - Sujet 27: terminale/pratique/sujet-27.md
+    - Sujet 28: terminale/pratique/sujet-28.md
+    - Sujet 29: terminale/pratique/sujet-29.md
+    - Sujet 30: terminale/pratique/sujet-30.md
+    - Sujet 31: terminale/pratique/sujet-31.md
+    - Sujet 32: terminale/pratique/sujet-32.md
+  - Crédits iconographiques: terminale/credits.md
+- À propos: a-propos.md
