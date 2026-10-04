@@ -203,5 +203,3 @@
 ### W
 
 **Web** — Service d’Internet : des pages reliées par des hyperliens, consultées avec un navigateur. *(ch. 4, [voir le cours](04-le-web/cours.md#lex-web04))*
-
-QQSLOTA0QQ

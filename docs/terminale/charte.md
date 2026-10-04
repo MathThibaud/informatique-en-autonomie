@@ -61,5 +61,3 @@ Les assistants d’IA écrivent du code et des explications, souvent bien, parfo
     - Sur la plateforme d’entraînement de la classe, les outils d’IA sont réglés par le professeur et suivent la pastille de l’activité.
 
 En cas de doute sur ce qui est permis pour un exercice, la règle est simple : **demandez avant**, pas après.
-
-QQSLOTA0QQ

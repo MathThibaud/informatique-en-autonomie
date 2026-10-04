@@ -91,7 +91,3 @@ Nos **2 heures par semaine** mêlent plusieurs façons d’apprendre :
     Dans tous les cas : vous restez responsable de ce que vous rendez, vous devez pouvoir l’expliquer à l’oral, et vous dites quand l’IA a été utilisée.
 
 *Prêt(e)s à voir ce qui se cache derrière l’écran ? Bienvenue en SNT !*
-
-QQSLOTA0QQ
-
-QQSLOTA0QQ

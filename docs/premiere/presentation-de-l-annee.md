@@ -137,5 +137,3 @@ Nos **4 heures par semaine** se partagent entre :
     - le site de **David Roche** : `pixees.fr/informatiquelycee`.
 
 *Prêt(e)s ? On passe de l’autre côté de l’écran. Bienvenue en NSI !*
-
-QQSLOTA0QQ

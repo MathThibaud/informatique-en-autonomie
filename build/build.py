@@ -456,6 +456,12 @@ class Site:
                     self.conv.unknown['QQ'] = self.conv.unknown.get('QQ', 0) + 1
             out.append(line)
         md = '\n'.join(out)
+        # emplacements de corrigé restés vides (pages sans corrigé)
+        md = re.sub(r'^[ \t]*QQSLOT.+?QQ[ \t]*$', '', md, flags=re.M)
+        # garde-fou : aucun marqueur interne ne doit atteindre une page publiée
+        reste = re.search(r'QQ(?:SLOT|I\d|B\d|W\d|AB|AE|H\d|HE|LK|CS|CE|CA\d|FIG|LST|TIKZ|MATH|PCT|IMG|NOTITLE)\S*', md)
+        if reste:
+            raise SystemExit('Marqueur interne non résolu dans %s : %s' % (page, reste.group(0)))
         md = re.sub(r'\n{3,}', '\n\n', md)
         return md.strip() + '\n'
 

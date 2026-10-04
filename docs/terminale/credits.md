@@ -96,5 +96,3 @@ Chapitre 14 — Systèmes sur puce et informatique embarquée
 
 *Puce Apple A13 Bionic (illustration)* — Henriok — CC0 (domaine public)  
 <https://commons.wikimedia.org/wiki/File:Apple_A13_Bionic.jpg>
-
-QQSLOTA0QQ
