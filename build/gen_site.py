@@ -152,8 +152,8 @@ licence, indiquée dans les pages « Crédits iconographiques » de chaque nivea
 La forme de ce site s'inspire du travail de **Gilles Lassus**, dont les cours de NSI en ligne
 ([glassus.github.io](https://glassus.github.io/)) sont une référence pour de nombreux enseignants.
 
-Merci également à **David Roche**, dont le site [pixees.fr/informatiquelycee](https://pixees.fr/informatiquelycee/)
-accompagne depuis des années professeurs et élèves de SNT et de NSI.
+Merci également à **David Roche** : son site [pixees.fr/informatiquelycee](https://pixees.fr/informatiquelycee/),
+qu'il partage librement, m'a beaucoup aidé dans la préparation de mes cours de SNT et de NSI.
 
 ## Mises à jour
 
