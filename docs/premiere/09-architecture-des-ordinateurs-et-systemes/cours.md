@@ -384,7 +384,7 @@ Linux est **multi-utilisateur** : plusieurs comptes partagent la machine, chacun
 
 - **Confondre mémoire vive et disque.** La RAM est *volatile* : ce qui n’est pas enregistré sur le disque est perdu à l’extinction.
 
-- **Croire que le processeur « comprend » Python.** Il n’exécute que du *langage machine* ; Python est traduit avant.
+- **Croire que le processeur « comprend » Python.** Il n’exécute que du *langage machine* ; l’interpréteur Python traduit le programme, au fur et à mesure, en instructions machine.
 
 - **Oublier le `/` initial** d’un chemin absolu, ou en mettre un à un chemin relatif.
 

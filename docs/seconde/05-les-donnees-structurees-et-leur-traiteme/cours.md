@@ -20,6 +20,8 @@
     \*(image manquante : 05_hist_carte_perforee)\*  
     Une carte perforée : une carte par personne
 
+    Source : U.S. Census Bureau, pages d’histoire « Herman Hollerith » et « Tabulation and Processing » (recensements de 1880 et 1890), `census.gov`.
+
 ## Une donnée, c’est quoi au juste ?
 
 Un texto, une note, une température, un « j’aime », une position GPS… tout cela, ce sont des **données**.
@@ -68,6 +70,8 @@ Pour *exploiter* des données, on les range dans un **tableau** à deux dimensio
 | 4 | Mario Kart 8 | 1 | 2014 | course | 3 | 60 |
 | 5 | Red Dead Redemption 2 | 3 | 2018 | action | 18 | 55 |
 | 6 | Animal Crossing | 1 | 2020 | simulation | 3 | 45 |
+
+Source : chiffres de ventes arrondis (2023), communiqués des éditeurs (Microsoft/Mojang, Take-Two/Rockstar Games, Nintendo).
 
 !!! definition "Définition 4"
 
@@ -127,9 +131,13 @@ id,titre,studio,annee,genre,pegi,ventes
 
     En **octobre 2020**, l’agence de santé publique anglaise a « perdu » **15 841** résultats de tests COVID-19. La cause ? Les laboratoires transmettaient leurs données dans un vieux fichier tableur `.xls`, **limité à 65 536 lignes**. Une fois cette limite atteinte, les nouveaux cas n’étaient signalés par *aucune* erreur… ils étaient **silencieusement ignorés**. Résultat : près de **48 000** personnes ayant croisé un cas positif n’ont pas été prévenues à temps (Public Health England et BBC News, octobre 2020). Un simple fichier **CSV**, lui, n’aurait rien plafonné : le texte peut avoir *autant de lignes qu’on veut*. *La morale : le bon format de données peut avoir des conséquences très réelles.*
 
+    Sources : Public Health England, communiqué du 5 octobre 2020 (15 841 cas non signalés) ; BBC News, « Excel: Why using Microsoft’s tool caused Covid-19 results to be lost », 5 octobre 2020.
+
 !!! remarque "Remarque — L’open data : les données publiques, à tous"
 
     Depuis **2011**, l’État français ouvre ses données sur `data.gouv.fr` (Etalab) ; la Principauté de Monaco fait de même sur son portail <span id="lex-opendata05" class="ancre"></span>**open data**. Horaires de bus, qualité de l’air, résultats d’élections, prénoms donnés chaque année… des milliers de tables sont **librement téléchargeables**, le plus souvent en CSV. Fouiller ces données est devenu un vrai pouvoir citoyen — et le métier des **data-journalistes**.
+
+    Source : Etalab, `data.gouv.fr`, page « À propos » (ouverture du portail en 2011).
 
 <span id="cours-05-5" class="ancre"></span>
 
@@ -308,13 +316,3 @@ Chaque site, chaque application **collecte** des données sur vous. La loi encad
     - réaliser un tri croissant ou décroissant sur une colonne ;
 
     - citer les enjeux liés aux **données personnelles**, au *cloud* et au *big data* (les 3 V).
-
-## Sources
-
-- U.S. Census Bureau, pages d’histoire « Herman Hollerith » et « Tabulation and Processing » (recensements de 1880 et 1890). `census.gov`
-
-- Chiffres de ventes des jeux (arrondis, 2023) : communiqués des éditeurs (Microsoft/Mojang, Take-Two/Rockstar Games, Nintendo).
-
-- Public Health England, communiqué du 5 octobre 2020 (15 841 cas non signalés) ; BBC News, « Excel: Why using Microsoft’s tool caused Covid-19 results to be lost », 5 octobre 2020.
-
-- Etalab, `data.gouv.fr`, page « À propos » (ouverture du portail en 2011).

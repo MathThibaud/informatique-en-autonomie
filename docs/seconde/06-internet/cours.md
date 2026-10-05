@@ -47,7 +47,7 @@ Vinton Cerf, co-inventeur de TCP/IP
 
     - **aujourd’hui** — des **milliards** de machines et d’objets connectés.
 
-    Sources des repères : UCLA (laboratoire de L. Kleinrock) pour le premier message ; Inria pour Cyclades ; V. Cerf et R. Kahn, *IEEE Transactions on Communications*, 1974, pour TCP/IP.
+    Sources : UCLA, Samueli School of Engineering, pages sur le premier message d’ARPANET (29 octobre 1969, laboratoire de Leonard Kleinrock) ; Inria, pages historiques consacrées au réseau Cyclades (projet lancé en 1971), `inria.fr` ; V. Cerf et R. Kahn, « A Protocol for Packet Network Intercommunication », *IEEE Transactions on Communications*, mai 1974.
 
 !!! remarque "Remarque"
 
@@ -65,7 +65,7 @@ Quand vous envoyez une photo, elle ne part pas d’un seul bloc. Internet la **d
 
     <span id="lex-paquet06" class="ancre"></span>Un **paquet** est un petit bloc de données de taille fixe. Il contient une partie du message, plus une « étiquette » : l’**adresse de l’expéditeur**, l’**adresse du destinataire**, et un **numéro** (pour remettre les morceaux dans l’ordre à l’arrivée).
 
-![](../figures/943286bc45ae3f20.svg){ .tikz loading=lazy }
+![](../figures/3474dafc9183008c.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 2 — Une force du système"
 
@@ -100,7 +100,7 @@ Comment un paquet trouve-t-il son chemin ? Grâce à des machines spécialisées
 
     Un <span id="lex-routeur06" class="ancre"></span>**routeur** est un ordinateur qui **aiguille** les paquets. Il ne connaît pas tout le réseau : il tient seulement une **carte locale** de ses voisins, et décide, pour chaque paquet, **la prochaine étape**. De proche en proche, le paquet progresse jusqu’à destination.
 
-![](../figures/8513ebff155c4022.svg){ .tikz loading=lazy }
+![](../figures/e1126b8c9e5f403e.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 4 — Les limites du routage"
 
@@ -122,7 +122,7 @@ Comment un paquet trouve-t-il son chemin ? Grâce à des machines spécialisées
 
     Chaque machine connectée possède une <span id="lex-ip06" class="ancre"></span>**adresse IP** : son « numéro » sur le réseau. En version **IPv4**, c’est une suite de **quatre nombres** de **0 à 255**, séparés par des points.
 
-![](../figures/423f618046a530e8.svg){ .tikz loading=lazy }
+![](../figures/334da9989f2e283b.svg){ .tikz loading=lazy }
 
 Il y a environ **4 milliards** d’adresses IPv4 possibles… ce qui ne suffit plus ! On déploie donc **IPv6**, avec des adresses bien plus longues (assez pour des milliards de milliards d’objets connectés).
 
@@ -134,7 +134,7 @@ Il y a environ **4 milliards** d’adresses IPv4 possibles… ce qui ne suffit 
 
     Une **adresse symbolique** (comme `wikipedia.fr`) est l’adresse « en toutes lettres », facile à retenir. Le **DNS** (*Domain Name System*) est l’annuaire géant d’internet qui **traduit** une adresse symbolique en **adresse IP** numérique.
 
-![](../figures/c9da2662f635111a.svg){ .tikz loading=lazy }
+![](../figures/59031e8bc4719f05.svg){ .tikz loading=lazy }
 
 Le DNS n’est pas une seule machine, mais un **immense ensemble d’ordinateurs** répartis dans le monde et sans cesse mis à jour.
 
@@ -169,7 +169,7 @@ D’habitude, un **serveur** central distribue à des **clients** (le modèle du
 
     <span id="lex-p2p06" class="ancre"></span>Dans un réseau **pair-à-pair** (*peer-to-peer*, P2P), il n’y a plus de serveur central : **chaque machine est à la fois émetteur et récepteur**, et partage directement avec les autres.
 
-![](../figures/850d4887104fdae9.svg){ .tikz loading=lazy }
+![](../figures/523f669413203b9a.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 5 — Intérêts… et dérives"
 
@@ -191,6 +191,8 @@ Internet a fait disparaître le télégramme, le télex, une partie du courrier 
 | 2024 | $\sim 7$ Zo (estimation UIT, 2024) |
 
 Ces valeurs viennent d’organismes différents, qui ne mesurent pas exactement la même chose : on compare des **ordres de grandeur**. Pour 2024, l’UIT estime environ 6 Zo sur les réseaux fixes et 1,3 Zo sur les réseaux mobiles.
+
+Sources : Cisco, *Visual Networking Index (VNI) – Forecast and Methodology*, éditions 2011 (trafic 2010) et 2017 (trafic 2016, prévision 2021) ; UIT (Union internationale des télécommunications), *Measuring digital development – Facts and Figures 2024*, novembre 2024 (trafic fixe $\approx 6$ Zo, mobile $\approx 1{,}3$ Zo, estimations), `itu.int`.
 
 Rappel des unités : 1 **ko** $=10^3$ o, 1 **Mo** $=10^6$, 1 **Go** $=10^9$, 1 **To** $=10^{12}$, 1 **Po** $=10^{15}$, 1 **Eo** $=10^{18}$, 1 **Zo** (zetta-octet) $=10^{21}$ octets.
 
@@ -243,17 +245,5 @@ Rappel des unités : 1 **ko** $=10^3$ o, 1 **Mo** $=10^6$, 1 **Go** $=10^9$, 1 
     - expliquer qu’Internet est **indépendant** du support physique ;
 
     - décrire un réseau **pair-à-pair** (P2P) et un de ses usages.
-
-## Sources
-
-- UCLA, Samueli School of Engineering, pages sur le premier message d’ARPANET (29 octobre 1969, laboratoire de Leonard Kleinrock).
-
-- Inria, pages historiques consacrées au réseau Cyclades (projet lancé en 1971). `inria.fr`
-
-- V. Cerf et R. Kahn, « A Protocol for Packet Network Intercommunication », *IEEE Transactions on Communications*, mai 1974.
-
-- Cisco, *Visual Networking Index (VNI) – Forecast and Methodology*, éditions 2011 (trafic 2010) et 2017 (trafic 2016, prévision 2021).
-
-- UIT (Union internationale des télécommunications), *Measuring digital development – Facts and Figures 2024*, novembre 2024 : trafic fixe $\approx 6$ Zo, mobile $\approx 1{,}3$ Zo (estimations). `itu.int`
 
 *Crédits : icônes issues du logiciel libre Filius (licence GNU GPL v2 ou v3), `www.lernsoftware-filius.de`.*

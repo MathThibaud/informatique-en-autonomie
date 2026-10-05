@@ -20,6 +20,8 @@
     \*(image manquante : 03_hist_sasson)\*  
     Le premier appareil numérique (Sasson, 1975)
 
+    Sources : Harry Ransom Center (université du Texas à Austin), qui conserve le « Point de vue du Gras » de Nicéphore Niépce (vers 1826–1827), `hrc.utexas.edu` ; George Eastman Museum (Rochester), histoire de l’appareil Kodak de 1888 et de son slogan ; IEEE, *Milestone* « Handheld Digital Camera, 1975 » (appareil de Steven Sasson : environ 3,6 kg, image de $100 \times 100$ pixels enregistrée en 23 s), inaugurée en 2022, `ethw.org`.
+
 ## De la lumière à l’image : le capteur
 
 Autrefois, l’appareil photo contenait une **pellicule** : une surface sensible à la lumière, qu’il fallait ensuite développer chimiquement en laboratoire. Aujourd’hui, la pellicule est remplacée par un **capteur** électronique.
@@ -38,7 +40,7 @@ Seul, un photosite ne distingue pas les couleurs : on obtiendrait une image en *
 \*(image manquante : 03_hist_capteur_macro)\*  
 Un capteur vu de très près : la mosaïque du filtre coloré
 
-![](../figures/7326010dec0769a0.svg){ .tikz loading=lazy }  
+![](../figures/5613c5f36d3a9885.svg){ .tikz loading=lazy }  
 Filtre de Bayer : 1 photosite rouge, 1 bleu et *2 verts* par groupe de quatre.
 
 !!! activite "Activité — Expliquer le capteur"
@@ -57,13 +59,13 @@ L’image finale est un quadrillage de points colorés : les **pixels** (de l’
 
     Chaque <span id="lex-pixel03" class="ancre"></span>**pixel** porte une couleur codée par **trois nombres** entre **0 et 255** : la quantité de **R**ouge, de **V**ert et de **B**leu (système **RVB**, ou *RGB* en anglais). Exemple : $(247,\ 56,\ 98)$. C’est la <span id="lex-rvb03" class="ancre"></span>**synthèse additive** : en mélangeant de la lumière rouge, verte et bleue, on obtient toutes les autres couleurs.
 
-![](../figures/dab1599ce8ef744e.svg){ .tikz loading=lazy }
+![](../figures/561ec56e8c32bd88.svg){ .tikz loading=lazy }
 
 !!! exemple "Exemple"
 
     Quelques couleurs utiles : rouge $=(255,0,0)$ vert $=(0,255,0)$ bleu $=(0,0,255)$ **noir** $=(0,0,0)$ **blanc** $=(255,255,255)$ jaune $=(255,255,0)$. Quand les trois canaux sont *égaux*, on obtient un **gris**.
 
-![](../figures/1e50f713b9ceed4d.svg){ .tikz loading=lazy }  
+![](../figures/d3db162b8dd97dea.svg){ .tikz loading=lazy }  
 La synthèse additive : rouge + vert $=$ jaune, les trois ensemble $=$ blanc.
 
 !!! activite "Activité — Jouer avec les couleurs"
@@ -110,7 +112,7 @@ La synthèse additive : rouge + vert $=$ jaune, les trois ensemble $=$ blanc.
 
 Une image étant un tableau de nombres, on peut la **transformer** avec un programme. On utilise la bibliothèque **PIL**. Chaque pixel est repéré par des coordonnées $(x, y)$ : $(0,0)$ est en **haut à gauche**.
 
-![](../figures/7a40ab64a427ef2f.svg){ .tikz loading=lazy }  
+![](../figures/9c8e11da46303ffb.svg){ .tikz loading=lazy }  
 Le pixel $(0,0)$ est en haut à gauche ; $x$ va vers la droite, $y$ vers le bas.
 
 **Lire** un pixel avec `getpixel`, le **modifier** avec `putpixel` :
@@ -263,13 +265,3 @@ La photo « parfaite » du smartphone n’est pas seulement captée : elle est *
     - expliquer ce que sont les métadonnées **EXIF** et le risque qu’elles posent pour la vie privée ;
 
     - citer des traitements automatiques (algorithmes) réalisés par un appareil photo ou un smartphone.
-
-## Sources
-
-- Harry Ransom Center (université du Texas à Austin), qui conserve le « Point de vue du Gras » de Nicéphore Niépce (vers 1826–1827). `hrc.utexas.edu`
-
-- George Eastman Museum (Rochester), histoire de l’appareil Kodak de 1888 et de son slogan.
-
-- IEEE, *Milestone* « Handheld Digital Camera, 1975 » (appareil de Steven Sasson : environ 3,6 kg, image de $100 \times 100$ pixels enregistrée en 23 s), inaugurée en 2022. `ethw.org`
-
-**Crédits.** Photo du capteur : Harry Munday, « Sony A7RIII CMOS Sensor and IBIS Module », Wikimedia Commons, licence CC BY-SA 4.0 (image réduite). Image `terre.jpg` utilisée dans les programmes : « The Blue Marble », NASA, équipage d’Apollo 17, 7 décembre 1972, domaine public. Autres figures et tableau EXIF (valeurs fictives) : réalisés pour ce cours.

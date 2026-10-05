@@ -20,6 +20,8 @@
     \*(image manquante : 08_hist_kevin_ashton)\*  
     Kevin Ashton (2015)
 
+    Sources : K. Ashton, « That “Internet of Things” Thing », *RFID Journal*, 2009 ; IoT Analytics, *State of IoT – Summer 2024*, septembre 2024 (18,8 milliards d’objets connectés estimés fin 2024), `iot-analytics.com` ; ONU (Département des affaires économiques et sociales), *World Population Prospects 2022* (8 milliards d’humains en novembre 2022), `un.org`.
+
 ## L’informatique invisible : les systèmes embarqués
 
 L’ordinateur n’est plus seulement la machine posée sur un bureau. Il a **rétréci** et s’est glissé *dans les objets*.
@@ -76,7 +78,7 @@ Le cœur d’un objet embarqué est un **programme** qui répète sans fin le m�
 
 !!! regle "Règle 1 — Le cycle acquisition $to$ décision $to$ action"
 
-    ![](../figures/7220736a39812389.svg){ .tikz loading=lazy }
+    ![](../figures/52dce73c9d57a04f.svg){ .tikz loading=lazy }
 
     Le système **acquiert** une mesure, **décide** (avec des conditions), **commande** un actionneur, puis **recommence**.
 
@@ -170,6 +172,8 @@ Un objet connecté est un petit ordinateur *relié à Internet* : il peut donc, 
 
     En **2016**, un logiciel malveillant nommé **Mirai** a pris le contrôle de **centaines de milliers** d’objets connectés (jusqu’à environ 600 000 à son pic ; Antonakakis et al., 2017) (caméras, magnétoscopes numériques…) dont les propriétaires n’avaient jamais changé le **mot de passe par défaut** (souvent `admin`/`admin`). Transformés en armée de « robots », ces objets ont **saturé** de grands sites (déni de service, chapitre *Internet*) et rendu inaccessibles, pendant des heures, Twitter, Netflix, Spotify… *La leçon : un objet mal sécurisé met en danger bien plus que son propriétaire.*
 
+    Source : M. Antonakakis et al., « Understanding the Mirai Botnet », *USENIX Security Symposium*, 2017.
+
 !!! regle "Règle 3 — Deux enjeux à retenir"
 
     - **Sécurité** : un objet connecté est une **porte d’entrée** sur le réseau (et sur votre maison). *Réflexes :* changer le mot de passe par défaut, faire les mises à jour.
@@ -205,6 +209,8 @@ Un objet connecté consomme un peu d’électricité… mais c’est surtout sa
     - **Aujourd’hui.** Le numérique représente **4,4 %** de l’empreinte carbone de la France (29,5 millions de tonnes de CO$_2$e) et **11 %** de sa consommation d’électricité. Répartition : **terminaux** (téléphones, ordinateurs, écrans, objets connectés…) **50 %**, **centres de données** **46 %**, **réseaux** 4 %. Ces chiffres ne tiennent pas encore compte de l’essor de l’IA générative. *Source : ADEME–Arcep, mise à jour publiée en janvier 2025 (données 2022).*
 
     - **Le cas du smartphone.** Un smartphone émet environ **80 kg de CO$_2$e** sur toute sa vie, dont **99 %** (environ 79 kg) lors de sa **fabrication** ; l’usage et la fin de vie ne pèsent qu’environ 1 % en France, où l’électricité est peu carbonée. Ce bilan suppose une durée d’utilisation de **2,5 ans**, soit environ **32 kg de CO$_2$e par année** d’utilisation. *Source : ADEME, outil Impact CO2 (`impactco2.fr`), fiche « smartphone » (données ADEME–Arcep 2025), consultée en 2026.*
+
+    Sources : ADEME–Arcep, *Évaluation de l’impact environnemental du numérique en France et analyse prospective*, 2022 (données 2020 : part de la fabrication, parc d’équipements, déchets, scénario 2030–2050), `arcep.fr` ; ADEME–Arcep, *Évaluation de l’impact environnemental du numérique en France*, mise à jour de janvier 2025 (données 2022 : 4,4 %, 29,5 Mt CO$_2$e, 11 % de l’électricité, répartition 50/46/4 %), `ademe.fr` ; ADEME, outil *Impact CO2*, fiche « smartphone », consultée en 2026 (80 kg CO$_2$e, 99 % à la fabrication, 2,5 ans d’utilisation), `impactco2.fr`.
 
 !!! activite "Activité — Un objet connecté, pour quoi faire ?"
 
@@ -264,19 +270,3 @@ Un objet connecté consomme un peu d’électricité… mais c’est surtout sa
     - citer les risques de **sécurité** et de **vie privée** des objets connectés, et les textes qui protègent les données (RGPD, loi monégasque n° 1.565) ;
 
     - expliquer pourquoi la **fabrication** pèse le plus dans l’impact environnemental d’un objet connecté.
-
-## Sources
-
-- ADEME–Arcep, *Évaluation de l’impact environnemental du numérique en France et analyse prospective*, 2022 (données 2020) : part de la fabrication, parc d’équipements, déchets, scénario 2030–2050. `arcep.fr`
-
-- ADEME–Arcep, *Évaluation de l’impact environnemental du numérique en France*, mise à jour publiée en janvier 2025 (données 2022) : 4,4 %, 29,5 Mt CO$_2$e, 11 % de l’électricité, répartition 50/46/4 %. `ademe.fr`
-
-- ADEME, outil *Impact CO2*, fiche « smartphone », consultée en 2026 : 80 kg CO$_2$e, 99 % à la fabrication, 2,5 ans d’utilisation. `impactco2.fr`
-
-- IoT Analytics, *State of IoT – Summer 2024*, septembre 2024 : 18,8 milliards d’objets connectés estimés fin 2024. `iot-analytics.com`
-
-- ONU (Département des affaires économiques et sociales), *World Population Prospects 2022* : 8 milliards d’humains en novembre 2022. `un.org`
-
-- M. Antonakakis et al., « Understanding the Mirai Botnet », *USENIX Security Symposium*, 2017.
-
-- K. Ashton, « That “Internet of Things” Thing », *RFID Journal*, 2009.
