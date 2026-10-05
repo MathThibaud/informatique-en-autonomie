@@ -48,6 +48,8 @@ Il en existe des dizaines, et ils ne se ressemblent pas : certains servent surt
     $^{*}$ LinkedIn annonce ses membres inscrits (2023), pas ses utilisateurs actifs, qui sont bien moins nombreux.  
     Rappel : la population mondiale est d’environ **8 milliards** d’humains (ONU, 2022).
 
+    Sources : DataReportal (Kepios, We Are Social, Meltwater), *Digital 2024 Global Overview Report*, janvier 2024, et chiffres publiés par les entreprises (utilisateurs actifs mensuels ; membres de LinkedIn, 2023) ; ONU (Département des affaires économiques et sociales), *World Population Prospects 2022* (8 milliards d’humains en novembre 2022).
+
 !!! activite "Activité — Dresser le portrait des réseaux"
 
     À l’aide du Document 1 et de vos propres connaissances :
@@ -149,6 +151,8 @@ La plupart des réseaux sociaux sont **gratuits**. Pourtant, ce sont des entrepr
 
     On mesure aussi le « revenu moyen par utilisateur » (en anglais *ARPU*) : le total des revenus divisé par le nombre d’utilisateurs. Pour Facebook, fin 2023, il était d’environ 13 dollars par trimestre en moyenne mondiale, soit de l’ordre de **40 € par utilisateur et par an**, et plus de 60 dollars par trimestre aux États-Unis et au Canada (Meta, résultats du 4<sup>e</sup> trimestre 2023). Autrement dit : chaque compte « gratuit » rapporte, en réalité, de l’argent à l’entreprise.
 
+    Source : Meta Platforms, rapport annuel 2023 (formulaire 10-K) et résultats du 4<sup>e</sup> trimestre 2023 (part de la publicité, revenu moyen par utilisateur).
+
 !!! activite "Activité — Suivre l’argent"
 
     À l’aide du Document 3 :
@@ -173,7 +177,7 @@ Pour *mesurer* un réseau, les informaticiens le dessinent sous forme de **graph
 
     Un <span id="lex-graphe02" class="ancre"></span>**graphe** est constitué de **sommets** (ici : les personnes) reliés par des **arêtes** (ici : « est ami avec », ou « suit »). Le <span id="lex-degre02" class="ancre"></span>**degré** d’un sommet est le nombre d’arêtes qui en partent : c’est, en gros, le nombre d’amis de la personne.
 
-![](../figures/2700d3ab221bc9f5.svg){ .tikz loading=lazy }
+![](../figures/e8208863a04dea6e.svg){ .tikz loading=lazy }
 
 Sur ce petit réseau d’amitiés, on peut déjà lire beaucoup de choses. Par exemple, le degré de David est 4 (il est relié à Bilal, Chloé, Ella et Farid) : c’est la personne la plus « connectée ».
 
@@ -227,6 +231,8 @@ Revenons à l’histoire du début du cours. L’idée qu’on puisse relier deu
     Parmi les lettres arrivées à destination, le nombre d’intermédiaires est en moyenne de **5 à 6** (Travers et Milgram, *Sociometry*, 1969). De là est née l’expression « **six degrés de séparation** » : deux personnes au hasard sur Terre seraient reliées par une chaîne d’environ six connaissances.
 
     *Et aujourd’hui ?* En 2016, une étude menée sur le réseau Facebook (près de 1,6 milliard de comptes à l’époque) a mesuré une distance moyenne d’environ **3,5** (Facebook Research, 2016). Le monde est devenu encore plus petit.
+
+    Sources : J. Travers et S. Milgram, « An Experimental Study of the Small World Problem », *Sociometry*, 1969 ; Facebook Research, « Three and a half degrees of separation », février 2016.
 
 !!! propriete "Propriété 1"
 
@@ -379,7 +385,3 @@ Un fil infini, des vidéos qui s’enchaînent toutes seules… Tout cela circu
     - citer des ordres de grandeur de l’**impact environnemental** du numérique et des gestes de sobriété ;
 
     - adopter de bonnes pratiques (temps d’écran, esprit critique, lutte contre le harcèlement).
-
-## Sources
-
-$\bullet$ DataReportal (Kepios, We Are Social, Meltwater), *Digital 2024 Global Overview Report*, janvier 2024, et chiffres publiés par les entreprises (utilisateurs actifs mensuels ; membres de LinkedIn, 2023). $\bullet$ ONU (Département des affaires économiques et sociales), *World Population Prospects 2022* : 8 milliards d’humains en novembre 2022. $\bullet$ J. Travers et S. Milgram, « An Experimental Study of the Small World Problem », *Sociometry*, 1969. $\bullet$ Facebook Research, « Three and a half degrees of separation », février 2016. $\bullet$ Meta Platforms, rapport annuel 2023 (formulaire 10-K) et résultats du 4<sup>e</sup> trimestre 2023 (part de la publicité, revenu moyen par utilisateur). $\bullet$ Sandvine, *Global Internet Phenomena Report*, janvier 2023 et mars 2024 (part de la vidéo dans le trafic). $\bullet$ Netflix, centre d’aide, « Comment contrôler la quantité de données utilisée par Netflix ? », consulté en 2026. $\bullet$ The Shift Project, *Climat : l’insoutenable usage de la vidéo en ligne*, juillet 2019. $\bullet$ Agence internationale de l’énergie (AIE), G. Kamiya, « The carbon footprint of streaming video: fact-checking the headlines », décembre 2020. $\bullet$ UIT et Banque mondiale, *Measuring the Emissions and Energy Footprint of the ICT Sector*, 2024 (données 2022).

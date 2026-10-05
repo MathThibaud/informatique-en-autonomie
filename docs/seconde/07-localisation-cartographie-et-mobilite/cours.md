@@ -14,6 +14,8 @@
 
     **Un peu d’histoire.** Le **GPS** (*Global Positioning System*) est conçu par l’armée américaine dans les années 1970 et devient pleinement opérationnel en **1995**. Jusqu’en **2000**, le signal civil était volontairement **dégradé** (« disponibilité sélective ») : la précision était de l’ordre de 100 m ! Le président Bill Clinton met fin à cette dégradation en mai 2000, et la précision grand public passe d’un coup à quelques mètres (GPS.gov). L’Europe a depuis déployé son propre système **civil**, **Galileo** (premiers services ouverts en décembre 2016 ; Commission européenne, 2016).
 
+    Sources : GPS.gov (gouvernement des États-Unis), pages « Selective Availability » (fin de la dégradation le 1<sup>er</sup> mai 2000) et présentation du système (pleine capacité opérationnelle en 1995), `gps.gov` ; Commission européenne, communiqué « Galileo goes live! », décembre 2016, `ec.europa.eu`.
+
 ## Se repérer sur la Terre : latitude et longitude
 
 Pour désigner un point sur le globe sans ambiguïté, on utilise deux nombres, comme sur un quadrillage.
@@ -26,7 +28,7 @@ Pour désigner un point sur le globe sans ambiguïté, on utilise deux nombres, 
 \*(image manquante : 07_hist_greenwich)\*  
 La ligne du méridien de Greenwich : longitude 0°
 
-![](../figures/46f8afd09319968b.svg){ .tikz loading=lazy }
+![](../figures/e12760deea5437c2.svg){ .tikz loading=lazy }
 
 !!! exemple "Exemple"
 
@@ -71,7 +73,7 @@ Connaître sa distance à *un* satellite ne suffit pas : on peut être n’impor
 
     En pratique, on capte un **4<sup>e</sup> satellite** pour corriger la petite erreur de l’horloge du récepteur.
 
-![](../figures/a32edf30e39df508.svg){ .tikz loading=lazy }  
+![](../figures/e977b01e25e8b536.svg){ .tikz loading=lazy }  
 Trois « cercles de distance » se croisent en **un seul** point : votre position.
 
 !!! remarque "Remarque"
@@ -81,6 +83,8 @@ Trois « cercles de distance » se croisent en **un seul** point : votre positio
 !!! activite "Activité — Trilatération à la règle et au compas"
 
     Sur une carte, un randonneur sait qu’il est à $3$ km d’un refuge A, $4$ km d’un lac B et $2$ km d’un sommet C. Placer A, B, C, tracer au compas les trois cercles correspondants (à l’échelle) et marquer sa **position** : le point commun aux trois cercles.
+
+Source : GPS.gov, page « Space Segment » (31 satellites en service, 2023), `gps.gov`.
 
 <span id="cours-07-5" class="ancre"></span>
 
@@ -135,12 +139,14 @@ Une position seule ne sert à rien sans une **carte**. Les cartes numériques (G
 
     Pour calculer un trajet, l’application modélise le réseau routier par un **graphe** : chaque **carrefour** est un **sommet**, chaque **route** une **arête** *pondérée* par sa longueur (ou son temps de parcours). Trouver « le plus court chemin » revient à additionner les poids et à retenir le trajet de **somme minimale**.
 
-![](../figures/3a471c78f9f5fd1c.svg){ .tikz loading=lazy }  
+![](../figures/aa9883e3e9d95c32.svg){ .tikz loading=lazy }  
 De A à E : le trajet A–C–D–E mesure $2+3+4 = 9$ km, plus court que A–B–D–E ($4+10+4 = 18$).
 
 !!! activite "Activité — Sur une carte en ligne"
 
     Ouvrir une carte numérique (Géoportail ou `openstreetmap.org`). **1.** Chercher son lycée et **lire ses coordonnées** (clic droit » « Où suis-je ? » / « Afficher l’adresse »). **2.** Calculer un **itinéraire** du lycée à la gare et relever la **distance** et la **durée**. **3.** Mesurer « à vol d’oiseau » la même distance : est-elle plus courte ? Pourquoi ?
+
+Source : OpenStreetMap, page « Stats » du wiki, 2<sup>e</sup> trimestre 2025 (10 millions d’inscrits, 2,25 millions de contributeurs), `wiki.openstreetmap.org`.
 
 <span id="cours-07-10" class="ancre"></span>
 
@@ -256,13 +262,3 @@ Consulter une carte ou calculer un itinéraire semble « immatériel ». Pourtan
     - citer les risques du **traçage** de la position pour la vie privée ;
 
     - situer l’essentiel de l’**empreinte environnementale** d’un smartphone et proposer des gestes de sobriété.
-
-## Sources
-
-- GPS.gov (gouvernement des États-Unis), pages « Space Segment » (31 satellites en service, 2023), « Selective Availability » (fin de la dégradation le 1<sup>er</sup> mai 2000) et présentation du système (pleine capacité opérationnelle en 1995). `gps.gov`
-
-- Commission européenne, communiqué « Galileo goes live! », décembre 2016 (ouverture des premiers services Galileo). `ec.europa.eu`
-
-- OpenStreetMap, page « Stats » du wiki, 2<sup>e</sup> trimestre 2025 (10 millions d’inscrits, 2,25 millions de contributeurs). `wiki.openstreetmap.org`
-
-- Chiffres de l’empreinte du numérique et du smartphone : voir les sources du thème *Informatique embarquée et objets connectés* (ADEME–Arcep 2022 et 2025 ; ADEME, Impact CO2).

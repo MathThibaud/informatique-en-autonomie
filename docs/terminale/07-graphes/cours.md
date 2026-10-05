@@ -348,8 +348,8 @@ On explore le graphe « par cercles concentriques » : d’abord le départ, pui
 
 ```python
 def BFS(g, depart):
-    '''Parcours en largeur de g depuis depart ;
-       renvoie la liste des sommets dans l'ordre de visite.'''
+    """Parcours en largeur de g depuis depart ;
+       renvoie la liste des sommets dans l'ordre de visite."""
     traites = []
     decouverts = [depart]
     en_attente = [depart]           # la file
@@ -379,8 +379,8 @@ Le BFS découvre les sommets par distance croissante. Donc, si l’on **mémoris
 
 ```python
 def plus_court_chemin(g, depart, arrivee):
-    '''Renvoie un plus court chemin de depart a arrivee (liste de sommets),
-       ou None s'il n'y en a pas.'''
+    """Renvoie un plus court chemin de depart a arrivee (liste de sommets),
+       ou None s'il n'y en a pas."""
     decouverts = [depart]
     en_attente = [depart]
     parent = {depart: None}         # depart n'a pas de parent

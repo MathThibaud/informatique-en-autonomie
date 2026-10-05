@@ -42,7 +42,7 @@ La toute première page web (1991), toujours en ligne sur `info.cern.ch` : les h
 
     - **2010** — explosion du Web **mobile** (smartphones, applications).
 
-    Sources : repères du programme officiel de SNT (2019) ; CERN, « La naissance du Web » ; W3C.
+    Sources : ministère de l’Éducation nationale, programme de SNT de seconde, *Bulletin officiel* spécial n° 1 du 22 janvier 2019 (repères historiques du Web) ; CERN, « La naissance du Web » et première page web reconstituée, `home.cern`, `info.cern.ch` ; W3C, « About W3C » (création du consortium en 1994), `w3.org`.
 
 ## Le Web n’est pas Internet
 
@@ -72,7 +72,7 @@ Quand vous consultez un site, deux ordinateurs dialoguent.
     <span id="lex-navigateur04" class="ancre"></span>Le <span id="lex-clientserveur04" class="ancre"></span>**client** est votre navigateur (Firefox, Chrome…) : il **demande** une page.  
     Le **serveur** est un ordinateur, allumé en permanence, qui **stocke** le site et **répond** en envoyant la page. Ce dialogue suit des règles précises : le protocole <span id="lex-http04" class="ancre"></span>**HTTP** (*HyperText Transfer Protocol*).
 
-![](../figures/eb4cf6bc93d2c316.svg){ .tikz loading=lazy }
+![](../figures/51cfc394677c607f.svg){ .tikz loading=lazy }
 
 Le navigateur envoie une **requête**, le serveur renvoie une **réponse** (la page, une image…) accompagnée d’un **code** qui dit si la requête a **réussi** ou **échoué** :
 
@@ -136,7 +136,7 @@ https://www.lycee.mc/cours/snt/web.html
 
 Les fichiers d’un site sont rangés dans des dossiers, comme sur votre ordinateur : c’est une structure en **arborescence** (un arbre à l’envers dont la racine est notée `/`).
 
-![](../figures/5a914a7415e8d100.svg){ .tikz loading=lazy }  
+![](../figures/13d6109be7d48d46.svg){ .tikz loading=lazy }  
 Les **dossiers** sont encadrés, les **fichiers** sont les feuilles de l’arbre.
 
 !!! regle "Règle 6 — Chemin absolu, chemin relatif"
@@ -392,11 +392,3 @@ Naviguer n’est jamais tout à fait anonyme, et laisser un site exécuter du co
     - expliquer le fonctionnement d’un **moteur de recherche** (indexation puis classement) ;
 
     - régler mon navigateur pour préserver ma sécurité et ma vie privée (HTTPS, cookies).
-
-## Sources
-
-- Ministère de l’Éducation nationale, programme de sciences numériques et technologie de seconde, *Bulletin officiel* spécial n° 1 du 22 janvier 2019 (repères historiques du Web).
-
-- CERN, « La naissance du Web » et première page web reconstituée. `home.cern`, `info.cern.ch`
-
-- W3C, « About W3C » (création du consortium en 1994). `w3.org`
