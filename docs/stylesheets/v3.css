@@ -129,6 +129,10 @@ body { background: var(--fond-image) center / cover fixed, var(--md-default-bg-c
 .md-typeset .ia-vert { color: var(--c-green); }
 .md-typeset .ia-vert::before { content: "● IA intégrée"; }
 
+.md-typeset .md-button--primary { background: var(--c-green); border-color: var(--c-green);
+  color: var(--bg); font-weight: 700; }
+.md-typeset .md-button--primary:hover { background: transparent; color: var(--c-green); }
+
 /* --- Figures --- */
 .md-typeset img.tikz { display: block; margin: .8em auto; max-width: 100%; height: auto;
   background: #fff; border-radius: 6px; padding: .35rem; }
@@ -280,3 +284,8 @@ body { background: var(--fond-image) center / cover fixed, var(--md-default-bg-c
 .md-typeset .fichiers > .admonition-title, .md-typeset .fichiers > summary { background-color: color-mix(in srgb, var(--c-blue) 12%, transparent); }
 .md-typeset .fichiers > .admonition-title::before, .md-typeset .fichiers > summary::before { background-color: var(--c-blue); -webkit-mask-image: var(--md-admonition-icon--fichiers); mask-image: var(--md-admonition-icon--fichiers); }
 .md-typeset .fichiers > summary::after { color: var(--c-blue); }
+:root { --md-admonition-icon--livre: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%2021.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65%200-3.35.3-4.75%201.05-.1.05-.15.05-.25.05-.25%200-.5-.25-.5-.5V6c.6-.45%201.25-.75%202-1%201.11-.35%202.33-.5%203.5-.5%201.95%200%204.05.4%205.5%201.5%201.45-1.1%203.55-1.5%205.5-1.5%201.17%200%202.39.15%203.5.5.75.25%201.4.55%202%201v14.6c0%20.25-.25.5-.5.5-.1%200-.15%200-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7%200-4.15.65-5.5%201.5M12%208v11.5c1.35-.85%203.8-1.5%205.5-1.5%201.2%200%202.4.15%203.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7%200-4.15.65-5.5%201.5m1%203.5c1.11-.68%202.6-1%204.5-1%20.91%200%201.76.09%202.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655%200-4.5.84zm4.5.17c-1.71%200-3.21.26-4.5.79v1.69c1.11-.65%202.6-.99%204.5-.99%201.04%200%201.88.08%202.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5%202.9c-.87-.16-1.71-.24-2.5-.24-1.83%200-3.33.27-4.5.8v1.69c1.11-.66%202.6-.99%204.5-.99%201.04%200%201.88.08%202.5.24z%22/%3E%3C/svg%3E'); }
+.md-typeset .admonition.livre, .md-typeset details.livre { border-color: var(--c-green); }
+.md-typeset .livre > .admonition-title, .md-typeset .livre > summary { background-color: color-mix(in srgb, var(--c-green) 12%, transparent); }
+.md-typeset .livre > .admonition-title::before, .md-typeset .livre > summary::before { background-color: var(--c-green); -webkit-mask-image: var(--md-admonition-icon--livre); mask-image: var(--md-admonition-icon--livre); }
+.md-typeset .livre > summary::after { color: var(--c-green); }

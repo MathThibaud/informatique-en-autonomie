@@ -29,6 +29,7 @@ ADM = {
     'reponse': ('--c-green', 'eye-check-outline'),
     'pouce': ('--c-yellow', 'lightbulb-on-outline'),
     'fichiers': ('--c-blue', 'file-download-outline'),
+    'livre': ('--c-green', 'book-open-variant'),
 }
 
 
@@ -167,6 +168,10 @@ body { background: var(--fond-image) center / cover fixed, var(--md-default-bg-c
 .md-typeset .ia-orange::before { content: "◐ IA en appui"; }
 .md-typeset .ia-vert { color: var(--c-green); }
 .md-typeset .ia-vert::before { content: "● IA intégrée"; }
+
+.md-typeset .md-button--primary { background: var(--c-green); border-color: var(--c-green);
+  color: var(--bg); font-weight: 700; }
+.md-typeset .md-button--primary:hover { background: transparent; color: var(--c-green); }
 
 /* --- Figures --- */
 .md-typeset img.tikz { display: block; margin: .8em auto; max-width: 100%; height: auto;
