@@ -7,6 +7,8 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / 'docs'
 NAV = json.loads((ROOT / 'build' / 'nav.json').read_text())
+_LIV = ROOT / 'build' / 'livres.json'
+LIVRES = json.loads(_LIV.read_text()) if _LIV.exists() else {}
 
 LEVELS = [
     ('seconde', 'Seconde', 'SNT', 'Sciences numériques et technologie',
@@ -47,6 +49,19 @@ def level_index(key, titre, mat, long_, desc, icon):
         for t, p in n['front']:
             md.append('[%s](%s){ .md-button }' % (t, p.split('/', 1)[1]))
         md.append('\n</div>\n')
+    liv = LIVRES.get(key)
+    if liv and 'livre' in liv:
+        b = liv['livre']
+        md.append('!!! livre "Le manuel complet en PDF"\n')
+        md.append('    Tout le cours, les exercices et les corrigés de l\'année, dans la version '
+                  'distribuée en classe (version du %s).\n' % b['date'])
+        md.append('    [:material-download: Télécharger le manuel (%s Mo)](%s){ .md-button .md-button--primary }'
+                  % (str(b['mo']).replace('.', ','), b['url']))
+        if '-a4' in liv:
+            a = liv['-a4']
+            md.append('    [:material-printer: Version A4 à imprimer (%s Mo)](%s){ .md-button }'
+                      % (str(a['mo']).replace('.', ','), a['url']))
+        md.append('')
     md.append('## Chapitres\n')
     md.append('<div class="grid cards chapitres" markdown>\n')
     for t, sub in n['chapters']:

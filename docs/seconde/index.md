@@ -14,6 +14,13 @@ hide:
 
 </div>
 
+!!! livre "Le manuel complet en PDF"
+
+    Tout le cours, les exercices et les corrigés de l'année, dans la version distribuée en classe (version du 4 octobre 2026).
+
+    [:material-download: Télécharger le manuel (8,2 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-seconde.pdf){ .md-button .md-button--primary }
+    [:material-printer: Version A4 à imprimer (8,1 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-seconde-a4.pdf){ .md-button }
+
 ## Chapitres
 
 <div class="grid cards chapitres" markdown>
