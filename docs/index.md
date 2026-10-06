@@ -45,7 +45,7 @@ dont les **corrigés se déplient** sous chaque énoncé, et des **TP**. Les fic
 sont téléchargeables depuis les TP.
 
 Ces pages sont une version web du manuel distribué aux élèves ; elles sont mises à jour
-environ tous les quinze jours. En cas d'écart, **les fiches et le manuel distribués en classe font foi**.
+régulièrement. En cas d'écart, **les fiches et le manuel distribués en classe font foi**.
 
 [À propos et licence](a-propos.md){ .md-button }
 

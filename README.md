@@ -4,7 +4,7 @@ Cours de SNT (Seconde) et de NSI (Première, Terminale) de Mathieu Thibaud : act
 
 **Site : https://maththibaud.github.io/informatique-en-autonomie/**
 
-Le contenu de `docs/` est généré automatiquement à partir des sources LaTeX (manuel d'édition) par les scripts de `build/` ; il est mis à jour environ tous les quinze jours. Les fiches et le manuel distribués en classe font foi.
+Le contenu de `docs/` est généré automatiquement à partir des sources LaTeX (manuel d'édition) par les scripts de `build/` ; il est mis à jour régulièrement. Les fiches et le manuel distribués en classe font foi.
 
 Licence : [CC BY-NC-SA 4.0](LICENSE.md). La forme du site s'inspire du travail de [Gilles Lassus](https://glassus.github.io/).
 
