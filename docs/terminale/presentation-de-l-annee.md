@@ -60,7 +60,7 @@ Environ **un tiers de l’année** reste consacré à des **projets** et à la p
 
 **Chapitre 11 — Les réseaux.** *Suivre le voyage d’un message sur Internet : adressage, découpage en paquets, routage — comment les données trouvent leur chemin d’un bout à l’autre du monde.*
 
-**Chapitre 12 — Sécurité et cryptographie.** *Protéger ces échanges : le chiffrement (symétrique et asymétrique) qui rend un message illisible pour tout autre que son destinataire.*
+**Chapitre 12 — Cryptographie.** *Protéger ces échanges : le chiffrement (symétrique et asymétrique) qui rend un message illisible pour tout autre que son destinataire.*
 
 **Chapitre 13 — Calculabilité et décidabilité.** *Toucher aux **limites** de l’informatique : existe-t-il des problèmes qu’*aucun* programme ne pourra jamais résoudre ? (Oui — et c’est vertigineux.)*
 
@@ -68,7 +68,7 @@ Environ **un tiers de l’année** reste consacré à des **projets** et à la p
 
 !!! remarque "Remarque — Un peu d’histoire"
 
-    En **1936**, le mathématicien britannique **Alan Turing** imagine une machine abstraite capable d’exécuter *n’importe quel* algorithme — l’ancêtre théorique de tous nos ordinateurs. Il démontre aussi qu’un programme ne peut pas, en général, décider si un autre programme *s’arrêtera* un jour : c’est le fameux « problème de l’arrêt », que vous rencontrerez au chapitre 12. L’architecture concrète de nos machines, elle, doit beaucoup à **John von Neumann** (1945), dont vous croiserez le modèle au chapitre 9.
+    En **1936**, le mathématicien britannique **Alan Turing** imagine une machine abstraite capable d’exécuter *n’importe quel* algorithme — l’ancêtre théorique de tous nos ordinateurs. Il démontre aussi qu’un programme ne peut pas, en général, décider si un autre programme *s’arrêtera* un jour : c’est le fameux « problème de l’arrêt », que vous rencontrerez au chapitre 13. L’architecture concrète de nos machines, elle, doit beaucoup à **John von Neumann** (1945), dont vous croiserez le modèle au chapitre 14.
 
 ## Comment est organisé ce livre
 
@@ -100,7 +100,7 @@ Comme les épreuves ont lieu **en fin d’année**, on dispose de **toute l’an
 
 ## Comment vous êtes évalué
 
-- à chaque chapitre : de courts **tests rapides** (/10) puis un **contrôle** (/20) ;
+- à chaque chapitre : un ou deux courts **tests rapides** (/10) puis un **contrôle** (/20) — sauf pour la calculabilité, évaluée par ses seuls tests rapides ;
 
 - des **bacs blancs** pour s’entraîner en conditions ;
 

@@ -6,9 +6,9 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *« Protocoles de communication. Protocoles de routage : décrire l’intérêt d’un protocole de routage. Dérouler le protocole RIP (métrique $=$ nombre de sauts) et le protocole OSPF (métrique $=$ coût, lié au débit) pour construire une table de routage. »* |
-| **Prérequis** | la notion de **réseau** et d’**adresse IP** (Première), les **graphes** et surtout l’algorithme de **Dijkstra** (plus courts chemins pondérés), la notion de **coût**. |
-| **Objectifs** | *distinguer* machine, switch et routeur ; *comprendre* le voyage d’un paquet à travers les *couches* ; *lire* et *construire* une table de routage ; *dérouler* RIP et OSPF et *comparer* leurs choix. |
+| **Programme (BO)** | *« Protocoles de routage. Identifier, suivant le protocole de routage utilisé, la route empruntée par un paquet. »* Commentaire du programme : *« En mode débranché, les tables de routage étant données, on se réfère au nombre de sauts (protocole RIP) ou au coût des routes (protocole OSPF). Le lien avec les algorithmes de recherche de chemin sur un graphe est mis en évidence. »* |
+| **Prérequis** | la notion de **réseau** et d’**adresse IP** (Première), les **graphes** (chemins, plus court chemin), la notion de **coût**. L’algorithme de **Dijkstra** (projet du chapitre *Graphes*) éclaire OSPF, mais n’est **pas exigé** (voir la section dédiée, au-delà du programme). |
+| **Objectifs** | *distinguer* machine, switch et routeur ; *comprendre* le voyage d’un paquet à travers les *couches* ; *lire* et *utiliser* une table de routage **donnée** ; *identifier* la route empruntée par un paquet selon le protocole (sauts pour RIP, coûts pour OSPF), et *compléter* la table d’un petit réseau ; *comparer* les choix de RIP et d’OSPF. |
 
 ## Le problème : relier des milliards de machines
 
@@ -26,7 +26,7 @@ C’est toute la question de ce chapitre. **Internet** n’est pas une machine g
 
     Un **réseau local** (LAN) regroupe des machines proches partageant la même **adresse réseau**. Un **switch** (commutateur) relie les machines *à l’intérieur* d’un même réseau local. Un **routeur** relie *plusieurs réseaux locaux entre eux* : il possède plusieurs **interfaces** (cartes réseau), une par réseau auquel il est raccordé. **Internet $=$ l’interconnexion de tous ces réseaux par des routeurs.**
 
-![](../figures/82d4a426d2e949eb.svg){ .tikz loading=lazy }
+![](../figures/6b7b45e89cd9fff9.svg){ .tikz loading=lazy }
 
 Dans un réseau local, un paquet destiné à une machine *du même réseau* y va directement via le switch. Mais s’il vise une machine d’un *autre* réseau, le switch le remet au **routeur**, qui devra l’aiguiller de proche en proche jusqu’au bon réseau.
 
@@ -62,11 +62,11 @@ L’intérêt de CIDR, c’est que `n` peut prendre **n’importe quelle valeur*
 
 Comment une même donnée peut-elle à la fois s’adresser à *une application* précise, être acheminée d’un *bout à l’autre* d’Internet, et circuler sur *un câble* local ? En empilant plusieurs **couches**, chacune ne s’occupant que d’une chose. C’est le modèle **TCP/IP**.
 
-![](../figures/0cf5bcaec68d2ad2.svg){ .tikz loading=lazy }
+![](../figures/f2bc9047a65e9042.svg){ .tikz loading=lazy }
 
 À l’émission, la donnée **descend** les couches : chacune ajoute son **en-tête** (son étiquette) — c’est l’**encapsulation**, comme des enveloppes emboîtées. À l’arrivée, la donnée **remonte** : chaque couche retire son en-tête et transmet le reste au-dessus.
 
-![](../figures/4f247050e2d8ea3b.svg){ .tikz loading=lazy }  
+![](../figures/8bf6c0060d9fc095.svg){ .tikz loading=lazy }  
 **Encapsulation :** en descendant les couches, chaque en-tête s’ajoute **à gauche** du bloc précédent. À l’arrivée, on les retire un à un.
 
 Ce chapitre se concentre sur la couche **Réseau (IP)** : c’est là que se joue le **routage**.
@@ -107,7 +107,7 @@ Comment remplir ces tables ? Deux façons : le **routage statique** (chaque lign
 
 Prenons ce réseau pour toute la suite (les nombres sur les liens seront expliqués plus loin) :
 
-![](../figures/0f9b679838719605.svg){ .tikz loading=lazy }
+![](../figures/eb0e4f04a15f0e63.svg){ .tikz loading=lazy }
 
 <span id="cours-11-6" class="ancre"></span>
 
@@ -138,7 +138,7 @@ Le protocole **RIP** (*Routing Information Protocol*) mesure une route par son *
 
     Voici un réseau à **six** routeurs (les nombres sont des débits, ignorés par RIP) :
 
-    ![](../figures/d9723688c4b827ad.svg){ .tikz .tikz-inline loading=lazy }
+    ![](../figures/1879fbb9798f0e18.svg){ .tikz .tikz-inline loading=lazy }
 
     Table de routage **RIP** de A (on compte les sauts en remontant de proche en proche) :
 
@@ -164,7 +164,7 @@ Le protocole **RIP** (*Routing Information Protocol*) mesure une route par son *
 
 !!! definition "Définition 4 — Métrique d’OSPF"
 
-    Le **coût** d’une liaison se calcule à partir de son débit : $$\text{coût} = \frac{10^8}{\text{débit (en bits/s)}}.$$ La **métrique d’une route** est la **somme des coûts** des liaisons traversées. Chaque routeur connaît la carte complète du réseau (*état de liens*) et applique l’algorithme de **Dijkstra**.
+    Le **coût** d’une liaison se calcule à partir de son débit : $$\text{coût} = \frac{10^8}{\text{débit (en bits/s)}}.$$ La **métrique d’une route** est la **somme des coûts** des liaisons traversées. Chaque routeur connaît la carte complète du réseau (*état de liens*) et en déduit les routes de coût minimal (en coulisses, par l’algorithme de **Dijkstra** : voir la dernière section sur le routage, au-delà du programme). Sur les petits réseaux du bac, on trouve ces routes en comparant les coûts totaux de quelques chemins.
 
 !!! remarque "Remarque"
 
@@ -205,7 +205,7 @@ Le protocole **RIP** (*Routing Information Protocol*) mesure une route par son *
 
     Voici un réseau plus étendu ; les nombres sont les **débits** (Mbps). On applique OSPF (coût $=10^8/$débit) depuis A.
 
-    ![](../figures/c7f35266c20c854c.svg){ .tikz loading=lazy }
+    ![](../figures/b8380a4568e02575.svg){ .tikz loading=lazy }
 
     Coûts : les liens à $100$ Mbps valent $1$, les liens A–C et D–F ($10$ Mbps) valent $10$. Table **OSPF** de A :
 
@@ -235,11 +235,53 @@ Comparons les deux tables de A. Elles **diffèrent** là où le lien direct A–
 
 RIP fonce sur le lien **direct** A–C … sans voir que c’est une liaison **poussive** à $1$ Mbps ! OSPF, lui, préfère faire **un détour par B** sur des liaisons rapides : la route est plus longue en nombre de routeurs, mais bien plus rapide en réalité.
 
-![](../figures/400b52d8ccf4b157.svg){ .tikz loading=lazy }
+![](../figures/7bb4a80f4203bac3.svg){ .tikz loading=lazy }
 
 !!! propriete "Propriété 2 — La leçon"
 
     **Compter les sauts (RIP) n’est pas compter le temps (OSPF).** En pénalisant les liaisons lentes par un coût élevé, OSPF trouve les routes réellement les plus rapides. C’est pourquoi les grands réseaux lui donnent la préférence.
+
+## Dans les coulisses d’OSPF : l’algorithme de Dijkstra <span class="horsprog">au-delà du programme</span>
+
+Le programme officiel est clair : au bac, **les tables de routage sont données**, ou se lisent « à l’œil » sur un petit réseau, en comparant le nombre de sauts (RIP) ou le coût total (OSPF) de quelques routes. C’est exactement ce que nous avons fait plus haut. Mais un vrai routeur OSPF, devant un réseau de plusieurs centaines de routeurs, ne peut pas « regarder » : il calcule. Et ce calcul, c’est l’**algorithme de Dijkstra**, que vous avez programmé dans le projet proposé en fin de chapitre *Graphes*. Ce paragraphe, **au-delà du programme**, le rappelle pour comprendre ce que fait vraiment OSPF.
+
+!!! encadre "Le principe de Dijkstra (rappel du projet Graphes)"
+
+    On part du routeur de départ et on fait grandir, petit à petit, un « nuage » de sommets dont on connaît **avec certitude** la distance minimale (ici : le coût minimal) au départ.
+
+    1.  On garde pour chaque sommet une **distance provisoire** (au début : $0$ pour le départ, $+\infty$ pour les autres).
+
+    2.  À chaque tour, on **fixe définitivement** le sommet non encore traité qui a la **plus petite** distance provisoire : il entre dans le nuage.
+
+    3.  Depuis ce sommet `u` tout juste fixé, on **met à jour** ses voisins : si passer par `u` raccourcit le chemin vers un voisin `v`, on améliore la distance de `v` et on note `u` comme **prédécesseur** de `v`. C’est le **relâchement** :
+
+        `si distance[u] + coût(u,v) < distance[v] :`  
+        ` distance[v] = distance[u] + coût(u,v)`
+
+    On recommence jusqu’à avoir fixé tous les sommets.
+
+!!! exemple "Exemple — Dijkstra sur le réseau du cours, depuis A"
+
+    Coûts OSPF : A–B, B–C, B–D, C–E, D–E valent $1$ ; C–D vaut $10$ ; A–C vaut $100$. À chaque ligne, on fixe le sommet marqué $\ast$ (en cas d’égalité, on prend l’ordre alphabétique) ; entre parenthèses, le prédécesseur.
+
+    | **Fixé** |   `A`    |   `B`    |    `C`    |   `D`    |   `E`    |
+    |:--------:|:--------:|:--------:|:---------:|:--------:|:--------:|
+    |    —     |   $0$    | $\infty$ | $\infty$  | $\infty$ | $\infty$ |
+    |   `A`    | $0^\ast$ | $1$ (A)  | $100$ (A) | $\infty$ | $\infty$ |
+    |   `B`    |          | $1^\ast$ |  $2$ (B)  | $2$ (B)  | $\infty$ |
+    |   `C`    |          |          | $2^\ast$  | $2$ (B)  | $3$ (C)  |
+    |   `D`    |          |          |           | $2^\ast$ | $3$ (C)  |
+    |   `E`    |          |          |           |          | $3^\ast$ |
+
+    Au deuxième tour, la distance provisoire de `C` tombe de $100$ (lien direct, lent) à $2$ (par B) : c’est le relâchement qui « découvre » le détour rapide. Pour remplir la colonne « sortir vers » de la table, on **remonte les prédécesseurs** jusqu’au départ : E $\leftarrow$ C $\leftarrow$ B $\leftarrow$ A, donc on sort vers **B**. On retrouve exactement la table OSPF de A donnée plus haut.
+
+!!! remarque "Remarque"
+
+    Si tous les liens avaient le même coût $1$, Dijkstra fixerait les sommets dans l’ordre d’un parcours en largeur, et la table obtenue serait celle de RIP (nombre de sauts), au choix près entre routes de même longueur. RIP, lui, ne fonctionne pas ainsi : chaque routeur n’a pas la carte complète, il ne connaît que ce que ses voisins lui annoncent (algorithme de **Bellman-Ford**, réparti entre les routeurs).
+
+<span id="cours-11-10" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercice **[10](exercices.md#ex-11-10)** (au-delà du programme : dérouler Dijkstra pour obtenir une table OSPF)
 
 ## TCP et UDP : deux façons de transporter <span class="horsprog">au-delà du programme</span>
 
@@ -272,7 +314,8 @@ Louis Pouzin, père de Cyclades
 | Commutation de paquets | message découpé ; robuste (contourne les pannes) |
 | Table de routage | par où sortir $+$ métrique ; statique ou **dynamique** |
 | RIP | métrique $=$ **nombre de sauts** ; vecteur de distance ; $\leq 15$ sauts |
-| OSPF | métrique $=$ **somme des coûts**, coût $=10^8/$débit ; **Dijkstra** |
+| OSPF | métrique $=$ **somme des coûts**, coût $=10^8/$débit |
+| Dijkstra <span class="horsprog">au-delà du programme</span> | le calcul qui se cache derrière OSPF (nuage $+$ relâchement) |
 | RIP vs OSPF | RIP ignore la vitesse ; OSPF évite les liens lents |
 
 ## Erreurs fréquentes
@@ -295,11 +338,13 @@ Louis Pouzin, père de Cyclades
 
 - **expliquer** l’encapsulation en couches et le rôle de la couche IP $\to$ ex. [5](exercices.md#ex-11-5) ;
 
-- **lire** et **construire** une table de routage (réseau, sortie, métrique) $\to$ ex. [6](exercices.md#ex-11-6), [7](exercices.md#ex-11-7) ;
+- **lire** et **utiliser** une table de routage donnée, et la **compléter** sur un petit réseau (réseau, sortie, métrique) $\to$ ex. [6](exercices.md#ex-11-6), [7](exercices.md#ex-11-7) ;
 
-- **dérouler RIP** (nombre de sauts) sur un réseau donné $\to$ ex. [7](exercices.md#ex-11-7), [11](exercices.md#ex-11-11) ;
+- **identifier la route RIP** (nombre de sauts) sur un réseau donné $\to$ ex. [7](exercices.md#ex-11-7), [12](exercices.md#ex-11-12) ;
 
-- **calculer les coûts** ($10^8/$débit) et **dérouler OSPF** (Dijkstra), puis **comparer** à RIP $\to$ ex. [8](exercices.md#ex-11-8), [9](exercices.md#ex-11-9), [11](exercices.md#ex-11-11).
+- **calculer les coûts** ($10^8/$débit), **identifier la route OSPF** (coût total minimal), puis **comparer** à RIP $\to$ ex. [8](exercices.md#ex-11-8), [9](exercices.md#ex-11-9), [12](exercices.md#ex-11-12) ;
+
+- <span class="horsprog">au-delà du programme</span> **dérouler Dijkstra** pour retrouver une table OSPF $\to$ ex. [10](exercices.md#ex-11-10).
 
 ## Vers le Grand Oral
 

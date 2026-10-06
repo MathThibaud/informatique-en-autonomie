@@ -352,7 +352,7 @@ def chiffrement(msg, cle):
 
 1.  Recopier et compléter les lignes `(a)`, `(b)` et `(c)`.
 
-2.  Indiquer, en justifiant, ce que renvoie l’appel `chiffrement(’RESEAU’, ’GFTZ’)`.
+2.  Indiquer, en justifiant, ce que l’on observe lors de l’appel `chiffrement(’RESEAU’, ’GFTZ’)`.
 
     ??? pouce "Coup de pouce"
 
@@ -568,7 +568,7 @@ def generer_ordre(cle):
 
     8.  Symétrique : *une* clé partagée (ici la grille) ; le problème est de **se l’échanger** en sécurité. Asymétrique : *deux* clés (publique/privée), ce qui permet justement d’échanger la clé symétrique quotidienne sans l’avoir jamais transmise en clair.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 14</span> — Type bac — Transmettre une clé de session *(Métropole 2024, sujet 2,* `24-NSIJ2ME1`*)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-14 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 14</span> — Type bac — Transmettre une clé de session *(Métropole 2024, jour 2,* `24-NSIJ2ME1`*)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-14 }
 
 Bob a mis en place une base de données pour gérer sa collection de CD. Cette base est hébergée sur un serveur auquel il accède depuis un client installé sur son ordinateur personnel. Pour sécuriser la connexion, un algorithme de chiffrement **symétrique** est utilisé.
 

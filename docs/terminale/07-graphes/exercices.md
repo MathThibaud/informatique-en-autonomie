@@ -275,7 +275,11 @@ On considère ce graphe (les voisins seront toujours pris par **ordre alphabéti
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-10 }
 
-1.  Programmer la classe `Graphe`, puis les fonctions `BFS(g, depart)` et `DFS(g, sommet)` (récursive) du cours.
+1.  Programmer la classe `Graphe`, puis les fonctions `BFS(g, depart)` et `DFS(g, sommet)` (récursive) du cours. Pour la file du BFS, reprendre la classe `File` du chapitre *Structures linéaires*.
+
+    ??? pouce "Coup de pouce"
+
+        La classe `File` de ce chapitre défile avec `pop(0)` : c’est un **choix de simplicité**, suffisant pour nos petits graphes, mais chaque `pop(0)` coûte $O(n)$ (il décale tous les éléments). Sur un très grand graphe, on prendrait une file plus efficace (`collections.deque`, deux piles…) sans rien changer au code du BFS : c’est tout l’intérêt de l’interface.
 
 2.  Construire le graphe de l’exercice précédent et vérifier vos réponses aux traces à la main.
 
@@ -287,7 +291,7 @@ On considère ce graphe (les voisins seront toujours pris par **ordre alphabéti
 
 ??? corrige "Corrigé"
 
-    Voir le cours pour `BFS`, `DFS` (récursif) et `DFS_iteratif`. Sur ce graphe, le DFS itératif renvoie par exemple `[A, C, D, F, E, B]` : la **pile** traite en dernier le premier voisin empilé, d’où un ordre différent du DFS récursif — mais c’est bien un parcours en profondeur valide.
+    Voir le cours pour `BFS`, `DFS` (récursif) et `DFS_iteratif`. Pour la file, la classe `File` du chapitre *Structures linéaires* (avec `pop(0)`) convient ici : c’est un choix de **simplicité**, acceptable sur de petits graphes, mais chaque `defiler` coûte alors $O(n)$ ; sur un grand graphe, on changerait d’implémentation (`collections.deque`…) sans toucher au BFS. Sur ce graphe, le DFS itératif renvoie par exemple `[A, C, D, F, E, B]` : la **pile** traite en dernier le premier voisin empilé, d’où un ordre différent du DFS récursif — mais c’est bien un parcours en profondeur valide.
 
 ### Chemins, cycles, connexité
 
@@ -331,9 +335,10 @@ On veut le **plus court chemin** en nombre d’arêtes.
     ??? pouce "Coup de pouce 2 (début de solution)"
 
         `parent = {depart: None}`  
-        `en_attente = [depart]`  
-        `while en_attente != []:`  
-        `s = en_attente.pop(0)` … À la fin, remonter avec `s = parent[s]` et retourner la liste obtenue.
+        `en_attente = File()`  
+        `en_attente.enfiler(depart)`  
+        `while not en_attente.est_vide():`  
+        `s = en_attente.defiler()` … À la fin, remonter avec `s = parent[s]` et retourner la liste obtenue.
 
 2.  Écrire `distances(g, depart)` qui renvoie un dictionnaire donnant, pour chaque sommet, sa distance (nombre d’arêtes) au départ.
 
@@ -348,10 +353,11 @@ On veut le **plus court chemin** en nombre d’arêtes.
     ```python
     def plus_court_chemin(g, depart, arrivee):
         decouverts = [depart]
-        en_attente = [depart]
+        en_attente = File()
+        en_attente.enfiler(depart)
         parent = {depart: None}
-        while en_attente != []:
-            s = en_attente.pop(0)
+        while not en_attente.est_vide():
+            s = en_attente.defiler()
             if s == arrivee:
                 chemin = [arrivee]
                 while parent[chemin[0]] is not None:
@@ -360,19 +366,20 @@ On veut le **plus court chemin** en nombre d’arêtes.
             for v in g.voisins(s):
                 if v not in decouverts:
                     decouverts.append(v)
-                    en_attente.append(v)
+                    en_attente.enfiler(v)
                     parent[v] = s
         return None
 
     def distances(g, depart):
-        d = {depart: 0}
-        en_attente = [depart]
-        while en_attente != []:
-            s = en_attente.pop(0)
+        d = {depart: 0}              # sert aussi de liste des decouverts
+        en_attente = File()
+        en_attente.enfiler(depart)
+        while not en_attente.est_vide():
+            s = en_attente.defiler()
             for v in g.voisins(s):
                 if v not in d:
                     d[v] = d[s] + 1
-                    en_attente.append(v)
+                    en_attente.enfiler(v)
         return d
     ```
 
@@ -447,10 +454,10 @@ On dispose de `sommets = [’G’,’J’,’Y’,’E’,’N’,’M’,’A�
 Milo se fâche avec Gabriel et Yanis, et Anas avec Yanis ; le nouveau graphe est :
 
 ```python
-graphe = {'G': ['J', 'N'],       'J': ['G', 'Y', 'E', 'L'],
-          'Y': ['J', 'E', 'N'],  'E': ['J', 'Y', 'N'],
-          'N': ['G', 'Y', 'E'],  'M': ['A'],
-          'A': ['M'],            'L': ['J']}
+graphe = {'G': ['J', 'Y', 'N'],       'J': ['G', 'Y', 'E', 'L'],
+          'Y': ['G', 'J', 'E', 'N'],  'E': ['J', 'Y', 'N'],
+          'N': ['G', 'Y', 'E'],       'M': ['A'],
+          'A': ['M'],                 'L': ['J']}
 ```
 
 Le « cercle d’amis » d’une personne est l’ensemble des personnes atteignables depuis elle ; on l’obtient par un **parcours en profondeur**.
@@ -521,7 +528,7 @@ Le « cercle d’amis » d’une personne est l’ensemble des personnes atteign
 
     **8.** `def nb_amis(d, s): return len(d[s])`
 
-    **9.** Cercle d’amis de Lou (graphe des fâcheries) : `[’L’,’J’,’G’,’N’,’Y’,’E’]` — Milo et Anas ne sont plus atteignables.
+    **9.** Cercle d’amis de Lou (graphe des fâcheries) : `[’L’,’J’,’G’,’Y’,’E’,’N’]` — Milo et Anas ne sont plus atteignables.
 
     **10.**
 
@@ -554,6 +561,12 @@ La fabrication d’un pain se décompose en tâches ; un **arc** `(i)`$\to$`(j)`
 
 4.  Ce graphe contient-il un cycle ? Qu’est-ce que cela garantit sur la faisabilité de la recette ?
 
+5.  Un élève lance un parcours en profondeur depuis `(b)`, puis depuis `(d)`. Il applique la règle : « si l’on retombe sur un sommet déjà découvert qui n’est pas celui d’où l’on vient, il y a un cycle ». En arrivant de `(d)` sur `(f)`, déjà découvert, il conclut à un cycle. Expliquer son erreur et donner le bon critère pour un graphe orienté.
+
+    ??? pouce "Coup de pouce"
+
+        Au moment où l’on arrive de `(d)`, l’exploration de `(f)` est-elle encore en cours, ou déjà terminée ? Peut-on revenir de `(f)` vers `(d)` en suivant les flèches ?
+
 On considère maintenant la matrice d’adjacence d’un graphe orienté (`M[i][j] = 1` s’il existe un arc de `i` vers `j`).
 
 ```python
@@ -570,7 +583,7 @@ M = [ [0, 1, 0, 0, 0],
 
     ??? pouce "Coup de pouce"
 
-        Chercher un cycle dans le graphe dessiné à la question 5 : que se passe-t-il si des tâches dépendent les unes des autres en boucle ?
+        Chercher un cycle dans le graphe dessiné à la question 6 : que se passe-t-il si des tâches dépendent les unes des autres en boucle ?
 
 ??? corrige "Corrigé"
 
@@ -582,13 +595,15 @@ M = [ [0, 1, 0, 0, 0],
 
     **4.** Non, pas de cycle. C’est indispensable : un cycle de dépendances rendrait la recette **impossible** à réaliser (chaque tâche attendrait l’autre).
 
-    **5.** Arcs : `0`$\to$`1`, `1`$\to$`2`, `2`$\to$`3`, `3`$\to$`1`, `3`$\to$`4`.
+    **5.** La règle utilisée ne vaut que pour un graphe **non orienté**. Ici, `(f)` a été atteinte depuis `(e)` lors du premier parcours, qui l’a **terminée** (`(f)`, `(g)`, `(l)` entièrement explorés). Arriver de `(d)` sur `(f)` signifie seulement que deux chemins, `(b)`$\to$`(e)`$\to$`(f)` et `(d)`$\to$`(f)`, **se rejoignent** : aucune flèche ne permet de revenir de `(f)` à `(d)`. **Bon critère** pour un graphe orienté : au cours d’un parcours en profondeur, il y a un cycle lorsqu’un arc mène à un sommet **en cours** (encore dans la pile d’appels, pas encore terminé) ; un arc vers un sommet **terminé** ne signale pas de cycle.
+
+    **6.** Arcs : `0`$\to$`1`, `1`$\to$`2`, `2`$\to$`3`, `3`$\to$`1`, `3`$\to$`4`.
 
     ![](../figures/d2511b65e6f41e8b.svg){ .tikz loading=lazy }
 
-    **6.** **Impossible** : le graphe contient le cycle `1`$\to$`2`$\to$`3`$\to$`1`. On ne peut donc pas ordonner ces tâches (aucun tri topologique n’existe quand il y a un cycle).
+    **7.** **Impossible** : le graphe contient le cycle `1`$\to$`2`$\to$`3`$\to$`1`. On ne peut donc pas ordonner ces tâches (aucun tri topologique n’existe quand il y a un cycle).
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — *d’après Amérique du Nord 2025, jour 2 bis, ex. 3 (partie A)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-15 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — *d’après Pays étrangers 2025, sujet PE2, ex. 3 (partie A)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-15 }
 
 Un parc d’attractions est modélisé par un graphe : chaque sommet est une attraction (de durée donnée), chaque arête porte la durée (en minutes) du trajet entre deux attractions.
 
@@ -919,9 +934,9 @@ def parcours_largeur(g, depart):
             sommet = en_attente.pop(0)  # on defile (FIFO)
     ```
 
-    Avec cette ligne, la fonction renvoie `[’A’, ’B’, ’C’, ’D’, ’E’]`.
+    Avec cette ligne, la fonction renvoie `[’A’, ’B’, ’C’, ’D’, ’E’]`. C’est la correction la plus courte, et elle suffit sur un petit graphe ; mais c’est un **choix de simplicité** : chaque `pop(0)` décale toute la liste et coûte $O(n)$ (chapitre *Structures linéaires*). La version du cours, avec l’interface `File` (`enfiler`/`defiler`/`est_vide`), évite à la fois l’erreur de l’IA et ce coût caché.
 
-    **3.** Dérouler le code sur un **graphe de quatre ou cinq sommets** où un sommet est à distance $2$ : en largeur, tous les sommets à distance $1$ doivent sortir *avant* ceux à distance $2$. Réflexe du cours : « `pop(0)` $=$ file $=$ largeur ; `pop()` $=$ pile $=$ profondeur » — une seule lettre change tout.
+    **3.** Dérouler le code sur un **graphe de quatre ou cinq sommets** où un sommet est à distance $2$ : en largeur, tous les sommets à distance $1$ doivent sortir *avant* ceux à distance $2$. Réflexe du cours : « file (FIFO) $=$ largeur ; pile (LIFO) $=$ profondeur ». Sur une `list`, `pop()` retire le dernier élément : on obtient une pile, donc un parcours en profondeur.
 
 ### S’entraîner à l’oral
 

@@ -12,7 +12,7 @@
 
 !!! remarque "Remarque — Le jeu qui cache un algorithme"
 
-    « Je pense à un nombre entre 1 et 100. À chaque essai, je vous dis *plus petit* ou *plus grand*. » Personne ne propose 1, puis 2, puis 3… Tout le monde propose **50**, puis coupe encore en deux. En 7 essais au maximum, c’est gagné. Ce réflexe si naturel *est* un algorithme fondamental : la **recherche dichotomique** (du grec *dikho-tomia*, « couper en deux »). Nous allons voir qu’il transforme une recherche dans un million de valeurs en… **vingt** comparaisons. Les points qui dépassent le programme sont signalés par le badge <span class="horsprog">au-delà du programme</span>.
+    « Je pense à un nombre entre 1 et 100. À chaque essai, je vous dis *plus petit* ou *plus grand*. » Personne ne propose 1, puis 2, puis 3… Tout le monde propose **50**, puis coupe encore en deux. En 7 essais au maximum, c’est gagné. Ce réflexe si naturel *est* un algorithme fondamental : la **recherche dichotomique** (du grec *dikho-tomia*, « couper en deux »). Vous l’avez d’ailleurs déjà programmé sans le savoir : au chapitre *Les bases de la programmation Python*, le défi « L’ordinateur devine » du TP « Le nombre mystère » appliquait exactement cette stratégie du milieu. Ce chapitre ne la redécouvre donc pas : il lui donne son **nom**, l’étend à la recherche dans un **tableau trié**, **prouve** qu’elle se termine toujours et **calcule** son coût. Nous allons voir qu’il transforme une recherche dans un million de valeurs en… **vingt** comparaisons. Les points qui dépassent le programme sont signalés par le badge <span class="horsprog">au-delà du programme</span>.
 
 ## L’idée : couper en deux, encore et encore
 

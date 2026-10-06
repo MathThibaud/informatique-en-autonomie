@@ -633,7 +633,7 @@ On considère la liste des nombres d’étages des immeubles d’une rue, en par
 
     **6.** La version récursive `llsc_fin` recalcule sans cesse les mêmes valeurs (coût exponentiel), tandis que `llsc_dyn` remplit chaque `dyn[i]` **une seule fois** : son coût est quadratique ($O(n^2)$), bien plus rapide.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 17</span> — Justifier un texte *(d’après Amérique du Nord 2025, jour 2 bis)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-17 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 17</span> — Justifier un texte *(d’après Pays étrangers 2025, sujet PE2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-17 }
 
 On veut couper un texte en lignes de manière « esthétique », pour une largeur (justification) donnée. On modélise un découpage par une liste de couples : pour `[’An’,’algorithm’,’must’,’be’,’seen’,’to’,’be’,’believed’]`, le découpage `[(0,2),(2,5),(5,7),(7,8)]` signifie « ligne 1 = mots 0 à 1, ligne 2 = mots 2 à 4, etc. ».
 
@@ -647,7 +647,7 @@ Le **coût inesthétique** d’une ligne est le *carré* du nombre d’espaces s
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        `longueur = sum(len(liste_mots[k]) for k in range(i, j)) + (j - i - 1)`  
+        `longueur = sum([len(liste_mots[k]) for k in range(i, j)]) + (j - i - 1)`  
         `if longueur > justification:`  
         `return 1000000` …
 
@@ -717,7 +717,7 @@ Le **coût inesthétique** d’une ligne est le *carré* du nombre d’espaces s
         return decoupage, cout_mini[0]
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Charger un camion au meilleur prix *(d’après Métropole 2024, sujet 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-18 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Charger un camion au meilleur prix *(d’après Métropole 2024, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-18 }
 
 Dans cet exercice, l’entête d’une fonction précise le type de ses paramètres et de la valeur renvoyée : ainsi `puissance(x: float, n: int) -> float` prend un flottant `x` et un entier `n` et renvoie le flottant `x**n`.
 

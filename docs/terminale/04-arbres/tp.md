@@ -26,7 +26,7 @@
 
 ## Construire un ABR
 
-On enveloppe l’arbre dans une classe `ABR` : l’attribut privé `_racine` désigne le nœud racine (ou `None`), et `_taille` compte les valeurs. L’utilisateur ne manipule jamais les nœuds : il appelle `inserer`, `contient`, `infixe`… Les valeurs sont **sans doublon**.
+On enveloppe l’arbre dans une classe `ABR` : l’attribut privé `_racine` désigne le nœud racine (ou `None`), et `_taille` compte les valeurs. L’utilisateur ne manipule jamais les nœuds : il appelle `inserer`, `contient`, `infixe`… Les valeurs sont **sans doublon** : c’est une **variante** de la convention du cours (où une valeur égale est rangée à droite). Ici, comme dans un ensemble, insérer une valeur déjà présente ne fait rien.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — L’ordre d’insertion compte <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-arbres-tp-1-1 }
 

@@ -349,7 +349,7 @@ On considère le texte dont les effectifs sont : $$\texttt{tab = [("A", 15), ("B
 
     **5.** Trois temps de « diviser pour régner » : **diviser** = couper la liste en deux groupes d’effectifs équilibrés (`separe`) ; **régner** = appeler récursivement `shannon` sur le groupe contenant le symbole ; **combiner** = préfixer le bit `"1"` ou `"0"` au code renvoyé.
 
-    **6.** **Terminaison.** Le variant est `len(tab)` (nombre de caractères). `separe` renvoie deux groupes **non vides** dont la réunion est `tab` ; le groupe sur lequel on récurse contient donc **strictement moins** de caractères que `tab`. Cet entier positif décroît d’au moins $1$ à chaque appel et atteint $1$ (cas d’arrêt) : la fonction s’arrête toujours.
+    **6.** **Terminaison.** Le variant est `len(tab)` (nombre de caractères). `separe` renvoie deux groupes **non vides** dont la réunion est `tab` (le premier contient au moins `tab[0]` ; comme la liste est triée par effectifs **décroissants**, le dernier effectif vaut au plus la moitié du total, donc le cumul atteint la moitié *avant* le dernier caractère et le second groupe n’est pas vide — sans ce tri, `separe([("A", 1), ("B", 3)])` renverrait un second groupe vide et `shannon("A", ...)` ne s’arrêterait pas) ; le groupe sur lequel on récurse contient donc **strictement moins** de caractères que `tab`. Cet entier positif décroît d’au moins $1$ à chaque appel et atteint $1$ (cas d’arrêt) : la fonction s’arrête toujours.
 
     **7.**
 

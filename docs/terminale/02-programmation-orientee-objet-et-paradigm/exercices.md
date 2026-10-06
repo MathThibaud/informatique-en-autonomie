@@ -610,7 +610,7 @@ Pour chacune des situations suivantes, indiquer le paradigme *a priori* le plus 
 
 ### Vers le bac
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Le domaine skiable (d’après Métropole 2024, sujet 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-16 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Le domaine skiable (d’après Métropole 2024, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-16 }
 
 *On ne traite ici que la partie « programmation objet » du sujet.* Une station de ski modélise ses pistes par une classe `Piste` et son domaine par une classe `Domaine`. Le code est donné en **annexe** ci-dessous ; il se termine par la création du domaine `lievre_blanc` et de ses pistes.
 
@@ -740,7 +740,7 @@ class Aliment:
 
 3.  Une erreur s’est glissée : la masse de protéines du lait est en réalité `3.4`. Donner l’instruction qui **modifie** cet attribut de `lait`.
 
-4.  On veut ajouter une méthode `energie_reelle` qui renvoie l’énergie d’une masse donnée (en grammes). Par exemple, `lait.energie_reelle(245)` renvoie `159.495` (soit $245 \times 65{,}1 \div 100$). Recopier et compléter :
+4.  On veut ajouter une méthode `energie_reelle` qui renvoie l’énergie d’une masse donnée (en grammes). Par exemple, `lait.energie_reelle(245)` renvoie environ `159.495` (soit $245 \times 65{,}1 \div 100$). Recopier et compléter :
 
     ```python
     def energie_reelle(..., masse):
@@ -770,7 +770,7 @@ class Aliment:
             return self.energie * masse / 100
         ```
 
-        *(`lait.energie_reelle(245)` renvoie bien `159.495`.)*
+        *(`lait.energie_reelle(245)` renvoie `159.49499999999998`, soit $159{,}495$ à l’erreur d’arrondi des flottants près.)*
 
     5.  `aliments[’pain’].energie_reelle(220)`.
 
@@ -1009,7 +1009,7 @@ def chargement_glouton(liste, rang, capacite):
     calling a Python object.
     ```
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction **itérative** (sans récursivité) `chargement_glouton2(liste, capacite)`, où `liste` est une liste de colis triés par poids décroissants et `capacite` la capacité du camion en kilogrammes, qui renvoie la liste des colis à charger selon le même algorithme glouton. On pourra créer une liste `colis_a_charger`, puis parcourir les colis triés en ajoutant chacun à cette liste tant que le poids total n’excède pas la capacité du camion.
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction **itérative** (sans récursivité) `chargement_glouton2(liste, capacite)`, où `liste` est une liste de colis triés par poids décroissants et `capacite` la capacité du camion en kilogrammes, qui renvoie la liste des colis à charger selon le même algorithme glouton. On pourra créer une liste `colis_a_charger`, puis parcourir tous les colis triés en ajoutant à cette liste chaque colis qui rentre encore dans le camion (le poids total ne doit pas excéder la capacité du camion).
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 

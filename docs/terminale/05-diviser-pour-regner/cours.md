@@ -306,7 +306,7 @@ Le BO cite la **rotation d’un quart de tour d’une image** carrée. On décou
 
     - **justifier** la terminaison (variant = taille du tableau) et **comparer** les coûts $n^2$, $n\log_2 n$, $\log_2 n$.
 
-    Exemples de sujets : *tri fusion* (Liban 2023), *recherche dichotomique* récurrente sur de nombreux sujets.
+    Exemples de sujets : *tri fusion* (Liban 2023, jour 2), *recherche dichotomique* récurrente sur de nombreux sujets.
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 

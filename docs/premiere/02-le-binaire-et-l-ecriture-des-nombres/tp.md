@@ -232,11 +232,11 @@
 
 ## Les portes logiques
 
-Dans cette partie, un bit est une chaîne d’un caractère : `"0"` ou `"1"`.
+Les opérateurs **et**, **ou**, **non**, **xor**, leurs tables de vérité et les symboles des portes ont été vus en cours (section « Logique booléenne : des portes logiques à l’addition ») : il s’agit maintenant de les **programmer**. Dans cette partie, un bit est une chaîne d’un caractère : `"0"` ou `"1"`.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 9</span> — Les trois portes de base <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-tp-1-9 }
 
-\[ sur machine \]  Écrire `non(a)`, `et(a, b)` et `ou(a, b)` avec des `if`. Chacune renvoie `"0"` ou `"1"`.
+\[ sur machine \]  Écrire `non(a)`, `et(a, b)` et `ou(a, b)` avec des `if`, en suivant leurs tables de vérité (cours). Chacune renvoie `"0"` ou `"1"`.
 
 ??? corrige "Corrigé"
 
@@ -259,9 +259,9 @@ Dans cette partie, un bit est une chaîne d’un caractère : `"0"` ou `"1"`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Construire le OU exclusif <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-tp-1-10 }
 
-Le OU exclusif (*xor*) vaut `"1"` lorsque **exactement un** des deux bits vaut `"1"`.
+Rappel du cours : le OU exclusif (*xor*) vaut `"1"` lorsque **exactement un** des deux bits vaut `"1"`.
 
-1.  \[ à la main \]  Dresser sa table de vérité.
+1.  \[ à la main \]  Dresser la table de vérité de l’expression ($a$ et non $b$) ou (non $a$ et $b$), avec la méthode du cours (une colonne par étape). Vérifier qu’elle coïncide avec celle du xor.
 
 2.  \[ sur machine \]  Écrire `xor(a, b)` **sans aucun `if`**, en combinant seulement `non`, `et` et `ou`. Indice : « `a` et pas `b`, ou bien pas `a` et `b` ».
 
@@ -269,7 +269,7 @@ Le OU exclusif (*xor*) vaut `"1"` lorsque **exactement un** des deux bits vaut `
 
 ??? corrige "Corrigé"
 
-    **1.** Table : $(0,0) \mapsto 0$, $(0,1) \mapsto 1$, $(1,0) \mapsto 1$, $(1,1) \mapsto 0$.
+    **1.** Pour $(a, b) = (0,0), (0,1), (1,0), (1,1)$ : $a$ et non $b$ vaut $0, 0, 1, 0$ ; non $a$ et $b$ vaut $0, 1, 0, 0$ ; leur ou vaut donc $0, 1, 1, 0$, exactement la table du xor : $(0,0) \mapsto 0$, $(0,1) \mapsto 1$, $(1,0) \mapsto 1$, $(1,1) \mapsto 0$.
 
     **2. et 3.**
 
@@ -286,7 +286,7 @@ Le OU exclusif (*xor*) vaut `"1"` lorsque **exactement un** des deux bits vaut `
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Le demi-additionneur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-tp-1-11 }
 
-\[ à la main \]  Poser les quatre additions d’un bit : $0+0$, $0+1$, $1+0$, $1+1$. Écrire chaque résultat **sur deux bits** (retenue, somme). Reconnaître ensuite la porte qui donne la retenue et celle qui donne la somme.
+Le cours l’a établi : en additionnant deux bits, la **somme** est donnée par une porte **xor** et la **retenue** par une porte **et**. On programme maintenant ce circuit, en réutilisant les portes de la partie précédente.
 
 ![](../figures/9208daa0d68e5202.svg){ .tikz loading=lazy }
 
@@ -299,7 +299,7 @@ Le OU exclusif (*xor*) vaut `"1"` lorsque **exactement un** des deux bits vaut `
 
 ??? corrige "Corrigé"
 
-    $0+0 = \texttt{00}$, $0+1 = \texttt{01}$, $1+0 = \texttt{01}$, $1+1 = \texttt{10}$. La retenue (bit de gauche) est la table du **ET** ; la somme (bit de droite) est celle du **OU exclusif**.
+    Comme vu en cours : $0+0 = \texttt{00}$, $0+1 = \texttt{01}$, $1+0 = \texttt{01}$, $1+1 = \texttt{10}$. La retenue (bit de gauche) est la table du **ET** ; la somme (bit de droite) est celle du **OU exclusif**.
 
     ```python
     def demi_additionneur(a, b):
@@ -549,7 +549,7 @@ La rampe est une barre inclinée terminée par un crochet : la bille roule jusqu
 
 ## Le bit : une mémoire d’un chiffre binaire
 
-!!! definition "Définition 5 — Convention du jeu"
+!!! definition "Définition 7 — Convention du jeu"
 
     Un bit qui pointe **à droite** vaut `1` ; un bit qui pointe **à gauche** vaut `0`. Quand une bille le traverse, elle tombe du côté **opposé** à la flèche, puis le bit **bascule**.
 
@@ -618,7 +618,7 @@ Voici le montage du puzzle **21** (« Quantum Number ») : quatre bits **empilé
 
 ![](../figures/b0bc3a0318dbed58.svg){ .tikz loading=lazy }
 
-!!! propriete "Propriété 3 — Un registre compte en binaire"
+!!! propriete "Propriété 4 — Un registre compte en binaire"
 
     Sur un bit qui vaut `1`, la bille le remet à `0` et **continue** vers le bit suivant : c’est la **retenue**. Sur un bit qui vaut `0`, la bille le met à `1` et **sort** : la retenue s’arrête. Chaque bille ajoute donc **1** au registre : c’est exactement la fonction `incrementer` du TP d’arithmétique binaire.
 

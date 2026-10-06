@@ -323,7 +323,7 @@ Un mathématicien annonce un algorithme **polynomial** qui résout le problème 
 
 ### Vers le bac
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Terminaison et problème de l’arrêt (d’après Métropole septembre 2024, sujet 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-13 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Terminaison et problème de l’arrêt (d’après Métropole septembre 2024, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-13 }
 
 On dit qu’un appel `f(x)` *termine* lorsque son évaluation renvoie une valeur au bout d’un nombre fini d’étapes.
 
@@ -509,7 +509,8 @@ while x > 0:
         ```python
         def terminaison_inverse(programme):
             if arret(programme):     # si le programme termine...
-                boucle_infinie()     # ... on boucle pour toujours
+                while True:          # ... on boucle pour toujours
+                    pass
             else:
                 return               # sinon on termine
         ```

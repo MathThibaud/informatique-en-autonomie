@@ -343,7 +343,7 @@ print(compte.solde())                   # affiche 120
 
 !!! remarque "Remarque"
 
-    On retrouve cette pratique dans les sujets de bac : la classe fournit des méthodes `get_…` (accesseurs) et `set_…` (mutateurs), et l’énoncé demande explicitement de « ne pas accéder directement aux attributs » depuis une autre classe (*ex.* Asie 2024 : la méthode `couvre` d’une antenne doit passer par `get_pos_maison()`).
+    On retrouve cette pratique dans les sujets de bac : la classe fournit des méthodes `get_…` (accesseurs) et `set_…` (mutateurs), et l’énoncé demande explicitement de « ne pas accéder directement aux attributs » depuis une autre classe (*ex.* Asie 2024, jour 1 : la méthode `couvre` d’une antenne doit passer par `get_pos_maison()`).
 
 <span id="cours-02-14" class="ancre"></span>
 

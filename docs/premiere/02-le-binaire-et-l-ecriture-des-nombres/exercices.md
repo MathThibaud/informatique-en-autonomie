@@ -505,7 +505,126 @@ ord("i") - ord("H")
     afficher_codes("Hi")   # affiche  H 72  puis  i 105
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 22</span> — Le complément à deux selon un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-02-22 }
+### Logique booléenne et portes logiques
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 22</span> — Évaluer des opérateurs booléens <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-22 }
+
+\[ à la main \] 
+
+1.  On prend $a = 1$ et $b = 0$. Donner la valeur de : non $a$ ; $a$ et $b$ ; $a$ ou $b$ ; $a$ xor $b$ ; non$(a$ ou $b)$.
+
+2.  Même question avec $a = 1$ et $b = 1$.
+
+3.  \[ sur machine \]  Vérifier en console, en écrivant `True` pour `1`, `False` pour `0` et `a != b` pour $a$ xor $b$ :
+
+    ```text
+    >>> not True
+    >>> True and False
+    >>> True or False
+    >>> True != False
+    >>> not (True or False)
+    ```
+
+??? corrige "Corrigé"
+
+    **1.** Avec $a = 1$ et $b = 0$ : non $a = 0$ ; $a$ et $b = 0$ ; $a$ ou $b = 1$ ; $a$ xor $b = 1$ (les deux bits sont différents) ; non$(a$ ou $b) =$ non $1 = 0$.
+
+    **2.** Avec $a = 1$ et $b = 1$ : non $a = 0$ ; $a$ et $b = 1$ ; $a$ ou $b = 1$ ; $a$ xor $b = 0$ (les deux bits sont égaux : c’est la ligne où ou et xor diffèrent) ; non$(a$ ou $b) = 0$.
+
+    **3.**
+
+    ```text
+    >>> not True
+    False
+    >>> True and False
+    False
+    >>> True or False
+    True
+    >>> True != False
+    True
+    >>> not (True or False)
+    False
+    ```
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Dresser la table d’une expression <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-23 }
+
+\[ à la main \] 
+
+1.  Dresser la table de vérité de non$(a$ et $b)$, puis celle de (non $a)$ ou (non $b)$. Que constate-t-on ? Comment dit-on de ces deux expressions ?
+
+2.  Dresser la table de vérité de $(a$ et $b)$ ou $c$. Combien de lignes faut-il ? Pour combien d’entre elles l’expression vaut-elle `1` ?0
+
+    ??? pouce "Coup de pouce"
+
+        Une ligne par combinaison des entrées : avec $n$ variables, $2^n$ lignes, énumérées en comptant en binaire (`000`, `001`, `010`…). Ajouter une colonne par étape du calcul, en commençant par les parenthèses.
+
+??? corrige "Corrigé"
+
+    **1.** Une ligne par combinaison de $a$ et $b$ (4 lignes), une colonne par étape : $$\begin{array}{|c|c||c|c||c|c|c|}
+    \hline
+    a & b & a \text{ et } b & \text{non}(a \text{ et } b) & \text{non } a & \text{non } b & (\text{non } a) \text{ ou } (\text{non } b) \\
+    \hline
+    \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{1} & \texttt{1} & \texttt{1} \\
+    \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{1} & \texttt{0} & \texttt{1} \\
+    \texttt{1} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{1} \\
+    \texttt{1} & \texttt{1} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
+    \hline
+    \end{array}$$ Les colonnes de non$(a$ et $b)$ et de (non $a)$ ou (non $b)$ sont identiques (`1`, `1`, `1`, `0`) : les deux expressions ont la même table de vérité, elles sont **équivalentes**. « Il est faux que $a$ et $b$ soient tous deux vrais » revient à dire « l’un des deux au moins est faux ».
+
+    **2.** Trois variables : $2^3 = 8$ lignes. $$\begin{array}{|c|c|c||c||c|}
+    \hline
+    a & b & c & a \text{ et } b & (a \text{ et } b) \text{ ou } c \\
+    \hline
+    \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
+    \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} \\
+    \texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} \\
+    \texttt{0} & \texttt{1} & \texttt{1} & \texttt{0} & \texttt{1} \\
+    \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
+    \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} \\
+    \texttt{1} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{1} \\
+    \texttt{1} & \texttt{1} & \texttt{1} & \texttt{1} & \texttt{1} \\
+    \hline
+    \end{array}$$ L’expression vaut `1` pour **5** lignes sur 8 : les quatre où $c = 1$, plus la ligne $a = b = 1$, $c = 0$.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — Le demi-additionneur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-24 }
+
+\[ à la main \] 
+
+1.  Recopier et compléter la table de l’addition de deux bits $a$ et $b$, en écrivant le résultat sur deux bits : la retenue $r$ (à gauche) et la somme $s$ (à droite).
+
+    | $a$ | $b$ | retenue $r$ | somme $s$ |
+    |:---:|:---:|:-----------:|:---------:|
+    | `0` | `0` |             |           |
+    | `0` | `1` |             |           |
+    | `1` | `0` |             |           |
+    | `1` | `1` |             |           |
+
+2.  Quelle porte logique donne la colonne $r$ ? Laquelle donne la colonne $s$ ? Dessiner le circuit du demi-additionneur.
+
+3.  Dans un circuit qui additionne deux nombres de 4 bits, seule la colonne de droite peut être confiée à un demi-additionneur. Pourquoi ? Le constater en posant $\texttt{0110} + \texttt{0011}$ : quelle colonne doit additionner trois bits ? Que manque-t-il au demi-additionneur ?0
+
+    ??? pouce "Coup de pouce"
+
+        Dans la colonne de droite, on n’ajoute que deux bits. Dans la colonne suivante, combien de bits faut-il ajouter ? D’où vient le bit supplémentaire ?
+
+??? corrige "Corrigé"
+
+    **1.** $0 + 0 = \texttt{00}_2$, $0 + 1 = 1 + 0 = \texttt{01}_2$, $1 + 1 = \texttt{10}_2$ : $$\begin{array}{|c|c||c|c|}
+    \hline
+    a & b & r & s \\
+    \hline
+    \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
+    \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} \\
+    \texttt{1} & \texttt{0} & \texttt{0} & \texttt{1} \\
+    \texttt{1} & \texttt{1} & \texttt{1} & \texttt{0} \\
+    \hline
+    \end{array}$$
+
+    **2.** La colonne $r$ (`0`, `0`, `0`, `1`) est la table du **et** : $r = a$ et $b$. La colonne $s$ (`0`, `1`, `1`, `0`) est la table du **xor** : $s = a$ xor $b$. Le circuit relie les deux entrées $a$ et $b$ à la fois à une porte xor (sortie : la somme) et à une porte et (sortie : la retenue), comme sur le schéma du cours.
+
+    **3.** La colonne de droite ne reçoit jamais de retenue : on n’y ajoute que **deux** bits, un demi-additionneur suffit. Toute autre colonne peut recevoir la retenue de sa voisine de droite. Dans $\texttt{0110} + \texttt{0011}$, la deuxième colonne ($1 + 1 = \texttt{10}_2$) produit une retenue : la troisième colonne doit additionner **trois** bits ($1$, $0$ et la retenue $1$). Il manque donc au demi-additionneur une entrée pour la **retenue venue de la droite** ; c’est le rôle de l’additionneur complet, construit avec deux demi-additionneurs (voir le TP « Programmer l’arithmétique binaire »). Résultat : $\texttt{0110} + \texttt{0011} = \texttt{1001}$, soit $6 + 3 = 9$.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 25</span> — Le complément à deux selon un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-02-25 }
 
 Un élève demande à un assistant d’IA : « Comment écrit-on $-5$ sur 8 bits en complément à deux ? » Voici la réponse obtenue.
 

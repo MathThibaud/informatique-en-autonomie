@@ -600,7 +600,7 @@ zero.succ = un ;   un.succ = deux ;   deux.succ = zero
 zero.pred = deux ; un.pred = zero ;   deux.pred = un
 ```
 
-1.  Donner le terme informatique correspondant à `pred`, `valeur` et `succ`.
+1.  Donner le terme correspondant à `pred`, `valeur` et `succ` dans le vocabulaire de la programmation orientée objet.
 
 2.  Déterminer les valeurs de `a` et `b` après :
 
@@ -631,7 +631,7 @@ zero.pred = deux ; un.pred = zero ;   deux.pred = un
 
 ??? corrige "Corrigé"
 
-    **1.** `pred` est le **prédécesseur**, `valeur` la **valeur** (le contenu) et `succ` le **successeur** du maillon. `pred` et `succ` sont eux-mêmes des maillons : la structure est une **liste doublement chaînée** (et ici circulaire).
+    **1.** Ce sont des **attributs** de la classe `Bonbon`. `pred` est le **prédécesseur**, `valeur` la **valeur** (le contenu) et `succ` le **successeur** du maillon. `pred` et `succ` sont eux-mêmes des maillons : la structure est une **liste doublement chaînée** (et ici circulaire).
 
     **2.** `a = zero.succ.valeur` : `zero.succ` est `un`, donc `a = 1`.  
     `b = un.succ.succ.pred.valeur` : `un.succ` $=$ `deux`, `deux.succ` $=$ `zero`, `zero.pred` $=$ `deux`, donc `b = 2`.

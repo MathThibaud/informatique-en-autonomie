@@ -344,7 +344,7 @@ On explore le graphe « par cercles concentriques » : d’abord le départ, pui
 
 - une liste `decouverts` : tous les sommets déjà rencontrés (pour ne pas les remettre en file) ;
 
-- une **file** `en_attente` : les sommets découverts mais pas encore visités. On enfile avec `append`, on défile avec `pop(0)`.
+- une **file** `en_attente` : les sommets découverts mais pas encore visités. On utilise la structure abstraite `File` du chapitre *Structures linéaires* : `enfiler`, `defiler`, `est_vide`. Comme au chapitre *Arbres*, on **admet** qu’une implémentation existe : seule compte ici l’**interface**.
 
 ```python
 def BFS(g, depart):
@@ -352,13 +352,14 @@ def BFS(g, depart):
        renvoie la liste des sommets dans l'ordre de visite."""
     traites = []
     decouverts = [depart]
-    en_attente = [depart]           # la file
-    while en_attente != []:
-        sommet = en_attente.pop(0)  # on defile (FIFO)
+    en_attente = File()             # la file (interface admise)
+    en_attente.enfiler(depart)
+    while not en_attente.est_vide():
+        sommet = en_attente.defiler()       # on defile (FIFO)
         for voisin in g.voisins(sommet):
-            if voisin not in decouverts:
+            if voisin not in decouverts:    # tester AVANT d'enfiler
                 decouverts.append(voisin)
-                en_attente.append(voisin)   # on enfile
+                en_attente.enfiler(voisin)  # on enfile
         traites.append(sommet)
     return traites
 ```
@@ -371,7 +372,11 @@ Voici l’état de la file `en_attente` après chaque tour de boucle (à gauche,
 
 !!! remarque "Remarque — Pourquoi decouverts ?"
 
-    Un même sommet peut être le voisin de plusieurs autres. Sans la liste `decouverts`, on l’enfilerait plusieurs fois. Le test `if voisin not in decouverts` garantit que chaque sommet n’entre **qu’une fois** dans la file.
+    Un même sommet peut être le voisin de plusieurs autres. Sans la liste `decouverts`, on l’enfilerait plusieurs fois. Le test `if voisin not in decouverts`, fait **avant d’enfiler**, garantit que chaque sommet n’entre **qu’une fois** dans la file. Tester seulement `traites` ne suffirait pas : un sommet déjà *en attente* (découvert mais pas encore visité) serait enfilé une seconde fois.
+
+!!! remarque "Remarque — Et si l’on écrivait la file avec une list ?"
+
+    On pourrait remplacer `File()` par une `list` Python, en enfilant avec `append` et en défilant avec `pop(0)`. Le parcours serait juste, mais **lent** sur un grand graphe : chaque `pop(0)` décale tous les éléments restants et coûte $O(n)$ (voir le chapitre *Structures linéaires*). D’où l’intérêt de raisonner avec l’**interface** `File`, quitte à choisir ensuite une implémentation efficace (liste chaînée, deux piles, `collections.deque`).
 
 #### Application vedette : le plus court chemin
 
@@ -382,10 +387,11 @@ def plus_court_chemin(g, depart, arrivee):
     """Renvoie un plus court chemin de depart a arrivee (liste de sommets),
        ou None s'il n'y en a pas."""
     decouverts = [depart]
-    en_attente = [depart]
+    en_attente = File()
+    en_attente.enfiler(depart)
     parent = {depart: None}         # depart n'a pas de parent
-    while en_attente != []:
-        sommet = en_attente.pop(0)
+    while not en_attente.est_vide():
+        sommet = en_attente.defiler()
         if sommet == arrivee:              # arrive : on reconstruit
             chemin = [arrivee]
             while parent[chemin[0]] is not None:
@@ -394,7 +400,7 @@ def plus_court_chemin(g, depart, arrivee):
         for voisin in g.voisins(sommet):
             if voisin not in decouverts:
                 decouverts.append(voisin)
-                en_attente.append(voisin)
+                en_attente.enfiler(voisin)
                 parent[voisin] = sommet    # on note qui l'a decouvert
     return None
 ```
@@ -424,25 +430,34 @@ Sur le graphe précédent, `DFS(g, ’A’)` renvoie `[’A’, ’B’, ’D’
 
 #### Version itérative, avec une pile
 
-Le DFS s’écrit aussi **sans récursion**, en remplaçant simplement la **file** du BFS par une **pile** : on empile avec `append`, on dépile avec `pop()` (le dernier arrivé repart en premier).
+Le DFS s’écrit aussi **sans récursion**, en remplaçant la **file** du BFS par une **pile** (structure abstraite `Pile`, elle aussi admise : `empiler`, `depiler`, `est_vide`) : le dernier sommet empilé repart en premier.
 
 ```python
 def DFS_iteratif(g, depart):
     traites = []
-    en_attente = [depart]              # la pile
-    while en_attente != []:
-        sommet = en_attente.pop()      # on depile (LIFO)
-        if sommet not in traites:
+    en_attente = Pile()                # la pile (interface admise)
+    en_attente.empiler(depart)
+    while not en_attente.est_vide():
+        sommet = en_attente.depiler()  # on depile (LIFO)
+        if sommet not in traites:      # deja traite : on l'ignore
             traites.append(sommet)
             for voisin in g.voisins(sommet):
                 if voisin not in traites:
-                    en_attente.append(voisin)  # on empile
+                    en_attente.empiler(voisin)  # on empile
     return traites
 ```
 
+Sur le graphe précédent, `DFS_iteratif(g, ’A’)` renvoie `[’A’, ’C’, ’D’, ’E’, ’G’, ’H’, ’F’, ’B’]` : le **dernier** voisin empilé ressort le premier, d’où un ordre différent du DFS récursif — mais c’est bien, lui aussi, un parcours en profondeur.
+
+!!! regle "Règle 7 — Où placer le test : file ou pile, ce n’est pas pareil"
+
+    - **En largeur (file)** : on teste `decouverts` **avant d’enfiler**. Chaque sommet n’entre qu’une fois dans la file, et l’ordre « par couches » est respecté.
+
+    - **En profondeur itératif (pile)** : on fait l’inverse, **exprès**. Un sommet peut être empilé plusieurs fois (par plusieurs voisins) ; on le marque `traites` seulement **quand on le dépile**, et on ignore les exemplaires suivants. C’est ce qui garantit que l’on plonge toujours depuis le sommet le plus *récent* : si l’on marquait les sommets dès l’empilement, le parcours obtenu ne serait plus vraiment « en profondeur ».
+
 !!! remarque "Remarque"
 
-    **BFS et DFS ne diffèrent que par une lettre de code** : `pop(0)` (file) contre `pop()` (pile). Toute la puissance du chapitre *Structures linéaires* est là : la structure de données choisie *dicte* le comportement de l’algorithme. Il n’existe pas « un seul » BFS ni « un seul » DFS : ce qui les caractérise est la **méthode de découverte**, pas l’ordre exact des voisins.
+    **BFS et DFS partagent le même squelette, mais pas la même structure** : le BFS range les sommets en attente dans une **file** (FIFO, premier arrivé, premier sorti), le DFS dans une **pile** (LIFO, dernier arrivé, premier sorti). Ce seul choix explique leurs comportements opposés : la file sert d’abord les sommets découverts le plus tôt, donc les plus **proches** du départ (cercles concentriques) ; la pile sert d’abord le dernier découvert, donc on s’**enfonce** le plus loin possible. Toute la puissance du chapitre *Structures linéaires* est là : la structure de données choisie *dicte* le comportement de l’algorithme. Il n’existe pas « un seul » BFS ni « un seul » DFS : ce qui les caractérise est la **méthode de découverte**, pas l’ordre exact des voisins.
 
 ### Deux applications directes : chemin et cycle
 
@@ -450,13 +465,79 @@ def DFS_iteratif(g, depart):
 
 - **Le graphe est-il connexe ?** Il l’est si et seulement si un parcours depuis *n’importe quel* sommet visite **tous** les sommets.
 
-- **Y a-t-il un cycle ?** Au cours d’un parcours, si l’on retombe sur un sommet **déjà découvert** qui n’est pas le sommet d’où l’on vient d’arriver, c’est qu’un cycle boucle par là.
+- **Y a-t-il un cycle ?** On le repère aussi au cours d’un parcours… mais le critère **n’est pas le même** selon que le graphe est orienté ou non : c’est l’objet du paragraphe suivant.
+
+#### Repérer un cycle : deux critères, selon l’orientation
+
+**Graphe non orienté.** Au cours d’un parcours, si l’on retombe sur un sommet **déjà découvert** qui n’est pas le sommet d’où l’on vient d’arriver (son « parent »), c’est qu’un cycle boucle par là. On exclut le parent parce qu’une arête se lit dans les deux sens : l’arête `A -- B` fait apparaître `A` parmi les voisins de `B`, sans former de cycle pour autant.
+
+**Graphe orienté : ce critère est faux.** Reprenons le graphe orienté de la partie II (rappelé ci-dessous) et oublions un instant l’arc `C`$\to$`A`, en pointillés. Un parcours en profondeur depuis `A` découvre `B`, `C`, puis `E` (par l’arc `C`$\to$`E`) ; il revient en arrière, explore `D`, et l’arc `D`$\to$`E` le fait retomber sur `E`, déjà découvert, alors qu’il arrive de `D`. Le critère non orienté crierait au cycle… à tort : `B`$\to$`C`$\to$`E` et `B`$\to$`D`$\to$`E` sont deux chemins qui **se rejoignent**, mais aucun arc ne permet de repartir de `E` pour revenir en arrière. Même piège dans la recette de l’exercice 14 de la feuille : la tâche `(f)` est atteinte à la fois depuis `(e)` et depuis `(d)`, sans le moindre cycle.
+
+![](../figures/63fc24820520f5be.svg){ .tikz loading=lazy }
+
+Pour s’en sortir, on distingue, pendant un parcours en **profondeur**, trois états pour chaque sommet :
+
+- **non vu** : le parcours ne l’a pas encore atteint ;
+
+- **en cours** : on a commencé à l’explorer, mais pas fini d’explorer ses successeurs. Il est encore dans la **pile d’appels** : c’est un sommet du chemin qui mène du départ au sommet actuel ;
+
+- **terminé** : tous ses successeurs ont été explorés ; on est sorti de son appel.
+
+!!! regle "Règle 8 — Cycle dans un graphe orienté"
+
+    Au cours d’un parcours en profondeur d’un graphe **orienté**, il y a un cycle lorsqu’un arc mène à un sommet **en cours** : on peut alors suivre le chemin en cours jusqu’au sommet actuel, puis revenir au point de départ par cet arc. Un arc qui mène à un sommet **terminé** ne signale **pas** de cycle (deux chemins qui se rejoignent).
+
+!!! exemple "Exemple — Les deux situations sur le même graphe"
+
+    **Sans l’arc `C`$\to$`A`.** `A`, `B`, `C` passent « en cours », puis `E`, qui n’a aucun successeur : `E` est aussitôt « terminé », puis `C`. On revient à `B`, qui explore `D` ; l’arc `D`$\to$`E` mène à un sommet **terminé** : pas de cycle. Finalement, tout est terminé : le graphe n’a pas de cycle.
+
+    **Avec l’arc `C`$\to$`A`.** Quand on explore `C`, les sommets `A`, `B`, `C` sont « en cours ». L’arc `C`$\to$`A` mène à un sommet **en cours** : il y a un cycle, `A`$\to$`B`$\to$`C`$\to$`A`.
+
+En Python, avec le dictionnaire `G` des successeurs et un dictionnaire `etat` (un sommet absent de `etat` n’a pas encore été vu) :
+
+```python
+def cycle_depuis(G, sommet, etat):
+    """Parcours en profondeur du graphe oriente G depuis sommet ;
+       renvoie True si l'on retombe sur un sommet en cours (cycle)."""
+    etat[sommet] = 'en cours'           # sommet entre dans la pile d'appels
+    for voisin in G[sommet]:
+        if voisin not in etat:          # jamais vu : on plonge
+            if cycle_depuis(G, voisin, etat):
+                return True
+        elif etat[voisin] == 'en cours':
+            return True                 # retour sur le chemin en cours : cycle
+        # sinon voisin est 'termine' : deja explore, pas de cycle par la
+    etat[sommet] = 'termine'            # tous ses successeurs sont explores
+    return False
+
+def a_un_cycle(G):
+    etat = {}
+    for s in G:                         # on relance depuis chaque sommet non vu
+        if s not in etat and cycle_depuis(G, s, etat):
+            return True
+    return False
+```
+
+Sur le graphe orienté ci-dessus :
+
+```text
+>>> G = {'A': ['B'], 'B': ['C', 'D'], 'C': ['A', 'E'], 'D': ['E'], 'E': []}
+>>> a_un_cycle(G)
+True
+>>> G['C'] = ['E']                  # on retire l'arc C -> A
+>>> a_un_cycle(G)
+False
+```
+
+!!! remarque "Remarque"
+
+    Ce critère « sommet en cours » resservira au chapitre *Processus* : le **graphe d’attente** des processus est un graphe **orienté**, et un cycle y signale un **interblocage**.
 
 <span class="horsprog">au-delà du programme</span> **Et pour un graphe pondéré ?** Le BFS trouve le plus court chemin en *nombre d’arêtes*, mais ignore les poids. Pour le plus court chemin en *distance* (un vrai GPS), on utilise l’**algorithme de Dijkstra** (1959), qui visite les sommets par coût total croissant à l’aide d’une file de priorité. C’est l’objet du projet proposé en fin de chapitre — mais vous en connaissez déjà l’idée directrice.
 
 <span id="cours-07-9" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-07-9) à [12](exercices.md#ex-07-12)** (parcours ; chemins, cycles, connexité)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-07-9) à [12](exercices.md#ex-07-12)** (parcours ; chemins, connexité) ; pour les cycles orientés, voir aussi l’exercice type bac 14 (questions 4 et 5)
 
 ## Ouverture et histoire
 
@@ -468,7 +549,7 @@ def DFS_iteratif(g, depart):
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Un **arbre** est un cas particulier de graphe (connexe, sans cycle). On parcourt un graphe en **profondeur** (avec une **pile**, ou par **récursivité**) ou en **largeur** (avec une **file**) — les mêmes outils que pour les **arbres** et les **structures linéaires**. La recherche de chemin sert directement au **routage** des paquets dans les **réseaux**. Il s’implémente par une classe `Graphe` (**programmation objet**), et un **cycle** dans le graphe d’attente des **processus** signale un interblocage.
+    Un **arbre** est un cas particulier de graphe (connexe, sans cycle). On parcourt un graphe en **profondeur** (avec une **pile**, ou par **récursivité**) ou en **largeur** (avec une **file**) — les mêmes outils que pour les **arbres** et les **structures linéaires**. La recherche d’un **plus court chemin pondéré** (l’algorithme de Dijkstra du projet) est au cœur du **routage** des paquets dans les **réseaux** (protocole OSPF). Un graphe s’implémente par une classe `Graphe` (**programmation objet**), et un **cycle** dans le graphe d’attente des **processus** — un graphe orienté — signale un interblocage.
 
 ## Bilan — la carte mémoire
 
@@ -483,21 +564,27 @@ def DFS_iteratif(g, depart):
 | Connexe | « d’un seul tenant » (sinon : composantes connexes) |
 | Matrice d’adjacence | tableau $n\times n$ de $0/1$ ; mémoire $O(n^2)$ ; arête en $O(1)$ |
 | Liste d’adjacence | dictionnaire sommet $\to$ voisins ; mémoire $O(n+m)$ |
-| BFS (largeur) | une **file**, cercles concentriques, **plus court chemin** |
-| DFS (profondeur) | une **pile** (ou la récursivité), « le plus loin d’abord » |
+| BFS (largeur) | une **file** (FIFO), cercles concentriques, **plus court chemin** |
+| DFS (profondeur) | une **pile** (LIFO, ou la récursivité), « le plus loin d’abord » |
 | Mémoriser les visités | **obligatoire** sur un graphe (cycles !) |
+| Cycle, non orienté | retomber sur un sommet déjà découvert, autre que le parent |
+| Cycle, orienté | retomber (en profondeur) sur un sommet **en cours** |
 
 ## Erreurs fréquentes
 
 - **Oublier de mémoriser les sommets visités.** Sur un graphe (contrairement à un arbre), le parcours **boucle à l’infini**. *Le réflexe :* une liste `decouverts` / `traites`, toujours.
 
-- **Confondre file et pile.** `pop(0)` $=$ file $=$ BFS $=$ largeur ; `pop()` $=$ pile $=$ DFS $=$ profondeur. Une seule lettre change tout.
+- **Confondre file et pile.** **File** (FIFO) $=$ BFS $=$ largeur ; **pile** (LIFO) $=$ DFS $=$ profondeur. Le squelette est le même, c’est la structure qui change tout.
+
+- **Défiler avec `pop(0)` sur une `list`.** Le parcours reste juste, mais chaque `pop(0)` coûte $O(n)$ (chapitre *Structures linéaires*). *Le réflexe :* raisonner avec l’interface `File` (`enfiler`/`defiler`/`est_vide`).
+
+- **Appliquer à un graphe orienté le critère de cycle du non orienté.** Retomber sur un sommet *déjà découvert* ne prouve rien en orienté (deux chemins peuvent se rejoindre) : il faut retomber sur un sommet **en cours**.
 
 - **Confondre arête et arc.** Non orienté $\to$ **arête** (deux sens), matrice **symétrique** ; orienté $\to$ **arc** (un sens).
 
 - **Croire que la matrice est toujours le bon choix.** Pour un graphe **creux**, la liste d’adjacence est bien plus économe ($O(n+m)$ contre $O(n^2)$).
 
-- **Enfiler un sommet déjà en attente.** On teste l’appartenance à `decouverts` *avant* d’enfiler, pas seulement à `traites`.
+- **Enfiler un sommet déjà en attente (BFS).** En largeur, on teste l’appartenance à `decouverts` *avant* d’enfiler, pas seulement à `traites`. (En profondeur itératif, c’est l’inverse : on teste `traites` au moment de dépiler, voir le cours.)
 
 - **Oublier la double insertion** dans `ajoute_arete` d’un graphe non orienté (il faut ajouter `a` chez `b` **et** `b` chez `a`).
 
@@ -515,7 +602,9 @@ def DFS_iteratif(g, depart):
 
 - dérouler et coder un **parcours en largeur** (file) et en **profondeur** (pile ou récursif) $\to$ ex. [9](exercices.md#ex-07-9), [10](exercices.md#ex-07-10) ;
 
-- trouver un **chemin**, un **plus court chemin** (BFS), tester la **connexité**, repérer un **cycle** $\to$ ex. [11](exercices.md#ex-07-11), [12](exercices.md#ex-07-12).
+- trouver un **chemin**, un **plus court chemin** (BFS), tester la **connexité** $\to$ ex. [11](exercices.md#ex-07-11), [12](exercices.md#ex-07-12) ;
+
+- repérer un **cycle**, en distinguant graphe non orienté (sommet déjà découvert, autre que le parent) et orienté (sommet **en cours**) $\to$ ex. [14](exercices.md#ex-07-14).
 
 ## Vers le Grand Oral
 
