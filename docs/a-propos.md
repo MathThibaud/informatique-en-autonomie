@@ -29,7 +29,7 @@ qu'il partage librement, m'a beaucoup aidé dans la préparation de mes cours de
 
 ## Mises à jour
 
-Le site est mis à jour environ tous les quinze jours. Les fiches individuelles et le manuel distribués
+Le site est mis à jour régulièrement. Les fiches individuelles et le manuel distribués
 en classe restent la version de référence.
 
 ## Signaler une erreur
