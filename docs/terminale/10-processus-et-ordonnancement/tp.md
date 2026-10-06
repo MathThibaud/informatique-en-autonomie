@@ -635,7 +635,7 @@ attend = {"P1": "R2", "P2": "R3", "P3": "R1"}
         return False                  # p n'attend rien
     ```
 
-    **3.** `True` sur l’exemple ; `False` après `del attend["P3"]` (la chaîne s’arrête sur `P3`, qui finira et libérera `R3`). C’est une recherche de **cycle** dans un graphe (chapitre *Graphes*) ; ici chaque processus n’attend qu’une ressource, donc on suit un seul chemin.
+    **3.** `True` sur l’exemple ; `False` après `del attend["P3"]` (la chaîne s’arrête sur `P3`, qui finira et libérera `R3`). C’est une recherche de **cycle** dans un graphe **orienté** (chapitre *Graphes*) ; ici chaque processus n’attend qu’une ressource, donc on suit un seul chemin. Tous les processus rencontrés sont alors sur ce chemin, encore « en cours » : revenir sur l’un d’eux, c’est exactement le critère orienté vu au chapitre *Graphes* (retomber sur un sommet **en cours**). Si un processus pouvait attendre plusieurs ressources, il faudrait un vrai parcours en profondeur qui distingue sommets « en cours » et « terminés » : retomber sur un sommet simplement déjà vu ne suffirait plus à prouver un cycle.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 16</span> — Défi : le dîner des philosophes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-processus-et-ordonnancement-tp-1-16 }
 

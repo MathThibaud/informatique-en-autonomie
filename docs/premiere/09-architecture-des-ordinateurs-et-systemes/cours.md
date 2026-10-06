@@ -26,7 +26,7 @@ Tout, dans un ordinateur, se ramène à deux états : le courant **passe** ou **
 
     Un **transistor** est un minuscule **interrupteur commandé électriquement** : une troisième borne (la « commande ») décide si le courant passe ou non entre les deux autres. C’est un interrupteur *sans pièce mécanique*, qui bascule des **milliards de fois par seconde**.
 
-En combinant quelques transistors, on fabrique des **portes logiques** (ET, OU, NON) qui calculent sur les 0 et les 1 ; en combinant des portes, on fabrique des circuits qui **additionnent**, **comparent**, **mémorisent**… et de proche en proche, tout un **processeur**. Le transistor est donc la **brique élémentaire** à partir de laquelle tout est construit.
+En combinant quelques transistors, on fabrique des **portes logiques** qui calculent sur les 0 et les 1. Rappel du chapitre *Le binaire et l’écriture des nombres* : les portes **ET**, **OU**, **NON** (et le **OU exclusif**) réalisent les opérateurs booléens du même nom, décrits par leurs **tables de vérité**, et une porte OU exclusif associée à une porte ET forme déjà un **demi-additionneur**, qui additionne deux bits. En combinant ainsi des portes, on fabrique des circuits qui **additionnent**, **comparent**, **mémorisent**… et de proche en proche, tout un **processeur**. Le transistor est donc la **brique élémentaire** à partir de laquelle tout est construit.
 
 !!! remarque "Remarque — Quelques ordres de grandeur (capacité attendue)"
 

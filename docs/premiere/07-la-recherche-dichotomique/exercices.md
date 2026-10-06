@@ -379,50 +379,60 @@ On joue à deviner un nombre entre `1` et `100` : à chaque proposition, on rép
     **1.** La meilleure première proposition est `50`, le **milieu** : quelle que soit la réponse, on élimine la moitié des possibilités (soit 1–49, soit 51–100).  
     **2.** En proposant toujours le milieu, le nombre de possibilités restantes, au pire, passe par $100 \to 50 \to 25 \to 12 \to 6 \to 3 \to 1$ : six essais pour réduire à un seul nombre possible, et un septième pour le proposer. **7 essais** suffisent donc dans le pire des cas. C’est exactement $\texttt{nb\_de\_tour(100)} = 7$ : le jeu *est* une recherche dichotomique.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — L’ordinateur devine <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-14 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — L’ordinateur devine : la preuve <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-14 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `ordi_devine(secret)` qui simule un ordinateur cherchant, **par dichotomie**, un nombre `secret` entre `1` et `100`. La fonction renvoie le nombre trouvé et le nombre d’essais utilisés. Vérifier que, quel que soit le secret, l’ordinateur trouve en **au plus 7** essais.
+Au chapitre *Les bases de la programmation Python*, le défi « L’ordinateur devine » du TP « Le nombre mystère » vous a fait programmer un ordinateur qui devine un nombre en proposant toujours le **milieu**. On reprend ici ce programme, non pour le réécrire, mais pour l’**analyser** avec les outils du cours (la fonction `comparer` du TP est remplacée par des comparaisons directes).
 
-```text
->>> ordi_devine(63)
-(63, 6)
+```python
+def essais_ordinateur(secret, maxi):
+    """Simule la strategie du milieu ; renvoie le nombre d'essais.
+    Precondition : 1 <= secret <= maxi."""
+    mini = 1
+    essais = 0
+    trouve = False
+    while not trouve:
+        proposition = (mini + maxi) // 2
+        essais = essais + 1
+        if proposition < secret:
+            mini = proposition + 1
+        elif proposition > secret:
+            maxi = proposition - 1
+        else:
+            trouve = True
+    return essais
 ```
 
-*(Pour la version interactive où l’utilisateur répond « + » ou « – » au clavier, on remplacera la comparaison au secret par un `input`.)* <span class="horsprog">au-delà du programme</span>
+1.  Comparer avec `recherche_dichotomique` du cours : quel rôle jouent `mini`, `maxi` et `proposition` ? Dans quel « tableau trié » l’ordinateur cherche-t-il ?
+
+2.  **Terminaison.** Montrer que `maxi - mini` diminue strictement à chaque essai raté. En utilisant la précondition (le secret reste toujours entre `mini` et `maxi`), en déduire que la boucle s’arrête. Comment appelle-t-on la quantité `maxi - mini` ?
+
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Appeler `essais_ordinateur(150, 100)`, qui **ne respecte pas** la précondition (interrompre le programme au besoin). Expliquer ce qui se passe en suivant les valeurs de `mini` et `maxi`. Quelle condition de boucle, utilisée dans le cours, aurait évité ce problème ?
+
+4.  **Coût.** Sans exécuter le programme, donner le nombre d’essais dans le pire des cas pour `maxi` égal à $100$, $1000$ et un million, en justifiant avec le raisonnement du cours. Combien d’essais faudrait-il, dans le pire des cas, à un ordinateur « naïf » qui propose $1$, puis $2$, puis $3$…?
 
 ??? pouce "Coup de pouce"
 
-    C’est une recherche dichotomique dans les entiers de 1 à 100 : deux bornes `bas` et `haut` jouent le rôle de `deb` et `fin`, la proposition celui de `mil`. Pour la vérification, une boucle `for` sur tous les secrets possibles.
+    Question 2 : examiner séparément les cas « trop petit » et « trop grand », comme pour `fin - deb` dans le cours. Question 3 : afficher `mini` et `maxi` à chaque tour avec un `print` ; que vaut `proposition` quand `mini` dépasse `maxi` ?
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    `bas = 1`  
-    `haut = 100`  
-    `essais = 0`  
-    `while bas <= haut:`  
-    `essais = essais + 1`  
-    `proposition = (bas + haut) // 2`
+    Question 4 : le nombre de candidats est au moins divisé par deux à chaque essai raté ; chercher la plus petite puissance de 2 qui dépasse `maxi` (ou utiliser `nb_de_tour`).
 
 ??? corrige "Corrigé"
 
-    ```python
-    def ordi_devine(secret):
-        bas = 1
-        haut = 100
-        essais = 0
-        while bas <= haut:
-            essais = essais + 1
-            proposition = (bas + haut) // 2
-            if proposition == secret:
-                return proposition, essais
-            elif proposition < secret:
-                bas = proposition + 1     # le secret est plus grand
-            else:
-                haut = proposition - 1    # le secret est plus petit
-        return None, essais
-    ```
+    **1.** C’est une recherche dichotomique : `mini` et `maxi` jouent le rôle de `deb` et `fin` (les bornes de la zone de recherche), `proposition` celui de `mil`. Le « tableau trié » est la suite des entiers `1, 2, …, maxi`, rangés dans l’ordre croissant : la valeur à la position `i` est `i` elle-même, il n’est donc pas besoin de la stocker.
 
-    `ordi_devine(63)` renvoie `(63, 6)`. Comme l’intervalle `[1 ; 100]` est divisé par 2 à chaque essai, on trouve toujours en au plus 7 essais.
+    **2.** À chaque essai raté :
+
+    - cas « trop petit » : `mini` devient `proposition + 1`, et `proposition` $\geqslant$ `mini`, donc `mini` augmente d’au moins 1 ;
+
+    - cas « trop grand » : `maxi` devient `proposition - 1`, et `proposition` $\leqslant$ `maxi`, donc `maxi` diminue d’au moins 1.
+
+    Dans les deux cas, l’entier `maxi - mini` **diminue strictement**. Grâce à la précondition, le secret reste toujours entre `mini` et `maxi` (on n’écarte que des nombres trop petits ou trop grands) : la zone ne peut donc jamais devenir vide. Comme `maxi - mini` ne peut pas décroître indéfiniment en restant $\geqslant 0$, on atteint au plus tard `mini == maxi` : la proposition est alors le secret lui-même, `trouve` devient `True` et la boucle s’arrête. La quantité `maxi - mini` est un **variant de boucle**.
+
+    **3.** Le programme **ne s’arrête jamais**. Les propositions sont 50, 75, 88, 94, 97, 99, 100, toutes « trop petites » ; on arrive à `mini = 101` et `maxi = 100`. La zone est vide, mais la boucle continue car `trouve` reste `False` : `proposition` vaut `(101 + 100) // 2 = 100`, encore trop petite, `mini` reprend la valeur `101`… et rien ne change plus. Le variant ne décroît plus : la preuve de la question 2 utilisait la précondition, qui n’est pas respectée. La condition `while mini <= maxi` (le `while deb <= fin` du cours) arrête la boucle dès que la zone est vide, même si l’appel est incorrect ; on pourrait aussi vérifier la précondition par un `assert` en début de fonction.
+
+    **4.** Après chaque essai raté, le nombre de candidats restants est au moins divisé par deux. Dans le pire des cas, le nombre d’essais est donc le plus petit $k$ tel que $2^k > \texttt{maxi}$, c’est-à-dire `nb_de_tour(maxi)` : **7** essais pour $100$ ($2^6 = 64 \leqslant 100 < 128 = 2^7$), **10** pour $1000$ ($2^{10} = 1024$) et **20** pour un million ($2^{20} = 1\,048\,576$). L’ordinateur naïf, lui, peut avoir besoin de `maxi` essais : $100$, $1000$, un million. Coût **logarithmique** contre coût **linéaire**, comme dans le cours.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 15</span> — La racine carrée entière <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-15 }
 

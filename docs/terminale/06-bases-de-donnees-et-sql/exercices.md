@@ -598,7 +598,7 @@ Possede (#id_membre, #id_objet)
 
 1.  Écrire une requête affichant le `nom` et le `prenom` des membres dont le code postal `cp` est `’69003’`.
 
-2.  Écrire une requête qui **modifie** le `tarif` de l’objet d’`id_objet` `2` pour le passer à `15`.
+2.  Écrire une requête qui **modifie** le `tarif` de l’objet d’`id_objet` `1` pour le passer à `15`.
 
 3.  Écrire une requête qui **ajoute** le membre Wendie Renard (`id_membre` `6`, `cp` `’69100’`).
 
@@ -627,7 +627,7 @@ Possede (#id_membre, #id_objet)
     ```sql
     SELECT nom, prenom FROM Membre WHERE cp = '69003';   -- 1.
 
-    UPDATE Objet SET tarif = 15 WHERE id_objet = 2;      -- 2.
+    UPDATE Objet SET tarif = 15 WHERE id_objet = 1;      -- 2.
 
     INSERT INTO Membre (id_membre, nom, prenom, cp)      -- 3.
     VALUES (6, 'Renard', 'Wendie', '69100');
@@ -743,7 +743,7 @@ Extraits de `podcast` (clé primaire `id_podcast`, `#id_emission` clé étrangè
 | 4 | Souveraineté numérique française | 2019 | 10183 |
 | 5 | Dans le cloud en Islande | 2019 | 10212 |
 
-La relation `emission` (id_emission, nom, radio, animateur) décrit les émissions ; la relation `description` contient un `id_description`, un `resume`, une `duree` (en minutes) et l’`id_emission` du podcast décrit.
+La relation `emission` (id_emission, nom, radio, animateur) décrit les émissions ; la relation `description` contient un `id_description`, un `resume`, une `duree` (en minutes) et l’`id_podcast` du podcast décrit.
 
 1.  Écrire le **schéma relationnel** de la relation `description` (attributs et types probables, clé primaire soulignée, clé étrangère).
 
@@ -771,11 +771,11 @@ La relation `emission` (id_emission, nom, radio, animateur) décrit les émiss
 
     ??? pouce "Coup de pouce"
 
-        Les trois relations partagent l’attribut `id_emission` : c’est lui qui sert dans les conditions de jointure.
+        `description` est reliée à `podcast` par `id_podcast`, et `podcast` à `emission` par `id_emission` : ce sont ces attributs qui servent dans les conditions de jointure.
 
 ??? corrige "Corrigé"
 
-    **1.** `description (``id_description``:INT, resume:TEXT, duree:INT, #id_emission:INT)`.  
+    **1.** `description (``id_description``:INT, resume:TEXT, duree:INT, #id_podcast:INT)`.  
     **2.** `(’L’enseignement supérieur est-il juste ?’, 2022)`.
 
     ```sql
@@ -794,8 +794,8 @@ La relation `emission` (id_emission, nom, radio, animateur) décrit les émiss
 
     SELECT podcast.theme, emission.nom, description.resume      -- 7.
     FROM description
-    JOIN emission ON description.id_emission = emission.id_emission
-    JOIN podcast  ON podcast.id_emission     = emission.id_emission
+    JOIN podcast  ON description.id_podcast = podcast.id_podcast
+    JOIN emission ON podcast.id_emission    = emission.id_emission
     WHERE description.duree < 5;
     ```
 

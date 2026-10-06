@@ -8,7 +8,7 @@
 |:---|:---|
 | **Programme (BO)** | *« Structures arborescentes : arbres, arbres binaires. Identifier des situations où une structure arborescente s’impose. Vocabulaire (racine, nœud, feuille, sous-arbre, taille, hauteur…). Évaluer la taille et la hauteur d’un arbre. Arbres binaires de recherche. Parcours d’un arbre. »* |
 | **Prérequis** | la **récursivité** (indispensable ici !), les classes et objets (chapitre *Programmation objet*), les piles et les files, la recherche par dichotomie. |
-| **Objectifs** | *reconnaître* une situation qui appelle un arbre ; *maîtriser* le vocabulaire ; *calculer* taille et hauteur ; *implémenter* un arbre binaire (de plusieurs façons) et le *parcourir* ; *comprendre* l’arbre binaire de recherche. |
+| **Objectifs** | *reconnaître* une situation qui appelle un arbre ; *maîtriser* le vocabulaire ; *calculer* taille et hauteur ; *implémenter* un arbre binaire (de plusieurs façons) et le *parcourir* ; *comprendre* l’arbre binaire de recherche, y *rechercher* et y *insérer* une valeur. |
 
 ## Pourquoi un arbre ? Des situations où rien d’autre ne convient
 
@@ -231,7 +231,7 @@ def hauteur(a):
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-04-3) à [5](exercices.md#ex-04-5)** (taille, hauteur et nombre de feuilles, en récursif).
 
-## L’arbre binaire de recherche (ABR) : chercher vite
+## L’arbre binaire de recherche (ABR) : chercher et insérer vite
 
 Un arbre quelconque ne facilite pas la recherche. Mais si l’on **range** les valeurs avec méthode, la recherche devient **très rapide**.
 
@@ -239,11 +239,15 @@ Un arbre quelconque ne facilite pas la recherche. Mais si l’on **range** les v
 
     Un **arbre binaire de recherche** (ABR) est un arbre binaire où, pour **chaque** nœud :
 
-    - toutes les valeurs de son sous-arbre **gauche** sont **plus petites** que sa valeur ;
+    - toutes les valeurs de son sous-arbre **gauche** sont **strictement plus petites** que sa valeur ;
 
-    - toutes les valeurs de son sous-arbre **droit** sont **plus grandes**.
+    - toutes les valeurs de son sous-arbre **droit** sont **plus grandes ou égales** à sa valeur.
+
+    Autrement dit : `gauche `$<$` nœud `$\leq$` droite`. Une valeur **égale** à celle du nœud (un doublon) se range donc **à droite** : c’est la convention de tout ce chapitre.
 
 ![](../figures/c8f1196fb3ebde17.svg){ .tikz loading=lazy }
+
+### Rechercher une valeur dans un ABR
 
 !!! regle "Règle 2 — Chercher dans un ABR"
 
@@ -258,16 +262,69 @@ def recherche(a, x):
     if x < a.valeur:
         return recherche(a.gauche, x)   # a gauche : les plus petits
     else:
-        return recherche(a.droite, x)   # a droite : les plus grands
+        return recherche(a.droite, x)   # a droite : les plus grands (ou egaux)
 ```
 
 !!! remarque "Remarque"
 
     La recherche coûte au plus **la hauteur** de l’arbre. Pour un ABR équilibré de $n$ valeurs, cela fait environ $\log_2(n)$ comparaisons : chercher parmi un **million** de valeurs ne demande qu’une **vingtaine** d’étapes ! C’est cette efficacité qui fait des arbres le cœur des **index de bases de données**. Petit bonus : un **parcours infixe** d’un ABR affiche ses valeurs **déjà triées**.
 
+<span id="cours-04-10" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercice **[10](exercices.md#ex-04-10)** (rechercher dans un ABR).
+
+### Insérer une valeur dans un ABR
+
+Chercher, c’est bien ; mais comment **construire** un ABR ? En y insérant les valeurs une à une, sans jamais casser la règle « à gauche les plus petits, à droite les autres ». Bonne nouvelle : l’insertion n’est qu’une **recherche qui va jusqu’au bout**.
+
+!!! regle "Règle 3 — Insérer dans un ABR"
+
+    Pour insérer une valeur `x`, on descend depuis la racine **exactement comme pour la chercher** : à gauche si `x` est plus petit que la valeur du nœud, à droite sinon (donc aussi en cas d’**égalité**, selon notre convention). On s’arrête quand on tombe sur un **sous-arbre vide** : c’est la place de `x`, qui y devient une nouvelle **feuille**. On ne déplace jamais les nœuds déjà en place.
+
+!!! exemple "Exemple — Insérer 7 puis 8 dans l’ABR précédent"
+
+    `7` : $7 < 8$ (gauche), $7 > 3$ (droite), $7 > 6$ (droite) : `7` devient le fils droit de `6`.  
+    `8` : $8 = 8$, donc à droite (convention), puis $8 < 10$ (gauche) : ce second `8` devient le fils gauche de `10`.
+
+    ![](../figures/0c3c145f4839551f.svg){ .tikz loading=lazy }
+
+    Le parcours infixe donne `1, 3, 6, 7, 8, 8, 10, 14` : toujours trié, doublon compris.
+
+Le code est récursif, comme la recherche. La fonction **renvoie l’arbre** obtenu : c’est indispensable, car lorsque l’arbre est vide (`None`), on ne peut rien modifier — on doit *créer* un nœud et le rendre à l’appelant, qui l’accroche à sa place.
+
+```python
+def inserer(a, x):
+    """Insere x dans l'ABR a et renvoie l'arbre obtenu."""
+    if a is None:
+        return Noeud(x)                 # place vide : x devient une feuille
+    if x < a.valeur:
+        a.gauche = inserer(a.gauche, x)     # plus petit : a gauche
+    else:
+        a.droite = inserer(a.droite, x)     # plus grand ou egal : a droite
+    return a
+```
+
+On construit alors un ABR en partant de l’arbre vide :
+
+```python
+a = None
+for v in [8, 3, 10, 1, 6, 14]:
+    a = inserer(a, v)          # on recupere TOUJOURS l'arbre renvoye
+```
+
+On obtient exactement l’ABR dessiné plus haut.
+
+!!! remarque "Remarque — Coût, et importance de l’ordre d’insertion"
+
+    Comme la recherche, l’insertion coûte au plus **la hauteur** de l’arbre. Mais la forme de l’arbre dépend de l’**ordre** dans lequel on insère : avec `4, 2, 6, 1, 3, 5, 7`, on obtient un arbre équilibré de hauteur $3$ ; avec `1, 2, 3, 4, 5, 6, 7` (déjà trié !), chaque valeur part à droite de la précédente et l’on obtient un arbre « en peigne » de hauteur $7$, aussi lent qu’une simple liste. (Il existe des ABR qui se rééquilibrent tout seuls, comme les arbres AVL ou rouge-noir <span class="horsprog">au-delà du programme</span>.)
+
+!!! remarque "Remarque — Les doublons : lire la convention de l’énoncé"
+
+    Ce cours range une valeur **égale** au nœud dans le sous-arbre **droit**. Ce n’est qu’une convention : certains sujets de bac interdisent les doublons (on n’insère pas une valeur déjà présente, comme dans le TP proposé en fin de chapitre), d’autres les placent à gauche. Dans tous les cas, la recherche et l’insertion suivent le même principe ; il suffit de **lire la définition donnée** et de l’appliquer de façon cohérente.
+
 <span id="cours-04-9" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-04-9) et [10](exercices.md#ex-04-10)** (insérer et rechercher dans un ABR).
+<span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-04-9) et [11](exercices.md#ex-04-11)** (insérer à la main ; programmer l’insertion).
 
 ## Ouverture et histoire
 
@@ -302,7 +359,9 @@ Et la nature s’y met aussi : à **Baïes** (Italie), un figuier sauvage pousse
 | Implémentations | classe `Noeud`, ou triplet `(valeur, g, d)`… (vide $=$ `None`) |
 | Parcours profondeur | préfixe / infixe / suffixe (récursifs) |
 | Parcours largeur | niveau par niveau, avec une **file** |
-| ABR | gauche $<$ nœud $<$ droite ; recherche en $\approx \log_2(n)$ |
+| ABR | gauche $<$ nœud $\leq$ droite (doublon à droite) |
+| Recherche, insertion | on descend d’un seul côté ; coût $=$ hauteur ($\approx \log_2(n)$ si équilibré) |
+| Insérer dans un ABR | descendre comme pour chercher ; `x` devient une **feuille** |
 
 ## Erreurs fréquentes
 
@@ -312,7 +371,11 @@ Et la nature s’y met aussi : à **Baïes** (Italie), un figuier sauvage pousse
 
 - **Mélanger les parcours.** **préfixe** (racine avant), **infixe** (racine au milieu), **suffixe** (racine après) ; **largeur** $=$ niveau par niveau avec une **file**.
 
-- **Chercher partout dans un ABR.** On exploite `gauche `$<$` nœud `$<$` droite` pour n’explorer **qu’un** côté ; sinon on perd tout l’intérêt.
+- **Chercher partout dans un ABR.** On exploite `gauche `$<$` nœud `$\leq$` droite` pour n’explorer **qu’un** côté ; sinon on perd tout l’intérêt.
+
+- **Perdre le nœud inséré.** Écrire `inserer(a.gauche, x)` sans réaffecter : quand `a.gauche` vaut `None`, le nouveau nœud n’est accroché nulle part. *Le réflexe :* `a.gauche = inserer(a.gauche, x)`, et `a = inserer(a, x)` à l’appel.
+
+- **Hésiter sur un doublon.** Appliquer la convention de l’énoncé ; ici, une valeur égale va **à droite**.
 
 - **Oublier de combiner / renvoyer** dans la récursion (comme en récursivité) : `return 1 + taille(g) + taille(d)`.
 
@@ -328,11 +391,11 @@ Et la nature s’y met aussi : à **Baïes** (Italie), un figuier sauvage pousse
 
 - écrire et reconnaître les **quatre parcours** (préfixe, infixe, suffixe, largeur / file) $\to$ ex. [6](exercices.md#ex-04-6), [7](exercices.md#ex-04-7), [8](exercices.md#ex-04-8) ;
 
-- manipuler un arbre via la classe `Noeud` ou une **interface** donnée $\to$ ex. [2](exercices.md#ex-04-2), [14](exercices.md#ex-04-14), [16](exercices.md#ex-04-16) ;
+- manipuler un arbre via la classe `Noeud` ou une **interface** donnée $\to$ ex. [2](exercices.md#ex-04-2), [15](exercices.md#ex-04-15), [17](exercices.md#ex-04-17) ;
 
-- **rechercher** et **insérer** dans un **ABR**, et relier infixe $\leftrightarrow$ tri $\to$ ex. [9](exercices.md#ex-04-9), [10](exercices.md#ex-04-10), [13](exercices.md#ex-04-13) ;
+- **rechercher** et **insérer** dans un **ABR** (à la main et en Python, doublon à droite), et relier infixe $\leftrightarrow$ tri $\to$ ex. [9](exercices.md#ex-04-9), [10](exercices.md#ex-04-10), [11](exercices.md#ex-04-11), [14](exercices.md#ex-04-14) ;
 
-- justifier le **coût** d’une recherche dans un ABR (la hauteur) $\to$ ex. [10](exercices.md#ex-04-10), [13](exercices.md#ex-04-13).
+- justifier le **coût** d’une recherche ou d’une insertion dans un ABR (la hauteur) $\to$ ex. [10](exercices.md#ex-04-10), [11](exercices.md#ex-04-11), [14](exercices.md#ex-04-14).
 
 ## Vers le Grand Oral
 

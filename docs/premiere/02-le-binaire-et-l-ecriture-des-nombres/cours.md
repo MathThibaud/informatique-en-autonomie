@@ -6,9 +6,9 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *« Écriture d’un entier positif dans une base $b \geqslant 2$ ; passer de la représentation d’une base dans une autre (bases 2, 10 et 16 privilégiées). Représentation binaire d’un entier relatif (complément à 2). Représentation approximative des réels : notion de nombre flottant. Représentation d’un texte en machine : encodages ASCII, ISO-8859-1, Unicode. »* |
-| **Prérequis** | les bases de Python (opérateurs `//` et `%`, boucles). |
-| **Objectifs** | comprendre *comment* une machine stocke un nombre ; *convertir* entre bases 2, 10 et 16 ; coder un entier *relatif* (complément à 2) ; comprendre *pourquoi* les nombres à virgule sont *approchés* ; comprendre comment un *texte* est codé (ASCII, Unicode) et *pourquoi* un même fichier peut s’afficher en charabia. |
+| **Programme (BO)** | *« Écriture d’un entier positif dans une base $b \geqslant 2$ ; passer de la représentation d’une base dans une autre (bases 2, 10 et 16 privilégiées). Représentation binaire d’un entier relatif (complément à 2). Valeurs booléennes : 0, 1. Opérateurs booléens : `and`, `or`, `not`. Expressions booléennes. Représentation approximative des réels : notion de nombre flottant. Représentation d’un texte en machine : encodages ASCII, ISO-8859-1, Unicode. »* |
+| **Prérequis** | les bases de Python (opérateurs `//` et `%`, boucles, opérateurs `and`, `or`, `not`). |
+| **Objectifs** | comprendre *comment* une machine stocke un nombre ; *convertir* entre bases 2, 10 et 16 ; dresser une *table de vérité* et comprendre comment des *portes logiques* additionnent ; coder un entier *relatif* (complément à 2) ; comprendre *pourquoi* les nombres à virgule sont *approchés* ; comprendre comment un *texte* est codé (ASCII, Unicode) et *pourquoi* un même fichier peut s’afficher en charabia. |
 
 ## Pourquoi le binaire ? De quoi parle-t-on dans la machine
 
@@ -22,7 +22,7 @@ Pourquoi deux et pas dix ? Parce que distinguer *deux* niveaux (« il y a du cou
 
     Un **bit** (de l’anglais *binary digit*, « chiffre binaire ») est la plus petite information : un `0` ou un `1`. On regroupe les bits par paquets de huit : un paquet de 8 bits s’appelle un **octet** (*byte* en anglais).
 
-![](../figures/a95ab8aceb31f1e7.svg){ .tikz loading=lazy }
+![](../figures/5519829334e4bf6d.svg){ .tikz loading=lazy }
 
 Un octet : 8 cases valant chacune `0` ou `1`. Ici, on lira bientôt le nombre `185`.
 
@@ -131,6 +131,120 @@ On pose l’addition comme en base 10, rang par rang **de droite à gauche**, en
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[2](exercices.md#ex-02-2) à [4](exercices.md#ex-02-4), [8](exercices.md#ex-02-8) et [9](exercices.md#ex-02-9)** (convertir binaire/décimal ; les programmer)
 
+## Logique booléenne : des portes logiques à l’addition
+
+Un transistor ne sait que laisser passer le courant, ou non. Pour qu’une machine *calcule*, on assemble les transistors en **portes logiques** : de petits circuits qui reçoivent un ou deux bits et en produisent un. C’est l’idée de Shannon évoquée plus haut : les deux valeurs d’un bit sont aussi les deux valeurs « vrai / faux » de la logique de Boole.
+
+### Les opérateurs `et`, `ou`, `non`
+
+!!! definition "Définition 3 — Valeur booléenne, opérateur booléen"
+
+    Une **valeur booléenne** ne prend que deux valeurs : `1` (vrai) ou `0` (faux). Un **opérateur booléen** combine des valeurs booléennes et renvoie une valeur booléenne :
+
+    - **non** $a$ vaut `1` si $a$ vaut `0`, et `0` si $a$ vaut `1` : il **inverse** ;
+
+    - $a$ **et** $b$ vaut `1` **seulement si** $a$ et $b$ valent `1` tous les deux ;
+
+    - $a$ **ou** $b$ vaut `1` dès qu’**au moins un** des deux vaut `1`.
+
+On résume le comportement d’un opérateur par sa **table de vérité** : une ligne par combinaison possible des entrées, avec la valeur obtenue en sortie.
+
+| $a$ | non $a$ |
+|:---:|:-------:|
+| `0` |   `1`   |
+| `1` |   `0`   |
+
+| $a$ | $b$ | $a$ et $b$ | $a$ ou $b$ |
+|:---:|:---:|:----------:|:----------:|
+| `0` | `0` |    `0`     |    `0`     |
+| `0` | `1` |    `0`     |    `1`     |
+| `1` | `0` |    `0`     |    `1`     |
+| `1` | `1` |    `1`     |    `1`     |
+
+Ce sont exactement les opérateurs `not`, `and` et `or` de Python, rencontrés au chapitre *Les bases de la programmation Python* pour combiner des conditions, avec `True` à la place de `1` et `False` à la place de `0`. Dans un processeur, chacun est réalisé par une **porte logique** de quelques transistors, que les schémas électroniques dessinent ainsi :
+
+![](../figures/dbeb0fb369be8959.svg){ .tikz loading=lazy }
+
+Les portes NON, ET, OU et OU exclusif (symboles américains, les plus répandus).
+
+### Le ou exclusif (`xor`)
+
+Le **ou** de la logique est *inclusif* : $1$ ou $1$ vaut $1$. Dans la langue courante, « fromage ou dessert » signifie plutôt « l’un ou l’autre, *mais pas les deux* » : c’est le **ou exclusif**.
+
+!!! definition "Définition 4 — Ou exclusif"
+
+    $a$ **xor** $b$ (*exclusive or*, « ou exclusif ») vaut `1` lorsque **exactement un** des deux bits vaut `1`, c’est-à-dire lorsque $a$ et $b$ sont **différents**.
+
+| $a$ | $b$ | $a$ ou $b$ | $a$ xor $b$ |
+|:---:|:---:|:----------:|:-----------:|
+| `0` | `0` |    `0`     |     `0`     |
+| `0` | `1` |    `1`     |     `1`     |
+| `1` | `0` |    `1`     |     `1`     |
+| `1` | `1` |    `1`     |   **`0`**   |
+
+Le ou et le ou exclusif ne diffèrent que sur la dernière ligne.
+
+!!! remarque "Remarque — sur machine"
+
+    Python n’a pas de mot-clé `xor`. Mais puisque « ou exclusif » signifie « différents », sur deux booléens il suffit d’écrire `a != b` :
+
+    ```text
+    >>> True != False      # exactement un des deux est vrai
+    True
+    >>> True != True       # les deux sont vrais
+    False
+    ```
+
+### Dresser la table de vérité d’une expression
+
+Une **expression booléenne** combine des variables à l’aide de ces opérateurs, par exemple « $(a$ ou $b)$ et non$(a$ et $b)$ ». Comme en calcul, les parenthèses indiquent ce que l’on évalue en premier.
+
+!!! regle "Règle 2 — Dresser la table de vérité d’une expression"
+
+    1.  Prévoir **une ligne par combinaison des entrées** : avec $n$ variables, il y a $2^n$ lignes — les $2^n$ valeurs codables sur $n$ bits. On les énumère sans en oublier **en comptant en binaire** : `00`, `01`, `10`, `11`.
+
+    2.  Prévoir **une colonne par étape du calcul**, des parenthèses les plus intérieures jusqu’à l’expression complète.
+
+    3.  Remplir **colonne par colonne**, à l’aide des tables de **et**, **ou**, **non**.
+
+!!! exemple "Exemple — Table de $E = (a$ ou $b)$ et non$(a$ et $b)$"
+
+    $$\begin{array}{|c|c||c|c|c||c|}
+    \hline
+    a & b & a \text{ ou } b & a \text{ et } b & \text{non}(a \text{ et } b) & E \\
+    \hline
+    \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} \\
+    \texttt{0} & \texttt{1} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{1} \\
+    \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{1} \\
+    \texttt{1} & \texttt{1} & \texttt{1} & \texttt{1} & \texttt{0} & \texttt{0} \\
+    \hline
+    \end{array}$$ La dernière colonne vaut `0`, `1`, `1`, `0` : c’est exactement la table du **xor**. Deux expressions qui ont la même table de vérité sont dites **équivalentes** : on vient de fabriquer un ou exclusif avec seulement des portes et, ou, non.
+
+### Du calcul logique à l’addition : le demi-additionneur
+
+Revenons à l’addition posée plus haut (« Additionner en binaire »). Dans la colonne de droite, on additionne deux bits $a$ et $b$. Le résultat tient sur **deux bits** : un bit de **somme** $s$, posé dans la colonne, et une **retenue** $r$, reportée dans la colonne de gauche.
+
+| $a$ | $b$ |       $a + b$       | retenue $r$ | somme $s$ |
+|:---:|:---:|:-------------------:|:-----------:|:---------:|
+| `0` | `0` | $0 = \texttt{00}_2$ |     `0`     |    `0`    |
+| `0` | `1` | $1 = \texttt{01}_2$ |     `0`     |    `1`    |
+| `1` | `0` | $1 = \texttt{01}_2$ |     `0`     |    `1`    |
+| `1` | `1` | $2 = \texttt{10}_2$ |     `1`     |    `0`    |
+
+!!! propriete "Propriété 2 — Le demi-additionneur"
+
+    La colonne de la somme est la table du **xor**, celle de la retenue est la table du **et** : $$s = a \text{ xor } b \qquad\qquad r = a \text{ et } b.$$ Le circuit formé d’une porte **xor** et d’une porte **et** s’appelle un **demi-additionneur** : il additionne deux bits.
+
+![](../figures/8eacb89cbd81c608.svg){ .tikz loading=lazy }
+
+!!! remarque "Remarque — Pourquoi « demi » ? au-delà du programme"
+
+    Dans les autres colonnes de l’addition posée, il faut aussi ajouter la **retenue venue de la droite** : trois bits et non deux (c’est le cas $1 + 1 + 1 = \texttt{11}_2$ vu plus haut). On assemble pour cela deux demi-additionneurs en un **additionneur complet**, puis on place un additionneur complet par colonne : le processeur additionne ainsi des nombres de 64 bits avec, en tout et pour tout, des portes logiques. Le TP « Programmer l’arithmétique binaire » fait construire cette chaîne en Python, porte après porte.
+
+<span id="cours-02-22" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercices **[22](exercices.md#ex-02-22) à [24](exercices.md#ex-02-24)** (opérateurs booléens, table de vérité d’une expression, demi-additionneur)
+
 ## L’hexadécimal : le binaire en plus court
 
 Écrire de longues suites de `0` et de `1` est pénible et source d’erreurs. On utilise donc très souvent la **base 16** (hexadécimal). Son intérêt : **un chiffre hexadécimal représente exactement 4 bits**, donc un octet tient en *deux* chiffres.
@@ -144,7 +258,7 @@ Il faut 16 chiffres : après `0`…`9`, on emprunte des lettres.
 |  2  | `0010` | `2` |  6  | `0110` | `6` | 10  | `1010` | `A` | 14  | `1110` | `E` |
 |  3  | `0011` | `3` |  7  | `0111` | `7` | 11  | `1011` | `B` | 15  | `1111` | `F` |
 
-!!! regle "Règle 2 — Binaire $leftrightarrow$ hexadécimal : regrouper par 4"
+!!! regle "Règle 3 — Binaire $leftrightarrow$ hexadécimal : regrouper par 4"
 
     On **regroupe les bits par paquets de 4**, en partant de la droite (on complète par des `0` à gauche si besoin), et on remplace chaque paquet par son chiffre hexadécimal. Et réciproquement.
 
@@ -181,7 +295,7 @@ On pourrait réserver le bit de poids fort au signe (`0` pour $+$, `1` pour $-$)
 
 ### Le complément à deux
 
-!!! regle "Règle 3 — Coder un entier négatif sur $n$ bits"
+!!! regle "Règle 4 — Coder un entier négatif sur $n$ bits"
 
     Pour coder $-x$ (avec $x > 0$) sur $n$ bits :
 
@@ -199,11 +313,11 @@ On pourrait réserver le bit de poids fort au signe (`0` pour $+$, `1` pour $-$)
 
 Pourquoi ça marche ? Parce qu’avec cette convention, l’addition binaire ordinaire donne le bon résultat, **sans traitement spécial** : $12 + (-12)$ doit valoir $0$.
 
-![](../figures/c3b4f6d5691f870d.svg){ .tikz loading=lazy }
+![](../figures/26d5ad7ae05a5b41.svg){ .tikz loading=lazy }
 
 La retenue finale « déborde » au-delà des 8 bits : il reste `00000000`, soit $0$. Tout fonctionne.
 
-!!! regle "Règle 4 — Lire le signe, et les bornes"
+!!! regle "Règle 5 — Lire le signe, et les bornes"
 
     Avec le complément à deux sur $n$ bits :
 
@@ -215,7 +329,7 @@ La retenue finale « déborde » au-delà des 8 bits : il reste `00000000`, soit
 
 **Le cadran du complément à deux sur 4 bits.** On range les 16 mots de 4 bits en cercle, comme les heures d’une horloge. Ajouter 1, c’est avancer d’un cran dans le sens des aiguilles d’une montre : de `1111` ($-1$) on passe à `0000` ($0$), la retenue « déborde » comme plus haut. Les mots qui commencent par `0` (à droite) sont les positifs $0$ à $7$ ; ceux qui commencent par `1` (à gauche) sont les négatifs $-8$ à $-1$. Seul piège : en bas, de `0111` ($+7$) à `1000` ($-8$), on passe brutalement du plus grand au plus petit : c’est le **dépassement de capacité**.
 
-![](../figures/920bb9392d1c66d7.svg){ .tikz loading=lazy }
+![](../figures/1107dfa2024e13b9.svg){ .tikz loading=lazy }
 
 !!! remarque "Remarque — sur machine"
 
@@ -244,7 +358,7 @@ Après la virgule, les rangs pèsent des puissances **négatives** de 2 : $2^{-1
 
 Reprenons la méthode sur $0{,}1$ : $$0{,}1 \times 2 = \mathbf{0}{,}2 \to \mathbf{0}{,}4 \to \mathbf{0}{,}8 \to \mathbf{1}{,}6 \to \mathbf{1}{,}2 \to \mathbf{0}{,}4 \to \cdots$$ Le motif se **répète sans fin** : $0{,}1_{10} = \texttt{0,0001100110011}\ldots_2$. Autrement dit, $0{,}1$ **n’a pas d’écriture binaire finie**, exactement comme $\frac{1}{3} = 0{,}333\ldots$ n’a pas d’écriture décimale finie.
 
-!!! regle "Règle 5 — Les flottants sont approchés"
+!!! regle "Règle 6 — Les flottants sont approchés"
 
     Une machine ne dispose que d’un nombre **fini** de bits (souvent 64) pour stocker un nombre à virgule, appelé **flottant** (*float*). Elle doit donc **tronquer** les écritures infinies : la valeur stockée est le plus souvent une **approximation**. On ne teste **jamais** l’égalité de deux flottants.
 
@@ -267,7 +381,7 @@ Reprenons la méthode sur $0{,}1$ : $$0{,}1 \times 2 = \mathbf{0}{,}2 \to \mathb
 
 Comme en base 10 on écrit $6{,}02 \times 10^{23}$, on met un flottant binaire sous la forme $1{,}\!\ldots \times 2^{e}$ (un seul `1` avant la virgule). La norme **IEEE 754** (1985) range alors, sur 32 bits (« simple précision ») :
 
-![](../figures/8c8babdc48bf138f.svg){ .tikz loading=lazy }
+![](../figures/cfcd66315a4ef608.svg){ .tikz loading=lazy }
 
 - **1 bit de signe** (`0` positif, `1` négatif) ;
 
@@ -285,7 +399,7 @@ C’est la limitation de la mantisse à 23 (ou 52) bits qui *force* l’arrondi 
 
 Le programme demande de savoir **estimer la taille** d’un nombre en mémoire.
 
-!!! propriete "Propriété 2 — Nombre de bits"
+!!! propriete "Propriété 3 — Nombre de bits"
 
     Un entier $N$ s’écrit sur $k$ bits dès que $2^{k} > N$, c’est-à-dire dès que $k$ dépasse $\log_2 N$. Repères utiles : $2^{10} = 1024 \approx 10^3$, donc $10$ bits couvrent $\approx$ mille valeurs, $20$ bits $\approx$ un million, $30$ bits $\approx$ un milliard.
 
@@ -301,7 +415,7 @@ Nous savons coder des nombres. Or, comme annoncé au début du chapitre, **une m
 
 ### L’ASCII : la première table
 
-!!! definition "Définition 3 — Code ASCII"
+!!! definition "Définition 5 — Code ASCII"
 
     L’**ASCII** (*American Standard Code for Information Interchange*, 1963) est une table qui associe à chaque caractère un numéro de `0` à `127`. Chaque caractère tient donc sur **7 bits** ($2^7 = 128$ valeurs).
 
@@ -334,7 +448,7 @@ Deux régularités bien pratiques : les chiffres, les majuscules et les minuscul
 
 L’ASCII a été conçu pour l’anglais : il ignore les **accents** (`é`, `à`, `ç`), sans parler du grec, du russe, du chinois ou des *émojis*. On a d’abord bricolé des tables sur **8 bits** ($256$ valeurs), comme l’**ISO-8859-1** (dite « Latin-1 »), qui ajoute les caractères d’Europe de l’Ouest. Mais 256 places ne suffisent pas au monde entier, et chaque région avait *sa* table incompatible : le même octet ne désignait pas la même lettre d’un pays à l’autre.
 
-!!! definition "Définition 4 — Unicode et UTF-8"
+!!! definition "Définition 6 — Unicode et UTF-8"
 
     **Unicode** est un *catalogue universel* qui attribue un numéro unique, appelé **point de code** (noté `U+`…), à *tous* les caractères de *toutes* les écritures (plus de 150 000 aujourd’hui). **UTF-8** est la façon la plus répandue d’*écrire ces points de code en octets* : il utilise **1 octet** pour les caractères ASCII, et **2 à 4 octets** pour les autres.
 
@@ -375,7 +489,7 @@ Un fichier texte n’est qu’une suite d’octets : **rien** n’y indique de f
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Les conversions reposent sur les opérateurs `//` et `%` et la boucle `while` du chapitre *Les bases de la programmation Python*, où l’on avait constaté sans l’expliquer que `0.1 + 0.2` ne vaut pas `0.3`. Les deux états du bit sont ceux du **transistor**, brique de base que l’on retrouvera au chapitre *Architecture des ordinateurs et systèmes d’exploitation*, et le **débordement** d’un entier stocké sur trop peu de bits est à l’origine de l’explosion d’Ariane 5, que racontera le chapitre *Spécifier et mettre au point ses programmes*. Une adresse IPv4 du chapitre *Le Web : réseaux et interactions homme-machine* ne sera rien d’autre que quatre **octets** (d’où les nombres de 0 à 255), et l’encodage **UTF-8** réapparaîtra dès qu’on ouvrira un fichier CSV (*Les données en tables*) ou qu’on écrira `<meta charset="utf-8">` dans une page HTML. En Terminale, le chapitre *Réseaux et routage* découpera ces 32 bits en partie réseau et partie hôte (le masque `/n`), et la *Cryptographie* chiffrera un message en calculant sur les rangs de ses lettres (chiffre de César).
+    Les conversions reposent sur les opérateurs `//` et `%` et la boucle `while` du chapitre *Les bases de la programmation Python*, où l’on avait constaté sans l’expliquer que `0.1 + 0.2` ne vaut pas `0.3`. Les deux états du bit sont ceux du **transistor**, brique de base que l’on retrouvera au chapitre *Architecture des ordinateurs et systèmes d’exploitation*, où les **portes logiques** et l’additionneur de ce chapitre deviendront l’unité arithmétique et logique du processeur, et le **débordement** d’un entier stocké sur trop peu de bits est à l’origine de l’explosion d’Ariane 5, que racontera le chapitre *Spécifier et mettre au point ses programmes*. Une adresse IPv4 du chapitre *Le Web : réseaux et interactions homme-machine* ne sera rien d’autre que quatre **octets** (d’où les nombres de 0 à 255), et l’encodage **UTF-8** réapparaîtra dès qu’on ouvrira un fichier CSV (*Les données en tables*) ou qu’on écrira `<meta charset="utf-8">` dans une page HTML. En Terminale, le chapitre *Réseaux et routage* découpera ces 32 bits en partie réseau et partie hôte (le masque `/n`), et la *Cryptographie* chiffrera un message en calculant sur les rangs de ses lettres (chiffre de César).
 
 ## Bilan — la carte mémoire
 
@@ -385,6 +499,8 @@ Un fichier texte n’est qu’une suite d’octets : **rien** n’y indique de f
 | Base $b$ | chaque rang pèse une puissance de $b$ ; $n$ bits codent $2^n$ valeurs |
 | Bin. $\to$ déc. | additionner les poids ($128, 64, 32, \ldots$) des rangs à `1` |
 | Déc. $\to$ bin. | divisions successives par 2, restes lus **de bas en haut** |
+| Logique booléenne | tables de vérité de **et**, **ou**, **non**, **xor** ; $n$ variables $\to 2^n$ lignes |
+| Demi-additionneur | somme $=$ $a$ xor $b$ ; retenue $=$ $a$ et $b$ |
 | Hexadécimal | 1 chiffre hexa $=$ 4 bits ; on regroupe les bits par 4 |
 | Entier relatif | **complément à 2** : inverser les bits, puis $+1$ ; bornes $-2^{n-1}\ldots 2^{n-1}-1$ |
 | Flottant | écriture souvent **approchée** ; ne jamais tester `==` sur des *float* |
@@ -402,6 +518,8 @@ Un fichier texte n’est qu’une suite d’octets : **rien** n’y indique de f
 - **Tester l’égalité de deux flottants.** L’écriture est souvent **approchée** ($0{,}1 + 0{,}2 \neq 0{,}3$). *Le réflexe :* ne jamais faire `==` sur des *float*.
 
 - **Oublier le nombre de bits.** Sur `n` bits, on code $2^n$ valeurs (de $0$ à $2^n - 1$) : au-delà, **débordement**.
+
+- **Confondre ou et ou exclusif.** $1$ ou $1$ vaut $1$, mais $1$ xor $1$ vaut $0$. *Le réflexe :* xor $=$ « exactement un des deux », c’est-à-dire « différents ».
 
 - **Divisions successives mal menées.** On lit les restes **de bas en haut** pour obtenir l’écriture binaire.
 
@@ -422,6 +540,8 @@ Un fichier texte n’est qu’une suite d’octets : **rien** n’y indique de f
 - donner le nombre de valeurs codables sur `n` bits ($2^n$) ;
 
 - **additionner** deux nombres en binaire ;
+
+- dresser la **table de vérité** d’une expression booléenne (**et**, **ou**, **non**, **xor**) et expliquer le **demi-additionneur** ;
 
 - coder un **entier relatif** (complément à deux) ;
 

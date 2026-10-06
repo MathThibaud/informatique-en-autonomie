@@ -480,6 +480,8 @@ Puis ajouter tout en bas du fichier la ligne `jouer()`, **après** les tests, et
 
 On renverse les rôles. Stratégie de l’ordinateur pour un nombre entre `mini` et `maxi` : proposer le **milieu** `(mini + maxi) // 2` ; si c’est trop petit, le secret est entre `milieu + 1` et `maxi` ; si c’est trop grand, entre `mini` et `milieu - 1`. On recommence avec le nouvel intervalle.
 
+Cette stratégie, qui coupe l’intervalle en deux à chaque essai, est l’un des grands classiques de l’algorithmique. Nous l’étudierons en détail au chapitre *La recherche dichotomique* : elle y recevra son nom, nous prouverons qu’elle se termine toujours et nous calculerons précisément son coût.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Jouer la stratégie à la main <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-les-bases-de-la-programmation-python-tp-1-10 }
 
 Le secret est `37`, entre 1 et 100. Recopier sur le cahier le tableau suivant et le compléter jusqu’à la victoire.

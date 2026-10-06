@@ -236,9 +236,71 @@ On reprend **le même réseau**, mais cette fois les nombres sont les **débits*
 
     **3.** Les deux protocoles **divergent** pour C et E : RIP prend le lien **direct** A–C ($1$ saut) et A–C–E ($2$ sauts) ; OSPF passe par B (A–B–C, A–B–C–E). En effet A–C n’a qu’un débit de $1$ Mbps (coût $100$) : RIP ne « voit » pas cette lenteur, OSPF si.
 
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Dijkstra derrière OSPF <span class="horsprog">au-delà du programme</span> <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-10 }
+
+*Cet exercice va **au-delà du programme officiel** : au bac, les tables de routage sont données, ou se lisent sur un petit réseau. Il sert à comprendre ce que fait vraiment un routeur OSPF.*
+
+Voici un réseau de six routeurs ; les nombres sont les **débits** des liaisons, en Mbit/s. On rappelle : $\text{coût}=10^8/\text{débit}$ (débit en bit/s).
+
+![](../figures/b69a4560f96550dd.svg){ .tikz loading=lazy }
+
+1.  Calculer le coût OSPF de chaque liaison et le reporter sur un schéma.
+
+2.  Dérouler l’algorithme de Dijkstra au départ de `A` : recopier et compléter un tableau (une ligne par sommet fixé ; colonnes `A` à `F` ; distance provisoire et prédécesseur ; $\infty$ $=$ pas encore atteint).
+
+    ??? pouce "Coup de pouce"
+
+        Reprendre le principe rappelé dans le cours : à chaque tour, fixer le sommet non traité de plus petite distance provisoire, puis relâcher ses liaisons (`si distance[u] + coût(u,v) < distance[v]`…).
+
+3.  En déduire la table de routage OSPF de `A` (réseau visé, sortir vers, coût total).
+
+    ??? pouce "Coup de pouce"
+
+        La colonne « sortir vers » est le **premier** routeur du chemin : remonter les prédécesseurs depuis la destination jusqu’à `A`.
+
+4.  Par quelle route RIP enverrait-il un paquet de `A` vers le réseau de `B` ? Et OSPF ? Expliquer.
+
+5.  La liaison `A`–`C` tombe en panne. Dérouler à nouveau Dijkstra depuis `A` et donner la nouvelle table OSPF de `A`.
+
+6.  <span class="run" title="À programmer et tester sur machine">▶</span>  Vérifier vos tableaux avec la fonction `dijkstra` écrite dans le projet proposé en fin de chapitre *Graphes*.
+
+??? corrige "Corrigé"
+
+    **1.** $10$ Mbit/s $\to 10$ ; \; $20$ Mbit/s $\to 5$ ; \; $50$ Mbit/s $\to 2$ ; \; $100$ Mbit/s $\to 1$. Soit : A–B $10$, A–C $2$, B–C $5$, B–D $2$, C–D $10$, B–E $5$, D–E $1$, D–F $2$, E–F $2$.
+
+    **2.** Entre parenthèses, le prédécesseur ; $\ast$ $=$ sommet fixé.
+
+    | **Fixé** |   `A`    |   `B`    |   `C`    |   `D`    |    `E`    |    `F`    |
+    |:--------:|:--------:|:--------:|:--------:|:--------:|:---------:|:---------:|
+    |    —     |   $0$    | $\infty$ | $\infty$ | $\infty$ | $\infty$  | $\infty$  |
+    |   `A`    | $0^\ast$ | $10$ (A) | $2$ (A)  | $\infty$ | $\infty$  | $\infty$  |
+    |   `C`    |          | $7$ (C)  | $2^\ast$ | $12$ (C) | $\infty$  | $\infty$  |
+    |   `B`    |          | $7^\ast$ |          | $9$ (B)  | $12$ (B)  | $\infty$  |
+    |   `D`    |          |          |          | $9^\ast$ | $10$ (D)  | $11$ (D)  |
+    |   `E`    |          |          |          |          | $10^\ast$ | $11$ (D)  |
+    |   `F`    |          |          |          |          |           | $11^\ast$ |
+
+    Deux relâchements sont décisifs : en fixant `C`, la distance de `B` tombe de $10$ (lien direct, lent) à $7$ ; en fixant `B`, celle de `D` tombe de $12$ à $9$.
+
+    **3.** En remontant les prédécesseurs (par exemple F $\leftarrow$ D $\leftarrow$ B $\leftarrow$ C $\leftarrow$ A), toutes les routes partent vers **C** :
+
+    |   Réseau    | Sortir vers |      Coût      |
+    |:-----------:|:-----------:|:--------------:|
+    | réseau de B |      C      |   7 (A–C–B)    |
+    | réseau de C |      C      |    2 (A–C)     |
+    | réseau de D |      C      |  9 (A–C–B–D)   |
+    | réseau de E |      C      | 10 (A–C–B–D–E) |
+    | réseau de F |      C      | 11 (A–C–B–D–F) |
+
+    **4.** RIP prend le lien **direct** A–B ($1$ saut). OSPF passe par C (A–C–B, coût $2+5=7$), car le lien direct A–B, à $10$ Mbit/s seulement, coûte $10$ : deux sauts rapides valent mieux qu’un saut lent.
+
+    **5.** Sans A–C : on fixe A ($0$) ; B ($10$, par A) ; D ($12$, par B) ; E ($13$, par D) ; F ($14$, par D) ; C ($15$, par B : $10+5$, mieux que $12+10$ par D). Nouvelle table : tout sort vers **B**, avec les coûts B $10$, C $15$ (A–B–C), D $12$ (A–B–D), E $13$ (A–B–D–E), F $14$ (A–B–D–F). C’est la force d’OSPF : dès qu’une panne est annoncée, chaque routeur recalcule seul ses routes.
+
+    **6.** Avec le graphe saisi sous la forme `{’A’: [(’B’, 10), (’C’, 2)], ’B’: [(’A’, 10), (’C’, 5), (’D’, 2), (’E’, 5)], …}`, l’appel `dijkstra(G, ’A’)` du projet renvoie les distances `{’A’: 0, ’B’: 7, ’C’: 2, ’D’: 9, ’E’: 10, ’F’: 11}` et les prédécesseurs correspondants.
+
 ### Exercices type bac
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Réseau d’un établissement *(d’après La Réunion 2023, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-10 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 11</span> — Réseau d’un établissement *(d’après La Réunion 2023, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-11 }
 
 Un ensemble scolaire « Établissement » regroupe plusieurs sites (l’Administration, l’école primaire, le collège, le lycée général, le lycée professionnel). Les postes de chaque site sont reliés entre eux par des commutateurs (switchs), eux-mêmes reliés à des routeurs. R1, R2, R3, R4, R5 et R6 sont les routeurs de l’établissement ; la figure 1 montre leurs liaisons et le routeur qui dessert trois des secteurs.
 
@@ -548,12 +610,12 @@ Figure 1 : les routeurs de l’établissement (en pointillés : le routeur qui d
     **4.** (a) Ethernet : $d = 10^{8}/10 = 10^{7}$ bit/s. Fast-Ethernet : $10^{8}/10^{8} = 1$. Fibre : $10^{8}/10^{9} = 0{,}1$.  
     (b) Ethernet $\to 10$, Fast-Ethernet $\to 1$, Fibre $\to 0{,}1$ (la liaison R6–R4 reste inconnue) :
 
-    ![](../figures/ebca4d0f21784214.svg){ .tikz loading=lazy }
+    ![](../figures/b7923dd540e53d46.svg){ .tikz loading=lazy }
 
     \(c\) Coût(R6–R4) $+ 10 + 0{,}1 = 11{,}1$, donc coût(R6–R4) $= 1$ : c’est une liaison **Fast-Ethernet**.  
     (d) Le Lycée général est desservi par R2. On compare les coûts des routes de R6 à R2 : R6–R1–R5–R2 : $1 + 1 + 0{,}1 = \textbf{2{,}1}$ ; R6–R1–R5–R3–R2 : $3{,}1$ ; toutes les routes passant par R4 coûtent au moins $1 + 10 + 0{,}1 = 11{,}1$. OSPF choisit donc **PC Admin 01 $\to$ R6 $\to$ R1 $\to$ R5 $\to$ R2 $\to$ PC LG 01**.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Des adresses, RIP puis OSPF *(d’après Centres étrangers 2023, jour 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-11 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Des adresses, RIP puis OSPF *(d’après Centres étrangers 2023, jour 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-12 }
 
 Voici un réseau dans lequel A, B, C, D, E, F, G et H sont des routeurs ; chaque liaison est étiquetée par l’adresse du réseau qui relie les deux routeurs.
 
@@ -593,12 +655,12 @@ On travaille avec le protocole OSPF. Le coût d’une liaison est donné par $\t
 
     **3.** (a) Coûts $10^9/BP$ : Ethernet $10^9/10^8 = 10$ ; Fast-Ethernet $10^9/10^9 = 1$ ; Fibre $10^9/10^{10} = 0{,}1$.
 
-    ![](../figures/6862ea0df1f8a735.svg){ .tikz loading=lazy }
+    ![](../figures/4f7c522085a1fb37.svg){ .tikz loading=lazy }
 
     \(b\) OSPF choisit le chemin de coût total minimal : **A–D–F–G**, de coût $10+1+1 = 12$ (devant A–B–C–H–G : $1+10+0{,}1+1 = 12{,}1$).  
     (c) Sans F, le meilleur chemin est **A–B–C–H–G**, de coût $12{,}1$ (A–D–E–G coûte $20{,}1$).
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Bob écrit à Alice *(d’après Sujet zéro 2023, sujet A)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-12 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Bob écrit à Alice *(d’après Sujet zéro 2023, sujet A)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-13 }
 
 Bob et Alice communiquent au travers du réseau ci-dessous, dont le protocole de routage est OSPF, qui minimise le coût des communications (LAN : réseau local ; WAN : réseau étendu ; R : routeur ; Sw : switch).
 
@@ -979,7 +1041,7 @@ Une adresse IPv4 est composée de quatre octets, soit $32$ bits. La notation `/n
 
     **5.** On teste chaque panne : sans R2, le meilleur chemin est R1–R3–R5–R6 ($100+10+10 = 120$) ; sans R3 ou sans R4, la route R1–R2–R5–R6 ($21$) reste disponible ; sans **R5**, il reste R1–R2–R4–R6 $= 10+1+100 = \mathbf{111}$. Le routeur en panne est **R5**.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Du réseau local L1 au réseau local L2 *(d’après Centres étrangers 2024, groupe 1, jour 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-13 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Du réseau local L1 au réseau local L2 *(d’après Centres étrangers 2024, groupe 1, jour 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-14 }
 
 *Rappels.* Une adresse IPv4 est composée de $4$ octets, soit $32$ bits, notée `a.b.c.d` (« notation décimale pointée »). La notation CIDR `a.b.c.d/n` signifie que les $n$ premiers bits de l’adresse représentent la partie réseau, les bits suivants la partie machine. L’adresse dont tous les bits machine sont à $0$ est l’*adresse du réseau* ; celle dont ils sont tous à $1$ est l’*adresse de diffusion*. On considère le réseau suivant :
 
@@ -1063,7 +1125,7 @@ La liaison entre H et D est rétablie. Pour tenir compte du débit des liaisons,
 
     **10.** Sans G–F : **A–H–F–E–D**, de coût $1 + 1 + 0{,}1 + 0{,}1 = \mathbf{2{,}2}$ (devant A–B–C–D, $3$).
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Le réseau d’une société *(d’après Métropole septembre 2024, sujet 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-14 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Le réseau d’une société *(d’après Métropole septembre 2024, jour 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-15 }
 
 Le réseau informatique d’une société est constitué de routeurs interconnectés par des fibres optiques. Il comporte deux réseaux locaux : L1, relié au routeur R1, et L2, relié au routeur R9.
 
@@ -1134,7 +1196,7 @@ Le réseau informatique d’une société est constitué de routeurs interconnec
 
 ### Critiquer une réponse d’IA
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — RIP et OSPF expliqués par un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-11-15 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — RIP et OSPF expliqués par un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-11-16 }
 
 Un élève demande à un assistant d’IA : « Quelle est la différence entre RIP et OSPF, et comment calcule-t-on la métrique d’une route en OSPF ? » Voici la réponse obtenue :
 
@@ -1160,7 +1222,7 @@ Un élève demande à un assistant d’IA : « Quelle est la différence entre R
 
 ### S’entraîner à l’oral
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-16 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-17 }
 
 Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 

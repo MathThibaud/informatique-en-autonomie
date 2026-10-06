@@ -240,7 +240,7 @@ Savoir écrire ne suffit pas : le programme demande de **savoir analyser**. Troi
 
 !!! remarque "Remarque"
 
-    On retrouve exactement le raisonnement attendu au bac : *« décrire ce qui garantit la terminaison de la fonction récursive »* (sujet Métropole 2025 : la longueur du tableau traité diminue à chaque appel). Attention aussi à la condition d’arrêt mal choisie : `fact` écrite avec `if n == 1` au lieu de `if n == 0` *boucle* sur `fact(-1)`, `fact(-2)`… si on l’appelle sur `fact(0)`. La condition d’arrêt doit être **réellement atteinte** par le variant.
+    On retrouve exactement le raisonnement attendu au bac : *« décrire ce qui garantit la terminaison de la fonction récursive »* (sujet Métropole 2025, jour 2 : la longueur du tableau traité diminue à chaque appel). Attention aussi à la condition d’arrêt mal choisie : `fact` écrite avec `if n == 1` au lieu de `if n == 0` *boucle* sur `fact(-1)`, `fact(-2)`… si on l’appelle sur `fact(0)`. La condition d’arrêt doit être **réellement atteinte** par le variant.
 
 ### Le coût : l’exemple frappant de Fibonacci
 
@@ -354,9 +354,9 @@ La récursivité produit naturellement les **fractales** : des figures qui se r�
 
 Ce chapitre est une **clé** pour toute la fin de l’année. On la retrouve dès qu’une structure ou une méthode est « faite de copies plus petites d’elle-même ».
 
-- **Structures récursives : les arbres.** Un arbre est un nœud reliant des *sous-arbres*. Presque tout algorithme sur les arbres est récursif (*ex.* bac Polynésie 2023 : `maximum(abr)` qui descend dans le sous-arbre droit).
+- **Structures récursives : les arbres.** Un arbre est un nœud reliant des *sous-arbres*. Presque tout algorithme sur les arbres est récursif (*ex.* bac Polynésie 2023, jour 2 : `maximum(abr)` qui descend dans le sous-arbre droit).
 
-- **Diviser pour régner : le tri fusion.** On coupe la liste en deux, on trie *récursivement* chaque moitié, puis on fusionne (*ex.* bac Liban 2023). Coût $n\log_2 n$ au lieu de $n^2$. *(Tout un chapitre y est consacré : **Diviser pour régner**.)*
+- **Diviser pour régner : le tri fusion.** On coupe la liste en deux, on trie *récursivement* chaque moitié, puis on fusionne (*ex.* bac Liban 2023, jour 2). Coût $n\log_2 n$ au lieu de $n^2$. *(Tout un chapitre y est consacré : **Diviser pour régner**.)*
 
 - **Retour sur trace (*backtracking*) : le Sudoku.** On essaie, on poursuit récursivement, on **revient en arrière** au premier échec (voir le projet Sudoku en fin de chapitre).
 

@@ -193,7 +193,7 @@ def ecrire(phrase, larg):
             lettre_L(larg)
         elif c == " ":
             espace(larg)
-        ...
+        # ... une branche par lettre programmee ...
         else:
             inconnu(larg)             # caractere que l'on ne sait pas dessiner
 
@@ -206,21 +206,6 @@ ecrire(phrase, 30)
 2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire `inconnu(larg)` : elle dessine un petit **rectangle vide** (c’est ce que font les vraies polices quand un caractère manque ; les typographes l’appellent le « tofu »). Elle doit, elle aussi, respecter le contrat !
 
 3.  Pourquoi le contrat est-il indispensable pour que `ecrire` fonctionne ? Que se passerait-il si `lettre_H` finissait en haut de sa case ?
-
-!!! remarque "Remarque — Pour aller plus loin : un dictionnaire de fonctions"
-
-    En Python, une fonction est une **valeur** comme une autre : on peut la ranger dans un dictionnaire. La longue suite de `elif` devient alors :
-
-    ```python
-    ALPHABET = {"E": lettre_E, "L": lettre_L, " ": espace}    # sans parentheses !
-
-    def ecrire(phrase, larg):
-        for c in phrase.upper():
-            if c in ALPHABET:
-                ALPHABET[c](larg)    # on recupere la fonction, puis on l'appelle
-            else:
-                inconnu(larg)
-    ```
 
 !!! remarque "Remarque — Deux pièges"
 
@@ -341,7 +326,7 @@ Au lancement, la tortue est au **centre** de la fenêtre, cap 0. C’est le seul
 
 3.  **Adapter la taille.** La largeur utile est `L = W - 2 * marge`. Pour que `n` caractères tiennent sur une ligne, il faut $\texttt{n}\times\dfrac{3\,\texttt{larg}}{2} \leqslant \texttt{L}$, c’est-à-dire $\texttt{larg} \leqslant \dfrac{2\,\texttt{L}}{3\,\texttt{n}}$. <span class="run" title="À programmer et tester sur machine">▶</span>  Calculer ainsi la plus grande largeur `larg` possible ; si elle devient trop petite (moins de 10 pixels, par exemple), passer sur plusieurs lignes.
 
-4.  **Défi** <span class="run" title="À programmer et tester sur machine">▶</span>  Couper la phrase **entre les mots** (`phrase.split()`), jamais au milieu d’un mot, puis **centrer** chaque ligne.
+4.  **Défi** <span class="run" title="À programmer et tester sur machine">▶</span>  Couper la phrase **entre les mots** (`phrase.split()`), jamais au milieu d’un mot, puis **centrer** chaque ligne. *`phrase.split()` renvoie une **liste** de mots : une liste permet de stocker plusieurs éléments à la suite (on y reviendra en détail au chapitre* Les types construits*).*
 
 ## Étape 6 — Le style (à la carte)
 
@@ -359,15 +344,20 @@ Choisissez vos améliorations ; chacune doit continuer à respecter le contrat.
 
 ### Majuscules et minuscules
 
-Jusqu’ici, `ecrire` passait tout en majuscules avec `phrase.upper()`. Pour respecter la casse, on retire le `.upper()` et on confie chaque caractère à une fonction `caractere(c, larg)` qui décide comment le dessiner. Deux idées, que l’on peut combiner.
+Jusqu’ici, `ecrire` passait tout en majuscules avec `phrase.upper()`. Pour respecter la casse, on retire le `.upper()` et on confie chaque caractère à une fonction `caractere(c, larg)` qui décide comment le dessiner. Pour y voir clair, on commence par sortir la longue chaîne de `if`/`elif` de `ecrire` et par la ranger dans sa propre fonction, `dessiner(c, larg)`. Deux idées, ensuite, que l’on peut combiner.
 
 **Idée 1 — la petite capitale (simple).** Une minuscule, c’est la majuscule **en plus petit**. Mais une lettre de taille `petit` n’avance que de `3 * petit / 2` : on **complète** le déplacement pour que la case garde sa largeur normale, sinon les lettres se chevauchent et le contrat n’est plus respecté.
 
 ```python
 def dessiner(c, larg):
     """Dessine le caractere c en taille larg (tofu s'il est inconnu)."""
-    if c in ALPHABET:
-        ALPHABET[c](larg)
+    if c == "A":                        # la chaine de if/elif de l'etape 2,
+        lettre_A(larg)                  # sortie de ecrire et rangee
+    elif c == "B":                      # dans sa propre fonction
+        lettre_B(larg)
+    # ... une branche par lettre ...
+    elif c == " ":
+        espace(larg)
     else:
         inconnu(larg)
 
@@ -430,14 +420,18 @@ def minuscule_p(larg):
     saut(3 * u, -u)
 ```
 
-On range ces fonctions dans un second dictionnaire, et `caractere` choisit : la vraie minuscule si elle existe, sinon la petite capitale.
+On ajoute ces fonctions en tête de `caractere`, qui choisit : la vraie minuscule si elle existe, sinon la petite capitale.
 
 ```python
-MINUSCULES = {"o": minuscule_o, "n": minuscule_n, "l": minuscule_l, "p": minuscule_p}
-
 def caractere(c, larg):
-    if c in MINUSCULES:                  # une vraie minuscule existe
-        MINUSCULES[c](larg)
+    if c == "o":                         # une vraie minuscule existe
+        minuscule_o(larg)
+    elif c == "n":
+        minuscule_n(larg)
+    elif c == "l":
+        minuscule_l(larg)
+    elif c == "p":
+        minuscule_p(larg)
     elif c.islower():                    # sinon : petite capitale
         petit = 0.65 * larg
         dessiner(c.upper(), petit)

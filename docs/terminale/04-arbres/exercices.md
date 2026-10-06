@@ -205,7 +205,7 @@ On part de l’arbre binaire de recherche suivant.
 
     ??? pouce "Coup de pouce"
 
-        Pour chaque valeur, partir de la racine et descendre : à gauche si la valeur est plus petite que le nœud, à droite sinon, jusqu’à trouver une place vide. Une nouvelle valeur devient toujours une feuille.
+        Pour chaque valeur, partir de la racine et descendre : à gauche si la valeur est plus petite que le nœud, à droite sinon (y compris en cas d’égalité : convention du cours), jusqu’à trouver une place vide. Une nouvelle valeur devient toujours une feuille.
 
 2.  Quel parcours de l’ABR obtenu affiche les valeurs dans l’ordre **croissant** ?
 
@@ -255,9 +255,80 @@ On part de l’arbre binaire de recherche suivant.
 
     Au plus **`h` comparaisons** (une par niveau), où `h` est la hauteur de l’arbre.
 
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Programmer l’insertion dans un ABR <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-11 }
+
+On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale** à celle du nœud va **à droite**.
+
+1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction récursive `inserer(a, x)` qui insère `x` à sa place dans l’ABR `a` et **renvoie** l’arbre obtenu.
+
+    ??? pouce "Coup de pouce"
+
+        Trois cas : arbre vide (on renvoie un nouveau `Noeud(x)`) ; `x` plus petit que la racine (on insère à gauche) ; sinon (on insère à droite). Ne pas oublier de **réaffecter** le sous-arbre modifié, puis de renvoyer `a`.
+
+    ??? pouce "Coup de pouce 2 (début de solution)"
+
+        `if x < a.valeur:`  
+        `a.gauche = inserer(a.gauche, x)`
+
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Partant de l’arbre vide, insérer dans cet ordre `5`, `3`, `8`, `3`, `9`, `5`. Dessiner l’ABR obtenu : où sont placés les deux doublons ? Vérifier que le parcours infixe donne les valeurs triées.
+
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> En déduire une fonction `tri_abr(t)` qui renvoie une nouvelle liste contenant les valeurs de la liste `t` triées (doublons compris), à l’aide d’un ABR.
+
+    ??? pouce "Coup de pouce"
+
+        Insérer toutes les valeurs, puis écrire une variante du parcours infixe qui **renvoie une liste** : `infixe(a.gauche) + [a.valeur] + infixe(a.droite)`.
+
+4.  Dessiner l’ABR obtenu en insérant `1, 2, 3, 4, 5, 6, 7` dans cet ordre, puis celui obtenu avec `4, 2, 6, 1, 3, 5, 7`. Donner la hauteur de chacun. Combien de comparaisons faut-il, au pire, pour y chercher une valeur ?
+
+??? corrige "Corrigé"
+
+    **1.**
+
+    ```python
+    def inserer(a, x):
+        if a is None:
+            return Noeud(x)                 # place vide : nouvelle feuille
+        if x < a.valeur:
+            a.gauche = inserer(a.gauche, x)     # plus petit : a gauche
+        else:
+            a.droite = inserer(a.droite, x)     # plus grand ou egal : a droite
+        return a
+    ```
+
+    Sans la réaffectation `a.gauche = …`, le nœud créé quand `a.gauche` vaut `None` serait perdu.
+
+    **2.** Le second `3` va à droite du premier `3` ; le second `5` va à droite de la racine `5`, puis à gauche de `8`.
+
+    ![](../figures/451965c96bce5350.svg){ .tikz loading=lazy }
+
+    Parcours infixe : `3, 3, 5, 5, 8, 9` — trié.
+
+    **3.**
+
+    ```python
+    def infixe(a):
+        if a is None:
+            return []
+        return infixe(a.gauche) + [a.valeur] + infixe(a.droite)
+
+    def tri_abr(t):
+        a = None
+        for v in t:
+            a = inserer(a, v)
+        return infixe(a)
+    ```
+
+    Par exemple `tri_abr([5, 3, 8, 3, 9, 5, 1])` vaut `[1, 3, 3, 5, 5, 8, 9]`.
+
+    **4.** Avec `1, 2, …, 7`, chaque valeur devient le fils droit de la précédente : un arbre « en peigne » de hauteur $7$ (une chaîne `1`–`2`–…–`7`). Avec `4, 2, 6, 1, 3, 5, 7`, on obtient l’arbre équilibré ci-dessous, de hauteur $3$.
+
+    ![](../figures/3ab03d06c1117802.svg){ .tikz loading=lazy }
+
+    Au pire, une recherche fait autant de comparaisons que la hauteur : $7$ dans le peigne (comme dans une liste), $3$ dans l’arbre équilibré. Mêmes valeurs, même nombre de nœuds : seul l’**ordre d’insertion** a changé.
+
 ### Pour aller plus loin
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 11</span> — Défi — l’arbre miroir <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-11 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 12</span> — Défi — l’arbre miroir <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-12 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `miroir(a)` qui renvoie un **nouvel** arbre, image de `a` dans un miroir : à chaque nœud, les sous-arbres gauche et droit sont échangés (récursivement).
 
@@ -283,7 +354,7 @@ On part de l’arbre binaire de recherche suivant.
         return Noeud(a.valeur, miroir(a.droite), miroir(a.gauche))  # on echange g et d
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 12</span> — Défi — maximum d’un arbre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-12 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Défi — maximum d’un arbre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-13 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `maximum(a)` qui renvoie la plus grande valeur d’un arbre `a` **non vide** (attention : arbre *quelconque*, pas forcément un ABR — il faut donc bien tout explorer).
 
@@ -312,7 +383,7 @@ On part de l’arbre binaire de recherche suivant.
 
 ### Vers le bac
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — ABR : mesures, insertion, recherche (d’après Métropole 2023, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-13 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — ABR : mesures, insertion, recherche (d’après Métropole 2023, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-14 }
 
 On considère l’arbre binaire de recherche suivant.
 
@@ -353,7 +424,7 @@ On considère l’arbre binaire de recherche suivant.
     **3.** **(C)** parcours infixe.  
     **4.** ligne 5 : `True` ; ligne 7 : `self.sd().present(x)` ; ligne 9 : `self.sg().present(x)`.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Un arbre binaire par une classe (d’après Sujet zéro 2023, sujet B) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-14 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Un arbre binaire par une classe (d’après Sujet zéro 2023, sujet B) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-15 }
 
 On donne la classe `ArbreBinaire` suivante : chaque objet a une `valeur` et deux sous-arbres `enfant_gauche` et `enfant_droit` (`None` au départ).
 
@@ -424,7 +495,7 @@ class ArbreBinaire:
         return 1 + taille(arbre.get_gauche()) + taille(arbre.get_droit())
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Un arbre de décision (d’après Amérique du Nord 2025, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-15 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Un arbre de décision (d’après Amérique du Nord 2025, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-16 }
 
 Un arbre de décision est représenté par deux classes : les **nœuds** portent une question, les **feuilles** portent un résultat.
 
@@ -494,7 +565,7 @@ class Feuille:
         return arbre.resultat
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Un arbre représenté par des listes (d’après Amérique du Sud 2023, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-16 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Un arbre représenté par des listes (d’après Amérique du Sud 2023, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-17 }
 
 Ici, un arbre (pas forcément binaire) est représenté par une liste `[e, lst_sa]` où `e` est l’étiquette du nœud et `lst_sa` la **liste de ses sous-arbres**. L’arbre vide est `[]`, une feuille est `[e, []]`.
 
@@ -558,7 +629,7 @@ a  = [4, [n1, n8]]
         return True
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 17</span> — La plus grande somme racine-feuille (d’après Asie 2023, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-17 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 18</span> — La plus grande somme racine-feuille (d’après Amérique du Sud 2022, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-18 }
 
 Dans un arbre binaire étiqueté par des entiers, un **chemin racine-feuille** part de la racine et descend, de fils en fils, jusqu’à une feuille. Sa **somme** est la somme des étiquettes rencontrées. On cherche la **plus grande** de ces sommes.
 
@@ -597,7 +668,7 @@ Dans un arbre binaire étiqueté par des entiers, un **chemin racine-feuille** p
         return a.valeur + max(somme_max(a.gauche), somme_max(a.droite))
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 18</span> — Puissance 4 : l’arbre de coups et l’algorithme min-max (d’après Amérique du Nord 2026, jour 1, parties B et C) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-18 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 19</span> — Puissance 4 : l’arbre de coups et l’algorithme min-max (d’après Amérique du Nord 2026, jour 1, parties B et C) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-19 }
 
 *Suite de l’exercice « Puissance 4 : la grille de jeu » du chapitre POO.* Une grille de puissance 4 (6 lignes, 7 colonnes) est un objet de la classe `Grille` ; les deux joueurs sont notés 1 et 2. On dispose des méthodes suivantes :
 
@@ -754,7 +825,7 @@ On suppose écrite de même une méthode `colonne_score_max` (fils de score le p
 
 ### Critiquer une réponse d’IA
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Un test d’ABR proposé par un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-04-19 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Un test d’ABR proposé par un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-04-20 }
 
 Un élève demande à un assistant d’IA : « Écris une fonction Python `est_abr(a)` qui renvoie `True` si l’arbre binaire `a` (classe `Noeud` du cours, attributs `valeur`, `gauche`, `droite`) est un arbre binaire de recherche. » Voici la réponse obtenue :
 
@@ -764,12 +835,12 @@ def est_abr(a):
         return True                      # l'arbre vide est un ABR
     if a.gauche is not None and a.gauche.valeur >= a.valeur:
         return False
-    if a.droite is not None and a.droite.valeur <= a.valeur:
+    if a.droite is not None and a.droite.valeur < a.valeur:
         return False
     return est_abr(a.gauche) and est_abr(a.droite)
 ```
 
-*« Cette fonction vérifie, pour chaque nœud, que son fils gauche est plus petit et son fils droit plus grand, puis fait de même récursivement dans les deux sous-arbres : c’est exactement la définition d’un ABR. »*
+*« Cette fonction vérifie, pour chaque nœud, que son fils gauche est plus petit et son fils droit plus grand ou égal, puis fait de même récursivement dans les deux sous-arbres : c’est exactement la définition d’un ABR. »*
 
 1.  La réponse est-elle correcte ? <span class="run" title="À programmer et tester sur machine">▶</span> La tester sur l’arbre `Noeud(8, Noeud(3, Noeud(1), Noeud(12)), Noeud(10))` : le dessiner d’abord, dire s’il est un ABR, puis comparer avec ce que renvoie la fonction.
 
@@ -783,17 +854,17 @@ def est_abr(a):
 
 ??? corrige "Corrigé"
 
-    **1.** **Non.** L’arbre proposé a pour racine `8`, avec `12` dans son sous-arbre **gauche** : ce n’est **pas** un ABR (toute valeur du sous-arbre gauche doit être plus petite que `8`). Or la fonction renvoie `True` (sortie réelle), car chaque nœud est « localement » correct : `3 < 8`, `10 > 8`, `1 < 3 < 12`.
+    **1.** **Non.** L’arbre proposé a pour racine `8`, avec `12` dans son sous-arbre **gauche** : ce n’est **pas** un ABR (toute valeur du sous-arbre gauche doit être plus petite que `8`). Or la fonction renvoie `True` (sortie réelle), car chaque nœud est « localement » correct : `3 < 8`, `10 >= 8`, `1 < 3 <= 12`.
 
-    **2.** L’erreur : la fonction ne compare chaque nœud qu’à ses **fils**, alors que la définition porte sur **toutes les valeurs** du sous-arbre (« *toutes les valeurs de son sous-arbre gauche sont plus petites que sa valeur* »). Il faut propager un encadrement (`mini`, `maxi`) le long de la descente :
+    **2.** L’erreur : la fonction ne compare chaque nœud qu’à ses **fils**, alors que la définition porte sur **toutes les valeurs** du sous-arbre (« *toutes les valeurs de son sous-arbre gauche sont plus petites que sa valeur* »). Il faut propager un encadrement le long de la descente : dans un sous-arbre gauche, toute valeur doit rester **strictement inférieure** à `maxi` ; dans un sous-arbre droit, **supérieure ou égale** à `mini` (convention du cours : doublon à droite) :
 
     ```python
     def est_abr(a, mini=None, maxi=None):
         if a is None:
             return True
-        if mini is not None and a.valeur <= mini:
+        if mini is not None and a.valeur < mini:     # a droite : >= mini
             return False
-        if maxi is not None and a.valeur >= maxi:
+        if maxi is not None and a.valeur >= maxi:    # a gauche : < maxi
             return False
         return est_abr(a.gauche, mini, a.valeur) and est_abr(a.droite, a.valeur, maxi)
     ```
@@ -804,7 +875,7 @@ def est_abr(a):
 
 ### S’entraîner à l’oral
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-20 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-21 }
 
 Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 
