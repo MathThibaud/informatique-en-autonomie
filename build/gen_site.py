@@ -235,6 +235,38 @@ def mkdocs_yml():
     (ROOT / 'mkdocs.yml').write_text(txt, encoding='utf-8')
 
 
+REDIRECT_HTML = """<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<title>Page déplacée</title>
+<link rel="canonical" href="{cible}">
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url={cible}">
+<script>location.replace("{cible}" + location.hash);</script>
+</head><body><p>Cette page a déménagé : <a href="{cible}">nouvelle adresse</a>.</p></body></html>
+"""
+
+
+def redirections():
+    """Pages HTML de redirection pour les chapitres renumérotés (build/redirections.json) :
+    chaque ancienne adresse (page du chapitre et ses sous-pages) renvoie vers la nouvelle."""
+    table = json.loads((ROOT / 'build' / 'redirections.json').read_text(encoding='utf-8'))
+    for ancien, nouveau in table.items():
+        if ancien.startswith('_'):
+            continue
+        cible_dir = DOCS / nouveau
+        if not cible_dir.is_dir():
+            raise SystemExit(f'redirection vers un chapitre inexistant : {nouveau}')
+        if (DOCS / ancien).is_dir() and any((DOCS / ancien).glob('*.md')):
+            raise SystemExit(f'redirection depuis une page qui existe encore : {ancien}')
+        sous = [''] + sorted(f.stem for f in cible_dir.glob('*.md') if f.stem != 'index')
+        for page in sous:
+            dossier = DOCS / ancien / page
+            dossier.mkdir(parents=True, exist_ok=True)
+            profondeur = len(Path(ancien, page).parts)
+            cible = '../' * profondeur + nouveau + '/' + (page + '/' if page else '')
+            (dossier / 'index.html').write_text(REDIRECT_HTML.format(cible=cible), encoding='utf-8')
+
+
 if __name__ == '__main__':
     home()
     a_propos()
@@ -242,3 +274,4 @@ if __name__ == '__main__':
         if lv[0] in NAV:
             level_index(*lv)
     mkdocs_yml()
+    redirections()
