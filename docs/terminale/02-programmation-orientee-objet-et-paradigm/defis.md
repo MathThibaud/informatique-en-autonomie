@@ -130,7 +130,7 @@ Utiliser la fonction précédente pour toutes les pentes demandées et calculer 
 
     ```python
     ligne = "..#.."
-    cases = list(ligne)               # ['.', '.', '#', '.', '.']
+    cases = [c for c in ligne]        # ['.', '.', '#', '.', '.']
     cases[2] = "X"                    # une liste, elle, se modifie
     print("".join(cases))             # ..X..  (separateur vide)
     print("-".join(["a", "b", "c"]))  # a-b-c
@@ -146,7 +146,7 @@ Utiliser la fonction précédente pour toutes les pentes demandées et calculer 
 
 ??? pouce "Coup de pouce"
 
-    Convertir chaque ligne en liste avec `list(ligne)`, la modifier, puis la recoller avec `"".join(...)`.
+    Convertir chaque ligne en liste avec `[c for c in ligne]`, la modifier, puis la recoller avec `"".join(...)`.
 
 ## <span class="etiquette">Défi 2</span> Rain Risk
 

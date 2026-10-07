@@ -106,7 +106,7 @@ En Python, une variable est plutôt une **étiquette** (un post-it) collée sur 
     **8.** Maman lit **brioche, lait, pommes** : il n’y a qu’**une** feuille, avec deux étiquettes dessus.  
     **9.** Python affiche :  
     `[’brioche’, ’lait’, ’pommes’]`. Beaucoup d’élèves prédisent `[’pain’, ’lait’, ’pommes’]`, car ils pensent que `papa = maman` « copie » la liste : c’est exactement la confusion que l’activité doit faire apparaître.  
-    **10.** Il faut **photocopier** (ou recopier) la feuille et coller l’étiquette `papa` sur la copie : deux feuilles, une flèche chacune. En Python : `papa = list(maman)` ; Maman garde alors `[’pain’, ’lait’, ’pommes’]`.
+    **10.** Il faut **photocopier** (ou recopier) la feuille et coller l’étiquette `papa` sur la copie : deux feuilles, une flèche chacune. En Python, on fabriquera cette copie avec une compréhension (vue dans le cours) : `papa = [x for x in maman]` ; Maman garde alors `[’pain’, ’lait’, ’pommes’]`.
 
     ![](../figures/15712a2c4b0d31d1.svg){ .tikz loading=lazy }
 

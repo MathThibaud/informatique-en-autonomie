@@ -304,7 +304,7 @@ L’espace est infini : pas de liste de listes. Écrire une fonction `lire_actif
 
     for d in product((-1, 0, 1), repeat=2):    # tous les couples de -1, 0, 1
         print(d)                               # (-1, -1), (-1, 0), ..., (1, 1)
-    print(len(list(product("ab", repeat=3))))  # 8 : 2 ** 3 triplets
+    print(len([t for t in product("ab", repeat=3)]))  # 8 : 2 ** 3 triplets
     ```
 
     **Intérêt.** Le nombre de boucles devient un **paramètre** : le même code sert en dimension 3, 4 ou plus.

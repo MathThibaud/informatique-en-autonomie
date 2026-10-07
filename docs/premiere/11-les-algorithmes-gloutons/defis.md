@@ -320,7 +320,7 @@ Dans la partie 2, on ne choisit plus deux chiffres. Regarder la longueur des lig
     print(random.randint(1, 9))            # un entier au hasard entre 1 et 9 (inclus)
     for choix in combinations("1234", 2):  # tous les choix de 2 caracteres, ordre conserve
         print(choix)                       # ('1', '2'), ('1', '3'), ..., ('3', '4')
-    print(len(list(combinations("12345", 3))))   # 10
+    print(len([t for t in combinations("12345", 3)]))   # 10
     ```
 
     **Intérêt.** Pour tester un algorithme rapide, on le compare à une recherche exhaustive lente mais sûre, sur beaucoup de petits cas tirés au hasard.

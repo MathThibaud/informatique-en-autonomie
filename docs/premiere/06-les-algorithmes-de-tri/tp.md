@@ -50,7 +50,7 @@ Le fichier fournit `aleatoire(n)` (`n` entiers au hasard entre 0 et 1000), `est_
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Exécuter le fichier, puis afficher dans la console `aleatoire(10)` et `presque_triee(10, 2)`.
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `triee(n)`, qui renvoie `[0, 1, …, n-1]`, et `inversee(n)`, qui renvoie `[n, n-1, …, 1]`, chacune en une ligne avec `list(range(…))`.
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `triee(n)`, qui renvoie `[0, 1, …, n-1]`, et `inversee(n)`, qui renvoie `[n, n-1, …, 1]`, chacune en une ligne, avec une compréhension sur `range(…)`.
 
     ```text
     >>> triee(4), inversee(4)
@@ -65,10 +65,10 @@ Le fichier fournit `aleatoire(n)` (`n` entiers au hasard entre 0 et 1000), `est_
 
     ```python
     def triee(n):
-        return list(range(n))
+        return [i for i in range(n)]
 
     def inversee(n):
-        return list(range(n, 0, -1))
+        return [i for i in range(n, 0, -1)]
     ```
 
     Question 3 : la liste triée est le **meilleur cas** de l’insertion, la liste inversée son **pire cas**, la liste aléatoire un cas « moyen ». Ce sont aussi des cas limites où se cachent les bugs (indice $-1$, boucle qui ne s’arrête pas…) : un tri qui ne marche que sur des listes au hasard n’est pas testé.
@@ -227,7 +227,7 @@ Décommenter `tester_partie_A()` : les tests trient des listes de plusieurs tail
 
     ??? pouce "Coup de pouce"
 
-        `copie = list(t)`, lire l’horloge, appeler `tri(copie)`, relire l’horloge. Que se passerait-il si la sélection triait `t` lui-même, puis que l’insertion recevait ce même `t` ?
+        `copie = [x for x in t]`, lire l’horloge, appeler `tri(copie)`, relire l’horloge. Que se passerait-il si la sélection triait `t` lui-même, puis que l’insertion recevait ce même `t` ?
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> La fonction `course(tailles)`, fournie, chronomètre la sélection, l’insertion et `sorted` sur une **même** liste aléatoire pour chaque taille. La lancer pour `[500, 1000, 2000, 4000]` puis recopier sur le cahier et compléter le tableau suivant (3 chiffres significatifs) :
 
@@ -242,7 +242,7 @@ Décommenter `tester_partie_A()` : les tests trient des listes de plusieurs tail
 
     ```python
     def chronometre(tri, t):
-        copie = list(t)                  # on ne trie jamais deux fois la meme liste
+        copie = [x for x in t]           # on ne trie jamais deux fois la meme liste
         debut = time.perf_counter()
         tri(copie)
         return time.perf_counter() - debut

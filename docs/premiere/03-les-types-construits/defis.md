@@ -134,7 +134,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     ```python
     t = [40, 10, 50, 10]
-    copie = list(t)          # une vraie copie (et non un alias)
+    copie = [x for x in t]   # une vraie copie (et non un alias)
     copie.remove(10)         # copie vaut [40, 50, 10] ; t n'a pas change
     print(t, copie)
     ```
@@ -151,7 +151,7 @@ Adapter le programme pour répondre à la nouvelle question : chercher le plus g
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    `copie = list(liste)` et `somme = 0` ; puis trois fois (`for i in range(3):`) : `m = maximum(copie)`, `somme += m`, `copie.remove(m)`.
+    `copie = [x for x in liste]` et `somme = 0` ; puis trois fois (`for i in range(3):`) : `m = maximum(copie)`, `somme += m`, `copie.remove(m)`.
 
 ## Approfondissement
 

@@ -156,7 +156,7 @@ Dans les données (et dans l’exemple de la fiche), les écarts entre adaptateu
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        Parcourir la liste triée en tenant à jour la taille du bloc en cours ; à chaque écart de 3, multiplier le résultat par `facons_bloc(taille)` et repartir à 1. `facons_bloc(m)` peut réutiliser `nombre_facons` sur la liste `list(range(m))`.
+        Parcourir la liste triée en tenant à jour la taille du bloc en cours ; à chaque écart de 3, multiplier le résultat par `facons_bloc(taille)` et repartir à 1. `facons_bloc(m)` peut réutiliser `nombre_facons` sur la liste `[i for i in range(m)]`.
 
 4.  Pourquoi cette méthode tombe-t-elle en défaut s’il existe un écart de 2 ? Laquelle des deux méthodes est la plus générale ?
 

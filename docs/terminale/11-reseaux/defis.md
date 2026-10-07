@@ -339,10 +339,10 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
     pas = (0, 1, -1)
     nouvelle = tuple(p + d for p, d in zip(pos, pas))
     print(nouvelle)                       # (1, -1, 0)
-    print(list(zip("abc", [1, 2, 3])))    # [('a', 1), ('b', 2), ('c', 3)]
+    print([c for c in zip("abc", [1, 2, 3])])    # [('a', 1), ('b', 2), ('c', 3)]
     ```
 
-    **Intérêt.** Le même code additionne des positions à 2 ou à 3 coordonnées. Question : que donne `list(zip([1, 2, 3], [10, 20]))` ?
+    **Intérêt.** Le même code additionne des positions à 2 ou à 3 coordonnées. Question : que donne `[c for c in zip([1, 2, 3], [10, 20])]` ?
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : d’autres systèmes de coordonnées <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-reseaux-aoc-2-7 }
 

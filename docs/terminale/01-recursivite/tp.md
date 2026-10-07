@@ -297,7 +297,7 @@ Idée naïve pour remplir une grille vide : on avance case par case, ligne par l
         if case is None:
             return True
         i, j = case
-        valeurs = list(range(1, 10))
+        valeurs = [i for i in range(1, 10)]
         random.shuffle(valeurs)          # on melange l'ordre des essais
         # A COMPLETER
     ```

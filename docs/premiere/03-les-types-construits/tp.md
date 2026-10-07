@@ -205,7 +205,7 @@ Compléter `renommer_chiffres` (remplacer chaque chiffre selon une permutation c
 
 ```python
 def renommer_chiffres(grille):
-    nouveaux = list(range(1, 10))
+    nouveaux = [i for i in range(1, 10)]
     random.shuffle(nouveaux)          # une permutation au hasard
     # A COMPLETER : construire le dictionnaire {1:nouveaux[0], ...}
     # puis renvoyer la grille avec chaque valeur remplacee
