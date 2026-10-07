@@ -38,11 +38,11 @@ hide:
 
     <small>Activités préparatoires · Cours · Exercices · TP et projets · Défis Advent of Code</small>
 
--   [**4. Arbres**](04-arbres/index.md)
+-   [**4. Processus et ordonnancement**](04-processus-et-ordonnancement/index.md)
 
     <small>Activités préparatoires · Cours · Exercices · TP et projets · Défis Advent of Code</small>
 
--   [**5. Diviser pour régner**](05-diviser-pour-regner/index.md)
+-   [**5. Arbres**](05-arbres/index.md)
 
     <small>Activités préparatoires · Cours · Exercices · TP et projets · Défis Advent of Code</small>
 
@@ -50,27 +50,27 @@ hide:
 
     <small>Activités préparatoires · Cours · Exercices · TP et projets · Défis Advent of Code</small>
 
--   [**7. Graphes**](07-graphes/index.md)
+-   [**7. Diviser pour régner**](07-diviser-pour-regner/index.md)
 
     <small>Activités préparatoires · Cours · Exercices · TP et projets · Défis Advent of Code</small>
 
--   [**8. Programmation dynamique**](08-programmation-dynamique/index.md)
+-   [**8. Graphes**](08-graphes/index.md)
 
     <small>Activités préparatoires · Cours · Exercices · TP et projets · Défis Advent of Code</small>
 
--   [**9. Recherche textuelle**](09-recherche-textuelle/index.md)
+-   [**9. Réseaux**](09-reseaux/index.md)
 
     <small>Activités préparatoires · Cours · Exercices · TP et projets · Défis Advent of Code</small>
 
--   [**10. Processus et ordonnancement**](10-processus-et-ordonnancement/index.md)
+-   [**10. Cryptographie**](10-cryptographie/index.md)
 
     <small>Activités préparatoires · Cours · Exercices · TP et projets · Défis Advent of Code</small>
 
--   [**11. Réseaux**](11-reseaux/index.md)
+-   [**11. Programmation dynamique**](11-programmation-dynamique/index.md)
 
     <small>Activités préparatoires · Cours · Exercices · TP et projets · Défis Advent of Code</small>
 
--   [**12. Cryptographie**](12-cryptographie/index.md)
+-   [**12. Recherche textuelle**](12-recherche-textuelle/index.md)
 
     <small>Activités préparatoires · Cours · Exercices · TP et projets · Défis Advent of Code</small>
 

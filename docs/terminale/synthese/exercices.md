@@ -366,7 +366,7 @@ lst = Cellule(3, Cellule(1, Cellule(4, None)))
 
     **5.** Pour ajouter en queue, il faut d’abord atteindre la dernière cellule en suivant les $n$ liens : environ $n$ opérations (coût **linéaire**), contre une seule en tête. C’est pourquoi une liste chaînée fait une excellente **pile** (on empile et dépile en tête, en une opération), mais une file médiocre si l’on ne garde pas aussi un accès direct à la dernière cellule.
 
-### Après le chapitre 4 (arbres)
+### Après le chapitre 5 (arbres)
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 4</span> — Trier avec un arbre binaire de recherche <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-4 }
 
