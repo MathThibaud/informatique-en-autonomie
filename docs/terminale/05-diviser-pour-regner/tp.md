@@ -368,7 +368,7 @@ temps_rapide = []
 temps_fusion = []
 for n in tailles:
     t1 = tableau_aleatoire(n)
-    t2 = list(t1)            # copie : les deux tris recoivent le meme tableau
+    t2 = [x for x in t1]     # copie : les deux tris recoivent le meme tableau
     debut = time.time()
     tri_rapide(t1, 0, len(t1) - 1)
     temps_rapide.append(time.time() - debut)
@@ -715,8 +715,8 @@ temps_rapide = []
 temps_fusion = []
 for n in tailles:
     t1 = tableau_aleatoire(n)
-    t2 = list(t1)            # copies : les trois tris recoivent le meme tableau
-    t3 = list(t1)
+    t2 = [x for x in t1]     # copies : les trois tris recoivent le meme tableau
+    t3 = [x for x in t1]
     debut = time.time()
     tim_sort(t1)
     temps_tim.append(time.time() - debut)
@@ -838,7 +838,7 @@ from PIL import Image
 
 im = Image.open("joconde.png").convert("RGB")
 n = im.width                                    # image carree n x n (ici 256)
-pixels = list(im.getdata())                     # tous les pixels, ligne par ligne
+pixels = [p for p in im.getdata()]              # tous les pixels, ligne par ligne
 image = [pixels[k*n:(k+1)*n] for k in range(n)] # tableau 2D : image[i][j]
 ```
 
@@ -983,7 +983,7 @@ sortie.save("joconde_tournee.png")
 
     im = Image.open("joconde.png").convert("RGB")
     n = im.width
-    pixels = list(im.getdata())
+    pixels = [p for p in im.getdata()]
     image = [pixels[k*n:(k+1)*n] for k in range(n)]
 
     rotation(image, 0, 0, n)          # appel initial : toute l'image

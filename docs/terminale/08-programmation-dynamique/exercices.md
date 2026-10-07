@@ -215,7 +215,7 @@ Partant du sommet, on descend à chaque étage vers le voisin de gauche ou de dr
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        `s = [list(niveau) for niveau in t]`  
+        `s = [[x for x in niveau] for niveau in t]`  
         `for i in range(len(t) - 2, -1, -1):`  
         `for j in range(len(t[i])):` …
 
@@ -230,7 +230,7 @@ Partant du sommet, on descend à chaque étage vers le voisin de gauche ou de dr
     ```python
     def meilleur_score(t):
         n = len(t)
-        s = [list(niveau) for niveau in t]      # copie ; le dernier niveau est deja bon
+        s = [[x for x in niveau] for niveau in t]   # copie ; le dernier niveau est deja bon
         for i in range(n - 2, -1, -1):          # du bas vers le haut
             for j in range(len(t[i])):
                 s[i][j] = t[i][j] + max(s[i + 1][j], s[i + 1][j + 1])

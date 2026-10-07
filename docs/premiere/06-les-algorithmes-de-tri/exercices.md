@@ -602,7 +602,7 @@ Chaque concurrent est décrit par un p-uplet `(nom, temps)` et le tableau `resul
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — La médiane <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-16 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> La **médiane** d’une série de nombres est la valeur du milieu quand on les range dans l’ordre. Écrire `mediane(t)` qui trie une **copie** de `t` (pour ne pas modifier l’original — utiliser `list(t)`) puis renvoie l’élément central (on suppose `len(t)` **impair**). En quoi trier rend-il ce calcul facile ?
+<span class="run" title="À programmer et tester sur machine">▶</span> La **médiane** d’une série de nombres est la valeur du milieu quand on les range dans l’ordre. Écrire `mediane(t)` qui trie une **copie** de `t` (pour ne pas modifier l’original — utiliser une compréhension `[x for x in t]`) puis renvoie l’élément central (on suppose `len(t)` **impair**). En quoi trier rend-il ce calcul facile ?
 
 ??? pouce "Coup de pouce"
 
@@ -614,7 +614,7 @@ Chaque concurrent est décrit par un p-uplet `(nom, temps)` et le tableau `resul
 
     ```python
     def mediane(t):
-        copie = list(t)          # copie : l'original n'est pas modifie
+        copie = [x for x in t]   # copie : l'original n'est pas modifie
         tri_selection(copie)
         return copie[len(copie) // 2]
     ```
@@ -633,7 +633,7 @@ Chaque concurrent est décrit par un p-uplet `(nom, temps)` et le tableau `resul
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    `copie = list(t)`  
+    `copie = [x for x in t]`  
     `tri_selection(copie)`  
     `for i in range(len(copie) - 1):`  
     `...`
@@ -644,7 +644,7 @@ Chaque concurrent est décrit par un p-uplet `(nom, temps)` et le tableau `resul
 
     ```python
     def a_un_doublon(t):
-        copie = list(t)
+        copie = [x for x in t]
         tri_selection(copie)          # cout quadratique
         for i in range(len(copie) - 1):
             if copie[i] == copie[i + 1]:
@@ -694,7 +694,7 @@ On dit qu’un tableau est *presque trié* si chaque élément est à au plus un
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    `copie = list(t)`  
+    `copie = [x for x in t]`  
     `for i in range(k):`  
     `i_min = indice_min(copie, i)`  
     `...` (échange) puis renvoyer `copie[0:k]`.
@@ -705,7 +705,7 @@ On dit qu’un tableau est *presque trié* si chaque élément est à au plus un
 
     ```python
     def k_plus_petits(t, k):
-        copie = list(t)                 # on ne modifie pas t
+        copie = [x for x in t]          # on ne modifie pas t
         for i in range(k):              # k etapes seulement
             i_min = indice_min(copie, i)
             temp = copie[i]

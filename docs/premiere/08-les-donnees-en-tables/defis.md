@@ -138,7 +138,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     ??? pouce "Coup de pouce"
 
-        `list(range(a, b + 1))` contient les numéros de `a` à `b` inclus.
+        `[i for i in range(a, b + 1)]` contient les numéros de `a` à `b` inclus.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 

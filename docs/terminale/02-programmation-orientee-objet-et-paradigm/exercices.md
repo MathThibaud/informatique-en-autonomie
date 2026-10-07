@@ -129,7 +129,7 @@ def plus_un(x):
         `return ...`  
         `return h`
 
-4.  Quelles fonctions prédéfinies de Python, citées dans le cours, jouent le rôle de `appliquer` et de `garder` ?
+4.  Sans définir de fonction, quelle construction vue en Première donne directement le résultat de `appliquer(abs, [-2, 3, -5])` ? et celui de `garder(est_pair, [1, 2, 3, 4])` ?
 
 ??? corrige "Corrigé"
 
@@ -150,7 +150,7 @@ def plus_un(x):
 
     `composer(double, plus_un)(3)` vaut `double(plus_un(3))` $= 2\times 4 = 8$, alors que `composer(plus_un, double)(3)` vaut `plus_un(double(3))` $= 6 + 1 = 7$ : l’ordre de composition compte.
 
-    **4.** Ce sont `map` (pour `appliquer`) et `filter` (pour `garder`) : `list(map(abs, [-2, 3, -5]))` renvoie `[2, 3, 5]`.
+    **4.** La **compréhension** : `[abs(x) for x in [-2, 3, -5]]` vaut `[2, 3, 5]` et `[x for x in [1, 2, 3, 4] if est_pair(x)]` vaut `[2, 4]`. C’est d’ailleurs exactement le corps des fonctions `appliquer` et `garder`.
 
 ### Lire et comprendre une classe
 

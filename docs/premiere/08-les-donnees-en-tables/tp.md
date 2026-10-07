@@ -694,7 +694,7 @@ Compléter `palmares(totaux, n)`, qui transforme le dictionnaire `totaux` en une
 
     ??? pouce "Coup de pouce"
 
-        La clé de tri peut être un couple : Python compare d’abord les premiers éléments, puis les seconds en cas d’égalité. Avec la clé `(-nombre, prenom)`, les grands nombres passent devant.
+        Trier **deux fois** : d’abord par prénom, puis par nombre (décroissant). `sorted` ne change jamais l’ordre de deux fiches qui ont la même clé : à nombre égal, l’ordre alphabétique obtenu au premier tri est donc conservé.
 
 3.  Votre classement et celui de l’INSEE diffèrent-ils sur ces deux prénoms ? Pourquoi l’INSEE peut-il les départager, et pas vous ?
 

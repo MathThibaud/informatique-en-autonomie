@@ -82,15 +82,15 @@ Les effets de bord rendent les programmes difficiles à prévoir et à relire : 
 
 !!! remarque "Remarque"
 
-    Certains langages sont conçus pour *favoriser* ce style (Haskell, Lisp, OCaml, Scheme ; Haskell va jusqu’à l’imposer), mais on peut programmer « fonctionnel » dans un langage généraliste comme Python. Le paradigme fonctionnel s’appuie aussi beaucoup sur des données **immuables** (tuples plutôt que listes) et sur des fonctions qui en prennent d’autres en paramètre (*ex.* `map`, `filter`).
+    Certains langages sont conçus pour *favoriser* ce style (Haskell, Lisp, OCaml, Scheme ; Haskell va jusqu’à l’imposer), mais on peut programmer « fonctionnel » dans un langage généraliste comme Python. Le paradigme fonctionnel s’appuie aussi beaucoup sur des données **immuables** (tuples plutôt que listes) et sur des fonctions qui en prennent d’autres en paramètre (*ex.* une fonction qui applique une autre fonction à chaque élément d’une liste).
 
 !!! remarque "Remarque — Vous en faites déjà : la création de liste par compréhension"
 
-    La **création de liste par compréhension**, vue en Première, relève de la **programmation fonctionnelle** : c’est une **expression** qui construit une **nouvelle** liste, sans modifier la liste parcourue ni aucune variable extérieure (pas d’effet de bord) — exactement comme `map` (appliquer une fonction à chaque élément) et `filter` (ne garder que certains éléments).
+    La **création de liste par compréhension**, vue en Première, relève de la **programmation fonctionnelle** : c’est une **expression** qui construit une **nouvelle** liste, sans modifier la liste parcourue ni aucune variable extérieure (pas d’effet de bord). Elle sait faire les deux opérations de base du style fonctionnel sur une liste : **appliquer** une fonction à chaque élément, et **garder** certains éléments.
 
-!!! exemple "Exemple — Compréhension ou map/filter : deux écritures du même calcul"
+!!! exemple "Exemple — Appliquer et garder avec une compréhension"
 
-    Avec `nombres = [1, 2, 3, 4, 5, 6]`, que valent les quatre expressions ci-dessous ? La liste `nombres` est-elle modifiée ?
+    Avec `nombres = [1, 2, 3, 4, 5, 6]`, que valent les deux expressions ci-dessous ? La liste `nombres` est-elle modifiée ?
 
     ```python
     def carre(x):
@@ -99,26 +99,24 @@ Les effets de bord rendent les programmes difficiles à prévoir et à relire : 
     def est_pair(x):
         return x % 2 == 0
 
-    [carre(x) for x in nombres]          # comprehension
-    list(map(carre, nombres))            # map : appliquer
-    [x for x in nombres if est_pair(x)]  # comprehension avec filtre
-    list(filter(est_pair, nombres))      # filter : garder
+    [carre(x) for x in nombres]          # appliquer carre a chaque element
+    [x for x in nombres if est_pair(x)]  # garder les elements pairs
     ```
 
     ??? corrige "Correction"
 
-        Les deux premières valent `[1, 4, 9, 16, 25, 36]`, les deux dernières `[2, 4, 6]`. Chaque écriture crée une **nouvelle** liste : `nombres` reste `[1, 2, 3, 4, 5, 6]`.
+        La première vaut `[1, 4, 9, 16, 25, 36]`, la seconde `[2, 4, 6]`. Chaque compréhension crée une **nouvelle** liste : `nombres` reste `[1, 2, 3, 4, 5, 6]`.
 
 !!! remarque "Remarque — Les fonctions anonymes : lambda"
 
-    Quand la fonction ne sert qu’une fois, on peut l’écrire directement, sans lui donner de nom, avec le mot-clé `lambda` (hérité du $\lambda$-calcul d’Alonzo Church) : `lambda x: x * x` est la fonction qui à `x` associe `x * x`.
+    Quand la fonction ne sert qu’une fois, on peut l’écrire directement, sans lui donner de nom, avec le mot-clé `lambda` (hérité du $\lambda$-calcul d’Alonzo Church) : `lambda x: x * x` se lit « la fonction qui, à `x`, associe `x * x` ». On l’a déjà rencontrée en Première pour **trier une table** : `sorted` reçoit, avec `key`, la fonction qui donne la valeur à comparer.
 
     ```python
-    list(map(lambda x: x * x, nombres))           # [1, 4, 9, 16, 25, 36]
-    list(filter(lambda x: x % 2 == 0, nombres))   # [2, 4, 6]
+    notes = [("Ada", 15), ("Alan", 12), ("Grace", 18)]
+    sorted(notes, key=lambda c: c[1])   # [('Alan', 12), ('Ada', 15), ('Grace', 18)]
     ```
 
-    Une `lambda` ne contient qu’une **expression** (pas d’instruction, pas de `return`) : pour une fonction plus longue, on revient à `def`.
+    Ici, `lambda c: c[1]` équivaut à `def note(c): return c[1]`, écrite sur place. Une `lambda` ne contient qu’une **expression** (pas d’instruction, pas de `return`) : pour une fonction plus longue, on revient à `def`.
 
 <span id="cours-02-1" class="ancre"></span>
 

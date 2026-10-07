@@ -180,7 +180,7 @@ On rappelle : **temps de séjour** $=$ instant de fin $-$ instant d’arrivée ;
     ```python
     def trier_par_arrivee(procs):
         # tri par insertion selon l'instant d'arrivee
-        t = list(procs)
+        t = [p for p in procs]
         for i in range(1, len(t)):
             j = i
             while j > 0 and t[j - 1][1] > t[j][1]:
@@ -252,7 +252,7 @@ On rappelle : **temps de séjour** $=$ instant de fin $-$ instant d’arrivée ;
     def sjf(procs):
         chrono = []
         t = 0
-        restants = list(procs)
+        restants = [p for p in procs]
         while restants != []:
             elu = None
             for p in restants:          # le plus court parmi les arrives
@@ -281,7 +281,7 @@ On rappelle : **temps de séjour** $=$ instant de fin $-$ instant d’arrivée ;
 
 2.  Vérifier : quantum $1$ $\to$ `"ABACBDABDA"` (le chronogramme du cours) ; quantum $2$ $\to$ `"AABBCAADDB"`.
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `commutations(chrono)` : le nombre de fois où le processeur passe d’un processus à un **autre** processus (les `"."` ne comptent pas). Exemple : `commutations(list("AAB..BCA"))` vaut $3$. Combien de commutations pour le tourniquet de quantum $1$ sur `JEU_COURS` ? et pour FCFS ?
+3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `commutations(chrono)` : le nombre de fois où le processeur passe d’un processus à un **autre** processus (les `"."` ne comptent pas). Exemple : `commutations([c for c in "AAB..BCA"])` vaut $3$. Combien de commutations pour le tourniquet de quantum $1$ sur `JEU_COURS` ? et pour FCFS ?
 
 ??? corrige "Corrigé"
 

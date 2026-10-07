@@ -466,7 +466,7 @@ Compléter `longueur(tournee)`, qui additionne les distances entre villes consé
         autres = [v for v in villes if v != depart]
         meilleure = None
         for ordre in itertools.permutations(autres):
-            tournee = [depart] + list(ordre)
+            tournee = [depart] + [v for v in ordre]
             if meilleure is None or longueur(tournee) < longueur(meilleure):
                 meilleure = tournee
         return meilleure

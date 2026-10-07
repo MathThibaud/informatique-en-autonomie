@@ -180,7 +180,7 @@ def dijkstra(graphe, depart):
     distance = {s: float('inf') for s in graphe}
     distance[depart] = ...                       # (a)
     precedent = {s: None for s in graphe}
-    a_traiter = list(graphe.keys())              # sommets pas encore fixes
+    a_traiter = [s for s in graphe]              # sommets pas encore fixes
     while a_traiter != []:
         # 1) choisir le sommet non traite de plus petite distance
         u = a_traiter[0]

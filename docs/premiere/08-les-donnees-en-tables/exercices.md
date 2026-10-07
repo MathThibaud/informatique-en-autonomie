@@ -136,7 +136,7 @@ Avec la variable `jeux` précédente, que renvoient ces expressions ?
 
     ```python
     def descripteurs(table):
-        return list(table[0].keys())
+        return [cle for cle in table[0]]
     ```
 
 ### Importer, et le piège du texte
@@ -688,7 +688,7 @@ On note `noms2023` et `noms2025` les listes des prénoms du top 10 des filles en
     ```python
     def exporter(table, fichier):
         with open(fichier, "w", encoding="utf-8", newline="") as f:
-            ecrivain = csv.DictWriter(f, fieldnames=list(table[0].keys()))
+            ecrivain = csv.DictWriter(f, fieldnames=[cle for cle in table[0]])
             ecrivain.writeheader()
             for ligne in table:
                 ecrivain.writerow(ligne)

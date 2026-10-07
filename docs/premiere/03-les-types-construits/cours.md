@@ -180,10 +180,8 @@ Un **tableau** ressemble à un p-uplet… mais il est **mutable**. C’est là 
 
 ```text
 >>> notes = [12, 8, 15, 9]
->>> vide = []                   # (ou list())
+>>> vide = []
 >>> singleton = [3]             # un element : PAS de virgule (contrairement au tuple)
->>> list(range(3, 11, 2))       # a partir d'un range
-[3, 5, 7, 9]
 >>> [0] * 5                     # repetition : cinq zeros
 [0, 0, 0, 0, 0]
 ```
@@ -332,7 +330,7 @@ Pour une **vraie copie** (objet indépendant), on *reconstruit* un tableau :
 
 ```text
 >>> a = [1, 2, 3]
->>> b = list(a)     # (ou a[:] , ou a.copy()) : NOUVEL objet
+>>> b = [x for x in a]   # (ou a[:] , ou a.copy()) : NOUVEL objet
 >>> b[0] = 99
 >>> a               # intact
 [1, 2, 3]
@@ -365,7 +363,7 @@ Pour une **vraie copie** (objet indépendant), on *reconstruit* un tableau :
         [[1, 2], [3, 4]]
         ```
 
-        À comparer avec une copie simple `list(grille)` : la même modification aurait changé `grille` en `[[99, 2], [3, 4]]`, car les lignes seraient restées partagées.
+        À comparer avec une copie simple `[ligne for ligne in grille]` : la même modification aurait changé `grille` en `[[99, 2], [3, 4]]`, car les lignes seraient restées partagées.
 
 <span id="cours-03-6" class="ancre"></span>
 
@@ -587,13 +585,13 @@ moyenne = sum(age.values()) / len(age)    # moyenne des ages
 | Les 2 questions | accès par indice ou par **clé** ? **modifiable** ou figé ? |
 | Compréhension | `[expr(x) for x in ... if ...]` : construit un tableau en une ligne |
 | Fil rouge (référence) | une variable est une **flèche** vers un objet |
-| Alias vs copie | `b = a` $\to$ même objet ; `list(a)` / `a[:]` $\to$ vraie copie |
+| Alias vs copie | `b = a` $\to$ même objet ; `[x for x in a]` / `a[:]` $\to$ vraie copie |
 | Piège des matrices | `[[0]*p]*n` partage une seule ligne ; utiliser une **compréhension** |
 | Clé de dictionnaire | doit être **immuable** : p-uplet oui, tableau non |
 
 ## Erreurs fréquentes
 
-- **Croire que `b = a` copie la liste.** On crée une **deuxième étiquette** sur la **même** liste : modifier `b` modifie `a`. *Le réflexe :* pour copier, `a[:]` ou `list(a)`.
+- **Croire que `b = a` copie la liste.** On crée une **deuxième étiquette** sur la **même** liste : modifier `b` modifie `a`. *Le réflexe :* pour copier, une compréhension `[x for x in a]` (ou `a[:]`).
 
 - **Le piège `[[0]*p]*n`.** Les `n` lignes sont la **même** liste partagée. *Le réflexe :* `[[0]*p for _ in range(n)]`.
 

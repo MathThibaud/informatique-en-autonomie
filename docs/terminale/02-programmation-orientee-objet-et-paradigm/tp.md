@@ -106,13 +106,13 @@ La main est une liste de cartes dont la carte **du dessus** est au **début**.
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire le constructeur, `nb_cartes()`, `a_perdu()`, `jouer_carte()` (retire et renvoie la carte du dessus) et `ramasser(cartes)` (place les cartes reçues, dans l’ordre, sous le tas).
 
-2.  Le test de la partie 3 ajoute une carte à la liste `cartes` **après** avoir créé le joueur, et vérifie que la main d’Ada n’a pas changé. Que faut-il donc écrire dans le constructeur : `self._main = cartes`, ou bien `self._main = list(cartes)` ? Expliquer.
+2.  Le test de la partie 3 ajoute une carte à la liste `cartes` **après** avoir créé le joueur, et vérifie que la main d’Ada n’a pas changé. Que faut-il donc écrire dans le constructeur : `self._main = cartes`, ou bien `self._main = [c for c in cartes]` ? Expliquer.
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `nb_cartes_de(valeur)` en **une ligne**, avec `filter` et une fonction `lambda`. Pourquoi cette méthode est-elle nécessaire pour compter les As d’un joueur depuis l’extérieur de la classe ?
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `nb_cartes_de(valeur)` en **une ligne**, avec une **liste en compréhension** : on garde les cartes de `self._main` dont la valeur est celle cherchée, et on compte le résultat avec `len(...)`. Pourquoi cette méthode est-elle nécessaire pour compter les As d’un joueur depuis l’extérieur de la classe ?
 
     ??? pouce "Coup de pouce"
 
-        `filter(f, t)` garde les éléments `x` de `t` pour lesquels `f(x)` est vrai ; on compte le résultat avec `len(list(...))`. La fonction `f` reçoit une carte `c` et compare `c.valeur()` à la valeur cherchée.
+        `[c for c in self._main if ...]` garde les cartes `c` de la main qui vérifient la condition ; la condition compare `c.valeur()` à la valeur cherchée.
 
 ## La classe `Partie` : faire jouer les objets ensemble
 
@@ -144,7 +144,7 @@ Le constructeur de `Partie` est fourni : il crée un paquet, le mélange, le dis
 
 ## Mille parties : des statistiques en style fonctionnel
 
-On veut maintenant **observer** le jeu. Dans cette partie, on n’écrit **aucune boucle** `for` ou `while` : seulement `map`, `filter`, `sorted`, `min`, `max` et des `lambda`.
+On veut maintenant **observer** le jeu. Dans cette partie, on n’écrit **aucune boucle** `for` ou `while` : seulement des **listes en compréhension**, comme en Première, pour filtrer ou transformer une liste de résultats. Deux questions ne se répondent pas avec une compréhension seule, car il ne s’agit plus de construire une nouvelle liste mais de **classer** ou de **choisir** selon un critère (`sorted`, `min`) : on y introduira alors une fonction `lambda`, en la construisant pas à pas.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Résumer une partie <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-tp-1-8 }
 
@@ -159,13 +159,13 @@ où `as_ada` est le nombre d’As d’Ada **avant** de jouer (méthode `nb_carte
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Interroger les mille parties <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-tp-1-9 }
 
-On calcule `res = list(map(resume, range(1000)))`.
+On calcule `res = [resume(g) for g in range(1000)]`.
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span> Avec `filter`, construire la liste `finies` des parties qui ont un vainqueur. Combien y en a-t-il ? Combien Ada en gagne-t-elle ?
+1.  <span class="run" title="À programmer et tester sur machine">▶</span> Avec une liste en compréhension, construire la liste `finies` des parties qui ont un vainqueur (ne garder que les dictionnaires `r` tels que `r["vainqueur"]` n’est pas `None`). Combien y en a-t-il ? Combien Ada en gagne-t-elle (même principe, sur `finies`) ?
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span> Avec `map`, calculer la **durée moyenne** (en plis) d’une partie finie.
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Avec une liste en compréhension, extraire de `finies` la liste des nombres de plis, puis en calculer la **durée moyenne**.
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span> Avec `sorted(..., key=lambda r: ...)`, afficher les graines des **trois** parties finies les plus longues ; avec `min(..., key=...)`, la plus courte.
+3.  On veut maintenant les graines des **trois** parties finies les plus longues, et celle de la plus courte. Ici, une compréhension ne suffit plus : on ne filtre ni ne transforme `finies`, on le **classe** selon le nombre de plis de chaque partie. `sorted` et `min` acceptent pour cela un paramètre `key` : une fonction qui, à partir d’un résumé `r`, renvoie la valeur à comparer. <span class="run" title="À programmer et tester sur machine">▶</span> Écrire cette fonction avec un `lambda` (`lambda r: r["plis"]` se lit « la fonction qui, à `r`, associe `r["plis"]` » ; c’est l’équivalent, pour un usage unique, de `def cle(r): return r["plis"]`), puis afficher les graines des trois parties les plus longues avec `sorted(finies, key=..., reverse=True)[:3]`, et celle de la plus courte avec `min(finies, key=...)`.
 
 4.  <span class="run" title="À programmer et tester sur machine">▶</span> Recopier et compléter le tableau suivant : pour chaque nombre d’As d’Ada au départ, le nombre de parties finies et le pourcentage gagné par Ada. Conclure.
 

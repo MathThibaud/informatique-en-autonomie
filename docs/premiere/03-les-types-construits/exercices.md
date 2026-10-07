@@ -139,9 +139,9 @@ Que valent `t`, `x` et `n` à la fin ?
 ??? corrige "Corrigé"
 
     ```python
-    a = list(range(10))            # [0, 1, ..., 9]
-    b = list(range(10, 51, 10))    # [10, 20, 30, 40, 50]
-    c = [0] * 8                    # huit zeros
+    a = [i for i in range(10)]            # [0, 1, ..., 9]
+    b = [i for i in range(10, 51, 10)]    # [10, 20, 30, 40, 50]
+    c = [0] * 8                           # huit zeros
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Parcours : les grands classiques <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-8 }
@@ -774,18 +774,18 @@ Sans machine, prédire l’affichage. Pour chaque cas, dire s’il y a **un** ou
 ```python
 # (a)                     # (b)
 a = [1, 2, 3]             a = [1, 2, 3]
-b = a                     b = list(a)
+b = a                     b = [x for x in a]
 b.append(4)               b.append(4)
 print(a, b)               print(a, b)
 ```
 
 ??? pouce "Coup de pouce"
 
-    Dessiner, pour chaque cas, les noms et les flèches après la 2<sup>e</sup> ligne : `list(a)` fabrique-t-il un nouvel objet ?
+    Dessiner, pour chaque cas, les noms et les flèches après la 2<sup>e</sup> ligne : la compréhension `[x for x in a]` fabrique-t-elle un nouvel objet ?
 
 ??? corrige "Corrigé"
 
-    **(a)** affiche `[1, 2, 3, 4] [1, 2, 3, 4]` : `b = a` crée un **alias**, **un seul** objet pour deux noms. **(b)** affiche `[1, 2, 3] [1, 2, 3, 4]` : `list(a)` crée un **nouvel** objet, **deux** objets indépendants.
+    **(a)** affiche `[1, 2, 3, 4] [1, 2, 3, 4]` : `b = a` crée un **alias**, **un seul** objet pour deux noms. **(b)** affiche `[1, 2, 3] [1, 2, 3, 4]` : la compréhension `[x for x in a]` crée un **nouvel** objet, **deux** objets indépendants.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 29</span> — Effet de bord d’une fonction <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-29 }
 
@@ -812,7 +812,7 @@ print(notes)
 
     ```python
     def avec_zero(t):
-        nouveau = list(t)     # copie independante
+        nouveau = [x for x in t]   # copie independante
         nouveau.append(0)
         return nouveau
     ```
@@ -1018,11 +1018,11 @@ print(doubles, notes)
 
 ??? corrige "Corrigé"
 
-    **1.** Non. L’affichage est `[24, 30, 18] [24, 30, 18]` : le tableau d’origine `notes` a été modifié, contrairement à ce qui était demandé. **2.** L’erreur est la ligne `copie = t` : elle ne copie rien, elle crée un **alias** (deux noms qui pointent vers le *même* tableau, fil rouge du cours). Modifier `copie[i]`, c’est modifier `t`. Il faut construire un nouvel objet, `copie = list(t)` (ou `t[:]`, ou `t.copy()`) :
+    **1.** Non. L’affichage est `[24, 30, 18] [24, 30, 18]` : le tableau d’origine `notes` a été modifié, contrairement à ce qui était demandé. **2.** L’erreur est la ligne `copie = t` : elle ne copie rien, elle crée un **alias** (deux noms qui pointent vers le *même* tableau, fil rouge du cours). Modifier `copie[i]`, c’est modifier `t`. Il faut construire un nouvel objet, `copie = [x for x in t]` (ou `t[:]`, ou `t.copy()`) :
 
     ```python
     def doubler(t):
-        copie = list(t)           # NOUVEL objet, independant de t
+        copie = [x for x in t]    # NOUVEL objet, independant de t
         for i in range(len(copie)):
             copie[i] = copie[i] * 2
         return copie

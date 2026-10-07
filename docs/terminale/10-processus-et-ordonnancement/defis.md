@@ -242,7 +242,7 @@ Jouer les trois premières manches à la main en écrivant les deux paquets apr�
     d.append(4)                # ajoute a la fin : deque([2, 8, 1, 4])
     d.extend([7, 3])           # ajoute plusieurs elements a la fin
     print(len(d), d[0])        # 6 2 : longueur, premier element
-    print(list(d)[:2])         # [2, 8] : copie en liste pour faire une tranche
+    print([d[i] for i in range(2)])  # [2, 8] : les deux premiers elements
     if d:                      # une deque vide vaut False
         print("non vide")
     ```
@@ -316,7 +316,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    Pour une sous-partie, on construit de **nouveaux** paquets (copies) : `deque(list(p1)[:n])` prend les `n` cartes du dessus sans modifier `p1`. La fonction renvoie un couple `(gagnant, paquet)` ; dans la sous-partie, seul le gagnant compte pour décider de la manche en cours.
+    Pour une sous-partie, on construit de **nouveaux** paquets (copies) : `deque([p1[i] for i in range(n)])` prend les `n` cartes du dessus sans modifier `p1`. La fonction renvoie un couple `(gagnant, paquet)` ; dans la sous-partie, seul le gagnant compte pour décider de la manche en cours.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : mesurer <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-processus-et-ordonnancement-aoc-2-6 }
 
