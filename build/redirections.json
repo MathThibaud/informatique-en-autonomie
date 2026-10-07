@@ -1,0 +1,11 @@
+{
+  "_note": "Anciennes adresses de chapitres -> nouvelles (progression Terminale réordonnée le 2026-10-07). Ne jamais retirer une entrée : des liens peuvent circuler.",
+  "terminale/04-arbres": "terminale/05-arbres",
+  "terminale/05-diviser-pour-regner": "terminale/07-diviser-pour-regner",
+  "terminale/07-graphes": "terminale/08-graphes",
+  "terminale/08-programmation-dynamique": "terminale/11-programmation-dynamique",
+  "terminale/09-recherche-textuelle": "terminale/12-recherche-textuelle",
+  "terminale/10-processus-et-ordonnancement": "terminale/04-processus-et-ordonnancement",
+  "terminale/11-reseaux": "terminale/09-reseaux",
+  "terminale/12-cryptographie": "terminale/10-cryptographie"
+}
