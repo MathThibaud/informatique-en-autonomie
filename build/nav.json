@@ -104,60 +104,60 @@
     ]
    ],
    [
-    "4. Arbres",
+    "4. Processus et ordonnancement",
     [
      [
       "Présentation",
-      "terminale/04-arbres/index.md"
+      "terminale/04-processus-et-ordonnancement/index.md"
      ],
      [
       "Activités préparatoires",
-      "terminale/04-arbres/activites.md"
+      "terminale/04-processus-et-ordonnancement/activites.md"
      ],
      [
       "Cours",
-      "terminale/04-arbres/cours.md"
+      "terminale/04-processus-et-ordonnancement/cours.md"
      ],
      [
       "Exercices",
-      "terminale/04-arbres/exercices.md"
+      "terminale/04-processus-et-ordonnancement/exercices.md"
      ],
      [
       "TP et projets",
-      "terminale/04-arbres/tp.md"
+      "terminale/04-processus-et-ordonnancement/tp.md"
      ],
      [
       "Défis Advent of Code",
-      "terminale/04-arbres/defis.md"
+      "terminale/04-processus-et-ordonnancement/defis.md"
      ]
     ]
    ],
    [
-    "5. Diviser pour régner",
+    "5. Arbres",
     [
      [
       "Présentation",
-      "terminale/05-diviser-pour-regner/index.md"
+      "terminale/05-arbres/index.md"
      ],
      [
       "Activités préparatoires",
-      "terminale/05-diviser-pour-regner/activites.md"
+      "terminale/05-arbres/activites.md"
      ],
      [
       "Cours",
-      "terminale/05-diviser-pour-regner/cours.md"
+      "terminale/05-arbres/cours.md"
      ],
      [
       "Exercices",
-      "terminale/05-diviser-pour-regner/exercices.md"
+      "terminale/05-arbres/exercices.md"
      ],
      [
       "TP et projets",
-      "terminale/05-diviser-pour-regner/tp.md"
+      "terminale/05-arbres/tp.md"
      ],
      [
       "Défis Advent of Code",
-      "terminale/05-diviser-pour-regner/defis.md"
+      "terminale/05-arbres/defis.md"
      ]
     ]
    ],
@@ -191,176 +191,176 @@
     ]
    ],
    [
-    "7. Graphes",
+    "7. Diviser pour régner",
     [
      [
       "Présentation",
-      "terminale/07-graphes/index.md"
+      "terminale/07-diviser-pour-regner/index.md"
      ],
      [
       "Activités préparatoires",
-      "terminale/07-graphes/activites.md"
+      "terminale/07-diviser-pour-regner/activites.md"
      ],
      [
       "Cours",
-      "terminale/07-graphes/cours.md"
+      "terminale/07-diviser-pour-regner/cours.md"
      ],
      [
       "Exercices",
-      "terminale/07-graphes/exercices.md"
+      "terminale/07-diviser-pour-regner/exercices.md"
      ],
      [
       "TP et projets",
-      "terminale/07-graphes/tp.md"
+      "terminale/07-diviser-pour-regner/tp.md"
      ],
      [
       "Défis Advent of Code",
-      "terminale/07-graphes/defis.md"
+      "terminale/07-diviser-pour-regner/defis.md"
      ]
     ]
    ],
    [
-    "8. Programmation dynamique",
+    "8. Graphes",
     [
      [
       "Présentation",
-      "terminale/08-programmation-dynamique/index.md"
+      "terminale/08-graphes/index.md"
      ],
      [
       "Activités préparatoires",
-      "terminale/08-programmation-dynamique/activites.md"
+      "terminale/08-graphes/activites.md"
      ],
      [
       "Cours",
-      "terminale/08-programmation-dynamique/cours.md"
+      "terminale/08-graphes/cours.md"
      ],
      [
       "Exercices",
-      "terminale/08-programmation-dynamique/exercices.md"
+      "terminale/08-graphes/exercices.md"
      ],
      [
       "TP et projets",
-      "terminale/08-programmation-dynamique/tp.md"
+      "terminale/08-graphes/tp.md"
      ],
      [
       "Défis Advent of Code",
-      "terminale/08-programmation-dynamique/defis.md"
+      "terminale/08-graphes/defis.md"
      ]
     ]
    ],
    [
-    "9. Recherche textuelle",
+    "9. Réseaux",
     [
      [
       "Présentation",
-      "terminale/09-recherche-textuelle/index.md"
+      "terminale/09-reseaux/index.md"
      ],
      [
       "Activités préparatoires",
-      "terminale/09-recherche-textuelle/activites.md"
+      "terminale/09-reseaux/activites.md"
      ],
      [
       "Cours",
-      "terminale/09-recherche-textuelle/cours.md"
+      "terminale/09-reseaux/cours.md"
      ],
      [
       "Exercices",
-      "terminale/09-recherche-textuelle/exercices.md"
+      "terminale/09-reseaux/exercices.md"
      ],
      [
       "TP et projets",
-      "terminale/09-recherche-textuelle/tp.md"
+      "terminale/09-reseaux/tp.md"
      ],
      [
       "Défis Advent of Code",
-      "terminale/09-recherche-textuelle/defis.md"
+      "terminale/09-reseaux/defis.md"
      ]
     ]
    ],
    [
-    "10. Processus et ordonnancement",
+    "10. Cryptographie",
     [
      [
       "Présentation",
-      "terminale/10-processus-et-ordonnancement/index.md"
+      "terminale/10-cryptographie/index.md"
      ],
      [
       "Activités préparatoires",
-      "terminale/10-processus-et-ordonnancement/activites.md"
+      "terminale/10-cryptographie/activites.md"
      ],
      [
       "Cours",
-      "terminale/10-processus-et-ordonnancement/cours.md"
+      "terminale/10-cryptographie/cours.md"
      ],
      [
       "Exercices",
-      "terminale/10-processus-et-ordonnancement/exercices.md"
+      "terminale/10-cryptographie/exercices.md"
      ],
      [
       "TP et projets",
-      "terminale/10-processus-et-ordonnancement/tp.md"
+      "terminale/10-cryptographie/tp.md"
      ],
      [
       "Défis Advent of Code",
-      "terminale/10-processus-et-ordonnancement/defis.md"
+      "terminale/10-cryptographie/defis.md"
      ]
     ]
    ],
    [
-    "11. Réseaux",
+    "11. Programmation dynamique",
     [
      [
       "Présentation",
-      "terminale/11-reseaux/index.md"
+      "terminale/11-programmation-dynamique/index.md"
      ],
      [
       "Activités préparatoires",
-      "terminale/11-reseaux/activites.md"
+      "terminale/11-programmation-dynamique/activites.md"
      ],
      [
       "Cours",
-      "terminale/11-reseaux/cours.md"
+      "terminale/11-programmation-dynamique/cours.md"
      ],
      [
       "Exercices",
-      "terminale/11-reseaux/exercices.md"
+      "terminale/11-programmation-dynamique/exercices.md"
      ],
      [
       "TP et projets",
-      "terminale/11-reseaux/tp.md"
+      "terminale/11-programmation-dynamique/tp.md"
      ],
      [
       "Défis Advent of Code",
-      "terminale/11-reseaux/defis.md"
+      "terminale/11-programmation-dynamique/defis.md"
      ]
     ]
    ],
    [
-    "12. Cryptographie",
+    "12. Recherche textuelle",
     [
      [
       "Présentation",
-      "terminale/12-cryptographie/index.md"
+      "terminale/12-recherche-textuelle/index.md"
      ],
      [
       "Activités préparatoires",
-      "terminale/12-cryptographie/activites.md"
+      "terminale/12-recherche-textuelle/activites.md"
      ],
      [
       "Cours",
-      "terminale/12-cryptographie/cours.md"
+      "terminale/12-recherche-textuelle/cours.md"
      ],
      [
       "Exercices",
-      "terminale/12-cryptographie/exercices.md"
+      "terminale/12-recherche-textuelle/exercices.md"
      ],
      [
       "TP et projets",
-      "terminale/12-cryptographie/tp.md"
+      "terminale/12-recherche-textuelle/tp.md"
      ],
      [
       "Défis Advent of Code",
-      "terminale/12-cryptographie/defis.md"
+      "terminale/12-recherche-textuelle/defis.md"
      ]
     ]
    ],

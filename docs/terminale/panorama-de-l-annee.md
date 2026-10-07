@@ -1,65 +1,87 @@
 # Panorama de l'année
 
-Le programme n’est pas une liste de chapitres indépendants : c’est un **réseau**. Une même structure (la pile, la file) resurgit d’un chapitre à l’autre ; une même question — **« combien ça coûte ? »** — traverse toute l’année. Cette fiche relie les morceaux : gardez-la sous les yeux, elle vous fera gagner en **recul** pour l’écrit *et* le Grand Oral.
+Les quatorze chapitres de l’année ne sont pas indépendants : les mêmes outils (la récursivité, la pile, la file…) reviennent d’un chapitre à l’autre, et une même question — **« combien ça coûte ? »** — traverse toute l’année. Cette fiche donne une vue d’ensemble, à relire à chaque nouveau chapitre : elle aide à prendre du **recul** pour l’écrit comme pour le Grand Oral.
+
+### Le plan de l’année en quatre blocs
+
+Le programme se partage en quatre grands blocs. Dans chaque bande, on lit les chapitres du bloc ; leur **numéro** indique l’ordre dans lequel on les étudie au fil de l’année.
+
+![](figures/11ee32f7e2d1ce18.svg){ .tikz loading=lazy }
+
+L’année ne parcourt pas les blocs l’un après l’autre : elle **alterne**. Après les outils de base (chapitres 1 à 3), on découvre la **machine** dès l’automne (processus), puis de nouvelles structures et méthodes ; viennent ensuite le **réseau** et sa sécurité, juste après les graphes dont ils ont besoin, de nouveaux **algorithmes** au printemps, et l’on termine par les **limites** de l’informatique et les systèmes sur puce.
 
 ### Le fil rouge : le coût d’un algorithme
 
-Depuis la Première, on ne se demande pas seulement « est-ce que ça marche ? » mais « **combien de temps** (ou de mémoire) cela demande-t-il quand les données sont nombreuses ? ». Tout l’enjeu de la Terminale est d’apprendre à **faire baisser ce coût**.
+Depuis la Première, on ne se demande pas seulement « est-ce que ça marche ? » mais aussi « **combien d’opérations** cela demande-t-il quand les données sont nombreuses ? ». On range les algorithmes sur une **échelle de coût** ($n$ désigne la taille des données) :
 
-![](figures/1628e38aeb031b4f.svg){ .tikz loading=lazy }
+![](figures/f7c11baab41549f6.svg){ .tikz loading=lazy }
 
-!!! encadre "Les deux victoires de l’année"
+Toute l’année, on cherche à **descendre cette échelle**, ou à contourner le problème quand c’est impossible. Chaque grande méthode correspond à une stratégie :
 
-    On cherche sans cesse à **descendre cette échelle**. Deux sauts sont emblématiques :
-
-    - de $n^2$ à $n\log_2 n$ : c’est le **tri fusion** (diviser pour régner) face aux tris quadratiques ;
-
-    - de $n$ à $\log_2 n$ : c’est la **recherche dichotomique** et l’**arbre binaire de recherche** équilibré face à la recherche séquentielle.
-
-    Le $\log_2 n$ n’est ici qu’un **outil de comptage** : le nombre de fois où l’on peut couper $n$ en deux (*aussi* le nombre de bits de $n$, vu en Première).
-
-!!! remarque "Remarque"
-
-    La **programmation dynamique** joue sur un autre tableau : elle échange du **temps** contre de la **mémoire** (« ne jamais recalculer deux fois »). Certains problèmes (voyageur de commerce) restent, eux, de coût **exponentiel** si l’on veut la solution exacte : c’est *précisément pour cela* qu’on se contente d’un algorithme **glouton**, qui ne coûte presque rien mais donne une solution seulement approchée. Le glouton n’est donc pas « en bout d’échelle » : c’est le raccourci rapide qu’on prend quand l’algorithme exact est hors de portée. Enfin, cette explosion peut devenir une **alliée** : la sécurité du chiffrement **RSA** (chapitre *Cryptographie*) repose sur le fait qu’on ne sait pas **factoriser** rapidement un très grand nombre — le coût des méthodes connues explose avec le nombre de chiffres.
-
-### La carte des liens
-
-Trois idées irriguent tout le programme. Suivez les flèches : ce qui est *en amont* sert à construire ce qui est *en aval*.
-
-![](figures/06c747e17853b5f1.svg){ .tikz loading=lazy }
-
-Deux **manières de programmer** (récursivité, POO) servent à *définir* et *implémenter* les **structures de données** ; **toutes** s’écrivent en classes (une classe `Pile`, `File`, `Arbre`, `Graphe`). On *parcourt* arbres et graphes avec une **pile** (profondeur) ou une **file** (largeur), pour bâtir les **méthodes et applications**. Les arbres servent d’**index** aux bases de données. Plus bas, la **machine** et le **réseau** : la file et les graphes orientés reviennent dans les **processus**, le **plus court chemin pondéré** dans le **routage** ; la cryptographie sécurise ce que le réseau transporte, et la calculabilité fixe les **limites** de tout programme.
-
-!!! encadre "La correspondance à retenir absolument"
-
-    Parcourir un arbre ou un graphe, c’est choisir un **récipient** pour les sommets en attente :
-
-    - une **pile** (LIFO) $\Rightarrow$ parcours **en profondeur** (aussi obtenu par la *récursivité*, qui utilise la pile d’appels) ;
-
-    - une **file** (FIFO) $\Rightarrow$ parcours **en largeur**.
-
-    C’est le *même* mécanisme pour les arbres (chapitre Arbres) et pour les graphes (chapitre Graphes). Le **routage** sur Internet, lui, va plus loin qu’un simple parcours : il cherche un **plus court chemin pondéré** (le coût des liaisons), avec l’algorithme de **Dijkstra** pour OSPF (celui du projet du chapitre Graphes) ou une méthode de type **Bellman-Ford** pour RIP.
-
-### Où chaque notion est réinvestie
-
-| **Notion (chapitre d’origine)** | **Réinvestie dans…** |
-|:---|:---|
-| Récursivité | arbres, diviser pour régner, graphes, prog. dynamique |
-| Pile & file (structures linéaires) | parcours d’arbres et de graphes (profondeur/largeur) ; file des processus prêts (ordonnancement) |
-| POO (classes) | implémentation des arbres, des graphes, des piles/files |
-| Coût d’un algorithme (1re) | tout le programme — surtout DPR ($n\log n$) et ABR ($\log n$) ; sécurité de RSA (factoriser coûte trop cher) |
-| Dichotomie / bits d’un entier (1re) | ABR, diviser pour régner, le $\log_2 n$ comme comptage |
-| Arbres (ABR) | index des bases de données (B-arbres), arbre des processus |
-| Bases de données & SQL | chapitre assez autonome ; réinvesti dans les projets (site web adossé à une base) et le Grand Oral (données, vie privée) |
-| Graphes (plus court chemin pondéré) | routage OSPF (Dijkstra) et RIP (réseaux), GPS |
-| Graphes orientés (cycle) | interblocage : cycle dans le graphe d’attente (processus) |
-| Rendu de monnaie (gloutons, 1re) | programmation dynamique (version optimale) |
-| Processus (ordonnancement) | systèmes sur puce : l’OS d’un téléphone répartit ses processus sur les cœurs d’une même puce |
-| Réseaux (paquets, routage) | cryptographie : chiffrer ce qui circule (HTTPS, échange de clé) |
-| Cryptographie | sécurité des échanges sur Internet ; fil rouge du coût (RSA) |
-| Programme $=$ donnée (calculabilité) | compilation, systèmes d’exploitation, sécurité (un antivirus parfait est impossible) |
-| Modèle de von Neumann (1re) | processus (le processeur partagé), systèmes sur puce (CPU, mémoire, bus sur une seule puce) |
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Stratégie</strong></th>
+<th style="text-align: left;"><strong>L’idée</strong></th>
+<th style="text-align: left;"><strong>Chapitre</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Bien ranger les données</td>
+<td style="text-align: left;">Avec des données organisées (triées, ou dans un arbre binaire de recherche), on élimine la moitié des candidats à chaque étape : on passe de <span class="math inline"><em>n</em></span> à <span class="math inline">log<sub>2</sub><em>n</em></span>.</td>
+<td style="text-align: left;">5 Arbres<br />
+(dichotomie : 1re)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Diviser pour régner</td>
+<td style="text-align: left;">Couper le problème en deux, résoudre chaque moitié, recombiner : le tri fusion passe de <span class="math inline"><em>n</em><sup>2</sup></span> à <span class="math inline"><em>n</em>log<sub>2</sub><em>n</em></span>.</td>
+<td style="text-align: left;">7 Diviser pour régner</td>
+</tr>
+<tr>
+<td style="text-align: left;">Ne jamais recalculer</td>
+<td style="text-align: left;">Mémoriser les résultats des sous-problèmes : on <strong>échange du temps contre de la mémoire</strong>.</td>
+<td style="text-align: left;">11 Programmation dynamique</td>
+</tr>
+<tr>
+<td style="text-align: left;">Renoncer à l’optimum</td>
+<td style="text-align: left;">Quand la solution exacte est hors de portée (voyageur de commerce : essayer tous les trajets), un algorithme <strong>glouton</strong> donne vite une solution, pas toujours la meilleure.</td>
+<td style="text-align: left;">glouton : 1re<br />
+(comparé en 11)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Faire du coût un bouclier</td>
+<td style="text-align: left;">Le chiffrement <strong>RSA</strong> est sûr parce que <strong>factoriser</strong> un très grand nombre coûte trop cher avec les méthodes connues.</td>
+<td style="text-align: left;">10 Cryptographie</td>
+</tr>
+</tbody>
+</table>
 
 !!! remarque "Remarque"
 
-    Pour le **Grand Oral**, ces liens sont de l’or : une bonne question en croise souvent *deux* (« le GPS » $=$ graphes $+$ coût). Voir la fiche *Grand Oral NSI*.
+    Le $\log_2 n$ n’est qu’un **outil de comptage** : c’est le nombre de fois où l’on peut couper $n$ en deux avant d’arriver à $1$ (à peu près le nombre de bits de $n$, vu en Première). Pour un million de données, $\log_2 n \approx 20$.
+
+### Chapitre par chapitre
+
+Pour chaque chapitre : ce qu’il **réutilise**, et où il **resservira**. Les notions de Première sont signalées par « 1re ».
+
+| **Chapitre** | **S’appuie sur…** | **Resservira dans…** |
+|:---|:---|:---|
+| 1 Récursivité | fonctions (1re) | arbres, diviser pour régner, parcours en profondeur, programmation dynamique |
+| 2 Programmation objet | types construits (1re) | toutes les structures : classes `Pile`, `File`, `Arbre`, `Graphe` |
+| 3 Piles, files, listes chaînées | programmation objet, récursivité | parcours d’arbres et de graphes ; file des processus prêts |
+| 4 Processus | files ; arborescence de fichiers, modèle de von Neumann (1re) | arbres (l’arbre des processus) ; graphes (le cycle d’un interblocage) ; systèmes sur puce |
+| 5 Arbres | récursivité, programmation objet, piles et files ; dichotomie (1re) | index des bases de données ; graphes (un arbre est un graphe particulier) |
+| 6 Bases de données, SQL | données en table (1re) ; arbres (les index) | projets (site web adossé à une base) ; Grand Oral (données, vie privée) |
+| 7 Diviser pour régner | récursivité ; dichotomie, tris (1re) | programmation dynamique (même découpage, sans recalcul) |
+| 8 Graphes | piles et files, récursivité, programmation objet, arbres ; graphe d’attente (processus) | routage (réseaux) ; GPS |
+| 9 Réseaux | graphes pondérés (Dijkstra) ; Internet, paquets (1re) | cryptographie (sécuriser ce qui circule) |
+| 10 Cryptographie | réseaux ; coût (factorisation) | HTTPS, signature, sécurité des échanges |
+| 11 Programmation dynamique | récursivité, diviser pour régner ; glouton (1re) | problèmes d’optimisation (rendu de monnaie, sac à dos) |
+| 12 Recherche textuelle | chaînes, boucles, coût (1re) | moteurs de recherche, traitement de texte, ADN |
+| 13 Calculabilité | un programme est une donnée (1re) | limites de tout programme (un antivirus parfait est impossible) |
+| 14 Systèmes sur puce | modèle de von Neumann (1re) ; processus | synthèse : le téléphone, un ordinateur complet sur une puce |
+
+!!! remarque "Remarque"
+
+    Pour le **Grand Oral**, ces liens sont précieux : une bonne question en croise souvent *deux* (« Comment fonctionne un GPS ? » $=$ graphes $+$ coût). Voir la fiche *Grand Oral NSI*.

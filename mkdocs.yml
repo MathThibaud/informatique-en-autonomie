@@ -254,20 +254,20 @@ nav:
     - Exercices: terminale/03-structures-lineaires-piles-files-listes/exercices.md
     - TP et projets: terminale/03-structures-lineaires-piles-files-listes/tp.md
     - Défis Advent of Code: terminale/03-structures-lineaires-piles-files-listes/defis.md
-  - 4. Arbres:
-    - terminale/04-arbres/index.md
-    - Activités préparatoires: terminale/04-arbres/activites.md
-    - Cours: terminale/04-arbres/cours.md
-    - Exercices: terminale/04-arbres/exercices.md
-    - TP et projets: terminale/04-arbres/tp.md
-    - Défis Advent of Code: terminale/04-arbres/defis.md
-  - 5. Diviser pour régner:
-    - terminale/05-diviser-pour-regner/index.md
-    - Activités préparatoires: terminale/05-diviser-pour-regner/activites.md
-    - Cours: terminale/05-diviser-pour-regner/cours.md
-    - Exercices: terminale/05-diviser-pour-regner/exercices.md
-    - TP et projets: terminale/05-diviser-pour-regner/tp.md
-    - Défis Advent of Code: terminale/05-diviser-pour-regner/defis.md
+  - 4. Processus et ordonnancement:
+    - terminale/04-processus-et-ordonnancement/index.md
+    - Activités préparatoires: terminale/04-processus-et-ordonnancement/activites.md
+    - Cours: terminale/04-processus-et-ordonnancement/cours.md
+    - Exercices: terminale/04-processus-et-ordonnancement/exercices.md
+    - TP et projets: terminale/04-processus-et-ordonnancement/tp.md
+    - Défis Advent of Code: terminale/04-processus-et-ordonnancement/defis.md
+  - 5. Arbres:
+    - terminale/05-arbres/index.md
+    - Activités préparatoires: terminale/05-arbres/activites.md
+    - Cours: terminale/05-arbres/cours.md
+    - Exercices: terminale/05-arbres/exercices.md
+    - TP et projets: terminale/05-arbres/tp.md
+    - Défis Advent of Code: terminale/05-arbres/defis.md
   - 6. Bases de données et SQL:
     - terminale/06-bases-de-donnees-et-sql/index.md
     - Activités préparatoires: terminale/06-bases-de-donnees-et-sql/activites.md
@@ -275,48 +275,48 @@ nav:
     - Exercices: terminale/06-bases-de-donnees-et-sql/exercices.md
     - TP et projets: terminale/06-bases-de-donnees-et-sql/tp.md
     - Défis Advent of Code: terminale/06-bases-de-donnees-et-sql/defis.md
-  - 7. Graphes:
-    - terminale/07-graphes/index.md
-    - Activités préparatoires: terminale/07-graphes/activites.md
-    - Cours: terminale/07-graphes/cours.md
-    - Exercices: terminale/07-graphes/exercices.md
-    - TP et projets: terminale/07-graphes/tp.md
-    - Défis Advent of Code: terminale/07-graphes/defis.md
-  - 8. Programmation dynamique:
-    - terminale/08-programmation-dynamique/index.md
-    - Activités préparatoires: terminale/08-programmation-dynamique/activites.md
-    - Cours: terminale/08-programmation-dynamique/cours.md
-    - Exercices: terminale/08-programmation-dynamique/exercices.md
-    - TP et projets: terminale/08-programmation-dynamique/tp.md
-    - Défis Advent of Code: terminale/08-programmation-dynamique/defis.md
-  - 9. Recherche textuelle:
-    - terminale/09-recherche-textuelle/index.md
-    - Activités préparatoires: terminale/09-recherche-textuelle/activites.md
-    - Cours: terminale/09-recherche-textuelle/cours.md
-    - Exercices: terminale/09-recherche-textuelle/exercices.md
-    - TP et projets: terminale/09-recherche-textuelle/tp.md
-    - Défis Advent of Code: terminale/09-recherche-textuelle/defis.md
-  - 10. Processus et ordonnancement:
-    - terminale/10-processus-et-ordonnancement/index.md
-    - Activités préparatoires: terminale/10-processus-et-ordonnancement/activites.md
-    - Cours: terminale/10-processus-et-ordonnancement/cours.md
-    - Exercices: terminale/10-processus-et-ordonnancement/exercices.md
-    - TP et projets: terminale/10-processus-et-ordonnancement/tp.md
-    - Défis Advent of Code: terminale/10-processus-et-ordonnancement/defis.md
-  - 11. Réseaux:
-    - terminale/11-reseaux/index.md
-    - Activités préparatoires: terminale/11-reseaux/activites.md
-    - Cours: terminale/11-reseaux/cours.md
-    - Exercices: terminale/11-reseaux/exercices.md
-    - TP et projets: terminale/11-reseaux/tp.md
-    - Défis Advent of Code: terminale/11-reseaux/defis.md
-  - 12. Cryptographie:
-    - terminale/12-cryptographie/index.md
-    - Activités préparatoires: terminale/12-cryptographie/activites.md
-    - Cours: terminale/12-cryptographie/cours.md
-    - Exercices: terminale/12-cryptographie/exercices.md
-    - TP et projets: terminale/12-cryptographie/tp.md
-    - Défis Advent of Code: terminale/12-cryptographie/defis.md
+  - 7. Diviser pour régner:
+    - terminale/07-diviser-pour-regner/index.md
+    - Activités préparatoires: terminale/07-diviser-pour-regner/activites.md
+    - Cours: terminale/07-diviser-pour-regner/cours.md
+    - Exercices: terminale/07-diviser-pour-regner/exercices.md
+    - TP et projets: terminale/07-diviser-pour-regner/tp.md
+    - Défis Advent of Code: terminale/07-diviser-pour-regner/defis.md
+  - 8. Graphes:
+    - terminale/08-graphes/index.md
+    - Activités préparatoires: terminale/08-graphes/activites.md
+    - Cours: terminale/08-graphes/cours.md
+    - Exercices: terminale/08-graphes/exercices.md
+    - TP et projets: terminale/08-graphes/tp.md
+    - Défis Advent of Code: terminale/08-graphes/defis.md
+  - 9. Réseaux:
+    - terminale/09-reseaux/index.md
+    - Activités préparatoires: terminale/09-reseaux/activites.md
+    - Cours: terminale/09-reseaux/cours.md
+    - Exercices: terminale/09-reseaux/exercices.md
+    - TP et projets: terminale/09-reseaux/tp.md
+    - Défis Advent of Code: terminale/09-reseaux/defis.md
+  - 10. Cryptographie:
+    - terminale/10-cryptographie/index.md
+    - Activités préparatoires: terminale/10-cryptographie/activites.md
+    - Cours: terminale/10-cryptographie/cours.md
+    - Exercices: terminale/10-cryptographie/exercices.md
+    - TP et projets: terminale/10-cryptographie/tp.md
+    - Défis Advent of Code: terminale/10-cryptographie/defis.md
+  - 11. Programmation dynamique:
+    - terminale/11-programmation-dynamique/index.md
+    - Activités préparatoires: terminale/11-programmation-dynamique/activites.md
+    - Cours: terminale/11-programmation-dynamique/cours.md
+    - Exercices: terminale/11-programmation-dynamique/exercices.md
+    - TP et projets: terminale/11-programmation-dynamique/tp.md
+    - Défis Advent of Code: terminale/11-programmation-dynamique/defis.md
+  - 12. Recherche textuelle:
+    - terminale/12-recherche-textuelle/index.md
+    - Activités préparatoires: terminale/12-recherche-textuelle/activites.md
+    - Cours: terminale/12-recherche-textuelle/cours.md
+    - Exercices: terminale/12-recherche-textuelle/exercices.md
+    - TP et projets: terminale/12-recherche-textuelle/tp.md
+    - Défis Advent of Code: terminale/12-recherche-textuelle/defis.md
   - 13. Calculabilité et décidabilité:
     - terminale/13-calculabilite-et-decidabilite/index.md
     - Activités préparatoires: terminale/13-calculabilite-et-decidabilite/activites.md

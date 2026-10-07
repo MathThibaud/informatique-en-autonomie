@@ -28,7 +28,7 @@ Environ **un tiers de l’année** reste consacré à des **projets** et à la p
 
 ## Ce que vous allez apprendre
 
-*Le programme est dense et s’enchaîne : la **récursivité** (chapitre 1) est la clé qui ouvre les arbres, « diviser pour régner » et les graphes. On avance régulièrement tout au long de l’année.*
+*Le programme est dense et s’enchaîne : la **récursivité** (chapitre 1) est la clé qui ouvre les arbres, « diviser pour régner » et les graphes. L’année alterne les **algorithmes** et les **machines** : on découvre le système d’exploitation dès l’automne, les réseaux en hiver.*
 
 ### De la rentrée aux vacances de Toussaint
 
@@ -40,35 +40,33 @@ Environ **un tiers de l’année** reste consacré à des **projets** et à la p
 
 ### De la Toussaint à Noël
 
-**Chapitre 4 — Les arbres.** *Manipuler des structures « en arborescence » (comme un arbre généalogique) et y ranger ou rechercher une information très efficacement.*
+**Chapitre 4 — Processus et ordonnancement.** *Comprendre comment le système d’exploitation fait tourner plusieurs programmes « en même temps » et gère les ressources de la machine.*
 
-**Chapitre 5 — Diviser pour régner.** *Couper un gros problème en deux moitiés, les résoudre séparément, puis recombiner : la recette des algorithmes rapides, comme le tri fusion.*
+**Chapitre 5 — Les arbres.** *Manipuler des structures « en arborescence » (comme un arbre généalogique) et y ranger ou rechercher une information très efficacement.*
 
 **Chapitre 6 — Bases de données et SQL.** *Interroger de vraies bases de données avec le langage SQL : retrouver, croiser et mettre à jour de très grandes quantités de données.*
 
 ### De janvier aux vacances d’hiver
 
-**Chapitre 7 — Les graphes.** *Modéliser des réseaux (routes, amis, Internet) par des points reliés, et écrire des algorithmes pour s’y déplacer, détecter un cycle, trouver un chemin.*
+**Chapitre 7 — Diviser pour régner.** *Couper un gros problème en deux moitiés, les résoudre séparément, puis recombiner : la recette des algorithmes rapides, comme le tri fusion.*
 
-**Chapitre 8 — La programmation dynamique.** *Rendre certains algorithmes récursifs spectaculairement plus rapides, en évitant de recalculer sans cesse la même chose.*
+**Chapitre 8 — Les graphes.** *Modéliser des réseaux (routes, amis, Internet) par des points reliés, et écrire des algorithmes pour s’y déplacer, détecter un cycle, trouver un chemin.*
 
-**Chapitre 9 — La recherche textuelle.** *Trouver efficacement un motif dans un grand texte (un roman, un génome) : de la méthode naïve à l’algorithme de Boyer-Moore.*
-
-**Chapitre 10 — Processus et ordonnancement.** *Comprendre comment le système d’exploitation fait tourner plusieurs programmes « en même temps » et gère les ressources de la machine.*
+**Chapitre 9 — Les réseaux.** *Suivre le voyage d’un message sur Internet : adressage, découpage en paquets, routage — comment les données trouvent leur chemin d’un bout à l’autre du monde.*
 
 ### De l’hiver au printemps
 
-**Chapitre 11 — Les réseaux.** *Suivre le voyage d’un message sur Internet : adressage, découpage en paquets, routage — comment les données trouvent leur chemin d’un bout à l’autre du monde.*
+**Chapitre 10 — Cryptographie.** *Protéger ces échanges : le chiffrement (symétrique et asymétrique) qui rend un message illisible pour tout autre que son destinataire.*
 
-**Chapitre 12 — Cryptographie.** *Protéger ces échanges : le chiffrement (symétrique et asymétrique) qui rend un message illisible pour tout autre que son destinataire.*
+**Chapitre 11 — La programmation dynamique.** *Rendre certains algorithmes récursifs spectaculairement plus rapides, en évitant de recalculer sans cesse la même chose.*
+
+**Chapitre 12 — La recherche textuelle.** *Trouver efficacement un motif dans un grand texte (un roman, un génome) : de la méthode naïve à l’algorithme de Boyer-Moore.*
+
+### Au printemps
 
 **Chapitre 13 — Calculabilité et décidabilité.** *Toucher aux **limites** de l’informatique : existe-t-il des problèmes qu’*aucun* programme ne pourra jamais résoudre ? (Oui — et c’est vertigineux.)*
 
 **Chapitre 14 — Systèmes sur puce et informatique embarquée.** *Découvrir comment un ordinateur entier tient sur une seule puce (dans votre téléphone, votre console, votre voiture) et ce que fait un microcontrôleur dans un système embarqué.*
-
-!!! remarque "Remarque — Un peu d’histoire"
-
-    En **1936**, le mathématicien britannique **Alan Turing** imagine une machine abstraite capable d’exécuter *n’importe quel* algorithme — l’ancêtre théorique de tous nos ordinateurs. Il démontre aussi qu’un programme ne peut pas, en général, décider si un autre programme *s’arrêtera* un jour : c’est le fameux « problème de l’arrêt », que vous rencontrerez au chapitre 13. L’architecture concrète de nos machines, elle, doit beaucoup à **John von Neumann** (1945), dont vous croiserez le modèle au chapitre 14.
 
 ## Comment est organisé ce livre
 
