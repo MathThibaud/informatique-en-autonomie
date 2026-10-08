@@ -2,6 +2,32 @@
 
 *Illustrations d’ouverture de chapitre* — dessins originaux de l’auteur.
 
+Panorama de l’année
+
+*Leonhard Euler (portrait de 1753)* — Jakob Emanuel Handmann — domaine public  
+<https://commons.wikimedia.org/wiki/File:Leonhard_Euler.jpg>
+
+*Les tours de Hanoï, gravure de 1883* — Édouard Lucas — domaine public  
+<https://commons.wikimedia.org/wiki/File:LucasTourHanoi_crop.jpg>
+
+*Alan Turing à 16 ans* — auteur inconnu (peut-être A. R. Chaffin) — domaine public  
+<https://commons.wikimedia.org/wiki/File:Alan_Turing_at_age_16.jpg>
+
+*Photo du badge de John von Neumann à Los Alamos* — Los Alamos National Laboratory — Los Alamos National Laboratory (mention obligatoire)  
+<https://commons.wikimedia.org/wiki/File:John_von_Neumann_Los_Alamos_identity_badge_photo.jpg>
+
+*Friedrich L. Bauer* — Hcii — CC BY-SA 3.0  
+<https://commons.wikimedia.org/wiki/File:FriedrichLudwigBauer.jpg>
+
+*Edsger W. Dijkstra* — Hamilton Richards — CC BY-SA 3.0  
+<https://commons.wikimedia.org/wiki/File:Edsger_Wybe_Dijkstra.jpg>
+
+*Microprocesseur Intel C4004* — Thomas Nguyen — CC BY-SA 4.0  
+<https://commons.wikimedia.org/wiki/File:Intel_C4004.jpg>
+
+*Whitfield Diffie* — Duncan Hull — CC BY-SA 4.0  
+<https://commons.wikimedia.org/wiki/File:Whitfield_Diffie_Royal_Society.jpg>
+
 Chapitre 1 — Récursivité
 
 *Les tours de Hanoï, gravure de 1883* — Édouard Lucas — domaine public  

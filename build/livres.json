@@ -26,13 +26,13 @@
  "terminale": {
   "livre": {
    "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-terminale.pdf",
-   "mo": 17.1,
-   "date": "7 octobre 2026"
+   "mo": 17.3,
+   "date": "8 octobre 2026"
   },
   "-a4": {
    "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-terminale-a4.pdf",
-   "mo": 16.9,
-   "date": "7 octobre 2026"
+   "mo": 17.1,
+   "date": "8 octobre 2026"
   }
  }
 }
