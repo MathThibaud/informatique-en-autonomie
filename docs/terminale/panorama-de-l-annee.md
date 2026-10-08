@@ -6,7 +6,7 @@ Les quatorze chapitres de l’année ne sont pas indépendants : les mêmes out
 
 Le programme se partage en quatre grands blocs. Dans chaque bande, on lit les chapitres du bloc ; leur **numéro** indique l’ordre dans lequel on les étudie au fil de l’année.
 
-![](figures/11ee32f7e2d1ce18.svg){ .tikz loading=lazy }
+![](figures/c3aa1bec0ee4c88f.svg){ .tikz loading=lazy }
 
 L’année ne parcourt pas les blocs l’un après l’autre : elle **alterne**. Après les outils de base (chapitres 1 à 3), on découvre la **machine** dès l’automne (processus), puis de nouvelles structures et méthodes ; viennent ensuite le **réseau** et sa sécurité, juste après les graphes dont ils ont besoin, de nouveaux **algorithmes** au printemps, et l’on termine par les **limites** de l’informatique et les systèmes sur puce.
 
@@ -14,7 +14,7 @@ L’année ne parcourt pas les blocs l’un après l’autre : elle **alterne**
 
 Depuis la Première, on ne se demande pas seulement « est-ce que ça marche ? » mais aussi « **combien d’opérations** cela demande-t-il quand les données sont nombreuses ? ». On range les algorithmes sur une **échelle de coût** ($n$ désigne la taille des données) :
 
-![](figures/f7c11baab41549f6.svg){ .tikz loading=lazy }
+![](figures/b5958a416d70c0e2.svg){ .tikz loading=lazy }
 
 Toute l’année, on cherche à **descendre cette échelle**, ou à contourner le problème quand c’est impossible. Chaque grande méthode correspond à une stratégie :
 
@@ -84,4 +84,12 @@ Pour chaque chapitre : ce qu’il **réutilise**, et où il **resservira**. Les
 
 !!! remarque "Remarque"
 
-    Pour le **Grand Oral**, ces liens sont précieux : une bonne question en croise souvent *deux* (« Comment fonctionne un GPS ? » $=$ graphes $+$ coût). Voir la fiche *Grand Oral NSI*.
+    Pour le **Grand Oral**, ces liens sont précieux : une bonne question en croise souvent *deux* (« Comment un message trouve-t-il son chemin sur Internet ? » $=$ **graphes**, pour le plus court chemin, $+$ **réseaux**, pour le routage). Voir la fiche *Grand Oral NSI*.
+
+### Une histoire de l’informatique en quelques dates
+
+Chaque date de cette frise correspond à une notion que l’on étudie cette année, dans le chapitre indiqué à droite. Certaines sont bien plus anciennes que les ordinateurs (les graphes, les tours de Hanoï) ; la plupart sont nées entre 1936 et 1980.
+
+![](figures/ebf76cbdef099d37.svg){ .tikz loading=lazy }
+
+![](figures/2c1cbedaf3c04e11.svg){ .tikz loading=lazy }
