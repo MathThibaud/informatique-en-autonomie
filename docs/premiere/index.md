@@ -11,15 +11,16 @@ hide:
 
 [Présentation de l'année](presentation-de-l-annee.md){ .md-button }
 [Charte d'usage de l'intelligence artificielle](charte.md){ .md-button }
+[Panorama de l'année](panorama-de-l-annee.md){ .md-button }
 
 </div>
 
 !!! livre "Le manuel complet en PDF"
 
-    Tout le cours, les exercices et les corrigés de l'année, dans la version distribuée en classe (version du 7 octobre 2026).
+    Tout le cours, les exercices et les corrigés de l'année, dans la version distribuée en classe (version du 8 octobre 2026).
 
-    [:material-download: Télécharger le manuel (11,0 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-premiere.pdf){ .md-button .md-button--primary }
-    [:material-printer: Version A4 à imprimer (10,8 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-premiere-a4.pdf){ .md-button }
+    [:material-download: Télécharger le manuel (11,3 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-premiere.pdf){ .md-button .md-button--primary }
+    [:material-printer: Version A4 à imprimer (11,1 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-premiere-a4.pdf){ .md-button }
 
 ## Chapitres
 

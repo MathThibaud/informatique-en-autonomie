@@ -2,6 +2,32 @@
 
 *Illustrations d’ouverture de chapitre* — dessins originaux de l’auteur.
 
+Panorama de l’année
+
+*Manuscrit de l’Algèbre d’al-Khwârizmî (MS. Huntington 214)* — Bodleian Library, Oxford — domaine public  
+<https://commons.wikimedia.org/wiki/File:Bodleian_MS._Huntington_214_roll332_frame36.jpg>
+
+*Gottfried Wilhelm Leibniz (v. 1695)* — Christoph Bernhard Francke — domaine public  
+<https://commons.wikimedia.org/wiki/File:Christoph_Bernhard_Francke_-_Bildnis_des_Philosophen_Leibniz_(ca._1695).jpg>
+
+*Ada Lovelace (aquarelle, v. 1840)* — Alfred Edward Chalon — domaine public  
+<https://commons.wikimedia.org/wiki/File:Ada_Lovelace_portrait.jpg>
+
+*Herman Hollerith* — Charles Milton Bell — domaine public  
+<https://commons.wikimedia.org/wiki/File:Herman_Hollerith,_head-and-shoulders_portrait,_facing_left_LCCN96502521.jpg>
+
+*L’EDVAC* — U.S. Army — domaine public  
+<https://commons.wikimedia.org/wiki/File:Edvac.jpg>
+
+*Cahier de bord du Mark II, 9 septembre 1947* — Naval Surface Warfare Center, Dahlgren — domaine public  
+<https://commons.wikimedia.org/wiki/File:First_Computer_Bug,_1947.jpg>
+
+*Iris versicolor* — U.S. Fish and Wildlife Service — domaine public  
+<https://commons.wikimedia.org/wiki/File:Iris_versicolor_FWS.jpg>
+
+*Robot tortue de sol* — Valiant Technology Ltd. — CC BY-SA 3.0  
+<https://commons.wikimedia.org/wiki/File:Turtle_draw.jpg>
+
 Chapitre 1 — Les bases de la programmation Python
 
 *Ada Lovelace (aquarelle, v. 1840)* — Alfred Edward Chalon — domaine public  
