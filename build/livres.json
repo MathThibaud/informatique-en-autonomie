@@ -14,13 +14,13 @@
  "premiere": {
   "livre": {
    "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-premiere.pdf",
-   "mo": 11.0,
-   "date": "7 octobre 2026"
+   "mo": 11.3,
+   "date": "8 octobre 2026"
   },
   "-a4": {
    "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-premiere-a4.pdf",
-   "mo": 10.8,
-   "date": "7 octobre 2026"
+   "mo": 11.1,
+   "date": "8 octobre 2026"
   }
  },
  "terminale": {
