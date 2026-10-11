@@ -625,7 +625,47 @@ Le site `https://www.recettes.mc` veut un formulaire de recherche, envoyé à l�
 
     **b)** `https://www.recettes.mc/recherche?q=tarte&tri=prix` : l’adresse `action`, puis `?`, puis les paires `name=valeur` séparées par `&`. **c)** « soupe » dans le champ `q`, « date » dans le champ `tri`. **d)** **Non** : avec `get`, le mot de passe apparaîtrait dans l’URL, donc à l’écran et dans l’historique. On utilise `post` (et une page en `https`).
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — Le voyage d’un clic (synthèse) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-24 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — Ce que retient le navigateur : les cookies <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-24 }
+
+À la première visite d’un internaute, le serveur `https://www.recettes.mc` répond :
+
+```text
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Set-Cookie: theme=sombre; Max-Age=604800
+Set-Cookie: panier=tarte-citron
+```
+
+1.  Ces deux informations sont-elles mémorisées dans le client ou sur le serveur ?
+
+2.  L’internaute clique ensuite sur un lien vers la page `/desserts.html` du même site. Écrire la première ligne de la requête envoyée, puis l’en-tête qui retransmet les cookies.
+
+3.  Combien de temps chaque cookie est-il conservé ?
+
+4.  L’internaute se rend ensuite sur `https://www.meteo.mc`. Le navigateur envoie-t-il ces cookies à ce site ?
+
+5.  Un autre site marchand range le prix à payer dans un cookie `prix=45`, et son serveur facture le prix qu’il lit dans ce cookie. Pourquoi est-ce une mauvaise idée ?
+
+??? pouce "Coup de pouce"
+
+    `Max-Age` est une durée en secondes ; une journée compte $24 \times 3600$ secondes.
+
+??? pouce "Coup de pouce 2 (début de solution)"
+
+    Où le cookie est-il rangé, et qui peut donc le lire et le modifier ?
+
+??? corrige "Corrigé"
+
+    **a)** Dans le **client** : l’en-tête `Set-Cookie` demande au navigateur de les garder. **b)** Le navigateur retransmet de lui-même les deux cookies, séparés par `;` :
+
+    ```text
+    GET /desserts.html HTTP/1.1
+    Cookie: theme=sombre; panier=tarte-citron
+    ```
+
+    **c)** `theme` : $604\,800$ secondes, soit $604\,800 / (24 \times 3600) = 7$ jours. `panier` n’a pas de durée : il est effacé à la fermeture du navigateur. **d)** **Non** : un cookie n’est renvoyé qu’au site qui l’a déposé (`www.recettes.mc`). **e)** Le cookie est stocké chez le client : l’utilisateur peut le lire et le **modifier** (par exemple avec les outils de développement) et payer `prix=1`. Le prix doit être calculé et vérifié **sur le serveur** ; un cookie ne doit contenir que des informations sans risque (préférence, identifiant de session).
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 25</span> — Le voyage d’un clic (synthèse) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-25 }
 
 Remettre dans l’ordre les étapes qui vont de la saisie d’une URL à l’affichage de la page.
 
@@ -647,7 +687,7 @@ Remettre dans l’ordre les étapes qui vont de la saisie d’une URL à l’aff
 
     Ordre : **3** (le DNS traduit le nom en IP) $\to$ **4** (requête HTTP `GET`) $\to$ **5** (les paquets traversent les routeurs) $\to$ **2** (réponse HTTP avec le HTML) $\to$ **1** (le navigateur assemble et affiche).
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 25</span> — `GET` et `POST` selon un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-10-25 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 26</span> — `GET` et `POST` selon un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-10-26 }
 
 Un élève demande à un assistant d’IA : « Quelle est la différence entre les méthodes `GET` et `POST` ? » Voici la réponse obtenue.
 

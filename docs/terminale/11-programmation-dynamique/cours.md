@@ -341,6 +341,16 @@ Tous ces exemples partagent la même ossature. C’est elle qu’il faut savoir 
 
     **Gloutons, diviser-pour-régner, programmation dynamique : ne pas confondre.** Le *glouton* fait un choix définitif à chaque étape (rapide, mais parfois faux). *Diviser pour régner* découpe en sous-problèmes **indépendants** (comme le tri fusion : les deux moitiés n’ont rien en commun). La *programmation dynamique* s’attaque au cas où les sous-problèmes **se chevauchent** : c’est précisément ce chevauchement qui rend la mémoire payante.
 
+## Ouverture : mémoriser plutôt que recalculer
+
+La programmation dynamique prolonge la **récursivité** (chapitre 1) et **diviser pour régner** (chapitre 7) : on découpe toujours en sous-problèmes, mais quand ils se répètent, on **mémorise** leurs résultats.
+
+- l’algorithme de Bellman-Ford, sur lequel repose le protocole RIP (chapitre *Réseaux*), est lui-même un algorithme de programmation dynamique ;
+
+- le chapitre suivant, *Recherche textuelle*, retrouvera la même idée « dépenser de la mémoire pour gagner du temps » avec une table de prétraitement ;
+
+- au **bac**, on vous demandera surtout d’écrire une **relation de récurrence**, de compléter une version **mémoïsée** ou une version **tabulée** (remplissage d’un tableau), et de comparer avec un algorithme **glouton**.
+
 ## Un peu d’histoire : Bellman et un nom choisi pour tromper un ministre
 
 La programmation dynamique est née dans les années 1950 sous la plume du mathématicien américain **Richard Bellman** (1920–1984), à la RAND Corporation. Le mot « programmation » n’a ici rien à voir avec le code : à l’époque, il signifie « planification », l’optimisation d’une suite de décisions (comme la *programmation linéaire*).

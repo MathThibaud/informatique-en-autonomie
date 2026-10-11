@@ -16,7 +16,7 @@
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/4 ](https://adventofcode.com/2020/day/4 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/06-defi-aoc-2020-04>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -119,7 +119,7 @@ Lire tout le fichier en une chaîne et construire la liste des blocs de texte, u
 
 ### <span class="exo-num">Exercice 5</span> — Compter les passeports complets <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-aoc-1-5 }
 
-Écrire `complet(passeport)` qui vérifie la présence des champs obligatoires, puis compter. Tester sur l’exemple de la fiche, puis sur vos données.
+Écrire `complet(passeport)` qui vérifie la présence des champs obligatoires, puis compter. Tester sur l’exemple du défi, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -183,7 +183,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 1.  Pour chaque champ, écrire une fonction de validation : `valide_byr(valeur)`, `valide_hgt(valeur)`, etc. Pour chacune, écrire au moins un `assert` qui doit réussir et un qui doit échouer, en visant les valeurs limites.
 
-2.  Écrire `valide(passeport)` qui combine le tout, puis compter. Sur l’exemple de la fiche, on doit trouver `2` passeports valides.
+2.  Écrire `valide(passeport)` qui combine le tout, puis compter. Sur l’exemple du défi, on doit trouver `2` passeports valides.
 
 ??? pouce "Coup de pouce"
 
@@ -231,7 +231,7 @@ Réécrire les validations des champs de la partie 2 qui s’y prêtent avec `re
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/16 ](https://adventofcode.com/2020/day/16 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/06-defi-aoc-2020-16>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -326,7 +326,7 @@ Repérer les valeurs non valides. Vérification : la réponse est `46`. Que rema
 
 ### <span class="exo-num">Exercice 4</span> — Valeurs non valides <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-aoc-2-4 }
 
-Écrire une fonction `respecte(valeur, bornes)` puis une fonction `valable_quelque_part(valeur, regles)`. En déduire le taux d’erreur. Tester sur l’exemple de la fiche, puis sur vos données.
+Écrire une fonction `respecte(valeur, bornes)` puis une fonction `valable_quelque_part(valeur, regles)`. En déduire le taux d’erreur. Tester sur l’exemple du défi, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -348,7 +348,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="exo-num">Exercice 5</span> — Ne garder que les bons billets <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-aoc-2-5 }
 
-Construire la liste des billets voisins valides. Attention : un billet peut contenir une valeur non valide qui ne change pas la somme de la partie 1. Sur l’exemple de la fiche, il reste 4 billets valides.
+Construire la liste des billets voisins valides. Attention : un billet peut contenir une valeur non valide qui ne change pas la somme de la partie 1. Sur l’exemple du défi, il reste 4 billets valides.
 
 !!! encadre "Outil Python : les ensembles (set)"
 

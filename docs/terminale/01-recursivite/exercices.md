@@ -148,7 +148,7 @@ def fib(n):
 
     En notant $C(n)$ le nombre d’appels, $C(0)=C(1)=1$ et $C(n)=1+C(n-1)+C(n-2)$, d’où $C(2)=3$, $C(3)=5$, $C(4)=\mathbf{9}$.
 
-    - **3.**  le nombre d’appels double environ à chaque incrément de $n$ : le coût est **exponentiel**, vite ingérable.
+    - **3.**  le nombre d’appels est multiplié par environ $1{,}6$ quand $n$ augmente de $1$ (il fait plus que doubler quand $n$ augmente de $2$) : le coût est **exponentiel**, vite ingérable.
 
     - **4.**  la **programmation dynamique** (mémoïsation) : on mémorise les valeurs déjà calculées.
 
@@ -297,7 +297,7 @@ Soit la suite $\left(u_n\right)$ définie par $$u_n = \left\lbrace \begin{array}
 
 On peut calculer $x^n$ bien plus vite en remarquant que $x^n = \left(x^{n/2}\right)^2$ si $n$ est pair, et $x^n = x \times x^{n-1}$ si $n$ est impair.
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `puissance_rapide(x, n)` suivant cette idée. C’est un exemple de méthode **« diviser pour régner »** : le nombre de multiplications passe de $n$ à environ $\log_2 n$.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `puissance_rapide(x, n)` suivant cette idée. C’est un exemple de la méthode **« diviser pour régner »**, qu’on étudiera au chapitre 7 : le nombre de multiplications passe de $n$ à environ $\log_2 n$.
 
 ??? pouce "Coup de pouce"
 

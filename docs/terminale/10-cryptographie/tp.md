@@ -510,7 +510,7 @@ Pour signer, on chiffre avec la clé **privée** ; tout le monde vérifie avec l
 
     **4.** De $15$ à $617$ chiffres, on ajoute $602$ chiffres, soit $301$ fois un facteur $10$ : environ $1{,}26 \times 10^{301}$ secondes, soit plus de $10^{283}$ fois l’âge de l’Univers.
 
-    **5.** Avec des premiers à $4$ chiffres, $n$ en a $7$ ou $8$ : `factoriser(32431187)` renvoie `(4931, 6577)` instantanément, puis $\varphi = 4930 \times 6576$ et `d = pow(65537, -1, phi)` : la clé privée est retrouvée et le message déchiffré en moins d’une seconde. De tels nombres ne protègent rien : la sécurité exige des premiers de plus de $150$ chiffres.
+    **5.** Avec des premiers à $4$ chiffres, $n$ en a $7$ ou $8$ : `factoriser(32431187)` renvoie `(4931, 6577)` instantanément, puis $\varphi = 4930 \times 6576$ et `d = pow(65537, -1, phi)` : la clé privée est retrouvée et le message déchiffré en moins d’une seconde. De tels nombres ne protègent rien : la sécurité exige des premiers d’environ $300$ chiffres chacun (un $n$ de $2\,048$ bits a $617$ chiffres, comme dans la question 4).
 
 ## Bilan du TP
 

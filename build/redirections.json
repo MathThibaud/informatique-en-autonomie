@@ -7,5 +7,6 @@
   "terminale/09-recherche-textuelle": "terminale/12-recherche-textuelle",
   "terminale/10-processus-et-ordonnancement": "terminale/04-processus-et-ordonnancement",
   "terminale/11-reseaux": "terminale/09-reseaux",
-  "terminale/12-cryptographie": "terminale/10-cryptographie"
+  "terminale/12-cryptographie": "terminale/10-cryptographie",
+  "premiere/12-les-k-k-plus-proches-voisins": "premiere/12-les-k-plus-proches-voisins"
 }

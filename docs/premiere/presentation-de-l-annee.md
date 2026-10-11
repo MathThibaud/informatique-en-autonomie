@@ -30,39 +30,39 @@ En Première, la NSI, c’est **4 heures par semaine**. Une grande partie se pas
 
 ### De la rentrée aux vacances de Toussaint
 
-**Chapitre 1 — Les bases de la programmation (Python).** *Vous allez apprendre à écrire vos premiers programmes : ranger des informations dans des variables, faire faire des choix à la machine (si… alors…), lui faire répéter des actions, et fabriquer vos propres « fonctions ».*
+**Chapitre 1 — Les bases de la programmation Python.** *Vous allez apprendre à écrire vos premiers programmes : ranger des informations dans des variables, faire faire des choix à la machine (si… alors…), lui faire répéter des actions, et fabriquer vos propres « fonctions ».*
 
-**Complément — Dessiner avec la tortue (`turtle`).** *Juste après ce premier chapitre, vos programmes **dessinent** : une « tortue » avance et tourne à l’écran selon vos ordres ; boucles et fonctions suffisent pour tracer polygones, spirales et rosaces… puis pour lui faire écrire des mots entiers (projet « La tortue écrivain »).*
+**Complément — Dessiner avec la tortue.** *Juste après ce premier chapitre, vos programmes **dessinent** : une « tortue » avance et tourne à l’écran selon vos ordres ; boucles et fonctions suffisent pour tracer polygones, spirales et rosaces… puis pour lui faire écrire des mots entiers (projet « La tortue écrivain »).*
 
 **Chapitre 2 — Le binaire et l’écriture des nombres.** *Vous allez découvrir comment une machine représente un nombre avec seulement des `0` et des `1`, pourquoi elle ne connaît que ça… et pourquoi, sur un ordinateur, $0{,}1 + 0{,}2$ ne fait pas tout à fait $0{,}3$ !*
 
 ### De la Toussaint à Noël
 
-**Chapitre 3 — Regrouper des données (listes, tableaux, dictionnaires).** *Vous allez apprendre à manipuler des données par paquets : des listes de valeurs, des tableaux, et des « dictionnaires » qui associent une information à une étiquette.*
+**Chapitre 3 — Les types construits.** *Vous allez apprendre à regrouper des données par paquets : des p-uplets figés, des tableaux (listes) de valeurs, et des « dictionnaires » qui associent une information à une étiquette.*
 
-**Chapitre 4 — Parcourir et chercher (algorithmique).** *Vous allez écrire des méthodes pour explorer des données : retrouver un élément, repérer le plus grand, calculer une moyenne… et vous demander si votre méthode est rapide.*
+**Chapitre 4 — Algorithmique : le parcours séquentiel.** *Vous allez écrire des méthodes pour explorer des données : retrouver un élément, repérer le plus grand, calculer une moyenne… et vous demander si votre méthode est rapide.*
 
 ### De janvier aux vacances d’hiver
 
-**Chapitre 5 — Écrire des programmes fiables (spécifier, tester, corriger).** *Vous allez apprendre à dire précisément ce que fait un programme, à le protéger des erreurs, à le **tester** et à **traquer les bugs** — et vous verrez qu’il existe bien d’autres langages que Python.*
+**Chapitre 5 — Spécifier et mettre au point ses programmes.** *Vous allez apprendre à écrire des programmes fiables : dire précisément ce que fait un programme, le protéger des erreurs, le **tester** et **traquer les bugs** — et vous verrez qu’il existe bien d’autres langages que Python.*
 
 **Chapitre 6 — Les algorithmes de tri.** *Vous allez apprendre à trier des données, comme on range un jeu de cartes, et à mesurer le travail que cela demande.*
 
 **Chapitre 7 — La recherche dichotomique.** *Vous allez retrouver une valeur très vite dans une liste triée, sans tout parcourir, en coupant la zone de recherche en deux à chaque étape.*
 
-**Chapitre 8 — Traiter des données en tables.** *Vous allez travailler sur de vraies données (des fichiers comme ceux d’un tableur) : les filtrer, les trier, croiser deux tables. Un avant-goût des bases de données.*
+**Chapitre 8 — Les données en tables.** *Vous allez travailler sur de vraies données (des fichiers comme ceux d’un tableur) : les filtrer, les trier, croiser deux tables. Un avant-goût des bases de données.*
 
 ### Des vacances d’hiver à celles de printemps
 
-**Chapitre 9 — Comment marche un ordinateur (machine, système, réseaux).** *Vous allez ouvrir le capot : le processeur, la mémoire, le rôle du système d’exploitation, et la façon dont les machines s’échangent des informations à travers un réseau.*
+**Chapitre 9 — Architecture des ordinateurs et systèmes d’exploitation.** *Vous allez ouvrir le capot : comment marche un ordinateur, avec son processeur et sa mémoire, et le rôle du système d’exploitation, que vous piloterez en ligne de commande.*
 
-**Chapitre 10 — Le Web et l’interaction.** *Vous allez comprendre ce qui se passe quand vous cliquez sur une page : ce que fait votre navigateur, ce que fait le serveur à l’autre bout, et comment un formulaire envoie vos réponses.*
+**Chapitre 10 — Le Web : réseaux et interactions homme-machine.** *Vous allez découvrir comment les machines s’échangent des informations à travers un réseau, puis comprendre ce qui se passe quand vous cliquez sur une page : ce que fait votre navigateur, ce que fait le serveur à l’autre bout, comment un formulaire envoie vos réponses et ce que le navigateur garde en mémoire (les cookies).*
 
 ### Du printemps à la fin de l’année
 
 **Chapitre 11 — Les algorithmes gloutons.** *Vous allez résoudre des problèmes en faisant, à chaque étape, le choix qui semble le meilleur sur le moment : rendre la monnaie, remplir un sac au mieux…*
 
-**Chapitre 12 — Une première intelligence artificielle : les « plus proches voisins ».** *Vous allez programmer un algorithme qui « devine » : classer un élément d’après ceux qui lui ressemblent le plus. C’est l’une des idées derrière l’IA d’aujourd’hui.*
+**Chapitre 12 — Les $k$ plus proches voisins.** *Une première intelligence artificielle. Vous allez programmer un algorithme qui « devine », c’est-à-dire qui classe un élément d’après ceux qui lui ressemblent le plus. C’est l’une des idées derrière l’IA d’aujourd’hui.*
 
 !!! remarque "Remarque"
 
@@ -100,11 +100,13 @@ Nos **4 heures par semaine** se partagent entre :
 
     - **Cours** : les notions, des exemples corrigés et un bilan ;
 
-    - **Exercices** : du plus simple au niveau du bac, avec des coups de pouce en fin de rubrique ; leurs corrigés sont en fin de livre ;
+    - **Exercices** : du plus simple au plus exigeant, avec des coups de pouce en fin de rubrique ; leurs corrigés sont en fin de livre ;
 
     - **TP et projets** : un travail plus long sur machine qui réinvestit tout le chapitre ;
 
-    - **Défis Advent of Code** : des énigmes de programmation tirées d’*Advent of Code* (`adventofcode.com`), un concours en ligne créé et animé depuis 2015 par le développeur **Eric Wastl**, qui publie chaque année, du 1<sup>er</sup> au 25 décembre, une énigme en deux parties. L’énoncé, en anglais, se lit sur le site (QR code sur chaque fiche ; le navigateur peut le traduire) ; la fiche fournit un lexique, un résumé, un petit exemple pour se tester et des coups de pouce. Ces défis sont **facultatifs** et n’utilisent que des notions déjà vues dans l’année.
+    - **Fiche de révision** : l’essentiel du chapitre en deux pages, à relire avant un test ou un contrôle ;
+
+    - **Défis Advent of Code** : un défi par chapitre, une énigme de programmation tirée d’*Advent of Code* (`adventofcode.com`), un concours en ligne créé et animé depuis 2015 par le développeur **Eric Wastl**, qui publie chaque mois de décembre une série d’énigmes, chacune en deux parties. L’énoncé, en anglais, se lit sur le site (QR code sur chaque défi ; le navigateur peut le traduire) ; le défi fournit un lexique, un résumé, un petit exemple pour se tester et des coups de pouce. Ces défis sont **facultatifs** et n’utilisent que des notions déjà vues dans l’année, ou présentées dans un encadré « Outil Python » du défi.
 
     **Les défis n’ont volontairement pas de corrigé** dans ce livre : tout le plaisir d’une énigme est de la résoudre soi-même. Le site indique si votre réponse est juste (avec un compte gratuit) ; en cas de blocage, lisez les coups de pouce, puis venez en parler en classe.
 

@@ -17,10 +17,10 @@ hide:
 
 !!! livre "Le manuel complet en PDF"
 
-    Tout le cours, les exercices et les corrigés de l'année, dans la version distribuée en classe (version du 8 octobre 2026).
+    Tout le cours, les exercices et les corrigés de l'année, dans la version distribuée en classe (version du 11 octobre 2026).
 
-    [:material-download: Télécharger le manuel (11,3 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-premiere.pdf){ .md-button .md-button--primary }
-    [:material-printer: Version A4 à imprimer (11,1 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-premiere-a4.pdf){ .md-button }
+    [:material-download: Télécharger le manuel (11,1 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-premiere.pdf){ .md-button .md-button--primary }
+    [:material-printer: Version A4 à imprimer (11,0 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-premiere-a4.pdf){ .md-button }
 
 ## Chapitres
 
@@ -74,11 +74,11 @@ hide:
 
     <small>Activités préparatoires · Cours · Exercices · TP et projets · Défis Advent of Code</small>
 
--   [**12. Les $k$k plus proches voisins**](12-les-k-k-plus-proches-voisins/index.md)
+-   [**12. Les k plus proches voisins**](12-les-k-plus-proches-voisins/index.md)
 
     <small>Activités préparatoires · Cours · Exercices · TP et projets · Défis Advent of Code</small>
 
--   [**Problèmes de synthèse et exercices type bac**](synthese/index.md)
+-   [**Problèmes de synthèse**](synthese/index.md)
 
     <small>Exercices</small>
 

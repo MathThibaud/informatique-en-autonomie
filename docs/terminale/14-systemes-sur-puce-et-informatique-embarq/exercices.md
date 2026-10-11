@@ -58,9 +58,9 @@ En 1971, l’Intel 4004 comptait $2\,300$ transistors. La loi de Moore affirme q
 
 2.  En déduire une estimation du nombre de transistors d’une puce en 2021. (On rappelle $2^{25}\approx 33{,}5$ millions ; on donnera un ordre de grandeur.)
 
-3.  La puce Apple A13 (2019) compte environ $8{,}5$ **milliards** de transistors. La loi de Moore est-elle une prédiction *parfaite* ? Commenter.
+3.  La puce Apple A15 (2021) compte environ $15$ **milliards** de transistors. La loi de Moore est-elle une prédiction *parfaite* ? Commenter.
 
-4.  Les transistors sont aujourd’hui gravés à $7$ nm. Un atome de silicium mesure environ $0{,}2$ nm. Combien d’atomes, environ, dans la largeur d’un transistor ? Que suggère ce résultat sur l’**avenir** de la loi de Moore ?
+4.  Les puces récentes sont gravées « en $3$ nm » (une appellation commerciale, qu’on prendra ici comme ordre de grandeur de la largeur d’un transistor). Un atome de silicium mesure environ $0{,}2$ nm. Combien d’atomes, environ, dans la largeur d’un transistor ? Que suggère ce résultat sur l’**avenir** de la loi de Moore ?
 
     ??? pouce "Coup de pouce"
 
@@ -72,9 +72,9 @@ En 1971, l’Intel 4004 comptait $2\,300$ transistors. La loi de Moore affirme q
 
     2.  $2\,300\times 2^{25}\approx 2\,300\times 33{,}5\text{ millions}\approx \mathbf{7{,}7\times 10^{10}}$, soit environ **80 milliards** de transistors.
 
-    3.  Non : la loi prévoit $\approx 80$ milliards, la réalité (A13) est $\approx 8{,}5$ milliards, soit environ **$10$ fois moins**. La loi de Moore donne le bon *ordre de grandeur* et la bonne *tendance*, mais elle a **ralenti** ces dernières années (elle reste une prédiction empirique, pas une loi physique).
+    3.  Non : la loi prévoit $\approx 80$ milliards, la réalité (A15, 2021) est $\approx 15$ milliards, soit environ **$5$ fois moins**. La loi de Moore donne le bon *ordre de grandeur* et la bonne *tendance*, mais elle a **ralenti** ces dernières années (elle reste une prédiction empirique, pas une loi physique).
 
-    4.  $7 \div 0{,}2 = \mathbf{35}$ atomes environ. On approche des limites **physiques** : on ne peut pas graver plus fin qu’un atome. La loi de Moore ne pourra donc pas continuer éternellement.
+    4.  $3 \div 0{,}2 = \mathbf{15}$ atomes environ : c’est un ordre de grandeur, car « 3 nm » est un nom commercial (les motifs réels sont un peu plus larges), mais on reste à quelques dizaines d’atomes au plus. On approche des limites **physiques** : on ne peut pas graver plus fin qu’un atome. La loi de Moore ne pourra donc pas continuer éternellement.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Dérouler un thermostat <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-5 }
 
@@ -619,7 +619,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
     **Sujet 3.**
 
-    - Énoncé : le nombre de **transistors** sur une puce double environ tous les deux ans (observation de Gordon Moore, 1965) ; c’est une prédiction empirique, pas une loi physique.
+    - Énoncé : le nombre de **transistors** sur une puce double environ tous les deux ans (Gordon Moore prévoit en 1965 un doublement chaque année, puis révise en 1975 : tous les deux ans) ; c’est une prédiction empirique, pas une loi physique.
 
     - Chiffres : $2\,300$ transistors pour l’Intel 4004 (1971), des dizaines de milliards aujourd’hui.
 

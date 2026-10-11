@@ -28,7 +28,7 @@ Nous utiliserons **Python** (version 3), un langage de haut niveau réputé pou
 
     L’idée d’écrire un programme avec des **mots** n’allait pas de soi. Dans les années 1950, on programme encore les ordinateurs avec des suites de nombres. L’Américaine **Grace Hopper** (1906–1992), mathématicienne et officière de la marine des États-Unis, pense au contraire que l’ordinateur doit s’adapter à l’humain. En 1952, elle écrit l’un des tout premiers **compilateurs** : un programme qui *traduit* des instructions lisibles en langage machine. On lui répond que « les ordinateurs ne comprennent pas l’anglais » ; elle s’obstine, et ses travaux mènent au langage <span class="smallcaps">Cobol</span> (1959), utilisé dans les banques jusqu’à aujourd’hui.
 
-    Trente ans plus tard, pendant les vacances de Noël 1989, le Néerlandais **Guido van Rossum** commence à écrire, à Amsterdam, un nouveau langage qu’il veut **simple à lire**. Il le baptise **Python**, non pas pour le serpent, mais en hommage à la troupe comique britannique des *Monty Python*. La première version est publiée en 1991 ; c’est à lui que l’on doit l’**indentation obligatoire** que vous allez découvrir. Python est aujourd’hui l’un des langages les plus utilisés au monde, de l’enseignement à l’intelligence artificielle.
+    Près de quarante ans plus tard, pendant les vacances de Noël 1989, le Néerlandais **Guido van Rossum** commence à écrire, à Amsterdam, un nouveau langage qu’il veut **simple à lire**. Il le baptise **Python**, non pas pour le serpent, mais en hommage à la troupe comique britannique des *Monty Python*. La première version est publiée en 1991 ; il y reprend, d’un langage plus ancien nommé ABC, l’**indentation obligatoire** que vous allez découvrir. Python est aujourd’hui l’un des langages les plus utilisés au monde, de l’enseignement à l’intelligence artificielle.
 
     \*(image manquante : 01_hist_grace_hopper)\*  
     Grace Hopper en 1984
@@ -85,9 +85,16 @@ Il existe une tradition en informatique : le premier programme qu’on écrit da
     print("Hello World !")
     ```
 
-    Puis cliquez sur le **triangle vert** $\blacktriangleright$ (en haut) pour **exécuter** le programme. Spyder va vous demander d’enregistrer votre fichier : rangez-le dans un dossier de travail que vous retrouverez (par exemple `Documents/SNT/`). Dans la console, vous devez voir apparaître :
+    Puis cliquez sur le **triangle vert** $\blacktriangleright$ (en haut) pour **exécuter** le programme. Spyder va vous demander d’enregistrer votre fichier : rangez-le dans un dossier de travail que vous retrouverez (par exemple `Documents/SNT/`, sous le nom `hello.py`). Dans la console, vous devez voir apparaître :
 
-    \*(image manquante : 01_helloworld)\*
+    ```text
+    In [1]: runfile('.../Documents/SNT/hello.py', wdir='.../Documents/SNT')
+    Hello World !
+
+    In [2]:
+    ```
+
+    La ligne `In [1]` est écrite par Spyder quand il lance le programme ; la ligne suivante est l’affichage produit par `print`.
 
 L’instruction `print(...)` (« imprimer » en anglais, au sens d’« afficher ») sert à **afficher un message dans la console**. C’est l’équivalent du bloc ![](../figures/e1f92541e5fb492e.svg){ .tikz .tikz-inline loading=lazy } de Scratch. Le message à afficher se met entre **guillemets** et entre **parenthèses**.
 
@@ -177,7 +184,7 @@ Cette ligne se lit : « la variable `points_de_vie` prend la valeur $15$ ». On 
 
 !!! remarque "Remarque"
 
-    Le signe `=` en Python ne veut **pas** dire « est égal à » comme en maths ! Il veut dire « **reçoit** la valeur ». La ligne `points_de_vie = 15` est un ordre : « range $15$ dans la boîte `points_de_vie` ». C’est une nuance importante, on y revient au § IV.
+    Le signe `=` en Python ne veut **pas** dire « est égal à » comme en maths ! Il veut dire « **reçoit** la valeur ». La ligne `points_de_vie = 15` est un ordre : « range $15$ dans la boîte `points_de_vie` ». C’est une nuance importante, on y revient au § V (« Le grand classique : `a = a + 1` »).
 
 ### Afficher et inspecter une variable
 
@@ -245,7 +252,7 @@ On a le droit de choisir presque n’importe quel nom… mais pas tout à fait 
 
     - `str` : une <span id="lex-chaine01" class="ancre"></span>**chaîne de caractères** (*string*), du texte, ex. `"Bonjour"` ;
 
-    - `bool` : un <span id="lex-booleen01" class="ancre"></span>**booléen**, qui vaut `True` (vrai) ou `False` (faux). (On l’étudie au § VIII.)
+    - `bool` : un **booléen**, qui vaut `True` (vrai) ou `False` (faux). (On l’étudie au § VIII.)
 
 !!! remarque "Remarque"
 
@@ -608,7 +615,7 @@ Une fonction qui utilise `print` mais pas `return` *montre* un résultat mais ne
 
 ### Vrai ou faux : le type booléen
 
-Si je vous dis « $4$ est égal à $5$ », vous répondez « faux ». Si je dis « $7$ est égal à $7$ », vous répondez « vrai ». Ces réponses « vrai / faux » sont ce qu’on appelle des **booléens**. En Python, il n’y a que deux booléens : `True` (vrai) et `False` (faux), avec une majuscule.
+<span id="lex-booleen01" class="ancre"></span> Si je vous dis « $4$ est égal à $5$ », vous répondez « faux ». Si je dis « $7$ est égal à $7$ », vous répondez « vrai ». Ces réponses « vrai / faux » sont ce qu’on appelle des **booléens**. En Python, il n’y a que deux booléens : `True` (vrai) et `False` (faux), avec une majuscule.
 
 Une **comparaison** produit un booléen. Le test d’égalité s’écrit avec un **double** signe égal `==` :
 
@@ -973,9 +980,9 @@ Vous avez maintenant toutes les briques : variables, types, calculs, chaînes, f
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Python sert d’outil dans plusieurs thèmes de SNT. Au chapitre *Photographie numérique*, deux boucles `for` imbriquées parcourent tous les **pixels** d’une image pour la retoucher ; au chapitre *Informatique embarquée et objets connectés*, une boucle `while` et un test `if` forment la **boucle de commande** d’un thermostat. La fiche *Turtle* met en images les boucles et les fonctions, et **filtrer** une table de données (chapitre *Données en tables*) revient à tester des conditions combinées par `and` et `or`. En spécialité NSI de Première, ces mêmes bases s’enrichissent de nouveaux types (**listes**, **dictionnaires**) pour traiter des données plus volumineuses.
+    Python servira d’outil dans plusieurs thèmes de SNT. Au chapitre *Photographie numérique*, deux boucles `for` imbriquées parcourront tous les **pixels** d’une image pour la retoucher ; au chapitre *Informatique embarquée et objets connectés*, une boucle `while` et un test `if` formeront la **boucle de commande** d’un thermostat. Le complément *Dessiner avec la tortue*, juste après ce chapitre, met en images les boucles et les fonctions, et **filtrer** une table de données (chapitre *Données en tables*) reviendra à tester des conditions combinées par `and` et `or`. En spécialité NSI de Première, ces mêmes bases s’enrichissent de nouveaux types (**listes**, **dictionnaires**) pour traiter des données plus volumineuses.
 
-## Aide-mémoire
+## Bilan — la carte mémoire
 
 | **Je veux…**                        | **J’écris…** |
 |:------------------------------------|:-------------|

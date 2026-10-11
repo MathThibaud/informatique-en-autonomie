@@ -434,7 +434,7 @@ La carte micro:bit (version 2) est construite autour d’une seule puce, le **nR
 
     Mémoire : $16$ Go $= 16 \times 1024 \times 1024$ Ko $= 16\,777\,216$ Ko, et $16\,777\,216 / 128 = 131\,072$. Composants du PC : carte mère, processeur, barrettes de mémoire, disque, carte graphique…
 
-    **2.** Processeur : le cœur Cortex-M4 ; mémoire : la Flash (programme) et la mémoire vive (données) ; entrées-sorties : la radio Bluetooth, le convertisseur analogique-numérique (capteurs), les minuteries. Tout est gravé sur **un seul circuit intégré** : c’est un système sur puce. Il s’agit d’un **microcontrôleur** : fréquence de quelques dizaines de MHz, mémoire de quelques dizaines de Ko, aucun système d’exploitation, très faible consommation, une tâche embarquée.
+    **2.** Processeur : le cœur Cortex-M4 ; mémoire : la Flash (programme) et la mémoire vive (données) ; entrées-sorties : la radio Bluetooth, le convertisseur analogique-numérique (capteurs), les minuteries. Tout est gravé sur **un seul circuit intégré** : c’est un système sur puce. Il s’agit d’un **microcontrôleur** : fréquence de quelques dizaines de MHz, mémoire de quelques centaines de Ko ($128$ Ko de mémoire vive et $512$ Ko de Flash ici), aucun système d’exploitation, très faible consommation, une tâche embarquée.
 
     **3.** L’**architecture de Harvard** (programme et données dans deux mémoires, deux bus) : le processeur peut lire une instruction et une donnée **en même temps**.
 

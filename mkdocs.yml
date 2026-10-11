@@ -104,30 +104,38 @@ nav:
     - seconde/02-les-reseaux-sociaux/index.md
     - Cours: seconde/02-les-reseaux-sociaux/cours.md
     - Exercices: seconde/02-les-reseaux-sociaux/exercices.md
+    - TP et projets: seconde/02-les-reseaux-sociaux/tp.md
   - 3. La photographie numérique:
     - seconde/03-la-photographie-numerique/index.md
     - Cours: seconde/03-la-photographie-numerique/cours.md
     - Exercices: seconde/03-la-photographie-numerique/exercices.md
+    - TP et projets: seconde/03-la-photographie-numerique/tp.md
   - 4. Le Web:
     - seconde/04-le-web/index.md
     - Cours: seconde/04-le-web/cours.md
     - Exercices: seconde/04-le-web/exercices.md
+    - TP et projets: seconde/04-le-web/tp.md
   - 5. Les données structurées et leur traitement:
     - seconde/05-les-donnees-structurees-et-leur-traiteme/index.md
     - Cours: seconde/05-les-donnees-structurees-et-leur-traiteme/cours.md
     - Exercices: seconde/05-les-donnees-structurees-et-leur-traiteme/exercices.md
+    - TP et projets: seconde/05-les-donnees-structurees-et-leur-traiteme/tp.md
   - 6. Internet:
     - seconde/06-internet/index.md
     - Cours: seconde/06-internet/cours.md
     - Exercices: seconde/06-internet/exercices.md
+    - TP et projets: seconde/06-internet/tp.md
   - 7. Localisation, cartographie et mobilité:
     - seconde/07-localisation-cartographie-et-mobilite/index.md
     - Cours: seconde/07-localisation-cartographie-et-mobilite/cours.md
     - Exercices: seconde/07-localisation-cartographie-et-mobilite/exercices.md
+    - TP et projets: seconde/07-localisation-cartographie-et-mobilite/tp.md
   - 8. Informatique embarquée et objets connectés:
     - seconde/08-informatique-embarquee-et-objets-connect/index.md
+    - Activités préparatoires: seconde/08-informatique-embarquee-et-objets-connect/activites.md
     - Cours: seconde/08-informatique-embarquee-et-objets-connect/cours.md
     - Exercices: seconde/08-informatique-embarquee-et-objets-connect/exercices.md
+    - TP et projets: seconde/08-informatique-embarquee-et-objets-connect/tp.md
   - Lexique: seconde/lexique.md
   - Crédits iconographiques: seconde/credits.md
 - Première:
@@ -218,14 +226,14 @@ nav:
     - Exercices: premiere/11-les-algorithmes-gloutons/exercices.md
     - TP et projets: premiere/11-les-algorithmes-gloutons/tp.md
     - Défis Advent of Code: premiere/11-les-algorithmes-gloutons/defis.md
-  - 12. Les $k$k plus proches voisins:
-    - premiere/12-les-k-k-plus-proches-voisins/index.md
-    - Activités préparatoires: premiere/12-les-k-k-plus-proches-voisins/activites.md
-    - Cours: premiere/12-les-k-k-plus-proches-voisins/cours.md
-    - Exercices: premiere/12-les-k-k-plus-proches-voisins/exercices.md
-    - TP et projets: premiere/12-les-k-k-plus-proches-voisins/tp.md
-    - Défis Advent of Code: premiere/12-les-k-k-plus-proches-voisins/defis.md
-  - Problèmes de synthèse et exercices type bac:
+  - 12. Les k plus proches voisins:
+    - premiere/12-les-k-plus-proches-voisins/index.md
+    - Activités préparatoires: premiere/12-les-k-plus-proches-voisins/activites.md
+    - Cours: premiere/12-les-k-plus-proches-voisins/cours.md
+    - Exercices: premiere/12-les-k-plus-proches-voisins/exercices.md
+    - TP et projets: premiere/12-les-k-plus-proches-voisins/tp.md
+    - Défis Advent of Code: premiere/12-les-k-plus-proches-voisins/defis.md
+  - Problèmes de synthèse:
     - premiere/synthese/index.md
     - Exercices: premiere/synthese/exercices.md
   - Crédits iconographiques: premiere/credits.md
@@ -346,5 +354,8 @@ nav:
     - Sujet 30: terminale/pratique/sujet-30.md
     - Sujet 31: terminale/pratique/sujet-31.md
     - Sujet 32: terminale/pratique/sujet-32.md
+  - Réussir la partie écrite: terminale/reussir-la-partie-ecrite.md
+  - Réussir l'épreuve pratique: terminale/reussir-l-epreuve-pratique.md
+  - Préparer le Grand Oral: terminale/preparer-le-grand-oral.md
   - Crédits iconographiques: terminale/credits.md
 - À propos: a-propos.md

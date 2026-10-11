@@ -82,7 +82,7 @@ Environ **un tiers de l’année** reste consacré à des **projets** et à la p
 
     - **TP et projets** : un travail plus long sur machine qui réinvestit tout le chapitre ;
 
-    - **Défis Advent of Code** : des énigmes de programmation tirées d’*Advent of Code* (`adventofcode.com`), un concours en ligne créé et animé depuis 2015 par le développeur **Eric Wastl**, qui publie chaque année, du 1<sup>er</sup> au 25 décembre, une énigme en deux parties. L’énoncé, en anglais, se lit sur le site (QR code sur chaque fiche ; le navigateur peut le traduire) ; la fiche fournit un lexique, un résumé, un petit exemple pour se tester et des coups de pouce. Ces défis sont **facultatifs** et n’utilisent que des notions déjà vues dans l’année.
+    - **Défis Advent of Code** : des énigmes de programmation tirées d’*Advent of Code* (`adventofcode.com`), un concours en ligne créé et animé depuis 2015 par le développeur **Eric Wastl**, qui publie chaque année, du 1<sup>er</sup> au 25 décembre, une énigme en deux parties. L’énoncé, en anglais, se lit sur le site (QR code sur chaque défi ; le navigateur peut le traduire) ; chaque défi est accompagné d’un lexique, d’un résumé, d’un petit exemple pour se tester et de coups de pouce. Ces défis sont **facultatifs** et n’utilisent que des notions déjà vues dans l’année.
 
     **Les défis n’ont volontairement pas de corrigé** dans ce livre : tout le plaisir d’une énigme est de la résoudre soi-même. Le site indique si votre réponse est juste (avec un compte gratuit) ; en cas de blocage, lisez les coups de pouce, puis venez en parler en classe.
 
@@ -90,7 +90,7 @@ Environ **un tiers de l’année** reste consacré à des **projets** et à la p
 
 !!! encadre "Les épreuves"
 
-    - **l’écrit de spécialité** (en **juin**, coefficient **16**) : une épreuve écrite portant sur l’ensemble du programme ;
+    - **l’épreuve de spécialité** (en **juin**, coefficient **16**), en deux parties : une **partie écrite** de 3 h 30, notée sur 12, qui porte sur l’ensemble du programme, et une **partie pratique** d’1 h sur machine, notée sur 8 (voir la deuxième partie de ce livre) ;
 
     - **le Grand Oral** (en juin également, coefficient **8**) : vous préparez **deux questions**, dont **au moins une doit s’appuyer sur la NSI**.
 
@@ -98,7 +98,7 @@ Comme les épreuves ont lieu **en fin d’année**, on dispose de **toute l’an
 
 ## Comment vous êtes évalué
 
-- à chaque chapitre : un ou deux courts **tests rapides** (/10) puis un **contrôle** (/20) — sauf pour la calculabilité, évaluée par ses seuls tests rapides ;
+- à chaque chapitre : un ou deux courts **tests rapides** (/10) puis un **contrôle** (/20) ;
 
 - des **bacs blancs** pour s’entraîner en conditions ;
 

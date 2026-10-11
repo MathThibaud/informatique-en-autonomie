@@ -48,6 +48,8 @@
 
 **CSV** — Format texte ouvert pour les tables : une ligne par enregistrement, valeurs séparées par des virgules ou des points-virgules. *(ch. 5, [voir le cours](05-les-donnees-structurees-et-leur-traiteme/cours.md#lex-csv05))*
 
+**Cyberharcèlement** — Insultes, menaces ou moqueries répétées en ligne ; c’est interdit par la loi. Réflexes : garder les preuves, bloquer, signaler, en parler. *(ch. 2, [voir le cours](02-les-reseaux-sociaux/cours.md#lex-cyberharcelement02))*
+
 ### D
 
 **Définition (d’une image)** — Nombre de pixels d’une image : largeur $\times$ hauteur. *(ch. 3, [voir le cours](03-la-photographie-numerique/cours.md#lex-definition03))*
@@ -72,6 +74,8 @@
 
 **E-réputation** — Image que votre identité numérique donne de vous aux autres. *(ch. 2, [voir le cours](02-les-reseaux-sociaux/cours.md#lex-ereputation02))*
 
+**Empreinte environnementale, sobriété** — Effets du numérique sur l’environnement (gaz à effet de serre, ressources), surtout dus à la fabrication des appareils ; la sobriété consiste à en limiter l’usage. *(ch. 8, [voir le cours](08-informatique-embarquee-et-objets-connect/cours.md#lex-empreinte08))*
+
 **Excentricité** — Distance d’un sommet au sommet le plus éloigné de lui. *(ch. 2, [voir le cours](02-les-reseaux-sociaux/cours.md#lex-excentricite02))*
 
 ### F
@@ -90,6 +94,8 @@
 
 ### H
 
+**Hameçonnage** — Faux message (courriel, SMS) qui imite un site connu pour vous faire saisir vos identifiants. *(ch. 4, [voir le cours](04-le-web/cours.md#lex-hameconnage04))*
+
 **HTML** — Langage de balisage qui décrit le contenu et la structure d’une page web. *(ch. 4, [voir le cours](04-le-web/cours.md#lex-html04))*
 
 **HTTP, HTTPS** — Protocole du dialogue entre client et serveur ; HTTPS en est la version sécurisée (données chiffrées). *(ch. 4, [voir le cours](04-le-web/cours.md#lex-http04))*
@@ -107,6 +113,8 @@
 **Interface homme-machine (IHM)** — Moyens de commander une machine et d’en recevoir un retour (écran, boutons, voix…). *(ch. 8, [voir le cours](08-informatique-embarquee-et-objets-connect/cours.md#lex-ihm08))*
 
 **Internet** — Réseau physique mondial de machines qui échangent des données grâce au protocole IP. *(ch. 4, [voir le cours](04-le-web/cours.md#lex-internet04))*
+
+**IPv6** — Nouvelle version des adresses IP, bien plus longues, pour numéroter des milliards de milliards de machines. *(ch. 6, [voir le cours](06-internet/cours.md#lex-ipv606))*
 
 ### L
 
@@ -131,6 +139,8 @@
 ### N
 
 **Navigateur** — Logiciel client qui demande les pages web et les affiche (Firefox, Chrome…). *(ch. 4, [voir le cours](04-le-web/cours.md#lex-navigateur04))*
+
+**Neutralité du Net** — Principe selon lequel les routeurs transmettent tous les paquets de la même façon, sans favoriser un service. *(ch. 6, [voir le cours](06-internet/cours.md#lex-neutralite06))*
 
 **Nuage (*cloud*)** — Données stockées sur des serveurs distants, accessibles par Internet. *(ch. 5, [voir le cours](05-les-donnees-structurees-et-leur-traiteme/cours.md#lex-nuage05))*
 
@@ -190,11 +200,15 @@
 
 **Trilatération** — Calcul d’une position en croisant les distances à plusieurs satellites. *(ch. 7, [voir le cours](07-localisation-cartographie-et-mobilite/cours.md#lex-trilateration07))*
 
+**TTL** — Compteur porté par chaque paquet : le nombre maximal de routeurs qu’il peut encore traverser ; à 0, le paquet est détruit. *(ch. 6, [voir le cours](06-internet/cours.md#lex-ttl06))*
+
 **Type** — Nature d’une valeur : entier (`int`), nombre à virgule (`float`), chaîne de caractères (`str`), booléen (`bool`). *(ch. 1, [voir le cours](01-les-bases-de-la-programmation-python/cours.md#lex-type01))*
 
 ### U
 
 **URL** — Adresse d’une page web. *(ch. 4, [voir le cours](04-le-web/cours.md#lex-url04))*
+
+**UTC** — Temps universel coordonné : l’heure de référence mondiale, la même partout sur Terre (Monaco est à UTC+1 en hiver, UTC+2 en été). *(ch. 7, [voir le cours](07-localisation-cartographie-et-mobilite/cours.md#lex-utc07))*
 
 ### V
 

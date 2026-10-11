@@ -16,7 +16,7 @@
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/11 ](https://adventofcode.com/2020/day/11 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/04-defi-aoc-2020-11>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -103,7 +103,7 @@ Dessiner la grille après un tour, puis après deux tours. Vérification : la gr
 
 ### <span class="exo-num">Exercice 5</span> — Un tour, puis jusqu’à stabilité <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-1-5 }
 
-Écrire une fonction `tour(grille)` qui renvoie la **nouvelle** grille sans modifier l’ancienne, puis répéter les tours tant que la grille change. Tester sur l’exemple de la fiche, puis sur vos données.
+Écrire une fonction `tour(grille)` qui renvoie la **nouvelle** grille sans modifier l’ancienne, puis répéter les tours tant que la grille change. Tester sur l’exemple du défi, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -127,7 +127,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Ce que l’on voit <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-1-6 }
 
-Écrire une fonction `visibles_occupes` (mêmes paramètres que `voisins_occupes`), puis adapter `tour` pour qu’elle reçoive en paramètres la fonction de comptage et le seuil. Sur l’exemple de la fiche, on doit trouver `9`.
+Écrire une fonction `visibles_occupes` (mêmes paramètres que `voisins_occupes`), puis adapter `tour` pour qu’elle reçoive en paramètres la fonction de comptage et le seuil. Sur l’exemple du défi, on doit trouver `9`.
 
 ??? pouce "Coup de pouce"
 
@@ -178,7 +178,7 @@ Les voisins visibles d’un siège ne dépendent pas de l’état des sièges, s
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/22 ](https://adventofcode.com/2020/day/22 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/04-defi-aoc-2020-22>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -308,7 +308,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Le combat récursif <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-2-5 }
 
-Écrire une fonction récursive `combat_recursif(p1, p2)` qui renvoie le numéro du gagnant et son paquet. Sur l’exemple de la fiche, le joueur 1 gagne avec un score de `151`. Bien relire la règle qui empêche une partie de durer indéfiniment : elle s’applique à **chaque** partie et sous-partie séparément.
+Écrire une fonction récursive `combat_recursif(p1, p2)` qui renvoie le numéro du gagnant et son paquet. Sur l’exemple du défi, le joueur 1 gagne avec un score de `151`. Bien relire la règle qui empêche une partie de durer indéfiniment : elle s’applique à **chaque** partie et sous-partie séparément.
 
 ??? pouce "Coup de pouce"
 

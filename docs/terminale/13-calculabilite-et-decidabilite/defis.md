@@ -16,7 +16,7 @@
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/8 ](https://adventofcode.com/2020/day/8 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/13-defi-aoc-2020-08>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -109,7 +109,7 @@ Construire la liste `programme` de tuples `(operation, argument)`, l’argument 
 
 ### <span class="exo-num">Exercice 4</span> — Un interpréteur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-1-4 }
 
-Écrire une fonction `executer(programme)` qui simule la machine : une variable `acc`, une variable `ip` (numéro de l’instruction courante), et une boucle qui exécute une instruction par tour. La fonction s’arrête dès qu’une instruction s’apprête à être exécutée pour la deuxième fois et renvoie `acc`. Tester sur l’exemple de la fiche, puis sur vos données.
+Écrire une fonction `executer(programme)` qui simule la machine : une variable `acc`, une variable `ip` (numéro de l’instruction courante), et une boucle qui exécute une instruction par tour. La fonction s’arrête dès qu’une instruction s’apprête à être exécutée pour la deuxième fois et renvoie `acc`. Tester sur l’exemple du défi, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -155,7 +155,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 1.  Modifier `executer` pour qu’elle renvoie aussi un booléen indiquant si le programme s’est terminé normalement. Quelle condition sur `ip` signale une fin normale ?
 
-2.  Essayer toutes les modifications autorisées par l’énoncé, une à une, jusqu’à trouver celle qui fait terminer le programme. Sur l’exemple de la fiche, on doit obtenir `5`.
+2.  Essayer toutes les modifications autorisées par l’énoncé, une à une, jusqu’à trouver celle qui fait terminer le programme. Sur l’exemple du défi, on doit obtenir `5`.
 
 ??? pouce "Coup de pouce"
 
@@ -179,7 +179,7 @@ Pour un programme de $n$ instructions, combien d’instructions la méthode pré
 
 On note $n$ le nombre de lignes et $\mathrm{succ}(k)$ la ligne exécutée juste après la ligne $k$ ; la valeur $n$ représente la fin du programme.
 
-1.  Sur l’exemple de la fiche, donner $\mathrm{succ}(k)$ pour $k$ de $0$ à $7$.
+1.  Sur l’exemple du défi, donner $\mathrm{succ}(k)$ pour $k$ de $0$ à $7$.
 
 2.  Quelles lignes mènent, sans modification, jusqu’à la fin $8$ ? On les trouve en **remontant** les flèches depuis $8$.
 
@@ -209,7 +209,7 @@ On note $n$ le nombre de lignes et $\mathrm{succ}(k)$ la ligne exécutée juste 
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/17 ](https://adventofcode.com/2020/day/17 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/13-defi-aoc-2020-17>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -321,7 +321,7 @@ L’espace est infini : pas de liste de listes. Écrire une fonction `lire_actif
 
 ### <span class="exo-num">Exercice 5</span> — Un cycle <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-2-5 }
 
-Écrire une fonction `cycle(actifs)` qui renvoie le **nouvel** ensemble des cubes actifs. Quels cubes faut-il examiner ? Pas seulement les cubes actifs : la zone active grandit à chaque cycle. Simuler six cycles sur l’exemple de la fiche, puis sur vos données.
+Écrire une fonction `cycle(actifs)` qui renvoie le **nouvel** ensemble des cubes actifs. Quels cubes faut-il examiner ? Pas seulement les cubes actifs : la zone active grandit à chaque cycle. Simuler six cycles sur l’exemple du défi, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -345,7 +345,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Une dimension de plus <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-2-6 }
 
-Combien de voisins un point a-t-il en dimension 4 ? Si votre code est bien écrit, peu de choses changent : adapter `lire_actifs` et `voisins`. Sur l’exemple de la fiche, on doit trouver `36` cubes actifs après un cycle et `680` après six cycles.
+Combien de voisins un point a-t-il en dimension 4 ? Si votre code est bien écrit, peu de choses changent : adapter `lire_actifs` et `voisins`. Sur l’exemple du défi, on doit trouver `36` cubes actifs après un cycle et `680` après six cycles.
 
 ??? pouce "Coup de pouce"
 

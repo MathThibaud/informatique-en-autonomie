@@ -16,7 +16,7 @@
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/2 ](https://adventofcode.com/2020/day/2 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/01-defi-aoc-2020-02>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -98,7 +98,7 @@ Pour chaque ligne, dire si le mot de passe respecte la règle de la partie 1. V�
 
 ### <span class="exo-num">Exercice 4</span> — Valider et compter <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-recursivite-aoc-1-4 }
 
-Écrire une fonction `valide1(a, b, lettre, mdp)` qui renvoie un booléen, puis le programme qui lit `input.txt` et compte les mots de passe valides. Tester sur l’exemple de la fiche, puis sur vos données.
+Écrire une fonction `valide1(a, b, lettre, mdp)` qui renvoie un booléen, puis le programme qui lit `input.txt` et compte les mots de passe valides. Tester sur l’exemple du défi, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -120,7 +120,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 1.  Sans programme : la ligne `1-3 a: aba` est-elle valide selon la nouvelle règle ? Et `2-3 b: abc` ?
 
-2.  Écrire `valide2(a, b, lettre, mdp)` et compter. Sur l’exemple de la fiche, on doit trouver `2` mots de passe valides.
+2.  Écrire `valide2(a, b, lettre, mdp)` et compter. Sur l’exemple du défi, on doit trouver `2` mots de passe valides.
 
 ??? pouce "Coup de pouce"
 
@@ -170,7 +170,7 @@ Dresser la table de vérité du ou exclusif. Vérifier que `p != q`, `p ^ q` et 
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/7 ](https://adventofcode.com/2020/day/7 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/01-defi-aoc-2020-07>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -272,7 +272,7 @@ Faire un schéma : écrire chaque couleur, et tracer une flèche de $A$ vers $B$
 
 ### <span class="exo-num">Exercice 4</span> — Peut contenir le sac doré ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-recursivite-aoc-2-4 }
 
-Écrire une fonction récursive `peut_contenir(couleur)` qui renvoie `True` si un sac de cette couleur contient, directement ou non, un sac `shiny gold`. Compter les couleurs concernées. Tester sur l’exemple de la fiche, puis sur vos données.
+Écrire une fonction récursive `peut_contenir(couleur)` qui renvoie `True` si un sac de cette couleur contient, directement ou non, un sac `shiny gold`. Compter les couleurs concernées. Tester sur l’exemple du défi, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -296,7 +296,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 1.  Dans la partie 1, on cherchait des sacs « au-dessus » du sac doré. Dans quel sens suit-on maintenant les règles ?
 
-2.  Écrire une fonction récursive qui répond à la question. Sur l’exemple de la fiche, on doit trouver `13`.
+2.  Écrire une fonction récursive qui répond à la question. Sur l’exemple du défi, on doit trouver `13`.
 
 ??? pouce "Coup de pouce"
 
@@ -314,7 +314,7 @@ Pour chaque couleur, construire la liste des couleurs qui la contiennent **direc
 
 ??? pouce "Coup de pouce"
 
-    Sur l’exemple de la fiche, `contenants["shiny gold"]` vaut `["pale cyan"]` et `contenants["pale cyan"]` vaut `["striped coral"]`.
+    Sur l’exemple du défi, `contenants["shiny gold"]` vaut `["pale cyan"]` et `contenants["pale cyan"]` vaut `["striped coral"]`.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -322,7 +322,7 @@ Pour chaque couleur, construire la liste des couleurs qui la contiennent **direc
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : l’inventaire du sac doré <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-recursivite-aoc-2-7 }
 
-1.  À la main, sur l’exemple de la fiche : combien de sacs de chaque couleur trouve-t-on, à tous les niveaux, dans un sac `shiny gold` ? Vérifier que le total redonne `13`.
+1.  À la main, sur l’exemple du défi : combien de sacs de chaque couleur trouve-t-on, à tous les niveaux, dans un sac `shiny gold` ? Vérifier que le total redonne `13`.
 
 2.  Écrire une fonction récursive `inventaire(couleur)` qui renvoie un dictionnaire associant à chaque couleur le nombre de sacs de cette couleur contenus dans un sac `couleur`.
 

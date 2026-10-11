@@ -16,7 +16,7 @@
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/13 ](https://adventofcode.com/2020/day/13 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/09-defi-aoc-2020-13>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -78,7 +78,7 @@ Pour chaque navette, calculer le premier départ à partir de l’instant 96 et 
 
 ### <span class="exo-num">Exercice 4</span> — L’attente, avec un modulo <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-reseaux-aoc-1-4 }
 
-Écrire une fonction `attente(arrivee, numero)` qui renvoie le nombre de minutes à attendre la navette `numero`, **sans boucle**. En déduire la réponse. Tester sur l’exemple de la fiche, puis sur vos données.
+Écrire une fonction `attente(arrivee, numero)` qui renvoie le nombre de minutes à attendre la navette `numero`, **sans boucle**. En déduire la réponse. Tester sur l’exemple du défi, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -98,11 +98,11 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="exo-num">Exercice 5</span> — Comprendre la condition <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-reseaux-aoc-1-5 }
 
-Traduire la condition sur une navette de numéro $b$ placée en position $i$ par une égalité avec `%`. Sur l’exemple de la fiche, on doit trouver $t = 215$ : le vérifier pour chacune des trois navettes.
+Traduire la condition sur une navette de numéro $b$ placée en position $i$ par une égalité avec `%`. Sur l’exemple du défi, on doit trouver $t = 215$ : le vérifier pour chacune des trois navettes.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : la partie 2 sur vos données <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-reseaux-aoc-1-6 }
 
-L’énoncé prévient que la réponse dépasse $10^{14}$ : tester tous les instants un par un prendrait des années. Lire la section suivante, puis écrire une fonction `premier_instant(navettes)` qui suit cette méthode. Vérifier sur l’exemple de la fiche et sur ceux de l’énoncé avant vos données.
+L’énoncé prévient que la réponse dépasse $10^{14}$ : tester tous les instants un par un prendrait des années. Lire la section suivante, puis écrire une fonction `premier_instant(navettes)` qui suit cette méthode. Vérifier sur l’exemple du défi et sur ceux de l’énoncé avant vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -116,7 +116,7 @@ L’énoncé prévient que la réponse dépasse $10^{14}$ : tester tous les inst
 
 !!! encadre "Recherche à pas croissant"
 
-    On cherche $t$ tel que $t \,\%\, 5 = 0$, $(t+2) \,\%\, 7 = 0$ et $(t+5) \,\%\, 11 = 0$ (exemple de la fiche).
+    On cherche $t$ tel que $t \,\%\, 5 = 0$, $(t+2) \,\%\, 7 = 0$ et $(t+5) \,\%\, 11 = 0$ (exemple du défi).
 
     **Idée.** Si $t$ convient pour la navette 5, alors $t + 5$, $t + 10$… conviennent aussi : la condition est *périodique*. Si $t$ convient pour 5 *et* 7, alors $t + 35$, $t + 70$… conviennent encore pour les deux, puisque 35 est un multiple de 5 et de 7.
 
@@ -155,7 +155,7 @@ La section précédente cite le théorème des restes chinois. Il donne aussi un
 
 1.  Recopier et exécuter le code de l’encadré. Que se passe-t-il avec `pow(4, -1, 6)` ? Pourquoi ?
 
-2.  Pour une navette de numéro $b$ en position $i$, quel reste $r$ doit avoir $t$ modulo $b$ ? Sur l’exemple de la fiche (`5,x,7,x,x,11`), calculer pour chaque navette $r_m$, $N_m$ et $y_m$, puis $t$. On doit retrouver `215`.
+2.  Pour une navette de numéro $b$ en position $i$, quel reste $r$ doit avoir $t$ modulo $b$ ? Sur l’exemple du défi (`5,x,7,x,x,11`), calculer pour chaque navette $r_m$, $N_m$ et $y_m$, puis $t$. On doit retrouver `215`.
 
 3.  Vérifier sur l’exemple que le terme associé à la navette 7 est un multiple de 5 et de 11, et qu’il a le bon reste modulo 7. En déduire pourquoi la formule fonctionne.
 
@@ -183,7 +183,7 @@ La section précédente cite le théorème des restes chinois. Il donne aussi un
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/24 ](https://adventofcode.com/2020/day/24 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/09-defi-aoc-2020-24>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -304,7 +304,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Un automate cellulaire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-reseaux-aoc-2-6 }
 
-Écrire une fonction `jour_suivant(noirs)` qui renvoie le nouvel ensemble des carreaux noirs. Sur l’exemple de la fiche, on doit trouver `9` carreaux noirs après un jour, `10` après deux jours et `53` après dix jours.
+Écrire une fonction `jour_suivant(noirs)` qui renvoie le nouvel ensemble des carreaux noirs. Sur l’exemple du défi, on doit trouver `9` carreaux noirs après un jour, `10` après deux jours et `53` après dix jours.
 
 ??? pouce "Coup de pouce"
 
@@ -348,7 +348,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 1.  **Coordonnées cubiques.** On repère une case par $(x, y, z)$ avec $x + y + z = 0$ ; on choisit `e` $= (1, -1, 0)$ et `ne` $= (1, 0, -1)$. Trouver les quatre autres déplacements, sachant que `w` est l’opposé de `e` et que faire `e` puis `nw` revient à faire `ne`. Calculer à la main la position de `seswnee`.
 
-2.  Écrire une fonction `position_systeme(ligne, deplacements)` qui fonctionne avec n’importe quel dictionnaire de déplacements (2 ou 3 coordonnées). Vérifier qu’on trouve encore `6` carreaux noirs sur l’exemple de la fiche.
+2.  Écrire une fonction `position_systeme(ligne, deplacements)` qui fonctionne avec n’importe quel dictionnaire de déplacements (2 ou 3 coordonnées). Vérifier qu’on trouve encore `6` carreaux noirs sur l’exemple du défi.
 
     ??? pouce "Coup de pouce"
 

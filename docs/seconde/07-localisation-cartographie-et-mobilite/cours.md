@@ -115,6 +115,8 @@ Une fois la position calculée, le récepteur GPS la transmet sous forme de cour
     | `15.0,M`      | altitude : 15,0 mètres                   |
     | `*20`         | somme de contrôle (vérifie l’intégrité)  |
 
+    L’heure est donnée en **UTC** (*<span id="lex-utc07" class="ancre"></span>temps universel coordonné*) : c’est l’heure de référence mondiale, la même partout sur Terre. Monaco est à UTC$+1$ en hiver et à UTC$+2$ en été : 10 h 15 UTC correspond donc à 11 h 15 à Monaco en hiver, 12 h 15 en été.
+
 !!! regle "Règle 3 — Lire la latitude et la longitude"
 
     Le GPS donne la latitude au format `ddmm.mmmm` (degrés puis minutes) et la longitude au format `dddmm.mmmm`. Pour obtenir des **degrés décimaux**, on sépare les degrés des minutes, puis on **divise les minutes par 60**.
@@ -146,7 +148,7 @@ De A à E : le trajet A–C–D–E mesure $2+3+4 = 9$ km, plus court que A–B�
 
     Ouvrir une carte numérique (Géoportail ou `openstreetmap.org`). **1.** Chercher son lycée et **lire ses coordonnées** (clic droit » « Où suis-je ? » / « Afficher l’adresse »). **2.** Calculer un **itinéraire** du lycée à la gare et relever la **distance** et la **durée**. **3.** Mesurer « à vol d’oiseau » la même distance : est-elle plus courte ? Pourquoi ?
 
-Source : OpenStreetMap, page « Stats » du wiki, 2<sup>e</sup> trimestre 2025 (10 millions d’inscrits, 2,25 millions de contributeurs), `wiki.openstreetmap.org`.
+Source : OpenStreetMap, page « Stats » du wiki, 2<sup>e</sup> trimestre 2025 (10 millions d’inscrits, 2,25 millions de contributeurs), [wiki.openstreetmap.org](wiki.openstreetmap.org).
 
 <span id="cours-07-10" class="ancre"></span>
 
@@ -186,7 +188,7 @@ Savoir où l’on est, c’est pratique. Mais chaque position est une **donnée 
 
 !!! remarque "Remarque — Et à Monaco ?"
 
-    Monaco n’est pas membre de l’Union européenne : le RGPD n’y est pas directement applicable (un site monégasque qui s’adresse à des personnes situées dans l’UE doit toutefois le respecter). La Principauté a sa propre loi, la **loi n° 1.565 du 3 décembre 2024** relative à la protection des données personnelles, conçue pour s’aligner sur les standards européens. Elle garantit les mêmes grands droits (accès, rectification, effacement, limitation, opposition, portabilité), sous le contrôle de l’**APDP** (Autorité de protection des données personnelles, `apdp.mc`), qui a succédé à la CCIN. Comme en France, en dessous de **15 ans**, l’inscription à un service en ligne demande l’autorisation des parents.
+    La loi n° 1.565 (2024) y protège de la même façon les données de localisation, sous le contrôle de l’**APDP** (voir l’encadré « Et à Monaco ? » du chapitre *Les réseaux sociaux*).
 
 !!! activite "Activité — Enquête sur mes traces"
 
@@ -210,19 +212,19 @@ Consulter une carte ou calculer un itinéraire semble « immatériel ». Pourtan
 
     - **le réseau** : fonds de carte et trafic en temps réel sont téléchargés à chaque usage, sauf si l’on a enregistré la carte **hors-ligne**.
 
-    L’essentiel de l’empreinte d’un téléphone vient pourtant de sa **fabrication** : le calcul complet, chiffres sourcés à l’appui, est fait dans le thème *Informatique embarquée et objets connectés* (section « L’impact environnemental des objets connectés »).
+    L’essentiel de l’empreinte d’un téléphone vient pourtant de sa **fabrication** : le calcul complet, chiffres sourcés à l’appui, sera fait au chapitre *Informatique embarquée et objets connectés* (section « L’impact environnemental des objets connectés »).
 
 !!! activite "Activité — Localisation et sobriété"
 
     **1.** Lorsque l’on calcule un itinéraire avec une application en ligne, quelles parties du numérique (terminaux, réseaux, centres de données) sont sollicitées ? **2.** Pourquoi une application qui vous localise « toujours », même fermée, pose-t-elle à la fois un problème de **batterie** et de **vie privée** ? **3.** Proposer deux gestes de **sobriété** liés à la localisation (par exemple : télécharger une carte hors-ligne une fois, en Wi-Fi, avant un voyage ; n’autoriser la localisation que « pendant l’utilisation » de l’application).
 
-<span id="cours-07-16" class="ancre"></span>
+<span id="cours-07-15" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[16](exercices.md#ex-07-16)** (localisation et environnement)
+<span class="afaire">▶ Exercices d'application :</span> exercice **[15](exercices.md#ex-07-15)** (localisation et environnement)
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    La localisation croise plusieurs thèmes de SNT. Le récepteur GPS est un **capteur** : montres et objets connectés l’utilisent pour suivre vos déplacements (chapitre *Informatique embarquée et objets connectés*). La position est une **donnée personnelle**, qui se glisse jusque dans les **métadonnées EXIF** des photos (chapitres *Données en tables* et *Photographie numérique*) ; quant à la trame NMEA, ses valeurs séparées par des virgules rappellent une ligne de fichier **CSV**. Le calcul d’itinéraire cherche un plus court chemin dans un **graphe**, la structure même d’un **réseau social**, et les fonds de carte arrivent par **Internet**, depuis des serveurs. En spécialité NSI de Terminale, on apprend à parcourir des graphes et à y chercher des chemins.
+    La localisation croise plusieurs thèmes de SNT. Le récepteur GPS est un **capteur** : montres et objets connectés l’utilisent pour suivre vos déplacements (on le verra au chapitre *Informatique embarquée et objets connectés*). La position est une **donnée personnelle**, qui se glisse jusque dans les **métadonnées EXIF** des photos (chapitres *Données en tables* et *Photographie numérique*) ; quant à la trame NMEA, ses valeurs séparées par des virgules rappellent une ligne de fichier **CSV**. Le calcul d’itinéraire cherche un plus court chemin dans un **graphe**, la structure même d’un **réseau social**, et les fonds de carte arrivent par **Internet**, depuis des serveurs. En spécialité NSI de Terminale, on apprend à parcourir des graphes et à y chercher des chemins.
 
 ## Bilan — la carte mémoire
 
@@ -241,7 +243,7 @@ Consulter une carte ou calculer un itinéraire semble « immatériel ». Pourtan
 
 !!! encadre "Débat argumenté"
 
-    Une **fiche débat** accompagne ce thème : « Faut-il laisser la géolocalisation de son téléphone activée en permanence ? » (documents, rôles, tableau d’arguments et trace écrite, environ 50 min).
+    Un **débat**, proposé en fin de chapitre, accompagne ce thème : « Faut-il laisser la géolocalisation de son téléphone activée en permanence ? » (documents, rôles, tableau d’arguments et trace écrite, environ 50 min).
 
 ## Savoir-faire à maîtriser
 

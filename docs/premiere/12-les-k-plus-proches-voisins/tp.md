@@ -1,6 +1,6 @@
 # TP et projets
 
-<p class="sous-titre">Les $k$k plus proches voisins</p>
+<p class="sous-titre">Les k plus proches voisins</p>
 
 ## <span class="etiquette">TP</span> Reconnaître des chiffres et des lettres manuscrits
 

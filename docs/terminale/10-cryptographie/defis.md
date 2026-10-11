@@ -16,7 +16,7 @@
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/25 ](https://adventofcode.com/2020/day/25 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/10-defi-aoc-2020-25>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -160,7 +160,7 @@ On admet que, $p$ étant premier, $g^{p-1} \bmod p = 1$ (petit théorème de Fer
 
 1.  À la main, avec $p = 29$, $g = 2$ et $m = 6$ : écrire le dictionnaire des pas de bébé. Retrouver le secret de Bob à partir de sa clé publique $18$, sachant que $2^{22} \bmod 29 = 5$.
 
-2.  Écrire `log_discret(g, cible, p)` et vérifier qu’elle retrouve les nombres de tours de l’exemple de la fiche, puis de vos données.
+2.  Écrire `log_discret(g, cible, p)` et vérifier qu’elle retrouve les nombres de tours de l’exemple du défi, puis de vos données.
 
     ??? pouce "Coup de pouce"
 

@@ -507,7 +507,7 @@ Sur votre croquis, la tournée gloutonne se **croise**-t-elle ? Un circuit qui s
 
 ??? pouce "Coup de pouce"
 
-    `tournee[:i] + tournee[i:j+1][::-1] + tournee[j+1:]` est la tournée où le morceau de `i` à `j` est retourné. Une variable `amelioration` (booléenne) dit s’il faut refaire un passage.
+    La compréhension `[tournee[j - k] for k in range(j - i + 1)]` donne les villes des positions `j`, `j - 1`, …, `i` : c’est le morceau retourné. La tournée essayée est alors `tournee[:i] + retourne + tournee[j + 1:]`. Une variable `amelioration` (booléenne) dit s’il faut refaire un passage.
 
 *Les longueurs sont des flottants, calculés avec de petites erreurs d’arrondi : ne compter comme amélioration qu’un gain d’au moins 1 mètre, c’est-à-dire tester `longueur(essai) < longueur(tournee) - 0.001`.*
 
@@ -524,7 +524,7 @@ Sur votre croquis, la tournée gloutonne se **croise**-t-elle ? Un circuit qui s
             amelioration = False
             for i in range(1, len(tournee) - 1):
                 for j in range(i + 1, len(tournee)):
-                    retourne = [tournee[k] for k in range(j, i - 1, -1)]   # de j a i
+                    retourne = [tournee[j - k] for k in range(j - i + 1)]   # de j a i
                     essai = tournee[:i] + retourne + tournee[j + 1:]
                     if longueur(essai) < longueur(tournee) - 0.001:   # gain >= 1 m
                         tournee = essai
@@ -532,7 +532,7 @@ Sur votre croquis, la tournée gloutonne se **croise**-t-elle ? Un circuit qui s
         return tournee
     ```
 
-    Le morceau `retourne` est exactement `tournee[i:j+1][::-1]`, l’écriture proposée dans le coup de pouce. Appliquée à la tournée gloutonne depuis Monaco, on obtient **156,7 km** : ici on retombe sur l’optimum (parcouru dans l’autre sens). C’est une chance : appliquée aux tournées gloutonnes issues des autres villes de départ (sauf Menton), elle s’arrête à 162,4 km, une tournée sans croisement mais non optimale. Cette amélioration locale (appelée *2-opt*) donne en général une très bonne tournée, *sans garantie* d’optimalité. Sans la marge de 0,001 km, les erreurs d’arrondi des flottants peuvent faire accepter de fausses « améliorations » (une tournée simplement parcourue à l’envers) et changer le résultat : c’est un piège classique.
+    Le morceau `retourne` est construit comme dans le coup de pouce : pour `k` allant de 0 à `j - i`, la position `j - k` va de `j` à `i`. Appliquée à la tournée gloutonne depuis Monaco, on obtient **156,7 km** : ici on retombe sur l’optimum (parcouru dans l’autre sens). C’est une chance : appliquée aux tournées gloutonnes issues des autres villes de départ (sauf Menton), elle s’arrête à 162,4 km, une tournée sans croisement mais non optimale. Cette amélioration locale (appelée *2-opt*) donne en général une très bonne tournée, *sans garantie* d’optimalité. Sans la marge de 0,001 km, les erreurs d’arrondi des flottants peuvent faire accepter de fausses « améliorations » (une tournée simplement parcourue à l’envers) et changer le résultat : c’est un piège classique.
 
 ## Bilan
 

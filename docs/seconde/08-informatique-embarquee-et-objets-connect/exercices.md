@@ -358,9 +358,37 @@ while True:
 
     Une enceinte qui « écoute » en permanence peut enregistrer des conversations privées et les envoyer vers un serveur : ce sont des **données personnelles**, dont l’usage est encadré en France (et dans l’UE) par le **RGPD** (autorité : CNIL). Monaco n’étant pas dans l’UE, c’est la **loi n° 1.565 du 3 décembre 2024** qui s’y applique (autorité : APDP).
 
+### Impact environnemental
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — L’empreinte d’un smartphone <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-17 }
+
+<span class="tag">sur papier</span>  D’après l’outil *Impact CO2* de l’ADEME (données ADEME–Arcep 2025, consulté en 2026 ; voir le document du cours), un smartphone émet environ `80` kg de CO$_2$e sur toute sa vie, dont `99` % lors de sa **fabrication** ; le calcul suppose qu’il est gardé `2,5` ans. On néglige ici l’usage et la fin de vie.
+
+1.  Calculer les émissions **par année d’utilisation** si le téléphone est gardé 2,5 ans.
+
+2.  Même question s’il est gardé **5 ans**. Conclure.
+
+3.  Pourquoi éteindre son téléphone la nuit a-t-il un effet bien plus faible que de le garder plus longtemps ?
+
+4.  Citer deux raisons qui poussent à changer de téléphone ou d’objet connecté trop tôt, et un moyen d’y remédier.
+
+??? pouce "Coup de pouce"
+
+    Divisez les $80$ kg par le nombre d’années. Où sont émis $99\,\%$ des gaz : pendant l’usage ou à la fabrication ?
+
+??? corrige "Corrigé"
+
+    1.  $80 \div 2{,}5 = 32$ : environ **32 kg de CO$_2$e par an**.
+
+    2.  $80 \div 5 = 16$ : environ **16 kg de CO$_2$e par an**. Garder le téléphone deux fois plus longtemps divise environ **par deux** son empreinte annuelle, car la fabrication (99 %) est « amortie » sur plus d’années.
+
+    3.  Éteindre le téléphone ne réduit que la part « usage », qui ne pèse qu’environ 1 % ici ; garder le téléphone plus longtemps agit sur la fabrication, qui pèse environ 99 %.
+
+    4.  Raisons : batterie usée, écran cassé difficile à réparer, **mises à jour** de sécurité qui s’arrêtent, mode, stockage plein… Remèdes : faire réparer (changer la batterie ou l’écran), choisir un modèle réparable et suivi longtemps, acheter reconditionné.
+
 ### Critiquer une réponse d’IA
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Le volet automatique d’un assistant <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-08-17 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Le volet automatique d’un assistant <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-08-18 }
 
 <span class="tag">sur papier</span>  Un élève a demandé à un assistant d’IA : « Écris la boucle de commande d’un volet roulant qui se ferme quand la nuit tombe et s’ouvre quand il fait jour. Le capteur `lire_luminosite()` renvoie un nombre de `0` (nuit noire) à `100` (plein soleil). » Voici la réponse obtenue :
 
@@ -391,31 +419,3 @@ while True:
     2.  L’erreur : les deux **actions** sont inversées dans le `if` / `else` (le commentaire « il fait nuit » est juste, l’action qui le suit ne l’est pas). Correction : `fermer_volet()` sous `if lum < 20:` et `ouvrir_volet()` sous `else:`.
 
     3.  Dérouler la boucle « à la main » avec **une valeur de chaque côté du seuil** (une mesure de nuit, une de jour) avant d’accepter le programme : c’est exactement la vérification de l’exercice 5.
-
-### Impact environnemental
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — L’empreinte d’un smartphone <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-18 }
-
-<span class="tag">sur papier</span>  D’après l’outil *Impact CO2* de l’ADEME (données ADEME–Arcep 2025, consulté en 2026 ; voir le document du cours), un smartphone émet environ `80` kg de CO$_2$e sur toute sa vie, dont `99` % lors de sa **fabrication** ; le calcul suppose qu’il est gardé `2,5` ans. On néglige ici l’usage et la fin de vie.
-
-1.  Calculer les émissions **par année d’utilisation** si le téléphone est gardé 2,5 ans.
-
-2.  Même question s’il est gardé **5 ans**. Conclure.
-
-3.  Pourquoi éteindre son téléphone la nuit a-t-il un effet bien plus faible que de le garder plus longtemps ?
-
-4.  Citer deux raisons qui poussent à changer de téléphone ou d’objet connecté trop tôt, et un moyen d’y remédier.
-
-??? pouce "Coup de pouce"
-
-    Divisez les $80$ kg par le nombre d’années. Où sont émis $99\,\%$ des gaz : pendant l’usage ou à la fabrication ?
-
-??? corrige "Corrigé"
-
-    1.  $80 \div 2{,}5 = 32$ : environ **32 kg de CO$_2$e par an**.
-
-    2.  $80 \div 5 = 16$ : environ **16 kg de CO$_2$e par an**. Garder le téléphone deux fois plus longtemps divise environ **par deux** son empreinte annuelle, car la fabrication (99 %) est « amortie » sur plus d’années.
-
-    3.  Éteindre le téléphone ne réduit que la part « usage », qui ne pèse qu’environ 1 % ici ; garder le téléphone plus longtemps agit sur la fabrication, qui pèse environ 99 %.
-
-    4.  Raisons : batterie usée, écran cassé difficile à réparer, **mises à jour** de sécurité qui s’arrêtent, mode, stockage plein… Remèdes : faire réparer (changer la batterie ou l’écran), choisir un modèle réparable et suivi longtemps, acheter reconditionné.

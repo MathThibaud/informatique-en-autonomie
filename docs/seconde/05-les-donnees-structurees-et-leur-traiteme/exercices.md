@@ -415,7 +415,7 @@ Tom;Beausoleil;quinze
 
     1.  L’*open data* désigne des données **publiques librement réutilisables**, par exemple sur `data.gouv.fr` (ou le portail open data de Monaco).
 
-    2.  Le CSV est un **format ouvert** (texte) : lisible par tous les logiciels, durable et sans limite de lignes, alors que le `.xlsx` est un format **propriétaire**.
+    2.  Le CSV est un **format ouvert** (texte) : lisible par tous les logiciels, durable et sans limite de lignes, alors que le `.xlsx` est un format de tableur bien plus complexe, conçu pour un type de logiciel (et l’ancien `.xls` était même **propriétaire**, avec une limite de 65 536 lignes).
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 17</span> — Mes données, mes droits <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-17 }
 

@@ -256,16 +256,18 @@ Pour **compresser** un texte, on donne aux caractères **fréquents** un code bi
 
 - **régner** : on recommence sur chaque groupe, jusqu’à ce qu’un groupe ne contienne **qu’un** caractère (condition d’arrêt).
 
-On représente les données par une liste de couples `(caractère, effectif)`. On **admet** la fonction `separe`, qui coupe la liste triée en deux groupes d’effectifs équilibrés :
+On représente les données par une liste de couples `(caractère, effectif)`. On **admet** la fonction `separe`, qui coupe la liste triée en deux groupes d’effectifs à peu près équilibrés :
 
 ```python
 def separe(tab):
-    total = sum(effectif for (_, effectif) in tab)
-    cumul = 0
-    for k in range(len(tab)):
+    total = 0
+    for (_, effectif) in tab:
+        total = total + effectif
+    k = 0
+    cumul = tab[0][1]
+    while cumul < total / 2:        # on coupe des que le cumul
+        k = k + 1                   # atteint la moitie du total
         cumul = cumul + tab[k][1]
-        if cumul >= total / 2:      # point de coupe le plus equilibre
-            break
     return tab[:k + 1], tab[k + 1:]
 ```
 
@@ -347,7 +349,7 @@ On considère le texte dont les effectifs sont : $$\texttt{tab = [("A", 15), ("B
 
     **4.** Les codes `11, 10, 011, 010, 00` forment un **code préfixe** : aucun n’est le début d’un autre. C’est indispensable au **décodage** : en lisant le texte codé bit à bit, dès qu’on reconnaît un code on sait qu’il est *complet* (il ne peut pas être le début d’un code plus long), donc le découpage en symboles est **sans ambiguïté**.
 
-    **5.** Trois temps de « diviser pour régner » : **diviser** = couper la liste en deux groupes d’effectifs équilibrés (`separe`) ; **régner** = appeler récursivement `shannon` sur le groupe contenant le symbole ; **combiner** = préfixer le bit `"1"` ou `"0"` au code renvoyé.
+    **5.** Trois temps de « diviser pour régner » : **diviser** = couper la liste en deux groupes d’effectifs à peu près équilibrés (`separe`) ; **régner** = appeler récursivement `shannon` sur le groupe contenant le symbole ; **combiner** = préfixer le bit `"1"` ou `"0"` au code renvoyé.
 
     **6.** **Terminaison.** Le variant est `len(tab)` (nombre de caractères). `separe` renvoie deux groupes **non vides** dont la réunion est `tab` (le premier contient au moins `tab[0]` ; comme la liste est triée par effectifs **décroissants**, le dernier effectif vaut au plus la moitié du total, donc le cumul atteint la moitié *avant* le dernier caractère et le second groupe n’est pas vide — sans ce tri, `separe([("A", 1), ("B", 3)])` renverrait un second groupe vide et `shannon("A", ...)` ne s’arrêterait pas) ; le groupe sur lequel on récurse contient donc **strictement moins** de caractères que `tab`. Cet entier positif décroît d’au moins $1$ à chaque appel et atteint $1$ (cas d’arrêt) : la fonction s’arrête toujours.
 

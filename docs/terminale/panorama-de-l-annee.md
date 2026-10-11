@@ -1,6 +1,6 @@
 # Panorama de l'année
 
-Les quatorze chapitres de l’année ne sont pas indépendants : les mêmes outils (la récursivité, la pile, la file…) reviennent d’un chapitre à l’autre, et une même question — **« combien ça coûte ? »** — traverse toute l’année. Cette fiche donne une vue d’ensemble, à relire à chaque nouveau chapitre : elle aide à prendre du **recul** pour l’écrit comme pour le Grand Oral.
+Les quatorze chapitres de l’année ne sont pas indépendants : les mêmes outils (la récursivité, la pile, la file…) reviennent d’un chapitre à l’autre, et une même question — **« combien ça coûte ? »** — traverse toute l’année. Ces pages donnent une vue d’ensemble, à relire à chaque nouveau chapitre : elles aident à prendre du **recul** pour l’écrit comme pour le Grand Oral.
 
 ### Le plan de l’année en quatre blocs
 
@@ -84,12 +84,14 @@ Pour chaque chapitre : ce qu’il **réutilise**, et où il **resservira**. Les
 
 !!! remarque "Remarque"
 
-    Pour le **Grand Oral**, ces liens sont précieux : une bonne question en croise souvent *deux* (« Comment un message trouve-t-il son chemin sur Internet ? » $=$ **graphes**, pour le plus court chemin, $+$ **réseaux**, pour le routage). Voir la fiche *Grand Oral NSI*.
+    Pour le **Grand Oral**, ces liens sont précieux : une bonne question en croise souvent *deux* (« Comment un message trouve-t-il son chemin sur Internet ? » $=$ **graphes**, pour le plus court chemin, $+$ **réseaux**, pour le routage). Voir les pages *Préparer les épreuves*, en fin de livre.
 
 ### Une histoire de l’informatique en quelques dates
 
 Chaque date de cette frise correspond à une notion que l’on étudie cette année, dans le chapitre indiqué à droite. Certaines sont bien plus anciennes que les ordinateurs (les graphes, les tours de Hanoï) ; la plupart sont nées entre 1936 et 1980.
 
-![](figures/ebf76cbdef099d37.svg){ .tikz loading=lazy }
+![](figures/85950f30e88106b6.svg){ .tikz loading=lazy }
 
-![](figures/2c1cbedaf3c04e11.svg){ .tikz loading=lazy }
+![](figures/fe2f510e37928fa9.svg){ .tikz loading=lazy }
+
+mainmattertrue

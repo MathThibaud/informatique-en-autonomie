@@ -16,7 +16,7 @@
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/10 ](https://adventofcode.com/2020/day/10 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/11-defi-aoc-2020-10>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -96,7 +96,7 @@ Ranger les valeurs dans l’ordre croissant, ajouter la prise et l’appareil, p
 
 ### <span class="exo-num">Exercice 4</span> — Compter les écarts <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-programmation-dynamique-aoc-1-4 }
 
-Écrire une fonction `ecarts(valeurs)` qui renvoie un dictionnaire associant à chaque écart son nombre d’apparitions. En déduire la réponse ; tester sur l’exemple de la fiche, puis sur vos données.
+Écrire une fonction `ecarts(valeurs)` qui renvoie un dictionnaire associant à chaque écart son nombre d’apparitions. En déduire la réponse ; tester sur l’exemple du défi, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -116,7 +116,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="exo-num">Exercice 5</span> — Pourquoi pas tout énumérer ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-programmation-dynamique-aoc-1-5 }
 
-Sur l’exemple de la fiche, on trouve `28` façons. Avec une centaine d’adaptateurs, l’énoncé annonce un nombre astronomique : expliquer pourquoi un programme qui construirait chaque façon une par une ne terminerait jamais.
+Sur l’exemple du défi, on trouve `28` façons. Avec une centaine d’adaptateurs, l’énoncé annonce un nombre astronomique : expliquer pourquoi un programme qui construirait chaque façon une par une ne terminerait jamais.
 
 ### <span class="exo-num">Exercice 6</span> — Compter sans énumérer <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-programmation-dynamique-aoc-1-6 }
 
@@ -142,7 +142,7 @@ On note $N(v)$ le nombre de façons d’aller de la prise jusqu’à l’adaptat
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 1 : découper en blocs <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-programmation-dynamique-aoc-1-8 }
 
-Dans les données (et dans l’exemple de la fiche), les écarts entre adaptateurs consécutifs valent 1 ou 3, jamais 2. On peut en profiter pour compter autrement.
+Dans les données (et dans l’exemple du défi), les écarts entre adaptateurs consécutifs valent 1 ou 3, jamais 2. On peut en profiter pour compter autrement.
 
 1.  Sur l’exemple, découper la chaîne $0, 1, 2, 3, 4, 7, 8, 9, 12, 13, 14, 17$ en **blocs** de valeurs consécutives (écarts de 1), séparés par les écarts de 3. Expliquer pourquoi la première et la dernière valeur de chaque bloc sont forcément utilisées.
 
@@ -174,7 +174,7 @@ Dans les données (et dans l’exemple de la fiche), les écarts entre adaptateu
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/15 ](https://adventofcode.com/2020/day/15 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/11-defi-aoc-2020-15>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -225,7 +225,7 @@ Avec les nombres de départ (inventés) `2,0,1`, écrire les dix premiers nombre
 
 ### <span class="exo-num">Exercice 3</span> — Une première version avec une liste <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-programmation-dynamique-aoc-2-3 }
 
-Écrire une fonction `jeu_liste(depart, n)` qui construit la liste de tous les nombres dits et renvoie le `n`-ième. Pour savoir quand le dernier nombre a été dit auparavant, on cherche dans la liste. Tester sur l’exemple de la fiche : avec `n = 2020`, on doit trouver `779`.
+Écrire une fonction `jeu_liste(depart, n)` qui construit la liste de tous les nombres dits et renvoie le `n`-ième. Pour savoir quand le dernier nombre a été dit auparavant, on cherche dans la liste. Tester sur l’exemple du défi : avec `n = 2020`, on doit trouver `779`.
 
 ??? pouce "Coup de pouce"
 

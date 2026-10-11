@@ -6,21 +6,21 @@
 
 |  |  |
 |:---|:---|
-| **Programme** | Repères historiques ; protocole **TCP/IP** (paquets, routage) ; adresses symboliques et serveurs **DNS** ; réseaux **pair-à-pair** ; indépendance d’internet vis-à-vis du réseau physique ; ordres de grandeur du trafic. |
+| **Programme** | Repères historiques ; protocole **TCP/IP** (paquets, routage) ; adresses symboliques et serveurs **DNS** ; réseaux **pair-à-pair** ; indépendance d’Internet vis-à-vis du réseau physique ; ordres de grandeur du trafic. |
 | **Idée** | Internet, c’est le **réseau** : des millions de machines qui s’échangent des **paquets** de données, de proche en proche, sans chef d’orchestre central. Une idée simple, robuste… et devenue vitale. |
-| **Objectifs** | Situer la naissance d’internet ; distinguer les rôles d’**IP** et de **TCP** ; comprendre le **routage** des paquets et ses limites ; passer d’une adresse symbolique à une adresse **IP** (DNS) ; connaître les grands types de réseaux physiques et l’ordre de grandeur du trafic. |
+| **Objectifs** | Situer la naissance d’Internet ; distinguer les rôles d’**IP** et de **TCP** ; comprendre le **routage** des paquets et ses limites ; passer d’une adresse symbolique à une adresse **IP** (DNS) ; connaître les grands types de réseaux physiques et l’ordre de grandeur du trafic. |
 
 !!! remarque "Remarque"
 
-    **Internet n’est pas le Web !** On l’a vu au chapitre précédent : **internet** est le *réseau* (les câbles, la fibre, les ondes, les machines) ; le **Web** n’est que *l’un des services* qui circulent dessus, à côté des e-mails, des appels vidéo, des jeux en ligne… Ce chapitre ouvre la boîte : *comment* l’information voyage-t-elle d’un bout à l’autre du monde ?
+    **Internet n’est pas le Web !** On l’a vu au chapitre *Le Web* : **Internet** est le *réseau* (les câbles, la fibre, les ondes, les machines) ; le **Web** n’est que *l’un des services* qui circulent dessus, à côté des e-mails, des appels vidéo, des jeux en ligne… Ce chapitre ouvre la boîte : *comment* l’information voyage-t-elle d’un bout à l’autre du monde ?
 
-## Une belle histoire : d’ARPANET à internet
+## Une belle histoire : d’ARPANET à Internet
 
 ### Le premier message : « LO…»
 
-Nous sommes le **29 octobre 1969**. Dans un laboratoire de l’université de Californie (UCLA), un étudiant, **Charley Kline**, tente d’envoyer le tout premier message d’un ordinateur à un autre, situé à **560 km** de là, à Stanford. Le mot à transmettre pour se connecter était simple : `LOGIN`. Il tape `L`… `O`… et au moment du `G`, la machine distante **plante** ! Le tout premier message de l’histoire d’internet fut donc simplement **« `LO` »** — comme dans l’expression anglaise « *lo and behold* » (« et voilà »).
+Nous sommes le **29 octobre 1969**. Dans un laboratoire de l’université de Californie (UCLA), un étudiant, **Charley Kline**, tente d’envoyer le tout premier message d’un ordinateur à un autre, situé à **560 km** de là, à Stanford. Le mot à transmettre pour se connecter était simple : `LOGIN`. Il tape `L`… `O`… et au moment du `G`, la machine distante **plante** ! Le tout premier message de l’histoire d’Internet fut donc simplement **« `LO` »** — comme dans l’expression anglaise « *lo and behold* » (« et voilà »).
 
-Une heure plus tard, après réparation, `LOGIN` passait en entier. Le réseau **ARPANET** était né : l’ancêtre direct d’internet.
+Une heure plus tard, après réparation, `LOGIN` passait en entier. Le réseau **ARPANET** était né : l’ancêtre direct d’Internet.
 
 \*(image manquante : 06_hist_imp_log)\*  
 Le cahier de bord du 29 octobre 1969 : « LO »
@@ -41,9 +41,9 @@ Vinton Cerf, co-inventeur de TCP/IP
 
     - **1974** — **Vinton Cerf** et **Robert Kahn** inventent le protocole **TCP/IP**, la « langue commune » qui reliera *tous* les réseaux.
 
-    - **1983** — tous les réseaux basculent sur TCP/IP : c’est la **naissance d’internet**. La même année apparaît le **DNS** (les adresses en toutes lettres).
+    - **1983** — tous les réseaux basculent sur TCP/IP : c’est la **naissance d’Internet**. La même année apparaît le **DNS** (les adresses en toutes lettres).
 
-    - **1990–91** — Tim Berners-Lee invente le **Web**, *par-dessus* internet.
+    - **1989–1991** — Tim Berners-Lee invente le **Web**, *par-dessus* Internet (première page en ligne en 1991).
 
     - **aujourd’hui** — des **milliards** de machines et d’objets connectés.
 
@@ -51,19 +51,19 @@ Vinton Cerf, co-inventeur de TCP/IP
 
 !!! remarque "Remarque"
 
-    Détail crucial : personne ne « possède » internet. Il n’a **pas de centre**, pas de chef. C’est justement ce qui le rend si **robuste** : si une partie tombe en panne, l’information trouve un autre chemin. Cette idée, née en pleine Guerre froide, était même un but militaire : un réseau qui *survit* à la destruction d’une partie de ses nœuds.
+    Détail crucial : personne ne « possède » Internet. Il n’a **pas de centre**, pas de chef. C’est justement ce qui le rend si **robuste** : si une partie tombe en panne, l’information trouve un autre chemin. On raconte souvent qu’ARPANET devait survivre à une guerre nucléaire : c’est en partie un mythe. L’idée d’un réseau qui *survit* à la destruction d’une partie de ses nœuds vient des travaux de Paul Baran (RAND Corporation, années 1960) ; ARPANET, lui, servait d’abord à partager des ordinateurs entre universités.
 
 <span id="cours-06-1" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-06-1) et [2](exercices.md#ex-06-2)** (un peu d’histoire : d’ARPANET à internet)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-06-1) et [2](exercices.md#ex-06-2)** (un peu d’histoire : d’ARPANET à Internet)
 
 ## Voyager en petits morceaux : les paquets
 
-Quand vous envoyez une photo, elle ne part pas d’un seul bloc. Internet la **découpe** en petits morceaux de taille fixe : les **paquets**.
+Quand vous envoyez une photo, elle ne part pas d’un seul bloc. Internet la **découpe** en petits morceaux de taille limitée : les **paquets**.
 
 !!! definition "Définition 1"
 
-    <span id="lex-paquet06" class="ancre"></span>Un **paquet** est un petit bloc de données de taille fixe. Il contient une partie du message, plus une « étiquette » : l’**adresse de l’expéditeur**, l’**adresse du destinataire**, et un **numéro** (pour remettre les morceaux dans l’ordre à l’arrivée).
+    <span id="lex-paquet06" class="ancre"></span>Un **paquet** est un petit bloc de données de **taille limitée** (au plus 1 500 octets environ sur un réseau Ethernet ou Wi-Fi). Il contient une partie du message, plus une « étiquette » : l’**adresse de l’expéditeur**, l’**adresse du destinataire**, et un **numéro** (pour remettre les morceaux dans l’ordre à l’arrivée).
 
 ![](../figures/3474dafc9183008c.svg){ .tikz loading=lazy }
 
@@ -86,7 +86,7 @@ Pour que tout cela fonctionne, les machines parlent la même « langue » : le 
 
 !!! regle "Règle 3 — Fiable, mais pas « à l’heure »"
 
-    TCP garantit que tout paquet **finira** par arriver (sauf panne matérielle). En revanche, ni IP ni TCP ne garantissent *quand* : il n’y a **aucune garantie de temps**. C’est pourquoi une vidéo en direct peut « saccader » : on préfère perdre une image que de bloquer tout le film.
+    TCP garantit que tout paquet **finira** par arriver (sauf panne matérielle). En revanche, ni IP ni TCP ne garantissent *quand* : il n’y a **aucune garantie de temps**. C’est pourquoi une vidéo en direct peut « saccader » : une image qui arrive trop tard ne sert plus à rien, et le film se fige un instant en l’attendant.
 
 <span id="cours-06-6" class="ancre"></span>
 
@@ -104,7 +104,7 @@ Comment un paquet trouve-t-il son chemin ? Grâce à des machines spécialisées
 
 !!! regle "Règle 4 — Les limites du routage"
 
-    Un paquet peut se **perdre** : panne d’un routeur, ou **destruction volontaire**. En effet, chaque paquet possède un compteur, le **nombre maximal de routeurs** qu’il peut traverser (le *TTL*). À chaque étape, le compteur diminue ; s’il atteint **0**, le paquet est **détruit** pour ne pas tourner en rond éternellement et encombrer le réseau. C’est alors **TCP** qui s’en aperçoit et **redemande** le paquet manquant.
+    Un paquet peut se **perdre** : panne d’un routeur, ou **destruction volontaire**. En effet, chaque paquet possède un compteur, le **nombre maximal de routeurs** qu’il peut traverser <span id="lex-ttl06" class="ancre"></span>(le *TTL*). À chaque étape, le compteur diminue ; s’il atteint **0**, le paquet est **détruit** pour ne pas tourner en rond éternellement et encombrer le réseau. C’est alors **TCP** qui s’en aperçoit et **redemande** le paquet manquant.
 
 !!! activite "Activité — Le routage débranché"
 
@@ -124,15 +124,15 @@ Comment un paquet trouve-t-il son chemin ? Grâce à des machines spécialisées
 
 ![](../figures/334da9989f2e283b.svg){ .tikz loading=lazy }
 
-Il y a environ **4 milliards** d’adresses IPv4 possibles… ce qui ne suffit plus ! On déploie donc **IPv6**, avec des adresses bien plus longues (assez pour des milliards de milliards d’objets connectés).
+Il y a environ **4 milliards** d’adresses IPv4 possibles… ce qui ne suffit plus ! On déploie donc <span id="lex-ipv606" class="ancre"></span>**IPv6**, avec des adresses bien plus longues (assez pour des milliards de milliards d’objets connectés).
 
-### Le DNS : l’annuaire d’internet
+### Le DNS : l’annuaire d’Internet
 
 <span id="lex-dns06" class="ancre"></span> Personne ne retient `172.217.22.14`. On tape `google.fr`. Le passage de l’un à l’autre est assuré par le **DNS**.
 
 !!! definition "Définition 4"
 
-    Une **adresse symbolique** (comme `wikipedia.fr`) est l’adresse « en toutes lettres », facile à retenir. Le **DNS** (*Domain Name System*) est l’annuaire géant d’internet qui **traduit** une adresse symbolique en **adresse IP** numérique.
+    Une **adresse symbolique** (comme `wikipedia.fr`) est l’adresse « en toutes lettres », facile à retenir. Le **DNS** (*Domain Name System*) est l’annuaire géant d’Internet qui **traduit** une adresse symbolique en **adresse IP** numérique.
 
 ![](../figures/59031e8bc4719f05.svg){ .tikz loading=lazy }
 
@@ -148,13 +148,13 @@ Le DNS n’est pas une seule machine, mais un **immense ensemble d’ordinateurs
 
 ## Internet est indépendant du réseau physique
 
-Point fort de génie : TCP/IP est **logiciel**. Il ne vit pas dans les câbles, mais **dans chaque machine**. Du coup, internet peut circuler sur **n’importe quel** support physique.
+Point fort de génie : TCP/IP est **logiciel**. Il ne vit pas dans les câbles, mais **dans chaque machine**. Du coup, Internet peut circuler sur **n’importe quel** support physique.
 
 | **Réseau physique** | **Filaire ?** | **Débit** | **Usage** |
 |:---|:--:|:--:|:---|
-| Fibre optique | filaire | très élevé | épine dorsale d’internet, box récentes |
+| Fibre optique | filaire | très élevé | épine dorsale d’Internet, box récentes |
 | Ethernet (câble RJ45) | filaire | élevé | réseau local (salle info) |
-| ADSL (ligne téléphone) | filaire | faible/moyen | ancien accès internet, en voie d’obsolescence |
+| ADSL (ligne téléphone) | filaire | faible/moyen | ancien accès Internet, en voie d’obsolescence |
 | Wi-Fi | sans fil | moyen/élevé | à la maison, au lycée, portée courte |
 | 4G / 5G | sans fil | élevé | téléphone mobile, grande portée |
 | Bluetooth | sans fil | faible | entre appareils proches (écouteurs…) |
@@ -199,18 +199,18 @@ Rappel des unités : 1 **ko** $=10^3$ o, 1 **Mo** $=10^6$, 1 **Go** $=10^9$, 1 
 !!! regle "Règle 6 — Deux enjeux de société"
 
     **Le déni de service (attaque DDoS)** : saturer un site de messages pour le rendre indisponible.  
-    **La neutralité du Net** : le principe, présent dès l’origine, selon lequel les routeurs transmettent **tous** les paquets de la même façon, *sans* favoriser un contenu ou un service. Elle est régulièrement remise en cause par des intérêts commerciaux.
+    <span id="lex-neutralite06" class="ancre"></span>**La neutralité du Net** : le principe, présent dès l’origine, selon lequel les routeurs transmettent **tous** les paquets de la même façon, *sans* favoriser un contenu ou un service. Elle est régulièrement remise en cause par des intérêts commerciaux.
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Internet est le socle de presque tous les thèmes de SNT. Le **Web** n’est qu’un de ses services : une requête HTTP part en paquets TCP/IP, après une question au **DNS**. Les **objets connectés** reçoivent eux aussi une adresse IP, d’où le besoin d’**IPv6**. Un réseau de routeurs se représente par un **graphe** (routeurs = sommets, liaisons = arêtes), comme le réseau routier du chapitre *Localisation* ou les amitiés d’un **réseau social**. En spécialité NSI de Première, on étudie de plus près les protocoles qui fiabilisent la transmission, comme le **protocole du bit alterné**.
+    Internet est le socle de presque tous les thèmes de SNT. Le **Web** n’est qu’un de ses services : une requête HTTP part en paquets TCP/IP, après une question au **DNS**. Les **objets connectés**, que l’on étudiera en fin d’année, reçoivent eux aussi une adresse IP, d’où le besoin d’**IPv6**. Un réseau de routeurs se représente par un **graphe** (routeurs = sommets, liaisons = arêtes), comme les amitiés d’un **réseau social** ou, on le verra au chapitre *Localisation*, le réseau routier. En spécialité NSI de Première, on étudie de plus près les protocoles qui fiabilisent la transmission, comme le **protocole du bit alterné**.
 
 ## Bilan — la carte mémoire
 
 | **Notion** | **À retenir** |
 |:---|:---|
-| Internet $\neq$ Web | internet $=$ le réseau ; le Web $=$ un service qui roule dessus. |
-| Histoire | ARPANET 1969 (« LO »), Cyclades 1971, TCP/IP 1974, internet né en 1983. |
+| Internet $\neq$ Web | Internet $=$ le réseau ; le Web $=$ un service qui roule dessus. |
+| Histoire | ARPANET 1969 (« LO »), Cyclades 1971, TCP/IP 1974, Internet né en 1983. |
 | Paquet | petit bloc : données + adresse expéditeur + destinataire + numéro. |
 | IP | **adresse** et **achemine** les paquets (adresse IPv4 : 4 nombres 0–255). |
 | TCP | **fiabilise** : redemande les paquets perdus, les remet dans l’ordre. |
@@ -224,7 +224,7 @@ Rappel des unités : 1 **ko** $=10^3$ o, 1 **Mo** $=10^6$, 1 **Go** $=10^9$, 1 
 
 !!! encadre "Débat argumenté"
 
-    Une **fiche débat** accompagne ce thème : « Les fournisseurs d’accès doivent-ils traiter tous les paquets de la même façon ? » (documents, rôles, tableau d’arguments et trace écrite, environ 50 min).
+    Un **débat**, proposé en fin de chapitre, accompagne ce thème : « Les fournisseurs d’accès doivent-ils traiter tous les paquets de la même façon ? » (documents, rôles, tableau d’arguments et trace écrite, environ 50 min).
 
 ## Savoir-faire à maîtriser
 
@@ -245,5 +245,3 @@ Rappel des unités : 1 **ko** $=10^3$ o, 1 **Mo** $=10^6$, 1 **Go** $=10^9$, 1 
     - expliquer qu’Internet est **indépendant** du support physique ;
 
     - décrire un réseau **pair-à-pair** (P2P) et un de ses usages.
-
-*Crédits : icônes issues du logiciel libre Filius (licence GNU GPL v2 ou v3), `www.lernsoftware-filius.de`.*
