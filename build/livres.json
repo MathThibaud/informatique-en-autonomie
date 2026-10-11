@@ -4,21 +4,11 @@
    "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-seconde.pdf",
    "mo": 9.1,
    "date": "11 octobre 2026"
-  },
-  "-a4": {
-   "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-seconde-a4.pdf",
-   "mo": 9.1,
-   "date": "11 octobre 2026"
   }
  },
  "premiere": {
   "livre": {
    "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-premiere.pdf",
-   "mo": 11.1,
-   "date": "11 octobre 2026"
-  },
-  "-a4": {
-   "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-premiere-a4.pdf",
    "mo": 11.0,
    "date": "11 octobre 2026"
   }
@@ -26,11 +16,6 @@
  "terminale": {
   "livre": {
    "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-terminale.pdf",
-   "mo": 17.5,
-   "date": "11 octobre 2026"
-  },
-  "-a4": {
-   "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-terminale-a4.pdf",
    "mo": 17.3,
    "date": "11 octobre 2026"
   }

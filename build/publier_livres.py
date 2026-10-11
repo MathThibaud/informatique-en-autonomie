@@ -16,7 +16,7 @@ REPO = 'MathThibaud/informatique-en-autonomie'
 TAG = 'livres'
 URL = 'https://github.com/%s/releases/download/%s/' % (REPO, TAG)
 NIVEAUX = {'seconde': 'Seconde', 'premiere': 'Premiere', 'terminale': 'Terminale'}
-FORMATS = {'livre_edition.pdf': '', 'livre_edition_a4.pdf': '-a4'}
+FORMATS = {'livre_edition.pdf': ''}   # format A4 unique depuis le 11-10-2026 (plus de 19×26)
 MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre',
         'octobre', 'novembre', 'décembre']
 
@@ -30,7 +30,7 @@ def main():
     etat = json.loads(etat_f.read_text()) if etat_f.exists() else {}
     if subprocess.run(['gh', 'release', 'view', TAG, '-R', REPO], capture_output=True).returncode:
         subprocess.run(['gh', 'release', 'create', TAG, '-R', REPO, '--title', 'Livres (PDF)',
-                        '--notes', "Manuels d'édition en PDF (format livre 19×26 et format A4). "
+                        '--notes', "Manuels d'édition en PDF (format A4). "
                         'Remplacés à chaque mise à jour du site.'], check=True)
     infos = {}
     for niv, dossier in NIVEAUX.items():
