@@ -31,7 +31,7 @@ Les assistants d’IA écrivent du code et des explications, souvent bien, parfo
 </tr>
 <tr>
 <td style="text-align: left;"><p><span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span></p>
-<p><span> feuilles d’exercices, préparation à la maison (pastille par défaut)</span></p></td>
+<p><span> exercices du livre, préparation à la maison (pastille par défaut)</span></p></td>
 <td style="text-align: left;">Faire expliquer un message d’erreur ; reformuler un énoncé ; demander un exemple ; <strong>vérifier</strong> une réponse que vous avez déjà écrite.</td>
 <td style="text-align: left;">Faire écrire la réponse ou le code à votre place, puis le recopier. La réponse finale est <strong>écrite par vous</strong> et vous savez l’expliquer.</td>
 </tr>
@@ -56,7 +56,7 @@ Les assistants d’IA écrivent du code et des explications, souvent bien, parfo
 
     - Un assistant répond avec la même assurance quand il a raison et quand il a tort. Savoir **vérifier** une réponse (la tester, la tracer, la comparer au cours) est précisément une compétence de ce cours : c’est le sens des exercices <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span>.
 
-    - Les épreuves du bac (écrit de spécialité, épreuve pratique, Grand Oral) se passent **sans aucun outil**. S’entraîner avec une aide que vous n’aurez pas le jour J, c’est se préparer à une autre épreuve que la vôtre.
+    - Les épreuves du bac (partie écrite et partie pratique de l’épreuve de spécialité, Grand Oral) se passent **sans aucune aide d’IA**. S’entraîner avec une aide que vous n’aurez pas le jour J, c’est se préparer à une autre épreuve que la vôtre.
 
     - Sur la plateforme d’entraînement de la classe, les outils d’IA sont réglés par le professeur et suivent la pastille de l’activité.
 

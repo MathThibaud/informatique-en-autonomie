@@ -208,7 +208,7 @@ Faire des calculs **modulo $n$**, c’est ne garder que le **reste** de la divis
 
 !!! regle "Règle 6 — Générer une paire de clés RSA"
 
-    1.  Choisir deux **grands nombres premiers** $p$ et $q$ (dans la réalité : plus de 150 chiffres chacun).
+    1.  Choisir deux **grands nombres premiers** $p$ et $q$ (dans la réalité : environ $300$ chiffres chacun, pour un $n$ de $2\,048$ bits, soit $617$ chiffres).
 
     2.  Calculer $n = p\times q$. Ce nombre $n$ sera public.
 
@@ -299,6 +299,16 @@ Aujourd’hui, le petit cadenas de votre navigateur signifie **HTTPS** : le traf
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
     Le chiffrement répond à une faiblesse des **réseaux** : un paquet traverse des routeurs inconnus et peut être intercepté. HTTPS chiffre le message de la couche **application** (HTTP) avant qu’il ne descende les couches **TCP/IP** : les routeurs acheminent les paquets sans pouvoir en lire le contenu. La sécurité de **RSA** est une question de **coût** : factoriser semble demander un temps exponentiel, ce qui la relie à la question P versus NP, que l’on évoquera au chapitre « calculabilité ». Enfin, les puces de nos téléphones intègrent un module dédié au chiffrement AES (on le retrouvera au chapitre « systèmes sur puce »).
+
+## Ouverture : une course sans fin
+
+La cryptographie avance avec ses attaquants : chaque progrès du calcul oblige à revoir les tailles de clés et les algorithmes.
+
+- les clés grandissent avec la puissance de calcul : un $n$ de $512$ bits a été factorisé en 1999, et l’on recommande aujourd’hui au moins $2\,048$ bits pour RSA ;
+
+- un ordinateur quantique suffisamment puissant saurait factoriser rapidement : des algorithmes dits **post-quantiques** sont déjà normalisés et commencent à être déployés <span class="horsprog">au-delà du programme</span> ;
+
+- au **bac**, on vous demandera surtout de **programmer** ou **dérouler** un chiffrement simple (César, Vigenère, `XOR`), de distinguer chiffrement **symétrique** et **asymétrique**, et d’expliquer le rôle de chacun dans **HTTPS**.
 
 ## Bilan — la carte mémoire
 

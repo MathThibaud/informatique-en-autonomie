@@ -907,7 +907,7 @@ def chiffrer_xor(codes, cle):
 
     2.  L’application chiffre avec la clé **publique** du casier : `C = pow(42, 5, 323)`, qui vaut $264$. Le casier déchiffre avec sa clé **privée** : `K = pow(264, 173, 323)`, qui redonne $42$ (vérifié par exécution).
 
-    3.  Ève connaît la clé publique $(5, 323)$. Elle cherche un diviseur de $323$ en essayant $2, 3, 5, \dots$ : elle trouve vite $323 = 17\times 19$, calcule $\varphi = 288$, puis $d = 173$ comme le casier. Avec un vrai RSA, $n$ est le produit de deux nombres premiers de plus de $150$ chiffres : aucun algorithme connu ne sait **factoriser** un tel nombre en un temps raisonnable. La sécurité de RSA repose sur cette difficulté.
+    3.  Ève connaît la clé publique $(5, 323)$. Elle cherche un diviseur de $323$ en essayant $2, 3, 5, \dots$ : elle trouve vite $323 = 17\times 19$, calcule $\varphi = 288$, puis $d = 173$ comme le casier. Avec un vrai RSA, $n$ est le produit de deux nombres premiers d’environ $300$ chiffres chacun ($n$ de $2\,048$ bits, soit $617$ chiffres) : aucun algorithme connu ne sait **factoriser** un tel nombre en un temps raisonnable. La sécurité de RSA repose sur cette difficulté.
 
     **Partie C.**
 

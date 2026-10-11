@@ -6,7 +6,7 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *Interactions homme-machine sur le Web* : décomposer une **URL** ; distinguer ce qui relève du **client** et du **serveur** ; requêtes **HTTP** `GET`/`POST` ; réaliser et analyser une page **HTML**/**CSS** simple ; rôle de **HTML**, **CSS**, **JavaScript** ; **événements** et modification du document ; **formulaires**. *Réseaux* : notion de **protocole**, **adresse IP**, acheminement par **paquets** (routeurs, commutateurs), modèles **client-serveur** et **pair-à-pair**. |
+| **Programme (BO)** | *Interactions homme-machine sur le Web* : décomposer une **URL** ; distinguer ce qui relève du **client** et du **serveur** ; requêtes **HTTP** `GET`/`POST` ; réaliser et analyser une page **HTML**/**CSS** simple ; rôle de **HTML**, **CSS**, **JavaScript** ; **événements** et modification du document ; **formulaires** ; distinguer ce qui est mémorisé dans le client (**cookies**) et retransmis au serveur. *Réseaux* : notion de **protocole**, **adresse IP**, acheminement par **paquets** (routeurs, commutateurs), modèles **client-serveur** et **pair-à-pair**. |
 | **Prérequis** | le chapitre *Architecture des ordinateurs et systèmes d’exploitation* (client/serveur $=$ deux machines en réseau) ; savoir écrire une fonction. |
 | **Objectifs** | comprendre **ce qui se passe** entre un clic et l’affichage d’une page ; **lire une URL** ; savoir ce qu’est un **protocole**, une **adresse IP**, un **paquet** ; distinguer **client** et **serveur** ; écrire une page **HTML**/**CSS** et la rendre **interactive** en JavaScript ; envoyer des données par un **formulaire** (`GET`/`POST`). |
 
@@ -86,7 +86,7 @@ Le paquet `1` est perdu ; faute d’accusé, l’émetteur le renvoie à l’ide
 
 !!! remarque "Remarque — En Terminale"
 
-    Le chapitre *Les réseaux et le routage* détaille comment les routeurs choisissent le chemin des paquets (protocoles RIP et OSPF) et comment on découpe les adresses IP en sous-réseaux.
+    Le chapitre *Réseaux* détaille comment les routeurs choisissent le chemin des paquets (protocoles RIP et OSPF) et comment on découpe les adresses IP en sous-réseaux.
 
 <span id="cours-10-1" class="ancre"></span>
 
@@ -110,7 +110,7 @@ Sur le Web, votre navigateur est un **client** : il demande des pages à des **s
 
 !!! remarque "Remarque — Reconnaître une page sécurisée (capacité attendue)"
 
-    Quand l’URL commence par `https` (et non `http`), la communication est **chiffrée** : personne ne peut lire au passage ce qui circule. **Réflexe** : avant de saisir un mot de passe ou des coordonnées bancaires, **vérifier le `https`**. Le « s » veut dire *secure*. On étudiera le chiffrement en Terminale.
+    Quand l’URL commence par `https` (et non `http`), la communication est **chiffrée** : personne ne peut lire au passage ce qui circule. **Réflexe** : avant de saisir un mot de passe ou des coordonnées bancaires, **vérifier le `https`**. Le « s » veut dire *secure*. Attention : le `https` (le cadenas) prouve que la liaison est chiffrée, **pas** que le site est honnête ; un site d’hameçonnage peut lui aussi être en `https`, il faut donc aussi vérifier le nom de domaine. On étudiera le chiffrement en Terminale.
 
 !!! remarque "Remarque — Le port au-delà du programme"
 
@@ -456,6 +456,36 @@ Jusqu’ici le client *recevait*. Un **formulaire** lui permet d’**envoyer** d
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[22](exercices.md#ex-10-22) et [23](exercices.md#ex-10-23)** (lire et écrire un formulaire)
 
+### Les cookies : ce que le navigateur retient
+
+Le protocole HTTP est **sans mémoire** : chaque requête est traitée seule, et le serveur ne sait pas, a priori, que deux requêtes viennent du même visiteur. Pour s’en souvenir (rester connecté, garder un panier, retenir une langue), le serveur demande au navigateur de garder une petite information : un **cookie**.
+
+!!! regle "Règle 8 — Le cookie : mémorisé dans le client, retransmis au serveur"
+
+    - Le **serveur** envoie le cookie dans un en-tête de sa réponse, `Set-Cookie`, sous la forme `nom=valeur`.
+
+    - Le **navigateur** (le client) le **mémorise**, rangé avec le nom du site qui l’a déposé.
+
+    - À **chaque** nouvelle requête vers **ce même site**, le navigateur le **retransmet automatiquement** dans l’en-tête `Cookie`. Il ne l’envoie jamais à un autre site.
+
+    ```http
+    HTTP/1.1 200 OK                          <- reponse du serveur
+    Set-Cookie: langue=fr; Max-Age=2592000
+
+    GET /accueil.html HTTP/1.1               <- requete suivante du navigateur
+    Cookie: langue=fr
+    ```
+
+    La **durée** est fixée par le serveur : `Max-Age=2592000` (en secondes) garde le cookie 30 jours ; sans durée, il est effacé à la fermeture du navigateur.
+
+!!! remarque "Remarque — Usages et vie privée"
+
+    Les cookies servent à rester connecté (le cookie contient un identifiant de session), à garder un panier ou des préférences. Mais des cookies déposés par des régies publicitaires présentes sur de nombreux sites permettent aussi de **suivre** un internaute d’un site à l’autre. Les sites doivent donc demander l’accord de l’utilisateur pour les cookies qui ne sont pas indispensables : c’est le rôle des bandeaux « Accepter / Refuser ». On peut consulter et effacer ses cookies dans le navigateur (`F12`, onglet *Application* ou *Stockage*). Enfin, un cookie est stocké **chez le client** : l’utilisateur peut le lire et le modifier, donc le serveur ne doit jamais lui faire une confiance aveugle.
+
+<span id="cours-10-24" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercice **[24](exercices.md#ex-10-24)** (cookies)
+
 ## Un peu d’histoire
 
 !!! remarque "Remarque — D’ARPANET au CERN"
@@ -487,6 +517,7 @@ Jusqu’ici le client *recevait*. Un **formulaire** lui permet d’**envoyer** d
 | Flexbox | `display:flex` sur le *conteneur* : aligne les enfants en ligne (`gap`, `justify-content`) |
 | JavaScript | *comportement* : événement (`click`…) $\to$ `querySelector` $+$ `.value`/DOM, côté client |
 | Formulaire | `<form action method>` ; `POST` pour envoyer/du sensible |
+| Cookie | `Set-Cookie` : *mémorisé* par le client, *renvoyé* au serveur à chaque requête vers ce site |
 
 ## Erreurs fréquentes
 
@@ -532,4 +563,6 @@ Jusqu’ici le client *recevait*. Un **formulaire** lui permet d’**envoyer** d
 
 - assembler HTML $+$ CSS $+$ JavaScript en une **petite page interactive complète** ;
 
-- écrire un **formulaire** et choisir sa méthode d’envoi.
+- écrire un **formulaire** et choisir sa méthode d’envoi ;
+
+- distinguer ce qu’un **cookie** fait **mémoriser par le client** et ce qui est **retransmis au serveur**.

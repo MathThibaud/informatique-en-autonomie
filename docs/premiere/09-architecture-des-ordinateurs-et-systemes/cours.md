@@ -32,7 +32,7 @@ En combinant quelques transistors, on fabrique des **portes logiques** qui calcu
 
     Il faut avoir en tête des *ordres de grandeur*, pas des chiffres exacts :
 
-    - un transistor mesure aujourd’hui quelques **nanomètres** (1 nm $=10^{-9}$ m, soit environ 10 atomes de large) ;
+    - un transistor mesure aujourd’hui de quelques **nanomètres** à quelques dizaines de nanomètres (1 nm $=10^{-9}$ m, soit environ 5 atomes de silicium côte à côte) ; les « 3 nm » annoncés par les fabricants sont un nom commercial plus qu’une vraie mesure ;
 
     - un processeur de smartphone ou d’ordinateur contient de l’ordre de **plusieurs milliards** de transistors ($10^{10}$) ;
 
@@ -336,13 +336,27 @@ Linux est **multi-utilisateur** : plusieurs comptes partagent la machine, chacun
 
     (`a` $=$ « tout le monde » $=$ `u`, `g` et `o` à la fois ; `=` réinitialise.)
 
+!!! regle "Règle 5 — Les droits en chiffres"
+
+    Chaque droit est **présent ou absent** : c’est un **bit**. On donne à chaque droit une valeur, `r`$\,=4$, `w`$\,=2$, `x`$\,=1$, et chaque catégorie s’écrit avec **un chiffre**, la somme de ses droits présents (de $0$ à $7$). Trois chiffres, dans l’ordre **propriétaire, groupe, autres**, décrivent donc tous les droits d’un fichier ; `chmod` les accepte et fixe alors **tous** les droits d’un coup.
+
+!!! exemple "Exemple — chmod 754 fichier"
+
+    |            | **propriétaire (u)** | **groupe (g)** | **autres (o)** |
+    |:----------:|:--------------------:|:--------------:|:--------------:|
+    |  chiffre   |     $7 = 4+2+1$      |   $5 = 4+1$    |      $4$       |
+    | en binaire |        `111`         |     `101`      |     `100`      |
+    |   droits   |        `rwx`         |     `r-x`      |     `r--`      |
+
+    Après `chmod 754 fichier`, `ls -l` affiche `-rwxr-xr--`. On reconnaît l’écriture binaire du chapitre **Le binaire et l’écriture des nombres** : `r`, `w`, `x` sont les bits de poids $4$, $2$ et $1$, donc un chiffre ne dépasse jamais $\texttt{111}_2 = 7$. Codes courants : `755` (`rwxr-xr-x`, un script que tous peuvent lancer), `644` (`rw-r--r--`, un document lisible par tous), `700` (`rwx------`, privé).
+
 !!! remarque "Remarque — Pourquoi c’est un enjeu de sécurité"
 
     Les droits ne sont pas un détail d’administration : ils **protègent** vos données des autres comptes, et limitent les dégâts qu’un programme malveillant peut causer. Un fichier de mots de passe lisible par « les autres », c’est une fuite ; un fichier téléchargé rendu `x` sans réfléchir, c’est un risque. `root`, qui a tous les droits, est aussi le compte le plus dangereux : on ne l’utilise que lorsque c’est nécessaire.
 
 <span id="cours-09-20" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[20](exercices.md#ex-09-20) à [22](exercices.md#ex-09-22)** (droits et permissions)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[20](exercices.md#ex-09-20) à [23](exercices.md#ex-09-23)** (droits et permissions)
 
 ## Un peu d’histoire
 
@@ -378,7 +392,7 @@ Linux est **multi-utilisateur** : plusieurs comptes partagent la machine, chacun
 | Système d’exploitation | gère processeur, mémoire, fichiers, périphériques, utilisateurs |
 | Ligne de commande | `pwd ls cd mkdir touch cat cp mv rm man` ; `.` courant, `..` parent |
 | Chemins | absolu (commence par `/`) vs relatif (part du répertoire courant) |
-| Droits | `rwx` pour `u`/`g`/`o` ; lire `ls -l` ; modifier avec `chmod` |
+| Droits | `rwx` pour `u`/`g`/`o` ; lire `ls -l` ; modifier avec `chmod` ; en chiffres `r`$=4$, `w`$=2$, `x`$=1$ (`754`) |
 
 ## Erreurs fréquentes
 
@@ -412,4 +426,4 @@ Linux est **multi-utilisateur** : plusieurs comptes partagent la machine, chacun
 
 - **utiliser** les commandes de base en ligne de commande sous Linux ;
 
-- **lire** une ligne de `ls -l` et **modifier** des droits avec `chmod`.
+- **lire** une ligne de `ls -l` et **modifier** des droits avec `chmod`, en lettres (`g+w`) ou en chiffres (`754`).

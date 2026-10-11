@@ -16,9 +16,9 @@ En 1945, le premier grand ordinateur électronique, l’**ENIAC**, occupait une 
 
 Comment un ordinateur complet — processeur, mémoire, périphériques — a-t-il pu tenir sur un seul morceau de silicium grand comme une pièce de monnaie ? C’est l’histoire du **système sur puce**, et le sujet de ce chapitre.
 
-!!! regle "Règle 1 — La loi de Moore (1965)"
+!!! regle "Règle 1 — La loi de Moore (1965, révisée en 1975)"
 
-    Gordon Moore, cofondateur d’Intel, observe que **le nombre de transistors sur une puce double environ tous les deux ans**. Ce n’est pas une loi physique, mais une prédiction économique — restée étonnamment juste pendant un demi-siècle. Le premier microprocesseur, l’**Intel 4004** (1971), comptait $2\,300$ transistors ; une puce d’aujourd’hui en compte **des dizaines de milliards**, gravés à $5$ ou $7$ **nanomètres** — soit l’épaisseur de quelques dizaines d’atomes.
+    Gordon Moore, cofondateur d’Intel, prévoit en 1965 que le nombre de transistors sur une puce va doubler chaque année ; en 1975, il révise sa prévision : **le nombre de transistors sur une puce double environ tous les deux ans**. Ce n’est pas une loi physique, mais une prédiction économique — restée étonnamment juste pendant un demi-siècle. Le premier microprocesseur, l’**Intel 4004** (1971), comptait $2\,300$ transistors ; une puce d’aujourd’hui en compte **des dizaines de milliards**, gravés « en $3$ **nanomètres** », voire « en $2$ nm ». Ces noms sont devenus commerciaux et ne mesurent plus exactement un transistor, mais l’ordre de grandeur est là : les motifs les plus fins ne font que quelques dizaines d’atomes de large.
 
 \*(image manquante : 14_Intel_C4004)\*  
 *L’Intel 4004 (1971), l’un des tout premiers microprocesseurs : $2\,300$ transistors.*
@@ -75,7 +75,7 @@ Tous les systèmes sur puce ne sont pas des monstres de puissance. À l’autre 
 |  | **Microcontrôleur** | **SoC (téléphone, tablette)** |
 |:---|:---|:---|
 | Puissance | quelques dizaines de MHz | plusieurs cœurs à plusieurs GHz |
-| Mémoire | quelques **Ko** | plusieurs **Go** |
+| Mémoire | quelques **Ko** à quelques centaines de **Ko** | plusieurs **Go** |
 | Consommation | minuscule (des années sur pile) | modérée |
 | Prix | quelques euros | quelques dizaines d’euros |
 | Système d’exploitation | **aucun** (le programme, seul) | un OS complet (iOS, Android…) |
@@ -136,7 +136,7 @@ Pourquoi tout intégrer sur une puce plutôt que garder une carte mère modulair
 
 <span class="afaire">▶ Exercices d'application :</span> exercice **[7](exercices.md#ex-14-7)** (le prix de l’intégration)
 
-## L’informatique invisible : les objets connectés
+## Ouverture : l’informatique invisible, les objets connectés
 
 Le SoC et le microcontrôleur ont fait naître l’**Internet des objets** (*Internet of Things*, IoT) : montres, ampoules, thermostats, voitures, capteurs agricoles… **des dizaines de milliards** d’objets, chacun avec sa puce, souvent connectés au réseau. L’ordinateur a tellement rétréci qu’il a disparu *dans les choses*. C’est une révolution silencieuse — et elle pose, en retour, des questions de **sécurité** (chaque objet est une porte d’entrée) et de **vie privée** (chaque objet est un capteur).
 
@@ -198,4 +198,4 @@ Le SoC et le microcontrôleur ont fait naître l’**Internet des objets** (*Int
 
 !!! remarque "Remarque"
 
-    Tout commence en **1958** : **Jack Kilby** (Texas Instruments) et **Robert Noyce** (futur cofondateur d’Intel) inventent, chacun de leur côté, le **circuit intégré** — l’idée de graver plusieurs composants sur un seul morceau de silicium. Kilby recevra le prix Nobel de physique en 2000. En **1971**, une petite équipe d’Intel menée par **Federico Faggin** grave le premier **microprocesseur**, l’**Intel 4004** : $2\,300$ transistors, aussi puissant que l’ENIAC de $30$ tonnes… sur une puce de la taille d’un ongle. Un demi-siècle plus tard, ses descendants en comptent des dizaines de milliards. L’ordinateur n’a jamais cessé de rétrécir — jusqu’à se glisser dans les objets du quotidien.
+    Tout commence en **1958–1959** : **Jack Kilby** (Texas Instruments, 1958, sur un morceau de germanium) et **Robert Noyce** (Fairchild, 1959, sur du silicium ; futur cofondateur d’Intel) inventent, chacun de leur côté, le **circuit intégré** — l’idée de graver plusieurs composants sur un seul morceau de semi-conducteur. Kilby recevra le prix Nobel de physique en 2000. En **1971**, une petite équipe d’Intel menée par **Federico Faggin** grave le premier **microprocesseur**, l’**Intel 4004** : $2\,300$ transistors, aussi puissant que l’ENIAC de $30$ tonnes… sur une puce de la taille d’un ongle. Un demi-siècle plus tard, ses descendants en comptent des dizaines de milliards. L’ordinateur n’a jamais cessé de rétrécir — jusqu’à se glisser dans les objets du quotidien.

@@ -46,6 +46,7 @@ def slugify(t):
 
 
 def clean_title(t):
+    t = re.sub(r'\\texorpdfstring\{((?:[^{}]|\{[^{}]*\})*)\}\{((?:[^{}]|\{[^{}]*\})*)\}', r'\2', t)
     t = re.sub(r'\\textsuperscript\{([^}]*)\}', r'\1', t)
     t = t.replace('---', '—').replace('--', '–').replace('\\,', ' ').replace('~', ' ')
     t = re.sub(r"\\'\{?e\}?", 'é', t)
@@ -77,6 +78,10 @@ def parse_book(path):
     lines = body.split('\n')
     for line in lines:
         st = line.strip()
+        # macros de mise en page du livre (renvois de page, onglets) : sans contenu pour le site
+        st = re.sub(r'^\\prochainentete\{[^}]*\}\{[^}]*\}\{[^}]*\}', '', st)
+        st = re.sub(r'^\\sansonglet', '', st).strip()
+        line = st
         if not st or st in ('\\clearpage', '\\mainmatter', '\\frontmatter', '\\tableofcontents',
                             '\\bandeaupagetitre', '\\cleartorecto') or st.startswith('\\lignesommaire'):
             continue
@@ -93,7 +98,14 @@ def parse_book(path):
         m = re.match(r'\\partpage\{([^}]*)\}\{([^}]*)\}', st)
         if m:
             t = m.group(2)
-            part = 3 if 'Corrig' in t else 2 if 'pratique' in t.lower() else 1
+            part = 3 if 'Corrig' in t else 2 if ('pratique' in t.lower() or 'épreuves' in t.lower()) else 1
+            target = None
+            continue
+        m = re.match(r'\\chapitrecorrige\{[^}]*\}\{', st)
+        if m and part == 3:
+            _, fin = find_group(st, m.end() - 1)
+            title = clean_title(find_group(st, fin)[0])
+            chap = by_title[title]
             target = None
             continue
         m = re.search(r'\\chapter(\*?)\{', st)
@@ -130,8 +142,12 @@ def parse_book(path):
                     page = dict(title=title, num=int(mm.group(1)), items=[], corr=[])
                     book['pratique'].append(page)
                     target = page['items']
-                else:
+                elif 'sujets' in title.lower():
                     target = book['pratique_intro']
+                else:                       # fiches méthode (écrit, épreuve pratique, Grand Oral)
+                    page = dict(title=title, items=[], slug=slugify(title))
+                    book['annexes'].append(page)
+                    target = page['items']
             elif part == 3:
                 mm = re.match(r'Corrigé du sujet (\d+)', title)
                 if mm:

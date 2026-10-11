@@ -1,6 +1,6 @@
 # Panorama de l'année
 
-Les douze chapitres de l’année ne sont pas indépendants : les mêmes outils (la boucle, le tableau, le parcours) reviennent d’un chapitre à l’autre, et deux questions traversent toute l’année : **« mon programme est-il correct ? »** et **« combien coûte-t-il ? »**. Cette fiche donne une vue d’ensemble, à relire à chaque nouveau chapitre. Elle montre aussi ce que chaque chapitre prépare pour la Terminale.
+Les douze chapitres de l’année ne sont pas indépendants : les mêmes outils (la boucle, le tableau, le parcours) reviennent d’un chapitre à l’autre, et deux questions traversent toute l’année : **« mon programme est-il correct ? »** et **« combien coûte-t-il ? »**. Ces pages donnent une vue d’ensemble, à relire à chaque nouveau chapitre. Elles montrent aussi ce que chaque chapitre prépare pour la Terminale.
 
 ### Le plan de l’année en quatre blocs
 
@@ -22,7 +22,7 @@ Chaque chapitre apporte des outils pour répondre à l’une des deux questions�
 |:---|:---|:---|
 | Spécifier et tester | Écrire ce que la fonction doit faire (préconditions, postconditions) et le vérifier par des **assertions** et des **jeux de tests**. Un test réussi ne prouve pas que le programme est juste. | 1 Bases de Python, 5 Mise au point |
 | Invariant de boucle | Une propriété vraie à chaque tour de boucle, qui explique pourquoi le résultat final est le bon. | 4 Parcours, 6 Tris |
-| Variant de boucle | Une quantité entière qui diminue à chaque tour : elle prouve que la boucle **se termine**. | 7 Dichotomie |
+| Variant de boucle | Une quantité entière, positive, qui diminue strictement à chaque tour : elle prouve que la boucle **se termine**. | 1 Bases de Python, 7 Dichotomie |
 | Compter les opérations | Un parcours coûte de l’ordre de $n$, un tri par insertion de l’ordre de $n^2$, une recherche dichotomique de l’ordre de $\log_2 n$. | 4 Parcours, 6 Tris, 7 Dichotomie |
 | Accepter un compromis | Un algorithme **glouton** est rapide mais ne donne pas toujours la meilleure solution. | 11 Gloutons |
 
@@ -48,7 +48,7 @@ Pour chaque chapitre : ce qu’il **réutilise**, et où il **resservira**, cet
 | 9 Architecture, OS | binaire (2) | le Web (10) ; Tle : processus, systèmes sur puce |
 | 10 Le Web | architecture (9) ; fonctions (1) | Tle : bases de données (côté serveur), cryptographie (HTTPS) |
 | 11 Algorithmes gloutons | parcours, coût, invariant du champion (4) | Tle : programmation dynamique, graphes (Dijkstra) |
-| 12 $k$ plus proches voisins | parcours (4), tris (6), données en tables (8) | Tle : arbres |
+| 12 $k$ plus proches voisins | parcours (4), tris (6), données en tables (8) | projet de reconnaissance de caractères ; Tle : sujet possible de Grand Oral (intelligence artificielle) |
 
 !!! remarque "Remarque"
 
@@ -61,3 +61,5 @@ Chaque date de cette frise correspond à une notion que l’on étudie cette ann
 ![](figures/1b2c9877d61d213d.svg){ .tikz loading=lazy }
 
 ![](figures/a21fa720abfd74c2.svg){ .tikz loading=lazy }
+
+mainmattertrue

@@ -8,7 +8,7 @@
 
     - <span class="tag">sur papier</span> *à faire sur papier* ; <span class="run" title="À programmer et tester sur machine">▶</span> *à faire sur machine* (terminal, navigateur).
 
-    - Un **TP sur le simulateur Filius** accompagne cette feuille (fiche séparée).
+    - Un **TP sur le simulateur Filius**, proposé en fin de chapitre, complète ces exercices.
 
     - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la charte d’usage de l’IA.
 
@@ -16,11 +16,11 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Remettre dans l’ordre <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-1 }
 
-<span class="tag">sur papier</span>  Ranger ces événements du plus ancien au plus récent, avec leur date : *invention du Web* $\bullet$ *premier message sur ARPANET* $\bullet$ *naissance d’internet (bascule TCP/IP)* $\bullet$ *invention du protocole TCP/IP*.
+<span class="tag">sur papier</span>  Ranger ces événements du plus ancien au plus récent, avec leur date : *invention du Web* $\bullet$ *premier message sur ARPANET* $\bullet$ *naissance d’Internet (bascule TCP/IP)* $\bullet$ *invention du protocole TCP/IP*.
 
 ??? corrige "Corrigé"
 
-    \; premier message ARPANET (**1969**) $\to$ protocole TCP/IP (**1974**) $\to$ naissance d’internet, bascule TCP/IP (**1983**) $\to$ invention du Web (**1990–91**).
+    \; premier message ARPANET (**1969**) $\to$ protocole TCP/IP (**1974**) $\to$ naissance d’Internet, bascule TCP/IP (**1983**) $\to$ invention du Web (**1990–91**).
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — « LO…» <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-2 }
 
@@ -42,7 +42,7 @@
 
 ??? corrige "Corrigé"
 
-    1.  Un **paquet** est un petit bloc de taille fixe contenant une partie du message ; son étiquette porte l’**adresse de l’expéditeur**, l’**adresse du destinataire** et un **numéro**.
+    1.  Un **paquet** est un petit bloc de taille limitée contenant une partie du message ; son étiquette porte l’**adresse de l’expéditeur**, l’**adresse du destinataire** et un **numéro**.
 
     2.  Le numéro permet de **remettre les paquets dans l’ordre** à l’arrivée.
 
@@ -130,7 +130,7 @@
 
 <span class="tag">sur papier</span>  On considère le réseau de routeurs suivant (PC-A veut joindre PC-B) :
 
-![](../figures/6d2ae0af0d363be4.svg){ .tikz loading=lazy }
+![](../figures/ebf36768c073f390.svg){ .tikz loading=lazy }
 
 1.  Donner **deux** chemins possibles de PC-A vers PC-B.
 
@@ -172,13 +172,13 @@
 
 <span class="tag">sur papier</span>  Dans le réseau ci-dessous, PC-A envoie des paquets à PC-B. Chaque routeur traversé **ralentit** un peu le paquet.
 
-![](../figures/b2c78d47310d51ca.svg){ .tikz loading=lazy }
+![](../figures/2e55be10370d336e.svg){ .tikz loading=lazy }
 
 1.  Quel chemin traverse le **moins** de routeurs ? Combien en traverse-t-il ?
 
 2.  Le câble R2–R6 tombe en panne. Quel est maintenant le plus petit nombre de routeurs à traverser ? Donner **tous** les chemins qui réalisent ce minimum.
 
-3.  Pourquoi cet exemple montre-t-il qu’internet est **robuste** ?
+3.  Pourquoi cet exemple montre-t-il qu’Internet est **robuste** ?
 
 ??? pouce "Coup de pouce"
 
@@ -194,7 +194,7 @@
 
     2.  Après la panne, il faut traverser au moins **4** routeurs (R1 et R6 n’ont plus aucun voisin commun). Trois chemins réalisent ce minimum : R1 – R2 – R4 – R6 ; \; R1 – R2 – R5 – R6 ; \; R1 – R3 – R5 – R6.
 
-    3.  Même quand un câble tombe en panne, il existe encore plusieurs chemins : les routeurs envoient les paquets par une autre route, un peu plus longue, et la communication continue. C’est le principe d’internet : **pas de point de passage unique**.
+    3.  Même quand un câble tombe en panne, il existe encore plusieurs chemins : les routeurs envoient les paquets par une autre route, un peu plus longue, et la communication continue. C’est le principe d’Internet : **pas de point de passage unique**.
 
 ### Adresses IP et DNS
 
@@ -246,7 +246,7 @@
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Sur machine <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-14 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Dans un terminal, taper `ping lycee.mc` (ou un autre site). Relever l’**adresse IP** affichée. Recommencer avec un deuxième site. *(But : voir le DNS à l’œuvre.)*
+<span class="run" title="À programmer et tester sur machine">▶</span>  Dans un terminal, taper `ping wikipedia.fr` (ou un autre site réel). Relever l’**adresse IP** affichée. Recommencer avec un deuxième site. *(But : voir le DNS à l’œuvre.)*
 
 ??? pouce "Coup de pouce"
 
@@ -264,7 +264,7 @@
 
 2.  Votre voisin, qui connaît l’adresse IP du site, la tape directement dans la barre d’adresse. La page peut-elle s’afficher ? Justifier.
 
-3.  En déduire pourquoi on dit que le DNS est l’« annuaire » d’internet.
+3.  En déduire pourquoi on dit que le DNS est l’« annuaire » d’Internet.
 
 ??? pouce "Coup de pouce"
 
@@ -354,9 +354,9 @@
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Un paquet perdu, selon un assistant <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-06-20 }
 
-<span class="tag">sur papier</span>  Un élève a demandé à un assistant d’IA : « Que se passe-t-il quand un paquet se perd sur internet ? » Voici la réponse obtenue :
+<span class="tag">sur papier</span>  Un élève a demandé à un assistant d’IA : « Que se passe-t-il quand un paquet se perd sur Internet ? » Voici la réponse obtenue :
 
-> Sur internet, un message est découpé en paquets qui voyagent séparément, de routeur en routeur, et peuvent emprunter des chemins différents. Chaque paquet porte un compteur (le TTL) qui diminue à chaque routeur traversé ; s’il tombe à zéro, le paquet est détruit, ce qui évite qu’il tourne en rond pour toujours. Un paquet peut donc être perdu. C’est alors le protocole IP qui s’en aperçoit et redemande le paquet manquant à l’expéditeur, puis remet les paquets dans le bon ordre. Le message finit toujours par arriver complet, mais sans garantie de délai.
+> Sur Internet, un message est découpé en paquets qui voyagent séparément, de routeur en routeur, et peuvent emprunter des chemins différents. Chaque paquet porte un compteur (le TTL) qui diminue à chaque routeur traversé ; s’il tombe à zéro, le paquet est détruit, ce qui évite qu’il tourne en rond pour toujours. Un paquet peut donc être perdu. C’est alors le protocole IP qui s’en aperçoit et redemande le paquet manquant à l’expéditeur, puis remet les paquets dans le bon ordre. Le message finit toujours par arriver complet, mais sans garantie de délai.
 
 1.  La réponse est-elle correcte ? Relire le tableau « IP et TCP » du cours et vérifier, pour chaque tâche citée, quel protocole en est chargé.
 
@@ -367,8 +367,6 @@
         Pour chaque action citée par l’assistant, cherchez dans le tableau « IP et TCP » du cours quel protocole en est chargé.
 
 3.  Quelle vérification simple, faite *avant* de faire confiance à cette réponse, aurait suffi à détecter l’erreur ?
-
-*Crédits : icônes issues du logiciel libre Filius (licence GNU GPL v2 ou v3), `www.lernsoftware-filius.de`.*
 
 ??? corrige "Corrigé"
 

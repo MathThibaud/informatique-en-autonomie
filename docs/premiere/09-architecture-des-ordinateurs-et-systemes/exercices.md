@@ -70,7 +70,7 @@ Pour chaque affirmation, répondre par vrai ou faux et **justifier** en une phra
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Ordres de grandeur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-09-3 }
 
-Recopier chaque grandeur en la reliant à l’ordre de grandeur qui convient : \; *quelques nanomètres* \;/\; *quelques milliards* \;/\; *quelques gigahertz*.
+Recopier chaque grandeur en la reliant à l’ordre de grandeur qui convient : \; *quelques nanomètres à quelques dizaines de nanomètres* \;/\; *quelques milliards* \;/\; *quelques gigahertz*.
 
 1.  taille d’un transistor gravé aujourd’hui ;
 
@@ -80,7 +80,7 @@ Recopier chaque grandeur en la reliant à l’ordre de grandeur qui convient : \
 
 ??? corrige "Corrigé"
 
-    a\) quelques **nanomètres** ; \; b) quelques **milliards** ; \; c) quelques **gigahertz**.
+    a\) quelques **nanomètres** à quelques dizaines de nanomètres ; \; b) quelques **milliards** ; \; c) quelques **gigahertz**.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — La loi de Moore <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-4 }
 
@@ -510,7 +510,25 @@ drwxr-x---  2 eleve  nsi  4096  8 sep 10:05 secret
 
     a\) `chmod o-r cours_nsi.txt` \; b) `chmod g+w cours_nsi.txt` \; c) `chmod u+x script.sh` \; d) `chmod a+r logo.png`
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 22</span> — Le compte `root` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-22 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 22</span> — Les droits en chiffres <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-22 }
+
+1.  Écrire en trois chiffres les droits `rwxr-xr-x`, `rw-r--r--`, `rwx------` et `r--r-----`.
+
+2.  Quels droits (en lettres) donnent `chmod 640`, `chmod 751` et `chmod 600` ?
+
+3.  Écrire la commande `chmod` en chiffres qui donne sur `script.sh` tous les droits au propriétaire, la lecture et l’exécution au groupe, et aucun droit aux autres.
+
+4.  Pourquoi chaque chiffre est-il compris entre $0$ et $7$ ? Combien de réglages différents des droits d’un fichier existe-t-il en tout ?
+
+    ??? pouce "Coup de pouce"
+
+        Lire chaque catégorie comme un nombre binaire de 3 bits : `r`, `w`, `x` sont les bits de poids $4$, $2$ et $1$ (`-` vaut $0$).
+
+??? corrige "Corrigé"
+
+    **a)** `rwxr-xr-x` $\to$ `755` ($4+2+1$, $4+1$, $4+1$) ; `rw-r--r--` $\to$ `644` ; `rwx------` $\to$ `700` ; `r--r-----` $\to$ `440`. **b)** `640` $\to$ `rw-r-----` ($6 = 4+2$ : lecture et écriture ; $4$ : lecture ; $0$ : rien) ; `751` $\to$ `rwxr-x--x` ; `600` $\to$ `rw-------`. **c)** Propriétaire $4+2+1 = 7$, groupe $4+1 = 5$, autres $0$ : `chmod 750 script.sh`. **d)** Une catégorie compte $3$ droits, chacun présent ou absent : c’est un nombre binaire de $3$ bits, donc au plus $\texttt{111}_2 = 4+2+1 = 7$ (et au moins $0$). Les $9$ droits étant chacun présent ou absent, il y a $2^9 = 512$ réglages ($8$ chiffres possibles pour chacune des $3$ catégories : $8 \times 8 \times 8 = 512$).
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Le compte `root` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-23 }
 
 1.  Qui est l’utilisateur `root` et que peut-il faire de plus que les autres ?
 
@@ -528,7 +546,7 @@ drwxr-x---  2 eleve  nsi  4096  8 sep 10:05 secret
 
 ### Mini-problème de synthèse
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 23</span> — Du transistor au fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-23 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 24</span> — Du transistor au fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-24 }
 
 Léo, sur son environnement Linux, écrit un petit programme, l’enregistre, puis le rend exécutable.
 
@@ -550,9 +568,9 @@ Léo, sur son environnement Linux, écrit un petit programme, l’enregistre, pu
 
 ??? corrige "Corrigé"
 
-    **a)** Tant qu’il n’a pas enregistré, le texte est en **RAM** (mémoire volatile) : une coupure de courant le **perd**. **b)** `cat Projets/jeu.py` (chemin relatif depuis `/home/leo`). **c)** `chmod u+x Projets/jeu.py` (pour n’autoriser que lui, on peut aussi tout réinitialiser avec `chmod 700 Projets/jeu.py` <span class="horsprog">au-delà du programme</span>). **d)** Le processeur ne comprend que le **langage machine**. Le code Python est donc d’abord **traduit** par l’interpréteur Python (en simplifiant : il le traduit en un code intermédiaire, qu’il exécute ensuite instruction par instruction) ; tout en bas, ce sont des instructions en langage machine que le processeur exécute une à une, en répétant le **cycle chercher-décoder-exécuter**. Le programme « lisible » du haut du mille-feuille finit toujours en instructions élémentaires tout en bas.
+    **a)** Tant qu’il n’a pas enregistré, le texte est en **RAM** (mémoire volatile) : une coupure de courant le **perd**. **b)** `cat Projets/jeu.py` (chemin relatif depuis `/home/leo`). **c)** `chmod u+x Projets/jeu.py` (pour n’autoriser que lui, on peut aussi fixer tous les droits d’un coup en chiffres : `chmod 700 Projets/jeu.py`, soit `rwx------`). **d)** Le processeur ne comprend que le **langage machine**. Le code Python est donc d’abord **traduit** par l’interpréteur Python (en simplifiant : il le traduit en un code intermédiaire, qu’il exécute ensuite instruction par instruction) ; tout en bas, ce sont des instructions en langage machine que le processeur exécute une à une, en répétant le **cycle chercher-décoder-exécuter**. Le programme « lisible » du haut du mille-feuille finit toujours en instructions élémentaires tout en bas.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — Le modèle de von Neumann selon un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-09-24 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 25</span> — Le modèle de von Neumann selon un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-09-25 }
 
 Un élève demande à un assistant d’IA : « Explique-moi le modèle de von Neumann. » Voici la réponse obtenue.
 

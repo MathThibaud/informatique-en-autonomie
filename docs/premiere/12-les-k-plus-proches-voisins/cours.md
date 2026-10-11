@@ -1,6 +1,6 @@
 # Cours
 
-<p class="sous-titre">Les $k$k plus proches voisins</p>
+<p class="sous-titre">Les k plus proches voisins</p>
 
 <span id="chap-12" class="ancre"></span>
 

@@ -1,4 +1,4 @@
-# Problèmes de synthèse et exercices type bac
+# Problèmes de synthèse
 
 <div class="grid cards rubriques" markdown>
 

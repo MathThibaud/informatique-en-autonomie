@@ -75,7 +75,7 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
 
 ??? corrige "Corrigé"
 
-    **1.** Chaque canal a $256$ valeurs, et il y a trois canaux indépendants : $$256 \times 256 \times 256 = 256^3 = \mathbf{16\,777\,216} \text{ couleurs} \quad (\approx 16{,}7 \text{ millions}).$$ **2.** Un gris a ses trois canaux **égaux** : il n’y a donc autant de gris que de valeurs communes possibles, soit **256** nuances (du noir au blanc).
+    **1.** Chaque canal a $256$ valeurs, et il y a trois canaux indépendants : $$256 \times 256 \times 256 = 256^3 = \mathbf{16\,777\,216} \text{ couleurs} \quad (\approx 16{,}7 \text{ millions}).$$ **2.** Un gris a ses trois canaux **égaux** : il y a donc autant de gris que de valeurs communes possibles, soit **256** nuances (du noir au blanc).
 
 ### Définition, résolution et poids
 
@@ -170,7 +170,7 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Lire un pixel <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-11 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  À l’aide de l’image `terre.jpg`, écrire un programme qui affiche les trois canaux R, V, B du pixel de coordonnées $(120, 200)$.
+<span class="run" title="À programmer et tester sur machine">▶</span>  À l’aide de l’image `terre.jpg` du cours (« The Blue Marble »), écrire un programme qui affiche les trois canaux R, V, B du pixel de coordonnées $(120, 200)$.
 
 ??? pouce "Coup de pouce"
 
@@ -372,8 +372,6 @@ img.show()
         Relisez la définition de la résolution dans le cours : en quelle unité s’exprime-t-elle ? Convertissez $30$ cm en pouces.
 
 3.  Quelle vérification simple, faite *avant* de faire confiance à cette réponse, aurait suffi à détecter l’erreur ?
-
-**Crédits.** Image `terre.jpg` : « The Blue Marble », NASA, équipage d’Apollo 17, 7 décembre 1972, domaine public.
 
 ??? corrige "Corrigé"
 

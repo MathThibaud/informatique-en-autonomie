@@ -1055,7 +1055,7 @@ def chargement_glouton(liste, rang, capacite):
 
     6.  C’est un **tri par sélection** (on sélectionne le plus lourd des colis restants et on le place en position `i`), de coût **quadratique** ($n^2$) dans le pire des cas.
 
-    7.  Par exemple le **tri fusion**, de coût $n \log_2 n$ dans le pire des cas.
+    7.  Par exemple le **tri fusion**, de coût $n \log_2 n$ dans le pire des cas, qui sera étudié au chapitre *Diviser pour régner*.
 
     8.
 

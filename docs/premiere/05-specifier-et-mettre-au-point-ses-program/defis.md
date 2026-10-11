@@ -2,192 +2,7 @@
 
 <p class="sous-titre">Spécifier et mettre au point ses programmes</p>
 
-## <span class="etiquette">Défi 1</span> Inventory Management System
-
-*l’inventaire — compter des lettres, double boucle*
-
-<p class="infos-activite">Jour 2</p>
-
-!!! fichiers "Fichiers à télécharger"
-
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/05-defi-aoc-2018-02){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-05-defi-aoc-2018-02.zip){ .md-button }
-
-!!! consignes "Consignes"
-
-    - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2018/day/2 ](https://adventofcode.com/2018/day/2 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
-
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/05-defi-aoc-2018-02>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
-
-    - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
-
-    - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
-
-*Ce défi est l’occasion d’appliquer la démarche de ce chapitre : spécifier chaque petite fonction et la tester avec des `assert` avant de l’utiliser.*
-
-## Lire l’énoncé
-
-Vocabulaire utile pour lire le texte original :
-
-|               |                      |                |                   |
-|:--------------|:---------------------|:---------------|:------------------|
-| box ID        | identifiant de boîte | checksum       | somme de contrôle |
-| exactly two   | exactement deux      | count          | compter, nombre   |
-| letter        | lettre               | differ by      | différer de       |
-| same position | même position        | common letters | lettres communes  |
-
-!!! encadre "Résumé de l’énoncé (partie 1)"
-
-    **Contexte.** Dans l’entrepôt des elfes, on cherche deux boîtes qui contiennent un tissu précieux. Chaque boîte porte un identifiant fait de lettres minuscules, et le fichier donne la liste de ces identifiants, un par ligne. Avant de chercher les boîtes, on calcule une « somme de contrôle » de la liste, qui sert à vérifier qu’on a bien recopié tous les identifiants.
-
-    **Ce qu’il faut faire.**
-
-    - On compte $A$, le nombre d’identifiants dans lesquels **au moins une** lettre apparaît **exactement deux fois**.
-
-    - On compte $B$, le nombre d’identifiants dans lesquels au moins une lettre apparaît **exactement trois fois**.
-
-    - Un identifiant compte au plus une fois dans $A$, même s’il a plusieurs lettres doubles ; il peut en revanche compter à la fois dans $A$ et dans $B$.
-
-    - Réponse : le produit $A \times B$.
-
-### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-1 }
-
-Après lecture du résumé (et de l’énoncé), vérifier sa compréhension sur ces cas particuliers :
-
-1.  Une lettre présente quatre fois rend-elle l’identifiant « double » ?
-
-2.  L’identifiant `aabbcc` ajoute-t-il 1 ou 3 au compte $A$ ?
-
-3.  Que vaut la réponse si aucun identifiant n’a de lettre triple ?
-
-### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-2 }
-
-On considère le fichier (inventé) suivant :
-
-```console
-mnoppq
-rrsttt
-uvwxyz
-aabbcc
-dedede
-fghfgk
-```
-
-Pour chaque identifiant, noter s’il contient une lettre exactement deux fois, une lettre exactement trois fois. Vérification : on doit obtenir `8`.
-
-## Programmer la partie 1
-
-### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-3 }
-
-Rappel pour lire un fichier ligne par ligne :
-
-```python
-fichier = open("input.txt", encoding="utf-8")
-for ligne in fichier:
-    ligne = ligne.strip()   # enlève le retour à la ligne final
-fichier.close()
-```
-
-Construire la liste `identifiants` des chaînes du fichier et afficher sa longueur.
-
-??? pouce "Coup de pouce"
-
-    Partir d’une liste vide `identifiants = []` et, dans la boucle, faire `identifiants.append(ligne)`.
-
-!!! encadre "Outil Python : compter dans une chaîne (count)"
-
-    La méthode `count` d’une chaîne renvoie le nombre d’apparitions d’un caractère, ou d’un morceau de chaîne, dans cette chaîne.
-
-    ```python
-    mot = "banane"
-    print(mot.count("a"))      # 2 : nombre d'apparitions du caractere "a"
-    print(mot.count("an"))     # 2 : marche aussi avec un morceau de chaine
-    print(mot.count("z"))      # 0 : absent
-    ```
-
-    **Intérêt.** Elle évite d’écrire soi-même une boucle de comptage. Attention, elle parcourt toute la chaîne à chaque appel : l’appeler pour chaque lettre d’un mot de longueur $m$ coûte environ $m^2$ opérations.
-
-    *À essayer.* Que renvoie `"banane".count("ana")` ? Pourquoi pas 2 ?
-
-### <span class="exo-num">Exercice 4</span> — Compter les lettres <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-4 }
-
-Écrire une fonction `a_une_lettre_n_fois(mot, n)` qui renvoie `True` si au moins une lettre de `mot` apparaît exactement `n` fois. Tester : `a_une_lettre_n_fois("dedede", 3)` vaut `True` et `a_une_lettre_n_fois("dedede", 2)` vaut `False`.
-
-??? pouce "Coup de pouce"
-
-    Pour chaque lettre du mot, compter combien de fois elle apparaît dans le mot avec une boucle (ou la méthode `mot.count(lettre)`).
-
-??? pouce "Coup de pouce 2 (début de solution)"
-
-    `for lettre in mot:` puis `if mot.count(lettre) == n:` on peut renvoyer `True` tout de suite. Après la boucle, renvoyer `False`.
-
-### <span class="exo-num">Exercice 5</span> — La somme de contrôle <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-5 }
-
-Écrire une fonction `somme_controle(identifiants)` qui compte les identifiants concernés par « deux », ceux concernés par « trois » et renvoie la réponse. Vérifier `8` sur l’exemple, puis lancer sur vos données.
-
-## Partie 2
-
-Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
-
-!!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
-
-    Il reste à trouver les deux boîtes au tissu précieux : ce sont les deux seules dont les identifiants diffèrent d’**exactement un caractère**, à la même position (toutes les autres positions sont identiques). La réponse est la chaîne des caractères communs, autrement dit l’un des deux identifiants privé du caractère qui diffère.
-
-### <span class="exo-num">Exercice 6</span> — Différer d’un seul caractère <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-6 }
-
-Écrire une fonction `nb_differences(mot1, mot2)` qui compte les positions où les deux mots (de même longueur) ont des caractères différents. Tester : `nb_differences("lunes", "lunas")` vaut `1`.
-
-??? pouce "Coup de pouce"
-
-    Une boucle sur les indices `i` de `0` à `len(mot1) - 1` et un compteur.
-
-### <span class="exo-num">Exercice 7</span> — Chercher la bonne paire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-7 }
-
-Trouver les deux identifiants qui ne diffèrent que d’un caractère et afficher la réponse demandée. Sur le petit fichier (inventé) ci-dessous, on doit trouver `luns`.
-
-```console
-lunes
-marte
-lunas
-sabor
-```
-
-??? pouce "Coup de pouce"
-
-    Deux boucles imbriquées sur les **indices** `i` et `j` de la liste, avec `j > i` pour ne pas comparer un identifiant avec lui-même ni deux fois la même paire.
-
-??? pouce "Coup de pouce 2 (début de solution)"
-
-    Une fois la paire trouvée, construire une chaîne vide `commun = ""` et y ajouter (`commun += ...`) les caractères qui sont identiques à la même position dans les deux mots.
-
-## Approfondissement
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 1 : combien de comparaisons ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-8 }
-
-1.  À la main : pour la liste de 4 identifiants de la partie 2, écrire toutes les paires que la double boucle compare. Combien y en a-t-il ?
-
-2.  Le fichier contient $n$ identifiants. Combien de paires la double boucle examine-t-elle au pire ? Calculer ce nombre pour vos données.
-
-    ??? pouce "Coup de pouce"
-
-        Le premier identifiant est comparé aux $n - 1$ suivants, le deuxième aux $n - 2$ suivants, etc.
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Approfondissement 2 : compter en un seul parcours <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-9 }
-
-1.  À la main : construire le dictionnaire des effectifs des lettres de `fghfgk`.
-
-2.  Écrire `a_une_lettre_n_fois_dico(mot, n)` qui construit ce dictionnaire en **un seul parcours** du mot, puis regarde si la valeur `n` figure parmi les valeurs. Vérifier qu’elle donne les mêmes résultats que la première version.
-
-    ??? pouce "Coup de pouce"
-
-        Pour chaque lettre : si elle est déjà une clé, ajouter 1 à sa valeur ; sinon, créer la clé avec la valeur 1.
-
-    ??? pouce "Coup de pouce 2 (début de solution)"
-
-        Le test final peut s’écrire `n in effectifs.values()`.
-
-3.  Comparer le nombre d’opérations des deux versions pour un mot de longueur $m$.
-
-## <span class="etiquette">Défi 2</span> Trebuchet?!
+## <span class="etiquette">Défi</span> Trebuchet?!
 
 *l’étalonnage du trébuchet — chiffres dans une chaîne*
 
@@ -201,7 +16,7 @@ sabor
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2023/day/1 ](https://adventofcode.com/2023/day/1 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/05-defi-aoc-2023-01>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -234,7 +49,7 @@ Vocabulaire utile pour lire le texte original :
 
     - Réponse : la somme des valeurs de toutes les lignes.
 
-### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-2-1 }
+### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-1 }
 
 Après lecture du résumé (et de l’énoncé), vérifier sa compréhension sur ces cas particuliers :
 
@@ -244,7 +59,7 @@ Après lecture du résumé (et de l’énoncé), vérifier sa compréhension sur
 
 3.  Quel type de données a un caractère comme `"7"` ? Que donne `"7" + "2"` ?
 
-### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-2-2 }
+### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-2 }
 
 On considère le fichier (inventé) suivant :
 
@@ -259,7 +74,7 @@ Donner la valeur de chaque ligne. Vérification : on doit obtenir `205`. Attenti
 
 ## Programmer la partie 1
 
-### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-2-3 }
+### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-3 }
 
 Rappel pour lire un fichier ligne par ligne :
 
@@ -289,7 +104,7 @@ Afficher les 5 premières lignes de vos données pour voir à quoi elles ressemb
 
     *À essayer.* Que renvoie `"eightwo".replace("two", "2")` ? Le mot `eight` est-il encore lisible ?
 
-### <span class="exo-num">Exercice 4</span> — Les chiffres d’une ligne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-2-4 }
+### <span class="exo-num">Exercice 4</span> — Les chiffres d’une ligne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-4 }
 
 Écrire une fonction `chiffres(ligne)` qui renvoie la liste des chiffres de la ligne, dans l’ordre, sous forme de chaînes. Tester : `chiffres("q12w34e")` doit valoir `["1", "2", "3", "4"]`.
 
@@ -297,7 +112,7 @@ Afficher les 5 premières lignes de vos données pour voir à quoi elles ressemb
 
     La méthode `c.isdigit()` renvoie `True` si le caractère `c` est un chiffre.
 
-### <span class="exo-num">Exercice 5</span> — Valeur d’une ligne et total <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-2-5 }
+### <span class="exo-num">Exercice 5</span> — Valeur d’une ligne et total <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-5 }
 
 Écrire une fonction `valeur(ligne)` puis calculer la somme sur tout le fichier. Vérifier `205` sur l’exemple.
 
@@ -317,7 +132,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     On s’aperçoit que certains chiffres étaient écrits en toutes lettres. Les chiffres de 1 à 9 écrits en anglais (`one`, `two`, …, `nine`) comptent maintenant aussi comme des chiffres. La valeur d’une ligne se calcule comme avant, avec le premier et le dernier chiffre, qu’ils soient écrits avec un chiffre ou en lettres.
 
-### <span class="exo-num">Exercice 6</span> — Des chiffres en toutes lettres <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-2-6 }
+### <span class="exo-num">Exercice 6</span> — Des chiffres en toutes lettres <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-6 }
 
 Modifier la fonction `chiffres(ligne)` pour qu’elle reconnaisse aussi les chiffres écrits en toutes lettres, comme le demande la partie 2. Sur le fichier (inventé) ci-dessous, on doit obtenir `215`.
 
@@ -340,7 +155,7 @@ nine87seven
 
 ## Approfondissement
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : chercher par les deux bouts <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-2-7 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : chercher par les deux bouts <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-7 }
 
 On n’a besoin que du premier et du dernier chiffre.
 

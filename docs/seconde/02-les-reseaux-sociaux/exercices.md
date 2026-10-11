@@ -312,7 +312,7 @@ On étudie le réseau d’amitiés suivant (une arête $=$ « est ami avec ») :
 
 ??? corrige "Corrigé"
 
-    Face au cyberharcèlement : **(1)** ne pas répondre ni « rendre les coups », **conserver les preuves** (captures d’écran) ; **(2)** **signaler** et bloquer l’auteur sur la plateforme ; **(3)** **en parler** à un adulte de confiance (parent, professeur, CPE). Numéro national d’aide : **3018** (violences numériques), gratuit et anonyme.
+    Face au cyberharcèlement : **(1)** ne pas répondre ni « rendre les coups », **conserver les preuves** (captures d’écran) ; **(2)** **signaler** et bloquer l’auteur sur la plateforme ; **(3)** **en parler** à un adulte de confiance (parent, professeur, CPE). À Monaco, la ligne d’écoute du Gouvernement contre le harcèlement, y compris en ligne, est joignable au **98 98 96 96** (24 h/24) ; le service français **3018** (violences numériques, gratuit et anonyme) répond aussi par tchat avec son application.
 
 ### Impact environnemental
 

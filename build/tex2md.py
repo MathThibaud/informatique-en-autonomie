@@ -106,6 +106,10 @@ MATH_RE = re.compile(r'(\$\$.*?\$\$|(?<!\\)\$.*?(?<!\\)\$|\\\[.*?\\\]|\\\(.*?\\\
                      r'\\begin\{(equation|align|displaymath|gather|multline)\*?\}.*?\\end\{\2\*?\})', re.S)
 
 
+MACROS_LIVRE = re.compile(r'\\(?:pageimage|pageimagecredit)\{[^{}]*\}|\\prochainentete\{[^{}]*\}\{[^{}]*\}\{[^{}]*\}|\\sansonglet\b')
+TEXORPDF = re.compile(r'\\texorpdfstring\{((?:[^{}]|\{[^{}]*\})*)\}\{((?:[^{}]|\{[^{}]*\})*)\}')
+
+
 def outside_math(s, fn):
     """Applique fn au texte en masquant les formules (remises en place ensuite)."""
     maths = []
@@ -439,6 +443,8 @@ class Converter:
         s = tex
         s = self.protect_verbatim(s, store)
         s = strip_comments(s)
+        s = TEXORPDF.sub(r'\1', s)       # \texorpdfstring{forme LaTeX}{forme PDF} -> forme LaTeX
+        s = MACROS_LIVRE.sub('', s)       # renvois de page / onglets du livre imprimé : rien à afficher
         s = s.strip()
         # groupe englobant {% ... }
         if s.startswith('{') and s.endswith('}'):

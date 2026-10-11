@@ -101,7 +101,7 @@ Dans un graphe **orienté**, un **arc** ne se parcourt que dans le sens de la fl
 
 ![](../figures/3d8e9bc1a3efda10.svg){ .tikz loading=lazy }
 
-Un graphe est **pondéré** (ou valué) si chaque arête porte une valeur numérique — son **poids** (coût, distance, temps, débit…). Exemples : les **distances** entre villes sur une carte routière, le **coût** d’une liaison entre routeurs dans le protocole OSPF.
+Un graphe est **pondéré** (ou valué) si chaque arête porte une valeur numérique — son **poids** (coût, distance, temps, débit…). Exemples : les **distances** entre villes sur une carte routière, le **coût** d’une liaison entre routeurs (on le retrouvera au chapitre *Réseaux*, avec le protocole OSPF).
 
 ### Connexité, cycle
 
@@ -135,9 +135,9 @@ Revenons à l’énigme fondatrice des **sept ponts de Königsberg** (§ I). O
 
     Une **chaîne eulérienne** est une chaîne qui emprunte **chaque arête du graphe une fois et une seule**. Si, de plus, elle revient à son point de départ, c’est un **cycle eulérien**.
 
-La question de Königsberg était donc : *ce graphe admet-il un cycle eulérien ?* Euler y répond **complètement**, et sa réponse ne dépend que des **degrés** des sommets.
+La question de Königsberg était donc : *ce graphe admet-il une chaîne eulérienne ?* (une promenade qui franchit chaque pont une fois et une seule, sans forcément revenir au départ). Euler y répond **complètement**, et sa réponse ne dépend que des **degrés** des sommets.
 
-!!! theoreme "Théorème 1 — Euler, 1736 au-delà du programme"
+!!! theoreme "Théorème 1 — Euler, 1736 ; Hierholzer, 1873 au-delà du programme"
 
     Soit $G$ un graphe connexe.
 
@@ -147,7 +147,7 @@ La question de Königsberg était donc : *ce graphe admet-il un cycle eulérien 
 
 !!! remarque "Remarque — L’idée"
 
-    Le sens « facile » est intuitif : chaque fois qu’on **traverse** un sommet intermédiaire, on « consomme » deux arêtes (une pour entrer, une pour sortir). Un sommet par lequel on ne fait que passer doit donc avoir un degré **pair**. Seuls le départ et l’arrivée peuvent avoir un degré impair — et ils coïncident dans le cas d’un cycle, qui exige alors **tous** les degrés pairs.
+    Le sens « facile » est intuitif : chaque fois qu’on **traverse** un sommet intermédiaire, on « consomme » deux arêtes (une pour entrer, une pour sortir). Un sommet par lequel on ne fait que passer doit donc avoir un degré **pair**. Seuls le départ et l’arrivée peuvent avoir un degré impair — et ils coïncident dans le cas d’un cycle, qui exige alors **tous** les degrés pairs. C’est ce sens que démontre Euler en 1736 ; la réciproque (si les degrés conviennent et que le graphe est connexe, la chaîne existe) ne sera démontrée qu’en 1873, par Carl **Hierholzer**.
 
 !!! exemple "Exemple — Königsberg tranché"
 
@@ -471,7 +471,7 @@ Sur le graphe précédent, `DFS_iteratif(g, ’A’)` renvoie `[’A’, ’C’
 
 **Graphe non orienté.** Au cours d’un parcours, si l’on retombe sur un sommet **déjà découvert** qui n’est pas le sommet d’où l’on vient d’arriver (son « parent »), c’est qu’un cycle boucle par là. On exclut le parent parce qu’une arête se lit dans les deux sens : l’arête `A -- B` fait apparaître `A` parmi les voisins de `B`, sans former de cycle pour autant.
 
-**Graphe orienté : ce critère est faux.** Reprenons le graphe orienté de la partie II (rappelé ci-dessous) et oublions un instant l’arc `C`$\to$`A`, en pointillés. Un parcours en profondeur depuis `A` découvre `B`, `C`, puis `E` (par l’arc `C`$\to$`E`) ; il revient en arrière, explore `D`, et l’arc `D`$\to$`E` le fait retomber sur `E`, déjà découvert, alors qu’il arrive de `D`. Le critère non orienté crierait au cycle… à tort : `B`$\to$`C`$\to$`E` et `B`$\to$`D`$\to$`E` sont deux chemins qui **se rejoignent**, mais aucun arc ne permet de repartir de `E` pour revenir en arrière. Même piège dans la recette de l’exercice 14 de la feuille : la tâche `(f)` est atteinte à la fois depuis `(e)` et depuis `(d)`, sans le moindre cycle.
+**Graphe orienté : ce critère est faux.** Reprenons le graphe orienté de la partie II (rappelé ci-dessous) et oublions un instant l’arc `C`$\to$`A`, en pointillés. Un parcours en profondeur depuis `A` découvre `B`, `C`, puis `E` (par l’arc `C`$\to$`E`) ; il revient en arrière, explore `D`, et l’arc `D`$\to$`E` le fait retomber sur `E`, déjà découvert, alors qu’il arrive de `D`. Le critère non orienté crierait au cycle… à tort : `B`$\to$`C`$\to$`E` et `B`$\to$`D`$\to$`E` sont deux chemins qui **se rejoignent**, mais aucun arc ne permet de repartir de `E` pour revenir en arrière. Même piège dans la recette de l’exercice 14 du chapitre : la tâche `(f)` est atteinte à la fois depuis `(e)` et depuis `(d)`, sans le moindre cycle.
 
 ![](../figures/63fc24820520f5be.svg){ .tikz loading=lazy }
 
@@ -549,7 +549,7 @@ False
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Un **arbre** est un cas particulier de graphe (connexe, sans cycle). On parcourt un graphe en **profondeur** (avec une **pile**, ou par **récursivité**) ou en **largeur** (avec une **file**) — les mêmes outils que pour les **arbres** et les **structures linéaires**. La recherche d’un **plus court chemin pondéré** (l’algorithme de Dijkstra du projet) est au cœur du **routage** des paquets dans les **réseaux** (protocole OSPF). Un graphe s’implémente par une classe `Graphe` (**programmation objet**), et un **cycle** dans le graphe d’attente des **processus** — un graphe orienté — signale un interblocage.
+    Un **arbre** est un cas particulier de graphe (connexe, sans cycle). On parcourt un graphe en **profondeur** (avec une **pile**, ou par **récursivité**) ou en **largeur** (avec une **file**) — les mêmes outils que pour les **arbres** et les **structures linéaires**. La recherche d’un **plus court chemin pondéré** (l’algorithme de Dijkstra du projet) sera au cœur du **routage** des paquets dans les **réseaux** (protocole OSPF, au chapitre suivant). Un graphe s’implémente par une classe `Graphe` (**programmation objet**), et un **cycle** dans le graphe d’attente des **processus** — un graphe orienté — signale un interblocage.
 
 ## Bilan — la carte mémoire
 

@@ -56,7 +56,7 @@ Avant d’écrire la moindre ligne, on fixe les classes, ce qu’elles savent (a
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Une carte qui se présente <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-tp-1-2 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Compléter le constructeur (il lève `ValueError("carte inconnue")` si la valeur n’est pas dans `VALEURS` ou la couleur pas dans `COULEURS`), les accesseurs `valeur()` et `couleur()`, la méthode `rang()` (position de la valeur dans `VALEURS` : $0$ pour un `7`, $7$ pour un `As`), et `__repr__` :
+<span class="run" title="À programmer et tester sur machine">▶</span> Dans `projet_poo_depart.py`, compléter la classe `Carte` (les listes `VALEURS`, de la plus faible à la plus forte, et `COULEURS` sont déjà définies en haut du fichier). Il faut écrire le constructeur (il lève `ValueError("carte inconnue")` si la valeur n’est pas dans `VALEURS` ou la couleur pas dans `COULEURS`), les accesseurs `valeur()` et `couleur()`, la méthode `rang()` (position de la valeur dans `VALEURS` : $0$ pour un `7`, $7$ pour un `As`), et `__repr__` (le texte affiché quand on tape le nom de l’objet). On doit obtenir :
 
 ```text
 >>> c = Carte("Roi", "coeur")
@@ -72,14 +72,14 @@ Pourquoi vaut-il mieux vérifier la valeur **dès le constructeur**, plutôt qu�
 
 Le cours a signalé qu’il existe d’autres méthodes spéciales, qui permettent d’utiliser `==` ou `<` sur nos propres objets. Écrire `a == b` déclenche l’appel `a.__eq__(b)` ; écrire `a < b` déclenche `a.__lt__(b)` (*lt* pour *less than*).
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span> Avant d’écrire ces méthodes, taper les deux instructions suivantes. Que se passe-t-il ? Que compare `==` par défaut ?
+1.  <span class="run" title="À programmer et tester sur machine">▶</span> Avant d’écrire ces méthodes, taper les deux instructions suivantes. Noter ce que Python répond à chacune (une valeur, ou une erreur). Que compare `==` par défaut ?
 
     ```text
     >>> Carte("Roi", "coeur") == Carte("Roi", "coeur")
     >>> sorted([Carte("Roi", "coeur"), Carte("7", "pique")])
     ```
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `__eq__(self, autre)` et `__lt__(self, autre)`, qui comparent les **rangs** (la couleur ne compte pas). Vérifier :
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `__eq__(self, autre)` et `__lt__(self, autre)`, qui renvoient un booléen en comparant les **rangs** des deux cartes (la couleur ne compte pas). Vérifier que le tri donne bien les cartes de la plus faible à la plus forte :
 
     ```text
     >>> main = [Carte("Roi", "coeur"), Carte("7", "pique"),
@@ -88,25 +88,25 @@ Le cours a signalé qu’il existe d’autres méthodes spéciales, qui permette
     [7 de pique, 9 de coeur, Roi de coeur, As de pique]
     ```
 
-3.  Avec ces définitions, `Carte("Roi", "coeur") == Carte("Roi", "trefle")` vaut `True`. Est-ce un problème pour la Bataille ? Pourrait-ce en être un dans un autre jeu ?
+3.  Avec ces définitions, `Carte("Roi", "coeur") == Carte("Roi", "trefle")` vaut `True`. Est-ce gênant pour la Bataille ? Dans quel autre jeu (ou quelle autre situation) cette définition de l’égalité poserait-elle problème ?
 
 ## Les classes `Paquet` et `Joueur`
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Le paquet <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-tp-1-4 }
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span> Le constructeur fabrique les 32 cartes dans l’attribut privé `_cartes`, avec deux boucles `for` imbriquées (une sur les couleurs, une sur les valeurs). *Pour les plus à l’aise :* l’écrire en **une ligne**, avec une liste en compréhension à deux boucles `for`.
+1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire le constructeur : il fabrique les 32 cartes (une par couple valeur/couleur) dans l’attribut privé `_cartes`, une liste de `Carte`, avec deux boucles `for` imbriquées (une sur les couleurs, une sur les valeurs). *Pour les plus à l’aise :* le réécrire ensuite en **une ligne**, avec une liste en compréhension à deux boucles `for`.
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `taille()`, puis la méthode `melanger(graine=None)`. Si une graine est donnée, elle appelle d’abord `random.seed(graine)` ; dans tous les cas, elle mélange ensuite les cartes avec la fonction `random.shuffle`. À quoi sert la graine pour des tests ?
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `taille()`, puis la méthode `melanger(graine=None)`. Si une graine est donnée, elle appelle d’abord `random.seed(graine)` ; dans tous les cas, elle mélange ensuite les cartes avec la fonction `random.shuffle`. (Le module `random` est déjà importé.) À quoi sert la graine quand on veut tester le programme ?
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `distribuer(nb_joueurs)` : la carte d’indice `i` va au joueur `i % nb_joueurs` ; le paquet est vide ensuite, et la méthode renvoie la liste des mains.
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `distribuer(nb_joueurs)` : la carte d’indice `i` va au joueur `i % nb_joueurs` ; le paquet est vide ensuite, et la méthode renvoie la liste des mains (une liste de cartes par joueur). Pour deux joueurs, la carte $0$ va au joueur $0$, la carte $1$ au joueur $1$, la carte $2$ au joueur $0$, etc.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Le joueur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-tp-1-5 }
 
 La main est une liste de cartes dont la carte **du dessus** est au **début**.
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire le constructeur, `nb_cartes()`, `a_perdu()`, `jouer_carte()` (retire et renvoie la carte du dessus) et `ramasser(cartes)` (place les cartes reçues, dans l’ordre, sous le tas).
+1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire le constructeur, `nb_cartes()`, `a_perdu()`, `jouer_carte()` (retire et renvoie la carte du dessus) et `ramasser(cartes)` (ajoute les cartes reçues, dans l’ordre, **à la fin** de la main, c’est-à-dire sous le tas). Le constructeur reçoit le nom et la liste des cartes de départ.
 
-2.  Le test de la partie 3 ajoute une carte à la liste `cartes` **après** avoir créé le joueur, et vérifie que la main d’Ada n’a pas changé. Que faut-il donc écrire dans le constructeur : `self._main = cartes`, ou bien `self._main = [c for c in cartes]` ? Expliquer.
+2.  Le test de la partie 3 ajoute une carte à la liste `cartes` **après** avoir créé le joueur, et vérifie que la main d’Ada n’a pas changé. Parmi les deux écritures suivantes, laquelle faut-il donc mettre dans le constructeur : `self._main = cartes`, ou bien `self._main = [c for c in cartes]` ? Expliquer ce qui différencie les deux.
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `nb_cartes_de(valeur)` en **une ligne**, avec une **liste en compréhension** : on garde les cartes de `self._main` dont la valeur est celle cherchée, et on compte le résultat avec `len(...)`. Pourquoi cette méthode est-elle nécessaire pour compter les As d’un joueur depuis l’extérieur de la classe ?
 
@@ -120,27 +120,42 @@ La main est une liste de cartes dont la carte **du dessus** est au **début**.
 
 Le constructeur de `Partie` est fourni : il crée un paquet, le mélange, le distribue et crée les deux joueurs `j1` et `j2`.
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `jouer_pli()` qui joue un pli complet et **renvoie le joueur** qui ramasse le tapis. Une liste locale `tapis` accumule les cartes posées ; une boucle répète :
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `jouer_pli()` qui joue un pli complet et **renvoie le joueur** qui ramasse le tapis. Une liste locale `tapis`, vide au départ, accumule toutes les cartes posées pendant le pli (visibles ou cachées). On répète les étapes suivantes tant que le pli n’est pas terminé :
 
-1.  si l’un des joueurs n’a plus de cartes, l’autre ramasse le tapis : c’est fini ;
+1.  si l’un des joueurs n’a plus de cartes (`a_perdu()`), l’autre est le gagnant du pli : c’est fini ;
 
-2.  chaque joueur pose une carte ; si l’une est strictement plus forte, son propriétaire ramasse le tapis : c’est fini ;
+2.  sinon, chaque joueur pose sa carte du dessus (`jouer_carte()`) : on les ajoute au tapis. Si l’une est strictement plus forte, son propriétaire est le gagnant du pli : c’est fini ;
 
-3.  sinon (égalité), on compte une bataille de plus (`nb_batailles`) et, si les deux joueurs ont encore des cartes, chacun en pose une face cachée sur le tapis ; on recommence.
+3.  sinon (égalité), on compte une bataille de plus (`nb_batailles`) et, si les deux joueurs ont encore des cartes, chacun en pose une de plus, **face cachée** : on l’ajoute simplement au tapis sans la comparer. On revient alors à l’étape a) (la carte face visible suivante sera comparée à l’étape b)).
 
 ??? pouce "Coup de pouce"
 
-    Une variable `gagnant`, qui vaut `None` tant que le pli n’est pas joué, et une boucle `while gagnant is None` ; après la boucle, `gagnant` ramasse le tapis et la méthode le renvoie. Les comparaisons s’écrivent `c2 < c1` et `c1 < c2` grâce à `__lt__`. Les cartes posées s’ajoutent au tapis dans l’ordre : carte de `j1`, puis carte de `j2`.
+    Une variable `gagnant`, qui vaut `None` tant que le pli n’est pas joué, et une boucle `while gagnant is None` ; après la boucle, `gagnant` ramasse le tapis (`ramasser`) et la méthode le renvoie. Les comparaisons s’écrivent `c2 < c1` et `c1 < c2` grâce à `__lt__`. Les cartes posées s’ajoutent au tapis dans l’ordre : carte de `j1`, puis carte de `j2`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Une partie entière, et un invariant <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-tp-1-7 }
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `jouer()` : on joue des plis (en comptant `nb_plis`) tant qu’aucun joueur n’a perdu **et** que `max_plis` n’est pas atteint ; on renvoie `self.vainqueur()` (méthode fournie).
+1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `jouer()` : tant qu’aucun des deux joueurs n’a perdu **et** que `nb_plis` est inférieur à `max_plis`, jouer un pli (`jouer_pli()`) et augmenter `nb_plis` de 1. À la fin, renvoyer `self.vainqueur()` (méthode fournie : le nom du vainqueur, ou `None` si la limite a été atteinte). `max_plis` évite de boucler indéfiniment si la partie ne finit jamais.
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span> Rejouer avec le programme la partie de l’exercice 1 (créer une `Partie`, puis remplacer `j1` et `j2` par deux `Joueur` construits à la main) et comparer avec votre trace.
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> On vérifie maintenant votre trace à la main (question 3 de l’exercice 1) avec le programme. Une `Partie` distribue au hasard, mais ici on veut des tas **imposés**. On procède donc ainsi :
 
-3.  Le test de la partie 4 vérifie qu’en fin de partie les deux joueurs ont **32 cartes au total**. Pourquoi cette propriété (un **invariant**) doit-elle être vraie à la fin de chaque pli ? Quelle erreur de programmation ferait-elle échouer ?
+    1.  créer une partie quelconque : `p = Partie("Ada", "Alan")` ;
 
-4.  <span class="run" title="À programmer et tester sur machine">▶</span> Avec la graine `2026`, qui gagne, en combien de plis ?
+    2.  remplacer ses deux joueurs par ceux de l’exercice 1, en affectant les attributs `p.j1` et `p.j2` :
+
+        ```text
+        p.j1 = Joueur("Ada", [...])
+        p.j2 = Joueur("Alan", [...])
+        ```
+
+        où chaque liste contient les cartes du tas, **la carte du dessus en premier** (par exemple `Carte("Dame", "coeur")`) ;
+
+    3.  lancer `p.jouer()` puis afficher le vainqueur, `p.nb_plis` et `p.nb_batailles`.
+
+    Le programme annonce-t-il le même vainqueur et le même nombre de plis que votre trace ? Sinon, qui a tort : la trace ou le programme ?
+
+3.  Le test de la partie 4 vérifie qu’en fin de partie les deux joueurs ont **32 cartes au total**. Pourquoi cette propriété (un **invariant**, c’est-à-dire une propriété qui reste vraie tout au long du programme) doit-elle être vraie à la fin de chaque pli ? Donner une erreur de programmation dans `jouer_pli` qui la ferait échouer.
+
+4.  <span class="run" title="À programmer et tester sur machine">▶</span> Cette fois on joue une partie « pour de vrai » : `Partie("Ada", "Alan", 2026)` mélange le paquet de façon **reproductible** (la graine `2026` fixe le mélange : tout le monde obtient la même distribution) et distribue 16 cartes à chacun. Créer cette partie, la jouer avec `jouer()` et indiquer le vainqueur et le nombre de plis (`nb_plis`). Le test de la partie 4 attend `"Alan"` et 106 plis.
 
 ## Mille parties : des statistiques en style fonctionnel
 
@@ -148,26 +163,32 @@ On veut maintenant **observer** le jeu. Dans cette partie, on n’écrit **aucun
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Résumer une partie <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-tp-1-8 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `resume(graine, tapis_melange=False)` qui joue la partie « Ada contre Alan » de graine donnée et renvoie un dictionnaire :
+Pour observer le jeu, il faut d’abord pouvoir jouer *une* partie et en garder les faits marquants. On écrit pour cela la fonction `resume(graine, tapis_melange=False)` (le second paramètre ne sert que dans l’extension : on le transmet simplement à `Partie`).
 
-```text
->>> resume(2026)
-{'graine': 2026, 'vainqueur': 'Alan', 'plis': 106, 'batailles': 8, 'as_ada': 1}
-```
+1.  <span class="run" title="À programmer et tester sur machine">▶</span> Dans `resume`, créer la partie `Partie("Ada", "Alan", graine, tapis_melange=tapis_melange)`, relever le nombre d’As du joueur `j1` (Ada) **avant** de jouer, avec `nb_cartes_de("As")`, puis jouer la partie avec `jouer()`.
 
-où `as_ada` est le nombre d’As d’Ada **avant** de jouer (méthode `nb_cartes_de`). `resume` est-elle une fonction **pure** ? Que deviendrait la réponse si l’on supprimait le paramètre `graine` ?
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> La fonction renvoie un **dictionnaire** aux cinq clés `"graine"` (la graine reçue), `"vainqueur"` (ce que renvoie `jouer()` : un nom, ou `None` si `max_plis` est atteint), `"plis"` (`nb_plis`), `"batailles"` (`nb_batailles`) et `"as_ada"`. Pour la graine 2026, on doit obtenir :
+
+    ```text
+    >>> resume(2026)
+    {'graine': 2026, 'vainqueur': 'Alan', 'plis': 106, 'batailles': 8, 'as_ada': 1}
+    ```
+
+3.  Pourquoi faut-il relever le nombre d’As **avant** d’appeler `jouer()` ? Que vaudrait-il après ?
+
+4.  `resume` est-elle une fonction **pure** ? Que deviendrait la réponse si l’on supprimait le paramètre `graine` ?
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Interroger les mille parties <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-tp-1-9 }
 
-On calcule `res = [resume(g) for g in range(1000)]`.
+On joue mille parties (graines 0 à 999) et on garde leurs résumés : `res = [resume(g) for g in range(1000)]`. `res` est une liste de 1000 dictionnaires, comme celui de l’exercice précédent. Une partie est **finie** si elle a un vainqueur ; sinon elle a atteint `max_plis`.
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span> Avec une liste en compréhension, construire la liste `finies` des parties qui ont un vainqueur (ne garder que les dictionnaires `r` tels que `r["vainqueur"]` n’est pas `None`). Combien y en a-t-il ? Combien Ada en gagne-t-elle (même principe, sur `finies`) ?
+1.  <span class="run" title="À programmer et tester sur machine">▶</span> Avec une liste en compréhension, construire la liste `finies` des parties qui ont un vainqueur (ne garder que les dictionnaires `r` tels que `r["vainqueur"]` n’est pas `None`). Combien y en a-t-il ? Avec une seconde compréhension sur `finies`, construire la liste `gagnees_ada` des parties dont le vainqueur est `"Ada"` : combien Ada en gagne-t-elle, et quel pourcentage des parties finies cela représente-t-il ?
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span> Avec une liste en compréhension, extraire de `finies` la liste des nombres de plis, puis en calculer la **durée moyenne**.
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Avec une liste en compréhension, extraire de `finies` la liste des nombres de plis, puis en calculer la **durée moyenne** (écrire une fonction `moyenne(tab)`, sans boucle : on rappelle que `sum` et `len` existent).
 
-3.  On veut maintenant les graines des **trois** parties finies les plus longues, et celle de la plus courte. Ici, une compréhension ne suffit plus : on ne filtre ni ne transforme `finies`, on le **classe** selon le nombre de plis de chaque partie. `sorted` et `min` acceptent pour cela un paramètre `key` : une fonction qui, à partir d’un résumé `r`, renvoie la valeur à comparer. <span class="run" title="À programmer et tester sur machine">▶</span> Écrire cette fonction avec un `lambda` (`lambda r: r["plis"]` se lit « la fonction qui, à `r`, associe `r["plis"]` » ; c’est l’équivalent, pour un usage unique, de `def cle(r): return r["plis"]`), puis afficher les graines des trois parties les plus longues avec `sorted(finies, key=..., reverse=True)[:3]`, et celle de la plus courte avec `min(finies, key=...)`.
+3.  On veut maintenant les graines des **trois** parties finies les plus longues, et celle de la plus courte. Ici, une compréhension ne suffit plus : on ne filtre ni ne transforme `finies`, on le **classe** selon le nombre de plis de chaque partie. `sorted` et `min` acceptent pour cela un paramètre `key` : une fonction qui, à partir d’un résumé `r`, renvoie la valeur à comparer. <span class="run" title="À programmer et tester sur machine">▶</span> Écrire cette fonction avec un `lambda` (`lambda r: r["plis"]` se lit « la fonction qui, à `r`, associe `r["plis"]` » ; c’est l’équivalent, pour un usage unique, de `def cle(r): return r["plis"]`), puis afficher, sous la forme (graine, nombre de plis), les trois parties les plus longues avec `sorted(finies, key=..., reverse=True)[:3]`, et la plus courte avec `min(finies, key=...)`.
 
-4.  <span class="run" title="À programmer et tester sur machine">▶</span> Recopier et compléter le tableau suivant : pour chaque nombre d’As d’Ada au départ, le nombre de parties finies et le pourcentage gagné par Ada. Conclure.
+4.  <span class="run" title="À programmer et tester sur machine">▶</span> Recopier et compléter le tableau suivant : pour chaque nombre $k$ d’As d’Ada au départ (clé `"as_ada"`), le nombre de parties finies avec ce $k$ et le pourcentage d’entre elles gagnées par Ada (arrondi à l’unité). Pour chaque $k$, on construit par compréhension le groupe des parties finies correspondantes, puis le sous-groupe gagné par Ada. Conclure : avoir des As aide-t-il ? Peut-on se fier aux pourcentages de tous les groupes ?
 
     | **As d’Ada au départ**  |  0  |  1  |  2  |  3  |  4  |
     |:------------------------|:---:|:---:|:---:|:---:|:---:|

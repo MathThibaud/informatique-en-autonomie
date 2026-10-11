@@ -1,6 +1,6 @@
 # Exercices
 
-<p class="sous-titre">Les $k$k plus proches voisins</p>
+<p class="sous-titre">Les k plus proches voisins</p>
 
 !!! consignes "Mode d’emploi"
 

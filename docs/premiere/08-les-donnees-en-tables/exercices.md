@@ -52,37 +52,9 @@ Dixit;Libellud;30;8
 
     **1.** Le séparateur est le **point-virgule** `;`. Il y a **4 descripteurs** et **3 enregistrements**. **2.** Descripteurs : `titre`, `editeur`, `duree`, `age_min`. Pour `Dixit`, `duree` vaut `30`. **3.** « À la française » : le séparateur est le point-virgule, comme il se doit quand on veut réserver la virgule aux décimaux.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Un fichier mal formé <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-2 }
-
-Un camarade obtient `prenoms.csv` avec **une seule colonne** géante quand il l’ouvre. Quelle est l’erreur la plus probable ? Comment la corriger dans l’appel à `csv.DictReader` ?
-
-??? corrige "Corrigé"
-
-    Le fichier est « à la française » (séparateur `;`) mais lu avec le séparateur par défaut (la virgule) : chaque ligne entière est prise pour **une seule valeur**. On corrige en précisant le séparateur :
-
-    ```python
-    csv.DictReader(f, delimiter=";")
-    ```
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Encodage <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-3 }
-
-En ouvrant un fichier, l’élève voit `RaphaÃ«l` au lieu de `Raphaël`. Quel réglage a été oublié ? Écrire la ligne `open(...)` corrigée.
-
-??? pouce "Coup de pouce"
-
-    Quel paramètre de `open` indique comment lire les caractères accentués ? Quel est l’encodage standard aujourd’hui ?
-
-??? corrige "Corrigé"
-
-    L’`encoding` n’a pas été précisé (le fichier est en UTF-8 mais lu autrement). On corrige :
-
-    ```python
-    open(fichier, encoding="utf-8", newline="")
-    ```
-
 ### Représenter une table en Python
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Une table à la main <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-4 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Une table à la main <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-2 }
 
 Écrire la variable `jeux` représentant les **trois** lignes de l’exercice 1 sous forme d’une **liste de dictionnaires**.
 
@@ -98,7 +70,7 @@ En ouvrant un fichier, l’élève voit `RaphaÃ«l` au lieu de `Raphaël`. Quel
     ]
     ```
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Accès <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-5 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Accès <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-3 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
@@ -117,7 +89,7 @@ Avec la variable `jeux` précédente, que renvoient ces expressions ?
     `jeux[1]["titre"]` $\rightarrow$ `’Dixit’` ; `jeux[0]["age_min"]` $\rightarrow$ `’8’` ; `len(jeux)` $\rightarrow$ `3`.  
     Éditeur de `7 Wonders` : `jeux[2]["editeur"]`.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Descripteurs automatiques <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-6 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Descripteurs automatiques <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-4 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
@@ -140,6 +112,34 @@ Avec la variable `jeux` précédente, que renvoient ces expressions ?
     ```
 
 ### Importer, et le piège du texte
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Un fichier mal formé <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-5 }
+
+Un camarade obtient `prenoms.csv` avec **une seule colonne** géante quand il l’ouvre. Quelle est l’erreur la plus probable ? Comment la corriger dans l’appel à `csv.DictReader` ?
+
+??? corrige "Corrigé"
+
+    Le fichier est « à la française » (séparateur `;`) mais lu avec le séparateur par défaut (la virgule) : chaque ligne entière est prise pour **une seule valeur**. On corrige en précisant le séparateur :
+
+    ```python
+    csv.DictReader(f, delimiter=";")
+    ```
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Encodage <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-6 }
+
+En ouvrant un fichier, l’élève voit `RaphaÃ«l` au lieu de `Raphaël`. Quel réglage a été oublié ? Écrire la ligne `open(...)` corrigée.
+
+??? pouce "Coup de pouce"
+
+    Quel paramètre de `open` indique comment lire les caractères accentués ? Quel est l’encodage standard aujourd’hui ?
+
+??? corrige "Corrigé"
+
+    L’`encoding` n’a pas été précisé (le fichier est en UTF-8 mais lu autrement). On corrige :
+
+    ```python
+    open(fichier, encoding="utf-8", newline="")
+    ```
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 7</span> — Lecture de trace <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-7 }
 

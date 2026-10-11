@@ -287,6 +287,16 @@ Le programme officiel est clair : au bac, **les tables de routage sont données*
 
 Juste au-dessus d’IP, la couche **Transport** offre deux services au choix. **TCP** garantit que *tout* arrive, *dans l’ordre*, sans perte (il numérote les paquets, les réordonne, redemande ceux qui manquent) : idéal pour un fichier ou une page web. **UDP** envoie sans garantie ni accusé de réception, mais **sans attendre** : idéal quand la vitesse prime sur la perfection (appel vidéo, jeu en ligne, où un paquet en retard est inutile de toute façon).
 
+## Ouverture : des graphes au service des paquets
+
+Ce chapitre est l’application la plus directe du chapitre *Graphes* : un réseau de routeurs *est* un graphe, et le routage est une recherche de plus court chemin.
+
+- RIP compte les arêtes d’un chemin, OSPF additionne leurs poids : deux métriques pour le même problème de **plus court chemin** ;
+
+- un paquet traverse des routeurs inconnus et peut être lu en chemin : le chapitre suivant, *Cryptographie*, montrera comment le protéger ;
+
+- au **bac**, on vous demandera surtout de manipuler des **adresses IP** (notation CIDR, appartenance à un réseau), de **lire** ou **compléter** une table de routage, de calculer des **coûts OSPF** et de **déterminer** la route suivie par un paquet selon RIP ou selon OSPF.
+
 ## Un peu d’histoire : d’ARPANET à Internet
 
 Dans la première moitié des années 1960, l’idée de **commutation de paquets** germe indépendamment chez **Paul Baran** (États-Unis) et **Donald Davies** (Royaume-Uni) : découper l’information en morceaux pour bâtir un réseau qui *survive* à la panne d’un nœud. En 1969 naît **ARPANET**, ancêtre d’Internet, reliant quatre universités américaines. Le croquis ci-contre, dessiné en décembre 1969, montre ce réseau tout entier : quatre nœuds seulement, à UCLA, au Stanford Research Institute (SRI), à Santa Barbara (UCSB) et à l’université de l’Utah. Le tout premier message, envoyé de UCLA vers SRI le 29 octobre 1969, devait être « LOGIN »… le système a planté après « LO ».

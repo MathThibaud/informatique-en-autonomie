@@ -434,3 +434,21 @@ On ne réécrit pas tout à chaque fois. En regroupant des fonctions utiles dans
 - **Laisser des `print` de débogage** dans la version finale — mais *garder* les tests.
 
 - **Dire que C est interprété** ou que Python est compilé ; appeler HTML un « langage de programmation », ou SQL un langage de programmation *généraliste*.
+
+## Savoir-faire à maîtriser
+
+*À la fin du chapitre, je sais…*
+
+- **spécifier** une fonction : prototype, **précondition** sur les arguments, **postcondition** sur le résultat, dans une **docstring** ;
+
+- documenter un programme sans excès (noms parlants, commentaires utiles) ;
+
+- protéger une fonction par un `assert` sur sa précondition, ou par une **valeur sentinelle** ;
+
+- écrire un **jeu de tests** qui couvre les cas limites (tableau vide, extrémités, absent…) et expliquer pourquoi des tests réussis ne prouvent pas qu’un programme est correct ;
+
+- **déboguer** : dérouler le programme à la main, placer des affichages (`print`) pour localiser l’erreur, puis les retirer en gardant les tests ;
+
+- énoncer un **invariant de boucle** et vérifier qu’il est vrai au départ et préservé à chaque tour ;
+
+- repérer les traits communs et particuliers de plusieurs langages (compilé ou interprété, typage statique ou dynamique) et utiliser la **documentation** d’une bibliothèque.

@@ -16,7 +16,7 @@
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/18 ](https://adventofcode.com/2020/day/18 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/03-defi-aoc-2020-18>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -118,7 +118,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="exo-num">Exercice 5</span> — Changer la priorité <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-structures-lineaires-piles-files-listes-aoc-1-5 }
 
-Seule la priorité entre `+` et `*` change. Adapter le programme. Sur l’exemple de la fiche, on doit trouver les valeurs `33`, `50` et `135`, de somme `218`.
+Seule la priorité entre `+` et `*` change. Adapter le programme. Sur l’exemple du défi, on doit trouver les valeurs `33`, `50` et `135`, de somme `218`.
 
 ??? pouce "Coup de pouce"
 
@@ -205,7 +205,7 @@ En **notation postfixe** (ou « polonaise inverse »), on écrit chaque opérate
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/23 ](https://adventofcode.com/2020/day/23 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/03-defi-aoc-2020-23>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -268,7 +268,7 @@ On part de l’étiquetage (inventé) `527164839`. Jouer le premier coup à la m
 
 ### <span class="exo-num">Exercice 3</span> — Une première simulation avec une liste <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-structures-lineaires-piles-files-listes-aoc-2-3 }
 
-Écrire une fonction `jouer(gobelets, nb_coups)` qui simule le jeu sur une liste Python d’entiers, puis une fonction qui renvoie la réponse sous forme de chaîne. Sur l’exemple de la fiche, on doit obtenir `53269478` après 10 coups et `98357642` après 100 coups.
+Écrire une fonction `jouer(gobelets, nb_coups)` qui simule le jeu sur une liste Python d’entiers, puis une fonction qui renvoie la réponse sous forme de chaîne. Sur l’exemple du défi, on doit obtenir `53269478` après 10 coups et `98357642` après 100 coups.
 
 ??? pouce "Coup de pouce"
 
@@ -292,7 +292,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Une liste chaînée dans un tableau <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-structures-lineaires-piles-files-listes-aoc-2-5 }
 
-Réécrire la simulation avec un **tableau des successeurs** (lire l’encadré), vérifier qu’elle redonne les résultats de la partie 1, puis répondre à la partie 2. Sur l’exemple de la fiche, on doit trouver `28997820592`. Le calcul peut prendre une dizaine de secondes.
+Réécrire la simulation avec un **tableau des successeurs** (lire l’encadré), vérifier qu’elle redonne les résultats de la partie 1, puis répondre à la partie 2. Sur l’exemple du défi, on doit trouver `28997820592`. Le calcul peut prendre une dizaine de secondes.
 
 ??? pouce "Coup de pouce"
 

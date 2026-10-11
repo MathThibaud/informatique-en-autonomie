@@ -200,7 +200,7 @@ t.done()
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Ce complément réinvestit directement le chapitre *Les bases de Python* : la **boucle** `for` y répète un motif, et une **fonction** avec **paramètres** le rend réutilisable. À l’origine, la tortue de Logo était un vrai **robot** piloté par programme, dont les moteurs sont des **actionneurs**, comme ceux du chapitre *Informatique embarquée et objets connectés*. Enfin, la fenêtre où elle dessine est un quadrillage de **pixels** : au chapitre *Photographie numérique*, on colorie directement ces pixels, en codant chaque couleur en **RVB**.
+    Ce complément réinvestit directement le chapitre *Les bases de Python* : la **boucle** `for` y répète un motif, et une **fonction** avec **paramètres** le rend réutilisable. À l’origine, la tortue de Logo était un vrai **robot** piloté par programme, dont les moteurs sont des **actionneurs**, comme ceux que l’on rencontrera au chapitre *Informatique embarquée et objets connectés*. Enfin, la fenêtre où elle dessine est un quadrillage de **pixels** : au chapitre *Photographie numérique*, on coloriera directement ces pixels, en codant chaque couleur en **RVB**.
 
 ## Bilan — la carte mémoire
 

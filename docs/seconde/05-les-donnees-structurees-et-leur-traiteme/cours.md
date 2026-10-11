@@ -125,17 +125,17 @@ id,titre,studio,annee,genre,pegi,ventes
 
 !!! regle "Règle 1 — Format ouvert / format fermé"
 
-    Le CSV est un <span id="lex-formatouvert05" class="ancre"></span>**format ouvert** : sa structure est publique, n’importe quel logiciel (tableur, éditeur de texte, navigateur, programme) peut le lire, aujourd’hui comme dans trente ans, sans dépendre d’une marque. À l’inverse, un **format fermé** (propriétaire) appartient à un éditeur : le `.xlsx` d’Excel, par exemple. Les **données ouvertes** (*open data*) sont presque toujours publiées en formats ouverts.
+    Le CSV est un <span id="lex-formatouvert05" class="ancre"></span>**format ouvert** : sa structure est publique, n’importe quel logiciel (tableur, éditeur de texte, navigateur, programme) peut le lire, aujourd’hui comme dans trente ans, sans dépendre d’une marque. À l’inverse, un **format fermé** (propriétaire) est contrôlé par un éditeur, qui seul en connaît tous les détails : l’ancien format `.xls` d’Excel, par exemple. Son successeur, le `.xlsx`, est aujourd’hui une norme publiée, mais il reste bien plus complexe qu’un simple fichier texte. Les **données ouvertes** (*open data*) sont presque toujours publiées en formats ouverts.
 
 !!! etudedoc "Quand un mauvais format fait « perdre » 16 000 malades"
 
-    En **octobre 2020**, l’agence de santé publique anglaise a « perdu » **15 841** résultats de tests COVID-19. La cause ? Les laboratoires transmettaient leurs données dans un vieux fichier tableur `.xls`, **limité à 65 536 lignes**. Une fois cette limite atteinte, les nouveaux cas n’étaient signalés par *aucune* erreur… ils étaient **silencieusement ignorés**. Résultat : près de **48 000** personnes ayant croisé un cas positif n’ont pas été prévenues à temps (Public Health England et BBC News, octobre 2020). Un simple fichier **CSV**, lui, n’aurait rien plafonné : le texte peut avoir *autant de lignes qu’on veut*. *La morale : le bon format de données peut avoir des conséquences très réelles.*
+    En **octobre 2020**, l’agence de santé publique anglaise a « perdu » **15 841** résultats de tests COVID-19. La cause ? Les laboratoires envoyaient leurs résultats en fichiers **CSV** ; pour les rassembler, l’agence les importait automatiquement dans un vieux format de tableur, le `.xls`, **limité à 65 536 lignes**. Chaque cas occupant plusieurs lignes, un fichier ne pouvait contenir qu’environ 1 400 cas. Une fois cette limite atteinte, les cas suivants n’étaient signalés par *aucune* erreur… ils étaient **silencieusement ignorés**. Résultat : près de **48 000** personnes ayant croisé un cas positif n’ont pas été prévenues à temps (Public Health England et BBC News, octobre 2020). Le fichier **CSV** d’origine, lui, n’avait pas de plafond : un texte peut avoir *autant de lignes qu’on veut*. *La morale : le bon format de données peut avoir des conséquences très réelles.*
 
     Sources : Public Health England, communiqué du 5 octobre 2020 (15 841 cas non signalés) ; BBC News, « Excel: Why using Microsoft’s tool caused Covid-19 results to be lost », 5 octobre 2020.
 
 !!! remarque "Remarque — L’open data : les données publiques, à tous"
 
-    Depuis **2011**, l’État français ouvre ses données sur `data.gouv.fr` (Etalab) ; la Principauté de Monaco fait de même sur son portail <span id="lex-opendata05" class="ancre"></span>**open data**. Horaires de bus, qualité de l’air, résultats d’élections, prénoms donnés chaque année… des milliers de tables sont **librement téléchargeables**, le plus souvent en CSV. Fouiller ces données est devenu un vrai pouvoir citoyen — et le métier des **data-journalistes**.
+    Depuis **2011**, l’État français ouvre ses données sur `data.gouv.fr` (portail géré par *Etalab*, le service de l’État chargé d’ouvrir les données publiques) ; la Principauté de Monaco fait de même sur son portail <span id="lex-opendata05" class="ancre"></span>**open data**. Horaires de bus, qualité de l’air, résultats d’élections, prénoms donnés chaque année… des milliers de tables sont **librement téléchargeables**, le plus souvent en CSV. Fouiller ces données est devenu un vrai pouvoir citoyen — et le métier des **data-journalistes**.
 
     Source : Etalab, `data.gouv.fr`, page « À propos » (ouverture du portail en 2011).
 
@@ -216,7 +216,7 @@ Pour réaliser ces opérations *sans programmer*, l’outil roi est le <span id=
 
 !!! remarque "Remarque"
 
-    Le tableur reste **le** logiciel le plus utilisé au monde pour manipuler des données. On y reviendra en **travaux pratiques**, avec de vrais fichiers : c’est là qu’on devient efficace. *(Attention toutefois au piège du §III : un tableur a des **limites** cachées que le CSV n’a pas.)*
+    Le tableur reste **le** logiciel le plus utilisé au monde pour manipuler des données. Les **TP tableur** proposés en fin de chapitre le font pratiquer avec de vrais fichiers : c’est là qu’on devient efficace. *(Attention toutefois au piège du §III : un tableur a des **limites** cachées que le CSV n’a pas.)*
 
 <span id="cours-05-14" class="ancre"></span>
 
@@ -236,9 +236,7 @@ Chaque site, chaque application **collecte** des données sur vous. La loi encad
 
 !!! monaco "Et à Monaco ?"
 
-    Monaco n’est **pas** membre de l’Union européenne : le RGPD n’y est pas directement applicable. La Principauté a adopté sa propre loi, la **loi n° 1.565 du 3 décembre 2024** relative à la protection des données personnelles, qui s’aligne sur les standards européens. On y retrouve **les mêmes grands droits** : accès, rectification, effacement, opposition, portabilité… L’autorité de contrôle est l’**APDP** (Autorité de protection des données personnelles, `apdp.mc`), qui a succédé à la CCIN. Comme en France, en dessous de **15 ans**, l’inscription à un service en ligne demande l’autorisation des parents.
-
-    *À noter :* un site monégasque qui s’adresse à des personnes situées dans l’Union européenne doit *aussi* respecter le RGPD.
+    Monaco n’est **pas** membre de l’Union européenne : la loi n° 1.565 (2024) y garantit les mêmes grands droits, sous le contrôle de l’**APDP** (voir l’encadré « Et à Monaco ? » du chapitre *Les réseaux sociaux*).
 
 ### Les données dans le nuage (*cloud*)
 
@@ -274,7 +272,7 @@ Chaque site, chaque application **collecte** des données sur vous. La loi encad
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Les données en tables se retrouvent dans presque tous les thèmes de SNT. Les **métadonnées EXIF** d’une photo (date, appareil, coordonnées **GPS**) forment une petite fiche de descripteurs (chapitre *Photographie numérique*) ; une **trame NMEA** est, comme une ligne de **CSV**, une suite de valeurs séparées par des virgules (chapitre *Localisation*). Les mesures des **capteurs** des objets connectés et les données collectées par les **réseaux sociaux** s’accumulent dans le **nuage** et nourrissent le *big data*. Enfin, une boucle `for` et un test `if` (chapitre *Les bases de Python*) suffisent pour **filtrer** une table par programme : c’est ce que vous ferez en spécialité NSI de Première, en lisant directement des fichiers CSV en Python.
+    Les données en tables se retrouvent dans presque tous les thèmes de SNT. Les **métadonnées EXIF** d’une photo (date, appareil, coordonnées **GPS**) forment une petite fiche de descripteurs (chapitre *Photographie numérique*) ; on verra au chapitre *Localisation* qu’une **trame NMEA** est, comme une ligne de **CSV**, une suite de valeurs séparées par des virgules. Les données collectées par les **réseaux sociaux**, et bientôt les mesures des **capteurs** des objets connectés, s’accumulent dans le **nuage** et nourrissent le *big data*. Enfin, une boucle `for` et un test `if` (chapitre *Les bases de Python*) suffisent pour **filtrer** une table par programme : c’est ce que vous ferez en spécialité NSI de Première, en lisant directement des fichiers CSV en Python.
 
 ## Bilan — la carte mémoire
 
@@ -285,7 +283,7 @@ Chaque site, chaque application **collecte** des données sur vous. La loi encad
 | Métadonnée | une donnée qui **décrit** une autre donnée (date, taille, GPS d’une photo…). |
 | Table | lignes et colonnes ; **descripteur** = colonne, **enregistrement** = ligne. |
 | CSV | fichier *texte*, format **ouvert** ; 1<sup>re</sup> ligne = en-tête ; séparateur `,` ou `;`. |
-| Format ouvert / fermé | public et pérenne (CSV) / propriétaire (`.xlsx`). |
+| Format ouvert / fermé | public et pérenne (CSV) / contrôlé par un éditeur (ancien `.xls`). |
 | Rechercher / filtrer / trier | trouver / ne garder que…/ ranger selon un descripteur. |
 | Croiser deux tables | les relier par un descripteur commun. |
 | Tableur | l’outil pour trier, filtrer, calculer, représenter (Excel, Calc, Sheets). |
@@ -297,7 +295,7 @@ Chaque site, chaque application **collecte** des données sur vous. La loi encad
 
 !!! encadre "Débat argumenté"
 
-    Une **fiche débat** accompagne ce thème : « Faut-il ouvrir à tous le plus possible de données publiques, même quand elles concernent des personnes ? » (documents, rôles, tableau d’arguments et trace écrite, environ 50 min).
+    Un **débat**, proposé en fin de chapitre, accompagne ce thème : « Faut-il ouvrir à tous le plus possible de données publiques, même quand elles concernent des personnes ? » (documents, rôles, tableau d’arguments et trace écrite, environ 50 min).
 
 ## Savoir-faire à maîtriser
 

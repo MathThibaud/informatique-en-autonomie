@@ -312,35 +312,9 @@ $GPGGA,142012,4342.054,N,00716.098,E,1,06,1.2,10.0,M,,,,*20
 
     3.  Couper la localisation quand elle est inutile ; limiter les applications qui y ont accès ; effacer l’historique ; retirer l’EXIF avant de publier une photo.
 
-### Critiquer une réponse d’IA
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Le GPS expliqué par un assistant <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-07-15 }
-
-<span class="tag">sur papier</span>  Un élève a demandé à un assistant d’IA : « Comment mon téléphone connaît-il ma position grâce au GPS ? » Voici la réponse obtenue :
-
-> Une trentaine de satellites GPS tournent autour de la Terre ; chacun embarque une horloge atomique et connaît sa position. Votre téléphone envoie un signal radio vers les satellites ; chaque satellite mesure le temps mis par ce signal pour lui parvenir, calcule la distance (vitesse de la lumière $\times$ temps de trajet, par exemple $300\,000 \times 0{,}05 = 15\,000$ km) et renvoie cette distance au téléphone. Avec trois distances, le téléphone se place par trilatération ; un quatrième satellite sert à corriger l’erreur de son horloge. En intérieur, le signal est bloqué et le téléphone se rabat sur le Wi-Fi et les antennes-relais.
-
-1.  La réponse est-elle correcte ? Vérifier le calcul, puis relire l’encadré « Du temps à la distance » du cours : qui envoie le signal, qui le reçoit ?
-
-2.  Localiser et corriger l’erreur.
-
-    ??? pouce "Coup de pouce"
-
-        Relisez dans le cours ce que contient le message d’un satellite et ce que fait le récepteur, puis comparez avec le récit de l’assistant, phrase par phrase.
-
-3.  Quelle vérification simple, faite *avant* de faire confiance à cette réponse, aurait suffi à détecter l’erreur ?
-
-??? corrige "Corrigé"
-
-    1.  Le calcul est juste ($300\,000 \times 0{,}05 = 15\,000$ km), ainsi que la trilatération, le quatrième satellite et le repli sur le Wi-Fi. Mais le cours dit : chaque satellite « **diffuse** en permanence un message radio contenant l’heure exacte de l’envoi » et « le **récepteur** (votre téléphone) compare l’heure d’envoi à l’heure de réception ».
-
-    2.  L’erreur : le sens de la communication est inversé. Le téléphone n’**envoie** rien aux satellites : il ne fait que **recevoir** leurs messages, calcule lui-même sa distance à chacun, puis sa position. Correction : « chaque satellite diffuse l’heure d’envoi ; le téléphone la compare à l’heure de réception et en déduit la distance ».
-
-    3.  Un argument de bon sens suffisait : le GPS fonctionne sans réseau ni carte SIM (en mode avion, en pleine montagne), donc le téléphone ne peut qu’*écouter*. Ou relire, avant de croire l’assistant, la phrase du cours qui décrit ce que fait le récepteur.
-
 ### Localisation et environnement
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Le coût caché d’un itinéraire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-16 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Le coût caché d’un itinéraire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-15 }
 
 <span class="tag">sur papier</span>  On s’appuie sur l’encadré « Le coût d’une localisation permanente » du cours. Une application de course à pied enregistre la position de Nora **toutes les secondes** pendant ses sorties et envoie le parcours à ses serveurs. On suppose qu’un point (heure, latitude, longitude) occupe environ $30$ octets.
 
@@ -365,3 +339,29 @@ $GPGGA,142012,4342.054,N,00716.098,E,1,06,1.2,10.0,M,,,,*20
     3.  Le trafic en temps réel (et les fonds de carte, les itinéraires calculés en ligne) sont des **données servies par des serveurs** : elles sont stockées et calculées dans des **centres de données** puis acheminées par les **réseaux**. Le GPS, lui, ne fait que *recevoir* des signaux et le téléphone calcule seul sa position.
 
     4.  Par exemple : télécharger une **carte hors-ligne** une fois (en Wi-Fi) avant un trajet, ce qui évite de recharger les données à chaque usage ; n’autoriser la localisation que **« pendant l’utilisation »** de l’application et la couper quand elle est inutile, ce qui ménage la **batterie** (une batterie usée trop tôt pousse à changer de téléphone, alors que l’essentiel de son empreinte vient de la **fabrication**, thème *Objets connectés*) et limite les traces envoyées aux serveurs.
+
+### Critiquer une réponse d’IA
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Le GPS expliqué par un assistant <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-07-16 }
+
+<span class="tag">sur papier</span>  Un élève a demandé à un assistant d’IA : « Comment mon téléphone connaît-il ma position grâce au GPS ? » Voici la réponse obtenue :
+
+> Une trentaine de satellites GPS tournent autour de la Terre ; chacun embarque une horloge atomique et connaît sa position. Votre téléphone envoie un signal radio vers les satellites ; chaque satellite mesure le temps mis par ce signal pour lui parvenir, calcule la distance (vitesse de la lumière $\times$ temps de trajet, par exemple $300\,000 \times 0{,}05 = 15\,000$ km) et renvoie cette distance au téléphone. Avec trois distances, le téléphone se place par trilatération ; un quatrième satellite sert à corriger l’erreur de son horloge. En intérieur, le signal est bloqué et le téléphone se rabat sur le Wi-Fi et les antennes-relais.
+
+1.  La réponse est-elle correcte ? Vérifier le calcul, puis relire l’encadré « Du temps à la distance » du cours : qui envoie le signal, qui le reçoit ?
+
+2.  Localiser et corriger l’erreur.
+
+    ??? pouce "Coup de pouce"
+
+        Relisez dans le cours ce que contient le message d’un satellite et ce que fait le récepteur, puis comparez avec le récit de l’assistant, phrase par phrase.
+
+3.  Quelle vérification simple, faite *avant* de faire confiance à cette réponse, aurait suffi à détecter l’erreur ?
+
+??? corrige "Corrigé"
+
+    1.  Le calcul est juste ($300\,000 \times 0{,}05 = 15\,000$ km), ainsi que la trilatération, le quatrième satellite et le repli sur le Wi-Fi. Mais le cours dit : chaque satellite « **diffuse** en permanence un message radio contenant l’heure exacte de l’envoi » et « le **récepteur** (votre téléphone) compare l’heure d’envoi à l’heure de réception ».
+
+    2.  L’erreur : le sens de la communication est inversé. Le téléphone n’**envoie** rien aux satellites : il ne fait que **recevoir** leurs messages, calcule lui-même sa distance à chacun, puis sa position. Correction : « chaque satellite diffuse l’heure d’envoi ; le téléphone la compare à l’heure de réception et en déduit la distance ».
+
+    3.  Un argument de bon sens suffisait : le GPS fonctionne sans réseau ni carte SIM (en mode avion, en pleine montagne), donc le téléphone ne peut qu’*écouter*. Ou relire, avant de croire l’assistant, la phrase du cours qui décrit ce que fait le récepteur.

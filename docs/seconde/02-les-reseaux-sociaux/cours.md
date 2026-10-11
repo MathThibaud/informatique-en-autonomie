@@ -32,29 +32,29 @@ Il en existe des dizaines, et ils ne se ressemblent pas : certains servent surt
 
 !!! etudedoc "Combien d’utilisateurs ? Des ordres de grandeur"
 
-    On ne connaît jamais le chiffre exact (il change tous les jours), mais on peut retenir des **ordres de grandeur** du nombre d’utilisateurs actifs chaque mois (données 2024, arrondies ; DataReportal, 2024, et chiffres publiés par les entreprises) :
+    On ne connaît jamais le chiffre exact (il change tous les jours), mais on peut retenir des **ordres de grandeur** du nombre d’utilisateurs actifs chaque mois (chiffres arrondis, mis à jour en octobre 2026 ; chiffres publiés par les entreprises, 2025-2026, et DataReportal) :
 
     | **Réseau** | **Contenu principal** | **Ordre de grandeur** |
     |:---|:---|:---|
     | Facebook | tout (texte, photo, vidéo) | $\sim 3$ milliards |
-    | YouTube | vidéos | $\sim 2{,}5$ milliards |
-    | Instagram | photos, vidéos courtes | $\sim 2$ milliards |
-    | WhatsApp | messages privés | $\sim 2$ milliards |
-    | TikTok | vidéos courtes | $\sim 1{,}5$ milliard |
-    | LinkedIn | professionnel | $\sim 1$ milliard d’*inscrits*$^{*}$ |
+    | WhatsApp | messages privés | plus de $3$ milliards |
+    | Instagram | photos, vidéos courtes | $\sim 3$ milliards |
+    | YouTube | vidéos | $\sim 2{,}5$ milliards$^{*}$ |
+    | TikTok | vidéos courtes | $\sim 1{,}6$ milliard$^{*}$ |
+    | LinkedIn | professionnel | $\sim 1{,}3$ milliard d’*inscrits*$^{**}$ |
+    | Snapchat | photos éphémères | près de $1$ milliard |
     | X (Twitter) | messages courts | *centaines de millions* |
-    | Snapchat | photos éphémères | *centaines de millions* |
 
-    $^{*}$ LinkedIn annonce ses membres inscrits (2023), pas ses utilisateurs actifs, qui sont bien moins nombreux.  
-    Rappel : la population mondiale est d’environ **8 milliards** d’humains (ONU, 2022).
+    $^{*}$ YouTube et TikTok ne publient pas ce chiffre : on donne le nombre de personnes que leurs publicités peuvent atteindre chaque mois (DataReportal, 2025). $^{**}$ LinkedIn annonce ses membres inscrits, pas ses utilisateurs actifs, qui sont bien moins nombreux.  
+    Rappel : la population mondiale est d’environ **8,2 milliards** d’humains (ONU, 2024).
 
-    Sources : DataReportal (Kepios, We Are Social, Meltwater), *Digital 2024 Global Overview Report*, janvier 2024, et chiffres publiés par les entreprises (utilisateurs actifs mensuels ; membres de LinkedIn, 2023) ; ONU (Département des affaires économiques et sociales), *World Population Prospects 2022* (8 milliards d’humains en novembre 2022).
+    Sources : Meta (Instagram : 3 milliards d’utilisateurs actifs mensuels, septembre 2025 ; WhatsApp : plus de 3 milliards, avril 2025 ; Facebook : environ 3 milliards) ; Snap Inc., résultats du 2<sup>e</sup> trimestre 2026 (971 millions d’utilisateurs actifs mensuels) ; LinkedIn, *About us* (plus de 1,3 milliard de membres, 2026) ; DataReportal (Kepios, We Are Social, Meltwater), *Digital 2025 Global Overview Report*, février 2025 (audiences publicitaires de YouTube et TikTok) ; ONU, *World Population Prospects 2024* (8,2 milliards d’humains en 2024).
 
 !!! activite "Activité — Dresser le portrait des réseaux"
 
     À l’aide du Document 1 et de vos propres connaissances :
 
-    1.  Classer ces réseaux du plus utilisé au moins utilisé.
+    1.  Classer ces réseaux par ordre de grandeur du nombre d’utilisateurs. Que remarque-t-on pour les trois premiers ? À quelle entreprise appartiennent-ils ?
 
     2.  Citer deux réseaux dont le contenu principal est la vidéo.
 
@@ -288,11 +288,11 @@ Les réseaux sont des outils formidables (s’informer, créer, garder le lien, 
 
 !!! regle "Règle 4"
 
-    **Le cyberharcèlement** (insultes, menaces, moqueries répétées en ligne) est **interdit par la loi** et lourdement puni. Face à une situation de harcèlement : ne pas répondre, **garder les preuves** (captures d’écran), **bloquer**, **signaler**, et **en parler** à un adulte de confiance (numéro national : **3018**).
+    <span id="lex-cyberharcelement02" class="ancre"></span>**Le cyberharcèlement** (insultes, menaces, moqueries répétées en ligne) est **interdit par la loi** et lourdement puni. Face à une situation de harcèlement : ne pas répondre, **garder les preuves** (captures d’écran), **bloquer**, **signaler**, et **en parler** à un adulte de confiance. À Monaco, la ligne d’écoute contre le harcèlement mise en place par le Gouvernement princier (**98 98 96 96**, 24 h/24, 7 j/7) aide aussi les victimes de harcèlement en ligne. Le service français **3018** répond par tchat (application *3018*) ; son numéro court n’est pas garanti depuis une ligne monégasque.
 
 !!! activite "Activité — Ma charte des réseaux"
 
-    En binôme, rédiger une **charte de cinq règles** « pour bien vivre sur les réseaux » (une pour la vie privée, une pour l’esprit critique, une contre le harcèlement, deux au choix). Ces règles serviront de base à l’exposé final.
+    En binôme, rédiger une **charte de cinq règles** « pour bien vivre sur les réseaux » (une pour la vie privée, une pour l’esprit critique, une contre le harcèlement, deux au choix). Ces règles serviront de base à l’exposé vidéo (projet noté, dont le sujet est distribué en classe).
 
 <span id="cours-02-17" class="ancre"></span>
 
@@ -317,7 +317,7 @@ Un fil infini, des vidéos qui s’enchaînent toutes seules… Tout cela circu
     - **Combien de CO<sub>2</sub> ? Une estimation discutée.** En 2019, The Shift Project estimait que la vidéo en ligne émettait plus de 300 Mt CO<sub>2</sub>e par an (près de 1 % des émissions mondiales). L’Agence internationale de l’énergie (AIE) a jugé ce type de calcul très surestimé : selon elle, une heure de vidéo en streaming émettait en moyenne environ **36 g de CO<sub>2</sub>** en 2019. Les résultats changent beaucoup selon les hypothèses (appareil, réseau, électricité du pays) ; ce qui est sûr, c’est que plus on regarde, et en haute définition, plus on échange de données.  
       *Sources : The Shift Project, « Climat : l’insoutenable usage de la vidéo en ligne », juillet 2019 ; AIE, « The carbon footprint of streaming video: fact-checking the headlines », décembre 2020.*
 
-    - **Et le numérique en général ?** Selon les études et ce qu’elles comptent, il pèse environ **2 à 4 %** des émissions mondiales (1,7 % pour le seul secteur des technologies de l’information selon l’UIT et la Banque mondiale, données 2022 ; près de 4 % selon The Shift Project, 2019). Pour la France et le calcul complet de l’empreinte d’un smartphone (environ 80 kg CO<sub>2</sub>e, presque tout à la fabrication), voir le thème *Informatique embarquée et objets connectés*.  
+    - **Et le numérique en général ?** Selon les études et ce qu’elles comptent, il pèse environ **2 à 4 %** des émissions mondiales (1,7 % pour le seul secteur des technologies de l’information selon l’UIT et la Banque mondiale, données 2022 ; près de 4 % selon The Shift Project, 2019). Pour la France et le calcul complet de l’empreinte d’un smartphone (environ 80 kg CO<sub>2</sub>e, presque tout à la fabrication), on y reviendra au chapitre *Informatique embarquée et objets connectés*.  
       *Source : UIT et Banque mondiale, *Measuring the Emissions and Energy Footprint of the ICT Sector*, 2024.*
 
 !!! activite "Activité — Sobriété numérique"
@@ -326,7 +326,7 @@ Un fil infini, des vidéos qui s’enchaînent toutes seules… Tout cela circu
 
     1.  Expliquer pourquoi une vidéo très regardée « pèse » bien plus que la taille de son fichier (penser au **stockage** et à la **diffusion**).
 
-    2.  En vous appuyant sur le thème *Objets connectés*, expliquer pourquoi **garder son téléphone plus longtemps** (le faire réparer, choisir un appareil reconditionné) est l’un des gestes les plus efficaces.
+    2.  En vous appuyant sur le chiffre de 80 kg CO<sub>2</sub>e du Document 6 (presque tout dû à la **fabrication**), expliquer pourquoi **garder son téléphone plus longtemps** (le faire réparer, choisir un appareil reconditionné) est l’un des gestes les plus efficaces.
 
     3.  La **lecture automatique** et la **qualité vidéo maximale** sont souvent activées par défaut. Expliquer pourquoi elles augmentent la quantité de données échangées, puis proposer deux réglages pour la réduire.
 
@@ -338,7 +338,7 @@ Un fil infini, des vidéos qui s’enchaînent toutes seules… Tout cela circu
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Un réseau social est d’abord un **graphe** : la même structure sert au calcul d’itinéraire (chapitre *Localisation*) et décrit les hyperliens du **Web**. Ce que vous publiez devient une **donnée personnelle**, rangée dans d’immenses **tables** chez l’entreprise (chapitre *Données en tables*) ; une photo peut même trahir, par ses **métadonnées EXIF**, le lieu où elle a été prise (chapitre *Photographie numérique*). Comme le Web, un réseau social est un **service** qui circule sur **Internet** : votre fil arrive en paquets depuis des serveurs. En spécialité NSI de Terminale, on apprend à parcourir des graphes et à y calculer des distances par programme.
+    Un réseau social est d’abord un **graphe** : on retrouvera la même structure dans le calcul d’itinéraire (chapitre *Localisation*) et dans les hyperliens du **Web**. Ce que vous publiez devient une **donnée personnelle**, rangée dans d’immenses **tables** chez l’entreprise (on le verra au chapitre *Données en tables*) ; une photo peut même trahir, par ses **métadonnées EXIF**, le lieu où elle a été prise (chapitre *Photographie numérique*, juste après celui-ci). Comme le Web, un réseau social est un **service** qui circule sur **Internet** : votre fil arrive en paquets depuis des serveurs (chapitre *Internet*). En spécialité NSI de Terminale, on apprend à parcourir des graphes et à y calculer des distances par programme.
 
 ## Bilan — la carte mémoire
 
@@ -355,12 +355,12 @@ Un fil infini, des vidéos qui s’enchaînent toutes seules… Tout cela circu
 | Petit monde | Milgram (1967) $\to$ « six degrés » ; sur Facebook ($\sim$<!-- -->2016) : $\approx 3{,}5$. |
 | Recommandation | un algorithme trie votre fil ; risques : bulle de filtres, désinformation. |
 | Données personnelles | RGPD ; seul dès **15 ans** ; accès, rectification, effacement ; CNIL (France), APDP et loi n° 1.565 (Monaco). |
-| Citoyenneté | cyberharcèlement interdit ; garder les preuves, bloquer, signaler, **3018**. |
+| Citoyenneté | cyberharcèlement interdit ; garder les preuves, bloquer, signaler, en parler (à Monaco : **98 98 96 96**). |
 | Impact environnemental | numérique $\approx 2$ à $4\,\%$ des GES mondiaux (estimations) ; vidéo $=$ majorité du trafic : stockage + diffusion ; garder ses appareils. |
 
 !!! encadre "Débat argumenté"
 
-    Une **fiche débat** accompagne ce thème : « Faut-il interdire les réseaux sociaux aux moins de 15 ans, avec une vérification d’âge obligatoire ? » (documents, rôles, tableau d’arguments et trace écrite, environ 50 min).
+    Un **débat**, proposé en fin de chapitre, accompagne ce thème : « Faut-il interdire les réseaux sociaux aux moins de 15 ans, avec une vérification d’âge obligatoire ? » (documents, rôles, tableau d’arguments et trace écrite, environ 50 min).
 
 ## Savoir-faire à maîtriser
 

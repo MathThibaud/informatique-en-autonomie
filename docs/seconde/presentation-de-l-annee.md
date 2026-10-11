@@ -14,7 +14,7 @@ Vous passez des heures chaque jour sur un téléphone, un ordinateur, une consol
 
 La SNT est un enseignement de **tronc commun** : *tout le monde* en fait en Seconde, à raison de **2 heures par semaine**. Ce n’est pas une spécialité et il n’y a **pas d’épreuve au baccalauréat** — mais le travail compte dans votre bulletin, et surtout cette culture vous servira toute votre vie. C’est aussi une belle occasion de découvrir si l’informatique vous plaît, avant de choisir (ou non) la spécialité **NSI** en Première.
 
-Le programme s’organise autour de **sept grands thèmes** officiels, plus un outil qui nous accompagnera toute l’année : un peu de **programmation en Python**. On ne cherche pas à devenir informaticien : on cherche à **comprendre**, à **manipuler** et à **réfléchir** en citoyen éclairé.
+Le programme s’organise autour de **sept grands thèmes** officiels, plus un outil qui nous accompagnera toute l’année : un peu de **programmation en Python**. Cela fait **huit chapitres** : l’outil Python d’abord, puis les sept thèmes. On ne cherche pas à devenir informaticien : on cherche à **comprendre**, à **manipuler** et à **réfléchir** en citoyen éclairé.
 
 ## Ce que vous allez découvrir cette année
 
@@ -22,29 +22,29 @@ Le programme s’organise autour de **sept grands thèmes** officiels, plus un o
 
 ### De la rentrée aux vacances de Toussaint
 
-**Thème 1 — Les bases de la programmation (Python).** *Vous allez apprendre à écrire vos premiers petits programmes : ranger des informations dans des variables, faire faire des choix à la machine, lui faire répéter des actions. C’est l’outil qu’on retrouvera dans plusieurs thèmes de l’année.*
+**Chapitre 1 — Les bases de la programmation (Python)**, l’outil de l’année, suivi d’un complément pour dessiner avec la tortue. *Vous allez apprendre à écrire vos premiers petits programmes : ranger des informations dans des variables, faire faire des choix à la machine, lui faire répéter des actions. C’est l’outil qu’on retrouvera dans plusieurs thèmes de l’année.*
 
-**Thème 2 — Les réseaux sociaux.** *Vous utilisez Instagram, TikTok, Snapchat, WhatsApp… mais comment fonctionnent-ils vraiment ? On parlera « amis d’amis » et petit monde, modèle économique de la « gratuité », algorithmes de recommandation, cyberharcèlement et identité numérique. Beaucoup de discussion et d’esprit critique.*
+**Chapitre 2 — Les réseaux sociaux.** *Vous utilisez Instagram, TikTok, Snapchat, WhatsApp… mais comment fonctionnent-ils vraiment ? On parlera « amis d’amis » et petit monde, modèle économique de la « gratuité », algorithmes de recommandation, cyberharcèlement et identité numérique. Beaucoup de discussion et d’esprit critique.*
 
 ### De la Toussaint à Noël
 
-**Thème 3 — La photographie numérique.** *Surprise : une photo, ce n’est que des **nombres** ! Vous allez découvrir les pixels, le codage des couleurs (RVB), les métadonnées (EXIF, y compris la position GPS…), puis **retoucher vous-même** des images avec quelques lignes de Python. Le thème où l’on réinvestit le plus la programmation.*
+**Chapitre 3 — La photographie numérique.** *Surprise : une photo, ce n’est que des **nombres** ! Vous allez découvrir les pixels, le codage des couleurs (RVB), les métadonnées (EXIF, y compris la position GPS…), puis **retoucher vous-même** des images avec quelques lignes de Python. Le thème où l’on réinvestit le plus la programmation.*
 
 ### De janvier aux vacances d’hiver
 
-**Thème 4 — Le Web (et votre propre site !).** *Vous allez comprendre ce qui se passe quand vous cliquez sur un lien : HTML, CSS, adresses, hypertexte… Et surtout, le temps fort de l’année : un **mini-projet** où vous **concevez et réalisez votre propre page Web**, sur le sujet de votre choix. À vous de créer quelque chose que l’on pourra vraiment afficher dans un navigateur.*
+**Chapitre 4 — Le Web (et votre propre site !).** *Vous allez comprendre ce qui se passe quand vous cliquez sur un lien : HTML, CSS, adresses, hypertexte… Et surtout, le temps fort de l’année : deux **projets**. D’abord, seul et en temps limité, vous reproduisez un petit site modèle ; puis, par groupes de trois, vous **concevez et réalisez votre propre mini-site** sur un lieu, un événement ou un thème **monégasque** de votre choix. À vous de créer quelque chose que l’on pourra vraiment afficher dans un navigateur.*
 
 ### Des vacances d’hiver à celles de printemps
 
-**Thème 5 — Les données structurées et leur traitement.** *Météo, résultats sportifs, catalogues, open data… le numérique carbure aux données. Vous allez apprendre à les organiser en tables, à les trier, les filtrer et les croiser — et à vous demander qui les collecte, où elles sont stockées et ce qu’on peut en déduire.*
+**Chapitre 5 — Les données structurées et leur traitement.** *Météo, résultats sportifs, catalogues, open data… le numérique carbure aux données. Vous allez apprendre à les organiser en tables, à les trier, les filtrer et les croiser — et à vous demander qui les collecte, où elles sont stockées et ce qu’on peut en déduire.*
 
-**Thème 6 — Internet et les réseaux.** *Comment un message part de votre téléphone et arrive à l’autre bout de la planète en une fraction de seconde ? Vous allez suivre le voyage des données : adresses IP, routage, « paquets », protocoles… la face cachée d’Internet.*
+**Chapitre 6 — Internet et les réseaux.** *Comment un message part de votre téléphone et arrive à l’autre bout de la planète en une fraction de seconde ? Vous allez suivre le voyage des données : adresses IP, routage, « paquets », protocoles… la face cachée d’Internet.*
 
 ### Du printemps à la fin de l’année
 
-**Thème 7 — La localisation, la cartographie et la mobilité.** *Comment votre téléphone sait-il où vous êtes ? Vous allez découvrir le GPS, les cartes numériques et le calcul d’itinéraire (le plus court chemin), en gardant un œil sur ce que cela implique pour votre vie privée.*
+**Chapitre 7 — La localisation, la cartographie et la mobilité.** *Comment votre téléphone sait-il où vous êtes ? Vous allez découvrir le GPS, les cartes numériques et le calcul d’itinéraire (le plus court chemin), en gardant un œil sur ce que cela implique pour votre vie privée.*
 
-**Thème 8 — L’informatique embarquée et les objets connectés.** *Montres, voitures, maisons « intelligentes »… des ordinateurs se cachent partout. Vous allez comprendre comment un objet capte son environnement, décide et agit — et pourquoi la sécurité de ces objets est un vrai sujet.*
+**Chapitre 8 — L’informatique embarquée et les objets connectés.** *Montres, voitures, maisons « intelligentes »… des ordinateurs se cachent partout. Vous allez comprendre comment un objet capte son environnement, décide et agit — et pourquoi la sécurité de ces objets est un vrai sujet.*
 
 !!! remarque "Remarque"
 

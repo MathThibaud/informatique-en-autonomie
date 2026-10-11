@@ -231,7 +231,7 @@ def horspool(motif, texte):
 
 !!! exemple "Exemple — Un clin d’œil à l’ADN : GATTACA"
 
-    Table de `GATTACA` : `G`$\to 6$, `A`$\to 2$, `T`$\to 3$, `C`$\to 1$, autres $\to 7$. Dans le brin `ACGTGATTACAGGT`, Horspool teste $i=0$ (fin `T` $\to$ saut $3$), $i=3$ (fin `C` $\to$ saut $1$), puis $i=4$ : **`GATTACA` trouvé** ! Trois essais au lieu de huit.
+    Table de `GATTACA` : `G`$\to 6$, `A`$\to 2$, `T`$\to 3$, `C`$\to 1$, autres $\to 7$. Dans le brin `ACGTGATTACAGGT`, Horspool teste $i=0$ (fin `T` $\to$ saut $3$), $i=3$ (fin `C` $\to$ saut $1$), puis $i=4$ : **`GATTACA` trouvé** ! Trois alignements au lieu de cinq pour la méthode naïve, qui essaie $i = 0, 1, 2, 3, 4$ avant de trouver.
 
 ![](../figures/8f4e3f1a15805c8e.svg){ .tikz loading=lazy }
 
@@ -252,7 +252,7 @@ C’est le **prodige** de Boyer-Moore : il peut trouver un mot **sans lire tout 
 
 <span class="afaire">▶ Exercices d'application :</span> exercice **[8](exercices.md#ex-12-8)** (le coût sous-linéaire)
 
-## Où la recherche textuelle est partout
+## Ouverture : la recherche textuelle est partout
 
 - **Éditeurs et `grep`** : le `Ctrl+F` de vos logiciels.
 

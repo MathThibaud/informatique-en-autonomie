@@ -16,7 +16,7 @@
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/5 ](https://adventofcode.com/2020/day/5 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/05-defi-aoc-2020-05>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -163,7 +163,7 @@ Trouver la place libre en temps linéaire sans trier ni utiliser d’ensemble, e
 
     **Intérêt.** Avec une liste, `x in liste` compare `x` à chaque élément l’un après l’autre : jusqu’à $n$ comparaisons. Un ensemble range ses éléments selon une valeur calculée à partir d’eux (une *fonction de hachage*, comme les clés d’un dictionnaire) : Python va directement là où `x` devrait se trouver. Le test `x in ensemble` prend donc un temps qui ne dépend pas du nombre d’éléments (**temps constant**, en moyenne).
 
-    **À essayer.** Construire l’ensemble des numéros de la liste de la fiche, puis tester si `602` et `603` en font partie.
+    **À essayer.** Construire l’ensemble des numéros de la liste du défi, puis tester si `602` et `603` en font partie.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 1 : la place libre avec un ensemble <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-8 }
 
@@ -197,7 +197,7 @@ Trouver la place libre en temps linéaire sans trier ni utiliser d’ensemble, e
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/6 ](https://adventofcode.com/2020/day/6 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/05-defi-aoc-2020-06>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -300,7 +300,7 @@ Lire tout le fichier en une chaîne et construire une liste de groupes, chaque g
 
 ### <span class="exo-num">Exercice 4</span> — Réunir les réponses <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-2-4 }
 
-Écrire une fonction `nb_oui_quelquun(groupe)` qui renvoie le nombre de lettres présentes chez au moins un membre, puis faire la somme sur tout le fichier. Tester sur l’exemple de la fiche, puis sur vos données.
+Écrire une fonction `nb_oui_quelquun(groupe)` qui renvoie le nombre de lettres présentes chez au moins un membre, puis faire la somme sur tout le fichier. Tester sur l’exemple du défi, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -326,7 +326,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 1.  Quelle opération sur les ensembles correspond à la nouvelle question ?
 
-2.  Écrire la fonction correspondante et faire la somme. Sur l’exemple de la fiche, on doit trouver `9`.
+2.  Écrire la fonction correspondante et faire la somme. Sur l’exemple du défi, on doit trouver `9`.
 
 ??? pouce "Coup de pouce"
 
@@ -362,7 +362,7 @@ Résoudre les deux parties sans ensemble, avec un dictionnaire qui compte, pour 
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : chaque partie en une ligne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-2-7 }
 
-1.  À la main, pour le troisième groupe de l’exemple de la fiche (`pqr`, `qrs`, `rst`), que renvoie l’expression suivante ? Et avec `set.union` ?
+1.  À la main, pour le troisième groupe de l’exemple du défi (`pqr`, `qrs`, `rst`), que renvoie l’expression suivante ? Et avec `set.union` ?
 
     `set.intersection(*[set(p) for p in groupe])`
 

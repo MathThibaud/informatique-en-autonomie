@@ -164,7 +164,7 @@ Un routeur A a la table de routage suivante :
 
 On considère le réseau ci-dessous (les nombres sont les débits en Mbps ; on les **ignore** pour RIP). Chaque routeur dessert son propre réseau local.
 
-![](../figures/0e7a42e65cd3a0c3.svg){ .tikz .tikz-inline loading=lazy }
+![](../figures/d4bb5f6ef25d59e1.svg){ .tikz .tikz-inline loading=lazy }
 
 1.  Donner, pour le routeur **A**, le nombre de sauts vers chacun des routeurs B, C, D, E (métrique RIP).
 
@@ -178,7 +178,7 @@ On considère le réseau ci-dessous (les nombres sont les débits en Mbps ; on l
 
 ??? corrige "Corrigé"
 
-    **1.** Nombre de sauts depuis A : B $\to 1$ ; C $\to 1$ ; D $\to 2$ (A–B–D) ; E $\to 2$ (A–C–E).  
+    **1.** Nombre de sauts depuis A : B $\to 1$ ; C $\to 1$ ; D $\to 2$ (A–B–D) ; E $\to 2$ (A–B–E).  
     **2.** Table de routage RIP de A :
 
     |   Réseau    | Sortir vers | Sauts |
@@ -186,7 +186,7 @@ On considère le réseau ci-dessous (les nombres sont les débits en Mbps ; on l
     | réseau de B |      B      |   1   |
     | réseau de C |      C      |   1   |
     | réseau de D |      B      |   2   |
-    | réseau de E |      C      |   2   |
+    | réseau de E |      B      |   2   |
 
     **3.** La métrique est plafonnée à $15$ (au-delà, réseau réputé inaccessible) ; et l’envoi périodique (toutes les 30 s) de toute la table à tous les voisins **sature** un grand réseau.
 
@@ -220,21 +220,22 @@ On reprend **le même réseau**, mais cette fois les nombres sont les **débits*
 
     ??? pouce "Coup de pouce"
 
-        Écrire d’abord le coût de chaque liaison sur le schéma. Pour chaque destination, comparer les coûts totaux de plusieurs chemins possibles ; pour la question 3, regarder de près le lien A–C.
+        Écrire d’abord le coût de chaque liaison sur le schéma. Pour chaque destination, comparer les coûts totaux de plusieurs chemins possibles ; pour la question 3, regarder de près le lien A–B.
 
 ??? corrige "Corrigé"
 
     **1.** Coûts $=10^8/\text{débit}$ : $100$ Mbps $\to 1$ ; \; $10$ Mbps $\to 10$ ; \; $1$ Mbps $\to 100$.  
-    **2.** Table OSPF de A (le lien A–C coûte $100$, on l’évite) :
+    **2.** Coûts des liaisons : A–B $100$ ; B–D $10$ ; toutes les autres $1$. Table OSPF de A (le lien A–B coûte $100$, on l’évite) :
 
-    |   Réseau    | Sortir vers |          Coût          |
-    |:-----------:|:-----------:|:----------------------:|
-    | réseau de B |      B      |        1 (A–B)         |
-    | réseau de C |      B      |       2 (A–B–C)        |
-    | réseau de D |      B      |       2 (A–B–D)        |
-    | réseau de E |      B      | 3 (A–B–C–E ou A–B–D–E) |
+    |   Réseau    | Sortir vers |     Coût      |
+    |:-----------:|:-----------:|:-------------:|
+    | réseau de B |      C      |   2 (A–C–B)   |
+    | réseau de C |      C      |    1 (A–C)    |
+    | réseau de D |      C      | 4 (A–C–B–E–D) |
+    | réseau de E |      C      |  3 (A–C–B–E)  |
 
-    **3.** Les deux protocoles **divergent** pour C et E : RIP prend le lien **direct** A–C ($1$ saut) et A–C–E ($2$ sauts) ; OSPF passe par B (A–B–C, A–B–C–E). En effet A–C n’a qu’un débit de $1$ Mbps (coût $100$) : RIP ne « voit » pas cette lenteur, OSPF si.
+    Pour D, on compare par exemple A–B–D ($100+10=110$), A–C–B–D ($1+1+10=12$) et A–C–B–E–D ($1+1+1+1=4$) : le chemin le plus long en nombre de liaisons est le moins coûteux.  
+    **3.** Les deux protocoles **divergent** pour B, D et E : RIP prend le lien **direct** A–B ($1$ saut vers B, puis A–B–D et A–B–E en $2$ sauts) ; OSPF passe par C (A–C–B, A–C–B–E–D, A–C–B–E). En effet A–B n’a qu’un débit de $1$ Mbps (coût $100$), et B–D seulement $10$ Mbps (coût $10$) : RIP ne « voit » pas cette lenteur, OSPF si. Seule la route vers C est la même (lien direct A–C).
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Dijkstra derrière OSPF <span class="horsprog">au-delà du programme</span> <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-10 }
 
@@ -242,7 +243,7 @@ On reprend **le même réseau**, mais cette fois les nombres sont les **débits*
 
 Voici un réseau de six routeurs ; les nombres sont les **débits** des liaisons, en Mbit/s. On rappelle : $\text{coût}=10^8/\text{débit}$ (débit en bit/s).
 
-![](../figures/b69a4560f96550dd.svg){ .tikz loading=lazy }
+![](../figures/7f1ea32d0cd9c8d8.svg){ .tikz loading=lazy }
 
 1.  Calculer le coût OSPF de chaque liaison et le reporter sur un schéma.
 
@@ -304,7 +305,7 @@ Voici un réseau de six routeurs ; les nombres sont les **débits** des liaisons
 
 Un ensemble scolaire « Établissement » regroupe plusieurs sites (l’Administration, l’école primaire, le collège, le lycée général, le lycée professionnel). Les postes de chaque site sont reliés entre eux par des commutateurs (switchs), eux-mêmes reliés à des routeurs. R1, R2, R3, R4, R5 et R6 sont les routeurs de l’établissement ; la figure 1 montre leurs liaisons et le routeur qui dessert trois des secteurs.
 
-![](../figures/c19ffb0b400414ce.svg){ .tikz loading=lazy }  
+![](../figures/0592b1c2e6713e0b.svg){ .tikz loading=lazy }  
 Figure 1 : les routeurs de l’établissement (en pointillés : le routeur qui dessert un secteur)
 
 **Rappels.** Une adresse IPv4 est composée de $4$ octets, soit $32$ bits, notée `A.B.C.D`. La notation `A.B.C.D/n` signifie que les $n$ premiers bits de l’adresse représentent la partie « réseau », les bits suivants la partie « hôte » ; les $n$ premiers bits du masque valent donc $1$, les autres $0$. L’adresse dont tous les bits de la partie hôte sont à $0$ est l’*adresse du réseau* ; celle dont tous les bits de la partie hôte sont à $1$ est l’*adresse de diffusion*.
@@ -496,7 +497,7 @@ Figure 1 : les routeurs de l’établissement (en pointillés : le routeur qui d
 
     2.  Recopier le schéma ci-dessous et indiquer le coût de chacune des liaisons connues.
 
-        ![](../figures/1ee7072ceb939db3.svg){ .tikz loading=lazy }  
+        ![](../figures/63d0d420b357e09b.svg){ .tikz loading=lazy }  
         Figure 2 : types des liaisons entre les routeurs
 
     3.  On sait que le parcours R6 – R4 – R5 – R2 a un coût de $11{,}1$. Déterminer le type de liaison entre R6 et R4.
@@ -619,7 +620,7 @@ Figure 1 : les routeurs de l’établissement (en pointillés : le routeur qui d
 
 Voici un réseau dans lequel A, B, C, D, E, F, G et H sont des routeurs ; chaque liaison est étiquetée par l’adresse du réseau qui relie les deux routeurs.
 
-![](../figures/b09483d1597f6d8d.svg){ .tikz loading=lazy }
+![](../figures/4865273365e772f3.svg){ .tikz loading=lazy }
 
 Les adresses IPv4 sont composées de $4$ octets, notées `X1.X2.X3.X4` en décimal. La notation CIDR `X1.X2.X3.X4/n` signifie que les $n$ premiers bits de poids forts représentent la partie « réseau », les suivants la partie « hôte ». Tous les hôtes d’un même réseau local ont la même partie réseau ; l’adresse dont tous les bits de la partie hôte sont à $0$ est l’*adresse du réseau*.
 
@@ -633,7 +634,7 @@ Les adresses IPv4 sont composées de $4$ octets, notées `X1.X2.X3.X4` en décim
 
 Voici maintenant le type de connexion entre les routeurs :
 
-![](../figures/f578aaf51ad01757.svg){ .tikz loading=lazy }
+![](../figures/bbc41015a995641c.svg){ .tikz loading=lazy }
 
 On travaille avec le protocole OSPF. Le coût d’une liaison est donné par $\text{coût} = 10^{9}/BP$, où $BP$ est la bande passante en bit/s, estimée selon le type de connexion : Ethernet $10^{8}$, Fast-Ethernet $10^{9}$, Fibre $10^{10}$.
 
@@ -664,7 +665,7 @@ On travaille avec le protocole OSPF. Le coût d’une liaison est donné par $\t
 
 Bob et Alice communiquent au travers du réseau ci-dessous, dont le protocole de routage est OSPF, qui minimise le coût des communications (LAN : réseau local ; WAN : réseau étendu ; R : routeur ; Sw : switch).
 
-![](../figures/c453023d54fd6375.svg){ .tikz loading=lazy }
+![](../figures/5a3e02bda2ddb319.svg){ .tikz loading=lazy }
 
 Une adresse IPv4 est composée de quatre octets, soit $32$ bits. La notation `/n` signifie que les $n$ premiers bits de l’adresse forment la partie « réseau » et les suivants la partie « machine ». L’adresse dont tous les bits machine sont à $0$ est l’adresse du réseau, celle dont ils sont tous à $1$ l’adresse de diffusion : ces deux adresses ne peuvent pas être attribuées à des machines. Le choix des routes est uniquement basé sur OSPF, avec un débit de référence de $10\,000$ Mbit/s : $$\text{coût} = \frac{\text{débit de référence}}{\text{débit du réseau concerné}}.$$
 
@@ -1045,7 +1046,7 @@ Une adresse IPv4 est composée de quatre octets, soit $32$ bits. La notation `/n
 
 *Rappels.* Une adresse IPv4 est composée de $4$ octets, soit $32$ bits, notée `a.b.c.d` (« notation décimale pointée »). La notation CIDR `a.b.c.d/n` signifie que les $n$ premiers bits de l’adresse représentent la partie réseau, les bits suivants la partie machine. L’adresse dont tous les bits machine sont à $0$ est l’*adresse du réseau* ; celle dont ils sont tous à $1$ est l’*adresse de diffusion*. On considère le réseau suivant :
 
-![](../figures/449e21926105627c.svg){ .tikz loading=lazy }
+![](../figures/347f639f171c9550.svg){ .tikz loading=lazy }
 
 **Partie A — Adresses IP**
 
@@ -1129,7 +1130,7 @@ La liaison entre H et D est rétablie. Pour tenir compte du débit des liaisons,
 
 Le réseau informatique d’une société est constitué de routeurs interconnectés par des fibres optiques. Il comporte deux réseaux locaux : L1, relié au routeur R1, et L2, relié au routeur R9.
 
-![](../figures/307237184c569a46.svg){ .tikz loading=lazy }
+![](../figures/72c1d380d9b2c5ae.svg){ .tikz loading=lazy }
 
 **Partie A.** Les adresses IP sont notées `X1.X2.X3.X4`, et `X1.X2.X3.X4/n` signifie que les $n$ premiers bits de poids forts représentent la partie réseau. Toutes les machines d’un réseau local ont la même partie réseau. Voici les adresses IPv4 du réseau de la société :
 
@@ -1164,7 +1165,7 @@ Le réseau informatique d’une société est constitué de routeurs interconnec
 
 **Partie C.** On utilise maintenant le protocole OSPF. Le poids de chaque arête ci-dessous est la bande passante de la liaison, en mégabits par seconde (Mb/s), et le coût d’une liaison est $C = \dfrac{10^{8}}{BP}$, où $BP$ est la bande passante en bits par seconde.
 
-![](../figures/4a1dc1082f4e31b3.svg){ .tikz loading=lazy }
+![](../figures/1ac3abfd59fd23e7.svg){ .tikz loading=lazy }
 
 1.  Déterminer la route empruntée par un paquet allant de l’ordinateur P1 à l’ordinateur P3. Préciser le coût de ce trajet.
 

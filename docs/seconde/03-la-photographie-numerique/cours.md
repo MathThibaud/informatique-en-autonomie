@@ -12,7 +12,7 @@
 
 !!! remarque "Remarque"
 
-    **Un peu d’histoire.** La toute première photographie est prise vers **1826** par le Français **Nicéphore Niépce** (« Point de vue du Gras ») : il a fallu *plusieurs heures* de pose ! En **1888**, **George Eastman** lance l’appareil **Kodak** avec un slogan resté célèbre : « *Vous appuyez sur le bouton, nous faisons le reste.* » Mais la vraie révolution est de **1975** : l’ingénieur **Steven Sasson**, chez Kodak, construit le **premier appareil photo numérique**. Il pesait près de 4 kg, enregistrait sur une cassette en **23 secondes**… une image de $100 \times 100$ pixels en noir et blanc ! (IEEE, 2022) Aujourd’hui, le capteur qui tient dans votre téléphone compte plus de **mille fois** plus de pixels (souvent 12 millions ou davantage, contre 10 000), en couleurs.
+    **Un peu d’histoire.** La toute première photographie est prise vers **1826** par le Français **Nicéphore Niépce** (« Point de vue du Gras ») : il a fallu *plusieurs heures* de pose ! En **1888**, **George Eastman** lance l’appareil **Kodak** avec un slogan resté célèbre : « *Vous appuyez sur le bouton, nous faisons le reste.* » Mais la vraie révolution est de **1975** : l’ingénieur **Steven Sasson**, chez Kodak, construit le **premier appareil photo numérique**. Il pesait environ 3,6 kg, enregistrait sur une cassette en **23 secondes**… une image de $100 \times 100$ pixels en noir et blanc ! (IEEE, 2022) Aujourd’hui, le capteur qui tient dans votre téléphone compte plus de **mille fois** plus de pixels (souvent 12 millions ou davantage, contre 10 000), en couleurs.
 
     \*(image manquante : 03_hist_niepce)\*  
     « Point de vue du Gras » (Niépce, vers 1826)
@@ -32,8 +32,7 @@ Autrefois, l’appareil photo contenait une **pellicule** : une surface sensible
 
 \*(image manquante : 03_capteur_cmos_sony_a7riii)\*
 
-Le capteur CMOS d’un appareil photo hybride, démonté : la surface rectangulaire centrale porte des dizaines de millions de photosites.  
-Photo : Harry Munday, Wikimedia Commons, licence CC BY-SA 4.0.
+Le capteur d’un appareil photo hybride, démonté (un capteur « CMOS », du nom de la technologie de fabrication utilisée par presque tous les appareils actuels) : la surface rectangulaire centrale porte des dizaines de millions de photosites.
 
 Seul, un photosite ne distingue pas les couleurs : on obtiendrait une image en **niveaux de gris**. Pour capter la couleur, on place devant les photosites un <span id="lex-bayer03" class="ancre"></span>**filtre de Bayer** : des petits filtres rouges, verts et bleus. Fait amusant, il y a **deux fois plus de filtres verts** que de rouges ou de bleus, car notre œil est plus sensible au vert.
 
@@ -76,10 +75,10 @@ La synthèse additive : rouge + vert $=$ jaune, les trois ensemble $=$ blanc.
 
     3.  Que voit-on à l’écran avec le code $(125,125,125)$ ? Et avec $(30,30,30)$ ?
 
-!!! projet "Projet — Dessiner des drapeaux avec Python (fiche séparée)"
+!!! projet "Projet — Dessiner des drapeaux avec Python"
 
     Maintenant que vous savez coder une couleur, vous allez **fabriquer** des images de zéro : des drapeaux (Monaco, France, puis d’autres), en respectant les **proportions** et les **couleurs officielles**.  
-    $\to$ voir la fiche *« Projet : dessiner des drapeaux avec PIL »*.
+    $\to$ voir le projet *« Dessiner des drapeaux avec Python »*, en fin de chapitre.
 
 <span id="cours-03-3" class="ancre"></span>
 
@@ -115,11 +114,14 @@ Une image étant un tableau de nombres, on peut la **transformer** avec un progr
 ![](../figures/9c8e11da46303ffb.svg){ .tikz loading=lazy }  
 Le pixel $(0,0)$ est en haut à gauche ; $x$ va vers la droite, $y$ vers le bas.
 
+Les programmes de ce chapitre utilisent l’image `terre.jpg` ($500 \times 500$ pixels) : c’est la célèbre photo de la Terre « *The Blue Marble* » prise par l’équipage d’Apollo 17 en 1972, dans le domaine public. Elle est à télécharger ici : <https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/03-photo-image-terre> ; à défaut, n’importe quelle photo `.jpg` renommée `terre.jpg` convient. Elle doit être rangée dans le même dossier que le programme.
+
 **Lire** un pixel avec `getpixel`, le **modifier** avec `putpixel` :
 
 ```python
 from PIL import Image
 img = Image.open("terre.jpg")        # l'image doit etre dans le meme dossier
+img = img.convert("RGB")             # 3 canaux R, V, B (utile pour un PNG)
 
 r, v, b = img.getpixel((100, 250))   # lire le pixel (100, 250)
 print("rouge :", r, "vert :", v, "bleu :", b)
@@ -132,8 +134,8 @@ Pour parcourir *toute* l’image, on utilise **deux boucles `for`** imbriquées 
 
 ```python
 from PIL import Image
-img = Image.open("terre.jpg")
-largeur, hauteur = 500, 500          # taille de terre.jpg
+img = Image.open("terre.jpg").convert("RGB")
+largeur, hauteur = img.size          # taille de l'image, en pixels
 
 for y in range(hauteur):
     for x in range(largeur):
@@ -156,10 +158,10 @@ img.show()
 
 Avec un `if`, on peut ne modifier *que certains* pixels (par exemple selon leur position ou leur couleur) : c’est la base de la retouche « localisée ».
 
-!!! projet "Projet — Retoucher un tableau célèbre (fiche séparée)"
+!!! projet "Projet — Retoucher un tableau célèbre"
 
     Vous appliquerez ces techniques à de vraies œuvres d’art (du domaine public) : changer la couleur du ciel de *La Nuit étoilée* de Van Gogh, ou celle d’un vêtement dans un portrait.  
-    $\to$ voir la fiche *« Projet : retoucher un tableau célèbre en RVB »*.
+    $\to$ voir le projet *« Retoucher un tableau célèbre en RVB »*, en fin de chapitre.
 
 <span id="cours-03-11" class="ancre"></span>
 
@@ -176,11 +178,16 @@ Un fichier photo ne contient pas *que* l’image. Il embarque aussi des informat
 On peut les lire avec un petit programme Python :
 
 ```python
-from PIL import Image
+from PIL import Image, ExifTags
 img = Image.open("photo.jpg")
-exif = img._getexif()      # dictionnaire cle : valeur
-print(exif)
+print("definition :", img.size)              # (largeur, hauteur)
+exif = img.getexif()                         # metadonnees : numero -> valeur
+for numero in exif:
+    nom = ExifTags.TAGS.get(numero, numero)  # nom lisible de la metadonnee
+    print(nom, ":", exif[numero])
 ```
+
+Chaque métadonnée est rangée sous un **numéro** (par exemple 271 pour le fabricant, 272 pour le modèle, 306 pour la date) ; `ExifTags.TAGS` donne le **nom** qui correspond à chaque numéro (`Make`, `Model`, `DateTime`…).
 
 | **Métadonnée EXIF**              | **Valeur (exemple fictif)**    |
 |:---------------------------------|:-------------------------------|
@@ -226,7 +233,7 @@ La photo « parfaite » du smartphone n’est pas seulement captée : elle est *
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Une photo numérique est un tableau de nombres : on la traite avec les **boucles** et les **conditions** du chapitre *Les bases de Python*. Ses **métadonnées EXIF** sont des **données** au sens du chapitre *Données en tables*, et leurs coordonnées viennent du récepteur **GPS** (chapitre *Localisation*). Le capteur d’image est un **capteur** comme ceux des objets connectés : il transforme une grandeur physique, la lumière, en nombre. En spécialité NSI de Première, on verra que chaque valeur de 0 à 255 tient sur un octet, c’est-à-dire 8 **bits** en écriture binaire.
+    Une photo numérique est un tableau de nombres : on la traite avec les **boucles** et les **conditions** du chapitre *Les bases de Python*. Ses **métadonnées EXIF** sont des **données** au sens que l’on précisera au chapitre *Données en tables*, et leurs coordonnées viennent du récepteur **GPS** (on le verra au chapitre *Localisation*). Le capteur d’image est un **capteur**, comme ceux des objets connectés que l’on étudiera en fin d’année : il transforme une grandeur physique, la lumière, en nombre. En spécialité NSI de Première, on verra que chaque valeur de 0 à 255 tient sur un octet, c’est-à-dire 8 **bits** en écriture binaire.
 
 ## Bilan — la carte mémoire
 
@@ -246,7 +253,7 @@ La photo « parfaite » du smartphone n’est pas seulement captée : elle est *
 
 !!! encadre "Débat argumenté"
 
-    Une **fiche débat** accompagne ce thème : « Faut-il obliger à signaler toute photo retouchée, dans la publicité comme sur les réseaux sociaux ? » (documents, rôles, tableau d’arguments et trace écrite, environ 50 min).
+    Un **débat**, proposé en fin de chapitre, accompagne ce thème : « Faut-il obliger à signaler toute photo retouchée, dans la publicité comme sur les réseaux sociaux ? » (documents, rôles, tableau d’arguments et trace écrite, environ 50 min).
 
 ## Savoir-faire à maîtriser
 

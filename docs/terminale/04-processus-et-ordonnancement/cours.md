@@ -160,7 +160,7 @@ Temps d’attente : A$=0$, B$=3$, C$=5$, D$=5$. **Moyenne $= 3{,}25$**. Défaut 
 
 ![](../figures/7c932e344138a22e.svg){ .tikz loading=lazy }
 
-Temps d’attente : A$=0$, C$=2$, D$=2$, B$=6$. **Moyenne $= 2{,}50$**. En faisant passer les courts devant, on **minimise le temps d’attente moyen** <span class="horsprog">au-delà du programme</span> : c’est un résultat qu’on peut démontrer. Rançon : un processus long (ici B) peut attendre longtemps — c’est le risque de « famine ».
+Temps d’attente : A$=0$, C$=2$, D$=2$, B$=6$. **Moyenne $= 2{,}50$**. En faisant passer les courts devant, on **réduit le temps d’attente moyen**. Quand tous les processus sont présents dès le départ, on peut démontrer que c’est même le meilleur choix possible <span class="horsprog">au-delà du programme</span> ; avec des arrivées échelonnées, comme ici, ce n’est plus garanti. Rançon : un processus long (ici B) peut attendre longtemps — c’est le risque de « famine ».
 
 ### Le tourniquet (round-robin)
 
@@ -241,6 +241,16 @@ Cela change peu ce que nous avons appris : sur *chaque* cœur, les états, le qu
 
 Conséquence pour qui programme : pour tirer parti de $N$ cœurs, un programme doit être **découpé pour s’exécuter en parallèle** (en plusieurs *fils d’exécution*, ou *threads*) ; sinon un seul cœur travaille pendant que les autres se tournent les pouces. C’est pourquoi « savoir paralléliser » est devenu essentiel. Aujourd’hui, un simple téléphone compte couramment $6$ à $8$ cœurs, un ordinateur portable de $8$ à $16$.
 
+## Ouverture : le système d’exploitation, chef d’orchestre
+
+Les processus ne sont pas un monde à part : ce chapitre réutilise les outils des chapitres précédents et en annonce d’autres.
+
+- l’ordonnanceur range les processus prêts dans une **file** (chapitre 3) : le tourniquet n’est rien d’autre qu’un enfiler/défiler répété ;
+
+- le graphe d’attente entre processus et ressources est un premier **graphe orienté** : chercher un interblocage, c’est chercher un **cycle**, ce qu’on apprendra à programmer au chapitre *Graphes* ;
+
+- au **bac**, on vous demandera surtout de **dérouler** un ordonnancement (chronogramme, temps d’attente), de suivre les **états** d’un processus, de lire une sortie de `ps`, et de **repérer** un interblocage dans une situation décrite.
+
 ## Un peu d’histoire : du traitement par lots au multitâche
 
 Les tout premiers ordinateurs (années 1950) exécutaient les programmes **un par un**, à la file (*traitement par lots*) : pendant qu’un programme attendait une lecture sur bande, le processeur, hors de prix, restait *oisif*. Quel gâchis ! Les programmeurs de l’époque, comme l’Américaine **Grace Hopper** (1906–1992), officier de la marine et pionnière qui écrit en 1952 l’un des tout premiers **compilateurs** puis inspire le langage COBOL, confient leurs programmes à un opérateur et attendent le résultat… parfois jusqu’au lendemain.
@@ -250,7 +260,7 @@ Grace Hopper en 1984
 
 L’idée de partager le processeur entre plusieurs tâches — le **temps partagé** (*time-sharing*) — naît au début des années 1960 (système CTSS au MIT, 1961, puis l’ambitieux Multics). En 1969, aux laboratoires Bell, **Ken Thompson** et **Dennis Ritchie** en tirent un système plus simple et élégant, **Unix**, dont descendent aujourd’hui Linux, macOS, Android et iOS. Toute la gestion des processus de ce cours vient de là.
 
-Côté théorie, le Néerlandais **Edsger Dijkstra** (déjà croisé pour les plus courts chemins) pose en 1965 les outils de la synchronisation (les *sémaphores*) et illustre l’interblocage par son célèbre « dîner des philosophes » <span class="horsprog">au-delà du programme</span>. En 1971, **Edward Coffman** énonce les quatre conditions qui portent son nom. La prochaine fois que votre téléphone jongle avec vingt applications sans sourciller, vous saurez quel héritage se cache derrière cette fluidité.
+Côté théorie, le Néerlandais **Edsger Dijkstra** (déjà croisé avec l’algorithme de la gare de triage, et qu’on retrouvera pour les plus courts chemins) pose en 1965 les outils de la synchronisation (les *sémaphores*) et illustre l’interblocage par son célèbre « dîner des philosophes » <span class="horsprog">au-delà du programme</span>. En 1971, **Edward Coffman** énonce les quatre conditions qui portent son nom. La prochaine fois que votre téléphone jongle avec vingt applications sans sourciller, vous saurez quel héritage se cache derrière cette fluidité.
 
 \*(image manquante : 04_hist_dijkstra)\*  
 Edsger W. Dijkstra

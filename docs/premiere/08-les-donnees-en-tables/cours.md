@@ -126,9 +126,9 @@ On accède alors à une valeur en deux temps : d’abord la fiche (par son **ind
 
     On *pourrait* coder chaque fiche par une liste `["Louise","F","2023","3177"]`. Mais il faudrait alors se souvenir que `nombre` est la case `3`… et écrire `ligne[3]`, illisible et fragile (si on ajoute une colonne, tout décale). Avec un dictionnaire, on écrit `ligne["nombre"]` : **on nomme ce qu’on manipule**. C’est exactement la promesse des $p$-uplets nommés du chapitre *Les types construits*.
 
-<span id="cours-08-4" class="ancre"></span>
+<span id="cours-08-2" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[4](exercices.md#ex-08-4) à [6](exercices.md#ex-08-6)** (représenter une table : liste de dictionnaires)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[2](exercices.md#ex-08-2) à [4](exercices.md#ex-08-4)** (représenter une table : liste de dictionnaires)
 
 ## Importer une table depuis un CSV
 
@@ -171,9 +171,9 @@ Saisir la table à la main serait absurde pour 700 000 lignes. La bibliothèqu
 
     **Le réflexe** : dès qu’on veut *calculer* sur une colonne numérique, on **convertit** avec `int(...)` ou `float(...)`.
 
-<span id="cours-08-2" class="ancre"></span>
+<span id="cours-08-5" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[2](exercices.md#ex-08-2) et [3](exercices.md#ex-08-3)** (séparateur, encodage), **[7](exercices.md#ex-08-7) et [8](exercices.md#ex-08-8)** (importer ; le piège du texte)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-08-5) à [8](exercices.md#ex-08-8)** (séparateur, encodage ; importer ; le piège du texte)
 
 ## Rechercher et filtrer : le parcours revient
 

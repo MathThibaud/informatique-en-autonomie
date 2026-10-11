@@ -16,7 +16,7 @@
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/1 ](https://adventofcode.com/2020/day/1 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-defi-aoc-2020-01>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -74,7 +74,7 @@ Trouver à la main la réponse attendue. Vérification : on doit obtenir `980896
 
 ### <span class="exo-num">Exercice 4</span> — Une première solution <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-aoc-1-4 }
 
-Écrire une fonction `paire_2020(nombres)` qui renvoie le produit des deux valeurs recherchées. Tester sur l’exemple de la fiche, puis sur vos données.
+Écrire une fonction `paire_2020(nombres)` qui renvoie le produit des deux valeurs recherchées. Tester sur l’exemple du défi, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -94,7 +94,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="exo-num">Exercice 6</span> — La partie 2 <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-aoc-1-6 }
 
-Adapter le programme pour répondre à la nouvelle question. Sur l’exemple de la fiche, on doit trouver `24106500`.
+Adapter le programme pour répondre à la nouvelle question. Sur l’exemple du défi, on doit trouver `24106500`.
 
 ??? pouce "Coup de pouce"
 
@@ -174,7 +174,7 @@ Une autre idée, sans ensemble, réinvestit le **tri** vu en Première. On trie 
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/9 ](https://adventofcode.com/2020/day/9 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-defi-aoc-2020-09>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -235,7 +235,7 @@ Vérifier à la main les nombres situés après le préambule, en écrivant à c
 
 ### <span class="exo-num">Exercice 4</span> — La fenêtre glissante <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-aoc-2-4 }
 
-Écrire une fonction `premier_invalide(nombres, p)` où `p` est la longueur du préambule. Tester avec `p = 5` sur l’exemple de la fiche, puis avec la bonne longueur sur vos données.
+Écrire une fonction `premier_invalide(nombres, p)` où `p` est la longueur du préambule. Tester avec `p = 5` sur l’exemple du défi, puis avec la bonne longueur sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -255,7 +255,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="exo-num">Exercice 5</span> — Une première solution <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-aoc-2-5 }
 
-Écrire une fonction qui cherche la suite demandée en essayant toutes les positions de début et de fin. Sur l’exemple de la fiche, on doit trouver `12`.
+Écrire une fonction qui cherche la suite demandée en essayant toutes les positions de début et de fin. Sur l’exemple du défi, on doit trouver `12`.
 
 ??? pouce "Coup de pouce"
 
@@ -328,7 +328,7 @@ Mesurer avec le module `time` la durée des deux méthodes de la partie 2 sur vo
 
 1.  À la main : avec la fenêtre `3 7 10 7 2` et la cible `13`, calculer pour chaque `x` la valeur `13 - x` et dire si elle est dans la fenêtre. Recommencer avec la cible `14` : pourquoi le complément `7` de `7` ne convient-il pas ?
 
-2.  Écrire `somme_de_deux_ensemble(fenetre, cible)` avec une seule boucle et un ensemble, puis l’utiliser pour retrouver `22` sur l’exemple de la fiche.
+2.  Écrire `somme_de_deux_ensemble(fenetre, cible)` avec une seule boucle et un ensemble, puis l’utiliser pour retrouver `22` sur l’exemple du défi.
 
 3.  Pour $p = 25$, combien de tests environ fait chaque version pour un nombre ? En déduire les complexités totales.
 

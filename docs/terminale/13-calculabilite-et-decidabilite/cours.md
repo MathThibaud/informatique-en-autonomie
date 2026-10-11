@@ -141,7 +141,7 @@ Le problème de l’arrêt n’est pas un cas isolé. En le « ramenant » (on
 
 - « ce programme contient-il un virus (a-t-il tel comportement) ? »
 
-!!! theoreme "Théorème 2 — Théorème de Rice, 1951 — version imagée"
+!!! theoreme "Théorème 2 — Théorème de Rice, 1953 — version imagée"
 
     Toute question **non triviale** portant sur ce qu’un programme **fait** (son comportement, et non son texte) est **indécidable**.
 
@@ -236,9 +236,9 @@ Voici la distinction sur laquelle tout repose. Il y a un monde entre **trouver**
 
 !!! exemple "Exemple — Le Sudoku"
 
-    Remplir une grille de Sudoku vide peut être **très long**. Mais si je vous **tends** une grille remplie, vérifier qu’elle est correcte (chaque ligne, colonne et bloc contient $1$ à $9$) est **immédiat**. **Vérifier** est facile ; **trouver** paraît dur.
+    Remplir une grille de Sudoku vide peut être **très long**. Mais si je vous **tends** une grille remplie, vérifier qu’elle est correcte (chaque ligne, colonne et bloc contient $1$ à $9$ ; $1$ à $4$ dans la grille réduite ci-dessous) est **immédiat**. **Vérifier** est facile ; **trouver** paraît dur.
 
-![](../figures/fc9baac219453682.svg){ .tikz loading=lazy }
+![](../figures/8c4e37a39f3f6a3c.svg){ .tikz loading=lazy }
 
 !!! definition "Définition 6 — Classe NP"
 
@@ -254,7 +254,7 @@ Beaucoup de problèmes « cauchemardesques » de l’informatique sont dans NP
 
 - **SAT** : une formule logique (un grand « ET » de « OU ») peut-elle être rendue **vraie** ? (*comme composer un club où chaque membre pose ses conditions, et où il faut contenter tout le monde à la fois.*)
 
-![](../figures/6edae8c6cee0e90f.svg){ .tikz loading=lazy }
+![](../figures/20ba3d9ced84e434.svg){ .tikz loading=lazy }
 
 ### La question à un million de dollars
 
@@ -286,6 +286,16 @@ Conséquence spectaculaire : si l’on trouvait un jour un algorithme polynomia
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-13-10) à [12](exercices.md#ex-13-12)** (P versus NP)
 
+## Ouverture : ce que l’on sait, ce que l’on ne pourra jamais savoir
+
+Ce chapitre prend du recul sur toute l’année : chaque programme écrit depuis le chapitre 1 est une donnée qu’un autre programme peut lire, et certaines questions sur ces programmes n’auront jamais de réponse automatique.
+
+- la **terminaison** étudiée dès la récursivité (le variant) se prouve programme par programme, à la main : le problème de l’arrêt dit qu’aucun programme ne peut le faire pour tous ;
+
+- la question P versus NP éclaire la **cryptographie** (chapitre 10) : RSA parie qu’un problème reste difficile ;
+
+- au **bac**, on vous demandera surtout d’expliquer qu’un programme est une **donnée**, de **dérouler** le raisonnement par l’absurde du problème de l’arrêt et de dire si une question sur des programmes est **décidable**.
+
 ## Un peu d’histoire — les explorateurs de l’impossible
 
 - **1928** — David **Hilbert** pose l’*Entscheidungsproblem* : existe-t-il une procédure mécanique décidant si un énoncé mathématique est vrai ? Il croit la réponse « oui ».
@@ -296,7 +306,7 @@ Conséquence spectaculaire : si l’on trouvait un jour un algorithme polynomia
 
 - **1939–45** — Turing casse le code **Enigma** à Bletchley Park : la théorie sert la guerre.
 
-- **1951** — Henry **Rice** généralise : toute propriété non triviale du *comportement* d’un programme est indécidable.
+- **1953** — Henry **Rice** généralise : toute propriété non triviale du *comportement* d’un programme est indécidable.
 
 - **1971** — Stephen **Cook** (et, indépendamment, Leonid **Levin**) fondent la théorie de la **NP-complétude** : la question **P versus NP** est posée. Elle est toujours ouverte.
 

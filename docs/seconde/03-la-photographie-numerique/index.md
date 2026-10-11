@@ -6,5 +6,6 @@
 
 -   [:material-book-open-variant: Cours](cours.md)
 -   [:material-pencil-outline: Exercices](exercices.md)
+-   [:material-laptop: TP et projets](tp.md)
 
 </div>

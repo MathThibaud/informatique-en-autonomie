@@ -32,7 +32,7 @@ L’ordinateur n’est plus seulement la machine posée sur un bureau. Il a **r�
 
 !!! exemple "Exemple"
 
-    On en trouve partout : lave-linge, four à micro-ondes, ascenseur, distributeur de billets, montre connectée, régulateur de vitesse d’une voiture, box internet, feu tricolore, drone, carte bancaire… Une voiture récente en contient à elle seule **plusieurs dizaines**.
+    On en trouve partout : lave-linge, four à micro-ondes, ascenseur, distributeur de billets, montre connectée, régulateur de vitesse d’une voiture, box Internet, feu tricolore, drone, carte bancaire… Une voiture récente en contient à elle seule **plusieurs dizaines**.
 
 !!! remarque "Remarque — Différence avec un ordinateur ordinaire"
 
@@ -180,11 +180,9 @@ Un objet connecté est un petit ordinateur *relié à Internet* : il peut donc, 
 
     - **Vie privée** : un objet connecté est un **capteur** qui observe (caméra), écoute (micro) ou vous suit (montre, GPS). Ses données sont des **données personnelles** (chapitre *Données en tables*), protégées dans l’Union européenne par le **RGPD**.
 
-!!! regle "Règle 4 — Et à Monaco ?"
+!!! remarque "Remarque — Et à Monaco ?"
 
-    Monaco **n’est pas membre de l’Union européenne** : le RGPD (règlement européen 2016/679) n’y est pas directement applicable. La Principauté a sa propre loi, la **loi n° 1.565 du 3 décembre 2024** relative à la protection des données personnelles, qui vise à s’aligner sur les standards européens (RGPD, Convention 108+ du Conseil de l’Europe). Elle est contrôlée par l’**APDP** (Autorité de protection des données personnelles, `apdp.mc`), qui a succédé à la CCIN. Un site monégasque qui s’adresse à des personnes situées dans l’UE doit aussi respecter le RGPD.
-
-    **Vos droits.** Si vous résidez en France (ou dans l’UE), vos droits relèvent du **RGPD** et de la loi Informatique et libertés (autorité : **CNIL**). À Monaco, ce sont les mêmes grands droits, garantis par la loi n° 1.565 (autorité : **APDP**) : droit d’**accès**, de **rectification**, d’**effacement**, de **limitation**, d’**opposition**, à la **portabilité**, et droit de ne pas faire l’objet d’une décision **entièrement automatisée**. Dans les deux pays, en dessous de **15 ans**, l’inscription à un service en ligne demande l’autorisation des parents.
+    Les données d’un objet connecté y sont protégées par la loi n° 1.565 (2024), sous le contrôle de l’**APDP** : ce sont les mêmes grands droits qu’avec le RGPD (voir l’encadré « Et à Monaco ? » du chapitre *Les réseaux sociaux*).
 
 !!! activite "Activité — Enquête sur un objet connecté"
 
@@ -195,6 +193,8 @@ Un objet connecté est un petit ordinateur *relié à Internet* : il peut donc, 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[15](exercices.md#ex-08-15) et [16](exercices.md#ex-08-16)** (sécurité : mots de passe par défaut ; vie privée)
 
 ## L’impact environnemental des objets connectés
+
+<span id="lex-empreinte08" class="ancre"></span>
 
 Un objet connecté consomme un peu d’électricité… mais c’est surtout sa **fabrication** qui pèse. Les chiffres ci-dessous sont des **ordres de grandeur**, tirés d’études publiques. C’est ici que l’on fait le calcul complet pour un smartphone ; les thèmes *Localisation* et *Réseaux sociaux* y renvoient.
 
@@ -224,9 +224,9 @@ Un objet connecté consomme un peu d’électricité… mais c’est surtout sa
 
     4.  Un objet connecté reste souvent en **veille**, relié au réseau jour et nuit. Proposer deux gestes de **sobriété** pour les objets et le smartphone (durée d’utilisation, qualité vidéo, lecture automatique, extinction…).
 
-<span id="cours-08-18" class="ancre"></span>
+<span id="cours-08-17" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[18](exercices.md#ex-08-18)** (l’empreinte d’un smartphone)
+<span class="afaire">▶ Exercices d'application :</span> exercice **[17](exercices.md#ex-08-17)** (l’empreinte d’un smartphone)
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
@@ -249,7 +249,7 @@ Un objet connecté consomme un peu d’électricité… mais c’est surtout sa
 
 !!! encadre "Débat argumenté"
 
-    Une **fiche débat** accompagne ce thème : « Faut-il équiper sa maison de caméras et d’enceintes connectées ? » (documents, rôles, tableau d’arguments et trace écrite, environ 50 min).
+    Un **débat**, proposé en fin de chapitre, accompagne ce thème : « Faut-il équiper sa maison de caméras et d’enceintes connectées ? » (documents, rôles, tableau d’arguments et trace écrite, environ 50 min).
 
 ## Savoir-faire à maîtriser
 

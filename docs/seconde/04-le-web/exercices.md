@@ -8,7 +8,7 @@
 
     - <span class="tag">sur papier</span> *à faire sur papier* ; <span class="run" title="À programmer et tester sur machine">▶</span> *à réaliser sur un éditeur en ligne* (`jsfiddle.net` ou `codepen.io`).
 
-    - Le **guide HTML & CSS** est autorisé pour tous les exercices.
+    - Les tableaux de balises HTML et de propriétés CSS du cours (§ IV et V) peuvent être consultés pour tous les exercices.
 
     - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la charte d’usage de l’IA.
 
@@ -46,9 +46,121 @@
 
     - **Internet (hors Web)** : un e-mail (SMTP) ; un transfert de fichier par FTP.
 
+### La requête HTTP, client et serveur
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Décomposer une requête <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-3 }
+
+<span class="tag">sur papier</span>  On tape dans le navigateur l’adresse : `https://www.meteo.mc/prevoir?ville=Nice&jour=mardi`.
+
+1.  Quelle **ressource** est demandée au serveur (avant le `?`) ?
+
+2.  Combien de **paramètres** sont passés au serveur ? Donner le **nom** et la **valeur** de chacun.
+
+3.  Que signifie la méthode `GET` d’une requête HTTP ?
+
+??? pouce "Coup de pouce"
+
+    Tout ce qui suit le `?` est formé de paramètres `nom=valeur`, séparés par `&`.
+
+??? corrige "Corrigé"
+
+    1.  Ressource demandée : `/prevoir`.
+
+    2.  **Deux** paramètres : `ville` vaut `Nice` ; `jour` vaut `mardi`.
+
+    3.  `GET` signifie « *donne-moi* cette ressource ».
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Réussite ou échec ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-4 }
+
+<span class="tag">sur papier</span>  Associer chaque **code de réponse HTTP** à sa signification :
+
+|         |         |         |         |
+|:--------|:--------|:--------|:--------|
+| **200** | **403** | **404** | **500** |
+
+*Significations :* page non trouvée $\bullet$ tout va bien $\bullet$ erreur du serveur $\bullet$ accès interdit.
+
+??? corrige "Corrigé"
+
+    **200** $=$ tout va bien ; **403** $=$ accès interdit ; **404** $=$ page non trouvée ; **500** $=$ erreur du serveur.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Client ou serveur ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-5 }
+
+<span class="tag">sur papier</span> 
+
+1.  Un langage s’exécute *dans le navigateur* pour animer la page : lequel, **JavaScript** ou **PHP** ?
+
+2.  Comment fait-on, dans un navigateur, pour **voir le code source** d’une page reçue ?
+
+3.  « Le serveur construit une page différente selon les paramètres reçus. » Comment appelle-t-on une telle page ?
+
+??? pouce "Coup de pouce"
+
+    Relisez l’encadré « Deux endroits où ça calcule » du cours : que fait le serveur, que fait le navigateur ?
+
+??? corrige "Corrigé"
+
+    1.  **JavaScript** s’exécute dans le navigateur (côté client) ; PHP, lui, tourne côté serveur.
+
+    2.  Par un **clic droit $\to$ « Afficher le code source »** (ou les outils de développement).
+
+    3.  Une page **dynamique** (construite sur mesure par le serveur).
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Suivre une requête <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-6 }
+
+<span class="tag">sur papier</span>  Vous tapez `https://www.lycee.mc/cours.html` dans la barre d’adresse. Le navigateur retrouve d’abord l’adresse du serveur `www.lycee.mc` sur le réseau (on verra comment au chapitre *Internet*). Remettre ensuite les étapes suivantes dans l’ordre :
+
+1.  Le navigateur affiche la page.
+
+2.  Le serveur trouve le fichier `cours.html` et renvoie une réponse avec le code `200`.
+
+3.  Le navigateur envoie au serveur la requête `GET /cours.html`.
+
+Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’existait pas ?
+
+??? pouce "Coup de pouce"
+
+    Dans un échange HTTP, c’est toujours le client qui parle le premier.
+
+??? corrige "Corrigé"
+
+    Ordre : **C** (le navigateur envoie la requête `GET /cours.html`), **B** (le serveur répond, code `200`), **A** (le navigateur affiche la page). Si le fichier n’existait pas, le serveur aurait renvoyé le code **404** (page non trouvée).
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Le formulaire de recherche <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-7 }
+
+<span class="tag">sur papier</span>  Sur le site d’une médiathèque, on cherche « Harry Potter » au format « livre ». Après validation du formulaire, la barre d’adresse affiche (le `+` remplace l’espace) :
+
+`https://www.mediatheque.mc/chercher?titre=Harry+Potter&format=livre`
+
+1.  Quelle ressource est demandée ? Quels paramètres sont passés, avec quelles valeurs ?
+
+2.  Écrire l’adresse obtenue si l’on cherche « Astérix » au format « BD ».
+
+3.  La page de résultats est-elle une page toute prête ou une page dynamique ? Justifier.
+
+4.  Pourquoi un site ne doit-il jamais transmettre un mot de passe de cette façon ?
+
+??? pouce "Coup de pouce"
+
+    Repérez le `?` et le `&` pour découper l’adresse. Pour la question 4 : où s’affichent les paramètres, et où restent-ils enregistrés ensuite ?
+
+??? pouce "Coup de pouce 2 (début de solution)"
+
+    Seules les valeurs changent : `titre=...` et `format=...`. Le serveur peut-il avoir préparé à l’avance une page pour chaque titre possible ?
+
+??? corrige "Corrigé"
+
+    1.  Ressource demandée : `/chercher`. **Deux** paramètres : `titre` vaut `Harry Potter` (écrit `Harry+Potter`) ; `format` vaut `livre`.
+
+    2.  `https://www.mediatheque.mc/chercher?titre=Asterix&format=BD` (on garde l’accent si le site l’accepte : `Astérix`).
+
+    3.  Une page **dynamique** : le serveur ne peut pas avoir préparé à l’avance une page pour chaque titre possible ; il **construit** la liste des résultats d’après les paramètres reçus.
+
+    4.  Les paramètres apparaissent **en clair dans la barre d’adresse** (quelqu’un peut les lire par-dessus l’épaule) et restent enregistrés dans l’**historique** du navigateur et dans les marque-pages. Un mot de passe ne doit jamais être visible ainsi.
+
 ### L’URL et les chemins
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Décomposer une URL <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-3 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Décomposer une URL <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-8 }
 
 <span class="tag">sur papier</span>  On considère l’URL : `https://www.lycee.mc/cours/snt/web.html`.
 
@@ -66,7 +178,7 @@
 
     3.  Chemin du fichier : `/cours/snt/web.html`.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Chemins absolu et relatif <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-4 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Chemins absolu et relatif <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-9 }
 
 <span class="tag">sur papier</span>  On dispose de l’arborescence suivante (la racine est `/`) :
 
@@ -93,7 +205,7 @@ dossier4 — fichier6.html
 
     3.  Depuis `dossier4` : `../dossier2/dossier3/fichier5.svg` (on remonte à la racine avec `..`, puis on redescend).
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 5</span> — Le site déménage <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-5 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Le site déménage <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-10 }
 
 <span class="tag">sur papier</span>  Le site d’un club est rangé ainsi : à la racine, le fichier `index.html` et deux dossiers, `images` (qui contient `logo.png`) et `pages` (qui contient `contact.html`).
 
@@ -117,7 +229,7 @@ dossier4 — fichier6.html
 
     1.  Arborescence :
 
-        ![](../figures/04f43098e0886866.svg){ .tikz loading=lazy }
+        ![](../figures/d30f8cd8b2afb392.svg){ .tikz loading=lazy }
 
     2.  Un chemin relatif part du dossier de la page qui l’utilise. Depuis `pages`, `images/logo.png` désigne `pages/images/logo.png`, qui n’existe pas. Il faut d’abord **remonter** à la racine : `<img src="../images/logo.png">`.
 
@@ -127,7 +239,7 @@ dossier4 — fichier6.html
 
 ### Lire du HTML
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — Que voit-on ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-6 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 11</span> — Que voit-on ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-11 }
 
 <span class="tag">sur papier</span>  Décrire ce que le navigateur affiche pour ce code :
 
@@ -148,7 +260,7 @@ dossier4 — fichier6.html
 
     - sucre
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Corriger les erreurs <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-7 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Corriger les erreurs <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-12 }
 
 <span class="tag">sur papier</span>  Ce code contient **deux** erreurs d’imbrication ou de fermeture. Les trouver et les corriger.
 
@@ -170,7 +282,7 @@ dossier4 — fichier6.html
     <h2>Chapitre 1</h2>
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Du rendu au code <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-8 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Du rendu au code <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-13 }
 
 <span class="tag">sur papier</span>  Écrire le code HTML (contenu du `<body>` seulement) qui produit l’affichage suivant : un grand titre « Mon club de foot » ; un paragraphe « Entraînement le mercredi. » où le mot *mercredi* est mis en valeur (en gras) ; une liste à puces de deux éléments, « gardiens » et « joueurs » ; enfin un lien « Le site du club » vers `https://www.monclub.mc`.
 
@@ -194,7 +306,7 @@ dossier4 — fichier6.html
 
 ### Écrire du HTML et du CSS
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Ma page de présentation <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-9 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Ma page de présentation <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-14 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une page HTML **complète** (squelette compris) qui contient : un titre `<h1>` avec votre prénom, un paragraphe de présentation, une **liste** de trois loisirs, et un **lien** vers un site de votre choix.
 
@@ -236,7 +348,7 @@ dossier4 — fichier6.html
     </html>
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Un peu de style <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-10 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Un peu de style <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-15 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Reprendre la page précédente et ajouter du CSS pour : centrer le titre et lui donner un fond coloré ; mettre les paragraphes dans la police `Verdana` ; colorer en gris, *via* un `id`, la seule ligne de signature.
 
@@ -262,7 +374,7 @@ dossier4 — fichier6.html
     }
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Le bon sélecteur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-11 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Le bon sélecteur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-16 }
 
 <span class="tag">sur papier</span>  On considère le code suivant :
 
@@ -298,7 +410,7 @@ p { font-family: Verdana; }
         #haut { color: blue; }
         ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Prévoir le rendu <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-12 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Prévoir le rendu <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-17 }
 
 <span class="tag">sur papier</span>  Sans machine, décrire précisément le rendu (couleurs, alignement, style) de :
 
@@ -322,121 +434,7 @@ p { font-family: Verdana; }
 
     La classe `.titre` cible *à la fois* le `<h1>` et le `<p>` (ils ont tous deux `class="titre"`). Les deux seront donc **centrés** et écrits en **bleu foncé**. Le `<h1>` reste un grand titre (gras), le `<p>` un paragraphe de taille normale.
 
-### La requête HTTP, client et serveur
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Décomposer une requête <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-13 }
-
-<span class="tag">sur papier</span>  On tape dans le navigateur l’adresse : `https://www.meteo.mc/prevoir?ville=Nice&jour=mardi`.
-
-1.  Quelle **ressource** est demandée au serveur (avant le `?`) ?
-
-2.  Combien de **paramètres** sont passés au serveur ? Donner le **nom** et la **valeur** de chacun.
-
-3.  Que signifie la méthode `GET` d’une requête HTTP ?
-
-??? pouce "Coup de pouce"
-
-    Tout ce qui suit le `?` est formé de paramètres `nom=valeur`, séparés par `&`.
-
-??? corrige "Corrigé"
-
-    1.  Ressource demandée : `/prevoir`.
-
-    2.  **Deux** paramètres : `ville` vaut `Nice` ; `jour` vaut `mardi`.
-
-    3.  `GET` signifie « *donne-moi* cette ressource ».
-
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 14</span> — Réussite ou échec ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-14 }
-
-<span class="tag">sur papier</span>  Associer chaque **code de réponse HTTP** à sa signification :
-
-|         |         |         |         |
-|:--------|:--------|:--------|:--------|
-| **200** | **403** | **404** | **500** |
-
-*Significations :* page non trouvée $\bullet$ tout va bien $\bullet$ erreur du serveur $\bullet$ accès interdit.
-
-??? corrige "Corrigé"
-
-    **200** $=$ tout va bien ; **403** $=$ accès interdit ; **404** $=$ page non trouvée ; **500** $=$ erreur du serveur.
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Client ou serveur ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-15 }
-
-<span class="tag">sur papier</span> 
-
-1.  Un langage s’exécute *dans le navigateur* pour animer la page : lequel, **JavaScript** ou **PHP** ?
-
-2.  Comment fait-on, dans un navigateur, pour **voir le code source** d’une page reçue ?
-
-3.  « Le serveur construit une page différente selon les paramètres reçus. » Comment appelle-t-on une telle page ?
-
-??? pouce "Coup de pouce"
-
-    Relisez l’encadré « Deux endroits où ça calcule » du cours : que fait le serveur, que fait le navigateur ?
-
-??? corrige "Corrigé"
-
-    1.  **JavaScript** s’exécute dans le navigateur (côté client) ; PHP, lui, tourne côté serveur.
-
-    2.  Par un **clic droit $\to$ « Afficher le code source »** (ou les outils de développement).
-
-    3.  Une page **dynamique** (construite sur mesure par le serveur).
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Suivre une requête <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-16 }
-
-<span class="tag">sur papier</span>  Vous tapez `https://www.lycee.mc/cours.html` dans la barre d’adresse. Remettre les étapes suivantes dans l’ordre :
-
-1.  Le navigateur affiche la page.
-
-2.  Le serveur trouve le fichier `cours.html` et renvoie une réponse avec le code `200`.
-
-3.  Le navigateur demande au DNS l’adresse IP du serveur `www.lycee.mc`.
-
-4.  Le navigateur envoie au serveur la requête `GET /cours.html`.
-
-Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’existait pas ?
-
-??? pouce "Coup de pouce"
-
-    Avant de pouvoir écrire à un serveur, il faut connaître son adresse. Ensuite, c’est toujours le client qui parle le premier.
-
-??? corrige "Corrigé"
-
-    Ordre : **C** (le DNS donne l’adresse IP du serveur), **D** (le navigateur envoie la requête `GET /cours.html`), **B** (le serveur répond, code `200`), **A** (le navigateur affiche la page). Si le fichier n’existait pas, le serveur aurait renvoyé le code **404** (page non trouvée).
-
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 17</span> — Le formulaire de recherche <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-17 }
-
-<span class="tag">sur papier</span>  Sur le site d’une médiathèque, on cherche « Harry Potter » au format « livre ». Après validation du formulaire, la barre d’adresse affiche (le `+` remplace l’espace) :
-
-`https://www.mediatheque.mc/chercher?titre=Harry+Potter&format=livre`
-
-1.  Quelle ressource est demandée ? Quels paramètres sont passés, avec quelles valeurs ?
-
-2.  Écrire l’adresse obtenue si l’on cherche « Astérix » au format « BD ».
-
-3.  La page de résultats est-elle une page toute prête ou une page dynamique ? Justifier.
-
-4.  Pourquoi un site ne doit-il jamais transmettre un mot de passe de cette façon ?
-
-??? pouce "Coup de pouce"
-
-    Repérez le `?` et le `&` pour découper l’adresse. Pour la question 4 : où s’affichent les paramètres, et où restent-ils enregistrés ensuite ?
-
-??? pouce "Coup de pouce 2 (début de solution)"
-
-    Seules les valeurs changent : `titre=...` et `format=...`. Le serveur peut-il avoir préparé à l’avance une page pour chaque titre possible ?
-
-??? corrige "Corrigé"
-
-    1.  Ressource demandée : `/chercher`. **Deux** paramètres : `titre` vaut `Harry Potter` (écrit `Harry+Potter`) ; `format` vaut `livre`.
-
-    2.  `https://www.mediatheque.mc/chercher?titre=Asterix&format=BD` (on garde l’accent si le site l’accepte : `Astérix`).
-
-    3.  Une page **dynamique** : le serveur ne peut pas avoir préparé à l’avance une page pour chaque titre possible ; il **construit** la liste des résultats d’après les paramètres reçus.
-
-    4.  Les paramètres apparaissent **en clair dans la barre d’adresse** (quelqu’un peut les lire par-dessus l’épaule) et restent enregistrés dans l’**historique** du navigateur et dans les marque-pages. Un mot de passe ne doit jamais être visible ainsi.
-
-### Droit d’auteur et sécurité
+### Droit d’auteur
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Ai-je le droit ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-18 }
 
@@ -460,27 +458,9 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
     3.  Faux : un fichier se copie pour presque rien, mais il garde une **valeur** (travail fourni, usage, valeur commerciale). *Copiable* $\neq$ *sans valeur*.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 19</span> — Régler et sécuriser son navigateur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-19 }
-
-<span class="tag">sur papier</span> 
-
-1.  Citer trois réglages de sécurité/confidentialité que l’on peut modifier dans un navigateur.
-
-2.  Qu’est-ce que l’**hameçonnage** (*phishing*) ?
-
-3.  Avant de cliquer sur un lien reçu par message, quel **geste simple** permet de vérifier vers quelle adresse il mène réellement ?
-
-??? corrige "Corrigé"
-
-    1.  Par exemple : refuser les cookies (tiers), effacer l’historique / navigation privée, gérer les autorisations (caméra, micro, position), bloquer les traceurs.
-
-    2.  L’**hameçonnage** : une fausse page imitant un vrai site pour voler vos identifiants.
-
-    3.  **Survoler** le lien (sans cliquer) pour lire la *vraie* URL de destination et vérifier le nom de domaine.
-
 ### Trouver une page
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 20</span> — Le moteur de recherche <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-20 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 19</span> — Le moteur de recherche <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-19 }
 
 <span class="tag">sur papier</span> 
 
@@ -496,9 +476,9 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
     2.  Le **PageRank** : une page est jugée importante si beaucoup d’autres pages importantes pointent vers elle. (On accepte aussi : présence des mots-clés, langue, localisation.)
 
-    3.  Les publicités sont signalées par une mention du type « **Annonce** » (ou *Sponsorisé*) et apparaissent souvent tout en haut.
+    3.  Les publicités sont signalées par une mention du type « **Sponsorisé** » (autrefois *Annonce*) et apparaissent souvent tout en haut.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 21</span> — Le graphe des liens <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-21 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 20</span> — Le graphe des liens <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-20 }
 
 <span class="tag">sur papier</span>  Quatre pages A, B, C et D se font des liens (une flèche de A vers B signifie : « la page A contient un lien vers la page B ») :
 
@@ -529,6 +509,26 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
     3.  **A** : son unique lien vient de C, la page la plus importante du graphe, alors que celui de B vient de A, moins importante. Selon l’idée du PageRank, un lien « compte » plus quand il vient d’une page importante.
 
     4.  Il cherche à **tricher** pour remonter artificiellement dans le classement (et attirer plus de visiteurs, donc plus d’argent). Les moteurs luttent contre cela pour que les premiers résultats restent **pertinents** pour l’utilisateur : ils repèrent les fausses pages et pénalisent les sites qui les utilisent.
+
+### Sécurité et confidentialité
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 21</span> — Régler et sécuriser son navigateur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-21 }
+
+<span class="tag">sur papier</span> 
+
+1.  Citer trois réglages de sécurité/confidentialité que l’on peut modifier dans un navigateur.
+
+2.  Qu’est-ce que l’**hameçonnage** (*phishing*) ?
+
+3.  Avant de cliquer sur un lien reçu par message, quel **geste simple** permet de vérifier vers quelle adresse il mène réellement ?
+
+??? corrige "Corrigé"
+
+    1.  Par exemple : refuser les cookies (tiers), effacer l’historique / navigation privée, gérer les autorisations (caméra, micro, position), bloquer les traceurs.
+
+    2.  L’**hameçonnage** : une fausse page imitant un vrai site pour voler vos identifiants.
+
+    3.  **Survoler** le lien (sans cliquer) pour lire la *vraie* URL de destination et vérifier le nom de domaine.
 
 ### Critiquer une réponse d’IA
 

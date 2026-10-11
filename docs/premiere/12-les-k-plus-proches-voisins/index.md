@@ -1,4 +1,4 @@
-# Les $k$k plus proches voisins
+# Les k plus proches voisins
 
 ![](../img/ouverture_12_knn.svg){ .ouverture }
 

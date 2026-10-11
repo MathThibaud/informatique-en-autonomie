@@ -16,7 +16,7 @@
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/20 ](https://adventofcode.com/2020/day/20 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/08-defi-aoc-2020-20>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -199,9 +199,9 @@ Retirer les bords de chaque tuile, recoller l’image, puis chercher le motif da
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 1 : assembler par un parcours <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-1-8 }
 
-La stratégie de la fiche part d’un coin et remplit l’image ligne par ligne. On peut aussi partir de **n’importe quelle** tuile, laissée telle quelle à la position $(0, 0)$, et propager : pour chaque tuile placée, on cherche ses voisines par ses quatre bords, on les oriente et on les place à côté. Les positions peuvent devenir négatives ; on « recadre » à la fin.
+La stratégie du défi part d’un coin et remplit l’image ligne par ligne. On peut aussi partir de **n’importe quelle** tuile, laissée telle quelle à la position $(0, 0)$, et propager : pour chaque tuile placée, on cherche ses voisines par ses quatre bords, on les oriente et on les place à côté. Les positions peuvent devenir négatives ; on « recadre » à la fin.
 
-1.  À la main, avec les tuiles A et B de la fiche : A est placée telle quelle en $(0, 0)$. À quelle position va B, et dans quelle orientation ? Quelle serait la position de B si l’on avait placé B en premier ?
+1.  À la main, avec les tuiles A et B du défi : A est placée telle quelle en $(0, 0)$. À quelle position va B, et dans quelle orientation ? Quelle serait la position de B si l’on avait placé B en premier ?
 
 2.  Écrire `assembler_parcours(tuiles)` qui utilise une **pile** des tuiles placées mais pas encore traitées, et un dictionnaire `place` qui associe à chaque position `(ligne, colonne)` la tuile orientée. Vérifier qu’on obtient la même réponse à la partie 2.
 
@@ -213,7 +213,7 @@ La stratégie de la fiche part d’un coin et remplit l’image ligne par ligne.
 
         Une liste `COTES` de quadruplets `(dl, dc, mon_bord, son_bord)`, par exemple `(0, 1, droite, gauche)`, évite d’écrire quatre fois le même code (les fonctions sont des valeurs comme les autres). Recadrage : soustraire à toutes les positions le plus petit numéro de ligne et le plus petit numéro de colonne.
 
-3.  Cette méthode suppose qu’aucun bord n’est un palindrome (une chaîne égale à son inverse). Pourquoi ? La méthode de la fiche a-t-elle le même défaut ?
+3.  Cette méthode suppose qu’aucun bord n’est un palindrome (une chaîne égale à son inverse). Pourquoi ? La méthode du défi a-t-elle le même défaut ?
 
 4.  Comparer les deux méthodes : nombre de tuiles examinées, longueur du code. Quel parcours de graphe reconnaît-on ?
 
@@ -231,7 +231,7 @@ La stratégie de la fiche part d’un coin et remplit l’image ligne par ligne.
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/21 ](https://adventofcode.com/2020/day/21 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/08-defi-aoc-2020-21>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -359,7 +359,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="exo-num">Exercice 6</span> — Attribuer chaque allergène <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-2-6 }
 
-Déterminer quel ingrédient contient chaque allergène, puis construire la chaîne demandée. Sur l’exemple de la fiche, on doit obtenir `tolu,zuli,brak`.
+Déterminer quel ingrédient contient chaque allergène, puis construire la chaîne demandée. Sur l’exemple du défi, on doit obtenir `tolu,zuli,brak`.
 
 ??? pouce "Coup de pouce"
 

@@ -310,7 +310,7 @@ Le BO cite la **rotation d’un quart de tour d’une image** carrée. On décou
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Diviser pour régner repose sur la **récursivité**. Le **tri fusion** fait tomber le coût d’un tri de $n^2$ à $n\log_2 n$ (notion de **coût**, algorithmique). Quand les sous-problèmes se **répètent**, on ne recoupe plus : on **mémorise** — c’est la **programmation dynamique**. Et face à un problème d’optimisation, diviser pour régner est une stratégie parmi d’autres, à comparer aux **algorithmes gloutons** (Première).
+    Diviser pour régner repose sur la **récursivité**. Le **tri fusion** fait tomber le coût d’un tri de $n^2$ à $n\log_2 n$ (notion de **coût**, algorithmique). Quand les sous-problèmes se **répètent**, on ne recoupe plus : on **mémorise** — c’est la **programmation dynamique**, qu’on étudiera au chapitre 11. Et face à un problème d’optimisation, diviser pour régner est une stratégie parmi d’autres, à comparer aux **algorithmes gloutons** (Première).
 
 ## Bilan — la carte mémoire
 

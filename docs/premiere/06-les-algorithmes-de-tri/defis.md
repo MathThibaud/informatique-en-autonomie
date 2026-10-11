@@ -2,139 +2,7 @@
 
 <p class="sous-titre">Les algorithmes de tri</p>
 
-## <span class="etiquette">Défi 1</span> I Was Told There Would Be No Math
-
-*emballer les cadeaux — découper une chaîne, trier trois nombres*
-
-<p class="infos-activite">Jour 2</p>
-
-!!! fichiers "Fichiers à télécharger"
-
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/06-defi-aoc-2015-02){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-06-defi-aoc-2015-02.zip){ .md-button }
-
-!!! consignes "Consignes"
-
-    - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2015/day/2 ](https://adventofcode.com/2015/day/2 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
-
-    - Avec un compte (facultatif), le lien *get your puzzle input* donne **vos** données, à enregistrer sous `input.txt` à côté du programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/06-defi-aoc-2015-02>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
-
-    - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
-
-    - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
-
-*Ce défi réinvestit le tri vu dans ce chapitre : trier trois nombres simplifie tous les calculs.*
-
-## Lire l’énoncé
-
-Vocabulaire utile pour lire le texte original :
-
-|  |  |  |  |
-|:---|:---|:---|:---|
-| wrapping paper | papier cadeau | present, gift | cadeau |
-| length, width, height | longueur, largeur, hauteur | box | boîte |
-| surface area | aire totale (de la surface) | side | face |
-| smallest | le plus petit | slack | supplément, marge |
-| square feet | pieds carrés (unité d’aire) | to order | commander |
-
-!!! encadre "Résumé de l’énoncé (partie 1)"
-
-    **Contexte.** Les elfes vont manquer de papier cadeau et doivent en commander. Tous les cadeaux sont des boîtes en forme de pavé droit, et les elfes connaissent les trois dimensions de chacune. Pour commander juste ce qu’il faut, ils ont besoin de la surface totale de papier.
-
-    **Ce qu’il faut faire.**
-
-    - Chaque ligne décrit une boîte : trois entiers séparés par la lettre `x`, la longueur $L$, la largeur $l$ et la hauteur $h$.
-
-    - Pour une boîte, il faut de quoi recouvrir ses six faces, soit l’aire totale $2Ll + 2lh + 2hL$, plus un peu de marge : l’aire de sa **plus petite face**.
-
-    - La réponse est la somme de ces quantités sur toutes les boîtes.
-
-### <span class="exo-num">Exercice 1</span> — Vérifier sa compréhension <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-1 }
-
-Questions pièges, à traiter sur le cahier :
-
-1.  Combien de papier faut-il pour un cube `2x2x2` ?
-
-2.  L’ordre des trois nombres sur la ligne change-t-il la quantité de papier ?
-
-3.  Si deux faces ont la même aire, la plus petite, ajoute-t-on deux fois cette aire ?
-
-### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-2 }
-
-Calculer le papier nécessaire pour les boîtes (inventées) `3x5x2`, `4x4x1` et `10x2x7`. Vérification : on doit trouver `68`, `52` et `222`, soit un total de `342`.
-
-## Programmer la partie 1
-
-### <span class="exo-num">Exercice 3</span> — Lire les dimensions <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-3 }
-
-Que renvoie `"3x5x2".split("x")` ? Écrire une fonction `dimensions(ligne)` qui renvoie la **liste triée** des trois entiers. Exemple : `dimensions("3x5x2")` renvoie `[2, 3, 5]`.
-
-??? pouce "Coup de pouce"
-
-    Après le `split`, convertir chacun des trois morceaux avec `int`, les mettre dans une liste, puis trier avec `sorted(...)` ou la méthode `.sort()`.
-
-### <span class="exo-num">Exercice 4</span> — Le papier d’une boîte <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-4 }
-
-Écrire une fonction `papier(ligne)` qui renvoie le papier nécessaire pour un cadeau. Pourquoi est-il pratique d’avoir trié les dimensions ? Tester sur les trois boîtes de l’exemple.
-
-??? pouce "Coup de pouce"
-
-    Une fois triées en `a <= b <= c`, la plus petite face est celle de dimensions `a` et `b`.
-
-??? pouce "Coup de pouce 2 (début de solution)"
-
-    `a, b, c = dimensions(ligne)` ; l’aire totale est `2 * (a * b + b * c + a * c)`, et il reste à ajouter le supplément demandé.
-
-### <span class="exo-num">Exercice 5</span> — Le total <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-5 }
-
-Lire `input.txt` et additionner le papier de tous les cadeaux.
-
-## Partie 2
-
-Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
-
-!!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
-
-    Les elfes doivent aussi commander du ruban. Pour une boîte, il faut de quoi en faire le tour par le côté le plus court, c’est-à-dire le **plus petit périmètre** parmi ceux des faces, plus de quoi faire le nœud, une longueur égale au **volume** de la boîte. La réponse est la somme sur toutes les boîtes.
-
-### <span class="exo-num">Exercice 6</span> — Le ruban <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-6 }
-
-Écrire une fonction `ruban(ligne)`. Sur les boîtes de l’exemple, on doit trouver `40`, `26` et `158`, soit un total de `224`.
-
-??? pouce "Coup de pouce"
-
-    Le plus petit périmètre parmi ceux des trois faces : là encore, les dimensions triées le donnent immédiatement.
-
-??? pouce "Coup de pouce 2 (début de solution)"
-
-    Avec `a <= b <= c`, le plus petit périmètre de face est `2 * (a + b)` ; le volume est `a * b * c`.
-
-## Approfondissement
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : une seule lecture du fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-7 }
-
-Écrire une fonction `commande(nom_fichier)` qui renvoie les deux totaux (papier et ruban) en une seule lecture du fichier, et vérifier avec des `assert` les valeurs de l’exemple.
-
-??? pouce "Coup de pouce"
-
-    Deux accumulateurs dans la même boucle ; une fonction peut renvoyer un couple : `return total_papier, total_ruban`.
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 2 : sans trier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-8 }
-
-On peut aussi se passer du tri, avec les fonctions `min` et `max` qui acceptent plusieurs nombres : `min(15, 10, 6)` vaut `6`.
-
-1.  Pour la boîte `3x5x2`, calculer les aires des trois faces différentes et leur minimum.
-
-2.  Écrire `papier_sans_tri(ligne)` qui utilise `min` sur les trois aires.
-
-3.  Pour le ruban, il faut les deux plus petites dimensions. Montrer que leur somme vaut $L + l + h - \max(L, l, h)$, puis écrire `ruban_sans_tri(ligne)`.
-
-    ??? pouce "Coup de pouce"
-
-        Les deux plus petites dimensions, ce sont toutes les dimensions sauf la plus grande.
-
-4.  Vérifier que les deux versions donnent les mêmes résultats sur tout le fichier. Laquelle préférez-vous, et pourquoi ?
-
-## <span class="etiquette">Défi 2</span> Historian Hysteria
+## <span class="etiquette">Défi</span> Historian Hysteria
 
 *deux listes à réconcilier — trier, distances, compter*
 
@@ -148,7 +16,7 @@ On peut aussi se passer du tri, avec les fonctions `min` et `max` qui acceptent 
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2024/day/1 ](https://adventofcode.com/2024/day/1 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (facultatif), le lien *get your puzzle input* donne **vos** données, à enregistrer sous `input.txt` à côté du programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/06-defi-aoc-2024-01>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (facultatif), le lien *get your puzzle input* donne **vos** données, à enregistrer sous `input.txt` à côté du programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -182,7 +50,7 @@ Vocabulaire utile pour lire le texte original :
 
     - La réponse est la somme des écarts de toutes les paires.
 
-### <span class="exo-num">Exercice 1</span> — Vérifier sa compréhension <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-2-1 }
+### <span class="exo-num">Exercice 1</span> — Vérifier sa compréhension <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-1 }
 
 Questions pièges, à traiter sur le cahier :
 
@@ -192,7 +60,7 @@ Questions pièges, à traiter sur le cahier :
 
 3.  Pourquoi les deux listes ont-elles forcément la même longueur ?
 
-### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-2-2 }
+### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-2 }
 
 On considère le fichier (inventé) suivant :
 
@@ -209,7 +77,7 @@ On considère le fichier (inventé) suivant :
 
 ## Programmer la partie 1
 
-### <span class="exo-num">Exercice 3</span> — Lire les deux colonnes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-2-3 }
+### <span class="exo-num">Exercice 3</span> — Lire les deux colonnes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-3 }
 
 Écrire une fonction `lire(nom_fichier)` qui renvoie les deux listes `gauche` et `droite`. Sur l’exemple : `[5, 2, 7, 1, 2, 6]` et `[2, 5, 4, 2, 8, 2]`.
 
@@ -234,7 +102,7 @@ On considère le fichier (inventé) suivant :
 
     **Intérêt.** Inutile d’écrire un `if` pour savoir quel nombre est le plus grand. Question : que vaut `abs(0)` ? `abs(-2.5)` ?
 
-### <span class="exo-num">Exercice 4</span> — La distance totale <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-2-4 }
+### <span class="exo-num">Exercice 4</span> — La distance totale <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-4 }
 
 Écrire une fonction `distance_totale(gauche, droite)` qui renvoie la réponse de la partie 1. Tester sur l’exemple, puis sur vos données.
 
@@ -262,11 +130,11 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     **Intérêt.** Le code est plus court, mais attention : chaque appel parcourt toute la liste, ce qui coûte cher s’il est répété. Question : combien de comparaisons fait `t.count(2)` ?
 
-### <span class="exo-num">Exercice 5</span> — Compter les apparitions <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-2-5 }
+### <span class="exo-num">Exercice 5</span> — Compter les apparitions <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-5 }
 
 1.  Écrire une fonction `nb_apparitions(x, liste)` qui compte, avec une boucle, combien de fois `x` apparaît dans `liste`. Comparer avec la méthode `liste.count(x)`.
 
-2.  Utiliser cette fonction pour répondre à la partie 2. Sur l’exemple de la fiche, on doit trouver `17`.
+2.  Utiliser cette fonction pour répondre à la partie 2. Sur l’exemple du défi, on doit trouver `17`.
 
 ??? pouce "Coup de pouce"
 
@@ -290,7 +158,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     Question : que se passe-t-il avec `compte[7]` ?
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Approfondissement 1 : compter une fois pour toutes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-2-6 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Approfondissement 1 : compter une fois pour toutes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-6 }
 
 1.  Avec 1000 nombres par liste, combien de comparaisons fait la solution de la partie 2 qui utilise `nb_apparitions` ?
 

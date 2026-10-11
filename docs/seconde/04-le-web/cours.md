@@ -12,7 +12,7 @@
 
 !!! remarque "Remarque"
 
-    **Un peu d’histoire.** L’idée d’un texte « augmenté » de renvois — l’<span id="lex-hypertexte04" class="ancre"></span>**hypertexte** — est imaginée dès **1965** par l’Américain **Ted Nelson**. Mais c’est en **1989** au **CERN** (près de Genève) que le Britannique **Tim Berners-Lee**, avec le Belge **Robert Cailliau**, invente le **World Wide Web** : relier des documents *de machine à machine* par des **hyperliens**. Il écrit le premier **navigateur** et met en ligne la **première page web** de l’histoire, toujours consultable aujourd’hui. Fait remarquable : il choisit de ne rien breveter — le Web est **libre et gratuit**.
+    **Un peu d’histoire.** L’idée d’un texte « augmenté » de renvois — l’<span id="lex-hypertexte04" class="ancre"></span>**hypertexte** — est imaginée dès **1965** par l’Américain **Ted Nelson**. Mais c’est en **1989** au **CERN** (près de Genève) que le Britannique **Tim Berners-Lee**, avec le Belge **Robert Cailliau**, invente le **World Wide Web** : relier des documents *de machine à machine* par des **hyperliens**. Il écrit le premier **navigateur** et met en ligne la **première page web** de l’histoire, dont le CERN a restauré une copie, consultable aujourd’hui. Fait remarquable : il choisit de ne rien breveter — le Web est **libre et gratuit**.
 
     \*(image manquante : 04_hist_premier_serveur)\*  
     Le premier serveur web, un ordinateur NeXT
@@ -24,7 +24,7 @@
 
     (image manquante : 04_premiere_page_web)\*
 
-La toute première page web (1991), toujours en ligne sur `info.cern.ch` : les hyperliens y sont déjà soulignés.
+La toute première page web (1991), dans la copie restaurée par le CERN et consultable sur `info.cern.ch` : les hyperliens y sont déjà soulignés.
 
 !!! regle "Règle 1 — Repères historiques (les grandes étapes)"
 
@@ -72,7 +72,7 @@ Quand vous consultez un site, deux ordinateurs dialoguent.
     <span id="lex-navigateur04" class="ancre"></span>Le <span id="lex-clientserveur04" class="ancre"></span>**client** est votre navigateur (Firefox, Chrome…) : il **demande** une page.  
     Le **serveur** est un ordinateur, allumé en permanence, qui **stocke** le site et **répond** en envoyant la page. Ce dialogue suit des règles précises : le protocole <span id="lex-http04" class="ancre"></span>**HTTP** (*HyperText Transfer Protocol*).
 
-![](../figures/51cfc394677c607f.svg){ .tikz loading=lazy }
+![](../figures/fea4b74b068e5c3f.svg){ .tikz loading=lazy }
 
 Le navigateur envoie une **requête**, le serveur renvoie une **réponse** (la page, une image…) accompagnée d’un **code** qui dit si la requête a **réussi** ou **échoué** :
 
@@ -116,9 +116,9 @@ Le serveur peut renvoyer une page toute prête, ou la **fabriquer sur mesure** e
     **Côté client** : le navigateur exécute le **JavaScript** contenu dans la page.  
     On peut voir le code d’une page reçue par un **clic droit $\to$ « Afficher le code source »**.
 
-<span id="cours-04-13" class="ancre"></span>
+<span id="cours-04-3" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[13](exercices.md#ex-04-13) à [17](exercices.md#ex-04-17)** (client/serveur ; la requête HTTP)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-04-3) à [7](exercices.md#ex-04-7)** (client/serveur ; la requête HTTP)
 
 ## L’adresse d’une page : l’URL
 
@@ -136,17 +136,19 @@ https://www.lycee.mc/cours/snt/web.html
 
 Les fichiers d’un site sont rangés dans des dossiers, comme sur votre ordinateur : c’est une structure en **arborescence** (un arbre à l’envers dont la racine est notée `/`).
 
-![](../figures/13d6109be7d48d46.svg){ .tikz loading=lazy }  
+![](../figures/2f9a02254f2f483b.svg){ .tikz loading=lazy }  
 Les **dossiers** sont encadrés, les **fichiers** sont les feuilles de l’arbre.
 
 !!! regle "Règle 6 — Chemin absolu, chemin relatif"
 
     Un **chemin absolu** part de la **racine** `/` : `/dossier2/dossier3/fichier3.jpg`.  
-    Un **chemin relatif** part du **dossier courant** (pas de `/` au début) : `dossier3/fichier3.jpg`. On **remonte** d’un niveau avec `..` : `../dossier3/fichier5.svg`.
+    Un **chemin relatif** part du **dossier courant**, celui de la page qui fait le lien (pas de `/` au début) : depuis `dossier2`, on écrit `dossier3/fichier3.jpg`. On **remonte** d’un niveau avec `..` : depuis `dossier4`, on écrit `../dossier3/fichier5.svg`.
 
-<span id="cours-04-3" class="ancre"></span>
+Dans une page HTML (§ IV), ces chemins s’écrivent dans deux **attributs** : `src` pour le fichier d’une **image**, `href` pour la destination d’un **lien**. Par exemple, dans une page rangée dans `dossier4`, `<img src="../dossier3/fichier3.jpg" alt="photo" />` affiche l’image `fichier3.jpg`, et `<a href="fichier6.html">Suite</a>` crée un lien vers la page `fichier6.html`, rangée dans le même dossier.
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-04-3) à [5](exercices.md#ex-04-5)** (l’URL et les chemins)
+<span id="cours-04-8" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercices **[8](exercices.md#ex-04-8) à [10](exercices.md#ex-04-10)** (l’URL et les chemins)
 
 ## HTML : le contenu de la page
 
@@ -169,7 +171,52 @@ En HTML, on entoure le contenu de <span id="lex-balise04" class="ancre"></span>*
 
     Ceci est un **paragraphe**. Avez-vous bien compris ?
 
-Chaque balise a un **sens** (on parle de *sémantique*) : `<h1>` est un titre important (`<h2>`, `<h3>`… des sous-titres), `<p>` un paragraphe, `<strong>` un mot important, `<img>` une image, `<a>` un lien.
+Chaque balise a un **sens** (on parle de *sémantique*) : `<h1>` est un titre important (`<h2>`, `<h3>`… des sous-titres), `<p>` un paragraphe, `<strong>` un mot important, `<img>` une image, `<a>` un lien. Voici les balises à connaître :
+
+| **Balise** | **Rôle** | **Exemple** |
+|:---|:---|:---|
+| `<h1>` à `<h6>` | titres, du plus important au moins important | `<h2>Horaires</h2>` |
+| `<p>` | un paragraphe | `<p>Bonjour</p>` |
+| `<strong>`, `<em>` | mot important (gras), mise en valeur (italique) | `<em>vraiment</em>` |
+| `<br />` | un retour à la ligne (se ferme seule) | `ligne 1<br />ligne 2` |
+| `<ul>`, `<ol>`, `<li>` | liste à puces, liste numérotée, un élément de la liste | `<ul><li>pain</li></ul>` |
+| `<img />` | une image (se ferme seule) : `src` donne le fichier, `alt` un texte qui la décrit | `<img src="chat.jpg" alt="un chat" />` |
+| `<a>` | un lien : `href` donne la destination | `<a href="page2.html">Suite</a>` |
+| `<table>`, `<tr>`, `<th>`, `<td>` | un tableau, une ligne, une case d’en-tête, une case | voir l’exemple ci-dessous |
+| `<div>` | un bloc qui regroupe des éléments (pour les mettre en forme ensemble) | `<div>…</div>` |
+
+Le texte de l’attribut `alt` s’affiche si l’image ne se charge pas, et il est lu à voix haute aux personnes aveugles : on ne l’oublie jamais. Voici ces balises à l’œuvre :
+
+```html
+<h2>Le club</h2>
+<img src="images/logo.png" alt="Logo du club" />
+<ol>
+  <li>Echauffement</li>
+  <li>Match</li>
+</ol>
+<table>
+  <tr> <th>Jour</th> <th>Heure</th> </tr>
+  <tr> <td>Mercredi</td> <td>14 h</td> </tr>
+</table>
+<a href="contact.html">Nous contacter</a>
+```
+
+!!! navigateur "Rendu dans le navigateur"
+
+    **Le club**
+
+    logo du club
+
+    1. Échauffement
+
+    2. Match
+
+    |          |           |
+    |:---------|:----------|
+    | **Jour** | **Heure** |
+    | Mercredi | 14 h      |
+
+    Nous contacter
 
 !!! regle "Règle 7 — Les deux règles d’or des balises"
 
@@ -205,9 +252,9 @@ Une vraie page web suit toujours le même squelette :
 
 Le `<head>` contient les informations *invisibles* (titre de l’onglet, encodage) ; le `<body>` contient tout ce qui s’**affiche** dans la page.
 
-<span id="cours-04-6" class="ancre"></span>
+<span id="cours-04-11" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-04-6) à [9](exercices.md#ex-04-9)** (lire et écrire du HTML)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[11](exercices.md#ex-04-11) à [14](exercices.md#ex-04-14)** (lire et écrire du HTML)
 
 ## CSS : l’apparence de la page
 
@@ -238,6 +285,23 @@ h2 {
 
     Ceci est un sous-titre
 
+Les propriétés les plus utiles sont les suivantes :
+
+| **Propriété** | **Effet** | **Exemple** |
+|:---|:---|:---|
+| `color` | couleur du texte | `color: red;` |
+| `background-color` | couleur du fond | `background-color: black;` |
+| `font-family` | police de caractères | `font-family: Verdana;` |
+| `font-size` | taille du texte | `font-size: 20px;` |
+| `font-style` | texte normal ou en italique | `font-style: italic;` |
+| `text-align` | alignement : `left`, `center`, `right` | `text-align: center;` |
+| `border` | bordure (épaisseur, style, couleur) | `border: 2px solid blue;` |
+| `margin` | marge *autour* de l’élément | `margin: 10px;` |
+| `padding` | marge *à l’intérieur* de l’élément | `padding: 8px;` |
+| `width` | largeur (par exemple d’une image) | `width: 300px;` |
+
+Une couleur s’écrit par son **nom** anglais (`red`, `crimson`, `teal`) ou par son code **RVB** en hexadécimal (`#e63946`), le même codage RVB que pour les pixels d’une photo. Chaque propriété se termine par un **point-virgule**.
+
 !!! regle "Règle 8 — Les trois sélecteurs à connaître"
 
     On peut cibler les éléments d’une page de trois façons différentes :
@@ -250,6 +314,20 @@ h2 {
 
 En CSS, l’`id` se cible avec un **dièse** `#`, la `class` avec un **point** `.` . C’est ainsi qu’on met en forme *un* paragraphe précis sans toucher aux autres.
 
+!!! regle "Règle 9 — Où écrire le CSS ? Une feuille de style reliée à la page"
+
+    On écrit les règles CSS dans un fichier à part, par exemple `style.css`, rangé à côté des pages. Chaque page HTML le **relie** par une balise `<link>` placée dans le `<head>` :
+
+```html
+<head>
+  <meta charset="utf-8" />
+  <title>Mon site</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+```
+
+Une seule feuille de style peut ainsi habiller **toutes** les pages d’un site : on change une couleur dans `style.css`, et tout le site change. (Sur un éditeur en ligne comme `jsfiddle.net`, la zone « CSS » joue le rôle de ce fichier.)
+
 !!! activite "Activité — Ma première page"
 
     Sur un éditeur en ligne (par exemple `jsfiddle.net` ou `codepen.io`) :
@@ -260,9 +338,9 @@ En CSS, l’`id` se cible avec un **dièse** `#`, la `class` avec un **point** `
 
     3.  Donner à un seul paragraphe l’`id="important"` et le colorer en rouge *via* `#important`.
 
-<span id="cours-04-10" class="ancre"></span>
+<span id="cours-04-15" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-04-10) à [12](exercices.md#ex-04-12)** (mettre en forme avec CSS)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[15](exercices.md#ex-04-15) à [17](exercices.md#ex-04-17)** (mettre en forme avec CSS)
 
 ## Les hyperliens : la « toile »
 
@@ -270,6 +348,15 @@ Ce qui fait la **toile**, ce sont les liens d’une page vers une autre. On les 
 
 ```html
 <a href="https://www.gouv.mc">Visiter le site du gouvernement</a>
+```
+
+Entre les pages d’un même site, on utilise des **chemins relatifs** (§ III) : un menu de navigation n’est qu’une liste de liens, recopiée sur chaque page.
+
+```html
+<ul>
+  <li><a href="index.html">Accueil</a></li>
+  <li><a href="pages/contact.html">Contact</a></li>
+</ul>
 ```
 
 En suivant les liens de page en page, on « navigue » : c’est la **navigation hypertexte**, l’idée fondatrice de Berners-Lee.
@@ -282,7 +369,7 @@ Publier n’est pas voler : sur le Web comme ailleurs, ce que l’on trouve **ap
 
     Le <span id="lex-droitauteur04" class="ancre"></span>**droit d’auteur** protège automatiquement toute création (texte, photo, musique, code) : son auteur décide qui peut l’utiliser. Une **licence** est l’autorisation qui accompagne une œuvre et fixe le **droit d’usage** : ce qu’on a le droit d’en faire (copier, modifier, diffuser, vendre…).
 
-!!! regle "Règle 9 — Copier n’est pas toujours permis"
+!!! regle "Règle 10 — Copier n’est pas toujours permis"
 
     Récupérer une image ou un texte trouvé sur le Web pour le republier **sans autorisation** peut être **illégal**. Pour réutiliser sereinement, on cherche des œuvres sous **licence libre** (par exemple **Creative Commons**, ou les **logiciels libres**) qui autorisent d’avance certains usages — souvent à condition de **citer l’auteur**.
 
@@ -300,9 +387,9 @@ Il existe des milliards de pages. Pour s’y retrouver, on utilise un **moteur d
 
     Un <span id="lex-moteur04" class="ancre"></span>**moteur de recherche** explore le Web en permanence grâce à des robots (les *crawlers*) qui suivent les liens, et range les pages trouvées dans un immense **index** (comme l’index d’un livre). Quand vous tapez une requête, le moteur ne cherche pas « dans le Web » mais **dans son index**, déjà prêt.
 
-!!! regle "Règle 10 — L’ordre des résultats n’est pas neutre"
+!!! regle "Règle 11 — L’ordre des résultats n’est pas neutre"
 
-    Le moteur **classe** les pages par **pertinence**, à l’aide d’un algorithme. Un critère historique (le *PageRank* de Google) : une page est jugée importante si **beaucoup d’autres pages importantes pointent vers elle**. S’ajoutent la présence des mots-clés, la langue, la localisation… Les premiers résultats peuvent aussi être des **publicités** (signalées par la mention « Annonce »).
+    Le moteur **classe** les pages par **pertinence**, à l’aide d’un algorithme. Un critère historique (le *PageRank* de Google) : une page est jugée importante si **beaucoup d’autres pages importantes pointent vers elle**. S’ajoutent la présence des mots-clés, la langue, la localisation… Les premiers résultats peuvent aussi être des **publicités** (signalées par la mention « Sponsorisé »).
 
 !!! activite "Activité — Aiguiser son esprit critique"
 
@@ -312,19 +399,19 @@ Il existe des milliards de pages. Pour s’y retrouver, on utilise un **moteur d
 
     3.  Expliquer pourquoi « être en première page » est un enjeu commercial énorme.
 
-<span id="cours-04-20" class="ancre"></span>
+<span id="cours-04-19" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[20](exercices.md#ex-04-20) et [21](exercices.md#ex-04-21)** (les moteurs de recherche)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[19](exercices.md#ex-04-19) et [20](exercices.md#ex-04-20)** (les moteurs de recherche)
 
 ## Sécurité et confidentialité : régler son navigateur
 
 Naviguer n’est jamais tout à fait anonyme, et laisser un site exécuter du code sur sa machine comporte des **risques**. Heureusement, le navigateur se **règle**.
 
-!!! regle "Règle 11 — Cookies et traces"
+!!! regle "Règle 12 — Cookies et traces"
 
     Un <span id="lex-cookie04" class="ancre"></span>**cookie** est un petit fichier qu’un site dépose dans votre navigateur pour vous **reconnaître** (rester connecté, retenir un panier…) — mais aussi pour **vous suivre** d’un site à l’autre à des fins publicitaires. Chaque visite laisse des **traces** : **historique**, adresse **IP**, cookies.
 
-!!! regle "Règle 12 — Les réglages importants du navigateur"
+!!! regle "Règle 13 — Les réglages importants du navigateur"
 
     Dans les *paramètres* de son navigateur, on peut :
 
@@ -336,17 +423,17 @@ Naviguer n’est jamais tout à fait anonyme, et laisser un site exécuter du co
 
     - préférer les sites en **HTTPS** (cadenas) et bloquer les traceurs.
 
-!!! regle "Règle 13 — Attention à l’hameçonnage (phishing)"
+!!! regle "Règle 14 — Attention à l’hameçonnage (phishing)"
 
-    De **fausses pages**, imitant une vraie (banque, réseau social), cherchent à voler vos identifiants : c’est l’**hameçonnage**. Un **lien peut cacher une adresse différente** de son texte : avant de cliquer, **survolez le lien** pour lire la *vraie* URL, et vérifiez le nom de domaine. En cas de doute, on ne clique pas et on ne saisit aucune information personnelle.
+    De **fausses pages**, imitant une vraie (banque, réseau social), cherchent à voler vos identifiants : c’est l’<span id="lex-hameconnage04" class="ancre"></span>**hameçonnage**. Un **lien peut cacher une adresse différente** de son texte : avant de cliquer, **survolez le lien** pour lire la *vraie* URL, et vérifiez le nom de domaine. En cas de doute, on ne clique pas et on ne saisit aucune information personnelle.
 
-<span id="cours-04-19" class="ancre"></span>
+<span id="cours-04-21" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[19](exercices.md#ex-04-19)** (régler et sécuriser son navigateur)
+<span class="afaire">▶ Exercices d'application :</span> exercice **[21](exercices.md#ex-04-21)** (régler et sécuriser son navigateur)
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Le Web s’appuie sur **Internet** : avant la requête HTTP, le navigateur demande au **DNS** l’adresse IP du serveur, puis la page voyage en **paquets** (TCP/IP). Les hyperliens forment un **graphe**, comme les amitiés d’un **réseau social** ; c’est sur ce graphe que travaille le PageRank. Cookies et traces de navigation sont des **données personnelles**. En spécialité NSI de Première, on étudie les formulaires, les méthodes `GET` et `POST` et le **JavaScript**.
+    Le Web s’appuie sur **Internet** : au chapitre *Internet*, on verra comment le navigateur trouve l’adresse du serveur et comment la page voyage en **paquets**. Les hyperliens forment un **graphe**, comme les amitiés d’un **réseau social** ; c’est sur ce graphe que travaille le PageRank. Cookies et traces de navigation sont des **données personnelles** (on y reviendra au chapitre *Données en tables*). En spécialité NSI de Première, on étudie les formulaires, les méthodes `GET` et `POST` et le **JavaScript**.
 
 ## Bilan — la carte mémoire
 
@@ -371,7 +458,7 @@ Naviguer n’est jamais tout à fait anonyme, et laisser un site exécuter du co
 
 !!! encadre "Débat argumenté"
 
-    Une **fiche débat** accompagne ce thème : « Un moteur de recherche doit-il rester libre de classer ses résultats comme il le veut ? » (documents, rôles, tableau d’arguments et trace écrite, environ 50 min).
+    Un **débat**, proposé en fin de chapitre, accompagne ce thème : « Un moteur de recherche doit-il rester libre de classer ses résultats comme il le veut ? » (documents, rôles, tableau d’arguments et trace écrite, environ 50 min).
 
 ## Savoir-faire à maîtriser
 

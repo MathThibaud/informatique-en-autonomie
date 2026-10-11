@@ -821,7 +821,7 @@ On suppose écrite de même une méthode `colonne_score_max` (fils de score le p
                 return racine.colonne_score_max()[0]
         ```
 
-        *Vérification : avec trois pions du joueur 2 alignés en bas des colonnes 0, 1 et 2, `choisit_coup` renvoie `3` pour le joueur 2 (il gagne) comme pour le joueur 1 (il bloque).*
+        *Vérification : avec trois pions du joueur 2 alignés en bas des colonnes 0, 1 et 2, `choisit_coup` renvoie `3` pour le joueur 2 (il gagne) comme pour le joueur 1 (il bloque), dès que `niveau_max` vaut au moins $2$. Avec `niveau_max = 1`, le joueur 1 ne simule pas la réponse de son adversaire : il ne voit pas la menace et ne bloque pas forcément.*
 
 ### Critiquer une réponse d’IA
 

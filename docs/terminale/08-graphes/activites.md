@@ -62,7 +62,7 @@ Pour chaque point, on compte le nombre de traits qui y aboutissent.
 
     2.  On utilise **deux** traits : un pour arriver, un pour repartir. Un point qui n’est ni le départ ni l’arrivée est traversé un certain nombre de fois, en consommant deux traits à chaque passage : il doit avoir un nombre **pair** de traits.
 
-    3.  Règle conjecturée : **$0$ point impair** : possible, et l’on revient au départ (on peut partir de n’importe où) ; **$2$ points impairs** : possible, en partant de l’un et en arrivant à l’autre ; **plus de $2$** : impossible. (C’est le théorème d’Euler, démontré en 1736.)
+    3.  Règle conjecturée : **$0$ point impair** : possible, et l’on revient au départ (on peut partir de n’importe où) ; **$2$ points impairs** : possible, en partant de l’un et en arrivant à l’autre ; **plus de $2$** : impossible. (C’est le théorème d’Euler, valable pour un dessin d’un seul tenant, c’est-à-dire un graphe **connexe** : Euler démontre en 1736 que la condition est nécessaire, et Carl Hierholzer en 1873 qu’elle est suffisante.)
 
 ### <span class="exo-num">Exercice 3</span> — Les sept ponts de Königsberg <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-graphes-act-1-3 }
 

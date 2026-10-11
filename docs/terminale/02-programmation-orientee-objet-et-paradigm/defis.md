@@ -16,7 +16,7 @@
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/3 ](https://adventofcode.com/2020/day/3 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/02-defi-aoc-2020-03>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -88,7 +88,7 @@ Construire la liste `carte` des lignes de `input.txt` (des chaînes, sans le ret
 
 ### <span class="exo-num">Exercice 4</span> — Compter les arbres <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-1-4 }
 
-Écrire une fonction `compter_arbres(carte, dx, dy)` qui renvoie le nombre d’arbres rencontrés en se déplaçant de `dx` cases vers la droite et `dy` vers le bas à chaque pas. Tester sur l’exemple de la fiche, puis sur vos données.
+Écrire une fonction `compter_arbres(carte, dx, dy)` qui renvoie le nombre d’arbres rencontrés en se déplaçant de `dx` cases vers la droite et `dy` vers le bas à chaque pas. Tester sur l’exemple du défi, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -112,7 +112,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="exo-num">Exercice 5</span> — Plusieurs pentes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-1-5 }
 
-Utiliser la fonction précédente pour toutes les pentes demandées et calculer la réponse. Sur l’exemple de la fiche, on doit trouver `72`.
+Utiliser la fonction précédente pour toutes les pentes demandées et calculer la réponse. Sur l’exemple du défi, on doit trouver `72`.
 
 ??? pouce "Coup de pouce"
 
@@ -162,7 +162,7 @@ Utiliser la fonction précédente pour toutes les pentes demandées et calculer 
 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/12 ](https://adventofcode.com/2020/day/12 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
-    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (<https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/02-defi-aoc-2020-12>) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -236,7 +236,7 @@ Suivre le navire sur un quadrillage (est vers la droite, nord vers le haut). Vé
 
 ### <span class="exo-num">Exercice 5</span> — Exécuter le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-2-5 }
 
-Écrire une méthode `executer(self, instruction)` qui reçoit une chaîne comme `"F6"` et met à jour le navire. Lire le fichier, exécuter toutes les instructions et afficher la distance. Tester sur l’exemple de la fiche, puis sur vos données.
+Écrire une méthode `executer(self, instruction)` qui reçoit une chaîne comme `"F6"` et met à jour le navire. Lire le fichier, exécuter toutes les instructions et afficher la distance. Tester sur l’exemple du défi, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -256,7 +256,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="exo-num">Exercice 6</span> — Le waypoint <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-2-6 }
 
-Écrire une classe `NavireRepere` (ou ajouter les attributs `wx`, `wy`) et une méthode `executer2`. Sur l’exemple de la fiche, on doit trouver `70`.
+Écrire une classe `NavireRepere` (ou ajouter les attributs `wx`, `wy`) et une méthode `executer2`. Sur l’exemple du défi, on doit trouver `70`.
 
 ??? pouce "Coup de pouce"
 
@@ -328,7 +328,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 1.  Recopier et exécuter le code de l’encadré. Calculer à la main $1 \times i$, puis $i \times i$, $(-1) \times i$ et $(-i) \times i$ : quelles orientations successives retrouve-t-on ? Par quel nombre faut-il multiplier pour un quart de tour vers la droite ?
 
-2.  Sur l’exemple de la fiche, la position et la direction sont des complexes ; au départ `position = 0` et `direction = 1`. Que valent-elles après `N4`, `F6`, `L90` puis `F3` ?
+2.  Sur l’exemple du défi, la position et la direction sont des complexes ; au départ `position = 0` et `direction = 1`. Que valent-elles après `N4`, `F6`, `L90` puis `F3` ?
 
 3.  Écrire une fonction `trajet_complexe(instructions, partie)` qui traite les deux parties ; vérifier qu’on obtient `6` et `70` sur l’exemple.
 

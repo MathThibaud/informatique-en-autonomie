@@ -4,6 +4,9 @@
 
 Chapitre 1 — Les bases de la programmation Python
 
+*Captures d’écran du logiciel Spyder (logiciel libre, licence MIT)* — captures réalisées par l’auteur — licence MIT pour le logiciel  
+<https://www.spyder-ide.org>
+
 *Grace Hopper en 1984* — James S. Davis (U.S. Navy) — domaine public  
 <https://commons.wikimedia.org/wiki/File:Commodore_Grace_M._Hopper,_USN_(covered).jpg>
 
@@ -34,8 +37,20 @@ Chapitre 3 — La photographie numérique
 *Premier appareil photo numérique (Steven Sasson, 1975)* — Bertrand Labévue — CC BY-SA 4.0  
 <https://commons.wikimedia.org/wiki/File:Kodak_Sasson_BL.jpg>
 
+*Capteur CMOS et module de stabilisation d’un Sony A7R III (image réduite)* — Harry Munday — CC BY-SA 4.0  
+<https://commons.wikimedia.org/wiki/File:Sony_A7RIII_CMOS_Sensor_and_IBIS_Module_.jpg>
+
+*« The Blue Marble », la Terre vue d’Apollo 17 le 7 décembre 1972 (image `terre.jpg` des programmes)* — NASA, équipage d’Apollo 17 — domaine public  
+<https://commons.wikimedia.org/wiki/File:The_Earth_seen_from_Apollo_17.jpg>
+
 *Capteur photo vu au macro* — Prosthetic Head — CC BY-SA 4.0  
 <https://commons.wikimedia.org/wiki/File:Colour_Sensor_Macro.jpg>
+
+**La Nuit étoilée*, Vincent van Gogh, 1889 (Museum of Modern Art, New York ; numérisation Google Art Project, image réduite)* — Vincent van Gogh — domaine public  
+<https://commons.wikimedia.org/wiki/File:Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg>
+
+**The Blue Boy*, Thomas Gainsborough, vers 1770 (The Huntington Library, San Marino ; image réduite)* — Thomas Gainsborough — domaine public  
+<https://commons.wikimedia.org/wiki/File:Thomas_Gainsborough_-_The_Blue_Boy_(The_Huntington_Library,_San_Marino_L._A.).jpg>
 
 Chapitre 4 — Le Web
 
@@ -57,6 +72,9 @@ Chapitre 5 — Les données structurées et leur traitement
 <https://commons.wikimedia.org/wiki/File:Hollerith_Punched_Card.jpg>
 
 Chapitre 6 — Internet
+
+*Icônes des schémas de réseau (ordinateur, switch, routeur, serveur, nuage)* — logiciel libre Filius — GNU GPL v2 ou v3  
+<https://www.lernsoftware-filius.de>
 
 *Cahier de bord de l’IMP, 29 octobre 1969* — Andrew « FastLizard4 » Adams — CC BY-SA 2.0  
 <https://commons.wikimedia.org/wiki/File:The_IMP_Log_The_Very_First_Message_Sent_on_the_Internet_(6293913865).jpg>
