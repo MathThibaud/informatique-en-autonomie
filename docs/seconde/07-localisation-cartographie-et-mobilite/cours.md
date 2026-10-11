@@ -148,7 +148,7 @@ De A à E : le trajet A–C–D–E mesure $2+3+4 = 9$ km, plus court que A–B�
 
     Ouvrir une carte numérique (Géoportail ou `openstreetmap.org`). **1.** Chercher son lycée et **lire ses coordonnées** (clic droit » « Où suis-je ? » / « Afficher l’adresse »). **2.** Calculer un **itinéraire** du lycée à la gare et relever la **distance** et la **durée**. **3.** Mesurer « à vol d’oiseau » la même distance : est-elle plus courte ? Pourquoi ?
 
-Source : OpenStreetMap, page « Stats » du wiki, 2<sup>e</sup> trimestre 2025 (10 millions d’inscrits, 2,25 millions de contributeurs), [wiki.openstreetmap.org](wiki.openstreetmap.org).
+Source : OpenStreetMap, page « Stats » du wiki, 2<sup>e</sup> trimestre 2025 (10 millions d’inscrits, 2,25 millions de contributeurs), [wiki.openstreetmap.org](https://wiki.openstreetmap.org/wiki/Stats).
 
 <span id="cours-07-10" class="ancre"></span>
 
