@@ -264,7 +264,7 @@ for mot in mots:
 
 ??? corrige "Corrigé"
 
-    Pour la **première** voyelle, on renvoie dès qu’on trouve. Pour la **dernière** occurrence, on retient le dernier indice vu (on ne peut pas s’arrêter tôt).
+    Pour la **première** voyelle, on renvoie dès qu’on trouve. Pour la **dernière** occurrence, en parcourant de gauche à droite, on ne peut pas s’arrêter tôt : une autre occurrence peut encore venir. On retient donc le dernier indice vu, jusqu’au bout du tableau.
 
     ```python
     def premiere_voyelle(mot):
@@ -281,7 +281,7 @@ for mot in mots:
         return resultat
     ```
 
-    *Autre méthode* pour `dernier_indice` : parcourir les indices **à l’envers**, du dernier au premier ; on peut alors s’arrêter dès qu’on trouve.
+    *Autre méthode* pour `dernier_indice` : parcourir les indices **à l’envers**, du dernier au premier : la première occurrence rencontrée est alors la dernière du tableau, et on peut s’arrêter dès qu’on la trouve.
 
     ```python
     def dernier_indice(t, x):
