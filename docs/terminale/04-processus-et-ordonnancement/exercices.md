@@ -452,41 +452,13 @@ depart_proc = {0: p1, 1: p3, 2: p2, 3: p4}
 
     ![](../figures/3f4bc6b3a6142e9e.svg){ .tikz loading=lazy }
 
-L’ordonnancement est mis en place par les classes `File` et `Ordonnanceur` suivantes (l’attribut `temps` correspond au cycle en cours) :
+L’ordonnancement est mis en place par les classes `File` et `Ordonnanceur` déjà écrites dans l’exercice « Ordonnancer des processus avec une file » du chapitre Piles et files (même sujet de bac). On les reprend telles que vous les avez complétées, avec deux précisions : `defile` renvoie `None` si la file est vide, et `tourniquet` renvoie le nom du processus élu (ou `None` si la file est vide) ; ici, la méthode qui exécute un processus pendant un cycle s’appelle `execute_un_cycle`. Rappel de l’interface utile :
 
 ```python
-class File:
-    def __init__(self):
-        self.contenu = []
-    def enfile(self, element):
-        self.contenu.append(element)
-    def defile(self):
-        if self.est_vide():
-            return None
-        return self.contenu.pop(0)
-    def est_vide(self):
-        return self.contenu == []
-
-class Ordonnanceur:
-    def __init__(self):
-        self.temps = 0
-        self.file = File()
-
-    def ajoute_nouveau_processus(self, proc):
-        self.file.enfile(proc)
-
-    def tourniquet(self):
-        """Effectue une etape d'ordonnancement et renvoie le nom
-        du processus elu."""
-        self.temps += 1
-        if not self.file.est_vide():
-            proc = self.file.defile()
-            proc.execute_un_cycle()
-            if not proc.est_fini():
-                self.file.enfile(proc)
-            return proc.nom
-        else:
-            return None
+ordo = Ordonnanceur()               # ordo.temps vaut 0, file vide
+ordo.ajoute_nouveau_processus(p)    # enfile le processus p
+nom = ordo.tourniquet()             # un cycle : temps + 1, elit, execute, remet en file
+ordo.file.est_vide()                # True s'il ne reste aucun processus en attente
 ```
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui utilise les variables `p1`, `p2`, `p3`, `p4` et `depart_proc` définies précédemment ; crée un ordonnanceur ; ajoute un nouveau processus à l’ordonnanceur lorsque c’est le moment ; affiche le processus choisi par l’ordonnanceur ; s’arrête lorsqu’il n’y a plus de processus à exécuter.
