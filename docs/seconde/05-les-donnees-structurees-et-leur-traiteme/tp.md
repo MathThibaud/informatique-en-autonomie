@@ -106,7 +106,7 @@ On compte de `3` en `3` à partir de `5` (pas en `C1`, premier terme en `A1`). E
 
 On fait varier automatiquement le premier terme.
 
-1.  En `B1`, un décimal aléatoire entre 0 et 1 : `=ALEA()`. En `B2` : `=B1*100`. En `B3`, un **entier** aléatoire entre 0 et 100 : `=ENT(B2)` (partie entière).
+1.  En `B1`, un décimal aléatoire entre 0 et 1 : `=ALEA()`. En `B2` : `=B1*100`. En `B3`, un **entier** aléatoire entre 0 et 99 : `=ENT(B2)` (partie entière).
 
 2.  Le pas est en `E1` (`3`). En `C1`, recopier le nombre aléatoire : `=B3`. Créer dans la colonne `C` une suite de 30 termes de pas 3.
 
@@ -116,7 +116,7 @@ On fait varier automatiquement le premier terme.
 
 Faire varier automatiquement le premier terme **et** le pas.
 
-1.  Obtenir en `B3` un entier aléatoire entre 0 et 100. Choisir un pas entier quelconque en `E1`.
+1.  Obtenir en `B3` un entier aléatoire entre 0 et 99. Choisir un pas entier quelconque en `E1`.
 
 2.  Dans la colonne `C`, créer une suite d’autant de termes que voulu, de pas celui de `E1`, à partir de `B3`.
 
@@ -208,7 +208,7 @@ Tailles de 885 nourrissons :
 
 - \(c\) Calculer l’étendue.
 
-- \(d\) Trouver médiane, premier et troisième quartile par lecture de la ligne des E.C.C.
+- \(d\) Trouver médiane, premier et troisième quartile par lecture de la ligne des E.C.C. *Méthode : avec un effectif total $N$, le premier quartile est la première valeur dont l’E.C.C. atteint (ou dépasse) $N/4$ ; la médiane, la première dont l’E.C.C. atteint $N/2$ ; le troisième quartile, la première dont l’E.C.C. atteint $3N/4$.*
 
 ### <span class="exo-num">Exercice 4</span> — Caractéristiques de position pour données groupées (feuille `Exercice 4`) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-les-donnees-structurees-et-leur-traiteme-tp-3-4 }
 
@@ -227,7 +227,7 @@ Tailles de 640 nourrissons :
 
 - \(a\) Compléter les fréquences, les centres de classe et les F.C.C.
 
-- \(b\) Localiser médiane, premier et troisième quartile.
+- \(b\) Localiser médiane, premier et troisième quartile *(même méthode, avec les F.C.C. : première classe dont la F.C.C. atteint $25\,\%$, $50\,\%$, puis $75\,\%$)*.
 
 - \(c\) Calculer la moyenne avec `=SOMMEPROD(centres;effectifs)/total`.
 

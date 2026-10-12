@@ -38,7 +38,7 @@ Donner une chaîne de documentation (rôle, précondition, postcondition) à la 
     def division_euclidienne(a, b):
         """Renvoie (q, r), quotient et reste de la division de a par b.
         Precondition : a >= 0 et b > 0.
-        Postcondition : a == q * b + r et 0 <= r < b."""
+        Postcondition : a == q * b + r, 0 <= r et r < b."""
     ```
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Prototyper puis documenter <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-3 }
@@ -105,7 +105,7 @@ Ajouter à la fonction `puissance(x, n)` une ligne `assert` qui garantit sa pré
         return r
     ```
 
-    `puissance(2, -3)` déclenche `AssertionError: l’exposant doit être positif ou nul` : le programme s’interrompt immédiatement, à l’endroit du vrai problème.
+    `puissance(2, -3)` déclenche `AssertionError: l’exposant doit etre positif ou nul` : le programme s’interrompt immédiatement, à l’endroit du vrai problème.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — `assert` ou `None` ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-6 }
 
@@ -446,22 +446,33 @@ def somme(t):
 
 ??? pouce "Coup de pouce"
 
-    Au début du tour d’indice `i`, `s` contient la somme de quels éléments ? Peut-on désigner ces éléments par une tranche de `t` ?
+    Au début du tour d’indice `i`, `s` contient la somme de quels éléments ? Comment calculer cette somme *autrement*, pour la comparer à `s` ?
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    La somme des éléments d’indices `0` à `i - 1` s’écrit `sum(t[0:i])` (ici `sum` sert seulement à *vérifier*). L’`assert` doit être exécuté à chaque tour, *avant* la mise à jour de `s`.
+    Écrire d’abord une petite fonction de vérification `somme_debut(t, i)` qui renvoie la somme des éléments d’indices `0` à `i - 1`. L’`assert` compare `s` à `somme_debut(t, i)` ; il doit être exécuté à chaque tour, *avant* la mise à jour de `s`.
 
 ??? corrige "Corrigé"
 
     ```python
+    def somme_debut(t, i):
+        """Renvoie t[0] + ... + t[i - 1] (fonction de verification)."""
+        total = 0
+        for k in range(i):
+            total = total + t[k]
+        return total
+
     def somme(t):
         s = 0
         for i in range(len(t)):
-            assert s == sum(t[0:i])   # invariant : s = somme des i premiers
+            assert s == somme_debut(t, i)   # invariant : s = somme des i premiers
             s = s + t[i]
         return s
     ```
+
+    \(a\) Juste avant le tour d’indice `i`, `s` contient la somme des `i` premiers éléments `t[0]`, …, `t[i - 1]`.
+
+    \(b\) Pour l’écrire en `assert`, il faut savoir calculer cette somme *autrement* : c’est le rôle de la fonction de vérification `somme_debut`. (Elle refait le travail à chaque tour, ce qui ralentit le programme : on ne la garde que pendant la mise au point.)
 
     \(c\) Pendant la mise au point, Python **vérifie l’invariant à chaque tour** : si une erreur casse la logique de l’accumulation, l’`AssertionError` se déclenche *tout de suite*, au tour fautif, au lieu de laisser un résultat faux apparaître à la fin.
 
@@ -493,7 +504,7 @@ def division(a, b):
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    Postcondition : `a == q * b + r` et `0 <= r < b`. Sur l’appel trouvé, l’invariant reste vrai à chaque tour : ce n’est donc pas le corps de la boucle qui est en cause.
+    Postcondition : `a == q * b + r`, `0 <= r` et `r < b`. Sur l’appel trouvé, l’invariant reste vrai à chaque tour : ce n’est donc pas le corps de la boucle qui est en cause.
 
 ??? corrige "Corrigé"
 
@@ -503,7 +514,7 @@ def division(a, b):
     def division(a, b):
         """Renvoie (q, r), quotient et reste de la division euclidienne de a par b.
         Precondition : a et b entiers, a >= 0 et b > 0.
-        Postcondition : a == q * b + r et 0 <= r < b."""
+        Postcondition : a == q * b + r, 0 <= r et r < b."""
     ```
 
     **b)** `division(6, 3)` renvoie `(1, 3)` au lieu de `(2, 0)` (de même `division(7, 7)` renvoie `(0, 7)`) : l’erreur apparaît dès que `r` atteint exactement la valeur `b`.
@@ -521,7 +532,7 @@ def division(a, b):
             assert a == q * b + r      # invariant (mise au point)
             r = r - b
             q = q + 1
-        assert 0 <= r < b              # postcondition
+        assert 0 <= r and r < b        # postcondition
         return q, r
 
     assert division(17, 5) == (3, 2)

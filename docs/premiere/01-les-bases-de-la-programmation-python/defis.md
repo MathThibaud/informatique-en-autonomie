@@ -77,16 +77,18 @@ En Python, comparer `2000 / 3`, `2000 // 3` et `int(2000 / 3)`. Lequel correspon
 
 ### <span class="exo-num">Exercice 5</span> — Le total <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-les-bases-de-la-programmation-python-aoc-1-5 }
 
-Voici comment lire un fichier texte ligne par ligne (ces lignes sont fournies) :
+!!! encadre "Outil Python : lire un fichier ligne par ligne (open, strip)"
 
-```python
-fichier = open("input.txt")      # ouvre le fichier
-for ligne in fichier:            # une ligne a chaque tour de boucle
-    ligne = ligne.strip()        # retire le retour a la ligne final
-    masse = int(ligne)           # la chaine "1969" devient l'entier 1969
-    print(masse)
-fichier.close()                  # ferme le fichier
-```
+    `open("input.txt")` ouvre le fichier ; une boucle `for` en parcourt les lignes une à une, sous forme de chaînes. Chaque ligne se termine par un retour à la ligne invisible, que `ligne.strip()` retire. Ces lignes sont fournies :
+
+    ```python
+    fichier = open("input.txt")      # ouvre le fichier
+    for ligne in fichier:            # une ligne a chaque tour de boucle
+        ligne = ligne.strip()        # retire le retour a la ligne final
+        masse = int(ligne)           # la chaine "1969" devient l'entier 1969
+        print(masse)
+    fichier.close()                  # ferme le fichier
+    ```
 
 Recopier ce programme et l’exécuter sur un fichier contenant l’exemple du défi. Le modifier ensuite pour calculer la somme des carburants de tous les modules, avec le motif de l’accumulateur.
 

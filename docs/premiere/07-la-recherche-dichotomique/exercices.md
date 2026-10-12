@@ -273,9 +273,34 @@ Dans un tableau trié qui contient des **doublons**, `indice_dichotomique` renvo
     Sur `[2, 4, 4, 4, 7, 9]` avec `x = 4` : `mil = 2` (trouvé, `resultat = 2`, `fin = 1`), puis `mil = 0` (`2 < 4`, `deb = 1`), puis `mil = 1` (trouvé, `resultat = 1`, `fin = 0`) ; la zone est vide, on renvoie `1`.  
     **2.** Avec un tableau qui ne contient que des `x`, par exemple `[4] * 1000` : la dichotomie tombe sur le milieu (indice 499), puis il faut reculer case par case jusqu’à l’indice 0, soit environ $n/2$ pas. Le coût redevient **linéaire** dans le pire cas.
 
+### La terminaison
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Pourquoi ça s’arrête <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-9 }
+
+La recherche dichotomique utilise une boucle `while` : il faut s’assurer qu’elle ne tourne pas indéfiniment.
+
+1.  Montrer que la quantité `fin - deb` **diminue strictement** à chaque tour où l’on n’a pas trouvé `x` (examiner les deux cas : « à droite » et « à gauche »).
+
+    ??? pouce "Coup de pouce"
+
+        Dans le cas « à droite », `deb` devient `mil + 1`. Or `mil` est compris entre `deb` et `fin` : comparer la nouvelle valeur de `deb` à l’ancienne. Même raisonnement pour `fin`.
+
+2.  En déduire que l’algorithme se termine toujours. Comment appelle-t-on une telle quantité ?
+
+??? corrige "Corrigé"
+
+    **1.** À chaque tour qui ne renvoie pas `True` :
+
+    - cas « à droite » : `deb` devient `mil + 1` $>$ `deb` : la largeur `fin - deb` diminue ;
+
+    - cas « à gauche » : `fin` devient `mil - 1` $<$ `fin` : la largeur `fin - deb` diminue aussi.
+
+    Dans les deux cas, `fin - deb` **diminue strictement** (d’au moins 1).  
+    **2.** Une quantité entière qui décroît strictement ne peut pas décroître indéfiniment : tôt ou tard `deb > fin`, la condition de la boucle devient fausse, l’algorithme se termine. Une telle quantité est un **variant de boucle**.
+
 ### Le coût logarithmique
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 9</span> — Combien d’étapes ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-9 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 10</span> — Combien d’étapes ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-10 }
 
 Sans machine, donner le nombre *maximal* de comparaisons d’une recherche dichotomique pour un tableau trié de :
 
@@ -292,7 +317,7 @@ Sans machine, donner le nombre *maximal* de comparaisons d’une recherche dicho
     **2.** $16 \to 8 \to 4 \to 2 \to 1$ : **4** divisions, plus la dernière comparaison, soit **5** comparaisons au maximum.  
     **3.** Pour $1\,000$ : $\log_2(1000) \approx 10$, donc **une dizaine** de comparaisons (à comparer aux 1000 d’un parcours !).
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Le plus petit `k` tel que $2^k > n$ <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-10 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Le plus petit `k` tel que $2^k > n$ <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-11 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `nb_de_tour(n)` qui renvoie le plus petit entier `k` tel que `2**k > n` — c’est le nombre maximal de valeurs examinées par la dichotomie dans un tableau de taille `n`. *On utilisera une boucle qui double une puissance de 2 tant qu’elle ne dépasse pas `n`.*
 
@@ -321,7 +346,7 @@ Sans machine, donner le nombre *maximal* de comparaisons d’une recherche dicho
 
     `nb_de_tour(100)` vaut `7` (car $2^6 = 64 \leq 100 < 128 = 2^7$).
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Le pire cas, en vrai <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-11 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Le pire cas, en vrai <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-12 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Le pire cas de la dichotomie est atteint quand l’élément est **absent**. En cherchant la valeur `1` dans un tableau ne contenant que des `0` (par exemple `[0] * n`), afficher le nombre de tours pour `n = 100`, `1000`, `10000`, `100000`, `1000000`. Que constate-t-on quand `n` est multiplié par 10 ? Comparer à la recherche séquentielle.
 
@@ -338,31 +363,6 @@ Sans machine, donner le nombre *maximal* de comparaisons d’une recherche dicho
     ```
 
     On obtient environ `7, 10, 14, 17, 20`. À chaque fois que `n` est **multiplié par 10**, le nombre de tours n’augmente que de **3 ou 4** : la croissance est **logarithmique**, extraordinairement lente. Une recherche séquentielle, elle, ferait jusqu’à `n` comparaisons (donc $\times 10$ à chaque fois).
-
-### La terminaison
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Pourquoi ça s’arrête <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-12 }
-
-La recherche dichotomique utilise une boucle `while` : il faut s’assurer qu’elle ne tourne pas indéfiniment.
-
-1.  Montrer que la quantité `fin - deb` **diminue strictement** à chaque tour où l’on n’a pas trouvé `x` (examiner les deux cas : « à droite » et « à gauche »).
-
-    ??? pouce "Coup de pouce"
-
-        Dans le cas « à droite », `deb` devient `mil + 1`. Or `mil` est compris entre `deb` et `fin` : comparer la nouvelle valeur de `deb` à l’ancienne. Même raisonnement pour `fin`.
-
-2.  En déduire que l’algorithme se termine toujours. Comment appelle-t-on une telle quantité ?
-
-??? corrige "Corrigé"
-
-    **1.** À chaque tour qui ne renvoie pas `True` :
-
-    - cas « à droite » : `deb` devient `mil + 1` $>$ `deb` : la largeur `fin - deb` diminue ;
-
-    - cas « à gauche » : `fin` devient `mil - 1` $<$ `fin` : la largeur `fin - deb` diminue aussi.
-
-    Dans les deux cas, `fin - deb` **diminue strictement** (d’au moins 1).  
-    **2.** Une quantité entière qui décroît strictement ne peut pas décroître indéfiniment : tôt ou tard `deb > fin`, la condition de la boucle devient fausse, l’algorithme se termine. Une telle quantité est un **variant de boucle**.
 
 ### Le jeu du nombre mystère
 

@@ -18,6 +18,16 @@ Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title=
 
 Un **double-clic** sur une machine ouvre sa configuration (adresse IP, masque, passerelle). En mode simulation, un double-clic permet d’installer la « **Ligne de commande** » : on y tape `ping`, `ipconfig`, `traceroute`. Le clic droit « **Afficher les échanges de données** » montre les paquets qui passent.
 
+!!! encadre "Le vocabulaire du TP"
+
+    - Un **switch** (ou *commutateur*) est le boîtier qui relie entre elles, par des câbles, les machines d’un **même réseau local** (une salle, une maison) : il fait suivre chaque paquet vers la machine à qui il est destiné.
+
+    - Un **routeur** (vu en cours) relie **plusieurs réseaux** entre eux et aiguille les paquets de l’un à l’autre.
+
+    - La **passerelle** d’une machine est l’adresse IP du routeur de *son* réseau local : c’est à lui qu’elle confie tout paquet destiné à une machine d’un **autre** réseau, comme on passe par la porte de sortie d’un bâtiment. On l’appelle aussi *routeur par défaut*.
+
+    - Filius demande aussi un **masque** : recopiez simplement la valeur donnée (`255.255.255.0`), sans chercher à l’expliquer.
+
 ## Partie 1 — Un réseau local
 
 ### <span class="exo-num">Exercice 1</span> <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-internet-tp-1-1 }
@@ -28,7 +38,7 @@ Un **double-clic** sur une machine ouvre sa configuration (adresse IP, masque, p
 
 1.  Les trois machines ont des adresses `192.168.0._`. À quoi sert le **switch** ?
 
-2.  Le switch a-t-il besoin d’une adresse IP, lui ?
+2.  Double-cliquer sur le switch : Filius propose-t-il de lui donner une adresse IP ? Qu’en déduire ?
 
 ??? corrige "Corrigé"
 
@@ -37,7 +47,7 @@ Un **double-clic** sur une machine ouvre sa configuration (adresse IP, masque, p
 
     1.  Le **switch** relie entre elles les machines d’un *même* réseau local et aiguille les données vers la bonne machine. *(Toutes les IP commencent par `192.168.0` : même réseau local.)*
 
-    2.  **Non** : un switch n’a pas besoin d’adresse IP (il ne fait que distribuer dans le réseau local, il ne « raisonne » pas sur les adresses IP comme un routeur).
+    2.  **Non**, Filius ne propose aucune adresse IP pour le switch : il n’en a pas besoin (il ne fait que distribuer dans le réseau local, il ne « raisonne » pas sur les adresses IP comme un routeur).
 
 ### <span class="exo-num">Exercice 2</span> <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-internet-tp-1-2 }
 
@@ -53,7 +63,7 @@ Un **double-clic** sur une machine ouvre sa configuration (adresse IP, masque, p
 
     1.  Le `ping` **réussit**. Trajet : PC-A $\to$ Switch $\to$ PC-B, et la réponse revient par le même chemin.
 
-    2.  On voit **arriver les paquets** (requête « echo » puis réponse). C’est l’échange `ping` / `pong`.
+    2.  On voit **arriver les paquets** (requête « echo » puis réponse). C’est l’échange « requête echo » / « réponse echo » du `ping`.
 
     3.  `ping 192.168.0.9` : **échec** (« délai dépassé » / pas de réponse) car aucune machine ne porte cette adresse dans le réseau.
 

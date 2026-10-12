@@ -171,6 +171,6 @@ boucle()
         | fonction qui s’appelle elle-même | fonction miroir, boucle | **fonction récursive** |
         | cas où l’on ne s’appelle plus | la fin, le dernier | **condition d’arrêt** (**cas de base**) |
 
-        On retire toujours le *dernier* posé : c’est une pile, et non une file (lien avec le chapitre « structures linéaires »).
+        On retire toujours le *dernier* posé : c’est une pile, et non une file (les piles seront étudiées au chapitre « structures linéaires »).
 
     2.  Quand une fonction en appelle une autre, la première est **mise en pause** et reprend là où elle s’était arrêtée. Les instructions écrites après l’appel s’exécutent **au retour**, dans l’ordre inverse des appels. Pour qu’une fonction qui s’appelle elle-même s’arrête, il faut un **cas où elle ne s’appelle plus**, et que chaque appel s’en **rapproche**.

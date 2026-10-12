@@ -258,7 +258,7 @@ notes = {"Léa": [12, 15, 9], "Noé": [8, 11, 14, 10], "Zoé": [17, 13]}
         return (meilleur_nom, meilleure_moy)
     ```
 
-    `meilleur(notes)` renvoie `("Zoé", 15.0)`.
+    `meilleur(notes)` renvoie `("Zoé", 15.0)`. Le champion part ici d’une moyenne fictive `-1` (une *sentinelle*), valable parce que toute moyenne est positive. *Autre méthode*, celle du cours : initialiser le champion avec un élément existant, par exemple le premier nom rencontré dans le dictionnaire.
 
     **4.**
 
@@ -763,7 +763,7 @@ soiree = [("Les Pirates du lagon", 60, 6), ("Le Dîner raté", 120, 9),
 
     ??? pouce "Coup de pouce"
 
-        L’ordre se construit avec `sorted(soiree, key=lambda f: f[2], reverse=True)` : la clé `f[2]` est le nombre de points du film `f`. Pour le second critère, la clé devient `f[2] / f[1]`.
+        Comme au TP des algorithmes gloutons, écrire une fonction `points(f)` qui renvoie `f[2]`, le nombre de points du film `f` ; l’ordre se construit alors avec `sorted(soiree, key=points, reverse=True)`. Pour le second critère, une fonction `points_par_minute(f)` renvoie `f[2] / f[1]`.
 
 4.  <span class="run" title="À programmer et tester sur machine">▶</span> Une soirée est un choix de films : chaque film est pris ou non, c’est un bit. Les $2^5 = 32$ soirées possibles correspondent donc aux entiers de $0$ à $31$ écrits en binaire. Écrire `meilleure_soiree(films, duree_max)` qui les essaie toutes et renvoie la meilleure. Les deux gloutons étaient-ils optimaux ?
 
@@ -791,10 +791,16 @@ soiree = [("Les Pirates du lagon", 60, 6), ("Le Dîner raté", 120, 9),
                 reste = reste - duree
         return choisis
 
-    par_points = sorted(soiree, key=lambda f: f[2], reverse=True)
+    def points(f):
+        return f[2]
+
+    def points_par_minute(f):
+        return f[2] / f[1]
+
+    par_points = sorted(soiree, key=points, reverse=True)
     soiree_gloutonne(240, par_points)
     # ['Le Diner rate', 'Mission Mistral']
-    par_minute = sorted(soiree, key=lambda f: f[2] / f[1], reverse=True)
+    par_minute = sorted(soiree, key=points_par_minute, reverse=True)
     soiree_gloutonne(240, par_minute)
     # ['Les Pirates du lagon', 'Mission Mistral', 'La Lettre']
     ```

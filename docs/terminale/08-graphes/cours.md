@@ -426,6 +426,8 @@ def DFS(g, sommet, traites=None):
     return traites
 ```
 
+Le paramètre `traites` a la valeur par défaut `None`, remplacée par une liste neuve au premier appel : c’est la bonne pratique vue au chapitre *Récursivité* (une valeur par défaut `[]` serait partagée d’un appel de l’utilisateur à l’autre).
+
 Sur le graphe précédent, `DFS(g, ’A’)` renvoie `[’A’, ’B’, ’D’, ’C’, ’E’, ’F’, ’G’, ’H’]` : depuis `A` on plonge par `B`, puis `D`, puis `C` (impasse), on remonte, puis `E, F, G, H`.
 
 #### Version itérative, avec une pile
@@ -453,7 +455,7 @@ Sur le graphe précédent, `DFS_iteratif(g, ’A’)` renvoie `[’A’, ’C’
 
     - **En largeur (file)** : on teste `decouverts` **avant d’enfiler**. Chaque sommet n’entre qu’une fois dans la file, et l’ordre « par couches » est respecté.
 
-    - **En profondeur itératif (pile)** : on fait l’inverse, **exprès**. Un sommet peut être empilé plusieurs fois (par plusieurs voisins) ; on le marque `traites` seulement **quand on le dépile**, et on ignore les exemplaires suivants. C’est ce qui garantit que l’on plonge toujours depuis le sommet le plus *récent* : si l’on marquait les sommets dès l’empilement, le parcours obtenu ne serait plus vraiment « en profondeur ».
+    - **En profondeur itératif (pile)** : on fait l’inverse, **exprès**. Un sommet peut être empilé plusieurs fois (par plusieurs voisins) ; on le marque `traites` seulement **quand on le dépile**, et on ignore les exemplaires suivants. C’est ce qui garantit que l’on plonge toujours depuis le sommet le plus *récent* : si l’on marquait les sommets dès l’empilement, le parcours obtenu ne serait plus vraiment « en profondeur ». Exemple : arêtes `A--B`, `A--C`, `B--E`, `C--D`, `C--E`, départ `A`. En marquant dès l’empilement, `A` marque `B` et `C` ; on dépile `C`, qui empile `D` et `E` ; on dépile `E`, dont le voisin `B` est déjà marqué, donc pas empilé : on repart de `D`. Ordre obtenu : `A, C, E, D, B`. Or un vrai parcours en profondeur, arrivé en `E`, continue vers son voisin `B`, encore jamais visité, avant de revenir en arrière : `A, C, E, B, D`, que donne bien `DFS_iteratif`.
 
 !!! remarque "Remarque"
 
@@ -531,7 +533,7 @@ False
 
 !!! remarque "Remarque"
 
-    Ce critère « sommet en cours » resservira au chapitre *Processus* : le **graphe d’attente** des processus est un graphe **orienté**, et un cycle y signale un **interblocage**.
+    Ce critère « sommet en cours » permet enfin de programmer la détection d’interblocage vue au chapitre *Processus* : le **graphe d’attente** des processus y est un graphe **orienté**, et un cycle y signale un **interblocage**.
 
 <span class="horsprog">au-delà du programme</span> **Et pour un graphe pondéré ?** Le BFS trouve le plus court chemin en *nombre d’arêtes*, mais ignore les poids. Pour le plus court chemin en *distance* (un vrai GPS), on utilise l’**algorithme de Dijkstra** (1959), qui visite les sommets par coût total croissant à l’aide d’une file de priorité. C’est l’objet du projet proposé en fin de chapitre — mais vous en connaissez déjà l’idée directrice.
 

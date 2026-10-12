@@ -373,7 +373,7 @@ Reprenons la méthode sur $0{,}1$ : $$0{,}1 \times 2 = \mathbf{0}{,}2 \to \mathb
     False
     ```
 
-    Ce n’est **pas un bug** de Python : c’est la conséquence directe du fait que $0{,}1$ et $0{,}2$ ne sont pas représentables exactement en binaire. Pour comparer deux flottants, on teste si leur écart est *minuscule* : `abs(a - b) < 1e-9`.
+    Ce n’est **pas un bug** de Python : c’est la conséquence directe du fait que $0{,}1$ et $0{,}2$ ne sont pas représentables exactement en binaire. Pour comparer deux flottants, on teste si leur écart est *minuscule* : `abs(a - b) < 1e-9`, où `abs` donne la valeur absolue et `1e-9` désigne $10^{-9}$.
 
 ### Pour aller plus loin : la norme IEEE 754
 

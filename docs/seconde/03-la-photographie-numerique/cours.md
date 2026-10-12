@@ -93,7 +93,7 @@ La synthèse additive : rouge + vert $=$ jaune, les trois ensemble $=$ blanc.
 
 !!! regle "Règle 1"
 
-    Une image en couleurs « brute » stocke 3 nombres par pixel (R, V, B), chacun sur **1 octet**. <span id="lex-poids03" class="ancre"></span>Son **poids** vaut donc environ : $$\text{poids} = \text{largeur} \times \text{hauteur} \times 3 \ \text{octets}.$$ (Les formats comme le JPEG *compressent* ensuite l’image pour réduire ce poids.)
+    Une image en couleurs « brute » stocke 3 nombres par pixel (R, V, B), chacun sur **1 octet** (un **octet** est la petite unité de mémoire qui permet de ranger un nombre entier de $0$ à $255$). <span id="lex-poids03" class="ancre"></span>Son **poids** vaut donc environ : $$\text{poids} = \text{largeur} \times \text{hauteur} \times 3 \ \text{octets}.$$ (Les formats comme le JPEG *compressent* ensuite l’image pour réduire ce poids.)
 
 !!! activite "Activité — Calculer sur les images"
 
@@ -115,6 +115,8 @@ Une image étant un tableau de nombres, on peut la **transformer** avec un progr
 Le pixel $(0,0)$ est en haut à gauche ; $x$ va vers la droite, $y$ vers le bas.
 
 Les programmes de ce chapitre utilisent l’image `terre.jpg` ($500 \times 500$ pixels) : c’est la célèbre photo de la Terre « *The Blue Marble* » prise par l’équipage d’Apollo 17 en 1972, dans le domaine public. Elle est à télécharger ici : <https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/03-photo-image-terre> ; à défaut, n’importe quelle photo `.jpg` renommée `terre.jpg` convient. Elle doit être rangée dans le même dossier que le programme.
+
+La ligne `from PIL import Image` charge l’outil `Image` de la bibliothèque **PIL**, un peu comme `import turtle as t` chargeait la tortue ; on écrit ensuite `Image.open(...)` pour ouvrir une image.
 
 **Lire** un pixel avec `getpixel`, le **modifier** avec `putpixel` :
 
@@ -187,6 +189,8 @@ for numero in exif:
     print(nom, ":", exif[numero])
 ```
 
+Ce programme s’utilise tel quel, sans chercher à en comprendre chaque ligne (la ligne `ExifTags.TAGS.get(...)` va chercher le nom de la métadonnée dans une table fournie par PIL). Pour le GPS, il n’affiche qu’un simple nombre (par exemple `GPSInfo : 70`) : les coordonnées sont rangées à part, dans un sous-dossier des métadonnées ; les logiciels de photo et les sites de lecture EXIF les affichent en clair, comme dans le tableau ci-dessous.
+
 Chaque métadonnée est rangée sous un **numéro** (par exemple 271 pour le fabricant, 272 pour le modèle, 306 pour la date) ; `ExifTags.TAGS` donne le **nom** qui correspond à chaque numéro (`Make`, `Model`, `DateTime`…).
 
 | **Métadonnée EXIF**              | **Valeur (exemple fictif)**    |
@@ -233,7 +237,7 @@ La photo « parfaite » du smartphone n’est pas seulement captée : elle est *
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Une photo numérique est un tableau de nombres : on la traite avec les **boucles** et les **conditions** du chapitre *Les bases de Python*. Ses **métadonnées EXIF** sont des **données** au sens que l’on précisera au chapitre *Données en tables*, et leurs coordonnées viennent du récepteur **GPS** (on le verra au chapitre *Localisation*). Le capteur d’image est un **capteur**, comme ceux des objets connectés que l’on étudiera en fin d’année : il transforme une grandeur physique, la lumière, en nombre. En spécialité NSI de Première, on verra que chaque valeur de 0 à 255 tient sur un octet, c’est-à-dire 8 **bits** en écriture binaire.
+    Une photo numérique est un tableau de nombres : on la traite avec les **boucles** et les **conditions** du chapitre *Les bases de Python*. Ses **métadonnées EXIF** sont des **données** au sens que l’on précisera au chapitre *Données en tables*, et leurs coordonnées viennent du récepteur **GPS** (on le verra au chapitre *Localisation*). Le capteur d’image est un **capteur**, comme ceux des objets connectés que l’on étudiera en fin d’année : il transforme une grandeur physique, la lumière, en nombre. Chaque valeur de 0 à 255 tient sur un octet, c’est-à-dire 8 **bits** (des 0 et des 1) : on reverra le bit au chapitre *Internet*, et l’écriture binaire en spécialité NSI de Première.
 
 ## Bilan — la carte mémoire
 

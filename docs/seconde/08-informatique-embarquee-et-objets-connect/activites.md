@@ -104,7 +104,7 @@ Votre mission : la carte doit surveiller une salle et afficher l’icône **non*
 
 ### <span class="exo-num">Exercice 4</span> — Ce qu’on a découvert <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-informatique-embarquee-et-objets-connect-act-1-4 }
 
-1.  Recopier sur le cahier et compléter avec vos mots.
+1.  Recopier sur le cahier et compléter, en choisissant parmi ces mots : *actionneur*, *capteur*, *programme*, *sans fin*, *communiquer*.
 
     - La partie de la carte qui **mesure** le monde réel s’appelle un …
 
@@ -126,6 +126,6 @@ Votre mission : la carte doit surveiller une salle et afficher l’icône **non*
 
     - Entre les deux, le **programme** décide, et il recommence **sans fin** (en boucle).
 
-    - Les boutons et l’écran permettent à l’humain et à la machine de **communiquer** (de dialoguer) : c’est l’**interface homme-machine**.
+    - Les boutons et l’écran permettent à l’humain et à la machine de **communiquer** (de dialoguer) : le cours appellera cela l’**interface homme-machine**.
 
     **12.** Par exemple : la carte ne fait qu’**une tâche** à la fois (celle qu’on lui a programmée) ; elle n’a ni clavier ni vrai écran ; elle est minuscule et consomme très peu ; elle réagit tout de suite à ce qu’elle mesure.

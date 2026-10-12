@@ -150,7 +150,7 @@ def fib(n):
 
     - **3.**  le nombre d’appels est multiplié par environ $1{,}6$ quand $n$ augmente de $1$ (il fait plus que doubler quand $n$ augmente de $2$) : le coût est **exponentiel**, vite ingérable.
 
-    - **4.**  la **programmation dynamique** (mémoïsation) : on mémorise les valeurs déjà calculées.
+    - **4.**  la **programmation dynamique** (mémoïsation) : on mémorise les valeurs déjà calculées (méthode étudiée au chapitre 11).
 
 ### Écrire des fonctions récursives — les nombres
 
@@ -521,9 +521,9 @@ On dispose d’un tableau `t` **trié** par ordre croissant.
 
 ??? pouce "Coup de pouce"
 
-    Une décomposition de `n` commence soit par `1`, soit par `2` : que reste-t-il alors à décomposer ? Ajouter un second paramètre qui mémorise le début déjà écrit, et l’afficher quand il ne reste plus rien.
+    Une décomposition de `n` commence soit par `1`, soit par `2` : que reste-t-il alors à décomposer ? Ajouter un second paramètre `debut` qui mémorise le début déjà écrit, avec la valeur par défaut `""` (voir le cours, « Un outil Python : le paramètre par défaut »), et l’afficher quand il ne reste plus rien.
 
-*Combien de décompositions pour `decoupe(n)` ? Quelle suite reconnaissez-vous ?*
+*Combien de décompositions pour `decoupe(n)` ? Quelle suite reconnaissez-vous ?* Pourquoi la valeur par défaut `""` est-elle sans danger ici, alors qu’une valeur par défaut `[]` serait un piège ?
 
 ??? corrige "Corrigé"
 
@@ -543,6 +543,8 @@ On dispose d’un tableau `t` **trié** par ordre croissant.
 
     *Le nombre de décompositions de `n` est $u_{n+1}$, où $(u_n)$ est la suite de **Fibonacci** ($u_0=0$, $u_1=1$) : on trouve $1, 2, 3, 5, 8\dots$ pour $n = 1, 2, 3, 4, 5$.*
 
+    La valeur par défaut `""` est sans danger : une chaîne ne se modifie pas, `debut + "1"` fabrique une **nouvelle** chaîne. Avec une liste par défaut (`debut=[]`) remplie par `append`, la même liste serait partagée par tous les appels `decoupe(…)` lancés par l’utilisateur : le deuxième appel repartirait du contenu laissé par le premier. On écrirait alors `debut=None`, puis `if debut is None: debut = []` (voir le cours).
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 22</span> — Triangle de Pascal <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-22 }
 
 Le triangle de Pascal donne les coefficients binomiaux, définis récursivement par $$\binom{n}{p} = \left\lbrace \begin{array}{ll} 1 & \text{si } p = 0 \text{ ou } n = p,\\  \binom{n-1}{p-1} + \binom{n-1}{p} & \text{sinon.} \end{array}\right.$$
@@ -561,6 +563,18 @@ Le triangle de Pascal donne les coefficients binomiaux, définis récursivement 
             return 1
         return pascal(n - 1, p - 1) + pascal(n - 1, p)
     ```
+
+    *Défi.* Pour chaque ligne `n`, on construit une chaîne avec les valeurs `pascal(n, p)`, `p` allant de `0` à `n`, puis on l’affiche :
+
+    ```python
+    for n in range(6):
+        ligne = ""
+        for p in range(n + 1):
+            ligne += str(pascal(n, p)) + " "
+        print(ligne)
+    ```
+
+    On obtient les lignes `1`, `1 1`, `1 2 1`, `1 3 3 1`, `1 4 6 4 1`, `1 5 10 10 5 1`.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 23</span> — Les tours de Hanoï <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-23 }
 
@@ -969,7 +983,7 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
             return nb_solutions(score - 3) + nb_solutions(score - 5) + nb_solutions(score - 7)
         ```
 
-    4.  La **programmation dynamique** (mémoïsation) : on garde en mémoire les valeurs déjà calculées pour ne pas les recalculer.
+    4.  La **programmation dynamique** (mémoïsation) : on garde en mémoire les valeurs déjà calculées pour ne pas les recalculer (méthode étudiée au chapitre 11).
 
     5.
 

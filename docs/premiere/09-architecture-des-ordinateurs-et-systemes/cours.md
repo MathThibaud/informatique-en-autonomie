@@ -34,7 +34,7 @@ En combinant quelques transistors, on fabrique des **portes logiques** qui calcu
 
     - un transistor mesure aujourd’hui de quelques **nanomètres** à quelques dizaines de nanomètres (1 nm $=10^{-9}$ m, soit environ 5 atomes de silicium côte à côte) ; les « 3 nm » annoncés par les fabricants sont un nom commercial plus qu’une vraie mesure ;
 
-    - un processeur de smartphone ou d’ordinateur contient de l’ordre de **plusieurs milliards** de transistors ($10^{10}$) ;
+    - un processeur de smartphone ou d’ordinateur contient **des milliards à des dizaines de milliards** de transistors ($10^{9}$ à $10^{10}$) ;
 
     - il exécute quelques **milliards d’opérations par seconde** : sa **fréquence** est de l’ordre du **gigahertz** (1 GHz $=10^{9}$ battements par seconde).
 
@@ -178,6 +178,10 @@ Pour *dérouler* un vrai programme machine sans se noyer, on utilise une machine
     |    06    |    OUT     |    8    |  5  |  3  |
 
     La sortie est **8**. *Dérouler*, c’est exactement cela : suivre ligne à ligne l’état de l’accumulateur et des cases.
+
+!!! remarque "Remarque — Deux compléments d’écriture"
+
+    `un DAT 1` réserve une case nommée `un` et y range d’avance la valeur `1` (sans valeur, la case vaut `0`). Une étiquette (comme `a` et `b` ci-dessus) peut aussi être placée devant une **instruction** : `BRA boucle` saute alors à l’instruction marquée `boucle`, sans avoir à connaître son adresse.
 
 !!! remarque "Remarque — Sur machine"
 

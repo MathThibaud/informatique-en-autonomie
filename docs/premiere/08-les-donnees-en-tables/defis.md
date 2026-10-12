@@ -22,7 +22,7 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi réinvestit la lecture d’un fichier et le découpage de lignes en champs, vus dans ce chapitre, avec ici plusieurs niveaux de séparateurs.*
+*Ce défi réinvestit la lecture d’un fichier et le découpage de lignes en champs avec `split`, vus dans les défis précédents, avec ici plusieurs niveaux de séparateurs.*
 
 ## Lire l’énoncé
 
@@ -116,7 +116,7 @@ Pour chaque partie, calculer le plus grand nombre de cubes rouges vus dans un m�
 
 ??? pouce "Coup de pouce"
 
-    Trois variables `rouge`, `vert`, `bleu` initialisées à 0 au début de chaque partie, et mises à jour avec `max` à chaque morceau. C’est un calcul de maximum, comme dans le chapitre sur les parcours de tableaux.
+    Trois variables `rouge`, `vert`, `bleu` initialisées à 0 au début de chaque partie, et mises à jour avec un `if` à chaque morceau. C’est un calcul de maximum (patron du champion), comme dans le chapitre sur les parcours de tableaux.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 

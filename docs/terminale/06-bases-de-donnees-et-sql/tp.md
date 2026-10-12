@@ -368,7 +368,7 @@ Insérer ensuite deux équipes et deux joueurs de votre choix, et vérifier dans
     FROM rencontre
     JOIN but ON but.id_rencontre = rencontre.id
     GROUP BY rencontre.id
-    HAVING score_total <> buts_saisis;
+    HAVING rencontre.buts_dom + rencontre.buts_ext <> COUNT(but.id);
     ```
 
     **Q14** : AS Fontvieille 4 – 4 Moneghetti Futsal ; Condamine FC 1 – 0 Rocher Club ; Monte-Carlo United 6 – 2 Larvotto Sporting.  
@@ -381,6 +381,10 @@ Insérer ensuite deux équipes et deux joueurs de votre choix, et vérifier dans
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire et exécuter les requêtes qui traduisent les nouvelles suivantes. **Relire chaque `WHERE` avant d’exécuter.**
 
 1.  La rencontre $14$ (Larvotto Sporting – Condamine FC) s’est terminée sur le score de $1$ à $1$ : buts de Gianni Esposito (joueur $36$) à la $12^\text{e}$ minute et de Diego Carvalho (joueur $11$) à la $29^\text{e}$. Mettre à jour le score, puis insérer les deux buts en **une seule** instruction `INSERT`.
+
+    ??? pouce "Coup de pouce"
+
+        On peut écrire plusieurs n-uplets après `VALUES`, séparés par des virgules : `VALUES (…), (…)`.
 
 2.  La rencontre $15$ est reportée au 11 octobre 2026.
 

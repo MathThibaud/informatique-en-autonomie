@@ -228,7 +228,7 @@ Sortons de l’*impossible* pour entrer dans le *difficile*. Parmi les problème
 
     Un problème est dans la classe **P** s’il existe un algorithme qui le résout en temps **polynomial** (coût majoré par $n^2$, $n^3$, … où $n$ est la taille de l’entrée).
 
-En pratique, « classe P » $\approx$ « résoluble en temps **raisonnable** », même pour de grandes données. On y trouve : **trier** une liste, une **recherche dichotomique**, le **plus court chemin** (Dijkstra), tester si un nombre est **premier**… Tout, sauf les coûts **exponentiels** ($2^n$), qui explosent dès que $n$ dépasse quelques dizaines.
+En pratique, « classe P » $\approx$ « résoluble en temps **raisonnable** », même pour de grandes données. On y trouve : **trier** une liste, une **recherche dichotomique**, le **plus court chemin** (algorithme de Dijkstra <span class="horsprog">au-delà du programme</span>), tester si un nombre est **premier** (grâce à des algorithmes bien plus fins que la division par essais, dont le coût est exponentiel en le nombre de chiffres)… Tout, sauf les coûts **exponentiels** ($2^n$), qui explosent dès que $n$ dépasse quelques dizaines.
 
 ### L’idée reine : trouver, ou seulement vérifier ?
 
@@ -265,6 +265,10 @@ D’abord, une évidence : si on sait **résoudre** vite (P), alors on sait **v
 !!! definition "Définition 7 — Problème NP-complet"
 
     Un problème est **NP-complet** s’il est « parmi les plus durs » de NP : **tout** problème de NP peut s’y **ramener** (réduction en temps polynomial). **SAT** (Cook, 1971), le Sudoku, le voyageur de commerce, la coloration à $3$ couleurs sont NP-complets.
+
+!!! remarque "Remarque — Le sac à dos : NP-complet, et pourtant résolu au chapitre 11 ?"
+
+    Le sac à dos est lui aussi NP-complet. Pourtant, au chapitre *Programmation dynamique*, on l’a résolu en $O(n \times C)$, où $C$ est la capacité. Ce n’est **pas** une contradiction : la taille d’une entrée se mesure en **nombre de bits**. La capacité $C$ s’écrit avec environ $\log_2 C$ bits, donc $C$ vaut environ $2^{\text{nombre de bits}}$ : le coût $n \times C$ est **exponentiel** en la taille de l’entrée. C’est un coût **pseudo-polynomial** : rapide quand les nombres sont petits, impraticable quand ils ont des dizaines de chiffres. Un algorithme vraiment polynomial (en $n$ et en le nombre de bits de $C$) prouverait que P $=$ NP.
 
 Conséquence spectaculaire : si l’on trouvait un jour un algorithme polynomial pour **un seul** problème NP-complet, on en aurait **d’un coup** pour **tous** les problèmes de NP — et alors **P $=$ NP**. À l’inverse, une seule preuve d’impossibilité fermerait la question dans l’autre sens. La quasi-totalité des chercheurs **parient** que **P $\ne$ NP**… sans savoir le démontrer.
 

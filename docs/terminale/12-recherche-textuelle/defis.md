@@ -22,7 +22,7 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi prolonge la recherche textuelle de ce chapitre : on ne cherche plus un motif fixe dans un texte, mais on vérifie si des messages entiers respectent des règles. L’approfondissement 2 réinvestit la mémoïsation du chapitre 8.*
+*Ce défi prolonge la recherche textuelle de ce chapitre : on ne cherche plus un motif fixe dans un texte, mais on vérifie si des messages entiers respectent des règles. L’approfondissement 2 réinvestit la mémoïsation du chapitre 11.*
 
 ## Lire l’énoncé
 

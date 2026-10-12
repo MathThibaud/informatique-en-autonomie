@@ -22,6 +22,8 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
+*Ce défi réinvestit le tri du chapitre précédent ; l’approfondissement 1 fait le lien avec ce chapitre : une liste triée se prête à la recherche dichotomique.*
+
 ## Lire l’énoncé
 
 Vocabulaire utile pour lire le texte original :
@@ -158,6 +160,12 @@ Une autre idée pour `tous_distincts` réutilise le **tri**.
         Comparer `t[i]` et `t[i + 1]` pour `i` de `0` à `len(t) - 2` ; attention à ne pas sortir de la liste.
 
 4.  Pour une ligne de $k$ mots, comparer le nombre de comparaisons de la double boucle et de cette méthode (le tri de Python coûte environ $k \log_2 k$ comparaisons).
+
+5.  **Lien avec la dichotomie.** Une fois la liste de mots triée, comment savoir si un mot donné y figure sans la parcourir en entier ? Combien de comparaisons faut-il au plus pour une liste de $1\,000$ mots ?
+
+    ??? pouce "Coup de pouce"
+
+        Les chaînes se comparent avec `<` dans l’ordre alphabétique : la recherche dichotomique du cours s’applique telle quelle.
 
 !!! encadre "Outil Python : codes des caractères (ord, chr)"
 

@@ -10,11 +10,11 @@
 
 !!! encadre "But du projet"
 
-    Comprendre, dérouler *à la main*, puis **programmer** l’algorithme de Dijkstra, qui calcule le plus court chemin dans un graphe **pondéré** (à poids positifs) — le cœur de tout GPS. <span class="run" title="À programmer et tester sur machine">▶</span>  signale ce qui est à programmer et tester. Un fichier `dijkstra_graphes.py` est **à télécharger** (lien ci-dessus) : les graphes y sont déjà saisis, avec la **trame** des fonctions à compléter (étapes 3 et 4) et des **tests** ; une fois vos fonctions écrites, il affiche les distances et les chemins pour vérifier vos calculs sans tout retaper.
+    **Projet** <span class="horsprog">au-delà du programme</span> : l’algorithme de Dijkstra n’est pas exigible au bac. Il prolonge le parcours en largeur du cours et éclaire le routage (protocole OSPF) du chapitre *Réseaux*. Comprendre, dérouler *à la main*, puis **programmer** l’algorithme de Dijkstra, qui calcule le plus court chemin dans un graphe **pondéré** (à poids positifs) — le cœur de tout GPS. <span class="run" title="À programmer et tester sur machine">▶</span>  signale ce qui est à programmer et tester. Un fichier `dijkstra_graphes.py` est **à télécharger** (lien ci-dessus) : les graphes y sont déjà saisis, avec la **trame** des fonctions à compléter (étapes 3 et 4) et des **tests** ; une fois vos fonctions écrites, il affiche les distances et les chemins pour vérifier vos calculs sans tout retaper.
 
 ## Le problème : et si les arêtes ont un coût ?
 
-Au chapitre *Graphes*, le parcours en largeur (BFS) trouve le plus court chemin en **nombre d’arêtes**. Mais sur une vraie carte, une route peut être longue et une autre courte : les arêtes ont un **poids** (distance, temps, péage…). Le BFS ne sait pas en tenir compte : le trajet avec le moins de villes traversées n’est pas forcément le plus rapide !
+Dans le cours, le parcours en largeur (BFS) trouve le plus court chemin en **nombre d’arêtes**. Mais sur une vraie carte, une route peut être longue et une autre courte : les arêtes ont un **poids** (distance, temps, péage…). Le BFS ne sait pas en tenir compte : le trajet avec le moins de villes traversées n’est pas forcément le plus rapide !
 
 ![](../figures/7f52ac5efc5a6f9c.svg){ .tikz loading=lazy }  
 Le graphe pondéré `G` du projet (poids $=$ distances).
@@ -175,11 +175,18 @@ G_petit = {'A': [('B', 6), ('D', 1)],
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Compléter la fonction `dijkstra` (elle est déjà recopiée, avec ses trous, dans `dijkstra_graphes.py`). Elle renvoie deux dictionnaires : `distance` (distance minimale du départ à chaque sommet) et `precedent` (le prédécesseur de chaque sommet sur un plus court chemin).
 
+!!! encadre "Outil Python : l’infini float(’inf’)"
+
+    Au départ, aucun sommet (sauf le départ) n’a encore été atteint : sa distance est « infinie ». Python dispose d’un nombre spécial, `float(’inf’)`, plus grand que tous les nombres : `float(’inf’) > 10**100` vaut `True`, et `float(’inf’) + 5` vaut encore `float(’inf’)`. Ainsi, le premier chemin trouvé vers un sommet est toujours meilleur que « pas de chemin », sans cas particulier à écrire. On l’utilisera de nouveau au chapitre *Programmation dynamique*.
+
 ```python
 def dijkstra(graphe, depart):
-    distance = {s: float('inf') for s in graphe}
+    distance = {}
+    precedent = {}
+    for s in graphe:
+        distance[s] = float('inf')               # +infini : pas encore atteint
+        precedent[s] = None
     distance[depart] = ...                       # (a)
-    precedent = {s: None for s in graphe}
     a_traiter = [s for s in graphe]              # sommets pas encore fixes
     while a_traiter != []:
         # 1) choisir le sommet non traite de plus petite distance
@@ -215,7 +222,7 @@ On peut tout aussi bien coder Dijkstra à partir d’une **matrice d’adjacence
 ```python
 def dijkstra_matrice(M, depart):
     n = len(M)
-    distance = [float('inf')] * n
+    distance = [float('inf')] * n     # +infini partout
     distance[depart] = ...            # (a)
     precedent = [None] * n
     traite = [False] * n
@@ -243,7 +250,7 @@ def dijkstra_matrice(M, depart):
 
 !!! remarque "Remarque"
 
-    Les deux versions donnent le même résultat : ce sont deux **implémentations** du même algorithme. Le choix dépend de la représentation du graphe — matrice (pratique si le graphe est « dense ») ou listes (économe si le graphe est « creux »), comme au chapitre *Graphes*.
+    Les deux versions donnent le même résultat : ce sont deux **implémentations** du même algorithme. Le choix dépend de la représentation du graphe — matrice (pratique si le graphe est « dense ») ou listes (économe si le graphe est « creux »), comme dans le cours.
 
 ## Pour aller plus loin <span class="horsprog">au-delà du programme</span>
 

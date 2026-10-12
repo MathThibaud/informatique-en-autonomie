@@ -20,7 +20,7 @@
 
 ??? corrige "Corrigé"
 
-    \; premier message ARPANET (**1969**) $\to$ protocole TCP/IP (**1974**) $\to$ naissance d’Internet, bascule TCP/IP (**1983**) $\to$ invention du Web (**1990–91**).
+    \; premier message ARPANET (**1969**) $\to$ protocole TCP/IP (**1974**) $\to$ naissance d’Internet, bascule TCP/IP (**1983**) $\to$ invention du Web (**1989–1991**).
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — « LO…» <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-2 }
 
@@ -66,7 +66,7 @@
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 5</span> — Découper une photo <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-5 }
 
-<span class="tag">sur papier</span>  On envoie une photo de $3$ Mo ($3 \times 10^{6}$ octets). On suppose que chaque paquet transporte $1500$ octets de la photo, et que son étiquette ajoute $40$ octets.
+<span class="tag">sur papier</span>  On envoie une photo de $3$ Mo ($3 \times 10^{6}$ octets). On suppose que chaque paquet transporte $1500$ octets de la photo, et que son étiquette ajoute $40$ octets (on simplifie : en réalité, étiquette comprise, un paquet ne dépasse pas $1500$ octets environ).
 
 1.  En combien de paquets la photo est-elle découpée ?
 
@@ -274,7 +274,7 @@
 
     1.  La page **ne s’affiche pas** (message d’erreur) : le navigateur ne peut pas obtenir l’adresse IP du serveur, donc il ne sait pas à qui envoyer sa requête.
 
-    2.  **Oui** : avec l’adresse IP, le navigateur n’a plus besoin du DNS ; la requête part directement vers le serveur (le reste du réseau fonctionne).
+    2.  **Oui, en principe** : avec l’adresse IP, le navigateur n’a plus besoin du DNS ; la requête part directement vers le serveur (le reste du réseau fonctionne).
 
     3.  Comme un annuaire, le DNS fait correspondre un **nom** facile à retenir à un **numéro** (l’adresse IP) ; sans lui, il faudrait connaître les numéros par cœur.
 
@@ -326,7 +326,7 @@
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 19</span> — Le temps d’un téléchargement <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-19 }
 
-<span class="tag">sur papier</span>  Les débits se mesurent en **bits par seconde** ; $1$ octet $= 8$ bits et $1$ Mbit/s $= 10^{6}$ bits par seconde. On télécharge un film de $4$ Go ($4 \times 10^{9}$ octets).
+<span class="tag">sur papier</span>  Rappel du cours : les débits se mesurent en **bits par seconde** ; $1$ octet $= 8$ bits et $1$ Mbit/s $= 10^{6}$ bits par seconde. On télécharge un film de $4$ Go ($4 \times 10^{9}$ octets).
 
 1.  Combien de **bits** faut-il recevoir ?
 
@@ -346,7 +346,7 @@
 
     1.  $4 \times 10^{9} \times 8 = \mathbf{32 \times 10^{9}}$ bits ($32$ milliards de bits).
 
-    2.  Fibre : $32 \times 10^{9} \div (100 \times 10^{6}) = \mathbf{320}$ **s**, soit environ **5 min 20 s**. ADSL : $32 \times 10^{9} \div (8 \times 10^{6}) = \mathbf{4000}$ **s**, soit environ **1 h 07 min** (plus de douze fois plus long).
+    2.  Fibre : $32 \times 10^{9} \div (100 \times 10^{6}) = \mathbf{320}$ **s**, soit environ **5 min 20 s**. ADSL : $32 \times 10^{9} \div (8 \times 10^{6}) = \mathbf{4000}$ **s**, soit $4000 \div 60 \approx \mathbf{66{,}7}$ **min**, environ **1 h 07 min** (plus de douze fois plus long).
 
     3.  En plus du film, il faut transmettre les **étiquettes** des paquets, renvoyer les paquets **perdus**, et le débit réel est souvent inférieur au débit annoncé (réseau partagé avec d’autres utilisateurs).
 

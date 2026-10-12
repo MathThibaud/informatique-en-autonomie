@@ -144,30 +144,15 @@ Trouver la place libre en temps linéaire sans trier ni utiliser d’ensemble, e
 
     La somme des entiers de $a$ à $b$ vaut $\frac{(a+b)(b-a+1)}{2}$.
 
-!!! encadre "Outil Python : les ensembles (set)"
+!!! encadre "Outil Python : les ensembles (set) — rappel"
 
-    Un **ensemble** est une collection **sans doublon** et **sans ordre** : on ne peut pas y accéder par un indice, on peut seulement ajouter, retirer, et demander si un élément y est. Python sait aussi calculer l’union, l’intersection et la différence de deux ensembles.
-
-    ```python
-    vus = set()              # ensemble vide (attention : {} est un dictionnaire vide)
-    vus.add(5)               # ajout ; ajouter une valeur deja presente ne change rien
-    vus.add(8)
-    print(8 in vus)          # True : test d'appartenance
-    print(len(vus))          # 2
-    a = {1, 2, 3}            # ensemble ecrit directement
-    b = set([2, 3, 4, 4])    # a partir d'une liste : {2, 3, 4}
-    print(a | b)             # union : {1, 2, 3, 4}
-    print(a & b)             # intersection : {2, 3}
-    print(a - b)             # difference : {1}
-    ```
-
-    **Intérêt.** Avec une liste, `x in liste` compare `x` à chaque élément l’un après l’autre : jusqu’à $n$ comparaisons. Un ensemble range ses éléments selon une valeur calculée à partir d’eux (une *fonction de hachage*, comme les clés d’un dictionnaire) : Python va directement là où `x` devrait se trouver. Le test `x in ensemble` prend donc un temps qui ne dépend pas du nombre d’éléments (**temps constant**, en moyenne).
+    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove` et `discard`, test `x in ensemble` en temps constant, union `|`, intersection `&`, différence `-`, éléments non modifiables (tuples).
 
     **À essayer.** Construire l’ensemble des numéros de la liste du défi, puis tester si `602` et `603` en font partie.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 1 : la place libre avec un ensemble <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-8 }
 
-1.  Recopier et exécuter le code de l’encadré, puis répondre à la question « À essayer ».
+1.  Répondre à la question « À essayer » de l’encadré (le code complet est dans le défi *Crab Combat*, chapitre 4).
 
 2.  À la main : les numéros présents sont $\{12, 13, 14, 16, 17\}$. Parcourir les entiers de $12$ à $17$ et dire, pour chacun, s’il est dans l’ensemble. Quelle place est libre ?
 
@@ -277,26 +262,11 @@ Lire tout le fichier en une chaîne et construire une liste de groupes, chaque g
 
     Couper d’abord aux lignes vides (`"\n\n"`), puis couper chaque bloc avec `split()`.
 
-!!! encadre "Outil Python : les ensembles (set)"
+!!! encadre "Outil Python : les ensembles (set) — rappel"
 
-    Un **ensemble** est une collection **sans doublon** et **sans ordre** : on ne peut pas y accéder par un indice, on peut seulement ajouter, retirer, et demander si un élément y est. Python sait aussi calculer l’union, l’intersection et la différence de deux ensembles.
+    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove` et `discard`, test `x in ensemble` en temps constant, union `|`, intersection `&`, différence `-`, éléments non modifiables (tuples).
 
-    ```python
-    vus = set()              # ensemble vide (attention : {} est un dictionnaire vide)
-    vus.add(5)               # ajout ; ajouter une valeur deja presente ne change rien
-    vus.add(8)
-    print(8 in vus)          # True : test d'appartenance
-    print(len(vus))          # 2
-    a = {1, 2, 3}            # ensemble ecrit directement
-    b = set([2, 3, 4, 4])    # a partir d'une liste : {2, 3, 4}
-    print(a | b)             # union : {1, 2, 3, 4}
-    print(a & b)             # intersection : {2, 3}
-    print(a - b)             # difference : {1}
-    ```
-
-    **Intérêt.** Avec une liste, `x in liste` compare `x` à chaque élément l’un après l’autre : jusqu’à $n$ comparaisons. Un ensemble range ses éléments selon une valeur calculée à partir d’eux (une *fonction de hachage*, comme les clés d’un dictionnaire) : Python va directement là où `x` devrait se trouver. Le test `x in ensemble` prend donc un temps qui ne dépend pas du nombre d’éléments (**temps constant**, en moyenne).
-
-    **À essayer.** Que renvoient `set("banane")` et `len(set("banane"))` ?
+    **À essayer.** Que renvoie `len(set("banane"))` ? Et `set("abc") & set("bcd")` ?
 
 ### <span class="exo-num">Exercice 4</span> — Réunir les réponses <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-2-4 }
 

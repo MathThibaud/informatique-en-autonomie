@@ -145,7 +145,7 @@ Le test vérifie aussi que `_taille` est égal à `taille(a._racine)`. Quel est 
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Le plus petit et le plus grand <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-tp-1-4 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `minimum()` et `maximum()`, qui lèvent `ValueError("arbre vide")` sur un arbre vide. Où se trouve la plus petite valeur d’un ABR ? Est-ce forcément une feuille ?
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `minimum()` et `maximum()`, qui lèvent `ValueError("arbre vide")` sur un arbre vide (avec `raise`, comme au chapitre *Programmation orientée objet*). Où se trouve la plus petite valeur d’un ABR ? Est-ce forcément une feuille ?
 
 ??? pouce "Coup de pouce"
 
@@ -192,7 +192,7 @@ Le test vérifie aussi que `_taille` est égal à `taille(a._racine)`. Quel est 
     [1, 3, 5, 7, 9]
     ```
 
-4.  <span class="run" title="À programmer et tester sur machine">▶</span> Tester `tri_abr` sur $200$ listes aléatoires en comparant son résultat à `sorted(set(t))`.
+4.  <span class="run" title="À programmer et tester sur machine">▶</span> Tester `tri_abr` sur $200$ listes aléatoires en comparant son résultat à `sorted(set(t))`, la liste triée sans doublon (`set(t)` est l’**ensemble** des valeurs de `t`, sans répétition : voir l’encadré du défi *Crab Combat*, chapitre 4).
 
 ??? corrige "Corrigé"
 
@@ -340,7 +340,10 @@ Le cours affirme qu’un ABR de $n$ valeurs « bien rempli » a une hauteur proc
         at.inserer(v)
     for arbre in [ar, at]:
         visites = [arbre.contient(v)[1] for v in range(1000)]
-        print(sum(visites) / 1000, max(visites))
+        total = 0
+        for nb in visites:
+            total += nb
+        print(total / 1000, max(visites))
     ```
 
     Arbre au hasard : **11,8** visites en moyenne, **22** au pire (sa hauteur). Arbre trié : **500,5** en moyenne, **1000** au pire — exactement comme une recherche séquentielle dans une liste non triée ($500{,}5$ et $1\,000$). La dichotomie dans une liste triée fait au plus $10$ comparaisons. Un ABR n’est intéressant que s’il reste **peu haut** ; il a alors l’avantage sur la liste triée d’accepter des insertions rapides (pas de décalage).

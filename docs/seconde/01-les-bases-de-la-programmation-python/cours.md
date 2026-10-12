@@ -150,7 +150,7 @@ On retrouve exactement la même organisation que dans Spyder : **on écrit à ga
 
 <span id="cours-01-1" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-01-1) à [3](exercices.md#ex-01-3)** (premiers pas : afficher)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-01-1) et [2](exercices.md#ex-01-2)** (premiers pas : afficher)
 
 ## Les variables
 
@@ -234,9 +234,9 @@ On a le droit de choisir presque n’importe quel nom… mais pas tout à fait 
 | `prix total` | **non**       | contient une espace                         |
 | `prénom` | **oui, mais** | accepté, mais à éviter (préférez `prenom`) |
 
-<span id="cours-01-4" class="ancre"></span>
+<span id="cours-01-3" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[4](exercices.md#ex-01-4) à [7](exercices.md#ex-01-7)** (les variables)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-01-3) à [6](exercices.md#ex-01-6)** (les variables ; l’échange)
 
 ## Les types de données
 
@@ -302,10 +302,6 @@ Ces conversions seront très utiles au § VI, quand on voudra mélanger nombre
 
         `int("12")` donne l’entier `12` (`int`) ; `str(12)` donne le texte `"12"` (`str`) ; `float("3.5")` donne le flottant `3.5` (`float`) ; `int(3.9)` donne l’entier `3` (`int`) : la partie après la virgule est **coupée**, pas arrondie.
 
-<span id="cours-01-8" class="ancre"></span>
-
-<span class="afaire">▶ Exercices d'application :</span> exercices **[8](exercices.md#ex-01-8) et [9](exercices.md#ex-01-9)** (les types ; l’échange)
-
 ## Un peu de calculs
 
 Un ordinateur, c’est d’abord une grosse calculette. Python connaît les opérations habituelles :
@@ -321,6 +317,14 @@ Un ordinateur, c’est d’abord une grosse calculette. Python connaît les opé
 | `**`  | puissance                     | `2 ** 3` donne `8` |
 
 Les deux lignes `//` et `%` méritent une mention spéciale. Elles répondent à la question de l’école primaire : « dans $7$, combien de fois $2$, et combien reste-t-il ? » Réponse : $3$ fois, et il reste $1$. Le modulo `%` est étonnamment utile (par exemple, un nombre est pair si `n % 2` vaut $0$).
+
+!!! regle "Règle 4"
+
+    **Deux règles à retenir.**
+
+    - La division `/` donne **toujours** un `float`, même quand elle « tombe juste » : `6 / 2` donne `3.0` et non `3`. Dès qu’un `float` entre dans un calcul, le résultat est un `float` : `3 * 1.0` donne `3.0`.
+
+    - Python respecte les **priorités opératoires** des maths : d’abord les parenthèses, puis `**`, puis `*`, `/`, `//`, `%`, enfin `+` et `-`. À priorité égale, on calcule de gauche à droite : `2 + 3 * 4` donne `14`, `(2 + 3) * 4` donne `20`.
 
 On peut calculer avec des nombres, mais aussi (et surtout) avec des **variables** :
 
@@ -346,7 +350,7 @@ a = a + 1
 
 En maths, « $a = a + 1$ » est impossible (aucun nombre n’est égal à lui-même plus un). Mais souvenez-vous : en Python, `=` ne veut pas dire « est égal à », il veut dire « **reçoit** ». La règle pour comprendre :
 
-!!! regle "Règle 4"
+!!! regle "Règle 5"
 
     **On lit une affectation de *droite à gauche*.**  
     On calcule d’abord tout ce qui est à droite du `=`, *puis* on range le résultat dans la variable de gauche.
@@ -368,7 +372,7 @@ racine = math.sqrt(16)      # racine carree de 16 -> 4.0
 puissance = math.pow(2, 5)  # 2 puissance 5 -> 32.0
 ```
 
-Quelques fonctions utiles : `math.sqrt(x)` (racine carrée), `math.cos(x)`, `math.sin(x)` (l’angle `x` est en radians, une unité vue en maths), `math.pi` (la constante $\pi$). La liste complète est dans la documentation officielle : <https://docs.python.org/fr/3/library/math.html>.
+Quelques fonctions utiles : `math.sqrt(x)` (racine carrée), `math.cos(x)`, `math.sin(x)` (l’angle `x` est en radians, une unité que vous verrez en maths plus tard), `math.pi` (la constante $\pi$). La liste complète est dans la documentation officielle : <https://docs.python.org/fr/3/library/math.html>.
 
 !!! remarque "Remarque"
 
@@ -392,9 +396,9 @@ Quelques fonctions utiles : `math.sqrt(x)` (racine carrée), `math.cos(x)`, `mat
 
         Pour un rayon de $3$, le programme affiche `28.274333882308138`.
 
-<span id="cours-01-10" class="ancre"></span>
+<span id="cours-01-7" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-01-10) à [16](exercices.md#ex-01-16)** (les calculs)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[7](exercices.md#ex-01-7) à [14](exercices.md#ex-01-14)** (les calculs)
 
 ## Chaînes de caractères, entrées et sorties
 
@@ -461,7 +465,7 @@ print(f"Bonjour {prenom} !")
 
     Souvenir de Scratch : le bloc ![](../figures/e91292b6f90fae8b.svg){ .tikz .tikz-inline loading=lazy } affichait une question et rangeait la réponse dans le bloc ![](../figures/a76743bf4692ab83.svg){ .tikz .tikz-inline loading=lazy }. En Python, `input("...")` fait les deux d’un coup : il pose la question *et* renvoie ce que l’utilisateur a tapé.
 
-!!! regle "Règle 5"
+!!! regle "Règle 6"
 
     **Piège à connaître :** `input` renvoie **toujours du texte** (`str`), même si l’utilisateur tape un nombre ! Pour calculer avec, il faut le **convertir** :
 
@@ -488,9 +492,9 @@ print(f"Bonjour {prenom} !")
 
         Sans les `int(...)`, `a` et `b` seraient du texte : en tapant `3` et `4`, on obtiendrait `34` (concaténation) au lieu de `7`.
 
-<span id="cours-01-17" class="ancre"></span>
+<span id="cours-01-15" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[17](exercices.md#ex-01-17) à [21](exercices.md#ex-01-21)** (chaînes, entrées/sorties)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[15](exercices.md#ex-01-15) à [21](exercices.md#ex-01-21)** (chaînes, entrées/sorties, types)
 
 ## Les fonctions
 
@@ -528,7 +532,7 @@ Décortiquons cette syntaxe, ligne par ligne :
 
 Vous avez remarqué le **décalage** des lignes à l’intérieur de la fonction ? Ce décalage s’appelle l’<span id="lex-indentation01" class="ancre"></span>**indentation**. Il n’est pas décoratif : en Python, c’est lui qui indique quelles lignes appartiennent à la fonction.
 
-!!! regle "Règle 6"
+!!! regle "Règle 7"
 
     **L’indentation définit les « blocs » de code.** Les lignes décalées (4 espaces, ou une tabulation) forment le **corps** de la fonction. Dès qu’une ligne revient à la marge de gauche, elle est *hors* de la fonction.
 
@@ -571,7 +575,7 @@ Une fonction peut recevoir plusieurs paramètres, séparés par des virgules. Le
 
 Voici la confusion la plus fréquente de l’année. Retenez bien la différence :
 
-!!! regle "Règle 7"
+!!! regle "Règle 8"
 
     $\bullet$ `print(...)` **affiche** quelque chose à l’écran (pour l’humain). Ça *ne* renvoie *rien* d’utilisable par le programme.  
     $\bullet$ `return ...` **renvoie** une valeur au programme (pour la machine). On peut la ranger dans une variable et la réutiliser.
@@ -628,7 +632,7 @@ Une **comparaison** produit un booléen. Le test d’égalité s’écrit avec u
     7 == 7     # renvoie True
     ```
 
-!!! regle "Règle 8"
+!!! regle "Règle 9"
 
     **Ne confondez jamais `=` et `==` !**  
     $\bullet$ `=` **affecte** une valeur : `age = 15` range $15$ dans `age`.  
@@ -830,7 +834,7 @@ Tant que la condition `i < 10` est vraie, le bloc indenté se répète. À chaqu
 
 ![](../figures/4899117055467d13.svg){ .tikz loading=lazy }
 
-!!! regle "Règle 9"
+!!! regle "Règle 10"
 
     **Danger : la boucle infinie !** Si la condition d’un `while` ne devient *jamais* fausse, le programme tourne pour l’éternité (ou jusqu’à ce qu’on l’arrête). Dans l’exemple ci-dessus, si on oublie la ligne `i = i + 1`, alors `i` reste à $0$, la condition `i < 10` reste vraie… et Python affiche $0$ jusqu’à la fin des temps. Pour arrêter un programme emballé dans Spyder : le bouton **stop** rouge (ou ![](../figures/1b1e09926fd5397b.svg){ .tikz .tikz-inline loading=lazy } + ![](../figures/5d5fe4ddcb92d6f5.svg){ .tikz .tikz-inline loading=lazy } dans la console).
 

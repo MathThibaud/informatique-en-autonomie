@@ -228,6 +228,8 @@ def sac_a_dos(poids, valeurs, capacite):
 
     Le sac à dos « entier » (on prend un objet ou pas, jamais un morceau) n’a **pas** de bon algorithme glouton : c’est justement ce qui le rend intéressant. Sa version dynamique remplit une table de taille $n \times C$, donc en coût $O(n \times C)$ — bien mieux que d’essayer les $2^n$ sous-ensembles d’objets.
 
+    **Une nuance importante.** Ce coût est polynomial en la **valeur** de $C$, mais pas en sa **taille**. Écrite en binaire avec $b$ bits, la capacité peut valoir jusqu’à $2^b$ : la table a alors de l’ordre de $n \times 2^b$ cases. Chaque bit ajouté à $C$ double la table : le coût est **exponentiel** en la taille de $C$. On parle de coût **pseudo-polynomial** : l’algorithme est excellent pour une capacité de quelques milliers, mais inutilisable pour une capacité de $30$ chiffres. On verra au chapitre *Calculabilité* pourquoi cette nuance compte.
+
 <span id="cours-11-12" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[12](exercices.md#ex-11-12) et [13](exercices.md#ex-11-13)** (les chemins d’un robot, le sac à dos)
@@ -317,7 +319,7 @@ def distance(a, b):
 
     On lit la distance dans le coin en bas à droite : $D[5][5] = \textbf{3}$. C’est logique : on garde `CH`, puis on **substitue** `I`$\to$`A`, `E`$\to$`T`, `N`$\to$`S`, soit trois opérations.
 
-En remontant la table (comme pour le rendu de monnaie), on peut même retrouver la *suite précise* des corrections : c’est exactement ce que fait un correcteur orthographique pour proposer les mots les plus « proches » de celui que vous avez tapé.
+En remontant la table (comme pour la plus longue sous-séquence commune), on peut même retrouver la *suite précise* des corrections : c’est exactement ce que fait un correcteur orthographique pour proposer les mots les plus « proches » de celui que vous avez tapé.
 
 <span id="cours-11-15" class="ancre"></span>
 

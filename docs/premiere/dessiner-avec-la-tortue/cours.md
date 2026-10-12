@@ -104,7 +104,7 @@ t.done()
 
     Pour fermer un polygone régulier à `n` côtés, la tortue doit avoir tourné en tout de $360^\circ$. À chaque sommet, elle tourne donc de $\dfrac{360}{n}$ degrés.
 
-Un hexagone (6 côtés, on tourne de $360/6 = 60^\circ$) et une étoile deviennent immédiats :
+Un hexagone (6 côtés, on tourne de $360/6 = 60^\circ$) devient immédiat ; l’étoile, dessinée à côté, demande deux tours complets ($720^\circ$) : ce sera un exercice.
 
 ```python
 import turtle as t
@@ -188,7 +188,7 @@ t.done()
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Ce complément met en images les boucles et les fonctions du chapitre *Les bases de la programmation Python*, et `turtle` est une **bibliothèque**, au sens que précisera le chapitre *Spécifier et mettre au point ses programmes*. En Terminale, la tortue tracera des fractales au chapitre *La récursivité*.
+    Ce complément met en images les boucles et les fonctions du chapitre *Les bases de la programmation Python*, et `turtle` est une **bibliothèque**, au sens vu dans ce même chapitre (section *Les fonctions*). En Terminale, la tortue tracera des fractales au chapitre *La récursivité*.
 
 ## Mémo
 

@@ -180,7 +180,7 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
 
     ```python
     from PIL import Image
-    img = Image.open("terre.jpg")
+    img = Image.open("terre.jpg").convert("RGB")
     r, v, b = img.getpixel((120, 200))
     print("Rouge :", r, " Vert :", v, " Bleu :", b)
     ```
@@ -228,7 +228,7 @@ img.show()
 
     ```python
     from PIL import Image
-    img = Image.open("terre.jpg")
+    img = Image.open("terre.jpg").convert("RGB")
     largeur, hauteur = img.size
     for y in range(hauteur):
         for x in range(largeur):
@@ -251,7 +251,7 @@ img.show()
 
     ```python
     from PIL import Image
-    img = Image.open("terre.jpg")
+    img = Image.open("terre.jpg").convert("RGB")
     largeur, hauteur = img.size
     for y in range(hauteur):
         for x in range(largeur):
@@ -283,7 +283,7 @@ img.show()
 
     ```python
     from PIL import Image
-    img = Image.open("terre.jpg")
+    img = Image.open("terre.jpg").convert("RGB")
     largeur, hauteur = img.size
     for y in range(hauteur):
         for x in range(largeur):
@@ -316,7 +316,7 @@ img.show()
 
     ```python
     from PIL import Image
-    img = Image.open("terre.jpg")
+    img = Image.open("terre.jpg").convert("RGB")
     largeur, hauteur = img.size
     for y in range(hauteur):
         for x in range(largeur // 2):
@@ -377,4 +377,4 @@ img.show()
 
     **1.** Le début est juste : $6000 \times 4000 = 24\,000\,000$ pixels (24 Mpx), $3$ octets par pixel, donc $72\,000\,000$ octets $\approx 72$ Mo brut, réduits par la compression JPEG. En revanche, $30$ cm $= 30 / 2{,}54 \approx 11{,}8$ pouces, et $6000 / 11{,}8 \approx \mathbf{508}$ ppp, pas $6000$.  
     **2.** L’assistant a confondu la **définition** (le nombre de pixels : $6000$ en largeur) et la **résolution** (le nombre de pixels *par pouce*) ; le cours précise : « la résolution est le nombre de pixels par unité de longueur ». La valeur juste est environ $508$ ppp — la conclusion (impression de bonne qualité) reste vraie, mais le nombre est faux.  
-    **3.** Un ordre de grandeur suffisait : $6000$ ppp sur $11{,}8$ pouces exigerait $6000 \times 11{,}8 \approx 71\,000$ pixels de large, six fois plus que la photo n’en possède. Dès qu’une réponse annonce une résolution, vérifier l’unité (pixels *par pouce*) et refaire la division.
+    **3.** Un ordre de grandeur suffisait : $6000$ ppp sur $11{,}8$ pouces exigerait $6000 \times 11{,}8 \approx 71\,000$ pixels de large, près de **douze fois** plus que la photo n’en possède ($71\,000 / 6000 \approx 11{,}8$). Dès qu’une réponse annonce une résolution, vérifier l’unité (pixels *par pouce*) et refaire la division.

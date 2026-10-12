@@ -409,7 +409,7 @@ Naviguer n’est jamais tout à fait anonyme, et laisser un site exécuter du co
 
 !!! regle "Règle 12 — Cookies et traces"
 
-    Un <span id="lex-cookie04" class="ancre"></span>**cookie** est un petit fichier qu’un site dépose dans votre navigateur pour vous **reconnaître** (rester connecté, retenir un panier…) — mais aussi pour **vous suivre** d’un site à l’autre à des fins publicitaires. Chaque visite laisse des **traces** : **historique**, adresse **IP**, cookies.
+    Un <span id="lex-cookie04" class="ancre"></span>**cookie** est un petit fichier qu’un site dépose dans votre navigateur pour vous **reconnaître** (rester connecté, retenir un panier…) — mais aussi pour **vous suivre** d’un site à l’autre à des fins publicitaires. Chaque visite laisse des **traces** : **historique**, adresse **IP** (l’adresse de votre appareil sur le réseau, qu’on étudiera au chapitre *Internet*), cookies.
 
 !!! regle "Règle 13 — Les réglages importants du navigateur"
 

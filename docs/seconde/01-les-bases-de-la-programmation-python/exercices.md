@@ -44,33 +44,9 @@
     print("Dessert : tarte aux pommes")
     ```
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Texte ou calcul ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-3 }
+### Variables
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui affiche **exactement** les trois lignes ci-dessous. La deuxième doit être *calculée* par Python (interdit d’écrire `17` soi-même !).
-
-```text
-12 + 5
-17
-Bonjour Monaco
-```
-
-??? pouce "Coup de pouce"
-
-    Pour la troisième ligne, collez deux morceaux de texte avec `+` (sans oublier l’espace entre les deux mots).
-
-??? corrige "Corrigé"
-
-    Entre guillemets, Python affiche le texte tel quel ; sans guillemets, il calcule. Le `+` entre deux textes les colle (attention à l’espace après *Bonjour*).
-
-    ```python
-    print("12 + 5")
-    print(12 + 5)
-    print("Bonjour " + "Monaco")
-    ```
-
-### Variables et types
-
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Deux variables <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-4 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Deux variables <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-3 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Créer une variable `sport` contenant son sport préféré (du texte) et une variable `heures` contenant le nombre d’heures qu’on y consacre par semaine (un nombre), puis les afficher.
 
@@ -85,7 +61,7 @@ Bonjour Monaco
     print(heures)
     ```
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Valeur finale <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-5 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Valeur finale <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-4 }
 
 <span class="tag">sur papier</span>  Sans machine, donner la valeur finale de `a` *et* de `b`, puis vérifier.
 
@@ -99,7 +75,7 @@ a = 10
 
     *Sur papier.* `a` $= \mathbf{10}$ et `b` $= \mathbf{6}$. La valeur de `b` a été calculée *une fois pour toutes* quand `a` valait $5$ : modifier `a` ensuite ne change pas `b`.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — Des noms parlants <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-6 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Des noms parlants <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-5 }
 
 <span class="tag">sur papier</span>  Ce programme calcule le prix de $3$ places de cinéma à $12$ €, mais ses noms de variables ne veulent rien dire :
 
@@ -121,45 +97,7 @@ z = x * y
 
     2.  `prix place` contient une espace ; `3places` commence par un chiffre ; `total€` contient un symbole (`€`) interdit dans un nom.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — La tirelire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-7 }
-
-<span class="run" title="À programmer et tester sur machine">▶</span>  La variable `tirelire` de Léa vaut $20$. Sa grand-mère **double** son contenu, puis Léa dépense $15$ € au cinéma, puis elle ajoute $8$ € d’argent de poche. En modifiant `tirelire` à chaque étape, afficher le contenu final (attendu : $33$).
-
-??? pouce "Coup de pouce"
-
-    Chaque étape s’écrit `tirelire = ...` en partant de l’ancienne valeur de `tirelire`.
-
-??? corrige "Corrigé"
-
-    On met à jour `tirelire` à partir de sa propre valeur, étape par étape.
-
-    ```python
-    tirelire = 20
-    tirelire = tirelire * 2    # 40
-    tirelire = tirelire - 15   # 25
-    tirelire = tirelire + 8    # 33
-    print(tirelire)
-    ```
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Le type d’un résultat <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-8 }
-
-<span class="tag">sur papier</span>  Sans machine, donner la valeur et le type (`int`, `float` ou `str`) du **résultat** de chaque expression, puis vérifier avec `type(...)` : `7 + 2` ; `7 / 7` ; `"7" + "2"` ; `3 * 1.0` ; `int("5") + 1` ; `str(4) + "0"`.
-
-??? pouce "Coup de pouce"
-
-    Pour chaque expression, demandez-vous si les valeurs sont des nombres ou du texte (entre guillemets). Relisez dans le cours ce que donne toujours la division `/`.
-
-??? corrige "Corrigé"
-
-    *Sur papier.*
-
-    - `7 + 2` $\to$ `9` (`int`) ; `7 / 7` $\to$ `1.0` (`float` : la division `/` donne toujours un flottant) ;
-
-    - `"7" + "2"` $\to$ `"72"` (`str` : on colle deux textes) ; `3 * 1.0` $\to$ `3.0` (`float`) ;
-
-    - `int("5") + 1` $\to$ `6` (`int`) ; `str(4) + "0"` $\to$ `"40"` (`str`).
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — L’échange <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-9 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — L’échange <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-6 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  On a `a = 1` et `b = 2`. Écrire les instructions qui **échangent** leurs valeurs (à la fin, `a` vaut $2$ et `b` vaut $1$).
 
@@ -181,7 +119,7 @@ z = x * y
 
 ### Calculs
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 10</span> — Somme et produit <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-10 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 7</span> — Somme et produit <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-7 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Ranger deux nombres dans `a` et `b`, puis afficher leur somme *et* leur produit.
 
@@ -194,7 +132,7 @@ z = x * y
     print(a * b)   # 24
     ```
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 11</span> — Le trajet <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-11 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Le trajet <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-8 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  À partir de deux variables `vitesse` (en km/h) et `duree` (en heures), calculer et afficher la distance parcourue. Test : $90$ km/h pendant $2{,}5$ h donnent $225$ km.
 
@@ -208,7 +146,27 @@ z = x * y
     print(vitesse * duree)   # 225.0
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Priorités de calcul <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-12 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — La tirelire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-9 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  La variable `tirelire` de Léa vaut $20$. Sa grand-mère **double** son contenu, puis Léa dépense $15$ € au cinéma, puis elle ajoute $8$ € d’argent de poche. En modifiant `tirelire` à chaque étape, afficher le contenu final (attendu : $33$).
+
+??? pouce "Coup de pouce"
+
+    Chaque étape s’écrit `tirelire = ...` en partant de l’ancienne valeur de `tirelire`.
+
+??? corrige "Corrigé"
+
+    On met à jour `tirelire` à partir de sa propre valeur, étape par étape.
+
+    ```python
+    tirelire = 20
+    tirelire = tirelire * 2    # 40
+    tirelire = tirelire - 15   # 25
+    tirelire = tirelire + 8    # 33
+    print(tirelire)
+    ```
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Priorités de calcul <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-10 }
 
 <span class="tag">sur papier</span>  Python respecte les priorités opératoires des maths. Sans machine, donner la valeur *et* le type de chaque résultat, puis vérifier.
 
@@ -238,7 +196,7 @@ z = x * y
 
     - `20 // 3 % 2` $= 0$ (`int`) : même priorité, on calcule de gauche à droite, `20 // 3` $= 6$ puis `6 % 2` $= 0$.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — La moyenne avec coefficients <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-13 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — La moyenne avec coefficients <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-11 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Un élève a $14$ en maths (coefficient $3$), $11$ en français (coefficient $2$) et $17$ en SNT (coefficient $1$). Ranger notes et coefficients dans des variables, puis calculer et afficher sa moyenne pondérée (attendu : $13{,}5$).
 
@@ -251,15 +209,18 @@ z = x * y
     On additionne les notes multipliées par leur coefficient, puis on divise par la *somme des coefficients* (et non par le nombre de notes).
 
     ```python
-    maths, coef_maths = 14, 3
-    francais, coef_francais = 11, 2
-    snt, coef_snt = 17, 1
+    maths = 14
+    coef_maths = 3
+    francais = 11
+    coef_francais = 2
+    snt = 17
+    coef_snt = 1
     total = maths * coef_maths + francais * coef_francais + snt * coef_snt
     moyenne = total / (coef_maths + coef_francais + coef_snt)
     print(moyenne)   # 13.5
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Le solde <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-14 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Le solde <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-12 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Un article coûte $80$ €. Le magasin fait une remise de $25\,\%$. Écrire un programme qui calcule et affiche le prix après remise.
 
@@ -269,7 +230,7 @@ z = x * y
 
 ??? corrige "Corrigé"
 
-    Une remise de $25\,\%$, c’est payer $75\,\%$ du prix.
+    On calcule d’abord le montant de la remise ($25\,\%$ de $80$, soit $20$ €), puis on le retire du prix de départ. (Autre écriture : payer $75\,\%$ du prix, `prix * 75 / 100`.)
 
     ```python
     prix = 80
@@ -277,7 +238,7 @@ z = x * y
     print(prix - remise)   # 60.0
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Quel jour serons-nous ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-15 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Quel jour serons-nous ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-13 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  On numérote les jours de la semaine : lundi $= 0$, mardi $= 1$, …, dimanche $= 6$. Aujourd’hui, c’est mercredi (jour $2$). Écrire un programme qui calcule et affiche :
 
@@ -299,7 +260,7 @@ z = x * y
     print((aujourd_hui + 100) % 7)      # 4, c'est-a-dire vendredi
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 16</span> — Le rendu de monnaie <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-16 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Le rendu de monnaie <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-14 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui, à partir d’une somme en euros entiers (variable `montant`), affiche comment la payer avec le **moins de coupures possible** en billets de $10$, pièces de $2$ et pièces de $1$. Par exemple pour $27$ € : $2$ billets de $10$, $3$ pièces de $2$, $1$ pièce de $1$ ($20 + 6 + 1 = 27$).
 
@@ -323,16 +284,40 @@ z = x * y
     reste = montant % 10          # 7
     pieces2 = reste // 2          # 3
     pieces1 = reste % 2           # 1
-    print(billets10, "billet(s) de 10")
-    print(pieces2, "piece(s) de 2")
-    print(pieces1, "piece(s) de 1")
+    print(f"{billets10} billet(s) de 10")
+    print(f"{pieces2} piece(s) de 2")
+    print(f"{pieces1} piece(s) de 1")
     ```
 
     *Vérification : $2 \times 10 + 3 \times 2 + 1 \times 1 = 27$.*
 
 ### Chaînes de caractères et dialogue
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 17</span> — Nom de code <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-17 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 15</span> — Texte ou calcul ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-15 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui affiche **exactement** les trois lignes ci-dessous. La deuxième doit être *calculée* par Python (interdit d’écrire `17` soi-même !).
+
+```text
+12 + 5
+17
+Bonjour Monaco
+```
+
+??? pouce "Coup de pouce"
+
+    Pour la troisième ligne, collez deux morceaux de texte avec `+` (sans oublier l’espace entre les deux mots).
+
+??? corrige "Corrigé"
+
+    Entre guillemets, Python affiche le texte tel quel ; sans guillemets, il calcule. Le `+` entre deux textes les colle (attention à l’espace après *Bonjour*).
+
+    ```python
+    print("12 + 5")
+    print(12 + 5)
+    print("Bonjour " + "Monaco")
+    ```
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 16</span> — Nom de code <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-16 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Demander à l’utilisateur son prénom, puis sa ville, et afficher à l’aide d’une f-string : « Agent *prénom*, votre mission vous attend à *ville*. »
 
@@ -343,6 +328,24 @@ z = x * y
     ville = input("Ta ville ? ")
     print(f"Agent {prenom}, votre mission vous attend a {ville}.")
     ```
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Le type d’un résultat <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-17 }
+
+<span class="tag">sur papier</span>  Sans machine, donner la valeur et le type (`int`, `float` ou `str`) du **résultat** de chaque expression, puis vérifier avec `type(...)` : `7 + 2` ; `7 / 7` ; `"7" + "2"` ; `3 * 1.0` ; `int("5") + 1` ; `str(4) + "0"`.
+
+??? pouce "Coup de pouce"
+
+    Pour chaque expression, demandez-vous si les valeurs sont des nombres ou du texte (entre guillemets). Relisez dans le cours ce que donne toujours la division `/`.
+
+??? corrige "Corrigé"
+
+    *Sur papier.*
+
+    - `7 + 2` $\to$ `9` (`int`) ; `7 / 7` $\to$ `1.0` (`float` : la division `/` donne toujours un flottant) ;
+
+    - `"7" + "2"` $\to$ `"72"` (`str` : on colle deux textes) ; `3 * 1.0` $\to$ `3.0` (`float`) ;
+
+    - `int("5") + 1` $\to$ `6` (`int`) ; `str(4) + "0"` $\to$ `"40"` (`str`).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Le temps d’écran <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-18 }
 
@@ -417,17 +420,17 @@ TOTAL : 4.5 euros
 
 ??? corrige "Corrigé"
 
-    On convertit chaque saisie dans le bon type, on calcule le total, puis on affiche les tirets « à la main » avant et après.
+    On convertit chaque saisie dans le bon type, on calcule le total, puis on affiche une ligne de tirets avant et après (`"-" * 20` répète le tiret $20$ fois).
 
     ```python
     article = input("Article : ")
     prix = float(input("Prix unitaire : "))
     quantite = int(input("Quantite : "))
-    print("--------------------")
+    print("-" * 20)
     print(f"{quantite} x {article}")
     print(f"Prix unitaire : {prix}")
     print(f"TOTAL : {prix * quantite} euros")
-    print("--------------------")
+    print("-" * 20)
     ```
 
 ### Les fonctions
@@ -723,7 +726,9 @@ print(f(g(2)) + 1)
         else:
             return "pleine"
 
-    print(icone(5), icone(50), icone(100))   # critique moyenne pleine
+    print(icone(5))     # critique
+    print(icone(50))    # moyenne
+    print(icone(100))   # pleine
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 36</span> — Le maximum de trois <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-36 }
@@ -743,16 +748,16 @@ print(f(g(2)) + 1)
 
 ??? corrige "Corrigé"
 
-    On garde le plus grand vu jusqu’ici dans une variable `m`.
+    On garde le plus grand vu jusqu’ici dans une variable `grand`.
 
     ```python
     def max3(a, b, c):
-        m = a
-        if b > m:
-            m = b
-        if c > m:
-            m = c
-        return m
+        grand = a
+        if b > grand:
+            grand = b
+        if c > grand:
+            grand = c
+        return grand
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 37</span> — Année bissextile <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-37 }
@@ -772,15 +777,29 @@ print(f(g(2)) + 1)
 
 ??? corrige "Corrigé"
 
-    On traduit la règle : divisible par $4$ **et** pas par $100$, **ou** divisible par $400$.
+    On traite les cas du plus particulier au plus général : d’abord $400$, puis $100$, puis $4$ (le premier test vrai l’emporte).
 
     ```python
     def bissextile(annee):
-        return (annee % 4 == 0 and annee % 100 != 0) or (annee % 400 == 0)
+        if annee % 400 == 0:
+            return True
+        elif annee % 100 == 0:
+            return False
+        elif annee % 4 == 0:
+            return True
+        else:
+            return False
 
     print(bissextile(2024))   # True
     print(bissextile(1900))   # False
     print(bissextile(2000))   # True
+    ```
+
+    Autre écriture, en une seule condition : divisible par $4$ **et** pas par $100$, **ou** divisible par $400$.
+
+    ```python
+    def bissextile(annee):
+        return (annee % 4 == 0 and annee % 100 != 0) or (annee % 400 == 0)
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 38</span> — Un triangle est-il possible ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-38 }
@@ -918,7 +937,7 @@ for i in range(4):
     print(compteur)   # 142
     ```
 
-    Autre méthode : `len(range(7, 1001, 7))`, ou tout simplement `1000 // 7`.
+    Autre méthode, sans boucle : tout simplement `1000 // 7`.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 45</span> — Le livret d’épargne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-45 }
 
@@ -1007,6 +1026,8 @@ for i in range(4):
         return True
     ```
 
+    `return` arrête **immédiatement** la fonction, même au milieu d’une boucle : dès qu’un diviseur est trouvé, on renvoie `False` sans tester les suivants. Si la boucle va jusqu’au bout sans trouver de diviseur, on arrive à la dernière ligne, `return True`.
+
 ### Petits défis de synthèse
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 48</span> — Fizz <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-48 }
@@ -1087,13 +1108,13 @@ for i in range(4):
     ```python
     somme = 0
     nombre = 0
-    note = int(input("Note (-1 pour finir) : "))
+    note = float(input("Note (-1 pour finir) : "))
     while note != -1:
         somme = somme + note
         nombre = nombre + 1
-        note = int(input("Note (-1 pour finir) : "))
+        note = float(input("Note (-1 pour finir) : "))
     if nombre > 0:
-        print("Moyenne :", somme / nombre)
+        print(f"Moyenne : {somme / nombre}")
     else:
         print("Aucune note saisie.")
     ```

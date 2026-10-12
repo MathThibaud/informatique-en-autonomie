@@ -160,7 +160,7 @@ C’est le cœur du chapitre — et du métier de data-détective. Trois opérat
 
 !!! exemple "Exemple(s) — Filtrer puis trier"
 
-    *« Les jeux tout public (`pegi` $\leqslant$ 7), du plus récent au plus ancien. »* On **filtre** d’abord (`pegi` vaut 3 ou 7) : Wii Sports, Mario Kart 8, Animal Crossing. Puis on **trie** par `annee` décroissante : Animal Crossing (2020), Mario Kart 8 (2014), Wii Sports (2006).
+    *« Les jeux tout public (`pegi` $\leqslant$ 7), du plus récent au plus ancien. »* On **filtre** d’abord (`pegi` vaut 3 ou 7) : Minecraft, Wii Sports, Mario Kart 8, Animal Crossing. Puis on **trie** par `annee` décroissante : Animal Crossing (2020), Mario Kart 8 (2014), Minecraft (2011), Wii Sports (2006).
 
 !!! remarque "Remarque — Un critère peut en combiner plusieurs"
 
@@ -216,7 +216,7 @@ Pour réaliser ces opérations *sans programmer*, l’outil roi est le <span id=
 
 !!! remarque "Remarque"
 
-    Le tableur reste **le** logiciel le plus utilisé au monde pour manipuler des données. Les **TP tableur** proposés en fin de chapitre le font pratiquer avec de vrais fichiers : c’est là qu’on devient efficace. *(Attention toutefois au piège du §III : un tableur a des **limites** cachées que le CSV n’a pas.)*
+    Le tableur reste **le** logiciel le plus utilisé au monde pour manipuler des données. Les **TP tableur** proposés en fin de chapitre en font pratiquer les gestes de base (formules, recopie, calculs sur une colonne) ; les mêmes gestes servent ensuite à trier et filtrer une vraie table, par exemple `jeux.csv` ouvert dans le tableur (menu *Données* : *Trier*, *Filtre automatique*). *(Attention toutefois au piège du §III : un tableur a des **limites** cachées que le CSV n’a pas.)*
 
 <span id="cours-05-14" class="ancre"></span>
 

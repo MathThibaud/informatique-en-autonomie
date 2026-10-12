@@ -293,24 +293,11 @@ kesa zuli brak (contains milk)
 
 ## Programmer la partie 1
 
-!!! encadre "Outil Python : les ensembles (set) et leurs opérations"
+!!! encadre "Outil Python : les ensembles (set) — rappel"
 
-    Un **ensemble** est une collection **sans doublon** et **sans ordre** (pas d’indice). Python fournit les opérations des mathématiques : intersection `&` (éléments communs), réunion `|` (éléments de l’un ou de l’autre), différence `-` (éléments du premier qui ne sont pas dans le second).
+    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove` et `discard`, test `x in ensemble` en temps constant, union `|`, intersection `&`, différence `-`, éléments non modifiables (tuples).
 
-    ```python
-    a = set("brak zuli monto".split())   # {'brak', 'zuli', 'monto'}
-    b = {"zuli", "kesa", "brak"}
-    print(a & b)          # {'brak', 'zuli'}   intersection
-    print(a | b)          # 4 elements          reunion
-    print(a - b)          # {'monto'}           difference
-    print("kesa" in b)    # True : test tres rapide
-    b.add("tolu")         # ajout (sans effet si deja present)
-    b.discard("kesa")     # retrait (sans erreur si absent)
-    x = b.pop()           # retire et renvoie un element quelconque
-    vide = set()          # attention : {} est un dictionnaire vide
-    ```
-
-    **Intérêt.** Ces opérations s’écrivent en une ligne et sont rapides : tester si un élément appartient à un ensemble prend un temps qui ne dépend pas de sa taille, contrairement à une liste. Question : recopier ce code ; que vaut `b - a` après les deux premières lignes ? Et `len(a & set())` ?
+    **À essayer.** Avec `a = set("brak zuli monto".split())` et `b = {"zuli", "kesa", "brak"}`, que valent `a & b`, `a - b` et `b - a` ? Et `len(a & set())` ?
 
 ### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-2-3 }
 

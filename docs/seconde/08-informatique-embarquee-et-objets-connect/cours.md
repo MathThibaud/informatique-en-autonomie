@@ -98,9 +98,15 @@ Le cœur d’un objet embarqué est un **programme** qui répète sans fin le m�
 
     On reconnaît le cycle : **lire** la température, **décider** (`if`), **agir** sur le radiateur, **recommencer**.
 
+!!! remarque "Remarque — Deux nouveautés : while True et les fonctions de la carte"
+
+    - La boucle `while True:` se répète « tant que `True` est vrai ». Or `True` est **toujours** vrai : la boucle ne s’arrête jamais. Au chapitre *Les bases de Python*, une boucle sans fin était un piège, car le programme ne se terminait pas. Ici, c’est **voulu** : un objet embarqué doit surveiller et réagir tant qu’il est allumé. Son microcontrôleur n’exécute que ce programme, de la mise sous tension jusqu’à ce qu’on coupe le courant ; il n’a rien d’autre à faire.
+
+    - `lire_temperature()`, `allumer_chauffage()`, `attendre(60)`… ne sont pas des fonctions de Python : dans un vrai objet, elles sont fournies avec la carte électronique, et on les **appelle** comme `print` ou `input`, sans savoir comment elles fonctionnent à l’intérieur. Une fonction `lire_…()` renvoie la mesure du capteur ; `allumer_…()` ou `eteindre_…()` commande un actionneur ; `attendre(n)` met le programme en **pause** pendant `n` secondes. Comme aucune carte n’est branchée à votre ordinateur, ces programmes s’écrivent **sur papier**.
+
 !!! remarque "Remarque — C’est un algorithme comme un autre"
 
-    La « décision » n’est qu’une suite de **conditions** et de **boucles** — exactement ce que vous savez déjà écrire (chapitre *Les bases de Python*). Un volet qui se ferme quand la nuit tombe, un arrosage qui se déclenche quand la terre est sèche : même boucle, autres capteurs et actionneurs.
+    La « décision » n’est qu’une suite de **conditions** et de **boucles** — ce que vous savez déjà écrire (chapitre *Les bases de Python*), avec en plus la boucle sans fin `while True`. Un volet qui se ferme quand la nuit tombe, un arrosage qui se déclenche quand la terre est sèche : même boucle, autres capteurs et actionneurs.
 
 !!! activite "Activité — Compléter une boucle de commande"
 

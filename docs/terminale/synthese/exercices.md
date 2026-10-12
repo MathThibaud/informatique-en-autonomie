@@ -372,16 +372,17 @@ lst = Cellule(3, Cellule(1, Cellule(4, None)))
 
 Chapitres croisés : *Arbres ; Récursivité ; coût des algorithmes*
 
-On dispose de la fonction `insere` du cours, qui insère `x` dans l’ABR `a` et renvoie l’arbre obtenu (une valeur déjà présente n’est pas ajoutée une seconde fois).
+On dispose de la fonction `inserer` du cours, qui insère `x` dans l’ABR `a` et renvoie l’arbre obtenu (une valeur égale à celle d’un nœud va à droite).
 
 ```python
-def insere(a, x):
+def inserer(a, x):
+    """Insere x dans l'ABR a et renvoie l'arbre obtenu."""
     if a is None:
         return Noeud(x)
     if x < a.valeur:
-        a.gauche = insere(a.gauche, x)
-    elif x > a.valeur:
-        a.droite = insere(a.droite, x)
+        a.gauche = inserer(a.gauche, x)
+    else:
+        a.droite = inserer(a.droite, x)
     return a
 ```
 
@@ -391,7 +392,7 @@ def insere(a, x):
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> En déduire une fonction `tri_abr(tab)` qui renvoie une liste contenant les valeurs de `tab` triées dans l’ordre croissant.
 
-4.  Que renvoie `tri_abr([3, 1, 3])` ? Proposer une modification de `insere` pour que ce tri conserve les doublons.
+4.  Que renvoie `tri_abr([3, 1, 3])` ? Où le second `3` est-il placé dans l’arbre ? Quelle modification de `inserer` donnerait au contraire un tri **sans doublon** (chaque valeur une seule fois) ?
 
 5.  On trie le tableau `[1, 2, 3, …, 100]`, déjà trié. Quelle est la hauteur de l’arbre construit ? Combien de comparaisons coûte l’insertion du dernier élément ? En déduire l’ordre de grandeur du coût du tri dans ce cas, et le comparer au cas d’un tableau mélangé, pour lequel la hauteur reste de l’ordre de $\log_2(n)$ (dans un essai avec $100$ valeurs mélangées, l’arbre avait une hauteur de $12$).
 
@@ -425,17 +426,17 @@ def insere(a, x):
     def tri_abr(tab):
         a = None
         for x in tab:
-            a = insere(a, x)
+            a = inserer(a, x)
         resultat = []
         infixe_dans(a, resultat)
         return resultat
     ```
 
-    **4.** `tri_abr([3, 1, 3])` renvoie `[1, 3]` : le second `3` n’est pas inséré, car `insere` ne fait rien quand `x == a.valeur`. Pour garder les doublons, on envoie les valeurs égales d’un côté choisi, par exemple à droite : on remplace `elif x > a.valeur:` par `else:`. On obtient alors `[1, 3, 3]`.
+    **4.** `tri_abr([3, 1, 3])` renvoie `[1, 3, 3]` : les doublons sont conservés. Le premier `3` est la racine, `1` va à sa gauche ; le second `3` n’est pas plus petit que la racine, il va donc à **droite** (convention du cours : égal à droite) et devient le fils droit de la racine. Le parcours infixe visite la racine, puis son sous-arbre droit : les deux `3` sortent côte à côte. Pour un tri **sans doublon**, il suffit de ne rien faire quand `x == a.valeur` : on remplace `else:` par `elif x > a.valeur:`, et `tri_abr([3, 1, 3])` renvoie alors `[1, 3]`. C’est une autre convention, que l’on rencontre dans certains sujets (ABR « sans doublon ») : toujours lire celle de l’énoncé.
 
-    **5.** Chaque valeur est plus grande que toutes les précédentes : elle va toujours à droite. L’arbre est un « peigne » de hauteur $100$, en réalité une liste chaînée. L’insertion du dernier élément compare $100$ à $99$ valeurs. Au total, $0 + 1 + \dots + 99 = 4\,950$ comparaisons, soit environ $n^2/2$ : coût **quadratique**, comme un tri par insertion. Pour un tableau mélangé, chaque insertion coûte au plus une douzaine de comparaisons ici, de l’ordre de $\log_2(n)$ : environ $n\log_2(n)$ au total, comme le tri fusion.
+    **5.** Chaque valeur est plus grande que toutes les précédentes : elle va toujours à droite. L’arbre est un « peigne » de hauteur $100$, en réalité une liste chaînée. L’insertion du dernier élément compare $100$ à $99$ valeurs. Au total, $0 + 1 + \dots + 99 = 4\,950$ comparaisons, soit environ $n^2/2$ : coût **quadratique**, comme un tri par insertion. Pour un tableau mélangé, chaque insertion coûte au plus une douzaine de comparaisons ici, de l’ordre de $\log_2(n)$ : environ $n\log_2(n)$ au total, comme le tri fusion (chapitre *Diviser pour régner*).
 
-    **6.** `insere` s’appelle récursivement une fois par niveau traversé : avec $10\,000$ valeurs triées, l’arbre a une hauteur de $10\,000$, donc il faut $10\,000$ appels emboîtés. Cela dépasse la limite de la pile d’appels de Python (environ $1\,000$ par défaut) : `RecursionError`. La forme de l’arbre a donc un coût en temps *et* en mémoire.
+    **6.** `inserer` s’appelle récursivement une fois par niveau traversé : avec $10\,000$ valeurs triées, l’arbre a une hauteur de $10\,000$, donc il faut $10\,000$ appels emboîtés. Cela dépasse la limite de la pile d’appels de Python (environ $1\,000$ par défaut) : `RecursionError`. La forme de l’arbre a donc un coût en temps *et* en mémoire.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — La largeur d’un arbre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-5 }
 
@@ -817,7 +818,7 @@ reseau = {"R1": {"R2": 10, "R3": 100},
 
 Chapitres croisés : *Cryptographie ; Diviser pour régner ; Récursivité*
 
-Alice choisit $p = 11$ et $q = 17$ ; sa clé publique est $(e, n)$ avec $e = 7$, et sa clé privée est $d = 23$. Un nombre $m$ (avec $0 \leq m < n$) se chiffre en $c = m^e \bmod n$ et se déchiffre en $m = c^d \bmod n$ (en Python : `c = m ** e % n`).
+Alice choisit $p = 11$ et $q = 17$ ; sa clé publique est $(e, n)$ avec $e = 7$, et sa clé privée est $d = 23$. Un nombre $m$ (avec $0 \leq m < n$) se chiffre en $c = m^e \bmod n$ et se déchiffre en $m = c^d \bmod n$ (en Python, naïvement : `c = m ** e % n`, qui forme d’abord le nombre $m^e$, géant dans un vrai RSA ; la question 4 fait mieux, comme `pow(m, e, n)` vu au chapitre *Cryptographie*).
 
 1.  Calculer $n$ et $\varphi = (p-1)(q-1)$, puis vérifier que $e \times d \bmod \varphi = 1$.
 

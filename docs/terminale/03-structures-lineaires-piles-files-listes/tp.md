@@ -39,7 +39,7 @@ La pile obtenue après `empiler(5)`, `empiler(8)`, `empiler(3)`.
 
 1.  Dessiner la pile après un `empiler(7)`, puis après un `depiler()`. Combien de liens faut-il modifier à chaque fois ? Ce nombre dépend-il de la taille de la pile ?
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span> Compléter les cinq méthodes de `PileChainee`. `depiler` et `sommet` lèvent `IndexError("pile vide")` sur une pile vide (comme `PileListe`).
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Compléter les cinq méthodes de `PileChainee`. `depiler` et `sommet` lèvent `IndexError("pile vide")` sur une pile vide (comme `PileListe` ; `raise` : voir le chapitre *Programmation orientée objet*).
 
     ??? pouce "Coup de pouce"
 
@@ -539,7 +539,10 @@ On utilise les dix clients de la liste `CLIENTS` du fichier fourni : `(0, 4), (
                     libre_a[g] = t + duree
             file_max = max(file_max, f.taille())
             t = t + 1
-        return sum(attentes) / len(attentes), max(attentes), file_max
+        total = 0
+        for a in attentes:
+            total += a
+        return total / len(attentes), max(attentes), file_max
     ```
 
     Résultats : `(7.9, 12, 6)` avec un guichet, `(0.9, 3, 2)` avec deux.

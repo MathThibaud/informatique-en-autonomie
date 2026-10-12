@@ -76,7 +76,7 @@ La plupart des traitements suivent le même **squelette**, dit motif de l’**ac
 
 <span id="cours-04-3" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-04-3) et [4](exercices.md#ex-04-4)** (comptage, somme, moyenne)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-04-3) et [4](exercices.md#ex-04-4)** (comptages, moyenne pondérée)
 
 ## Chercher un élément : la recherche séquentielle
 
@@ -187,7 +187,7 @@ Dire qu’une propriété est un invariant, cela ne se devine pas : cela se **d�
 
 <span id="cours-04-5" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-04-5) à [7](exercices.md#ex-04-7)** (maximum, amplitude, moyenne sans la pire note), **[12](exercices.md#ex-04-12)**, **[13](exercices.md#ex-04-13)** et **[15](exercices.md#ex-04-15) à [18](exercices.md#ex-04-18)** (minimum, maximum, champion ; invariants)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-04-5) à [7](exercices.md#ex-04-7)** (mot le plus long, amplitude, moyenne sans la pire note), **[12](exercices.md#ex-04-12)** (minimum), **[13](exercices.md#ex-04-13)** et **[15](exercices.md#ex-04-15) à [18](exercices.md#ex-04-18)** (minimum, maximum, champion ; invariants)
 
 ## Combien ça coûte ?
 

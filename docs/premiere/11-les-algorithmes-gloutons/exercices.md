@@ -218,7 +218,7 @@ Un système est **canonique** si le glouton y est toujours optimal. On ne teste 
     ```python
     def rendre_sys(systeme, somme):
         n = 0
-        for p in sorted(systeme, reverse=True):
+        for p in systeme:          # systeme deja trie a l'envers
             while somme >= p:
                 n = n + 1
                 somme = somme - p
@@ -234,7 +234,7 @@ Un système est **canonique** si le glouton y est toujours optimal. On ne teste 
         print("canonique jusqu'a 30")
     ```
 
-    (Pour {1,6,10}, le premier écart apparaît pour la somme **12**.)
+    (Pour le système `[10, 6, 1]`, le premier écart apparaît pour la somme **12**.)
 
 ### Le sac à dos
 

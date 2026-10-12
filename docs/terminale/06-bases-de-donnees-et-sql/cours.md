@@ -397,7 +397,7 @@ WHERE annee < 2005;
 
 !!! remarque "Remarque — La suite"
 
-    On a effleuré les **transactions** et les **index** (qui, en coulisses, sont souvent des *arbres* !). Les bases relationnelles ne sont pas les seules : pour un réseau social, un **modèle de graphe** est parfois plus adapté — clin d’œil au chapitre « graphes ».
+    On a effleuré les **transactions** et les **index** (qui, en coulisses, sont souvent des *arbres* !). Les bases relationnelles ne sont pas les seules : pour un réseau social, un **modèle de graphe** est parfois plus adapté — clin d’œil au chapitre « graphes », que l’on étudiera plus loin.
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 

@@ -102,27 +102,15 @@ Adapter le programme pour répondre à la nouvelle question. Sur l’exemple du 
 
 ## Approfondissement
 
-!!! encadre "Outil Python : les ensembles (set)"
+!!! encadre "Outil Python : les ensembles (set) — rappel"
 
-    Un **ensemble** est une collection **sans doublon** et **sans ordre** : on ne peut pas y accéder par un indice, on peut seulement ajouter, retirer, et demander si un élément y est.
+    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove` et `discard`, test `x in ensemble` en temps constant, union `|`, intersection `&`, différence `-`, éléments non modifiables (tuples).
 
-    ```python
-    vus = set()              # ensemble vide (attention : {} est un dictionnaire vide)
-    vus.add(812)             # ajout ; ajouter une valeur deja presente ne change rien
-    vus.add(1208)
-    pairs = {2, 4, 6}        # ensemble ecrit directement
-    print(812 in vus)        # True : test d'appartenance
-    print(len(vus))          # 2
-    vus.remove(812)          # retrait (erreur si l'element est absent)
-    for x in pairs:          # parcours possible, mais dans un ordre quelconque
-        print(x)
-    ```
-
-    **Intérêt.** Avec une liste, `x in liste` compare `x` à chaque élément l’un après l’autre : jusqu’à $n$ comparaisons. Un ensemble range ses éléments selon une valeur calculée à partir d’eux (une *fonction de hachage*, le même principe que les clés d’un dictionnaire) : Python va directement à l’endroit où `x` devrait se trouver. Le test `x in ensemble` prend donc un temps qui **ne dépend pas** du nombre d’éléments (on dit en **temps constant**, en moyenne). Sur un million d’éléments, la différence est énorme.
+    **À essayer.** Avec `vus = {812, 1208}`, que valent `812 in vus` et `2020 - 812 in vus` ? Sur un million d’éléments, la différence de temps avec une liste est énorme.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : une seule boucle grâce à un ensemble <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-aoc-1-7 }
 
-1.  Recopier puis exécuter le code de l’encadré. Que se passe-t-il si l’on ajoute deux fois `1208` ?
+1.  Recopier puis exécuter le code de l’encadré du défi *Crab Combat* (chapitre 4). Que se passe-t-il si l’on ajoute deux fois `1208` à un ensemble ?
 
 2.  Écrire `paire_rapide(nombres)` qui résout la partie 1 avec une **seule** boucle et un ensemble `vus`. Quelle est sa complexité ?
 
@@ -303,24 +291,9 @@ Mesurer avec le module `time` la durée des deux méthodes de la partie 2 sur vo
 
     `time.perf_counter()` avant et après l’appel ; la différence donne la durée en secondes.
 
-!!! encadre "Outil Python : les ensembles (set)"
+!!! encadre "Outil Python : les ensembles (set) — rappel"
 
-    Un **ensemble** est une collection **sans doublon** et **sans ordre** : on ne peut pas y accéder par un indice, on peut seulement ajouter, retirer, et demander si un élément y est. Python sait aussi calculer l’union, l’intersection et la différence de deux ensembles.
-
-    ```python
-    vus = set()              # ensemble vide (attention : {} est un dictionnaire vide)
-    vus.add(5)               # ajout ; ajouter une valeur deja presente ne change rien
-    vus.add(8)
-    print(8 in vus)          # True : test d'appartenance
-    print(len(vus))          # 2
-    a = {1, 2, 3}            # ensemble ecrit directement
-    b = set([2, 3, 4, 4])    # a partir d'une liste : {2, 3, 4}
-    print(a | b)             # union : {1, 2, 3, 4}
-    print(a & b)             # intersection : {2, 3}
-    print(a - b)             # difference : {1}
-    ```
-
-    **Intérêt.** Avec une liste, `x in liste` compare `x` à chaque élément l’un après l’autre : jusqu’à $n$ comparaisons. Un ensemble range ses éléments selon une valeur calculée à partir d’eux (une *fonction de hachage*, comme les clés d’un dictionnaire) : Python va directement là où `x` devrait se trouver. Le test `x in ensemble` prend donc un temps qui ne dépend pas du nombre d’éléments (**temps constant**, en moyenne).
+    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove` et `discard`, test `x in ensemble` en temps constant, union `|`, intersection `&`, différence `-`, éléments non modifiables (tuples).
 
     **À essayer.** Avec `fenetre = [3, 7, 10, 7, 2]`, que vaut `set(fenetre)` ? Combien d’éléments ?
 

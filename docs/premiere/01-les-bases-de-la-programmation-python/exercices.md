@@ -93,10 +93,17 @@ Que réalise, au final, ce programme sur `x` et `y` ?
 
     def prix_ttc(ht):
         return ht * 1.20
+    ```
 
-    assert celsius_en_fahrenheit(100) == 212.0
-    assert celsius_en_fahrenheit(0) == 32.0
-    assert prix_ttc(50) == 60.0
+    On teste dans la console :
+
+    ```text
+    >>> celsius_en_fahrenheit(100)
+    212.0
+    >>> celsius_en_fahrenheit(0)
+    32.0
+    >>> prix_ttc(50)
+    60.0
     ```
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Rectangle : périmètre et aire <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-4 }
@@ -118,9 +125,15 @@ Que réalise, au final, ce programme sur `x` et `y` ?
 
     def aire(largeur, hauteur):
         return largeur * hauteur
+    ```
 
-    assert perimetre(3, 4) == 14
-    assert aire(3, 4) == 12
+    On teste dans la console :
+
+    ```text
+    >>> perimetre(3, 4)
+    14
+    >>> aire(3, 4)
+    12
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Le bon usage de `//` et `%` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-5 }
@@ -155,10 +168,29 @@ Que réalise, au final, ce programme sur `x` et `y` ?
 
     def centaines(n):
         return (n // 100) % 10
+    ```
 
-    assert unites(347) == 7 and dizaines(347) == 4 and centaines(347) == 3
-    assert unites(60) == 0 and dizaines(60) == 6 and centaines(60) == 0
-    assert unites(7) == 7 and dizaines(7) == 0 and centaines(7) == 0
+    On teste dans la console :
+
+    ```text
+    >>> unites(347)
+    7
+    >>> dizaines(347)
+    4
+    >>> centaines(347)
+    3
+    >>> unites(60)
+    0
+    >>> dizaines(60)
+    6
+    >>> centaines(60)
+    0
+    >>> unites(7)
+    7
+    >>> dizaines(7)
+    0
+    >>> centaines(7)
+    0
     ```
 
 ### Les conditionnelles
@@ -172,10 +204,17 @@ Que réalise, au final, ce programme sur `x` et `y` ?
     ```python
     def est_pair(n):
         return n % 2 == 0
+    ```
 
-    assert est_pair(4) == True
-    assert est_pair(7) == False
-    assert est_pair(0) == True
+    On teste dans la console :
+
+    ```text
+    >>> est_pair(4)
+    True
+    >>> est_pair(7)
+    False
+    >>> est_pair(0)
+    True
     ```
 
     Remarquer qu’on *renvoie directement* le booléen `n % 2 == 0` : inutile d’écrire `if ...: return True else: return False`.
@@ -191,10 +230,17 @@ Que réalise, au final, ce programme sur `x` et `y` ?
         if a > b:
             return a
         return b        # couvre aussi le cas a == b
+    ```
 
-    assert maximum2(3, 5) == 5
-    assert maximum2(5, 3) == 5
-    assert maximum2(4, 4) == 4
+    On teste dans la console :
+
+    ```text
+    >>> maximum2(3, 5)
+    5
+    >>> maximum2(5, 3)
+    5
+    >>> maximum2(4, 4)
+    4
     ```
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Le signe d’un nombre <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-8 }
@@ -211,10 +257,17 @@ Que réalise, au final, ce programme sur `x` et `y` ?
             return -1
         else:
             return 0
+    ```
 
-    assert signe(12) == 1
-    assert signe(-3) == -1
-    assert signe(0) == 0
+    On teste dans la console :
+
+    ```text
+    >>> signe(12)
+    1
+    >>> signe(-3)
+    -1
+    >>> signe(0)
+    0
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Mention au bac <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-9 }
@@ -273,11 +326,19 @@ True
     ```python
     def est_bissextile(annee):
         return annee % 400 == 0 or (annee % 4 == 0 and annee % 100 != 0)
+    ```
 
-    assert est_bissextile(2000) == True
-    assert est_bissextile(1900) == False
-    assert est_bissextile(2024) == True
-    assert est_bissextile(2023) == False
+    On teste dans la console :
+
+    ```text
+    >>> est_bissextile(2000)
+    True
+    >>> est_bissextile(1900)
+    False
+    >>> est_bissextile(2024)
+    True
+    >>> est_bissextile(2023)
+    False
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Le plus grand des trois <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-11 }
@@ -300,10 +361,17 @@ True
         if c > m:
             m = c
         return m
+    ```
 
-    assert maximum3(3, 9, 5) == 9
-    assert maximum3(3, 5, 9) == 9
-    assert maximum3(4, 4, 4) == 4
+    On teste dans la console :
+
+    ```text
+    >>> maximum3(3, 9, 5)
+    9
+    >>> maximum3(3, 5, 9)
+    9
+    >>> maximum3(4, 4, 4)
+    4
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Quel type de triangle ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-12 }
@@ -327,17 +395,23 @@ True
 
     ```python
     def type_triangle(a, b, c):
-        assert a > 0 and b > 0 and c > 0
         if a == b and b == c:
             return "equilateral"
         elif a == b or b == c or a == c:
             return "isocele"
         else:
             return "scalene"
+    ```
 
-    assert type_triangle(3, 3, 3) == "equilateral"
-    assert type_triangle(3, 3, 5) == "isocele"
-    assert type_triangle(3, 4, 5) == "scalene"
+    On teste dans la console :
+
+    ```text
+    >>> type_triangle(3, 3, 3)
+    'equilateral'
+    >>> type_triangle(3, 3, 5)
+    'isocele'
+    >>> type_triangle(3, 4, 5)
+    'scalene'
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Réduction par paliers <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-13 }
@@ -368,10 +442,17 @@ True
         else:
             taux = 10
         return montant * (1 - taux / 100)
+    ```
 
-    assert prix_reduit(50) == 50.0
-    assert prix_reduit(200) == 190.0
-    assert prix_reduit(300) == 270.0
+    On teste dans la console :
+
+    ```text
+    >>> prix_reduit(50)
+    50.0
+    >>> prix_reduit(200)
+    190.0
+    >>> prix_reduit(300)
+    270.0
     ```
 
 ### Les boucles bornées (`for`)
@@ -404,8 +485,13 @@ for i in range(a, b + 1):
         for i in range(a, b + 1):
             total = total + i
         return total
+    ```
 
-    assert somme_entre(3, 6) == 18    # 3 + 4 + 5 + 6
+    On teste dans la console :
+
+    ```text
+    >>> somme_entre(3, 6)    # 3 + 4 + 5 + 6
+    18
     ```
 
     **2.** `somme_entre(3, 6)` renvoie bien `18`.
@@ -434,9 +520,15 @@ for i in range(a, b + 1):
         for i in range(1, n + 1):
             total = total + i * i
         return total
+    ```
 
-    assert somme(100) == 5050
-    assert somme_carres(3) == 14      # 1 + 4 + 9
+    On teste dans la console :
+
+    ```text
+    >>> somme(100)
+    5050
+    >>> somme_carres(3)    # 1 + 4 + 9
+    14
     ```
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 16</span> — Table de multiplication <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-16 }
@@ -454,7 +546,7 @@ for i in range(a, b + 1):
 
 ??? corrige "Corrigé"
 
-    La fonction **affiche** et ne renvoie rien : on ne peut donc pas la tester avec `assert`, on vérifie l’affichage à l’écran.
+    La fonction **affiche** et ne renvoie rien : on l’appelle et on contrôle l’affichage à l’écran.
 
     ```python
     def table(n):
@@ -487,9 +579,15 @@ for i in range(a, b + 1):
         for i in range(n):
             chaine = chaine + "*"
         return chaine
+    ```
 
-    assert ligne_etoiles(5) == "*****"
-    assert ligne_etoiles(0) == ""
+    On teste dans la console :
+
+    ```text
+    >>> ligne_etoiles(5)
+    '*****'
+    >>> ligne_etoiles(0)
+    ''
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Factorielle <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-18 }
@@ -510,10 +608,17 @@ for i in range(a, b + 1):
         for i in range(2, n + 1):
             produit = produit * i
         return produit
+    ```
 
-    assert factorielle(0) == 1
-    assert factorielle(1) == 1
-    assert factorielle(5) == 120
+    On teste dans la console :
+
+    ```text
+    >>> factorielle(0)
+    1
+    >>> factorielle(1)
+    1
+    >>> factorielle(5)
+    120
     ```
 
     Avec 5 coureurs, il y a donc `120` ordres d’arrivée possibles ; avec 10 coureurs, déjà `factorielle(10)` $=$ `3628800`.
@@ -540,9 +645,15 @@ for i in range(a, b + 1):
             if lettre in "aeiouyAEIOUY":
                 n = n + 1
         return n
+    ```
 
-    assert compter_voyelles("bonjour") == 3
-    assert compter_voyelles("") == 0
+    On teste dans la console :
+
+    ```text
+    >>> compter_voyelles("bonjour")
+    3
+    >>> compter_voyelles("")
+    0
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Diviseurs et nombres parfaits <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-20 }
@@ -582,10 +693,17 @@ True
     for k in range(1, 100):
         if est_parfait(k):
             print(k)          # affiche 6 puis 28
+    ```
 
-    assert somme_diviseurs(6) == 12
-    assert est_parfait(28) == True
-    assert est_parfait(12) == False
+    On teste dans la console :
+
+    ```text
+    >>> somme_diviseurs(6)
+    12
+    >>> est_parfait(28)
+    True
+    >>> est_parfait(12)
+    False
     ```
 
     Les nombres parfaits inférieurs à 100 sont `6` et `28`.
@@ -612,9 +730,15 @@ True
             if lettre == caractere:
                 n = n + 1
         return n
+    ```
 
-    assert occurrences("a", "banana") == 3
-    assert occurrences("z", "banana") == 0
+    On teste dans la console :
+
+    ```text
+    >>> occurrences("a", "banana")
+    3
+    >>> occurrences("z", "banana")
+    0
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 22</span> — Puissance sans `**` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-22 }
@@ -642,10 +766,17 @@ True
         for i in range(n):
             resultat = resultat * a
         return resultat
+    ```
 
-    assert puissance(2, 10) == 1024
-    assert puissance(5, 0) == 1
-    assert puissance(3, 3) == 27
+    On teste dans la console :
+
+    ```text
+    >>> puissance(2, 10)
+    1024
+    >>> puissance(5, 0)
+    1
+    >>> puissance(3, 3)
+    27
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 23</span> — FizzBuzz <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-23 }
@@ -776,10 +907,17 @@ Buzz
             total = total + n % 10
             n = n // 10
         return total
+    ```
 
-    assert nombre_de_chiffres(347) == 3
-    assert nombre_de_chiffres(0) == 1
-    assert somme_chiffres(347) == 14
+    On teste dans la console :
+
+    ```text
+    >>> nombre_de_chiffres(347)
+    3
+    >>> nombre_de_chiffres(0)
+    1
+    >>> somme_chiffres(347)
+    14
     ```
 
     Dans les deux fonctions, `n` est un **variant** : c’est un entier positif, et l’affectation `n = n // 10` le fait décroître strictement à chaque tour (car `n` $\geqslant 1$ dans la boucle), jusqu’à `0`.
@@ -807,10 +945,17 @@ Buzz
         while (k + 1) * (k + 1) <= n:
             k = k + 1
         return k
+    ```
 
-    assert racine_entiere(15) == 3
-    assert racine_entiere(16) == 4
-    assert racine_entiere(0) == 0
+    On teste dans la console :
+
+    ```text
+    >>> racine_entiere(15)
+    3
+    >>> racine_entiere(16)
+    4
+    >>> racine_entiere(0)
+    0
     ```
 
     Avec 15 dalles, la plus grande terrasse carrée fait $3 \times 3$ (9 dalles) ; avec 16 dalles, $4 \times 4$. **Terminaison.** La quantité `n - k*k` décroît strictement (`k` augmente de `1` à chaque tour) et reste positive tant qu’on boucle : la boucle s’arrête donc.
@@ -833,8 +978,13 @@ Buzz
             n = n + 1
             total = total + n
         return n
+    ```
 
-    assert seuil(1000) == 45      # 1+...+44 = 990, 1+...+45 = 1035
+    On teste dans la console :
+
+    ```text
+    >>> seuil(1000)    # 1+...+44 = 990, 1+...+45 = 1035
+    45
     ```
 
     Le total `total` est le contenu de la tirelire et `n` le numéro du jour : Léa dépasse 1000 € le 45<sup>e</sup> jour. **Terminaison.** La quantité `s - total` décroît strictement à chaque tour (on ajoute au moins `1` à `total`) : elle finit par devenir négative, ce qui arrête la boucle.
@@ -875,10 +1025,17 @@ Buzz
             else:
                 b = b - a
         return a
+    ```
 
-    assert pgcd(12, 18) == 6
-    assert pgcd(7, 7) == 7
-    assert pgcd(1071, 462) == 21
+    On teste dans la console :
+
+    ```text
+    >>> pgcd(12, 18)
+    6
+    >>> pgcd(7, 7)
+    7
+    >>> pgcd(1071, 462)
+    21
     ```
 
     **Terminaison.** La quantité `a + b` est un variant : à chaque tour on retranche à l’un des deux une valeur strictement positive, donc `a + b` décroît strictement tout en restant $\geqslant 2$. La boucle ne peut donc pas tourner indéfiniment.
@@ -922,10 +1079,17 @@ Buzz
         while n >= 10:
             n = somme_chiffres(n)
         return n
+    ```
 
-    assert racine_numerique(347) == 5
-    assert racine_numerique(9) == 9
-    assert racine_numerique(12345) == 6
+    On teste dans la console :
+
+    ```text
+    >>> racine_numerique(347)
+    5
+    >>> racine_numerique(9)
+    9
+    >>> racine_numerique(12345)
+    6
     ```
 
     **Terminaison.** Dès que `n` a au moins deux chiffres, la somme de ses chiffres est *strictement plus petite* que `n` : la valeur de `n` décroît strictement à chaque tour tout en restant positive, jusqu’à passer sous `10`.
@@ -1029,12 +1193,15 @@ True
         return mot[0] == mot[-1]
 
     def memes_bords(mot1, mot2):
+        if mot1 == "" or mot2 == "":
+            return False         # cas limite : pas de premiere lettre a comparer
         return mot1[0] == mot2[0] and mot1[-1] == mot2[-1]
 
     assert meme_bord("radar") == True
     assert meme_bord("bonjour") == False
     assert memes_bords("chat", "chocolat") == True
     assert memes_bords("chat", "chien") == False
+    assert memes_bords("", "chat") == False
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 34</span> — Le bug qui passe les tests <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-34 }

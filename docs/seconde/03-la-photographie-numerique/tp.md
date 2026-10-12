@@ -123,7 +123,7 @@ largeur, hauteur = 600, 400              # proportions 2:3
 img = Image.new("RGB", (largeur, hauteur), (255, 255, 255))
 
 xc, yc = largeur // 2, hauteur // 2      # centre du drapeau
-r = int(0.3 * hauteur)                   # rayon = 3/5 de la demi-hauteur
+r = int(0.3 * hauteur)                   # rayon = 3/5 de la demi-hauteur ; int garde la partie entiere
 rouge = (188, 0, 45)
 
 for y in range(hauteur):
@@ -200,7 +200,7 @@ Vous avez maintenant les deux outils : le **cercle** et la **droite**. On peut a
 
     2.  **La Tchéquie** : moitié haute blanche, moitié basse rouge, et un **triangle bleu** à gauche pointant vers le centre. Le triangle se dessine en testant, pour chaque pixel, s’il est *du bon côté* de **deux** droites.
 
-    3.  **Les Seychelles** : cinq **bandes obliques** (bleu, jaune, rouge, blanc, vert) qui partent toutes du coin **en bas à gauche**. Les droites de séparation visent les **tiers** des bords haut et droit (*pas* des angles égaux !) : pour un pixel, on compare sa *pente* $(\text{hauteur}-y)/x$ à celle de ces droites.
+    3.  **Les Seychelles** : cinq **bandes obliques** (bleu, jaune, rouge, blanc, vert) qui partent toutes du coin **en bas à gauche**. Les droites de séparation visent les **tiers** des bords haut et droit (*pas* des angles égaux !) : pour un pixel, on compare sa *pente* $(\text{hauteur}-y)/x$ à celle de ces droites (attention : sur le bord gauche, $x = 0$ et on ne peut pas diviser par $0$ : traiter ces pixels à part).
 
 !!! activite "Activité — Votre drapeau"
 

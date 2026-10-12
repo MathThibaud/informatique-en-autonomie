@@ -16,7 +16,7 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Le carré <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-T-1 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Dessiner un carré de côté `100` à l’aide d’une boucle `for` (4 côtés, on tourne de `90` à chaque fois).
+<span class="run" title="À programmer et tester sur machine">▶</span> Dessiner un carré de côté `100`, **sans boucle** : on écrit les quatre « avancer, tourner de `90` » les uns après les autres.
 
 ![](../figures/1fab7621799b42e2.svg){ .tikz loading=lazy }
 
@@ -26,13 +26,22 @@
 
         Plusieurs écritures sont possibles ; on en donne une simple. Chaque programme suppose `import turtle as t` au début et `t.done()` à la fin. Rappel de la règle d’or : un polygone régulier à `n` côtés se ferme en tournant de `360 / n` à chaque sommet.
 
+    Quatre fois « avancer de `100`, tourner de `90` ».
+
     ```python
     import turtle as t
-    for i in range(4):
-        t.forward(100)
-        t.left(90)
+    t.forward(100)
+    t.left(90)
+    t.forward(100)
+    t.left(90)
+    t.forward(100)
+    t.left(90)
+    t.forward(100)
+    t.left(90)
     t.done()
     ```
+
+    On verra dans le cours (§ 2) comment la boucle `for` évite de recopier quatre fois les mêmes lignes.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Le rectangle <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-T-2 }
 
@@ -40,17 +49,24 @@
 
 ??? corrige "Corrigé"
 
-    Deux longueurs et deux largeurs : on répète **deux fois** le couple « long côté / court côté ».
+    Deux longueurs et deux largeurs, en alternance, en tournant toujours de `90`.
 
     ```python
     import turtle as t
-    for i in range(2):
-        t.forward(200)   # longueur
-        t.left(90)
-        t.forward(100)   # largeur
-        t.left(90)
+    t.forward(200)   # longueur
+    t.left(90)
+    t.forward(100)   # largeur
+    t.left(90)
+    t.forward(200)   # longueur
+    t.left(90)
+    t.forward(100)   # largeur
+    t.left(90)
     t.done()
     ```
+
+    Avec la boucle `for` du § 2, on répétera **deux fois** le couple « long côté / court côté ».
+
+### Répéter : la boucle `for`
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — L’escalier <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-T-3 }
 
@@ -71,8 +87,6 @@
         t.right(90)     # on repart a l'horizontale
     t.done()
     ```
-
-### Les polygones réguliers
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Triangle et hexagone <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-T-4 }
 
@@ -125,34 +139,9 @@
     t.done()
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Un polygone au choix <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-6 }
+### Réutiliser : les fonctions
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `polygone(n, cote)` qui dessine un polygone régulier à `n` côtés de longueur `cote`. L’utiliser pour dessiner un triangle, un carré, puis un octogone.
-
-??? pouce "Coup de pouce"
-
-    Partez du carré (4 côtés, on tourne de `90`) : remplacez le nombre de côtés par `n` et l’angle par le calcul qui convient pour `n` côtés.
-
-??? corrige "Corrigé"
-
-    On remplace l’angle par `360 / n` : la même fonction dessine tous les polygones réguliers.
-
-    ```python
-    import turtle as t
-    def polygone(n, cote):
-        for i in range(n):
-            t.forward(cote)
-            t.left(360 / n)
-
-    polygone(3, 100)   # triangle
-    polygone(4, 100)   # carre
-    polygone(8, 60)    # octogone
-    t.done()
-    ```
-
-### Réutiliser et colorier
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — La fonction carré <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-7 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — La fonction carré <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-6 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `carre(cote)` qui dessine un carré, puis l’appeler trois fois pour dessiner trois carrés de tailles différentes (par exemple $50$, $100$, $150$).
 
@@ -177,17 +166,44 @@
     t.done()
     ```
 
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Un polygone au choix <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-7 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `polygone(n, cote)` qui dessine un polygone régulier à `n` côtés de longueur `cote`. L’utiliser pour dessiner un triangle, un carré, puis un octogone.
+
+??? pouce "Coup de pouce"
+
+    Partez du carré (4 côtés, on tourne de `90`) : remplacez le nombre de côtés par `n` et l’angle par le calcul qui convient pour `n` côtés.
+
+??? corrige "Corrigé"
+
+    On remplace l’angle par `360 / n` : la même fonction dessine tous les polygones réguliers.
+
+    ```python
+    import turtle as t
+    def polygone(n, cote):
+        for i in range(n):
+            t.forward(cote)
+            t.left(360 / n)
+
+    polygone(3, 100)   # triangle
+    polygone(4, 100)   # carre
+    polygone(8, 60)    # octogone
+    t.done()
+    ```
+
+### Colorier une forme
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Trois carrés colorés <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-8 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Dessiner **trois carrés** côte à côte, remplis de trois couleurs différentes (par exemple rouge, vert, bleu).
 
 ??? pouce "Coup de pouce"
 
-    Pour passer d’un carré au suivant **sans tracer de trait**, utilisez `t.penup()` puis `t.pendown()` ; pour remplir, encadrez le tracé par `t.begin_fill()` … `t.end_fill()`.
+    Pour passer d’un carré au suivant **sans tracer de trait**, levez le stylo avec `t.penup()`, avancez avec `t.forward(...)`, puis baissez-le avec `t.pendown()` ; pour remplir, encadrez le tracé par `t.begin_fill()` … `t.end_fill()`.
 
 ??? corrige "Corrigé"
 
-    On fabrique un « carré plein » (couleur $+$ `begin_fill`/`end_fill`), et on déplace la tortue *sans tracer* entre deux carrés grâce à `penup`/`goto`/`pendown`.
+    On fabrique un « carré plein » (couleur $+$ `begin_fill`/`end_fill`), et on déplace la tortue *sans tracer* entre deux carrés grâce à `penup`/`forward`/`pendown`. Après un carré, la tortue est revenue à son point de départ, tournée vers la droite : avancer de `100` (côté $80$ plus un espace de $20$) la place au départ du carré suivant.
 
     ```python
     import turtle as t
@@ -199,13 +215,15 @@
             t.left(90)
         t.end_fill()
 
-    x = -150
-    for couleur in ["red", "green", "blue"]:
-        t.penup()
-        t.goto(x, 0)
-        t.pendown()
-        carre_plein(80, couleur)
-        x = x + 100
+    carre_plein(80, "red")
+    t.penup()
+    t.forward(100)     # on se deplace sans tracer
+    t.pendown()
+    carre_plein(80, "green")
+    t.penup()
+    t.forward(100)
+    t.pendown()
+    carre_plein(80, "blue")
     t.done()
     ```
 
@@ -283,7 +301,7 @@
 
 ??? corrige "Corrigé"
 
-    On trace d’abord la façade (un carré). La tortue revient en bas à gauche ; on monte au coin haut-gauche, puis on pose un toit triangulaire (triangle équilatéral, angles de `120` degrés).
+    On trace d’abord la façade (un carré). La tortue revient en bas à gauche ; on monte au coin haut-gauche, puis on pose un toit triangulaire (triangle équilatéral, angles de `120` degrés). Pourquoi `right(30)` ? Arrivée en haut, la tortue regarde vers le haut ($90^\circ$ par rapport à l’horizontale) ; or le premier côté du toit monte à $60^\circ$ de l’horizontale (angle d’un triangle équilatéral) : elle doit donc tourner de $90 - 60 = 30$ degrés vers la droite.
 
     ```python
     import turtle as t
@@ -294,7 +312,7 @@
     # On monte au coin haut-gauche pour poser le toit
     t.left(90)
     t.forward(100)
-    t.right(30)          # on vise le sommet du toit
+    t.right(30)          # 90 - 60 = 30 : on vise le sommet du toit
     # Le toit (triangle equilateral)
     for i in range(3):
         t.forward(100)

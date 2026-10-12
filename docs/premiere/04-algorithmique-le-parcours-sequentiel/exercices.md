@@ -63,111 +63,111 @@ Que calcule cette fonction en général ? Renvoie-t-elle un résultat correct si
         return resultat
     ```
 
-### Décliner : somme, moyenne, comptages
+### Décliner : comptages, moyennes, premiers champions
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Compter les occurrences : code à trous <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-3 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Compter dans un intervalle : code à trous <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-3 }
 
-La fonction `nb_occurrences(t, x)` doit renvoyer le nombre de fois où `x` apparaît dans le tableau `t`. Recopier et compléter les pointillés en suivant le patron du parcours (initialisation, mise à jour, renvoi).
+La fonction `nb_entre(t, a, b)` doit renvoyer le nombre d’éléments du tableau `t` compris entre `a` et `b` (bornes incluses). Recopier et compléter les pointillés en suivant le patron du parcours (initialisation, mise à jour, renvoi).
 
 ```python
-def nb_occurrences(t, x):
+def nb_entre(t, a, b):
     c = ......
-    for element in ......:
-        if ......:
+    for x in ......:
+        if ...... and ......:
             c = ......
     return ......
 ```
 
 ```text
->>> nb_occurrences([2, 7, 2, 5, 2], 2)
-3
+>>> nb_entre([12, 5, 18, 9, 15], 10, 15)
+2
 ```
 
 ??? corrige "Corrigé"
 
     ```python
-    def nb_occurrences(t, x):
-        c = 0                     # compteur : element neutre 0
-        for element in t:
-            if element == x:      # mise a jour conditionnelle
+    def nb_entre(t, a, b):
+        c = 0                       # compteur : element neutre 0
+        for x in t:
+            if x >= a and x <= b:   # mise a jour conditionnelle
                 c = c + 1
         return c
     ```
 
-    `nb_occurrences([2, 7, 2, 5, 2], 2)` renvoie bien `3`.
+    `nb_entre([12, 5, 18, 9, 15], 10, 15)` renvoie bien `2` (les éléments `12` et `15`). Les deux conditions sont reliées par `and` : il faut *à la fois* `x >= a` et `x <= b`.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Statistiques de base <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-4 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Taux de réussite et moyenne pondérée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-4 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Pour un tableau de nombres `t` **non vide**, écrire :
+<span class="run" title="À programmer et tester sur machine">▶</span> Les notes d’un élève sont rangées dans un tableau `notes` **non vide** ; le tableau `coefs`, de même longueur, donne leurs coefficients (`coefs[i]` est le coefficient de `notes[i]`). Écrire :
 
-1.  `somme(t)` et `moyenne(t)` ;
+1.  `taux_reussite(notes)` : le pourcentage de notes supérieures ou égales à `10` ;
 
-2.  `nb_pairs(t)` : le nombre d’éléments pairs ;
+2.  `moyenne_ponderee(notes, coefs)` : la somme des produits `notes[i] * coefs[i]`, divisée par la somme des coefficients.
 
-3.  `nb_au_dessus(t, seuil)` : le nombre d’éléments strictement supérieurs à `seuil`.
+```text
+>>> taux_reussite([12, 8, 15, 9])
+50.0
+>>> moyenne_ponderee([12, 8, 15], [2, 1, 1])
+11.75
+```
 
 ??? pouce "Coup de pouce"
 
-    Chaque fonction suit le patron : un accumulateur (ou un compteur) initialisé *avant* la boucle, mis à jour *dans* la boucle, renvoyé *après*. `moyenne` peut appeler `somme`.
+    Question 1 : un compteur, puis une division par le nombre de notes. Question 2 : deux accumulateurs mis à jour dans la *même* boucle ; il faut lire à la fois `notes[i]` et `coefs[i]`, donc parcourir par indice.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    `def nb_pairs(t):`  
-    `c = 0`  
-    `for x in t:`
+    `def moyenne_ponderee(notes, coefs):`  
+    `total = 0`  
+    `total_coefs = 0`  
+    `for i in range(len(notes)):`
 
 ??? corrige "Corrigé"
 
     ```python
-    def somme(t):
-        s = 0
-        for x in t:
-            s = s + x
-        return s
-
-    def moyenne(t):
-        return somme(t) / len(t)
-
-    def nb_pairs(t):
+    def taux_reussite(notes):
         c = 0
-        for x in t:
-            if x % 2 == 0:
+        for note in notes:
+            if note >= 10:
                 c = c + 1
-        return c
+        return 100 * c / len(notes)
 
-    def nb_au_dessus(t, seuil):
-        c = 0
-        for x in t:
-            if x > seuil:
-                c = c + 1
-        return c
+    def moyenne_ponderee(notes, coefs):
+        total = 0                   # somme des notes[i] * coefs[i]
+        total_coefs = 0             # somme des coefficients
+        for i in range(len(notes)):
+            total = total + notes[i] * coefs[i]
+            total_coefs = total_coefs + coefs[i]
+        return total / total_coefs
     ```
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Le maximum : lignes à remettre dans l’ordre <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-5 }
+    Pour `moyenne_ponderee`, on parcourt par **indice** : le même `i` donne la note et son coefficient. Les deux accumulateurs sont mis à jour dans la même boucle : un seul parcours. Sur l’exemple : $(12 \times 2 + 8 + 15) / (2 + 1 + 1) = 47 / 4 = 11{,}75$.
 
-Les lignes de la fonction `maximum(t)` (tableau **non vide**) ont été mélangées et leur indentation a été perdue. Les recopier **dans le bon ordre** et **correctement indentées**, puis <span class="run" title="À programmer et tester sur machine">▶</span> tester sur `[-5, -2, -9]`.
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Le mot le plus long : lignes à remettre dans l’ordre <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-5 }
+
+Les lignes de la fonction `mot_le_plus_long(mots)` (tableau de chaînes **non vide**) ont été mélangées et leur indentation a été perdue. Les recopier **dans le bon ordre** et **correctement indentées**, puis <span class="run" title="À programmer et tester sur machine">▶</span> tester sur `["chat", "girafe", "ours", "souris"]`. Pourquoi obtient-on `"girafe"` et non `"souris"`, qui a pourtant la même longueur ?
 
 ```text
-return m
-m = x
-def maximum(t):
-if x > m:
-m = t[0]
-for x in t:
+return champion
+champion = mot
+def mot_le_plus_long(mots):
+if len(mot) > len(champion):
+champion = mots[0]
+for mot in mots:
 ```
 
 ??? corrige "Corrigé"
 
     ```python
-    def maximum(t):
-        m = t[0]
-        for x in t:
-            if x > m:
-                m = x
-        return m
+    def mot_le_plus_long(mots):
+        champion = mots[0]
+        for mot in mots:
+            if len(mot) > len(champion):
+                champion = mot
+        return champion
     ```
 
-    À noter : `m = t[0]` se place **avant** la boucle (initialisation du champion) ; `return m` est au niveau de la boucle, **après** elle (sinon on renverrait dès le premier tour). Sur `[-5, -2, -9]`, on obtient `-2`.
+    À noter : `champion = mots[0]` se place **avant** la boucle (initialisation du champion) ; `return champion` est au niveau de la boucle, **après** elle (sinon on renverrait dès le premier tour). Sur l’exemple, on obtient `"girafe"` : quand arrive `"souris"`, le test `len(mot) > len(champion)` compare `6 > 6`, qui est faux. La comparaison **stricte** garde donc le **premier** mot de longueur maximale.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Amplitude <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-6 }
 
@@ -208,53 +208,68 @@ for x in t:
 
 ??? corrige "Corrigé"
 
-    On retire une fois la plus mauvaise note de la somme, et on divise par `len(t) - 1`.
+    On retire une fois la plus mauvaise note de la somme, et on divise par `len(t) - 1`. La somme et la pire note se calculent dans le même parcours.
 
     ```python
     def moyenne_sans_pire(t):
         pire = t[0]
+        total = 0
         for x in t:
+            total = total + x
             if x < pire:
                 pire = x
-        return (somme(t) - pire) / (len(t) - 1)
+        return (total - pire) / (len(t) - 1)
     ```
 
 ### Recherche séquentielle
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Présent ou absent <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-8 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Un multiple dans le tableau <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-8 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `est_present(t, x)` qui renvoie `True` si `x` figure dans `t`, `False` sinon. Faire en sorte de **s’arrêter** dès que `x` est trouvé.
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `a_un_multiple(t, k)` qui renvoie `True` si au moins un élément de `t` est un multiple de `k`, `False` sinon. La fonction doit **s’arrêter** dès qu’un multiple est trouvé. Combien de tours de boucle effectue `a_un_multiple([7, 10, 3, 20], 5)` ? Et `a_un_multiple([7, 10, 3, 20], 6)` ?
+
+??? pouce "Coup de pouce"
+
+    `x` est un multiple de `k` quand `x % k == 0`. Où placer `return False` : dans la boucle ou après ?
 
 ??? corrige "Corrigé"
 
     ```python
-    def est_present(t, x):
-        for element in t:
-            if element == x:
+    def a_un_multiple(t, k):
+        for x in t:
+            if x % k == 0:
                 return True       # on s'arrete des qu'on trouve
-        return False
+        return False              # parcours fini sans succes
     ```
+
+    `a_un_multiple([7, 10, 3, 20], 5)` fait **2** tours : `10` est trouvé au deuxième tour, et `return` arrête aussitôt la fonction. `a_un_multiple([7, 10, 3, 20], 6)` fait **4** tours : aucun multiple de 6, il faut tout parcourir avant de répondre `False`. C’est le pire cas.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Où est-il ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-9 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire :
 
-1.  `premier_indice(t, x)` : l’indice de la **première** occurrence de `x`, ou `-1` si absent ;
+1.  `premiere_voyelle(mot)` : l’indice de la **première** voyelle (`a`, `e`, `i`, `o`, `u`, `y`) de la chaîne `mot`, ou `-1` s’il n’y en a pas ;
 
-2.  `dernier_indice(t, x)` : l’indice de la **dernière** occurrence de `x`, ou `-1` si absent.
+2.  `dernier_indice(t, x)` : l’indice de la **dernière** occurrence de `x` dans le tableau `t`, ou `-1` si `x` est absent.
+
+```text
+>>> premiere_voyelle("schtroumpf")
+5
+>>> dernier_indice([4, 1, 4, 2], 4)
+2
+```
 
 ??? pouce "Coup de pouce"
 
-    Première occurrence : on peut s’arrêter dès qu’on trouve. Dernière occurrence : soit parcourir tout le tableau en mémorisant le dernier indice rencontré, soit parcourir les indices à l’envers.
+    Première voyelle : parcourir par indice, tester `mot[i] in "aeiouy"` et s’arrêter dès qu’on trouve. Dernière occurrence : soit parcourir tout le tableau en mémorisant le dernier indice rencontré, soit parcourir les indices à l’envers.
 
 ??? corrige "Corrigé"
 
-    Pour la **première** occurrence, on renvoie dès qu’on trouve. Pour la **dernière**, on retient le dernier indice vu (on ne peut pas s’arrêter tôt).
+    Pour la **première** voyelle, on renvoie dès qu’on trouve. Pour la **dernière** occurrence, on retient le dernier indice vu (on ne peut pas s’arrêter tôt).
 
     ```python
-    def premier_indice(t, x):
-        for i in range(len(t)):
-            if t[i] == x:
+    def premiere_voyelle(mot):
+        for i in range(len(mot)):
+            if mot[i] in "aeiouy":
                 return i
         return -1
 
@@ -266,16 +281,14 @@ for x in t:
         return resultat
     ```
 
-    *Autre méthode* pour `premier_indice`, avec un `while` : on avance tant qu’on n’est ni au bout du tableau ni sur `x`, puis on regarde pourquoi on s’est arrêté.
+    *Autre méthode* pour `dernier_indice` : parcourir les indices **à l’envers**, du dernier au premier ; on peut alors s’arrêter dès qu’on trouve.
 
     ```python
-    def premier_indice(t, x):
-        i = 0
-        while i < len(t) and t[i] != x:
-            i = i + 1
-        if i < len(t):            # arret sur x
-            return i
-        return -1                 # arret au bout : x absent
+    def dernier_indice(t, x):
+        for i in range(len(t) - 1, -1, -1):
+            if t[i] == x:
+                return i
+        return -1
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Recherche sous condition <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-10 }
@@ -289,7 +302,7 @@ for x in t:
 
 ??? pouce "Coup de pouce"
 
-    Même structure que `est_present` : on renvoie l’élément dès que la condition est vraie. Que renvoyer si la boucle se termine sans succès ?
+    Même structure que `a_un_multiple` : on renvoie l’élément dès que la condition est vraie. Que renvoyer si la boucle se termine sans succès ?
 
 ??? corrige "Corrigé"
 
@@ -330,22 +343,22 @@ for x in t:
 
 ### Minimum, maximum et champion
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 12</span> — Le plus grand <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-12 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 12</span> — Le plus petit <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-12 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `maximum(t)` (tableau non vide), **sans** `max`. Préciser l’**invariant** de votre boucle.
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `minimum(t)` (tableau non vide), **sans** `min`. Préciser l’**invariant** de votre boucle. Pourquoi serait-il faux d’initialiser le champion à `0` ? (Penser au tableau `[3, 8, 5]`.)
 
 ??? corrige "Corrigé"
 
     ```python
-    def maximum(t):
+    def minimum(t):
         m = t[0]
         for x in t:
-            if x > m:
+            if x < m:
                 m = x
         return m
     ```
 
-    **Invariant** : à chaque tour, `m` est le maximum des éléments déjà visités.
+    **Invariant** : à chaque tour, `m` est le minimum des éléments déjà visités. Initialiser `m` à `0` serait faux : sur `[3, 8, 5]`, aucun élément n’est inférieur à `0`, et la fonction renverrait `0`, qui n’est même pas dans le tableau (c’est le défaut de l’exercice « Lecture de trace »). On initialise avec un élément *existant* : `t[0]`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — La position du champion <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-13 }
 
@@ -388,7 +401,7 @@ for x in t:
         return mini, maxi
     ```
 
-    Un seul parcours ($\approx n$ tours) au lieu de deux : deux fois moins de travail, mais même coût **linéaire**.
+    Un seul parcours ($n$ tours) au lieu de deux ($2n$ tours) : deux fois moins de **tours de boucle**, mais autant de **comparaisons** (deux par tour, soit $2n$ dans les deux cas). Le coût reste **linéaire**.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 15</span> — Le deuxième plus grand <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-15 }
 
@@ -427,6 +440,8 @@ for x in t:
                     second = x
         return second
     ```
+
+    On écrit ici `== None` ; le chapitre *Spécifier et mettre au point ses programmes* présentera l’écriture recommandée `is None`.
 
 ### Invariants de boucle
 
@@ -570,11 +585,14 @@ C’est **l’exercice central** du chapitre. La variance mesure la dispersion :
 
 ??? corrige "Corrigé"
 
-    **1, 4.** Les deux fonctions :
+    **1, 2, 4.** Les trois fonctions :
 
     ```python
-    def moyenne(t):
-        return somme(t) / len(t)
+    def moyenne(t):              # 1.
+        s = 0
+        for x in t:
+            s = s + x
+        return s / len(t)
 
     def variance_naive(t):        # 2.
         n = len(t)
@@ -614,8 +632,8 @@ C’est **l’exercice central** du chapitre. La variance mesure la dispersion :
 
     `courante = 0`  
     `record = 0`  
-    `for t in temperatures:`  
-    `if t > seuil:`
+    `for temp in temperatures:`  
+    `if temp > seuil:`
 
 ??? corrige "Corrigé"
 
@@ -629,16 +647,16 @@ C’est **l’exercice central** du chapitre. La variance mesure la dispersion :
 
     def nb_jours_gel(temperatures):
         c = 0
-        for t in temperatures:
-            if t < 0:
+        for temp in temperatures:
+            if temp < 0:
                 c = c + 1
         return c
 
     def plus_longue_serie_chaude(temperatures, seuil):   # au-dela du programme
         record = 0
         courante = 0
-        for t in temperatures:
-            if t > seuil:
+        for temp in temperatures:
+            if temp > seuil:
                 courante = courante + 1
                 if courante > record:
                     record = courante
