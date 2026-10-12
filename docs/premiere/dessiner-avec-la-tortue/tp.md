@@ -207,6 +207,10 @@ ecrire(phrase, 30)
 
 3.  Pourquoi le contrat est-il indispensable pour que `ecrire` fonctionne ? Que se passerait-il si `lettre_H` finissait en haut de sa case ?
 
+!!! remarque "Remarque — Notation : phrase.upper()"
+
+    `ch.upper()` renvoie la chaîne `ch` écrite en majuscules ; plus loin, `c.islower()` dira si le caractère `c` est une minuscule. Cette écriture « avec un point » s’appelle une **méthode** : le chapitre *Les types construits* en présentera d’autres.
+
 !!! remarque "Remarque — Deux pièges"
 
     - `input` attend la phrase dans la **console**, pas dans la fenêtre de la tortue : cliquez dans la console pour taper. Autre possibilité, une petite fenêtre de saisie : `phrase = t.textinput("La tortue", "Votre phrase :")`.

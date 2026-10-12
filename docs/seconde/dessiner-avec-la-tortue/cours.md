@@ -67,7 +67,7 @@ t.done()
 
 <span id="cours-T-1" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-T-1) à [3](exercices.md#ex-T-3)** (premiers tracés)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-T-1) et [2](exercices.md#ex-T-2)** (premiers tracés, sans boucle)
 
 ## Répéter : la boucle `for`
 
@@ -114,9 +114,9 @@ t.done()
 
 ![](../figures/3c5df2e4dce7fdfc.svg){ .tikz loading=lazy }
 
-<span id="cours-T-4" class="ancre"></span>
+<span id="cours-T-3" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[4](exercices.md#ex-T-4) à [6](exercices.md#ex-T-6)** (les polygones réguliers)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-T-3) à [5](exercices.md#ex-T-5)** (boucle `for` et polygones réguliers)
 
 ## Réutiliser : les fonctions
 
@@ -147,9 +147,9 @@ polygone(3, 100)   # triangle
 polygone(8, 60)    # octogone
 ```
 
-<span id="cours-T-7" class="ancre"></span>
+<span id="cours-T-6" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[7](exercices.md#ex-T-7)** (une fonction pour le carré)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-T-6) et [7](exercices.md#ex-T-7)** (une fonction pour le carré, puis pour tout polygone)
 
 ## Colorier une forme
 

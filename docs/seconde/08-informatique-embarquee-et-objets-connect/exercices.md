@@ -6,7 +6,7 @@
 
     - Niveau : ★ échauffement, ★★ classique (niveau bac), ★★★ défi ; les *coups de pouce* et les *corrigés* se déplient sous chaque exercice.
 
-    - <span class="tag">sur papier</span> *à faire sur papier* ; <span class="tag">sur machine</span> *à programmer et tester* en Python.
+    - <span class="tag">sur papier</span> *à faire sur papier*. Les fonctions des capteurs et actionneurs (`lire_humidite()`, `detecte()`, `attendre()`…) n’existent que sur une vraie carte : les programmes de cette feuille s’écrivent donc sur papier.
 
     - Réflexe « objet embarqué » : **capteur** (mesure) $\to$ **programme** (décision) $\to$ **actionneur** (action) $\to$ on recommence.
 
@@ -140,7 +140,7 @@ Combien de temps s’est-il écoulé entre la première et la dernière mesure ?
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Compléter un arrosage automatique <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-7 }
 
-<span class="tag">sur machine</span>  Un système arrose une plante dès que la terre est trop sèche : l’humidité `h` passe sous `40`. Recopier et compléter :
+<span class="tag">sur papier</span>  Un système arrose une plante dès que la terre est trop sèche : l’humidité `h` passe sous `40`. Recopier et compléter :
 
 ```python
 while True:
@@ -170,7 +170,7 @@ while True:
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 8</span> — Défi — une alarme <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-8 }
 
-<span class="tag">sur machine</span>  Écrire une boucle de commande pour une **alarme** : tant qu’elle fonctionne, si le détecteur de mouvement renvoie `True` (`detecte()`), elle déclenche la sirène (`sonner()`) et allume une LED (`allumer_led()`) ; sinon elle éteint tout. On testera dix fois par seconde.
+<span class="tag">sur papier</span>  Écrire une boucle de commande pour une **alarme** : tant qu’elle fonctionne, si le détecteur de mouvement renvoie `True` (`detecte()`), elle déclenche la sirène (`sonner()`) et allume une LED (`allumer_led()`) ; sinon elle éteint tout. On testera dix fois par seconde.
 
 ??? pouce "Coup de pouce"
 
@@ -199,7 +199,7 @@ while True:
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 9</span> — Le thermostat à deux seuils <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-9 }
 
-<span class="tag">sur machine</span>  Le thermostat du cours allume le chauffage sous $19\,^\circ$C et l’éteint sinon : autour de $19\,^\circ$C, le radiateur s’allume et s’éteint sans arrêt, ce qui l’use. On veut un thermostat plus malin : il **allume** le chauffage si la température passe sous $19\,^\circ$C, l’**éteint** si elle dépasse $21\,^\circ$C, et **ne change rien** entre les deux.
+<span class="tag">sur papier</span>  Le thermostat du cours allume le chauffage sous $19\,^\circ$C et l’éteint sinon : autour de $19\,^\circ$C, le radiateur s’allume et s’éteint sans arrêt, ce qui l’use. On veut un thermostat plus malin : il **allume** le chauffage si la température passe sous $19\,^\circ$C, l’**éteint** si elle dépasse $21\,^\circ$C, et **ne change rien** entre les deux.
 
 1.  Écrire cette boucle de commande (une mesure par minute).
 
@@ -235,7 +235,7 @@ while True:
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Le compteur de passages <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-10 }
 
-<span class="tag">sur machine</span>  À l’entrée d’une petite salle, un détecteur `detecte()` renvoie `True` quand quelqu’un passe. On veut **compter** les entrées, afficher le total sur un écran (`afficher(n)`) et déclencher un signal sonore (`sonner()`) dès que plus de $20$ personnes sont entrées.
+<span class="tag">sur papier</span>  À l’entrée d’une petite salle, un détecteur `detecte()` renvoie `True` quand quelqu’un passe. On veut **compter** les entrées, afficher le total sur un écran (`afficher(n)`) et déclencher un signal sonore (`sonner()`) dès que plus de $20$ personnes sont entrées.
 
 1.  Écrire la boucle de commande (dix tests par seconde).
 
@@ -268,7 +268,23 @@ while True:
             attendre(0.1)                # 10 tests par seconde
         ```
 
-    2.  En une demi-seconde, la boucle teste $5$ fois le détecteur : la même personne serait **comptée $5$ fois**. Solution simple : après une détection, attendre une seconde avant de reprendre les tests (ajouter `attendre(1)` juste après `afficher(nb)`) ; ou ne compter que lorsque le détecteur passe de `False` à `True`.
+    2.  En une demi-seconde, la boucle teste $5$ fois le détecteur : la même personne serait **comptée $5$ fois**. Solution simple : après une détection, attendre une seconde avant de reprendre les tests (ajouter `attendre(1)` juste après `afficher(nb)`).
+
+    *Pour aller plus loin :* on peut aussi ne compter que lorsque le détecteur **passe** de `False` à `True`. Il faut alors se souvenir, d’un tour à l’autre, de la mesure précédente, rangée dans une variable `avant` :
+
+    ```python
+    nb = 0
+    avant = False
+    while True:
+        maintenant = detecte()
+        if maintenant and not avant:     # le detecteur vient de passer a True
+            nb = nb + 1
+            afficher(nb)
+            if nb > 20:
+                sonner()
+        avant = maintenant               # on retient la mesure pour le tour suivant
+        attendre(0.1)
+    ```
 
 ### L’interface homme-machine (IHM)
 

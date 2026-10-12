@@ -225,7 +225,7 @@ On considère trois processus, dans cet ordre d’arrivée : PID $11$ (durée $4
             ...........................       # True si reste_a_faire vaut 0
     ```
 
-4.  <span class="run" title="À programmer et tester sur machine">▶</span>  Recopier et compléter la fonction `tourniquet`, qui renvoie la liste des PID dans l’ordre d’exécution :
+4.  <span class="run" title="À programmer et tester sur machine">▶</span>  Recopier et compléter la fonction `tourniquet`, qui renvoie la liste des PID dans l’ordre d’exécution (la file est ici une liste Python défilée par `pop(0)` : choix simple mais coûteux, en $O(n)$, cf. chapitre *Structures linéaires*) :
 
     ??? pouce "Coup de pouce"
 
@@ -730,7 +730,7 @@ Un processus est représenté par une classe `Processus` d’attributs `PID` (id
             self.temps_CPU = temps_CPU
     ```
 
-2.  On considère les trois processus suivants :
+2.  On considère les trois processus suivants (à l’appel, on peut **nommer** les arguments, `PID=1` par exemple : c’est plus lisible, et l’ordre n’importe plus) :
 
     ```python
     P1 = Processus(PID=1, priorite=0, temps_CPU=10)

@@ -46,9 +46,9 @@ Un **double-clic** sur un composant ouvre sa configuration. **Pour taper des com
 
 ??? corrige "Corrigé"
 
-    **1.** `ping 192.168.0.2` réussit ; le paquet va PC-A $\to$ Switch $\to$ PC-B (précédé d’une requête **ARP** pour trouver l’adresse physique, puis les échanges **ICMP** *echo*/*reply*).
+    **1.** `ping 192.168.0.2` réussit ; le paquet va PC-A $\to$ Switch $\to$ PC-B (pour information, hors programme : il est précédé d’une requête **ARP**, par laquelle PC-A demande « qui a l’adresse IP `192.168.0.2` ? » pour obtenir l’adresse physique, dite MAC, de PC-B ; viennent ensuite les messages **ICMP** *echo* et *reply*, le protocole utilisé par `ping`).
 
-    **2.** Vers une machine **inexistante** (`.9`), personne ne répond à l’ARP : le `ping` **échoue** (délai dépassé).
+    **2.** Vers une machine **inexistante** (`.9`), personne ne répond à la requête ARP : le `ping` **échoue** (délai dépassé).
 
 ## Partie 2 — Deux réseaux, un routeur, une passerelle
 

@@ -79,6 +79,17 @@ On considère le fichier (inventé) suivant :
 
 ### <span class="exo-num">Exercice 3</span> — Lire les deux colonnes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-3 }
 
+!!! encadre "Outil Python : découper une ligne (split)"
+
+    `ligne.split()` découpe la chaîne `ligne` sur les espaces et renvoie la **liste** des morceaux (des chaînes) ; les espaces multiples ne gênent pas. Avec un argument, `ligne.split(", ")` découpe sur ce séparateur.
+
+    ```python
+    morceaux = "5   2".split()
+    print(morceaux)              # ['5', '2'] : deux chaines
+    print(int(morceaux[0]))      # 5 : converti en entier
+    print("a, b, c".split(", ")) # ['a', 'b', 'c']
+    ```
+
 Écrire une fonction `lire(nom_fichier)` qui renvoie les deux listes `gauche` et `droite`. Sur l’exemple : `[5, 2, 7, 1, 2, 6]` et `[2, 5, 4, 2, 8, 2]`.
 
 ??? pouce "Coup de pouce"
@@ -91,7 +102,7 @@ On considère le fichier (inventé) suivant :
 
 !!! encadre "Outil Python : la valeur absolue (abs)"
 
-    La fonction `abs` renvoie la valeur absolue d’un nombre : le nombre sans son signe. Pour deux nombres `x` et `y`, `abs(x - y)` est la distance entre eux, quel que soit le plus grand.
+    La fonction `abs`, déjà rencontrée au chapitre *Le binaire et l’écriture des nombres*, renvoie la valeur absolue d’un nombre : le nombre sans son signe. Pour deux nombres `x` et `y`, `abs(x - y)` est la distance entre eux, quel que soit le plus grand.
 
     ```python
     print(abs(-4))       # 4
@@ -164,7 +175,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 2.  Sur l’exemple, écrire à la main le dictionnaire `compte` qui associe à chaque nombre de la liste de droite son nombre d’apparitions.
 
-3.  Écrire une fonction `similarite_dico(gauche, droite)` qui construit ce dictionnaire en un parcours de la liste de droite, puis répond en un seul parcours de la liste de gauche. Quelle est sa complexité ?
+3.  Écrire une fonction `similarite_dico(gauche, droite)` qui construit ce dictionnaire en un parcours de la liste de droite, puis répond en un seul parcours de la liste de gauche. Quel est son coût ?
 
     ??? pouce "Coup de pouce"
 

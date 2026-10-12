@@ -179,7 +179,7 @@ Pour aller plus loin, on peut **générer des tests au hasard**. Encore faut-il 
 
 ```python
 for n in range(2, 30):
-    for _ in range(20):
+    for k in range(20):
         t = tableau_avec_doublon(n)
         assert verifie_doublon(doublon(t), t)
 ```

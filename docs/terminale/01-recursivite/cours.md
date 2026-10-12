@@ -208,6 +208,51 @@ Le programme demande explicitement des exemples *variés*. En voici quatre, tous
 
         On obtient `0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55` pour `n` allant de 0 à 10.
 
+### Un outil Python : le paramètre par défaut
+
+Une fonction récursive a souvent besoin d’un paramètre **de plus** que ce que l’utilisateur veut fournir : un **accumulateur**, qui transporte d’un appel à l’autre le résultat en cours de construction. Python permet de donner à ce paramètre une **valeur par défaut**, écrite dans l’en-tête avec `=` : elle est utilisée quand l’appel ne fournit pas ce paramètre.
+
+```python
+def somme_acc(n, total=0):
+    """Renvoie total + 1 + 2 + ... + n."""
+    if n == 0:
+        return total
+    else:
+        return somme_acc(n - 1, total + n)
+```
+
+L’utilisateur appelle `somme_acc(4)`, qui renvoie `10` : `total` vaut alors `0`, sans qu’il ait à le savoir. Les appels récursifs, eux, fournissent `total` : `somme_acc(3, 4)`, puis `somme_acc(2, 7)`, etc. Les paramètres qui ont une valeur par défaut s’écrivent **après** les autres.
+
+!!! regle "Règle 4 — Piège : une valeur par défaut modifiable"
+
+    La valeur par défaut est créée **une seule fois**, quand Python lit le `def`, et non à chaque appel. Pour un nombre ou une chaîne, qu’on ne modifie jamais, c’est sans danger. Pour une **liste**, c’est un piège : la même liste sert à tous les appels qui ne la fournissent pas.
+
+    ```python
+    def a_rebours(n, vus=[]):    # A EVITER
+        """Renvoie la liste [n, n - 1, ..., 1]."""
+        if n == 0:
+            return vus
+        else:
+            vus.append(n)
+            return a_rebours(n - 1, vus)
+    ```
+
+    `a_rebours(3)` renvoie bien `[3, 2, 1]`, mais l’appel suivant `a_rebours(2)` renvoie `[3, 2, 1, 2, 1]` : la liste a gardé le résultat du premier appel. La bonne pratique : mettre `None` par défaut, et créer une liste neuve dans la fonction.
+
+    ```python
+    def a_rebours(n, vus=None):
+        """Renvoie la liste [n, n - 1, ..., 1]."""
+        if vus is None:
+            vus = []             # liste neuve a chaque appel de l'utilisateur
+        if n == 0:
+            return vus
+        else:
+            vus.append(n)
+            return a_rebours(n - 1, vus)
+    ```
+
+    Cette fois, `a_rebours(2)` renvoie `[2, 1]`. On retrouvera ce schéma au chapitre *Graphes*, dans le parcours en profondeur récursif.
+
 <span id="cours-01-5" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-01-5) à [23](exercices.md#ex-01-23)** (écrire des fonctions récursives : nombres, chaînes, listes, dénombrement)
@@ -304,7 +349,7 @@ Toute fonction récursive peut se réécrire de façon **itérative** (avec des 
 
     Le bac aime aussi les **limites** : `tester_palindrome(53235)` *échoue*, car `len` ne s’applique pas à un entier. Une fonction n’est correcte que pour le **type de données** qu’elle attend.
 
-!!! regle "Règle 4 — Comment choisir ?"
+!!! regle "Règle 5 — Comment choisir ?"
 
     - la version **récursive** gagne quand le problème est *lui-même récursif* (arbres, fractales, diviser pour régner) : le code est alors bien plus court et clair ;
 

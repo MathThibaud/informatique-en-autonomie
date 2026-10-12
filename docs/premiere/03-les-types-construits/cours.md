@@ -40,7 +40,7 @@ De cette image découle une distinction **fondamentale** : peut-on modifier l’
 
 !!! remarque "Remarque — La chaîne : une collection que vous connaissez déjà"
 
-    Le type `str` annonce déjà les séquences : ses caractères sont **ordonnés**, indexés à partir de $0$, et on en extrait des tranches. On peut aussi la passer tout en **minuscules** ou en **majuscules** avec `.lower()` et `.upper()`. Ces réflexes vont resservir tels quels.
+    Le type `str` annonce déjà les séquences : ses caractères sont **ordonnés** et indexés à partir de $0$ ; on peut aussi en extraire des **tranches** (nouveau : `ch[3:7]` ci-dessous, détaillé avec les tableaux). On peut aussi la passer tout en **minuscules** ou en **majuscules** avec `.lower()` et `.upper()`. Ces réflexes vont resservir tels quels.
 
     ```text
     >>> ch = "Bonjour"
@@ -153,7 +153,8 @@ q, r = division(25, 7)      # q vaut 3, r vaut 4
     ```python
     def mini_maxi(t):
         """Renvoie (plus petit, plus grand) du tableau non vide t."""
-        mini = maxi = t[0]
+        mini = t[0]
+        maxi = t[0]
         for x in t:
             if x < mini:
                 mini = x
@@ -199,6 +200,32 @@ Un **tableau** ressemble à un p-uplet… mais il est **mutable**. C’est là 
 [12, 20]
 ```
 
+!!! regle "Règle 2 — Indices négatifs et tranches"
+
+    - **Indice négatif** : on compte depuis la fin. `t[-1]` est le dernier élément, `t[-2]` l’avant-dernier ; `t[-k]` désigne `t[len(t) - k]`.
+
+    - **Tranche** `t[a:b]` : un *nouveau* tableau, formé des éléments d’indices `a` à `b - 1` (`b` est exclu, comme dans `range`). Si `a` est omis, on part du début ; si `b` est omis, on va jusqu’à la fin.
+
+    - Les deux se combinent : `t[:-1]` est le tableau privé de son dernier élément, c’est-à-dire `t[0:len(t) - 1]`.
+
+    Tout cela vaut aussi pour les chaînes et les p-uplets.
+
+```text
+>>> notes = [12, 20, 15, 9]
+>>> notes[-1]          # dernier element
+9
+>>> notes[-2]          # avant-dernier
+15
+>>> notes[1:3]         # indices 1 et 2 (3 exclu)
+[20, 15]
+>>> notes[:2]          # depuis le debut
+[12, 20]
+>>> notes[2:]          # jusqu'a la fin
+[15, 9]
+>>> notes[:-1]         # tout sauf le dernier
+[12, 20, 15]
+```
+
 ### Parcourir un tableau (capacité attendue)
 
 **(1) Par élément**, quand seules les valeurs comptent :
@@ -231,7 +258,7 @@ for i, note in enumerate(notes):
 
 Écriture concise, à **maîtriser absolument** : elle fabrique un tableau à partir d’un itérable.
 
-!!! regle "Règle 2 — Syntaxe de la compréhension"
+!!! regle "Règle 3 — Syntaxe de la compréhension"
 
     Deux formes (une par ligne), chaque couleur repérant une partie :
 
@@ -271,7 +298,7 @@ for i, note in enumerate(notes):
 
 Un tableau étant mutable, il possède des **méthodes** (appel avec un point). Non exigibles, mais omniprésentes, y compris dans les sujets de bac.
 
-!!! regle "Règle 3 — Méthodes usuelles (au-delà du programme)"
+!!! regle "Règle 4 — Méthodes usuelles (au-delà du programme)"
 
     Un tableau `t` dispose notamment des méthodes suivantes :
 
@@ -296,7 +323,7 @@ Un tableau étant mutable, il possède des **méthodes** (appel avec un point). 
 >>> t.sort()          # -> [1, 2, 3, 9]
 ```
 
-!!! regle "Règle 4 — Modifier sur place vs renvoyer une copie"
+!!! regle "Règle 5 — Modifier sur place vs renvoyer une copie"
 
     Ces méthodes modifient le tableau et renvoient `None` : n’écrivez **jamais** `t = t.sort()` (vous perdriez tout). Pour trier *sans* modifier l’original, la **fonction** `sorted` renvoie un nouveau tableau.
 
@@ -312,7 +339,7 @@ Un tableau étant mutable, il possède des **méthodes** (appel avec un point). 
 
 Voici le point le plus important — et le plus piégeux — du chapitre. Reprenons le dessin du §I.
 
-!!! regle "Règle 5 — Affecter un tableau ne le copie pas !"
+!!! regle "Règle 6 — Affecter un tableau ne le copie pas !"
 
     `b = a` ne crée **aucun** nouvel objet : il fait simplement pointer `b` vers **le même** tableau que `a`. On dit que `a` et `b` sont des **alias**. Modifier via l’un se voit via l’autre.
 
@@ -378,7 +405,7 @@ M = [[1, 2, 3],
      [4, 5, 6]]        # 2 lignes, 3 colonnes
 ```
 
-!!! regle "Règle 6 — Accès à une case : M[i][j]"
+!!! regle "Règle 7 — Accès à une case : M[i][j]"
 
     `M[i]` est la ligne d’indice `i` (un tableau) ; `M[i][j]` est la case ligne `i`, colonne `j`. Le nombre de lignes est `len(M)`, de colonnes `len(M[0])`.
 
@@ -469,7 +496,7 @@ Différence majeure avec le tableau : on crée une **nouvelle clé** par simple 
 2
 ```
 
-!!! regle "Règle 7 — Le test in porte sur les clés"
+!!! regle "Règle 8 — Le test in porte sur les clés"
 
     ```text
     >>> "Bob" in age    # une cle ?
@@ -484,7 +511,7 @@ Différence majeure avec le tableau : on crée une **nouvelle clé** par simple 
 
 Une boucle `for` sur un dictionnaire parcourt ses **clés**. Trois méthodes précisent le parcours.
 
-!!! regle "Règle 8 — keys, values, items"
+!!! regle "Règle 9 — keys, values, items"
 
     `d.keys()` : les clés. `d.values()` : les valeurs. `d.items()` : les couples `(clé, valeur)`.
 
@@ -497,7 +524,10 @@ for prenom in age:                 # parcourt les cles (defaut)
 for prenom, a in age.items():      # couples : tres pratique
     print(prenom, "a", a, "ans")
 
-moyenne = sum(age.values()) / len(age)    # moyenne des ages
+total = 0
+for a in age.values():             # parcourt les valeurs
+    total = total + a
+moyenne = total / len(age)         # moyenne des ages
 ```
 
 !!! exemple "Exemple — Compter des occurrences : le cas d’école du dictionnaire"
@@ -538,9 +568,13 @@ moyenne = sum(age.values()) / len(age)    # moyenne des ages
 
 ### Le fil rouge, une dernière fois : pourquoi la clé est-elle immuable ?
 
-!!! regle "Règle 9 — Une clé de dictionnaire doit être immuable"
+!!! regle "Règle 10 — Une clé de dictionnaire doit être immuable"
 
     Un tableau ne peut pas être une clé ; un p-uplet, si. Le modèle mémoire l’explique : le dictionnaire range chaque valeur *à une place calculée à partir de la clé*. Si la clé pouvait **changer** après coup (comme un tableau mutable), cette place ne correspondrait plus à rien et la valeur serait **introuvable**. D’où l’exigence d’une clé **figée**.
+
+!!! remarque "Remarque — Copier un dictionnaire au-delà du programme"
+
+    Comme pour les tableaux, `d2 = d` crée un **alias**, pas une copie. Pour obtenir un nouveau dictionnaire contenant les mêmes couples clé-valeur, on écrit `d2 = dict(d)`.
 
 !!! exemple "Exemple — Clés composées avec des p-uplets"
 
@@ -593,7 +627,7 @@ moyenne = sum(age.values()) / len(age)    # moyenne des ages
 
 - **Croire que `b = a` copie la liste.** On crée une **deuxième étiquette** sur la **même** liste : modifier `b` modifie `a`. *Le réflexe :* pour copier, une compréhension `[x for x in a]` (ou `a[:]`).
 
-- **Le piège `[[0]*p]*n`.** Les `n` lignes sont la **même** liste partagée. *Le réflexe :* `[[0]*p for _ in range(n)]`.
+- **Le piège `[[0]*p]*n`.** Les `n` lignes sont la **même** liste partagée. *Le réflexe :* `[[0]*p for i in range(n)]`.
 
 - **Vouloir modifier un p-uplet.** Un `tuple` est **immuable** ; une liste est mutable.
 

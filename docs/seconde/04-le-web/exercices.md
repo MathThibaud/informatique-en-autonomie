@@ -182,16 +182,13 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
 <span class="tag">sur papier</span>  On dispose de l’arborescence suivante (la racine est `/`) :
 
-/ — dossier2 — fichier1.css  
-dossier3 — fichier3.jpg  
-fichier5.svg  
-dossier4 — fichier6.html
+![](../figures/bae69bd7d62b65a8.svg){ .tikz loading=lazy }
 
-1.  Donner le **chemin absolu** du fichier `fichier3.jpg`.
+1.  Donner le **chemin absolu** du fichier `sable.jpg`.
 
-2.  Le fichier `fichier1.css` (dans `dossier2`) veut utiliser `fichier3.jpg`. Donner le **chemin relatif** correspondant.
+2.  Le fichier `album.css` (dans `photos`) veut utiliser `sable.jpg`. Donner le **chemin relatif** correspondant.
 
-3.  Depuis `dossier4`, donner le chemin relatif vers `fichier5.svg`.
+3.  La page `playlist.html` (dans `musique`) veut afficher `mer.png`. Donner le chemin relatif correspondant.
 
 ??? pouce "Coup de pouce"
 
@@ -199,11 +196,11 @@ dossier4 — fichier6.html
 
 ??? corrige "Corrigé"
 
-    1.  Chemin absolu : `/dossier2/dossier3/fichier3.jpg`.
+    1.  Chemin absolu : `/photos/ete/sable.jpg`.
 
-    2.  Chemin relatif depuis `dossier2` : `dossier3/fichier3.jpg` (pas de `/` au début).
+    2.  Chemin relatif depuis `photos` : `ete/sable.jpg` (pas de `/` au début).
 
-    3.  Depuis `dossier4` : `../dossier2/dossier3/fichier5.svg` (on remonte à la racine avec `..`, puis on redescend).
+    3.  Depuis `musique` : `../photos/ete/mer.png` (on remonte à la racine avec `..`, puis on redescend dans `photos`, puis dans `ete`).
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Le site déménage <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-10 }
 
@@ -211,7 +208,7 @@ dossier4 — fichier6.html
 
 1.  Dessiner l’arborescence de ce site.
 
-2.  Dans `index.html`, le logo s’affiche avec `<img src="images/logo.png">`. On copie cette ligne telle quelle dans `contact.html` : le logo ne s’affiche plus. Pourquoi ? Corriger le chemin.
+2.  Dans `index.html`, le logo s’affiche avec `<img src="images/logo.png" alt="Logo du club" />`. On copie cette ligne telle quelle dans `contact.html` : le logo ne s’affiche plus. Pourquoi ? Corriger le chemin.
 
 3.  Écrire, dans `contact.html`, un lien qui ramène à `index.html`.
 
@@ -231,7 +228,7 @@ dossier4 — fichier6.html
 
         ![](../figures/d30f8cd8b2afb392.svg){ .tikz loading=lazy }
 
-    2.  Un chemin relatif part du dossier de la page qui l’utilise. Depuis `pages`, `images/logo.png` désigne `pages/images/logo.png`, qui n’existe pas. Il faut d’abord **remonter** à la racine : `<img src="../images/logo.png">`.
+    2.  Un chemin relatif part du dossier de la page qui l’utilise. Depuis `pages`, `images/logo.png` désigne `pages/images/logo.png`, qui n’existe pas. Il faut d’abord **remonter** à la racine : `<img src="../images/logo.png" alt="Logo du club" />`.
 
     3.  `<a href="../index.html">Retour à l’accueil</a>`.
 
@@ -350,7 +347,7 @@ dossier4 — fichier6.html
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Un peu de style <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-15 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Reprendre la page précédente et ajouter du CSS pour : centrer le titre et lui donner un fond coloré ; mettre les paragraphes dans la police `Verdana` ; colorer en gris, *via* un `id`, la seule ligne de signature.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Reprendre la page précédente et ajouter du CSS pour : centrer le titre et lui donner un fond coloré ; mettre les paragraphes dans la police `Verdana` ; ajouter en bas de page une ligne de signature (par exemple « Page réalisée par …») et la colorer en gris, *via* un `id`.
 
 ??? pouce "Coup de pouce"
 
@@ -358,7 +355,7 @@ dossier4 — fichier6.html
 
 ??? corrige "Corrigé"
 
-    On ajoute (par exemple un `id="signature"` sur le dernier paragraphe) :
+    On ajoute en bas du `<body>` une ligne de signature munie d’un `id`, par exemple `<p id="signature">Page réalisée par Léa</p>`, puis les règles CSS :
 
     ```css
     h1 {

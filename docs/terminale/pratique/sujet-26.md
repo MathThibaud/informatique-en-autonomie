@@ -109,7 +109,7 @@
 
     On obtient encore un chemin **valide** de l’entrée à la sortie (chaque case a pour parent une case voisine), mais de **78** déplacements au lieu de 26 : ce n’est plus le plus court.
 
-    Avec `pop()`, `en_attente` n’est plus une file mais une **pile** : on repart toujours de la dernière case découverte, on s’enfonce le plus loin possible avant de revenir en arrière. C’est un **parcours en profondeur**, qui ne découvre plus les cases par distance croissante. Comme ce labyrinthe contient des **cycles** (plusieurs chemins possibles), le parent retenu pour une case n’est pas forcément sur un plus court chemin.
+    Avec `pop()`, `en_attente` n’est plus une file mais une **pile** : on repart toujours de la dernière case découverte et l’on s’enfonce loin avant de revenir en arrière, comme dans un parcours en profondeur. Ce n’en est pas tout à fait un, car les cases sont marquées dès qu’on les empile (voir la règle du cours de Graphes) ; surtout, le parcours ne découvre plus les cases par distance croissante. Comme ce labyrinthe contient des **cycles** (plusieurs chemins possibles), le parent retenu pour une case n’est pas forcément sur un plus court chemin.
 
     $\blacktriangleright$ Appel professeur. faire le lien file $\leftrightarrow$ largeur, pile $\leftrightarrow$ profondeur, et expliquer que seul le parcours en largeur garantit un plus court chemin (en nombre d’arêtes).
 
@@ -274,6 +274,6 @@ Le dossier fourni au candidat comporte les éléments suivants :
 
     On obtient encore un chemin **valide** de l’entrée à la sortie (chaque case a pour parent une case voisine), mais de **78** déplacements au lieu de 26 : ce n’est plus le plus court.
 
-    Avec `pop()`, `en_attente` n’est plus une file mais une **pile** : on repart toujours de la dernière case découverte, on s’enfonce le plus loin possible avant de revenir en arrière. C’est un **parcours en profondeur**, qui ne découvre plus les cases par distance croissante. Comme ce labyrinthe contient des **cycles** (plusieurs chemins possibles), le parent retenu pour une case n’est pas forcément sur un plus court chemin.
+    Avec `pop()`, `en_attente` n’est plus une file mais une **pile** : on repart toujours de la dernière case découverte et l’on s’enfonce loin avant de revenir en arrière, comme dans un parcours en profondeur. Ce n’en est pas tout à fait un, car les cases sont marquées dès qu’on les empile (voir la règle du cours de Graphes) ; surtout, le parcours ne découvre plus les cases par distance croissante. Comme ce labyrinthe contient des **cycles** (plusieurs chemins possibles), le parent retenu pour une case n’est pas forcément sur un plus court chemin.
 
     $\blacktriangleright$ Appel professeur. faire le lien file $\leftrightarrow$ largeur, pile $\leftrightarrow$ profondeur, et expliquer que seul le parcours en largeur garantit un plus court chemin (en nombre d’arêtes).

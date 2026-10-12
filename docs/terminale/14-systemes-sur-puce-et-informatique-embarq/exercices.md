@@ -146,7 +146,7 @@ Un thermostat connecté maintient une pièce à la température `consigne`. Il d
 
     2.  Tout étant intégré et soudé, on **ne peut pas remplacer** la seule batterie : il faut changer tout le téléphone (non réparable / non évolutif). Cela alimente la **montagne de déchets électroniques** et motive les lois sur le **droit à la réparation** et l’indice de réparabilité.
 
-    3.  Une grande partie de l’énergie d’un circuit est dissipée en **chaleur** dans les fils. En consommant peu (composants proches, sans long câblage), un SoC chauffe peu, donc n’a souvent **pas besoin de ventilateur** (il est aussi *silencieux*).
+    3.  L’énergie consommée par un circuit finit en **chaleur**, dissipée dans les transistors et dans les connexions ; transporter des signaux sur de longs fils entre puces séparées en consomme beaucoup. En consommant peu (composants proches, sans long câblage), un SoC chauffe peu, donc n’a souvent **pas besoin de ventilateur** (il est aussi *silencieux*).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Exercice d’entraînement — un microcontrôleur dans la voiture <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-8 }
 

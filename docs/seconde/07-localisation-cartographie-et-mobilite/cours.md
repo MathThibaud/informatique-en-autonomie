@@ -36,7 +36,7 @@ La ligne du méridien de Greenwich : longitude 0°
 
 !!! remarque "Remarque — Degrés décimaux ou degrés-minutes"
 
-    Un même point s’écrit de deux façons : en **degrés décimaux** ($43{,}7384^\circ$) ou en **degrés et minutes** ($43^\circ\,44{,}30'$), sachant qu’**un degré vaut 60 minutes**. Pour convertir des minutes en degrés, on **divise par 60** : $43^\circ\,44{,}30' = 43 + \dfrac{44{,}30}{60} \approx 43{,}7384^\circ$. Le GPS, on le verra, « parle » en degrés-minutes.
+    Un même point s’écrit de deux façons : en **degrés décimaux** ($43{,}7384^\circ$) ou en **degrés et minutes** ($43^\circ\,44{,}304'$), sachant qu’**un degré vaut 60 minutes**. Pour convertir des minutes en degrés, on **divise par 60** : $43^\circ\,44{,}304' = 43 + \dfrac{44{,}304}{60} \approx 43{,}7384^\circ$. Le GPS, on le verra, « parle » en degrés-minutes.
 
 <span id="cours-07-1" class="ancre"></span>
 
@@ -82,7 +82,16 @@ Trois « cercles de distance » se croisent en **un seul** point : votre positio
 
 !!! activite "Activité — Trilatération à la règle et au compas"
 
-    Sur une carte, un randonneur sait qu’il est à $3$ km d’un refuge A, $4$ km d’un lac B et $2$ km d’un sommet C. Placer A, B, C, tracer au compas les trois cercles correspondants (à l’échelle) et marquer sa **position** : le point commun aux trois cercles.
+    Sur la carte quadrillée ci-dessous (**1 carreau = 1 km**), un randonneur repère trois lieux : un refuge A, un lac B et un sommet C. Son téléphone lui indique qu’il est à $5$ km du refuge A, à $3$ km du lac B et à $4$ km du sommet C.
+
+    ![](../figures/7121aa4ace7db94f.svg){ .tikz loading=lazy }  
+    A$(0\,;0)$, B$(4\,;0)$, C$(0\,;3)$.
+
+    Recopier le quadrillage, tracer au compas les trois cercles (centre : le lieu ; rayon : la distance) et marquer sa **position** : le point commun aux trois cercles. Donner ses coordonnées.
+
+    ??? corrige "Correction"
+
+        Les cercles de centre A (rayon $5$) et de centre B (rayon $3$) se coupent en **deux** points, $(4\,;3)$ et $(4\,;-3)$. Seul le premier est aussi à $4$ km de C : le randonneur est au point $\mathbf{(4\,;3)}$. Le troisième cercle a servi à choisir entre les deux points, exactement comme un satellite supplémentaire pour le GPS.
 
 Source : GPS.gov, page « Space Segment » (31 satellites en service, 2023), `gps.gov`.
 
@@ -119,7 +128,7 @@ Une fois la position calculée, le récepteur GPS la transmet sous forme de cour
 
 !!! regle "Règle 3 — Lire la latitude et la longitude"
 
-    Le GPS donne la latitude au format `ddmm.mmmm` (degrés puis minutes) et la longitude au format `dddmm.mmmm`. Pour obtenir des **degrés décimaux**, on sépare les degrés des minutes, puis on **divise les minutes par 60**.
+    Le GPS donne la latitude au format `ddmm.mmm` (degrés puis minutes) et la longitude au format `dddmm.mmm`. Pour obtenir des **degrés décimaux**, on sépare les degrés des minutes, puis on **divise les minutes par 60**.
 
 !!! exemple "Exemple"
 

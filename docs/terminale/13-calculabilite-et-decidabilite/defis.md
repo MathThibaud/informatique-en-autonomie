@@ -86,24 +86,9 @@ Construire la liste `programme` de tuples `(operation, argument)`, l’argument 
 
     `int("+3")` et `int("-4")` fonctionnent directement : pas besoin de traiter le signe à part.
 
-!!! encadre "Outil Python : les ensembles (set)"
+!!! encadre "Outil Python : les ensembles (set) — rappel"
 
-    Un **ensemble** est une collection **sans doublon** et **sans ordre** : on ne peut pas y accéder par un indice, on peut seulement ajouter, retirer, et demander si un élément y est. Python sait aussi calculer l’union, l’intersection et la différence de deux ensembles.
-
-    ```python
-    vus = set()              # ensemble vide (attention : {} est un dictionnaire vide)
-    vus.add(5)               # ajout ; ajouter une valeur deja presente ne change rien
-    vus.add(8)
-    print(8 in vus)          # True : test d'appartenance
-    print(len(vus))          # 2
-    a = {1, 2, 3}            # ensemble ecrit directement
-    b = set([2, 3, 4, 4])    # a partir d'une liste : {2, 3, 4}
-    print(a | b)             # union : {1, 2, 3, 4}
-    print(a & b)             # intersection : {2, 3}
-    print(a - b)             # difference : {1}
-    ```
-
-    **Intérêt.** Avec une liste, `x in liste` compare `x` à chaque élément l’un après l’autre : jusqu’à $n$ comparaisons. Un ensemble range ses éléments selon une valeur calculée à partir d’eux (une *fonction de hachage*, comme les clés d’un dictionnaire) : Python va directement là où `x` devrait se trouver. Le test `x in ensemble` prend donc un temps qui ne dépend pas du nombre d’éléments (**temps constant**, en moyenne).
+    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove` et `discard`, test `x in ensemble` en temps constant, union `|`, intersection `&`, différence `-`, éléments non modifiables (tuples).
 
     **À essayer.** Que vaut `len(vus)` après `vus = {1, 2}` puis `vus.add(2)` ?
 
@@ -267,25 +252,11 @@ Combien de cubes actifs au départ ? Compter les voisins actifs du cube central 
 
 ## Programmer la partie 1
 
-!!! encadre "Outil Python : les ensembles de tuples (set)"
+!!! encadre "Outil Python : les ensembles (set) — rappel"
 
-    Un **ensemble** est une collection **sans doublon** et **sans ordre** : pas d’indice, on peut seulement ajouter, retirer et tester l’appartenance. Ses éléments doivent être non modifiables : des nombres, des chaînes ou des **tuples**, mais pas des listes.
+    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove` et `discard`, test `x in ensemble` en temps constant, union `|`, intersection `&`, différence `-`, éléments non modifiables (tuples).
 
-    ```python
-    actifs = set()                # ensemble vide (attention : {} est un dictionnaire)
-    actifs.add((0, 1, 0))
-    actifs.add((2, 0, 0))
-    actifs.add((0, 1, 0))         # deja present : rien ne change
-    print(len(actifs))            # 2
-    print((2, 0, 0) in actifs)    # True
-    print((5, 5, 5) in actifs)    # False : un cube absent est inactif
-    ligne = {(x, 0, 0) for x in range(3)}   # ensemble en comprehension
-    print(actifs & ligne)         # {(2, 0, 0)} : cubes communs aux deux ensembles
-    ```
-
-    **Intérêt.** On ne stocke que les cubes actifs, où qu’ils soient dans l’espace infini, et le test `cube in actifs` prend un temps constant (en moyenne), comme pour les clés d’un dictionnaire.
-
-    **À essayer.** Essayer `actifs.add([1, 2, 3])` : que se passe-t-il ? Pourquoi utilise-t-on des tuples ?
+    **À essayer.** Essayer `actifs = set()` puis `actifs.add([1, 2, 3])` : que se passe-t-il ? Pourquoi range-t-on les cubes sous forme de tuples `(x, y, z)` ? L’ensemble en compréhension `{(x, 0, 0) for x in range(3)}` contient les trois cubes d’une ligne.
 
 ### <span class="exo-num">Exercice 3</span> — Un ensemble de tuples <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-2-3 }
 

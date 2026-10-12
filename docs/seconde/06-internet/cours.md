@@ -18,7 +18,7 @@
 
 ### Le premier message : « LO…»
 
-Nous sommes le **29 octobre 1969**. Dans un laboratoire de l’université de Californie (UCLA), un étudiant, **Charley Kline**, tente d’envoyer le tout premier message d’un ordinateur à un autre, situé à **560 km** de là, à Stanford. Le mot à transmettre pour se connecter était simple : `LOGIN`. Il tape `L`… `O`… et au moment du `G`, la machine distante **plante** ! Le tout premier message de l’histoire d’Internet fut donc simplement **« `LO` »** — comme dans l’expression anglaise « *lo and behold* » (« et voilà »).
+Nous sommes le **29 octobre 1969**. Dans un laboratoire de l’université de Californie (UCLA), un étudiant, **Charley Kline**, tente d’envoyer le tout premier message d’un ordinateur à un autre, situé à **560 km** de là, au *Stanford Research Institute* (SRI), plus au nord en Californie. Le mot à transmettre pour se connecter était simple : `LOGIN`. Il tape `L`… `O`… et au moment du `G`, la machine distante **plante** ! Le tout premier message de l’histoire d’Internet fut donc simplement **« `LO` »** — comme dans l’expression anglaise « *lo and behold* » (« et voilà »).
 
 Une heure plus tard, après réparation, `LOGIN` passait en entier. Le réseau **ARPANET** était né : l’ancêtre direct d’Internet.
 
@@ -64,6 +64,8 @@ Quand vous envoyez une photo, elle ne part pas d’un seul bloc. Internet la **d
 !!! definition "Définition 1"
 
     <span id="lex-paquet06" class="ancre"></span>Un **paquet** est un petit bloc de données de **taille limitée** (au plus 1 500 octets environ sur un réseau Ethernet ou Wi-Fi). Il contient une partie du message, plus une « étiquette » : l’**adresse de l’expéditeur**, l’**adresse du destinataire**, et un **numéro** (pour remettre les morceaux dans l’ordre à l’arrivée).
+
+Chaque paquet fait son propre chemin, indépendamment des autres : c’est la **commutation par paquets**, le principe de base d’Internet.
 
 ![](../figures/3474dafc9183008c.svg){ .tikz loading=lazy }
 
@@ -161,11 +163,19 @@ Point fort de génie : TCP/IP est **logiciel**. Il ne vit pas dans les câbles,
 
 Grâce à cette indépendance, votre téléphone passe **sans coupure** de la 4G au Wi-Fi, ou d’antenne en antenne quand vous voyagez.
 
+!!! definition "Définition 5"
+
+    Le **débit** d’une liaison est la quantité de données qu’elle transmet en une seconde. Il se mesure en **bits par seconde** (bit/s). Un **bit** est la plus petite donnée possible, un `0` ou un `1`, et $1$ octet $= 8$ bits. On utilise surtout le **mégabit par seconde** ($1$ Mbit/s $= 10^{6}$ bit/s) et le **gigabit par seconde** ($1$ Gbit/s $= 10^{9}$ bit/s). Ordres de grandeur : une fibre optique atteint souvent $1$ Gbit/s, une vieille ligne ADSL quelques Mbit/s.
+
+!!! remarque "Remarque"
+
+    Attention aux unités : les débits s’expriment en **bits** par seconde, mais la taille des fichiers en **octets**. Pour savoir combien de temps prend un téléchargement, on convertit d’abord la taille du fichier en bits (on multiplie par $8$).
+
 ## Les réseaux pair-à-pair (P2P)
 
 D’habitude, un **serveur** central distribue à des **clients** (le modèle du Web). Mais il existe une autre organisation :
 
-!!! definition "Définition 5"
+!!! definition "Définition 6"
 
     <span id="lex-p2p06" class="ancre"></span>Dans un réseau **pair-à-pair** (*peer-to-peer*, P2P), il n’y a plus de serveur central : **chaque machine est à la fois émetteur et récepteur**, et partage directement avec les autres.
 

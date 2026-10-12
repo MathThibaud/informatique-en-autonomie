@@ -121,7 +121,7 @@ def boyer_moore(motif, texte):
 
 <span id="cours-12-3" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-12-3) à [5](exercices.md#ex-12-5)** (Boyer-Moore : les deux idées, dérouler, la table de décalage)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-12-3) et [4](exercices.md#ex-12-4)** (Boyer-Moore : les deux idées, dérouler)
 
 ## Boyer-Moore-Horspool : la version simplifiée (1980)
 
@@ -235,9 +235,9 @@ def horspool(motif, texte):
 
 ![](../figures/8f4e3f1a15805c8e.svg){ .tikz loading=lazy }
 
-<span id="cours-12-6" class="ancre"></span>
+<span id="cours-12-5" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-12-6) et [7](exercices.md#ex-12-7)** (Horspool : dérouler, en Python)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-12-5) à [7](exercices.md#ex-12-7)** (Horspool : la table de décalage, dérouler, en Python)
 
 ## Le coût, ou le miracle du sous-linéaire
 

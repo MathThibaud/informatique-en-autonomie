@@ -212,11 +212,11 @@ $GPGGA,142012,4342.054,N,00716.098,E,1,06,1.2,10.0,M,,,,*20
 
 <span class="tag">sur papier</span>  On modélise un réseau routier par le graphe suivant (distances en km) :
 
-![](../figures/a7229d8cbcbc81fd.svg){ .tikz loading=lazy }
+![](../figures/c34d700061f3d103.svg){ .tikz loading=lazy }
 
 1.  Donner deux itinéraires possibles de A à E et leur longueur totale.
 
-2.  Quel est le **plus court** chemin de A à E ? Quelle est sa longueur ?
+2.  Quel est le **plus court** chemin de A à E ? Quelle est sa longueur ? Est-ce aussi celui qui passe par le moins de carrefours ?
 
 3.  En quoi ce graphe ressemble-t-il à ce que calcule une application GPS ?
 
@@ -226,9 +226,9 @@ $GPGGA,142012,4342.054,N,00716.098,E,1,06,1.2,10.0,M,,,,*20
 
 ??? corrige "Corrigé"
 
-    1.  Par exemple A–B–D–E $= 4+10+4 = 18$ km ; A–C–D–E $= 2+3+4 = 9$ km.
+    1.  Par exemple A–B–D–E $= 3+7+4 = 14$ km ; A–C–F–E $= 2+5+8 = 15$ km.
 
-    2.  Le plus court chemin est **A–C–D–E**, de longueur **9 km** (les autres : A–B–C–D–E $=16$, A–C–B–D–E $=21$).
+    2.  Il n’y a que quatre chemins de A à E sans repasser par un même sommet : A–B–D–E ($14$ km), A–C–F–E ($15$ km), A–C–F–D–E ($2+5+2+4 = 13$ km) et A–B–D–F–E ($3+7+2+8 = 20$ km). Le plus court est **A–C–F–D–E**, de longueur **13 km**. Ce n’est **pas** celui qui passe par le moins de carrefours (A–B–D–E n’a que deux étapes intermédiaires, mais mesure $14$ km) : seule la **somme des poids** compte.
 
     3.  Une application GPS modélise de même le réseau routier par un **graphe** (carrefours = sommets, routes pondérées) et cherche le trajet de **somme minimale**.
 

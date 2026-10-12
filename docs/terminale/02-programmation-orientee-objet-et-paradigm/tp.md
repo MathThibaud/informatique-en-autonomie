@@ -56,7 +56,7 @@ Avant d’écrire la moindre ligne, on fixe les classes, ce qu’elles savent (a
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Une carte qui se présente <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-tp-1-2 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Dans `projet_poo_depart.py`, compléter la classe `Carte` (les listes `VALEURS`, de la plus faible à la plus forte, et `COULEURS` sont déjà définies en haut du fichier). Il faut écrire le constructeur (il lève `ValueError("carte inconnue")` si la valeur n’est pas dans `VALEURS` ou la couleur pas dans `COULEURS`), les accesseurs `valeur()` et `couleur()`, la méthode `rang()` (position de la valeur dans `VALEURS` : $0$ pour un `7`, $7$ pour un `As`), et `__repr__` (le texte affiché quand on tape le nom de l’objet). On doit obtenir :
+<span class="run" title="À programmer et tester sur machine">▶</span> Dans `projet_poo_depart.py`, compléter la classe `Carte` (les listes `VALEURS`, de la plus faible à la plus forte, et `COULEURS` sont déjà définies en haut du fichier). Il faut écrire le constructeur (il lève `ValueError("carte inconnue")` avec `raise`, voir le cours, « Signaler une erreur », si la valeur n’est pas dans `VALEURS` ou la couleur pas dans `COULEURS`), les accesseurs `valeur()` et `couleur()`, la méthode `rang()` (position de la valeur dans `VALEURS` : $0$ pour un `7`, $7$ pour un `As`), et `__repr__` (le texte affiché quand on tape le nom de l’objet). On doit obtenir :
 
 ```text
 >>> c = Carte("Roi", "coeur")
@@ -96,7 +96,7 @@ Le cours a signalé qu’il existe d’autres méthodes spéciales, qui permette
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire le constructeur : il fabrique les 32 cartes (une par couple valeur/couleur) dans l’attribut privé `_cartes`, une liste de `Carte`, avec deux boucles `for` imbriquées (une sur les couleurs, une sur les valeurs). *Pour les plus à l’aise :* le réécrire ensuite en **une ligne**, avec une liste en compréhension à deux boucles `for`.
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `taille()`, puis la méthode `melanger(graine=None)`. Si une graine est donnée, elle appelle d’abord `random.seed(graine)` ; dans tous les cas, elle mélange ensuite les cartes avec la fonction `random.shuffle`. (Le module `random` est déjà importé.) À quoi sert la graine quand on veut tester le programme ?
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `taille()`, puis la méthode `melanger(graine=None)` (paramètre par défaut : voir le chapitre *Récursivité*). Si une graine est donnée, elle appelle d’abord `random.seed(graine)` ; dans tous les cas, elle mélange ensuite les cartes avec la fonction `random.shuffle`. (Le module `random` est déjà importé.) À quoi sert la graine quand on veut tester le programme ?
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `distribuer(nb_joueurs)` : la carte d’indice `i` va au joueur `i % nb_joueurs` ; le paquet est vide ensuite, et la méthode renvoie la liste des mains (une liste de cartes par joueur). Pour deux joueurs, la carte $0$ va au joueur $0$, la carte $1$ au joueur $1$, la carte $2$ au joueur $0$, etc.
 

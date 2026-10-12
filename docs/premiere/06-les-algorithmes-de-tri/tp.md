@@ -339,7 +339,7 @@ Décommenter `tester_partie_A()` : les tests trient des listes de plusieurs tail
             print(t[k], "#" * t[k] + marque)
         print()
 
-    def tri_insertion_visu(t, pause=0.5):
+    def tri_insertion_visu(t, pause):
         afficher_barres(t, -1)
         for i in range(1, len(t)):
             x = t[i]

@@ -378,6 +378,8 @@ Un fil infini, des vidéos qui s’enchaînent toutes seules… Tout cela circu
 
     - modéliser un réseau social par un **graphe** (sommets = comptes, arêtes = relations) et lire le **degré** d’un sommet ;
 
+    - calculer une **distance**, l’**excentricité** d’un sommet, puis le **diamètre**, le **rayon** et le **centre** d’un graphe ;
+
     - expliquer l’idée des « **six degrés de séparation** » (petit monde) ;
 
     - expliquer qu’un **algorithme** choisit et ordonne ce qui est affiché (fil, recommandations) ;

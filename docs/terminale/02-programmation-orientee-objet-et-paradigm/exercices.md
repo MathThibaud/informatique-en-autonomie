@@ -26,7 +26,7 @@ def f1(x):
     return 2 * x + 1
 
 def f2(x):
-    global compteur
+    global compteur      # f2 modifie la variable compteur exterieure
     compteur = compteur + 1
     return x
 
@@ -328,7 +328,10 @@ Exemple d’utilisation :
             self.notes.append(note)
 
         def moyenne(self):
-            return sum(self.notes) / len(self.notes)
+            total = 0
+            for note in self.notes:
+                total += note
+            return total / len(self.notes)
     ```
 
 ### Écrire une classe complète
@@ -416,7 +419,54 @@ Exemple : après $75$ appels à `tic`, `affichage()` renvoie `"01:15"`.
             return f"{m:02d}:{s:02d}"
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 12</span> — Défi — la classe Fraction <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-12 }
+### Encapsulation
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Corriger une mauvaise pratique <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-12 }
+
+Un élève manipule un compte directement par son attribut :
+
+```python
+class Compte:
+    def __init__(self, solde):
+        self.solde = solde
+
+c = Compte(100)
+c.solde = c.solde - 500     # le solde devient negatif !
+print(c.solde)
+```
+
+<span class="run" title="À programmer et tester sur machine">▶</span> **1.** Expliquer pourquoi manipuler `c.solde` directement est une mauvaise pratique. **2.** Réécrire la classe `Compte` en **encapsulant** le solde (attribut `_solde`) et en fournissant une méthode `retirer(self, montant)` qui **refuse** un retrait rendant le solde négatif (elle renvoie `True` si le retrait a eu lieu, `False` sinon) et une méthode `solde(self)` qui renvoie le solde.
+
+??? pouce "Coup de pouce"
+
+    Que peut encore garantir la classe si n’importe qui écrit dans ses attributs ? Pour `retirer` : comparer le montant à `self._solde` **avant** de modifier quoi que ce soit.
+
+??? corrige "Corrigé"
+
+    **1.** En écrivant directement `c.solde = c.solde - 500`, on *court-circuite* la classe : aucun contrôle n’est fait, et le solde peut devenir absurde (négatif). L’objet n’a plus la garantie de rester dans un état correct.
+
+    **2.**
+
+    ```python
+    class Compte:
+        def __init__(self, solde):
+            self._solde = solde
+
+        def solde(self):
+            return self._solde
+
+        def retirer(self, montant):
+            if 0 < montant <= self._solde:
+                self._solde = self._solde - montant
+                return True
+            return False
+    ```
+
+    Désormais `c.retirer(500)` sur un solde de $100$ renvoie `False` et laisse le solde inchangé.
+
+### Méthodes spéciales et objets qui interagissent
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Défi — la classe Fraction <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-13 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une classe `Fraction` représentant un nombre rationnel par un `numerateur` et un `denominateur`.
 
@@ -471,7 +521,7 @@ Exemple :
                             self.denominateur * autre.denominateur)
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Défi — un réseau d’amis <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-13 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Défi — un réseau d’amis <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-14 }
 
 On modélise un petit réseau social : chaque personne est un objet de la classe `Personne`, qui possède un attribut `nom` et un attribut `amis`, liste d’**objets** `Personne` (vide à la création).
 
@@ -485,7 +535,7 @@ On modélise un petit réseau social : chaque personne est un objet de la classe
 
   ??? pouce "Coup de pouce"
 
-      Dans `ajouter_ami`, tout faire en une fois : un test pour écarter les cas interdits (`autre is self`, `autre in self.amis`), puis deux `append`, un dans chaque liste. Pour `amis_d_amis` : deux boucles imbriquées (mes amis, puis les amis de chacun d’eux) et trois conditions avant d’ajouter un nom.
+      Dans `ajouter_ami`, tout faire en une fois : un test pour écarter les cas interdits (`autre is self`, `autre in self.amis` ; `is` teste s’il s’agit du **même** objet, et non de deux objets égaux), puis deux `append`, un dans chaque liste. Pour `amis_d_amis` : deux boucles imbriquées (mes amis, puis les amis de chacun d’eux) et trois conditions avant d’ajouter un nom.
 
   ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -542,51 +592,6 @@ Exemple :
     Sur l’exemple : `a.amis_d_amis()` renvoie `[’Dan’]` (ami de Chloé) ; Bob, déjà ami d’Ada, n’est pas proposé.
 
     **Pourquoi des objets ?** En stockant les objets eux-mêmes, on accède directement à *toutes* leurs informations, y compris à *leurs* amis (indispensable pour `amis_d_amis`) ; deux personnes peuvent aussi porter le même nom sans être confondues. Avec de simples noms, il faudrait une structure supplémentaire pour retrouver l’objet correspondant.
-
-### Encapsulation
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Corriger une mauvaise pratique <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-14 }
-
-Un élève manipule un compte directement par son attribut :
-
-```python
-class Compte:
-    def __init__(self, solde):
-        self.solde = solde
-
-c = Compte(100)
-c.solde = c.solde - 500     # le solde devient negatif !
-print(c.solde)
-```
-
-<span class="run" title="À programmer et tester sur machine">▶</span> **1.** Expliquer pourquoi manipuler `c.solde` directement est une mauvaise pratique. **2.** Réécrire la classe `Compte` en **encapsulant** le solde (attribut `_solde`) et en fournissant une méthode `retirer(self, montant)` qui **refuse** un retrait rendant le solde négatif (elle renvoie `True` si le retrait a eu lieu, `False` sinon) et une méthode `solde(self)` qui renvoie le solde.
-
-??? pouce "Coup de pouce"
-
-    Que peut encore garantir la classe si n’importe qui écrit dans ses attributs ? Pour `retirer` : comparer le montant à `self._solde` **avant** de modifier quoi que ce soit.
-
-??? corrige "Corrigé"
-
-    **1.** En écrivant directement `c.solde = c.solde - 500`, on *court-circuite* la classe : aucun contrôle n’est fait, et le solde peut devenir absurde (négatif). L’objet n’a plus la garantie de rester dans un état correct.
-
-    **2.**
-
-    ```python
-    class Compte:
-        def __init__(self, solde):
-            self._solde = solde
-
-        def solde(self):
-            return self._solde
-
-        def retirer(self, montant):
-            if 0 < montant <= self._solde:
-                self._solde = self._solde - montant
-                return True
-            return False
-    ```
-
-    Désormais `c.retirer(500)` sur un solde de $100$ renvoie `False` et laisse le solde inchangé.
 
 ### Choisir un paradigme
 
@@ -1055,7 +1060,7 @@ def chargement_glouton(liste, rang, capacite):
 
     6.  C’est un **tri par sélection** (on sélectionne le plus lourd des colis restants et on le place en position `i`), de coût **quadratique** ($n^2$) dans le pire des cas.
 
-    7.  Par exemple le **tri fusion**, de coût $n \log_2 n$ dans le pire des cas, qui sera étudié au chapitre *Diviser pour régner*.
+    7.  Par exemple le **tri par insertion** (vu en Première), lui aussi de coût quadratique ($n^2$) dans le pire des cas. *Le tri fusion, que l’on étudiera au chapitre Diviser pour régner, fera mieux : $n \log_2 n$.*
 
     8.
 

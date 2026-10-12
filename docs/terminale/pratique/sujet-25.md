@@ -84,7 +84,7 @@
         return infixe(construire_abr(valeurs))
     ```
 
-    Dans un ABR, tout le sous-arbre gauche est plus petit que la racine, elle-même plus petite que tout le sous-arbre droit : le parcours infixe donne donc les valeurs **dans l’ordre croissant**. Les doublons disparaissent car `inserer` ne modifie pas l’arbre si la valeur est déjà présente.
+    Dans un ABR, tout le sous-arbre gauche est plus petit que la racine, elle-même plus petite que tout le sous-arbre droit : le parcours infixe donne donc les valeurs **dans l’ordre croissant**. Les doublons disparaissent car `inserer` ne modifie pas l’arbre si la valeur est déjà présente. Attention : ce sujet fixe sa propre convention (inégalités **strictes**, ABR sans doublon), différente de celle du cours, où une valeur égale va à droite et les doublons sont conservés ; toujours appliquer la convention de l’énoncé.
 
     ```python
         assert infixe(None) == []
@@ -241,7 +241,7 @@ Le dossier fourni au candidat comporte les éléments suivants :
         return infixe(construire_abr(valeurs))
     ```
 
-    Dans un ABR, tout le sous-arbre gauche est plus petit que la racine, elle-même plus petite que tout le sous-arbre droit : le parcours infixe donne donc les valeurs **dans l’ordre croissant**. Les doublons disparaissent car `inserer` ne modifie pas l’arbre si la valeur est déjà présente.
+    Dans un ABR, tout le sous-arbre gauche est plus petit que la racine, elle-même plus petite que tout le sous-arbre droit : le parcours infixe donne donc les valeurs **dans l’ordre croissant**. Les doublons disparaissent car `inserer` ne modifie pas l’arbre si la valeur est déjà présente. Attention : ce sujet fixe sa propre convention (inégalités **strictes**, ABR sans doublon), différente de celle du cours, où une valeur égale va à droite et les doublons sont conservés ; toujours appliquer la convention de l’énoncé.
 
     ```python
         assert infixe(None) == []

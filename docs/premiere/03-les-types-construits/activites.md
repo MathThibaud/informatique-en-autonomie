@@ -77,7 +77,7 @@ On propose deux façons de ranger : une **rangée de cases numérotées** à par
 
 ??? corrige "Corrigé"
 
-    **4.** Cases 0 à 3 : pain, lait, pommes, beurre. La case numéro 2 contient **pommes** (et non lait : on numérote à partir de 0, première rencontre avec cette convention).  
+    **4.** Cases 0 à 3 : pain, lait, pommes, beurre. La case numéro 2 contient **pommes** (et non lait : on numérote à partir de 0, convention déjà vue avec les chaînes et `range`).  
     **5.** On ajoute une case à la fin (« œufs », case 4) ; rayer « lait » fait **glisser** pommes, beurre et œufs d’un cran vers la gauche : leurs numéros changent (pommes passe de 2 à 1). La rangée **s’allonge ou raccourcit** : elle est modifiable.  
     **6.** On efface 87 dans le tiroir « Hugo » et on écrit 90 ; l’étiquette ne bouge pas. Deux tiroirs « Hugo » : non, on ne saurait plus lequel ouvrir — une étiquette doit être **unique**. Deux Léa : il faut une étiquette qui les distingue (« Léa D. » et « Léa M. », ou un numéro d’élève).  
     **7.** Un cadenas, une rangée « plastifiée » ou « sous verre » : on peut lire les cases, pas y écrire. Toute idée de « figé » convient.
@@ -106,7 +106,7 @@ En Python, une variable est plutôt une **étiquette** (un post-it) collée sur 
     **8.** Maman lit **brioche, lait, pommes** : il n’y a qu’**une** feuille, avec deux étiquettes dessus.  
     **9.** Python affiche :  
     `[’brioche’, ’lait’, ’pommes’]`. Beaucoup d’élèves prédisent `[’pain’, ’lait’, ’pommes’]`, car ils pensent que `papa = maman` « copie » la liste : c’est exactement la confusion que l’activité doit faire apparaître.  
-    **10.** Il faut **photocopier** (ou recopier) la feuille et coller l’étiquette `papa` sur la copie : deux feuilles, une flèche chacune. En Python, on fabriquera cette copie avec une compréhension (vue dans le cours) : `papa = [x for x in maman]` ; Maman garde alors `[’pain’, ’lait’, ’pommes’]`.
+    **10.** Il faut **photocopier** (ou recopier) la feuille et coller l’étiquette `papa` sur la copie : deux feuilles, une flèche chacune. En Python, on fabriquera cette copie avec une compréhension (que l’on verra dans le cours) : `papa = [x for x in maman]` ; Maman garde alors `[’pain’, ’lait’, ’pommes’]`.
 
     ![](../figures/15712a2c4b0d31d1.svg){ .tikz loading=lazy }
 

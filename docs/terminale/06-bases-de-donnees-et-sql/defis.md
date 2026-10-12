@@ -101,19 +101,9 @@ Lire tout le fichier en une chaîne et construire la liste des blocs de texte, u
 
     `bloc.split()` sans argument coupe à la fois aux espaces et aux retours à la ligne. Chaque morceau se coupe ensuite en deux au `:`.
 
-!!! encadre "Outil Python : all et any"
+!!! encadre "Outil Python : all et any — rappel"
 
-    `all(...)` renvoie `True` si **tous** les éléments sont vrais, `any(...)` si **au moins un** l’est. On les écrit souvent avec une expression de la forme d’une compréhension de liste.
-
-    ```python
-    notes = [12, 15, 9]
-    print(all(n >= 10 for n in notes))    # False : 9 ne convient pas
-    print(any(n >= 15 for n in notes))    # True : 15 convient
-    print(all([]))                        # True : aucun contre-exemple
-    print(any([]))                        # False : aucun exemple
-    ```
-
-    **Intérêt.** Ils remplacent une boucle accompagnée d’un booléen « drapeau », et s’arrêtent dès que la réponse est connue (au premier faux pour `all`, au premier vrai pour `any`).
+    `all` et `any` sont présentés dans l’encadré « Outil Python : `all` et `any` » du défi *Handy Haversacks* (chapitre 1) : `all(...)` vaut `True` si **toutes** les valeurs sont vraies, `any(...)` si **au moins une** l’est ; le calcul s’arrête dès que la réponse est connue.
 
     **À essayer.** Écrire `complet(passeport)` en une ligne avec `all`.
 
@@ -309,18 +299,9 @@ Repérer les valeurs non valides. Vérification : la réponse est `46`. Que rema
 
     `open(...).read().split("\n\n")` sépare les trois blocs, car ils sont séparés par une ligne vide.
 
-!!! encadre "Outil Python : any et all"
+!!! encadre "Outil Python : any et all — rappel"
 
-    `any(...)` vaut `True` si **au moins une** des valeurs est vraie ; `all(...)` vaut `True` si **toutes** le sont. On leur donne une liste de booléens, ou directement une expression comme dans une compréhension.
-
-    ```python
-    valeurs = [3, 8, 12]
-    print(any(v > 10 for v in valeurs))   # True : au moins une valeur depasse 10
-    print(all(v > 10 for v in valeurs))   # False : pas toutes
-    print(all(v > 0 for v in []))         # True : aucun contre-exemple
-    ```
-
-    **Intérêt.** Le code se lit comme la phrase « il existe… » ou « pour tout… », et le calcul s’arrête dès que la réponse est connue (premier `True` pour `any`, premier `False` pour `all`).
+    `all` et `any` sont présentés dans l’encadré « Outil Python : `all` et `any` » du défi *Handy Haversacks* (chapitre 1) : `all(...)` vaut `True` si **toutes** les valeurs sont vraies, `any(...)` si **au moins une** l’est ; le calcul s’arrête dès que la réponse est connue.
 
     **À essayer.** Que vaut `any([])` ? Pourquoi est-ce cohérent avec `all([])` ?
 
@@ -350,25 +331,11 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 Construire la liste des billets voisins valides. Attention : un billet peut contenir une valeur non valide qui ne change pas la somme de la partie 1. Sur l’exemple du défi, il reste 4 billets valides.
 
-!!! encadre "Outil Python : les ensembles (set)"
+!!! encadre "Outil Python : les ensembles (set) — rappel"
 
-    Un **ensemble** est une collection **sans doublon** et **sans ordre** : pas d’indice, on peut seulement ajouter, retirer et tester l’appartenance. Attention, `{}` est un dictionnaire vide ; l’ensemble vide s’écrit `set()`.
+    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove` et `discard`, test `x in ensemble` en temps constant, union `|`, intersection `&`, différence `-`, éléments non modifiables (tuples).
 
-    ```python
-    champs = {"poids", "taille"}     # ensemble ecrit directement
-    champs.add("depart")             # ajout (sans effet si deja present)
-    champs.discard("taille")         # retrait, sans erreur si l'element est absent
-    print("poids" in champs)         # True : test d'appartenance en temps constant
-    print(len(champs))               # 2
-    seul = {"quai"}
-    print(seul.pop())                # quai : retire et renvoie un element
-    pairs = {n for n in range(10) if n % 2 == 0}   # ensemble en comprehension
-    print({1, 2, 3} & {2, 3, 4})     # {2, 3} : elements communs (intersection)
-    ```
-
-    **Intérêt.** Comme les clés d’un dictionnaire, les éléments sont rangés grâce à une *fonction de hachage* : `x in ensemble`, `add` et `discard` prennent un temps qui ne dépend pas de la taille de l’ensemble, alors que `x in liste` peut parcourir toute la liste.
-
-    **À essayer.** Que contient `{1, 2, 2, 3}` ? Que se passe-t-il si l’on remplace `discard` par `remove` pour retirer un élément absent ?
+    **À essayer.** Que contient `{1, 2, 2, 3}` ? Que se passe-t-il si l’on remplace `discard` par `remove` pour retirer un élément absent ? `s.pop()` retire et renvoie un élément quelconque de `s`.
 
 !!! encadre "Outil Python : startswith"
 

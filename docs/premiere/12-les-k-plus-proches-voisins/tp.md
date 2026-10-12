@@ -301,6 +301,8 @@ def taux_reussite(exemples, tests, k, limite=100):
     return bons / len(tests)
 ```
 
+L’écriture `limite=100` donne au paramètre `limite` une **valeur par défaut** : si l’on appelle la fonction sans le préciser, il vaut `100`. La tranche `tests[:limite]` garde les `limite` premiers tests.
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter **(e)** et lancer (cela prend quelques dizaines de secondes) :
 
 ```text

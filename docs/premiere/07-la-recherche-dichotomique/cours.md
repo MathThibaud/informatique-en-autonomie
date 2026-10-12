@@ -96,9 +96,9 @@ Avec une boucle `while`, une question capitale se pose : est-on sûr de ne pas t
 
     Un **invariant** (chapitre *Algorithmique : le parcours séquentiel*) est une propriété qui reste *vraie* à chaque tour et prouve que le résultat est **correct**. Un **variant** est une quantité qui *décroît* à chaque tour et prouve que l’algorithme **se termine**. Correction *et* terminaison : les deux garanties d’un bon algorithme.
 
-<span id="cours-07-12" class="ancre"></span>
+<span id="cours-07-9" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[12](exercices.md#ex-07-12)** (la terminaison)
+<span class="afaire">▶ Exercices d'application :</span> exercice **[9](exercices.md#ex-07-9)** (la terminaison)
 
 ## Combien ça coûte ? Le coût logarithmique
 
@@ -145,9 +145,9 @@ Voici les trois coûts rencontrés cette année : **linéaire** ($n$), **quadrat
 
     La dichotomie est l’exemple type de la méthode étudiée dans le chapitre *Diviser pour régner* : ramener un problème à un sous-problème plus petit, du même type. Elle s’y écrit aussi très naturellement sous forme *récursive* (chapitre *La récursivité*).
 
-<span id="cours-07-9" class="ancre"></span>
+<span id="cours-07-10" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-07-9) à [11](exercices.md#ex-07-11)** (le coût logarithmique)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-07-10) à [12](exercices.md#ex-07-12)** (le coût logarithmique)
 
 ## Un peu d’histoire et de culture
 

@@ -97,7 +97,7 @@ Avec la variable `jeux` précédente, que renvoient ces expressions ?
 
 ??? pouce "Coup de pouce"
 
-    Les noms de colonnes sont les clés de n’importe quelle fiche, par exemple de la première, `table[0]`. Comment obtenir les clés d’un dictionnaire ?
+    Les noms de colonnes sont les clés de n’importe quelle fiche, par exemple de la première, `table[0]`. Une boucle `for` sur un dictionnaire parcourt ses clés : il reste à les ranger dans une liste, par exemple avec une compréhension.
 
 ```text
 >>> descripteurs(prenoms)

@@ -647,7 +647,9 @@ Le **coût inesthétique** d’une ligne est le *carré* du nombre d’espaces s
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        `longueur = sum([len(liste_mots[k]) for k in range(i, j)]) + (j - i - 1)`  
+        `longueur = j - i - 1  # les espaces`  
+        `for k in range(i, j):`  
+        `longueur += len(liste_mots[k])`  
         `if longueur > justification:`  
         `return 1000000` …
 
@@ -696,7 +698,9 @@ Le **coût inesthétique** d’une ligne est le *carré* du nombre d’espaces s
     ```python
     def cout(i, j, liste_mots, justification):
         mots = liste_mots[i:j]
-        nb_car = sum([len(m) for m in mots])          # nombre de lettres
+        nb_car = 0                                    # nombre de lettres
+        for m in mots:
+            nb_car += len(m)
         nb_mots = len(mots)
         if nb_car + (nb_mots - 1) > justification:    # la ligne ne tient pas
             return 1000000
@@ -878,8 +882,6 @@ L’algorithme glouton ne renvoie pas toujours une solution optimale. On écrit 
         return total
     ```
 
-    *Autre méthode :* construire par compréhension la liste des prix, puis en faire la somme : `return sum([m.prix for m in tab])`.
-
     **5.** Combinaisons de volume au plus 100 litres (aucune combinaison de trois marchandises ne tient : la plus légère, $m_1 + m_3 + m_4$, fait 110 litres) :
 
     | Combinaison | Volume | Prix | Combinaison | Volume |  Prix   |
@@ -966,7 +968,7 @@ L’algorithme glouton ne renvoie pas toujours une solution optimale. On écrit 
         return res
     ```
 
-    `prix_max(tab, 100, 0, {})` renvoie bien `250`. Il y a au plus $(n+1) \times (V+1)$ clés différentes (pour un volume initial $V$), chacune calculée une seule fois : c’est le **sac à dos** du cours.
+    `prix_max(tab, 100, 0, {})` renvoie bien `250`. Il y a au plus $(n+1) \times (V+1)$ clés différentes (pour un volume initial $V$), chacune calculée une seule fois : c’est le **sac à dos** du cours, en $O(n \times V)$ (coût **pseudo-polynomial** : voir la remarque du cours).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Découper des planches au meilleur prix *(sujet maison, façon bac)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-19 }
 

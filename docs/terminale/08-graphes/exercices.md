@@ -16,7 +16,9 @@
 class Graphe:
     def __init__(self, sommets):
         self.sommets = sommets
-        self.adj = {s: [] for s in sommets}
+        self.adj = {}
+        for s in sommets:
+            self.adj[s] = []
     def ajoute_arete(self, a, b):
         self.adj[a].append(b)
         self.adj[b].append(a)
@@ -885,7 +887,8 @@ def parcours(graphe, sommet):
             if x not in visite:
                 visite.append(x)
                 for v in G[x]:
-                    pile.append(v)
+                    if v not in visite:
+                        pile.append(v)
         return visite
     ```
 
@@ -926,7 +929,7 @@ def parcours_largeur(g, depart):
 
 ??? corrige "Corrigé"
 
-    **1.** **Non.** Trace : `en_attente = [A]` ; on retire `A`, on ajoute `B` puis `C` $\to$ `[B, C]` ; `pop()` retire le **dernier**, `C`, qui ajoute `E` $\to$ `[B, E]` ; on retire `E` ; puis `B`, qui ajoute `D` ; puis `D`. Sortie réelle : `[’A’, ’C’, ’E’, ’B’, ’D’]`. Or `E` est à distance $2$ de `A` et est traité *avant* `B`, à distance $1$ : ce n’est pas un parcours en largeur, mais un parcours en **profondeur**. L’ordre attendu est `[’A’, ’B’, ’C’, ’D’, ’E’]`.
+    **1.** **Non.** Trace : `en_attente = [A]` ; on retire `A`, on ajoute `B` puis `C` $\to$ `[B, C]` ; `pop()` retire le **dernier**, `C`, qui ajoute `E` $\to$ `[B, E]` ; on retire `E` ; puis `B`, qui ajoute `D` ; puis `D`. Sortie réelle : `[’A’, ’C’, ’E’, ’B’, ’D’]`. Or `E` est à distance $2$ de `A` et est traité *avant* `B`, à distance $1$ : ce n’est **pas** un parcours en largeur. La liste se comporte en **pile** : le parcours s’enfonce comme un parcours en profondeur (sur ce petit graphe sans cycle, on obtient même l’ordre de `DFS_iteratif`), mais ce n’en est pas tout à fait un en général, puisque les sommets sont marqués dès l’empilement (voir la règle du cours et son contre-exemple). L’ordre attendu est `[’A’, ’B’, ’C’, ’D’, ’E’]`.
 
     **2.** L’erreur : `en_attente.pop()` retire le **dernier** élément ajouté (comportement de **pile**, LIFO). Pour une **file** (FIFO), il faut retirer le premier :
 
@@ -936,7 +939,7 @@ def parcours_largeur(g, depart):
 
     Avec cette ligne, la fonction renvoie `[’A’, ’B’, ’C’, ’D’, ’E’]`. C’est la correction la plus courte, et elle suffit sur un petit graphe ; mais c’est un **choix de simplicité** : chaque `pop(0)` décale toute la liste et coûte $O(n)$ (chapitre *Structures linéaires*). La version du cours, avec l’interface `File` (`enfiler`/`defiler`/`est_vide`), évite à la fois l’erreur de l’IA et ce coût caché.
 
-    **3.** Dérouler le code sur un **graphe de quatre ou cinq sommets** où un sommet est à distance $2$ : en largeur, tous les sommets à distance $1$ doivent sortir *avant* ceux à distance $2$. Réflexe du cours : « file (FIFO) $=$ largeur ; pile (LIFO) $=$ profondeur ». Sur une `list`, `pop()` retire le dernier élément : on obtient une pile, donc un parcours en profondeur.
+    **3.** Dérouler le code sur un **graphe de quatre ou cinq sommets** où un sommet est à distance $2$ : en largeur, tous les sommets à distance $1$ doivent sortir *avant* ceux à distance $2$. Réflexe du cours : « file (FIFO) $=$ largeur ; pile (LIFO) $=$ profondeur ». Sur une `list`, `pop()` retire le dernier élément : on obtient une pile, et le parcours n’est plus en largeur.
 
 ### S’entraîner à l’oral
 

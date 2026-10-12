@@ -115,7 +115,7 @@ a = Noeud(1, Noeud(2), Noeud(3, None, Noeud(4)))
 
 !!! remarque "Remarque"
 
-    C’est exactement l’idée annoncée dans le chapitre *Programmation objet* : « une classe `Noeud` avec un sous-arbre gauche et un sous-arbre droit ». Une **feuille** est simplement un `Noeud` dont les deux fils valent `None`.
+    C’est exactement l’idée annoncée dans le chapitre *Programmation objet* : « une classe `Noeud` avec un sous-arbre gauche et un sous-arbre droit ». Une **feuille** est simplement un `Noeud` dont les deux fils valent `None`. Grâce aux **paramètres par défaut** `gauche=None` et `droite=None` (voir le chapitre *Récursivité*), on l’écrit simplement `Noeud(2)` ; la valeur par défaut `None` ne se modifie pas, elle est donc sans danger.
 
 ### Par un tuple (ou une liste) imbriqué
 
@@ -195,9 +195,9 @@ def largeur(a):
 
     Retenez le duo : parcours en **largeur** $\leftrightarrow$ **file** ; parcours en **profondeur** $\leftrightarrow$ récursivité (donc, en coulisses, une **pile**). Les deux structures du chapitre « structures linéaires » resservent ici.
 
-<span id="cours-05-6" class="ancre"></span>
+<span id="cours-05-3" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-05-6) à [8](exercices.md#ex-05-8)** (les quatre parcours, en profondeur et en largeur).
+<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-05-3) à [5](exercices.md#ex-05-5)** (les quatre parcours, en profondeur et en largeur).
 
 ## Calculer sur un arbre : taille et hauteur
 
@@ -227,9 +227,9 @@ def hauteur(a):
 
     Chaque appel se ramène à des sous-arbres *strictement plus petits* : le cas de base (l’arbre vide) finit toujours par être atteint. La terminaison est garantie — comme pour toute belle récursion sur un arbre.
 
-<span id="cours-05-3" class="ancre"></span>
+<span id="cours-05-6" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-05-3) à [5](exercices.md#ex-05-5)** (taille, hauteur et nombre de feuilles, en récursif).
+<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-05-6) à [8](exercices.md#ex-05-8)** (taille, hauteur et nombre de feuilles, en récursif).
 
 ## L’arbre binaire de recherche (ABR) : chercher et insérer vite
 
@@ -269,9 +269,9 @@ def recherche(a, x):
 
     La recherche coûte au plus **la hauteur** de l’arbre. Pour un ABR équilibré de $n$ valeurs, cela fait environ $\log_2(n)$ comparaisons : chercher parmi un **million** de valeurs ne demande qu’une **vingtaine** d’étapes ! C’est cette efficacité qui fait des arbres le cœur des **index de bases de données**. Petit bonus : un **parcours infixe** d’un ABR affiche ses valeurs **déjà triées**.
 
-<span id="cours-05-10" class="ancre"></span>
+<span id="cours-05-9" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[10](exercices.md#ex-05-10)** (rechercher dans un ABR).
+<span class="afaire">▶ Exercices d'application :</span> exercice **[9](exercices.md#ex-05-9)** (rechercher dans un ABR).
 
 ### Insérer une valeur dans un ABR
 
@@ -322,9 +322,9 @@ On obtient exactement l’ABR dessiné plus haut.
 
     Ce cours range une valeur **égale** au nœud dans le sous-arbre **droit**. Ce n’est qu’une convention : certains sujets de bac interdisent les doublons (on n’insère pas une valeur déjà présente, comme dans le TP proposé en fin de chapitre), d’autres les placent à gauche. Dans tous les cas, la recherche et l’insertion suivent le même principe ; il suffit de **lire la définition donnée** et de l’appliquer de façon cohérente.
 
-<span id="cours-05-9" class="ancre"></span>
+<span id="cours-05-10" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-05-9) et [11](exercices.md#ex-05-11)** (insérer à la main ; programmer l’insertion).
+<span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-05-10) et [11](exercices.md#ex-05-11)** (insérer à la main ; programmer l’insertion).
 
 ## Ouverture et histoire
 
@@ -387,15 +387,15 @@ Et la nature s’y met aussi : à **Baïes** (Italie), un figuier sauvage pousse
 
 - employer le **vocabulaire** (racine, nœud, feuille, sous-arbre, taille, hauteur) $\to$ ex. [1](exercices.md#ex-05-1), [2](exercices.md#ex-05-2) ;
 
-- calculer **taille**, **hauteur**, nombre de feuilles par une fonction **récursive** $\to$ ex. [3](exercices.md#ex-05-3), [4](exercices.md#ex-05-4), [5](exercices.md#ex-05-5) ;
+- calculer **taille**, **hauteur**, nombre de feuilles par une fonction **récursive** $\to$ ex. [6](exercices.md#ex-05-6), [7](exercices.md#ex-05-7), [8](exercices.md#ex-05-8) ;
 
-- écrire et reconnaître les **quatre parcours** (préfixe, infixe, suffixe, largeur / file) $\to$ ex. [6](exercices.md#ex-05-6), [7](exercices.md#ex-05-7), [8](exercices.md#ex-05-8) ;
+- écrire et reconnaître les **quatre parcours** (préfixe, infixe, suffixe, largeur / file) $\to$ ex. [3](exercices.md#ex-05-3), [4](exercices.md#ex-05-4), [5](exercices.md#ex-05-5) ;
 
 - manipuler un arbre via la classe `Noeud` ou une **interface** donnée $\to$ ex. [2](exercices.md#ex-05-2), [15](exercices.md#ex-05-15), [17](exercices.md#ex-05-17) ;
 
 - **rechercher** et **insérer** dans un **ABR** (à la main et en Python, doublon à droite), et relier infixe $\leftrightarrow$ tri $\to$ ex. [9](exercices.md#ex-05-9), [10](exercices.md#ex-05-10), [11](exercices.md#ex-05-11), [14](exercices.md#ex-05-14) ;
 
-- justifier le **coût** d’une recherche ou d’une insertion dans un ABR (la hauteur) $\to$ ex. [10](exercices.md#ex-05-10), [11](exercices.md#ex-05-11), [14](exercices.md#ex-05-14).
+- justifier le **coût** d’une recherche ou d’une insertion dans un ABR (la hauteur) $\to$ ex. [9](exercices.md#ex-05-9), [11](exercices.md#ex-05-11), [14](exercices.md#ex-05-14).
 
 ## Vers le Grand Oral
 

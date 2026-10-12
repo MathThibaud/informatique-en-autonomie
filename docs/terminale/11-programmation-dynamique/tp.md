@@ -32,11 +32,11 @@ Travaillons d’abord sur une petite grille ($1$ = blanc, $0$ = noir), en rempli
 
 On regarde une case **blanche** dont les trois voisins *déjà calculés* portent les valeurs ci-dessous. Quelle valeur faut-il mettre dans la case « ? » ? (Un carré blanc s’appuyant sur ce coin est limité par le plus *petit* des trois carrés voisins.)
 
-![](../figures/948338e817623def.svg){ .tikz loading=lazy }
+![](../figures/977d859be0a1e690.svg){ .tikz loading=lazy }
 
 ??? corrige "Corrigé"
 
-    Un carré blanc appuyé sur ce coin ne peut pas être plus grand que le plus **petit** des trois carrés voisins : la valeur est $1 + \min(\underbrace{4}_{\text{haut}}, \underbrace{2}_{\text{gauche}}, \underbrace{3}_{\text{diag.}}) = 1 + 2 = \mathbf{3}$.
+    Un carré blanc appuyé sur ce coin ne peut pas être plus grand que le plus **petit** des trois carrés voisins : la valeur est $1 + \min(\underbrace{3}_{\text{haut}}, \underbrace{2}_{\text{gauche}}, \underbrace{4}_{\text{diag.}}) = 1 + 2 = \mathbf{3}$.
 
 ### <span class="exo-num">Exercice 2</span> — Remplir toute la grille { #ex-11-programmation-dynamique-tp-1-2 }
 

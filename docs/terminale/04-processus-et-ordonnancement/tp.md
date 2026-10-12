@@ -273,7 +273,7 @@ On rappelle : **temps de séjour** $=$ instant de fin $-$ instant d’arrivée ;
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Le tourniquet <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-tp-1-8 }
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `tourniquet(procs, quantum)`. La file des processus prêts est une liste : on retire en tête (`pop(0)`), on ajoute en queue (`append`). L’élu s’exécute `min(quantum, reste)` unités. **Convention du cours** : les processus arrivés *pendant* ce quantum entrent dans la file **avant** que l’élu, s’il n’a pas fini, n’y retourne.
+1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `tourniquet(procs, quantum)`. La file des processus prêts est une liste : on retire en tête (`pop(0)` : choix simple mais coûteux, en $O(n)$, cf. chapitre *Structures linéaires*), on ajoute en queue (`append`). L’élu s’exécute `min(quantum, reste)` unités. **Convention du cours** : les processus arrivés *pendant* ce quantum entrent dans la file **avant** que l’élu, s’il n’a pas fini, n’y retourne.
 
     ??? pouce "Coup de pouce"
 

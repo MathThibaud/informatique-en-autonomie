@@ -290,21 +290,40 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     - Réponse : le score du gagnant de la partie principale.
 
-!!! encadre "Outil Python : un ensemble de tuples pour mémoriser des états"
+!!! encadre "Outil Python : les ensembles (set)"
 
-    Un **ensemble** (`set`) est une collection sans doublon, dans laquelle le test `x in ensemble` est très rapide. On ne peut y ranger que des valeurs **non modifiables** (nombres, chaînes, tuples) : ni liste, ni `deque`. Pour mémoriser l’état des deux paquets, on le convertit en un couple de tuples.
+    Un **ensemble** est une collection **sans doublon** et **sans ordre** : pas d’indice ; on peut seulement ajouter, retirer, tester l’appartenance et parcourir (dans un ordre quelconque). Ses éléments doivent être **non modifiables** : nombres, chaînes, **tuples** — ni liste, ni `deque`.
+
+    ```python
+    vus = set()              # ensemble vide (attention : {} est un dictionnaire vide)
+    vus.add(5)               # ajout ; ajouter une valeur deja presente ne change rien
+    vus.add(8)
+    print(8 in vus)          # True : test d'appartenance
+    print(len(vus))          # 2
+    vus.remove(8)            # retrait (erreur si absent ; discard : sans erreur)
+    a = {1, 2, 3}            # ensemble ecrit directement
+    b = set([2, 3, 4, 4])    # a partir d'une liste : {2, 3, 4}
+    print(a | b)             # union : {1, 2, 3, 4}
+    print(a & b)             # intersection : {2, 3}
+    print(a - b)             # difference : {1}
+    pairs = {n for n in range(10) if n % 2 == 0}   # ensemble en comprehension
+    ```
+
+    Dans ce défi, pour mémoriser l’état des deux paquets, on le convertit en un couple de tuples :
 
     ```python
     from collections import deque
     p1, p2 = deque([6, 2]), deque([4, 7])
-    deja_vus = set()                          # ensemble vide
+    deja_vus = set()
     etat = (tuple(p1), tuple(p2))             # ((6, 2), (4, 7))
     print(etat in deja_vus)                   # False
     deja_vus.add(etat)
     print(((6, 2), (4, 7)) in deja_vus)       # True
     ```
 
-    **Intérêt.** Avec une liste des états déjà vus, chaque test parcourrait toute la liste ; avec un ensemble, il prend un temps constant (en moyenne). Question : que se passe-t-il si l’on essaie `deja_vus.add(p1)` ?
+    **Intérêt.** Avec une liste, `x in liste` compare `x` à chaque élément l’un après l’autre : jusqu’à $n$ comparaisons. Un ensemble range ses éléments selon une valeur calculée à partir d’eux (une *fonction de hachage*, le même principe que les clés d’un dictionnaire) : Python va directement là où `x` devrait se trouver. Le test `x in ensemble` prend donc un temps qui **ne dépend pas** du nombre d’éléments (**temps constant**, en moyenne). Cet encadré servira dans plusieurs défis des chapitres suivants.
+
+    **À essayer.** Que se passe-t-il si l’on essaie `deja_vus.add(p1)` ? Que renvoie `set("banane")` ?
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Le combat récursif <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-2-5 }
 

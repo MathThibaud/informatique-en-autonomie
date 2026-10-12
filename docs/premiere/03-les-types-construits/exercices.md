@@ -451,9 +451,9 @@ On pose `M = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`.
     ```python
     def somme_matrice(M):
         s = 0
-        for i in range(len(M)):
-            for j in range(len(M[0])):
-                s = s + M[i][j]
+        for ligne in M:
+            for x in ligne:
+                s = s + x
         return s
 
     def maximum_matrice(M):
@@ -470,6 +470,8 @@ On pose `M = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`.
             s = s + x
         return s
     ```
+
+    *Autre méthode* pour `somme_matrice`, par indices : `for i in range(len(M)):` puis `for j in range(len(M[i])):` et `s = s + M[i][j]`. Elle est indispensable dès qu’on a besoin de la *position* de la case.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Créer une grille — et le piège <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-19 }
 
@@ -618,7 +620,10 @@ On dispose de `notes = {"Alice": 14, "Bob": 9, "Chloe": 17}`.
 
     ```python
     def moyenne(notes):
-        return sum(notes.values()) / len(notes)
+        total = 0
+        for note in notes.values():
+            total = total + note
+        return total / len(notes)
 
     def admis(notes, seuil):
         return [prenom for prenom in notes if notes[prenom] >= seuil]
@@ -633,7 +638,7 @@ On dispose de `notes = {"Alice": 14, "Bob": 9, "Chloe": 17}`.
         return champion
     ```
 
-    Pour `meilleur`, c’est une recherche de maximum où l’on retient *aussi* le prénom du champion.
+    Pour `meilleur`, c’est une recherche de maximum où l’on retient *aussi* le prénom du champion. On part ici d’une note fictive `-1` (une *sentinelle*), valable seulement parce que toutes les notes sont positives ; le chapitre *Algorithmique : le parcours séquentiel* préférera partir d’un élément existant, ce qui marche dans tous les cas.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 24</span> — Compter des votes : code à trous <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-24 }
 
@@ -885,7 +890,10 @@ carnet = {"Alice": [12, 15, 9], "Bob": [8, 14]}
 
     def moyenne_eleve(carnet, eleve):
         notes = carnet[eleve]
-        return sum(notes) / len(notes)
+        total = 0
+        for note in notes:
+            total = total + note
+        return total / len(notes)
 
     def moyennes(carnet):
         resultat = {}
@@ -944,6 +952,8 @@ prix   = {"pomme": 0.5, "pain": 1.2, "lait": 0.9}
                 champion = produit
         return champion
     ```
+
+    Comme pour `meilleur` (exercice « Parcourir un dictionnaire »), le sous-total fictif `-1` est une sentinelle, valable parce que les sous-totaux sont positifs.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 33</span> — Vers le bac — le jeu du démineur (grille) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-33 }
 

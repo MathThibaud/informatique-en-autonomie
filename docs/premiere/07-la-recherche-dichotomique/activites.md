@@ -66,11 +66,11 @@
 
 ### <span class="exo-num">Exercice 4</span> — Ce qu’on a découvert <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-la-recherche-dichotomique-act-1-4 }
 
-1.  **Ce qu’on a découvert.** Recopier et compléter sur le cahier : « La meilleure stratégie consiste à proposer le … des nombres encore possibles : chaque coup … le nombre de possibilités par … Avec $k$ coups, on peut départager jusqu’à $2^k$ nombres : comme $2^{10} = \ldots$, il suffit de … coups pour 1 000 nombres. »
+1.  **Ce qu’on a découvert.** Recopier et compléter sur le cahier : « La meilleure stratégie consiste à proposer le … des nombres encore possibles : chaque coup … le nombre de possibilités par … Avec $k$ coups, on peut départager jusqu’à $2^k - 1$ nombres : comme $2^{10} - 1 = \ldots$, il suffit de … coups pour 1 000 nombres. »
 
 2.  Cette stratégie marcherait-elle si le maître du jeu ne répondait que « gagné » ou « perdu » ? Qu’est-ce qui la rend possible ?
 
 ??? corrige "Corrigé"
 
-    **10.** « La meilleure stratégie consiste à proposer le **milieu** des nombres encore possibles : chaque coup **divise** le nombre de possibilités par **deux**. Avec $k$ coups, on peut départager jusqu’à $2^k$ nombres : comme $2^{10} = \mathbf{1\,024}$, il suffit de **10** coups pour 1 000 nombres. » Ce nombre de coups, le nombre de fois qu’on peut diviser par 2 avant d’arriver à 1, s’appelle le **logarithme en base 2** : $\log_2(1\,000) \approx 10$.  
+    **10.** « La meilleure stratégie consiste à proposer le **milieu** des nombres encore possibles : chaque coup **divise** le nombre de possibilités par **deux**. Avec $k$ coups, on peut départager jusqu’à $2^k - 1$ nombres (le dernier coup doit proposer le bon nombre) : comme $2^{10} - 1 = \mathbf{1\,023}$, il suffit de **10** coups pour 1 000 nombres. » Ce nombre de coups, le nombre de fois qu’on peut diviser par 2 avant d’arriver à 1, s’appelle le **logarithme en base 2** : $\log_2(1\,000) \approx 10$.  
     **11.** Non : avec seulement « gagné / perdu », on n’apprend rien sur la position du secret et il faut essayer les nombres un par un (jusqu’à 1 000 coups). Ce qui rend la stratégie possible, c’est que les nombres sont **rangés dans l’ordre** : la réponse « plus grand / plus petit » permet d’éliminer d’un coup toute une moitié.

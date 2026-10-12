@@ -667,7 +667,7 @@ assert maximum(4, 4) == 4    # le cas d'egalite : a ne pas oublier
 
     3.  écrire un petit **jeu de tests** en `assert`, sans oublier les cas limites.
 
-    Ces gestes seront approfondis dans le chapitre *Spécifier et mettre au point ses programmes* (invariants de boucle, débogage, oracle) — mais on les met en pratique **dès maintenant**.
+    Ces gestes seront approfondis dans les chapitres *Algorithmique : le parcours séquentiel* (invariants de boucle) et *Spécifier et mettre au point ses programmes* (débogage, oracle) — mais on les met en pratique **dès maintenant**.
 
 ### Réutiliser le travail des autres : les bibliothèques
 

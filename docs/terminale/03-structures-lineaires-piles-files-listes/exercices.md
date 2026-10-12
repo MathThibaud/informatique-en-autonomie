@@ -403,7 +403,7 @@ On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux p
 
 ??? pouce "Coup de pouce"
 
-    Combien de fois faut-il suivre le lien `suivante` pour atteindre l’indice `n` ? Que vaut le curseur si la liste est trop courte ? L’erreur se lève avec `raise`.
+    Combien de fois faut-il suivre le lien `suivante` pour atteindre l’indice `n` ? Que vaut le curseur si la liste est trop courte ? L’erreur se lève avec `raise IndexError("indice invalide")` (voir le cours du chapitre *Programmation orientée objet*, « Signaler une erreur »).
 
 ??? corrige "Corrigé"
 
@@ -533,7 +533,7 @@ On considère la file `f` suivante **(tête à droite)** :
         return f_aux
     ```
 
-4.  Représenter l’état de la file `f` (d’origine) après y avoir ajouté, avec `ajouter_file_prio`, la tâche `(t6, 2)` puis la tâche `(t7, 4)`.
+4.  En repartant de la file `f` d’origine, représenter la file obtenue par `f = ajouter_file_prio(f, <t6>, 2)` puis `f = ajouter_file_prio(f, <t7>, 4)`.
 
 5.  Donner le **coût d’exécution**, dans le pire des cas, de `ajouter_file_prio` en fonction du nombre `m` d’éléments de `f`.
 
@@ -705,7 +705,7 @@ def parcours(graphe, depart):
 
 2.  Dérouler `parcours(graphe, ’A’)` : donner l’ordre dans lequel les sommets entrent dans `visite`.
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span> Traduire en une fonction Python `parcours2(graphe, depart)` l’algorithme suivant :
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Traduire en une fonction Python `parcours2(graphe, depart)` l’algorithme suivant, en utilisant la classe `Pile` du cours (`empiler`, `depiler`, `est_vide`) :
 
     ??? pouce "Coup de pouce"
 
@@ -839,7 +839,7 @@ class Processus:
             return None
     ```
 
-    **4.** File de départ (tête à gauche pour `pop(0)`) : `[p1(2), p2(1)]`.
+    **4.** On donne ici le contenu de l’attribut `contenu` (liste Python : la tête est l’indice `0`, donc **à gauche**, à l’inverse de la convention de dessin « tête à droite » de la feuille). File de départ : `[p1(2), p2(1)]`.
 
     - `tourniquet()` : on défile `p1`, il s’exécute (reste `1`), pas fini $\Rightarrow$ réenfilé. File : `[p2(1), p1(1)]`. Renvoie `"p1"`.
 

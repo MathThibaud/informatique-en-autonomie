@@ -343,9 +343,37 @@ print(compte.solde())                   # affiche 120
 
     On retrouve cette pratique dans les sujets de bac : la classe fournit des méthodes `get_…` (accesseurs) et `set_…` (mutateurs), et l’énoncé demande explicitement de « ne pas accéder directement aux attributs » depuis une autre classe (*ex.* Asie 2024, jour 1 : la méthode `couvre` d’une antenne doit passer par `get_pos_maison()`).
 
-<span id="cours-02-14" class="ancre"></span>
+### Signaler une erreur : `raise`
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[14](exercices.md#ex-02-14)** (encapsulation)
+Dans `deposer`, un montant négatif est ignoré **en silence** : l’appelant ne sait pas que son ordre n’a pas été exécuté. Il vaut souvent mieux **lever une erreur** (on dit aussi « lever une exception ») avec le mot-clé `raise` :
+
+```python
+    def deposer(self, montant):
+        if montant <= 0:
+            raise ValueError("montant invalide")
+        self._solde = self._solde + montant
+```
+
+```text
+>>> compte.deposer(-5)
+Traceback (most recent call last):
+  ...
+ValueError: montant invalide
+```
+
+!!! regle "Règle 3 — Lever une erreur"
+
+    - **Syntaxe** : `raise ValueError("message")`. La fonction s’arrête **immédiatement** (les lignes suivantes ne sont pas exécutées), puis le programme s’arrête à son tour en affichant le type d’erreur et le message.
+
+    - **Types courants** : `ValueError` (valeur incorrecte : montant négatif, carte inconnue…), `IndexError` (indice hors limites, pile vide), `TypeError` (type incorrect).
+
+    - **Quand l’utiliser ?** Quand l’appelant demande quelque chose d’**impossible** : la précondition n’est pas respectée, et renvoyer une valeur « bidon » (`None`, `-1`…) risquerait de passer inaperçu.
+
+    - **Différence avec `assert`** (vu en Première) : `assert condition, "message"` sert au **programmeur** à vérifier, pendant la mise au point et dans les tests, ce qui *doit* être vrai ; il lève `AssertionError` et peut être désactivé. `raise`, lui, fait partie du **comportement prévu** de la fonction : il se documente dans la docstring, comme une sortie possible.
+
+<span id="cours-02-12" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercice **[12](exercices.md#ex-02-12)** (encapsulation)
 
 ## Pour aller plus loin : les méthodes spéciales
 
@@ -381,7 +409,7 @@ Illisible ! Par défaut, un objet ne sait pas se décrire. On corrige cela en d�
     Point(3, 4)
     ```
 
-!!! regle "Règle 3 — __repr__ ou __str__ ?"
+!!! regle "Règle 4 — __repr__ ou __str__ ?"
 
     Deux méthodes gouvernent l’affichage d’un objet :
 
@@ -395,9 +423,9 @@ Illisible ! Par défaut, un objet ne sait pas se décrire. On corrige cela en d�
 
     `__init__`, `__repr__` et `__str__` font partie des méthodes dites *spéciales* (entourées de doubles tirets bas). Il en existe d’autres, hors programme, qui permettent par exemple d’utiliser `+` ou `==` sur vos propres objets. De même, l’**héritage** (créer une classe à partir d’une autre) et le **polymorphisme** sont *explicitement hors du programme* de Terminale : nous nous arrêtons ici.
 
-<span id="cours-02-12" class="ancre"></span>
+<span id="cours-02-13" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[12](exercices.md#ex-02-12)** (défi : la classe `Fraction`) et **[13](exercices.md#ex-02-13)** (défi : un réseau d’amis, des objets qui interagissent)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[13](exercices.md#ex-02-13)** (défi : la classe `Fraction`) et **[14](exercices.md#ex-02-14)** (défi : un réseau d’amis, des objets qui interagissent)
 
 ## Choisir — et mélanger — les paradigmes
 
@@ -496,7 +524,7 @@ La programmation objet n’est pas une curiosité isolée : elle sert à **impl�
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Les classes servent à écrire les **structures de données** : `Pile`, `File` et la `Cellule` d’une liste chaînée (chapitre « structures linéaires »), le `Noeud` d’un **arbre**, le `Graphe`. La définition de `fact` en OCaml rappelle que le style **fonctionnel** s’appuie sur la **récursivité**. Enfin, une table de **base de données** ressemble à une collection d’objets (chaque colonne est un **attribut**) ; SQL, lui, est **déclaratif** : comme en Prolog, on décrit le résultat voulu plutôt que la façon de l’obtenir.
+    Les classes serviront à écrire les **structures de données** des chapitres suivants : `Pile`, `File` et la `Cellule` d’une liste chaînée (chapitre « structures linéaires »), le `Noeud` d’un **arbre**, le `Graphe`. La définition de `fact` en OCaml rappelle que le style **fonctionnel** s’appuie sur la **récursivité**. Enfin, une table de **base de données** ressemble à une collection d’objets (chaque colonne est un **attribut**) ; SQL, lui, est **déclaratif** : comme en Prolog, on décrit le résultat voulu plutôt que la façon de l’obtenir.
 
 ## Bilan — la carte mémoire
 
@@ -538,9 +566,9 @@ La programmation objet n’est pas une curiosité isolée : elle sert à **impl�
 
 - utiliser `self` correctement $\to$ ex. [6](exercices.md#ex-02-6), [8](exercices.md#ex-02-8) ;
 
-- respecter l’**encapsulation** (attribut `_x`, accesseur / mutateur) $\to$ ex. [14](exercices.md#ex-02-14) ;
+- respecter l’**encapsulation** (attribut `_x`, accesseur / mutateur) $\to$ ex. [12](exercices.md#ex-02-12) ;
 
-- écrire `__repr__` (et `__str__`) $\to$ ex. [12](exercices.md#ex-02-12) ;
+- écrire `__repr__` (et `__str__`) $\to$ ex. [13](exercices.md#ex-02-13) ;
 
 - lire et **compléter** une classe donnée (type bac) $\to$ ex. [16](exercices.md#ex-02-16), [18](exercices.md#ex-02-18) ;
 

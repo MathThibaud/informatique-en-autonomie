@@ -190,6 +190,8 @@
     t.done()
     ```
 
+    *Autre méthode :* au tour numéro `i`, le côté mesure `10 * i` ; on peut donc faire varier `i` de `1` à `20` sans variable `cote` : `for i in range(1, 21):` puis `t.forward(10 * i)` et `t.left(90)`.
+
 ### Défis
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 8</span> — La maison <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-8 }

@@ -55,71 +55,9 @@ On considère l’arbre binaire suivant.
 
     Taille $= 5$, hauteur $= 3$.
 
-### Mesurer un arbre
-
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Taille <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-3 }
-
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction récursive `taille(a)` qui renvoie le nombre de nœuds de l’arbre `a`. *(Rappel : l’arbre vide `None` a pour taille `0`.)*
-
-??? corrige "Corrigé"
-
-    ```python
-    def taille(a):
-        if a is None:
-            return 0
-        return 1 + taille(a.gauche) + taille(a.droite)
-    ```
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Hauteur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-4 }
-
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction récursive `hauteur(a)` qui renvoie la hauteur de `a` (convention : compter les nœuds ; l’arbre vide a pour hauteur `0`).
-
-<span class="run" title="À programmer et tester sur machine">▶</span> Un sujet de bac définit la hauteur en comptant les **arêtes** (une feuille seule a pour hauteur $0$). Écrire `hauteur_aretes(a)` selon cette convention. Quelle valeur faut-il donner à l’arbre vide ?
-
-??? pouce "Coup de pouce"
-
-    Condition d’arrêt : l’arbre vide. Sinon, la hauteur se déduit de la plus **grande** des hauteurs des deux sous-arbres (fonction `max`). Pour les arêtes : quelle valeur donner à l’arbre vide pour qu’une feuille obtienne la hauteur $0$ avec la même formule ?
-
-??? corrige "Corrigé"
-
-    ```python
-    def hauteur(a):
-        if a is None:
-            return 0
-        return 1 + max(hauteur(a.gauche), hauteur(a.droite))
-    ```
-
-    Avec la convention des arêtes, seul le cas de base change : l’arbre vide vaut $-1$, pour qu’une feuille vaille $1 + \max(-1, -1) = 0$.
-
-    ```python
-    def hauteur_aretes(a):
-        if a is None:
-            return -1
-        return 1 + max(hauteur_aretes(a.gauche), hauteur_aretes(a.droite))
-    ```
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Nombre de feuilles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-5 }
-
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `nb_feuilles(a)` qui renvoie le nombre de feuilles de `a`. *(Un nœud est une feuille si ses deux fils sont `None`.)*
-
-??? pouce "Coup de pouce"
-
-    Deux cas immédiats : l’arbre vide, et le nœud qui est lui-même une feuille. Dans les autres cas, que faire des nombres de feuilles des deux sous-arbres ?
-
-??? corrige "Corrigé"
-
-    ```python
-    def nb_feuilles(a):
-        if a is None:
-            return 0
-        if a.gauche is None and a.droite is None:
-            return 1
-        return nb_feuilles(a.gauche) + nb_feuilles(a.droite)
-    ```
-
 ### Parcourir un arbre
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — Les quatre parcours <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-6 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Les quatre parcours <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-3 }
 
 On considère l’arbre suivant.
 
@@ -139,7 +77,7 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
 
     Le parcours **infixe** donne les valeurs **triées par ordre croissant** : cet arbre est en fait un **ABR**.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Programmer les parcours en profondeur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-7 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Programmer les parcours en profondeur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-4 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `prefixe(a)` qui **affiche** les valeurs de `a` dans l’ordre préfixe. Indiquer ensuite la (seule) ligne à déplacer pour obtenir le parcours **infixe**, puis le parcours **suffixe**.
 
@@ -159,7 +97,7 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
 
     **Infixe** : placer `print(a.valeur)` *entre* `prefixe(a.gauche)` et `prefixe(a.droite)`. **Suffixe** : placer `print(a.valeur)` *après* les deux appels.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 8</span> — Défi — parcours en largeur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-8 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 5</span> — Défi — parcours en largeur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-5 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `largeur(a)` qui affiche les valeurs de `a` **niveau par niveau**, de gauche à droite. On s’appuiera sur une `File` (interface `enfiler`, `defiler`, `est_vide`). *(On admet la classe `File`.)*
 
@@ -193,31 +131,71 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
                 f.enfiler(n.droite)
     ```
 
-### Arbres binaires de recherche
+### Mesurer un arbre
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Insérer dans un ABR <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-9 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — Taille <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-6 }
 
-On part de l’arbre binaire de recherche suivant.
-
-![](../figures/3de7d3de290b5b02.svg){ .tikz loading=lazy }
-
-1.  Redessiner l’arbre après insertion, **dans cet ordre**, des valeurs `10`, `18` puis `2`.
-
-    ??? pouce "Coup de pouce"
-
-        Pour chaque valeur, partir de la racine et descendre : à gauche si la valeur est plus petite que le nœud, à droite sinon (y compris en cas d’égalité : convention du cours), jusqu’à trouver une place vide. Une nouvelle valeur devient toujours une feuille.
-
-2.  Quel parcours de l’ABR obtenu affiche les valeurs dans l’ordre **croissant** ?
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction récursive `taille(a)` qui renvoie le nombre de nœuds de l’arbre `a`. *(Rappel : l’arbre vide `None` a pour taille `0`.)*
 
 ??? corrige "Corrigé"
 
-    **1.** `10` : $<15$ (gauche), $>8$ (droite), $<12$ (gauche) $\to$ fils gauche de `12`. `18` : $>15$, $<20$ $\to$ fils gauche de `20`. `2` : $<15$, $<8$, $<5$ $\to$ fils gauche de `5`.
+    ```python
+    def taille(a):
+        if a is None:
+            return 0
+        return 1 + taille(a.gauche) + taille(a.droite)
+    ```
 
-    ![](../figures/075dad01c3dfb7e2.svg){ .tikz loading=lazy }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Hauteur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-7 }
 
-    **2.** Le parcours **infixe** (gauche, racine, droite) affiche les valeurs par ordre croissant.
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction récursive `hauteur(a)` qui renvoie la hauteur de `a` (convention : compter les nœuds ; l’arbre vide a pour hauteur `0`).
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Rechercher dans un ABR <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-10 }
+<span class="run" title="À programmer et tester sur machine">▶</span> Un sujet de bac définit la hauteur en comptant les **arêtes** (une feuille seule a pour hauteur $0$). Écrire `hauteur_aretes(a)` selon cette convention. Quelle valeur faut-il donner à l’arbre vide ?
+
+??? pouce "Coup de pouce"
+
+    Condition d’arrêt : l’arbre vide. Sinon, la hauteur se déduit de la plus **grande** des hauteurs des deux sous-arbres (fonction `max`). Pour les arêtes : quelle valeur donner à l’arbre vide pour qu’une feuille obtienne la hauteur $0$ avec la même formule ?
+
+??? corrige "Corrigé"
+
+    ```python
+    def hauteur(a):
+        if a is None:
+            return 0
+        return 1 + max(hauteur(a.gauche), hauteur(a.droite))
+    ```
+
+    Avec la convention des arêtes, seul le cas de base change : l’arbre vide vaut $-1$, pour qu’une feuille vaille $1 + \max(-1, -1) = 0$.
+
+    ```python
+    def hauteur_aretes(a):
+        if a is None:
+            return -1
+        return 1 + max(hauteur_aretes(a.gauche), hauteur_aretes(a.droite))
+    ```
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Nombre de feuilles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-8 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `nb_feuilles(a)` qui renvoie le nombre de feuilles de `a`. *(Un nœud est une feuille si ses deux fils sont `None`.)*
+
+??? pouce "Coup de pouce"
+
+    Deux cas immédiats : l’arbre vide, et le nœud qui est lui-même une feuille. Dans les autres cas, que faire des nombres de feuilles des deux sous-arbres ?
+
+??? corrige "Corrigé"
+
+    ```python
+    def nb_feuilles(a):
+        if a is None:
+            return 0
+        if a.gauche is None and a.droite is None:
+            return 1
+        return nb_feuilles(a.gauche) + nb_feuilles(a.droite)
+    ```
+
+### Arbres binaires de recherche
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Rechercher dans un ABR <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-9 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction récursive `recherche(a, x)` qui renvoie `True` si la valeur `x` est présente dans l’**ABR** `a`, `False` sinon, en profitant de l’ordre de l’ABR (on ne parcourt **pas** tout l’arbre). Combien de comparaisons, au maximum, pour un ABR de hauteur `h` ?
 
@@ -254,6 +232,28 @@ On part de l’arbre binaire de recherche suivant.
     ```
 
     Au plus **`h` comparaisons** (une par niveau), où `h` est la hauteur de l’arbre.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Insérer dans un ABR <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-10 }
+
+On part de l’arbre binaire de recherche suivant.
+
+![](../figures/3de7d3de290b5b02.svg){ .tikz loading=lazy }
+
+1.  Redessiner l’arbre après insertion, **dans cet ordre**, des valeurs `10`, `18` puis `2`.
+
+    ??? pouce "Coup de pouce"
+
+        Pour chaque valeur, partir de la racine et descendre : à gauche si la valeur est plus petite que le nœud, à droite sinon (y compris en cas d’égalité : convention du cours), jusqu’à trouver une place vide. Une nouvelle valeur devient toujours une feuille.
+
+2.  Quel parcours de l’ABR obtenu affiche les valeurs dans l’ordre **croissant** ?
+
+??? corrige "Corrigé"
+
+    **1.** `10` : $<15$ (gauche), $>8$ (droite), $<12$ (gauche) $\to$ fils gauche de `12`. `18` : $>15$, $<20$ $\to$ fils gauche de `20`. `2` : $<15$, $<8$, $<5$ $\to$ fils gauche de `5`.
+
+    ![](../figures/075dad01c3dfb7e2.svg){ .tikz loading=lazy }
+
+    **2.** Le parcours **infixe** (gauche, racine, droite) affiche les valeurs par ordre croissant.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Programmer l’insertion dans un ABR <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-11 }
 
@@ -551,6 +551,8 @@ class Feuille:
     def nb_resultats(self):
         return self.sioui.nb_resultats() + self.sinon.nb_resultats()
     ```
+
+    *Remarque : chaque classe a sa propre version de la méthode ; à l’appel `self.sioui.nb_resultats()`, Python exécute celle de la classe de l’objet (`Feuille` ou `Noeud`). C’est le **polymorphisme**, au-delà du programme.*
 
     **4.**
 

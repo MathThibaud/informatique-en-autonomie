@@ -180,7 +180,7 @@ Un **palindrome** se lit de la même façon dans les deux sens (`abba`, `aba`, `
         ("retour", BLANC): (BLANC, "D", "q0"),
     ```
 
-    Les $511$ mots de longueur $0$ à $8$ sont correctement classés (vérifié par comparaison avec `mot == mot[::-1]`). Sur `abba` : `oui` en $15$ étapes.
+    Les $511$ mots de longueur $0$ à $8$ sont correctement classés (vérifié par comparaison avec `mot == mot[::-1]`, qui compare le mot à son inverse). Sur `abba` : `oui` en $15$ étapes.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Combien d’étapes ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-tp-1-7 }
 
@@ -192,7 +192,7 @@ Un **palindrome** se lit de la même façon dans les deux sens (`abba`, `aba`, `
 
 1.  Quand la longueur double, par combien le nombre d’étapes est-il (à peu près) multiplié ? Quel est donc l’ordre de grandeur du coût de cette machine ?
 
-2.  En Python, `mot == mot[::-1]` répond instantanément. La machine de Turing calcule-t-elle « moins de choses » que Python ? Relier à la thèse de Church-Turing : qu’est-ce qui diffère d’un modèle de calcul à l’autre, et qu’est-ce qui ne diffère pas ?
+2.  En Python, `mot == mot[::-1]` répond instantanément (`mot[::-1]` est le mot lu à l’envers : tranche parcourue avec un pas de $-1$). La machine de Turing calcule-t-elle « moins de choses » que Python ? Relier à la thèse de Church-Turing : qu’est-ce qui diffère d’un modèle de calcul à l’autre, et qu’est-ce qui ne diffère pas ?
 
 ??? corrige "Corrigé"
 

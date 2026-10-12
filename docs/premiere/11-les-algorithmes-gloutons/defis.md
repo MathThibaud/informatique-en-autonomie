@@ -98,8 +98,10 @@ fichier.close()
     print(max(ligne))          # 9 : le plus grand caractere ("9" > "8" > ... > "1")
     print(ligne.index("9"))    # 3 : indice de la PREMIERE apparition
     print(ligne.index("3"))    # 0 : premiere apparition, pas la derniere
-    print(max(ligne[:-1]))     # 9 : on peut chercher dans une tranche
+    print(max(ligne[:-1]))     # 9 : maximum de tout sauf le dernier caractere
     ```
+
+    `ligne[:-1]` est la tranche privée du dernier caractère (indices négatifs et tranches : voir le chapitre *Les types construits*, encadré « Indices négatifs et tranches »).
 
     **Intérêt.** Deux appels remplacent une boucle de recherche du maximum avec mémorisation de sa position.
 

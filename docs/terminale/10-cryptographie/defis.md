@@ -2,7 +2,7 @@
 
 <p class="sous-titre">Cryptographie</p>
 
-## <span class="etiquette">Défi</span> Combo Breaker
+## <span class="etiquette">Défi 1</span> Combo Breaker
 
 *la carte d’hôtel — Diffie-Hellman et exponentiation modulaire*
 
@@ -171,3 +171,172 @@ On admet que, $p$ étant premier, $g^{p-1} \bmod p = 1$ (petit théorème de Fer
         Calculer une fois pour toutes `facteur = pow(g, p - 1 - m, p)` ; à chaque pas de géant, `geant = geant * facteur % p`. À la sortie, la réponse est `i * m + bebes[geant]`.
 
 3.  Combien d’opérations pour $p \approx 2 \times 10^7$ ? Et pour $p \approx 10^{600}$ ? Cela remet-il en cause la sécurité du protocole ? Quelle quantité de mémoire faut-il ?
+
+## <span class="etiquette">Défi 2</span> Shuttle Search
+
+*les navettes — modulo et efficacité*
+
+<p class="infos-activite">Jour 13</p>
+
+!!! fichiers "Fichiers à télécharger"
+
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/10-defi-aoc-2020-13){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-10-defi-aoc-2020-13.zip){ .md-button }
+
+!!! consignes "Consignes"
+
+    - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/13 ](https://adventofcode.com/2020/day/13 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
+
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+
+    - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
+
+    - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
+
+*Ce défi réinvestit l’arithmétique modulaire de ce chapitre : le reste `%` dans la partie 1, puis, en approfondissement, l’inverse modulaire `pow(a, -1, m)` rencontré avec le chiffrement affine et RSA.*
+
+## Lire l’énoncé
+
+Vocabulaire utile pour lire le texte original :
+
+|                |              |            |                      |
+|:---------------|:-------------|:-----------|:---------------------|
+| shuttle bus    | navette      | timestamp  | instant (en minutes) |
+| depart         | partir       | earliest   | le plus tôt possible |
+| out of service | hors service | ID         | identifiant (numéro) |
+| offset         | décalage     | subsequent | suivant, consécutif  |
+
+!!! encadre "Résumé de l’énoncé (partie 1)"
+
+    **Contexte.** Arrivé au port, vous devez rejoindre l’aéroport en navette. Chaque navette fait une boucle de durée fixe et repasse donc régulièrement au port ; son numéro est justement la durée de sa boucle, en minutes. Le fichier contient vos notes : l’heure à laquelle vous serez prêt, et la liste des navettes de la compagnie.
+
+    **Ce qu’il faut faire.**
+
+    - Ligne 1 : l’instant $a$ (en minutes) à partir duquel vous pouvez partir. Ligne 2 : les numéros des navettes séparés par des virgules ; un `x` désigne une navette hors service, à ignorer.
+
+    - Toutes les navettes sont parties ensemble à l’instant 0 : la navette numéro $b$ part donc aux instants $0$, $b$, $2b$, $3b$… autrement dit aux multiples de $b$.
+
+    - Il faut trouver la navette qui part le plus tôt à partir de l’instant $a$ (un départ à l’instant $a$ lui-même convient). La réponse est son numéro multiplié par le nombre de minutes d’attente.
+
+### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-1 }
+
+Questions de vérification, à traiter sur le cahier :
+
+1.  Si $a$ est un multiple de $b$, combien de minutes attend-on la navette $b$ ?
+
+2.  Avec $a = 30$, à quel instant part la navette 7, et combien attend-on ?
+
+3.  Les `x` jouent-ils un rôle dans la partie 1 ?
+
+### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-2 }
+
+On considère le fichier (inventé) suivant :
+
+```console
+96
+5,x,7,x,x,11
+```
+
+Pour chaque navette, calculer le premier départ à partir de l’instant 96 et l’attente correspondante. Vérification : la réponse est `14`.
+
+## Programmer la partie 1
+
+### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-3 }
+
+Écrire une fonction `lire_notes(nom_fichier)` qui renvoie l’instant d’arrivée et la liste des numéros des navettes en service (sans les `x`).
+
+??? pouce "Coup de pouce"
+
+    `ligne.split(",")` découpe la seconde ligne ; on ne garde que les morceaux différents de `"x"`.
+
+### <span class="exo-num">Exercice 4</span> — L’attente, avec un modulo <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-4 }
+
+Écrire une fonction `attente(arrivee, numero)` qui renvoie le nombre de minutes à attendre la navette `numero`, **sans boucle**. En déduire la réponse. Tester sur l’exemple du défi, puis sur vos données.
+
+??? pouce "Coup de pouce"
+
+    `arrivee % numero` donne le temps écoulé depuis le dernier départ. Attention au cas où il vaut `0` : on part tout de suite.
+
+## Partie 2
+
+Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
+
+!!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
+
+    La compagnie propose un concours : trouver le moment où les navettes partent les unes après les autres, minute après minute, dans l’ordre de la liste.
+
+    - La première ligne ne sert plus. Les positions dans la liste sont numérotées à partir de 0, `x` compris ; un `x` n’impose aucune condition.
+
+    - Trouver le plus petit instant $t$ tel que la navette en position $i$ parte exactement à l’instant $t + i$, pour toutes les navettes en service.
+
+### <span class="exo-num">Exercice 5</span> — Comprendre la condition <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-5 }
+
+Traduire la condition sur une navette de numéro $b$ placée en position $i$ par une égalité avec `%`. Sur l’exemple du défi, on doit trouver $t = 215$ : le vérifier pour chacune des trois navettes.
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : la partie 2 sur vos données <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-6 }
+
+L’énoncé prévient que la réponse dépasse $10^{14}$ : tester tous les instants un par un prendrait des années. Lire la section suivante, puis écrire une fonction `premier_instant(navettes)` qui suit cette méthode. Vérifier sur l’exemple du défi et sur ceux de l’énoncé avant vos données.
+
+??? pouce "Coup de pouce"
+
+    On traite les navettes une par une. Une fois une navette satisfaite, on ne regarde plus que des instants qui la satisfont encore.
+
+??? pouce "Coup de pouce 2 (début de solution)"
+
+    Deux variables suffisent : `t` (candidat actuel) et `pas`. Pour chaque navette, on ajoute `pas` à `t` tant que la condition n’est pas vérifiée, puis on met à jour `pas`.
+
+## Pour y arriver : synchroniser des périodes <span class="horsprog">au-delà du programme</span>
+
+!!! encadre "Recherche à pas croissant"
+
+    On cherche $t$ tel que $t \,\%\, 5 = 0$, $(t+2) \,\%\, 7 = 0$ et $(t+5) \,\%\, 11 = 0$ (exemple du défi).
+
+    **Idée.** Si $t$ convient pour la navette 5, alors $t + 5$, $t + 10$… conviennent aussi : la condition est *périodique*. Si $t$ convient pour 5 *et* 7, alors $t + 35$, $t + 70$… conviennent encore pour les deux, puisque 35 est un multiple de 5 et de 7.
+
+    **Méthode.** On part de $t = 0$ avec un pas de 1. Pour chaque navette, on avance de *pas* en *pas* jusqu’à ce qu’elle soit satisfaite, puis on multiplie le pas par son numéro : le pas est toujours le produit des périodes déjà satisfaites.
+
+    - navette 5 : $t = 0$ convient tout de suite ; le pas devient $5$ ;
+
+    - navette 7 : on teste $0$, puis $5$ ; $5 + 2 = 7$ est divisible par 7 ; le pas devient $5 \times 7 = 35$ ;
+
+    - navette 11 : on teste $5, 40, 75, 110, 145, 180, 215$ ; $215 + 5 = 220 = 11 \times 20$. Donc $t = 215$.
+
+    Il a suffi de 7 essais au lieu de 215. Pour chaque navette, on fait au plus « numéro » essais : quelques centaines en tout, même si $t$ dépasse $10^{14}$.
+
+    **Pourquoi ça marche.** Les numéros des navettes sont premiers entre eux (ici ce sont même des nombres premiers) : en avançant de pas en pas, on finit toujours par satisfaire la nouvelle navette en moins de « numéro » essais. Si les numéros avaient un diviseur commun, il faudrait prendre leur PPCM.
+
+    **Pour aller plus loin.** En mathématiques, ce problème est résolu par le *théorème des restes chinois* : si $n_1, \dots, n_k$ sont premiers entre eux deux à deux, il existe une unique solution $t$ entre $0$ et $n_1 \times \dots \times n_k - 1$ à un système de conditions $t \,\%\, n_j = r_j$. La méthode ci-dessus est une façon simple de la calculer.
+
+## Approfondissement
+
+!!! encadre "Rappel du cours : puissance modulaire et inverse (pow(a, b, m))"
+
+    Comme dans le cours (chiffrement affine, RSA), `pow(a, b, m)` calcule $a^b \bmod m$ sans jamais former le très grand nombre $a^b$. Avec l’exposant $-1$, `pow(a, -1, m)` renvoie l’**inverse de $a$ modulo $m$**, c’est-à-dire l’entier $y$ entre $0$ et $m-1$ tel que $a \times y \bmod m = 1$ (Python 3.8 ou plus récent). Il n’existe que si $a$ et $m$ sont premiers entre eux.
+
+    ```python
+    print(pow(3, 4))               # 81 : comme 3 ** 4
+    print(pow(3, 4, 7))            # 4 : 81 % 7, sans jamais former de tres grand nombre
+    print(pow(6, -1, 7))           # 6 : inverse de 6 modulo 7 (6 * 6 = 36 = 5 * 7 + 1)
+    print(6 * pow(6, -1, 7) % 7)   # 1
+    ```
+
+    **Intérêt.** L’inverse modulaire se calcule en un nombre d’étapes proportionnel au nombre de chiffres (algorithme d’Euclide étendu), même pour des nombres immenses ; le chercher en essayant $y = 1, 2, 3\dots$ prendrait jusqu’à $m$ essais.
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : la formule des restes chinois <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-7 }
+
+La section précédente cite le théorème des restes chinois. Il donne aussi une **formule** : pour le système $t \,\%\, n_m = r_m$ ($m = 1, \dots, k$), avec des $n_m$ premiers entre eux deux à deux, on pose $N = n_1 \times \dots \times n_k$, $N_m = N / n_m$ et $y_m$ l’inverse de $N_m$ modulo $n_m$. Alors $$t = \Big(\sum_{m} r_m \, N_m \, y_m\Big) \bmod N.$$
+
+1.  Recopier et exécuter le code de l’encadré. Que se passe-t-il avec `pow(4, -1, 6)` ? Pourquoi ?
+
+2.  Pour une navette de numéro $b$ en position $i$, quel reste $r$ doit avoir $t$ modulo $b$ ? Sur l’exemple du défi (`5,x,7,x,x,11`), calculer pour chaque navette $r_m$, $N_m$ et $y_m$, puis $t$. On doit retrouver `215`.
+
+3.  Vérifier sur l’exemple que le terme associé à la navette 7 est un multiple de 5 et de 11, et qu’il a le bon reste modulo 7. En déduire pourquoi la formule fonctionne.
+
+4.  Écrire une fonction `restes_chinois(navettes)` et la comparer à `premier_instant` : nombre d’opérations, lisibilité.
+
+    ??? pouce "Coup de pouce"
+
+        `(-i) % b` donne un reste compris entre 0 et `b - 1`, même quand `-i` est négatif.
+
+    ??? pouce "Coup de pouce 2 (début de solution)"
+
+        Une première boucle calcule le produit $N$ ; une seconde ajoute `r * (N // b) * pow(N // b, -1, b)` pour chaque navette ; on renvoie le total modulo $N$.

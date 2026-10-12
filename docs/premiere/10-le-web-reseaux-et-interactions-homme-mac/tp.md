@@ -29,6 +29,16 @@ Votre site doit comporter :
 
 - un **formulaire** (avec un attribut `method`).
 
+!!! encadre "Aide-mémoire JavaScript : boucle et hasard (en plus du cours)"
+
+    Le cours montre la condition `if (…) { …}`. Pour une boucle ou un tirage au hasard :
+
+    - `for (let i = 1; i <= 10; i++) { …}` répète le bloc pour `i` allant de 1 à 10 (comme `for i in range(1, 11):` en Python) ;
+
+    - `while (n > 0) { …}` répète tant que la condition est vraie ;
+
+    - `Math.floor(Math.random() * 6) + 1` donne un entier au hasard entre 1 et 6 (comme `randint(1, 6)`).
+
 !!! encadre "Arborescence imposée"
 
     Tout le site tient dans un dossier `monsite/` organisé ainsi :

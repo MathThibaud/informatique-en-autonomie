@@ -70,7 +70,7 @@ Pour chaque affirmation, répondre par vrai ou faux et **justifier** en une phra
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Ordres de grandeur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-09-3 }
 
-Recopier chaque grandeur en la reliant à l’ordre de grandeur qui convient : \; *quelques nanomètres à quelques dizaines de nanomètres* \;/\; *quelques milliards* \;/\; *quelques gigahertz*.
+Recopier chaque grandeur en la reliant à l’ordre de grandeur qui convient : \; *quelques nanomètres à quelques dizaines de nanomètres* \;/\; *des milliards à des dizaines de milliards* \;/\; *quelques gigahertz*.
 
 1.  taille d’un transistor gravé aujourd’hui ;
 
@@ -80,7 +80,7 @@ Recopier chaque grandeur en la reliant à l’ordre de grandeur qui convient : \
 
 ??? corrige "Corrigé"
 
-    a\) quelques **nanomètres** à quelques dizaines de nanomètres ; \; b) quelques **milliards** ; \; c) quelques **gigahertz**.
+    a\) quelques **nanomètres** à quelques dizaines de nanomètres ; \; b) des **milliards** à des dizaines de milliards ; \; c) quelques **gigahertz**.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — La loi de Moore <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-4 }
 

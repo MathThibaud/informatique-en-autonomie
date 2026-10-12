@@ -198,7 +198,7 @@ On étudie le réseau d’amitiés suivant (une arête $=$ « est ami avec ») :
     | excentricité |  $3$  |  $2$  |  $2$  |  $2$  | $3$  |  $3$  |
 
     **2.** Le **diamètre** (plus grande excentricité) vaut $\mathbf{3}$ ; le **rayon** (plus petite excentricité) vaut $\mathbf{2}$ ; le **centre** (les sommets d’excentricité minimale) est $\{\textbf{Bilal, Chloé, David}\}$.  
-    **3.** Si Alice devient aussi amie avec David (nouvelle arête Alice–David), Alice atteint tout le monde en au plus $2$ pas ; Ella et Farid aussi (via David–Alice). Toutes les excentricités valent alors $2$ : le **diamètre passe de $3$ à $\mathbf{2}$**. *Oui, il change* — un seul lien bien placé « rapproche » tout le réseau.
+    **3.** Si Alice devient aussi amie avec David (nouvelle arête Alice–David), Alice atteint tout le monde en au plus $2$ pas ; Ella et Farid aussi (via David–Alice). Les excentricités valent alors toutes $2$, sauf celle de David, qui vaut $\mathbf{1}$ (il est maintenant ami de tout le monde) : le **diamètre passe de $3$ à $\mathbf{2}$**, le rayon devient $1$ et le centre se réduit à $\{\textbf{David}\}$. *Oui, il change* — un seul lien bien placé « rapproche » tout le réseau.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Dessiner un réseau <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-12 }
 
@@ -284,7 +284,7 @@ On étudie le réseau d’amitiés suivant (une arête $=$ « est ami avec ») :
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 16</span> — Les amis de mes amis <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-16 }
 
-<span class="tag">sur papier</span>  Un réseau propose à chacun des « amis suggérés » : les personnes situées à **distance $2$**, en commençant par celles avec qui l’on a le plus d’**amis en commun**. On reprend le graphe d’amitiés de la section 4.
+<span class="tag">sur papier</span>  Un réseau propose à chacun des « amis suggérés » : les personnes situées à **distance $2$**, en commençant par celles avec qui l’on a le plus d’**amis en commun**. On reprend le graphe d’amitiés de la section IV du cours.
 
 1.  Quelles personnes sont à distance $2$ d’Alice ? Combien d’amis en commun a-t-elle avec chacune ? Qui lui sera suggéré en premier ?
 
@@ -308,7 +308,7 @@ On étudie le réseau d’amitiés suivant (une arête $=$ « est ami avec ») :
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 17</span> — Citoyen des réseaux <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-17 }
 
-<span class="tag">sur papier</span>  Face à une situation de cyberharcèlement, citer trois bons réflexes et donner le numéro national d’aide.
+<span class="tag">sur papier</span>  Face à une situation de cyberharcèlement, citer trois bons réflexes et donner un numéro d’aide joignable à Monaco.
 
 ??? corrige "Corrigé"
 
@@ -322,7 +322,7 @@ On étudie le réseau d’amitiés suivant (une arête $=$ « est ami avec ») :
 
 1.  Combien de minutes de vidéo en 4K Sami peut-il encore filmer ?
 
-2.  Sami pense acheter un téléphone neuf avec plus de mémoire. D’après le thème *Objets connectés*, un smartphone émet environ $80$ kg CO<sub>2</sub>e sur sa vie, presque tout à sa **fabrication**. Proposer deux solutions plutôt que d’acheter un téléphone neuf.
+2.  Sami pense acheter un téléphone neuf avec plus de mémoire. D’après le Document 6 du cours (on y reviendra au thème *Objets connectés*), un smartphone émet environ $80$ kg CO<sub>2</sub>e sur sa vie, presque tout à sa **fabrication**. Proposer deux solutions plutôt que d’acheter un téléphone neuf.
 
 3.  Sami publie une vidéo de $50$ Mo, qui est vue $1$ million de fois. Quelle quantité de données le réseau social doit-il transporter pour ces visionnages ? Donner le résultat en téraoctets ($1$ To $= 10^{6}$ Mo).
 
@@ -363,7 +363,7 @@ On étudie le réseau d’amitiés suivant (une arête $=$ « est ami avec ») :
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Une distance calculée par un assistant <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-02-20 }
 
-<span class="tag">sur papier</span>  Un élève a décrit à un assistant d’IA le graphe d’amitiés de la section 4 et lui a demandé : « Quelle est la distance entre Alice et Farid ? » Voici la réponse obtenue :
+<span class="tag">sur papier</span>  Un élève a décrit à un assistant d’IA le graphe d’amitiés de la section IV du cours et lui a demandé : « Quelle est la distance entre Alice et Farid ? » Voici la réponse obtenue :
 
 > Alice et Farid ne sont pas amis directement. Pour aller de l’un à l’autre, il faut passer par David, le sommet le plus connecté du réseau (degré 4). Un plus court chemin est Alice – Bilal – David – Farid (on peut aussi passer par Chloé à la place de Bilal). Ce chemin passe par quatre personnes : la distance entre Alice et Farid est donc de 4. À titre de comparaison, Ella et Farid sont amis, donc à distance 1.
 

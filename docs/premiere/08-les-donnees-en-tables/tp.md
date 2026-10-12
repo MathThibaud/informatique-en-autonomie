@@ -292,8 +292,6 @@ Compléter `releves_de(table, station)` (filtre par compréhension) et `moyenne(
         print(s["nom"], round(cumul, 1), compter_si(r, "pluie", 1))
     ```
 
-    *Autre méthode :* pour le cumul, construire par compréhension la liste des hauteurs de pluie de la station, puis l’additionner avec `sum` : `cumul = sum([ligne["pluie"] for ligne in r])`.
-
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — L’épisode orageux <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-les-donnees-en-tables-tp-1-10 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
