@@ -318,9 +318,9 @@ Avec les règles d’origine, on doit compter `2` messages ; avec les règles mo
 
 ## Approfondissement
 
-!!! encadre "Outils Python : les ensembles (set) et all"
+!!! encadre "Outil Python : les ensembles (set)"
 
-    Un **ensemble** est une collection sans doublon et sans ordre. On l’écrit entre accolades, on peut le construire par compréhension comme une liste, et réunir deux ensembles avec `|`. La fonction `all` renvoie `True` si *tous* les éléments d’une suite de booléens sont vrais.
+    Un **ensemble** est une collection sans doublon et sans ordre. On l’écrit entre accolades, on peut le construire par compréhension comme une liste, et réunir deux ensembles avec `|`.
 
     ```python
     debuts = {"a", "b"}
@@ -331,8 +331,6 @@ Avec les règles d’origine, on doit compter `2` messages ; avec les règles mo
     reunion = mots | {"bb"}         # reunion de deux ensembles
     mots |= {"aa"}                  # deja present : rien ne change
     print(len(mots))                # 4
-    print(all(m in mots for m in ["aa", "ba"]))   # True
-    print(all(m in mots for m in ["aa", "bb"]))   # False
     ```
 
     **Intérêt.** Le test `x in ensemble` prend un temps qui ne dépend pas de la taille de l’ensemble (contrairement à une liste, qu’il faut parcourir), et les doublons disparaissent d’eux-mêmes. Question : combien d’éléments a `{d + f for d in "ab" for f in "ab"}` ?
@@ -359,7 +357,7 @@ Dans les vraies données, la règle `0` est `8 11`, et les règles `42` et `31` 
 
     ??? pouce "Coup de pouce"
 
-        Compter le nombre `p` de blocs de tête qui sont dans `m42` ; tous les blocs restants doivent être dans `m31` (utiliser `all`).
+        Compter le nombre `p` de blocs de tête qui sont dans `m42` ; tous les blocs restants doivent être dans `m31` (un booléen drapeau, comme dans le défi *Handy Haversacks*).
 
 5.  Comparer avec la fonction `fins` : vitesse, et généralité (que se passe-t-il si l’on change la règle `0` ?).
 

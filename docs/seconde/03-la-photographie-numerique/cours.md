@@ -217,7 +217,7 @@ Extrait de métadonnées EXIF (valeurs fictives). En rouge : les coordonnées GP
 
 <span id="cours-03-17" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[17](exercices.md#ex-03-17) et [18](exercices.md#ex-03-18)** (métadonnées EXIF et vie privée)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[17](exercices.md#ex-03-17) et [18](exercices.md#ex-03-18)** (métadonnées EXIF et vie privée), exercice **[19](exercices.md#ex-03-19)** (critiquer une réponse d’IA)
 
 ## Les algorithmes dans nos appareils
 
@@ -237,7 +237,7 @@ La photo « parfaite » du smartphone n’est pas seulement captée : elle est *
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Une photo numérique est un tableau de nombres : on la traite avec les **boucles** et les **conditions** du chapitre *Les bases de Python*. Ses **métadonnées EXIF** sont des **données** au sens que l’on précisera au chapitre *Données en tables*, et leurs coordonnées viennent du récepteur **GPS** (on le verra au chapitre *Localisation*). Le capteur d’image est un **capteur**, comme ceux des objets connectés que l’on étudiera en fin d’année : il transforme une grandeur physique, la lumière, en nombre. Chaque valeur de 0 à 255 tient sur un octet, c’est-à-dire 8 **bits** (des 0 et des 1) : on reverra le bit au chapitre *Internet*, et l’écriture binaire en spécialité NSI de Première.
+    Une photo numérique est un tableau de nombres : on la traite avec les **boucles** et les **conditions** du chapitre *Les bases de Python*. Ses **métadonnées EXIF** sont des **données** au sens que l’on précisera au chapitre *Les données structurées et leur traitement*, et leurs coordonnées viennent du récepteur **GPS** (on le verra au chapitre *Localisation*). Le capteur d’image est un **capteur**, comme ceux des objets connectés que l’on étudiera en fin d’année : il transforme une grandeur physique, la lumière, en nombre. Chaque valeur de 0 à 255 tient sur un octet, c’est-à-dire 8 **bits** (des 0 et des 1) : on reverra le bit au chapitre *Internet*, et l’écriture binaire en spécialité NSI de Première.
 
 ## Bilan — la carte mémoire
 

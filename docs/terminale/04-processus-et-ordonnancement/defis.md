@@ -186,6 +186,8 @@ Les voisins visibles d’un siège ne dépendent pas de l’état des sièges, s
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
+*Ce défi mobilise les files vues au chapitre 3 : chaque paquet de cartes est une file, comme celle des processus prêts dans l’ordonnancement en tourniquet de ce chapitre. La partie 2 réinvestit la récursivité du chapitre 1 : chaque sous-partie est un appel récursif, avec sa propre mémoire des situations déjà vues.*
+
 ## Lire l’énoncé
 
 Vocabulaire utile pour lire le texte original :
@@ -259,16 +261,17 @@ Lire le fichier et ranger les cartes de chaque joueur dans une **file** : on ret
 
     Avec `from collections import deque`, `d = deque([6, 2, 8, 1])`, `d.popleft()` renvoie `6` et `d.append(x)` ajoute à la fin, en temps constant. Avec une liste, `pop(0)` est en $O(n)$.
 
-!!! encadre "Outil Python : parcourir avec l’indice (enumerate)"
+!!! encadre "Rappel : parcourir avec l’indice"
 
-    `enumerate(suite)` fournit à chaque tour le couple `(indice, élément)`.
+    Pour connaître à la fois la **position** et la **valeur** de chaque élément, on parcourt les indices avec `range(len(...))`.
 
     ```python
-    for i, carte in enumerate([8, 6, 7]):
-        print(i, carte)        # 0 8, puis 1 6, puis 2 7
+    paquet = [8, 6, 7]
+    for i in range(len(paquet)):
+        print(i, paquet[i])    # 0 8, puis 1 6, puis 2 7
     ```
 
-    **Intérêt.** On évite `for i in range(len(paquet))` suivi de `paquet[i]`, qui est moins lisible (et lent sur une `deque`, où l’accès par indice au milieu n’est pas en temps constant). Question : écrire avec `enumerate` une boucle qui affiche `carte * (3 - i)` pour la liste `[8, 6, 7]`.
+    **Intérêt.** L’indice `i` dit où se trouve la carte dans le paquet : c’est lui qui fixe son coefficient dans le score. Question : écrire une boucle qui affiche `paquet[i] * (3 - i)` pour la liste `[8, 6, 7]`, puis qui calcule la somme de ces trois produits dans une variable `total`.
 
 ### <span class="exo-num">Exercice 4</span> — Jouer et compter <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-2-4 }
 
@@ -276,7 +279,7 @@ Lire le fichier et ranger les cartes de chaque joueur dans une **file** : on ret
 
 ??? pouce "Coup de pouce"
 
-    La boucle tourne `while p1 and p2` : une file vide vaut `False`. Pour le score, la carte du dessous est multipliée par 1 : avec `enumerate`, la carte d’indice `i` est multipliée par `len(paquet) - i`.
+    La boucle tourne `while p1 and p2` : une file vide vaut `False`. Pour le score, la carte du dessous est multipliée par 1 : en parcourant le paquet par indice (`for i in range(len(paquet))`), la carte d’indice `i` est multipliée par `len(paquet) - i` ; on accumule les produits dans une variable `total`.
 
 ## Partie 2
 

@@ -429,11 +429,11 @@ Naviguer n’est jamais tout à fait anonyme, et laisser un site exécuter du co
 
 <span id="cours-04-21" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[21](exercices.md#ex-04-21)** (régler et sécuriser son navigateur)
+<span class="afaire">▶ Exercices d'application :</span> exercice **[21](exercices.md#ex-04-21)** (régler et sécuriser son navigateur), exercice **[22](exercices.md#ex-04-22)** (critiquer une réponse d’IA)
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Le Web s’appuie sur **Internet** : au chapitre *Internet*, on verra comment le navigateur trouve l’adresse du serveur et comment la page voyage en **paquets**. Les hyperliens forment un **graphe**, comme les amitiés d’un **réseau social** ; c’est sur ce graphe que travaille le PageRank. Cookies et traces de navigation sont des **données personnelles** (on y reviendra au chapitre *Données en tables*). En spécialité NSI de Première, on étudie les formulaires, les méthodes `GET` et `POST` et le **JavaScript**.
+    Le Web s’appuie sur **Internet** : au chapitre *Internet*, on verra comment le navigateur trouve l’adresse du serveur et comment la page voyage en **paquets**. Les hyperliens forment un **graphe**, comme les amitiés d’un **réseau social** ; c’est sur ce graphe que travaille le PageRank. Cookies et traces de navigation sont des **données personnelles** (on y reviendra au chapitre *Les données structurées et leur traitement*). En spécialité NSI de Première, on étudie les formulaires, les méthodes `GET` et `POST` et le **JavaScript**.
 
 ## Bilan — la carte mémoire
 

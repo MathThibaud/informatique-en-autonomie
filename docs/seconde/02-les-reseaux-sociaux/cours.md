@@ -334,11 +334,11 @@ Un fil infini, des vidéos qui s’enchaînent toutes seules… Tout cela circu
 
 <span id="cours-02-18" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[18](exercices.md#ex-02-18) et [19](exercices.md#ex-02-19)** (le coût d’un smartphone, haute ou basse définition)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[18](exercices.md#ex-02-18) et [19](exercices.md#ex-02-19)** (le coût d’un smartphone, haute ou basse définition), exercice **[20](exercices.md#ex-02-20)** (critiquer une réponse d’IA)
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Un réseau social est d’abord un **graphe** : on retrouvera la même structure dans le calcul d’itinéraire (chapitre *Localisation*) et dans les hyperliens du **Web**. Ce que vous publiez devient une **donnée personnelle**, rangée dans d’immenses **tables** chez l’entreprise (on le verra au chapitre *Données en tables*) ; une photo peut même trahir, par ses **métadonnées EXIF**, le lieu où elle a été prise (chapitre *Photographie numérique*, juste après celui-ci). Comme le Web, un réseau social est un **service** qui circule sur **Internet** : votre fil arrive en paquets depuis des serveurs (chapitre *Internet*). En spécialité NSI de Terminale, on apprend à parcourir des graphes et à y calculer des distances par programme.
+    Un réseau social est d’abord un **graphe** : on retrouvera la même structure dans le calcul d’itinéraire (chapitre *Localisation*) et dans les hyperliens du **Web**. Ce que vous publiez devient une **donnée personnelle**, rangée dans d’immenses **tables** chez l’entreprise (on le verra au chapitre *Les données structurées et leur traitement*) ; une photo peut même trahir, par ses **métadonnées EXIF**, le lieu où elle a été prise (chapitre *Photographie numérique*, juste après celui-ci). Comme le Web, un réseau social est un **service** qui circule sur **Internet** : votre fil arrive en paquets depuis des serveurs (on le verra au chapitre *Internet*). En spécialité NSI de Terminale, on apprend à parcourir des graphes et à y calculer des distances par programme.
 
 ## Bilan — la carte mémoire
 

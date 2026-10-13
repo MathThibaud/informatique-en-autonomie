@@ -101,11 +101,11 @@ Lire tout le fichier en une chaîne et construire la liste des blocs de texte, u
 
     `bloc.split()` sans argument coupe à la fois aux espaces et aux retours à la ligne. Chaque morceau se coupe ensuite en deux au `:`.
 
-!!! encadre "Outil Python : all et any — rappel"
+!!! encadre "Rappel : « tous » avec un booléen drapeau"
 
-    `all` et `any` sont présentés dans l’encadré « Outil Python : `all` et `any` » du défi *Handy Haversacks* (chapitre 1) : `all(...)` vaut `True` si **toutes** les valeurs sont vraies, `any(...)` si **au moins une** l’est ; le calcul s’arrête dès que la réponse est connue.
+    La méthode est présentée dans l’encadré « Méthode : « tous » ou « au moins un », avec un booléen drapeau » du défi *Handy Haversacks* (chapitre 1) : pour vérifier que **toutes** les valeurs conviennent, on part d’un booléen à `True`, que la boucle passe à `False` au premier contre-exemple.
 
-    **À essayer.** Écrire `complet(passeport)` en une ligne avec `all`.
+    **À essayer.** Écrire `complet(passeport)` avec un drapeau `tout_present`. Que renvoie-t-elle si la liste des clés obligatoires est vide ?
 
 ### <span class="exo-num">Exercice 5</span> — Compter les passeports complets <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-aoc-1-5 }
 
@@ -299,11 +299,11 @@ Repérer les valeurs non valides. Vérification : la réponse est `46`. Que rema
 
     `open(...).read().split("\n\n")` sépare les trois blocs, car ils sont séparés par une ligne vide.
 
-!!! encadre "Outil Python : any et all — rappel"
+!!! encadre "Rappel : « au moins un » et « tous » avec un booléen drapeau"
 
-    `all` et `any` sont présentés dans l’encadré « Outil Python : `all` et `any` » du défi *Handy Haversacks* (chapitre 1) : `all(...)` vaut `True` si **toutes** les valeurs sont vraies, `any(...)` si **au moins une** l’est ; le calcul s’arrête dès que la réponse est connue.
+    La méthode est présentée dans l’encadré « Méthode : « tous » ou « au moins un », avec un booléen drapeau » du défi *Handy Haversacks* (chapitre 1) : pour « au moins un », le drapeau part de `False` et passe à `True` au premier exemple ; pour « tous », il part de `True` et passe à `False` au premier contre-exemple.
 
-    **À essayer.** Que vaut `any([])` ? Pourquoi est-ce cohérent avec `all([])` ?
+    **À essayer.** Pour une liste vide, que vaut à la fin un drapeau « au moins un » ? un drapeau « tous » ? Pourquoi ces deux résultats sont-ils cohérents ?
 
 ### <span class="exo-num">Exercice 4</span> — Valeurs non valides <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-aoc-2-4 }
 
@@ -311,7 +311,7 @@ Repérer les valeurs non valides. Vérification : la réponse est `46`. Que rema
 
 ??? pouce "Coup de pouce"
 
-    `a <= valeur <= b` s’écrit tel quel en Python. La fonction `any` évite d’écrire une boucle de plus.
+    `a <= valeur <= b` s’écrit tel quel en Python. Les deux fonctions sont des « au moins un » : un drapeau initialisé à `False` dans chacune.
 
 ## Partie 2
 

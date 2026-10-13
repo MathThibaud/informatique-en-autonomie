@@ -154,14 +154,18 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site. Cette 
 
     Pour une liste de chaînes `t` de taille $n$, la ligne `j` de la tuile tournée d’un quart de tour dans le sens horaire est formée des caractères `t[n - 1 - i][j]` pour `i` de `0` à `n - 1`.
 
-!!! encadre "Outils Python : all et les ensembles (set)"
+!!! encadre "Outil Python : les ensembles (set), et rappel sur le drapeau"
 
-    `all(...)` renvoie `True` si tous les tests qu’on lui donne sont vrais (et s’arrête au premier faux). Un **ensemble** est une collection sans doublon et sans ordre ; on y ajoute avec `add`, on réunit deux ensembles avec `|`, et le test `x in ensemble` est très rapide.
+    Pour tester si **toutes** les cases d’une liste sont des `#`, on utilise un booléen « drapeau » (méthode du défi *Handy Haversacks*, chapitre 1) : il part de `True` et la boucle le passe à `False` au premier contre-exemple. Un **ensemble** est une collection sans doublon et sans ordre ; on y ajoute avec `add`, on réunit deux ensembles avec `|`, et le test `x in ensemble` est très rapide.
 
     ```python
     image = ["#.#", "###"]
     cases = [(0, 0), (1, 1)]
-    print(all(image[i][j] == "#" for i, j in cases))   # True
+    tout_diese = True
+    for i, j in cases:
+        if image[i][j] != "#":
+            tout_diese = False
+    print(tout_diese)                    # True
     couvertes = set()                    # ensemble vide (attention : {} est un dict)
     couvertes.add((0, 0))
     couvertes |= {(0, 0), (1, 1)}        # reunion : (0, 0) n'est pas compte deux fois
@@ -169,7 +173,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site. Cette 
     print((1, 1) in couvertes)           # True
     ```
 
-    **Intérêt.** Si deux monstres se chevauchaient, une case commune ne serait comptée qu’une fois dans l’ensemble. Question : que renvoie `all(image[i][j] == "#" for i, j in [(0, 0), (0, 1)])` ?
+    **Intérêt.** Si deux monstres se chevauchaient, une case commune ne serait comptée qu’une fois dans l’ensemble. Question : que vaudrait `tout_diese` avec la liste de cases `[(0, 0), (0, 1)]` ?
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Chercher le motif <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-1-7 }
 
@@ -177,7 +181,7 @@ Retirer les bords de chaque tuile, recoller l’image, puis chercher le motif da
 
 ??? pouce "Coup de pouce"
 
-    Stocker le motif comme une liste de décalages `(ligne, colonne)` des cases `#` ; le motif est présent à la position `(i, j)` si (avec `all`) toutes les cases `(i + dl, j + dc)` de l’image sont des `#`. Une seule orientation de l’image contient des motifs.
+    Stocker le motif comme une liste de décalages `(ligne, colonne)` des cases `#` ; le motif est présent à la position `(i, j)` si (avec un drapeau) toutes les cases `(i + dl, j + dc)` de l’image sont des `#`. Une seule orientation de l’image contient des motifs.
 
 ## Pour y arriver : orientations et assemblage
 

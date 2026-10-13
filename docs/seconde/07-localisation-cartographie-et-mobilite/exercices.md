@@ -338,7 +338,7 @@ $GPGGA,142012,4342.054,N,00716.098,E,1,06,1.2,10.0,M,,,,*20
 
     3.  Le trafic en temps réel (et les fonds de carte, les itinéraires calculés en ligne) sont des **données servies par des serveurs** : elles sont stockées et calculées dans des **centres de données** puis acheminées par les **réseaux**. Le GPS, lui, ne fait que *recevoir* des signaux et le téléphone calcule seul sa position.
 
-    4.  Par exemple : télécharger une **carte hors-ligne** une fois (en Wi-Fi) avant un trajet, ce qui évite de recharger les données à chaque usage ; n’autoriser la localisation que **« pendant l’utilisation »** de l’application et la couper quand elle est inutile, ce qui ménage la **batterie** (une batterie usée trop tôt pousse à changer de téléphone, alors que l’essentiel de son empreinte vient de la **fabrication**, thème *Objets connectés*) et limite les traces envoyées aux serveurs.
+    4.  Par exemple : télécharger une **carte hors-ligne** une fois (en Wi-Fi) avant un trajet, ce qui évite de recharger les données à chaque usage ; n’autoriser la localisation que **« pendant l’utilisation »** de l’application et la couper quand elle est inutile, ce qui ménage la **batterie** (une batterie usée trop tôt pousse à changer de téléphone, alors que l’essentiel de son empreinte vient de la **fabrication**, comme on le verra au thème *Objets connectés*) et limite les traces envoyées aux serveurs.
 
 ### Critiquer une réponse d’IA
 

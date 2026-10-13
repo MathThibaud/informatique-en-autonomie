@@ -322,7 +322,7 @@ Un nouveau joueur mesure $176$ cm pour $70$ kg.
 
 2.  Quel poste recommande le $1$-NN ? le $3$-NN ?
 
-3.  Ici taille et poids ont des ordres de grandeur *proches* : faut-il normaliser ? (Contraster avec l’exercice « âge / revenu ».)
+3.  Ici taille et poids ont des ordres de grandeur *proches* : faut-il normaliser ? (Contraster avec l’exercice « Le piège de l’échelle » : âge et revenu.)
 
     ??? pouce "Coup de pouce"
 
@@ -341,7 +341,7 @@ Un nouveau joueur mesure $176$ cm pour $70$ kg.
     |  (170;65)  | attaquant |    61     |
     |  (173;68)  | attaquant |  **13**   |
 
-    **b)** $1$-NN : le plus proche (8) est un **milieu**. $3$-NN : les trois plus proches sont 8 (milieu), 13 (attaquant), 41 (milieu) $\to$ 2 milieux contre 1 $\to$ **milieu**. **c)** Ici taille ($\sim$<!-- -->170–195) et poids ($\sim$<!-- -->65–90) sont du **même ordre** : la normalisation n’est pas indispensable. Au contraire, âge (0–100) et revenu (0–5000) diffèrent d’un facteur $\sim$<!-- -->50, d’où l’obligation de normaliser dans l’exercice précédent.
+    **b)** $1$-NN : le plus proche (8) est un **milieu**. $3$-NN : les trois plus proches sont 8 (milieu), 13 (attaquant), 41 (milieu) $\to$ 2 milieux contre 1 $\to$ **milieu**. **c)** Ici taille ($\sim$<!-- -->170–195) et poids ($\sim$<!-- -->65–90) sont du **même ordre** : la normalisation n’est pas indispensable. Au contraire, âge (0–100) et revenu (0–5000) diffèrent d’un facteur $\sim$<!-- -->50, d’où l’obligation de normaliser dans l’exercice « Le piège de l’échelle ».
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Reconnaître une image $3\times3$ (sans machine) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-13 }
 

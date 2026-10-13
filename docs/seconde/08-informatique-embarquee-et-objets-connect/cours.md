@@ -54,13 +54,13 @@ Une carte micro:bit : capteurs, boutons et LED
     <span id="lex-capteur08" class="ancre"></span>Un **capteur** *mesure* une grandeur physique (température, lumière, mouvement, pression…) et la transforme en un **nombre** exploitable par la machine. C’est une **entrée**.  
     Un <span id="lex-actionneur08" class="ancre"></span>**actionneur** *agit* sur le monde physique (chauffer, éclairer, tourner, ouvrir, émettre un son…). C’est une **sortie**.
 
-| **Capteurs (entrées)**             | **Actionneurs (sorties)** |
-|:-----------------------------------|:--------------------------|
-| thermomètre (température)          | radiateur, ventilateur    |
-| photorésistance (luminosité)       | lampe, LED                |
-| détecteur de mouvement             | moteur (volet, portail)   |
-| microphone (son)                   | haut-parleur              |
-| capteur d’image (chapitre *Photo*) | écran                     |
+| **Capteurs (entrées)** | **Actionneurs (sorties)** |
+|:---|:---|
+| thermomètre (température) | radiateur, ventilateur |
+| photorésistance (luminosité) | lampe, LED |
+| détecteur de mouvement | moteur (volet, portail) |
+| microphone (son) | haut-parleur |
+| capteur d’image (chapitre *Photographie numérique*) | écran |
 
 !!! activite "Activité — Capteurs ou actionneurs ?"
 
@@ -164,7 +164,7 @@ Un système embarqué qui, en plus, se **relie au réseau** devient un **objet c
 
 !!! remarque "Remarque — Le nuage n’est jamais loin"
 
-    Beaucoup d’objets connectés envoient leurs mesures vers des **serveurs** (le *cloud*, chapitre *Données en tables*), où elles sont stockées et analysées. Ces montagnes de données alimentent des services (statistiques, recommandations) mais posent aussi la question : *qui* les détient ?
+    Beaucoup d’objets connectés envoient leurs mesures vers des **serveurs** (le *cloud*, chapitre *Les données structurées et leur traitement*), où elles sont stockées et analysées. Ces montagnes de données alimentent des services (statistiques, recommandations) mais posent aussi la question : *qui* les détient ?
 
 <span id="cours-08-14" class="ancre"></span>
 
@@ -184,7 +184,7 @@ Un objet connecté est un petit ordinateur *relié à Internet* : il peut donc, 
 
     - **Sécurité** : un objet connecté est une **porte d’entrée** sur le réseau (et sur votre maison). *Réflexes :* changer le mot de passe par défaut, faire les mises à jour.
 
-    - **Vie privée** : un objet connecté est un **capteur** qui observe (caméra), écoute (micro) ou vous suit (montre, GPS). Ses données sont des **données personnelles** (chapitre *Données en tables*), protégées dans l’Union européenne par le **RGPD**.
+    - **Vie privée** : un objet connecté est un **capteur** qui observe (caméra), écoute (micro) ou vous suit (montre, GPS). Ses données sont des **données personnelles** (chapitre *Les données structurées et leur traitement*), protégées dans l’Union européenne par le **RGPD**.
 
 !!! remarque "Remarque — Et à Monaco ?"
 
@@ -232,11 +232,11 @@ Un objet connecté consomme un peu d’électricité… mais c’est surtout sa
 
 <span id="cours-08-17" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[17](exercices.md#ex-08-17)** (l’empreinte d’un smartphone)
+<span class="afaire">▶ Exercices d'application :</span> exercice **[17](exercices.md#ex-08-17)** (l’empreinte d’un smartphone), exercice **[18](exercices.md#ex-08-18)** (critiquer une réponse d’IA)
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Un objet connecté réunit plusieurs thèmes de SNT : sa boucle de commande s’écrit avec les `while` et `if` du chapitre *Les bases de Python*, et ses données voyagent en **paquets** sur **Internet**, grâce à une **adresse IP**. Le capteur d’image d’un appareil photo et le récepteur **GPS** sont aussi des **capteurs**, et les mesures envoyées dans le **nuage** sont souvent des **données personnelles** (chapitre *Données en tables*). En spécialité NSI de Première, on programme soi-même capteurs, actionneurs et **IHM**.
+    Un objet connecté réunit plusieurs thèmes de SNT : sa boucle de commande s’écrit avec les `while` et `if` du chapitre *Les bases de Python*, et ses données voyagent en **paquets** sur **Internet**, grâce à une **adresse IP**. Le capteur d’image d’un appareil photo et le récepteur **GPS** sont aussi des **capteurs**, et les mesures envoyées dans le **nuage** sont souvent des **données personnelles** (chapitre *Les données structurées et leur traitement*). En spécialité NSI de Première, on programme soi-même capteurs, actionneurs et **IHM**.
 
 ## Bilan — la carte mémoire
 

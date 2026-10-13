@@ -268,7 +268,7 @@ Chaque site, chaque application **collecte** des données sur vous. La loi encad
 
 <span id="cours-05-16" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[16](exercices.md#ex-05-16) et [17](exercices.md#ex-05-17)** (open data ; mes données, mes droits)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[16](exercices.md#ex-05-16) et [17](exercices.md#ex-05-17)** (open data ; mes données, mes droits), défi **[18](exercices.md#ex-05-18)** (data-détective sur l’open data), exercice **[19](exercices.md#ex-05-19)** (critiquer une réponse d’IA)
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 

@@ -181,7 +181,7 @@ Le mot « GPS » est passé dans le langage courant, mais c’est en réalité *
 
 ## Localisation et vie privée
 
-Savoir où l’on est, c’est pratique. Mais chaque position est une **donnée personnelle** (chapitre *Données en tables*), et l’accumulation de positions dessine… toute votre vie.
+Savoir où l’on est, c’est pratique. Mais chaque position est une **donnée personnelle** (chapitre *Les données structurées et leur traitement*), et l’accumulation de positions dessine… toute votre vie.
 
 !!! regle "Règle 6 — Les traces de localisation"
 
@@ -229,11 +229,11 @@ Consulter une carte ou calculer un itinéraire semble « immatériel ». Pourtan
 
 <span id="cours-07-15" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[15](exercices.md#ex-07-15)** (localisation et environnement)
+<span class="afaire">▶ Exercices d'application :</span> exercice **[15](exercices.md#ex-07-15)** (localisation et environnement), exercice **[16](exercices.md#ex-07-16)** (critiquer une réponse d’IA)
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    La localisation croise plusieurs thèmes de SNT. Le récepteur GPS est un **capteur** : montres et objets connectés l’utilisent pour suivre vos déplacements (on le verra au chapitre *Informatique embarquée et objets connectés*). La position est une **donnée personnelle**, qui se glisse jusque dans les **métadonnées EXIF** des photos (chapitres *Données en tables* et *Photographie numérique*) ; quant à la trame NMEA, ses valeurs séparées par des virgules rappellent une ligne de fichier **CSV**. Le calcul d’itinéraire cherche un plus court chemin dans un **graphe**, la structure même d’un **réseau social**, et les fonds de carte arrivent par **Internet**, depuis des serveurs. En spécialité NSI de Terminale, on apprend à parcourir des graphes et à y chercher des chemins.
+    La localisation croise plusieurs thèmes de SNT. Le récepteur GPS est un **capteur** : montres et objets connectés l’utilisent pour suivre vos déplacements (on le verra au chapitre *Informatique embarquée et objets connectés*). La position est une **donnée personnelle**, qui se glisse jusque dans les **métadonnées EXIF** des photos (chapitres *Les données structurées et leur traitement* et *Photographie numérique*) ; quant à la trame NMEA, ses valeurs séparées par des virgules rappellent une ligne de fichier **CSV**. Le calcul d’itinéraire cherche un plus court chemin dans un **graphe**, la structure même d’un **réseau social**, et les fonds de carte arrivent par **Internet**, depuis des serveurs. En spécialité NSI de Terminale, on apprend à parcourir des graphes et à y chercher des chemins.
 
 ## Bilan — la carte mémoire
 

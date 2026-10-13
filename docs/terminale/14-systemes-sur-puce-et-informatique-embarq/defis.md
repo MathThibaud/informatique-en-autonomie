@@ -22,6 +22,8 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
+*Ce défi met en scène l’ordinateur embarqué d’un ferry, un système comme ceux de ce chapitre : il initialise sa mémoire adresse par adresse. Le masque, appliqué bit par bit, rappelle le masque de sous-réseau vu au chapitre 9 ; l’approfondissement 1 réinvestit la récursivité du chapitre 1.*
+
 ## Lire l’énoncé
 
 Vocabulaire utile pour lire le texte original :
