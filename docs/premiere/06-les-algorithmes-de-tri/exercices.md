@@ -158,7 +158,7 @@ i_min = i
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Le tri par sélection <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-4 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> En utilisant l’idée précédente, écrire `tri_selection(t)` qui trie le tableau `t` **en place** dans l’ordre croissant. Tester sur plusieurs exemples, dont un tableau vide et un tableau déjà trié.
+<span class="run" title="À programmer et tester sur machine">▶</span> En utilisant la fonction `indice_min` de l’exercice « L’ingrédient : trouver le minimum », écrire `tri_selection(t)` qui trie le tableau `t` **en place** dans l’ordre croissant. Tester sur plusieurs exemples, dont un tableau vide et un tableau déjà trié.
 
 ??? pouce "Coup de pouce"
 
