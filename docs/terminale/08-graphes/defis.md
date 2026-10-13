@@ -367,3 +367,15 @@ Inventer un petit fichier pour lequel la méthode d’élimination ne suffit pas
 ??? pouce "Coup de pouce"
 
     Essayer avec deux allergènes indiqués toujours ensemble, sur les mêmes lignes : le problème a-t-il encore une seule solution ? Dans les cas où la solution est unique mais où l’élimination bloque, on peut tester les possibilités une à une (retour sur trace).
+
+!!! encadre "Un peu d’histoire : Philip Hall et le « problème des mariages » (1935)"
+
+    **Le graphe du défi.** Dessinons les allergènes d’un côté, les ingrédients de l’autre, et relions chaque allergène à ses candidats. Toutes les arêtes vont d’un groupe à l’autre : c’est un graphe **biparti**. Choisir un ingrédient par allergène, deux allergènes n’ayant jamais le même ingrédient, revient à garder des arêtes **sans sommet commun** : on appelle cela un **couplage**. Sur le petit exemple de la fiche :
+
+    ![](../figures/cfa73b64ab81c8de.svg){ .tikz loading=lazy }
+
+    **Le théorème.** En 1935, le mathématicien anglais **Philip Hall** (1904–1982), spécialiste d’algèbre à Cambridge, publie un article de cinq pages, *On Representatives of Subsets*. Il y répond à une question simple : à quelle condition peut-on choisir, dans chaque ensemble d’une liste, un élément différent pour chacun ? Réponse : il faut et il suffit que **tout groupe de $k$ ensembles contienne, à eux tous, au moins $k$ éléments différents**. La condition est évidemment nécessaire (trois allergènes qui n’ont que deux candidats à eux trois ne peuvent pas être servis) ; le tour de force de Hall est de prouver qu’elle suffit. En 1950, Paul Halmos et Herbert Vaughan le reformulent avec des jeunes filles qui veulent chacune épouser un garçon qu’elle connaît : depuis, on l’appelle le **théorème des mariages**.
+
+    **Et aujourd’hui.** En 1962, David Gale et Lloyd Shapley étudient la version où chacun classe ses partenaires par préférence (« mariages stables ») ; leur algorithme sert à répartir des étudiants entre des formations (la procédure Parcoursup s’en inspire) et a valu à Shapley le prix Nobel d’économie 2012, partagé avec Alvin Roth.
+
+    *Sources :* P. Hall, « On Representatives of Subsets », *J. London Math. Soc.*, 10 (1935), p. 26–30 ; P. Halmos et H. Vaughan, « The Marriage Problem », *Amer. J. Math.*, 72 (1950) ; D. Gale et L. Shapley, « College Admissions and the Stability of Marriage », *Amer. Math. Monthly*, 69 (1962).

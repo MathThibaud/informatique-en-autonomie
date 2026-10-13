@@ -511,6 +511,13 @@ Sur votre croquis, la tournée gloutonne se **croise**-t-elle ? Un circuit qui s
 
 *Les longueurs sont des flottants, calculés avec de petites erreurs d’arrondi : ne compter comme amélioration qu’un gain d’au moins 1 mètre, c’est-à-dire tester `longueur(essai) < longueur(tournee) - 0.001`.*
 
+!!! encadre "Repère historique — le voyageur de commerce, de 49 villes à 85 900 points"
+
+    **1954** — À la RAND Corporation, **George Dantzig**, **Ray Fulkerson** et **Selmer Johnson** trouvent la tournée **optimale** de **49 villes** des États-Unis. Ils n’essaient pas tous les ordres (il y en a plus de $10^{60}$) : ils construisent une tournée, puis **prouvent** qu’aucune autre n’est plus courte.  
+    **1958** — **G. A. Croes**, ingénieur chez Shell, publie la méthode de l’exercice « Décroiser la tournée » : retourner un morceau de tournée tant que cela raccourcit le trajet. On l’appelle aujourd’hui **2-opt** ; elle reste l’une des améliorations les plus utilisées.  
+    **2006** — Le logiciel **Concorde** (Applegate, Bixby, Chvátal et Cook) résout exactement un problème de **85 900 points**, issu du dessin d’une puce électronique, au prix de plus de 136 années de calcul processeur réparties sur de nombreuses machines. Pour des millions de points (livraisons, perçage de circuits), on se contente encore de bonnes tournées approchées, obtenues par un glouton puis améliorées par décroisement.  
+    *Sources :* G. Dantzig, D. R. Fulkerson, S. M. Johnson, *Operations Research*, vol. 2, 1954 ; G. A. Croes, *Operations Research*, vol. 6, 1958 ; W. J. Cook, *In Pursuit of the Traveling Salesman*, Princeton University Press, 2012.
+
 ??? corrige "Corrigé"
 
     Oui : le segment Grasse $\to$ Menton croise Vence $\to$ Antibes et Saint-Martin-Vesubie $\to$ Monaco.

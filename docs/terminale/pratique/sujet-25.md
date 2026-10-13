@@ -113,6 +113,35 @@
 
     $\blacktriangleright$ Appel professeur. décrire le peigne, relier le coût de la recherche à la hauteur, et conclure qu’insérer des données déjà triées est le pire cas.
 
+    !!! encadre "Pour aller plus loin : réparer un peigne"
+
+        Si les valeurs sont déjà triées, on peut construire directement un ABR **équilibré** : la valeur du milieu devient la racine, la moitié gauche le sous-arbre gauche, la moitié droite le sous-arbre droit, et l’on recommence récursivement sur chaque moitié.
+
+        ```python
+        def construire_equilibre(valeurs):
+            """Renvoie un ABR de hauteur minimale contenant les
+            valeurs de la liste valeurs (triee, sans doublon)"""
+            if valeurs == []:
+                return None
+            milieu = len(valeurs) // 2
+            return Noeud(valeurs[milieu],
+                         construire_equilibre(valeurs[:milieu]),
+                         construire_equilibre(valeurs[milieu + 1:]))
+        ```
+
+        ```console
+        >>> hauteur(construire_equilibre([i for i in range(1, 201)]))
+        8
+        ```
+
+        Les deux moitiés ont la même taille à une unité près : la hauteur est la plus petite possible, $8$ pour $200$ valeurs ($2^7 - 1 = 127 < 200 \leq 255 = 2^8 - 1$). Pour réparer le peigne de la question 4, il suffit donc d’écrire `construire_equilibre(infixe(a))`. La recherche passe alors de $200$ comparaisons au plus à $8$.
+
+    !!! encadre "Un peu d’histoire : les arbres AVL (1962)"
+
+        Reconstruire tout l’arbre après chaque insertion coûterait trop cher. En 1962, deux chercheurs soviétiques de Moscou, **Georgi Adelson-Velski** et **Evguéni Landis**, publient une méthode qui garde un ABR équilibré *au fil des insertions* : en chaque nœud, les hauteurs des deux sous-arbres ne diffèrent jamais de plus de $1$, et une insertion qui casse cette règle est réparée par quelques « rotations » locales, près de l’endroit modifié. La hauteur reste alors de l’ordre de $\log_2(n)$ quel que soit l’ordre d’arrivée des valeurs, même triées. Ces arbres portent les initiales de leurs inventeurs : ce sont les **arbres AVL**, premiers d’une famille d’arbres « auto-équilibrés » encore utilisés dans les bibliothèques des langages et les bases de données.
+
+        *Source :* G. Adelson-Velski et E. Landis, « Un algorithme pour l’organisation de l’information » (en russe), *Doklady Akademii Nauk SSSR*, 146 (1962), p. 263–266 ; D. Knuth, *The Art of Computer Programming*, vol. 3, § 6.2.3.
+
 *Durée de l’épreuve : 1 heure.*
 
 !!! encadre "Déroulement de l’épreuve"
@@ -269,3 +298,32 @@ Le dossier fourni au candidat comporte les éléments suivants :
     La recherche descend d’un niveau à chaque appel, donc fait au plus **hauteur** comparaisons : jusqu’à $200$ dans le peigne (autant qu’une recherche séquentielle dans une liste), une quinzaine dans l’arbre aléatoire. L’efficacité d’un ABR dépend donc de sa forme : il faut qu’il soit (à peu près) **équilibré**.
 
     $\blacktriangleright$ Appel professeur. décrire le peigne, relier le coût de la recherche à la hauteur, et conclure qu’insérer des données déjà triées est le pire cas.
+
+    !!! encadre "Pour aller plus loin : réparer un peigne"
+
+        Si les valeurs sont déjà triées, on peut construire directement un ABR **équilibré** : la valeur du milieu devient la racine, la moitié gauche le sous-arbre gauche, la moitié droite le sous-arbre droit, et l’on recommence récursivement sur chaque moitié.
+
+        ```python
+        def construire_equilibre(valeurs):
+            """Renvoie un ABR de hauteur minimale contenant les
+            valeurs de la liste valeurs (triee, sans doublon)"""
+            if valeurs == []:
+                return None
+            milieu = len(valeurs) // 2
+            return Noeud(valeurs[milieu],
+                         construire_equilibre(valeurs[:milieu]),
+                         construire_equilibre(valeurs[milieu + 1:]))
+        ```
+
+        ```console
+        >>> hauteur(construire_equilibre([i for i in range(1, 201)]))
+        8
+        ```
+
+        Les deux moitiés ont la même taille à une unité près : la hauteur est la plus petite possible, $8$ pour $200$ valeurs ($2^7 - 1 = 127 < 200 \leq 255 = 2^8 - 1$). Pour réparer le peigne de la question 4, il suffit donc d’écrire `construire_equilibre(infixe(a))`. La recherche passe alors de $200$ comparaisons au plus à $8$.
+
+    !!! encadre "Un peu d’histoire : les arbres AVL (1962)"
+
+        Reconstruire tout l’arbre après chaque insertion coûterait trop cher. En 1962, deux chercheurs soviétiques de Moscou, **Georgi Adelson-Velski** et **Evguéni Landis**, publient une méthode qui garde un ABR équilibré *au fil des insertions* : en chaque nœud, les hauteurs des deux sous-arbres ne diffèrent jamais de plus de $1$, et une insertion qui casse cette règle est réparée par quelques « rotations » locales, près de l’endroit modifié. La hauteur reste alors de l’ordre de $\log_2(n)$ quel que soit l’ordre d’arrivée des valeurs, même triées. Ces arbres portent les initiales de leurs inventeurs : ce sont les **arbres AVL**, premiers d’une famille d’arbres « auto-équilibrés » encore utilisés dans les bibliothèques des langages et les bases de données.
+
+        *Source :* G. Adelson-Velski et E. Landis, « Un algorithme pour l’organisation de l’information » (en russe), *Doklady Akademii Nauk SSSR*, 146 (1962), p. 263–266 ; D. Knuth, *The Art of Computer Programming*, vol. 3, § 6.2.3.
