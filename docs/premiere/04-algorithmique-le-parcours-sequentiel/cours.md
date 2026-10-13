@@ -105,9 +105,9 @@ def indice(t, x):
 
     Renvoyer dès qu’on a trouvé évite de parcourir inutilement la fin du tableau. C’est correct *et* souvent plus rapide — on y revient au §V (meilleur/pire cas).
 
-<span id="cours-04-8" class="ancre"></span>
+<span id="cours-04-5" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[8](exercices.md#ex-04-8) à [10](exercices.md#ex-04-10)** (recherche séquentielle)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-04-5) à [7](exercices.md#ex-04-7)** (recherche séquentielle)
 
 ## Le plus grand, le plus petit : l’invariant du champion
 
@@ -183,11 +183,11 @@ Dire qu’une propriété est un invariant, cela ne se devine pas : cela se **d�
 
 !!! remarque "Remarque — Bien choisir l’invariant : « déjà visités »"
 
-    La clé est presque toujours la même formulation : « la variable contient le résultat **pour les éléments déjà visités** ». C’est cette petite phrase qui rend l’hérédité facile à écrire.
+    La clé est presque toujours la même formulation : « la variable contient le résultat **pour les éléments déjà visités** ». C’est cette petite phrase qui rend l’hérédité facile à écrire. On retrouvera les invariants au chapitre *Spécifier et mettre au point ses programmes* (les vérifier par un `assert`), puis pour justifier les tris.
 
-<span id="cours-04-5" class="ancre"></span>
+<span id="cours-04-8" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-04-5) à [7](exercices.md#ex-04-7)** (mot le plus long, amplitude, moyenne sans la pire note), **[12](exercices.md#ex-04-12)** (minimum), **[13](exercices.md#ex-04-13)** et **[15](exercices.md#ex-04-15) à [18](exercices.md#ex-04-18)** (minimum, maximum, champion ; invariants)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[8](exercices.md#ex-04-8) à [13](exercices.md#ex-04-13)** (minimum, mot le plus long, position du champion, amplitude, moyenne sans la pire note, deuxième plus grand) et **[14](exercices.md#ex-04-14) à [16](exercices.md#ex-04-16)** (invariants)
 
 ## Combien ça coûte ?
 
@@ -207,7 +207,7 @@ Toutes les fonctions vues jusqu’ici (`somme`, `moyenne`, `maximum`, `est_prese
 
     - **pire cas** : l’élément est absent (ou en dernier) $\rightarrow$ `n` comparaisons.
 
-    Le pire cas reste **linéaire** : c’est lui qu’on retient pour caractériser un algorithme.
+    Le pire cas reste **linéaire** : c’est lui qu’on retient pour caractériser un algorithme. Si le tableau est **trié**, on fera beaucoup mieux : c’est la recherche dichotomique, que l’on verra au chapitre *La recherche dichotomique*.
 
 ### Le piège quadratique : moyenne *vs* variance
 
@@ -264,9 +264,9 @@ Ces ordres de grandeur se vérifient au chronomètre (TP proposé en fin de chap
 
     Le même patron de parcours s’applique à d’autres structures : les listes chaînées (*Structures linéaires : piles, files, listes chaînées*), puis des structures qui ne sont plus « en ligne » (*Les arbres*, *Les graphes*). La recherche séquentielle se prolonge dans *La recherche textuelle*.
 
-<span id="cours-04-11" class="ancre"></span>
+<span id="cours-04-17" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[11](exercices.md#ex-04-11)** et **[14](exercices.md#ex-04-14)** (deux tableaux ; min et max en une passe), puis **[19](exercices.md#ex-04-19) à [21](exercices.md#ex-04-21)** (le coût : linéaire ou quadratique)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[17](exercices.md#ex-04-17) à [21](exercices.md#ex-04-21)** (le coût : linéaire ou quadratique ; min et max en une passe, deux tableaux)
 
 ## Un peu d’histoire
 

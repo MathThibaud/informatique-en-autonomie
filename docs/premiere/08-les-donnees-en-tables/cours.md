@@ -93,7 +93,7 @@ Alba,F,2023,3088
 
 ## Représenter une table : la liste de dictionnaires
 
-Puisqu’un enregistrement associe une valeur à chaque descripteur, l’objet Python qui lui ressemble le plus est le **dictionnaire**. Toute la table devient alors une **liste de dictionnaires**.
+Puisqu’un enregistrement associe une valeur à chaque descripteur, l’objet Python qui lui ressemble le plus est le **dictionnaire** (chapitre *Les types construits*). Toute la table devient alors une **liste de dictionnaires**.
 
 !!! regle "Règle 1 — Table $=$ liste de dictionnaires"
 
@@ -280,7 +280,7 @@ Une fois la table (ou un sous-ensemble filtré) en main, calculer sur une colonn
 
 ## Trier une table selon un descripteur
 
-Trier une table, c’est ranger ses fiches selon les valeurs d’**un** descripteur. Inutile de réécrire un tri : la fonction `sorted` le fait, à condition de lui dire **sur quoi** comparer, via le paramètre `key`.
+Trier une table, c’est ranger ses fiches selon les valeurs d’**un** descripteur. Inutile de réécrire un tri par sélection ou par insertion (chapitre *Les algorithmes de tri*) : la fonction `sorted` le fait, à condition de lui dire **sur quoi** comparer, via le paramètre `key`.
 
 !!! regle "Règle 5 — Trier avec sorted et une clé"
 

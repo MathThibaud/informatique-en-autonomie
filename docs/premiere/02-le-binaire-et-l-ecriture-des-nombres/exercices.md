@@ -76,65 +76,9 @@
     25
     ```
 
-### L’hexadécimal
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Binaire et hexadécimal <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-5 }
-
-\[ à la main \]  En regroupant les bits par paquets de 4 : convertir $\texttt{11011010}_2$ en hexadécimal, et $\texttt{3F}_{16}$ en binaire.0
-
-??? pouce "Coup de pouce"
-
-    Un paquet de 4 bits code une valeur de $0$ à $15$, donc exactement un chiffre hexadécimal. Par quel côté commencer les paquets ? Dans l’autre sens, chaque chiffre hexadécimal redonne 4 bits.
-
-??? corrige "Corrigé"
-
-    On regroupe par 4 bits : $$\texttt{11011010}_2 = \underbrace{\texttt{1101}}_{\texttt{D}}\,\underbrace{\texttt{1010}}_{\texttt{A}} = \texttt{DA}_{16}, \qquad \texttt{3F}_{16} = \underbrace{\texttt{0011}}_{\texttt{3}}\,\underbrace{\texttt{1111}}_{\texttt{F}} = \texttt{00111111}_2.$$
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Décimal et hexadécimal <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-6 }
-
-\[ à la main \]  Convertir $255$ et $3000$ en hexadécimal ; convertir $\texttt{2A}_{16}$ et $\texttt{FF}_{16}$ en décimal.0
-
-??? pouce "Coup de pouce"
-
-    Même méthode qu’en binaire, avec la base 16 : divisions successives par $16$ dans un sens, somme des poids ($1$, $16$, $256$…) dans l’autre. Ne pas oublier que `A` vaut $10$ et `F` vaut $15$.
-
-??? corrige "Corrigé"
-
-    $255 = \texttt{FF}_{16}$ ; $3000 = \texttt{BB8}_{16}$ (car $3000 = 11{\cdot}256 + 11{\cdot}16 + 8$).  
-    $\texttt{2A}_{16} = 2{\cdot}16 + 10 = 42$ ; $\texttt{FF}_{16} = 15{\cdot}16 + 15 = 255$.
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Une couleur du Web <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-7 }
-
-\[ sur machine \]  Sur le Web, une couleur s’écrit `#RRGGBB` en hexadécimal (rouge, vert, bleu, chacun sur un octet). Retrouver les trois composantes (en base 10) de la couleur `#FF8000`.
-
-```text
->>> int("FF", 16)
->>> int("80", 16)
->>> int("00", 16)
-```
-
-À votre avis, quelle *couleur* obtient-on (rouge « à fond », un peu de vert, pas de bleu) ?0
-
-??? pouce "Coup de pouce"
-
-    Découper `FF8000` en trois paquets de deux chiffres hexadécimaux : un octet par composante. Que vaut chaque octet sur l’échelle de $0$ à $255$ ?
-
-??? corrige "Corrigé"
-
-    ```text
-    >>> int("FF", 16)
-    255
-    >>> int("80", 16)
-    128
-    >>> int("00", 16)
-    0
-    ```
-
-    Rouge à fond (`255`), vert à moitié (`128`), pas de bleu : on obtient un **orange**.
-
 ### Programmer les conversions
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Décimal vers binaire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-8 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Décimal vers binaire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-5 }
 
 \[ sur machine \]  Écrire une fonction `decimal_vers_binaire(n)` qui renvoie l’écriture binaire d’un entier `n` $\geqslant 0$ sous forme de **chaîne**, à l’aide d’une boucle `while`. Traiter le cas `n = 0`.0
 
@@ -175,7 +119,7 @@
     assert decimal_vers_binaire(0) == "0"
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Binaire vers décimal <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-9 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Binaire vers décimal <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-6 }
 
 \[ sur machine \]  Écrire une fonction `binaire_vers_decimal(ch)` qui prend une chaîne de `0` et de `1` et renvoie l’entier correspondant, en parcourant la chaîne avec une boucle `for`.0
 
@@ -211,7 +155,182 @@
     assert binaire_vers_decimal("10111001") == 185
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Changer de base <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-10 }
+### Logique booléenne et portes logiques
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 7</span> — Évaluer des opérateurs booléens <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-7 }
+
+\[ à la main \] 
+
+1.  On prend $a = 1$ et $b = 0$. Donner la valeur de : non $a$ ; $a$ et $b$ ; $a$ ou $b$ ; $a$ xor $b$ ; non$(a$ ou $b)$.
+
+2.  Même question avec $a = 1$ et $b = 1$.
+
+3.  \[ sur machine \]  Vérifier en console, en écrivant `True` pour `1`, `False` pour `0` et `a != b` pour $a$ xor $b$ :
+
+    ```text
+    >>> not True
+    >>> True and False
+    >>> True or False
+    >>> True != False
+    >>> not (True or False)
+    ```
+
+??? corrige "Corrigé"
+
+    **1.** Avec $a = 1$ et $b = 0$ : non $a = 0$ ; $a$ et $b = 0$ ; $a$ ou $b = 1$ ; $a$ xor $b = 1$ (les deux bits sont différents) ; non$(a$ ou $b) =$ non $1 = 0$.
+
+    **2.** Avec $a = 1$ et $b = 1$ : non $a = 0$ ; $a$ et $b = 1$ ; $a$ ou $b = 1$ ; $a$ xor $b = 0$ (les deux bits sont égaux : c’est la ligne où ou et xor diffèrent) ; non$(a$ ou $b) = 0$.
+
+    **3.**
+
+    ```text
+    >>> not True
+    False
+    >>> True and False
+    False
+    >>> True or False
+    True
+    >>> True != False
+    True
+    >>> not (True or False)
+    False
+    ```
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Dresser la table d’une expression <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-8 }
+
+\[ à la main \] 
+
+1.  Dresser la table de vérité de non$(a$ et $b)$, puis celle de (non $a)$ ou (non $b)$. Que constate-t-on ? Comment dit-on de ces deux expressions ?
+
+2.  Dresser la table de vérité de $(a$ et $b)$ ou $c$. Combien de lignes faut-il ? Pour combien d’entre elles l’expression vaut-elle `1` ?0
+
+    ??? pouce "Coup de pouce"
+
+        Une ligne par combinaison des entrées : avec $n$ variables, $2^n$ lignes, énumérées en comptant en binaire (`000`, `001`, `010`…). Ajouter une colonne par étape du calcul, en commençant par les parenthèses.
+
+??? corrige "Corrigé"
+
+    **1.** Une ligne par combinaison de $a$ et $b$ (4 lignes), une colonne par étape : $$\begin{array}{|c|c||c|c||c|c|c|}
+    \hline
+    a & b & a \text{ et } b & \text{non}(a \text{ et } b) & \text{non } a & \text{non } b & (\text{non } a) \text{ ou } (\text{non } b) \\
+    \hline
+    \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{1} & \texttt{1} & \texttt{1} \\
+    \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{1} & \texttt{0} & \texttt{1} \\
+    \texttt{1} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{1} \\
+    \texttt{1} & \texttt{1} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
+    \hline
+    \end{array}$$ Les colonnes de non$(a$ et $b)$ et de (non $a)$ ou (non $b)$ sont identiques (`1`, `1`, `1`, `0`) : les deux expressions ont la même table de vérité, elles sont **équivalentes**. « Il est faux que $a$ et $b$ soient tous deux vrais » revient à dire « l’un des deux au moins est faux ».
+
+    **2.** Trois variables : $2^3 = 8$ lignes. $$\begin{array}{|c|c|c||c||c|}
+    \hline
+    a & b & c & a \text{ et } b & (a \text{ et } b) \text{ ou } c \\
+    \hline
+    \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
+    \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} \\
+    \texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} \\
+    \texttt{0} & \texttt{1} & \texttt{1} & \texttt{0} & \texttt{1} \\
+    \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
+    \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} \\
+    \texttt{1} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{1} \\
+    \texttt{1} & \texttt{1} & \texttt{1} & \texttt{1} & \texttt{1} \\
+    \hline
+    \end{array}$$ L’expression vaut `1` pour **5** lignes sur 8 : les quatre où $c = 1$, plus la ligne $a = b = 1$, $c = 0$.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Le demi-additionneur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-9 }
+
+\[ à la main \] 
+
+1.  Recopier et compléter la table de l’addition de deux bits $a$ et $b$, en écrivant le résultat sur deux bits : la retenue $r$ (à gauche) et la somme $s$ (à droite).
+
+    | $a$ | $b$ | retenue $r$ | somme $s$ |
+    |:---:|:---:|:-----------:|:---------:|
+    | `0` | `0` |             |           |
+    | `0` | `1` |             |           |
+    | `1` | `0` |             |           |
+    | `1` | `1` |             |           |
+
+2.  Quelle porte logique donne la colonne $r$ ? Laquelle donne la colonne $s$ ? Dessiner le circuit du demi-additionneur.
+
+3.  Dans un circuit qui additionne deux nombres de 4 bits, seule la colonne de droite peut être confiée à un demi-additionneur. Pourquoi ? Le constater en posant $\texttt{0110} + \texttt{0011}$ : quelle colonne doit additionner trois bits ? Que manque-t-il au demi-additionneur ?0
+
+    ??? pouce "Coup de pouce"
+
+        Dans la colonne de droite, on n’ajoute que deux bits. Dans la colonne suivante, combien de bits faut-il ajouter ? D’où vient le bit supplémentaire ?
+
+??? corrige "Corrigé"
+
+    **1.** $0 + 0 = \texttt{00}_2$, $0 + 1 = 1 + 0 = \texttt{01}_2$, $1 + 1 = \texttt{10}_2$ : $$\begin{array}{|c|c||c|c|}
+    \hline
+    a & b & r & s \\
+    \hline
+    \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
+    \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} \\
+    \texttt{1} & \texttt{0} & \texttt{0} & \texttt{1} \\
+    \texttt{1} & \texttt{1} & \texttt{1} & \texttt{0} \\
+    \hline
+    \end{array}$$
+
+    **2.** La colonne $r$ (`0`, `0`, `0`, `1`) est la table du **et** : $r = a$ et $b$. La colonne $s$ (`0`, `1`, `1`, `0`) est la table du **xor** : $s = a$ xor $b$. Le circuit relie les deux entrées $a$ et $b$ à la fois à une porte xor (sortie : la somme) et à une porte et (sortie : la retenue), comme sur le schéma du cours.
+
+    **3.** La colonne de droite ne reçoit jamais de retenue : on n’y ajoute que **deux** bits, un demi-additionneur suffit. Toute autre colonne peut recevoir la retenue de sa voisine de droite. Dans $\texttt{0110} + \texttt{0011}$, la deuxième colonne ($1 + 1 = \texttt{10}_2$) produit une retenue : la troisième colonne doit additionner **trois** bits ($1$, $0$ et la retenue $1$). Il manque donc au demi-additionneur une entrée pour la **retenue venue de la droite** ; c’est le rôle de l’additionneur complet, construit avec deux demi-additionneurs (voir le TP « Programmer l’arithmétique binaire »). Résultat : $\texttt{0110} + \texttt{0011} = \texttt{1001}$, soit $6 + 3 = 9$.
+
+### L’hexadécimal
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Binaire et hexadécimal <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-10 }
+
+\[ à la main \]  En regroupant les bits par paquets de 4 : convertir $\texttt{11011010}_2$ en hexadécimal, et $\texttt{3F}_{16}$ en binaire.0
+
+??? pouce "Coup de pouce"
+
+    Un paquet de 4 bits code une valeur de $0$ à $15$, donc exactement un chiffre hexadécimal. Par quel côté commencer les paquets ? Dans l’autre sens, chaque chiffre hexadécimal redonne 4 bits.
+
+??? corrige "Corrigé"
+
+    On regroupe par 4 bits : $$\texttt{11011010}_2 = \underbrace{\texttt{1101}}_{\texttt{D}}\,\underbrace{\texttt{1010}}_{\texttt{A}} = \texttt{DA}_{16}, \qquad \texttt{3F}_{16} = \underbrace{\texttt{0011}}_{\texttt{3}}\,\underbrace{\texttt{1111}}_{\texttt{F}} = \texttt{00111111}_2.$$
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Décimal et hexadécimal <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-11 }
+
+\[ à la main \]  Convertir $255$ et $3000$ en hexadécimal ; convertir $\texttt{2A}_{16}$ et $\texttt{FF}_{16}$ en décimal.0
+
+??? pouce "Coup de pouce"
+
+    Même méthode qu’en binaire, avec la base 16 : divisions successives par $16$ dans un sens, somme des poids ($1$, $16$, $256$…) dans l’autre. Ne pas oublier que `A` vaut $10$ et `F` vaut $15$.
+
+??? corrige "Corrigé"
+
+    $255 = \texttt{FF}_{16}$ ; $3000 = \texttt{BB8}_{16}$ (car $3000 = 11{\cdot}256 + 11{\cdot}16 + 8$).  
+    $\texttt{2A}_{16} = 2{\cdot}16 + 10 = 42$ ; $\texttt{FF}_{16} = 15{\cdot}16 + 15 = 255$.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Une couleur du Web <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-12 }
+
+\[ sur machine \]  Sur le Web, une couleur s’écrit `#RRGGBB` en hexadécimal (rouge, vert, bleu, chacun sur un octet). Retrouver les trois composantes (en base 10) de la couleur `#FF8000`.
+
+```text
+>>> int("FF", 16)
+>>> int("80", 16)
+>>> int("00", 16)
+```
+
+À votre avis, quelle *couleur* obtient-on (rouge « à fond », un peu de vert, pas de bleu) ?0
+
+??? pouce "Coup de pouce"
+
+    Découper `FF8000` en trois paquets de deux chiffres hexadécimaux : un octet par composante. Que vaut chaque octet sur l’échelle de $0$ à $255$ ?
+
+??? corrige "Corrigé"
+
+    ```text
+    >>> int("FF", 16)
+    255
+    >>> int("80", 16)
+    128
+    >>> int("00", 16)
+    0
+    ```
+
+    Rouge à fond (`255`), vert à moitié (`128`), pas de bleu : on obtient un **orange**.
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Changer de base <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-13 }
 
 \[ sur machine \]  Écrire une fonction `decimal_vers_base(n, b)` qui renvoie, sous forme de chaîne, l’écriture d’un entier `n` $\geqslant 0$ en base `b`, pour $2 \leqslant b \leqslant 16$. Les chiffres utilisés sont ceux de la chaîne `"0123456789ABCDEF"`.0
 
@@ -265,7 +384,7 @@ Vérifier les résultats avec `hex`, `bin` et `int("144", 8)`.
 
 ### Les entiers relatifs (complément à deux)
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Coder et décoder <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-11 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Coder et décoder <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-14 }
 
 \[ à la main \] 
 
@@ -283,7 +402,27 @@ Vérifier les résultats avec `hex`, `bin` et `int("144", 8)`.
 
     **2.** `11111011` commence par `1` : c’est un **négatif**. Pour trouver sa valeur, on inverse (`00000100`) et on ajoute 1 (`00000101` $= 5$) : la valeur est donc $-5$.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 12</span> — Débordement <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-12 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Le complément à deux selon un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-02-15 }
+
+Un élève demande à un assistant d’IA : « Comment écrit-on $-5$ sur 8 bits en complément à deux ? » Voici la réponse obtenue.
+
+« On écrit d’abord $5$ sur 8 bits : `00000101`. Le complément à deux consiste à inverser tous les bits, ce qui donne `11111010`. Le bit de poids fort vaut `1`, ce qui confirme que le nombre est négatif. Donc $-5$ s’écrit `11111010` sur 8 bits. Avec cette convention, on représente sur 8 bits les entiers de $-128$ à $+127$. »
+
+1.  \[ à la main \]  La réponse est-elle correcte ? Vérifier en posant l’addition $5 + (-5)$ sur 8 bits avec l’écriture proposée : que doit-on trouver ?
+
+2.  Localiser et corriger l’erreur.
+
+3.  \[ sur machine \]  Quelle vérification simple, faite avant de faire confiance à la réponse, aurait suffi à détecter l’erreur ?0
+
+    ??? pouce "Coup de pouce"
+
+        Un nombre plus son opposé doit donner $0$ : poser l’addition sur 8 bits en ignorant la retenue qui sort. En Python, `bin(256 - 5)` donne l’écriture sur 8 bits de $-5$.
+
+??? corrige "Corrigé"
+
+    **1.** Non. Posons $5 + (-5)$ avec l’écriture proposée : $\texttt{00000101} + \texttt{11111010} = \texttt{11111111}$, et non `00000000` : ce n’est pas l’opposé de $5$. D’ailleurs `11111010` est l’écriture de $-6$ (l’addition avec `00000110` donne bien `1 00000000`, où la retenue déborde des 8 bits). **2.** L’erreur est dans l’étape « inverser tous les bits » : le complément à deux, c’est inverser **puis ajouter 1** ; l’assistant a oublié le $+1$. $5 = \texttt{00000101}$ $\to$ inversion `11111010` $\to$ $+1$ : **`11111011`**. Vérification : $\texttt{00000101} + \texttt{11111011} = \texttt{1\,00000000}$, il reste $0$ sur 8 bits. Le reste de la réponse (signe lu sur le bit de poids fort, bornes $-128$ à $+127$) est juste. **3.** Additionner le nombre et son opposé supposé : on doit trouver $0$ sur 8 bits. Sur machine, on peut aussi utiliser le fait que, sur $n$ bits, $-x$ se code comme l’entier positif $2^n - x$ : `bin(256 - 5)` affiche `’0b11111011’`, ce qui contredit `11111010`.
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 16</span> — Débordement <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-16 }
 
 \[ à la main \]  \[ sur machine \] 
 
@@ -307,7 +446,7 @@ Vérifier les résultats avec `hex`, `bin` et `int("144", 8)`.
 
     **2.** `2 ** 64` vaut `18446744073709551616` : Python le calcule car ses entiers sont de **taille arbitraire** (ils grandissent avec la mémoire). Sur « 64 bits fixes » (comme dans le matériel ou d’autres langages), cette valeur **dépasse** le plus grand entier codable : elle « déborde ».
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Le cas étrange de $-128$ <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-13 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 17</span> — Le cas étrange de $-128$ <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-17 }
 
 \[ à la main \] 
 
@@ -341,7 +480,7 @@ Vérifier les résultats avec `hex`, `bin` et `int("144", 8)`.
 
 ### Les nombres à virgule
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Fractions en binaire <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-14 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Fractions en binaire <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-18 }
 
 \[ à la main \] 
 
@@ -359,7 +498,7 @@ Vérifier les résultats avec `hex`, `bin` et `int("144", 8)`.
 
     **2.** $\texttt{101,101}_2 = 4 + 1 + \tfrac{1}{2} + \tfrac{1}{8} = 5{,}625$.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 15</span> — La trahison des flottants <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-15 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 19</span> — La trahison des flottants <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-19 }
 
 \[ sur machine \]  En console, taper `0.1 + 0.2`, puis `0.1 + 0.2 == 0.3`. Expliquer en une phrase ce que l’on observe. Proposer une manière **correcte** de tester si deux flottants sont « égaux ».
 
@@ -378,7 +517,7 @@ Vérifier les résultats avec `hex`, `bin` et `int("144", 8)`.
     abs((0.1 + 0.2) - 0.3) < 1e-9      # True
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Additionner dix fois un dixième <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-16 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Additionner dix fois un dixième <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-20 }
 
 \[ sur machine \]  En console, calculer la somme de dix fois `0.1` :
 
@@ -401,7 +540,7 @@ Quel résultat obtient-on ? Est-il exactement égal à `1.0` ? Relier cette obse
 
 ### Coder le texte : ASCII et Unicode
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 17</span> — Lire la table ASCII <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-17 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 21</span> — Lire la table ASCII <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-21 }
 
 \[ à la main \]  On donne les codes ASCII : `A`${=}65$, `Z`${=}90$, `a`${=}97$, `0`${=}48$.
 
@@ -419,7 +558,7 @@ Quel résultat obtient-on ? Est-il exactement égal à `1.0` ? Relier cette obse
 
     3.  $65 = 64 + 1 = \texttt{1000001}_2$ (sur 7 bits).
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 18</span> — `ord` et `chr` <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-18 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 22</span> — `ord` et `chr` <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-22 }
 
 \[ sur machine \]  En console, prévoir *puis vérifier* :
 
@@ -443,7 +582,7 @@ ord("i") - ord("H")
     33
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Caractères et octets <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-19 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Caractères et octets <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-23 }
 
 \[ sur machine \]  Soit le mot `"élève"`.
 
@@ -465,7 +604,7 @@ ord("i") - ord("H")
 
     3.  Les lettres `é` et `è` ne sont pas dans l’ASCII : chacune prend **2 octets** en UTF-8. On a donc $3$ lettres ASCII ($1$ octet) $+\ 2$ lettres accentuées ($2$ octets) $= 3 + 4 = 7$ octets, pour seulement $5$ caractères.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — D’où vient le charabia <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-20 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — D’où vient le charabia <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-24 }
 
 \[ à la main \]  Une page Web affiche `cafÃ©` au lieu de `café`.
 
@@ -483,7 +622,7 @@ ord("i") - ord("H")
 
     2.  `"café".encode("utf-8").decode("latin-1")` renvoie `’cafÃ©’`, ce qui reproduit exactement le charabia observé.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Programmer : coder un mot <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-21 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 25</span> — Programmer : coder un mot <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-25 }
 
 \[ sur machine \]  Écrire une fonction `afficher_codes(mot)` qui affiche, ligne par ligne, chaque caractère de `mot` suivi de son code ASCII.
 
@@ -504,142 +643,3 @@ ord("i") - ord("H")
 
     afficher_codes("Hi")   # affiche  H 72  puis  i 105
     ```
-
-### Logique booléenne et portes logiques
-
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 22</span> — Évaluer des opérateurs booléens <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-22 }
-
-\[ à la main \] 
-
-1.  On prend $a = 1$ et $b = 0$. Donner la valeur de : non $a$ ; $a$ et $b$ ; $a$ ou $b$ ; $a$ xor $b$ ; non$(a$ ou $b)$.
-
-2.  Même question avec $a = 1$ et $b = 1$.
-
-3.  \[ sur machine \]  Vérifier en console, en écrivant `True` pour `1`, `False` pour `0` et `a != b` pour $a$ xor $b$ :
-
-    ```text
-    >>> not True
-    >>> True and False
-    >>> True or False
-    >>> True != False
-    >>> not (True or False)
-    ```
-
-??? corrige "Corrigé"
-
-    **1.** Avec $a = 1$ et $b = 0$ : non $a = 0$ ; $a$ et $b = 0$ ; $a$ ou $b = 1$ ; $a$ xor $b = 1$ (les deux bits sont différents) ; non$(a$ ou $b) =$ non $1 = 0$.
-
-    **2.** Avec $a = 1$ et $b = 1$ : non $a = 0$ ; $a$ et $b = 1$ ; $a$ ou $b = 1$ ; $a$ xor $b = 0$ (les deux bits sont égaux : c’est la ligne où ou et xor diffèrent) ; non$(a$ ou $b) = 0$.
-
-    **3.**
-
-    ```text
-    >>> not True
-    False
-    >>> True and False
-    False
-    >>> True or False
-    True
-    >>> True != False
-    True
-    >>> not (True or False)
-    False
-    ```
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Dresser la table d’une expression <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-23 }
-
-\[ à la main \] 
-
-1.  Dresser la table de vérité de non$(a$ et $b)$, puis celle de (non $a)$ ou (non $b)$. Que constate-t-on ? Comment dit-on de ces deux expressions ?
-
-2.  Dresser la table de vérité de $(a$ et $b)$ ou $c$. Combien de lignes faut-il ? Pour combien d’entre elles l’expression vaut-elle `1` ?0
-
-    ??? pouce "Coup de pouce"
-
-        Une ligne par combinaison des entrées : avec $n$ variables, $2^n$ lignes, énumérées en comptant en binaire (`000`, `001`, `010`…). Ajouter une colonne par étape du calcul, en commençant par les parenthèses.
-
-??? corrige "Corrigé"
-
-    **1.** Une ligne par combinaison de $a$ et $b$ (4 lignes), une colonne par étape : $$\begin{array}{|c|c||c|c||c|c|c|}
-    \hline
-    a & b & a \text{ et } b & \text{non}(a \text{ et } b) & \text{non } a & \text{non } b & (\text{non } a) \text{ ou } (\text{non } b) \\
-    \hline
-    \texttt{0} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{1} & \texttt{1} & \texttt{1} \\
-    \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{1} & \texttt{0} & \texttt{1} \\
-    \texttt{1} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{1} \\
-    \texttt{1} & \texttt{1} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
-    \hline
-    \end{array}$$ Les colonnes de non$(a$ et $b)$ et de (non $a)$ ou (non $b)$ sont identiques (`1`, `1`, `1`, `0`) : les deux expressions ont la même table de vérité, elles sont **équivalentes**. « Il est faux que $a$ et $b$ soient tous deux vrais » revient à dire « l’un des deux au moins est faux ».
-
-    **2.** Trois variables : $2^3 = 8$ lignes. $$\begin{array}{|c|c|c||c||c|}
-    \hline
-    a & b & c & a \text{ et } b & (a \text{ et } b) \text{ ou } c \\
-    \hline
-    \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
-    \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} \\
-    \texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} \\
-    \texttt{0} & \texttt{1} & \texttt{1} & \texttt{0} & \texttt{1} \\
-    \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
-    \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} \\
-    \texttt{1} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{1} \\
-    \texttt{1} & \texttt{1} & \texttt{1} & \texttt{1} & \texttt{1} \\
-    \hline
-    \end{array}$$ L’expression vaut `1` pour **5** lignes sur 8 : les quatre où $c = 1$, plus la ligne $a = b = 1$, $c = 0$.
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — Le demi-additionneur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-24 }
-
-\[ à la main \] 
-
-1.  Recopier et compléter la table de l’addition de deux bits $a$ et $b$, en écrivant le résultat sur deux bits : la retenue $r$ (à gauche) et la somme $s$ (à droite).
-
-    | $a$ | $b$ | retenue $r$ | somme $s$ |
-    |:---:|:---:|:-----------:|:---------:|
-    | `0` | `0` |             |           |
-    | `0` | `1` |             |           |
-    | `1` | `0` |             |           |
-    | `1` | `1` |             |           |
-
-2.  Quelle porte logique donne la colonne $r$ ? Laquelle donne la colonne $s$ ? Dessiner le circuit du demi-additionneur.
-
-3.  Dans un circuit qui additionne deux nombres de 4 bits, seule la colonne de droite peut être confiée à un demi-additionneur. Pourquoi ? Le constater en posant $\texttt{0110} + \texttt{0011}$ : quelle colonne doit additionner trois bits ? Que manque-t-il au demi-additionneur ?0
-
-    ??? pouce "Coup de pouce"
-
-        Dans la colonne de droite, on n’ajoute que deux bits. Dans la colonne suivante, combien de bits faut-il ajouter ? D’où vient le bit supplémentaire ?
-
-??? corrige "Corrigé"
-
-    **1.** $0 + 0 = \texttt{00}_2$, $0 + 1 = 1 + 0 = \texttt{01}_2$, $1 + 1 = \texttt{10}_2$ : $$\begin{array}{|c|c||c|c|}
-    \hline
-    a & b & r & s \\
-    \hline
-    \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
-    \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} \\
-    \texttt{1} & \texttt{0} & \texttt{0} & \texttt{1} \\
-    \texttt{1} & \texttt{1} & \texttt{1} & \texttt{0} \\
-    \hline
-    \end{array}$$
-
-    **2.** La colonne $r$ (`0`, `0`, `0`, `1`) est la table du **et** : $r = a$ et $b$. La colonne $s$ (`0`, `1`, `1`, `0`) est la table du **xor** : $s = a$ xor $b$. Le circuit relie les deux entrées $a$ et $b$ à la fois à une porte xor (sortie : la somme) et à une porte et (sortie : la retenue), comme sur le schéma du cours.
-
-    **3.** La colonne de droite ne reçoit jamais de retenue : on n’y ajoute que **deux** bits, un demi-additionneur suffit. Toute autre colonne peut recevoir la retenue de sa voisine de droite. Dans $\texttt{0110} + \texttt{0011}$, la deuxième colonne ($1 + 1 = \texttt{10}_2$) produit une retenue : la troisième colonne doit additionner **trois** bits ($1$, $0$ et la retenue $1$). Il manque donc au demi-additionneur une entrée pour la **retenue venue de la droite** ; c’est le rôle de l’additionneur complet, construit avec deux demi-additionneurs (voir le TP « Programmer l’arithmétique binaire »). Résultat : $\texttt{0110} + \texttt{0011} = \texttt{1001}$, soit $6 + 3 = 9$.
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 25</span> — Le complément à deux selon un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-02-25 }
-
-Un élève demande à un assistant d’IA : « Comment écrit-on $-5$ sur 8 bits en complément à deux ? » Voici la réponse obtenue.
-
-« On écrit d’abord $5$ sur 8 bits : `00000101`. Le complément à deux consiste à inverser tous les bits, ce qui donne `11111010`. Le bit de poids fort vaut `1`, ce qui confirme que le nombre est négatif. Donc $-5$ s’écrit `11111010` sur 8 bits. Avec cette convention, on représente sur 8 bits les entiers de $-128$ à $+127$. »
-
-1.  \[ à la main \]  La réponse est-elle correcte ? Vérifier en posant l’addition $5 + (-5)$ sur 8 bits avec l’écriture proposée : que doit-on trouver ?
-
-2.  Localiser et corriger l’erreur.
-
-3.  \[ sur machine \]  Quelle vérification simple, faite avant de faire confiance à la réponse, aurait suffi à détecter l’erreur ?0
-
-    ??? pouce "Coup de pouce"
-
-        Un nombre plus son opposé doit donner $0$ : poser l’addition sur 8 bits en ignorant la retenue qui sort. En Python, `bin(256 - 5)` donne l’écriture sur 8 bits de $-5$.
-
-??? corrige "Corrigé"
-
-    **1.** Non. Posons $5 + (-5)$ avec l’écriture proposée : $\texttt{00000101} + \texttt{11111010} = \texttt{11111111}$, et non `00000000` : ce n’est pas l’opposé de $5$. D’ailleurs `11111010` est l’écriture de $-6$ (l’addition avec `00000110` donne bien `1 00000000`, où la retenue déborde des 8 bits). **2.** L’erreur est dans l’étape « inverser tous les bits » : le complément à deux, c’est inverser **puis ajouter 1** ; l’assistant a oublié le $+1$. $5 = \texttt{00000101}$ $\to$ inversion `11111010` $\to$ $+1$ : **`11111011`**. Vérification : $\texttt{00000101} + \texttt{11111011} = \texttt{1\,00000000}$, il reste $0$ sur 8 bits. Le reste de la réponse (signe lu sur le bit de poids fort, bornes $-128$ à $+127$) est juste. **3.** Additionner le nombre et son opposé supposé : on doit trouver $0$ sur 8 bits. Sur machine, on peut aussi utiliser le fait que, sur $n$ bits, $-x$ se code comme l’entier positif $2^n - x$ : `bin(256 - 5)` affiche `’0b11111011’`, ce qui contredit `11111010`.

@@ -152,7 +152,7 @@ On dispose d’objets ayant chacun une **valeur** et un **poids**, et d’un sac
     | B         |    100     |   2 kg    |         50         |
     | C         |    120     |   3 kg    |         40         |
 
-    Quel **critère glouton** choisir ? Prendre d’abord l’objet le plus *utile au kilo*, c’est-à-dire le meilleur rapport **valeur / poids**. Ordre : A (60), B (50), C (40).
+    Quel **critère glouton** choisir ? Prendre d’abord l’objet le plus *utile au kilo*, c’est-à-dire le meilleur rapport **valeur / poids**. Ordre : A (60), B (50), C (40) — on **trie** donc les objets par rapport décroissant (chapitre *Les algorithmes de tri*).
 
     - on prend **A** (1 kg, valeur 60) ; il reste 4 kg ;
 

@@ -243,7 +243,7 @@ def horspool(motif, texte):
 
 !!! regle "Règle 3 — Complexité"
 
-    **Prétraitement** : construire la table coûte $O(m)$ (une seule passe sur le motif ; les lettres absentes du motif ne sont pas stockées : elles reçoivent le décalage par défaut $m$).  
+    **Prétraitement** : construire la table coûte $O(m)$ (une seule passe sur le motif ; les lettres absentes du motif ne sont pas stockées : elles reçoivent le décalage par défaut $m$). Comme la mémoïsation du chapitre 11, on dépense un peu de mémoire pour gagner du temps.  
     **Recherche** : dans le *pire* cas, on reste en $O(n\times m)$ (comme le naïf). Mais en **pratique**, sur un texte « ordinaire », les sauts sont si grands qu’on est **sous-linéaire** : de l’ordre de $O(n/m)$ comparaisons.
 
 C’est le **prodige** de Boyer-Moore : il peut trouver un mot **sans lire tout le texte**. Et — contre-intuition merveilleuse — *plus le motif est long, plus la recherche est rapide*, car les sauts possibles sont plus grands. C’est cet algorithme (ou ses cousins) qui fait tourner `Ctrl+F`, `grep` et les moteurs de recherche.

@@ -22,7 +22,7 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi fait comparer plusieurs méthodes et leur coût, comme dans ce chapitre : double boucle, ensemble, et tri suivi d’un parcours par les deux bouts.*
+*Ce défi fait comparer plusieurs méthodes et leur coût, comme dans ce chapitre : double boucle, ensemble, et tri suivi d’un parcours par les deux bouts. Ce tri coûte $O(n\log n)$ grâce à un algorithme « diviser pour régner » comme le tri fusion du cours.*
 
 ## Lire l’énoncé
 
@@ -130,7 +130,7 @@ Adapter le programme pour répondre à la nouvelle question. Sur l’exemple du 
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 2 : trier puis rapprocher deux indices <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-aoc-1-8 }
 
-Une autre idée, sans ensemble, réinvestit le **tri** vu en Première. On trie la liste, puis on place un indice `g` au début et un indice `d` à la fin.
+Une autre idée, sans ensemble, réinvestit le **tri** : avec le tri fusion de ce chapitre (ou `sorted`), il coûte $O(n\log n)$. On trie la liste, puis on place un indice `g` au début et un indice `d` à la fin.
 
 1.  Sur la liste triée `[33, 487, 812, 1010, 1208, 1500]`, on a `g = 0` et `d = 5` : la somme vaut $33 + 1500 = 1533$, trop petite. Faut-il avancer `g` ou reculer `d` ? Justifier, puis dérouler la méthode à la main jusqu’à trouver la paire.
 
@@ -167,6 +167,8 @@ Une autre idée, sans ensemble, réinvestit le **tri** vu en Première. On trie 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
+
+*Ce défi prolonge le défi précédent (*Report Repair*) et l’analyse de complexité de ce chapitre : comme le tri fusion détrône les tris quadratiques, une meilleure idée (deux indices qui ne font qu’avancer) remplace une recherche quadratique par un parcours linéaire. La fenêtre glissante reviendra au chapitre 12, avec la recherche naïve d’un motif dans un texte.*
 
 ## Lire l’énoncé
 

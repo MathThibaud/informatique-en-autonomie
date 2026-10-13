@@ -2,7 +2,163 @@
 
 <p class="sous-titre">Recherche textuelle</p>
 
-## <span class="etiquette">Défi</span> Monster Messages
+## <span class="etiquette">Défi 1</span> Password Philosophy
+
+*les mots de passe — découpage de chaînes et ou exclusif*
+
+<p class="infos-activite">Jour 2</p>
+
+!!! fichiers "Fichiers à télécharger"
+
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/12-defi-aoc-2020-02){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-12-defi-aoc-2020-02.zip){ .md-button }
+
+!!! consignes "Consignes"
+
+    - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/2 ](https://adventofcode.com/2020/day/2 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
+
+    - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+
+    - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
+
+    - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
+
+*Ce défi mobilise la recherche d’un motif dans un texte, vue dans ce chapitre : on y compte les occurrences d’une lettre dans un mot de passe (et l’encadré sur `count` montre une différence avec la recherche naïve du cours). L’approfondissement revient sur le ou exclusif du masque jetable, vu au chapitre 10.*
+
+## Lire l’énoncé
+
+Vocabulaire utile pour lire le texte original :
+
+|  |  |  |  |
+|:---|:---|:---|:---|
+| password | mot de passe | policy | règle, politique |
+| corrupted | corrompu, abîmé | valid | valide, conforme |
+| lowest / highest | plus petit / plus grand | number of times | nombre de fois |
+| log in | se connecter | instance | occurrence (d’une lettre) |
+
+!!! encadre "Résumé de l’énoncé (partie 1)"
+
+    **Contexte.** Le héros part en vacances et doit descendre jusqu’à la côte en luge. Le loueur de luges ne parvient plus à se connecter : sa base de mots de passe est en partie abîmée. Chaque ligne du fichier décrit un mot de passe enregistré, accompagné de la règle de sécurité qui était en vigueur quand il a été choisi. Il s’agit de repérer les mots de passe qui respectent leur propre règle.
+
+    **Ce qu’il faut faire.**
+
+    - Une ligne a la forme `a-b l: motdepasse` : deux entiers $a \leqslant b$, une lettre `l`, puis le mot de passe, écrit en lettres minuscules.
+
+    - La règle se lit ainsi : la lettre `l` doit apparaître dans le mot de passe au moins $a$ fois et au plus $b$ fois, bornes comprises. Autrement dit, le nombre d’occurrences de `l` doit appartenir à l’intervalle $[a, b]$.
+
+    - Il faut renvoyer le nombre de lignes dont le mot de passe respecte sa règle.
+
+### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-1-1 }
+
+Après lecture de l’énoncé et du résumé, vérifier sa compréhension :
+
+1.  Le mot de passe `kkk` respecte-t-il la règle `1-3 k` ? Et la règle `4-5 k` ?
+
+2.  Après `"2-3 z: zaz".split()`, que contient le deuxième morceau ? Quel piège pour comparer la lettre ?
+
+3.  Les nombres peuvent avoir deux chiffres (`10-12`). Pourquoi est-il alors dangereux de lire la ligne à des positions fixes ?
+
+### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-1-2 }
+
+On considère le fichier (inventé) suivant :
+
+```console
+2-4 m: mmxmz
+1-2 k: akkkb
+3-5 t: tttxt
+1-1 q: rst
+2-6 e: eeabcf
+```
+
+Pour chaque ligne, dire si le mot de passe respecte la règle de la partie 1. Vérification : on doit compter `3` mots de passe valides.
+
+## Programmer la partie 1
+
+### <span class="exo-num">Exercice 3</span> — Découper une ligne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-1-3 }
+
+Écrire une fonction `decouper(ligne)` qui renvoie le tuple `(a, b, lettre, mdp)` formé de deux entiers et de deux chaînes. Par exemple `decouper("2-4 m: mmxmz")` doit renvoyer `(2, 4, "m", "mmxmz")`. Tester avec `assert`.
+
+??? pouce "Coup de pouce"
+
+    `ligne.split()` coupe aux espaces et donne trois morceaux ; le premier se recoupe avec `split("-")`, le deuxième se débarrasse du `:` en ne gardant que son premier caractère.
+
+!!! encadre "Outil Python : compter dans une chaîne (count) et comparaisons enchaînées"
+
+    La méthode `count` renvoie le nombre d’apparitions d’un caractère (ou d’un morceau de chaîne) dans une chaîne, sans écrire de boucle. Python accepte aussi d’enchaîner les comparaisons, comme en mathématiques.
+
+    ```python
+    mot = "banane"
+    print(mot.count("a"))     # 2
+    print(mot.count("an"))    # 2 : on peut compter un morceau de chaine
+    print(mot.count("z"))     # 0 si absent
+    n = 3
+    print(1 <= n <= 5)        # True : equivaut a 1 <= n and n <= 5
+    ```
+
+    **Intérêt.** Le code est plus court et plus lisible ; `count` parcourt la chaîne une fois, comme une boucle écrite à la main (coût proportionnel à la longueur).
+
+    **À essayer.** Que renvoie `"aaaa".count("aa")` ? Pourquoi pas `3` ? Que renverrait la fonction `recherche_naive("aa", "aaaa")` du cours ?
+
+### <span class="exo-num">Exercice 4</span> — Valider et compter <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-1-4 }
+
+Écrire une fonction `valide1(a, b, lettre, mdp)` qui renvoie un booléen, puis le programme qui lit `input.txt` et compte les mots de passe valides. Tester sur l’exemple du défi, puis sur vos données.
+
+??? pouce "Coup de pouce"
+
+    La méthode `mdp.count(lettre)` compte les occurrences. Python accepte les comparaisons enchaînées : `a <= n <= b`.
+
+## Partie 2
+
+Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
+
+!!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
+
+    Le loueur s’aperçoit qu’il s’est trompé de règlement : les deux nombres n’ont pas le sens qu’on leur a donné.
+
+    - Ils désignent maintenant deux **positions** dans le mot de passe, numérotées **à partir de 1** (il n’y a pas de position 0).
+
+    - Le mot de passe est valide si la lettre se trouve à exactement une de ces deux positions : ni à aucune, ni aux deux. Les occurrences ailleurs dans le mot ne comptent plus.
+
+### <span class="exo-num">Exercice 5</span> — Une nouvelle règle <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-1-5 }
+
+1.  Sans programme : la ligne `1-3 a: aba` est-elle valide selon la nouvelle règle ? Et `2-3 b: abc` ?
+
+2.  Écrire `valide2(a, b, lettre, mdp)` et compter. Sur l’exemple du défi, on doit trouver `2` mots de passe valides.
+
+??? pouce "Coup de pouce"
+
+    Attention au décalage : la position `1` de l’énoncé correspond à l’indice `0` en Python.
+
+??? pouce "Coup de pouce 2 (début de solution)"
+
+    Calculer deux booléens `p` et `q` (la lettre est-elle à chacune des deux positions ?). « L’un ou l’autre mais pas les deux » s’écrit `p != q` : c’est le *ou exclusif*.
+
+## Approfondissement
+
+!!! encadre "Outil Python : les opérateurs bit à bit (&, |, ^)"
+
+    Sur des entiers, ces opérateurs travaillent chiffre binaire par chiffre binaire : `&` (et), `|` (ou), `^` (ou exclusif). Sur des booléens, ils donnent le même résultat que `and`, `or` et le ou exclusif.
+
+    ```python
+    print(6 & 3)          # 110 et 011 -> 010, soit 2
+    print(6 | 3)          # 110 ou 011 -> 111, soit 7
+    print(6 ^ 3)          # 110 xor 011 -> 101, soit 5
+    print(True ^ True)    # False
+    print(5 ^ 5)          # 0 : x ^ x vaut toujours 0
+    ```
+
+    **Intérêt.** Un seul calcul traite tous les bits à la fois ; le ou exclusif est très utilisé en cryptographie (masque jetable de Vernam, chapitre 10) et pour coder des ensembles de petits entiers.
+
+    **À essayer.** Calculer à la main `12 ^ 10`, puis vérifier avec Python.
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : une table de vérité <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-1-6 }
+
+Dresser la table de vérité du ou exclusif. Vérifier que `p != q`, `p ^ q` et `(p or q) and not (p and q)` donnent le même résultat pour les quatre cas, en le faisant afficher par un programme.
+
+??? pouce "Coup de pouce"
+
+    Deux boucles `for p in (False, True)` imbriquées suffisent à parcourir les quatre cas.
+
+## <span class="etiquette">Défi 2</span> Monster Messages
 
 *les messages du satellite — grammaires et récursivité*
 
@@ -51,7 +207,7 @@ Vocabulaire utile pour lire le texte original :
 
     - Un message est valide si la règle `0` le reconnaît **en entier**, sans caractère en trop. Réponse : le nombre de messages valides.
 
-### <span class="exo-num">Exercice 1</span> — Vérifier sa compréhension <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-1-1 }
+### <span class="exo-num">Exercice 1</span> — Vérifier sa compréhension <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-2-1 }
 
 1.  Une même règle peut-elle apparaître deux fois dans une définition ? Le choix d’alternative est-il alors forcément le même ?
 
@@ -59,7 +215,7 @@ Vocabulaire utile pour lire le texte original :
 
 3.  Les règles sont-elles forcément rangées dans l’ordre des numéros ? Quelle structure de données évite de s’en soucier ?
 
-### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-1-2 }
+### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-2-2 }
 
 On considère les règles (inventées) suivantes :
 
@@ -79,7 +235,7 @@ On considère les règles (inventées) suivantes :
 
 ## Programmer la partie 1
 
-### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-1-3 }
+### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-2-3 }
 
 Lire `input.txt` et construire un dictionnaire `regles` : à chaque numéro (une chaîne, par exemple `’2’`), on associe soit la lettre (`’a’`), soit la liste des alternatives, chacune étant une liste de numéros (`[[’4’, ’3’], [’3’, ’1’]]`). Construire aussi la liste `messages`.
 
@@ -100,7 +256,7 @@ Lire `input.txt` et construire un dictionnaire `regles` : à chaque numéro (une
 
     **Intérêt.** Cela évite de stocker une information supplémentaire (« type de règle ») : la valeur elle-même dit de quoi il s’agit. Question : que renvoie `isinstance(["a"], str)` ?
 
-### <span class="exo-num">Exercice 4</span> — Reconnaître un message <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-1-4 }
+### <span class="exo-num">Exercice 4</span> — Reconnaître un message <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-2-4 }
 
 Écrire une fonction récursive `fins(regles, num, message, i)` qui renvoie la **liste des positions** où peut se terminer un morceau du message commençant à l’indice `i` et reconnu par la règle `num` (lire l’encadré). Un message est accepté si `len(message)` figure dans `fins(regles, ’0’, message, 0)`. Tester sur l’exemple, puis compter les messages acceptés.
 
@@ -120,7 +276,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     Les elfes s’aperçoivent que deux de leurs règles étaient fausses et vous envoient les bonnes : `8: 42 | 42 8` et `11: 42 31 | 42 11 31`. Ces règles font appel à elles-mêmes : la règle `8` reconnaît une ou plusieurs répétitions de la règle `42`, et la règle `11` reconnaît $k$ fois la règle `42` suivie de $k$ fois la règle `31` ($k \geq 1$). Réponse : le nouveau nombre de messages valides.
 
-### <span class="exo-num">Exercice 5</span> — Des règles récursives <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-1-5 }
+### <span class="exo-num">Exercice 5</span> — Des règles récursives <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-2-5 }
 
 Deux règles sont remplacées par des règles qui **s’appellent elles-mêmes**. Modifier le dictionnaire comme indiqué et relancer le comptage. Votre fonction `fins` fonctionne-t-elle encore ? Pourquoi ne boucle-t-elle pas indéfiniment ?
 
@@ -181,7 +337,7 @@ Avec les règles d’origine, on doit compter `2` messages ; avec les règles mo
 
     **Intérêt.** Le test `x in ensemble` prend un temps qui ne dépend pas de la taille de l’ensemble (contrairement à une liste, qu’il faut parcourir), et les doublons disparaissent d’eux-mêmes. Question : combien d’éléments a `{d + f for d in "ab" for f in "ab"}` ?
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Approfondissement 1 : une méthode par blocs, propre aux données <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-1-6 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Approfondissement 1 : une méthode par blocs, propre aux données <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-2-6 }
 
 Dans les vraies données, la règle `0` est `8 11`, et les règles `42` et `31` ne contiennent pas de cycle : chacune reconnaît un ensemble **fini** de mots, et ces mots ont tous la même longueur.
 
@@ -207,7 +363,7 @@ Dans les vraies données, la règle `0` est `8 11`, et les règles `42` et `31` 
 
 5.  Comparer avec la fonction `fins` : vitesse, et généralité (que se passe-t-il si l’on change la règle `0` ?).
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 2 : mémoïser la fonction `fins` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-1-7 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 2 : mémoïser la fonction `fins` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-2-7 }
 
 Pour un message donné, la fonction `fins` peut être appelée plusieurs fois avec la même règle et la même position `i`.
 

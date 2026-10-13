@@ -71,7 +71,7 @@ Reprenons le dictionnaire. On dispose d’un tableau **déjà trié** et on veut
 
 !!! remarque "Remarque"
 
-    L’ordre de grandeur est spectaculaire : dans un tableau d’**un million** d’éléments, une recherche naïve (élément par élément) demande jusqu’à un million de comparaisons, là où la dichotomie en demande environ $20$ (car $2^{20} \approx 10^6$). On passe d’un coût $n$ à un coût $\log_2 n$ : c’est exactement le gain que le programme demande de « montrer ».
+    L’ordre de grandeur est spectaculaire : dans un tableau d’**un million** d’éléments, une recherche naïve (élément par élément) demande jusqu’à un million de comparaisons, là où la dichotomie en demande environ $20$ (car $2^{20} \approx 10^6$). On passe d’un coût $n$ à un coût $\log_2 n$ : c’est exactement le gain que le programme demande de « montrer ». C’est aussi l’idée de la recherche dans un arbre binaire de recherche (chapitre 5), où chaque comparaison élimine tout un sous-arbre.
 
 !!! remarque "Remarque — Un « diviser pour régner » un peu particulier"
 
@@ -83,7 +83,7 @@ Reprenons le dictionnaire. On dispose d’un tableau **déjà trié** et on veut
 
 ## L’exemple phare : le tri fusion
 
-On sait déjà trier (tri par insertion, tri par sélection), mais ces tris coûtent $n^2$ : sur un million de valeurs, c’est $10^{12}$ opérations, inutilisable. Le **tri fusion** (*merge sort*), imaginé par **John von Neumann** en **1945**, applique « diviser pour régner » et fait **bien mieux**.
+On sait déjà trier (tri par insertion, tri par sélection, vus en Première), mais ces tris coûtent $n^2$ : sur un million de valeurs, c’est $10^{12}$ opérations, inutilisable. Le **tri fusion** (*merge sort*), imaginé par **John von Neumann** en **1945**, applique « diviser pour régner » et fait **bien mieux**.
 
 **Un peu d’histoire.** Mathématicien d’origine hongroise, von Neumann collabore alors au laboratoire de **Los Alamos** (projet Manhattan) et participe à la conception de l’**EDVAC**, l’un des premiers ordinateurs à programme enregistré, dont il décrit l’organisation, toujours celle de nos ordinateurs (« architecture de von Neumann »). Pour montrer qu’elle sait faire autre chose que du calcul, il écrit l’un des tout premiers programmes de tri : un tri fusion.
 

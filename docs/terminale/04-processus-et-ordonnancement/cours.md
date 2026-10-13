@@ -164,7 +164,7 @@ Temps d’attente : A$=0$, C$=2$, D$=2$, B$=6$. **Moyenne $= 2{,}50$**. En faisa
 
 ### Le tourniquet (round-robin)
 
-Pour que *personne* ne monopolise le processeur, on fixe un **quantum** (ici $1$ unité) et on fait **tourner** les processus prêts dans une **file** : chacun s’exécute un quantum, puis repart en fin de file s’il n’a pas fini.
+Pour que *personne* ne monopolise le processeur, on fixe un **quantum** (ici $1$ unité) et on fait **tourner** les processus prêts dans une **file** (la structure FIFO du chapitre 3) : chacun s’exécute un quantum, puis repart en fin de file s’il n’a pas fini.
 
 ![](../figures/7243a1680236ca44.svg){ .tikz loading=lazy }
 
@@ -200,7 +200,7 @@ Le partage des ressources peut mener à une panne subtile où des processus s’
 
 Chacun retient une ressource que l’autre attend, et aucun ne peut la libérer puisque, bloqué, il ne s’exécute plus. La situation est figée pour toujours : c’est l’**interblocage** (*deadlock*).
 
-On le visualise avec un **graphe d’attente** : une flèche « $P \to R$ » signifie « $P$ attend $R$ », une flèche « $R \to P$ » signifie « $R$ est détenue par $P$ ». Un **cycle** dans ce graphe est la signature d’un interblocage.
+On le visualise avec un **graphe d’attente** : une flèche « $P \to R$ » signifie « $P$ attend $R$ », une flèche « $R \to P$ » signifie « $R$ est détenue par $P$ ». Un **cycle** dans ce graphe est la signature d’un interblocage (on apprendra à détecter un cycle au chapitre 8, *Graphes*).
 
 ![](../figures/994518e6b8173a8a.svg){ .tikz loading=lazy }
 
@@ -228,7 +228,7 @@ On le visualise avec un **graphe d’attente** : une flèche « $P \to R$ » sig
 
 ## Et aujourd’hui : les processeurs multi-cœurs <span class="horsprog">au-delà du programme</span>
 
-Depuis le début de ce chapitre, nous avons supposé **un seul cœur** : un seul processus élu à la fois, et l’illusion du parallélisme grâce à la vitesse de commutation. Or, depuis le milieu des années 2000, presque tous les processeurs sont **multi-cœurs**.
+Depuis le début de ce chapitre, nous avons supposé **un seul cœur** : un seul processus élu à la fois, et l’illusion du parallélisme grâce à la vitesse de commutation. Or, depuis le milieu des années 2000, presque tous les processeurs sont **multi-cœurs** (on les retrouvera, intégrés à une seule puce, au chapitre 14 sur les systèmes sur puce).
 
 Un **cœur** (*core*) est un processeur complet à lui seul, capable d’exécuter *son* processus. Un processeur « quadricœur » en contient quatre : il peut donc élire **jusqu’à quatre processus *vraiment* en même temps** — ce n’est plus une illusion, c’est du **vrai parallélisme**.
 

@@ -251,7 +251,7 @@ Un arbre quelconque ne facilite pas la recherche. Mais si l’on **range** les v
 
 !!! regle "Règle 2 — Chercher dans un ABR"
 
-    Pour chercher une valeur `x`, on part de la racine et, à chaque nœud, on compare : si `x` est plus petit, on descend à **gauche** ; s’il est plus grand, à **droite** ; sinon, on l’a trouvé. À chaque étape, on **élimine tout un sous-arbre** : si l’arbre est **équilibré**, c’est environ la **moitié** de ce qui reste, comme dans la **recherche dichotomique** vue en Première, mais incarnée dans une structure de données (si l’arbre est très déséquilibré, on n’élimine presque rien à chaque étape).
+    Pour chercher une valeur `x`, on part de la racine et, à chaque nœud, on compare : si `x` est plus petit, on descend à **gauche** ; s’il est plus grand, à **droite** ; sinon, on l’a trouvé. À chaque étape, on **élimine tout un sous-arbre** : si l’arbre est **équilibré**, c’est environ la **moitié** de ce qui reste, comme dans la **recherche dichotomique** vue en Première (le chapitre 7 en fera un exemple de « diviser pour régner »), mais incarnée dans une structure de données (si l’arbre est très déséquilibré, on n’élimine presque rien à chaque étape).
 
 ```python
 def recherche(a, x):

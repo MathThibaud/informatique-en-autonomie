@@ -86,7 +86,7 @@ Avec une boucle `while`, une question capitale se pose : est-on sûr de ne pas t
 
 !!! regle "Règle 2 — Un variant de boucle"
 
-    Considérons la quantité `fin - deb`, la « largeur » de la zone de recherche. À **chaque** tour, on remplace `deb` par `mil + 1`, ou `fin` par `mil - 1` : dans les deux cas, cette largeur **diminue strictement**. Une quantité entière qui décroît strictement ne peut pas le faire éternellement : tôt ou tard `deb > fin`, et la boucle s’arrête. Une telle grandeur est appelée un **variant de boucle**.
+    Considérons la quantité `fin - deb`, la « largeur » de la zone de recherche. À **chaque** tour, on remplace `deb` par `mil + 1`, ou `fin` par `mil - 1` : dans les deux cas, cette largeur **diminue strictement**. Une quantité entière qui décroît strictement ne peut pas le faire éternellement : tôt ou tard `deb > fin`, et la boucle s’arrête. Une telle grandeur est appelée un **variant de boucle** (notion déjà rencontrée au chapitre *Les bases de la programmation Python*).
 
 !!! demonstration "Démonstration — La terminaison"
 
@@ -139,7 +139,7 @@ Voici les trois coûts rencontrés cette année : **linéaire** ($n$), **quadrat
 
 !!! remarque "Remarque — Le prix à payer : un tableau trié"
 
-    La dichotomie **exige** un tableau trié. Si le tableau ne l’est pas, il faut d’abord le trier (coût quadratique, ou $n\log_2 n$ avec un bon tri). Cela ne vaut le coup que si l’on fait **beaucoup** de recherches : on trie *une* fois, on cherche *souvent*, très vite.
+    La dichotomie **exige** un tableau trié. Si le tableau ne l’est pas, il faut d’abord le trier (coût quadratique avec les tris par sélection ou par insertion du chapitre *Les algorithmes de tri*, ou $n\log_2 n$ avec un bon tri). Cela ne vaut le coup que si l’on fait **beaucoup** de recherches : on trie *une* fois, on cherche *souvent*, très vite.
 
 !!! remarque "Remarque — En Terminale"
 

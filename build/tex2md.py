@@ -652,6 +652,7 @@ class Converter:
             if name.endswith('_'):
                 name = name[:-1]
             s = sub_macro(s, name, 1, 1, lambda o, a, st: '')
+        s = re.sub(r'\\looseness\s*=\s*-?\d+', '', s)  # réglage de mise en page du livre
         s = sub_macro(s, 'setcounter', 2, 0, lambda o, a, st: '')
         s = sub_macro(s, 'addtocounter', 2, 0, lambda o, a, st: '')
         s = sub_macro(s, 'setlength', 2, 0, lambda o, a, st: '')

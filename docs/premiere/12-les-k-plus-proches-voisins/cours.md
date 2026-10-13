@@ -30,7 +30,7 @@ Le $k$-NN est sans doute l’algorithme d’apprentissage supervisé **le plus s
 
 ## Le jeu de données : l’exemple des iris
 
-En apprentissage, tout part d’un **jeu de données** (*dataset*) : un tableau où chaque **ligne** est un individu et chaque **colonne** un descripteur, plus une colonne d’**étiquette**. On retrouve exactement les *données en tables* : un individu $=$ une fiche.
+En apprentissage, tout part d’un **jeu de données** (*dataset*) : un tableau où chaque **ligne** est un individu et chaque **colonne** un descripteur, plus une colonne d’**étiquette**. On retrouve exactement les *données en tables* (chapitre *Les données en tables*) : un individu $=$ une fiche.
 
 !!! exemple "Exemple — Le célèbre jeu de données Iris"
 
@@ -122,7 +122,7 @@ donc  $d = \sqrt{1.13} \approx 1.06$.
 
     **$1$-NN** ($k=1$) : le plus proche est une *versicolor* ($d^2=0.05$) $\to$ **versicolor**. **$3$-NN** ($k=3$) : les 3 plus proches sont deux *versicolor* (0.05 ; 0.05) et une *virginica* (1.13) $\to$ vote 2 contre 1 $\to$ **versicolor**.
 
-On assemble le tout en Python. On réutilise le **tri par clé** et un **dictionnaire d’occurrences** pour le vote.
+On assemble le tout en Python. On réutilise le **tri par clé** (chapitres *Les algorithmes de tri* et *Les données en tables*) pour classer les distances, et un **dictionnaire d’occurrences** (chapitre *Les types construits*) pour le vote.
 
 !!! regle "Règle 3 — Les $k$ plus proches, puis le vote"
 

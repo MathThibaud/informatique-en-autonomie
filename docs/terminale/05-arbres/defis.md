@@ -188,6 +188,8 @@ Trouver la place libre en temps linéaire sans trier ni utiliser d’ensemble, e
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
+*Ce défi manipule des ensembles (union, intersection). Un ensemble peut se représenter par un arbre binaire de recherche, vu dans ce chapitre : tester l’appartenance d’une valeur coûte alors la hauteur de l’arbre. Le type `set` de Python, lui, utilise une table de hachage, comme les dictionnaires.*
+
 ## Lire l’énoncé
 
 Vocabulaire utile pour lire le texte original :

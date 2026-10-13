@@ -41,7 +41,7 @@ Dans un ordinateur classique, ces éléments sont des **composants séparés**, 
 
 !!! definition "Définition 1 — Système sur puce (System on Chip, SoC)"
 
-    Un **système sur puce** rassemble sur un **unique circuit intégré** tous les composants qui étaient dispersés sur la carte mère : le **processeur** (souvent multi-cœur), la **mémoire**, un **processeur graphique** (GPU), et une foule de **périphériques** (Wi-Fi, Bluetooth, GPS, modem, capteurs…). Un ordinateur complet, sur un seul morceau de silicium.
+    Un **système sur puce** rassemble sur un **unique circuit intégré** tous les composants qui étaient dispersés sur la carte mère : le **processeur** (souvent multi-cœur, comme au chapitre 4), la **mémoire**, un **processeur graphique** (GPU), et une foule de **périphériques** (Wi-Fi, Bluetooth, GPS, modem, capteurs…). Un ordinateur complet, sur un seul morceau de silicium.
 
 ![](../figures/f64ec2cfc8a7ca25.svg){ .tikz loading=lazy }
 
@@ -57,7 +57,7 @@ Un SoC est un **vrai ordinateur**, aussi puissant : plusieurs cœurs cadencés �
 
     - un **Neural Engine** à 8 cœurs, dédié à l’intelligence artificielle (reconnaissance faciale…) ;
 
-    - un module **cryptographique** (il chiffre et déchiffre les données très vite) et $4$ Go de RAM.
+    - un module **cryptographique** (il chiffre et déchiffre les données très vite, par exemple en AES, vu au chapitre 10) et $4$ Go de RAM.
 
     Plus de puissance, dans votre poche, que tous les ordinateurs de la mission Apollo réunis.
 

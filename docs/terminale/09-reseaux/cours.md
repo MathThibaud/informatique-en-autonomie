@@ -36,7 +36,7 @@ Dans un réseau local, un paquet destiné à une machine *du même réseau* y va
 
 ## Les adresses IP : reconnaître son réseau
 
-Chaque interface possède une **adresse IP** (en IPv4 : quatre octets, soit quatre nombres de $0$ à $255$, par exemple `172.16.5.3` — donc $32$ bits en tout). Cette adresse se découpe en deux parties : une partie **réseau** (commune à toutes les machines du réseau local) et une partie **hôte** (qui identifie la machine dans ce réseau). Où se situe la frontière ? C’est le rôle du **masque**.
+Chaque interface possède une **adresse IP** (en IPv4 : quatre octets, soit quatre nombres de $0$ à $255$, par exemple `172.16.5.3` — donc $32$ bits en tout, d’où l’intérêt de l’écriture binaire vue en Première). Cette adresse se découpe en deux parties : une partie **réseau** (commune à toutes les machines du réseau local) et une partie **hôte** (qui identifie la machine dans ce réseau). Où se situe la frontière ? C’est le rôle du **masque**.
 
 !!! definition "Définition 2 — Notation CIDR (le /n)"
 
@@ -119,7 +119,7 @@ Le protocole **RIP** (*Routing Information Protocol*) mesure une route par son *
 
 !!! definition "Définition 3 — Métrique de RIP"
 
-    Métrique RIP $=$ **nombre de sauts** (routeurs traversés). C’est un **vecteur de distance** : chaque routeur ne connaît que « à quelle distance » est chaque réseau, sans voir toute la carte. RIP s’appuie sur l’algorithme de **Bellman-Ford**.
+    Métrique RIP $=$ **nombre de sauts** (routeurs traversés). C’est un **vecteur de distance** : chaque routeur ne connaît que « à quelle distance » est chaque réseau, sans voir toute la carte. RIP s’appuie sur l’algorithme de **Bellman-Ford**, un algorithme de programmation dynamique (on verra cette méthode au chapitre 11).
 
 !!! exemple "Exemple"
 
