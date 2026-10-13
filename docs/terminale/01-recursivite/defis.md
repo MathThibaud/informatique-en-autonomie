@@ -100,21 +100,27 @@ Faire un schéma : écrire chaque couleur, et tracer une flèche de $A$ vers $B$
 
     Couper d’abord sur `" bags contain "`. Si la suite commence par `"no other"`, le contenu est vide ; sinon, couper sur `", "` : chaque morceau commence par un nombre suivi de deux mots de couleur.
 
-!!! encadre "Outil Python : all et any"
+!!! encadre "Méthode : « tous » ou « au moins un », avec un booléen drapeau"
 
-    `all(...)` renvoie `True` si **tous** les éléments sont vrais, `any(...)` si **au moins un** l’est. On les écrit souvent avec une expression de la forme d’une compréhension de liste.
+    Pour savoir si **tous** les éléments d’une collection vérifient une condition, ou si **au moins un** la vérifie, on utilise un booléen appelé « drapeau » : on lui donne une valeur de départ, et la boucle la change dès qu’elle rencontre un élément décisif.
 
     ```python
     notes = [12, 15, 9]
-    print(all(n >= 10 for n in notes))    # False : 9 ne convient pas
-    print(any(n >= 15 for n in notes))    # True : 15 convient
-    print(all([]))                        # True : aucun contre-exemple
-    print(any([]))                        # False : aucun exemple
+    tous_admis = True          # aucun contre-exemple pour l'instant
+    for n in notes:
+        if n < 10:
+            tous_admis = False
+    print(tous_admis)          # False : 9 ne convient pas
+    un_tres_bien = False       # aucun exemple pour l'instant
+    for n in notes:
+        if n >= 15:
+            un_tres_bien = True
+    print(un_tres_bien)        # True : 15 convient
     ```
 
-    **Intérêt.** Ils remplacent une boucle accompagnée d’un booléen « drapeau », et s’arrêtent dès que la réponse est connue (au premier faux pour `all`, au premier vrai pour `any`).
+    **Intérêt.** Pour une collection vide, la boucle ne fait aucun tour : le drapeau garde sa valeur de départ (`True` pour « tous », `False` pour « au moins un »). Pour ne plus rien calculer une fois la réponse connue, on place le drapeau en tête de la condition, par exemple `if not un_tres_bien and n >= 15:` : quand le drapeau est déjà levé, Python n’évalue pas la suite du `and`.
 
-    **À essayer.** Prévoir puis vérifier `any(x == "shiny gold" for x in {})` : que renvoie `any` pour un sac vide ?
+    **À essayer.** Un drapeau `trouve` vaut `False` avant la boucle `for x in {}:` (un sac vide). Que vaut-il après ? Qu’en déduire pour un sac vide dans `peut_contenir` ?
 
 ### <span class="exo-num">Exercice 4</span> — Peut contenir le sac doré ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-recursivite-aoc-1-4 }
 
@@ -126,7 +132,7 @@ Faire un schéma : écrire chaque couleur, et tracer une flèche de $A$ vers $B$
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    Le résultat est vrai si, pour au moins un sac `x` du contenu, `x` est le sac doré **ou** `peut_contenir(x)` est vrai : c’est exactement ce que calcule `any` (voir l’encadré). Un sac vide donne `False` : c’est la condition d’arrêt.
+    Le résultat est vrai si, pour au moins un sac `x` du contenu, `x` est le sac doré **ou** `peut_contenir(x)` est vrai : c’est un « au moins un », à calculer avec un drapeau (voir l’encadré). Un sac vide donne `False` : c’est la condition d’arrêt.
 
 ## Partie 2
 

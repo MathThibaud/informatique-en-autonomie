@@ -134,7 +134,7 @@ Pourquoi tout intégrer sur une puce plutôt que garder une carte mère modulair
 
 <span id="cours-14-7" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[7](exercices.md#ex-14-7)** (le prix de l’intégration)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[7](exercices.md#ex-14-7) et [8](exercices.md#ex-14-8)** (le prix de l’intégration ; un microcontrôleur dans la voiture)
 
 ## Ouverture : l’informatique invisible, les objets connectés
 

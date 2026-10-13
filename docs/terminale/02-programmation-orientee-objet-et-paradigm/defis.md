@@ -126,9 +126,9 @@ Utiliser la fonction précédente pour toutes les pentes demandées et calculer 
 
 ## Approfondissement
 
-!!! encadre "Outil Python : d’une chaîne à une liste et retour (list, join)"
+!!! encadre "Outil Python : d’une chaîne à une liste et retour (compréhension, join)"
 
-    Une chaîne n’est pas modifiable : `ligne[2] = "X"` provoque une erreur. On la convertit en liste de caractères, que l’on peut modifier, puis on recolle les morceaux avec `join`, appelée sur le séparateur.
+    Une chaîne n’est pas modifiable : `ligne[2] = "X"` provoque une erreur. On la convertit en liste de caractères par une compréhension de liste, puis, une fois la liste modifiée, on recolle les morceaux avec `join`, appelée sur le séparateur.
 
     ```python
     ligne = "..#.."

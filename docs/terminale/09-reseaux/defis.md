@@ -22,6 +22,8 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
+*Ce défi mobilise la notion de voisins dans un graphe, vue au chapitre 8 : chaque carreau du pavage a exactement six voisins. La partie 2 fait évoluer tous les carreaux en même temps, comme les sièges du défi *Seating System* (chapitre 4).*
+
 ## Lire l’énoncé
 
 Vocabulaire utile pour lire le texte original :
@@ -163,19 +165,19 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ## Approfondissement
 
-!!! encadre "Outil Python : parcourir deux listes en parallèle (zip)"
+!!! encadre "Méthode : additionner deux positions coordonnée par coordonnée"
 
-    `zip(a, b)` fournit les couples `(a[0], b[0])`, `(a[1], b[1])`… jusqu’à la fin de la plus courte.
+    Une position à 2 ou à 3 coordonnées se range dans un tuple. Pour lui ajouter un déplacement, on parcourt les indices des coordonnées avec une **compréhension de liste**, puis on reconvertit le résultat en tuple pour pouvoir le ranger dans un ensemble.
 
     ```python
     pos = (1, -2, 1)
     pas = (0, 1, -1)
-    nouvelle = tuple(p + d for p, d in zip(pos, pas))
-    print(nouvelle)                       # (1, -1, 0)
-    print([c for c in zip("abc", [1, 2, 3])])    # [('a', 1), ('b', 2), ('c', 3)]
+    somme = [pos[k] + pas[k] for k in range(len(pos))]
+    print(somme)                          # [1, -1, 0]
+    nouvelle = tuple(somme)               # (1, -1, 0) : rangeable dans un ensemble
     ```
 
-    **Intérêt.** Le même code additionne des positions à 2 ou à 3 coordonnées. Question : que donne `[c for c in zip([1, 2, 3], [10, 20])]` ?
+    **Intérêt.** Grâce à `len(pos)`, le même code additionne des positions à 2 ou à 3 coordonnées. Question : que se passe-t-il si `pos` vaut `(1, 2, 3)` et `pas` vaut `(10, 20)` ?
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : d’autres systèmes de coordonnées <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-reseaux-aoc-1-7 }
 
@@ -185,7 +187,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     ??? pouce "Coup de pouce"
 
-        Partir de la liste `[0] * len(deplacements["e"])` et, à chaque pas, additionner coordonnée par coordonnée avec `zip`. Renvoyer un tuple, pour pouvoir le ranger dans un ensemble.
+        Partir de la liste `[0] * len(deplacements["e"])` et, à chaque pas, additionner coordonnée par coordonnée (voir l’encadré). Renvoyer un tuple, pour pouvoir le ranger dans un ensemble.
 
 3.  **Coordonnées doublées.** Avec `e` $= (2, 0)$ et `ne` $= (1, -1)$, trouver les autres déplacements. Montrer que $x + y$ est toujours pair. Retrouver le résultat de la partie 1.
 

@@ -187,7 +187,7 @@ D’habitude, un **serveur** central distribue à des **clients** (le modèle du
 
 <span id="cours-06-16" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[16](exercices.md#ex-06-16) à [19](exercices.md#ex-06-19)** (réseaux physiques ; pair-à-pair ; ordres de grandeur)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[16](exercices.md#ex-06-16) et [17](exercices.md#ex-06-17)** (réseaux physiques ; pair-à-pair)
 
 ## Ordres de grandeur : le trafic explose
 
@@ -210,6 +210,10 @@ Rappel des unités : 1 **ko** $=10^3$ o, 1 **Mo** $=10^6$, 1 **Go** $=10^9$, 1 
 
     **Le déni de service (attaque DDoS)** : saturer un site de messages pour le rendre indisponible.  
     <span id="lex-neutralite06" class="ancre"></span>**La neutralité du Net** : le principe, présent dès l’origine, selon lequel les routeurs transmettent **tous** les paquets de la même façon, *sans* favoriser un contenu ou un service. Elle est régulièrement remise en cause par des intérêts commerciaux.
+
+<span id="cours-06-18" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercices **[18](exercices.md#ex-06-18) et [19](exercices.md#ex-06-19)** (ordres de grandeur ; temps d’un téléchargement), exercice **[20](exercices.md#ex-06-20)** (critiquer une réponse d’IA)
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 

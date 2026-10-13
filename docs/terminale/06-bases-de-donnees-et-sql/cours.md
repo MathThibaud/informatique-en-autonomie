@@ -384,7 +384,7 @@ WHERE annee < 2005;
 
 <span id="cours-06-15" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[15](exercices.md#ex-06-15)** (insérer, modifier, supprimer)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[15](exercices.md#ex-06-15) et [16](exercices.md#ex-06-16)** (insérer, modifier, supprimer ; transactions et ACID)
 
 ## Ouverture et histoire
 

@@ -887,7 +887,7 @@ Tant que la condition `i < 10` est vraie, le bloc indenté se répète. À chaqu
 
 <span id="cours-01-39" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[39](exercices.md#ex-01-39) à [47](exercices.md#ex-01-47)** (les boucles)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[39](exercices.md#ex-01-39) à [47](exercices.md#ex-01-47)** (les boucles), défis **[48](exercices.md#ex-01-48) à [51](exercices.md#ex-01-51)**, exercice **[52](exercices.md#ex-01-52)** (critiquer une réponse d’IA)
 
 ## Mini-projets de synthèse
 
@@ -984,7 +984,7 @@ Vous avez maintenant toutes les briques : variables, types, calculs, chaînes, f
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 
-    Python servira d’outil dans plusieurs thèmes de SNT. Au chapitre *Photographie numérique*, deux boucles `for` imbriquées parcourront tous les **pixels** d’une image pour la retoucher ; au chapitre *Informatique embarquée et objets connectés*, une boucle `while` et un test `if` formeront la **boucle de commande** d’un thermostat. Le complément *Dessiner avec la tortue*, juste après ce chapitre, met en images les boucles et les fonctions, et **filtrer** une table de données (chapitre *Données en tables*) reviendra à tester des conditions combinées par `and` et `or`. En spécialité NSI de Première, ces mêmes bases s’enrichissent de nouveaux types (**listes**, **dictionnaires**) pour traiter des données plus volumineuses.
+    Python servira d’outil dans plusieurs thèmes de SNT. Au chapitre *Photographie numérique*, deux boucles `for` imbriquées parcourront tous les **pixels** d’une image pour la retoucher ; au chapitre *Informatique embarquée et objets connectés*, une boucle `while` et un test `if` formeront la **boucle de commande** d’un thermostat. Le complément *Dessiner avec la tortue*, juste après ce chapitre, met en images les boucles et les fonctions, et **filtrer** une table de données (chapitre *Les données structurées et leur traitement*) reviendra à tester des conditions combinées par `and` et `or`. En spécialité NSI de Première, ces mêmes bases s’enrichissent de nouveaux types (**listes**, **dictionnaires**) pour traiter des données plus volumineuses.
 
 ## Bilan — la carte mémoire
 

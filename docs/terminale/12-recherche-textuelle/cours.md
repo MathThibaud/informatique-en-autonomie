@@ -250,7 +250,7 @@ C’est le **prodige** de Boyer-Moore : il peut trouver un mot **sans lire tout 
 
 <span id="cours-12-8" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[8](exercices.md#ex-12-8)** (le coût sous-linéaire)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[8](exercices.md#ex-12-8) et [9](exercices.md#ex-12-9)** (le coût sous-linéaire ; chercher un gène dans l’ADN)
 
 ## Ouverture : la recherche textuelle est partout
 

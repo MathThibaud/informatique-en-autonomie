@@ -32,7 +32,7 @@ Le programme s’organise autour de **sept grands thèmes** officiels, plus un o
 
 ### De janvier aux vacances d’hiver
 
-**Chapitre 4 — Le Web (et votre propre site !).** *Vous allez comprendre ce qui se passe quand vous cliquez sur un lien : HTML, CSS, adresses, hypertexte… Et surtout, le temps fort de l’année : deux **projets**. D’abord, seul et en temps limité, vous reproduisez un petit site modèle ; puis, par groupes de trois, vous **concevez et réalisez votre propre mini-site** sur un lieu, un événement ou un thème **monégasque** de votre choix. À vous de créer quelque chose que l’on pourra vraiment afficher dans un navigateur.*
+**Chapitre 4 — Le Web (et votre propre site !).** *Vous allez comprendre ce qui se passe quand vous cliquez sur un lien : HTML, CSS, adresses, hypertexte… Et surtout, le temps fort de l’année : deux **projets**, dont les sujets vous seront **distribués à part** (ils ne figurent pas dans ce manuel). D’abord, seul et en temps limité, vous reproduirez un petit site modèle ; puis, par groupes de trois, vous **concevrez et réaliserez votre propre mini-site** sur un lieu, un événement ou un thème **monégasque** de votre choix. À vous de créer quelque chose que l’on pourra vraiment afficher dans un navigateur.*
 
 ### Des vacances d’hiver à celles de printemps
 
@@ -58,9 +58,9 @@ Nos **2 heures par semaine** mêlent plusieurs façons d’apprendre :
 
 - **des activités et des manipulations sur machine** : on programme un peu, on teste, on explore de vrais outils et de vraies données ;
 
-- **des débats et des exposés** : sur les réseaux sociaux, les données, la vie privée — ici, votre avis argumenté compte ;
+- **des débats et des exposés** : sur les réseaux sociaux, les données, la vie privée — ici, votre avis argumenté compte (les sujets d’exposé sont distribués à part) ;
 
-- **un mini-projet** : la création de votre propre page Web.
+- **un mini-projet** : la création de votre propre page Web (sujet distribué à part, hors de ce manuel).
 
 !!! encadre "Comment vous êtes évalué"
 

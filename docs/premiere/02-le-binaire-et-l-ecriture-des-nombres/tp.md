@@ -34,7 +34,7 @@
 
     - `"0" + s` vaut `"01011"` (concaténation) ; `"0" * 3` vaut `"000"` (répétition) ;
 
-    - `s[1:]` vaut `"011"` (tout sauf le premier caractère) ; plus généralement, la **tranche** `s[i:j]` est formée des caractères d’indices `i` à `j - 1` : `s[0:2]` vaut `"10"` ;
+    - `s[1:]` vaut `"011"` (tout sauf le premier caractère) ; plus généralement, la **tranche** `s[i:j]` est formée des caractères d’indices `i` à `j - 1` : `s[0:2]` vaut `"10"` (les tranches seront reprises au chapitre *Les types construits*) ;
 
     - `for c in s:` parcourt les caractères de gauche à droite ; `for i in range(len(s) - 1, -1, -1):` parcourt les *indices* de droite à gauche (utile pour les retenues) ;
 

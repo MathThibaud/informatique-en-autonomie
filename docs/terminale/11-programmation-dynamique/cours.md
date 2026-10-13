@@ -168,6 +168,8 @@ def rendu(somme, pieces, memo=None):
     return meilleur
 ```
 
+`float("inf")` est l’infini de Python, plus grand que tout nombre : la première solution trouvée le remplace toujours (voir l’encadré « Outil Python : l’infini » du projet Dijkstra, chapitre 8).
+
 **Version tabulée (bottom-up).** On remplit un tableau `table[s]` $= R(s)$ pour $s$ allant de $0$ à la somme voulue :
 
 ```python
