@@ -374,3 +374,13 @@ Pour un message donné, la fonction `fins` peut être appelée plusieurs fois av
         Le dictionnaire doit être **vide au début de chaque message** : un même couple `(num, i)` ne donne pas le même résultat pour deux messages différents.
 
 3.  Combien de couples `(num, i)` différents au plus pour un message de longueur $n$ et $R$ règles ? Que peut-on en dire sur la complexité ?
+
+!!! encadre "Un peu d’histoire : Chomsky, Backus, Naur et les grammaires"
+
+    **Un linguiste.** En 1956, le linguiste américain **Noam Chomsky** (né en 1928) publie *Three Models for the Description of Language*. Il y compare plusieurs façons de décrire une langue par des règles, du plus simple au plus puissant. Il montre que les modèles les plus simples, qui lisent une phrase de gauche à droite sans rien retenir d’autre qu’un « état » parmi un nombre fini, ne suffisent pas pour l’anglais : les constructions emboîtées comme « *if* … *then* … », qui peuvent contenir d’autres « *if* … *then* … », demandent de **compter**. C’est exactement la règle `11` de la partie 2 ($k$ fois `42` puis $k$ fois `31`), qu’aucune expression régulière ne sait décrire.
+
+    **Deux informaticiens.** En 1959, à la première conférence internationale sur le traitement de l’information (Unesco, Paris), **John Backus**, déjà l’inventeur du langage Fortran chez IBM, présente une notation pour décrire la syntaxe du nouveau langage ALGOL : chaque construction est définie par des règles qui peuvent se citer elles-mêmes, avec des alternatives séparées par une barre. Le Danois **Peter Naur** l’améliore et l’utilise pour rédiger le rapport ALGOL 60 (1960). En 1964, Donald Knuth propose d’appeler cette notation **BNF** (*Backus–Naur Form*). Les règles de l’énoncé, avec leurs `|` et leurs appels récursifs, en sont une version miniature.
+
+    **Et aujourd’hui.** La syntaxe de presque tous les langages de programmation est décrite par une grammaire de ce type ; celle de Python figure dans sa documentation officielle, et c’est à partir d’elle que l’interpréteur vérifie vos programmes avant de les exécuter (le message `SyntaxError` vient de là). Backus a reçu le prix Turing en 1977, Naur en 2005.
+
+    *Sources :* N. Chomsky, « Three Models for the Description of Language », *IRE Transactions on Information Theory*, 2 (1956), p. 113–124 ; P. Naur (éd.), « Report on the Algorithmic Language ALGOL 60 », *Communications of the ACM*, 3 (1960) ; D. Knuth, « Backus Normal Form vs. Backus Naur Form », *Communications of the ACM*, 7 (1964) ; site de l’ACM (lauréats du prix Turing).

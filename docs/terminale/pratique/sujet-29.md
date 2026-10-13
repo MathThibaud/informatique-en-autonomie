@@ -132,6 +132,38 @@
         assert recherche_rec([], 4, 0, -1) == -1
     ```
 
+    !!! encadre "Erreurs fréquentes"
+
+        - **`milieu = (debut + fin) / 2`** : la division `/` donne un flottant, et `tab[milieu]` provoque une `TypeError`. Il faut la division entière `//`.
+
+        - **`debut = milieu`** au lieu de `milieu + 1` : avec `tab = [1, 3]` et `x = 3`, on a `debut = 0`, `fin = 1`, `milieu = 0`, puis à nouveau `debut = 0` : la zone ne diminue plus et la boucle ne s’arrête jamais (en récursif : `RecursionError`).
+
+        - **Oublier le `return`** devant l’appel récursif : la valeur trouvée est perdue et la fonction renvoie `None`.
+
+        - **Travailler sur des tranches** au lieu de passer `debut` et `fin` :
+
+          ```python
+          def recherche_tranches(tab, x):
+              """Version a eviter : les tranches copient la liste"""
+              if tab == []:
+                  return -1
+              milieu = len(tab) // 2
+              if tab[milieu] == x:
+                  return milieu
+              elif tab[milieu] < x:
+                  return recherche_tranches(tab[milieu + 1:], x)
+              else:
+                  return recherche_tranches(tab[:milieu], x)
+          ```
+
+          `recherche_tranches([1, 3, 5, 7, 9], 9)` renvoie `1` et non `4` : c’est l’indice de `9` dans la tranche `[7, 9]`, pas dans le tableau. De plus, chaque tranche est une **copie** : copier la moitié du tableau à chaque appel coûte un temps proportionnel à $n$, et l’on perd tout le bénéfice du coût logarithmique.
+
+    !!! encadre "Un peu d’histoire : une idée simple, longtemps mal programmée"
+
+        D’après Donald Knuth, la recherche dichotomique est décrite pour la première fois en 1946 par **John Mauchly**, l’un des concepteurs de l’ENIAC, lors d’une série de cours à l’université de Pennsylvanie ; mais il faut attendre 1960 pour qu’une version publiée, due à Derrick Lehmer, fonctionne pour *toutes* les tailles de tableau. En 2006, **Joshua Bloch**, de Google, révèle que la recherche dichotomique de la bibliothèque standard de Java contenait une erreur depuis neuf ans : sur un tableau de plus d’un milliard d’éléments, la somme `debut + fin` dépassait le plus grand entier représentable et devenait négative. En Python, les entiers n’ont pas de taille maximale : cette erreur-là ne peut pas se produire, mais celles de l’encadré précédent, si.
+
+        *Sources :* D. Knuth, *The Art of Computer Programming*, vol. 3, § 6.2.1 ; J. Bloch, « Extra, Extra – Read All About It: Nearly All Binary Searches and Mergesorts are Broken », blog de Google Research, 2 juin 2006.
+
 *Durée de l’épreuve : 1 heure.*
 
 !!! encadre "Déroulement de l’épreuve"
@@ -309,3 +341,35 @@ Le dossier fourni au candidat comporte les éléments suivants :
         assert recherche_rec(tab, 2, 0, len(tab) - 1) == 0
         assert recherche_rec([], 4, 0, -1) == -1
     ```
+
+    !!! encadre "Erreurs fréquentes"
+
+        - **`milieu = (debut + fin) / 2`** : la division `/` donne un flottant, et `tab[milieu]` provoque une `TypeError`. Il faut la division entière `//`.
+
+        - **`debut = milieu`** au lieu de `milieu + 1` : avec `tab = [1, 3]` et `x = 3`, on a `debut = 0`, `fin = 1`, `milieu = 0`, puis à nouveau `debut = 0` : la zone ne diminue plus et la boucle ne s’arrête jamais (en récursif : `RecursionError`).
+
+        - **Oublier le `return`** devant l’appel récursif : la valeur trouvée est perdue et la fonction renvoie `None`.
+
+        - **Travailler sur des tranches** au lieu de passer `debut` et `fin` :
+
+          ```python
+          def recherche_tranches(tab, x):
+              """Version a eviter : les tranches copient la liste"""
+              if tab == []:
+                  return -1
+              milieu = len(tab) // 2
+              if tab[milieu] == x:
+                  return milieu
+              elif tab[milieu] < x:
+                  return recherche_tranches(tab[milieu + 1:], x)
+              else:
+                  return recherche_tranches(tab[:milieu], x)
+          ```
+
+          `recherche_tranches([1, 3, 5, 7, 9], 9)` renvoie `1` et non `4` : c’est l’indice de `9` dans la tranche `[7, 9]`, pas dans le tableau. De plus, chaque tranche est une **copie** : copier la moitié du tableau à chaque appel coûte un temps proportionnel à $n$, et l’on perd tout le bénéfice du coût logarithmique.
+
+    !!! encadre "Un peu d’histoire : une idée simple, longtemps mal programmée"
+
+        D’après Donald Knuth, la recherche dichotomique est décrite pour la première fois en 1946 par **John Mauchly**, l’un des concepteurs de l’ENIAC, lors d’une série de cours à l’université de Pennsylvanie ; mais il faut attendre 1960 pour qu’une version publiée, due à Derrick Lehmer, fonctionne pour *toutes* les tailles de tableau. En 2006, **Joshua Bloch**, de Google, révèle que la recherche dichotomique de la bibliothèque standard de Java contenait une erreur depuis neuf ans : sur un tableau de plus d’un milliard d’éléments, la somme `debut + fin` dépassait le plus grand entier représentable et devenait négative. En Python, les entiers n’ont pas de taille maximale : cette erreur-là ne peut pas se produire, mais celles de l’encadré précédent, si.
+
+        *Sources :* D. Knuth, *The Art of Computer Programming*, vol. 3, § 6.2.1 ; J. Bloch, « Extra, Extra – Read All About It: Nearly All Binary Searches and Mergesorts are Broken », blog de Google Research, 2 juin 2006.

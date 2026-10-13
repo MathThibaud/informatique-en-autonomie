@@ -367,7 +367,7 @@ t.done()
     t.done()
     ```
 
-### Défi
+### Défis
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Le damier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-13 }
 
@@ -413,5 +413,47 @@ t.done()
                 t.end_fill()
             else:                            # case blanche : contour seul
                 carre(cote)
+    t.done()
+    ```
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — La cible <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-14 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> On veut dessiner une cible de tir à l’arc : **cinq disques** de même centre `(0, 0)`, de rayons `100`, `80`, `60`, `40` et `20`, remplis alternativement en rouge et en blanc. *(On précise que* `t.circle(r)` *trace un cercle de rayon* `r` *dont le centre se trouve à* `r` *pas sur la **gauche** de la tortue.)*
+
+1.  La tortue est tournée vers la droite, comme au départ. En quel point doit-elle se trouver pour que `t.circle(100)` trace un cercle de centre `(0, 0)` ? Et pour `t.circle(r)` ?
+
+2.  Écrire une fonction `disque(r, couleur)` qui trace un disque de rayon `r`, de centre `(0, 0)`, rempli de la couleur `couleur`.
+
+3.  À l’aide d’une boucle `for` et de `disque`, dessiner la cible. Pourquoi faut-il commencer par le **plus grand** disque ?0
+
+    ??? pouce "Coup de pouce"
+
+        Le rayon du disque numéro `i` (pour `i` allant de `0` à `4`) vaut `100 - 20 * i`. La couleur dépend de la parité de `i`, comme les cases du damier.
+
+![](../figures/47384dd8e4deaa48.svg){ .tikz loading=lazy }
+
+??? corrige "Corrigé"
+
+    **1.** Tournée vers la droite, la tortue a sa gauche vers le haut : le centre du cercle est `r` pas **au-dessus** d’elle. Pour un centre en `(0, 0)`, elle doit partir de `(0, -100)` pour `t.circle(100)`, et de `(0, -r)` pour `t.circle(r)`.
+
+    **2. et 3.** Un cercle complet ramène la tortue à son point et à son orientation de départ : elle reste tournée vers la droite pour le disque suivant. On trace du plus grand au plus petit, car chaque disque rempli **recouvre** ce qui était dessiné dessous : en commençant par le plus petit, le disque de rayon `100`, tracé en dernier, cacherait tous les autres.
+
+    ```python
+    import turtle as t
+    def disque(r, couleur):
+        """Trace un disque de rayon r, de centre (0, 0), rempli de couleur."""
+        t.penup()
+        t.goto(0, -r)
+        t.pendown()
+        t.color(couleur)
+        t.begin_fill()
+        t.circle(r)
+        t.end_fill()
+
+    for i in range(5):
+        if i % 2 == 0:
+            disque(100 - 20 * i, "red")
+        else:
+            disque(100 - 20 * i, "white")
     t.done()
     ```

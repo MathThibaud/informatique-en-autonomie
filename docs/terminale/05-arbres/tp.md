@@ -1079,3 +1079,28 @@ Rédiger, en une dizaine de lignes, un bilan qui répond aux questions suivantes
     - Minimax : sur une feuille (condition d’arrêt), on renvoie le score de la partie ; si c’est à MAX de jouer, on renvoie le maximum des valeurs des fils ; si c’est à MIN, leur minimum. L’algorithme est récursif parce que la valeur d’un nœud se définit à partir des valeurs de ses fils, qui sont des sous-arbres de même nature.
 
     - La machine ne « réfléchit » pas : elle **énumère** toutes les suites possibles et applique une règle de calcul. Aux échecs, l’arbre est beaucoup trop grand pour être exploré en entier ; on combine alors l’élagage **alpha-bêta** (même résultat, beaucoup moins de positions) et une **profondeur limitée** avec une **fonction d’évaluation** (résultat approché).
+
+    !!! encadre "Pour aller plus loin : 549 946 nœuds, mais combien de positions différentes ?"
+
+        Dans l’arbre de jeu, une même grille apparaît très souvent : `X` en `0`, `O` en `4`, `X` en `8` donne la même position que `X` en `8`, `O` en `4`, `X` en `0`. Pour compter les positions **différentes**, on parcourt l’arbre comme `minimax`, en notant chaque grille rencontrée dans un dictionnaire dont les clés sont les grilles écrites sous forme de chaînes :
+
+        ```python
+        def noter_positions(grille, joueur, vues):
+            """Note dans vues les positions de l'arbre de jeu"""
+            vues["".join(grille)] = True       # cle deja presente : pas de doublon
+            if not est_finie(grille):
+                for c in coups_possibles(grille):
+                    noter_positions(jouer(grille, c, joueur), adversaire(joueur), vues)
+
+        vues = {}
+        noter_positions([VIDE] * 9, "X", vues)
+        print(len(vues))                       # 5478
+        ```
+
+        L’arbre a $549\,946$ nœuds, mais il n’y a que $5\,478$ positions différentes (dont $958$ parties finies) : `minimax` recalcule donc chaque position une centaine de fois en moyenne. Ranger la valeur de chaque position déjà calculée dans un dictionnaire, pour ne jamais la recalculer : ce sera l’idée centrale du chapitre Programmation dynamique.
+
+    !!! encadre "Un peu d’histoire : un morpion sur l’EDSAC (1952)"
+
+        En 1952, à l’université de Cambridge, **Alexander « Sandy » Douglas** (1921–2010) programme le morpion sur l’**EDSAC**, l’un des tout premiers ordinateurs à programme enregistré, dans le cadre de sa thèse sur les échanges entre l’homme et la machine. La grille s’affiche sur l’un des petits écrans cathodiques de la machine, prévus à l’origine pour montrer le contenu de la mémoire, et le joueur indique sa case avec un cadran de téléphone ; l’ordinateur joue sans jamais perdre. Avec le jeu de dames de Christopher Strachey, ce programme est l’un des premiers jeux affichés sur un écran électronique. Douglas ne lui avait pas donné de nom : on l’appelle aujourd’hui *OXO*, nom choisi par l’historien Martin Campbell-Kelly quand il a reconstitué l’EDSAC en simulation. Soixante-dix ans plus tard, ce TP fait la même chose en une trentaine de lignes.
+
+        *Sources :* article « OXO (video game) » de Wikipédia (en anglais) ; simulateur EDSAC de M. Campbell-Kelly (université de Warwick).

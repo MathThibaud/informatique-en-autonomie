@@ -1460,3 +1460,75 @@ def somme_impairs(n):
     ```
 
     **3.** Exécuter l’exemple que l’assistant donne lui-même : il annonce `9` pour `somme_impairs(5)`, la console affiche `4`. La réponse se contredit ; un seul appel suffisait. Le cas où `n` est lui-même impair est justement le cas limite à tester.
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 39</span> — Euclide en accéléré <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-39 }
+
+L’algorithme de l’exercice « PGCD (algorithme d’Euclide) » est décrit par le mathématicien grec **Euclide**, vers 300 av. J.-C., au livre VII de ses *Éléments* (propositions 1 et 2). L’informaticien **Donald Knuth** y voit le « grand-père de tous les algorithmes », le plus ancien algorithme non trivial encore utilisé aujourd’hui (*The Art of Computer Programming*, vol. 2, 1981, p. 318). Il a pourtant un défaut, que l’on va corriger.
+
+1.  <span class="run" title="À programmer et tester sur machine">▶</span> Reprendre la fonction `pgcd(a, b)` de l’exercice « PGCD » et y ajouter une variable `tours`, augmentée de 1 à chaque tour de boucle et affichée juste avant le `return`. Combien de tours faut-il pour `pgcd(1000, 3)` ?
+
+2.  Dans ce calcul, on retire `3` à `1000` encore et encore, tant que c’est possible. Quelle opération du cours donne **directement** ce qu’il reste à la fin de toutes ces soustractions ?
+
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> En déduire `pgcd_rapide(a, b)` : tant que `b` n’est pas nul, on remplace `a` par `b` et `b` par le reste de la division de `a` par `b` ; à la fin, `a` est le PGCD. Afficher aussi le nombre de tours : combien pour `pgcd_rapide(1000, 3)` ?0
+
+    ??? pouce "Coup de pouce"
+
+        Si l’on écrit `a = b` puis `b = a % b`, l’ancienne valeur de `a` est déjà perdue. Calculer d’abord le reste dans une variable `r`, puis faire les deux affectations.
+
+4.  **Justifier la terminaison** de `pgcd_rapide` : quelle quantité entière, positive, diminue strictement à chaque tour ?
+
+```text
+>>> pgcd_rapide(12, 18)
+3 tours
+6
+>>> pgcd_rapide(1071, 462)
+3 tours
+21
+```
+
+??? corrige "Corrigé"
+
+    **1.** On ajoute un compteur à la fonction de l’exercice « PGCD » :
+
+    ```python
+    def pgcd(a, b):
+        """Renvoie le PGCD de a et b (entiers strictement positifs)."""
+        tours = 0
+        while a != b:
+            if a > b:
+                a = a - b
+            else:
+                b = b - a
+            tours += 1
+        print(tours, "tours")
+        return a
+
+    print(pgcd(1000, 3))    # 335 tours, puis 1
+    ```
+
+    Il faut **335 tours** : 333 soustractions de 3 pour descendre de 1000 à 1, puis deux tours pour amener `b` de 3 à 1.
+
+    **2.** Retirer 3 autant de fois que possible à 1000, c’est faire la division euclidienne de 1000 par 3 : ce qui reste à la fin est le **reste** `1000 % 3`, qui vaut `1`.
+
+    **3.** On calcule d’abord le reste dans `r`, sinon l’ancienne valeur de `a` serait perdue :
+
+    ```python
+    def pgcd_rapide(a, b):
+        """Renvoie le PGCD de a et b (entiers strictement positifs)."""
+        tours = 0
+        while b != 0:
+            r = a % b
+            a = b
+            b = r
+            tours += 1
+        print(tours, "tours")
+        return a
+
+    print(pgcd_rapide(1000, 3))     # 2 tours, puis 1
+    print(pgcd_rapide(12, 18))      # 3 tours, puis 6
+    print(pgcd_rapide(1071, 462))   # 3 tours, puis 21
+    ```
+
+    Pour `pgcd_rapide(1000, 3)`, **2 tours** suffisent au lieu de 335. Si `a < b`, le premier tour échange simplement les deux nombres (`12 % 18` vaut `12`).
+
+    **4.** La quantité `b` est un entier positif ou nul, et elle **diminue strictement** à chaque tour, car le reste de la division par `b` est toujours strictement inférieur à `b`. Une telle quantité ne peut pas diminuer indéfiniment : elle finit par valoir `0`, et la boucle s’arrête.
