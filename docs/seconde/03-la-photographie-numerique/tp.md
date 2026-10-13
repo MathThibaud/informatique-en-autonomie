@@ -146,14 +146,9 @@ Le résultat attendu.
 
     3.  Modifier le rayon pour obtenir un disque **deux fois plus petit**.
 
-\begin{attention}{L'axe des $y$ est à l'envers !}
-L'origine $(0,0)$ est en \textbf{haut à gauche} et l'axe des $y$ est orienté \textbf{vers le bas} :
-un $y$ \emph{plus grand} correspond à un point \emph{plus bas} sur l'image. C'est l'\textbf{inverse}
-du repère habituel en mathématiques\,! Attention, donc, en écrivant vos \textbf{inégalités} :
-« vers le haut » signifie un $y$ \textbf{plus petit}, « vers le bas » un $y$ \textbf{plus grand}.
-Le mieux est de \textbf{tester} votre condition sur un pixel dont vous connaissez déjà la couleur
-(par exemple un coin).
-\end{attention}
+!!! encadre "$triangle$ L’axe des $y$ est à l’envers !"
+
+    L’origine $(0,0)$ est en **haut à gauche** et l’axe des $y$ est orienté **vers le bas** : un $y$ *plus grand* correspond à un point *plus bas* sur l’image. C’est l’**inverse** du repère habituel en mathématiques ! Attention, donc, en écrivant vos **inégalités** : « vers le haut » signifie un $y$ **plus petit**, « vers le bas » un $y$ **plus grand**. Le mieux est de **tester** votre condition sur un pixel dont vous connaissez déjà la couleur (par exemple un coin).
 
 ### Défi 2 : une diagonale (à compléter)
 
@@ -209,6 +204,189 @@ Vous avez maintenant les deux outils : le **cercle** et la **droite**. On peut a
     2.  **Bonus** : expliquer pourquoi certains drapeaux (avec une *étoile*, un *blason*…) sont presque impossibles à dessiner ainsi.
 
 **Crédits.** Les images de drapeaux de ce projet sont produites par les programmes Python qui les accompagnent (bibliothèque `PIL`). Les drapeaux nationaux ne sont pas protégés par le droit d’auteur ; couleurs et proportions d’après la Wikipédia anglaise.
+
+??? corrige "Corrigé de l'activité"
+
+    Notions du cours mobilisées
+
+    - **Pixel**, codage **RVB** (trois nombres de 0 à 255), **définition** et **résolution**.
+
+    - **Modifier une image par programme** (Python + PIL) : éclaircir, changer une couleur, c’est changer les valeurs des pixels.
+
+    - **Algorithmes des appareils** : HDR, débruitage, accentuation, embellissement automatique.
+
+    - **Une photo n’est plus une preuve** en soi : esprit critique (d’où vient l’image ? qui l’a publiée ?).
+
+    - **Métadonnées EXIF** : le fichier peut garder la trace du logiciel, mais elles s’effacent.
+
+    Arguments attendus
+
+    <table>
+    <thead>
+    <tr>
+    <th style="text-align: left;"><strong>POUR (oui) : toujours signaler</strong></th>
+    <th style="text-align: left;"><strong>CONTRE (non) : pas d’obligation générale</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Santé publique</strong> : des corps impossibles à atteindre abîment l’image de soi (doc. 1).</p></li>
+    <li><p><strong>Droit d’être informé</strong> : une retouche est souvent invisible, celui qui regarde doit savoir (cours).</p></li>
+    <li><p><strong>La loi le fait déjà</strong> pour la publicité et l’influence commerciale ; il suffit d’aller plus loin (doc. 1 et 2).</p></li>
+    <li><p><strong>Les filtres sont partout</strong> sur les réseaux, même hors publicité (doc. 2) : les jeunes se comparent à des images retouchées.</p></li>
+    <li><p><strong>Confiance</strong> : la presse montre qu’on peut fixer une règle claire (doc. 4).</p></li>
+    <li><p><strong>C’est techniquement simple</strong> : une mention, ou une trace dans les métadonnées (doc. 4).</p></li>
+    </ul></td>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Toute photo est déjà calculée</strong> par le smartphone (doc. 3, cours) : où placer la limite ?</p></li>
+    <li><p><strong>Mention inutile si elle est partout</strong> : on ne la lit plus (doc. 3).</p></li>
+    <li><p><strong>Liberté artistique</strong> : la retouche fait partie du travail du photographe depuis toujours (doc. 3).</p></li>
+    <li><p><strong>Impossible à contrôler</strong> pour des milliards de photos personnelles ; les métadonnées s’effacent (doc. 4).</p></li>
+    <li><p><strong>Distinguer les cas</strong> : la loi vise déjà ce qui trompe dans un but commercial (silhouette, visage) (doc. 1 et 2).</p></li>
+    <li><p><strong>Retouche légère <span class="math inline">≠</span> tromperie</strong> : corriger la lumière ne change pas ce que montre l’image (doc. 1 et 4).</p></li>
+    </ul></td>
+    </tr>
+    </tbody>
+    </table>
+
+    *Arguments de l’autre camp souvent jugés solides dans la trace écrite :* un élève POUR retient souvent « une mention mise sur toutes les photos finirait par ne plus être lue » ; un élève CONTRE, « une silhouette affinée dans une publicité trompe vraiment celui qui regarde ».
+
+    Questions de relance (pour le modérateur)
+
+    1.  Éclaircir une photo et affiner une silhouette : est-ce la même chose ? (pensez aux pixels et à ce que montre l’image)
+
+    2.  La retouche automatique du smartphone (doc. 3) doit-elle être signalée ?
+
+    3.  Pourquoi la loi vise-t-elle la publicité et les influenceurs, et pas vos photos de vacances (doc. 1 et 2) ?
+
+    4.  La règle de la presse (doc. 4) pourrait-elle s’appliquer aux réseaux sociaux ?
+
+    !!! encadre "Synthèse possible"
+
+        Retoucher une photo numérique, c’est **modifier les valeurs de ses pixels** : c’est facile, et le résultat peut être invisible. Toute photo de smartphone est déjà transformée par des algorithmes (HDR, débruitage). La loi française n’impose pas de signaler toute retouche, mais celles qui **trompent dans un but commercial** : la silhouette dans la publicité (« Photographie retouchée », 2017), la silhouette ou le visage dans l’influence commerciale (« Image retouchée », 2023). La presse s’impose des règles plus strictes encore : on ne touche pas au contenu. Face à une image, l’esprit critique reste indispensable : d’où vient-elle, qui l’a publiée, dans quel but ?
+
+??? corrige "Corrigé de l'activité"
+
+    Notions du cours mobilisées
+
+    - **Pixel**, codage **RVB** (trois nombres de 0 à 255), **définition** et **résolution**.
+
+    - **Modifier une image par programme** (Python + PIL) : éclaircir, changer une couleur, c’est changer les valeurs des pixels.
+
+    - **Algorithmes des appareils** : HDR, débruitage, accentuation, embellissement automatique.
+
+    - **Une photo n’est plus une preuve** en soi : esprit critique (d’où vient l’image ? qui l’a publiée ?).
+
+    - **Métadonnées EXIF** : le fichier peut garder la trace du logiciel, mais elles s’effacent.
+
+    Arguments attendus
+
+    <table>
+    <thead>
+    <tr>
+    <th style="text-align: left;"><strong>POUR (oui) : toujours signaler</strong></th>
+    <th style="text-align: left;"><strong>CONTRE (non) : pas d’obligation générale</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Santé publique</strong> : des corps impossibles à atteindre abîment l’image de soi (doc. 1).</p></li>
+    <li><p><strong>Droit d’être informé</strong> : une retouche est souvent invisible, celui qui regarde doit savoir (cours).</p></li>
+    <li><p><strong>La loi le fait déjà</strong> pour la publicité et l’influence commerciale ; il suffit d’aller plus loin (doc. 1 et 2).</p></li>
+    <li><p><strong>Les filtres sont partout</strong> sur les réseaux, même hors publicité (doc. 2) : les jeunes se comparent à des images retouchées.</p></li>
+    <li><p><strong>Confiance</strong> : la presse montre qu’on peut fixer une règle claire (doc. 4).</p></li>
+    <li><p><strong>C’est techniquement simple</strong> : une mention, ou une trace dans les métadonnées (doc. 4).</p></li>
+    </ul></td>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Toute photo est déjà calculée</strong> par le smartphone (doc. 3, cours) : où placer la limite ?</p></li>
+    <li><p><strong>Mention inutile si elle est partout</strong> : on ne la lit plus (doc. 3).</p></li>
+    <li><p><strong>Liberté artistique</strong> : la retouche fait partie du travail du photographe depuis toujours (doc. 3).</p></li>
+    <li><p><strong>Impossible à contrôler</strong> pour des milliards de photos personnelles ; les métadonnées s’effacent (doc. 4).</p></li>
+    <li><p><strong>Distinguer les cas</strong> : la loi vise déjà ce qui trompe dans un but commercial (silhouette, visage) (doc. 1 et 2).</p></li>
+    <li><p><strong>Retouche légère <span class="math inline">≠</span> tromperie</strong> : corriger la lumière ne change pas ce que montre l’image (doc. 1 et 4).</p></li>
+    </ul></td>
+    </tr>
+    </tbody>
+    </table>
+
+    *Arguments de l’autre camp souvent jugés solides dans la trace écrite :* un élève POUR retient souvent « une mention mise sur toutes les photos finirait par ne plus être lue » ; un élève CONTRE, « une silhouette affinée dans une publicité trompe vraiment celui qui regarde ».
+
+    Questions de relance (pour le modérateur)
+
+    1.  Éclaircir une photo et affiner une silhouette : est-ce la même chose ? (pensez aux pixels et à ce que montre l’image)
+
+    2.  La retouche automatique du smartphone (doc. 3) doit-elle être signalée ?
+
+    3.  Pourquoi la loi vise-t-elle la publicité et les influenceurs, et pas vos photos de vacances (doc. 1 et 2) ?
+
+    4.  La règle de la presse (doc. 4) pourrait-elle s’appliquer aux réseaux sociaux ?
+
+    !!! encadre "Synthèse possible"
+
+        Retoucher une photo numérique, c’est **modifier les valeurs de ses pixels** : c’est facile, et le résultat peut être invisible. Toute photo de smartphone est déjà transformée par des algorithmes (HDR, débruitage). La loi française n’impose pas de signaler toute retouche, mais celles qui **trompent dans un but commercial** : la silhouette dans la publicité (« Photographie retouchée », 2017), la silhouette ou le visage dans l’influence commerciale (« Image retouchée », 2023). La presse s’impose des règles plus strictes encore : on ne touche pas au contenu. Face à une image, l’esprit critique reste indispensable : d’où vient-elle, qui l’a publiée, dans quel but ?
+
+??? corrige "Corrigé de l'activité"
+
+    Notions du cours mobilisées
+
+    - **Pixel**, codage **RVB** (trois nombres de 0 à 255), **définition** et **résolution**.
+
+    - **Modifier une image par programme** (Python + PIL) : éclaircir, changer une couleur, c’est changer les valeurs des pixels.
+
+    - **Algorithmes des appareils** : HDR, débruitage, accentuation, embellissement automatique.
+
+    - **Une photo n’est plus une preuve** en soi : esprit critique (d’où vient l’image ? qui l’a publiée ?).
+
+    - **Métadonnées EXIF** : le fichier peut garder la trace du logiciel, mais elles s’effacent.
+
+    Arguments attendus
+
+    <table>
+    <thead>
+    <tr>
+    <th style="text-align: left;"><strong>POUR (oui) : toujours signaler</strong></th>
+    <th style="text-align: left;"><strong>CONTRE (non) : pas d’obligation générale</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Santé publique</strong> : des corps impossibles à atteindre abîment l’image de soi (doc. 1).</p></li>
+    <li><p><strong>Droit d’être informé</strong> : une retouche est souvent invisible, celui qui regarde doit savoir (cours).</p></li>
+    <li><p><strong>La loi le fait déjà</strong> pour la publicité et l’influence commerciale ; il suffit d’aller plus loin (doc. 1 et 2).</p></li>
+    <li><p><strong>Les filtres sont partout</strong> sur les réseaux, même hors publicité (doc. 2) : les jeunes se comparent à des images retouchées.</p></li>
+    <li><p><strong>Confiance</strong> : la presse montre qu’on peut fixer une règle claire (doc. 4).</p></li>
+    <li><p><strong>C’est techniquement simple</strong> : une mention, ou une trace dans les métadonnées (doc. 4).</p></li>
+    </ul></td>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Toute photo est déjà calculée</strong> par le smartphone (doc. 3, cours) : où placer la limite ?</p></li>
+    <li><p><strong>Mention inutile si elle est partout</strong> : on ne la lit plus (doc. 3).</p></li>
+    <li><p><strong>Liberté artistique</strong> : la retouche fait partie du travail du photographe depuis toujours (doc. 3).</p></li>
+    <li><p><strong>Impossible à contrôler</strong> pour des milliards de photos personnelles ; les métadonnées s’effacent (doc. 4).</p></li>
+    <li><p><strong>Distinguer les cas</strong> : la loi vise déjà ce qui trompe dans un but commercial (silhouette, visage) (doc. 1 et 2).</p></li>
+    <li><p><strong>Retouche légère <span class="math inline">≠</span> tromperie</strong> : corriger la lumière ne change pas ce que montre l’image (doc. 1 et 4).</p></li>
+    </ul></td>
+    </tr>
+    </tbody>
+    </table>
+
+    *Arguments de l’autre camp souvent jugés solides dans la trace écrite :* un élève POUR retient souvent « une mention mise sur toutes les photos finirait par ne plus être lue » ; un élève CONTRE, « une silhouette affinée dans une publicité trompe vraiment celui qui regarde ».
+
+    Questions de relance (pour le modérateur)
+
+    1.  Éclaircir une photo et affiner une silhouette : est-ce la même chose ? (pensez aux pixels et à ce que montre l’image)
+
+    2.  La retouche automatique du smartphone (doc. 3) doit-elle être signalée ?
+
+    3.  Pourquoi la loi vise-t-elle la publicité et les influenceurs, et pas vos photos de vacances (doc. 1 et 2) ?
+
+    4.  La règle de la presse (doc. 4) pourrait-elle s’appliquer aux réseaux sociaux ?
+
+    !!! encadre "Synthèse possible"
+
+        Retoucher une photo numérique, c’est **modifier les valeurs de ses pixels** : c’est facile, et le résultat peut être invisible. Toute photo de smartphone est déjà transformée par des algorithmes (HDR, débruitage). La loi française n’impose pas de signaler toute retouche, mais celles qui **trompent dans un but commercial** : la silhouette dans la publicité (« Photographie retouchée », 2017), la silhouette ou le visage dans l’influence commerciale (« Image retouchée », 2023). La presse s’impose des règles plus strictes encore : on ne touche pas au contenu. Face à une image, l’esprit critique reste indispensable : d’où vient-elle, qui l’a publiée, dans quel but ?
 
 ## <span class="etiquette">Projet 2</span> Retoucher un tableau célèbre en RVB
 
@@ -317,12 +495,96 @@ img.show()
 
 Les versions modifiées des deux tableaux sont produites par les programmes Python de ce projet.
 
-!!! danger "Conversion impossible"
-    Ce passage n'a pas pu être converti.
+0
+
+## <span class="etiquette">Débat</span> Faut-il obliger à signaler toute photo retouchée, dans la publicité comme sur les réseaux sociaux ?
+
+*retouche et transparence*
+
+<p class="infos-activite">Durée : 50 min</p>
+
+!!! consignes "Consignes"
+
+    - En classe entière. Les rôles sont tirés au sort : vous défendrez peut-être une position qui n’est pas la vôtre, c’est un excellent entraînement.
+
+    - Chaque argument s’appuie sur un **document** ci-dessous ou sur le **cours**. <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> Préparation sans IA ni recherche en ligne.
+
+    - Avant de commencer, notez sur votre cahier votre position de départ : oui, non ou je ne sais pas.
+
+**Rappel du cours.** Une image numérique est un tableau de **pixels**, chacun codé par trois nombres (**RVB**) : la modifier, c’est changer ces nombres, et quelques lignes de Python y suffisent. Les smartphones eux-mêmes retouchent chaque photo grâce à des **algorithmes** (HDR, débruitage, embellissement). Une retouche peut être invisible : une photo n’est donc plus une **preuve** en soi. Faut-il prévenir celui qui regarde ?
+
+!!! encadre "Les deux camps"
+
+    **Groupe POUR** — oui : toute photo retouchée diffusée en public (publicité, réseaux sociaux) doit être signalée.  
+    **Groupe CONTRE** — non : une telle obligation générale serait inutile ou impossible ; on peut la limiter à certains cas.
+
+Les documents
+
+!!! encadre "Document 1 — La mention « Photographie retouchée » (2017)"
+
+    Depuis le 1<sup>er</sup> octobre 2017, en France, les photographies à usage commercial (publicités, affiches, catalogues…) sur lesquelles la **silhouette** d’un mannequin a été modifiée par un logiciel, pour l’affiner ou l’épaissir, doivent porter la mention **« Photographie retouchée »**. L’annonceur qui l’oublie risque une amende de 37 500 €, pouvant aller jusqu’à 30 % des dépenses consacrées à la publicité. Le but affiché est la **santé publique** : limiter la diffusion d’images de corps impossibles à atteindre. Une retouche de la lumière, des couleurs ou de la peau n’est pas concernée.
+
+    Source : code de la santé publique, article L2133-2 ; décret n° 2017-738 du 4 mai 2017.
+
+!!! encadre "Document 2 — Les influenceurs aussi (2023)"
+
+    La loi française du 9 juin 2023 sur l’influence commerciale a étendu l’obligation aux **influenceurs** : lorsqu’ils font la promotion d’un produit ou d’un service, leurs photos et vidéos doivent porter la mention **« Image retouchée »** si un procédé de traitement d’image a affiné ou épaissi leur silhouette ou modifié l’apparence de leur visage ; un filtre qui transforme le visage est concerné. En revanche, une photo personnelle publiée sans aucun partenariat commercial n’est soumise à aucune obligation.
+
+    Source : loi n° 2023-451 du 9 juin 2023 visant à encadrer l’influence commerciale et à lutter contre les dérives des influenceurs sur les réseaux sociaux.
+
+!!! encadre "Document 3 — Toute photo est déjà retouchée ?"
+
+    Avant même que vous touchiez à une photo, votre smartphone l’a transformée : il combine plusieurs clichés (HDR), réduit le bruit, accentue les contours, parfois lisse la peau automatiquement. Les photographes, eux, ont toujours ajusté la lumière, le contraste ou le cadrage, déjà dans la chambre noire à l’époque de la pellicule. Pour beaucoup de photographes et d’artistes, imposer une mention sur toute image modifiée n’aurait pas de sens : il faudrait la mettre sur presque toutes les photos, et elle finirait par ne plus être lue. La vraie question serait alors : **à partir de quand une retouche trompe-t-elle** celui qui regarde ?
+
+    Source : d’après le cours (« Les algorithmes dans nos appareils »).
+
+!!! encadre "Document 4 — Photo de presse : interdit de toucher au contenu"
+
+    Pour une photo de presse, l’enjeu est la **confiance**. Le grand concours international de photojournalisme World Press Photo interdit d’ajouter, de retirer ou de déplacer un élément de l’image ; seuls des réglages raisonnables de lumière, de contraste et de couleur sont admis, et les photographes sélectionnés doivent fournir leurs fichiers d’origine. Des photos sélectionnées ont déjà été disqualifiées pour avoir enfreint ces règles. Les **métadonnées EXIF** d’un fichier peuvent indiquer le logiciel utilisé pour le modifier… mais elles s’effacent facilement.
+
+    Source : World Press Photo, règles d’inscription et code éthique du concours.
+
+Organisation du débat
+
+| **Rôle** | **Préparation (15 min), puis débat** |
+|:---|:---|
+| Groupe POUR ($\approx$ 1/3) | Défend **oui** : au moins trois arguments, chacun appuyé sur un document ou le cours ; prévoit la réponse à deux arguments adverses ; choisit qui ouvre et qui conclut. |
+| Groupe CONTRE ($\approx$ 1/3) | Défend **non** : même travail que le groupe POUR. |
+| Modérateur (1 ou 2) | Prépare deux questions de relance ; donne la parole en alternant les camps, tient le temps, recentre. Ne donne **pas** son avis. |
+| Secrétaire (1 ou 2) | Note au tableau, en deux colonnes POUR / CONTRE, chaque argument et le numéro du document cité. |
+| Observateurs (les autres) | Suivent deux ou trois élèves (citent-ils un document ? répondent-ils à l’argument précédent ?) et notent le meilleur argument de chaque camp. |
+
+| **Min.** | **Étape** | **Min.** | **Étape** |
+|---:|:---|---:|:---|
+| 0–3 | **Mise en place** : tirage des rôles, groupes face à face. | 26–38 | **Échanges** : 12 min, parole alternée entre les camps. |
+| 3–18 | **Préparation** en groupes, tableau d’arguments ci-dessous. | 38–42 | **Observateurs** : meilleur argument de chaque camp. |
+| 18–20 | **Ouverture** : le modérateur lit la question et les règles. | 42–44 | **Conclusions** : 1 min par groupe. |
+| 20–26 | **Prises de position** : 3 min POUR, puis 3 min CONTRE. | 44–50 | **Bilan** : trace écrite individuelle, puis vote. |
+
+!!! encadre "Règles de prise de parole"
+
+    - On lève la main, le modérateur donne la parole ; une seule personne à la fois, une minute au plus.
+
+    - On **argumente** (« je pense que… **parce que**… ») et on **cite** un document ou le cours (« d’après le document 2… »).
+
+    - On **répond à l’argument précédent** avant d’en avancer un nouveau : « vous dites que…, mais… ».
+
+    - On **respecte** : on critique une idée, jamais une personne ; pas de moquerie ; on ne raconte pas la vie privée de quelqu’un.
+
+Tableau d’arguments
+
+Recopier ce tableau sur le cahier et le compléter pendant le débat.
+
+| **Argument POUR (oui)** | **Doc.** | **Argument CONTRE (non)** | **Doc.** |
+|:------------------------|:---------|:--------------------------|:---------|
+| …                       |          | …                         |          |
+
+Trace écrite finale (individuelle)
+
+Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes, justifiez-la avec vos **deux meilleurs arguments**, dont **un argument de l’autre camp** que vous trouvez solide (avec le document qui l’appuie).
 
 ## Corrigé
 
 ??? corrige "Corrigé"
 
-    !!! danger "Conversion impossible"
-        Ce passage n'a pas pu être converti.
+    0
