@@ -249,6 +249,7 @@ class Converter:
 
     def extract_defs(self, s):
         """Retire les définitions locales ; renvoie (texte, defs_brutes, macros)."""
+        self.tcb_envs = {}
         defs = []
         macros = {}   # nom -> (nargs, default_opt, body, raw)
         envs = {}
@@ -296,10 +297,15 @@ class Converter:
                     e, i = read_arg(s, i)
                     envs[name.strip()] = (int(n) if n else 0, dflt, b, e)
                 elif cmd == 'newtcolorbox':
+                    _, i = read_opt(s, i)          # [use counter=...] avant le nom
                     name, i = read_arg(s, i)
                     n, i = read_opt(s, i)
                     dflt, i = read_opt(s, i)
                     b, i = read_arg(s, i)
+                    # boite locale (ex. « Document n --- titre » des fiches debat SNT) :
+                    # rendue comme un encadre dont le titre suit la cle title=
+                    if name.strip() not in BOXES:   # boites deja connues (navigateur...) : inchangees
+                        self.tcb_envs[name.strip()] = (int(n) if n else 0, keyval(b, 'title') or '')
                 elif cmd in ('def', 'gdef'):
                     mm = re.match(r'\s*\\([a-zA-Z@]+)((?:#\d)*)', s[i:])
                     i += mm.end()
@@ -490,6 +496,24 @@ class Converter:
                 continue
             s = re.sub(r'\\begin\{%s\}' % re.escape(name), lambda m, b=b: b, s)
             s = re.sub(r'\\end\{%s\}' % re.escape(name), lambda m, e=e: e, s)
+        # compteur protege des fiches debat : \makeatletter\@ifundefined{c@x}{...}{}\makeatother (sans rendu)
+        s = re.sub(r'\\makeatletter\s*\\@ifundefined\{[^{}]*\}\{[^{}]*\}\{[^{}]*\}\s*\\makeatother', '', s)
+        # boites tcolorbox locales : \begin{nom}{arg} -> encadre numerote (\thetcbcounter)
+        for name, (n, tpl) in self.tcb_envs.items():
+            debut = re.compile(r'\\begin\{%s\}' % re.escape(name))
+            out, k, num = [], 0, 0
+            for m in debut.finditer(s):
+                if m.start() < k:
+                    continue
+                num += 1
+                arg, j = read_arg(s, m.end()) if n else ('', m.end())
+                titre = tpl.replace('\\thetcbcounter', str(num)).replace('#1', arg.strip())
+                titre = titre.replace('~', ' ').replace('---', '—')
+                out.append(s[k:m.start()] + '\\begin{encadre}{%s}' % titre)
+                k = j
+            out.append(s[k:])
+            s = ''.join(out)
+            s = re.sub(r'\\end\{%s\}' % re.escape(name), r'\\end{encadre}', s)
         # macros locales textuelles : expansion
         for _ in range(4):
             before = s
@@ -635,6 +659,9 @@ class Converter:
         s = sub_macro(s, 'renewcommand', 2, 0, lambda o, a, st: '')
         s = sub_macro(s, 'scalebox', 2, 0, lambda o, a, st: a[1])
         s = sub_macro(s, 'resizebox', 3, 0, lambda o, a, st: a[2])
+        # \begin{adjustbox}{max width=...} ... \end{adjustbox} : on garde le contenu (tableau)
+        s = re.sub(r'\\begin\{adjustbox\}\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}', '', s)
+        s = s.replace('\\end{adjustbox}', '')
         s = sub_macro(s, 'up', 1, 0, lambda o, a, st: self.wrap(lambda x: '<sup>%s</sup>' % x, a[0]))
         s = re.sub(r'\\\\\s*\[[^\]]*\]', r'\\\\ ', s)
         s = outside_math(s, self.text_only)
