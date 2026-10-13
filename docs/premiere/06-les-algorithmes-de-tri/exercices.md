@@ -14,7 +14,7 @@
 
     - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
-### Comprendre : dérouler un tri à la main
+### Le tri par sélection
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Trace du tri par sélection <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-1 }
 
@@ -100,7 +100,119 @@ Sans machine, on trie `[7, 2, 5, 3, 8, 1]` par **sélection**. Recopier et compl
     </tbody>
     </table>
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Trace du tri par insertion <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-2 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — L’ingrédient : trouver le minimum <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-2 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `indice_min(t, debut)` qui renvoie l’indice du plus petit élément de la portion `t[debut:]` (des indices `debut` jusqu’à la fin). Cette fonction est le cœur du tri par sélection.
+
+```text
+>>> indice_min([9, 4, 7, 2, 8], 1)
+3
+```
+
+??? corrige "Corrigé"
+
+    ```python
+    def indice_min(t, debut):
+        i_min = debut
+        for j in range(debut + 1, len(t)):
+            if t[j] < t[i_min]:
+                i_min = j
+        return i_min
+    ```
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Remettre le tri par sélection dans l’ordre <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-3 }
+
+Voici les lignes de la fonction `tri_selection` du cours (recherche du minimum écrite en entier), **mélangées** et **sans indentation**. Les remettre dans le bon ordre et les indenter correctement, puis vérifier sur machine que `[5, 3, 8, 1]` devient `[1, 3, 5, 8]`.
+
+```text
+t[i_min] = temp
+for j in range(i + 1, n):
+i_min = j
+def tri_selection(t):
+temp = t[i]
+for i in range(n):
+if t[j] < t[i_min]:
+n = len(t)
+t[i] = t[i_min]
+i_min = i
+```
+
+??? corrige "Corrigé"
+
+    On retrouve les deux temps du cours : chercher le minimum de `t[i:]`, puis l’échanger avec `t[i]`.
+
+    ```python
+    def tri_selection(t):
+        n = len(t)
+        for i in range(n):
+            i_min = i
+            for j in range(i + 1, n):
+                if t[j] < t[i_min]:
+                    i_min = j
+            temp = t[i]
+            t[i] = t[i_min]
+            t[i_min] = temp
+    ```
+
+    À noter : `i_min = i` se place *avant* la boucle sur `j` (dans la boucle sur `i`) ; les trois lignes de l’échange sont *après* la boucle sur `j`, au même niveau que `i_min = i`. Avec `[5, 3, 8, 1]`, on obtient bien `[1, 3, 5, 8]`.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Le tri par sélection <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-4 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> En utilisant l’idée précédente, écrire `tri_selection(t)` qui trie le tableau `t` **en place** dans l’ordre croissant. Tester sur plusieurs exemples, dont un tableau vide et un tableau déjà trié.
+
+??? pouce "Coup de pouce"
+
+    À l’étape `i`, où faut-il chercher le minimum ? La fonction `indice_min` répond exactement à cette question ; il reste à échanger deux cases (variable temporaire).
+
+??? pouce "Coup de pouce 2 (début de solution)"
+
+    `def tri_selection(t):`  
+    `for i in range(len(t)):`  
+    `i_min = indice_min(t, i)`  
+    `...` (échange de `t[i]` et `t[i_min]`)
+
+??? corrige "Corrigé"
+
+    ```python
+    def tri_selection(t):
+        n = len(t)
+        for i in range(n):
+            i_min = indice_min(t, i)   # reutilise l'exercice precedent
+            temp = t[i]                # echange via variable temporaire
+            t[i] = t[i_min]
+            t[i_min] = temp
+    ```
+
+    Sur un tableau vide (`n = 0`), la boucle ne s’exécute pas : rien à trier, c’est correct. Sur un tableau déjà trié, chaque `indice_min` renvoie `i` : les échanges sont neutres, le tableau reste trié.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Dans l’autre sens <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-5 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `tri_selection_decroissant(t)` qui trie `t` du plus grand au plus petit. *Un seul caractère change par rapport au tri croissant : lequel ?*
+
+??? pouce "Coup de pouce"
+
+    Pour ranger du plus grand au plus petit, quel élément de la partie non triée faut-il amener en position `i` à chaque étape ?
+
+??? corrige "Corrigé"
+
+    On cherche le **maximum** au lieu du minimum : le seul changement est le sens de la comparaison (`>` au lieu de `<`).
+
+    ```python
+    def tri_selection_decroissant(t):
+        n = len(t)
+        for i in range(n):
+            i_max = i
+            for j in range(i + 1, n):
+                if t[j] > t[i_max]:    # seul changement : > au lieu de <
+                    i_max = j
+            temp = t[i]
+            t[i] = t[i_max]
+            t[i_max] = temp
+    ```
+
+### Le tri par insertion
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — Trace du tri par insertion <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-6 }
 
 Même tableau `[7, 2, 5, 3, 8, 1]`, trié cette fois par **insertion**. Donner l’état du tableau **après chaque insertion** (5 étapes), en soulignant la partie déjà triée.
 
@@ -173,133 +285,7 @@ Même tableau `[7, 2, 5, 3, 8, 1]`, trié cette fois par **insertion**. Donner l
     </tbody>
     </table>
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Qui a fait quoi ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-3 }
-
-On a photographié un tableau *en cours* de tri, juste après une étape : $$\texttt{[1, 2, 3, 8, 5, 9, 4, 7]}$$ On sait que le tri est soit une sélection, soit une insertion, et qu’on trie de gauche à droite. En observant la partie `[1, 2, 3]`, peut-on être sûr de laquelle il s’agit ? Justifier.
-
-??? pouce "Coup de pouce"
-
-    Dans chacun des deux tris, la partie triée de gauche contient-elle forcément les plus petits éléments du tableau ? Le tableau de départ est-il connu ?
-
-??? corrige "Corrigé"
-
-    On **ne peut pas** être certain. La partie gauche `[1, 2, 3]` est triée dans les deux cas. Mais l’indice décisif est ceci : en tri par **sélection**, la partie triée de gauche contient *à coup sûr les plus petits éléments du tableau, à leur place définitive*. Ici `[1, 2, 3]` sont bien les trois plus petits : c’est **compatible** avec une sélection (3 étapes faites). Mais c’est *aussi* compatible avec une insertion, si le tableau initial commençait déjà par de petites valeurs. Sans connaître le tableau de départ, on ne peut donc pas trancher. *(En revanche, si la partie gauche triée contenait une valeur qu’on sait **ne pas** être parmi les plus petites, ce serait forcément une insertion.)*
-
-### Le tri par sélection
-
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — L’ingrédient : trouver le minimum <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-4 }
-
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `indice_min(t, debut)` qui renvoie l’indice du plus petit élément de la portion `t[debut:]` (des indices `debut` jusqu’à la fin). Cette fonction est le cœur du tri par sélection.
-
-```text
->>> indice_min([9, 4, 7, 2, 8], 1)
-3
-```
-
-??? corrige "Corrigé"
-
-    ```python
-    def indice_min(t, debut):
-        i_min = debut
-        for j in range(debut + 1, len(t)):
-            if t[j] < t[i_min]:
-                i_min = j
-        return i_min
-    ```
-
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Remettre le tri par sélection dans l’ordre <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-5 }
-
-Voici les lignes de la fonction `tri_selection` du cours (recherche du minimum écrite en entier), **mélangées** et **sans indentation**. Les remettre dans le bon ordre et les indenter correctement, puis vérifier sur machine que `[5, 3, 8, 1]` devient `[1, 3, 5, 8]`.
-
-```text
-t[i_min] = temp
-for j in range(i + 1, n):
-i_min = j
-def tri_selection(t):
-temp = t[i]
-for i in range(n):
-if t[j] < t[i_min]:
-n = len(t)
-t[i] = t[i_min]
-i_min = i
-```
-
-??? corrige "Corrigé"
-
-    On retrouve les deux temps du cours : chercher le minimum de `t[i:]`, puis l’échanger avec `t[i]`.
-
-    ```python
-    def tri_selection(t):
-        n = len(t)
-        for i in range(n):
-            i_min = i
-            for j in range(i + 1, n):
-                if t[j] < t[i_min]:
-                    i_min = j
-            temp = t[i]
-            t[i] = t[i_min]
-            t[i_min] = temp
-    ```
-
-    À noter : `i_min = i` se place *avant* la boucle sur `j` (dans la boucle sur `i`) ; les trois lignes de l’échange sont *après* la boucle sur `j`, au même niveau que `i_min = i`. Avec `[5, 3, 8, 1]`, on obtient bien `[1, 3, 5, 8]`.
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Le tri par sélection <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-6 }
-
-<span class="run" title="À programmer et tester sur machine">▶</span> En utilisant l’idée précédente, écrire `tri_selection(t)` qui trie le tableau `t` **en place** dans l’ordre croissant. Tester sur plusieurs exemples, dont un tableau vide et un tableau déjà trié.
-
-??? pouce "Coup de pouce"
-
-    À l’étape `i`, où faut-il chercher le minimum ? La fonction `indice_min` répond exactement à cette question ; il reste à échanger deux cases (variable temporaire).
-
-??? pouce "Coup de pouce 2 (début de solution)"
-
-    `def tri_selection(t):`  
-    `for i in range(len(t)):`  
-    `i_min = indice_min(t, i)`  
-    `...` (échange de `t[i]` et `t[i_min]`)
-
-??? corrige "Corrigé"
-
-    ```python
-    def tri_selection(t):
-        n = len(t)
-        for i in range(n):
-            i_min = indice_min(t, i)   # reutilise l'exercice precedent
-            temp = t[i]                # echange via variable temporaire
-            t[i] = t[i_min]
-            t[i_min] = temp
-    ```
-
-    Sur un tableau vide (`n = 0`), la boucle ne s’exécute pas : rien à trier, c’est correct. Sur un tableau déjà trié, chaque `indice_min` renvoie `i` : les échanges sont neutres, le tableau reste trié.
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Dans l’autre sens <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-7 }
-
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `tri_selection_decroissant(t)` qui trie `t` du plus grand au plus petit. *Un seul caractère change par rapport au tri croissant : lequel ?*
-
-??? pouce "Coup de pouce"
-
-    Pour ranger du plus grand au plus petit, quel élément de la partie non triée faut-il amener en position `i` à chaque étape ?
-
-??? corrige "Corrigé"
-
-    On cherche le **maximum** au lieu du minimum : le seul changement est le sens de la comparaison (`>` au lieu de `<`).
-
-    ```python
-    def tri_selection_decroissant(t):
-        n = len(t)
-        for i in range(n):
-            i_max = i
-            for j in range(i + 1, n):
-                if t[j] > t[i_max]:    # seul changement : > au lieu de <
-                    i_max = j
-            temp = t[i]
-            t[i] = t[i_max]
-            t[i_max] = temp
-    ```
-
-### Le tri par insertion
-
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Compléter le tri par insertion <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-8 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 7</span> — Compléter le tri par insertion <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-7 }
 
 Compléter les cinq trous `.....` de cette fonction de tri par insertion, puis la tester sur `[4, 2, 5, 1]`.
 
@@ -332,6 +318,18 @@ def tri_insertion(t):
     ```
 
     Sur `[4, 2, 5, 1]`, on obtient `[1, 2, 4, 5]`. On pose `x` en `t[j + 1]` car la boucle s’est arrêtée sur une case `j` qui *ne doit pas* bouger (ou sur `j = -1`).
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Qui a fait quoi ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-8 }
+
+On a photographié un tableau *en cours* de tri, juste après une étape : $$\texttt{[1, 2, 3, 8, 5, 9, 4, 7]}$$ On sait que le tri est soit une sélection, soit une insertion, et qu’on trie de gauche à droite. En observant la partie `[1, 2, 3]`, peut-on être sûr de laquelle il s’agit ? Justifier.
+
+??? pouce "Coup de pouce"
+
+    Dans chacun des deux tris, la partie triée de gauche contient-elle forcément les plus petits éléments du tableau ? Le tableau de départ est-il connu ?
+
+??? corrige "Corrigé"
+
+    On **ne peut pas** être certain. La partie gauche `[1, 2, 3]` est triée dans les deux cas. Mais l’indice décisif est ceci : en tri par **sélection**, la partie triée de gauche contient *à coup sûr les plus petits éléments du tableau, à leur place définitive*. Ici `[1, 2, 3]` sont bien les trois plus petits : c’est **compatible** avec une sélection (3 étapes faites). Mais c’est *aussi* compatible avec une insertion, si le tableau initial commençait déjà par de petites valeurs. Sans connaître le tableau de départ, on ne peut donc pas trancher. *(En revanche, si la partie gauche triée contenait une valeur qu’on sait **ne pas** être parmi les plus petites, ce serait forcément une insertion.)*
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Le tri par insertion <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-9 }
 
@@ -396,9 +394,80 @@ Modifier `tri_insertion` en `tri_insertion_compte(t)` qui renvoie le **nombre to
     **1.** Sur `[1, 2, 3, 4, 5]` : **0** décalage — la condition `t[j] > x` est fausse d’emblée à chaque étape. C’est le *meilleur cas*, coût linéaire.  
     **2.** Sur `[5, 4, 3, 2, 1]` : **10** décalages, soit $\frac{n(n-1)}{2}$ pour $n=5$. Chaque nouvel élément doit remonter tout au début : c’est le *pire cas*, coût quadratique.
 
+### Le coût d’un tri
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 11</span> — Linéaire ou quadratique ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-11 }
+
+Pour chacune des affirmations, répondre par vrai ou faux et justifier.
+
+1.  Le tri par sélection fait le même nombre de comparaisons, que le tableau soit trié ou non.
+
+2.  Le tri par insertion est plus rapide sur un tableau déjà trié.
+
+3.  Doubler la taille d’un tableau multiplie par 2 le temps d’un tri quadratique.
+
+??? corrige "Corrigé"
+
+    **1. Vrai.** Le tri par sélection compare toujours $\frac{n(n-1)}{2}$ paires, que le tableau soit trié ou non : il ne « profite » jamais d’un tableau déjà ordonné.  
+    **2. Vrai.** Sur un tableau déjà trié, la boucle `while` de l’insertion ne décale rien : coût linéaire, bien meilleur.  
+    **3. Faux.** Un coût quadratique varie comme $n^2$ : doubler $n$ multiplie le temps par $\mathbf{4}$, pas par 2.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Compter les comparaisons de la sélection <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-12 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `nb_comparaisons_selection(t)` qui trie `t` par sélection **et** renvoie le nombre de comparaisons `t[j] < t[i_min]` effectuées.
+
+1.  Combien vaut ce nombre pour un tableau de 5 éléments ? de 10 ?
+
+2.  Vérifier expérimentalement la formule $\dfrac{n(n-1)}{2}$ vue en cours.
+
+    ??? pouce "Coup de pouce"
+
+        Repartir du tri par sélection du cours, où la recherche du minimum est écrite en entier : la comparaison à compter y apparaît une seule fois. Un compteur augmenté de 1 à chaque fois qu’elle est évaluée suffit.
+
+??? corrige "Corrigé"
+
+    ```python
+    def nb_comparaisons_selection(t):
+        n = len(t)
+        c = 0
+        for i in range(n):
+            i_min = i
+            for j in range(i + 1, n):
+                c = c + 1              # une comparaison t[j] < t[i_min]
+                if t[j] < t[i_min]:
+                    i_min = j
+            temp = t[i]
+            t[i] = t[i_min]
+            t[i_min] = temp
+        return c
+    ```
+
+    **1.** Pour $n = 5$ : $\frac{5 \times 4}{2} = 10$ comparaisons. Pour $n = 10$ : $\frac{10 \times 9}{2} = 45$.  
+    **2.** Quel que soit le contenu du tableau, on obtient toujours $\frac{n(n-1)}{2}$ : le nombre de comparaisons ne dépend que de la **taille**, ce qui confirme le coût quadratique.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Vérifier qu’un tableau est trié <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-13 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `est_trie(t)` qui renvoie `True` si `t` est trié dans l’ordre croissant, `False` sinon (s’arrêter dès qu’on trouve une « descente »). Quel est son coût ? À quoi peut servir cette fonction pour *tester* vos tris ?
+
+??? pouce "Coup de pouce"
+
+    Comparer chaque élément à son voisin de droite : quel est le dernier indice `i` pour lequel `t[i + 1]` existe ?
+
+??? corrige "Corrigé"
+
+    ```python
+    def est_trie(t):
+        for i in range(len(t) - 1):
+            if t[i] > t[i + 1]:   # une descente : pas trie
+                return False
+        return True
+    ```
+
+    Coût **linéaire** (un seul parcours), avec arrêt anticipé dès la première descente. Elle sert de **test** : après avoir appliqué un tri, on peut vérifier que `est_trie(t)` vaut `True` et que `t` contient bien les mêmes éléments qu’au départ.
+
 ### Exercice guidé : le tri à bulles
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Construire le tri à bulles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-11 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Construire le tri à bulles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-14 }
 
 Le **tri à bulles** compare les éléments *voisins* et les échange s’ils sont dans le désordre. À force de passages, les grandes valeurs « remontent » comme des bulles vers la fin du tableau.
 
@@ -477,77 +546,6 @@ Le **tri à bulles** compare les éléments *voisins* et les échange s’ils so
     ```
 
     Sur un tableau déjà trié, le **premier** passage ne fait aucun échange : la fonction s’arrête après **un seul** passage (coût linéaire).
-
-### Le coût d’un tri
-
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 12</span> — Linéaire ou quadratique ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-12 }
-
-Pour chacune des affirmations, répondre par vrai ou faux et justifier.
-
-1.  Le tri par sélection fait le même nombre de comparaisons, que le tableau soit trié ou non.
-
-2.  Le tri par insertion est plus rapide sur un tableau déjà trié.
-
-3.  Doubler la taille d’un tableau multiplie par 2 le temps d’un tri quadratique.
-
-??? corrige "Corrigé"
-
-    **1. Vrai.** Le tri par sélection compare toujours $\frac{n(n-1)}{2}$ paires, que le tableau soit trié ou non : il ne « profite » jamais d’un tableau déjà ordonné.  
-    **2. Vrai.** Sur un tableau déjà trié, la boucle `while` de l’insertion ne décale rien : coût linéaire, bien meilleur.  
-    **3. Faux.** Un coût quadratique varie comme $n^2$ : doubler $n$ multiplie le temps par $\mathbf{4}$, pas par 2.
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Compter les comparaisons de la sélection <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-13 }
-
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `nb_comparaisons_selection(t)` qui trie `t` par sélection **et** renvoie le nombre de comparaisons `t[j] < t[i_min]` effectuées.
-
-1.  Combien vaut ce nombre pour un tableau de 5 éléments ? de 10 ?
-
-2.  Vérifier expérimentalement la formule $\dfrac{n(n-1)}{2}$ vue en cours.
-
-    ??? pouce "Coup de pouce"
-
-        Repartir du tri par sélection du cours, où la recherche du minimum est écrite en entier : la comparaison à compter y apparaît une seule fois. Un compteur augmenté de 1 à chaque fois qu’elle est évaluée suffit.
-
-??? corrige "Corrigé"
-
-    ```python
-    def nb_comparaisons_selection(t):
-        n = len(t)
-        c = 0
-        for i in range(n):
-            i_min = i
-            for j in range(i + 1, n):
-                c = c + 1              # une comparaison t[j] < t[i_min]
-                if t[j] < t[i_min]:
-                    i_min = j
-            temp = t[i]
-            t[i] = t[i_min]
-            t[i_min] = temp
-        return c
-    ```
-
-    **1.** Pour $n = 5$ : $\frac{5 \times 4}{2} = 10$ comparaisons. Pour $n = 10$ : $\frac{10 \times 9}{2} = 45$.  
-    **2.** Quel que soit le contenu du tableau, on obtient toujours $\frac{n(n-1)}{2}$ : le nombre de comparaisons ne dépend que de la **taille**, ce qui confirme le coût quadratique.
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Vérifier qu’un tableau est trié <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-14 }
-
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `est_trie(t)` qui renvoie `True` si `t` est trié dans l’ordre croissant, `False` sinon (s’arrêter dès qu’on trouve une « descente »). Quel est son coût ? À quoi peut servir cette fonction pour *tester* vos tris ?
-
-??? pouce "Coup de pouce"
-
-    Comparer chaque élément à son voisin de droite : quel est le dernier indice `i` pour lequel `t[i + 1]` existe ?
-
-??? corrige "Corrigé"
-
-    ```python
-    def est_trie(t):
-        for i in range(len(t) - 1):
-            if t[i] > t[i + 1]:   # une descente : pas trie
-                return False
-        return True
-    ```
-
-    Coût **linéaire** (un seul parcours), avec arrêt anticipé dès la première descente. Elle sert de **test** : après avoir appliqué un tri, on peut vérifier que `est_trie(t)` vaut `True` et que `t` contient bien les mêmes éléments qu’au départ.
 
 ### Synthèse : vers le bac et au-delà
 

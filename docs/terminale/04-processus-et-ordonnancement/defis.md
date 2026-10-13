@@ -22,6 +22,8 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
+*Ce défi mobilise la notion d’effet de bord vue au chapitre 2 : la fonction `tour` doit renvoyer une nouvelle grille sans modifier l’ancienne. Il fait aussi écho à ce chapitre : toutes les cases changent « en même temps », et lire un état pendant qu’on le modifie donne des résultats incohérents, comme deux processus qui accèdent sans précaution à une même ressource.*
+
 ## Lire l’énoncé
 
 Vocabulaire utile pour lire le texte original :

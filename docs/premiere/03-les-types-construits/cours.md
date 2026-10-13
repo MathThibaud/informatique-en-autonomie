@@ -252,7 +252,7 @@ for i, note in enumerate(notes):
 
 !!! remarque "Remarque — Pourquoi la méthode 1 ne modifie pas le tableau"
 
-    Dans `for note in notes`, la variable `note` est un *nouveau* nom qui pointe tour à tour vers chaque élément. Lui réaffecter `note = note + 1` le fait pointer ailleurs, **sans toucher** au tableau. Pour modifier, il faut l’indice (méthode 2).
+    Dans `for note in notes`, la variable `note` est un *nouveau* nom qui pointe tour à tour vers chaque élément. Lui réaffecter `note = note + 1` le fait pointer ailleurs, **sans toucher** au tableau. Pour modifier, il faut l’indice (méthode 2). Ces deux parcours deviendront un patron général (somme, recherche, maximum) au chapitre *Algorithmique : le parcours séquentiel*.
 
 ### Construction par compréhension (capacité attendue)
 
@@ -481,7 +481,7 @@ Dans un tableau, l’étiquette d’accès est **imposée** : un indice $0, 1, 2
 
 !!! remarque "Remarque — Tableau associatif = enregistrement"
 
-    Le nom savant est **tableau associatif**. C’est l’outil idéal pour une *fiche* : `{"nom": "Ada", "annee": 1815, "domaine": "informatique"}`.
+    Le nom savant est **tableau associatif**. C’est l’outil idéal pour une *fiche* : `{"nom": "Ada", "annee": 1815, "domaine": "informatique"}`. Au chapitre *Les données en tables*, une table entière sera une liste de telles fiches.
 
 ### Ajouter, modifier, supprimer
 

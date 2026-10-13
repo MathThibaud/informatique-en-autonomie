@@ -28,20 +28,7 @@ Pour chaque affirmation sur une fonction `racine_carree(x)`, dire s’il s’agi
 
     \(a\) **précondition** (condition sur l’argument `x`) ; (b) **postcondition** (garantie sur le résultat) ; (c) **postcondition**.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Une docstring pour `division_euclidienne` <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-2 }
-
-Donner une chaîne de documentation (rôle, précondition, postcondition) à la fonction `division_euclidienne` vue dans le cours.
-
-??? corrige "Corrigé"
-
-    ```python
-    def division_euclidienne(a, b):
-        """Renvoie (q, r), quotient et reste de la division de a par b.
-        Precondition : a >= 0 et b > 0.
-        Postcondition : a == q * b + r, 0 <= r et r < b."""
-    ```
-
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Prototyper puis documenter <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-3 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Prototyper puis documenter <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-2 }
 
 Écrire l’en-tête (`def`…) **et** la docstring d’une fonction `puissance(x, n)` qui calcule `x` à la puissance `n`, pour `n` entier positif ou nul. On n’écrit *pas* le corps.
 
@@ -54,43 +41,9 @@ Donner une chaîne de documentation (rôle, précondition, postcondition) à la 
         Postcondition : renvoie x**n (et 1 si n == 0)."""
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Un meilleur nom <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-4 }
-
-Cette fonction « marche », mais se lit mal.
-
-```python
-def f(t):
-    s = 0
-    for i in range(len(t)):
-        s = s + t[i]
-    return s
-```
-
-Lui donner : (a) un **nom** explicite, (b) une **docstring**, (c) un **invariant** de boucle, (d) trois **tests**.
-
-??? pouce "Coup de pouce"
-
-    Commencer par l’essayer sur `[1, 2, 3]` : que calcule-t-elle ? Pour l’invariant : que contient `s` au début du tour d’indice `i` ? Pour les tests, penser au tableau vide.
-
-??? corrige "Corrigé"
-
-    ```python
-    def somme(t):
-        """Renvoie la somme des elements du tableau t (0 si t est vide)."""
-        s = 0
-        for i in range(len(t)):
-            # invariant : s == t[0] + t[1] + ... + t[i-1]
-            s = s + t[i]
-        return s
-
-    assert somme([]) == 0
-    assert somme([5]) == 5
-    assert somme([1, 2, 3, 4]) == 10
-    ```
-
 ### Programmation défensive
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Poser un garde-fou <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-5 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Poser un garde-fou <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-3 }
 
 Ajouter à la fonction `puissance(x, n)` une ligne `assert` qui garantit sa précondition, avec un message clair. Que se passe-t-il si on appelle `puissance(2, -3)` ?
 
@@ -107,7 +60,7 @@ Ajouter à la fonction `puissance(x, n)` une ligne `assert` qui garantit sa pré
 
     `puissance(2, -3)` déclenche `AssertionError: l’exposant doit etre positif ou nul` : le programme s’interrompt immédiatement, à l’endroit du vrai problème.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — `assert` ou `None` ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-6 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — `assert` ou `None` ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-4 }
 
 On écrit `premier_element(t)` qui renvoie le premier élément d’un tableau.
 
@@ -145,7 +98,7 @@ On écrit `premier_element(t)` qui renvoie le premier élément d’un tableau.
         print(r)
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Le piège de `-1` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-7 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Le piège de `-1` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-5 }
 
 Une fonction `indice_de(v, t)` renvoie l’indice de `v` dans `t`, et `-1` si `v` est absente. Cette convention est courante (on la trouve dans des sujets de bac). Montrer, sur un exemple, le **piège** qu’elle tend au code appelant en Python, puis écrire ce code appelant correctement. Quelle autre convention évite ce piège ?
 
@@ -159,7 +112,7 @@ Une fonction `indice_de(v, t)` renvoie l’indice de `v` dans `t`, et `-1` si `v
 
 ### Tester ses programmes
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Tests pour `puissance` <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-8 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — Tests pour `puissance` <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-6 }
 
 Écrire un bon jeu de tests (au moins quatre `assert`) pour `puissance(x, n)`. On pensera au **cas limite** `n = 0`.
 
@@ -173,7 +126,7 @@ Une fonction `indice_de(v, t)` renvoie l’indice de `v` dans `t`, et `-1` si `v
     assert puissance(1, 100) == 1
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Trouver le contre-exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-9 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Trouver le contre-exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-7 }
 
 On prétend que la fonction suivante teste l’appartenance de `v` au tableau `t`.
 
@@ -222,7 +175,7 @@ Donner un jeu de tests, dont un `assert` qui **échoue** et prouve que la foncti
         return False
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Deux erreurs pour le prix d’une <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-10 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Deux erreurs pour le prix d’une <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-8 }
 
 Même énoncé pour cette autre version.
 
@@ -253,7 +206,7 @@ Donner des tests montrant **deux** raisons distinctes pour lesquelles elle est f
 
     Correction : renvoyer `True` dès qu’on trouve, `False` après le parcours complet.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Un bon jeu de tests <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-11 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Un bon jeu de tests <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-9 }
 
 Une fonction `est_pair(n)` renvoie un booléen. En s’appuyant sur la check-list du cours, lister les **cas** qu’un bon jeu de tests doit couvrir, puis écrire les `assert` correspondants.
 
@@ -273,7 +226,7 @@ Une fonction `est_pair(n)` renvoie un booléen. En s’appuyant sur la check-lis
     assert est_pair(-3) == False   # negatif impair
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 12</span> — Des tests qui démasquent <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-12 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Des tests qui démasquent <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-10 }
 
 La fonction `est_trie(t)` doit renvoyer `True` si les éléments du tableau `t` sont rangés dans l’ordre croissant au sens large (`[2, 2, 5]` est trié), `False` sinon. Trois élèves en proposent chacun une version.
 
@@ -330,7 +283,7 @@ def est_trie_3(t):
 
 ### Corriger les erreurs (déboguer)
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — La chasse au bug <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-13 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — La chasse au bug <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-11 }
 
 La fonction doit renvoyer le plus petit élément d’un tableau non vide.
 
@@ -372,7 +325,7 @@ def minimum(t):
     assert minimum([7]) == 7
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Débogage guidé par l’affichage <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-14 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Débogage guidé par l’affichage <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-12 }
 
 La fonction doit renvoyer le nombre d’éléments **strictement positifs** d’un tableau.
 
@@ -408,7 +361,77 @@ Elle renvoie `1` pour `[3, 8, -2, 5]` alors qu’on attend `3`. En imaginant un 
     assert nb_positifs([-1, -2]) == 0
     ```
 
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Une fonction spécifiée par un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-05-13 }
+
+Un élève demande à un assistant d’IA : « Écris une fonction `nb_chiffres(n)` qui renvoie le nombre de chiffres d’un entier positif, avec sa docstring et un jeu de tests. » Voici la réponse obtenue.
+
+```python
+def nb_chiffres(n):
+    """Renvoie le nombre de chiffres de l'entier n.
+    Precondition : n >= 0. Par convention nb_chiffres(0) vaut 1."""
+    compteur = 0
+    while n > 0:
+        n = n // 10
+        compteur = compteur + 1
+    return compteur
+
+assert nb_chiffres(2024) == 4
+assert nb_chiffres(7) == 1
+assert nb_chiffres(0) == 1
+```
+
+« À chaque tour, on retire le dernier chiffre par division entière et on compte ; la boucle s’arrête quand il ne reste plus rien. Les trois tests couvrent un cas général, un cas à un chiffre et le cas limite `0` : ils passent tous. »
+
+1.  La réponse est-elle correcte ? Exécuter le fichier tel quel (ou faire la trace de `nb_chiffres(0)`).
+
+2.  Localiser et corriger l’erreur, sans changer la spécification.
+
+3.  Quelle vérification simple, faite avant de faire confiance à la réponse, aurait suffi à détecter l’erreur ?
+
+??? pouce "Coup de pouce"
+
+    Dérouler à la main `nb_chiffres(0)` : combien de tours fait la boucle `while n > 0` ? Que vaut alors `compteur` ?
+
+??? corrige "Corrigé"
+
+    \(a\) Non. Pour `n = 0`, la condition `n > 0` est fausse dès le départ : la boucle n’est jamais exécutée et la fonction renvoie `0`. Les deux premiers tests passent (`4` et `1`), le troisième échoue :
+
+    ```text
+    Traceback (most recent call last):
+      File "nb_chiffres.py", line 12, in <module>
+        assert nb_chiffres(0) == 1
+    AssertionError
+    ```
+
+    \(b\) La fonction ne respecte pas sa propre spécification sur le cas limite `0`. On compte un chiffre d’office et on boucle tant qu’il en reste au moins un autre (`n >= 10`) :
+
+    ```python
+    def nb_chiffres(n):
+        """Renvoie le nombre de chiffres de l'entier n.
+        Precondition : n >= 0. Par convention nb_chiffres(0) vaut 1."""
+        compteur = 1
+        while n >= 10:
+            n = n // 10
+            compteur = compteur + 1
+        return compteur
+    ```
+
+    Les trois `assert` passent. (c) Exécuter le jeu de tests fourni au lieu de croire la phrase « ils passent tous » : l’assistant a écrit le bon test (le cas limite) sans le lancer. Un test qu’on n’exécute pas ne vérifie rien.
+
 ### Invariant de boucle
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 14</span> — Une docstring pour `division_euclidienne` <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-14 }
+
+Donner une chaîne de documentation (rôle, précondition, postcondition) à la fonction `division_euclidienne` vue dans le cours.
+
+??? corrige "Corrigé"
+
+    ```python
+    def division_euclidienne(a, b):
+        """Renvoie (q, r), quotient et reste de la division de a par b.
+        Precondition : a >= 0 et b > 0.
+        Postcondition : a == q * b + r, 0 <= r et r < b."""
+    ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Énoncer un invariant <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-15 }
 
@@ -430,7 +453,41 @@ def puissance(x, n):
 
     Invariant, juste avant le tour d’indice `i` : `r == x ** i` (r est `x` multiplié par lui-même `i` fois). Vrai au départ (`i = 0`, `r = 1 = x**0`). Préservé : si `r == x**i`, alors après `r = r * x` et le passage à `i+1` on a `r == x**(i+1)`. À la sortie, `i` a atteint `n`, donc `r == x**n` : le résultat attendu.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 16</span> — Invariant et `assert` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-16 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Un meilleur nom <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-16 }
+
+Cette fonction « marche », mais se lit mal.
+
+```python
+def f(t):
+    s = 0
+    for i in range(len(t)):
+        s = s + t[i]
+    return s
+```
+
+Lui donner : (a) un **nom** explicite, (b) une **docstring**, (c) un **invariant** de boucle, (d) trois **tests**.
+
+??? pouce "Coup de pouce"
+
+    Commencer par l’essayer sur `[1, 2, 3]` : que calcule-t-elle ? Pour l’invariant : que contient `s` au début du tour d’indice `i` ? Pour les tests, penser au tableau vide.
+
+??? corrige "Corrigé"
+
+    ```python
+    def somme(t):
+        """Renvoie la somme des elements du tableau t (0 si t est vide)."""
+        s = 0
+        for i in range(len(t)):
+            # invariant : s == t[0] + t[1] + ... + t[i-1]
+            s = s + t[i]
+        return s
+
+    assert somme([]) == 0
+    assert somme([5]) == 5
+    assert somme([1, 2, 3, 4]) == 10
+    ```
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 17</span> — Invariant et `assert` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-17 }
 
 On somme les éléments d’un tableau.
 
@@ -476,7 +533,7 @@ def somme(t):
 
     \(c\) Pendant la mise au point, Python **vérifie l’invariant à chaque tour** : si une erreur casse la logique de l’accumulation, l’`AssertionError` se déclenche *tout de suite*, au tour fautif, au lieu de laisser un résultat faux apparaître à la fin.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 17</span> — Une division qui se trompe parfois <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-17 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 18</span> — Une division qui se trompe parfois <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-18 }
 
 Cette fonction doit renvoyer le couple `(q, r)` du quotient et du reste de la division euclidienne de `a` par `b`, pour `a` entier positif ou nul et `b` entier strictement positif.
 
@@ -546,7 +603,7 @@ def division(a, b):
 
 ### Diversité des langages et bibliothèques
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 18</span> — Compilé ou interprété ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-18 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 19</span> — Compilé ou interprété ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-19 }
 
 Pour chacune des affirmations, indiquer si elle décrit plutôt un langage **compilé** ou **interprété**, et justifier en une phrase.
 
@@ -562,7 +619,7 @@ Pour chacune des affirmations, indiquer si elle décrit plutôt un langage **com
 
     a\) Interprété : le même fichier tourne partout où l’interpréteur est installé, sans retraduction. b) Compilé : on produit un exécutable rapide, mais il faut recompiler à chaque modification. c) Interprété : la traduction se fait à la volée, donc l’erreur n’apparaît qu’en atteignant la ligne. d) Compilé : la traduction complète a lieu avant l’exécution, ce qui permet de signaler les erreurs en amont.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Statique ou dynamique ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-19 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Statique ou dynamique ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-20 }
 
 1.  Pour chacune de ces trois lignes, dire si le typage est **statique** ou **dynamique**, et si le type est **écrit** ou **deviné** (inféré) : (C) `int n = 5;` (Python) `n = 5` (OCaml) `let n = 5`
 
@@ -587,7 +644,7 @@ Pour chacune des affirmations, indiquer si elle décrit plutôt un langage **com
 
     b\) Non : les deux appels passent par la *même* branche (`code == "normal"`) ; la dernière ligne n’est jamais exécutée. L’appel `prix_ttc(10, "reduit")` l’atteint et déclenche `TypeError: can only concatenate str (not "float") to str` : on ne peut pas coller un texte et un nombre. Correction : `return "prix reduit : " + str(prix * 1.055)` (ou renvoyer simplement le nombre `prix * 1.055`). Un langage à typage **statique** aurait refusé ce programme *avant* l’exécution. Leçon : le jeu de tests doit passer par **toutes** les branches.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 20</span> — Le bon outil <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-20 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 21</span> — Le bon outil <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-21 }
 
 Associer chaque besoin au langage le plus naturel (une seule réponse par ligne) : **Python**, **C**, **JavaScript**, **SQL**.
 
@@ -603,7 +660,7 @@ Associer chaque besoin au langage le plus naturel (une seule réponse par ligne)
 
     a\) JavaScript. b) SQL. c) C. d) Python.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Vrai ou faux, et pourquoi <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-21 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 22</span> — Vrai ou faux, et pourquoi <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-22 }
 
 Dire si chaque affirmation est vraie ou fausse, en corrigeant les fausses.
 
@@ -623,7 +680,7 @@ Dire si chaque affirmation est vraie ou fausse, en corrigeant les fausses.
 
     a\) Faux : aucun langage n’est le meilleur ; chacun est un compromis adapté à certaines tâches. b) Faux : un *algorithme* est indépendant du langage ; seul le *programme* qui le traduit en dépend. c) Vrai : Python est multi-paradigme (impératif, fonctionnel, objet). d) Faux : c’est l’inverse en général ; un langage compilé est traduit une fois pour toutes et s’exécute typiquement *plus vite* qu’un langage interprété.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 22</span> — Langage de programmation ou pas ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-22 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 23</span> — Langage de programmation ou pas ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-23 }
 
 Pour chacun, dire si c’est un **langage de programmation** : Python, HTML, SQL, C, JavaScript. Justifier en une phrase.
 
@@ -631,7 +688,7 @@ Pour chacun, dire si c’est un **langage de programmation** : Python, HTML, SQL
 
     **Python, C, JavaScript** : oui, on y écrit des algorithmes (variables, boucles, conditions). **HTML** : non, il *décrit* une page ; c’est un langage formalisé, mais pas un langage de programmation. **SQL** : c’est un langage de *requêtes*, qui *interroge* une base de données en décrivant le résultat voulu ; ce n’est pas un langage de programmation *généraliste*.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Lire un programme dans un langage inconnu <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-23 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — Lire un programme dans un langage inconnu <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-24 }
 
 Voici une fonction dans un langage que vous ne connaissez pas.
 
@@ -656,7 +713,7 @@ Repérer : (a) la **construction élémentaire** commune avec Python (appel, val
         return x * 2
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — Lire une documentation <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-24 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 25</span> — Lire une documentation <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-25 }
 
 La documentation du module `random` indique : `randint(a, b)` *« renvoie un entier aléatoire N tel que a $\leqslant$ N $\leqslant$ b »*.
 
@@ -673,60 +730,3 @@ La documentation du module `random` indique : `randint(a, b)` *« renvoie un ent
 ??? corrige "Corrigé"
 
     \(a\) Précondition implicite : `a <= b`. (b) `random.randint(1, 6)`. (c) Non : la documentation (la spécification) suffit pour l’utiliser correctement, sans lire son code — c’est tout l’intérêt d’une bibliothèque.
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 25</span> — Une fonction spécifiée par un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-05-25 }
-
-Un élève demande à un assistant d’IA : « Écris une fonction `nb_chiffres(n)` qui renvoie le nombre de chiffres d’un entier positif, avec sa docstring et un jeu de tests. » Voici la réponse obtenue.
-
-```python
-def nb_chiffres(n):
-    """Renvoie le nombre de chiffres de l'entier n.
-    Precondition : n >= 0. Par convention nb_chiffres(0) vaut 1."""
-    compteur = 0
-    while n > 0:
-        n = n // 10
-        compteur = compteur + 1
-    return compteur
-
-assert nb_chiffres(2024) == 4
-assert nb_chiffres(7) == 1
-assert nb_chiffres(0) == 1
-```
-
-« À chaque tour, on retire le dernier chiffre par division entière et on compte ; la boucle s’arrête quand il ne reste plus rien. Les trois tests couvrent un cas général, un cas à un chiffre et le cas limite `0` : ils passent tous. »
-
-1.  La réponse est-elle correcte ? Exécuter le fichier tel quel (ou faire la trace de `nb_chiffres(0)`).
-
-2.  Localiser et corriger l’erreur, sans changer la spécification.
-
-3.  Quelle vérification simple, faite avant de faire confiance à la réponse, aurait suffi à détecter l’erreur ?
-
-??? pouce "Coup de pouce"
-
-    Dérouler à la main `nb_chiffres(0)` : combien de tours fait la boucle `while n > 0` ? Que vaut alors `compteur` ?
-
-??? corrige "Corrigé"
-
-    \(a\) Non. Pour `n = 0`, la condition `n > 0` est fausse dès le départ : la boucle n’est jamais exécutée et la fonction renvoie `0`. Les deux premiers tests passent (`4` et `1`), le troisième échoue :
-
-    ```text
-    Traceback (most recent call last):
-      File "nb_chiffres.py", line 12, in <module>
-        assert nb_chiffres(0) == 1
-    AssertionError
-    ```
-
-    \(b\) La fonction ne respecte pas sa propre spécification sur le cas limite `0`. On compte un chiffre d’office et on boucle tant qu’il en reste au moins un autre (`n >= 10`) :
-
-    ```python
-    def nb_chiffres(n):
-        """Renvoie le nombre de chiffres de l'entier n.
-        Precondition : n >= 0. Par convention nb_chiffres(0) vaut 1."""
-        compteur = 1
-        while n >= 10:
-            n = n // 10
-            compteur = compteur + 1
-        return compteur
-    ```
-
-    Les trois `assert` passent. (c) Exécuter le jeu de tests fourni au lieu de croire la phrase « ils passent tous » : l’assistant a écrit le bon test (le cas limite) sans le lancer. Un test qu’on n’exécute pas ne vérifie rien.

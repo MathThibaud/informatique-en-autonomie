@@ -478,7 +478,7 @@ def fact(n):
     return r
 ```
 
-**OCaml**, en style **fonctionnel** (une définition récursive, sans variable modifiée) :
+**OCaml**, en style **fonctionnel** (une définition récursive, comme au chapitre 1, sans variable modifiée) :
 
 ```ocaml
 let rec fact n =

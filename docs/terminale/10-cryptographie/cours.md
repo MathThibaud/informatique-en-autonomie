@@ -86,7 +86,7 @@ Réputé incassable pendant trois siècles, il fut finalement percé par **Charl
 
 ### Le masque jetable : le seul code inviolable
 
-Poussons l’idée de Vigenère à l’extrême : et si la clé était **aussi longue que le message**, **totalement aléatoire**, et **utilisée une seule fois** ? On obtient le **masque jetable** (*one-time pad*). En informatique, on ne décale plus les lettres : on combine chaque caractère du message avec la clé par un **OU exclusif** (XOR, noté `^`).
+Poussons l’idée de Vigenère à l’extrême : et si la clé était **aussi longue que le message**, **totalement aléatoire**, et **utilisée une seule fois** ? On obtient le **masque jetable** (*one-time pad*). En informatique, on ne décale plus les lettres : on combine chaque caractère du message avec la clé par un **OU exclusif** (XOR, noté `^`), l’opération booléenne vue en Première, appliquée ici bit à bit.
 
 !!! propriete "Propriété 3 — Le XOR est son propre inverse"
 

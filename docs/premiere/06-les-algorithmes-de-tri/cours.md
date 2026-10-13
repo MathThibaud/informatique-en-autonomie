@@ -167,11 +167,11 @@ La même trace en **histogramme** : chaque barre a la hauteur de sa valeur. On v
 
 !!! regle "Règle 4 — L’invariant du tri par sélection"
 
-    Juste avant de traiter la case `i`, la partie `t[0..i-1]` est **triée** *et* contient les `i` plus petits éléments du tableau, **à leur place définitive**. C’est cet invariant qui garantit qu’à la fin le tableau entier est trié.
+    Juste avant de traiter la case `i`, la partie `t[0..i-1]` est **triée** *et* contient les `i` plus petits éléments du tableau, **à leur place définitive**. C’est cet invariant qui garantit qu’à la fin le tableau entier est trié. Il se démontre en deux étapes, comme au chapitre *Algorithmique : le parcours séquentiel*, et peut être vérifié par un `assert` pendant la mise au point, comme au chapitre *Spécifier et mettre au point ses programmes*.
 
 <span id="cours-06-1" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-06-1)** (dérouler la sélection) et **[4](exercices.md#ex-06-4) à [7](exercices.md#ex-06-7)** (le tri par sélection)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-06-1) à [5](exercices.md#ex-06-5)** (dérouler la sélection ; programmer le tri par sélection)
 
 ## Le tri par insertion
 
@@ -287,9 +287,9 @@ En **histogramme**, après chaque insertion : la zone triée (colorée) grandit 
 
     Le tri par **sélection** place, à chaque étape, un élément à sa position *définitive* (il ne bougera plus). Le tri par **insertion** garde une partie gauche toujours triée, mais qui *grandit et se réorganise* au fil de l’eau. Même résultat, chemins différents.
 
-<span id="cours-06-2" class="ancre"></span>
+<span id="cours-06-6" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[2](exercices.md#ex-06-2) et [3](exercices.md#ex-06-3)** (dérouler l’insertion, comparer les deux tris) et **[8](exercices.md#ex-06-8) à [10](exercices.md#ex-06-10)** (le tri par insertion)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-06-6) à [10](exercices.md#ex-06-10)** (dérouler l’insertion, comparer les deux tris ; programmer le tri par insertion)
 
 ## Combien ça coûte ?
 
@@ -320,9 +320,9 @@ Les deux tris sont quadratiques *dans le pire des cas*. Mais l’insertion a une
 
     Pour $n = 1\,000$ éléments, un tri quadratique fait de l’ordre de $500\,000$ comparaisons : instantané. Mais pour $n = 1\,000\,000$, il en faudrait de l’ordre de $5 \times 10^{11}$ : **des minutes, voire des heures**. C’est pourquoi les vrais logiciels utilisent des tris plus malins (coût $n\log_2 n$), que vous découvrirez en terminale. <span class="horsprog">au-delà du programme</span>
 
-<span id="cours-06-12" class="ancre"></span>
+<span id="cours-06-11" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[12](exercices.md#ex-06-12) à [14](exercices.md#ex-06-14)** (le coût d’un tri)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[11](exercices.md#ex-06-11) à [13](exercices.md#ex-06-13)** (le coût d’un tri)
 
 ## D’autres tris existent
 
@@ -346,9 +346,9 @@ Sélection et insertion ne sont que deux membres d’une grande famille.
 
     Le chapitre *Diviser pour régner* présente le **tri fusion** : on coupe le tableau en deux, on trie chaque moitié, puis on fusionne. Son coût, en $n\log_2 n$, le rend bien plus rapide que nos tris quadratiques sur de grands tableaux.
 
-<span id="cours-06-11" class="ancre"></span>
+<span id="cours-06-14" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[11](exercices.md#ex-06-11)** (le tri à bulles)
+<span class="afaire">▶ Exercices d'application :</span> exercice **[14](exercices.md#ex-06-14)** (le tri à bulles)
 
 ## Un peu d’histoire
 

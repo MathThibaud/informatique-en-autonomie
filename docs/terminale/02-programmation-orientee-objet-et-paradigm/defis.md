@@ -22,6 +22,8 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
+*Ce défi se prête à l’encapsulation vue dans ce chapitre : une classe `Foret` peut cacher le modulo derrière une méthode `est_arbre(x, y)`. L’utilisateur croit manipuler une forêt infinie, alors que l’objet ne stocke que le motif de la carte.*
+
 ## Lire l’énoncé
 
 Vocabulaire utile pour lire le texte original :

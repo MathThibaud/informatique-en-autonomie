@@ -254,7 +254,7 @@ se représente par `adj = [[1, 2], [0, 3], [0], [1], [5], [4]]` : le sommet $0$ 
 
 ## Une classe `Graphe`
 
-Manipuler directement le dictionnaire `G` fonctionne, mais rien n’empêche alors d’oublier un sens d’une arête et d’obtenir un graphe incohérent. On **encapsule** donc la représentation dans une **classe** : l’utilisateur ne touche plus au dictionnaire, il passe par quelques méthodes (même démarche que pour les piles et les files). On se limite ici aux graphes **non orientés**.
+Manipuler directement le dictionnaire `G` fonctionne, mais rien n’empêche alors d’oublier un sens d’une arête et d’obtenir un graphe incohérent. On **encapsule** donc la représentation dans une **classe** (chapitre 2) : l’utilisateur ne touche plus au dictionnaire, il passe par quelques méthodes (même démarche que pour les piles et les files). On se limite ici aux graphes **non orientés**.
 
 ```python
 class Graphe:
@@ -535,7 +535,7 @@ False
 
     Ce critère « sommet en cours » permet enfin de programmer la détection d’interblocage vue au chapitre *Processus* : le **graphe d’attente** des processus y est un graphe **orienté**, et un cycle y signale un **interblocage**.
 
-<span class="horsprog">au-delà du programme</span> **Et pour un graphe pondéré ?** Le BFS trouve le plus court chemin en *nombre d’arêtes*, mais ignore les poids. Pour le plus court chemin en *distance* (un vrai GPS), on utilise l’**algorithme de Dijkstra** (1959), qui visite les sommets par coût total croissant à l’aide d’une file de priorité. C’est l’objet du projet proposé en fin de chapitre — mais vous en connaissez déjà l’idée directrice.
+<span class="horsprog">au-delà du programme</span> **Et pour un graphe pondéré ?** Le BFS trouve le plus court chemin en *nombre d’arêtes*, mais ignore les poids. Pour le plus court chemin en *distance* (un vrai GPS), on utilise l’**algorithme de Dijkstra** (1959), qui visite les sommets par coût total croissant à l’aide d’une file de priorité. C’est l’objet du projet proposé en fin de chapitre — mais vous en connaissez déjà l’idée directrice. On le retrouvera au chapitre 9, derrière le protocole de routage OSPF.
 
 <span id="cours-08-9" class="ancre"></span>
 

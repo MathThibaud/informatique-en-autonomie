@@ -129,7 +129,7 @@ On pose l’addition comme en base 10, rang par rang **de droite à gauche**, en
 
 <span id="cours-02-2" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[2](exercices.md#ex-02-2) à [4](exercices.md#ex-02-4), [8](exercices.md#ex-02-8) et [9](exercices.md#ex-02-9)** (convertir binaire/décimal ; les programmer)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[2](exercices.md#ex-02-2) à [6](exercices.md#ex-02-6)** (convertir binaire/décimal ; les programmer)
 
 ## Logique booléenne : des portes logiques à l’addition
 
@@ -239,11 +239,11 @@ Revenons à l’addition posée plus haut (« Additionner en binaire »). Dans l
 
 !!! remarque "Remarque — Pourquoi « demi » ? au-delà du programme"
 
-    Dans les autres colonnes de l’addition posée, il faut aussi ajouter la **retenue venue de la droite** : trois bits et non deux (c’est le cas $1 + 1 + 1 = \texttt{11}_2$ vu plus haut). On assemble pour cela deux demi-additionneurs en un **additionneur complet**, puis on place un additionneur complet par colonne : le processeur additionne ainsi des nombres de 64 bits avec, en tout et pour tout, des portes logiques. Le TP « Programmer l’arithmétique binaire » fait construire cette chaîne en Python, porte après porte.
+    Dans les autres colonnes de l’addition posée, il faut aussi ajouter la **retenue venue de la droite** : trois bits et non deux (c’est le cas $1 + 1 + 1 = \texttt{11}_2$ vu plus haut). On assemble pour cela deux demi-additionneurs en un **additionneur complet**, puis on place un additionneur complet par colonne : le processeur additionne ainsi des nombres de 64 bits avec, en tout et pour tout, des portes logiques (on retrouvera ce circuit dans l’unité arithmétique et logique, au chapitre *Architecture des ordinateurs et systèmes d’exploitation*). Le TP « Programmer l’arithmétique binaire » fait construire cette chaîne en Python, porte après porte.
 
-<span id="cours-02-22" class="ancre"></span>
+<span id="cours-02-7" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[22](exercices.md#ex-02-22) à [24](exercices.md#ex-02-24)** (opérateurs booléens, table de vérité d’une expression, demi-additionneur)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[7](exercices.md#ex-02-7) à [9](exercices.md#ex-02-9)** (opérateurs booléens, table de vérité d’une expression, demi-additionneur)
 
 ## L’hexadécimal : le binaire en plus court
 
@@ -281,9 +281,9 @@ Pour passer du **décimal** à l’hexadécimal, on divise par 16 (au lieu de 2)
 
     On croise l’hexadécimal partout : les **couleurs** du Web (`#FF8000` = rouge `FF`, vert `80`, bleu `00`) et les **adresses mémoire** en sont deux exemples quotidiens.
 
-<span id="cours-02-5" class="ancre"></span>
+<span id="cours-02-10" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-02-5) à [7](exercices.md#ex-02-7)** (l’hexadécimal) et **[10](exercices.md#ex-02-10)** (changer de base)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-02-10) à [13](exercices.md#ex-02-13)** (l’hexadécimal ; changer de base)
 
 ## Les entiers relatifs : le complément à deux
 
@@ -335,9 +335,9 @@ La retenue finale « déborde » au-delà des 8 bits : il reste `00000000`, soit
 
     Les entiers de Python sont **de taille arbitraire** : ils grandissent tant qu’il reste de la mémoire (essayez `2 ** 200` !). Le complément à deux sur un nombre fixe de bits reste néanmoins la réalité du *matériel* et de nombreux langages, où un entier trop grand « déborde ».
 
-<span id="cours-02-11" class="ancre"></span>
+<span id="cours-02-14" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[11](exercices.md#ex-02-11) à [13](exercices.md#ex-02-13)** (entiers relatifs : complément à deux)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[14](exercices.md#ex-02-14) à [17](exercices.md#ex-02-17)** (entiers relatifs : complément à deux)
 
 ## Les nombres à virgule : les flottants
 
@@ -373,7 +373,7 @@ Reprenons la méthode sur $0{,}1$ : $$0{,}1 \times 2 = \mathbf{0}{,}2 \to \mathb
     False
     ```
 
-    Ce n’est **pas un bug** de Python : c’est la conséquence directe du fait que $0{,}1$ et $0{,}2$ ne sont pas représentables exactement en binaire. Pour comparer deux flottants, on teste si leur écart est *minuscule* : `abs(a - b) < 1e-9`, où `abs` donne la valeur absolue et `1e-9` désigne $10^{-9}$.
+    Ce n’est **pas un bug** de Python (le résultat avait été constaté au chapitre *Les bases de la programmation Python*) : c’est la conséquence directe du fait que $0{,}1$ et $0{,}2$ ne sont pas représentables exactement en binaire. Pour comparer deux flottants, on teste si leur écart est *minuscule* : `abs(a - b) < 1e-9`, où `abs` donne la valeur absolue et `1e-9` désigne $10^{-9}$.
 
 ### Pour aller plus loin : la norme IEEE 754
 
@@ -391,9 +391,9 @@ Comme en base 10 on écrit $6{,}02 \times 10^{23}$, on met un flottant binaire s
 
 C’est la limitation de la mantisse à 23 (ou 52) bits qui *force* l’arrondi vu plus haut.
 
-<span id="cours-02-14" class="ancre"></span>
+<span id="cours-02-18" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[14](exercices.md#ex-02-14) à [16](exercices.md#ex-02-16)** (les nombres à virgule)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[18](exercices.md#ex-02-18) à [20](exercices.md#ex-02-20)** (les nombres à virgule)
 
 ## Combien de bits pour un nombre ?
 
@@ -483,9 +483,9 @@ Un fichier texte n’est qu’une suite d’octets : **rien** n’y indique de f
 
     Un caractère peut prendre jusqu’à **4 octets** en UTF-8 : c’est le cas des émojis. Ainsi le visage souriant (point de code `U+1F600`) est un *seul* caractère — `ord` vaut `128512` — mais occupe **4 octets** en mémoire.
 
-<span id="cours-02-17" class="ancre"></span>
+<span id="cours-02-21" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[17](exercices.md#ex-02-17) à [21](exercices.md#ex-02-21)** (coder le texte : ASCII, Unicode)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[21](exercices.md#ex-02-21) à [25](exercices.md#ex-02-25)** (coder le texte : ASCII, Unicode)
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"
 

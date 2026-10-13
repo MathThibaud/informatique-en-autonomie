@@ -14,7 +14,7 @@
 
 **Un peu d’histoire.** Cette suite doit son nom à **Leonardo Fibonacci** (Léonard de Pise), qui la fait connaître en Europe en **1202** dans son *Liber abbaci* (« Livre du calcul »), l’ouvrage qui popularise aussi les chiffres indo-arabes. Elle y répond à un problème de **lapins** (combien de couples au bout d’un an ?), dont la page ci-contre, copie médiévale conservée à Florence, porte les réponses en marge : $1, 2, 3, 5, 8, \dots, 377$.
 
-La suite de Fibonacci est définie par $F_0 = 0$, $F_1 = 1$ et $F_n = F_{n-1} + F_{n-2}$. Sa version récursive naïve recopie la définition :
+La suite de Fibonacci est définie par $F_0 = 0$, $F_1 = 1$ et $F_n = F_{n-1} + F_{n-2}$. Sa version récursive naïve, déjà rencontrée au chapitre 1, recopie la définition :
 
 ```python
 def fibo(n):
@@ -66,7 +66,7 @@ Arbre de `fibo(5)` *mémoïsé* : les nœuds en pointillés gris (`3`, `2`, `1` 
 
 !!! remarque "Remarque"
 
-    Le paramètre `memo={}` par défaut est pratique mais c’est un **piège classique** : en Python, un argument par défaut mutable est **partagé** entre tous les appels. Ici cela nous arrange (le carnet survit d’un appel à l’autre), mais dans un autre contexte cela cause des bugs sournois. Une version plus sûre passe le dictionnaire explicitement, ou l’initialise à `None`.
+    Le paramètre `memo={}` par défaut est pratique mais c’est un **piège classique** : en Python, un argument par défaut mutable est **partagé** entre tous les appels (voir le chapitre 1). Ici cela nous arrange (le carnet survit d’un appel à l’autre), mais dans un autre contexte cela cause des bugs sournois. Une version plus sûre passe le dictionnaire explicitement, ou l’initialise à `None`.
 
 Python fournit d’ailleurs la mémoïsation « clés en main », sous la forme d’un **décorateur** `@cache` (ou `@lru_cache`) du module `functools`. On garde alors la fonction récursive naïve, et une seule ligne au-dessus lui greffe le carnet :
 

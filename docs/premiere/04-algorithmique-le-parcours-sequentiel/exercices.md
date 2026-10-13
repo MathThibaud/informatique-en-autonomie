@@ -63,7 +63,7 @@ Que calcule cette fonction en général ? Renvoie-t-elle un résultat correct si
         return resultat
     ```
 
-### Décliner : comptages, moyennes, premiers champions
+### Décliner : comptages, moyennes
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Compter dans un intervalle : code à trous <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-3 }
 
@@ -143,87 +143,9 @@ def nb_entre(t, a, b):
 
     Pour `moyenne_ponderee`, on parcourt par **indice** : le même `i` donne la note et son coefficient. Les deux accumulateurs sont mis à jour dans la même boucle : un seul parcours. Sur l’exemple : $(12 \times 2 + 8 + 15) / (2 + 1 + 1) = 47 / 4 = 11{,}75$.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Le mot le plus long : lignes à remettre dans l’ordre <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-5 }
-
-Les lignes de la fonction `mot_le_plus_long(mots)` (tableau de chaînes **non vide**) ont été mélangées et leur indentation a été perdue. Les recopier **dans le bon ordre** et **correctement indentées**, puis <span class="run" title="À programmer et tester sur machine">▶</span> tester sur `["chat", "girafe", "ours", "souris"]`. Pourquoi obtient-on `"girafe"` et non `"souris"`, qui a pourtant la même longueur ?
-
-```text
-return champion
-champion = mot
-def mot_le_plus_long(mots):
-if len(mot) > len(champion):
-champion = mots[0]
-for mot in mots:
-```
-
-??? corrige "Corrigé"
-
-    ```python
-    def mot_le_plus_long(mots):
-        champion = mots[0]
-        for mot in mots:
-            if len(mot) > len(champion):
-                champion = mot
-        return champion
-    ```
-
-    À noter : `champion = mots[0]` se place **avant** la boucle (initialisation du champion) ; `return champion` est au niveau de la boucle, **après** elle (sinon on renverrait dès le premier tour). Sur l’exemple, on obtient `"girafe"` : quand arrive `"souris"`, le test `len(mot) > len(champion)` compare `6 > 6`, qui est faux. La comparaison **stricte** garde donc le **premier** mot de longueur maximale.
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Amplitude <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-6 }
-
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `amplitude(t)` qui renvoie la différence entre le plus grand et le plus petit élément d’un tableau non vide. Combien de parcours votre solution effectue-t-elle ?
-
-??? pouce "Coup de pouce"
-
-    Il faut deux « champions » : le plus grand et le plus petit. Peut-on les mettre à jour dans la même boucle ?
-
-??? corrige "Corrigé"
-
-    ```python
-    def amplitude(t):
-        plus_petit = t[0]
-        plus_grand = t[0]
-        for x in t:
-            if x < plus_petit:
-                plus_petit = x
-            if x > plus_grand:
-                plus_grand = x
-        return plus_grand - plus_petit
-    ```
-
-    Cette solution fait **un seul** parcours (on cherche min et max en même temps). Deux parcours séparés donneraient le même résultat, en deux fois plus de tours.
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Moyenne de fin de trimestre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-7 }
-
-<span class="run" title="À programmer et tester sur machine">▶</span> Les notes d’un élève sont dans un tableau. Écrire `moyenne_sans_pire(t)` qui calcule la moyenne **après avoir retiré la plus mauvaise note**. On supposera au moins deux notes.
-
-```text
->>> moyenne_sans_pire([8, 12, 15, 5])
-11.666666666666666
-```
-
-??? pouce "Coup de pouce"
-
-    Faut-il vraiment retirer la note du tableau ? Une fois la pire note enlevée, que deviennent la somme des notes et leur nombre ?
-
-??? corrige "Corrigé"
-
-    On retire une fois la plus mauvaise note de la somme, et on divise par `len(t) - 1`. La somme et la pire note se calculent dans le même parcours.
-
-    ```python
-    def moyenne_sans_pire(t):
-        pire = t[0]
-        total = 0
-        for x in t:
-            total = total + x
-            if x < pire:
-                pire = x
-        return (total - pire) / (len(t) - 1)
-    ```
-
 ### Recherche séquentielle
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Un multiple dans le tableau <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-8 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Un multiple dans le tableau <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-5 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `a_un_multiple(t, k)` qui renvoie `True` si au moins un élément de `t` est un multiple de `k`, `False` sinon. La fonction doit **s’arrêter** dès qu’un multiple est trouvé. Combien de tours de boucle effectue `a_un_multiple([7, 10, 3, 20], 5)` ? Et `a_un_multiple([7, 10, 3, 20], 6)` ?
 
@@ -243,7 +165,7 @@ for mot in mots:
 
     `a_un_multiple([7, 10, 3, 20], 5)` fait **2** tours : `10` est trouvé au deuxième tour, et `return` arrête aussitôt la fonction. `a_un_multiple([7, 10, 3, 20], 6)` fait **4** tours : aucun multiple de 6, il faut tout parcourir avant de répondre `False`. C’est le pire cas.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Où est-il ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-9 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Où est-il ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-6 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire :
 
@@ -291,7 +213,7 @@ for mot in mots:
         return -1
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Recherche sous condition <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-10 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Recherche sous condition <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-7 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `premier_negatif(t)` qui renvoie le premier élément strictement négatif rencontré, ou `None` s’il n’y en a pas.
 
@@ -314,36 +236,9 @@ for mot in mots:
         return None
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 11</span> — Deux tableaux <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-11 }
-
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `element_commun(t1, t2)` qui renvoie `True` si les deux tableaux ont (au moins) un élément en commun. Combien de fois, dans le pire cas, compare-t-on deux éléments si `t1` et `t2` ont chacun `n` éléments ? Quel est le coût ? <span class="horsprog">au-delà du programme</span>
-
-??? pouce "Coup de pouce"
-
-    Pour chaque élément de `t1`, chercher s’il est dans `t2` : une recherche séquentielle à l’intérieur d’une autre boucle. Le pire cas : aucun élément commun.
-
-??? pouce "Coup de pouce 2 (début de solution)"
-
-    `for x in t1:`  
-    `for y in t2:`  
-    `if x == y:`
-
-??? corrige "Corrigé"
-
-    ```python
-    def element_commun(t1, t2):
-        for x in t1:
-            for y in t2:
-                if x == y:
-                    return True
-        return False
-    ```
-
-    Dans le pire cas (aucun élément commun), on compare chaque élément de `t1` à chaque élément de `t2`, soit $n \times n = n^2$ comparaisons : coût **quadratique**. <span class="horsprog">au-delà du programme</span>
-
 ### Minimum, maximum et champion
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 12</span> — Le plus petit <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-12 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Le plus petit <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-8 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `minimum(t)` (tableau non vide), **sans** `min`. Préciser l’**invariant** de votre boucle. Pourquoi serait-il faux d’initialiser le champion à `0` ? (Penser au tableau `[3, 8, 5]`.)
 
@@ -360,7 +255,33 @@ for mot in mots:
 
     **Invariant** : à chaque tour, `m` est le minimum des éléments déjà visités. Initialiser `m` à `0` serait faux : sur `[3, 8, 5]`, aucun élément n’est inférieur à `0`, et la fonction renverrait `0`, qui n’est même pas dans le tableau (c’est le défaut de l’exercice « Lecture de trace »). On initialise avec un élément *existant* : `t[0]`.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — La position du champion <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-13 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 9</span> — Le mot le plus long : lignes à remettre dans l’ordre <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-9 }
+
+Les lignes de la fonction `mot_le_plus_long(mots)` (tableau de chaînes **non vide**) ont été mélangées et leur indentation a été perdue. Les recopier **dans le bon ordre** et **correctement indentées**, puis <span class="run" title="À programmer et tester sur machine">▶</span> tester sur `["chat", "girafe", "ours", "souris"]`. Pourquoi obtient-on `"girafe"` et non `"souris"`, qui a pourtant la même longueur ?
+
+```text
+return champion
+champion = mot
+def mot_le_plus_long(mots):
+if len(mot) > len(champion):
+champion = mots[0]
+for mot in mots:
+```
+
+??? corrige "Corrigé"
+
+    ```python
+    def mot_le_plus_long(mots):
+        champion = mots[0]
+        for mot in mots:
+            if len(mot) > len(champion):
+                champion = mot
+        return champion
+    ```
+
+    À noter : `champion = mots[0]` se place **avant** la boucle (initialisation du champion) ; `return champion` est au niveau de la boucle, **après** elle (sinon on renverrait dès le premier tour). Sur l’exemple, on obtient `"girafe"` : quand arrive `"souris"`, le test `len(mot) > len(champion)` compare `6 > 6`, qui est faux. La comparaison **stricte** garde donc le **premier** mot de longueur maximale.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — La position du champion <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-10 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `indice_du_min(t)` qui renvoie l’indice du plus petit élément (le premier en cas d’égalité).
 
@@ -379,31 +300,59 @@ for mot in mots:
         return i_min
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Min et max en une seule passe <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-14 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Amplitude <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-11 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `mini_maxi(t)` qui renvoie le p-uplet `(min, max)` en **un seul** parcours du tableau. Comparer au coût de deux parcours séparés.
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `amplitude(t)` qui renvoie la différence entre le plus grand et le plus petit élément d’un tableau non vide. Combien de parcours votre solution effectue-t-elle ?
 
 ??? pouce "Coup de pouce"
 
-    Deux champions initialisés avec `t[0]`, et deux tests dans le même tour de boucle. Combien de tours font deux parcours séparés ?
+    Il faut deux « champions » : le plus grand et le plus petit. Peut-on les mettre à jour dans la même boucle ?
 
 ??? corrige "Corrigé"
 
     ```python
-    def mini_maxi(t):
-        mini = t[0]
-        maxi = t[0]
+    def amplitude(t):
+        plus_petit = t[0]
+        plus_grand = t[0]
         for x in t:
-            if x < mini:
-                mini = x
-            if x > maxi:
-                maxi = x
-        return mini, maxi
+            if x < plus_petit:
+                plus_petit = x
+            if x > plus_grand:
+                plus_grand = x
+        return plus_grand - plus_petit
     ```
 
-    Un seul parcours ($n$ tours) au lieu de deux ($2n$ tours) : deux fois moins de **tours de boucle**, mais autant de **comparaisons** (deux par tour, soit $2n$ dans les deux cas). Le coût reste **linéaire**.
+    Cette solution fait **un seul** parcours (on cherche min et max en même temps). Deux parcours séparés donneraient le même résultat, en deux fois plus de tours.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 15</span> — Le deuxième plus grand <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-15 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Moyenne de fin de trimestre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-12 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> Les notes d’un élève sont dans un tableau. Écrire `moyenne_sans_pire(t)` qui calcule la moyenne **après avoir retiré la plus mauvaise note**. On supposera au moins deux notes.
+
+```text
+>>> moyenne_sans_pire([8, 12, 15, 5])
+11.666666666666666
+```
+
+??? pouce "Coup de pouce"
+
+    Faut-il vraiment retirer la note du tableau ? Une fois la pire note enlevée, que deviennent la somme des notes et leur nombre ?
+
+??? corrige "Corrigé"
+
+    On retire une fois la plus mauvaise note de la somme, et on divise par `len(t) - 1`. La somme et la pire note se calculent dans le même parcours.
+
+    ```python
+    def moyenne_sans_pire(t):
+        pire = t[0]
+        total = 0
+        for x in t:
+            total = total + x
+            if x < pire:
+                pire = x
+        return (total - pire) / (len(t) - 1)
+    ```
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Le deuxième plus grand <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-13 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `deuxieme_max(t)` qui renvoie le deuxième plus grand élément *distinct* d’un tableau (on suppose au moins deux valeurs distinctes), en **un seul** parcours.
 
@@ -445,7 +394,7 @@ for mot in mots:
 
 ### Invariants de boucle
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 16</span> — Que contient la variable ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-16 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 14</span> — Que contient la variable ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-14 }
 
 On considère la fonction suivante :
 
@@ -467,7 +416,7 @@ def f(t):
     **1.** Invariant : à chaque tour, `c` contient le **nombre d’éléments pairs déjà visités**.  
     **2.** À la fin, tous les éléments ont été visités : la fonction renvoie le **nombre d’éléments pairs** du tableau.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Énoncer un invariant <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-17 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Énoncer un invariant <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-15 }
 
 On reprend la fonction `produit(t)` (initialisation `p = 1`, puis `p = p * x` à chaque tour).
 
@@ -484,7 +433,7 @@ On reprend la fonction `produit(t)` (initialisation `p = 1`, puis `p = p * x` à
     **1.** Invariant : à chaque tour, `p` contient le **produit des éléments déjà visités** (et `p = 1`, produit vide, avant le premier tour).  
     **2.** Comme l’invariant est vrai à chaque tour, il l’est encore au dernier : quand tous les éléments ont été visités, `p` est le produit de *tout* le tableau — le résultat est donc correct.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 18</span> — Une preuve d’invariant en deux étapes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-18 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 16</span> — Une preuve d’invariant en deux étapes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-16 }
 
 On considère `nb_positifs(t)`, qui compte les éléments strictement positifs (initialisation `c = 0` ; à chaque tour, `c = c + 1` si `x > 0`). Soit la propriété $$P : \text{«~\texttt{c} contient le nombre d'éléments strictement positifs \textbf{déjà visités}~».}$$ En suivant la méthode du cours, **démontrer** que $P$ est un invariant :
 
@@ -518,7 +467,7 @@ On considère `nb_positifs(t)`, qui compte les éléments strictement positifs (
 
 ### Le coût : linéaire ou quadratique ?
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 19</span> — Compter les tours <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-19 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 17</span> — Compter les tours <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-17 }
 
 Pour chaque fonction, dire combien de tours de boucle sont effectués pour un tableau de `n` éléments, et si le coût est **linéaire** ou **quadratique**.
 
@@ -537,7 +486,31 @@ def f(t):                          def g(t):
 
     **(a)** `n` tours de boucle : coût **linéaire**. **(b)** deux boucles imbriquées sur `t` : $n \times n = n^2$ tours : coût **quadratique**.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Compter les doublons <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-20 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Min et max en une seule passe <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-18 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `mini_maxi(t)` qui renvoie le p-uplet `(min, max)` en **un seul** parcours du tableau. Comparer au coût de deux parcours séparés.
+
+??? pouce "Coup de pouce"
+
+    Deux champions initialisés avec `t[0]`, et deux tests dans le même tour de boucle. Combien de tours font deux parcours séparés ?
+
+??? corrige "Corrigé"
+
+    ```python
+    def mini_maxi(t):
+        mini = t[0]
+        maxi = t[0]
+        for x in t:
+            if x < mini:
+                mini = x
+            if x > maxi:
+                maxi = x
+        return mini, maxi
+    ```
+
+    Un seul parcours ($n$ tours) au lieu de deux ($2n$ tours) : deux fois moins de **tours de boucle**, mais autant de **comparaisons** (deux par tour, soit $2n$ dans les deux cas). Le coût reste **linéaire**.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Compter les doublons <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-19 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `a_un_doublon(t)` qui renvoie `True` si (au moins) deux éléments de `t` sont égaux. Quel est le coût de votre solution (en nombre de comparaisons dans le pire cas) ? <span class="horsprog">au-delà du programme</span>
 
@@ -557,6 +530,33 @@ def f(t):                          def g(t):
     ```
 
     Dans le pire cas (aucun doublon), on examine toutes les paires, soit environ $\dfrac{n^2}{2}$ comparaisons : coût **quadratique**. <span class="horsprog">au-delà du programme</span>
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 20</span> — Deux tableaux <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-20 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `element_commun(t1, t2)` qui renvoie `True` si les deux tableaux ont (au moins) un élément en commun. Combien de fois, dans le pire cas, compare-t-on deux éléments si `t1` et `t2` ont chacun `n` éléments ? Quel est le coût ? <span class="horsprog">au-delà du programme</span>
+
+??? pouce "Coup de pouce"
+
+    Pour chaque élément de `t1`, chercher s’il est dans `t2` : une recherche séquentielle à l’intérieur d’une autre boucle. Le pire cas : aucun élément commun.
+
+??? pouce "Coup de pouce 2 (début de solution)"
+
+    `for x in t1:`  
+    `for y in t2:`  
+    `if x == y:`
+
+??? corrige "Corrigé"
+
+    ```python
+    def element_commun(t1, t2):
+        for x in t1:
+            for y in t2:
+                if x == y:
+                    return True
+        return False
+    ```
+
+    Dans le pire cas (aucun élément commun), on compare chaque élément de `t1` à chaque élément de `t2`, soit $n \times n = n^2$ comparaisons : coût **quadratique**. <span class="horsprog">au-delà du programme</span>
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 21</span> — Moyenne, variance — et le piège du coût <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-21 }
 

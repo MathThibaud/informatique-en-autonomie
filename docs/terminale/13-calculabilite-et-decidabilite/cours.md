@@ -26,7 +26,7 @@ Et l’on peut poursuivre la poupée russe : `python3` est lui-même lancé par
 
 !!! remarque "Remarque"
 
-    Vous connaissez déjà des programmes qui prennent des programmes en entrée : un **interpréteur** (comme `python3`), un **compilateur** (qui traduit du C en langage machine), un **éditeur** qui colore la syntaxe, un **antivirus** qui inspecte un exécutable… Traiter « un programme comme une donnée » n’a rien d’exotique.
+    Vous connaissez déjà des programmes qui prennent des programmes en entrée : un **interpréteur** (comme `python3`), un **compilateur** (qui traduit du C en langage machine), un **éditeur** qui colore la syntaxe, un **antivirus** qui inspecte un exécutable (recherche de signatures, chapitre 12)… Traiter « un programme comme une donnée » n’a rien d’exotique.
 
 <span id="cours-13-1" class="ancre"></span>
 
@@ -228,7 +228,7 @@ Sortons de l’*impossible* pour entrer dans le *difficile*. Parmi les problème
 
     Un problème est dans la classe **P** s’il existe un algorithme qui le résout en temps **polynomial** (coût majoré par $n^2$, $n^3$, … où $n$ est la taille de l’entrée).
 
-En pratique, « classe P » $\approx$ « résoluble en temps **raisonnable** », même pour de grandes données. On y trouve : **trier** une liste, une **recherche dichotomique**, le **plus court chemin** (algorithme de Dijkstra <span class="horsprog">au-delà du programme</span>), tester si un nombre est **premier** (grâce à des algorithmes bien plus fins que la division par essais, dont le coût est exponentiel en le nombre de chiffres)… Tout, sauf les coûts **exponentiels** ($2^n$), qui explosent dès que $n$ dépasse quelques dizaines.
+En pratique, « classe P » $\approx$ « résoluble en temps **raisonnable** », même pour de grandes données. On y trouve : **trier** une liste (le tri fusion du chapitre 7), une **recherche dichotomique**, le **plus court chemin** (algorithme de Dijkstra <span class="horsprog">au-delà du programme</span>, chapitres 8 et 9), tester si un nombre est **premier** (grâce à des algorithmes bien plus fins que la division par essais, dont le coût est exponentiel en le nombre de chiffres)… Tout, sauf les coûts **exponentiels** ($2^n$), qui explosent dès que $n$ dépasse quelques dizaines.
 
 ### L’idée reine : trouver, ou seulement vérifier ?
 

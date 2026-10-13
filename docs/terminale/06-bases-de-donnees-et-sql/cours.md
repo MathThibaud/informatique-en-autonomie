@@ -148,7 +148,7 @@ On ne manipule jamais les fichiers d’une base « à la main » : on passe par 
 
     - **Sécurité** : droits d’accès par utilisateur, sauvegardes.
 
-    - **Accès concurrents** : plusieurs utilisateurs en même temps, sans conflit, grâce aux **transactions**.
+    - **Accès concurrents** : plusieurs utilisateurs en même temps, sans conflit, grâce aux **transactions** (un problème de ressource partagée, comme entre les processus du chapitre 4).
 
 !!! remarque "Remarque — Question de bac : « intérêt d’un SGBD » / « deux services rendus »"
 

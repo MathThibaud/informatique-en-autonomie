@@ -94,7 +94,7 @@ n = 25  # nombre de nombres premiers plus petits que 100
 
 <span id="cours-05-1" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-05-1)** et **[3](exercices.md#ex-05-3)** (spécifier et documenter)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-05-1)** et **[2](exercices.md#ex-05-2)** (spécifier et documenter)
 
 ## Programmation défensive
 
@@ -132,9 +132,9 @@ if r is not None:
 
     On rencontre les deux, y compris au bac : `None` (ici) ou `-1` ; **suivez la convention de l’énoncé**. Avec `-1`, attention : `t[-1]` est un indice *valide* (le dernier élément), donc testez `r != -1` avant d’utiliser `t[r]`.
 
-<span id="cours-05-5" class="ancre"></span>
+<span id="cours-05-3" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-05-5) à [7](exercices.md#ex-05-7)** (programmation défensive)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-05-3) à [5](exercices.md#ex-05-5)** (programmation défensive)
 
 ## Tester ses programmes
 
@@ -184,9 +184,9 @@ for n in range(2, 30):
         assert verifie_doublon(doublon(t), t)
 ```
 
-<span id="cours-05-8" class="ancre"></span>
+<span id="cours-05-6" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[8](exercices.md#ex-05-8) à [12](exercices.md#ex-05-12)** (tester ses programmes)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-05-6) à [10](exercices.md#ex-05-10)** (tester ses programmes)
 
 ## Corriger les erreurs (déboguer)
 
@@ -230,13 +230,13 @@ assert est_croissant([]) == True
 
     - une fois corrigé, **retirer les affichages** mais **garder les tests**.
 
-<span id="cours-05-13" class="ancre"></span>
+<span id="cours-05-11" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[13](exercices.md#ex-05-13) et [14](exercices.md#ex-05-14)** (corriger, déboguer)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[11](exercices.md#ex-05-11) à [13](exercices.md#ex-05-13)** (corriger, déboguer)
 
 ## Invariant de boucle
 
-Pour se convaincre qu’une boucle est correcte, on cherche une propriété **vraie avant la boucle et préservée à chaque tour** : un **invariant de boucle**. Vraie au départ et maintenue, elle est donc encore vraie *à la sortie* — c’est ce qui prouve le résultat. Prenons la division euclidienne par soustractions successives.
+Vous avez rencontré cette notion avec l’invariant du champion (chapitre *Algorithmique : le parcours séquentiel*) ; on l’applique ici à une boucle `while`. Pour se convaincre qu’une boucle est correcte, on cherche une propriété **vraie avant la boucle et préservée à chaque tour** : un **invariant de boucle**. Vraie au départ et maintenue, elle est donc encore vraie *à la sortie* — c’est ce qui prouve le résultat. Prenons la division euclidienne par soustractions successives.
 
 ```python
 def division_euclidienne(a, b):   # a >= 0, b > 0
@@ -265,9 +265,9 @@ while r >= b:
     r -= b
 ```
 
-<span id="cours-05-15" class="ancre"></span>
+<span id="cours-05-14" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[15](exercices.md#ex-05-15) à [17](exercices.md#ex-05-17)** (invariant de boucle), puis **[2](exercices.md#ex-05-2)** (docstring de `division_euclidienne`) et **[4](exercices.md#ex-05-4)** (un meilleur nom : docstring, invariant et tests)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[14](exercices.md#ex-05-14) à [18](exercices.md#ex-05-18)** (docstring de `division_euclidienne` ; invariant de boucle ; un meilleur nom : docstring, invariant et tests)
 
 ## Diversité et unité des langages
 
@@ -379,9 +379,9 @@ On ne réécrit pas tout à chaque fois. En regroupant des fonctions utiles dans
 
     Deux chapitres prolongent directement celui-ci : *La récursivité* (une fonction qui s’appelle elle-même, avec sa condition d’arrêt — ses tests et ses préconditions se pensent exactement comme ici) et *Programmation objet et paradigmes* (définir ses propres types avec des classes, et comparer vraiment les styles impératif, fonctionnel et objet).
 
-<span id="cours-05-18" class="ancre"></span>
+<span id="cours-05-19" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[18](exercices.md#ex-05-18) à [24](exercices.md#ex-05-24)** (diversité des langages)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[19](exercices.md#ex-05-19) à [25](exercices.md#ex-05-25)** (diversité des langages)
 
 ## Un peu d’histoire
 

@@ -24,7 +24,7 @@ def fctB():
     print("Fin fctB")
 ```
 
-La chose essentielle à observer : l’exécution de `fctB` est **interrompue** pendant celle de `fctA`, puis **reprend exactement où elle s’était arrêtée**. Pour gérer cela, le système utilise une **pile d’exécution**.
+La chose essentielle à observer : l’exécution de `fctB` est **interrompue** pendant celle de `fctA`, puis **reprend exactement où elle s’était arrêtée**. Pour gérer cela, le système utilise une **pile d’exécution** (la pile, comme structure de données, sera étudiée pour elle-même au chapitre 3).
 
 !!! definition "Définition 1 — Pile d’exécution"
 
@@ -299,7 +299,7 @@ On voit que `fib(2)` est recalculé **trois** fois, `fib(3)` deux fois… Le no
 
     Concrètement : `fib(40)` demande plus de $330$ millions d’appels ($331\,160\,281$ exactement) et met plusieurs *dizaines de secondes*, là où une version itérative (avec une boucle) répond en quelques *microsecondes*. Retenez cet ordre de grandeur : une fonction récursive peut être élégante **et** inutilisable.
 
-Une manière efficace de calculer $u_n$ malgré tout sera étudiée dans le chapitre de **programmation dynamique**.
+Une manière efficace de calculer $u_n$ malgré tout sera étudiée dans le chapitre de **programmation dynamique** (chapitre 11).
 
 ## Récursif ou itératif ?
 
@@ -399,9 +399,9 @@ La récursivité produit naturellement les **fractales** : des figures qui se r�
 
 Ce chapitre est une **clé** pour toute la fin de l’année. On la retrouve dès qu’une structure ou une méthode est « faite de copies plus petites d’elle-même ».
 
-- **Structures récursives : les arbres.** Un arbre est un nœud reliant des *sous-arbres*. Presque tout algorithme sur les arbres est récursif (*ex.* bac Polynésie 2023, jour 2 : `maximum(abr)` qui descend dans le sous-arbre droit).
+- **Structures récursives : les arbres** (chapitre 5). Un arbre est un nœud reliant des *sous-arbres*. Presque tout algorithme sur les arbres est récursif (*ex.* bac Polynésie 2023, jour 2 : `maximum(abr)` qui descend dans le sous-arbre droit).
 
-- **Diviser pour régner : le tri fusion.** On coupe la liste en deux, on trie *récursivement* chaque moitié, puis on fusionne (*ex.* bac Liban 2023, jour 2). Coût $n\log_2 n$ au lieu de $n^2$. *(Tout un chapitre y est consacré : **Diviser pour régner**.)*
+- **Diviser pour régner : le tri fusion.** On coupe la liste en deux, on trie *récursivement* chaque moitié, puis on fusionne (*ex.* bac Liban 2023, jour 2). Coût $n\log_2 n$ au lieu de $n^2$. *(Tout un chapitre y est consacré : **Diviser pour régner**, chapitre 7.)*
 
 - **Retour sur trace (*backtracking*) : le Sudoku.** On essaie, on poursuit récursivement, on **revient en arrière** au premier échec (voir le projet Sudoku en fin de chapitre).
 
