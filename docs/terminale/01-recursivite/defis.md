@@ -77,20 +77,20 @@ Faire un schéma : écrire chaque couleur, et tracer une flèche de $A$ vers $B$
 
 ## Programmer la partie 1
 
-!!! encadre "Outil Python : tester le début ou la fin d’une chaîne (startswith, endswith)"
+!!! encadre "Outil Python : tester le début ou la fin d’une chaîne avec une tranche"
 
-    Ces deux méthodes renvoient un booléen : la chaîne commence-t-elle (finit-elle) par le morceau donné ?
+    On compare une tranche au morceau cherché : `s[:n]` contient les `n` premiers caractères, `s[-n:]` les `n` derniers.
 
     ```python
     reste = "no other bags."
-    print(reste.startswith("no other"))   # True
-    print(reste.endswith("."))            # True
-    print("2 dull lime bags".startswith("no"))   # False
+    print(reste[:8] == "no other")          # True : les 8 premiers caracteres
+    print(reste[-1:] == ".")                # True : le dernier caractere
+    print("2 dull lime bags"[:2] == "no")   # False
     ```
 
-    **Intérêt.** Plus lisible et plus sûr que de comparer une tranche à la main (`reste[:8] == "no other"`), où il faut compter les caractères.
+    **Intérêt.** Pour ne pas compter les caractères à la main, écrire `reste[:len("no other")] == "no other"`. Une tranche plus longue que la chaîne ne provoque pas d’erreur : elle s’arrête à la fin.
 
-    **À essayer.** Que renvoie `"bags".startswith("bag")` ? Et `"bag".startswith("bags")` ?
+    **À essayer.** Que vaut `"bags"[:3] == "bag"` ? Et `"bag"[:4] == "bags"` ?
 
 ### <span class="exo-num">Exercice 3</span> — Les règles en dictionnaire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-recursivite-aoc-1-3 }
 

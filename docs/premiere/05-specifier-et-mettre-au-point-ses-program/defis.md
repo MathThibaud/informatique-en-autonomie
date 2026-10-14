@@ -87,20 +87,19 @@ fichier.close()
 
 Afficher les 5 premières lignes de vos données pour voir à quoi elles ressemblent.
 
-!!! encadre "Outil Python : méthodes de chaînes (isdigit, startswith, replace)"
+!!! encadre "Outil Python : méthodes de chaînes (isdigit, tranches, replace)"
 
-    `c.isdigit()` renvoie `True` si la chaîne `c` n’est faite que de chiffres. `ligne.startswith(mot, i)` dit si `mot` apparaît dans `ligne` à partir de l’indice `i`. `ligne.replace(a, b)` renvoie une copie de `ligne` où chaque `a` est remplacé par `b`.
+    `c.isdigit()` renvoie `True` si la chaîne `c` n’est faite que de chiffres. La comparaison `ligne[i:i + len(mot)] == mot` dit si `mot` apparaît dans `ligne` à partir de l’indice `i`. `ligne.replace(a, b)` renvoie une copie de `ligne` où chaque `a` est remplacé par `b`.
 
     ```python
     print("4".isdigit(), "q".isdigit())     # True False
     ligne = "abcone2"
-    print(ligne.startswith("one", 3))       # True : "one" commence a l'indice 3
-    print(ligne.startswith("one", 2))       # False
-    print(ligne[3:6] == "one")              # meme test avec une tranche
+    print(ligne[3:6] == "one")              # True : "one" commence a l'indice 3
+    print(ligne[2:5] == "one")              # False
     print("onetwo".replace("one", "1"))     # 1two : remplace TOUTES les apparitions
     ```
 
-    **Intérêt.** Ces méthodes évitent d’écrire des boucles de comparaison. `startswith(mot, i)` équivaut à la tranche `ligne[i:i + len(mot)] == mot`.
+    **Intérêt.** Ces outils évitent d’écrire des boucles de comparaison. Avec `len(mot)`, la tranche a toujours la bonne longueur, quel que soit le mot cherché.
 
     *À essayer.* Que renvoie `"eightwo".replace("two", "2")` ? Le mot `eight` est-il encore lisible ?
 
@@ -151,7 +150,7 @@ nine87seven
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    Plutôt que de modifier la ligne, la parcourir indice par indice : à chaque indice `i`, regarder si le caractère est un chiffre, puis, pour chaque mot de la liste, si la ligne contient ce mot **à partir de** l’indice `i` (une tranche de la bonne longueur, ou `ligne.startswith(mot, i)`).
+    Plutôt que de modifier la ligne, la parcourir indice par indice : à chaque indice `i`, regarder si le caractère est un chiffre, puis, pour chaque mot de la liste, si la ligne contient ce mot **à partir de** l’indice `i` (une tranche de la bonne longueur : `ligne[i:i + len(mot)]`).
 
 ## Approfondissement
 

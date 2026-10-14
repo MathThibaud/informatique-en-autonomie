@@ -302,7 +302,7 @@ On tape `DUP` dans la barre de recherche : l’annuaire doit proposer **aussitô
 
 2.  Pourquoi le premier nom qui commence par `"DUP"` est-il exactement le premier nom `>= "DUP"` ?
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `suggestions(noms, prefixe, k)` qui renvoie au plus `k` noms commençant par `prefixe`, dans l’ordre. *La méthode `s.startswith(p)` renvoie `True` si la chaîne `s` commence par `p`.*
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `suggestions(noms, prefixe, k)` qui renvoie au plus `k` noms commençant par `prefixe`, dans l’ordre. *La chaîne `s` commence par `p` lorsque la tranche `s[:len(p)]` est égale à `p`.*
 
     ```text
     >>> suggestions(noms, "DUP", 3)
@@ -332,7 +332,7 @@ On tape `DUP` dans la barre de recherche : l’annuaire doit proposer **aussitô
     def suggestions(noms, prefixe, k):
         res = []
         i = premier_indice_au_moins(noms, prefixe)
-        while i < len(noms) and len(res) < k and noms[i].startswith(prefixe):
+        while i < len(noms) and len(res) < k and noms[i][:len(prefixe)] == prefixe:
             res.append(noms[i])
             i = i + 1
         return res
@@ -340,7 +340,7 @@ On tape `DUP` dans la barre de recherche : l’annuaire doit proposer **aussitô
     def nb_commencant_par(noms, prefixe):
         i = premier_indice_au_moins(noms, prefixe)
         c = 0
-        while i < len(noms) and noms[i].startswith(prefixe):
+        while i < len(noms) and noms[i][:len(prefixe)] == prefixe:
             c = c + 1
             i = i + 1
         return c
