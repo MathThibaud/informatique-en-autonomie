@@ -131,17 +131,17 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     - `pid` compte exactement neuf chiffres (zéros de tête compris) ; `cid` est ignoré.
 
-!!! encadre "Outil Python : tester la forme d’une chaîne (isdigit, startswith, endswith)"
+!!! encadre "Outil Python : tester la forme d’une chaîne (isdigit, tranches)"
 
-    Ces méthodes renvoient un booléen qui décrit la forme de la chaîne, sans la convertir.
+    La méthode `isdigit` et les comparaisons de tranches renvoient un booléen qui décrit la forme de la chaîne, sans la convertir.
 
     ```python
     print("2019".isdigit())         # True : que des chiffres
     print("-12".isdigit())          # False : le signe n'est pas un chiffre
     print("".isdigit())             # False : chaine vide
     taille = "172cm"
-    print(taille.endswith("cm"))    # True
-    print(taille.startswith("#"))   # False
+    print(taille[-2:] == "cm")      # True : les 2 derniers caracteres
+    print(taille[:1] == "#")        # False : le premier caractere
     print(taille[:-2], taille[-2:]) # 172 cm : tranches avec indices negatifs
     ```
 
@@ -177,7 +177,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ??? pouce "Coup de pouce"
 
-    Penser aux chaînes pièges : une taille sans unité, un identifiant trop court, une couleur en majuscules… Les méthodes `isdigit()`, `endswith()` et le découpage `valeur[:-2]` sont utiles.
+    Penser aux chaînes pièges : une taille sans unité, un identifiant trop court, une couleur en majuscules… La méthode `isdigit()` et les tranches `valeur[:-2]` et `valeur[-2:]` sont utiles.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -337,19 +337,20 @@ Construire la liste des billets voisins valides. Attention : un billet peut cont
 
     **À essayer.** Que contient `{1, 2, 2, 3}` ? Que se passe-t-il si l’on remplace `discard` par `remove` pour retirer un élément absent ? `s.pop()` retire et renvoie un élément quelconque de `s`.
 
-!!! encadre "Outil Python : startswith"
+!!! encadre "Outil Python : tester le début d’une chaîne avec une tranche"
 
-    `s.startswith(debut)` vaut `True` si la chaîne `s` commence par `debut`.
+    `s[:n]` est la chaîne des `n` premiers caractères de `s`. Pour savoir si `s` commence par `debut`, on compare `s[:len(debut)]` à `debut`.
 
     ```python
     nom = "departure track"
-    print(nom.startswith("departure"))       # True
-    print("arrival".startswith("depart"))    # False
+    debut = "departure"
+    print(nom[:len(debut)] == debut)     # True
+    print("arrival"[:6] == "depart")     # False
     ```
 
-    **Intérêt.** Plus lisible et plus sûr que `s[:9] == "departure"`, où il faut compter les lettres.
+    **Intérêt.** `len(debut)` évite de compter les lettres à la main. Une tranche plus longue que la chaîne ne provoque pas d’erreur : elle s’arrête à la fin de la chaîne.
 
-    **À essayer.** Que renvoie `"dep".startswith("departure")` ?
+    **À essayer.** Que vaut `"dep"[:9]` ? En déduire la valeur de `"dep"[:9] == "departure"`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Élimination par contraintes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-aoc-2-6 }
 

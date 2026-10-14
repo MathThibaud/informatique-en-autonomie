@@ -618,7 +618,7 @@ Les éditions précédentes du fichier contenaient des lignes qui ne décrivent 
 
     ??? pouce "Coup de pouce"
 
-        Les chaînes ont deux méthodes utiles : `"_PRENOMS".startswith("_")` vaut `True` et `"XXXX".isdigit()` vaut `False`.
+        Deux outils utiles : la tranche `"_PRENOMS"[:1]` vaut `"_"` (le premier caractère) et `"XXXX".isdigit()` vaut `False`.
 
 2.  Un camarade propose plutôt le test `"RARES" in ligne["prenom"]`. Or le fichier complet contient la ligne `1;RARES;2025;15;2053`. Que décrit-elle ? Pourquoi ce test serait-il une erreur ?
 
