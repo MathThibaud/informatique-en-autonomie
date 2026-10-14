@@ -206,14 +206,14 @@ Dans un document, les balises s’écrivent `<b>` (ouvrante) et `</b>` (fermante
 
 ??? pouce "Coup de pouce"
 
-    Une balise fermante commence par `"</"` (méthode `startswith`). On empile les ouvrantes telles quelles ; pour une fermante `b`, l’ouvrante attendue au sommet s’obtient par concaténation : `"<" + b[2:]`. Il reste à reprendre l’algorithme du parenthésage.
+    Une balise fermante commence par `"</"` : il suffit de comparer ses deux premiers caractères, `b[:2]`, à `"</"`. On empile les ouvrantes telles quelles ; pour une fermante `b`, l’ouvrante attendue au sommet s’obtient par concaténation : `"<" + b[2:]`. Il reste à reprendre l’algorithme du parenthésage.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
     `def balises_ok(liste):`  
     `p = Pile()`  
     `for b in liste:`  
-    `if not b.startswith("</"):`  
+    `if b[:2] != "</":`  
     `p.empiler(b)`
 
 ??? corrige "Corrigé"
@@ -222,7 +222,7 @@ Dans un document, les balises s’écrivent `<b>` (ouvrante) et `</b>` (fermante
     def balises_ok(liste):
         p = Pile()
         for b in liste:
-            if not b.startswith("</"):         # ouvrante <x>
+            if b[:2] != "</":                  # ouvrante <x>
                 p.empiler(b)
             else:                              # fermante </x>
                 if p.est_vide():
