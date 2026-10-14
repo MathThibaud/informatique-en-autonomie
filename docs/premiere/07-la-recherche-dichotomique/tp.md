@@ -253,10 +253,10 @@ Chaque fonction renvoie un **couple** : le numéro trouvé (ou `None` si le nom 
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> La fonction `courbe_moyennes`, fournie, mesure le nombre moyen de comparaisons de la dichotomie sur les `n` premiers abonnés (`noms[0:n]`, qui reste trié). La lancer pour `tailles = [1000, 2000, 4000, 8000, 16000]` puis recopier et compléter sur le cahier le tableau suivant :
 
-| **taille `n`**               | $1\,000$ | $2\,000$ | $4\,000$ | $8\,000$ | $16\,000$ |
-|:-----------------------------|:---------|:---------|:---------|:---------|:----------|
-| **comparaisons (moyenne)**   |          |          |          |          |           |
-| **$\log_2 n$** (`math.log2`) |          |          |          |          |           |
+| **taille `n`** | $1\,000$ | $2\,000$ | $4\,000$ | $8\,000$ | $16\,000$ |
+|:---|:---|:---|:---|:---|:---|
+| **comparaisons (moyenne)** |  |  |  |  |  |
+| **$\log_2 n$** (`log2`, fournie) |  |  |  |  |  |
 
 1.  De combien augmente le nombre moyen de comparaisons quand la taille **double** ? Comparer à $\log_2 n$. Quelle phrase du cours retrouve-t-on ?
 

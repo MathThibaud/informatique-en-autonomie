@@ -88,29 +88,42 @@ Tuile B
 
 ## Programmer la partie 1
 
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
+
 ### <span class="exo-num">Exercice 3</span> — Lire les tuiles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-1-3 }
 
 Construire un dictionnaire `tuiles` qui associe à chaque numéro (un entier) la tuile sous forme de liste de chaînes. Vérifier le nombre de tuiles : est-ce un carré parfait ?
 
 ??? pouce "Coup de pouce"
 
-    Les tuiles sont séparées par une ligne vide : `split("\n\n")`. La première ligne d’un bloc donne le numéro (enlever le texte et le `:`).
+    Les tuiles sont séparées par une ligne vide : `split("\n\n")`. La première ligne d’un bloc donne le numéro : une tranche enlève le texte `Tile ` et le `:` final.
 
-!!! encadre "Outils Python : lire une chaîne à l’envers, assembler, comparer ([::-1], join, min)"
+!!! encadre "Outils Python : lire une chaîne à l’envers, construire une colonne, comparer deux chaînes"
 
-    `s[::-1]` est la tranche qui parcourt `s` avec un pas de $-1$ : c’est la chaîne à l’envers. `"".join(...)` colle bout à bout des chaînes (ici des caractères) en une seule. Enfin `min` et `<` comparent les chaînes dans l’ordre « alphabétique » des caractères (l’ordre de leurs codes : `#` vient avant `.`).
+    `s[::-1]` est la tranche qui parcourt `s` avec un pas de $-1$ : c’est la chaîne à l’envers. Pour obtenir une **colonne** d’une tuile, on part d’une chaîne vide et on lui ajoute, ligne après ligne, le caractère voulu. Enfin `min(a, b)` et `<` comparent deux chaînes dans l’ordre « alphabétique » des caractères (l’ordre de leurs codes : `#` vient avant `.`).
 
     ```python
     tuile = ["#.#", "..#", "##."]
-    print(tuile[0][::-1])                         # "#.#" lu a l'envers : "#.#"
-    print("..#"[::-1])                            # "#.."
-    gauche = "".join(ligne[0] for ligne in tuile) # premier caractere de chaque ligne
-    print(gauche)                                 # "#.#"
-    print("-".join(["a", "b", "c"]))              # "a-b-c" : le separateur est au choix
-    print(min("..#", "#.."))                      # "#.." car "#" < "."
+    print(tuile[0][::-1])               # "#.#" lu a l'envers : "#.#"
+    print("..#"[::-1])                  # "#.."
+    gauche = ""
+    for ligne in tuile:
+        gauche += ligne[0]              # premier caractere de chaque ligne
+    print(gauche)                       # "#.#"
+    print(min("..#", "#.."))            # "#.." car "#" < "."
     ```
 
-    **Intérêt.** Avec `min(b, b[::-1])`, un bord et son inverse donnent **la même** chaîne : on peut alors les ranger sous une seule clé de dictionnaire. Question : écrire le bord droit de cette tuile avec `join`. Que vaut `min("##.", ".##")` ?
+    **Intérêt.** Avec `min(b, b[::-1])`, un bord et son inverse donnent **la même** chaîne : on peut alors les ranger sous une seule clé de dictionnaire. Question : écrire le bord droit de cette tuile avec une boucle. Que vaut `min("##.", ".##")` ?
 
 ### <span class="exo-num">Exercice 4</span> — Les bords <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-1-4 }
 
@@ -118,7 +131,7 @@ Construire un dictionnaire `tuiles` qui associe à chaque numéro (un entier) la
 
 ??? pouce "Coup de pouce"
 
-    `"".join(ligne[0] for ligne in tuile)` donne le bord gauche ; `chaine[::-1]` lit une chaîne à l’envers.
+    Une boucle qui ajoute `ligne[0]` à une chaîne, vide au départ, donne le bord gauche ; `chaine[::-1]` lit une chaîne à l’envers.
 
 ### <span class="exo-num">Exercice 5</span> — Les coins <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-1-5 }
 
@@ -152,11 +165,11 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site. Cette 
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    Pour une liste de chaînes `t` de taille $n$, la ligne `j` de la tuile tournée d’un quart de tour dans le sens horaire est formée des caractères `t[n - 1 - i][j]` pour `i` de `0` à `n - 1`.
+    Pour une liste de chaînes `t` de taille $n$, la ligne `j` de la tuile tournée d’un quart de tour dans le sens horaire est formée des caractères `t[n - 1 - i][j]` pour `i` de `0` à `n - 1`, ajoutés un par un à une chaîne vide au départ.
 
 !!! encadre "Outil Python : les ensembles (set), et rappel sur le drapeau"
 
-    Pour tester si **toutes** les cases d’une liste sont des `#`, on utilise un booléen « drapeau » (méthode du défi *Handy Haversacks*, chapitre 1) : il part de `True` et la boucle le passe à `False` au premier contre-exemple. Un **ensemble** est une collection sans doublon et sans ordre ; on y ajoute avec `add`, on réunit deux ensembles avec `|`, et le test `x in ensemble` est très rapide.
+    Pour tester si **toutes** les cases d’une liste sont des `#`, on utilise un booléen « drapeau » (méthode du défi *Handy Haversacks*, chapitre 1) : il part de `True` et la boucle le passe à `False` au premier contre-exemple. Un **ensemble** est une collection sans doublon et sans ordre ; on y ajoute avec `add`, on réunit deux ensembles avec `a | b`, et le test `x in ensemble` est très rapide (encadré « les ensembles » du défi *Crab Combat*, chapitre 4).
 
     ```python
     image = ["#.#", "###"]
@@ -168,7 +181,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site. Cette 
     print(tout_diese)                    # True
     couvertes = set()                    # ensemble vide (attention : {} est un dict)
     couvertes.add((0, 0))
-    couvertes |= {(0, 0), (1, 1)}        # reunion : (0, 0) n'est pas compte deux fois
+    couvertes = couvertes | {(0, 0), (1, 1)}   # reunion : (0, 0) n'est pas compte deux fois
     print(len(couvertes))                # 2
     print((1, 1) in couvertes)           # True
     ```
@@ -215,7 +228,7 @@ La stratégie du défi part d’un coin et remplit l’image ligne par ligne. On
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        Une liste `COTES` de quadruplets `(dl, dc, mon_bord, son_bord)`, par exemple `(0, 1, droite, gauche)`, évite d’écrire quatre fois le même code (les fonctions sont des valeurs comme les autres). Recadrage : soustraire à toutes les positions le plus petit numéro de ligne et le plus petit numéro de colonne.
+        Une liste `COTES` de quadruplets `(dl, dc, mon_bord, son_bord)`, par exemple `(0, 1, droite, gauche)`, évite d’écrire quatre fois le même code (les fonctions sont des valeurs comme les autres). Recadrage : soustraire à toutes les positions le plus petit numéro de ligne et le plus petit numéro de colonne, trouvés par une boucle sur les clés de `place`.
 
 3.  Cette méthode suppose qu’aucun bord n’est un palindrome (une chaîne égale à son inverse). Pourquoi ? La méthode du défi a-t-elle le même défaut ?
 
@@ -299,9 +312,21 @@ kesa zuli brak (contains milk)
 
 !!! encadre "Outil Python : les ensembles (set) — rappel"
 
-    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove` et `discard`, test `x in ensemble` en temps constant, union `|`, intersection `&`, différence `-`, éléments non modifiables (tuples).
+    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove`, test `x in ensemble` en temps constant, parcours avec `for`, éléments non modifiables (tuples), **réunion** `a | b` (éléments présents dans l’un ou dans l’autre) et **intersection** `a & b` (éléments présents dans les deux). Ces deux opérateurs renvoient un nouvel ensemble, sans modifier `a` ni `b`.
 
-    **À essayer.** Avec `a = set("brak zuli monto".split())` et `b = {"zuli", "kesa", "brak"}`, que valent `a & b`, `a - b` et `b - a` ? Et `len(a & set())` ?
+    **À essayer.** Avec `a = set("brak zuli monto".split())` et `b = {"zuli", "kesa", "brak"}`, que valent `a & b`, `b & a` et `a | b` ? Écrire une boucle qui construit l’ensemble des éléments de `b` absents de `a`. Que vaut `len(a & set())` ?
+
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
 
 ### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-2-3 }
 
@@ -309,7 +334,7 @@ Construire la liste `aliments` : chaque aliment est un couple `(ingredients, all
 
 ??? pouce "Coup de pouce"
 
-    `ligne.split(" (contains ")` sépare les deux parties ; il reste à enlever la parenthèse finale avec `rstrip(")")` puis à couper selon `", "`.
+    Après `strip`, `ligne.split(" (contains ")` sépare les deux parties ; il reste à enlever la parenthèse finale (le dernier caractère) avec la tranche `[:-1]` puis à couper selon `", "`.
 
 ### <span class="exo-num">Exercice 4</span> — Les candidats <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-2-4 }
 
@@ -325,7 +350,7 @@ Calculer l’ensemble des ingrédients « suspects » (réunion des candidats), 
 
 ??? pouce "Coup de pouce"
 
-    Réunion de plusieurs ensembles : partir de `set()` et lui réunir chaque ensemble de candidats avec `|`. Pour compter, la différence `ingredients - suspects` donne, sur chaque ligne, les ingrédients sans danger ; attention, on compte chaque apparition sur chaque ligne.
+    Réunion de plusieurs ensembles : partir de `set()` et le remplacer, pour chaque ensemble de candidats `e`, par `suspects | e`. Pour compter, parcourir les ingrédients de chaque ligne et ajouter 1 à un compteur pour chacun qui n’est pas dans `suspects` ; attention, on compte chaque apparition sur chaque ligne.
 
 ## Partie 2
 
@@ -335,18 +360,21 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     Il reste à identifier les ingrédients dangereux pour pouvoir les éviter. Déterminer, pour chaque allergène, l’ingrédient qui le contient (la solution est unique). Réponse : la liste de ces ingrédients, rangés dans l’ordre alphabétique de leur **allergène** (et non de leur nom), séparés par des virgules sans espace.
 
-!!! encadre "Outil Python : assembler des chaînes (join)"
+!!! encadre "Méthode : trier puis assembler des chaînes"
 
-    `separateur.join(liste)` colle les chaînes de la liste en intercalant le séparateur.
+    **Trier.** Les chaînes se comparent avec `<` dans l’ordre alphabétique (`"eggs" < "gluten"` vaut `True`) : le **tri par insertion** du cours de première les range donc dans l’ordre alphabétique, sans rien changer à son code.
+
+    **Assembler.** Pour coller des chaînes en intercalant un séparateur, on part du premier mot et l’on ajoute, pour chacun des suivants, le séparateur puis le mot : il n’y a pas de virgule en trop à la fin.
 
     ```python
     mots = ["tolu", "zuli", "brak"]
-    print(",".join(mots))           # tolu,zuli,brak
-    print(" - ".join(mots))         # tolu - zuli - brak
-    print(",".join(sorted(mots)))   # brak,tolu,zuli  (ordre alphabetique)
+    texte = mots[0]
+    for i in range(1, len(mots)):
+        texte = texte + "," + mots[i]
+    print(texte)                    # tolu,zuli,brak
     ```
 
-    **Intérêt.** C’est plus simple (et plus rapide) qu’une boucle qui ajoute les mots un par un, et l’on n’a pas de virgule en trop à la fin. Question : que donne `"".join(["a", "b"])` ?
+    Question : que se passe-t-il si la liste `mots` est vide ? Que faut-il changer pour obtenir `tolu - zuli - brak` ?
 
 ### <span class="exo-num">Exercice 6</span> — Attribuer chaque allergène <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-2-6 }
 
@@ -358,7 +386,7 @@ Déterminer quel ingrédient contient chaque allergène, puis construire la cha�
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    Tant que le dictionnaire des candidats n’est pas vide : chercher un allergène dont l’ensemble a une seule valeur, le retirer du dictionnaire (`pop`) en notant l’ingrédient dans un dictionnaire `attribution`, puis faire `discard(ingredient)` sur tous les autres ensembles. Penser à trier par **allergène** pour la réponse.
+    Tant que le dictionnaire des candidats n’est pas vide : chercher un allergène dont l’ensemble a une seule valeur, le retirer du dictionnaire (`del`) en notant l’ingrédient dans un dictionnaire `attribution`, puis retirer cet ingrédient (`remove`, après avoir testé `in`) de tous les autres ensembles. Pour la réponse, trier les **allergènes** (tri par insertion), puis assembler les ingrédients correspondants.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Défi : et si ça bloquait ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-2-7 }
 

@@ -72,7 +72,7 @@ Dans un exemple inventé, la carte utilise `10` tours et la porte `17` tours. Av
 
 ??? pouce "Coup de pouce"
 
-    Une boucle `for` de `nb_tours` tours, avec `valeur = valeur * sujet % 20201227`. Python fournit aussi `pow(sujet, nb_tours, 20201227)`, beaucoup plus rapide (lire l’encadré).
+    Une boucle `for` de `nb_tours` tours, avec `valeur = valeur * sujet % 20201227`. Une méthode beaucoup plus rapide, l’exponentiation rapide, est programmée dans l’approfondissement 1.
 
 ### <span class="exo-num">Exercice 4</span> — Retrouver un secret <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-1-4 }
 
@@ -110,7 +110,7 @@ Les vrais protocoles utilisent un modulo de plus de 600 chiffres. Mesurer la vit
 
 ??? pouce "Coup de pouce"
 
-    La recherche essaie, au pire, toutes les valeurs du nombre de tours, jusqu’au modulo. La carte, elle, n’a qu’à calculer une puissance, ce que `pow` fait en un nombre d’étapes proportionnel au nombre de *chiffres* de l’exposant.
+    La recherche essaie, au pire, toutes les valeurs du nombre de tours, jusqu’au modulo. La carte, elle, n’a qu’à calculer une puissance, ce que l’exponentiation rapide (approfondissement 1) fait en un nombre d’étapes proportionnel au nombre de *chiffres* de l’exposant.
 
 ## Rappel : l’échange de clés de Diffie-Hellman
 
@@ -126,17 +126,17 @@ Les vrais protocoles utilisent un modulo de plus de 600 chiffres. Mesurer la vit
 
     Ils obtiennent le même secret car $(g^b)^a = (g^a)^b = g^{ab}$. Un espion qui a entendu $3$ et $18$ doit retrouver $a$ ou $b$ : c’est le problème du **logarithme discret**.
 
-    **Pourquoi est-ce difficile ?** Les puissances successives de $2$ modulo $29$ semblent tirées au hasard : $2, 4, 8, 16, 3, 6, 12, 24, 19, 9, 18, 7\dots$ Aucune régularité ne permet de « remonter » d’un résultat à l’exposant : la méthode naïve essaie les exposants un à un, et même les meilleures méthodes connues deviennent beaucoup trop lentes quand $p$ est très grand. À l’inverse, calculer une puissance est rapide : en Python, `pow(a, b, m)` calcule $a^b \bmod m$ par exponentiation rapide, sans jamais manipuler le nombre géant $a^b$.
+    **Pourquoi est-ce difficile ?** Les puissances successives de $2$ modulo $29$ semblent tirées au hasard : $2, 4, 8, 16, 3, 6, 12, 24, 19, 9, 18, 7\dots$ Aucune régularité ne permet de « remonter » d’un résultat à l’exposant : la méthode naïve essaie les exposants un à un, et même les meilleures méthodes connues deviennent beaucoup trop lentes quand $p$ est très grand. À l’inverse, calculer une puissance est rapide : l’exponentiation rapide (approfondissement 1) calcule $a^b \bmod m$ en peu de multiplications, en réduisant modulo $m$ à chaque étape, sans jamais manipuler le nombre géant $a^b$.
 
 ## Approfondissement
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Approfondissement 1 : programmer l’exponentiation rapide <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-1-6 }
 
-La fonction `pow(a, b, m)` de Python n’effectue pas $b$ multiplications : elle utilise l’**exponentiation rapide**, fondée sur $a^{b} = \left(a^{b/2}\right)^2$ si $b$ est pair et $a^{b} = \left(a^{(b-1)/2}\right)^2 \times a$ si $b$ est impair.
+Pour calculer $a^b \bmod m$, il n’est pas nécessaire d’effectuer $b$ multiplications : l’**exponentiation rapide** est fondée sur $a^{b} = \left(a^{b/2}\right)^2$ si $b$ est pair et $a^{b} = \left(a^{(b-1)/2}\right)^2 \times a$ si $b$ est impair.
 
 1.  À la main : calculer $2^{11} \bmod 29$ en n’utilisant que des carrés et des multiplications par $2$ (partir de $2^{11} = (2^{5})^{2} \times 2$). Combien de multiplications a-t-on faites ? Combien en fallait-il avec la méthode « une multiplication par tour » ?
 
-2.  Écrire une fonction **récursive** `puissance_rapide(a, b, m)` qui renvoie $a^b \bmod m$. La comparer à `pow(a, b, m)` sur de nombreuses valeurs.
+2.  Écrire une fonction **récursive** `puissance_rapide(a, b, m)` qui renvoie $a^b \bmod m$. La comparer à `transformer(a, b)` (avec `m = 20201227`) sur de nombreuses valeurs.
 
     ??? pouce "Coup de pouce"
 
@@ -168,7 +168,7 @@ On admet que, $p$ étant premier, $g^{p-1} \bmod p = 1$ (petit théorème de Fer
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        Calculer une fois pour toutes `facteur = pow(g, p - 1 - m, p)` ; à chaque pas de géant, `geant = geant * facteur % p`. À la sortie, la réponse est `i * m + bebes[geant]`.
+        Calculer une fois pour toutes `facteur = puissance_rapide(g, p - 1 - m, p)` (approfondissement 1) ; à chaque pas de géant, `geant = geant * facteur % p`. À la sortie, la réponse est `i * m + bebes[geant]`.
 
 3.  Combien d’opérations pour $p \approx 2 \times 10^7$ ? Et pour $p \approx 10^{600}$ ? Cela remet-il en cause la sécurité du protocole ? Quelle quantité de mémoire faut-il ?
 
@@ -192,7 +192,7 @@ On admet que, $p$ étant premier, $g^{p-1} \bmod p = 1$ (petit théorème de Fer
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi réinvestit l’arithmétique modulaire de ce chapitre : le reste `%` dans la partie 1, puis, en approfondissement, l’inverse modulaire `pow(a, -1, m)` rencontré avec le chiffrement affine et RSA.*
+*Ce défi réinvestit l’arithmétique modulaire de ce chapitre : le reste `%` dans la partie 1, puis, en approfondissement, l’inverse modulaire rencontré avec le chiffrement affine et RSA.*
 
 ## Lire l’énoncé
 
@@ -242,11 +242,23 @@ Pour chaque navette, calculer le premier départ à partir de l’instant 96 et 
 
 ### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-3 }
 
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
+
 Écrire une fonction `lire_notes(nom_fichier)` qui renvoie l’instant d’arrivée et la liste des numéros des navettes en service (sans les `x`).
 
 ??? pouce "Coup de pouce"
 
-    `ligne.split(",")` découpe la seconde ligne ; on ne garde que les morceaux différents de `"x"`.
+    Après `strip`, `ligne.split(",")` découpe la seconde ligne ; on ne garde que les morceaux différents de `"x"`.
 
 ### <span class="exo-num">Exercice 4</span> — L’attente, avec un modulo <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-4 }
 
@@ -308,24 +320,31 @@ L’énoncé prévient que la réponse dépasse $10^{14}$ : tester tous les inst
 
 ## Approfondissement
 
-!!! encadre "Rappel du cours : puissance modulaire et inverse (pow(a, b, m))"
+!!! encadre "Méthode : l’inverse modulaire (par une boucle)"
 
-    Comme dans le cours (chiffrement affine, RSA), `pow(a, b, m)` calcule $a^b \bmod m$ sans jamais former le très grand nombre $a^b$. Avec l’exposant $-1$, `pow(a, -1, m)` renvoie l’**inverse de $a$ modulo $m$**, c’est-à-dire l’entier $y$ entre $0$ et $m-1$ tel que $a \times y \bmod m = 1$ (Python 3.8 ou plus récent). Il n’existe que si $a$ et $m$ sont premiers entre eux.
+    Comme dans le cours (chiffrement affine, RSA), l’**inverse de $a$ modulo $m$** est l’entier $y$ entre $0$ et $m-1$ tel que $a \times y \bmod m = 1$. Il n’existe que si $a$ et $m$ sont premiers entre eux. Quand $m$ est petit (ici, un numéro de navette), on peut le chercher en essayant $y = 1, 2, 3\dots$
 
     ```python
-    print(pow(3, 4))               # 81 : comme 3 ** 4
-    print(pow(3, 4, 7))            # 4 : 81 % 7, sans jamais former de tres grand nombre
-    print(pow(6, -1, 7))           # 6 : inverse de 6 modulo 7 (6 * 6 = 36 = 5 * 7 + 1)
-    print(6 * pow(6, -1, 7) % 7)   # 1
+    def inverse_mod(a, m):
+        """Renvoie l'inverse de a modulo m, ou None s'il n'existe pas."""
+        a = a % m
+        for y in range(1, m):
+            if a * y % m == 1:
+                return y
+        return None
+
+    print(inverse_mod(6, 7))           # 6 : 6 * 6 = 36 = 5 * 7 + 1
+    print(6 * inverse_mod(6, 7) % 7)   # 1
+    print(inverse_mod(55, 7))          # 6 : 55 % 7 = 6, on se ramene au cas precedent
     ```
 
-    **Intérêt.** L’inverse modulaire se calcule en un nombre d’étapes proportionnel au nombre de chiffres (algorithme d’Euclide étendu), même pour des nombres immenses ; le chercher en essayant $y = 1, 2, 3\dots$ prendrait jusqu’à $m$ essais.
+    **Intérêt.** Au plus $m - 1$ essais : c’est instantané pour les numéros de navettes (quelques centaines). Pour les très grands nombres de RSA, on utilise plutôt l’algorithme d’Euclide étendu du cours, dont le nombre d’étapes est proportionnel au nombre de chiffres.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : la formule des restes chinois <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-7 }
 
 La section précédente cite le théorème des restes chinois. Il donne aussi une **formule** : pour le système $t \,\%\, n_m = r_m$ ($m = 1, \dots, k$), avec des $n_m$ premiers entre eux deux à deux, on pose $N = n_1 \times \dots \times n_k$, $N_m = N / n_m$ et $y_m$ l’inverse de $N_m$ modulo $n_m$. Alors $$t = \Big(\sum_{m} r_m \, N_m \, y_m\Big) \bmod N.$$
 
-1.  Recopier et exécuter le code de l’encadré. Que se passe-t-il avec `pow(4, -1, 6)` ? Pourquoi ?
+1.  Recopier et exécuter le code de l’encadré. Que renvoie `inverse_mod(4, 6)` ? Pourquoi ?
 
 2.  Pour une navette de numéro $b$ en position $i$, quel reste $r$ doit avoir $t$ modulo $b$ ? Sur l’exemple du défi (`5,x,7,x,x,11`), calculer pour chaque navette $r_m$, $N_m$ et $y_m$, puis $t$. On doit retrouver `215`.
 
@@ -339,4 +358,4 @@ La section précédente cite le théorème des restes chinois. Il donne aussi un
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        Une première boucle calcule le produit $N$ ; une seconde ajoute `r * (N // b) * pow(N // b, -1, b)` pour chaque navette ; on renvoie le total modulo $N$.
+        Une première boucle calcule le produit $N$ ; une seconde ajoute `r * (N // b) * inverse_mod(N // b, b)` pour chaque navette ; on renvoie le total modulo $N$.

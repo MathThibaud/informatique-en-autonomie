@@ -531,7 +531,7 @@ La **distance d’édition** entre deux mots est le nombre minimal d’opératio
                 if a[i - 1] == b[j - 1]:
                     D[i][j] = D[i - 1][j - 1]
                 else:
-                    D[i][j] = 1 + min(D[i - 1][j], D[i][j - 1], D[i - 1][j - 1])
+                    D[i][j] = 1 + min(min(D[i - 1][j], D[i][j - 1]), D[i - 1][j - 1])
         return D[n][m]
     ```
 
@@ -628,8 +628,14 @@ On considère la liste des nombres d’étages des immeubles d’une rue, en par
             for j in range(i):
                 if tab[j] < tab[i]:
                     dyn[i] = max(dyn[i], dyn[j] + 1)   # ligne 7
-        return max(dyn)                                 # ligne 8
+        meilleur = dyn[0]                               # ligne 8 : plus
+        for k in range(1, n):                           # grande valeur
+            if dyn[k] > meilleur:                       # de dyn
+                meilleur = dyn[k]
+        return meilleur
     ```
+
+    La ligne 8 doit renvoyer la **plus grande** valeur de `dyn` (la plus longue sous-séquence ne se termine pas forcément à la dernière case) : on la cherche par un parcours.
 
     **6.** La version récursive `llsc_fin` recalcule sans cesse les mêmes valeurs (coût exponentiel), tandis que `llsc_dyn` remplit chaque `dyn[i]` **une seule fois** : son coût est quadratique ($O(n^2)$), bien plus rapide.
 

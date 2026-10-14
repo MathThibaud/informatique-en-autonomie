@@ -153,6 +153,71 @@ Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujo
 
         Les réseaux sociaux fixent un âge minimal (souvent 13 ans) rarement vérifié, alors que la loi (RGPD, loi française ; loi n° 1.565 à Monaco) exige l’accord des parents avant 15 ans. Interdire avant 15 ans peut **protéger** (santé, harcèlement, exploitation commerciale de l’attention), mais une interdiction n’a de sens que si l’âge est **vérifié**, ce qui demande de fournir des **données personnelles** : il faut alors des solutions respectueuses de la vie privée, comme le **double anonymat** recommandé par la CNIL. Dans tous les cas, l’éducation (régler sa confidentialité, esprit critique, réflexes contre le harcèlement) reste indispensable.
 
+\newgeometry{inner=1.8cm,outer=1.6cm,top=2.2cm,bottom=1.9cm,headheight=16pt,headsep=0.5cm,footskip=0.9cm}
+
+??? corrige "Corrigé de l'activité"
+
+    Notions du cours mobilisées
+
+    - **Données personnelles**, **consentement**, âge de 15 ans (RGPD et loi Informatique et libertés ; loi n° 1.565 et APDP à Monaco).
+
+    - **Identification** / **authentification** : vérifier un âge, c’est prouver une information, comme on prouve son identité.
+
+    - **Modèle économique** : publicité ciblée, économie de l’attention, revenu par utilisateur.
+
+    - **Algorithme de recommandation**, bulle de filtres, désinformation.
+
+    - **Cyberharcèlement** et réflexes (garder les preuves, bloquer, signaler, en parler ; à Monaco, ligne d’écoute 98 98 96 96).
+
+    - **Identité numérique** et e-réputation : la permanence des contenus publiés jeune.
+
+    Arguments attendus
+
+    <table>
+    <thead>
+    <tr>
+    <th style="text-align: left;"><strong>POUR (oui) : interdire avant 15 ans et vérifier</strong></th>
+    <th style="text-align: left;"><strong>CONTRE (non) : ni interdiction ni vérification obligatoire</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Protéger la santé</strong> : sommeil, attention, exposition au harcèlement (doc. 2).</p></li>
+    <li><p><strong>La règle actuelle n’est pas respectée</strong> : 13 ans affichés, 8 ans et demi en réalité (doc. 1 et 2) ; sans vérification, une règle ne sert à rien.</p></li>
+    <li><p><strong>Cohérence avec la loi</strong> : on ne peut consentir seul à l’usage de ses données qu’à 15 ans (doc. 1, cours).</p></li>
+    <li><p><strong>Modèle économique</strong> : l’attention et les données des plus jeunes sont vendues aux annonceurs (cours).</p></li>
+    <li><p><strong>Effet collectif</strong> : si personne n’y est, on n’est pas exclu du groupe ; la pression sociale diminue.</p></li>
+    <li><p><strong>C’est faisable</strong> : l’Australie l’applique (doc. 3) ; le double anonymat protège la vie privée (doc. 4).</p></li>
+    </ul></td>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Vie privée de tous</strong> : vérifier l’âge oblige chacun, adultes compris, à fournir des données (doc. 4).</p></li>
+    <li><p><strong>Contournement</strong> : fausse date, compte d’un adulte (doc. 3) ; l’interdiction peut rester théorique.</p></li>
+    <li><p><strong>Repli vers des espaces moins surveillés</strong>, sans modération ni signalement (doc. 3).</p></li>
+    <li><p><strong>Lien social, création, information</strong> : les réseaux ont aussi des effets positifs (doc. 2, cours « Bien vivre avec les réseaux »).</p></li>
+    <li><p><strong>Éduquer plutôt qu’interdire</strong> : apprendre à régler sa confidentialité et à garder son esprit critique (cours).</p></li>
+    <li><p><strong>Rôle des familles</strong> : l’accord parental existe déjà (doc. 1) ; c’est aux parents de décider, pas à l’État.</p></li>
+    </ul></td>
+    </tr>
+    </tbody>
+    </table>
+
+    *Arguments de l’autre camp souvent jugés solides dans la trace écrite :* un élève POUR retient souvent « vérifier l’âge de tout le monde, c’est collecter beaucoup de données personnelles » ; un élève CONTRE, « la règle actuelle des 13 ans n’est presque jamais vérifiée ».
+
+    Questions de relance (pour le modérateur)
+
+    1.  Une interdiction que tout le monde contourne vaut-elle mieux que pas d’interdiction du tout ?
+
+    2.  Seriez-vous prêts à envoyer votre pièce d’identité à un réseau social ? Et le double anonymat (doc. 4) change-t-il votre réponse ?
+
+    3.  Messagerie, plateforme de vidéos, jeu en ligne avec discussion : où s’arrête un « réseau social » ?
+
+    4.  Qui est responsable : la plateforme, les parents, l’élève, l’État ? (doc. 1 et 3)
+
+    !!! encadre "Synthèse possible"
+
+        Les réseaux sociaux fixent un âge minimal (souvent 13 ans) rarement vérifié, alors que la loi (RGPD, loi française ; loi n° 1.565 à Monaco) exige l’accord des parents avant 15 ans. Interdire avant 15 ans peut **protéger** (santé, harcèlement, exploitation commerciale de l’attention), mais une interdiction n’a de sens que si l’âge est **vérifié**, ce qui demande de fournir des **données personnelles** : il faut alors des solutions respectueuses de la vie privée, comme le **double anonymat** recommandé par la CNIL. Dans tous les cas, l’éducation (régler sa confidentialité, esprit critique, réflexes contre le harcèlement) reste indispensable.
+
 ## Corrigé
 
 ??? corrige "Corrigé"

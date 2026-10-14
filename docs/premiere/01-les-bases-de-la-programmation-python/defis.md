@@ -75,9 +75,21 @@ En Python, comparer `2000 / 3`, `2000 // 3` et `int(2000 / 3)`. Lequel correspon
 
     Une seule ligne suffit dans la fonction : `return` suivi du calcul, avec l’opérateur `//`.
 
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
+
 ### <span class="exo-num">Exercice 5</span> — Le total <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-les-bases-de-la-programmation-python-aoc-1-5 }
 
-!!! encadre "Outil Python : lire un fichier ligne par ligne (open, strip)"
+!!! encadre "Outil Python : lire un fichier ligne par ligne (open)"
 
     `open("input.txt")` ouvre le fichier ; une boucle `for` en parcourt les lignes une à une, sous forme de chaînes. Chaque ligne se termine par un retour à la ligne invisible, que `ligne.strip()` retire. Ces lignes sont fournies :
 

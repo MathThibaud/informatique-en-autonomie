@@ -63,7 +63,7 @@ Une machine de Turing lit et écrit sur un **ruban** infini de cases. Dans le fi
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Le cœur du simulateur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-tp-1-2 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `une_etape(regles, ruban, tete, etat)` : lire le symbole sous la tête, trouver la règle, écrire le nouveau symbole, déplacer la tête, et renvoyer `(nouvelle_position, nouvel_etat)`. La fonction `executer`, fournie, l’appelle en boucle. Lancer le fichier (`test_une_etape` doit afficher `OK`), puis taper dans la console `executer(INVERSER, "1011", trace=True)` et comparer avec la question 1.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `une_etape(regles, ruban, tete, etat)` : lire le symbole sous la tête, trouver la règle, écrire le nouveau symbole, déplacer la tête, et renvoyer `(nouvelle_position, nouvel_etat)`. La première ligne, fournie, lit le symbole avec `lire_case` (une case absente du ruban contient un blanc). La fonction `executer`, fournie, l’appelle en boucle. Lancer le fichier (`test_une_etape` doit afficher `OK`), puis taper dans la console `executer(INVERSER, "1011", trace=True)` et comparer avec la question 1.
 
 ??? pouce "Coup de pouce"
 
@@ -73,7 +73,7 @@ Une machine de Turing lit et écrit sur un **ruban** infini de cases. Dans le fi
 
     ```python
     def une_etape(regles, ruban, tete, etat):
-        lu = ruban.get(tete, BLANC)
+        lu = lire_case(ruban, tete)
         ecrit, deplacement, nouvel_etat = regles[(etat, lu)]
         ruban[tete] = ecrit
         if deplacement == "D":

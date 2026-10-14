@@ -364,7 +364,7 @@ Une instance ne prouve rien : on va mesurer sur **200 instances** de 10 objets t
                 nb_optimal[nom] = nb_optimal[nom] + 1
             ecart_total[nom] = ecart_total[nom] + (meilleur - valeur) / meilleur * 100
     for nom in nb_optimal:
-        print(nom, nb_optimal[nom], round(ecart_total[nom] / 200, 1))
+        print(nom, nb_optimal[nom], f"{ecart_total[nom] / 200:.1f}")
     ```
 
     | critère             |    optimum trouvé    | écart moyen |
@@ -443,7 +443,7 @@ Compléter `longueur(tournee)`, qui additionne les distances entre villes consé
                 if distance(ici, v) < distance(ici, proche):
                     proche = v
             tournee.append(proche)
-            a_visiter.remove(proche)
+            a_visiter = [v for v in a_visiter if v != proche]   # on la retire
         return tournee
     ```
 
@@ -453,7 +453,7 @@ Compléter `longueur(tournee)`, qui additionne les distances entre villes consé
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-1.  Compléter la fonction `tournee_optimale`. L’appel `itertools.permutations(autres)` énumère **tous les ordres** possibles des 9 autres villes. Combien y en a-t-il ? Mesurer la durée du calcul.
+1.  Compléter la fonction `tournee_optimale`. La fonction `tous_les_ordres(autres)`, **fournie** dans le fichier, renvoie la liste de **tous les ordres** possibles des 9 autres villes (elle insère chaque ville, l’une après l’autre, à toutes les positions possibles). Combien y en a-t-il ? Mesurer la durée du calcul.
 
 2.  Afficher la tournée optimale et sa longueur ; la dessiner sur le même croquis, d’une autre couleur. Calculer l’écart du glouton en pourcentage.
 
@@ -465,8 +465,8 @@ Compléter `longueur(tournee)`, qui additionne les distances entre villes consé
     def tournee_optimale(depart, villes):
         autres = [v for v in villes if v != depart]
         meilleure = None
-        for ordre in itertools.permutations(autres):
-            tournee = [depart] + [v for v in ordre]
+        for ordre in tous_les_ordres(autres):
+            tournee = [depart] + ordre
             if meilleure is None or longueur(tournee) < longueur(meilleure):
                 meilleure = tournee
         return meilleure
@@ -494,7 +494,7 @@ Une tournée revient à son point de départ : on peut la commencer dans n’imp
         t = plus_proche_voisin(v, VILLES)
         if meilleure is None or longueur(t) < longueur(meilleure):
             meilleure = t
-    print(meilleure, round(longueur(meilleure), 1))
+    print(meilleure, f"{longueur(meilleure):.1f}")
     ```
 
     Longueurs selon le départ : Monaco 189,6 ; Menton 184,4 ; Sospel 162,4 ; Eze 190,3 ; Nice 165,5 ; Vence 162,4 ; Grasse 162,4 ; Cannes 162,4 ; Antibes 165,7 ; Saint-Martin-Vesubie 162,4. Meilleure : **162,4 km** (par exemple depuis Sospel), soit un écart de **3,6 %** seulement — pour 10 appels du glouton, contre $362\,880$ tournées examinées par la force brute. Le livreur peut suivre ce circuit en partant de Monaco : c’est le même cycle.

@@ -68,6 +68,18 @@ Vérification : on doit obtenir `7` pour le premier, `10` pour le second. Écrir
 
 ### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-aoc-1-3 }
 
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
+
 Le fichier ne contient qu’une ligne : on le lit d’un coup.
 
 ```python
@@ -118,9 +130,15 @@ Ajouter un paramètre : `position_marqueur(flux, taille)`. La partie 1 correspon
 
 !!! encadre "Rappel : les ensembles (set)"
 
-    Les ensembles sont présentés dans l’encadré « Outil Python : les ensembles » du défi *High-Entropy Passphrases* (chapitre 7). L’essentiel : `set()` crée un ensemble vide, `e.add(x)` ajoute `x` (sans doublon), `len(e)` compte les éléments, et le test `x in e` est quasi instantané, quelle que soit la taille de `e`. Ici, on se sert surtout de `set(chaine)`, qui donne l’ensemble des caractères distincts de la chaîne.
+    Les ensembles sont présentés dans l’encadré « Outil Python : les ensembles » du défi *High-Entropy Passphrases* (chapitre 7). L’essentiel : `set()` crée un ensemble vide, `e.add(x)` ajoute `x` (sans doublon), `len(e)` compte les éléments, et le test `x in e` est quasi instantané, quelle que soit la taille de `e`. Ici, on construit l’ensemble des caractères d’une chaîne en les ajoutant un à un dans une boucle : les doublons disparaissent d’eux-mêmes.
 
-    *À essayer.* Que vaut `len(set("abac"))` ? Comparer avec `len("abac")`.
+    ```python
+    caracteres = set()
+    for c in "abac":
+        caracteres.add(c)
+    ```
+
+    *À essayer.* Que vaut alors `len(caracteres)` ? Comparer avec `len("abac")`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : tous différents avec un ensemble <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-aoc-1-7 }
 
@@ -130,11 +148,11 @@ Ajouter un paramètre : `position_marqueur(flux, taille)`. La partie 1 correspon
 
         Le premier caractère est comparé aux $k - 1$ suivants, le deuxième aux $k - 2$ suivants, etc.
 
-2.  Écrire `tous_differents_ens(morceau)` en une ligne, avec un ensemble, et vérifier qu’elle donne les mêmes réponses.
+2.  Écrire `tous_differents_ens(morceau)` avec un ensemble, et vérifier qu’elle donne les mêmes réponses.
 
     ??? pouce "Coup de pouce"
 
-        Les caractères sont tous différents si et seulement si l’ensemble des caractères a la même taille que la fenêtre.
+        Parcourir la fenêtre en mettant chaque caractère dans un ensemble : les caractères sont tous différents si et seulement si, à la fin, l’ensemble a la même taille que la fenêtre.
 
 !!! encadre "Outil Python : codes des caractères (ord, chr)"
 

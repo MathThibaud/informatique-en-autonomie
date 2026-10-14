@@ -254,3 +254,68 @@ Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujo
     !!! encadre "Synthèse possible"
 
         La **neutralité du Net** est le principe selon lequel les FAI traitent tous les paquets de la même façon, sans favoriser un contenu, un service ou une entreprise. Dans l’Union européenne, c’est une **obligation légale** depuis 2016 (règlement 2015/2120), contrôlée en France par l’Arcep, avec des exceptions techniques limitées (congestion, catégories de trafic aux besoins différents). Le débat porte sur deux questions : **qui paie** les réseaux dont le trafic explose, et **qui décide** de ce qui passe en premier. Les choix diffèrent selon les pays (États-Unis, Monaco hors UE).
+
+\newgeometry{inner=1.8cm,outer=1.6cm,top=2.2cm,bottom=1.9cm,headheight=16pt,headsep=0.5cm,footskip=0.9cm}
+
+??? corrige "Corrigé de l'activité"
+
+    Notions du cours mobilisées
+
+    - **Paquet**, **routeur**, **routage** de proche en proche, sans chef d’orchestre central.
+
+    - **IP** achemine, **TCP** fiabilise mais *sans garantie de temps* : d’où les saccades du streaming (argument pour la priorité au temps réel).
+
+    - **Ordres de grandeur du trafic** (zetta-octets par an) : la congestion est un vrai problème.
+
+    - **Neutralité du Net** et **déni de service** (cadre « Deux enjeux de société »).
+
+    - Indépendance d’Internet vis-à-vis du réseau physique : qui paie la fibre, les antennes 4G/5G ?
+
+    - **Internet $\neq$ Web** : la neutralité concerne le réseau, pas le contenu des sites.
+
+    Arguments attendus
+
+    <table>
+    <thead>
+    <tr>
+    <th style="text-align: left;"><strong>POUR (oui) : neutralité stricte</strong></th>
+    <th style="text-align: left;"><strong>CONTRE (non) : priorités ou offres différenciées</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Égalité des chances</strong> : une petite application ou un site naissant doit arriver aussi vite qu’un géant (doc. 2).</p></li>
+    <li><p><strong>Concurrence et innovation</strong> : Internet s’est développé sans « péage » ; les « voies rapides » payantes favoriseraient ceux qui ont déjà de l’argent (doc. 4).</p></li>
+    <li><p><strong>Liberté d’accès à l’information</strong> : le FAI ne doit pas choisir ce que l’abonné voit ou utilise.</p></li>
+    <li><p><strong>C’est la loi en Europe</strong>, confirmée par la justice (doc. 1 et 2) ; la Californie a recréé une règle quand la règle fédérale a disparu (doc. 4).</p></li>
+    <li><p><strong>Le client paie déjà</strong> son abonnement pour accéder à tout Internet (doc. 3).</p></li>
+    <li><p>La gestion technique « raisonnable » est <em>déjà</em> permise sans casser la neutralité (doc. 1).</p></li>
+    </ul></td>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Tous les paquets n’ont pas les mêmes besoins</strong> : appel vidéo, téléconsultation, jeu en ligne supportent mal le retard ; TCP ne garantit pas le temps (cours, doc. 1).</p></li>
+    <li><p><strong>Congestion</strong> : le trafic explose (cours) ; donner la priorité permet de mieux utiliser le réseau.</p></li>
+    <li><p><strong>Qui paie les réseaux ?</strong> Les grandes plateformes produisent beaucoup de trafic sans financer les antennes et la fibre (doc. 3).</p></li>
+    <li><p><strong>Offres moins chères</strong> pour le client : le « tarif zéro » était une bonne affaire pour certains abonnés (doc. 2).</p></li>
+    <li><p><strong>L’exemple américain</strong> : l’Internet a continué à se développer sans règle fédérale (doc. 4).</p></li>
+    <li><p>La neutralité est un <strong>principe européen</strong> : Monaco n’est pas tenu par ce règlement (doc. 1), chaque pays peut faire un autre choix.</p></li>
+    </ul></td>
+    </tr>
+    </tbody>
+    </table>
+
+    *Arguments de l’autre camp souvent jugés solides dans la trace écrite :* un élève POUR retient souvent « certains usages (appel vidéo, secours) ont vraiment besoin de passer vite » ; un élève CONTRE, « une petite application n’a aucune chance si les géants achètent la priorité ».
+
+    Questions de relance (pour le modérateur)
+
+    1.  Si un hôpital fait une consultation à distance, doit-elle passer avant une vidéo de divertissement ? Est-ce contraire à la neutralité (doc. 1) ?
+
+    2.  Qui devrait payer les nouvelles antennes et la fibre : l’abonné, les plateformes, l’État ?
+
+    3.  Une option « réseau social illimité » à 2 € : bonne affaire pour vous, mais pour l’application concurrente ?
+
+    4.  Que se passerait-il si votre FAI ralentissait le site d’un concurrent de son propre service de vidéo ?
+
+    !!! encadre "Synthèse possible"
+
+        La **neutralité du Net** est le principe selon lequel les FAI traitent tous les paquets de la même façon, sans favoriser un contenu, un service ou une entreprise. Dans l’Union européenne, c’est une **obligation légale** depuis 2016 (règlement 2015/2120), contrôlée en France par l’Arcep, avec des exceptions techniques limitées (congestion, catégories de trafic aux besoins différents). Le débat porte sur deux questions : **qui paie** les réseaux dont le trafic explose, et **qui décide** de ce qui passe en premier. Les choix diffèrent selon les pays (États-Unis, Monaco hors UE).

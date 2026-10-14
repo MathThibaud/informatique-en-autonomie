@@ -467,7 +467,7 @@ fusion[c] = ld[c]
 return resultat
 if lg[cle] == ld[cle]:
 resultat = []
-fusion = dict(lg)
+fusion = {c: lg[c] for c in lg}
 for lg in gauche:
 for c in ld:
 ```
@@ -480,7 +480,7 @@ for c in ld:
         for lg in gauche:             # chaque fiche de gauche...
             for ld in droite:         # ... est comparee a chaque fiche de droite
                 if lg[cle] == ld[cle]:          # meme valeur de la cle
-                    fusion = dict(lg)           # copie de la fiche de gauche
+                    fusion = {c: lg[c] for c in lg}   # copie de la fiche de gauche
                     for c in ld:
                         fusion[c] = ld[c]       # on ajoute les colonnes de droite
                     resultat.append(fusion)     # on range la fiche combinee
@@ -513,7 +513,7 @@ On charge `communes = charger("communes.csv")` et `departements = charger("depar
         for lg in gauche:
             for ld in droite:
                 if lg[cle] == ld[cle]:
-                    fusion = dict(lg)
+                    fusion = {c: lg[c] for c in lg}
                     for c in ld:
                         fusion[c] = ld[c]
                     resultat.append(fusion)
@@ -584,8 +584,8 @@ On charge `communes = charger("communes.csv")` et `departements = charger("depar
 
     print("Fille la plus donnee :", plus_donne(filles25))     # ('Louise', 3070)
     print("Garcon le plus donne :", plus_donne(garcons25))    # ('Gabriel', 4625)
-    print("Moyenne filles :", round(nombre_moyen(filles25), 1))    # 2489.0
-    print("Moyenne garcons :", round(nombre_moyen(garcons25), 1))  # 3231.5
+    print("Moyenne filles :", nombre_moyen(filles25))       # 2489.0
+    print("Moyenne garcons :", nombre_moyen(garcons25))     # 3231.5
     top3 = trier_par_nombre(garcons25)[:3]
     print("Top 3 garcons :", [l["prenom"] for l in top3])   # Gabriel, Noah, Leo
     ```

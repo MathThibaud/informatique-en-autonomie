@@ -71,6 +71,18 @@ Indiquer pour chaque ligne si elle est valide. Vérification : on doit obtenir `
 
 ## Programmer la partie 1
 
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
+
 ### <span class="exo-num">Exercice 3</span> — Lire et découper <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-la-recherche-dichotomique-aoc-1-3 }
 
 Rappel pour lire un fichier ligne par ligne :
@@ -78,7 +90,7 @@ Rappel pour lire un fichier ligne par ligne :
 ```python
 fichier = open("input.txt", encoding="utf-8")
 for ligne in fichier:
-    ligne = ligne.strip()   # enlève le retour à la ligne final
+    ligne = ligne.strip()   # enleve le retour a la ligne final
 fichier.close()
 ```
 
@@ -108,20 +120,33 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     Le service de sécurité durcit la règle : un mot ne doit pas pouvoir s’obtenir en mélangeant les lettres d’un autre mot de la même ligne. Une phrase est valide si aucun mot n’est une **anagramme** d’un autre (mêmes lettres, en même nombre, dans un ordre éventuellement différent). Deux mots identiques sont aussi anagrammes. Réponse : le nombre de lignes valides.
 
-!!! encadre "Outil Python : recoller une liste de caractères (join)"
+!!! encadre "Méthode : ranger les lettres d’un mot dans l’ordre alphabétique"
 
-    `sorted` appliqué à une chaîne renvoie la **liste** de ses caractères triés. Pour obtenir de nouveau une chaîne, on utilise `join` : la chaîne placée avant le point sert de séparateur.
+    Une chaîne ne se modifie pas. On passe donc par une **liste** de caractères, que l’on trie avec le tri par insertion du chapitre précédent (les caractères se comparent avec `<` et `>`, dans l’ordre alphabétique pour les minuscules), puis on recolle les caractères un par un dans une chaîne.
 
     ```python
-    lettres = sorted("rame")        # sorted sur une chaine renvoie une LISTE
+    def tri_insertion(t):
+        n = len(t)
+        for i in range(1, n):
+            x = t[i]
+            j = i - 1
+            while j >= 0 and t[j] > x:
+                t[j + 1] = t[j]
+                j = j - 1
+            t[j + 1] = x
+
+    lettres = [c for c in "rame"]   # liste des caracteres
+    tri_insertion(lettres)
     print(lettres)                  # ['a', 'e', 'm', 'r']
-    print("".join(lettres))         # aemr : recolle sans separateur
-    print("-".join(lettres))        # a-e-m-r : le separateur est la chaine de gauche
+    mot_trie = ""
+    for c in lettres:               # on recolle les caracteres
+        mot_trie += c
+    print(mot_trie)                 # aemr
     ```
 
     **Intérêt.** Une chaîne se compare directement à une autre avec `==` ; une liste comparée à une chaîne donne toujours `False`. Recoller la liste évite ce piège.
 
-    *À essayer.* Que renvoie `", ".join(["un", "deux"])` ? Et `sorted("rame") == "aemr"` ?
+    *À essayer.* Que vaut `["a", "e", "m", "r"] == "aemr"` ? Que donne la même méthode sur le mot `"banane"` ?
 
 ### <span class="exo-num">Exercice 5</span> — Reconnaître deux anagrammes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-la-recherche-dichotomique-aoc-1-5 }
 
@@ -129,7 +154,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ??? pouce "Coup de pouce"
 
-    `sorted("rame")` renvoie la **liste** `[’a’, ’e’, ’m’, ’r’]`. Pour recoller une liste de caractères en une chaîne : `"".join(liste)`.
+    Reprendre la méthode de l’encadré : liste des caractères, tri par insertion, puis une boucle qui recolle les caractères dans une chaîne vide au départ.
 
 ### <span class="exo-num">Exercice 6</span> — La partie 2 <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-la-recherche-dichotomique-aoc-1-6 }
 
@@ -153,13 +178,13 @@ Une autre idée pour `tous_distincts` réutilise le **tri**.
 
     ??? pouce "Coup de pouce"
 
-        Travailler sur une copie triée `t = sorted(mots)` pour ne pas modifier la liste de départ.
+        Travailler sur une copie `t = [m for m in mots]`, triée avec `tri_insertion(t)`, pour ne pas modifier la liste de départ.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
         Comparer `t[i]` et `t[i + 1]` pour `i` de `0` à `len(t) - 2` ; attention à ne pas sortir de la liste.
 
-4.  Pour une ligne de $k$ mots, comparer le nombre de comparaisons de la double boucle et de cette méthode (le tri de Python coûte environ $k \log_2 k$ comparaisons).
+4.  Pour une ligne de $k$ mots, comparer le nombre de comparaisons de la double boucle et de cette méthode, au pire (le tri par insertion fait au pire $\frac{k(k-1)}{2}$ comparaisons). Le gain serait-il le même avec un tri qui ne fait qu’environ $k \log_2 k$ comparaisons (on en verra un en Terminale) ?
 
 5.  **Lien avec la dichotomie.** Une fois la liste de mots triée, comment savoir si un mot donné y figure sans la parcourir en entier ? Combien de comparaisons faut-il au plus pour une liste de $1\,000$ mots ?
 
@@ -213,7 +238,6 @@ Une autre idée pour `tous_distincts` réutilise le **tri**.
     b = {2, 3, 4}
     print(a | b)                # reunion : {1, 2, 3, 4}
     print(a & b)                # intersection (elements communs) : {2, 3}
-    print({7}.pop())            # 7 : pop retire et renvoie un element
     ```
 
     **Intérêt.** Avec une liste, `x in liste` compare `x` aux éléments un par un : jusqu’à $n$ comparaisons. Un ensemble range chaque élément à un endroit calculé à partir de sa valeur (comme les clés d’un dictionnaire) : Python va directement voir à cet endroit. Le test `x in ensemble` prend un temps qui ne dépend pas du nombre d’éléments.

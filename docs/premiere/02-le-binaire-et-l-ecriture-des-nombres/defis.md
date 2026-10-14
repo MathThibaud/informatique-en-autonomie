@@ -77,6 +77,18 @@ Faire un tableau avec une ligne par commande et deux colonnes : position horizon
 
 ## Programmer la partie 1
 
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
+
 ### <span class="exo-num">Exercice 3</span> — Lire une commande <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-aoc-1-3 }
 
 Dans les fichiers de données de ce défi, le nombre $X$ n’a qu’**un seul chiffre** (le vérifier en parcourant votre fichier). On peut donc lire une commande sans la découper : sa première lettre suffit à reconnaître la commande, et son dernier caractère est le nombre.

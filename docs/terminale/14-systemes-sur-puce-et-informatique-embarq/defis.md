@@ -77,45 +77,83 @@ mem[3] = 13
 
 ### <span class="exo-num">Exercice 3</span> — Lire une ligne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-systemes-sur-puce-et-informatique-embarq-aoc-1-3 }
 
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
+
 Écrire une fonction `analyser(ligne)` qui renvoie `("mask", chaine)` ou `("mem", adresse, valeur)` selon la ligne.
 
 ??? pouce "Coup de pouce"
 
-    `ligne.split(" = ")` sépare la partie gauche de la valeur. Pour l’adresse, on peut découper `"mem[3]"` avec des tranches ou `replace`.
+    `ligne.split(" = ")` sépare la partie gauche de la valeur. Pour l’adresse, on peut découper `"mem[3]"` avec une tranche qui enlève les 4 premiers caractères et le dernier.
 
-!!! encadre "Outil Python : opérations bit à bit et conversions binaires (&, |, int(s, 2), format)"
+!!! encadre "Outil Python : opérations bit à bit et conversions binaires (&, |, int(s, 2), bin)"
 
-    Les opérateurs `&` (et) et `|` (ou) travaillent sur l’écriture binaire des entiers, bit par bit, tous les bits en même temps. `int(chaine, 2)` lit une chaîne binaire ; `format(n, "036b")` écrit `n` en binaire sur 36 chiffres, complété par des zéros à gauche.
+    Les opérateurs `&` (et) et `|` (ou) travaillent sur l’écriture binaire des entiers, bit par bit, tous les bits en même temps. `int(chaine, 2)` lit une chaîne binaire ; `bin(n)` écrit `n` en binaire avec le préfixe `0b`. Une tranche retire le préfixe, et une boucle complète par des zéros à gauche pour obtenir 36 chiffres.
 
     ```python
     a = int("1100", 2)             # 12 : chaine binaire -> entier
     b = int("1010", 2)             # 10
     print(a & b)                   # 8  (1000) : 1 la ou les deux bits valent 1
     print(a | b)                   # 14 (1110) : 1 la ou au moins un des bits vaut 1
-    print(format(a & b, "04b"))    # 1000 : entier -> chaine binaire sur 4 chiffres
-    print(format(5, "036b"))       # 36 caracteres, completes par des 0 a gauche
-    print(bin(5))                  # 0b101 : autre ecriture, avec le prefixe 0b
+    print(bin(a & b))              # 0b1000 : entier -> chaine binaire, prefixe 0b
+    print(bin(5)[2:])              # 101 : la tranche retire le prefixe
+
+    def en_binaire(n, nb_bits):
+        """Renvoie l'ecriture binaire de n sur nb_bits chiffres (0 a gauche)."""
+        chaine = bin(n)[2:]
+        while len(chaine) < nb_bits:
+            chaine = "0" + chaine
+        return chaine
+
+    print(en_binaire(5, 36))       # 36 caracteres, completes par des 0 a gauche
     ```
 
     **Intérêt.** `x & m` met à 0 tous les bits de `x` là où `m` a un 0 ; `x | m` met à 1 tous les bits de `x` là où `m` a un 1. Une seule opération, très rapide, remplace une boucle sur les 36 bits.
 
     **À essayer.** Calculer à la main `13 & 6` et `13 | 6` (écrire 13 et 6 sur 4 bits), puis vérifier avec Python.
 
-!!! encadre "Outil Python : méthodes de chaînes (replace, count, find)"
+!!! encadre "Méthode : parcourir une chaîne caractère par caractère"
 
-    `s.replace(a, b)` renvoie une copie de `s` où chaque `a` est remplacé par `b` ; `s.count(a)` compte les occurrences de `a` ; `s.find(a)` donne l’indice de la première occurrence, ou $-1$ s’il n’y en a pas.
+    Pour remplacer, compter ou repérer un caractère dans une chaîne, on la parcourt avec une boucle. Une chaîne n’est pas modifiable : on en construit une **nouvelle** par concaténations successives.
 
     ```python
+    def remplacer(s, a, b):
+        """Renvoie une copie de s ou chaque caractere a est remplace par b."""
+        resultat = ""
+        for c in s:
+            if c == a:
+                resultat += b
+            else:
+                resultat += c
+        return resultat
+
+    def premier_indice(s, a):
+        """Renvoie l'indice de la premiere occurrence de a dans s, ou -1."""
+        i = 0
+        while i < len(s) and s[i] != a:
+            i += 1
+        if i == len(s):
+            return -1
+        return i
+
     m = "X1X0"
-    print(m.replace("X", "0"))     # 0100 : renvoie une NOUVELLE chaine
-    print(m.count("X"))            # 2 : nombre d'occurrences
-    print(m.find("X"))             # 0 : indice de la premiere occurrence
-    print(m.find("Z"))             # -1 : absent
+    print(remplacer(m, "X", "0"))      # 0100 : une NOUVELLE chaine
+    print(premier_indice(m, "X"))      # 0 : indice de la premiere occurrence
+    print(premier_indice(m, "Z"))      # -1 : absent
     ```
 
-    **Intérêt.** Ces méthodes évitent d’écrire une boucle sur les caractères ; leur coût reste proportionnel à la longueur de la chaîne.
+    **Intérêt.** Pour compter les `X`, on reprend la même boucle avec un compteur. Le coût de ces fonctions est proportionnel à la longueur de la chaîne ; `premier_indice` s’arrête dès qu’il a trouvé.
 
-    **À essayer.** Après `m.replace("X", "0")`, que vaut `m` ? Pourquoi ?
+    **À essayer.** Après `remplacer(m, "X", "0")`, que vaut `m` ? Pourquoi ?
 
 ### <span class="exo-num">Exercice 4</span> — Appliquer le masque avec deux opérations bit à bit <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-systemes-sur-puce-et-informatique-embarq-aoc-1-4 }
 
@@ -127,7 +165,7 @@ mem[3] = 13
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    Remplacer les `X` du masque par des `0` donne un entier `ou_masque` à combiner avec `|` ; les remplacer par des `1` donne un entier `et_masque` à combiner avec `&`.
+    Remplacer (par une boucle sur les caractères) les `X` du masque par des `0` donne un entier `ou_masque` à combiner avec `|` ; les remplacer par des `1` donne un entier `et_masque` à combiner avec `&`.
 
 ### <span class="exo-num">Exercice 5</span> — La mémoire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-systemes-sur-puce-et-informatique-embarq-aoc-1-5 }
 
@@ -162,7 +200,7 @@ Vérification : `mem[5] = 4` écrit dans 8 adresses, de `16` à `53` ; la répon
 
 ??? pouce "Coup de pouce"
 
-    Travailler sur des chaînes de 36 caractères : `format(adresse, "036b")` donne l’écriture binaire complétée par des zéros. On construit d’abord la chaîne résultat avec ses `X`.
+    Travailler sur des chaînes de 36 caractères : `en_binaire(adresse, 36)` (encadré de la partie 1) donne l’écriture binaire complétée par des zéros. On construit d’abord la chaîne résultat avec ses `X`.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -182,11 +220,11 @@ Afficher le plus grand nombre de `X` parmi les masques de vos données, et le no
 
     ??? pouce "Coup de pouce"
 
-        Cas de base : le modèle ne contient aucun `X` (`find` renvoie $-1$) ; la liste ne contient alors que le modèle lui-même.
+        Cas de base : le modèle ne contient aucun `X` (`premier_indice` renvoie $-1$) ; la liste ne contient alors que le modèle lui-même.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        Sinon, avec `i = modele.find("X")`, construire par tranches `modele[:i] + "0" + modele[i + 1:]` et la même chaîne avec `"1"`, puis concaténer les deux listes renvoyées par les appels récursifs.
+        Sinon, avec `i = premier_indice(modele, "X")`, construire par tranches `modele[:i] + "0" + modele[i + 1:]` et la même chaîne avec `"1"`, puis concaténer les deux listes renvoyées par les appels récursifs.
 
 3.  Utiliser `remplacer_x` pour réécrire `adresses` ; vérifier les 8 adresses de l’exemple de la partie 2 et la réponse `48`.
 

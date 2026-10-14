@@ -280,7 +280,7 @@ class File:
 
 !!! remarque "Remarque — Attention au coût de pop(0)"
 
-    Cette file « fonctionne », mais elle est **sournoisement lente**. Retirer le *dernier* élément d’une `list` avec `pop()` est immédiat ; retirer le *premier* avec `pop(0)`, en revanche, oblige Python à **décaler d’une case vers la gauche tous les éléments qui restent**. Sur une file de $n$ éléments, **chaque `defiler` coûte donc $n$ opérations**, contre une seule pour `depiler` sur une pile. Autrement dit, cette implémentation est parfaite pour une pile mais médiocre pour une file. Une *vraie* file efficace s’appuie sur une autre implémentation — une liste chaînée, deux piles, ou le type `collections.deque` de Python. Belle illustration du chapitre : une **même interface** peut cacher des implémentations aux **coûts très différents**.
+    Cette file « fonctionne », mais elle est **sournoisement lente**. Retirer le *dernier* élément d’une `list` avec `pop()` est immédiat ; retirer le *premier* avec `pop(0)`, en revanche, oblige Python à **décaler d’une case vers la gauche tous les éléments qui restent**. Sur une file de $n$ éléments, **chaque `defiler` coûte donc $n$ opérations**, contre une seule pour `depiler` sur une pile. Autrement dit, cette implémentation est parfaite pour une pile mais médiocre pour une file. Une *vraie* file efficace s’appuie sur une autre implémentation — une liste chaînée ou deux piles. Belle illustration du chapitre : une **même interface** peut cacher des implémentations aux **coûts très différents**.
 
 !!! regle "Règle 3 — L’essentiel à retenir"
 
@@ -379,7 +379,7 @@ Piles et files ne sont pas des curiosités isolées : ce sont les **outils de ba
 
 - **Croire que la `list` Python est une liste chaînée.** C’est un **tableau dynamique** (accès direct par indice) ; une liste chaînée suit des **liens** de maillon en maillon.
 
-- **Défiler avec `pop(0)`.** Décaler tout le tableau coûte **O(n)** : mauvaise file. *Le réflexe :* liste chaînée, deux piles ou `collections.deque`.
+- **Défiler avec `pop(0)`.** Décaler tout le tableau coûte **O(n)** : mauvaise file. *Le réflexe :* liste chaînée ou deux piles.
 
 - **Perdre la suite d’une liste chaînée.** En insérant / supprimant, mettre à jour le lien `suivante` **dans le bon ordre**, sinon on perd des maillons.
 

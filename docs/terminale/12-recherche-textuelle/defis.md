@@ -22,7 +22,7 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi mobilise la recherche d’un motif dans un texte, vue dans ce chapitre : on y compte les occurrences d’une lettre dans un mot de passe (et l’encadré sur `count` montre une différence avec la recherche naïve du cours). L’approfondissement revient sur le ou exclusif du masque jetable, vu au chapitre 10.*
+*Ce défi mobilise la recherche d’un motif dans un texte, vue dans ce chapitre : on y compte les occurrences d’une lettre dans un mot de passe (par une boucle de comptage, qu’on compare à la recherche naïve du cours). L’approfondissement revient sur le ou exclusif du masque jetable, vu au chapitre 10.*
 
 ## Lire l’énoncé
 
@@ -81,22 +81,40 @@ Pour chaque ligne, dire si le mot de passe respecte la règle de la partie 1. V�
 
     `ligne.split()` coupe aux espaces et donne trois morceaux ; le premier se recoupe avec `split("-")`, le deuxième se débarrasse du `:` en ne gardant que son premier caractère.
 
-!!! encadre "Outil Python : compter dans une chaîne (count) et comparaisons enchaînées"
+!!! encadre "Méthode : compter les apparitions d’une lettre, et comparaisons enchaînées"
 
-    La méthode `count` renvoie le nombre d’apparitions d’un caractère (ou d’un morceau de chaîne) dans une chaîne, sans écrire de boucle. Python accepte aussi d’enchaîner les comparaisons, comme en mathématiques.
+    Pour compter combien de fois une lettre apparaît dans une chaîne, on parcourt la chaîne caractère par caractère avec un **compteur** initialisé à 0. Python accepte aussi d’enchaîner les comparaisons, comme en mathématiques.
 
     ```python
-    mot = "banane"
-    print(mot.count("a"))     # 2
-    print(mot.count("an"))    # 2 : on peut compter un morceau de chaine
-    print(mot.count("z"))     # 0 si absent
+    def compter(lettre, mot):
+        """Renvoie le nombre d'apparitions de lettre dans mot."""
+        nb = 0
+        for c in mot:
+            if c == lettre:
+                nb += 1
+        return nb
+
+    print(compter("a", "banane"))   # 2
+    print(compter("z", "banane"))   # 0 si absente
     n = 3
-    print(1 <= n <= 5)        # True : equivaut a 1 <= n and n <= 5
+    print(1 <= n <= 5)              # True : equivaut a 1 <= n and n <= 5
     ```
 
-    **Intérêt.** Le code est plus court et plus lisible ; `count` parcourt la chaîne une fois, comme une boucle écrite à la main (coût proportionnel à la longueur).
+    **Intérêt.** Un seul parcours de la chaîne : le coût est proportionnel à sa longueur.
 
-    **À essayer.** Que renvoie `"aaaa".count("aa")` ? Pourquoi pas `3` ? Que renverrait la fonction `recherche_naive("aa", "aaaa")` du cours ?
+    **À essayer.** Adapter `compter` pour compter un **morceau** de chaîne (`motif`) en testant chaque position `i` avec la tranche `mot[i:i + len(motif)]`. Combien d’apparitions de `"aa"` trouve-t-on dans `"aaaa"` ? Comparer avec la fonction `recherche_naive("aa", "aaaa")` du cours.
+
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
 
 ### <span class="exo-num">Exercice 4</span> — Valider et compter <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-1-4 }
 
@@ -104,7 +122,7 @@ Pour chaque ligne, dire si le mot de passe respecte la règle de la partie 1. V�
 
 ??? pouce "Coup de pouce"
 
-    La méthode `mdp.count(lettre)` compte les occurrences. Python accepte les comparaisons enchaînées : `a <= n <= b`.
+    Compter les occurrences de `lettre` dans `mdp` avec une boucle et un compteur (voir l’encadré « Méthode »). Python accepte les comparaisons enchaînées : `a <= n <= b`.
 
 ## Partie 2
 
@@ -235,26 +253,37 @@ On considère les règles (inventées) suivantes :
 
 ## Programmer la partie 1
 
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
+
 ### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-2-3 }
 
 Lire `input.txt` et construire un dictionnaire `regles` : à chaque numéro (une chaîne, par exemple `’2’`), on associe soit la lettre (`’a’`), soit la liste des alternatives, chacune étant une liste de numéros (`[[’4’, ’3’], [’3’, ’1’]]`). Construire aussi la liste `messages`.
 
 ??? pouce "Coup de pouce"
 
-    Le fichier se coupe en deux avec `split("\n\n")`. Pour une règle, `split(": ")` sépare le numéro du reste, puis `split(" | ")` sépare les alternatives.
+    Le fichier se coupe en deux avec `strip()` puis `split("\n\n")`. Pour une règle, `split(": ")` sépare le numéro du reste, puis `split(" | ")` sépare les alternatives. Une règle « lettre » s’écrit `"a"` avec ses guillemets : la lettre est le caractère d’indice 1.
 
-!!! encadre "Outil Python : tester le type d’une valeur (isinstance)"
+!!! encadre "Méthode : reconnaître une règle « lettre »"
 
-    Dans le dictionnaire `regles`, une valeur est soit une chaîne (une lettre), soit une liste d’alternatives. Pour savoir dans quel cas on est, `isinstance(x, str)` renvoie `True` si `x` est une chaîne ; de même avec `list`, `int`…
+    Dans le dictionnaire `regles`, une valeur est soit une chaîne (une lettre), soit une liste d’alternatives. Dans ce défi, les seules lettres sont `a` et `b` : une règle est une règle « lettre » exactement quand elle vaut `"a"` ou `"b"`. Comparer une liste à une chaîne avec `==` ne provoque pas d’erreur : le résultat est simplement `False`.
 
     ```python
     regles = {"3": "a", "2": [["4", "3"], ["3", "1"]]}
-    print(isinstance(regles["3"], str))    # True : regle "lettre"
-    print(isinstance(regles["2"], str))    # False
-    print(isinstance(regles["2"], list))   # True : liste d'alternatives
+    print(regles["3"] == "a" or regles["3"] == "b")   # True : regle "lettre"
+    print(regles["2"] == "a" or regles["2"] == "b")   # False : alternatives
     ```
 
-    **Intérêt.** Cela évite de stocker une information supplémentaire (« type de règle ») : la valeur elle-même dit de quoi il s’agit. Question : que renvoie `isinstance(["a"], str)` ?
+    **Intérêt.** Cela évite de stocker une information supplémentaire (« type de règle ») : la valeur elle-même dit de quoi il s’agit. Question : que vaut `["a"] == "a"` ? Pourquoi ?
 
 ### <span class="exo-num">Exercice 4</span> — Reconnaître un message <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-aoc-2-4 }
 
@@ -312,7 +341,7 @@ Avec les règles d’origine, on doit compter `2` messages ; avec les règles mo
 
     **Grammaire.** Les règles de l’énoncé forment une *grammaire* : chaque règle décrit un ensemble de mots à partir d’autres règles, comme « une phrase est un groupe nominal suivi d’un verbe ». On dit qu’un mot est *reconnu* s’il peut être obtenu en partant de la règle `0`.
 
-    **Pourquoi pas une expression régulière ?** En partie 1, on peut remplacer chaque numéro par sa définition jusqu’à n’avoir que des lettres et obtenir une expression régulière (module `re`) : sur l’exemple du défi, la règle `0` devient `(aa|b)(ba|a(aa|b))`. Mais si une règle contient son propre numéro, ce remplacement ne s’arrête jamais. Pire : une règle du type « `X` suivi de `Y` autant de fois que de `X` » (même nombre des deux côtés) ne peut *pas du tout* s’écrire comme une expression régulière, car celles-ci ne savent pas compter.
+    **Pourquoi pas une expression régulière ?** En partie 1, on peut remplacer chaque numéro par sa définition jusqu’à n’avoir que des lettres et obtenir une expression régulière : sur l’exemple du défi, la règle `0` devient `(aa|b)(ba|a(aa|b))`. Mais si une règle contient son propre numéro, ce remplacement ne s’arrête jamais. Pire : une règle du type « `X` suivi de `Y` autant de fois que de `X` » (même nombre des deux côtés) ne peut *pas du tout* s’écrire comme une expression régulière, car celles-ci ne savent pas compter.
 
     **L’idée de la fonction `fins`.** Plutôt que de deviner *où* s’arrête la partie reconnue par une règle, on renvoie *toutes* les possibilités. Sur l’exemple du défi, avec le mot `bbaa` : la règle `1` depuis l’indice `0` renvoie `[1]` (la lettre `b`) ; la règle `2` depuis l’indice `1` renvoie `[3]` (le morceau `ba`). Donc `fins(regles, ’0’, "bbaa", 0)` vaut `[3]` : le mot n’est pas reconnu en entier car $3 \neq 4$. Quand une règle a plusieurs alternatives, la liste peut contenir plusieurs positions ; une liste vide signifie « échec ».
 
@@ -320,7 +349,7 @@ Avec les règles d’origine, on doit compter `2` messages ; avec les règles mo
 
 !!! encadre "Outil Python : les ensembles (set)"
 
-    Un **ensemble** est une collection sans doublon et sans ordre. On l’écrit entre accolades, on peut le construire par compréhension comme une liste, et réunir deux ensembles avec `|`.
+    Un **ensemble** est une collection sans doublon et sans ordre. On l’écrit entre accolades (`set()` pour l’ensemble vide), on peut le construire par compréhension comme une liste, et lui ajouter un élément avec `add`. La **réunion** `a | b` et l’**intersection** `a & b` construisent un nouvel ensemble (voir aussi l’encadré du défi *Crab Combat*, chapitre 4).
 
     ```python
     debuts = {"a", "b"}
@@ -328,9 +357,9 @@ Avec les règles d’origine, on doit compter `2` messages ; avec les règles mo
     mots = {d + f for d in debuts for f in fins}   # tous les "collages"
     print(mots)                     # {'aa', 'aab', 'ba', 'bab'} (ordre quelconque)
     print("ba" in mots)             # True : test d'appartenance tres rapide
-    reunion = mots | {"bb"}         # reunion de deux ensembles
-    mots |= {"aa"}                  # deja present : rien ne change
-    print(len(mots))                # 4
+    mots = mots | {"bb", "aa"}     # reunion : "aa" deja present, pas de doublon
+    print(len(mots))                # 5
+    print(mots & {"bb", "ab"})      # {'bb'} : intersection
     ```
 
     **Intérêt.** Le test `x in ensemble` prend un temps qui ne dépend pas de la taille de l’ensemble (contrairement à une liste, qu’il faut parcourir), et les doublons disparaissent d’eux-mêmes. Question : combien d’éléments a `{d + f for d in "ab" for f in "ab"}` ?
@@ -351,9 +380,9 @@ Dans les vraies données, la règle `0` est `8 11`, et les règles `42` et `31` 
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        `possibles = {debut + fin for debut in possibles for fin in mots(regles, sous_regle)}` ; les ensembles obtenus pour les différentes alternatives sont réunis avec `|=`.
+        `possibles = {debut + fin for debut in possibles for fin in mots(regles, sous_regle)}` ; les mots obtenus pour les différentes alternatives sont réunis dans l’ensemble résultat : `resultat = resultat | possibles`.
 
-4.  Écrire `valide_par_blocs(message, m42, m31)` et retrouver le résultat de la partie 2. Pourquoi faut-il que les deux ensembles n’aient aucun mot commun ? Le vérifier sur vos données.
+4.  Écrire `valide_par_blocs(message, m42, m31)` et retrouver le résultat de la partie 2. Pourquoi faut-il que les deux ensembles n’aient aucun mot commun ? Le vérifier sur vos données (que doit valoir `m42 & m31` ?).
 
     ??? pouce "Coup de pouce"
 

@@ -262,7 +262,7 @@ On rappelle : **temps de séjour** $=$ instant de fin $-$ instant d’arrivée ;
                 chrono.append(".")
                 t = t + 1
             else:
-                restants.remove(elu)
+                restants = [p for p in restants if p != elu]   # on retire l'elu
                 for k in range(elu[2]):
                     chrono.append(elu[0])
                     t = t + 1
@@ -347,11 +347,17 @@ Que représente le nombre de `.` d’une ligne ?
 
 ??? pouce "Coup de pouce"
 
-    Pour chaque processus, calculer d’abord son instant de fin ; puis parcourir `t` de `0` à `len(chrono) - 1` et choisir le caractère à ajouter. Pour aligner les noms : `nom.ljust(3)` ; pour l’axe : `str(t).ljust(5)` pour `t` allant de 0 à `len(chrono)` de 5 en 5.
+    Pour chaque processus, calculer d’abord son instant de fin ; puis parcourir `t` de `0` à `len(chrono) - 1` et choisir le caractère à ajouter. Pour aligner, écrire une fonction `completer(texte, n)` qui ajoute des espaces à droite de `texte` tant qu’il a moins de `n` caractères : `completer(nom, 3)` pour les noms ; pour l’axe, `completer(str(t), 5)` pour `t` allant de 0 à `len(chrono)` de 5 en 5.
 
 ??? corrige "Corrigé"
 
     ```python
+    def completer(texte, n):
+        """Ajoute des espaces a droite de texte jusqu'a n caracteres."""
+        while len(texte) < n:
+            texte = texte + " "
+        return texte
+
     def gantt(chrono, procs):
         lignes = ""
         for nom, arrivee, duree in procs:
@@ -367,10 +373,10 @@ Que représente le nombre de `.` d’une ligne ?
                     ligne = ligne + "."
                 else:
                     ligne = ligne + " "
-            lignes = lignes + nom.ljust(3) + "|" + ligne + "|\n"
+            lignes = lignes + completer(nom, 3) + "|" + ligne + "|\n"
         axe = ""
         for t in range(0, len(chrono) + 1, 5):
-            axe = axe + str(t).ljust(5)
+            axe = axe + completer(str(t), 5)
         return lignes + "    " + axe
     ```
 

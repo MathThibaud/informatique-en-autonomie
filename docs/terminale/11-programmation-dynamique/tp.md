@@ -83,9 +83,10 @@ def pgcb(x, y):
     elif x == 0 or y == 0:
         return ...              # (b) cas de base : bord haut / gauche
     else:
-        return 1 + min(...,     # (c) a gauche
-                       ...,     # (d) au-dessus
-                       ...)     # (e) en diagonale
+        g = ...                 # (c) a gauche
+        h = ...                 # (d) au-dessus
+        d = ...                 # (e) en diagonale
+        return 1 + min(min(g, h), d)
 ```
 
 ??? corrige "Corrigé"
@@ -97,9 +98,10 @@ def pgcb(x, y):
         elif x == 0 or y == 0:
             return 1                        # (b)
         else:
-            return 1 + min(pgcb(x - 1, y),      # (c) a gauche
-                           pgcb(x, y - 1),      # (d) au-dessus
-                           pgcb(x - 1, y - 1))  # (e) en diagonale
+            g = pgcb(x - 1, y)                  # (c) a gauche
+            h = pgcb(x, y - 1)                  # (d) au-dessus
+            d = pgcb(x - 1, y - 1)              # (e) en diagonale
+            return 1 + min(min(g, h), d)
     ```
 
 ### <span class="exo-num">Exercice 4</span> — Le problème de la lenteur { #ex-11-programmation-dynamique-tp-1-4 }
@@ -138,9 +140,10 @@ Si l’on teste `pgcb(250, 250)` sur l’image de la section « Sur une vraie im
         elif x == 0 or y == 0:
             r = 1
         else:
-            r = 1 + min(pgcb_memo(x - 1, y, memo),
-                        pgcb_memo(x, y - 1, memo),
-                        pgcb_memo(x - 1, y - 1, memo))
+            g = pgcb_memo(x - 1, y, memo)
+            h = pgcb_memo(x, y - 1, memo)
+            d = pgcb_memo(x - 1, y - 1, memo)
+            r = 1 + min(min(g, h), d)
         memo[(x, y)] = r
         return r
     ```
@@ -243,7 +246,7 @@ En s’inspirant **du remplissage à la main** de la section « Découverte à l
                 elif x == 0 or y == 0:
                     S[y][x] = 1
                 else:
-                    S[y][x] = 1 + min(S[y][x - 1], S[y - 1][x], S[y - 1][x - 1])
+                    S[y][x] = 1 + min(min(S[y][x - 1], S[y - 1][x]), S[y - 1][x - 1])
                 if S[y][x] > meilleur:
                     meilleur = S[y][x]
                     coin = (x, y)

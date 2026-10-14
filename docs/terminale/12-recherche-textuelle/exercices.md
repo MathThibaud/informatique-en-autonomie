@@ -187,7 +187,7 @@ Recopier et compléter les deux fonctions :
 
 ??? pouce "Coup de pouce"
 
-    Pour `(c)`, quelle méthode des dictionnaires renvoie une valeur par défaut quand la clé est absente ?
+    Pour `(c)`, la lettre `c` n’est pas dans la table : elle n’apparaît pas dans le motif (sauf peut-être en dernière position). De combien peut-on alors décaler la fenêtre ?
 
 ```python
 def table_decalage(motif):
@@ -209,13 +209,16 @@ def horspool(motif, texte):
         if j < 0:
             positions.append(i)
         c = texte[i + m - 1]
-        i += ...                       # (c) le saut (m par defaut)
+        if c in dec:
+            i += dec[c]
+        else:
+            i += ...                   # (c) lettre absente de la table
     return positions
 ```
 
 ??? corrige "Corrigé"
 
-    `(a)` `range(m - 1)` ; `(b)` `dec[motif[k]] = m - 1 - k` ; `(c)` `i += dec.get(c, m)`.
+    `(a)` `range(m - 1)` ; `(b)` `dec[motif[k]] = m - 1 - k` ; `(c)` `i += m` (lettre absente de la table : saut maximal).
 
 ### Coût
 
@@ -281,7 +284,11 @@ On modélise un brin d’ADN par une chaîne sur l’alphabet `{A, T, G, C}`, et
                 j -= 1
             if ... :                       # (a) motif entierement retrouve ?
                 nb = nb + 1
-            i += dec.get(texte[i + m - 1], ...)   # (b) valeur par defaut ?
+            c = texte[i + m - 1]
+            if c in dec:
+                i += dec[c]
+            else:
+                i += ...                   # (b) decalage par defaut ?
         return nb
     ```
 
@@ -598,7 +605,11 @@ def boyer_moore(motif, texte):
             i += 1
         else:
             c = texte[i + j]
-            i += max(1, j - last.get(c, -1))
+            if c in last:
+                k = last[c]
+            else:
+                k = -1
+            i += max(1, j - k)
     return positions
 ```
 
@@ -610,7 +621,7 @@ def boyer_moore(motif, texte):
 
         Commencer à $i=0$ : comparer `brin[5]` et `motif[5]`, puis reculer tant que les lettres coïncident ; le décalage vient de la ligne `i += max(1, ...)`.
 
-3.  Lors de ce déroulé, la quantité `j - last.get(c, -1)` a été négative. À quelle position $i$ ? Que se passerait-il si l’on remplaçait `max(1, j - last.get(c, -1))` par `j - last.get(c, -1)` ?
+3.  Lors de ce déroulé, la quantité `j - k` a été négative. À quelle position $i$ ? Que se passerait-il si l’on remplaçait `max(1, j - k)` par `j - k` ?
 
     ??? pouce "Coup de pouce"
 
@@ -730,7 +741,11 @@ def horspool(motif, texte):
             j -= 1                   # comparaison droite -> gauche
         if j < 0:
             return i                 # motif trouve en i
-        i += dec.get(texte[i + m - 1], m)   # saut selon la derniere case
+        c = texte[i + m - 1]         # lettre de fin de fenetre
+        if c in dec:
+            i += dec[c]
+        else:
+            i += m
     return -1
 ```
 

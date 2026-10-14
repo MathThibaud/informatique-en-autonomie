@@ -1191,3 +1191,5 @@ print(puissance(2, 3))   # affiche 8
     ```
 
     **3.** Exécuter la fonction sur **un petit exemple dont on connaît le résultat** ($2 \times 2 \times 2 = 8$) : le commentaire `# affiche 8` n’est qu’une affirmation de l’assistant ; seule la console fait foi.
+
+\newgeometry{inner=1.8cm,outer=1.6cm,top=2.2cm,bottom=1.9cm,headheight=16pt,headsep=0.5cm,footskip=0.9cm}

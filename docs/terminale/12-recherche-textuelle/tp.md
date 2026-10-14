@@ -4,7 +4,7 @@
 
 ## <span class="etiquette">TP</span> La course des algorithmes de recherche
 
-*compter, chronométrer et comparer naïf, Horspool et `str.find`*
+*compter, chronométrer et comparer naïf, Horspool et l’opérateur `in`*
 
 <p class="infos-activite">Durée : 2 h 30 à 3 h (deux séances) · Sur machine, par deux</p>
 
@@ -24,7 +24,7 @@
 
 !!! encadre "But du TP"
 
-    Transformer les algorithmes du cours en **instruments de mesure** : chaque recherche renverra, en plus des positions trouvées, le **nombre de comparaisons de caractères** effectuées. On fera ensuite courir la méthode naïve et Boyer-Moore-Horspool sur un **vrai roman** et sur un **génome** d’un million de bases, on étudiera l’effet de la **longueur du motif** et de la **taille de l’alphabet**, on construira des **cas défavorables**, et on se mesurera à la méthode `find` de Python. *Produit final* : des tableaux de mesures et un bilan argumenté sur le coût de la recherche textuelle.
+    Transformer les algorithmes du cours en **instruments de mesure** : chaque recherche renverra, en plus des positions trouvées, le **nombre de comparaisons de caractères** effectuées. On fera ensuite courir la méthode naïve et Boyer-Moore-Horspool sur un **vrai roman** et sur un **génome** d’un million de bases, on étudiera l’effet de la **longueur du motif** et de la **taille de l’alphabet**, on construira des **cas défavorables**, et on se mesurera à l’opérateur `in` de Python. *Produit final* : des tableaux de mesures et un bilan argumenté sur le coût de la recherche textuelle.
 
 **Convention de comptage.** On compte **une comparaison** chaque fois qu’un caractère du texte est comparé à un caractère du motif, que la comparaison réussisse ou échoue.
 
@@ -55,7 +55,7 @@
 
     - Le prétraitement (la table) coûte une seule passe sur le motif ($m$ opérations), négligeable devant la recherche dans un texte de $n \gg m$ caractères : on dépense un peu de mémoire pour gagner beaucoup de temps.
 
-    - `find` est compilé et optimisé : on l’utilise en pratique. Programmer Horspool sert à **comprendre** pourquoi il est rapide, et quand il ne l’est pas.
+    - L’opérateur `in` est compilé et optimisé : on l’utilise en pratique. Programmer Horspool sert à **comprendre** pourquoi il est rapide, et quand il ne l’est pas.
 
     **1.** $i=0$ : $1$ (`A`$\neq$`C`) ; $i=1$ : $2$ ; $i=2$ : $2$ ; $i=3$ : $1$ ; $i=4$ : $3$ (trouvé). Total : **9 comparaisons**.
 
@@ -108,7 +108,11 @@
                 comp += 1                   # la comparaison qui a echoue
             else:
                 positions.append(i)
-            i += dec.get(texte[i + m - 1], m)
+            c = texte[i + m - 1]
+            if c in dec:
+                i += dec[c]
+            else:
+                i += m
         return positions, comp
     ```
 
@@ -116,11 +120,11 @@
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Une référence, et mille tests <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-tp-1-3 }
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `toutes_positions(motif, texte)` à l’aide de `texte.find(motif, debut)`, qui renvoie la première position du motif à partir de l’indice `debut`, ou $-1$ s’il est absent. Attention : les occurrences peuvent se **chevaucher** (`AA` est trois fois dans `AAAA`).
+1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `toutes_positions(motif, texte)`, une version « de référence », écrite autrement que les deux précédentes : pour chaque position `i` possible, on compare d’un coup la **tranche** `texte[i:i + m]` au motif. Attention : les occurrences peuvent se **chevaucher** (`AA` est trois fois dans `AAAA`).
 
     ??? pouce "Coup de pouce"
 
-        Chercher une première fois à partir de $0$ ; tant que le résultat `p` n’est pas $-1$, l’ajouter à la liste et relancer la recherche à partir de `p + 1` (et non `p + len(motif)`, à cause des chevauchements).
+        Les positions possibles vont de $0$ à $n - m$ ; chaque position où la tranche est égale au motif est ajoutée à la liste, sans sauter de position (à cause des chevauchements).
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une boucle de **$1\,000$ tests aléatoires** : texte de longueur $0$ à $30$ et motif de longueur $1$ à $5$, tous deux sur l’alphabet `"AB"` (avec `random.choice` et `random.randint`). À chaque tour, vérifier par un `assert` que les trois fonctions renvoient les mêmes positions. Pourquoi un alphabet de deux lettres est-il un bon choix pour ces tests ?
 
@@ -128,11 +132,12 @@
 
     ```python
     def toutes_positions(motif, texte):
+        n = len(texte)
+        m = len(motif)
         positions = []
-        p = texte.find(motif)
-        while p != -1:
-            positions.append(p)
-            p = texte.find(motif, p + 1)     # p + 1 : chevauchements permis
+        for i in range(n - m + 1):           # toutes les positions : chevauchements permis
+            if texte[i:i + m] == motif:
+                positions.append(i)
         return positions
 
     def mot_aleatoire(longueur):
@@ -171,7 +176,11 @@
 
 2.  Pourquoi Horspool fait-il **moins de comparaisons qu’il n’y a de caractères** dans le texte ? Quels caractères n’a-t-il jamais lus ?
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Chercher `fogg` (sans majuscule). Que se passe-t-il ? Comment chercher un mot « sans tenir compte des majuscules » ? (Penser à `lower()`.)
+3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Chercher `fogg` (sans majuscule). Que se passe-t-il ? Comment chercher un mot « sans tenir compte des majuscules » ?
+
+    ??? pouce "Coup de pouce"
+
+        Écrire une fonction `minuscules(texte)` qui recopie le texte caractère par caractère en remplaçant chaque majuscule `c` (de `"A"` à `"Z"`) par `chr(ord(c) + 32)`, puis chercher `fogg` dans le résultat.
 
 ??? corrige "Corrigé"
 
@@ -189,7 +198,20 @@
 
     **3.** À chaque échec, il saute souvent de $m$ caractères (ou presque) : les caractères **survolés** lors des sauts ne sont jamais comparés.
 
-    **4.** `fogg` n’est pas trouvé (ou presque pas) : la recherche distingue majuscules et minuscules (`"F" != "f"`). On cherche `"fogg"` dans `texte.lower()` (et on met aussi le motif en minuscules). Dans le roman : `fogg` $0$ fois, `Fogg` $655$ fois, et $685$ fois dans `texte.lower()` (les $30$ de plus sont écrits en capitales, `FOGG`, dans les titres de chapitres).
+    **4.** `fogg` n’est pas trouvé (ou presque pas) : la recherche distingue majuscules et minuscules (`"F" != "f"`). On cherche `"fogg"` dans le texte mis en minuscules (et on écrit aussi le motif en minuscules) :
+
+    ```python
+    def minuscules(texte):
+        resultat = ""
+        for c in texte:
+            if "A" <= c <= "Z":
+                resultat = resultat + chr(ord(c) + 32)   # majuscule -> minuscule
+            else:
+                resultat = resultat + c
+        return resultat
+    ```
+
+    Dans le roman : `fogg` $0$ fois, `Fogg` $655$ fois, et $685$ fois dans `minuscules(texte)` (les $30$ de plus sont écrits en capitales, `FOGG`, dans les titres de chapitres). Les capitales accentuées (`É`…) ne sont pas converties : sans effet ici.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Un mini-`grep` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-tp-1-5 }
 
@@ -203,7 +225,7 @@ La commande `grep` des systèmes Unix affiche les **lignes** d’un fichier qui 
 
         Parcourir les positions renvoyées par `horspool_compte` en gardant un indice `i` : la partie de la ligne déjà recopiée. On ajoute `ligne[i:p]`, puis le motif entre crochets, puis `i` devient `p + len(motif)` ; une position `p` inférieure à `i` (chevauchement) est ignorée.
 
-3.  Le fichier de Gutenberg est coupé en lignes d’environ $70$ caractères. Pour le motif `Phileas Fogg`, comparer : le nombre de lignes renvoyées par `grep`, le nombre d’occurrences trouvées par `horspool_compte` dans le texte entier, puis dans `texte.replace("\n", " ")`. Expliquer les écarts.
+3.  Le fichier de Gutenberg est coupé en lignes d’environ $70$ caractères. Pour le motif `Phileas Fogg`, comparer : le nombre de lignes renvoyées par `grep`, le nombre d’occurrences trouvées par `horspool_compte` dans le texte entier, puis dans le texte où chaque fin de ligne `"\n"` a été remplacée par une espace (construire ce texte par un parcours des caractères). Expliquer les écarts.
 
 ??? corrige "Corrigé"
 
@@ -231,7 +253,20 @@ La commande `grep` des systèmes Unix affiche les **lignes** d’un fichier qui 
 
     **2.** On ne peut pas mettre de crochets qui se chevauchent : on garde la première occurrence et on ignore celles qui la recouvrent, d’où `"[aa]a"` (c’est aussi le choix de `grep` et des éditeurs).
 
-    **3.** Dans le roman : $282$ lignes, $282$ occurrences dans le texte entier, $301$ après le remplacement. `grep` compte des *lignes* : une ligne qui contient deux fois le motif ne compterait qu’une fois (ce n’est jamais le cas ici, d’où $282 = 282$). Surtout, quand `Phileas` est en fin de ligne et `Fogg` au début de la suivante, le texte contient `"Phileas\nFogg"` : ni `grep`, ni la recherche dans le texte entier ne trouvent le motif (le caractère de fin de ligne n’est pas une espace). En remplaçant les fins de ligne par des espaces, on retrouve ces occurrences coupées ($19$ ici), au prix de la perte des numéros de ligne. *(Vérifié sur un petit texte : `grep("Fogg voyage", "Phileas Fogg\nvoyage")` renvoie `[]`, mais le motif est trouvé après le remplacement.)*
+    **3.** Le texte sans fins de ligne se construit comme `minuscules` :
+
+    ```python
+    def sans_fins_de_ligne(texte):
+        resultat = ""
+        for c in texte:
+            if c == "\n":
+                resultat = resultat + " "
+            else:
+                resultat = resultat + c
+        return resultat
+    ```
+
+    Dans le roman : $282$ lignes, $282$ occurrences dans le texte entier, $301$ après le remplacement. `grep` compte des *lignes* : une ligne qui contient deux fois le motif ne compterait qu’une fois (ce n’est jamais le cas ici, d’où $282 = 282$). Surtout, quand `Phileas` est en fin de ligne et `Fogg` au début de la suivante, le texte contient `"Phileas\nFogg"` : ni `grep`, ni la recherche dans le texte entier ne trouvent le motif (le caractère de fin de ligne n’est pas une espace). En remplaçant les fins de ligne par des espaces, on retrouve ces occurrences coupées ($19$ ici), au prix de la perte des numéros de ligne. *(Vérifié sur un petit texte : `grep("Fogg voyage", "Phileas Fogg\nvoyage")` renvoie `[]`, mais le motif est trouvé après le remplacement.)*
 
 ## Partie C — La longueur du motif, et la taille de l’alphabet
 
@@ -344,30 +379,26 @@ On prend un texte de $n = 20\,000$ lettres `A` : `texte = "A" * 20000`.
 
 La fonction fournie `chrono(f, a, b)` exécute `f(a, b)` et renvoie le couple (résultat, durée en secondes).
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Sur le génome et sur le roman, avec un motif de longueur $16$ pris dans le texte, mesurer la durée de `naive_compte`, `horspool_compte` et `toutes_positions`. Combien de fois `find` est-il plus rapide que votre Horspool ?
+1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Sur le génome avec le motif `genome(16, 1)` (16 bases tirées au hasard, absentes du génome), puis sur le roman avec le motif `"le gentleman dit"` (16 caractères, absent du roman) — chaque méthode doit donc parcourir tout le texte —, mesurer la durée de `naive_compte`, `horspool_compte` et de la fonction fournie `present(motif, texte)`, qui renvoie simplement `motif in texte`. Combien de fois l’opérateur `in` est-il plus rapide que votre Horspool, sur chacun des deux textes ?
 
-2.  La méthode `find` est écrite en langage C et compilée, et son algorithme s’inspire justement de Boyer-Moore-Horspool. Expliquer l’écart de temps. Le nombre de comparaisons et la durée mesurent-ils la même chose ?
-
-3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Comparer `toutes_positions("AA", "AAAA")` et `"AAAA".count("AA")`. Que compte exactement `count` ? Dans quel cas ce piège peut-il fausser une recherche dans l’ADN ?
+2.  L’opérateur `in` des chaînes est écrit en langage C et compilé, et son algorithme s’inspire justement de Boyer-Moore-Horspool. Expliquer l’écart de temps. Le nombre de comparaisons et la durée mesurent-ils la même chose ?
 
 ??? corrige "Corrigé"
 
-    **1.** Durées mesurées (meilleure de trois exécutions, motif de longueur $16$) :
+    **1.** Durées mesurées (meilleure de trois exécutions, motifs de 16 caractères absents du texte : `genome(16, 1)` pour le génome, `"le gentleman dit"` pour le roman) :
 
-    |  | `naive_compte` | `horspool_compte` | `toutes_positions` (`find`) |
+    |  | `naive_compte` | `horspool_compte` | `present` (`in`) |
     |:---|:--:|:--:|:--:|
-    | Génome ($10^6$ bases) | $198$ ms | $125$ ms | $4{,}6$ ms |
-    | Roman ($4{,}4 \times 10^5$ car.) | $78$ ms | $11$ ms | $0{,}21$ ms |
+    | Génome ($10^6$ bases) | $200$ ms | $63$ ms | $4{,}6$ ms |
+    | Roman ($4{,}4 \times 10^5$ car.) | $72$ ms | $15$ ms | $0{,}31$ ms |
 
-    `find` est environ $25$ fois plus rapide que notre Horspool sur le génome, $50$ fois sur le roman.
+    L’opérateur `in` est environ $14$ fois plus rapide que notre Horspool sur le génome, $50$ fois sur le roman (l’ordre de grandeur dépend de l’ordinateur).
 
-    **2.** Notre Horspool est **interprété** : chaque tour de boucle Python coûte des dizaines d’instructions machine (et nous incrémentons en plus un compteur). `find` est compilé en langage machine, avec un algorithme du même type. Le nombre de comparaisons mesure le travail **de l’algorithme**, indépendamment de la machine et du langage ; la durée mesure aussi le coût de **l’implémentation**. Les deux mesures se complètent.
-
-    **3.** `toutes_positions("AA", "AAAA")` vaut `[0, 1, 2]`, mais `"AAAA".count("AA")` vaut `2` : `count` compte les occurrences **sans chevauchement**. Dans l’ADN, où les répétitions (`ATATAT`…) sont fréquentes, on sous-estimerait le nombre d’occurrences d’un motif périodique.
+    **2.** Notre Horspool est **interprété** : chaque tour de boucle Python coûte des dizaines d’instructions machine (et nous incrémentons en plus un compteur). L’opérateur `in` est compilé en langage machine, avec un algorithme du même type. Le nombre de comparaisons mesure le travail **de l’algorithme**, indépendamment de la machine et du langage ; la durée mesure aussi le coût de **l’implémentation**. Les deux mesures se complètent.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 9</span> — Défi : le vrai Boyer-Moore (mauvais caractère) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-tp-1-9 }
 
-Dans le Boyer-Moore du cours, on regarde le caractère `c = texte[i + j]` qui a **provoqué l’échec** (position `j` du motif), et on décale de `max(1, j - dernier.get(c, -1))`, où `dernier` associe à chaque lettre du motif sa **dernière** position. Après une occurrence trouvée, on décale de $1$.
+Dans le Boyer-Moore du cours, on regarde le caractère `c = texte[i + j]` qui a **provoqué l’échec** (position `j` du motif), et on décale de `max(1, j - k)`, où `k` est la **dernière** position de `c` dans le motif (lue dans un dictionnaire `dernier`), ou $-1$ si `c` n’apparaît pas dans le motif. Après une occurrence trouvée, on décale de $1$.
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire `table_dernier(motif)` et `boyer_moore_compte(motif, texte)`, et les ajouter aux $1\,000$ tests de l’exercice 3.
 
@@ -399,7 +430,12 @@ Dans le Boyer-Moore du cours, on regarde le caractère `c = texte[i + j]` qui a 
                 i += 1
             else:
                 comp += 1                   # la comparaison qui a echoue
-                i += max(1, j - dernier.get(texte[i + j], -1))
+                c = texte[i + j]
+                if c in dernier:
+                    k = dernier[c]
+                else:
+                    k = -1
+                i += max(1, j - k)
         return positions, comp
     ```
 
@@ -415,4 +451,4 @@ Dans le Boyer-Moore du cours, on regarde le caractère `c = texte[i + j]` qui a 
 
     3.  À quoi sert le **prétraitement** du motif ? Combien coûte-t-il, comparé à la recherche elle-même ?
 
-    4.  Pourquoi utiliser `find` (ou `in`) en pratique, et à quoi bon avoir programmé Horspool ?
+    4.  Pourquoi utiliser l’opérateur `in` en pratique, et à quoi bon avoir programmé Horspool ?

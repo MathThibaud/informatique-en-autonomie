@@ -54,7 +54,13 @@ MON;2025-08-02;22,2;27,2;0,0
     def en_nombre(texte):
         if texte == "":
             return None
-        return float(texte.replace(",", "."))
+        resultat = ""                  # on recopie le texte...
+        for car in texte:
+            if car == ",":
+                resultat += "."        # ... en changeant la virgule en point
+            else:
+                resultat += car
+        return float(resultat)
 
     def est_complete(ligne):
         return ligne["tmin"] != "" and ligne["tmax"] != "" and ligne["pluie"] != ""
@@ -147,7 +153,7 @@ Compléter `en_nombre(texte)` qui convertit une valeur lue dans le fichier en `f
 
 ??? pouce "Coup de pouce"
 
-    Les chaînes ont une méthode `replace` : `"23,4".replace(",", ".")` vaut `"23.4"`.
+    Construire une nouvelle chaîne en parcourant le texte caractère par caractère : on recopie chaque caractère, sauf la virgule, qu’on remplace par un point. Il ne reste plus qu’à appliquer `float`.
 
 ```python
 >>> en_nombre("23,4")
@@ -162,7 +168,13 @@ True
     def en_nombre(texte):
         if texte == "":
             return None
-        return float(texte.replace(",", "."))
+        resultat = ""                  # on recopie le texte...
+        for car in texte:
+            if car == ",":
+                resultat += "."        # ... en changeant la virgule en point
+            else:
+                resultat += car
+        return float(resultat)
     ```
 
 ## Contrôle qualité : repérer les lignes douteuses
@@ -249,7 +261,7 @@ Combien de lignes reste-t-il ? Combien ont été écartées ? **Tout le reste du
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-Compléter `releves_de(table, station)` (filtre par compréhension) et `moyenne(table, descripteur)`. Pour Monaco (`"MON"`), afficher le nombre de relevés et la moyenne des températures maximales, arrondie au dixième avec `round(x, 1)`.
+Compléter `releves_de(table, station)` (filtre par compréhension) et `moyenne(table, descripteur)`. Pour Monaco (`"MON"`), afficher le nombre de relevés et la moyenne des températures maximales, affichée au dixième avec une f-string : `f"{x:.1f}"`.
 
 ??? corrige "Corrigé"
 
@@ -257,7 +269,8 @@ Compléter `releves_de(table, station)` (filtre par compréhension) et `moyenne(
 
     ```python
     monaco = releves_de(propre, "MON")
-    print(len(monaco), round(moyenne(monaco, "tmax"), 1))     # 31 29.1
+    m = moyenne(monaco, "tmax")
+    print(len(monaco), f"{m:.1f}")      # 31 29.1 (affichage au dixieme)
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Records et comptages <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-les-donnees-en-tables-tp-1-9 }
@@ -289,7 +302,7 @@ Compléter `releves_de(table, station)` (filtre par compréhension) et `moyenne(
         cumul = 0
         for ligne in r:
             cumul = cumul + ligne["pluie"]
-        print(s["nom"], round(cumul, 1), compter_si(r, "pluie", 1))
+        print(s["nom"], f"{cumul:.1f}", compter_si(r, "pluie", 1))
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — L’épisode orageux <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-les-donnees-en-tables-tp-1-10 }
@@ -326,7 +339,7 @@ On veut maintenant regrouper les relevés **par date**, toutes stations confondu
     for d in cumul:
         if jour_max is None or cumul[d] > cumul[jour_max]:
             jour_max = d
-    print(len(cumul), jour_max, round(cumul[jour_max], 1))
+    print(len(cumul), jour_max, f"{cumul[jour_max]:.1f}")
     print(len([d for d in cumul if cumul[d] == 0]))
     ```
 
@@ -360,8 +373,9 @@ On veut maintenant regrouper les relevés **par date**, toutes stations confondu
     pluies = []
     for s in stations:
         r = releves_de(propre, s["station"])
-        pluies.append((s["nom"], round(moyenne(r, "pluie") * len(r), 1)))
-    print(sorted(pluies, key=lambda c: c[1], reverse=True))
+        pluies.append((s["nom"], moyenne(r, "pluie") * len(r)))
+    for c in sorted(pluies, key=lambda c: c[1], reverse=True):
+        print(c[0], f"{c[1]:.1f}")
     ```
 
     **3.** `[’2025-08-15’, ’2025-08-20’, ’2025-09-02’]` est dans l’ordre chronologique ; `[’02/09/2025’, ’15/08/2025’, ’20/08/2025’]` ne l’est pas (le 2 septembre passe en premier). Les chaînes se comparent caractère par caractère : avec l’année, puis le mois, puis le jour, l’ordre « des mots » coïncide avec l’ordre du temps. C’est le format international **ISO 8601**.
@@ -410,8 +424,9 @@ La fonction `jointure` du cours est fournie dans le programme.
     littoral = [l for l in j if l["littoral"] == "oui"]
     arriere = [l for l in j if l["littoral"] == "non"]
     for groupe in (littoral, arriere):
-        print(round(moyenne(groupe, "tmin"), 1), round(moyenne(groupe, "tmax"), 1),
-              round(moyenne(groupe, "tmax") - moyenne(groupe, "tmin"), 1))
+        m_min = moyenne(groupe, "tmin")
+        m_max = moyenne(groupe, "tmax")
+        print(f"{m_min:.1f} {m_max:.1f} {m_max - m_min:.1f}")
     ```
 
 ## Produire : exporter un CSV de bilan
@@ -420,7 +435,11 @@ La fonction `jointure` du cours est fournie dans le programme.
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-1.  Compléter `en_texte(nombre)`, réciproque de `en_nombre` : `en_texte(23.4)` vaut `"23,4"`.
+1.  Compléter `en_texte(nombre)`, réciproque de `en_nombre`, qui écrit le nombre avec **un** chiffre après la virgule : `en_texte(23.4)` vaut `"23,4"` et `en_texte(31)` vaut `"31,0"`.
+
+    ??? pouce "Coup de pouce"
+
+        La f-string `f"{nombre:.1f}"` écrit le nombre au dixième, avec un point ; il reste à remplacer ce point par une virgule, caractère par caractère, comme dans `en_nombre`.
 
 2.  Construire une table `bilan` contenant **une fiche par station**, avec les descripteurs `station`, `nom`, `tmin_moy`, `tmax_moy`, `pluie_totale`, `nuits_tropicales` (moyennes et cumul arrondis au dixième, écrits avec `en_texte`).
 
@@ -436,15 +455,22 @@ La fonction `jointure` du cours est fournie dans le programme.
 
     ```python
     def en_texte(nombre):
-        return str(nombre).replace(".", ",")
+        texte = f"{nombre:.1f}"        # un chiffre apres le point
+        resultat = ""
+        for car in texte:
+            if car == ".":
+                resultat += ","        # virgule decimale a la francaise
+            else:
+                resultat += car
+        return resultat
 
     bilan = []
     for s in stations:
         r = releves_de(propre, s["station"])
         bilan.append({"station": s["station"], "nom": s["nom"],
-                      "tmin_moy": en_texte(round(moyenne(r, "tmin"), 1)),
-                      "tmax_moy": en_texte(round(moyenne(r, "tmax"), 1)),
-                      "pluie_totale": en_texte(round(moyenne(r, "pluie") * len(r), 1)),
+                      "tmin_moy": en_texte(moyenne(r, "tmin")),
+                      "tmax_moy": en_texte(moyenne(r, "tmax")),
+                      "pluie_totale": en_texte(moyenne(r, "pluie") * len(r)),
                       "nuits_tropicales": compter_si(r, "tmin", 20)})
     exporter(bilan, "bilan_stations.csv", ";")
     ```
@@ -604,9 +630,18 @@ Pour travailler confortablement, on transforme chaque ligne brute en une **nouve
 {'sexe': 'G', 'prenom': 'Léo', 'annee': 2025, 'nombre': 3420, 'rang': 3}
 ```
 
+Pour le prénom, compléter d’abord `prenom_lisible(prenom)`, qui garde la majuscule en **début de mot** (premier caractère, ou caractère qui suit un tiret) et met les autres lettres en minuscules : `prenom_lisible("JEAN-PIERRE")` vaut `"Jean-Pierre"`. Elle s’appuie sur la fonction `en_minuscule`, fournie dans le fichier de départ : dans la table Unicode, la minuscule d’une lettre majuscule, accentuée ou non (de `A` à `Z` et de `À` à `Ü`), est rangée **32** places plus loin.
+
+```python
+def en_minuscule(car):
+    if "A" <= car <= "Z" or "À" <= car <= "Ü":
+        return chr(ord(car) + 32)      # majuscule -> minuscule
+    return car                         # pas une majuscule : inchange
+```
+
 ??? pouce "Coup de pouce"
 
-    La méthode `title` des chaînes met une majuscule au début de chaque mot et des minuscules ailleurs : `"JEAN-PIERRE".title()` vaut `"Jean-Pierre"`.
+    Construire le résultat caractère par caractère, avec une variable booléenne `debut_de_mot`, vraie au départ ; après chaque caractère, elle devient vraie si ce caractère est un tiret, fausse sinon.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Un programme robuste <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-les-donnees-en-tables-tp-2-4 }
 
@@ -618,7 +653,7 @@ Les éditions précédentes du fichier contenaient des lignes qui ne décrivent 
 
     ??? pouce "Coup de pouce"
 
-        Deux outils utiles : la tranche `"_PRENOMS"[:1]` vaut `"_"` (le premier caractère) et `"XXXX".isdigit()` vaut `False`.
+        La tranche `"_PRENOMS"[:1]` vaut `"_"` (le premier caractère). Pour l’année, parcourir ses caractères : un caractère `car` est un chiffre lorsque `"0" <= car <= "9"` ; dès qu’on en trouve un qui n’en est pas un, la ligne n’est pas valide.
 
 2.  Un camarade propose plutôt le test `"RARES" in ligne["prenom"]`. Or le fichier complet contient la ligne `1;RARES;2025;15;2053`. Que décrit-elle ? Pourquoi ce test serait-il une erreur ?
 
@@ -672,7 +707,7 @@ Compléter `plus_donne_par_decennie(table, sexe)`, qui renvoie un dictionnaire `
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-Compléter `diversite(table, annee, sexe)`, qui renvoie le nombre de prénoms différents de l’année, le total des naissances correspondantes et la **part du top 10** dans ce total (en pourcentage, arrondie au dixième). Comparer 1950, 1975, 2000 et 2025, pour chaque sexe, puis rédiger deux phrases de conclusion. Le total obtenu pour 2025 est-il le nombre de bébés nés en France cette année-là ?
+Compléter `diversite(table, annee, sexe)`, qui renvoie le nombre de prénoms différents de l’année, le total des naissances correspondantes et la **part du top 10** dans ce total (en pourcentage, à afficher au dixième avec `f"{part:.1f}"`). Comparer 1950, 1975, 2000 et 2025, pour chaque sexe, puis rédiger deux phrases de conclusion. Le total obtenu pour 2025 est-il le nombre de bébés nés en France cette année-là ?
 
 ## Trier
 

@@ -256,13 +256,13 @@ Le cours affirme qu’un ABR de $n$ valeurs « bien rempli » a une hauteur proc
 
     | $n$                        |  $10$   | $100$ | $1\,000$ | $10\,000$ |
     |:---------------------------|:-------:|:-----:|:--------:|:---------:|
-    | $\log_2(n)$ (`math.log2`)  | $3{,}3$ |       |          |           |
+    | $\log_2(n)$ (calculatrice) | $3{,}3$ |       |          |           |
     | hauteur moyenne, au hasard |         |       |          |           |
     | hauteur, valeurs triées    |         |       |          |           |
 
 3.  Que vaut à peu près le rapport entre la hauteur moyenne au hasard et $\log_2(n)$ ? Comment évolue la hauteur au hasard quand $n$ est multiplié par $10$ ?
 
-4.  <span class="run" title="À programmer et tester sur machine">▶</span> Tracer les deux courbes avec `matplotlib`, ainsi que $\log_2(n)$, pour $n$ parmi `10, 20, 50, 100, 200, 500, 1000, 2000` (valeurs triées) et jusqu’à `10000` (au hasard). Les échelles logarithmiques (`plt.xscale("log")` et `plt.yscale("log")`) rendent le graphique lisible.
+4.  <span class="run" title="À programmer et tester sur machine">▶</span> Tracer les deux courbes avec `matplotlib`, ainsi que $\log_2(n)$ (valeur approchée par une fonction `log2(n)` qui compte le nombre de divisions par $2$ nécessaires pour passer de $n$ à $1$ ou moins), pour $n$ parmi `10, 20, 50, 100, 200, 500, 1000, 2000` (valeurs triées) et jusqu’à `10000` (au hasard). Les échelles logarithmiques (`plt.xscale("log")` et `plt.yscale("log")`) rendent le graphique lisible.
 
 5.  Le fichier de départ commence par `sys.setrecursionlimit(20000)`. Sans cette ligne, quel calcul échouerait, et pourquoi ? *(Penser à la forme de l’arbre et à la fonction `hauteur`.)*
 
@@ -303,11 +303,20 @@ Le cours affirme qu’un ABR de $n$ valeurs « bien rempli » a une hauteur proc
 
     ```python
     import matplotlib.pyplot as plt
+
+    def log2(n):
+        """Nombre de divisions par 2 pour passer de n a 1 ou moins (log2(n) arrondi au-dessus)"""
+        k = 0
+        while n > 1:
+            n = n / 2
+            k = k + 1
+        return k
+
     ns = [10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]
     nt = [n for n in ns if n <= 2000]
     plt.plot(nt, [hauteur_triee(n) for n in nt], "o-", label="valeurs triees")
     plt.plot(ns, [hauteur_aleatoire(n) for n in ns], "o-", label="au hasard")
-    plt.plot(ns, [math.log2(n) for n in ns], "--", label="log2(n)")
+    plt.plot(ns, [log2(n) for n in ns], "--", label="log2(n)")
     plt.xscale("log")
     plt.yscale("log")
     plt.xlabel("n")
@@ -341,9 +350,12 @@ Le cours affirme qu’un ABR de $n$ valeurs « bien rempli » a une hauteur proc
     for arbre in [ar, at]:
         visites = [arbre.contient(v)[1] for v in range(1000)]
         total = 0
+        pire = 0
         for nb in visites:
             total += nb
-        print(total / 1000, max(visites))
+            if nb > pire:
+                pire = nb
+        print(total / 1000, pire)
     ```
 
     Arbre au hasard : **11,8** visites en moyenne, **22** au pire (sa hauteur). Arbre trié : **500,5** en moyenne, **1000** au pire — exactement comme une recherche séquentielle dans une liste non triée ($500{,}5$ et $1\,000$). La dichotomie dans une liste triée fait au plus $10$ comparaisons. Un ABR n’est intéressant que s’il reste **peu haut** ; il a alors l’avantage sur la liste triée d’accepter des insertions rapides (pas de décalage).
@@ -756,7 +768,7 @@ On part maintenant de la grille **vide**.
 
     ??? pouce "Coup de pouce"
 
-        Condition d’arrêt : si la partie est finie, renvoyer `score_final(grille)`. Sinon, construire par compréhension la liste `scores` des valeurs des fils : pour chaque case `c` de `coups_possibles(grille)`, la valeur est `minimax(jouer(grille, c, joueur), adversaire(joueur))`. Renvoyer `max(scores)` si `joueur` vaut `"X"`, `min(scores)` sinon.
+        Condition d’arrêt : si la partie est finie, renvoyer `score_final(grille)`. Sinon, chercher le maximum (pour `"X"`) ou le minimum (pour `"O"`) des valeurs des fils, comme dans une recherche de maximum : partir de `valeur = -100` pour `"X"` (`100` pour `"O"`), puis, pour chaque case `c` de `coups_possibles(grille)`, calculer `s = minimax(jouer(grille, c, joueur), adversaire(joueur))` et remplacer `valeur` par `max(valeur, s)` (ou `min(valeur, s)`).
 
     ```text
     >>> minimax(depuis_texte("XOXOOX..."), "X")
@@ -787,14 +799,20 @@ On part maintenant de la grille **vide**.
     def minimax(grille, joueur):
         if est_finie(grille):                      # condition d'arret
             return score_final(grille)
-        scores = [minimax(jouer(grille, c, joueur), adversaire(joueur))
-                  for c in coups_possibles(grille)]
         if joueur == "X":
-            return max(scores)
-        return min(scores)
+            valeur = -100                          # "moins l'infini"
+        else:
+            valeur = 100                           # "plus l'infini"
+        for c in coups_possibles(grille):
+            s = minimax(jouer(grille, c, joueur), adversaire(joueur))
+            if joueur == "X":
+                valeur = max(valeur, s)
+            else:
+                valeur = min(valeur, s)
+        return valeur
     ```
 
-    La condition d’arrêt (le cas de base) : la partie est finie, c’est-à-dire que l’on est sur une **feuille** de l’arbre de jeu. Elle est toujours atteinte, car chaque appel récursif se fait sur une grille qui a une case vide de moins.
+    La condition d’arrêt (le cas de base) : la partie est finie, c’est-à-dire que l’on est sur une **feuille** de l’arbre de jeu. Elle est toujours atteinte, car chaque appel récursif se fait sur une grille qui a une case vide de moins. Le maximum (ou le minimum) des valeurs des fils se calcule au fur et à mesure, comme une recherche de maximum dans une liste : on part d’une valeur qu’aucun score n’atteint ($-100$ pour `X`, $100$ pour `O`) et on la remplace par `max(valeur, s)` (ou `min(valeur, s)`) à chaque fils.
 
     **3.** On retrouve la valeur $+1$ de l’exercice 6. Dans la grille `"X..OO.X.."`, `O` menace d’aligner `(3, 4, 5)` : `X` doit jouer `5`, et n’a pas de double menace à créer ; `O` peut ensuite parer toutes les menaces de `X`. Le mieux que `X` puisse garantir est le nul.
 
@@ -810,7 +828,7 @@ On part maintenant de la grille **vide**.
 
     ??? pouce "Coup de pouce"
 
-        Une feuille renvoie `(score_final(grille), 1)`. Sinon, partir de `visites = 1` et, pour chaque coup, récupérer le couple `s, v` renvoyé par l’appel récursif : ajouter `s` à la liste des scores et `v` à `visites`.
+        Une feuille renvoie `(score_final(grille), 1)`. Sinon, partir de `visites = 1` et, pour chaque coup, récupérer le couple `s, v` renvoyé par l’appel récursif : mettre à jour `valeur` avec `s` comme dans `minimax`, et ajouter `v` à `visites`.
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `nb_parties(grille, joueur)`, qui renvoie le nombre de feuilles de l’arbre de jeu, c’est-à-dire le nombre de parties possibles.
 
@@ -826,15 +844,19 @@ On part maintenant de la grille **vide**.
     def minimax_compte(grille, joueur):
         if est_finie(grille):
             return score_final(grille), 1
-        scores = []
+        if joueur == "X":
+            valeur = -100
+        else:
+            valeur = 100
         visites = 1                                # la position courante
         for c in coups_possibles(grille):
             s, v = minimax_compte(jouer(grille, c, joueur), adversaire(joueur))
-            scores.append(s)
+            if joueur == "X":
+                valeur = max(valeur, s)
+            else:
+                valeur = min(valeur, s)
             visites += v
-        if joueur == "X":
-            return max(scores), visites
-        return min(scores), visites
+        return valeur, visites
 
     def nb_parties(grille, joueur):
         if est_finie(grille):
@@ -1030,11 +1052,17 @@ Aux échecs, une position offre en moyenne une trentaine de coups et une partie 
             return score_final(grille)
         if profondeur == 0:                        # on s'arrete : on estime
             return evaluer(grille)
-        scores = [minimax_limite(jouer(grille, c, joueur), adversaire(joueur), profondeur - 1)
-                  for c in coups_possibles(grille)]
         if joueur == "X":
-            return max(scores)
-        return min(scores)
+            valeur = -100
+        else:
+            valeur = 100
+        for c in coups_possibles(grille):
+            s = minimax_limite(jouer(grille, c, joueur), adversaire(joueur), profondeur - 1)
+            if joueur == "X":
+                valeur = max(valeur, s)
+            else:
+                valeur = min(valeur, s)
+        return valeur
 
     def meilleur_coup_limite(grille, joueur, profondeur):
         coups = coups_possibles(grille)
@@ -1085,9 +1113,16 @@ Rédiger, en une dizaine de lignes, un bilan qui répond aux questions suivantes
         Dans l’arbre de jeu, une même grille apparaît très souvent : `X` en `0`, `O` en `4`, `X` en `8` donne la même position que `X` en `8`, `O` en `4`, `X` en `0`. Pour compter les positions **différentes**, on parcourt l’arbre comme `minimax`, en notant chaque grille rencontrée dans un dictionnaire dont les clés sont les grilles écrites sous forme de chaînes :
 
         ```python
+        def en_texte(grille):
+            """Renvoie la grille sous forme d'une chaine de 9 caracteres"""
+            texte = ""
+            for c in grille:
+                texte = texte + c
+            return texte
+
         def noter_positions(grille, joueur, vues):
             """Note dans vues les positions de l'arbre de jeu"""
-            vues["".join(grille)] = True       # cle deja presente : pas de doublon
+            vues[en_texte(grille)] = True      # cle deja presente : pas de doublon
             if not est_finie(grille):
                 for c in coups_possibles(grille):
                     noter_positions(jouer(grille, c, joueur), adversaire(joueur), vues)

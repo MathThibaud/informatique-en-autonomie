@@ -70,29 +70,66 @@ Ranger les valeurs dans l’ordre croissant, ajouter la prise et l’appareil, p
 
 ## Programmer la partie 1
 
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
+
+!!! encadre "Méthode : trier une liste par insertion (rappel de Première)"
+
+    On parcourt la liste de gauche à droite ; chaque élément est ramené vers la gauche, en décalant d’un cran les éléments plus grands, jusqu’à sa place dans la partie déjà triée.
+
+    ```python
+    def tri_insertion(t):
+        """Trie la liste t sur place, par ordre croissant."""
+        for i in range(1, len(t)):
+            x = t[i]
+            j = i
+            while j > 0 and t[j - 1] > x:
+                t[j] = t[j - 1]          # decaler vers la droite
+                j -= 1
+            t[j] = x
+
+    t = [9, 1, 13, 4]
+    tri_insertion(t)
+    print(t)                         # [1, 4, 9, 13]
+    ```
+
+    **Intérêt.** Le coût est quadratique dans le pire cas, ce qui reste négligeable pour une centaine d’adaptateurs. Le maximum d’une liste triée est son dernier élément.
+
 ### <span class="exo-num">Exercice 3</span> — Lire et ranger <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-programmation-dynamique-aoc-1-3 }
 
 Écrire une fonction `chaine(nom_fichier)` qui renvoie la liste triée des valeurs, complétée par `0` au début et par la valeur de l’appareil à la fin.
 
 ??? pouce "Coup de pouce"
 
-    La méthode `sort()` ou la fonction `sorted` trient une liste. L’appareil vaut le maximum plus 3.
+    Lire les lignes non vides et les convertir avec `int`, puis trier avec le tri par insertion de l’encadré. L’appareil vaut le maximum plus 3, c’est-à-dire le dernier élément de la liste triée plus 3.
 
-!!! encadre "Outil Python : la méthode get des dictionnaires (d.get(cle, defaut))"
+!!! encadre "Méthode : compter avec un dictionnaire"
 
-    `d.get(cle, defaut)` renvoie la valeur associée à `cle` si la clé existe, et la valeur `defaut` sinon, sans provoquer d’erreur. Le dictionnaire n’est pas modifié.
+    Pour compter des apparitions, on associe à chaque valeur rencontrée son nombre d’apparitions. Avant d’augmenter un compteur, on teste si la clé existe déjà : sinon, on la crée avec la valeur 1.
 
     ```python
     compte = {"a": 2}
-    print(compte.get("a", 0))   # 2 : la cle existe
-    print(compte.get("z", 0))   # 0 : cle absente, on obtient la valeur par defaut
-    compte["z"] = compte.get("z", 0) + 1   # compter sans tester si la cle existe
-    print(compte)               # {'a': 2, 'z': 1}
+    for c in ["a", "z", "z"]:
+        if c in compte:
+            compte[c] += 1     # cle deja presente
+        else:
+            compte[c] = 1      # premiere apparition
+    print(compte)              # {'a': 3, 'z': 2}
+    print("y" in compte)       # False : la cle n'existe pas
     ```
 
-    **Intérêt.** On évite d’écrire un test `if cle in d: … else: …` à chaque fois qu’on compte ou qu’on lit une valeur peut-être absente. Le coût reste celui d’un accès au dictionnaire : constant en moyenne.
+    **Intérêt.** Le test `in` et l’accès `compte[c]` coûtent un temps constant en moyenne : on compte en un seul parcours.
 
-    **À essayer.** Recopier et exécuter ce code. Que se passe-t-il si l’on écrit `compte["y"]` ? Et `compte.get("y")`, sans second argument ?
+    **À essayer.** Recopier et exécuter ce code. Que se passe-t-il si l’on écrit `compte["y"]` ? Écrire une fonction `valeur(d, cle)` qui renvoie `d[cle]` si la clé existe, et `0` sinon.
 
 ### <span class="exo-num">Exercice 4</span> — Compter les écarts <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-programmation-dynamique-aoc-1-4 }
 
@@ -128,7 +165,7 @@ On note $N(v)$ le nombre de façons d’aller de la prise jusqu’à l’adaptat
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    `N[0] = 1`, puis pour chaque valeur `v` : `N[v]` est la somme des `N[v - k]` pour `k` valant 1, 2 et 3, en comptant 0 si `v - k` n’est pas un adaptateur (méthode `get` des dictionnaires).
+    `N[0] = 1`, puis pour chaque valeur `v` : `N[v]` est la somme des `N[v - k]` pour `k` valant 1, 2 et 3, en comptant 0 si `v - k` n’est pas un adaptateur (tester d’abord `v - k in N`, comme dans l’encadré sur le comptage).
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Défi : la version récursive <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-programmation-dynamique-aoc-1-7 }
 
@@ -222,6 +259,20 @@ Questions de vérification, à traiter sur le cahier :
 Avec les nombres de départ (inventés) `2,0,1`, écrire les dix premiers nombres dits, en numérotant les tours à partir de 1. Vérification : les cinq premiers sont `2, 0, 1, 0, 2` et le dixième vaut `2`.
 
 ## Programmer la partie 1
+
+Le fichier ne contient qu’une ligne : on la lit avec `read()`, on la nettoie avec `strip`, puis on la découpe avec `split(",")` avant de convertir chaque morceau avec `int`.
+
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
 
 ### <span class="exo-num">Exercice 3</span> — Une première version avec une liste <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-programmation-dynamique-aoc-2-3 }
 

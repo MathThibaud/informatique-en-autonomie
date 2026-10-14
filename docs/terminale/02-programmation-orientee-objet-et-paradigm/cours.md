@@ -126,7 +126,7 @@ Les effets de bord rendent les programmes difficiles à prévoir et à relire : 
 
 !!! remarque "Remarque"
 
-    Bonne nouvelle : vous utilisez déjà des objets *sans le savoir* ! Quand vous écrivez `"radar".upper()` ou `ma_liste.append(3)`, le `.quelquechose()` est un appel de **méthode** sur un **objet**. Il est temps de comprendre — et d’écrire — ce qui se cache derrière.
+    Bonne nouvelle : vous utilisez déjà des objets *sans le savoir* ! Quand vous écrivez `"le petit chat".split()` ou `ma_liste.append(3)`, le `.quelquechose()` est un appel de **méthode** sur un **objet**. Il est temps de comprendre — et d’écrire — ce qui se cache derrière.
 
 ### L’idée : réunir des données et des comportements
 
@@ -266,7 +266,7 @@ Distinguons deux rôles très courants : une méthode qui **renvoie** une inform
 
 !!! remarque "Remarque — Fonction ou méthode ?"
 
-    Une **fonction** s’appelle seule : `len(bilbo_liste)`. Une **méthode** s’appelle « sur » un objet, après un point : `"abc".upper()`. L’objet placé à gauche du point est passé, en coulisses, comme `self`.
+    Une **fonction** s’appelle seule : `len(bilbo_liste)`. Une **méthode** s’appelle « sur » un objet, après un point : `bilbo_liste.append(3)`. L’objet placé à gauche du point est passé, en coulisses, comme `self`.
 
 ### Un second exemple : des objets qui interagissent
 
