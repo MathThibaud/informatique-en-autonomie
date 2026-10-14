@@ -56,14 +56,18 @@ def accueil(n):
     source = 'def accueil(n):\n    for k in range(n):\n        print("bonjour")\n'
 
     def compter_lignes(code):
-        return code.count("\n")    # nombre de passages a la ligne
+        nb = 0
+        for c in code:
+            if c == "\n":          # un passage a la ligne
+                nb += 1
+        return nb
     ```
 
     Que renvoie `compter_lignes(source)` ? Un « bonjour » est-il affiché ?
 
 3.  En Python, `exec(chaine)` exécute le programme écrit dans la chaîne. Qu’affiche l’instruction `exec(source + "accueil(2)\n")` ?
 
-4.  La fonction `compter_lignes` a elle aussi un texte (deux lignes). Peut-on lui donner **son propre texte** en entrée ? Que renverrait-elle ?
+4.  La fonction `compter_lignes` a elle aussi un texte (six lignes). Peut-on lui donner **son propre texte** en entrée ? Que renverrait-elle ?
 
 ??? corrige "Corrigé"
 
@@ -73,7 +77,7 @@ def accueil(n):
 
     3.  Deux `bonjour` : `exec` **exécute** le texte reçu (définition de `accueil`, puis appel `accueil(2)`) — comme le cuisinier. `exec` est un interpréteur Python *dans* Python.
 
-    4.  Oui : le texte de `compter_lignes` est une chaîne comme une autre ; elle renverrait $2$. Un programme peut recevoir **son propre texte** en entrée : rien de magique, c’est une donnée. (Vérifié en Python : $3$, deux `bonjour`, $2$.)
+    4.  Oui : le texte de `compter_lignes` est une chaîne comme une autre ; elle renverrait $6$. Un programme peut recevoir **son propre texte** en entrée : rien de magique, c’est une donnée. (Vérifié en Python : $3$, deux `bonjour`, $6$.)
 
 ### <span class="exo-num">Exercice 3</span> — Le devin et le contrariant <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-13-calculabilite-et-decidabilite-act-1-3 }
 

@@ -115,7 +115,11 @@ def boyer_moore(motif, texte):
             i += 1
         else:
             c = texte[i + j]                # le "mauvais caractere"
-            i += max(1, j - last.get(c, -1))  # saut (au moins 1)
+            if c in last:
+                k = last[c]                 # derniere position de c
+            else:
+                k = -1                      # c absent du motif
+            i += max(1, j - k)              # saut (au moins 1)
     return positions
 ```
 
@@ -169,7 +173,10 @@ def horspool(motif, texte):
         if j < 0:
             positions.append(i)            # motif trouve en i
         c = texte[i + m - 1]              # caractere aligne avec la FIN de la fenetre
-        i += dec.get(c, m)               # saut (m par defaut)
+        if c in dec:
+            i += dec[c]                   # saut lu dans la table
+        else:
+            i += m                        # lettre absente : saut de m
     return positions
 ```
 

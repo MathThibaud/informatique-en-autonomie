@@ -72,21 +72,23 @@ Calculer chaque ligne avec la règle de l’énoncé, en écrivant les étapes c
 
 ## Programmer la partie 1
 
-!!! encadre "Outil Python : deux méthodes de chaînes (isdigit, replace)"
+!!! encadre "Méthode : reconnaître un chiffre, ignorer un espace"
 
-    Les chaînes de caractères possèdent des *méthodes* toutes faites. `c.isdigit()` renvoie `True` si tous les caractères de `c` sont des chiffres ; `s.replace(a, b)` renvoie une **nouvelle** chaîne où chaque occurrence de `a` est remplacée par `b` (la chaîne `s` n’est pas modifiée).
+    Un caractère `c` est un chiffre exactement quand `c in "0123456789"` vaut `True`. Pour ignorer les espaces, il suffit de ne rien faire quand `c == " "` : on construit une nouvelle chaîne en n’y ajoutant que les autres caractères.
 
     ```python
-    print("7".isdigit())       # True
-    print("+".isdigit())       # False
-    print("12".isdigit())      # True : tous les caracteres sont des chiffres
+    print("7" in "0123456789")   # True
+    print("+" in "0123456789")   # False
     s = "3 * (2 + 4)"
-    t = s.replace(" ", "")     # on remplace chaque espace par "rien"
-    print(t)                   # 3*(2+4)
-    print(s)                   # s est inchange : 3 * (2 + 4)
+    sans_espaces = ""
+    for c in s:
+        if c != " ":
+            sans_espaces += c
+    print(sans_espaces)          # 3*(2+4)
+    print(s)                     # s est inchange : 3 * (2 + 4)
     ```
 
-    **Intérêt.** Ces méthodes évitent d’écrire soi-même une boucle de comparaison (`c in "0123456789"` fait le même travail que `c.isdigit()` pour un caractère). Question : recopier et exécuter ce code ; que renvoie `"2020".replace("0", "")` ? et `"".isdigit()` ?
+    **Intérêt.** Ces deux tests suffisent pour découper une ligne caractère par caractère. Question : recopier et exécuter ce code ; que valent `"12" in "0123456789"` et `"13" in "0123456789"` ? Pourquoi faut-il tester les caractères **un par un** ?
 
 ### <span class="exo-num">Exercice 3</span> — Découper une ligne en symboles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-structures-lineaires-piles-files-listes-aoc-1-3 }
 
@@ -94,7 +96,19 @@ Calculer chaque ligne avec la règle de l’énoncé, en écrivant les étapes c
 
 ??? pouce "Coup de pouce"
 
-    Supprimer d’abord les espaces avec `replace`, puis parcourir la chaîne caractère par caractère en accumulant les chiffres consécutifs dans une chaîne `nombre` : un nombre est terminé dès qu’on rencontre autre chose qu’un chiffre.
+    Parcourir la chaîne caractère par caractère, sans rien faire pour un espace, en accumulant les chiffres consécutifs dans une chaîne `nombre` : un nombre est terminé dès qu’on rencontre autre chose qu’un chiffre.
+
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
 
 ### <span class="exo-num">Exercice 4</span> — Évaluer sans priorité <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-structures-lineaires-piles-files-listes-aoc-1-4 }
 
@@ -154,19 +168,6 @@ En partie 2, une expression est un **produit de sommes** : `2 + 3 * 4 + (1 * 6)`
 
 3.  Quelle est la complexité de cette méthode ? Comment l’adapter à la partie 1 (une seule priorité) ?
 
-!!! encadre "Outil Python : tester le type d’une valeur (isinstance)"
-
-    `isinstance(x, int)` renvoie `True` si `x` est un entier ; de même avec `str`, `list`… C’est utile quand une même liste contient des valeurs de types différents, par exemple des nombres et des opérateurs.
-
-    ```python
-    expression = [3, 4, "+", 2, "*"]
-    print(isinstance(expression[0], int))   # True  : un nombre
-    print(isinstance(expression[2], int))   # False : un operateur
-    print(isinstance(expression[2], str))   # True
-    ```
-
-    Question : que renvoie `isinstance("7", int)` ? Pourquoi ?
-
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 2 : la notation postfixe <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-structures-lineaires-piles-files-listes-aoc-1-7 }
 
 En **notation postfixe** (ou « polonaise inverse »), on écrit chaque opérateur *après* ses deux opérandes, et l’on n’a plus besoin de parenthèses : `(3 + 4) * 2` s’écrit `3 4 + 2 *`. Certaines calculatrices fonctionnent ainsi.
@@ -177,7 +178,7 @@ En **notation postfixe** (ou « polonaise inverse »), on écrit chaque opérate
 
     ??? pouce "Coup de pouce"
 
-        Une seule pile (une liste avec `append` et `pop`) ; `isinstance(s, int)` distingue les nombres des opérateurs. Attention à l’ordre : le premier élément dépilé est l’opérande de **droite**.
+        Une seule pile (une liste avec `append` et `pop`) ; un symbole est un opérateur s’il vaut `’+’` ou `’*’`, sinon c’est un nombre. Attention à l’ordre : le premier élément dépilé est l’opérande de **droite**.
 
 3.  L’algorithme de la gare de triage peut, au lieu de calculer, **écrire** l’expression en notation postfixe : un nombre va directement dans la liste de sortie, un opérateur dépilé y est ajouté au lieu d’être appliqué. Écrire `postfixe(symboles, priorite)`. Écrire à la main la notation postfixe de la deuxième ligne de l’exemple pour chacune des deux parties : qu’est-ce qui change ?
 
@@ -251,20 +252,42 @@ On part de l’étiquetage (inventé) `527164839`. Jouer le premier coup à la m
 
 ## Programmer la partie 1
 
-!!! encadre "Outil Python : chercher dans une liste (index, max)"
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    `liste.index(x)` renvoie l’indice de la **première** occurrence de `x` (erreur si `x` est absent) ; `max(liste)` renvoie le plus grand élément.
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
+
+!!! encadre "Méthode : chercher un élément dans une liste"
+
+    Pour trouver la position d’un gobelet, on parcourt la liste avec un indice jusqu’à le rencontrer. Une boucle `while` s’arrête dès qu’il est trouvé, sans `break`.
+
+    ```python
+    def indice(liste, x):
+        """Indice de la premiere occurrence de x, ou -1 si x est absent."""
+        i = 0
+        while i < len(liste) and liste[i] != x:
+            i += 1
+        if i == len(liste):
+            return -1
+        return i
+
     g = [5, 6, 4, 2, 7, 1, 8, 3, 9]
-    print(g.index(1))          # 5
-    print(max(g))              # 9
-    k = g.index(4)
+    print(indice(g, 1))        # 5
+    k = indice(g, 4)
     g = g[:k + 1] + [0] + g[k + 1:]    # insertion juste apres le 4
     print(g)                   # [5, 6, 4, 0, 2, 7, 1, 8, 3, 9]
     ```
 
-    **Intérêt et limite.** Ces fonctions sont pratiques, mais elles parcourent la liste : `index` et `max` coûtent jusqu’à $n$ opérations. Question : que se passe-t-il avec `g.index(10)` ?
+    La plus grande étiquette, elle, n’a pas besoin d’être cherchée : les étiquettes sont exactement les entiers de $1$ à $n$, elle vaut donc `len(g)`.
+
+    **Intérêt et limite.** La recherche parcourt la liste : elle coûte jusqu’à $n$ comparaisons. Question : que renvoie `indice(g, 10)` ? Pourquoi faut-il écrire le test `i < len(liste)` *avant* le test `liste[i] != x` ?
 
 ### <span class="exo-num">Exercice 3</span> — Une première simulation avec une liste <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-structures-lineaires-piles-files-listes-aoc-2-3 }
 
@@ -280,7 +303,7 @@ Quelle est la complexité d’un coup avec cette méthode, en fonction du nombre
 
 ??? pouce "Coup de pouce"
 
-    Chercher le gobelet de destination (`index`), retirer et insérer des éléments dans une liste Python : chacune de ces opérations est en $O(n)$.
+    Chercher le gobelet de destination (parcours de la liste), retirer et insérer des éléments dans une liste Python : chacune de ces opérations est en $O(n)$.
 
 ## Partie 2
 
@@ -310,28 +333,24 @@ Réécrire la simulation avec un **tableau des successeurs** (lire l’encadré)
 
     **Pour lire le cercle** à partir du gobelet `1`, on suit les flèches : `x = suivant[1]`, puis `x = suivant[x]`, jusqu’à revenir à `1`.
 
-!!! encadre "Outils Python : mesurer un temps (time.perf_counter) et tableaux compacts (array)"
+!!! encadre "Outil Python : mesurer un temps (time.perf_counter)"
 
-    `perf_counter()` renvoie un temps en secondes, très précis ; la différence entre deux appels donne une durée. Le module `array` fournit des tableaux d’entiers d’un seul type, plus compacts en mémoire qu’une liste.
+    `perf_counter()` renvoie un temps en secondes, très précis ; la différence entre deux appels donne une durée. On s’en sert ici uniquement pour **comparer** des programmes et vérifier une complexité.
 
     ```python
     from time import perf_counter
-    from array import array
     debut = perf_counter()
     total = 0
     for k in range(1_000_000):
         total += k
     print(f"{perf_counter() - debut:.3f} s")   # duree de la boucle
-    t = array("i", [0] * 10)    # 10 entiers de type "i" (int en C)
-    t[3] = 42                   # s'utilise comme une liste
-    print(t[3], len(t))         # 42 10
     ```
 
     Question : mesurer la durée de la boucle ci-dessus avec $10^6$ puis $10^7$ tours. Le temps est-il proportionnel au nombre de tours ?
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : aller plus vite <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-structures-lineaires-piles-files-listes-aoc-2-6 }
 
-Mesurer le temps de calcul avec `perf_counter`. Peut-on le réduire en évitant de recalculer des valeurs dans la boucle, ou avec le module `array` ?
+Avec `perf_counter`, comparer les deux versions (liste et tableau des successeurs) : jouer $100$ coups avec $10^4$, puis $10^5$ gobelets étiquetés dans l’ordre. Les mesures confirment-elles les complexités trouvées plus haut ? Peut-on ensuite réduire le temps de la version chaînée en évitant de recalculer des valeurs dans la boucle ?
 
 ??? pouce "Coup de pouce"
 

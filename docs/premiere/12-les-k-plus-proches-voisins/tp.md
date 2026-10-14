@@ -128,7 +128,10 @@ Il reste à choisir la classe **la plus fréquente** parmi ces voisins. On compt
 def vote(classes):
     compte = {}
     for c in classes:
-        compte[c] = ...............      # (d) ajouter 1 au compteur de c
+        if c in compte:
+            ...............          # (d) ajouter 1 au compteur de c
+        else:
+            compte[c] = 1            # premiere voix pour c
     meilleure = None
     for c in compte:
         if meilleure is None or compte[c] > compte[meilleure]:
@@ -136,7 +139,7 @@ def vote(classes):
     return meilleure
 ```
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Compléter **(d)** (indice : `compte.get(c, 0)` donne le compteur actuel de `c`, ou 0). Tester :
+<span class="run" title="À programmer et tester sur machine">▶</span>  Compléter **(d)** (indice : si `c` est déjà une clé de `compte`, `compte[c]` est son compteur actuel). Tester :
 
 ```text
 >>> vote(["A", "B", "A"])
@@ -413,7 +416,7 @@ En une poignée de fonctions, sans aucune bibliothèque d’« intelligence arti
 
     **2.** Le plus proche est $(2;1)$, de classe `A` $\to$ le $1$-NN prédit **A**. **3.** Les 3 plus proches : $(2;1)$ A, $(1;1)$ A, $(5;4)$ B $\to$ vote 2 A contre 1 B $\to$ le $3$-NN prédit **A**.
 
-    **1.3 — 1.6 Les trous.** **(a)** `(a[i] - b[i]) ** 2` **(b)** `distance(x, descripteurs)` **(c)** `couple[0]` **(d)** `compte.get(c, 0) + 1`. Ici, la fonction `distance` de `ocr.py` renvoie la distance **au carré** $d^2$ (sans racine, contrairement à celle du cours) : pour comparer des distances, cela suffit.
+    **1.3 — 1.6 Les trous.** **(a)** `(a[i] - b[i]) ** 2` **(b)** `distance(x, descripteurs)` **(c)** `couple[0]` **(d)** `compte[c] += 1`. Ici, la fonction `distance` de `ocr.py` renvoie la distance **au carré** $d^2$ (sans racine, contrairement à celle du cours) : pour comparer des distances, cela suffit.
 
     ```python
     def distance(a, b):
@@ -432,7 +435,10 @@ En une poignée de fonctions, sans aucune bibliothèque d’« intelligence arti
     def vote(classes):
         compte = {}
         for c in classes:
-            compte[c] = compte.get(c, 0) + 1
+            if c in compte:
+                compte[c] += 1
+            else:
+                compte[c] = 1
         meilleure = None
         for c in compte:
             if meilleure is None or compte[c] > compte[meilleure]:
@@ -501,7 +507,7 @@ En une poignée de fonctions, sans aucune bibliothèque d’« intelligence arti
 
     **2.** Le plus proche est $(2;1)$, de classe `A` $\to$ le $1$-NN prédit **A**. **3.** Les 3 plus proches : $(2;1)$ A, $(1;1)$ A, $(5;4)$ B $\to$ vote 2 A contre 1 B $\to$ le $3$-NN prédit **A**.
 
-    **1.3 — 1.6 Les trous.** **(a)** `(a[i] - b[i]) ** 2` **(b)** `distance(x, descripteurs)` **(c)** `couple[0]` **(d)** `compte.get(c, 0) + 1`. Ici, la fonction `distance` de `ocr.py` renvoie la distance **au carré** $d^2$ (sans racine, contrairement à celle du cours) : pour comparer des distances, cela suffit.
+    **1.3 — 1.6 Les trous.** **(a)** `(a[i] - b[i]) ** 2` **(b)** `distance(x, descripteurs)` **(c)** `couple[0]` **(d)** `compte[c] += 1`. Ici, la fonction `distance` de `ocr.py` renvoie la distance **au carré** $d^2$ (sans racine, contrairement à celle du cours) : pour comparer des distances, cela suffit.
 
     ```python
     def distance(a, b):
@@ -520,7 +526,10 @@ En une poignée de fonctions, sans aucune bibliothèque d’« intelligence arti
     def vote(classes):
         compte = {}
         for c in classes:
-            compte[c] = compte.get(c, 0) + 1
+            if c in compte:
+                compte[c] += 1
+            else:
+                compte[c] = 1
         meilleure = None
         for c in compte:
             if meilleure is None or compte[c] > compte[meilleure]:
@@ -589,7 +598,7 @@ En une poignée de fonctions, sans aucune bibliothèque d’« intelligence arti
 
     **2.** Le plus proche est $(2;1)$, de classe `A` $\to$ le $1$-NN prédit **A**. **3.** Les 3 plus proches : $(2;1)$ A, $(1;1)$ A, $(5;4)$ B $\to$ vote 2 A contre 1 B $\to$ le $3$-NN prédit **A**.
 
-    **1.3 — 1.6 Les trous.** **(a)** `(a[i] - b[i]) ** 2` **(b)** `distance(x, descripteurs)` **(c)** `couple[0]` **(d)** `compte.get(c, 0) + 1`. Ici, la fonction `distance` de `ocr.py` renvoie la distance **au carré** $d^2$ (sans racine, contrairement à celle du cours) : pour comparer des distances, cela suffit.
+    **1.3 — 1.6 Les trous.** **(a)** `(a[i] - b[i]) ** 2` **(b)** `distance(x, descripteurs)` **(c)** `couple[0]` **(d)** `compte[c] += 1`. Ici, la fonction `distance` de `ocr.py` renvoie la distance **au carré** $d^2$ (sans racine, contrairement à celle du cours) : pour comparer des distances, cela suffit.
 
     ```python
     def distance(a, b):
@@ -608,7 +617,10 @@ En une poignée de fonctions, sans aucune bibliothèque d’« intelligence arti
     def vote(classes):
         compte = {}
         for c in classes:
-            compte[c] = compte.get(c, 0) + 1
+            if c in compte:
+                compte[c] += 1
+            else:
+                compte[c] = 1
         meilleure = None
         for c in compte:
             if meilleure is None or compte[c] > compte[meilleure]:

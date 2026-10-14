@@ -617,7 +617,7 @@ Chaque concurrent est décrit par un p-uplet `(nom, temps)` et le tableau `resul
         return copie[len(copie) // 2]
     ```
 
-    *Autre méthode :* la fonction `sorted` (vue avec les tableaux) renvoie directement une copie triée, sans toucher à `t` : `copie = sorted(t)` remplace les deux premières lignes.
+    *Autre méthode :* le tri par insertion convient tout aussi bien : `tri_insertion(copie)` à la place de `tri_selection(copie)`.
 
     Une fois le tableau trié, la médiane est *simplement* l’élément du milieu : le tri a fait tout le travail. (Sans tri, il faudrait un algorithme bien plus subtil.)
 

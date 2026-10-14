@@ -674,12 +674,9 @@ assert maximum(4, 4) == 4    # le cas d'egalite : a ne pas oublier
 On ne réécrit pas tout soi-même : une **bibliothèque** (*module*) regroupe des fonctions déjà écrites et testées. On y accède avec `import`.
 
 ```python
-import math
-print(math.sqrt(16))    # 4.0
-print(math.pi)          # 3.141592653589793
-
 import random
 print(random.randint(1, 6))   # un de : entier au hasard entre 1 et 6
+print(random.randint(0, 100)) # un entier au hasard entre 0 et 100
 ```
 
 !!! remarque "Remarque"

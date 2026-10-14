@@ -280,19 +280,19 @@ Que valent `t`, `x` et `n` à la fin ?
 
     *Autre méthode :* une fois la compréhension vue, le même parcours des indices à l’envers s’écrit en une ligne : `return [t[i] for i in range(len(t) - 1, -1, -1)]`.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 12</span> — Méthodes des tableaux <span class="horsprog">au-delà du programme</span> <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-12 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 12</span> — Ajouter et retirer <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-12 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Partant de `t = [3, 1, 4, 1, 5]`, donner une instruction utilisant une **méthode** pour :
+<span class="run" title="À programmer et tester sur machine">▶</span> Partant de `t = [3, 1, 4, 1, 5]`, donner une instruction pour chaque étape (dans l’ordre), et le contenu de `t` après chacune :
 
-1.  ajouter `9` à la fin ;
+1.  ajouter `9` à la fin (méthode `append`) ;
 
-2.  insérer `0` en tête ;
+2.  ajouter `0` en tête, par concaténation ;
 
 3.  retirer (et récupérer) le dernier élément ;
 
-4.  retirer la première valeur `1` ;
+4.  retirer (et récupérer) l’élément d’indice `2` ;
 
-5.  trier le tableau.
+5.  ne garder que les trois premiers éléments, à l’aide d’une tranche.
 
 ??? corrige "Corrigé"
 
@@ -300,10 +300,10 @@ Que valent `t`, `x` et `n` à la fin ?
 
     ```python
     t.append(9)      # a) [3, 1, 4, 1, 5, 9]
-    t.insert(0, 0)   # b) [0, 3, 1, 4, 1, 5, 9]
-    x = t.pop()      # c) x vaut 9 ; le 9 est retire
-    t.remove(1)      # d) retire le PREMIER 1
-    t.sort()         # e) trie
+    t = [0] + t      # b) [0, 3, 1, 4, 1, 5, 9] (nouveau tableau)
+    x = t.pop()      # c) x vaut 9 ; t -> [0, 3, 1, 4, 1, 5]
+    y = t.pop(2)     # d) y vaut 1 ; t -> [0, 3, 4, 1, 5]
+    t = t[:3]        # e) [0, 3, 4]
     ```
 
 ### Construction par compréhension
@@ -358,8 +358,8 @@ Réécrire chacun de ces codes en **une** compréhension.
 ```python
 # (a)                              # (b)
 r = []                             r = []
-for x in [5, -2, 7, -8, 3]:        for c in "Bonjour":
-    if x > 0:                          r.append(c.lower())
+for x in [5, -2, 7, -8, 3]:        for mot in ["le", "chat", "dort"]:
+    if x > 0:                          r.append(mot[0])
         r.append(x)
 ```
 
@@ -371,28 +371,27 @@ for x in [5, -2, 7, -8, 3]:        for c in "Bonjour":
 
     ```python
     r = [x for x in [5, -2, 7, -8, 3] if x > 0]   # (a) -> [5, 7, 3]
-    r = [c.lower() for c in "Bonjour"]            # (b) ->
-    # ['b', 'o', 'n', 'j', 'o', 'u', 'r']
+    r = [mot[0] for mot in ["le", "chat", "dort"]]   # (b) -> ['l', 'c', 'd']
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Nettoyer une phrase <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-16 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> À l’aide d’une compréhension, écrire `voyelles(phrase)` qui renvoie le tableau des voyelles de `phrase` (en minuscule), dans l’ordre. Puis en déduire `nb_voyelles(phrase)`.
+<span class="run" title="À programmer et tester sur machine">▶</span> À l’aide d’une compréhension, écrire `voyelles(phrase)` qui renvoie le tableau des voyelles de `phrase` (minuscules ou majuscules), dans l’ordre. Puis en déduire `nb_voyelles(phrase)`.
 
 ```text
 >>> voyelles("Bonjour NSI")
-['o', 'o', 'u', 'i']
+['o', 'o', 'u', 'I']
 ```
 
 ??? pouce "Coup de pouce"
 
-    Le filtre porte sur la lettre *mise en minuscule* (`.lower()`) : est-elle dans `"aeiouy"` ? Pour `nb_voyelles`, réutiliser `voyelles`.
+    Le filtre porte sur chaque caractère : est-il dans `"aeiouyAEIOUY"` ? Pour `nb_voyelles`, réutiliser `voyelles`.
 
 ??? corrige "Corrigé"
 
     ```python
     def voyelles(phrase):
-        return [c.lower() for c in phrase if c.lower() in "aeiouy"]
+        return [c for c in phrase if c in "aeiouyAEIOUY"]
 
     def nb_voyelles(phrase):
         return len(voyelles(phrase))
@@ -404,8 +403,8 @@ for x in [5, -2, 7, -8, 3]:        for c in "Bonjour":
     def voyelles(phrase):
         resultat = []
         for c in phrase:
-            if c.lower() in "aeiouy":
-                resultat.append(c.lower())
+            if c in "aeiouyAEIOUY":
+                resultat.append(c)
         return resultat
     ```
 
@@ -829,7 +828,7 @@ Sans machine, prédire l’affichage.
 ```python
 modele = {"vie": 100, "sac": []}
 joueur1 = modele
-joueur2 = dict(modele)
+joueur2 = {cle: modele[cle] for cle in modele}
 joueur1["vie"] = 50
 joueur2["sac"].append("clef")
 print(modele["vie"], modele["sac"])
@@ -839,7 +838,7 @@ print(modele["vie"], modele["sac"])
 
 ??? pouce "Coup de pouce"
 
-    `dict(modele)` copie le premier niveau seulement : la valeur associée à `"sac"` est-elle recopiée, ou seulement la flèche vers ce tableau ?
+    La compréhension copie le premier niveau seulement : la valeur associée à `"sac"` est-elle recopiée, ou seulement la flèche vers ce tableau ?
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -851,7 +850,7 @@ print(modele["vie"], modele["sac"])
 
     - `joueur1 = modele` est un alias : `joueur1["vie"] = 50` change bien `modele["vie"]`.
 
-    - `joueur2 = dict(modele)` copie le *premier niveau*, mais la valeur associée à `"sac"` (le tableau) reste **partagée** : `joueur2["sac"].append("clef")` modifie donc aussi `modele["sac"]`. Il faudrait une copie *profonde* (`deepcopy`). <span class="horsprog">au-delà du programme</span>
+    - La compréhension crée bien un *nouveau* dictionnaire `joueur2`, mais elle ne copie que le *premier niveau* : la valeur associée à `"sac"` (le tableau) reste **partagée** : `joueur2["sac"].append("clef")` modifie donc aussi `modele["sac"]`. Il faudrait une copie *profonde*, qui recopie aussi le tableau : `joueur2["sac"] = [x for x in modele["sac"]]`.
 
 ### Synthèse : petits problèmes
 
@@ -1028,7 +1027,7 @@ print(doubles, notes)
 
 ??? corrige "Corrigé"
 
-    **1.** Non. L’affichage est `[24, 30, 18] [24, 30, 18]` : le tableau d’origine `notes` a été modifié, contrairement à ce qui était demandé. **2.** L’erreur est la ligne `copie = t` : elle ne copie rien, elle crée un **alias** (deux noms qui pointent vers le *même* tableau, fil rouge du cours). Modifier `copie[i]`, c’est modifier `t`. Il faut construire un nouvel objet, `copie = [x for x in t]` (ou `t[:]`, ou `t.copy()`) :
+    **1.** Non. L’affichage est `[24, 30, 18] [24, 30, 18]` : le tableau d’origine `notes` a été modifié, contrairement à ce qui était demandé. **2.** L’erreur est la ligne `copie = t` : elle ne copie rien, elle crée un **alias** (deux noms qui pointent vers le *même* tableau, fil rouge du cours). Modifier `copie[i]`, c’est modifier `t`. Il faut construire un nouvel objet, `copie = [x for x in t]` (ou `t[:]`) :
 
     ```python
     def doubler(t):

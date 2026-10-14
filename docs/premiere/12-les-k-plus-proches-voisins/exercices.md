@@ -125,7 +125,10 @@ On veut classer la fleur $x = (4.7 ; 1.4)$.
     def vote(etiquettes):
         compte = {}
         for e in etiquettes:
-            compte[e] = compte.get(e, 0) + 1
+            if e in compte:
+                compte[e] += 1
+            else:
+                compte[e] = 1
         meilleure = None
         for e in compte:
             if meilleure is None or compte[e] > compte[meilleure]:
@@ -254,7 +257,10 @@ Le vote peut aboutir à une **égalité**. Une règle courante : en cas d’éga
     def compter(voisins):
         compte = {}
         for c in voisins:
-            compte[c] = compte.get(c, 0) + 1
+            if c in compte:
+                compte[c] += 1
+            else:
+                compte[c] = 1
         return compte
 
     def vote_departage(voisins):
@@ -413,7 +419,10 @@ def classer(exemples, x, k):
     dists.sort()                  # du plus proche au plus lointain
     compte = {}
     for classe, d in dists[:k]:   # les k voisins
-        compte[classe] = compte.get(classe, 0) + 1
+        if classe in compte:
+            compte[classe] += 1
+        else:
+            compte[classe] = 1
     meilleure = None
     for c in compte:
         if meilleure is None or compte[c] > compte[meilleure]:
@@ -445,7 +454,10 @@ def classer(exemples, x, k):
         dists.sort()                  # tri par distance croissante
         compte = {}
         for d, classe in dists[:k]:
-            compte[classe] = compte.get(classe, 0) + 1
+            if classe in compte:
+                compte[classe] += 1
+            else:
+                compte[classe] = 1
         meilleure = None
         for c in compte:
             if meilleure is None or compte[c] > compte[meilleure]:

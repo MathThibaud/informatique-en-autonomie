@@ -72,6 +72,18 @@ Trouver à la main la réponse attendue. Vérification : on doit obtenir `980896
 
 Écrire les lignes qui lisent `input.txt` et construisent la liste `nombres` des entiers qu’il contient. Afficher sa longueur pour vérifier.
 
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
+
 ### <span class="exo-num">Exercice 4</span> — Une première solution <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-aoc-1-4 }
 
 Écrire une fonction `paire_2020(nombres)` qui renvoie le produit des deux valeurs recherchées. Tester sur l’exemple du défi, puis sur vos données.
@@ -104,7 +116,7 @@ Adapter le programme pour répondre à la nouvelle question. Sur l’exemple du 
 
 !!! encadre "Outil Python : les ensembles (set) — rappel"
 
-    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove` et `discard`, test `x in ensemble` en temps constant, union `|`, intersection `&`, différence `-`, éléments non modifiables (tuples).
+    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4). On n’utilise ici que `set()` (ensemble vide), `add`, `remove` et le test `x in ensemble`, en temps constant (en moyenne). Les éléments doivent être non modifiables (nombres, chaînes, tuples).
 
     **À essayer.** Avec `vus = {812, 1208}`, que valent `812 in vus` et `2020 - 812 in vus` ? Sur un million d’éléments, la différence de temps avec une liste est énorme.
 
@@ -130,11 +142,11 @@ Adapter le programme pour répondre à la nouvelle question. Sur l’exemple du 
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 2 : trier puis rapprocher deux indices <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-aoc-1-8 }
 
-Une autre idée, sans ensemble, réinvestit le **tri** : avec le tri fusion de ce chapitre (ou `sorted`), il coûte $O(n\log n)$. On trie la liste, puis on place un indice `g` au début et un indice `d` à la fin.
+Une autre idée, sans ensemble, réinvestit le **tri** : avec le tri fusion de ce chapitre, il coûte $O(n\log n)$. On trie la liste, puis on place un indice `g` au début et un indice `d` à la fin.
 
 1.  Sur la liste triée `[33, 487, 812, 1010, 1208, 1500]`, on a `g = 0` et `d = 5` : la somme vaut $33 + 1500 = 1533$, trop petite. Faut-il avancer `g` ou reculer `d` ? Justifier, puis dérouler la méthode à la main jusqu’à trouver la paire.
 
-2.  Écrire `paire_triee(nombres, cible)` qui applique cette méthode (on travaille sur une copie triée, par exemple `sorted(nombres)`) et renvoie le produit, ou `None` s’il n’y a pas de paire.
+2.  Écrire `paire_triee(nombres, cible)` qui applique cette méthode (on travaille sur une copie triée, obtenue avec **votre** fonction `tri_fusion` du cours, qui renvoie une nouvelle liste) et renvoie le produit, ou `None` s’il n’y a pas de paire.
 
     ??? pouce "Coup de pouce"
 
@@ -249,7 +261,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ??? pouce "Coup de pouce"
 
-    Une suite contiguë, c’est une tranche `nombres[debut:fin]`. Attention : la suite réduite au seul nombre invalide ne compte pas.
+    Une suite contiguë, c’est une tranche `nombres[debut:fin]`. Attention : la suite réduite au seul nombre invalide ne compte pas. Le plus petit et le plus grand nombre de la tranche se trouvent avec une boucle, comme une recherche de maximum.
 
 ### <span class="exo-num">Exercice 6</span> — Deux indices <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-aoc-2-6 }
 
@@ -273,17 +285,24 @@ Les nombres de vos données sont tous positifs. Expliquer pourquoi on peut alors
     import random
     import time
 
+    def somme_entiers(n):
+        """Somme des entiers de 0 a n - 1, calculee par une boucle."""
+        total = 0
+        for k in range(n):
+            total += k
+        return total
+
     x = random.randint(1, 6)         # entier au hasard entre 1 et 6 (bornes comprises)
     liste = [random.randint(1, 1000) for _ in range(5)]
     depart = time.perf_counter()     # top depart (en secondes)
-    total = sum(range(10**6))
+    total = somme_entiers(10**6)
     duree = time.perf_counter() - depart
     print(f"{duree:.4f} s")          # 4 chiffres apres la virgule
     ```
 
     **Intérêt.** Vérifier expérimentalement une complexité : si l’on double $n$, une méthode linéaire prend environ deux fois plus de temps, une méthode quadratique environ quatre fois plus. Une mesure isolée varie : la répéter.
 
-    **À essayer.** Mesurer `sum(range(10**6))` puis `sum(range(2 * 10**6))` : le rapport des durées est-il proche de 2 ?
+    **À essayer.** Mesurer `somme_entiers(10**6)` puis `somme_entiers(2 * 10**6)` : le rapport des durées est-il proche de 2 ?
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Défi : mesurer <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-aoc-2-7 }
 
@@ -295,7 +314,7 @@ Mesurer avec le module `time` la durée des deux méthodes de la partie 2 sur vo
 
 !!! encadre "Outil Python : les ensembles (set) — rappel"
 
-    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove` et `discard`, test `x in ensemble` en temps constant, union `|`, intersection `&`, différence `-`, éléments non modifiables (tuples).
+    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : ensemble vide `set()`, ajout avec `add`, retrait avec `remove`, test `x in ensemble` en temps constant, éléments non modifiables (tuples). Un ensemble ne contient jamais deux fois le même élément.
 
     **À essayer.** Avec `fenetre = [3, 7, 10, 7, 2]`, que vaut `set(fenetre)` ? Combien d’éléments ?
 

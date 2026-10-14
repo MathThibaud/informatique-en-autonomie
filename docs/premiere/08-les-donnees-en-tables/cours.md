@@ -246,7 +246,7 @@ Une fois la table (ou un sous-ensemble filtré) en main, calculer sur une colonn
     ```text
     >>> compter(prenoms, "G")
     20
-    >>> round(nombre_moyen(filles23), 1)
+    >>> nombre_moyen(filles23)
     2628.7
     ```
 
@@ -339,7 +339,7 @@ Prenons une table de communes et une table de départements, reliées par le cod
         for lg in gauche:
             for ld in droite:
                 if lg[cle] == ld[cle]:      # meme valeur de descripteur
-                    fusion = dict(lg)       # copie de la fiche de gauche
+                    fusion = {c: lg[c] for c in lg}   # copie de la fiche de gauche
                     for c in ld:
                         fusion[c] = ld[c]   # on ajoute les colonnes de droite
                     resultat.append(fusion)

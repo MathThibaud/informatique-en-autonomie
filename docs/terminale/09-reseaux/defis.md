@@ -91,21 +91,27 @@ Découper chaque ligne en directions (par exemple `seswnee` donne `se`, `sw`, `n
 
     Un dictionnaire `DEPLACEMENTS` qui associe à chaque direction un couple `(dx, dy)` rend la fonction très courte.
 
-!!! encadre "Outil Python : les ensembles (set) et la différence symétrique ^"
+!!! encadre "Méthode : retourner un carreau avec un ensemble (set)"
 
-    Les ensembles sont présentés dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) ; rappel : éléments non modifiables, donc une position `(q, r)` convient. Nouveauté ici : l’opérateur `a ^ b` (différence symétrique) donne les éléments qui sont dans `a` ou dans `b`, mais pas dans les deux.
+    Les ensembles sont présentés dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) ; rappel : éléments non modifiables, donc une position `(q, r)` convient. On ne garde que les carreaux **noirs** : retourner un carreau, c’est l’ajouter à l’ensemble s’il n’y est pas, l’en retirer sinon.
 
     ```python
+    def retourner(noirs, p):
+        """Retourne le carreau p : blanc -> noir, noir -> blanc."""
+        if p in noirs:
+            noirs.remove(p)
+        else:
+            noirs.add(p)
+
     noirs = set()              # ensemble vide (attention : {} est un dict)
     noirs.add((3, 0))
     print((3, 0) in noirs)     # True
-    noirs ^= {(1, 1)}          # (1, 1) absent : il est ajoute
-    noirs ^= {(3, 0)}          # (3, 0) present : il est retire
+    retourner(noirs, (1, 1))   # (1, 1) absent : il est ajoute
+    retourner(noirs, (3, 0))   # (3, 0) present : il est retire
     print(noirs)               # {(1, 1)}
-    print({1, 2, 3} ^ {3, 4})  # {1, 2, 4}
     ```
 
-    **Intérêt.** `noirs ^= {p}` « retourne » le carreau `p` en une instruction, sans `if`. Avec une liste, chaque test `p in liste` parcourrait toute la liste. Question : que contient `noirs` si l’on exécute trois fois `noirs ^= {(0, 0)}` à partir d’un ensemble vide ?
+    **Intérêt.** Le test `p in noirs` se fait en temps constant ; avec une liste, chaque test `p in liste` parcourrait toute la liste. Question : que contient `noirs` si l’on appelle trois fois `retourner(noirs, (0, 0))` à partir d’un ensemble vide ?
 
 ### <span class="exo-num">Exercice 5</span> — Retourner les carreaux <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-reseaux-aoc-1-5 }
 
@@ -113,7 +119,7 @@ Gérer l’ensemble `noirs` des coordonnées des carreaux noirs et répondre à 
 
 ??? pouce "Coup de pouce"
 
-    Retourner un carreau, c’est l’ajouter à l’ensemble s’il n’y est pas, l’en retirer sinon. L’opérateur `^=` (différence symétrique) le fait en une instruction : `noirs ^= {p}`.
+    Retourner un carreau, c’est l’ajouter à l’ensemble s’il n’y est pas, l’en retirer sinon : c’est la fonction `retourner` de l’encadré.
 
 ## Partie 2
 
@@ -123,19 +129,22 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     Le motif n’est pas figé : il évolue de jour en jour selon une règle simple. Partir du carrelage obtenu. Chaque jour, tous les carreaux changent **en même temps** : un carreau noir ayant $0$ ou plus de $2$ voisins noirs devient blanc ; un carreau blanc ayant exactement $2$ voisins noirs devient noir ; les autres ne changent pas. Réponse : le nombre de carreaux noirs après 100 jours.
 
-!!! encadre "Outil Python : compter avec un dictionnaire (get)"
+!!! encadre "Méthode : compter avec un dictionnaire"
 
-    `d.get(cle, defaut)` renvoie `d[cle]` si la clé existe, et `defaut` sinon (sans erreur et sans créer la clé). C’est idéal pour compter.
+    Pour compter les apparitions de chaque valeur, on associe à chaque valeur rencontrée son nombre d’apparitions. À la première rencontre, la clé n’existe pas encore : on la crée avec la valeur `1`.
 
     ```python
     compte = {}
     for case in [(0, 1), (2, 0), (0, 1)]:
-        compte[case] = compte.get(case, 0) + 1
+        if case in compte:
+            compte[case] += 1
+        else:
+            compte[case] = 1
     print(compte)              # {(0, 1): 2, (2, 0): 1}
-    print(compte.get((5, 5), 0))   # 0 : cle absente
+    print((5, 5) in compte)    # False : case jamais rencontree
     ```
 
-    **Intérêt.** On évite le test `if case in compte: ... else: ...`. Question : que se passerait-il avec `compte[case] = compte[case] + 1` ?
+    **Intérêt.** Une seule lecture de la liste suffit, et le test `case in compte` se fait en temps constant. Question : que se passerait-il sans le test, avec seulement `compte[case] = compte[case] + 1` ?
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Un automate cellulaire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-reseaux-aoc-1-6 }
 

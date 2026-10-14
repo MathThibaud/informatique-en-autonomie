@@ -194,7 +194,7 @@ def dijkstra(graphe, depart):
         for s in a_traiter:
             if distance[s] < distance[u]:
                 u = ...                          # (b)
-        a_traiter.remove(u)
+        a_traiter = [s for s in a_traiter if s != u]   # on retire u
         # 2) relacher les aretes issues de u
         for (v, poids) in graphe[u]:
             if distance[u] + poids < ... :       # (c)
@@ -268,7 +268,7 @@ L’algorithme repose sur une affirmation forte : *quand on fixe le sommet `u` d
 
 ### Efficacité
 
-Telle qu’écrite, à chaque tour on cherche le minimum en parcourant tous les sommets restants : le coût est en $O(n^2)$. En rangeant les sommets dans une **file de priorité** (le module `heapq` de Python), on descend à $O((n+m)\log n)$ — indispensable sur les graphes routiers à des millions de sommets.
+Telle qu’écrite, à chaque tour on cherche le minimum en parcourant tous les sommets restants : le coût est en $O(n^2)$. En rangeant les sommets dans une **file de priorité** (rangée dans une structure appelée *tas*), on descend à $O((n+m)\log n)$ — indispensable sur les graphes routiers à des millions de sommets.
 
 !!! remarque "Remarque"
 

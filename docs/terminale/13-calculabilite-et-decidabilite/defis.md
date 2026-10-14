@@ -88,7 +88,7 @@ Construire la liste `programme` de tuples `(operation, argument)`, l’argument 
 
 !!! encadre "Outil Python : les ensembles (set) — rappel"
 
-    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove` et `discard`, test `x in ensemble` en temps constant, union `|`, intersection `&`, différence `-`, éléments non modifiables (tuples).
+    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : ensemble vide `set()`, ajout avec `add`, retrait avec `remove`, test `x in ensemble` en temps constant, éléments non modifiables (tuples). Un ensemble ne contient jamais deux fois le même élément.
 
     **À essayer.** Que vaut `len(vus)` après `vus = {1, 2}` puis `vus.add(2)` ?
 
@@ -118,23 +118,23 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     - Le programme réparé se termine, c’est-à-dire qu’il cherche à exécuter la ligne qui suit immédiatement la dernière. Il faut renvoyer la valeur de l’accumulateur à ce moment.
 
-!!! encadre "Outil Python : copier une liste (copy)"
+!!! encadre "Méthode : copier une liste avec une tranche (a[:])"
 
-    Écrire `b = a` ne copie pas la liste : `a` et `b` désignent la **même** liste, et modifier l’une modifie « l’autre ». La méthode `copy` (ou la tranche `a[:]`) fabrique une nouvelle liste contenant les mêmes éléments.
+    Écrire `b = a` ne copie pas la liste : `a` et `b` désignent la **même** liste, et modifier l’une modifie « l’autre ». La tranche complète `a[:]` (du début à la fin) fabrique une nouvelle liste contenant les mêmes éléments.
 
     ```python
     a = [1, 2, 3]
     b = a              # meme liste, deux noms
     b[0] = 9
     print(a)           # [9, 2, 3] : a a change aussi !
-    c = a.copy()       # vraie copie (comme a[:])
+    c = a[:]           # vraie copie : une nouvelle liste
     c[0] = 0
     print(a, c)        # [9, 2, 3] [0, 2, 3]
     ```
 
     **Intérêt.** Chaque essai de la partie 2 part d’un programme intact. Une copie coûte un temps proportionnel à la longueur de la liste.
 
-    **À essayer.** Avec `a = [[1], [2]]` et `c = a.copy()`, que devient `a` après `c[0].append(5)` ? Pourquoi n’est-ce pas un problème pour une liste de tuples ?
+    **À essayer.** Avec `a = [[1], [2]]` et `c = a[:]`, que devient `a` après `c[0].append(5)` ? Pourquoi n’est-ce pas un problème pour une liste de tuples ?
 
 ### <span class="exo-num">Exercice 5</span> — Réparer le programme <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-1-5 }
 
@@ -148,7 +148,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    `copie = programme.copy()`, puis on remplace un seul tuple de `copie`. Inutile d’essayer les lignes `acc`.
+    `copie = programme[:]`, puis on remplace un seul tuple de `copie`. Inutile d’essayer les lignes `acc`.
 
 ## Approfondissement
 
@@ -254,9 +254,21 @@ Combien de cubes actifs au départ ? Compter les voisins actifs du cube central 
 
 !!! encadre "Outil Python : les ensembles (set) — rappel"
 
-    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove` et `discard`, test `x in ensemble` en temps constant, union `|`, intersection `&`, différence `-`, éléments non modifiables (tuples).
+    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove`, test `x in ensemble` en temps constant, éléments non modifiables (tuples).
 
     **À essayer.** Essayer `actifs = set()` puis `actifs.add([1, 2, 3])` : que se passe-t-il ? Pourquoi range-t-on les cubes sous forme de tuples `(x, y, z)` ? L’ensemble en compréhension `{(x, 0, 0) for x in range(3)}` contient les trois cubes d’une ligne.
+
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
 
 ### <span class="exo-num">Exercice 3</span> — Un ensemble de tuples <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-2-3 }
 
@@ -266,21 +278,21 @@ L’espace est infini : pas de liste de listes. Écrire une fonction `lire_actif
 
     Un `set` de tuples : l’appartenance `(x, y, z) in actifs` se teste en temps quasi constant, et un cube inactif n’est tout simplement pas dans l’ensemble.
 
-!!! encadre "Outil Python : itertools.product"
+!!! encadre "Méthode : construire les décalages coordonnée par coordonnée"
 
-    `product(valeurs, repeat=d)` énumère tous les tuples de longueur `d` dont chaque élément est pris dans `valeurs` : c’est l’équivalent de `d` boucles imbriquées.
+    Pour obtenir tous les tuples de longueur `d` formés de $-1$, $0$ et $1$, on part de la liste `[()]` (le tuple vide) et, à chaque tour, on prolonge chaque tuple par $-1$, par $0$ et par $1$ : la longueur des tuples augmente de 1 et leur nombre est multiplié par 3.
 
     ```python
-    from itertools import product
-
-    for d in product((-1, 0, 1), repeat=2):    # tous les couples de -1, 0, 1
-        print(d)                               # (-1, -1), (-1, 0), ..., (1, 1)
-    print(len([t for t in product("ab", repeat=3)]))  # 8 : 2 ** 3 triplets
+    tuples = [()]
+    for _ in range(2):                         # deux coordonnees
+        tuples = [t + (c,) for t in tuples for c in (-1, 0, 1)]
+    print(tuples)       # [(-1, -1), (-1, 0), (-1, 1), (0, -1), ..., (1, 1)]
+    print(len(tuples))  # 9 : 3 ** 2 couples
     ```
 
-    **Intérêt.** Le nombre de boucles devient un **paramètre** : le même code sert en dimension 3, 4 ou plus.
+    **Intérêt.** Le nombre de boucles imbriquées devient un **paramètre** : le même code sert en dimension 3, 4 ou plus.
 
-    **À essayer.** Combien de tuples produit `product((-1, 0, 1), repeat=4)` ? Lequel faut-il retirer pour obtenir les décalages vers les voisins ?
+    **À essayer.** Combien de tuples obtient-on avec 4 tours de boucle ? Lequel faut-il retirer pour obtenir les décalages vers les voisins ?
 
 ### <span class="exo-num">Exercice 4</span> — Les voisins <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-2-4 }
 
@@ -328,13 +340,13 @@ Combien de voisins un point a-t-il en dimension 4 ? Si votre code est bien écri
 
 ??? pouce "Coup de pouce"
 
-    Utiliser `itertools.product` (voir l’encadré), ou la fonction récursive de l’approfondissement 1.
+    Construire les décalages coordonnée par coordonnée (voir l’encadré « Méthode »), ou utiliser la fonction récursive de l’approfondissement 1.
 
 ## Approfondissement
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 1 : les décalages sans `itertools` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-2-8 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 1 : les décalages par récursivité <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-2-8 }
 
-On veut construire soi-même la liste des décalages, par récursivité.
+On veut construire la liste des décalages par une fonction récursive, plutôt qu’avec la boucle de l’encadré « Méthode ».
 
 1.  Lister à la main les tuples de longueur 1 formés de $-1$, $0$, $1$, puis ceux de longueur 2, obtenus en plaçant $-1$, $0$ ou $1$ devant chacun des précédents. Combien y en a-t-il en longueur $d$ ?
 
@@ -348,6 +360,6 @@ On veut construire soi-même la liste des décalages, par récursivité.
 
         Pour chaque `debut` dans `(-1, 0, 1)` et chaque `fin` de `decalages_rec(dimension - 1)`, ajouter `(debut,) + fin` au résultat.
 
-3.  Vérifier qu’une fois le tuple nul retiré, on obtient les mêmes décalages qu’avec `product` en dimension 3 et 4, puis l’utiliser dans `simuler`.
+3.  Vérifier qu’une fois le tuple nul retiré, on obtient les mêmes décalages qu’avec la méthode coordonnée par coordonnée en dimension 3 et 4, puis l’utiliser dans `simuler`.
 
 4.  Combien d’appels récursifs fait `decalages_rec(d)` ? Combien de voisins un point a-t-il en dimension 5 ?

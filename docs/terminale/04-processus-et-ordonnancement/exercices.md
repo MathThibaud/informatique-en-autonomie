@@ -495,11 +495,15 @@ Dans la situation donnée en exemple (premier chronogramme), les processus utili
 
     ![](../figures/8f9bd36840f5177e.svg){ .tikz loading=lazy }
 
-    **4.** On boucle tant qu’il reste un processus à créer ou un processus dans la file. `ordo.temps` est le cycle en cours (il est incrémenté par `tourniquet`) ; `max(depart_proc)` est la plus grande *clé* du dictionnaire, c’est-à-dire la date de création du dernier processus (ici $3$) :
+    **4.** On boucle tant qu’il reste un processus à créer ou un processus dans la file. `ordo.temps` est le cycle en cours (il est incrémenté par `tourniquet`) ; on calcule d’abord `dernier`, la plus grande *clé* du dictionnaire, c’est-à-dire la date de création du dernier processus (ici $3$), par une recherche de maximum :
 
     ```python
+    dernier = 0
+    for t in depart_proc:
+        if t > dernier:
+            dernier = t
     ordo = Ordonnanceur()
-    while ordo.temps <= max(depart_proc) or not ordo.file.est_vide():
+    while ordo.temps <= dernier or not ordo.file.est_vide():
         if ordo.temps in depart_proc:
             ordo.ajoute_nouveau_processus(depart_proc[ordo.temps])
         print(ordo.tourniquet())
@@ -789,13 +793,13 @@ Pour régler ce phénomène, on ajoute au processus l’attribut `temps_d_attent
         return liste_files[i].pop(len(liste_files[i]) - 1)
     ```
 
-    **10.** Une version possible, qui renvoie le processus en cours à l’issue du cycle. On enfile à gauche (`insert(0, p)`) et on crée une nouvelle file si la priorité dépasse le nombre de files :
+    **10.** Une version possible, qui renvoie le processus en cours à l’issue du cycle. On enfile à gauche (`[p] + file`, la tête étant à droite) et on crée une nouvelle file si la priorité dépasse le nombre de files :
 
     ```python
     def placer(p, liste_files):
         while len(liste_files) <= p.priorite:
             liste_files.append([])
-        liste_files[p.priorite].insert(0, p)
+        liste_files[p.priorite] = [p] + liste_files[p.priorite]
 
     def gerer(p, liste_files):
         if p is None:                                  # processeur libre

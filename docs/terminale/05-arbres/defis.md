@@ -77,20 +77,23 @@ Faire de même avec `FFBBFBFRLR`, puis comparer : écrire `75` et `2` en binaire
 
     Multiplier par $8 = 2^3$ décale l’écriture binaire de trois rangs vers la gauche, ce qui laisse exactement la place des 3 bits de la colonne.
 
-!!! encadre "Outil Python : conversions binaires (int(..., 2), bin, format) et replace"
+!!! encadre "Outil Python : conversions binaires (int(..., 2), bin) et traduction lettre par lettre"
 
-    Python sait lire et écrire des nombres en base 2. La méthode `replace` fabrique une nouvelle chaîne où un morceau est remplacé par un autre.
+    Python sait lire et écrire des nombres en base 2. Une chaîne n’étant pas modifiable, pour « traduire » ses lettres on construit une **nouvelle** chaîne en la parcourant, avec un dictionnaire qui donne la traduction de chaque lettre.
 
     ```python
     print(int("1011", 2))          # 11 : lit une chaine ecrite en base 2
     print(bin(11))                 # 0b1011 : ecriture binaire (une chaine)
-    print(format(11, "08b"))       # 00001011 : sur 8 chiffres, sans 0b
+    traduction = {"F": "0", "B": "1"}
     mot = "FBFB"
-    print(mot.replace("F", "0"))   # 0B0B : nouvelle chaine
+    binaire = ""
+    for lettre in mot:
+        binaire = binaire + traduction[lettre]
+    print(binaire)                 # 0101 : nouvelle chaine
     print(mot)                     # FBFB : mot n'a pas change
     ```
 
-    **Intérêt.** La conversion prend un temps proportionnel au nombre de chiffres, et `replace` évite d’écrire une boucle caractère par caractère.
+    **Intérêt.** La conversion et la traduction prennent un temps proportionnel au nombre de caractères : un seul parcours suffit.
 
     **À essayer.** Que vaut `int("1111111111", 2)` ? Quel lien avec le plus grand numéro de siège possible ?
 
@@ -100,7 +103,7 @@ Faire de même avec `FFBBFBFRLR`, puis comparer : écrire `75` et `2` en binaire
 
 ??? pouce "Coup de pouce"
 
-    `int("1011", 2)` convertit une chaîne écrite en binaire en entier. Pour remplacer les lettres, `replace` appelé quatre fois convient.
+    `int("1011", 2)` convertit une chaîne écrite en binaire en entier. Pour traduire les lettres, parcourir le code avec un dictionnaire `{"F": "0", "B": "1", "L": "0", "R": "1"}` (voir l’encadré). Pour le maximum, une variable qui garde le plus grand numéro vu jusqu’ici.
 
 ### <span class="exo-num">Exercice 5</span> — Le lien avec la dichotomie <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-5 }
 
@@ -128,7 +131,7 @@ Trouver votre place en suivant les indications de la partie 2.
 
 ??? pouce "Coup de pouce"
 
-    Trier la liste des numéros, puis la parcourir en comparant chaque numéro au suivant.
+    Trier la liste des numéros avec un tri écrit par vous (le tri par insertion de Première), puis la parcourir en comparant chaque numéro au suivant.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -146,9 +149,9 @@ Trouver la place libre en temps linéaire sans trier ni utiliser d’ensemble, e
 
 !!! encadre "Outil Python : les ensembles (set) — rappel"
 
-    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove` et `discard`, test `x in ensemble` en temps constant, union `|`, intersection `&`, différence `-`, éléments non modifiables (tuples).
+    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4). On n’utilise ici que `set()` (ensemble vide), `add`, `remove` et le test `x in ensemble`, en temps constant (en moyenne). Les éléments doivent être non modifiables (nombres, chaînes, tuples).
 
-    **À essayer.** Construire l’ensemble des numéros de la liste du défi, puis tester si `602` et `603` en font partie.
+    **À essayer.** Construire l’ensemble des numéros de la liste du défi (en partant de `set()` et en ajoutant chaque numéro avec `add`), puis tester si `602` et `603` en font partie.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 1 : la place libre avec un ensemble <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-8 }
 
@@ -162,11 +165,11 @@ Trouver la place libre en temps linéaire sans trier ni utiliser d’ensemble, e
 
 ??? pouce "Coup de pouce"
 
-    Les seules places candidates sont les entiers compris entre le plus petit et le plus grand numéro présents : `range(min(numeros), max(numeros))`.
+    Les seules places candidates sont les entiers compris entre le plus petit numéro présent `mini` et le plus grand `maxi`, à calculer par une boucle : `range(mini, maxi)`.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    On parcourt ces entiers et l’on renvoie le premier qui n’est pas dans l’ensemble `presents = set(numeros)` : chaque test coûte un temps constant.
+    On parcourt ces entiers et l’on renvoie le premier qui n’est pas dans l’ensemble `presents` (rempli avec `add`) : chaque test coûte un temps constant.
 
 ## <span class="etiquette">Défi 2</span> Custom Customs
 
@@ -266,9 +269,9 @@ Lire tout le fichier en une chaîne et construire une liste de groupes, chaque g
 
 !!! encadre "Outil Python : les ensembles (set) — rappel"
 
-    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove` et `discard`, test `x in ensemble` en temps constant, union `|`, intersection `&`, différence `-`, éléments non modifiables (tuples).
+    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : ensemble vide `set()`, ajout avec `add`, retrait avec `remove`, test `x in ensemble` en temps constant, éléments non modifiables (tuples), réunion `a | b` et intersection `a & b`. Un ensemble ne contient jamais deux fois le même élément.
 
-    **À essayer.** Que renvoie `len(set("banane"))` ? Et `set("abc") & set("bcd")` ?
+    **À essayer.** Que renvoie `len(set("banane"))` ? Après `e = set("abc")`, puis `e.add("d")`, `e.add("a")` et `e.remove("b")`, que contient `e` ? Que valent `set("abc") | set("bcd")` et `set("abc") & set("bcd")` ?
 
 ### <span class="exo-num">Exercice 4</span> — Réunir les réponses <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-2-4 }
 
@@ -280,7 +283,7 @@ Lire tout le fichier en une chaîne et construire une liste de groupes, chaque g
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    Partir d’un ensemble vide `set()` et lui ajouter les lettres de chaque membre avec l’opérateur `|` (union).
+    Partir d’un ensemble vide `set()`, puis, pour chaque membre, le remplacer par sa réunion avec l’ensemble des lettres de ce membre : `reunion = reunion | set(personne)`.
 
 ## Partie 2
 
@@ -302,7 +305,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ??? pouce "Coup de pouce"
 
-    L’opérateur `&` donne l’intersection de deux ensembles.
+    Les lettres communes à deux ensembles `a` et `b` forment leur intersection `a & b`. Il suffit de remplacer `|` par `&` dans la fonction de la partie 1… ou presque (voir le coup de pouce suivant).
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -317,35 +320,3 @@ Résoudre les deux parties sans ensemble, avec un dictionnaire qui compte, pour 
 ??? pouce "Coup de pouce"
 
     Une lettre compte pour la partie 2 si son compteur est égal au nombre de membres du groupe.
-
-!!! encadre "Outil Python : passer une liste comme arguments (*)"
-
-    Placée devant une liste lors d’un appel de fonction, l’étoile la « dépaquette » : chaque élément devient un argument séparé. Or `set.union` et `set.intersection` acceptent un nombre quelconque d’ensembles.
-
-    ```python
-    nombres = [3, 1, 2]
-    print(*nombres)                  # 3 1 2  (comme print(3, 1, 2))
-    e = [{1, 2, 3}, {2, 3}, {3, 4}]
-    print(set.union(*e))             # {1, 2, 3, 4}
-    print(set.intersection(*e))      # {3}
-    ```
-
-    **Intérêt.** Écrire en une ligne une opération sur un nombre variable d’ensembles, sans boucle ni valeur de départ à choisir.
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : chaque partie en une ligne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-2-7 }
-
-1.  À la main, pour le troisième groupe de l’exemple du défi (`pqr`, `qrs`, `rst`), que renvoie l’expression suivante ? Et avec `set.union` ?
-
-    `set.intersection(*[set(p) for p in groupe])`
-
-2.  Écrire `nb_oui_quelquun_court(groupe)` et `nb_oui_tous_court(groupe)`, une ligne chacune, et vérifier qu’on retrouve `15` et `9` sur l’exemple.
-
-3.  Que se passe-t-il si un groupe est une liste vide ? Dans quel cas la lecture du fichier pourrait-elle en produire un ?
-
-??? pouce "Coup de pouce"
-
-    La compréhension `[set(p) for p in groupe]` fabrique la liste des ensembles des membres ; il reste à la dépaqueter.
-
-??? pouce "Coup de pouce 2 (début de solution)"
-
-    `len(set.union(*[set(p) for p in groupe]))`, puis la même chose avec `intersection`. Pour la question 3, essayer `set.union(*[])`.

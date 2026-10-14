@@ -126,21 +126,23 @@ Utiliser la fonction précédente pour toutes les pentes demandées et calculer 
 
 ## Approfondissement
 
-!!! encadre "Outil Python : d’une chaîne à une liste et retour (compréhension, join)"
+!!! encadre "Méthode : d’une chaîne à une liste et retour"
 
-    Une chaîne n’est pas modifiable : `ligne[2] = "X"` provoque une erreur. On la convertit en liste de caractères par une compréhension de liste, puis, une fois la liste modifiée, on recolle les morceaux avec `join`, appelée sur le séparateur.
+    Une chaîne n’est pas modifiable : `ligne[2] = "X"` provoque une erreur. On la convertit en liste de caractères par une compréhension de liste, puis, une fois la liste modifiée, on reconstruit une chaîne avec une boucle d’accumulation, en partant de la chaîne vide.
 
     ```python
     ligne = "..#.."
     cases = [c for c in ligne]        # ['.', '.', '#', '.', '.']
     cases[2] = "X"                    # une liste, elle, se modifie
-    print("".join(cases))             # ..X..  (separateur vide)
-    print("-".join(["a", "b", "c"]))  # a-b-c
+    texte = ""
+    for c in cases:
+        texte = texte + c             # on ajoute les caracteres un a un
+    print(texte)                      # ..X..
     ```
 
-    **Intérêt.** `join` assemble tous les morceaux en un seul passage, alors que des `+` successifs recopient la chaîne à chaque ajout (coût quadratique sur de longues chaînes).
+    **Intérêt.** La liste sert de brouillon modifiable ; la chaîne n’est reconstruite qu’une fois, à la fin.
 
-    **À essayer.** Que se passe-t-il si l’on exécute directement `ligne[2] = "X"` ? Que renvoie `" ".join("abc")` ?
+    **À essayer.** Que se passe-t-il si l’on exécute directement `ligne[2] = "X"` ? Écrire une fonction `recoller(morceaux, sep)` qui renvoie les chaînes de la liste `morceaux` mises bout à bout, séparées par `sep` : `recoller(["a", "b", "c"], "-")` doit renvoyer `"a-b-c"` (pas de séparateur à la fin).
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : visualiser le trajet <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-1-6 }
 
@@ -148,7 +150,7 @@ Utiliser la fonction précédente pour toutes les pentes demandées et calculer 
 
 ??? pouce "Coup de pouce"
 
-    Convertir chaque ligne en liste avec `[c for c in ligne]`, la modifier, puis la recoller avec `"".join(...)`.
+    Convertir chaque ligne en liste avec `[c for c in ligne]`, la modifier, puis reconstruire la chaîne avec une boucle d’accumulation (voir l’encadré « Méthode »).
 
 ## <span class="etiquette">Défi 2</span> Rain Risk
 
@@ -238,11 +240,23 @@ Suivre le navire sur un quadrillage (est vers la droite, nord vers le haut). Vé
 
 ### <span class="exo-num">Exercice 5</span> — Exécuter le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-2-5 }
 
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
+
 Écrire une méthode `executer(self, instruction)` qui reçoit une chaîne comme `"F6"` et met à jour le navire. Lire le fichier, exécuter toutes les instructions et afficher la distance. Tester sur l’exemple du défi, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
-    `instruction[0]` donne la lettre, `int(instruction[1:])` la valeur.
+    Lire les lignes avec `readlines()` et les nettoyer avec `strip` ; `instruction[0]` donne la lettre, `int(instruction[1:])` la valeur.
 
 ## Partie 2
 

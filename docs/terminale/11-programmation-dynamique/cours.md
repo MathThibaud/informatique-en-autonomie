@@ -68,20 +68,6 @@ Arbre de `fibo(5)` *mémoïsé* : les nœuds en pointillés gris (`3`, `2`, `1` 
 
     Le paramètre `memo={}` par défaut est pratique mais c’est un **piège classique** : en Python, un argument par défaut mutable est **partagé** entre tous les appels (voir le chapitre 1). Ici cela nous arrange (le carnet survit d’un appel à l’autre), mais dans un autre contexte cela cause des bugs sournois. Une version plus sûre passe le dictionnaire explicitement, ou l’initialise à `None`.
 
-Python fournit d’ailleurs la mémoïsation « clés en main », sous la forme d’un **décorateur** `@cache` (ou `@lru_cache`) du module `functools`. On garde alors la fonction récursive naïve, et une seule ligne au-dessus lui greffe le carnet :
-
-```python
-from functools import cache
-
-@cache                       # mémoïse automatiquement les appels
-def fibo(n):
-    if n <= 1:
-        return n
-    return fibo(n - 1) + fibo(n - 2)
-```
-
-Le résultat est identique à notre version manuelle : chaque `fibo(k)` n’est calculé qu’une fois. Écrire soi-même le dictionnaire reste indispensable pour *comprendre* ce qui se passe — mais dans la vraie vie, on emploie souvent le décorateur.
-
 <span id="cours-11-1" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-11-1) à [3](exercices.md#ex-11-3)** (mémoïsation)
@@ -300,9 +286,9 @@ def distance(a, b):
             if a[i - 1] == b[j - 1]:
                 D[i][j] = D[i - 1][j - 1]   # lettres egales : rien a payer
             else:
-                D[i][j] = 1 + min(D[i - 1][j],      # suppression
-                                  D[i][j - 1],      # insertion
-                                  D[i - 1][j - 1])  # substitution
+                D[i][j] = 1 + min(min(D[i - 1][j],      # suppression
+                                      D[i][j - 1]),     # insertion
+                                  D[i - 1][j - 1])      # substitution
     return D[n][m]
 ```
 

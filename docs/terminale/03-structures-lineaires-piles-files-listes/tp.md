@@ -540,9 +540,12 @@ On utilise les dix clients de la liste `CLIENTS` du fichier fourni : `(0, 4), (
             file_max = max(file_max, f.taille())
             t = t + 1
         total = 0
+        attente_max = 0
         for a in attentes:
             total += a
-        return total / len(attentes), max(attentes), file_max
+            if a > attente_max:
+                attente_max = a
+        return total / len(attentes), attente_max, file_max
     ```
 
     Résultats : `(7.9, 12, 6)` avec un guichet, `(0.9, 3, 2)` avec deux.

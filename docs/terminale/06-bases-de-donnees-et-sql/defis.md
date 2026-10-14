@@ -131,14 +131,24 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     - `pid` compte exactement neuf chiffres (zéros de tête compris) ; `cid` est ignoré.
 
-!!! encadre "Outil Python : tester la forme d’une chaîne (isdigit, tranches)"
+!!! encadre "Méthode : tester la forme d’une chaîne (boucle drapeau, tranches)"
 
-    La méthode `isdigit` et les comparaisons de tranches renvoient un booléen qui décrit la forme de la chaîne, sans la convertir.
+    Pour savoir si une chaîne ne contient que des chiffres, on la parcourt avec un booléen drapeau (« tous ») ; les comparaisons de tranches testent le début ou la fin. Tout cela renvoie un booléen qui décrit la forme de la chaîne, sans la convertir.
 
     ```python
-    print("2019".isdigit())         # True : que des chiffres
-    print("-12".isdigit())          # False : le signe n'est pas un chiffre
-    print("".isdigit())             # False : chaine vide
+    def que_des_chiffres(s):
+        """Renvoie True si s est non vide et ne contient que des chiffres."""
+        if len(s) == 0:
+            return False
+        ok = True
+        for c in s:
+            if c not in "0123456789":
+                ok = False
+        return ok
+
+    print(que_des_chiffres("2019"))   # True : que des chiffres
+    print(que_des_chiffres("-12"))    # False : le signe n'est pas un chiffre
+    print(que_des_chiffres(""))       # False : chaine vide
     taille = "172cm"
     print(taille[-2:] == "cm")      # True : les 2 derniers caracteres
     print(taille[:1] == "#")        # False : le premier caractere
@@ -147,7 +157,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     **Intérêt.** Vérifier la forme d’une chaîne **avant** d’appeler `int`, qui provoque une erreur sur `"abc"` ou `"170cm"`.
 
-    **À essayer.** Que renvoient `int("0042")` et `"0042".isdigit()` ?
+    **À essayer.** Que renvoient `int("0042")` et `que_des_chiffres("0042")` ?
 
 !!! encadre "Outil Python : ranger des fonctions dans un dictionnaire"
 
@@ -177,33 +187,27 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ??? pouce "Coup de pouce"
 
-    Penser aux chaînes pièges : une taille sans unité, un identifiant trop court, une couleur en majuscules… La méthode `isdigit()` et les tranches `valeur[:-2]` et `valeur[-2:]` sont utiles.
+    Penser aux chaînes pièges : une taille sans unité, un identifiant trop court, une couleur en majuscules… La fonction `que_des_chiffres` de l’encadré « Méthode » et les tranches `valeur[:-2]` et `valeur[-2:]` sont utiles.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
     Un dictionnaire peut associer chaque nom de champ à sa fonction de validation : `regles = {"byr": valide_byr, ...}`. On parcourt alors `regles.items()` et on appelle `fonction(passeport[cle])`.
 
-## Pour y arriver : les expressions régulières <span class="horsprog">au-delà du programme</span>
-
-!!! encadre "Expressions régulières (facultatif)"
-
-    Une *expression régulière* (regex) décrit la forme d’une chaîne. Le module `re` teste si une chaîne entière a cette forme avec `re.fullmatch(motif, chaine)`, qui renvoie `None` en cas d’échec.
-
-    - `[0-9]` : un chiffre ; `[a-z]` : une lettre minuscule ; `[abc]` : un caractère parmi `a`, `b`, `c`.
-
-    - `{3}` : répéter exactement 3 fois ce qui précède ; `+` : une fois ou plus.
-
-    - `|` : ou ; les parenthèses regroupent.
-
-    Exemple : `re.fullmatch(r"[0-9]{2}h[0-9]{2}", "08h30")` réussit, mais pas avec `"8h30"` ni `"08h300"`. Tout ce que fait une regex ici peut aussi s’écrire avec des tests sur les caractères : c’est seulement plus court.
-
 ## Approfondissement
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Défi : tout en regex <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-aoc-1-7 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Défi : décrire la forme par un motif <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-aoc-1-7 }
 
-Réécrire les validations des champs de la partie 2 qui s’y prêtent avec `re.fullmatch`. Les tests écrits plus haut doivent toujours passer.
+Plusieurs règles décrivent la *forme* d’une chaîne, caractère par caractère. On la résume par un **motif** : dans un motif, `9` désigne un chiffre quelconque, `h` un caractère hexadécimal (`0` à `9` ou `a` à `f`) et tout autre caractère doit être recopié tel quel. Par exemple `"#hhhhhh"` décrit `hcl` et `"99h99"` accepte `"08a30"` mais ni `"8a30"` ni `"08g30"`.
+
+1.  Écrire `respecte(motif, valeur)` qui renvoie `True` si `valeur` a la forme décrite par `motif`.
+
+2.  Réécrire `valide_hcl`, `valide_pid` et la vérification des années avec `respecte`. Les tests écrits plus haut doivent toujours passer.
 
 ??? pouce "Coup de pouce"
+
+    Commencer par comparer les longueurs, puis parcourir les deux chaînes en parallèle avec un indice `i`.
+
+??? pouce "Coup de pouce 2 (début de solution)"
 
     Les tests de la partie 2 servent ici de filet de sécurité : on modifie le code, on relance les `assert`.
 
@@ -291,13 +295,25 @@ Repérer les valeurs non valides. Vérification : la réponse est `46`. Que rema
 
 ## Programmer la partie 1
 
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
+
 ### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-aoc-2-3 }
 
 Écrire une fonction `lire(nom_fichier)` qui renvoie trois objets : un dictionnaire `regles` (nom du champ $\to$ liste de deux couples de bornes), votre billet et la liste des billets voisins (listes d’entiers).
 
 ??? pouce "Coup de pouce"
 
-    `open(...).read().split("\n\n")` sépare les trois blocs, car ils sont séparés par une ligne vide.
+    `open(...).read().strip().split("\n\n")` sépare les trois blocs, car ils sont séparés par une ligne vide.
 
 !!! encadre "Rappel : « au moins un » et « tous » avec un booléen drapeau"
 
@@ -333,9 +349,9 @@ Construire la liste des billets voisins valides. Attention : un billet peut cont
 
 !!! encadre "Outil Python : les ensembles (set) — rappel"
 
-    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove` et `discard`, test `x in ensemble` en temps constant, union `|`, intersection `&`, différence `-`, éléments non modifiables (tuples).
+    Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) : `set()`, `add`, `remove`, test `x in ensemble` en temps constant, éléments non modifiables (tuples). Dans ce défi, ces opérations suffisent.
 
-    **À essayer.** Que contient `{1, 2, 2, 3}` ? Que se passe-t-il si l’on remplace `discard` par `remove` pour retirer un élément absent ? `s.pop()` retire et renvoie un élément quelconque de `s`.
+    **À essayer.** Que contient `{1, 2, 2, 3}` ? Que se passe-t-il si l’on appelle `remove` pour retirer un élément absent ? Comment l’éviter avec un test `in` ?
 
 !!! encadre "Outil Python : tester le début d’une chaîne avec une tranche"
 
@@ -358,7 +374,7 @@ Pour chaque position, construire l’**ensemble** des champs compatibles avec *t
 
 ??? pouce "Coup de pouce"
 
-    Un dictionnaire `possibles` associant à chaque position un `set` de noms de champs. La méthode `discard` retire un élément sans erreur s’il est absent.
+    Un dictionnaire `possibles` associant à chaque position un `set` de noms de champs. Avant d’appeler `remove`, tester avec `in` que le champ est encore dans l’ensemble. Pour récupérer l’unique élément d’un ensemble, une boucle `for` suffit.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 

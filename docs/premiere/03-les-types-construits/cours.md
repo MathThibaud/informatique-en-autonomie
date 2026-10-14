@@ -40,7 +40,7 @@ De cette image découle une distinction **fondamentale** : peut-on modifier l’
 
 !!! remarque "Remarque — La chaîne : une collection que vous connaissez déjà"
 
-    Le type `str` annonce déjà les séquences : ses caractères sont **ordonnés** et indexés à partir de $0$ ; on peut aussi en extraire des **tranches** (nouveau : `ch[3:7]` ci-dessous, détaillé avec les tableaux). On peut aussi la passer tout en **minuscules** ou en **majuscules** avec `.lower()` et `.upper()`. Ces réflexes vont resservir tels quels.
+    Le type `str` annonce déjà les séquences : ses caractères sont **ordonnés** et indexés à partir de $0$ ; on peut aussi en extraire des **tranches** (nouveau : `ch[3:7]` ci-dessous, détaillé avec les tableaux). Ces réflexes vont resservir tels quels.
 
     ```text
     >>> ch = "Bonjour"
@@ -50,10 +50,6 @@ De cette image découle une distinction **fondamentale** : peut-on modifier l’
     'jour'
     >>> len(ch)      # longueur
     7
-    >>> ch.lower()   # tout en minuscules
-    'bonjour'
-    >>> ch.upper()   # tout en majuscules
-    'BONJOUR'
     ```
 
 ## Deux questions, trois types
@@ -243,13 +239,6 @@ for i in range(len(notes)):
     notes[i] = notes[i] + 1     # +1 point a chaque note
 ```
 
-**(3)** <span class="horsprog">au-delà du programme</span>`enumerate` donne indice *et* valeur :
-
-```python
-for i, note in enumerate(notes):
-    print("indice", i, ":", note)
-```
-
 !!! remarque "Remarque — Pourquoi la méthode 1 ne modifie pas le tableau"
 
     Dans `for note in notes`, la variable `note` est un *nouveau* nom qui pointe tour à tour vers chaque élément. Lui réaffecter `note = note + 1` le fait pointer ailleurs, **sans toucher** au tableau. Pour modifier, il faut l’indice (méthode 2). Ces deux parcours deviendront un patron général (somme, recherche, maximum) au chapitre *Algorithmique : le parcours séquentiel*.
@@ -296,50 +285,50 @@ for i, note in enumerate(notes):
 
 ### Méthodes des tableaux <span class="horsprog">au-delà du programme</span>
 
-Un tableau étant mutable, il possède des **méthodes** (appel avec un point). Non exigibles, mais omniprésentes, y compris dans les sujets de bac.
+Un tableau étant mutable, il possède des **méthodes** (appel avec un point). Deux d’entre elles suffisent cette année, et reviennent dans les sujets de bac.
 
-!!! regle "Règle 4 — Méthodes usuelles (au-delà du programme)"
+!!! regle "Règle 4 — Ajouter et retirer en fin de tableau"
 
-    Un tableau `t` dispose notamment des méthodes suivantes :
+    Un tableau `t` dispose des méthodes suivantes :
 
-    | **Appel**      | **Effet**                                   |
-    |:---------------|:--------------------------------------------|
-    | t.append(x)    | ajoute `x` à la **fin**                     |
-    | t.insert(i, x) | insère `x` à l’indice `i` (décale la suite) |
-    | t.pop()        | retire et **renvoie** le dernier élément    |
-    | t.pop(i)       | retire et renvoie l’élément d’indice `i`    |
-    | t.remove(x)    | retire la **première** occurrence de `x`    |
-    | t.count(x)     | compte les occurrences de `x`               |
-    | t.index(x)     | indice de la première occurrence de `x`     |
-    | t.sort()       | **trie** sur place                          |
-    | t.reverse()    | inverse l’ordre sur place                   |
+    | **Appel**   | **Effet**                                |
+    |:------------|:-----------------------------------------|
+    | t.append(x) | ajoute `x` à la **fin**                  |
+    | t.pop()     | retire et **renvoie** le dernier élément |
+    | t.pop(i)    | retire et renvoie l’élément d’indice `i` |
 
 ```text
 >>> t = [3, 1, 2]
 >>> t.append(5)       # -> [3, 1, 2, 5]
->>> t.insert(1, 9)    # -> [3, 9, 1, 2, 5]
->>> t.pop()           # renvoie 5 ; t -> [3, 9, 1, 2]
+>>> t.pop()           # renvoie 5 ; t -> [3, 1, 2]
 5
->>> t.sort()          # -> [1, 2, 3, 9]
+>>> t.pop(0)          # renvoie 3 ; t -> [1, 2]
+3
 ```
 
 !!! regle "Règle 5 — Modifier sur place vs renvoyer une copie"
 
-    Ces méthodes modifient le tableau et renvoient `None` : n’écrivez **jamais** `t = t.sort()` (vous perdriez tout). Pour trier *sans* modifier l’original, la **fonction** `sorted` renvoie un nouveau tableau.
+    `append` modifie le tableau et renvoie `None` : n’écrivez **jamais** `t = t.append(5)` (vous perdriez tout). Pour obtenir un *nouveau* tableau sans modifier l’original, on le construit, par exemple par **concaténation** (`+`).
 
     ```text
     >>> t = [3, 1, 2]
-    >>> sorted(t)         # NOUVEAU tableau trie
-    [1, 2, 3]
+    >>> t + [5]           # NOUVEAU tableau
+    [3, 1, 2, 5]
+    >>> [0] + t           # ajout en tete, NOUVEAU tableau
+    [0, 3, 1, 2]
     >>> t                 # original intact
     [3, 1, 2]
     ```
+
+!!! regle "Règle 6 — Méthode : tout le reste s’écrit avec une boucle"
+
+    Compter les occurrences d’une valeur, chercher sa position, retirer une valeur, inverser ou trier un tableau : on ne cherche pas une méthode toute faite, on **écrit le parcours** (exercices « Chercher et compter » et « Renverser sans `reverse` »). Ces algorithmes sont au cœur des chapitres *Algorithmique : le parcours séquentiel* et *Les tris*.
 
 ### Le fil rouge à l’œuvre : références, alias et copie
 
 Voici le point le plus important — et le plus piégeux — du chapitre. Reprenons le dessin du §I.
 
-!!! regle "Règle 6 — Affecter un tableau ne le copie pas !"
+!!! regle "Règle 7 — Affecter un tableau ne le copie pas !"
 
     `b = a` ne crée **aucun** nouvel objet : il fait simplement pointer `b` vers **le même** tableau que `a`. On dit que `a` et `b` sont des **alias**. Modifier via l’un se voit via l’autre.
 
@@ -357,24 +346,19 @@ Pour une **vraie copie** (objet indépendant), on *reconstruit* un tableau :
 
 ```text
 >>> a = [1, 2, 3]
->>> b = [x for x in a]   # (ou a[:] , ou a.copy()) : NOUVEL objet
+>>> b = [x for x in a]   # (ou a[:]) : NOUVEL objet
 >>> b[0] = 99
 >>> a               # intact
 [1, 2, 3]
 ```
 
-!!! remarque "Remarque — Copie profonde au-delà du programme"
+!!! remarque "Remarque — Copie d’un tableau de tableaux"
 
-    Une copie simple ne duplique que le premier niveau : pour un tableau *de tableaux*, les sous-tableaux restent partagés. Pour tout dédoubler, `deepcopy` du module `copy` :
-
-    ```python
-    from copy import deepcopy
-    grille2 = deepcopy(grille)   # copie totalement independante
-    ```
+    Une copie simple ne duplique que le premier niveau : pour un tableau *de tableaux*, les sous-tableaux restent partagés. Pour tout dédoubler, il faut aussi recopier **chaque** sous-tableau (copie *profonde*) : c’est l’objet de l’exemple suivant.
 
 !!! exemple "Exemple — Copier un tableau de tableaux avec deux compréhensions emboîtées"
 
-    Sans `deepcopy`, construire une copie indépendante de `grille = [[1, 2], [3, 4]]` à l’aide de **deux** compréhensions emboîtées, puis vérifier que modifier la copie ne touche pas l’original.
+    Construire une copie indépendante de `grille = [[1, 2], [3, 4]]` à l’aide de **deux** compréhensions emboîtées, puis vérifier que modifier la copie ne touche pas l’original.
 
     ??? corrige "Correction"
 
@@ -405,7 +389,7 @@ M = [[1, 2, 3],
      [4, 5, 6]]        # 2 lignes, 3 colonnes
 ```
 
-!!! regle "Règle 7 — Accès à une case : M[i][j]"
+!!! regle "Règle 8 — Accès à une case : M[i][j]"
 
     `M[i]` est la ligne d’indice `i` (un tableau) ; `M[i][j]` est la case ligne `i`, colonne `j`. Le nombre de lignes est `len(M)`, de colonnes `len(M[0])`.
 
@@ -496,7 +480,7 @@ Différence majeure avec le tableau : on crée une **nouvelle clé** par simple 
 2
 ```
 
-!!! regle "Règle 8 — Le test in porte sur les clés"
+!!! regle "Règle 9 — Le test in porte sur les clés"
 
     ```text
     >>> "Bob" in age    # une cle ?
@@ -511,7 +495,7 @@ Différence majeure avec le tableau : on crée une **nouvelle clé** par simple 
 
 Une boucle `for` sur un dictionnaire parcourt ses **clés**. Trois méthodes précisent le parcours.
 
-!!! regle "Règle 9 — keys, values, items"
+!!! regle "Règle 10 — keys, values, items"
 
     `d.keys()` : les clés. `d.values()` : les valeurs. `d.items()` : les couples `(clé, valeur)`.
 
@@ -568,13 +552,13 @@ moyenne = total / len(age)         # moyenne des ages
 
 ### Le fil rouge, une dernière fois : pourquoi la clé est-elle immuable ?
 
-!!! regle "Règle 10 — Une clé de dictionnaire doit être immuable"
+!!! regle "Règle 11 — Une clé de dictionnaire doit être immuable"
 
     Un tableau ne peut pas être une clé ; un p-uplet, si. Le modèle mémoire l’explique : le dictionnaire range chaque valeur *à une place calculée à partir de la clé*. Si la clé pouvait **changer** après coup (comme un tableau mutable), cette place ne correspondrait plus à rien et la valeur serait **introuvable**. D’où l’exigence d’une clé **figée**.
 
 !!! remarque "Remarque — Copier un dictionnaire au-delà du programme"
 
-    Comme pour les tableaux, `d2 = d` crée un **alias**, pas une copie. Pour obtenir un nouveau dictionnaire contenant les mêmes couples clé-valeur, on écrit `d2 = dict(d)`.
+    Comme pour les tableaux, `d2 = d` crée un **alias**, pas une copie. Pour obtenir un nouveau dictionnaire contenant les mêmes couples clé-valeur, on le reconstruit par compréhension : `d2 = {cle: d[cle] for cle in d}`.
 
 !!! exemple "Exemple — Clés composées avec des p-uplets"
 

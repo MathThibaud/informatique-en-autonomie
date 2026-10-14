@@ -76,6 +76,18 @@ Donner la valeur de chaque ligne. Vérification : on doit obtenir `205`. Attenti
 
 ### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-3 }
 
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
+
 Rappel pour lire un fichier ligne par ligne :
 
 ```python
@@ -87,21 +99,20 @@ fichier.close()
 
 Afficher les 5 premières lignes de vos données pour voir à quoi elles ressemblent.
 
-!!! encadre "Outil Python : méthodes de chaînes (isdigit, tranches, replace)"
+!!! encadre "Méthode : reconnaître un chiffre, repérer un mot avec une tranche"
 
-    `c.isdigit()` renvoie `True` si la chaîne `c` n’est faite que de chiffres. La comparaison `ligne[i:i + len(mot)] == mot` dit si `mot` apparaît dans `ligne` à partir de l’indice `i`. `ligne.replace(a, b)` renvoie une copie de `ligne` où chaque `a` est remplacé par `b`.
+    Un caractère `c` est un chiffre lorsqu’il fait partie de la chaîne `"0123456789"` : le test `c in "0123456789"` vaut alors `True`. La comparaison `ligne[i:i + len(mot)] == mot` dit si `mot` apparaît dans `ligne` à partir de l’indice `i`.
 
     ```python
-    print("4".isdigit(), "q".isdigit())     # True False
+    print("4" in "0123456789", "q" in "0123456789")   # True False
     ligne = "abcone2"
     print(ligne[3:6] == "one")              # True : "one" commence a l'indice 3
     print(ligne[2:5] == "one")              # False
-    print("onetwo".replace("one", "1"))     # 1two : remplace TOUTES les apparitions
     ```
 
-    **Intérêt.** Ces outils évitent d’écrire des boucles de comparaison. Avec `len(mot)`, la tranche a toujours la bonne longueur, quel que soit le mot cherché.
+    **Intérêt.** Avec `len(mot)`, la tranche a toujours la bonne longueur, quel que soit le mot cherché ; en faisant varier `i`, on teste toutes les positions possibles de la ligne.
 
-    *À essayer.* Que renvoie `"eightwo".replace("two", "2")` ? Le mot `eight` est-il encore lisible ?
+    *À essayer.* Avec `ligne = "eightwo"`, que valent `ligne[0:5] == "eight"` et `ligne[4:7] == "two"` ? Les deux mots partagent-ils une lettre ?
 
 ### <span class="exo-num">Exercice 4</span> — Les chiffres d’une ligne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-4 }
 
@@ -109,7 +120,7 @@ Afficher les 5 premières lignes de vos données pour voir à quoi elles ressemb
 
 ??? pouce "Coup de pouce"
 
-    La méthode `c.isdigit()` renvoie `True` si le caractère `c` est un chiffre.
+    Le test `c in "0123456789"` vaut `True` si le caractère `c` est un chiffre.
 
 ### <span class="exo-num">Exercice 5</span> — Valeur d’une ligne et total <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-5 }
 
@@ -142,7 +153,7 @@ zoneight
 nine87seven
 ```
 
-**Piège** : deux mots peuvent partager des lettres (regarder `twone` et `zoneight`). Une méthode qui remplace les mots par des chiffres dans la chaîne avec `replace` risque de détruire l’un des deux mots : vérifier votre programme sur ces lignes.
+**Piège** : deux mots peuvent partager des lettres (regarder `twone` et `zoneight`). Une méthode qui remplace les mots par des chiffres dans la chaîne risque de détruire l’un des deux mots : vérifier votre programme sur ces lignes.
 
 ??? pouce "Coup de pouce"
 

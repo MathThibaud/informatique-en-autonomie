@@ -376,7 +376,7 @@ Voici l’état de la file `en_attente` après chaque tour de boucle (à gauche,
 
 !!! remarque "Remarque — Et si l’on écrivait la file avec une list ?"
 
-    On pourrait remplacer `File()` par une `list` Python, en enfilant avec `append` et en défilant avec `pop(0)`. Le parcours serait juste, mais **lent** sur un grand graphe : chaque `pop(0)` décale tous les éléments restants et coûte $O(n)$ (voir le chapitre *Structures linéaires*). D’où l’intérêt de raisonner avec l’**interface** `File`, quitte à choisir ensuite une implémentation efficace (liste chaînée, deux piles, `collections.deque`).
+    On pourrait remplacer `File()` par une `list` Python, en enfilant avec `append` et en défilant avec `pop(0)`. Le parcours serait juste, mais **lent** sur un grand graphe : chaque `pop(0)` décale tous les éléments restants et coûte $O(n)$ (voir le chapitre *Structures linéaires*). D’où l’intérêt de raisonner avec l’**interface** `File`, quitte à choisir ensuite une implémentation efficace (liste chaînée, deux piles).
 
 #### Application vedette : le plus court chemin
 
@@ -395,7 +395,7 @@ def plus_court_chemin(g, depart, arrivee):
         if sommet == arrivee:              # arrive : on reconstruit
             chemin = [arrivee]
             while parent[chemin[0]] is not None:
-                chemin.insert(0, parent[chemin[0]])
+                chemin = [parent[chemin[0]]] + chemin
             return chemin
         for voisin in g.voisins(sommet):
             if voisin not in decouverts:

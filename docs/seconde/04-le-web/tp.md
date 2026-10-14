@@ -151,6 +151,69 @@ Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujo
 
         Un moteur de recherche **classe** les pages de son index par un algorithme : l’ordre des résultats n’est jamais neutre, et la première page a une valeur commerciale énorme. Parce que quelques moteurs concentrent la plupart des recherches, l’Union européenne **encadre** ce classement sans le dicter : interdiction de favoriser ses propres services (DMA), option sans profilage (DSA), transparence des principaux critères (règlement de 2019), droit au déréférencement (RGPD ; loi n° 1.565 à Monaco). Le débat oppose la **liberté** de l’entreprise et l’**intérêt général** d’un accès loyal à l’information.
 
+\newgeometry{inner=1.8cm,outer=1.6cm,top=2.2cm,bottom=1.9cm,headheight=16pt,headsep=0.5cm,footskip=0.9cm}
+
+??? corrige "Corrigé de l'activité"
+
+    Notions du cours mobilisées
+
+    - **Moteur de recherche**, robots (*crawlers*), **index**, requête.
+
+    - **Classement par pertinence**, *PageRank* (une page est importante si des pages importantes pointent vers elle), **hyperliens** et graphe du Web.
+
+    - **Publicités** signalées par une mention (« Sponsorisé ») ; enjeu commercial de la première page.
+
+    - **Cookies et traces** : la personnalisation des résultats repose sur des données personnelles.
+
+    - **Notions juridiques** du cours (droit d’auteur, licences) : le Web n’est pas une zone sans droit.
+
+    Arguments attendus
+
+    <table>
+    <thead>
+    <tr>
+    <th style="text-align: left;"><strong>POUR (oui) : liberté du moteur</strong></th>
+    <th style="text-align: left;"><strong>CONTRE (non) : règles fixées par la loi</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Entreprise privée, service gratuit</strong> : elle a investi dans son algorithme, c’est son savoir-faire.</p></li>
+    <li><p><strong>Le secret protège</strong> contre la triche des référenceurs (doc. 3).</p></li>
+    <li><p><strong>Liberté de choix</strong> : l’utilisateur peut changer de moteur (doc. 3).</p></li>
+    <li><p><strong>Qualité</strong> : le moteur a intérêt à donner les meilleurs résultats, sinon il perd ses utilisateurs.</p></li>
+    <li><p><strong>Risque de censure</strong> : si l’État décide du classement, il décide de ce que l’on voit.</p></li>
+    <li><p><strong>Les règles existent déjà</strong> sur la façon de classer (doc. 2) : inutile d’aller plus loin, ni de décider à la place du moteur.</p></li>
+    </ul></td>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Position dominante</strong> : quand presque tout le monde utilise le même moteur, son classement décide de qui existe (doc. 1).</p></li>
+    <li><p><strong>Autofavoritisme</strong> : le moteur peut mettre ses propres services devant (doc. 1), d’où le DMA (doc. 2).</p></li>
+    <li><p><strong>Publicité et résultats mélangés</strong> : l’utilisateur doit savoir ce qui est payé (doc. 3, cours).</p></li>
+    <li><p><strong>Transparence</strong> : un classement secret ne peut pas être contrôlé (doc. 2).</p></li>
+    <li><p><strong>Vie privée</strong> : le droit au déréférencement montre que la loi doit pouvoir intervenir (doc. 4).</p></li>
+    <li><p><strong>Profilage</strong> : sans règle, chacun voit des résultats taillés pour lui (lien avec la bulle de filtres des réseaux sociaux).</p></li>
+    </ul></td>
+    </tr>
+    </tbody>
+    </table>
+
+    *Arguments de l’autre camp souvent jugés solides dans la trace écrite :* un élève POUR retient souvent « un moteur dominant ne doit pas avantager ses propres produits » ; un élève CONTRE, « si l’État choisissait l’ordre des résultats, ce serait une forme de censure ».
+
+    Questions de relance (pour le modérateur)
+
+    1.  Qui décide aujourd’hui qu’un article disparaît des résultats sur un nom (doc. 4) ? Est-ce normal que ce soit une entreprise ?
+
+    2.  Changer de moteur, est-ce vraiment simple ? Lequel utilisez-vous, et pourquoi ?
+
+    3.  Faut-il connaître la « recette » du classement pour lui faire confiance (doc. 3) ?
+
+    4.  Encadrer la façon de classer, est-ce la même chose que décider de l’ordre des résultats (doc. 2) ?
+
+    !!! encadre "Synthèse possible"
+
+        Un moteur de recherche **classe** les pages de son index par un algorithme : l’ordre des résultats n’est jamais neutre, et la première page a une valeur commerciale énorme. Parce que quelques moteurs concentrent la plupart des recherches, l’Union européenne **encadre** ce classement sans le dicter : interdiction de favoriser ses propres services (DMA), option sans profilage (DSA), transparence des principaux critères (règlement de 2019), droit au déréférencement (RGPD ; loi n° 1.565 à Monaco). Le débat oppose la **liberté** de l’entreprise et l’**intérêt général** d’un accès loyal à l’information.
+
 ## Corrigé
 
 ??? corrige "Corrigé"

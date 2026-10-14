@@ -74,6 +74,18 @@ Pour chaque ligne, trouver le plus grand nombre de deux chiffres possible. Véri
 
 ### <span class="exo-num">Exercice 3</span> — Lire et tester toutes les paires <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-les-algorithmes-gloutons-aoc-1-3 }
 
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
+
 Rappel pour lire un fichier ligne par ligne :
 
 ```python
@@ -89,23 +101,28 @@ fichier.close()
 
     Deux boucles imbriquées, la seconde commençant à `i + 1`, et un calcul de maximum.
 
-!!! encadre "Outil Python : plus grand caractère et position (max, index)"
+!!! encadre "Méthode : position du plus grand caractère"
 
-    `max` appliqué à une chaîne renvoie son plus grand caractère ; pour des chiffres, c’est le plus grand chiffre. `ligne.index(c)` renvoie l’indice de la **première** apparition de `c` dans `ligne`.
+    Les chiffres se comparent très bien sous forme de caractères : `"9" > "8"` vaut `True`. Pour trouver l’indice de la **première** apparition du plus grand caractère de `ligne` entre les indices `debut` (inclus) et `fin` (exclu), on parcourt cette zone en mémorisant la position du meilleur caractère vu jusque-là.
 
     ```python
+    def position_max(ligne, debut, fin):
+        """Indice de la premiere apparition du plus grand caractere
+        parmi ligne[debut], ..., ligne[fin - 1]."""
+        p = debut
+        for i in range(debut + 1, fin):
+            if ligne[i] > ligne[p]:      # strict : en cas d'egalite, on garde la premiere
+                p = i
+        return p
+
     ligne = "38193"
-    print(max(ligne))          # 9 : le plus grand caractere ("9" > "8" > ... > "1")
-    print(ligne.index("9"))    # 3 : indice de la PREMIERE apparition
-    print(ligne.index("3"))    # 0 : premiere apparition, pas la derniere
-    print(max(ligne[:-1]))     # 9 : maximum de tout sauf le dernier caractere
+    print(position_max(ligne, 0, 5))   # 3 : le 9 est a l'indice 3
+    print(position_max(ligne, 0, 3))   # 1 : le 8, parmi "381"
     ```
 
-    `ligne[:-1]` est la tranche privée du dernier caractère (indices négatifs et tranches : voir le chapitre *Les types construits*, encadré « Indices négatifs et tranches »).
+    **Intérêt.** Une seule boucle donne à la fois le plus grand chiffre (`ligne[p]`) et sa position `p` ; les bornes `debut` et `fin` permettent de chercher dans une partie de la ligne seulement, sans la recopier.
 
-    **Intérêt.** Deux appels remplacent une boucle de recherche du maximum avec mémorisation de sa position.
-
-    *À essayer.* Que renvoie `"5958".index("5")` ? Et `max("5958"[1:])` ?
+    *À essayer.* Que renvoient `position_max("9919", 0, 4)` et `position_max("9919", 1, 3)` ? Que renverrait le premier appel si l’on écrivait `>=` au lieu de `>` ?
 
 ### <span class="exo-num">Exercice 4</span> — Une idée gloutonne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-les-algorithmes-gloutons-aoc-1-4 }
 
@@ -117,7 +134,7 @@ fichier.close()
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    Chercher le maximum de `ligne[:-1]` et l’indice `p` de sa **première** apparition (`index`), puis le maximum de `ligne[p+1:]`. Les chiffres se comparent très bien sous forme de caractères : `"9" > "8"`.
+    Avec la fonction `position_max` de l’encadré : `p = position_max(ligne, 0, len(ligne) - 1)` donne le chiffre des dizaines (le dernier caractère est exclu), puis `q = position_max(ligne, p + 1, len(ligne))` celui des unités. Le résultat est `int(ligne[p] + ligne[q])`.
 
 !!! encadre "Lien avec le cours : algorithmes gloutons"
 
@@ -145,35 +162,31 @@ Dans la partie 2, on ne choisit plus deux chiffres. Regarder la longueur des lig
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    Une boucle `for r in range(k, 0, -1):` ; la fenêtre de recherche est `ligne[debut:len(ligne) - r + 1]` ; on y prend le maximum, on avance `debut` juste après sa première apparition, et on ajoute ce chiffre à une chaîne `resultat`.
+    Une boucle `for r in range(k, 0, -1):` ; la recherche se fait avec `p = position_max(ligne, debut, len(ligne) - r + 1)` ; on ajoute `ligne[p]` à une chaîne `resultat`, puis on avance `debut` juste après : `debut = p + 1`.
 
 ## Approfondissement
 
-!!! encadre "Outil Python : hasard et combinaisons (random, itertools)"
+!!! encadre "Outil Python : le hasard (random)"
 
-    Le module `random` tire des nombres au hasard ; `randint(a, b)` renvoie un entier entre `a` et `b` inclus. La fonction `combinations` du module `itertools` énumère tous les choix de `k` éléments d’une chaîne ou d’une liste, **dans leur ordre d’origine**.
+    Le module `random` tire des nombres au hasard ; `random.randint(a, b)` renvoie un entier entre `a` et `b` inclus.
 
     ```python
     import random
-    from itertools import combinations
 
     print(random.randint(1, 9))            # un entier au hasard entre 1 et 9 (inclus)
-    for choix in combinations("1234", 2):  # tous les choix de 2 caracteres, ordre conserve
-        print(choix)                       # ('1', '2'), ('1', '3'), ..., ('3', '4')
-    print(len([t for t in combinations("12345", 3)]))   # 10
     ```
 
     **Intérêt.** Pour tester un algorithme rapide, on le compare à une recherche exhaustive lente mais sûre, sur beaucoup de petits cas tirés au hasard.
 
-    *À essayer.* Combien de choix `combinations("123456", 2)` fournit-il ?
+    *À essayer.* Écrire une boucle qui construit une chaîne de 15 chiffres, chacun tiré au hasard entre 1 et 9.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : convaincre et tester <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-les-algorithmes-gloutons-aoc-1-7 }
 
-1.  Écrire une fonction `exhaustif(ligne, k)` qui essaie tous les choix de `k` chiffres avec `combinations` et renvoie le plus grand nombre obtenu.
+1.  Écrire une fonction `exhaustif(ligne, k)` qui essaie tous les choix de `k` chiffres pris dans l’ordre de la ligne et renvoie le plus grand nombre obtenu.
 
     ??? pouce "Coup de pouce"
 
-        Chaque choix est un p-uplet de caractères : `"".join(choix)` le transforme en chaîne.
+        Construire la liste de tous les débuts de choix : partir de `[""]` puis, pour chaque caractère `c` de la ligne, remplacer chaque début `s` par deux débuts, `s` (on ne prend pas `c`) et `s + c` (on le prend, si `s` a moins de `k` caractères). À la fin, garder le plus grand des choix de longueur `k`.
 
 2.  Comparer `meilleur(ligne, k)` et `exhaustif(ligne, k)` sur 300 lignes de 15 chiffres tirées au hasard, avec `k` lui aussi au hasard. Combien de désaccords ?
 

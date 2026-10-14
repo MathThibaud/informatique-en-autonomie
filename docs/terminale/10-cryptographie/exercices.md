@@ -729,7 +729,7 @@ On suppose que les mots présents dans un mot de passe sont entiers et séparés
             for caractere in mdp:
                 if caractere.isupper():
                     majuscules += 1
-                if caractere.isdigit():
+                if '0' <= caractere <= '9':
                     chiffres += 1
                 if caractere in liste_symboles:
                     symboles += 1
@@ -738,6 +738,8 @@ On suppose que les mots présents dans un mot de passe sont entiers et séparés
             return True
         ```
 
+        Ligne 10 : plutôt que la méthode `isdigit` proposée par l’énoncé, on compare le caractère aux bornes `’0’` et `’9’` : les chiffres se suivent dans la table des caractères, donc `’0’ <= caractere <= ’9’` teste exactement « est-ce un chiffre ? » (les deux écritures sont acceptées). De même, `’A’ <= c <= ’Z’` teste une majuscule non accentuée.
+
     2.  On continue à tirer des caractères tant que la longueur voulue *ou* l’un des minimums n’est pas atteint (le mot de passe peut donc dépasser `n` caractères si le hasard tarde à fournir les majuscules, chiffres ou symboles demandés) :
 
         ```python
@@ -745,9 +747,9 @@ On suppose que les mots présents dans un mot de passe sont entiers et séparés
                 # la variable c contient un caractere
                 # choisi aleatoirement dans la variable caracteres
                 c = choice(caracteres)
-                if c.isupper():
+                if 'A' <= c <= 'Z':
                     majuscules += 1
-                if c.isdigit():
+                if '0' <= c <= '9':
                     chiffres += 1
                 if c in liste_symboles:
                     symboles += 1
@@ -764,7 +766,7 @@ On suppose que les mots présents dans un mot de passe sont entiers et séparés
             trouve = []
             i = 0
             while i < len(mot):
-                if mot[i].isdigit():   # si le caractere est un chiffre
+                if '0' <= mot[i] <= '9':   # si le caractere est un chiffre
                     i = i + 1
                 elif mot[i] in liste_symboles:
                     i = i + 1
@@ -773,7 +775,7 @@ On suppose que les mots présents dans un mot de passe sont entiers et séparés
                     # lettres qui la suivent jusqu'au moment ou
                     # on trouve un chiffre ou un symbole
                     chaine = ''
-                    while i < len(mot) and not mot[i].isdigit() and mot[i] not in liste_symboles:
+                    while i < len(mot) and not ('0' <= mot[i] <= '9') and mot[i] not in liste_symboles:
                         chaine = chaine + mot[i]
                         i = i + 1
                     trouve.append(chaine)

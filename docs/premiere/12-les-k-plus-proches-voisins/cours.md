@@ -138,7 +138,10 @@ On assemble le tout en Python. On réutilise le **tri par clé** (chapitres *Les
     def vote(classes):
         compte = {}
         for c in classes:
-            compte[c] = compte.get(c, 0) + 1          # dictionnaire d'occurrences
+            if c in compte:
+                compte[c] += 1          # dictionnaire d'occurrences
+            else:
+                compte[c] = 1
         meilleure = None
         for c in compte:
             if meilleure is None or compte[c] > compte[meilleure]:

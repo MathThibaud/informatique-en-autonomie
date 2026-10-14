@@ -119,7 +119,11 @@ On considère le fichier (inventé) suivant :
 
 ??? pouce "Coup de pouce"
 
-    Trier les deux listes (`sorted`), puis parcourir les indices : l’écart entre deux nombres `x` et `y` est `abs(x - y)`.
+    Écrire d’abord une fonction `trier(t)` (tri par insertion ou par sélection du chapitre) et trier les deux listes, puis parcourir les indices : l’écart entre deux nombres `x` et `y` est `abs(x - y)`.
+
+??? pouce "Coup de pouce 2 (début de solution)"
+
+    Pour ne pas modifier les listes lues, trier des copies : `g_tri = [x for x in gauche]`, puis `trier(g_tri)`. Ensuite, un accumulateur `total` et une boucle sur `range(len(g_tri))`.
 
 ## Partie 2
 
@@ -129,21 +133,9 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     Les historiens remarquent que beaucoup de numéros se retrouvent dans les deux listes : on mesure maintenant leur ressemblance autrement. Pour chaque nombre de la liste de gauche, on compte combien de fois il apparaît dans la liste de droite, et on multiplie le nombre par ce compte. La réponse est la somme de ces produits ; un nombre présent deux fois à gauche est compté deux fois.
 
-!!! encadre "Outil Python : compter dans une liste (count)"
-
-    La méthode `count` d’une liste renvoie le nombre de fois qu’une valeur y apparaît. Elle parcourt toute la liste à notre place.
-
-    ```python
-    t = [2, 5, 4, 2, 8, 2]
-    print(t.count(2))    # 3
-    print(t.count(7))    # 0 : valeur absente
-    ```
-
-    **Intérêt.** Le code est plus court, mais attention : chaque appel parcourt toute la liste, ce qui coûte cher s’il est répété. Question : combien de comparaisons fait `t.count(2)` ?
-
 ### <span class="exo-num">Exercice 5</span> — Compter les apparitions <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-5 }
 
-1.  Écrire une fonction `nb_apparitions(x, liste)` qui compte, avec une boucle, combien de fois `x` apparaît dans `liste`. Comparer avec la méthode `liste.count(x)`.
+1.  Écrire une fonction `nb_apparitions(x, liste)` qui compte, avec une boucle, combien de fois `x` apparaît dans `liste`. Combien de comparaisons fait `nb_apparitions(2, [2, 5, 4, 2, 8, 2])` ?
 
 2.  Utiliser cette fonction pour répondre à la partie 2. Sur l’exemple du défi, on doit trouver `17`.
 
@@ -156,18 +148,6 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
     Pour chaque `x` de la liste de gauche, on ajoute au total `x * nb_apparitions(x, droite)`.
 
 ## Approfondissement
-
-!!! encadre "Outil Python : la méthode get des dictionnaires"
-
-    Pour un dictionnaire `d`, `d.get(cle, defaut)` renvoie la valeur associée à `cle` si elle existe, et `defaut` sinon, sans provoquer d’erreur.
-
-    ```python
-    compte = {2: 3, 5: 1}
-    print(compte.get(2, 0))      # 3
-    print(compte.get(7, 0))      # 0 : la cle 7 est absente
-    ```
-
-    Question : que se passe-t-il avec `compte[7]` ?
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Approfondissement 1 : compter une fois pour toutes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-6 }
 
@@ -183,4 +163,4 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        Ensuite, pour chaque `x` de gauche, ajouter `x * compte.get(x, 0)` au total : `get` renvoie 0 pour un nombre absent de la liste de droite.
+        Ensuite, pour chaque `x` de gauche : si `x in compte`, ajouter `x * compte[x]` au total ; sinon, rien à ajouter. Sans ce test, `compte[x]` provoquerait une erreur pour un nombre absent de la liste de droite.

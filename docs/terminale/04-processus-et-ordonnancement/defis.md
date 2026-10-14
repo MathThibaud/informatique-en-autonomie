@@ -77,6 +77,18 @@ Dessiner la grille après un tour, puis après deux tours. Vérification : la gr
 
 ### <span class="exo-num">Exercice 3</span> — Lire la grille <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-1-3 }
 
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
+
 Écrire une fonction `lire_grille(nom_fichier)` qui renvoie une liste de listes de caractères (une liste par ligne). Afficher le nombre de lignes et de colonnes.
 
 ### <span class="exo-num">Exercice 4</span> — Compter les voisins occupés <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-1-4 }
@@ -87,21 +99,31 @@ Dessiner la grille après un tour, puis après deux tours. Vérification : la gr
 
     Deux boucles sur les décalages `di` et `dj` dans `[-1, 0, 1]`, sans oublier d’exclure le cas `(0, 0)` et de vérifier qu’on ne sort pas de la grille.
 
-!!! encadre "Outil Python : compter des éléments (count)"
+!!! encadre "Méthode : compter des éléments avec un compteur"
 
-    `l.count(x)` renvoie le nombre d’éléments de la liste `l` égaux à `x` ; la même méthode existe pour les chaînes de caractères.
+    On parcourt la liste et l’on ajoute 1 à un compteur chaque fois que l’élément convient. Pour une grille (liste de listes), on ajoute les comptes de chaque ligne.
 
     ```python
-    ligne = ["#", ".", "L", "#"]
-    print(ligne.count("#"))     # 2 : nombre d'elements egaux a "#"
-    print("#.L##".count("#"))   # 3 : fonctionne aussi sur une chaine
+    def compter(ligne, x):
+        """Renvoie le nombre d'elements de ligne egaux a x."""
+        total = 0
+        for c in ligne:
+            if c == x:
+                total += 1
+        return total
+
+    print(compter(["#", ".", "L", "#"], "#"))   # 2
+    print(compter("#.L##", "#"))                 # 3 : fonctionne aussi sur une chaine
     grille = [["#", "L"], ["#", "#"]]
-    print(sum([l.count("#") for l in grille]))   # 3 : somme des comptes de chaque ligne
+    total = 0
+    for ligne in grille:
+        total += compter(ligne, "#")
+    print(total)                                 # 3 : somme des comptes de chaque ligne
     ```
 
-    **Intérêt.** Une ligne au lieu d’une boucle et d’un compteur. Attention : `count` parcourt toute la liste, son coût est proportionnel à sa longueur.
+    **Intérêt.** Le schéma « compteur initialisé à 0, une boucle, un test » sert partout. Son coût est proportionnel à la longueur de ce qu’on parcourt : compter les sièges occupés d’une grille de $L \times C$ cases coûte $O(L \cdot C)$.
 
-    **À essayer.** Que renvoie `[1, 2, 1].count(3)` ?
+    **À essayer.** Que renvoie `compter([1, 2, 1], 3)` ? Et `compter([], "#")` ?
 
 ### <span class="exo-num">Exercice 5</span> — Un tour, puis jusqu’à stabilité <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-1-5 }
 
@@ -235,31 +257,43 @@ Jouer les trois premières manches à la main en écrivant les deux paquets apr�
 
 ## Programmer la partie 1
 
-!!! encadre "Outil Python : la file toute faite (collections.deque)"
+!!! encadre "Méthode : une file avec une liste Python"
 
-    Le module `collections` fournit `deque` (prononcer « dèque »), une file à deux bouts : on peut ajouter et retirer aussi bien au début qu’à la fin, en temps constant.
+    Un paquet de cartes est une **file** : on retire au début (le dessus), on ajoute à la fin (le dessous). Une simple liste Python suffit : `pop(0)` retire et renvoie le premier élément, `append` ajoute à la fin.
 
     ```python
-    from collections import deque
-    d = deque([6, 2, 8, 1])    # dessus du paquet a gauche
-    x = d.popleft()            # retire et renvoie 6
-    d.append(4)                # ajoute a la fin : deque([2, 8, 1, 4])
-    d.extend([7, 3])           # ajoute plusieurs elements a la fin
-    print(len(d), d[0])        # 6 2 : longueur, premier element
-    print([d[i] for i in range(2)])  # [2, 8] : les deux premiers elements
-    if d:                      # une deque vide vaut False
+    paquet = [6, 2, 8, 1]      # dessus du paquet a gauche
+    x = paquet.pop(0)          # retire et renvoie 6
+    paquet.append(4)           # ajoute a la fin : [2, 8, 1, 4]
+    paquet.append(7)
+    paquet.append(3)
+    print(len(paquet), paquet[0])   # 6 2 : longueur, premier element
+    print(paquet[:2])          # [2, 8] : nouvelle liste des deux premiers
+    if paquet:                 # une liste vide vaut False
         print("non vide")
     ```
 
-    **Intérêt.** Avec une liste Python, `liste.pop(0)` décale tous les autres éléments d’une case : $O(n)$ opérations. `popleft` est en $O(1)$ : sur une partie de plusieurs milliers de manches, la différence se voit. C’est l’implémentation « professionnelle » de la file du cours. Question : que contient `d` à la fin du code ? Que se passe-t-il si l’on appelle `popleft` sur une `deque` vide ?
+    **Intérêt et limite.** C’est la file du cours, sans rien à programmer. Mais `pop(0)` décale tous les autres éléments d’une case : $O(n)$ opérations pour $n$ éléments. Avec au plus 50 cartes, c’est négligeable ; pour de très longues files, on utiliserait la classe `File` du cours (deux piles) ou un indice de tête qui avance au lieu de décaler la liste, pour retirer en $O(1)$. Question : que contient `paquet` à la fin du code ? Que se passe-t-il si l’on appelle `pop(0)` sur une liste vide ?
+
+!!! encadre "Outil Python : strip (nettoyer une ligne lue)"
+
+    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+
+    ```python
+    ligne = "1721\n"
+    print(ligne.strip())                  # 1721
+    print(len(ligne), len(ligne.strip())) # 5 4
+    ```
+
+    **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
 
 ### <span class="exo-num">Exercice 3</span> — Une file pour chaque joueur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-2-3 }
 
-Lire le fichier et ranger les cartes de chaque joueur dans une **file** : on retire au début (dessus du paquet), on ajoute à la fin (dessous). Utiliser `collections.deque`, ou une classe `File` du cours.
+Lire le fichier et ranger les cartes de chaque joueur dans une **file** : on retire au début (dessus du paquet), on ajoute à la fin (dessous). Utiliser une liste Python (encadré ci-dessus), ou une classe `File` du cours.
 
 ??? pouce "Coup de pouce"
 
-    Avec `from collections import deque`, `d = deque([6, 2, 8, 1])`, `d.popleft()` renvoie `6` et `d.append(x)` ajoute à la fin, en temps constant. Avec une liste, `pop(0)` est en $O(n)$.
+    Le fichier contient deux blocs séparés par une ligne vide : après `strip`, `texte.split("\n\n")` les sépare, puis `split("\n")` découpe chaque bloc en lignes (la première, `Player 1:`, ne contient pas de carte). Avec `paquet = [6, 2, 8, 1]`, `paquet.pop(0)` renvoie `6` et `paquet.append(x)` ajoute à la fin.
 
 !!! encadre "Rappel : parcourir avec l’indice"
 
@@ -297,7 +331,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Outil Python : les ensembles (set)"
 
-    Un **ensemble** est une collection **sans doublon** et **sans ordre** : pas d’indice ; on peut seulement ajouter, retirer, tester l’appartenance et parcourir (dans un ordre quelconque). Ses éléments doivent être **non modifiables** : nombres, chaînes, **tuples** — ni liste, ni `deque`.
+    Un **ensemble** est une collection **sans doublon** et **sans ordre** : pas d’indice ; on peut seulement ajouter, retirer, tester l’appartenance et parcourir (dans un ordre quelconque). Ses éléments doivent être **non modifiables** : nombres, chaînes, **tuples** — pas de liste.
 
     ```python
     vus = set()              # ensemble vide (attention : {} est un dictionnaire vide)
@@ -305,20 +339,29 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
     vus.add(8)
     print(8 in vus)          # True : test d'appartenance
     print(len(vus))          # 2
-    vus.remove(8)            # retrait (erreur si absent ; discard : sans erreur)
+    vus.remove(8)            # retrait (erreur si absent : tester avant avec in)
     a = {1, 2, 3}            # ensemble ecrit directement
     b = set([2, 3, 4, 4])    # a partir d'une liste : {2, 3, 4}
-    print(a | b)             # union : {1, 2, 3, 4}
-    print(a & b)             # intersection : {2, 3}
-    print(a - b)             # difference : {1}
+    print(len(b))            # 3 : le doublon a disparu
+    for x in a:              # parcours, dans un ordre quelconque
+        print(x)
     pairs = {n for n in range(10) if n % 2 == 0}   # ensemble en comprehension
+    ```
+
+    Deux opérateurs construisent un **nouvel** ensemble à partir de deux autres, sans les modifier : la **réunion** `a | b` (éléments présents dans `a` ou dans `b`) et l’**intersection** `a & b` (éléments présents dans les deux).
+
+    ```python
+    a = {1, 2, 3}
+    b = {2, 3, 4}
+    print(a | b)             # {1, 2, 3, 4} : reunion, sans doublon
+    print(a & b)             # {2, 3} : intersection
+    a = a | {7}              # pour agrandir a, on le remplace par la reunion
     ```
 
     Dans ce défi, pour mémoriser l’état des deux paquets, on le convertit en un couple de tuples :
 
     ```python
-    from collections import deque
-    p1, p2 = deque([6, 2]), deque([4, 7])
+    p1, p2 = [6, 2], [4, 7]
     deja_vus = set()
     etat = (tuple(p1), tuple(p2))             # ((6, 2), (4, 7))
     print(etat in deja_vus)                   # False
@@ -326,9 +369,9 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
     print(((6, 2), (4, 7)) in deja_vus)       # True
     ```
 
-    **Intérêt.** Avec une liste, `x in liste` compare `x` à chaque élément l’un après l’autre : jusqu’à $n$ comparaisons. Un ensemble range ses éléments selon une valeur calculée à partir d’eux (une *fonction de hachage*, le même principe que les clés d’un dictionnaire) : Python va directement là où `x` devrait se trouver. Le test `x in ensemble` prend donc un temps qui **ne dépend pas** du nombre d’éléments (**temps constant**, en moyenne). Cet encadré servira dans plusieurs défis des chapitres suivants.
+    **Intérêt.** Avec une liste, `x in liste` compare `x` à chaque élément l’un après l’autre : jusqu’à $n$ comparaisons. Un ensemble range ses éléments selon une valeur calculée à partir d’eux (une *fonction de hachage*, le même principe que les clés d’un dictionnaire) : Python va directement là où `x` devrait se trouver. Le test `x in ensemble` prend donc un temps qui **ne dépend pas** du nombre d’éléments (**temps constant**, en moyenne). C’est aussi ce qui rend `a & b` rapide : Python parcourt un des deux ensembles et teste chaque élément dans l’autre en temps constant, au lieu de comparer chaque élément de `a` à chaque élément de `b`. Cet encadré servira dans plusieurs défis des chapitres suivants.
 
-    **À essayer.** Que se passe-t-il si l’on essaie `deja_vus.add(p1)` ? Que renvoie `set("banane")` ?
+    **À essayer.** Que se passe-t-il si l’on essaie `deja_vus.add(p1)` ? Que renvoie `set("banane")` ? Que valent `set("chat") & set("chien")` et `set("chat") | set("chien")` ? Et `a & set()` ?
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Le combat récursif <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-2-5 }
 
@@ -336,11 +379,11 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ??? pouce "Coup de pouce"
 
-    La mémoire des situations déjà vues est un **ensemble** créé au début de chaque appel de la fonction (donc propre à chaque sous-partie). Une `deque` n’est pas utilisable comme élément d’un ensemble : y ranger le couple `(tuple(p1), tuple(p2))`.
+    La mémoire des situations déjà vues est un **ensemble** créé au début de chaque appel de la fonction (donc propre à chaque sous-partie). Une liste n’est pas utilisable comme élément d’un ensemble : y ranger le couple `(tuple(p1), tuple(p2))`.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    Pour une sous-partie, on construit de **nouveaux** paquets (copies) : `deque([p1[i] for i in range(n)])` prend les `n` cartes du dessus sans modifier `p1`. La fonction renvoie un couple `(gagnant, paquet)` ; dans la sous-partie, seul le gagnant compte pour décider de la manche en cours.
+    Pour une sous-partie, on construit de **nouveaux** paquets (copies) : la tranche `p1[:n]` est une nouvelle liste qui contient les `n` cartes du dessus, sans modifier `p1`. La fonction renvoie un couple `(gagnant, paquet)` ; dans la sous-partie, seul le gagnant compte pour décider de la manche en cours.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : mesurer <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-2-6 }
 

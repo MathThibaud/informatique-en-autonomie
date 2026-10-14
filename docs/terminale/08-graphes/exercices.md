@@ -281,7 +281,7 @@ On considère ce graphe (les voisins seront toujours pris par **ordre alphabéti
 
     ??? pouce "Coup de pouce"
 
-        La classe `File` de ce chapitre défile avec `pop(0)` : c’est un **choix de simplicité**, suffisant pour nos petits graphes, mais chaque `pop(0)` coûte $O(n)$ (il décale tous les éléments). Sur un très grand graphe, on prendrait une file plus efficace (`collections.deque`, deux piles…) sans rien changer au code du BFS : c’est tout l’intérêt de l’interface.
+        La classe `File` de ce chapitre défile avec `pop(0)` : c’est un **choix de simplicité**, suffisant pour nos petits graphes, mais chaque `pop(0)` coûte $O(n)$ (il décale tous les éléments). Sur un très grand graphe, on prendrait une file plus efficace (liste chaînée, deux piles…) sans rien changer au code du BFS : c’est tout l’intérêt de l’interface.
 
 2.  Construire le graphe de l’exercice précédent et vérifier vos réponses aux traces à la main.
 
@@ -293,7 +293,7 @@ On considère ce graphe (les voisins seront toujours pris par **ordre alphabéti
 
 ??? corrige "Corrigé"
 
-    Voir le cours pour `BFS`, `DFS` (récursif) et `DFS_iteratif`. Pour la file, la classe `File` du chapitre *Structures linéaires* (avec `pop(0)`) convient ici : c’est un choix de **simplicité**, acceptable sur de petits graphes, mais chaque `defiler` coûte alors $O(n)$ ; sur un grand graphe, on changerait d’implémentation (`collections.deque`…) sans toucher au BFS. Sur ce graphe, le DFS itératif renvoie par exemple `[A, C, D, F, E, B]` : la **pile** traite en dernier le premier voisin empilé, d’où un ordre différent du DFS récursif — mais c’est bien un parcours en profondeur valide.
+    Voir le cours pour `BFS`, `DFS` (récursif) et `DFS_iteratif`. Pour la file, la classe `File` du chapitre *Structures linéaires* (avec `pop(0)`) convient ici : c’est un choix de **simplicité**, acceptable sur de petits graphes, mais chaque `defiler` coûte alors $O(n)$ ; sur un grand graphe, on changerait d’implémentation (liste chaînée, deux piles…) sans toucher au BFS. Sur ce graphe, le DFS itératif renvoie par exemple `[A, C, D, F, E, B]` : la **pile** traite en dernier le premier voisin empilé, d’où un ordre différent du DFS récursif — mais c’est bien un parcours en profondeur valide.
 
 ### Chemins, cycles, connexité
 
@@ -363,7 +363,7 @@ On veut le **plus court chemin** en nombre d’arêtes.
             if s == arrivee:
                 chemin = [arrivee]
                 while parent[chemin[0]] is not None:
-                    chemin.insert(0, parent[chemin[0]])
+                    chemin = [parent[chemin[0]]] + chemin
                 return chemin
             for v in g.voisins(s):
                 if v not in decouverts:

@@ -151,6 +151,69 @@ Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujo
 
         La localisation rend de vrais services (itinéraires, secours, objet perdu). Mais chaque position est une **donnée personnelle**, et leur **accumulation** trace notre vie : quatre points suffisent souvent à identifier une personne, même dans des données sans nom. La loi (RGPD ; loi n° 1.565 et APDP à Monaco) impose un but précis et donne des droits, et les téléphones permettent de choisir, application par application, « toujours », « pendant l’utilisation » ou « jamais », et une position approximative. Garder la main, c’est **n’accorder la position qu’au service qui en a besoin, quand il en a besoin**.
 
+\newgeometry{inner=1.8cm,outer=1.6cm,top=2.2cm,bottom=1.9cm,headheight=16pt,headsep=0.5cm,footskip=0.9cm}
+
+??? corrige "Corrigé de l'activité"
+
+    Notions du cours mobilisées
+
+    - **Latitude, longitude** ; **GPS / GNSS** (Galileo…) et **localisation assistée** (antennes-relais, Wi-Fi).
+
+    - **Cartes numériques** et **calcul d’itinéraire** : services qui ont besoin de la position.
+
+    - **Traces de localisation**, **métadonnées EXIF** des photos (coordonnées GPS).
+
+    - **Données personnelles**, **RGPD** et CNIL ; **loi n° 1.565** et **APDP** à Monaco ; réglages « toujours / pendant l’utilisation / jamais ».
+
+    - **Sobriété** (partie « Localisation et environnement ») : la localisation permanente consomme batterie et données.
+
+    Arguments attendus
+
+    <table>
+    <thead>
+    <tr>
+    <th style="text-align: left;"><strong>POUR (oui) : toujours activée</strong></th>
+    <th style="text-align: left;"><strong>CONTRE (non) : seulement quand c’est utile</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Sécurité</strong> : appel aux secours avec la position, partage de position lors d’un trajet de nuit (doc. 1) ; l’eCall montre l’intérêt de la position pour les secours, même s’il est intégré à la voiture et non au téléphone.</p></li>
+    <li><p><strong>Retrouver un téléphone</strong> perdu ou volé : impossible si la localisation est coupée (doc. 1).</p></li>
+    <li><p><strong>Confort</strong> : itinéraires, trafic en temps réel, météo locale, sans rien régler (doc. 1, cours).</p></li>
+    <li><p><strong>La loi protège</strong> : but précis, droits d’accès et d’effacement, autorités de contrôle (doc. 4).</p></li>
+    <li><p><strong>On garde la main</strong> : position approximative, choix application par application (doc. 4, cours).</p></li>
+    <li><p><strong>Intérêt collectif</strong> : les positions agrégées servent à calculer l’état du trafic pour tous.</p></li>
+    </ul></td>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Quatre points suffisent</strong> à identifier quelqu’un, même sans nom (doc. 2).</p></li>
+    <li><p><strong>L’anonymat ne protège pas</strong> : la carte Strava a révélé des lieux secrets (doc. 3).</p></li>
+    <li><p><strong>Les traces révèlent une vie</strong> : domicile, lycée, habitudes (cours).</p></li>
+    <li><p><strong>« Toujours » = enregistrement en continu</strong>, même sans utiliser l’application (doc. 4).</p></li>
+    <li><p><strong>Les services fonctionnent quand même</strong> avec « pendant l’utilisation » : itinéraire, météo (cours).</p></li>
+    <li><p><strong>Sobriété</strong> : batterie et données consommées en permanence (cours).</p></li>
+    </ul></td>
+    </tr>
+    </tbody>
+    </table>
+
+    *Arguments de l’autre camp souvent jugés solides dans la trace écrite :* un élève POUR retient souvent « des positions sans nom suffisent à retrouver quelqu’un » ; un élève CONTRE, « en cas d’accident ou de perte, la localisation peut vraiment aider ».
+
+    Questions de relance (pour le modérateur)
+
+    1.  Quelles applications ont vraiment besoin de votre position *en permanence* ? Lesquelles seulement pendant l’utilisation ?
+
+    2.  Si un service utile ne fonctionne qu’avec « toujours », que faites-vous ?
+
+    3.  Le doc. 2 parle de données sans nom : pourquoi cela ne suffit-il pas à protéger ?
+
+    4.  Les données de position agrégées (trafic, affluence) : utiles à tous, ou risquées pour chacun ?
+
+    !!! encadre "Synthèse possible"
+
+        La localisation rend de vrais services (itinéraires, secours, objet perdu). Mais chaque position est une **donnée personnelle**, et leur **accumulation** trace notre vie : quatre points suffisent souvent à identifier une personne, même dans des données sans nom. La loi (RGPD ; loi n° 1.565 et APDP à Monaco) impose un but précis et donne des droits, et les téléphones permettent de choisir, application par application, « toujours », « pendant l’utilisation » ou « jamais », et une position approximative. Garder la main, c’est **n’accorder la position qu’au service qui en a besoin, quand il en a besoin**.
+
 ## Corrigé
 
 ??? corrige "Corrigé"
