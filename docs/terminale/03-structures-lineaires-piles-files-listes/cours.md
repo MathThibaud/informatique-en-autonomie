@@ -389,19 +389,19 @@ Piles et files ne sont pas des curiosités isolées : ce sont les **outils de ba
 
 *À la fin du chapitre, je sais…*
 
-- distinguer **pile (LIFO)** et **file (FIFO)** et en donner des usages concrets $\to$ ex. [1](exercices.md#ex-03-1), [5](exercices.md#ex-03-5) ;
+- distinguer **pile (LIFO)** et **file (FIFO)** et en donner des usages concrets $\to$ ex. [14](exercices.md#ex-03-14), [15](exercices.md#ex-03-15) ;
 
-- utiliser l’**interface** d’une pile (`empiler / depiler / est_vide / sommet`) et d’une file (`enfiler / defiler / est_vide / tete`) $\to$ ex. [2](exercices.md#ex-03-2), [16](exercices.md#ex-03-16) ;
+- utiliser l’**interface** d’une pile (`empiler / depiler / est_vide / sommet`) et d’une file (`enfiler / defiler / est_vide / tete`) $\to$ ex. [1](exercices.md#ex-03-1), [6](exercices.md#ex-03-6), [9](exercices.md#ex-03-9) ;
 
-- **dérouler** l’état d’une pile ou d’une file après une suite d’opérations $\to$ ex. [3](exercices.md#ex-03-3), [4](exercices.md#ex-03-4), [5](exercices.md#ex-03-5) ;
+- **dérouler** l’état d’une pile ou d’une file après une suite d’opérations $\to$ ex. [2](exercices.md#ex-03-2), [10](exercices.md#ex-03-10), [15](exercices.md#ex-03-15) ;
 
-- appliquer une pile à un problème (**parenthésage**, évaluation, *annuler*) $\to$ ex. [6](exercices.md#ex-03-6), [7](exercices.md#ex-03-7), [10](exercices.md#ex-03-10) ;
+- appliquer une pile à un problème (**parenthésage**, évaluation, *annuler*) $\to$ ex. [3](exercices.md#ex-03-3), [4](exercices.md#ex-03-4), [8](exercices.md#ex-03-8) ;
 
-- parcourir une **liste chaînée** (longueur, occurrences, $n$-ième élément) $\to$ ex. [12](exercices.md#ex-03-12), [13](exercices.md#ex-03-13), [14](exercices.md#ex-03-14) ;
+- parcourir une **liste chaînée** (longueur, occurrences, $n$-ième élément) $\to$ ex. [18](exercices.md#ex-03-18), [19](exercices.md#ex-03-19), [20](exercices.md#ex-03-20) ;
 
-- raisonner sur le **coût** des opérations (dont `pop(0)` en O(n)) $\to$ ex. [17](exercices.md#ex-03-17), [20](exercices.md#ex-03-20) ;
+- raisonner sur le **coût** des opérations (dont `pop(0)` en O(n)) $\to$ ex. [11](exercices.md#ex-03-11), [12](exercices.md#ex-03-12) ;
 
-- distinguer **interface** et **implémentation** $\to$ ex. [11](exercices.md#ex-03-11), [21](exercices.md#ex-03-21).
+- distinguer **interface** et **implémentation** $\to$ ex. [13](exercices.md#ex-03-13), [17](exercices.md#ex-03-17).
 
 ## Vers le Grand Oral
 
