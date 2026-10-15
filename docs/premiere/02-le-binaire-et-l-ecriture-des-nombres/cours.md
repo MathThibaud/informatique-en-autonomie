@@ -327,6 +327,18 @@ La retenue finale « déborde » au-delà des 8 bits : il reste `00000000`, soit
 
     Sur 8 bits : de $-128$ à $+127$. Sur 16 bits : de $-32768$ à $+32767$.
 
+!!! regle "Règle 6 — Décoder un entier en complément à deux sur $n$ bits"
+
+    - Si le **bit de poids fort** vaut `0`, le nombre est positif : on le lit directement (somme des poids).
+
+    - S’il vaut `1`, le nombre est **négatif** : **inverser** tous les bits puis **ajouter 1** donne sa **valeur absolue**.
+
+!!! exemple "Exemple — Décoder 11111010 sur 8 bits"
+
+    Le bit de poids fort vaut `1` : le nombre est négatif. $$\texttt{11111010}
+    \ \xrightarrow{\text{on inverse}}\ \texttt{00000101}
+    \ \xrightarrow{+1}\ \texttt{00000110} = 6.$$ Donc `11111010` code $-6$. À l’inverse, `00101101` commence par `0` : il code directement $32 + 8 + 4 + 1 = 45$.
+
 **Le cadran du complément à deux sur 4 bits.** On range les 16 mots de 4 bits en cercle, comme les heures d’une horloge. Ajouter 1, c’est avancer d’un cran dans le sens des aiguilles d’une montre : de `1111` ($-1$) on passe à `0000` ($0$), la retenue « déborde » comme plus haut. Les mots qui commencent par `0` (à droite) sont les positifs $0$ à $7$ ; ceux qui commencent par `1` (à gauche) sont les négatifs $-8$ à $-1$. Seul piège : en bas, de `0111` ($+7$) à `1000` ($-8$), on passe brutalement du plus grand au plus petit : c’est le **dépassement de capacité**.
 
 ![](../figures/1107dfa2024e13b9.svg){ .tikz loading=lazy }
@@ -358,7 +370,7 @@ Après la virgule, les rangs pèsent des puissances **négatives** de 2 : $2^{-1
 
 Reprenons la méthode sur $0{,}1$ : $$0{,}1 \times 2 = \mathbf{0}{,}2 \to \mathbf{0}{,}4 \to \mathbf{0}{,}8 \to \mathbf{1}{,}6 \to \mathbf{1}{,}2 \to \mathbf{0}{,}4 \to \cdots$$ Le motif se **répète sans fin** : $0{,}1_{10} = \texttt{0,0001100110011}\ldots_2$. Autrement dit, $0{,}1$ **n’a pas d’écriture binaire finie**, exactement comme $\frac{1}{3} = 0{,}333\ldots$ n’a pas d’écriture décimale finie.
 
-!!! regle "Règle 6 — Les flottants sont approchés"
+!!! regle "Règle 7 — Les flottants sont approchés"
 
     Une machine ne dispose que d’un nombre **fini** de bits (souvent 64) pour stocker un nombre à virgule, appelé **flottant** (*float*). Elle doit donc **tronquer** les écritures infinies : la valeur stockée est le plus souvent une **approximation**. On ne teste **jamais** l’égalité de deux flottants.
 
@@ -502,7 +514,7 @@ Un fichier texte n’est qu’une suite d’octets : **rien** n’y indique de f
 | Logique booléenne | tables de vérité de **et**, **ou**, **non**, **xor** ; $n$ variables $\to 2^n$ lignes |
 | Demi-additionneur | somme $=$ $a$ xor $b$ ; retenue $=$ $a$ et $b$ |
 | Hexadécimal | 1 chiffre hexa $=$ 4 bits ; on regroupe les bits par 4 |
-| Entier relatif | **complément à 2** : inverser les bits, puis $+1$ ; bornes $-2^{n-1}\ldots 2^{n-1}-1$ |
+| Entier relatif | **complément à 2** : inverser les bits, puis $+1$ ; bornes $-2^{n-1}\ldots 2^{n-1}-1$ ; décoder : bit de poids fort `1` $\Rightarrow$ négatif, inverser puis $+1$ donne la valeur absolue |
 | Flottant | écriture souvent **approchée** ; ne jamais tester `==` sur des *float* |
 | Texte (ASCII) | chaque caractère a un **numéro** ; ASCII $=$ 7 bits (128 car.) ; `ord`/`chr` |
 | Unicode / UTF-8 | Unicode $=$ catalogue universel (`U+`) ; UTF-8 $=$ 1 à 4 octets, compatible ASCII |

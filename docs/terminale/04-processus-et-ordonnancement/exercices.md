@@ -78,11 +78,11 @@ On donne la hiérarchie de processus suivante (chaque nœud est étiqueté par s
 
 3.  Le processus $1$ a-t-il un PPID ? Que représente-t-il ?
 
-4.  Si l’on `kill` le processus $17$, quels processus risquent de disparaître aussi ?
+4.  On `kill` le processus $17$. Que deviennent les processus $42$ et $43$ ? Préciser leur nouveau PPID.
 
 ??? corrige "Corrigé"
 
-    **1.** PPID de $42$ : c’est $17$. PPID de $23$ : c’est $1$. **2.** $17$ a **deux** fils : $42$ et $43$. **3.** $1$ (`init`) n’a pas de père utile ici ; son PPID vaut $0$ (le processus de démarrage). **4.** Tuer $17$ met en péril ses descendants $42$ et $43$.
+    **1.** PPID de $42$ : c’est $17$. PPID de $23$ : c’est $1$. **2.** $17$ a **deux** fils : $42$ et $43$. **3.** $1$ (`init`) n’a pas de père utile ici ; son PPID vaut $0$ (le processus de démarrage). **4.** Tuer $17$ ne tue pas ses fils : $42$ et $43$ deviennent **orphelins** et sont **adoptés par `init`** ; leur PPID devient $1$.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Reconstruire l’arbre <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-6 }
 

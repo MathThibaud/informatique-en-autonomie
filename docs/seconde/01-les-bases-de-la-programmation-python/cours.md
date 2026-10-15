@@ -846,6 +846,24 @@ Tant que la condition `i < 10` est vraie, le bloc indenté se répète. À chaqu
 
 **Le bon réflexe :** si vous pouvez compléter la phrase « je vais répéter *tant de fois* », prenez une boucle `for`. Si vous ne pouvez compléter que « je répète *tant que…* » ou « *jusqu’à ce que…* », prenez un `while`.
 
+!!! exemple "Exemple — Somme des entiers de 1 à n"
+
+    Écrire une fonction `somme` qui prend en paramètre un entier `n` et renvoie la somme $1 + 2 + \cdots + n$, en utilisant une boucle `for`.
+
+    ??? corrige "Correction"
+
+        On part d’une variable `s` qui vaut $0$, puis, à chaque tour, on lui ajoute la valeur de `i` (c’est le grand classique `a = a + 1`, mais avec `i` à la place de `1`) :
+
+        ```python
+        def somme(n):
+            s = 0
+            for i in range(1, n + 1):
+                s = s + i
+            return s
+        ```
+
+        Attention à `range(1, n + 1)` : la borne de droite est exclue, il faut donc écrire `n + 1` pour que `i` prenne aussi la valeur `n`. Par exemple `somme(4)` renvoie $1 + 2 + 3 + 4 = 10$.
+
 !!! exemple "Exemple — Table de multiplication"
 
     Écrire une fonction `table` qui prend en paramètre un entier et affiche sa table de multiplication de $1$ à $10$. Par exemple `table(3)` affiche « $1 \times 3 = 3$ », « $2 \times 3 = 6$ », …, « $10 \times 3 = 30$ ».

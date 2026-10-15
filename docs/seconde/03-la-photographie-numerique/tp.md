@@ -452,7 +452,10 @@ for y in range(hauteur):
         # le bleu domine (le costume) -> on repeint en rouge
         if b > r + 15 and b > v + 5 and b > 60:
             gris = (r + v + b) // 3          # on garde la luminosite (les plis)
-            img.putpixel((x, y), (min(255, gris + 50), gris // 3, gris // 4))
+            rouge = gris + 50
+            if rouge > 255:                  # on ne depasse pas 255
+                rouge = 255
+            img.putpixel((x, y), (rouge, gris // 3, gris // 4))
 img.save("garcon_modifie.jpg")
 img.show()
 ```
