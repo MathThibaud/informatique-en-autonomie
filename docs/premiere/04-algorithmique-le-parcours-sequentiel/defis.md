@@ -116,7 +116,7 @@ Tester d’abord avec un fichier `exemple.txt` contenant l’exemple ci-dessus (
 
 ### <span class="exo-num">Exercice 5</span> — Erreur classique <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-algorithmique-le-parcours-sequentiel-aoc-1-5 }
 
-Que se passerait-il si la boucle allait de `0` à `len(mesures) - 1` en comparant `mesures[i]` et `mesures[i + 1]` ? Et jusqu’à `len(mesures)` ? Tester pour vérifier.
+Que se passerait-il si la boucle était `for i in range(len(mesures) - 1)` en comparant `mesures[i]` et `mesures[i + 1]` ? Et avec `for i in range(len(mesures))` ? Tester pour vérifier.
 
 ## Partie 2
 

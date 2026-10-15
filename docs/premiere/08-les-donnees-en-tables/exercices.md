@@ -367,7 +367,7 @@ None
         return champion["prenom"], int(champion["nombre"])
     ```
 
-    `plus_donne(prenoms)` $\rightarrow$ `(’Gabriel’, 4625)` ; `moins_donne(prenoms)` $\rightarrow$ `(’Anna’, 2129)`. Sans `int`, on comparerait des *chaînes* : `"900"` serait jugé « plus grand » que `"3070"` (comparaison caractère par caractère), et le champion serait faux.
+    `plus_donne(prenoms)` $\rightarrow$ `(’Gabriel’, 4625)` ; `moins_donne(prenoms)` $\rightarrow$ `(’Anna’, 2129)`. Sans `int`, on comparerait des *chaînes*. Sur ce fichier, le champion serait le bon *par chance* : tous les effectifs ont 4 chiffres. Mais dès que les longueurs diffèrent, `"900"` serait jugé « plus grand » que `"3070"` (comparaison caractère par caractère) et le champion serait faux.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 16</span> — Coût <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-16 }
 
@@ -451,7 +451,7 @@ Trier `filles23` avec `key=lambda l: l["nombre"]` (sans `int`) et `reverse=True`
 
 ??? corrige "Corrigé"
 
-    Avec `key=lambda l: l["nombre"]`, on trie les `nombre` **comme des mots**. Deux chaînes se comparent caractère par caractère : `"900"` commence par `’9’`, `"3070"` par `’3’` ; comme `’9’ > ’3’`, la chaîne `"900"` est jugée « plus grande » que `"3070"`. Le classement est donc faux : il faut `int(...)`.
+    Avec `key=lambda l: l["nombre"]`, on trie les `nombre` **comme des mots**. Deux chaînes se comparent caractère par caractère : `"900"` commence par `’9’`, `"3070"` par `’3’` ; comme `’9’ > ’3’`, la chaîne `"900"` est jugée « plus grande » que `"3070"`. Sur `filles23`, le résultat est pourtant le bon classement, mais *par chance* : tous les effectifs ont 4 chiffres, et pour des chaînes de chiffres de même longueur, l’ordre des mots coïncide avec l’ordre des nombres. Il suffirait d’un prénom donné 900 fois pour que le classement devienne faux : il faut `int(...)`.
 
 ### Fusionner deux tables
 

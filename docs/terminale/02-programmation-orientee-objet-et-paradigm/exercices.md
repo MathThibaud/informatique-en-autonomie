@@ -303,7 +303,7 @@ print(e.nom, e.classe, e.notes)   # attendu : Zoe TG1 []
 
   ??? pouce "Coup de pouce"
 
-      La liste à modifier est l’attribut `self.notes` (méthode `append`). Pour la moyenne : somme des notes divisée par leur nombre (`sum` et `len`, ou une boucle).
+      La liste à modifier est l’attribut `self.notes` (méthode `append`). Pour la moyenne : somme des notes (boucle d’accumulation) divisée par leur nombre, `len(self.notes)`.
 
 Exemple d’utilisation :
 
@@ -1090,7 +1090,7 @@ def chargement_glouton(liste, rang, capacite):
             return colis_a_charger
         ```
 
-        Sur des listes tirées au hasard, elle renvoie toujours le même résultat que `chargement_glouton(liste, 0, capacite)`.
+        Elle applique la même règle que `chargement_glouton` (on garde un colis s’il tient dans la charge restante, en parcourant la liste dans le même ordre) : elle renvoie donc la même liste que `chargement_glouton(liste, 0, capacite)`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Puissance 4 : la grille de jeu (d’après Amérique du Nord 2026, jour 1, partie A) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-21 }
 

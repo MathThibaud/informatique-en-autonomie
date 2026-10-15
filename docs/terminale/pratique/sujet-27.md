@@ -14,19 +14,160 @@
 
     *Évaluer à la main `5 1 2 + 4 * + 3 -` en dessinant la pile.*
 
-    (sommet à droite)
+    La pile est dessinée verticalement, **sommet en haut**.
 
-    | **Élément** | **Action**                          | **Pile** |
-    |:-----------:|:------------------------------------|:---------|
-    |     `5`     | empiler                             | `5`      |
-    |     `1`     | empiler                             | `5 1`    |
-    |     `2`     | empiler                             | `5 1 2`  |
-    |     `+`     | dépiler 2 et 1, empiler $1+2$       | `5 3`    |
-    |     `4`     | empiler                             | `5 3 4`  |
-    |     `*`     | dépiler 4 et 3, empiler $3\times 4$ | `5 12`   |
-    |     `+`     | dépiler 12 et 5, empiler $5+12$     | `17`     |
-    |     `3`     | empiler                             | `17 3`   |
-    |     `-`     | dépiler 3 et 17, empiler $17-3$     | `14`     |
+    <table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><strong>Élément</strong></th>
+    <th style="text-align: left;"><strong>Action</strong></th>
+    <th style="text-align: center;"><strong>Pile</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;"><code>5</code></td>
+    <td style="text-align: left;">empiler</td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>5</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    </table></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>1</code></td>
+    <td style="text-align: left;">empiler</td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>1</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;"><code>5</code></td>
+    </tr>
+    </tbody>
+    </table></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>2</code></td>
+    <td style="text-align: left;">empiler</td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>2</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;"><code>1</code></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>5</code></td>
+    </tr>
+    </tbody>
+    </table></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>+</code></td>
+    <td style="text-align: left;">dépiler 2 et 1, empiler <span class="math inline">1 + 2</span></td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>3</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;"><code>5</code></td>
+    </tr>
+    </tbody>
+    </table></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>4</code></td>
+    <td style="text-align: left;">empiler</td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>4</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;"><code>3</code></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>5</code></td>
+    </tr>
+    </tbody>
+    </table></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>*</code></td>
+    <td style="text-align: left;">dépiler 4 et 3, empiler <span class="math inline">3 × 4</span></td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>12</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;"><code>5</code></td>
+    </tr>
+    </tbody>
+    </table></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>+</code></td>
+    <td style="text-align: left;">dépiler 12 et 5, empiler <span class="math inline">5 + 12</span></td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>17</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    </table></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>3</code></td>
+    <td style="text-align: left;">empiler</td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>3</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;"><code>17</code></td>
+    </tr>
+    </tbody>
+    </table></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>-</code></td>
+    <td style="text-align: left;">dépiler 3 et 17, empiler <span class="math inline">17 − 3</span></td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>14</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    </table></td>
+    </tr>
+    </tbody>
+    </table>
 
     La valeur est `14` : c’est l’expression $5 + (1+2)\times 4 - 3$.
 
@@ -176,19 +317,160 @@ Le dossier fourni au candidat comporte les éléments suivants :
 
     *Évaluer à la main `5 1 2 + 4 * + 3 -` en dessinant la pile.*
 
-    (sommet à droite)
+    La pile est dessinée verticalement, **sommet en haut**.
 
-    | **Élément** | **Action**                          | **Pile** |
-    |:-----------:|:------------------------------------|:---------|
-    |     `5`     | empiler                             | `5`      |
-    |     `1`     | empiler                             | `5 1`    |
-    |     `2`     | empiler                             | `5 1 2`  |
-    |     `+`     | dépiler 2 et 1, empiler $1+2$       | `5 3`    |
-    |     `4`     | empiler                             | `5 3 4`  |
-    |     `*`     | dépiler 4 et 3, empiler $3\times 4$ | `5 12`   |
-    |     `+`     | dépiler 12 et 5, empiler $5+12$     | `17`     |
-    |     `3`     | empiler                             | `17 3`   |
-    |     `-`     | dépiler 3 et 17, empiler $17-3$     | `14`     |
+    <table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><strong>Élément</strong></th>
+    <th style="text-align: left;"><strong>Action</strong></th>
+    <th style="text-align: center;"><strong>Pile</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;"><code>5</code></td>
+    <td style="text-align: left;">empiler</td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>5</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    </table></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>1</code></td>
+    <td style="text-align: left;">empiler</td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>1</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;"><code>5</code></td>
+    </tr>
+    </tbody>
+    </table></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>2</code></td>
+    <td style="text-align: left;">empiler</td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>2</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;"><code>1</code></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>5</code></td>
+    </tr>
+    </tbody>
+    </table></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>+</code></td>
+    <td style="text-align: left;">dépiler 2 et 1, empiler <span class="math inline">1 + 2</span></td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>3</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;"><code>5</code></td>
+    </tr>
+    </tbody>
+    </table></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>4</code></td>
+    <td style="text-align: left;">empiler</td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>4</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;"><code>3</code></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>5</code></td>
+    </tr>
+    </tbody>
+    </table></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>*</code></td>
+    <td style="text-align: left;">dépiler 4 et 3, empiler <span class="math inline">3 × 4</span></td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>12</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;"><code>5</code></td>
+    </tr>
+    </tbody>
+    </table></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>+</code></td>
+    <td style="text-align: left;">dépiler 12 et 5, empiler <span class="math inline">5 + 12</span></td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>17</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    </table></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>3</code></td>
+    <td style="text-align: left;">empiler</td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>3</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;"><code>17</code></td>
+    </tr>
+    </tbody>
+    </table></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>-</code></td>
+    <td style="text-align: left;">dépiler 3 et 17, empiler <span class="math inline">17 − 3</span></td>
+    <td style="text-align: center;"><table>
+    <thead>
+    <tr>
+    <th style="text-align: center;"><code>14</code></th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    </table></td>
+    </tr>
+    </tbody>
+    </table>
 
     La valeur est `14` : c’est l’expression $5 + (1+2)\times 4 - 3$.
 

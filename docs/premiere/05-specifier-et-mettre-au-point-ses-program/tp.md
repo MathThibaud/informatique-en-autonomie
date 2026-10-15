@@ -319,7 +319,9 @@ L’appel `nb_progressions([12, 8, 10])` renvoie `2` au lieu de `1`, **sans aucu
         return int(x * 2 + 0.5) / 2
 
     def nb_admis(notes):
-        """Renvoie le nombre de notes superieures ou egales a 10."""
+        """Renvoie le nombre de notes superieures ou egales a 10.
+        Precondition : chaque note est entre 0 et 20."""
+        assert notes_valides(notes), "note hors de [0, 20]"
         nb = 0
         for x in notes:
             if x >= 10:
@@ -339,7 +341,9 @@ L’appel `nb_progressions([12, 8, 10])` renvoie `2` au lieu de `1`, **sans aucu
         return r
 
     def nb_progressions(notes):
-        """Renvoie le nombre d'indices i >= 1 tels que notes[i] > notes[i - 1]."""
+        """Renvoie le nombre d'indices i >= 1 tels que notes[i] > notes[i - 1].
+        Precondition : chaque note est entre 0 et 20."""
+        assert notes_valides(notes), "note hors de [0, 20]"
         nb = 0
         for i in range(1, len(notes)):
             if notes[i] > notes[i - 1]:
@@ -348,7 +352,9 @@ L’appel `nb_progressions([12, 8, 10])` renvoie `2` au lieu de `1`, **sans aucu
 
     def premiere_sous(notes, seuil):
         """Renvoie l'indice de la premiere note strictement inferieure a seuil,
-        ou None s'il n'y en a pas."""
+        ou None s'il n'y en a pas.
+        Precondition : chaque note est entre 0 et 20."""
+        assert notes_valides(notes), "note hors de [0, 20]"
         i = 0
         while i < len(notes):
             # invariant : les notes d'indices 0 a i - 1 sont toutes >= seuil
@@ -538,7 +544,7 @@ float moyenne(int notes[], int n) {
         assert verifie_arrondi(arrondi_demi(x), x)
     ```
 
-    La version corrigée passe les 1 000 tirages. La version d’origine échoue sur **environ la moitié** des tirages (de 476 à 509 sur 1 000 lors de cinq essais ; 48 % en moyenne) : tous les `x` dont la partie décimale, comptée à partir du dernier demi-point, dépasse 0,25. Un seul tirage malchanceux suffit à la démasquer ; l’oracle juge sans connaître la réponse exacte.
+    La version corrigée passe les 1 000 tirages. La version d’origine échoue sur **environ la moitié** des tirages (environ 48 % des tirages : exactement 960 des 2 001 valeurs possibles `k / 100`) : tous les `x` dont la partie décimale, comptée à partir du dernier demi-point, dépasse 0,25. Un seul tirage malchanceux suffit à la démasquer ; l’oracle juge sans connaître la réponse exacte.
 
 ## Bilan à rédiger
 

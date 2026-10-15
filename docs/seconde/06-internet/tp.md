@@ -102,7 +102,7 @@ Interface du routeur côté réseau 0 : `192.168.0.254` ; côté réseau 1 : `19
 
     3.  `traceroute` montre **deux étapes** : d’abord le **routeur** (`192.168.0.254`), puis **PC-B**. L’étape intermédiaire est le routeur (la passerelle).
 
-    *Pour aller plus loin : couper le câble PC-B–S2 en pleine simulation et relancer le ping $\to$ échec ; le rebrancher $\to$ succès. Illustre pannes et robustesse.*
+    *Pour aller plus loin : couper le câble PC-B–S2 en pleine simulation et relancer le ping $\to$ échec ; le rebrancher $\to$ succès. Illustre une **panne** : ce câble est le seul chemin vers PC-B, donc plus rien ne passe. La **robustesse** d’Internet viendrait d’un **second chemin** entre routeurs, par lequel les paquets pourraient contourner la panne.*
 
 0
 

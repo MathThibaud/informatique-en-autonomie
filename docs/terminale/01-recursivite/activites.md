@@ -45,7 +45,7 @@ fctB()
 
 ??? corrige "Corrigé"
 
-    1.  Affichage (vérifié à la machine) :
+    1.  Affichage :
 
         ```text
         Debut fctB
@@ -93,7 +93,7 @@ ouvrir(3)
 
 ??? corrige "Corrigé"
 
-    1.  Affichage (vérifié à la machine) :
+    1.  Affichage :
 
         ```text
         J'ouvre la poupee 3

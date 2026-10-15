@@ -570,7 +570,7 @@ Quelle opération le bit réalise-t-il sur sa propre valeur ? Quelle porte logiq
 
     !!! remarque "Remarque"
 
-        Conventions (celles du guide officiel de Turing Tumble) : un bit vaut 1 quand il pointe à droite, et le bit du haut d’un registre est celui des unités. Les montages des portes ET/OU, de l’inverseur et de « inverser puis $+1$ » ont été conçus pour l’atelier et **testés dans le simulateur** (tous les cas des portes ; `0101` $\to$ `1010` ; `1011` $\to$ `1100`).
+        Conventions (celles du guide officiel de Turing Tumble) : un bit vaut 1 quand il pointe à droite, et le bit du haut d’un registre est celui des unités. Les montages des portes ET/OU, de l’inverseur et de « inverser puis $+1$ » ont été conçus pour l’atelier et se vérifient dans le simulateur (tous les cas des portes ; `0101` $\to$ `1010` ; `1011` $\to$ `1100`).
 
     Valeur `0` : la bille tombe à **droite**, le bit passe à `1`. Valeur `1` : la bille tombe à **gauche**, le bit passe à `0`. Le bit **inverse** sa valeur à chaque passage : c’est la porte **NON** appliquée à sa propre mémoire.
 

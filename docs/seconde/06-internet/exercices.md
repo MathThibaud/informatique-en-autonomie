@@ -370,7 +370,7 @@
 
 ??? corrige "Corrigé"
 
-    1.  Presque : paquets, routeurs, TTL et « aucune garantie de temps » sont conformes au cours. Mais le cours attribue à **TCP** le rôle de « vérifier que *tous* les paquets arrivent, **redemander** ceux qui manquent, et les **remettre dans l’ordre** », et à IP celui d’**adresser** et d’**acheminer** les paquets.
+    1.  Non. Paquets, routeurs, TTL et « aucune garantie de temps » sont conformes au cours. Mais le cours attribue à **TCP** le rôle de « vérifier que *tous* les paquets arrivent, **redemander** ceux qui manquent, et les **remettre dans l’ordre** », et à IP celui d’**adresser** et d’**acheminer** les paquets.
 
     2.  L’erreur : « c’est le protocole IP qui s’en aperçoit et redemande le paquet ». IP ne fait qu’acheminer ; c’est **TCP** qui s’aperçoit de la perte, redemande le paquet et remet les paquets dans l’ordre. Correction : remplacer « IP » par « TCP » dans cette phrase.
 

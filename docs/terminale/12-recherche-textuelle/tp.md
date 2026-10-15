@@ -154,7 +154,7 @@
         assert horspool_compte(motif, texte)[0] == ref
     ```
 
-    Avec deux lettres seulement, le motif apparaît **souvent**, avec beaucoup de correspondances partielles et de chevauchements : ce sont les situations délicates, celles où se cachent les erreurs d’indice. Sur un alphabet de $26$ lettres, presque tous les tests seraient des « absent » sans intérêt. (Les tests passent sans erreur.)
+    Avec deux lettres seulement, le motif apparaît **souvent**, avec beaucoup de correspondances partielles et de chevauchements : ce sont les situations délicates, celles où se cachent les erreurs d’indice. Sur un alphabet de $26$ lettres, presque tous les tests seraient des « absent » sans intérêt.
 
 ## Partie B — Un vrai roman
 
@@ -266,7 +266,7 @@ La commande `grep` des systèmes Unix affiche les **lignes** d’un fichier qui 
         return resultat
     ```
 
-    Dans le roman : $282$ lignes, $282$ occurrences dans le texte entier, $301$ après le remplacement. `grep` compte des *lignes* : une ligne qui contient deux fois le motif ne compterait qu’une fois (ce n’est jamais le cas ici, d’où $282 = 282$). Surtout, quand `Phileas` est en fin de ligne et `Fogg` au début de la suivante, le texte contient `"Phileas\nFogg"` : ni `grep`, ni la recherche dans le texte entier ne trouvent le motif (le caractère de fin de ligne n’est pas une espace). En remplaçant les fins de ligne par des espaces, on retrouve ces occurrences coupées ($19$ ici), au prix de la perte des numéros de ligne. *(Vérifié sur un petit texte : `grep("Fogg voyage", "Phileas Fogg\nvoyage")` renvoie `[]`, mais le motif est trouvé après le remplacement.)*
+    Dans le roman : $282$ lignes, $282$ occurrences dans le texte entier, $301$ après le remplacement. `grep` compte des *lignes* : une ligne qui contient deux fois le motif ne compterait qu’une fois (ce n’est jamais le cas ici, d’où $282 = 282$). Surtout, quand `Phileas` est en fin de ligne et `Fogg` au début de la suivante, le texte contient `"Phileas\nFogg"` : ni `grep`, ni la recherche dans le texte entier ne trouvent le motif (le caractère de fin de ligne n’est pas une espace). En remplaçant les fins de ligne par des espaces, on retrouve ces occurrences coupées ($19$ ici), au prix de la perte des numéros de ligne. *(Sur un petit texte : `grep("Fogg voyage", "Phileas Fogg\nvoyage")` renvoie `[]`, mais le motif est trouvé après le remplacement.)*
 
 ## Partie C — La longueur du motif, et la taille de l’alphabet
 
@@ -371,7 +371,7 @@ On prend un texte de $n = 20\,000$ lettres `A` : `texte = "A" * 20000`.
 
     **3.** Les deux sont en $O(n \times m)$ dans le pire des cas (coût **quadratique** si $m$ est de l’ordre de $n$). Ce pire cas exige un texte très répétitif (une seule lettre) : il n’arrive pratiquement jamais en français, mais il peut arriver sur des données binaires ou des séquences d’ADN très répétées.
 
-    **4.** Un motif sans aucun `A`, par exemple `"B" * 10` : la lettre de fin de fenêtre est toujours `A`, absente de la table, donc saut de $10$ après une seule comparaison : $20\,000 / 10 = 2\,000$ comparaisons (mesuré : $2\,000$).
+    **4.** Un motif sans aucun `A`, par exemple `"B" * 10` : la lettre de fin de fenêtre est toujours `A`, absente de la table, donc saut de $10$ après une seule comparaison : $20\,000 / 10 = 2\,000$ comparaisons.
 
 ## Partie E — Face à Python
 

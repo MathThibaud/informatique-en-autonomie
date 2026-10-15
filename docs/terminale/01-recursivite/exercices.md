@@ -1082,7 +1082,7 @@ On se déplace dans une grille rectangulaire, du coin en haut à gauche jusqu’
             return itineraire
         ```
 
-        On vérifie sur de nombreux tirages que le résultat contient toujours exactement `m` lettres `B` et `n` lettres `D`. La grille parcourue a donc $m+1$ lignes et $n+1$ colonnes (indices de $0$ à $m$ et de $0$ à $n$) : ce n’est pas la même convention que dans la suite, où $m \times n$ désigne le nombre de **cases**.
+        La boucle s’arrête dès que `i` vaut `m` ou que `j` vaut `n` ; les deux `if` complètent alors avec les `n - j` lettres `D` ou les `m - i` lettres `B` qui manquent. Le résultat contient donc toujours exactement `m` lettres `B` et `n` lettres `D`. La grille parcourue a donc $m+1$ lignes et $n+1$ colonnes (indices de $0$ à $m$ et de $0$ à $n$) : ce n’est pas la même convention que dans la suite, où $m \times n$ désigne le nombre de **cases**.
 
     2.  Dans une grille d’une seule ligne, on ne peut jamais descendre : le seul chemin consiste à aller toujours à droite (`’DDD’` pour $n = 4$ colonnes). Donc $N(1, n) = 1$.
 
@@ -1346,11 +1346,11 @@ Pour vérifier si une proposition est une anagramme du bon mot, il est inutile d
 
         ![](../figures/f99d8965eb3ac972.svg){ .tikz loading=lazy }
 
-        Il y a $1 + 3 + 6 = \mathbf{10}$ appels. Pour `’ABCD’`, l’appel initial lance $4$ appels sur des mots de $3$ lettres, et chacun d’eux en provoque $10$ (arbre ci-dessus) : $1 + 4\times 10 = \mathbf{41}$ appels (nombres vérifiés en comptant les appels à l’exécution).
+        Il y a $1 + 3 + 6 = \mathbf{10}$ appels. Pour `’ABCD’`, l’appel initial lance $4$ appels sur des mots de $3$ lettres, et chacun d’eux en provoque $10$ (arbre ci-dessus) : $1 + 4\times 10 = \mathbf{41}$ appels.
 
     7.  Le **variant** est la longueur du mot. Chaque appel récursif porte sur `sans_lettre(mot, i)`, qui a une lettre de moins : cet entier positif décroît strictement à chaque appel, donc finit par valoir $1$ (ou $0$ pour le mot vide) : c’est la condition d’arrêt `len(mot) <= 1`, qui renvoie sans appel récursif. De plus, chaque appel ne lance qu’un nombre fini d’appels (un par lettre) : l’exécution se termine.
 
-    8.  La fonction ne distingue pas les deux `L` : elle les traite comme deux lettres différentes. La liste contient $4\times 3\times 2\times 1 = \mathbf{24}$ mots, mais chaque mot y figure deux fois (une fois pour chaque façon de placer les deux `L`, qui donnent le même mot) : il n’y a que $24 / 2 = \mathbf{12}$ mots différents (vérifié par exécution). La formule $P(n) = n!$ ne vaut que pour des lettres toutes différentes.
+    8.  La fonction ne distingue pas les deux `L` : elle les traite comme deux lettres différentes. La liste contient $4\times 3\times 2\times 1 = \mathbf{24}$ mots, mais chaque mot y figure deux fois (une fois pour chaque façon de placer les deux `L`, qui donnent le même mot) : il n’y a que $24 / 2 = \mathbf{12}$ mots différents. La formule $P(n) = n!$ ne vaut que pour des lettres toutes différentes.
 
     9.
 
@@ -1386,7 +1386,7 @@ Pour vérifier si une proposition est une anagramme du bon mot, il est inutile d
 
         - `’O’` est dans `’O’` $\rightarrow$ appel `est_anagramme(’’, ’’)` : condition d’arrêt, renvoie `True`.
 
-        La valeur `True` remonte jusqu’à l’appel initial. À l’inverse, `est_anagramme(’ALLO’, ’ALO’)` renvoie `False` (après avoir retiré `A` et `L`, il ne reste plus de `L` dans `’O’`). La fonction donne le même résultat que la comparaison des lettres triées sur des milliers de couples de mots tirés au hasard.
+        La valeur `True` remonte jusqu’à l’appel initial. À l’inverse, `est_anagramme(’ALLO’, ’ALO’)` renvoie `False` (après avoir retiré `A` et `L`, il ne reste plus de `L` dans `’O’`).
 
 ### Critiquer une réponse d’IA
 
@@ -1417,7 +1417,7 @@ def est_triee(tab):
 
 ??? corrige "Corrigé"
 
-    **1.** `est_triee([1, 5, 2, 8])` : `1 > 5` est faux, appel sur `[2, 8]` ; `2 > 8` est faux, appel sur `[]` $\to$ `True`. Sortie réelle : `True`, alors que la liste **n’est pas triée** ($5 > 2$). Pour `[1, 2, 5, 8]` : `True` (correct). La réponse est donc **fausse**.
+    **1.** `est_triee([1, 5, 2, 8])` : `1 > 5` est faux, appel sur `[2, 8]` ; `2 > 8` est faux, appel sur `[]` $\to$ `True`. La fonction renvoie donc `True`, alors que la liste **n’est pas triée** ($5 > 2$). Pour `[1, 2, 5, 8]` : `True` (correct). La réponse est donc **fausse**.
 
     **2.** L’erreur : l’appel récursif `tab[2:]` saute deux éléments à la fois, si bien que la paire `(tab[1], tab[2])` n’est **jamais comparée**. Il faut avancer d’un seul élément :
 

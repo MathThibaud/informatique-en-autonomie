@@ -51,7 +51,7 @@ La pile obtenue après `empiler(5)`, `empiler(8)`, `empiler(3)`.
 
 ??? corrige "Corrigé"
 
-    Tout le code ci-dessous a été exécuté : avec ces solutions, les huit tests du fichier `tp_structures_lineaires_depart.py` affichent `[OK]`.
+    Avec ces solutions, les huit tests du fichier `tp_structures_lineaires_depart.py` affichent `[OK]`.
 
     **1.** `empiler(7)` crée une cellule `7` dont le lien pointe vers l’ancienne tête `3`, et `_tete` désigne désormais cette cellule : `7 → 3 → 8 → 5 → None`. `depiler()` renvoie `7` et ramène `_tete` sur `3`. Chaque opération modifie **un** lien (plus la création d’une cellule), quelle que soit la taille de la pile : coût constant.
 
@@ -408,7 +408,7 @@ Pour traduire une expression usuelle (dite *infixe*), on la lit de gauche à dro
         return texte
     ```
 
-    `"12*(3+4)-(5+5)*2"` se traduit en `12 3 4 + * 5 5 + 2 * -` et vaut `64.0`. Le résultat a été comparé à celui de Python sur six expressions.
+    `"12*(3+4)-(5+5)*2"` se traduit en `12 3 4 + * 5 5 + 2 * -` et vaut `64.0`.
 
 ## Les boutons « Annuler » et « Rétablir »
 

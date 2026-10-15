@@ -128,6 +128,8 @@ if r is not None:
     print("le maximum est", t[r])
 ```
 
+Pour tester la valeur `None`, on écrit `r is None` (ou `r is not None`) plutôt que `r == None`.
+
 !!! remarque "Remarque — Deux conventions pour « absent » : None ou -1"
 
     On rencontre les deux, y compris au bac : `None` (ici) ou `-1` ; **suivez la convention de l’énoncé**. Avec `-1`, attention : `t[-1]` est un indice *valide* (le dernier élément), donc testez `r != -1` avant d’utiliser `t[r]`.

@@ -856,7 +856,7 @@ def est_abr(a):
 
 ??? corrige "Corrigé"
 
-    **1.** **Non.** L’arbre proposé a pour racine `8`, avec `12` dans son sous-arbre **gauche** : ce n’est **pas** un ABR (toute valeur du sous-arbre gauche doit être plus petite que `8`). Or la fonction renvoie `True` (sortie réelle), car chaque nœud est « localement » correct : `3 < 8`, `10 >= 8`, `1 < 3 <= 12`.
+    **1.** **Non.** L’arbre proposé a pour racine `8`, avec `12` dans son sous-arbre **gauche** : ce n’est **pas** un ABR (toute valeur du sous-arbre gauche doit être plus petite que `8`). Or la fonction renvoie `True`, car chaque nœud est « localement » correct : `3 < 8`, `10 >= 8`, `1 < 3 <= 12`.
 
     **2.** L’erreur : la fonction ne compare chaque nœud qu’à ses **fils**, alors que la définition porte sur **toutes les valeurs** du sous-arbre (« *toutes les valeurs de son sous-arbre gauche sont plus petites que sa valeur* »). Il faut propager un encadrement le long de la descente : dans un sous-arbre gauche, toute valeur doit rester **strictement inférieure** à `maxi` ; dans un sous-arbre droit, **supérieure ou égale** à `mini` (convention du cours : doublon à droite) :
 

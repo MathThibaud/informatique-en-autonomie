@@ -536,7 +536,7 @@ Quel résultat obtient-on ? Est-il exactement égal à `1.0` ? Relier cette obse
 
 ??? corrige "Corrigé"
 
-    On obtient `0.9999999999999999`, et non `1.0`. Chaque `0.1` étant déjà approché, les petites erreurs s’**accumulent** à chaque addition. C’est la même cause qu’à l’exercice précédent : les flottants sont des approximations, jamais des valeurs exactes.
+    On obtient `0.9999999999999999`, et non `1.0`. Chaque `0.1` étant déjà approché, les petites erreurs s’**accumulent** à chaque addition. C’est la même cause qu’à l’exercice précédent. Les flottants sont le plus souvent des approximations : seuls les nombres qui ont une écriture binaire finie ($0{,}5$ ; $0{,}75$ ; $6{,}25$…) sont stockés exactement, et $0{,}1$ n’en fait pas partie.
 
 ### Coder le texte : ASCII et Unicode
 

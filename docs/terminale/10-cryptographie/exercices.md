@@ -899,7 +899,7 @@ def chiffrer_xor(codes, cle):
             return [intercepte[i] ^ debut_connu[i] for i in range(n)]
         ```
 
-        Avec `intercepte = [88, 80, 124, 69, 64, 26, 32]`, l’appel `retrouver_cle(intercepte, [79, 85, 86], 3)` renvoie `[23, 5, 42]`. Ève appelle ensuite `chiffrer_xor(intercepte, [23, 5, 42])`, qui renvoie `[79, 85, 86, 82, 69, 48, 55]`, c’est-à-dire `"OUVRE07"` (vérifié par exécution).
+        Avec `intercepte = [88, 80, 124, 69, 64, 26, 32]`, l’appel `retrouver_cle(intercepte, [79, 85, 86], 3)` renvoie `[23, 5, 42]`. Ève appelle ensuite `chiffrer_xor(intercepte, [23, 5, 42])`, qui renvoie `[79, 85, 86, 82, 69, 48, 55]`, c’est-à-dire `"OUVRE07"`.
 
     6.  Le masque jetable exige une clé **aussi longue que le message**, **aléatoire** et **utilisée une seule fois**. Ici la clé est **courte** et **répétée** dans le message, et surtout **réutilisée** pour tous les messages : connaître un morceau du clair (le début `"OUVRE"`, toujours le même) suffit à retrouver la clé, donc à lire — et à fabriquer — tous les messages.
 
@@ -907,7 +907,7 @@ def chiffrer_xor(codes, cle):
 
     1.  $n = 17\times 19 = 323$ et $\varphi = 16\times 18 = 288$. Comme $288 = 2^{5}\times 3^{2}$ n’est pas divisible par le nombre premier $5$, $e = 5$ est bien premier avec $\varphi$. Enfin $5\times 173 = 865 = 3\times 288 + 1$, donc $5\times 173\equiv 1\ [288]$ : $d = 173$ est l’inverse modulaire de $e$ (en Python, `pow(5, -1, 288)` renvoie `173`). Clé publique : $\mathbf{(5,\,323)}$ ; clé privée : $\mathbf{(173,\,323)}$.
 
-    2.  L’application chiffre avec la clé **publique** du casier : `C = pow(42, 5, 323)`, qui vaut $264$. Le casier déchiffre avec sa clé **privée** : `K = pow(264, 173, 323)`, qui redonne $42$ (vérifié par exécution).
+    2.  L’application chiffre avec la clé **publique** du casier : `C = pow(42, 5, 323)`, qui vaut $264$. Le casier déchiffre avec sa clé **privée** : `K = pow(264, 173, 323)`, qui redonne $42$.
 
     3.  Ève connaît la clé publique $(5, 323)$. Elle cherche un diviseur de $323$ en essayant $2, 3, 5, \dots$ : elle trouve vite $323 = 17\times 19$, calcule $\varphi = 288$, puis $d = 173$ comme le casier. Avec un vrai RSA, $n$ est le produit de deux nombres premiers d’environ $300$ chiffres chacun ($n$ de $2\,048$ bits, soit $617$ chiffres) : aucun algorithme connu ne sait **factoriser** un tel nombre en un temps raisonnable. La sécurité de RSA repose sur cette difficulté.
 
@@ -948,7 +948,7 @@ def dechiffrer(C):
 
 ??? corrige "Corrigé"
 
-    1.  **Non.** Avec $n = 55$ : `d = pow(3, -1, 55)` vaut $37$ (car $3 \times 37 = 111 = 2\times 55 + 1$). Puis `chiffrer(7)` $= 7^{3} \bmod 55 = 343 \bmod 55 = 13$, et `dechiffrer(13)` $= 13^{37} \bmod 55 = \mathbf{18}$ (sortie réelle), et non $7$ : le déchiffrement **ne redonne pas le message**.
+    1.  **Non.** Avec $n = 55$ : `d = pow(3, -1, 55)` vaut $37$ (car $3 \times 37 = 111 = 2\times 55 + 1$). Puis `chiffrer(7)` $= 7^{3} \bmod 55 = 343 \bmod 55 = 13$, et `dechiffrer(13)` $= 13^{37} \bmod 55 = \mathbf{18}$, et non $7$ : le déchiffrement **ne redonne pas le message**.
 
     2.  L’erreur : l’inverse modulaire de $e$ doit être pris **modulo $\varphi = (p-1)(q-1)$**, pas modulo $n$ (cours : « *Calculer $d$, l’inverse modulaire de $e$ : le nombre tel que $e \times d \equiv 1\ [\varphi]$* »). Lignes corrigées :
 

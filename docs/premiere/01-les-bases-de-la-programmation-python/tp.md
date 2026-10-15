@@ -47,7 +47,7 @@ Pourquoi est-il préférable de *renvoyer* la réponse plutôt que de l’*affic
     |  |  |
     |:---|:---|
     | **Ancrage BO (1re)** | constructions élémentaires (séquence, affectation, conditionnelles, boucles bornées et non bornées, appels de fonction) ; spécification (docstring, précondition par `assert`) ; jeux de tests ; terminaison par un variant. |
-    | **Code** | tout le code ci-dessous forme **un seul fichier** `nombre_mystere.py`, exécuté avec `python3` : tous les `assert` passent, et une partie complète a été jouée en simulant les saisies (sorties reproduites telles quelles). |
+    | **Code** | tout le code ci-dessous forme **un seul fichier** `nombre_mystere.py`. |
     | **Contrainte** | aucune liste ni aucun tuple (non vus à ce stade) : les affichages multiples sont des `print` successifs, et chaque fonction renvoie **une seule** valeur (d’où `borne_max` et `essais_autorises` séparées). |
 
     - Testées par `assert` : `comparer`, `est_dans_intervalle`, `ecart`, `indice`, `points`, `borne_max`, `essais_autorises`, `essais_ordinateur`, `pire_cas`, `nb_moities`. Non testables ainsi : `partie`, `afficher_menu`, `demander_niveau`, `ordinateur_devine`, `jouer` (elles lisent le clavier ou affichent) : on les essaie à la main.
@@ -447,7 +447,7 @@ Puis ajouter tout en bas du fichier la ligne `jouer()`, **après** les tests, et
     jouer()
     ```
 
-    Exécution réelle (saisies simulées, secret `42` puis `3` ; le menu, affiché avant chaque choix de niveau, n’est pas reproduit) :
+    Exemple de partie (secret `42` puis `3` ; le menu, affiché avant chaque choix de niveau, n’est pas reproduit) :
 
     ```text
     Votre niveau (1, 2, 3 ou 4) : 5
@@ -617,7 +617,7 @@ Ajouter ce mode au menu de `jouer()` (par exemple, niveau `4`). Quelles fonction
                     essais = essais - 1
     ```
 
-    Testé : la séquence `+ - + =` donne bien l’affichage de l’énoncé ; répondre `+` à chaque fois affiche `Tricheur !` juste après la 7<sup>e</sup> proposition (`100`). Pour l’ajouter au jeu, on modifie `afficher_menu`, `demander_niveau` et `jouer` (voir plus haut) ; `comparer`, `indice`, `points`, `partie`, `borne_max` et `essais_autorises` restent **intactes** — c’est tout l’intérêt du découpage en fonctions. Attention : `borne_max(4)` déclencherait l’`assert`, d’où le `if niveau == 4` placé *avant* son appel.
+    Avec la séquence `+ - + =`, on obtient l’affichage de l’énoncé ; répondre `+` à chaque fois affiche `Tricheur !` juste après la 7<sup>e</sup> proposition (`100`). Pour l’ajouter au jeu, on modifie `afficher_menu`, `demander_niveau` et `jouer` (voir plus haut) ; `comparer`, `indice`, `points`, `partie`, `borne_max` et `essais_autorises` restent **intactes** — c’est tout l’intérêt du découpage en fonctions. Attention : `borne_max(4)` déclencherait l’`assert`, d’où le `if niveau == 4` placé *avant* son appel.
 
 ## Bilan à rédiger
 

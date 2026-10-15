@@ -719,7 +719,7 @@ Le **coût inesthétique** d’une ligne est le *carré* du nombre d’espaces s
 
     **2.** Après chacun des $n-1$ premiers mots on peut couper ou non : cela fait $2^{n-1}$ découpages possibles. Ce nombre **explose** (exponentiel) : impossible de tous les tester dès que $n$ dépasse quelques dizaines.
 
-    **3.** La fonction remplit `cout_mini` **de la fin vers le début** : quand on calcule `cout_mini[i]`, toutes les cases `cout_mini[j]` avec $j > i$ sont **déjà connues**. La relation est $$\texttt{cout\_mini[i]} = \min_{j > i}\ \big(\ \texttt{cout(i, j)} + \texttt{cout\_mini[j]}\ \big),$$ c’est-à-dire : coût de la première ligne (mots $i$ à $j-1$) plus le coût optimal du reste. Comme on résout les sous-problèmes du plus petit (la fin) au plus grand (le début) en rangeant les résultats dans un tableau, c’est bien de la **tabulation**.
+    **3.** La fonction remplit `cout_mini` **de la fin vers le début** : quand on calcule `cout_mini[i]`, toutes les cases `cout_mini[j]` avec $j > i$ sont **déjà connues**. La relation est $$\texttt{cout\_mini[i]} = \min_{i < j \leqslant n}\ \big(\ \texttt{cout(i, j)} + \texttt{cout\_mini[j]}\ \big),$$ c’est-à-dire : coût de la première ligne (mots $i$ à $j-1$) plus le coût optimal du reste. Pour $j = n$, on adopte la convention $\texttt{cout\_mini[n]} = 0$ (il ne reste plus aucun mot à justifier) : ce cas, où tous les mots restants tiennent sur une seule ligne, correspond à la valeur initiale `cout(i, n, ...)` du code, puisque la liste `cout_mini` n’a que $n$ cases (indices $0$ à $n-1$). Comme on résout les sous-problèmes du plus petit (la fin) au plus grand (le début) en rangeant les résultats dans un tableau, c’est bien de la **tabulation**.
 
     **4.** Il suffit de renvoyer aussi `cout_mini[0]`, qui contient déjà le coût inesthétique total du meilleur découpage :
 
@@ -1340,7 +1340,7 @@ def rendu(somme, pieces):
 
 ??? corrige "Corrigé"
 
-    **1.** **Non.** Toutes les cases valent $0$ au départ ; pour `s = 1`, on teste `table[0] + 1 < table[1]`, soit `1 < 0` : faux, la case reste à $0$. Il en va de même pour toutes les suivantes : la condition « strictement plus petit que $0$ » n’est jamais vraie. Sortie réelle : `rendu(6, [1, 3, 4])` renvoie `0` (et `rendu(7, [1, 3, 4])` aussi), au lieu de $2$.
+    **1.** **Non.** Toutes les cases valent $0$ au départ ; pour `s = 1`, on teste `table[0] + 1 < table[1]`, soit `1 < 0` : faux, la case reste à $0$. Il en va de même pour toutes les suivantes : la condition « strictement plus petit que $0$ » n’est jamais vraie. Ainsi, `rendu(6, [1, 3, 4])` renvoie `0` (et `rendu(7, [1, 3, 4])` aussi), au lieu de $2$.
 
     **2.** L’erreur : la table est **initialisée à $0$**, valeur qui joue le rôle de « meilleur résultat connu » et bat donc toute proposition. Un montant non encore traité doit valoir **$+\infty$** (« aucune solution connue »), seule la case `table[0]` valant $0$ :
 

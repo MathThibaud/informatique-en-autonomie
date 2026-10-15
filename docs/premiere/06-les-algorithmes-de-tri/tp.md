@@ -104,7 +104,7 @@ On **instrumente** les deux tris du cours : ils trient le tableau **en place** c
         comparaisons = 0
         echanges = 0
         n = len(t)
-        for i in range(n - 1):
+        for i in range(n):
             i_min = i
             for j in range(i + 1, n):
                 comparaisons = comparaisons + 1
@@ -296,32 +296,32 @@ Décommenter `tester_partie_A()` : les tests trient des listes de plusieurs tail
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `tri_insertion_visu(t, pause)` : le tri par insertion, qui affiche le tableau **après chaque insertion**, en marquant l’élément qu’on vient de placer, puis attend `pause` secondes (`time.sleep(pause)`). Voici un **extrait** de l’affichage attendu sur `[5, 3, 8, 1, 9, 2]` (l’état de départ, puis les étapes 1 et 3 ; l’étape 2, où 8 reste à sa place, n’est pas reproduite) :
 
 ```text
- 5 #####
- 3 ###
- 8 ########
- 1 #
- 9 #########
- 2 ##
+5 #####
+3 ###
+8 ########
+1 #
+9 #########
+2 ##
 ```
 
 ```text
 Étape 1 : on insère 3
- 3 ###  <--
- 5 #####
- 8 ########
- 1 #
- 9 #########
- 2 ##
+3 ###  <--
+5 #####
+8 ########
+1 #
+9 #########
+2 ##
 ```
 
 ```text
 Étape 3 : on insère 1
- 1 #  <--
- 3 ###
- 5 #####
- 8 ########
- 9 #########
- 2 ##
+1 #  <--
+3 ###
+5 #####
+8 ########
+9 #########
+2 ##
 ```
 
 1.  Sur l’affichage, repérer l’**invariant** du tri par insertion : quelle partie du tableau est triée après l’étape $i$ ?
@@ -351,9 +351,24 @@ Décommenter `tester_partie_A()` : les tests trient des listes de plusieurs tail
             print("Étape", i, ": on insère", x)
             afficher_barres(t, j + 1)    # x vient d'etre pose en j + 1
             time.sleep(pause)
+
+    def tri_selection_visu(t, pause):          # question 4
+        afficher_barres(t, -1)
+        n = len(t)
+        for i in range(n):
+            i_min = i
+            for j in range(i + 1, n):
+                if t[j] < t[i_min]:
+                    i_min = j
+            temp = t[i]
+            t[i] = t[i_min]
+            t[i_min] = temp
+            print("Étape", i + 1, ": le minimum", t[i], "va en position", i)
+            afficher_barres(t, i)
+            time.sleep(pause)
     ```
 
-    Question 3 : après l’étape $i$, les cases `0` à `i` sont triées (mais des éléments plus petits arriveront encore). Question 4 : la sélection est le tri du cours, avec un affichage après chaque échange ; à l’écran, la zone de gauche n’est **plus jamais modifiée**, alors qu’avec l’insertion les barres déjà rangées glissent encore vers la droite.
+    Question 3 : après l’étape $i$, les cases `0` à `i` sont triées (mais des éléments plus petits arriveront encore). Question 4 : `tri_selection_visu` (code ci-dessus) est le tri du cours, avec un affichage après chaque échange ; à l’écran, la zone de gauche n’est **plus jamais modifiée**, alors qu’avec l’insertion les barres déjà rangées glissent encore vers la droite.
 
 ## Défi : le classement en direct
 

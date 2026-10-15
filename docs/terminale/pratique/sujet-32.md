@@ -34,7 +34,11 @@
     (176, 21890, 242784)
     ```
 
-    L’appel $E(4)$ lance $E(3)$ et $E(2)$ ; or $E(3)$ relance lui-même $E(2)$ et $E(1)$. $E(2)$ est donc calculé **deux fois**, $E(1)$ trois fois, et ainsi de suite : les sous-problèmes **se recouvrent**. Chaque marche supplémentaire multiplie environ par $1{,}6$ le nombre d’appels (comme la suite de Fibonacci) : le coût est **exponentiel**. Pour $100$ marches, il faudrait de l’ordre de $10^{21}$ appels : c’est impossible en pratique.
+    L’arbre des appels de $E(4)$ (les deux appels $E(2)$, qui refont exactement le même calcul, sont grisés) :
+
+    ![](../figures/549b0e63b2a51c93.svg){ .tikz loading=lazy }
+
+    L’appel $E(4)$ lance $E(3)$ et $E(2)$ ; or $E(3)$ relance lui-même $E(2)$ et $E(1)$, soit $9$ appels en tout. $E(2)$ est donc calculé **deux fois**, $E(1)$ trois fois, et ainsi de suite : les sous-problèmes **se recouvrent**. Chaque marche supplémentaire multiplie environ par $1{,}6$ le nombre d’appels (comme la suite de Fibonacci) : le coût est **exponentiel**. Pour $100$ marches, il faudrait de l’ordre de $10^{21}$ appels : c’est impossible en pratique.
 
     $\blacktriangleright$ Appel professeur. dessiner l’arbre des appels de $E(4)$ et y repérer les calculs répétés.
 
@@ -175,7 +179,11 @@ Le dossier fourni au candidat comporte les éléments suivants :
     (176, 21890, 242784)
     ```
 
-    L’appel $E(4)$ lance $E(3)$ et $E(2)$ ; or $E(3)$ relance lui-même $E(2)$ et $E(1)$. $E(2)$ est donc calculé **deux fois**, $E(1)$ trois fois, et ainsi de suite : les sous-problèmes **se recouvrent**. Chaque marche supplémentaire multiplie environ par $1{,}6$ le nombre d’appels (comme la suite de Fibonacci) : le coût est **exponentiel**. Pour $100$ marches, il faudrait de l’ordre de $10^{21}$ appels : c’est impossible en pratique.
+    L’arbre des appels de $E(4)$ (les deux appels $E(2)$, qui refont exactement le même calcul, sont grisés) :
+
+    ![](../figures/549b0e63b2a51c93.svg){ .tikz loading=lazy }
+
+    L’appel $E(4)$ lance $E(3)$ et $E(2)$ ; or $E(3)$ relance lui-même $E(2)$ et $E(1)$, soit $9$ appels en tout. $E(2)$ est donc calculé **deux fois**, $E(1)$ trois fois, et ainsi de suite : les sous-problèmes **se recouvrent**. Chaque marche supplémentaire multiplie environ par $1{,}6$ le nombre d’appels (comme la suite de Fibonacci) : le coût est **exponentiel**. Pour $100$ marches, il faudrait de l’ordre de $10^{21}$ appels : c’est impossible en pratique.
 
     $\blacktriangleright$ Appel professeur. dessiner l’arbre des appels de $E(4)$ et y repérer les calculs répétés.
 

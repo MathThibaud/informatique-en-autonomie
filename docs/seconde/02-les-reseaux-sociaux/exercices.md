@@ -367,7 +367,7 @@ On étudie le réseau d’amitiés suivant (une arête $=$ « est ami avec ») :
 
 > Alice et Farid ne sont pas amis directement. Pour aller de l’un à l’autre, il faut passer par David, le sommet le plus connecté du réseau (degré 4). Un plus court chemin est Alice – Bilal – David – Farid (on peut aussi passer par Chloé à la place de Bilal). Ce chemin passe par quatre personnes : la distance entre Alice et Farid est donc de 4. À titre de comparaison, Ella et Farid sont amis, donc à distance 1.
 
-1.  La réponse est-elle correcte ? Vérifiez sur le graphe et relisez la définition de la distance dans le cours.
+1.  La réponse est-elle correcte ? Vérifier sur le graphe et relire la définition de la distance dans le cours.
 
 2.  Localiser et corriger l’erreur.
 

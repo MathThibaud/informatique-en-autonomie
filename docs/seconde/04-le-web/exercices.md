@@ -152,7 +152,7 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
     1.  Ressource demandée : `/chercher`. **Deux** paramètres : `titre` vaut `Harry Potter` (écrit `Harry+Potter`) ; `format` vaut `livre`.
 
-    2.  `https://www.mediatheque.mc/chercher?titre=Asterix&format=BD` (on garde l’accent si le site l’accepte : `Astérix`).
+    2.  `https://www.mediatheque.mc/chercher?titre=Astérix&format=BD` (le navigateur encode lui-même la lettre accentuée).
 
     3.  Une page **dynamique** : le serveur ne peut pas avoir préparé à l’avance une page pour chaque titre possible ; il **construit** la liste des résultats d’après les paramètres reçus.
 

@@ -26,8 +26,6 @@
 
 ??? corrige "Corrigé"
 
-    Les réponses ont été vérifiées par un programme qui essaie tous les tracés possibles.
-
     1.  \(a\) Possible, par exemple `A-B-C-D-A-C-E-D-B` ; tous les tracés possibles partent de `A` et finissent en `B`, ou l’inverse. (b) Impossible (aucun tracé n’existe). (c) Possible, par exemple `P-Q-M-R-S-M-P`, et l’on revient au départ.
 
     2.  En partant de `E` (ou de `C`, `D`), on se retrouve toujours bloqué avec des traits non tracés : le camarade a raison.

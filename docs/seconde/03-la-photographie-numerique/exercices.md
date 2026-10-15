@@ -363,7 +363,7 @@ img.show()
 
 > Votre photo contient $6000 \times 4000 = 24\,000\,000$ pixels, soit 24 mégapixels. Chaque pixel est codé par trois nombres (rouge, vert, bleu) sur un octet chacun, donc 3 octets par pixel : le poids brut est $24\,000\,000 \times 3 = 72\,000\,000$ octets, soit 72 Mo. En pratique, le fichier JPEG est compressé et pèse plutôt 5 à 10 Mo. Pour l’impression, aucune inquiétude : sur une largeur de 30 cm, la résolution de votre photo est de 6000 ppp, bien au-dessus des 300 ppp recommandés.
 
-1.  La réponse est-elle correcte ? Refaites chaque calcul (rappel : $1$ pouce $=2{,}54$ cm).
+1.  La réponse est-elle correcte ? Refaire chaque calcul (rappel : $1$ pouce $=2{,}54$ cm).
 
 2.  Localiser l’erreur, nommer la notion confondue et donner la valeur juste.
 

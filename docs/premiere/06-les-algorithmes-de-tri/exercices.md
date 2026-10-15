@@ -26,7 +26,7 @@ Sans machine, on trie `[7, 2, 5, 3, 8, 1]` par **sélection**. Recopier et compl
 
         On donne **une** version simple ; d’autres écritures sont possibles. Tous les tris se font **en place**.
 
-    Tableau montré **au début de chaque étape** : zone grisée déjà triée, et en orange le minimum de la zone restante, amené à sa place par un échange.
+    Tableau montré **au début de chaque étape**, donc avant l’échange : l’état après l’échange de l’étape `i` est celui de la ligne suivante (la ligne « arrivée » pour la dernière étape). Zone grisée déjà triée, et en orange le minimum de la zone restante, amené à sa place par un échange.
 
     <table>
     <thead>
@@ -656,7 +656,7 @@ Chaque concurrent est décrit par un p-uplet `(nom, temps)` et le tableau `resul
 
 On dit qu’un tableau est *presque trié* si chaque élément est à au plus une case de sa position finale. On donne à trier un tel tableau : `[2, 1, 4, 3, 6, 5]`.
 
-1.  Combien de *décalages* le tri par insertion effectue-t-il ? Le comparer au tri par sélection.
+1.  Combien de *comparaisons* (et de décalages) le tri par insertion effectue-t-il ? Le comparer au tri par sélection.
 
     ??? pouce "Coup de pouce"
 
@@ -664,13 +664,13 @@ On dit qu’un tableau est *presque trié* si chaque élément est à au plus un
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        Insérer `1` : un décalage (le `2`) ; insérer `4` : aucun ; insérer `3` : … Pour la sélection, le nombre de comparaisons ne dépend que de $n$ : formule $\frac{n(n-1)}{2}$.
+        Insérer `1` : une comparaison et un décalage (le `2`) ; insérer `4` : une comparaison, aucun décalage ; insérer `3` : … (ne pas oublier la comparaison qui arrête la boucle). Pour la sélection, le nombre de comparaisons ne dépend que de $n$ : formule $\frac{n(n-1)}{2}$.
 
 2.  En déduire lequel des deux tris on préférerait pour des données *déjà presque en ordre* (par exemple une liste triée dans laquelle on vient d’ajouter quelques éléments). <span class="horsprog">au-delà du programme</span>
 
 ??? corrige "Corrigé"
 
-    **1.** Sur `[2, 1, 4, 3, 6, 5]`, le tri par **insertion** ne fait que **3** décalages (chaque petit élément recule d’une seule case) : le travail est proportionnel au **désordre**. Le tri par **sélection**, lui, refait ses $\frac{n(n-1)}{2} = 15$ comparaisons, sans profiter du bon ordre initial.  
+    **1.** Sur `[2, 1, 4, 3, 6, 5]`, le tri par **insertion** ne fait que **7** comparaisons (et **3** décalages : chaque petit élément recule d’une seule case) : le travail est proportionnel au **désordre**. Le tri par **sélection**, lui, refait ses $\frac{n(n-1)}{2} = 15$ comparaisons, sans profiter du bon ordre initial.  
     **2.** <span class="horsprog">au-delà du programme</span> On préfère nettement le tri par **insertion** pour des données presque en ordre : son coût s’approche du linéaire. C’est pour cela qu’il est utilisé comme brique dans des tris performants (comme Timsort) sur les portions déjà quasi triées.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 19</span> — Les k plus petits <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-19 }

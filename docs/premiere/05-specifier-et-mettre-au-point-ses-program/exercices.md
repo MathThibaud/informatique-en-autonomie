@@ -346,7 +346,7 @@ Elle renvoie `1` pour `[3, 8, -2, 5]` alors qu’on attend `3`. En imaginant un 
 
 ??? corrige "Corrigé"
 
-    Un `print(nb)` dans la boucle afficherait `1, 1, 1` : `nb` est **remis à 1** à chaque élément positif au lieu d’être **incrémenté**. Il faut `nb = nb + 1`.
+    Un `print(nb)` en fin de corps de boucle afficherait `1, 1, 1, 1` (ou `1, 1, 1` s’il est placé dans le `if`) : `nb` est **remis à 1** à chaque élément positif au lieu d’être **incrémenté**. Il faut `nb = nb + 1`.
 
     ```python
     def nb_positifs(t):
@@ -451,7 +451,7 @@ def puissance(x, n):
 
 ??? corrige "Corrigé"
 
-    Invariant, juste avant le tour d’indice `i` : `r == x ** i` (r est `x` multiplié par lui-même `i` fois). Vrai au départ (`i = 0`, `r = 1 = x**0`). Préservé : si `r == x**i`, alors après `r = r * x` et le passage à `i+1` on a `r == x**(i+1)`. À la sortie, `i` a atteint `n`, donc `r == x**n` : le résultat attendu.
+    Invariant, juste avant le tour d’indice `i` : `r == x ** i` (r est `x` multiplié par lui-même `i` fois). Vrai au départ (`i = 0`, `r = 1 = x**0`). Préservé : si `r == x**i`, alors après `r = r * x` et le passage à `i+1` on a `r == x**(i+1)`. À la sortie, la boucle a fait `n` tours : l’invariant, appliqué « juste avant un tour d’indice `n` » qui n’a pas lieu, donne `r == x**n`, le résultat attendu (pour `n = 0`, aucun tour : `r = 1 = x**0`).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Un meilleur nom <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-16 }
 
@@ -582,14 +582,14 @@ def division(a, b):
 
     ```python
     def division(a, b):
-        assert b > 0, "le diviseur doit etre strictement positif"
+        assert a >= 0 and b > 0, "il faut a >= 0 et b > 0"
         q = 0
         r = a
         while r >= b:
             assert a == q * b + r      # invariant (mise au point)
             r = r - b
             q = q + 1
-        assert 0 <= r and r < b        # postcondition
+        assert a == q * b + r and 0 <= r and r < b   # postcondition
         return q, r
 
     assert division(17, 5) == (3, 2)
