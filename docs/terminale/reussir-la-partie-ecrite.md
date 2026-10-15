@@ -20,7 +20,7 @@
 |:---|:--:|:--:|:--:|:--:|:--:|
 | Durée indicative | 10 min | $\approx$ 60 min | $\approx$ 60 min | $\approx$ 65 min | 15 min |
 
-**Repère** : environ **10 minutes par point** de barème. Bloqué plus de **5 minutes** sur une question ? La marquer d’une croix dans la marge, passer à la suivante, y revenir à la fin. Dès qu’un exercice dépasse son temps de plus de 15 minutes, passer au suivant.
+**Repère** : le sujet est barémé sur **20** (en général $6$, $6$ et $8$ points), puis la note est ramenée sur $12$. Une fois la lecture et la relecture mises de côté, il reste un peu plus de 3 h, soit environ **9 minutes par point** de ce barème : l’exercice sur $8$ points mérite un peu plus de temps que les deux autres. Bloqué plus de **5 minutes** sur une question ? La marquer d’une croix dans la marge, passer à la suivante, y revenir à la fin. Dès qu’un exercice dépasse son temps de plus de 15 minutes, passer au suivant.
 
 ### Écrire du code sur papier
 

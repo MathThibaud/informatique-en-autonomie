@@ -148,7 +148,7 @@ Si l’on teste `pgcb(250, 250)` sur l’image de la section « Sur une vraie im
         return r
     ```
 
-    C’est la même construction que `fibo(n, memo={})` dans le cours. L’appel `pgcb_memo(250, 250)` devient instantané et renvoie `21` (vérifié à la machine ; sans mémoïsation, `pgcb(250, 250)` dépasse $30$ millions d’appels en $10$ secondes sans finir). Attention au piège du cours : le dictionnaire par défaut est **partagé** d’un appel à l’autre, d’où l’intérêt de passer un dictionnaire neuf à la question suivante.
+    C’est la même construction que `fibo(n, memo={})` dans le cours. L’appel `pgcb_memo(250, 250)` devient instantané et renvoie `21` (sans mémoïsation, `pgcb(250, 250)` dépasse $30$ millions d’appels en $10$ secondes sans finir). Attention au piège du cours : le dictionnaire par défaut est **partagé** d’un appel à l’autre, d’où l’intérêt de passer un dictionnaire neuf à la question suivante.
 
 ## Sur une vraie image
 

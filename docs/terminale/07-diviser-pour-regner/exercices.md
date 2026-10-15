@@ -468,7 +468,7 @@ On montre que le coût en temps dans le pire des cas du tri de Stooge est de l�
 
     **4.** `k = (5 - 0 + 1) // 3 = 6 // 3 = 2`. Le premier appel porte sur $6$ éléments, chaque tiers en contient $2$.
 
-    **5.** Niveau 1 : $3$ appels ; niveau 2 : $3 \times 3 = 9$ appels ; niveau 3 : $9 \times 3 = 27$ appels (sur deux ou trois éléments, ces appels n’ont plus d’enfants lorsque `j - i = 1`). Total : $3 + 9 + 27 = \mathbf{39}$ appels récursifs (compté par exécution).
+    **5.** Niveau 1 : $3$ appels ; niveau 2 : $3 \times 3 = 9$ appels ; niveau 3 : $9 \times 3 = 27$ appels (sur deux ou trois éléments, ces appels n’ont plus d’enfants lorsque `j - i = 1`). Total : $3 + 9 + 27 = \mathbf{39}$ appels récursifs.
 
     **6.** Sur les arêtes partant de la racine, `k = 2` ; sur celles partant du niveau 1 (sous-tableaux de $4$ éléments), `k = 1`.
 
@@ -655,7 +655,7 @@ On suppose que l’on a partagé `lst` en deux listes : `lst1 = lst[:n//2]` (les
                     return maj_d
     ```
 
-    `majo_abs3([1, 4, 1, 6, 1, 7, 2, 1, 1])` renvoie `1` et `majo_abs3([1, 4, 6, 1, 7, 2, 1, 1])` renvoie `None` (résultats identiques à ceux de `majo_abs1` et `majo_abs2` sur des milliers de listes tirées au hasard). Les trois temps : **diviser** (couper en deux moitiés), **régner** (deux appels récursifs), **combiner** (compter les deux candidats dans toute la liste).
+    `majo_abs3([1, 4, 1, 6, 1, 7, 2, 1, 1])` renvoie `1` et `majo_abs3([1, 4, 6, 1, 7, 2, 1, 1])` renvoie `None`. Les trois temps : **diviser** (couper en deux moitiés), **régner** (deux appels récursifs), **combiner** (compter les deux candidats dans toute la liste).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Les deux points les plus proches *(d’après Polynésie 2023, jour 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-9 }
 
@@ -796,7 +796,7 @@ L’objectif est de trouver les deux points les plus proches dans un nuage de po
         return segments
     ```
 
-    **2. c)** Le point d’indice $0$ donne $n-1$ segments, le point d’indice $1$ en donne $n-2$, …, le point d’indice $n-2$ en donne $1$ : la longueur vaut $(n-1) + (n-2) + \dots + 1 = \dfrac{n(n-1)}{2}$ (vérifié pour $n = 2$ à $7$).
+    **2. c)** Le point d’indice $0$ donne $n-1$ segments, le point d’indice $1$ en donne $n-2$, …, le point d’indice $n-2$ en donne $1$ : la longueur vaut $(n-1) + (n-2) + \dots + 1 = \dfrac{n(n-1)}{2}$.
 
     **2. d)** On construit $\dfrac{n(n-1)}{2}$ segments, chacun en temps constant : la complexité est **quadratique**, en $O(n^2)$.
 
@@ -970,7 +970,7 @@ On appelle **inversion** d’une liste `t` tout couple d’indices `(i, j)` tel 
         return fusionnee, inv_g + inv_d + inv_c
     ```
 
-    **Diviser** : couper `t` en deux moitiés (`t[:milieu]` et `t[milieu:]`) ; **régner** : les deux appels récursifs, qui trient chaque moitié et comptent ses inversions ; **combiner** : `fusion_compte`, qui fusionne et compte les inversions croisées, puis la somme des trois nombres. `tri_compte([5, 2, 6, 1, 4, 3])` renvoie `([1, 2, 3, 4, 5, 6], 9)` ; la fonction donne le même nombre que `inversions_naif` sur des milliers de listes tirées au hasard.
+    **Diviser** : couper `t` en deux moitiés (`t[:milieu]` et `t[milieu:]`) ; **régner** : les deux appels récursifs, qui trient chaque moitié et comptent ses inversions ; **combiner** : `fusion_compte`, qui fusionne et compte les inversions croisées, puis la somme des trois nombres. `tri_compte([5, 2, 6, 1, 4, 3])` renvoie `([1, 2, 3, 4, 5, 6], 9)`.
 
     **8.** Déroulement de `tri_compte([3, 1, 2])` (`milieu = 1`) :
 

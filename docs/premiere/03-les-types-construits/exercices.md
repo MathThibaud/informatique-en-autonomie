@@ -280,7 +280,7 @@ Que valent `t`, `x` et `n` à la fin ?
 
     *Autre méthode :* une fois la compréhension vue, le même parcours des indices à l’envers s’écrit en une ligne : `return [t[i] for i in range(len(t) - 1, -1, -1)]`.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 12</span> — Ajouter et retirer <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-12 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 12</span> — Ajouter et retirer <span class="horsprog">au-delà du programme</span> <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-12 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Partant de `t = [3, 1, 4, 1, 5]`, donner une instruction pour chaque étape (dans l’ordre), et le contenu de `t` après chacune :
 
@@ -504,6 +504,8 @@ On pose `M = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`.
     g = grille_zeros(2, 3)
     g[0][0] = 1        # g vaut [[1, 0, 0], [0, 0, 0]] : une seule case changee
     ```
+
+    *Autre méthode :* `return [[0] * p for i in range(n)]`. Chaque tour réévalue `[0] * p`, donc crée une ligne neuve.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 20</span> — Transposée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-20 }
 
@@ -756,6 +758,8 @@ releve = {("Ada", "NSI"): 18, ("Ada", "Maths"): 15, ("Léo", "NSI"): 12}
 
     **1.** `releve[("Ada", "Maths")]` vaut `15`.
 
+    **2.**
+
     ```python
     def moyenne_eleve(releve, eleve):
         total = 0
@@ -815,7 +819,7 @@ print(notes)
     Affiche `[12, 15, 0]`. Le paramètre `t` et la variable `notes` pointent vers **le même** tableau : la méthode `append` le modifie, donc le changement est visible à l’extérieur (effet de bord). Pour ne pas modifier l’original, on travaille sur une copie :
 
     ```python
-    def avec_zero(t):
+    def ajoute_zero(t):
         nouveau = [x for x in t]   # copie independante
         nouveau.append(0)
         return nouveau
@@ -1027,7 +1031,11 @@ print(doubles, notes)
 
 ??? corrige "Corrigé"
 
-    **1.** Non. L’affichage est `[24, 30, 18] [24, 30, 18]` : le tableau d’origine `notes` a été modifié, contrairement à ce qui était demandé. **2.** L’erreur est la ligne `copie = t` : elle ne copie rien, elle crée un **alias** (deux noms qui pointent vers le *même* tableau, fil rouge du cours). Modifier `copie[i]`, c’est modifier `t`. Il faut construire un nouvel objet, `copie = [x for x in t]` (ou `t[:]`) :
+    **1.** Non. L’affichage est `[24, 30, 18] [24, 30, 18]` : le tableau d’origine `notes` a été modifié, contrairement à ce qui était demandé. Dessin : `notes`, puis `t` et `copie` pendant l’appel, puis `doubles` au retour ; ces quatre noms pointent tous vers **un seul** tableau.
+
+    ![](../figures/22545a518677de91.svg){ .tikz loading=lazy }
+
+    **2.** L’erreur est la ligne `copie = t` : elle ne copie rien, elle crée un **alias** (deux noms qui pointent vers le *même* tableau, fil rouge du cours). Modifier `copie[i]`, c’est modifier `t`. Il faut construire un nouvel objet, `copie = [x for x in t]` (ou `t[:]`) :
 
     ```python
     def doubler(t):

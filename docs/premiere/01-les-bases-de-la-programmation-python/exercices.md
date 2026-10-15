@@ -1499,7 +1499,7 @@ L’algorithme de l’exercice « PGCD (algorithme d’Euclide) » est décrit p
                 a = a - b
             else:
                 b = b - a
-            tours += 1
+            tours = tours + 1
         print(tours, "tours")
         return a
 
@@ -1520,7 +1520,7 @@ L’algorithme de l’exercice « PGCD (algorithme d’Euclide) » est décrit p
             r = a % b
             a = b
             b = r
-            tours += 1
+            tours = tours + 1
         print(tours, "tours")
         return a
 

@@ -45,7 +45,7 @@ def afficher_binaire(n):
 
     !!! remarque "Remarque"
 
-        On donne une version testée de chaque fonction ; d’autres écritures correctes sont possibles. Le fichier complet, `corrige_synthese_terminale.py`, est en ligne : <https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/corriges/terminale/synthese>.
+        On donne une version de chaque fonction ; d’autres écritures correctes sont possibles. Le fichier complet, `corrige_synthese_terminale.py`, est en ligne : <https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/corriges/terminale/synthese>.
 
     **1.** Appels successifs : `afficher_binaire(13)` $\to$ `(6)` $\to$ `(3)` $\to$ `(1)`. L’appel `(1)` ne relance rien ($1 < 2$) et affiche `1` ; puis, en remontant, `(3)` affiche `1`, `(6)` affiche `0` et `(13)` affiche `1`. Affichage : `1101`, l’écriture **binaire** de $13$ ($8 + 4 + 1$).
 

@@ -129,7 +129,7 @@ Combien d’étapes pour `1011` ? pour `111` ?
     }
     ```
 
-    `1011` $\to$ `1100` en $8$ étapes ; `111` $\to$ `1000` en $8$ étapes ($4$ pour aller au bout, $3$ pour propager la retenue, $1$ pour poser le `1`). Test : les $300$ premiers entiers (vérifié).
+    `1011` $\to$ `1100` en $8$ étapes ; `111` $\to$ `1000` en $8$ étapes ($4$ pour aller au bout, $3$ pour propager la retenue, $1$ pour poser le `1`). Le test du fichier, qui porte sur les $300$ premiers entiers, affiche alors `OK`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Un nombre pair de 1 ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-tp-1-5 }
 
@@ -180,7 +180,7 @@ Un **palindrome** se lit de la même façon dans les deux sens (`abba`, `aba`, `
         ("retour", BLANC): (BLANC, "D", "q0"),
     ```
 
-    Les $511$ mots de longueur $0$ à $8$ sont correctement classés (vérifié par comparaison avec `mot == mot[::-1]`, qui compare le mot à son inverse). Sur `abba` : `oui` en $15$ étapes.
+    Les $511$ mots de longueur $0$ à $8$ sont correctement classés (même réponse que `mot == mot[::-1]`, qui compare le mot à son inverse). Sur `abba` : `oui` en $15$ étapes.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Combien d’étapes ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-tp-1-7 }
 
@@ -328,7 +328,7 @@ On part d’un entier $n \geq 1$ ; s’il est pair on le divise par $2$, sinon o
 
     **2.** Vérifié : aucun `None` de $1$ à $100\,000$ avec une limite de $1\,000$. Le record est $77\,031$, avec $350$ étapes (trouvé par une boucle sur `n` de $1$ à $100\,000$ qui mémorise le plus grand nombre d’étapes rencontré).  
     **3.** `syracuse_etapes(27, 100)` renvoie `None`, mais `syracuse_etapes(27, 1000)` renvoie $111$ (la suite monte jusqu’à $9\,232$ avant de redescendre). `None` ne veut donc **pas** dire « ne s’arrête jamais » : seulement « pas encore ». Même dissymétrie qu’à l’exercice 3.  
-    **4.** Le programme s’arrête **si et seulement si** la conjecture de Goldbach est **fausse** (il renvoie alors le premier contre-exemple). Il suffirait donc de calculer `halt(chercher_contre_exemple)` : `True` signifierait « conjecture fausse », `False` « conjecture vraie ». Un détecteur d’arrêt universel résoudrait mécaniquement d’innombrables problèmes ouverts des mathématiques : c’est une raison supplémentaire de ne pas être surpris qu’il ne puisse pas exister. (Vérifié en passant : la conjecture tient pour tous les entiers pairs jusqu’à $20\,000$, ce qui ne prouve rien.)
+    **4.** Le programme s’arrête **si et seulement si** la conjecture de Goldbach est **fausse** (il renvoie alors le premier contre-exemple). Comme la fonction `halt` du cours prend deux arguments, un programme et sa donnée, on donne à `chercher_contre_exemple` un paramètre `x` qu’elle n’utilise pas ; il suffirait alors de calculer `halt(chercher_contre_exemple, 0)` : `True` signifierait « conjecture fausse », `False` « conjecture vraie ». Un détecteur d’arrêt universel résoudrait mécaniquement d’innombrables problèmes ouverts des mathématiques : c’est une raison supplémentaire de ne pas être surpris qu’il ne puisse pas exister. (La conjecture tient pour tous les entiers pairs jusqu’à $20\,000$, et bien au-delà, ce qui ne prouve rien.)
 
 ## Bilan à rédiger
 

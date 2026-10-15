@@ -510,7 +510,7 @@ def f(t):                          def g(t):
 
     Un seul parcours ($n$ tours) au lieu de deux ($2n$ tours) : deux fois moins de **tours de boucle**, mais autant de **comparaisons** (deux par tour, soit $2n$ dans les deux cas). Le coût reste **linéaire**.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Compter les doublons <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-19 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Détecter un doublon <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-19 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `a_un_doublon(t)` qui renvoie `True` si (au moins) deux éléments de `t` sont égaux. Quel est le coût de votre solution (en nombre de comparaisons dans le pire cas) ? <span class="horsprog">au-delà du programme</span>
 

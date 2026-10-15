@@ -77,7 +77,7 @@ def accueil(n):
 
     3.  Deux `bonjour` : `exec` **exécute** le texte reçu (définition de `accueil`, puis appel `accueil(2)`) — comme le cuisinier. `exec` est un interpréteur Python *dans* Python.
 
-    4.  Oui : le texte de `compter_lignes` est une chaîne comme une autre ; elle renverrait $6$. Un programme peut recevoir **son propre texte** en entrée : rien de magique, c’est une donnée. (Vérifié en Python : $3$, deux `bonjour`, $6$.)
+    4.  Oui : le texte de `compter_lignes` est une chaîne comme une autre ; elle renverrait $6$. Un programme peut recevoir **son propre texte** en entrée : rien de magique, c’est une donnée.
 
 ### <span class="exo-num">Exercice 3</span> — Le devin et le contrariant <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-13-calculabilite-et-decidabilite-act-1-3 }
 

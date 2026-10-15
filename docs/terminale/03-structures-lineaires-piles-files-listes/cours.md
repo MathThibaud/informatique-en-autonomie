@@ -36,10 +36,6 @@ Jusqu’ici, quand vous aviez besoin de ranger plusieurs données, vous preniez 
 
 Les trois structures de ce chapitre sont dites **linéaires** : leurs éléments sont rangés les uns à la suite des autres, comme sur une file d’attente. Ce qui les distingue, ce n’est pas leur contenu, c’est **leur jeu de méthodes** — en particulier *par où* on entre et *par où* on sort.
 
-<span id="cours-03-1" class="ancre"></span>
-
-<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-03-1) et [2](exercices.md#ex-03-2)** (interface : LIFO ou FIFO)
-
 ## La pile (LIFO)
 
 !!! definition "Définition 3 — Pile"
@@ -77,6 +73,10 @@ L’image classique est une **pile d’assiettes** : on ne peut poser ou prendre
     | `p.depiler()`   | `3`         | $5\ ;\ 8$                                  |
     | `p.depiler()`   | `8`         | $5$                                        |
     | `p.est_vide()`  | `False`     | $5$                                        |
+
+<span id="cours-03-1" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-03-1) et [2](exercices.md#ex-03-2)** (opérations et trace d’une pile)
 
 ### À quoi sert une pile en informatique ?
 
@@ -173,7 +173,7 @@ def parenthesage_correct(expr):
 
 <span id="cours-03-3" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-03-3), [6](exercices.md#ex-03-6) à [10](exercices.md#ex-03-10)** (tracer une pile ; parenthésage ; renverser)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-03-3) à [8](exercices.md#ex-03-8)** (parenthésage ; renverser ; balises ; notation polonaise inverse)
 
 ## La file (FIFO)
 
@@ -226,9 +226,9 @@ Le principe FIFO s’impose dès qu’il faut **traiter les demandes dans l’or
 
 - **Le parcours en largeur** d’un arbre ou d’un graphe (*BFS*) utilise une file pour visiter les sommets niveau par niveau (vous l’étudierez aux chapitres *Arbres* et *Graphes*). Symétriquement, le parcours en profondeur utilise, lui, une *pile*.
 
-<span id="cours-03-4" class="ancre"></span>
+<span id="cours-03-9" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[4](exercices.md#ex-03-4), [5](exercices.md#ex-03-5) et [11](exercices.md#ex-03-11)** (tracer une file ; comparer ; une file avec deux piles)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-03-9) à [12](exercices.md#ex-03-12)** (opérations et trace d’une file ; ordonnancement ; file de priorité) et **[14](exercices.md#ex-03-14) à [16](exercices.md#ex-03-16)** (piles et files ensemble)
 
 ## Une implémentation possible (à admettre le plus souvent)
 
@@ -290,6 +290,10 @@ class File:
 
     La `list` de Python *n’est pas* le type abstrait « liste » de ce chapitre : c’est un **tableau dynamique**. Elle permet certes de *simuler* une pile (`append`/`pop`) ou une file, mais elle offre bien plus d’opérations (accès à n’importe quel indice). Restreindre son usage aux seules méthodes de l’interface, c’est justement respecter la structure choisie.
 
+<span id="cours-03-13" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercices **[13](exercices.md#ex-03-13) et [17](exercices.md#ex-03-17)** (une file écrite par un assistant d’IA ; une file avec deux piles)
+
 ## Les listes chaînées : l’autre grande implémentation
 
 Comment ranger des éléments *à l’intérieur* de la machine ? Il existe deux grandes familles.
@@ -332,9 +336,9 @@ Insérer un maillon ne demande que de **rebrancher deux liens**, sans déplacer 
 
     En Python, on peut représenter un maillon par un petit objet (chapitre *Programmation objet*) : une classe `Cellule` avec deux attributs, `valeur` (l’élément) et `suivante` (la cellule d’après, ou `None` à la fin). On construit alors une liste en emboîtant les cellules : `Cellule(1, Cellule(2, Cellule(3, None)))`. Nous n’en aurons pas besoin pour la plupart des exercices : là encore, il suffit le plus souvent d’**admettre** l’existence d’une implémentation.
 
-<span id="cours-03-12" class="ancre"></span>
+<span id="cours-03-18" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[12](exercices.md#ex-03-12) à [15](exercices.md#ex-03-15)** (listes chaînées)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[18](exercices.md#ex-03-18) à [22](exercices.md#ex-03-22)** (listes chaînées)
 
 ## Ouverture : des structures qu’on retrouvera partout
 

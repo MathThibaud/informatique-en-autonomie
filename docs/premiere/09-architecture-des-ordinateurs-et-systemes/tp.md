@@ -55,7 +55,7 @@ b    DAT
 
 ??? corrige "Corrigé"
 
-    Tous les programmes LMC ci-dessous ont été vérifiés avec un interpréteur LMC écrit en Python (mêmes codes d’instructions que le simulateur de Peter Higginson) sur de nombreuses entrées, et la multiplication a été exécutée sur le simulateur en ligne. Les sorties de terminal de la partie B ont été obtenues dans JSLinux (Alpine Linux 3.12.0, console x86).
+    Les programmes LMC ci-dessous utilisent les mêmes codes d’instructions que le simulateur de Peter Higginson. Les sorties de terminal de la partie B sont celles de JSLinux (Alpine Linux 3.12.0, console x86).
 
     **1.** Un `if` : un calcul (souvent `SUB`) suivi d’un saut conditionnel `BRZ` ou `BRP`, et d’un `BRA` pour sauter par-dessus le bloc « sinon ». Une boucle `while` : une étiquette en haut, un test de sortie (`BRZ`/`BRP` vers `fin`) et un `BRA` qui remonte. **2.** La mémoire ne contient que des nombres : les instructions sont codées (`ADD 09` $\to$ `109`). Les mots sont pour les humains (l’assembleur), les nombres pour la machine (le langage machine). **3.** Tableau complété :
 
@@ -203,7 +203,7 @@ Le LMC ne sait pas multiplier. Mais $a \times b$, c’est $a + a + \dots + a$ ($
     un     DAT 1
     ```
 
-    **1.** Tests : $6 \times 7 \to 42$ (vérifié aussi sur le simulateur en ligne) ; $5 \times 0 \to 0$ ; $0 \times 5 \to 0$.
+    **1.** Tests : $6 \times 7 \to 42$ ; $5 \times 0 \to 0$ ; $0 \times 5 \to 0$.
 
     **2.** La machine exécute $8b + 9$ instructions : 4 pour les entrées, 8 par tour de boucle, 2 pour le dernier test, 3 pour finir. Pour $3 \times 200$ : **1 609** instructions ; pour $200 \times 3$ : **33** seulement. Pour aller plus vite, il faut boucler sur le **plus petit** des deux nombres : comparer $a$ et $b$ au début (`SUB` puis `BRP`) et les échanger si besoin.
 
@@ -251,7 +251,7 @@ L’exercice 8 (« Le plus grand des deux ») de la rubrique Exercices de ce cha
     max    DAT
     ```
 
-    Tests : (9, 4, 7) $\to$ 9 ; (4, 9, 7) $\to$ 9 ; (4, 7, 9) $\to$ 9 ; (7, 7, 2) $\to$ 7. Le programme a été vérifié par l’interpréteur sur les 125 triplets formés avec 0, 1, 4, 7, 9.
+    Tests : (9, 4, 7) $\to$ 9 ; (4, 9, 7) $\to$ 9 ; (4, 7, 9) $\to$ 9 ; (7, 7, 2) $\to$ 7. Le programme renvoie le bon maximum pour chacun des 125 triplets formés avec 0, 1, 4, 7, 9.
 
     C’est l’**invariant du champion** du chapitre *Algorithmique : le parcours séquentiel* : `max` contient le plus grand nombre vu jusque-là.
 
@@ -290,7 +290,7 @@ L’exercice 8 (« Le plus grand des deux ») de la rubrique Exercices de ce cha
     un     DAT 1
     ```
 
-    Tests : (17, 5) $\to$ 3 puis 2 ; (15, 5) $\to$ 3 puis 0 ; (4, 9) $\to$ 0 puis 4. Vérifié par l’interpréteur pour tous les $a$ de 0 à 59 et $b$ de 1 à 11.
+    Tests : (17, 5) $\to$ 3 puis 2 ; (15, 5) $\to$ 3 puis 0 ; (4, 9) $\to$ 0 puis 4. Le programme donne le bon quotient et le bon reste pour tous les $a$ de 0 à 59 et $b$ de 1 à 11.
 
     Si $b = 0$, `a - b` reste toujours positif : la boucle ne s’arrête jamais (`q` augmente sans fin). Un programme correct testerait $b$ dès le départ.
 

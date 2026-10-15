@@ -270,7 +270,7 @@ Le tri rapide applique « diviser pour régner », mais divise **autrement** que
         return i + 1                # indice definitif du pivot
     ```
 
-    Sur `[10, 7, 8, 9, 1, 5]` (pivot `5`) : seul `1` est $\leqslant 5$ ; il est échangé avec `10`, ce qui donne `[1, 7, 8, 9, 10, 5]`, puis le pivot vient en position `1` : `[1, 5, 8, 9, 10, 7]`, et la fonction renvoie `1`. C’est exactement l’exemple de l’énoncé (vérifié à la machine).
+    Sur `[10, 7, 8, 9, 1, 5]` (pivot `5`) : seul `1` est $\leqslant 5$ ; il est échangé avec `10`, ce qui donne `[1, 7, 8, 9, 10, 5]`, puis le pivot vient en position `1` : `[1, 5, 8, 9, 10, 7]`, et la fonction renvoie `1`. C’est exactement l’exemple de l’énoncé.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 2</span> — La fonction récursive `tri_rapide` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-tp-2-2 }
 
@@ -440,7 +440,7 @@ Testez différentes stratégies de choix du pivot (premier élément, dernier é
 
 ??? corrige "Corrigé"
 
-    Pour tester les stratégies, on place le pivot choisi en dernière position, puis on réutilise `partition` (code testé, résultats comparés à `sorted`) :
+    Pour tester les stratégies, on place le pivot choisi en dernière position, puis on réutilise `partition` :
 
     ```python
     def tri_rapide_pivot(tab, bas, haut, choix):
@@ -468,7 +468,7 @@ Testez différentes stratégies de choix du pivot (premier élément, dernier é
     | élément du milieu |            $1{,}2$ ms |            $1{,}0$ ms |
     | élément aléatoire |            $1{,}6$ ms |            $1{,}5$ ms |
 
-    Sur un tableau **déjà trié** avec le pivot « dernier élément », le pivot est à chaque fois le **plus grand** : la partition laisse tous les autres éléments d’un seul côté. On ne coupe plus en deux, on enlève un seul élément à chaque appel : $n - 1 + n - 2 + \dots + 1 = \frac{n(n-1)}{2}$ comparaisons, soit un coût en $n^2$. Compté par programme pour $n = 500$ : $124\,750$ comparaisons sur le tableau trié, contre $4\,786$ sur un tableau aléatoire. De plus, la profondeur de récursion vaut $n$ : dès $n = 1\,000$, Python s’arrête sur `RecursionError: maximum recursion depth exceeded`. Le pivot « premier élément » a le même défaut. Les pivots « milieu » et « aléatoire » évitent ce piège : avec eux, un tableau trié de $100\,000$ éléments est trié en $0{,}2$ à $0{,}3$ s.
+    Sur un tableau **déjà trié** avec le pivot « dernier élément », le pivot est à chaque fois le **plus grand** : la partition laisse tous les autres éléments d’un seul côté. On ne coupe plus en deux, on enlève un seul élément à chaque appel : $n - 1 + n - 2 + \dots + 1 = \frac{n(n-1)}{2}$ comparaisons, soit un coût en $n^2$. Pour $n = 500$, cela fait $124\,750$ comparaisons sur le tableau trié, contre quelques milliers seulement sur un tableau aléatoire (par exemple $4\,786$). De plus, la profondeur de récursion vaut $n$ : dès $n = 1\,000$, Python s’arrête sur `RecursionError: maximum recursion depth exceeded`. Le pivot « premier élément » a le même défaut. Les pivots « milieu » et « aléatoire » évitent ce piège : avec eux, un tableau trié de $100\,000$ éléments est trié en $0{,}2$ à $0{,}3$ s.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Questions de réflexion <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-tp-2-7 }
 
@@ -755,7 +755,7 @@ plt.show()
 
 ??? corrige "Corrigé"
 
-    - Sur des données **aléatoires**, le tri rapide est le plus rapide à toutes les tailles ; notre Tim sort est le plus lent ($20$ à $35\,\%$ de plus que le tri fusion) : sur des données en désordre, les blocs triés par insertion coûtent cher ($64$ éléments par bloc, coût quadratique dans chaque bloc). Les trois restent en $n \log_2 n$ (temps multiplié par environ $11$ à $12$ quand $n$ est multiplié par $10$).
+    - Sur des données **aléatoires**, le tri rapide est le plus rapide à toutes les tailles ; notre Tim sort est le plus lent ($10$ à $35\,\%$ de plus que le tri fusion) : sur des données en désordre, les blocs triés par insertion coûtent cher ($64$ éléments par bloc, coût quadratique dans chaque bloc). Les trois restent en $n \log_2 n$ (temps multiplié par environ $11$ à $17$ quand $n$ est multiplié par $10$ : un peu plus que $10$, mais loin du $\times 100$ d’un coût quadratique).
 
     - Sur un tableau **déjà trié**, les rôles s’inversent :
 
@@ -886,7 +886,7 @@ On note les pixels par des nombres. Faites tourner cette image d’un **quart de
     | 15  | 11  |  7  |  3  |
     | 16  | 12  |  8  |  4  |
 
-    *Avec la méthode du TP* : on tourne d’abord chaque quadrant $2\times2$ sur lui-même (`1 2 / 5 6` devient `5 1 / 6 2`, etc.), puis on permute les quatre blocs (HG $\to$ HD $\to$ BD $\to$ BG $\to$ HG). On obtient le même tableau, ce que confirme `rotation` exécutée sur ce tableau.
+    *Avec la méthode du TP* : on tourne d’abord chaque quadrant $2\times2$ sur lui-même (`1 2 / 5 6` devient `5 1 / 6 2`, etc.), puis on permute les quatre blocs (HG $\to$ HD $\to$ BD $\to$ BG $\to$ HG). On obtient le même tableau.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 2</span> — Compléter la fonction récursive <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-tp-4-2 }
 
@@ -974,9 +974,9 @@ sortie.save("joconde_tournee.png")
     rotation(image, 0, 0, n)
     ```
 
-    **2.** Le fichier `joconde_tournee.png` obtenu montre la Joconde couchée, la tête à droite. Mesure faite : la rotation de l’image $256\times256$ prend environ $0{,}1$ s en Python, et le résultat coïncide pixel par pixel avec `im.rotate(-90)` de Pillow.
+    **2.** Le fichier `joconde_tournee.png` obtenu montre la Joconde couchée, la tête à droite. La rotation de l’image $256\times256$ prend environ $0{,}1$ s en Python, et le résultat est identique, pixel par pixel, à celui de `im.rotate(-90)` de Pillow.
 
-    Programme complet (testé) sur la vraie image :
+    Programme complet sur la vraie image :
 
     ```python
     from PIL import Image
@@ -1021,7 +1021,7 @@ sortie.save("joconde_tournee.png")
 
     - On coupe le côté en deux à chaque appel : pour que les quatre quadrants soient toujours des carrés égaux et que l’on arrive exactement à des carrés de $1$ pixel, il faut pouvoir diviser $n$ par $2$ jusqu’à $1$, donc $n$ doit être une puissance de $2$. Sinon, il faudrait gérer des quadrants de tailles différentes (par exemple compléter l’image par des pixels blancs jusqu’à la puissance de $2$ suivante, puis rogner).
 
-    - Pour le sens **anti-horaire**, on fait tourner les blocs dans l’autre sens (HG $\to$ BG $\to$ BD $\to$ HD $\to$ HG) ; les quatre appels récursifs, eux, restent les mêmes (code testé : appliquer cette version puis la version horaire redonne l’image de départ) :
+    - Pour le sens **anti-horaire**, on fait tourner les blocs dans l’autre sens (HG $\to$ BG $\to$ BD $\to$ HD $\to$ HG) ; les quatre appels récursifs, eux, restent les mêmes (appliquer cette version puis la version horaire redonne l’image de départ) :
 
       ```python
                   image[ligne + i][col + j]               = hd   # HG <- HD
@@ -1030,7 +1030,7 @@ sortie.save("joconde_tournee.png")
                   image[ligne + i][col + demi + j]        = bd   # HD <- BD
       ```
 
-    - *Bonus* : à chaque niveau de récursion, chaque pixel est déplacé une fois ; il y a $\log_2 n$ niveaux, d’où $n^2 \log_2 n$ écritures de pixels (compté par programme : $524\,288 = 256^2 \times 8$ pour $n = 256$). Une simple recopie dans une nouvelle image coûterait $n^2$ écritures, mais une deuxième image en mémoire. **Compromis** : on accepte un peu plus de *temps* pour économiser la *mémoire*.
+    - *Bonus* : à chaque niveau de récursion, chaque pixel est déplacé une fois ; il y a $\log_2 n$ niveaux, d’où $n^2 \log_2 n$ écritures de pixels (pour $n = 256$ : $256^2 \times 8 = 524\,288$). Une simple recopie dans une nouvelle image coûterait $n^2$ écritures, mais une deuxième image en mémoire. **Compromis** : on accepte un peu plus de *temps* pour économiser la *mémoire*.
 
       *Autre méthode* (la « simple recopie », sans diviser pour régner) : le pixel ligne `i`, colonne `j` de l’image tournée est le pixel ligne `n - 1 - j`, colonne `i` de l’image de départ. On construit la nouvelle image **par compréhension**, ligne par ligne :
 

@@ -38,7 +38,7 @@ On enveloppe l’arbre dans une classe `ABR` : l’attribut privé `_racine` dé
 
 ??? corrige "Corrigé"
 
-    Tout le code ci-dessous a été exécuté : avec ces solutions, les six tests du fichier `tp_arbres_depart.py` affichent `[OK]`, et les mesures sont celles réellement obtenues.
+    Avec ces solutions, les six tests du fichier `tp_arbres_depart.py` affichent `[OK]`.
 
     ![](../figures/8be18960b53b279a.svg){ .tikz loading=lazy }
 

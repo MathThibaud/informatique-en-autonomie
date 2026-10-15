@@ -215,7 +215,7 @@ On considère le graphe **pondéré** suivant (les poids sont des distances en k
 
     **1.** (poids sur la diagonale $=0$, et $0$ en l’absence d’arête) $$P=\begin{pmatrix}
     0&4&7&0\\ 4&0&2&5\\ 7&2&0&3\\ 0&5&3&0
-    \end{pmatrix}\quad(\text{ordre }\texttt{A},\texttt{B},\texttt{C},\texttt{D})$$ **2.** `A-B-C-D` $=4+2+3=9$ ; `A-B-D`$=4+5=9$ ; `A-C-D`$=7+3=10$. Le plus court fait **9 km**.
+    \end{pmatrix}\quad(\text{ordre }\texttt{A},\texttt{B},\texttt{C},\texttt{D})$$ **2.** `A-B-C-D` $=4+2+3=9$ ; `A-B-D`$=4+5=9$ ; `A-C-D`$=7+3=10$ ; `A-C-B-D`$=7+2+5=14$. Le plus court fait **9 km**, longueur atteinte par deux trajets : `A-B-D` et `A-B-C-D`.
 
 ### La classe `Graphe`
 
@@ -929,7 +929,7 @@ def parcours_largeur(g, depart):
 
 ??? corrige "Corrigé"
 
-    **1.** **Non.** Trace : `en_attente = [A]` ; on retire `A`, on ajoute `B` puis `C` $\to$ `[B, C]` ; `pop()` retire le **dernier**, `C`, qui ajoute `E` $\to$ `[B, E]` ; on retire `E` ; puis `B`, qui ajoute `D` ; puis `D`. Sortie réelle : `[’A’, ’C’, ’E’, ’B’, ’D’]`. Or `E` est à distance $2$ de `A` et est traité *avant* `B`, à distance $1$ : ce n’est **pas** un parcours en largeur. La liste se comporte en **pile** : le parcours s’enfonce comme un parcours en profondeur (sur ce petit graphe sans cycle, on obtient même l’ordre de `DFS_iteratif`), mais ce n’en est pas tout à fait un en général, puisque les sommets sont marqués dès l’empilement (voir la règle du cours et son contre-exemple). L’ordre attendu est `[’A’, ’B’, ’C’, ’D’, ’E’]`.
+    **1.** **Non.** Trace : `en_attente = [A]` ; on retire `A`, on ajoute `B` puis `C` $\to$ `[B, C]` ; `pop()` retire le **dernier**, `C`, qui ajoute `E` $\to$ `[B, E]` ; on retire `E` ; puis `B`, qui ajoute `D` ; puis `D`. La fonction renvoie donc `[’A’, ’C’, ’E’, ’B’, ’D’]`. Or `E` est à distance $2$ de `A` et est traité *avant* `B`, à distance $1$ : ce n’est **pas** un parcours en largeur. La liste se comporte en **pile** : le parcours s’enfonce comme un parcours en profondeur (sur ce petit graphe sans cycle, on obtient même l’ordre de `DFS_iteratif`), mais ce n’en est pas tout à fait un en général, puisque les sommets sont marqués dès l’empilement (voir la règle du cours et son contre-exemple). L’ordre attendu est `[’A’, ’B’, ’C’, ’D’, ’E’]`.
 
     **2.** L’erreur : `en_attente.pop()` retire le **dernier** élément ajouté (comportement de **pile**, LIFO). Pour une **file** (FIFO), il faut retirer le premier :
 

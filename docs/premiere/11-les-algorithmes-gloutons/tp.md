@@ -42,7 +42,7 @@ La fonction `rendu_glouton(systeme, somme)` est donnée : c’est celle du cours
 
 ??? corrige "Corrigé"
 
-    Tous les résultats ont été obtenus en exécutant le programme corrigé (les fonctions complètes figurent dans chaque exercice ; elles passent les tests de `tp_gloutons_depart.py`). Les **durées** dépendent de la machine : seuls leurs ordres de grandeur et leur *croissance* comptent.
+    Les fonctions complètes figurent dans chaque exercice. Les **durées** dépendent de la machine : seuls leurs ordres de grandeur et leur *croissance* comptent.
 
     <table>
     <thead>

@@ -44,7 +44,7 @@ for n in range(20, 36, 3):
 
 ??? corrige "Corrigé"
 
-    1.  Temps réellement mesurés sur un ordinateur portable (Python 3.8) :
+    1.  Temps mesurés sur un ordinateur portable (Python 3.8) :
 
         | $n$       |   $20$    |   $23$    |   $26$    |   $29$   |   $32$   |  $35$   |
         |:----------|:---------:|:---------:|:---------:|:--------:|:--------:|:-------:|
@@ -72,7 +72,7 @@ for n in range(20, 36, 3):
 
         ![](../figures/000678c97773bc42.svg){ .tikz loading=lazy }
 
-    2.  $15$ appels (vérifié à la machine avec un compteur).
+    2.  $15$ appels.
 
     3.  `fibo(3)` : $2$ fois ; `fibo(2)` : $3$ fois ; `fibo(1)` : $5$ fois (et `fibo(0)` : $3$ fois).
 
@@ -96,7 +96,7 @@ On note $A(n)$ le nombre total d’appels déclenchés par `fibo(n)`. Ainsi $A(0
 
     1.  Un appel `fibo(n)` compte pour $1$, puis déclenche `fibo(n-1)`, qui produit $A(n-1)$ appels, et `fibo(n-2)`, qui en produit $A(n-2)$.
 
-    2.  Tableau (vérifié à la machine) :
+    2.  Tableau :
 
         | $n$    | $0$ | $1$ | $2$ | $3$ | $4$ | $5$  | $6$  | $7$  | $8$  |
         |:-------|:---:|:---:|:---:|:---:|:---:|:----:|:----:|:----:|:----:|
@@ -122,7 +122,7 @@ On reprend le calcul de `fibo(6)`, mais on dispose d’un **carnet** où l’on 
 
     1.  Le carnet se remplit dans l’ordre `fibo(2)`, `fibo(3)`, `fibo(4)`, `fibo(5)`, `fibo(6)` : on descend d’abord tout à gauche jusqu’à `fibo(1)` et `fibo(0)`, puis on remonte ; chaque appel de droite (`fibo(2)` sous `fibo(4)`, `fibo(3)` sous `fibo(5)`, `fibo(4)` sous `fibo(6)`) est **lu** dans le carnet.
 
-    2.  $5$ additions avec le carnet (une par valeur $F_2, \dots, F_6$) contre $12$ sans. Pour `fibo(40)` : $39$ additions avec le carnet, contre plus de $165$ millions sans. (En comptant les appels, la version avec carnet en fait $11$ pour `fibo(6)` et $79$ pour `fibo(40)`, vérifié à la machine.)
+    2.  $5$ additions avec le carnet (une par valeur $F_2, \dots, F_6$) contre $12$ sans. Pour `fibo(40)` : $39$ additions avec le carnet, contre plus de $165$ millions sans. (En comptant les appels, la version avec carnet en fait $11$ pour `fibo(6)` et $79$ pour `fibo(40)`.)
 
     3.  $F_k$ pour $k = 0$ à $10$ : $0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55$. Une seule boucle, aucune récursivité.
 

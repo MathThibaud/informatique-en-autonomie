@@ -77,7 +77,7 @@ En Python, comparer `2000 / 3`, `2000 // 3` et `int(2000 / 3)`. Lequel correspon
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans le fichier (par exemple avec `for ligne in fichier:`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -144,7 +144,7 @@ Une fonction peut s’appeler elle-même : on parle de fonction *récursive*. C�
 
     ??? pouce "Coup de pouce"
 
-        Si le carburant d’une masse est nul ou négatif, la réponse est 0 et on s’arrête : c’est le *cas de base*. Sinon, la réponse est ce carburant, plus le carburant total de ce carburant.
+        Si le carburant d’une masse est nul ou négatif, la réponse est 0 et on s’arrête : c’est le *cas de base* (la condition d’arrêt). Sinon, la réponse est ce carburant, plus le carburant total de ce carburant.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 

@@ -305,9 +305,13 @@ Chaque site, chaque application **collecte** des données sur vous. La loi encad
 
     - distinguer une **donnée**, un **descripteur** (attribut) et un **enregistrement** (ligne) ;
 
+    - retrouver les **métadonnées** d’un fichier personnel et les distinguer des données ;
+
     - lire une table de données : repérer les descripteurs et compter les enregistrements ;
 
     - reconnaître le format **CSV** (du texte, un séparateur, une ligne d’en-tête) et l’ouvrir dans un tableur ;
+
+    - utiliser un site de **données ouvertes** (*open data*) pour sélectionner et récupérer des données ;
 
     - **rechercher**, **filtrer** et **trier** des enregistrements selon un ou plusieurs critères ;
 

@@ -44,7 +44,7 @@ On veut faire écrire par Python l’écriture binaire d’un entier, **sans cha
 
     !!! remarque "Remarque"
 
-        On donne une version testée de chaque fonction ; d’autres écritures correctes sont possibles. Le fichier complet, `corrige_synthese_premiere.py`, est en ligne : [`github.com/MathThibaud/nsi-fichiers-eleves/tree/main/corriges/premiere/synthese`](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/corriges/premiere/synthese).
+        On donne une version de chaque fonction ; d’autres écritures correctes sont possibles. Le fichier complet, `corrige_synthese_premiere.py`, est en ligne : [`github.com/MathThibaud/nsi-fichiers-eleves/tree/main/corriges/premiere/synthese`](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/corriges/premiere/synthese).
 
     **1.** $13 = 2 \times 6 + 1$, $6 = 2 \times 3 + 0$, $3 = 2 \times 1 + 1$, $1 = 2 \times 0 + 1$ : en lisant les restes de bas en haut, $13 = \texttt{1101}_2$. De même, $185 = \texttt{10111001}_2$. Les bits sont obtenus **de droite à gauche** : le premier reste est le bit de poids faible.
 
@@ -196,7 +196,7 @@ Sur 8 bits, on code les entiers de $-128$ à $127$ en complément à deux. Le co
         return valeur((code_8bits(a) + code_8bits(b)) % 256)
     ```
 
-    $12 + (-12)$ donne bien $0$ ($12 + 244 = 256$, et $256 \bmod 256 = 0$ : la retenue qui déborde est oubliée). Mais $100 + 50$ renvoie $-106$ et $127 + 1$ renvoie $-128$ : le vrai résultat ($150$, $128$) dépasse $127$, le plus grand entier codable. Son code a un bit de poids fort à $1$, qui est lu comme le signe d’un négatif. C’est un **dépassement de capacité** : la machine ne signale rien, c’est au programmeur d’y penser.
+    $12 + (-12)$ donne bien $0$ ($12 + 244 = 256$, et `256 % 256` vaut $0$ : la retenue qui déborde est oubliée). Mais $100 + 50$ renvoie $-106$ et $127 + 1$ renvoie $-128$ : le vrai résultat ($150$, $128$) dépasse $127$, le plus grand entier codable. Son code a un bit de poids fort à $1$, qui est lu comme le signe d’un négatif. C’est un **dépassement de capacité** : la machine ne signale rien, c’est au programmeur d’y penser.
 
 ### Après les chapitres 3 et 4 (Les types construits ; Algorithmique : le parcours séquentiel)
 
@@ -785,7 +785,7 @@ soiree = [("Les Pirates du lagon", 60, 6), ("Le Dîner raté", 120, 9),
     def soiree_gloutonne(duree_max, ordre):
         choisis = []
         reste = duree_max
-        for (titre, duree, points) in ordre:
+        for (titre, duree, pts) in ordre:
             if duree <= reste:
                 choisis.append(titre)
                 reste = reste - duree
@@ -799,7 +799,7 @@ soiree = [("Les Pirates du lagon", 60, 6), ("Le Dîner raté", 120, 9),
 
     par_points = sorted(soiree, key=points, reverse=True)
     soiree_gloutonne(240, par_points)
-    # ['Le Diner rate', 'Mission Mistral']
+    # Le Diner rate, puis Mission Mistral
     par_minute = sorted(soiree, key=points_par_minute, reverse=True)
     soiree_gloutonne(240, par_minute)
     # ['Les Pirates du lagon', 'Mission Mistral', 'La Lettre']
@@ -815,16 +815,16 @@ soiree = [("Les Pirates du lagon", 60, 6), ("Le Dîner raté", 120, 9),
         for code in range(2 ** n):
             choix = []
             duree_totale = 0
-            points = 0
+            total_points = 0
             for i in range(n):
                 if (code // 2 ** i) % 2 == 1:      # bit numero i du code
                     titre, duree, pts = films[i]
                     choix.append(titre)
                     duree_totale = duree_totale + duree
-                    points = points + pts
-            if duree_totale <= duree_max and points > meilleurs_points:
+                    total_points = total_points + pts
+            if duree_totale <= duree_max and total_points > meilleurs_points:
                 meilleur_choix = choix
-                meilleurs_points = points
+                meilleurs_points = total_points
         return meilleur_choix, meilleurs_points
     ```
 

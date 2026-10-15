@@ -56,7 +56,7 @@ Une **comparaison**, c’est regarder la carte retournée et la carte en main po
 
     **5.** La première carte est prise sans comparaison, puis une comparaison par carte suivante : $9$ comparaisons pour 10 cartes, $51$ pour 52 cartes, $n - 1$ pour $n$ cartes. *(Dans le cours, `for x in t` compare aussi `t[0]` avec lui-même : $n$ comparaisons, ce qui ne change rien à l’ordre de grandeur.)*
 
-    **6.** Pile rangée dans l’ordre **croissant** : le chercheur change de carte à chaque fois ($9$ changements). Plus haute carte en premier (par exemple ordre décroissant) : il ne change jamais. Dans les deux cas, il fait **toujours $9$ comparaisons** : le nombre de comparaisons ne dépend pas de l’ordre des cartes, seulement de leur nombre.
+    **6.** Pile rangée dans l’ordre **strictement** croissant ($10$ valeurs différentes) : le chercheur change de carte à chaque fois ($9$ changements). Plus haute carte en premier (par exemple ordre décroissant) : il ne change jamais. Dans les deux cas, il fait **toujours $9$ comparaisons** : le nombre de comparaisons ne dépend pas de l’ordre des cartes, seulement de leur nombre.
 
     **7.** Le camarade annonce $0$ : aucune température ne bat sa carte imaginaire. C’est faux ($0$ n’est même pas dans la pile ; la réponse est $-1$). La bonne façon de commencer est de **garder la première vraie carte**, comme à la question 2.
 

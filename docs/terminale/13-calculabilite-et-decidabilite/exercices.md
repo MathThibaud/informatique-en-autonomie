@@ -223,7 +223,15 @@ On admet le **théorème de l’arrêt** (indécidable). On voudrait maintenant 
 
 ??? corrige "Corrigé"
 
-    1.  Si `renvoie42` existait, il faudrait, pour savoir si un programme renvoie un jour $42$, être capable de dire s’il **finit** par renvoyer quelque chose — donc de résoudre (en partie) le problème de l’arrêt, qui est indécidable. On peut « ramener » (réduire) l’arrêt à cette question : elle est donc, elle aussi, indécidable.
+    1.  On raisonne par l’absurde : on suppose que `renvoie42` existe, et on montre qu’il permettrait alors de décider l’arrêt. Soit `prog` un programme quelconque. On fabrique le programme `prog2` suivant.
+
+        ```python
+        def prog2(x):
+            prog(x)      # on execute prog sur x, en ignorant son resultat
+            return 42
+        ```
+
+        Si `prog(x)` s’arrête, `prog2(x)` passe à la ligne suivante et renvoie $42$ ; si `prog(x)` ne s’arrête pas, `prog2(x)` ne renvoie jamais rien. Donc `prog2(x)` renvoie $42$ **si et seulement si** `prog(x)` s’arrête. On aurait alors `halt(prog, x) = renvoie42(prog2, x)` : `renvoie42` déciderait le problème de l’arrêt, ce qui est impossible (théorème de l’arrêt). Donc `renvoie42` n’existe pas : la question « `prog(x)` renvoie-t-il $42$ ? » est, elle aussi, indécidable. On dit qu’on a **réduit** (ramené) le problème de l’arrêt à cette question.
 
     2.  C’est le **théorème de Rice**.
 
@@ -255,7 +263,7 @@ Répondre **vrai** ou **faux** et justifier d’un mot.
 
     5.  **Faux** : l’indécidabilité ne dépend pas du langage ; le problème de l’arrêt est indécidable dans *tout* langage Turing-complet.
 
-### P, NP et le million de dollars
+### P, NP et le million de dollars <span class="horsprog">au-delà du programme</span>
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 10</span> — Vérifier, est-ce facile ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-13-10 }
 

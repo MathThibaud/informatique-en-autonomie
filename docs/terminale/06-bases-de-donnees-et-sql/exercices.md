@@ -572,7 +572,7 @@ Un SGBD garantit qu’une **transaction** (un groupe d’opérations, ouvert par
 
     **3.** Après le `COMMIT` : compte `1` à `50` €, compte `2` à `80` €. La **durabilité** garantit qu’une transaction validée survit à la coupure (elle est écrite sur disque).
 
-    **4.** Le débit `UPDATE compte SET solde = solde - 80 WHERE id = 1;` échoue : le solde deviendrait $50 - 80 = -30$, ce que la contrainte `CHECK (solde >= 0)` interdit. Le crédit de `80` € sur le compte `2`, lui, réussit. Attention : le SGBD (SQLite, par exemple) n’annule que l’**instruction fautive** ; la transaction reste ouverte avec le crédit déjà fait. Si l’on exécutait alors `COMMIT`, le compte `2` passerait à `160` € : `80` € créés de nulle part ! C’est donc à l’**application** de détecter l’erreur et d’exécuter `ROLLBACK;`, qui défait le crédit : les soldes restent `50` € et `80` €. Propriétés : **atomicité** (tout ou rien), qui préserve la **cohérence** (la base ne quitte jamais un état qui respecte les contraintes). *(Testé dans SQLite : « CHECK constraint failed » ; avec `COMMIT`, soldes `50` et `160` ; avec `ROLLBACK`, soldes `50` et `80`.)*
+    **4.** Le débit `UPDATE compte SET solde = solde - 80 WHERE id = 1;` échoue : le solde deviendrait $50 - 80 = -30$, ce que la contrainte `CHECK (solde >= 0)` interdit. Le crédit de `80` € sur le compte `2`, lui, réussit. Attention : le SGBD (SQLite, par exemple) n’annule que l’**instruction fautive** ; la transaction reste ouverte avec le crédit déjà fait. Si l’on exécutait alors `COMMIT`, le compte `2` passerait à `160` € : `80` € créés de nulle part ! C’est donc à l’**application** de détecter l’erreur et d’exécuter `ROLLBACK;`, qui défait le crédit : les soldes restent `50` € et `80` €. Propriétés : **atomicité** (tout ou rien), qui préserve la **cohérence** (la base ne quitte jamais un état qui respecte les contraintes). *(Dans SQLite, le message d’erreur commence par « CHECK constraint failed ».)*
 
     **5.** On attend $50 - 20 - 20 = \mathbf{10}$ €.
 
@@ -941,7 +941,7 @@ WHERE adherent.nom = 'Durand';
 
 ??? corrige "Corrigé"
 
-    **1.** **Non.** On attend **2** (les deux emprunts d’`id_adherent` `1`). Testée sur la mini-base, la requête renvoie **5** : sans condition `ON`, la jointure produit le **produit cartésien** ($5 \times 3 = 15$ lignes, toutes les combinaisons emprunt/adhérent) ; le `WHERE` n’en conserve que celles associées à la ligne « Durand », soit les **cinq** emprunts, quel que soit leur emprunteur.
+    **1.** **Non.** On attend **2** (les deux emprunts d’`id_adherent` `1`). Sur la mini-base, la requête renvoie **5** : sans condition `ON`, la jointure produit le **produit cartésien** ($5 \times 3 = 15$ lignes, toutes les combinaisons emprunt/adhérent) ; le `WHERE` n’en conserve que celles associées à la ligne « Durand », soit les **cinq** emprunts, quel que soit leur emprunteur.
 
     **2.** L’erreur est l’**absence de condition de jointure** (`JOIN` sans `ON`). Correction (résultat sur la mini-base : **2**) :
 

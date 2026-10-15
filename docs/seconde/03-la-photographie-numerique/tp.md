@@ -234,7 +234,7 @@ Vous avez maintenant les deux outils : le **cercle** et la **droite**. On peut a
     <li><p><strong>Santé publique</strong> : des corps impossibles à atteindre abîment l’image de soi (doc. 1).</p></li>
     <li><p><strong>Droit d’être informé</strong> : une retouche est souvent invisible, celui qui regarde doit savoir (cours).</p></li>
     <li><p><strong>La loi le fait déjà</strong> pour la publicité et l’influence commerciale ; il suffit d’aller plus loin (doc. 1 et 2).</p></li>
-    <li><p><strong>Les filtres sont partout</strong> sur les réseaux, même hors publicité (doc. 2) : les jeunes se comparent à des images retouchées.</p></li>
+    <li><p><strong>Les filtres sont partout</strong> sur les réseaux, or la loi ne vise que l’influence commerciale : une photo personnelle retouchée échappe à toute mention (doc. 2). Les jeunes se comparent pourtant à ces images.</p></li>
     <li><p><strong>Confiance</strong> : la presse montre qu’on peut fixer une règle claire (doc. 4).</p></li>
     <li><p><strong>C’est techniquement simple</strong> : une mention, ou une trace dans les métadonnées (doc. 4).</p></li>
     </ul></td>
@@ -295,7 +295,7 @@ Vous avez maintenant les deux outils : le **cercle** et la **droite**. On peut a
     <li><p><strong>Santé publique</strong> : des corps impossibles à atteindre abîment l’image de soi (doc. 1).</p></li>
     <li><p><strong>Droit d’être informé</strong> : une retouche est souvent invisible, celui qui regarde doit savoir (cours).</p></li>
     <li><p><strong>La loi le fait déjà</strong> pour la publicité et l’influence commerciale ; il suffit d’aller plus loin (doc. 1 et 2).</p></li>
-    <li><p><strong>Les filtres sont partout</strong> sur les réseaux, même hors publicité (doc. 2) : les jeunes se comparent à des images retouchées.</p></li>
+    <li><p><strong>Les filtres sont partout</strong> sur les réseaux, or la loi ne vise que l’influence commerciale : une photo personnelle retouchée échappe à toute mention (doc. 2). Les jeunes se comparent pourtant à ces images.</p></li>
     <li><p><strong>Confiance</strong> : la presse montre qu’on peut fixer une règle claire (doc. 4).</p></li>
     <li><p><strong>C’est techniquement simple</strong> : une mention, ou une trace dans les métadonnées (doc. 4).</p></li>
     </ul></td>
@@ -356,7 +356,7 @@ Vous avez maintenant les deux outils : le **cercle** et la **droite**. On peut a
     <li><p><strong>Santé publique</strong> : des corps impossibles à atteindre abîment l’image de soi (doc. 1).</p></li>
     <li><p><strong>Droit d’être informé</strong> : une retouche est souvent invisible, celui qui regarde doit savoir (cours).</p></li>
     <li><p><strong>La loi le fait déjà</strong> pour la publicité et l’influence commerciale ; il suffit d’aller plus loin (doc. 1 et 2).</p></li>
-    <li><p><strong>Les filtres sont partout</strong> sur les réseaux, même hors publicité (doc. 2) : les jeunes se comparent à des images retouchées.</p></li>
+    <li><p><strong>Les filtres sont partout</strong> sur les réseaux, or la loi ne vise que l’influence commerciale : une photo personnelle retouchée échappe à toute mention (doc. 2). Les jeunes se comparent pourtant à ces images.</p></li>
     <li><p><strong>Confiance</strong> : la presse montre qu’on peut fixer une règle claire (doc. 4).</p></li>
     <li><p><strong>C’est techniquement simple</strong> : une mention, ou une trace dans les métadonnées (doc. 4).</p></li>
     </ul></td>

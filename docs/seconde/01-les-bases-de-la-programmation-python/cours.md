@@ -970,13 +970,14 @@ Vous avez maintenant toutes les briques : variables, types, calculs, chaînes, f
 
     ??? corrige "Correction"
 
-        La fonction traduit la formule ; la boucle parcourt $0, 10, 20, \ldots, 100$ grâce au pas de `range` :
+        La fonction traduit la formule ; la boucle fait $11$ tours et, au tour `i`, calcule la température `c = 10 * i`, qui prend donc les valeurs $0, 10, 20, \ldots, 100$ :
 
         ```python
         def celsius_vers_fahrenheit(c):
             return c * 1.8 + 32
 
-        for c in range(0, 101, 10):
+        for i in range(11):
+            c = 10 * i
             print(f"{c} C = {celsius_vers_fahrenheit(c)} F")
         ```
 

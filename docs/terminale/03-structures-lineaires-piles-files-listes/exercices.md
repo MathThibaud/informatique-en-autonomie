@@ -533,7 +533,7 @@ class File:
 
 ??? corrige "Corrigé"
 
-    **1.** **Non.** Après les trois `enfiler`, `contenu` vaut `[7, 19, 22]` ; `f.tete()` renvoie bien `7`, mais `f.defiler()` renvoie `22` (sortie réelle), le *dernier* entré, et laisse `[7, 19]`. Le premier entré, `7`, n’est pas le premier sorti : la structure se comporte comme une **pile**, et `tete` et `defiler` ne désignent même pas le même élément.
+    **1.** **Non.** Après les trois `enfiler`, `contenu` vaut `[7, 19, 22]` ; `f.tete()` renvoie bien `7`, mais `f.defiler()` renvoie `22`, le *dernier* entré, et laisse `[7, 19]`. Le premier entré, `7`, n’est pas le premier sorti : la structure se comporte comme une **pile**, et `tete` et `defiler` ne désignent même pas le même élément.
 
     **2.** L’erreur : `pop()` sans argument retire le **dernier** élément de la liste (la queue). Pour retirer la tête, placée au début :
 

@@ -34,7 +34,7 @@ On cherche le mot « algorithme » dans un dictionnaire papier de $2\,000$ pages
 
     1.  Au pire $2\,000$ pages (le mot est sur la dernière page regardée).
 
-    2.  Tableau complété (calcul vérifié à la machine) :
+    2.  Tableau complété :
 
         | Coups |    0     |    1     |   2   |   3   |   4   |  5   |  6   |  7   |  8  |  9  | 10  | 11  |
         |:------|:--------:|:--------:|:-----:|:-----:|:-----:|:----:|:----:|:----:|:---:|:---:|:---:|:---:|
@@ -60,7 +60,7 @@ paquet G : ![](../figures/c3a01e52cd7b9ed2.svg){ .tikz .tikz-inline loading=lazy
 
     1.  On prend dans l’ordre `1, 2, 3, 4, 5, 6, 7, 8`.
 
-    2.  $7$ comparaisons (vérifié à la machine). Quand le paquet D est vide (après la carte `7`), il ne reste que la carte `8` : on la pose sans rien comparer.
+    2.  $7$ comparaisons. Quand le paquet D est vide (après la carte `7`), il ne reste que la carte `8` : on la pose sans rien comparer.
 
     3.  Au plus $99$ comparaisons (une par carte prise, sauf la dernière). Chaque carte n’est prise **qu’une fois** : fusionner coûte de l’ordre du nombre total de cartes.
 
@@ -95,7 +95,7 @@ Le paquet mélangé ![](../figures/d6ffe49a15dc4039.svg){ .tikz .tikz-inline loa
 
     2.  $3$ étages pour $8$ cartes ($2^3 = 8$), $4$ pour $16$, $10$ pour $1\,024$ ($2^{10} = 1\,024$) : c’est $\log_2 n$.
 
-    3.  Chaque étage de fusions prend chacune des $8$ cartes une fois : au plus $8$ comparaisons par étage, donc au plus $3 \times 8 = 24$ pour tout le tri. (Sur ce paquet, la simulation à la machine en compte $17$.)
+    3.  Chaque étage de fusions prend chacune des $8$ cartes une fois : au plus $8$ comparaisons par étage, donc au plus $3 \times 8 = 24$ pour tout le tri. (Sur ce paquet, on en compte en fait $17$.)
 
     4.  Tableau complété :
 

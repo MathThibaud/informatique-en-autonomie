@@ -95,7 +95,7 @@ Rappel pour lire un fichier ligne par ligne :
 ```python
 fichier = open("input.txt", encoding="utf-8")
 for ligne in fichier:
-    ligne = ligne.strip()   # enlève le retour à la ligne final
+    ligne = ligne.strip()   # enleve le retour a la ligne final
 fichier.close()
 ```
 
@@ -164,7 +164,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : sans chaînes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-les-types-construits-aoc-1-7 }
 
-1.  À la main : avec 5 bits, quel est le bit de poids $2^2$ de $22 = \texttt{10110}_2$ ? Calculer $(22 \mathbin{//} 4) \bmod 2$ et comparer.
+1.  À la main : avec 5 bits, quel est le bit de poids $2^2$ de $22 = \texttt{10110}_2$ ? Calculer `(22 // 4) % 2` et comparer.
 
 2.  Refaire la partie 1 en convertissant chaque ligne en entier dès la lecture, et en obtenant le bit de poids $2^p$ par des calculs.
 

@@ -48,7 +48,7 @@ MON;2025-08-02;22,2;27,2;0,0
 
 ??? corrige "Corrigé"
 
-    Tous les résultats ci-dessous ont été obtenus en exécutant le programme corrigé sur les fichiers fournis (193 lignes de relevés, 6 stations). Les fonctions complètes sont regroupées en fin de document.
+    Les résultats ci-dessous portent sur les fichiers fournis (193 lignes de relevés, 6 stations). Les fonctions complètes sont regroupées en fin de document.
 
     ```python
     def en_nombre(texte):

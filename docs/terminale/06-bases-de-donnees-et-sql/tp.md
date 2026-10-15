@@ -182,7 +182,7 @@ Insérer ensuite deux équipes et deux joueurs de votre choix, et vérifier dans
     | h | *acceptée* | domaine *non* vérifié par SQLite |
 
     **1.** Supprimer l’équipe $6$ laisserait des joueurs et des rencontres qui désignent une équipe **inexistante** : la contrainte de référence interdit aussi les suppressions qui créeraient de telles « références pendantes ».  
-    **2.** SQLite a un typage **souple** : le type déclaré n’est qu’une préférence (« affinité »). `’2021’` serait converti en entier, mais `’hier’` est stocké tel quel, en texte (`typeof(annee_creation)` vaut `’text’`). D’autres SGBD (PostgreSQL, MySQL) refusent. Parade : `annee_creation INTEGER CHECK (typeof(annee_creation) = ’integer’)` — testé : `2020` et `’2021’` acceptés, `’hier’` refusé (depuis SQLite 3.37, on peut aussi déclarer la table `STRICT`).  
+    **2.** SQLite a un typage **souple** : le type déclaré n’est qu’une préférence (« affinité »). `’2021’` serait converti en entier, mais `’hier’` est stocké tel quel, en texte (`typeof(annee_creation)` vaut `’text’`). D’autres SGBD (PostgreSQL, MySQL) refusent. Parade : `annee_creation INTEGER CHECK (typeof(annee_creation) = ’integer’)` — avec cette contrainte, `2020` et `’2021’` sont acceptés, `’hier’` est refusé (depuis SQLite 3.37, on peut aussi déclarer la table `STRICT`).  
     **3.** Requête :
 
     ```sql
@@ -372,7 +372,7 @@ Insérer ensuite deux équipes et deux joueurs de votre choix, et vérifier dans
     ```
 
     **Q14** : AS Fontvieille 4 – 4 Moneghetti Futsal ; Condamine FC 1 – 0 Rocher Club ; Monte-Carlo United 6 – 2 Larvotto Sporting.  
-    **Q15** : résultat **vide** — la base est cohérente (vérifié pour les $12$ rencontres jouées). Limite : un match joué sur le score de $0$ à $0$ n’a aucune ligne dans `but` et échappe à la jointure ; il n’y en a pas ici.
+    **Q15** : résultat **vide** — la base est cohérente pour les $12$ rencontres jouées. Limite : un match joué sur le score de $0$ à $0$ n’a aucune ligne dans `but` et échappe à la jointure ; il n’y en a pas ici.
 
 ## Partie 5 — Mettre la base à jour
 
@@ -427,7 +427,7 @@ Relancer la requête de contrôle de cohérence : elle doit toujours ne rien ren
 
     **4.** Refus (`FOREIGN KEY constraint failed`) : $7$ lignes de `but` désignent Yanis Moreau ; les supprimer avec lui effacerait l’histoire de la saison. Dans la vraie vie, on garderait le joueur (par exemple avec un attribut « actif »).  
     **5.** Raphaël Petit (gardien de Larvotto) n’a marqué aucun but : aucune ligne ne le référence. Il reste $35$ joueurs.  
-    **6.** Elle tenterait de supprimer **tous** les joueurs. Ici, SQLite la refuse en bloc (des buts référencent certains joueurs) : testé, il reste bien $35$ joueurs. Mais sans clés étrangères actives, la table serait vidée : « le `WHERE` qui sauve des vies ».  
+    **6.** Elle tenterait de supprimer **tous** les joueurs. Ici, SQLite la refuse en bloc (des buts référencent certains joueurs) : il reste bien $35$ joueurs. Mais sans clés étrangères actives, la table serait vidée : « le `WHERE` qui sauve des vies ».  
     La requête de contrôle (Q15) renvoie toujours un résultat vide.
 
 ## Partie 6 — Piloter la base depuis Python
