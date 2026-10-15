@@ -36,7 +36,7 @@ La ligne du méridien de Greenwich : longitude 0°
 
 !!! remarque "Remarque — Degrés décimaux ou degrés-minutes"
 
-    Un même point s’écrit de deux façons : en **degrés décimaux** ($43{,}7384^\circ$) ou en **degrés et minutes** ($43^\circ\,44{,}304'$), sachant qu’**un degré vaut 60 minutes**. Pour convertir des minutes en degrés, on **divise par 60** : $43^\circ\,44{,}304' = 43 + \dfrac{44{,}304}{60} \approx 43{,}7384^\circ$. Le GPS, on le verra, « parle » en degrés-minutes.
+    Un même point s’écrit de deux façons : en **degrés décimaux** ($43{,}7384^\circ$) ou en **degrés et minutes** ($43^\circ\,44{,}304'$), sachant qu’**un degré vaut 60 minutes**. Pour convertir des minutes en degrés, on **divise par 60** : $43^\circ\,44{,}304' = 43 + \dfrac{44{,}304}{60} \approx 43{,}7384^\circ$. Dans l’autre sens, pour passer des degrés décimaux aux degrés-minutes, on garde la partie entière et on **multiplie la partie décimale par 60** : $7{,}5^\circ = 7^\circ\,(0{,}5 \times 60)' = 7^\circ\,30'$. Le GPS, on le verra, « parle » en degrés-minutes.
 
 <span id="cours-07-1" class="ancre"></span>
 
@@ -240,7 +240,7 @@ Consulter une carte ou calculer un itinéraire semble « immatériel ». Pourtan
 | **Notion** | **À retenir** |
 |:---|:---|
 | Latitude / longitude | Nord–Sud ($-90$ à $90^\circ$) / Est–Ouest ($-180$ à $180^\circ$) ; Greenwich $=0$. |
-| Degrés-minutes | $1^\circ = 60'$ ; minutes $\to$ degrés : diviser par 60. |
+| Degrés-minutes | $1^\circ = 60'$ ; minutes $\to$ degrés : diviser par 60 ; degrés $\to$ minutes : partie décimale $\times 60$. |
 | Principe du GPS | le récepteur mesure le **temps de trajet** du signal $\to$ distance $= c \times t$. |
 | Trilatération | croiser 3 distances (cercles) $\to$ 1 point ; 4<sup>e</sup> satellite pour l’horloge. |
 | Trame NMEA | phrase texte (`$GPGGA`) : heure, latitude, longitude, nb de satellites. |

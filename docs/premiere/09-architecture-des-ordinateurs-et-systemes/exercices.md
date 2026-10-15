@@ -443,7 +443,7 @@ Chaque commande contient une erreur. L’identifier et proposer la correction.
 
 1.  `cd /home/eleve/Documents/cours_nsi.txt` (on veut aller *dans* `Documents`) ;
 
-2.  `rm -r notes.txt` (on veut supprimer ce simple fichier) ;
+2.  `rm Images` (on veut supprimer le répertoire `Images` et son contenu) ;
 
 3.  vous êtes dans `/home/eleve/Images` et tapez `cat cours_nsi.txt` (le fichier est dans `Documents`).
 
@@ -453,7 +453,7 @@ Chaque commande contient une erreur. L’identifier et proposer la correction.
 
 ??? corrige "Corrigé"
 
-    **a)** `cd` attend un **répertoire**, pas un fichier : `cd /home/eleve/Documents`. **b)** `-r` sert aux *répertoires* ; pour un simple fichier : `rm notes.txt`. **c)** Le fichier est dans `Documents`, pas dans le répertoire courant : `cat ../Documents/cours_nsi.txt`.
+    **a)** `cd` attend un **répertoire**, pas un fichier : `cd /home/eleve/Documents`. **b)** `Images` est un *répertoire* : `rm` seul ne supprime que des fichiers et refuse. Il faut l’option `-r` : `rm -r Images`. **c)** Le fichier est dans `Documents`, pas dans le répertoire courant : `cat ../Documents/cours_nsi.txt`.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 19</span> — Reconstituer une séquence <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-19 }
 

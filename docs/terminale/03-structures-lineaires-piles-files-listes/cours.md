@@ -334,7 +334,32 @@ Insérer un maillon ne demande que de **rebrancher deux liens**, sans déplacer 
 
 !!! remarque "Remarque"
 
-    En Python, on peut représenter un maillon par un petit objet (chapitre *Programmation objet*) : une classe `Cellule` avec deux attributs, `valeur` (l’élément) et `suivante` (la cellule d’après, ou `None` à la fin). On construit alors une liste en emboîtant les cellules : `Cellule(1, Cellule(2, Cellule(3, None)))`. Nous n’en aurons pas besoin pour la plupart des exercices : là encore, il suffit le plus souvent d’**admettre** l’existence d’une implémentation.
+    En Python, on peut représenter un maillon par un petit objet (chapitre *Programmation objet*) : une classe `Cellule` avec deux attributs, `valeur` (l’élément) et `suivante` (la cellule d’après, ou `None` à la fin). On construit alors une liste en emboîtant les cellules : `Cellule(1, Cellule(2, Cellule(3, None)))`. Pour les piles et les files, il suffit le plus souvent d’**admettre** l’existence d’une implémentation ; en revanche, il faut savoir **parcourir** une liste chaînée construite avec `Cellule`, en suivant les liens d’une cellule à la suivante.
+
+!!! exemple "Exemple — Parcourir une liste chaînée"
+
+    Avec la classe `Cellule` ci-dessous, écrire une fonction `afficher(lst)` qui affiche, dans l’ordre, les valeurs de la liste chaînée `lst` (rien pour la liste vide `None`).
+
+    ```python
+    class Cellule:
+        def __init__(self, v, s):
+            self.valeur = v
+            self.suivante = s
+    ```
+
+    ??? corrige "Correction"
+
+        On part de la première cellule et on suit les liens jusqu’à `None`, en affichant chaque valeur rencontrée :
+
+        ```python
+        def afficher(lst):
+            c = lst                    # cellule courante
+            while c is not None:
+                print(c.valeur)
+                c = c.suivante         # on avance d'un maillon
+        ```
+
+        Pour `lst = Cellule(4, Cellule(7, Cellule(2, None)))`, la boucle fait trois tours et affiche `4`, `7` puis `2`. Le même schéma (`c = lst`, `while c is not None:`, `c = c.suivante`) sert à tous les parcours : calculer la longueur, chercher une valeur, faire une somme, accéder au $n$-ième élément…
 
 <span id="cours-03-18" class="ancre"></span>
 

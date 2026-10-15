@@ -447,13 +447,13 @@ Ce chapitre est une **clé** pour toute la fin de l’année. On la retrouve dè
 
 - **Une condition d’arrêt jamais atteinte.** L’appel récursif ne *rapproche* pas du cas de base (mauvais sens, argument qui ne décroît pas) : même effet qu’un oubli. *Le réflexe :* vérifier qu’un **variant** décroît strictement.
 
-- **Oublier le `return` devant l’appel récursif.** Le résultat est calculé mais jamais renvoyé, la fonction renvoie `None`. *Le réflexe :* `return n * factorielle(n-1)`, et non `factorielle(n-1)` seul.
+- **Oublier le `return` devant l’appel récursif.** Le résultat est calculé mais jamais renvoyé, la fonction renvoie `None`. *Le réflexe :* `return n * fact(n-1)`, et non `fact(n-1)` seul.
 
 - **Ne pas combiner le résultat de l’appel.** On oublie l’opération qui relie le sous-problème au problème (le `n *`, le `+ 1`, la concaténation…).
 
 - **Croire que « chaque appel repart de zéro ».** Les appels s’**empilent** ; chaque cadre possède ses **propres** variables locales. Dérouler la pile lève le doute.
 
-- **La récursivité naïve qui recalcule.** `fibonacci(n)` relance deux fois les mêmes calculs $\Rightarrow$ coût **exponentiel**. *Le réflexe :* repérer les **appels répétés** (on apprendra à les éviter au chapitre *Programmation dynamique*).
+- **La récursivité naïve qui recalcule.** `fib(n)` relance deux fois les mêmes calculs $\Rightarrow$ coût **exponentiel**. *Le réflexe :* repérer les **appels répétés** (on apprendra à les éviter au chapitre *Programmation dynamique*).
 
 ## Savoir-faire à maîtriser
 

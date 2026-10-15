@@ -108,7 +108,7 @@ $$n \to \frac{n}{2} \to \frac{n}{4} \to \frac{n}{8} \to \cdots \to 1.$$
 
 !!! regle "Règle 3 — Coût logarithmique"
 
-    Le nombre d’étapes de la recherche dichotomique sur un tableau de taille `n` est de l’ordre de $\log_2(n)$ : c’est le nombre de fois qu’on peut diviser `n` par 2 pour arriver à 1. On dit que son coût est **logarithmique**. C’est *radicalement* plus petit que `n`.
+    La recherche dichotomique sur un tableau de taille `n` fait **au plus $\lfloor \log_2 n \rfloor + 1$ tours**, soit le nombre de divisions par 2 pour arriver à 1, **plus un** (le dernier tour examine la seule case restante). Par exemple, pour $n = 16$ : $16 \to 8 \to 4 \to 2 \to 1$ fait 4 divisions, donc au plus **5 tours**. Ce nombre est de l’ordre de $\log_2(n)$ : on dit que son coût est **logarithmique**. C’est *radicalement* plus petit que `n`.
 
 !!! remarque "Remarque — Le logarithme en deux mots au-delà du programme"
 

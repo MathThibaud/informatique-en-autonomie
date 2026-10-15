@@ -81,6 +81,8 @@ Chaque processus porte un identifiant unique, le **PID** (*Process IDentifier*),
 
 ![](../figures/4ef74e786272891d.svg){ .tikz loading=lazy }
 
+Lorsqu’un processus se termine (ou est tué) avant ses fils, ceux-ci ne disparaissent pas : chacun devient **orphelin** et est **adopté par `init`**, son PPID devient alors $1$.
+
 !!! remarque "Remarque"
 
     L’appel `fork` **duplique** le processus qui l’exécute : après un `fork`, il y a *deux* processus (le père **et** le fils) qui poursuivent tous deux la suite du programme. Conséquence surprenante : deux `fork` à la suite donnent $2 \times 2 = 4$ processus, trois `fork` en donnent $2^3 = 8$… Chaque `fork` **double** le nombre de processus. Le code suivant affiche donc « bonjour » **quatre** fois :
@@ -144,7 +146,7 @@ Pour comparer les stratégies, prenons quatre processus qui arrivent à des inst
 |     C     |         2         |        1        |
 |     D     |         3         |        2        |
 
-On mesure la qualité d’un ordonnancement par le **temps d’attente** de chaque processus (le temps passé à ne *pas* s’exécuter alors qu’il était arrivé), et on en prend la moyenne.
+On mesure la qualité d’un ordonnancement par le **temps d’attente** de chaque processus (le temps passé à ne *pas* s’exécuter alors qu’il était arrivé), et on en prend la moyenne. On utilise aussi le **temps de séjour** d’un processus, égal à son instant de fin moins son instant d’arrivée (certains sujets l’appellent *temps de rotation* ou *temps d’exécution*). Les deux sont liés : temps d’attente $=$ temps de séjour $-$ durée de calcul.
 
 ### Premier arrivé, premier servi (FCFS)
 
@@ -165,6 +167,8 @@ Temps d’attente : A$=0$, C$=2$, D$=2$, B$=6$. **Moyenne $= 2{,}50$**. En faisa
 ### Le tourniquet (round-robin)
 
 Pour que *personne* ne monopolise le processeur, on fixe un **quantum** (ici $1$ unité) et on fait **tourner** les processus prêts dans une **file** (la structure FIFO du chapitre 3) : chacun s’exécute un quantum, puis repart en fin de file s’il n’a pas fini.
+
+**Convention :** un processus qui arrive à l’instant où un quantum se termine entre dans la file **avant** le processus qui vient d’être interrompu.
 
 ![](../figures/7243a1680236ca44.svg){ .tikz loading=lazy }
 
