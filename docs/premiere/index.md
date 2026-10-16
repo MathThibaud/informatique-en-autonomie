@@ -19,7 +19,7 @@ hide:
 
     Tout le cours, les exercices et les corrigés de l'année, dans la version distribuée en classe (version du 16 octobre 2026).
 
-    [:material-download: Télécharger le manuel (11,1 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-premiere.pdf){ .md-button .md-button--primary }
+    [:material-download: Télécharger le manuel (12,0 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-premiere.pdf){ .md-button .md-button--primary }
 
 ## Chapitres
 
