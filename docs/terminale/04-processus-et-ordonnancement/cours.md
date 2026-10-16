@@ -164,6 +164,10 @@ Temps d’attente : A$=0$, B$=3$, C$=5$, D$=5$. **Moyenne $= 3{,}25$**. Défaut 
 
 Temps d’attente : A$=0$, C$=2$, D$=2$, B$=6$. **Moyenne $= 2{,}50$**. En faisant passer les courts devant, on **réduit le temps d’attente moyen**. Quand tous les processus sont présents dès le départ, on peut démontrer que c’est même le meilleur choix possible <span class="horsprog">au-delà du programme</span> ; avec des arrivées échelonnées, comme ici, ce n’est plus garanti. Rançon : un processus long (ici B) peut attendre longtemps — c’est le risque de « famine ».
 
+!!! remarque "Remarque — Variante préemptive : le plus court temps restant d’abord"
+
+    Ci-dessus, un processus élu s’exécute jusqu’au bout. Dans la variante **préemptive** (en anglais *SRTF*, *shortest remaining time first*), on refait le choix **à chaque unité de temps** : on élit le processus prêt dont la **durée restante** est la plus courte, quitte à **interrompre** celui qui s’exécute quand un processus plus court arrive. Une règle de départage est nécessaire en cas d’égalité (souvent : le premier arrivé). Cette variante figure dans des sujets de bac ; l’énoncé en rappelle alors les règles.
+
 ### Le tourniquet (round-robin)
 
 Pour que *personne* ne monopolise le processeur, on fixe un **quantum** (ici $1$ unité) et on fait **tourner** les processus prêts dans une **file** (la structure FIFO du chapitre 3) : chacun s’exécute un quantum, puis repart en fin de file s’il n’a pas fini.

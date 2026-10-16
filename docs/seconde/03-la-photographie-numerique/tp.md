@@ -203,6 +203,71 @@ Vous avez maintenant les deux outils : le **cercle** et la **droite**. On peut a
 
     2.  **Bonus** : expliquer pourquoi certains drapeaux (avec une *étoile*, un *blason*…) sont presque impossibles à dessiner ainsi.
 
+## Grille d’évaluation
+
+La **moitié des points** récompense vos **initiatives** : allez au-delà de ce qui est demandé, et gardez une trace de ce que vous avez cherché et essayé.
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Critère</strong></th>
+<th style="text-align: center;"><strong>Points</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" style="text-align: left;"><strong>Le socle</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Les quatre drapeaux à trois bandes sont dessinés, avec les proportions et les couleurs de la Wikipédia anglaise</td>
+<td style="text-align: center;"> /3</td>
+</tr>
+<tr>
+<td style="text-align: left;">Le drapeau du Japon est complet : disque centré, de la bonne taille, condition expliquée</td>
+<td style="text-align: center;"> /2</td>
+</tr>
+<tr>
+<td style="text-align: left;">La diagonale est obtenue, et vous savez échanger les deux triangles</td>
+<td style="text-align: center;"> /2</td>
+</tr>
+<tr>
+<td style="text-align: left;">Votre code est lisible : noms de variables parlants, commentaires sur les lignes importantes</td>
+<td style="text-align: center;"> /1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Vous expliquez (à l’oral ou par écrit) le rôle de chaque ligne d’un de vos programmes</td>
+<td style="text-align: center;"> /2</td>
+</tr>
+<tr>
+<td colspan="2" style="text-align: left;"><strong>Vos initiatives</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Vous avez dessiné des drapeaux supplémentaires de votre choix, sources (dimensions, couleurs) citées</td>
+<td style="text-align: center;"> /3</td>
+</tr>
+<tr>
+<td style="text-align: left;">Vous avez réussi un ou plusieurs défis : autre diagonale, Bénin, Tchéquie, Seychelles…</td>
+<td style="text-align: center;"> /2</td>
+</tr>
+<tr>
+<td style="text-align: left;">Vous avez inventé un effet ou une variante (dégradé, contour, drapeau « délavé », mélange de formes…)</td>
+<td style="text-align: center;"> /2</td>
+</tr>
+<tr>
+<td style="text-align: left;">Vous avez cherché par vous-même une fonction ou une notion (documentation, tutoriel) et vous savez l’expliquer ; les formes demandées restent dessinées pixel par pixel</td>
+<td style="text-align: center;"> /2</td>
+</tr>
+<tr>
+<td style="text-align: left;">Soin et originalité de l’ensemble (rendu, présentation des images)</td>
+<td style="text-align: center;"> /1</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Total</strong></td>
+<td style="text-align: center;"><strong> /20</strong></td>
+</tr>
+</tbody>
+</table>
+
 **Crédits.** Les images de drapeaux de ce projet sont produites par les programmes Python qui les accompagnent (bibliothèque `PIL`). Les drapeaux nationaux ne sont pas protégés par le droit d’auteur ; couleurs et proportions d’après la Wikipédia anglaise.
 
 ??? corrige "Corrigé de l'activité"
