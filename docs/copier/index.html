@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Copier le code</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='5' y='5' width='9' height='9' rx='1.5' fill='none' stroke='%2300696B' stroke-width='1.6'/%3E%3Cpath d='M3 11V3.5A1.5 1.5 0 0 1 4.5 2H11' fill='none' stroke='%2300696B' stroke-width='1.6'/%3E%3C/svg%3E">
+<!--
+  Page « copier le code » des livres NSI (format PDF).
+  Le code n'est PAS stocké sur le site : il voyage dans le lien lui-même, après le « # »
+  (JSON {t: titre, c: code} compressé en deflate brut, puis base64url). La partie après
+  le « # » n'est jamais envoyée au serveur. Lien produit par livre_autonome/_build
+  (edition_commun.liens_copie) dans les dépôts Overleaf.
+-->
+<style>
+  :root {
+    --fond: #f6f8f8; --carte: #ffffff; --texte: #1d2b2b; --doux: #5b6b6b;
+    --accent: #00696b; --accent-doux: #e3f0f0; --bord: #d5e2e2; --code: #f1f6f6;
+    --sur-accent: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --fond: #121818; --carte: #1a2222; --texte: #e4eeee; --doux: #9fb3b3;
+      --accent: #4fc1c1; --accent-doux: #1f3333; --bord: #2c3b3b; --code: #141c1c;
+      --sur-accent: #0b1f1f;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--fond); color: var(--texte);
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 860px; margin: 0 auto; padding: 24px 16px 48px; }
+  header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  header svg { flex: none; }
+  h1 { font-size: 1.15rem; margin: 0; font-weight: 650; }
+  .titre { color: var(--doux); font-size: .95rem; margin: 2px 0 0; }
+  .carte {
+    background: var(--carte); border: 1px solid var(--bord); border-radius: 10px;
+    overflow: hidden;
+  }
+  .barre {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 8px 10px 8px 14px; border-bottom: 1px solid var(--bord); background: var(--accent-doux);
+  }
+  .barre span { color: var(--doux); font-size: .85rem; }
+  button {
+    display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+    font: inherit; font-size: .95rem; font-weight: 600; color: var(--sur-accent); background: var(--accent);
+    border: 0; border-radius: 7px; padding: 8px 14px;
+  }
+  button:focus-visible { outline: 3px solid var(--texte); outline-offset: 2px; }
+  button.ok { background: #2e7d32; color: #ffffff; }
+  pre {
+    margin: 0; padding: 14px 16px; overflow-x: auto; background: var(--code);
+    font: 14px/1.55 ui-monospace, "SF Mono", Menlo, Consolas, monospace; tab-size: 4;
+  }
+  .aide { color: var(--doux); font-size: .9rem; margin-top: 14px; }
+  .erreur { border-left: 4px solid #c62828; padding: 10px 14px; background: var(--carte); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <svg width="34" height="34" viewBox="0 0 16 16" aria-hidden="true">
+      <rect x="5" y="5" width="9" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4" style="color:var(--accent)"/>
+      <path d="M3 11V3.5A1.5 1.5 0 0 1 4.5 2H11" fill="none" stroke="currentColor" stroke-width="1.4" style="color:var(--accent)"/>
+    </svg>
+    <div>
+      <h1>Copier le code du livre</h1>
+      <p class="titre" id="titre"></p>
+    </div>
+  </header>
+
+  <div id="zone"></div>
+
+  <p class="aide">Le code est copié tel qu'il est imprimé dans le livre, avec son indentation et sans les numéros de ligne.
+    Collez-le dans Thonny, VS Code ou l'éditeur de votre choix.</p>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var zone = document.getElementById("zone");
+  var titre = document.getElementById("titre");
+
+  function erreur(msg) {
+    zone.innerHTML = "";
+    var p = document.createElement("p");
+    p.className = "erreur";
+    p.textContent = msg;
+    zone.appendChild(p);
+  }
+
+  function octets(b64url) {
+    var b64 = b64url.replace(/-/g, "+").replace(/_/g, "/");
+    while (b64.length % 4) b64 += "=";
+    var bin = atob(b64), t = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) t[i] = bin.charCodeAt(i);
+    return t;
+  }
+
+  function chargerPako() {
+    return new Promise(function (ok, ko) {
+      var s = document.createElement("script");
+      s.src = "https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako_inflate.min.js";
+      s.onload = function () { ok(window.pako); };
+      s.onerror = ko;
+      document.head.appendChild(s);
+    });
+  }
+
+  function decompresser(t) {
+    if (window.DecompressionStream) {
+      var flux = new Blob([t]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
+      return new Response(flux).text();
+    }
+    return chargerPako().then(function (pako) { return pako.inflateRaw(t, { to: "string" }); });
+  }
+
+  function copier(texte, bouton) {
+    function fait() {
+      bouton.classList.add("ok");
+      bouton.lastChild.textContent = "Copié !";
+      setTimeout(function () { bouton.classList.remove("ok"); bouton.lastChild.textContent = "Copier le code"; }, 2000);
+    }
+    function secours() {
+      var ta = document.createElement("textarea");
+      ta.value = texte; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); fait(); } catch (e) { /* sélection laissée à l'élève */ }
+      document.body.removeChild(ta);
+    }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(texte).then(fait, secours);
+    } else {
+      secours();
+    }
+  }
+
+  function afficher(d) {
+    var code = (d.c || "").replace(/\s+$/, "") + "\n";
+    if (d.t) { titre.textContent = d.t; document.title = "Copier le code — " + d.t; }
+    zone.innerHTML = "";
+    var carte = document.createElement("div"); carte.className = "carte";
+    var barre = document.createElement("div"); barre.className = "barre";
+    var info = document.createElement("span");
+    var n = code.split("\n").length - 1;
+    info.textContent = n + (n > 1 ? " lignes" : " ligne");
+    var bouton = document.createElement("button"); bouton.type = "button";
+    bouton.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">'
+      + '<rect x="5" y="5" width="9" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/>'
+      + '<path d="M3 11V3.5A1.5 1.5 0 0 1 4.5 2H11" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+    bouton.appendChild(document.createTextNode("Copier le code"));
+    bouton.addEventListener("click", function () { copier(code, bouton); });
+    barre.appendChild(info); barre.appendChild(bouton);
+    var pre = document.createElement("pre"); var c = document.createElement("code");
+    c.textContent = code; pre.appendChild(c);
+    carte.appendChild(barre); carte.appendChild(pre); zone.appendChild(carte);
+    bouton.focus();
+  }
+
+  var h = location.hash.slice(1);
+  if (!h) { erreur("Aucun code dans ce lien : ouvrez cette page depuis l'icône de copie d'un bloc de code du livre."); return; }
+  try {
+    decompresser(octets(h)).then(function (txt) { afficher(JSON.parse(txt)); })
+      .catch(function () { erreur("Ce lien semble incomplet ou abîmé : impossible de lire le code."); });
+  } catch (e) {
+    erreur("Ce lien semble incomplet ou abîmé : impossible de lire le code.");
+  }
+})();
+</script>
+</body>
+</html>
