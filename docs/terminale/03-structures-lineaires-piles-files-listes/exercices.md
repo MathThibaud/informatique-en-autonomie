@@ -198,7 +198,97 @@ On dispose d’une classe `Pile` dont les objets représentent une pile, munie d
 
     Pour `3, 2, 10` empilés dans cet ordre, l’affichage est `10`, puis `2`, puis `3` (du sommet vers le fond).
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Défi — des balises bien imbriquées <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-7 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — La taille d’une pile <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-7 }
+
+La classe `Pile` du cours n’a **pas** de méthode `taille` : on ne dispose que de `est_vide`, `empiler`, `depiler` et `sommet`.
+
+1.  Un élève propose la fonction suivante.
+
+    ```python
+    def taille(p):
+        n = 0
+        while not p.est_vide():
+            p.depiler()
+            n = n + 1
+        return n
+    ```
+
+    On empile `4`, `7` puis `2` dans une pile vide `p`, puis on exécute deux fois de suite `print(taille(p))`. Qu’affiche le programme ? Expliquer, avec l’expression **effet de bord**, pourquoi cette fonction ne convient pas.
+
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `taille(p)` qui renvoie le nombre d’éléments de la pile `p`, en n’utilisant **que** les méthodes de l’interface, et qui laisse `p` **dans son état d’origine** (mêmes éléments, même ordre).
+
+    ??? pouce "Coup de pouce"
+
+        Les éléments dépilés doivent être rangés quelque part pour être remis ensuite : dans une seconde pile, par exemple. Dans quel ordre en ressortent-ils ?
+
+3.  Avec la pile `p` de la question 1, représenter `p` et la pile auxiliaire au moment où l’on a fini de compter, puis à la fin de l’appel.
+
+??? corrige "Corrigé"
+
+    **1.** Le programme affiche `3`, puis `0`. Pour compter, la fonction **dépile tout** : elle modifie la pile reçue en paramètre (**effet de bord**), qui est vide après le premier appel. Connaître la taille d’une pile ne doit pas la détruire.
+
+    **2.** On range chaque élément dépilé dans une pile auxiliaire, puis on le remet dans `p` :
+
+    ```python
+    def taille(p):
+        aux = Pile()
+        n = 0
+        while not p.est_vide():          # on vide p dans aux en comptant
+            aux.empiler(p.depiler())
+            n = n + 1
+        while not aux.est_vide():        # on remet chaque element dans p
+            p.empiler(aux.depiler())
+        return n
+    ```
+
+    **3.** Fin du comptage : `p` est vide et `aux` contient, du fond vers le sommet, `2`, `7`, `4` (l’ordre est **inversé**). Fin de l’appel : `aux` est vide et `p` contient de nouveau `4`, `7`, `2` (`2` au sommet) : le second transvasement inverse une seconde fois l’ordre, ce qui le rétablit.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Copier une pile <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-8 }
+
+On veut écrire une fonction `copier_pile(p)` qui renvoie une **nouvelle** pile contenant les mêmes éléments que `p`, **dans le même ordre** (même sommet), en n’utilisant que `est_vide`, `empiler`, `depiler` et `sommet`. À la fin, `p` doit avoir retrouvé son état d’origine.
+
+1.  Pourquoi l’instruction `q = p` ne fabrique-t-elle pas une copie ? Que devient `p` si l’on exécute ensuite `q.depiler()` ?
+
+2.  Un élève dépile `p` jusqu’à ce qu’elle soit vide en empilant chaque élément dans une nouvelle pile `q`. Pour la pile `p` contenant `4`, `7`, `2` (`2` au sommet), représenter `p` et `q` à la fin. Relever les **deux** défauts de cette méthode.
+
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire la fonction `copier_pile(p)`. La tester en vérifiant que `p` et sa copie se dépilent dans le même ordre, et que dépiler la copie ne modifie pas `p`.
+
+    ??? pouce "Coup de pouce"
+
+        Un seul transvasement renverse l’ordre ; deux transvasements le rétablissent. Pendant le second, chaque élément retiré de la pile auxiliaire peut être empilé **deux fois** : dans `p` et dans la copie.
+
+    ??? pouce "Coup de pouce 2 (début de solution)"
+
+        `def copier_pile(p):`  
+        `aux = Pile()`  
+        `while not p.est_vide():`  
+        `aux.empiler(p.depiler())`  
+        `q = Pile()`
+
+??? corrige "Corrigé"
+
+    **1.** `q = p` ne crée aucune pile : `q` et `p` sont **deux noms pour le même objet**. `q.depiler()` retire donc aussi le sommet `2` de `p`.
+
+    **2.** À la fin, `p` est vide et `q` contient `2`, `7`, `4` (`4` au sommet). Deux défauts : l’ordre est **inversé** (le sommet de `q` est le fond de `p`) et `p` a été **détruite**.
+
+    **3.** Deux transvasements ; pendant le second, chaque élément est empilé à la fois dans `p` (restauration) et dans la copie :
+
+    ```python
+    def copier_pile(p):
+        aux = Pile()
+        while not p.est_vide():          # p renversee dans aux
+            aux.empiler(p.depiler())
+        q = Pile()
+        while not aux.est_vide():        # aux renversee : ordre d'origine
+            x = aux.depiler()
+            p.empiler(x)                 # on restaure p
+            q.empiler(x)                 # on construit la copie
+        return q
+    ```
+
+    Test : avec `p` contenant `4`, `7`, `2`, `q = copier_pile(p)` puis `q.depiler()` renvoie `2`, et `p.sommet()` vaut toujours `2` : les deux piles sont bien indépendantes.
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 9</span> — Défi — des balises bien imbriquées <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-9 }
 
 Dans un document, les balises s’écrivent `<b>` (ouvrante) et `</b>` (fermante), comme en HTML. Une liste de balises est **bien imbriquée** si chaque fermante correspond à la dernière ouvrante non encore fermée.
 
@@ -235,7 +325,7 @@ Dans un document, les balises s’écrivent `<b>` (ouvrante) et `</b>` (fermante
 
     `["<b>", "<i>", "</i>", "</b>"]` $\to$ `True` ; `["<b>", "<i>", "</b>", "</i>"]` $\to$ `False` (à `</b>`, on dépile `<i>` qui ne correspond pas).
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 8</span> — Défi — notation polonaise inverse <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-8 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Défi — notation polonaise inverse <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-10 }
 
 En **notation polonaise inverse** (NPI), on écrit les opérateurs *après* leurs opérandes : `"3 4 +"` vaut $7$, et `"5 1 2 + 4 * +"` vaut $17$. On évalue avec une pile : chaque **nombre** est empilé ; à chaque **opérateur**, on dépile les *deux* derniers nombres, on applique l’opération et on empile le résultat.
 
@@ -278,7 +368,7 @@ En **notation polonaise inverse** (NPI), on écrit les opérateurs *après* leur
 
 ### Files
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 9</span> — La bonne opération sur une file <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-9 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 11</span> — La bonne opération sur une file <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-11 }
 
 On dispose d’une file `f`. Pour chaque phrase, écrire l’**appel de méthode** correspondant.
 
@@ -294,7 +384,7 @@ On dispose d’une file `f`. Pour chaque phrase, écrire l’**appel de méthode
 
     **1.** `f.enfiler(7)` **2.** `f.defiler()` **3.** `f.est_vide()` **4.** `f.tete()`
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 10</span> — Trace d’une file <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-10 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 12</span> — Trace d’une file <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-12 }
 
 On part d’une file `f` vide. Même travail (la **tête est à droite** : on défile à droite).
 
@@ -324,7 +414,7 @@ f.defiler()
     | `tete()`        |     `7`     | $9\ ;\ 2\ ;\ 7$          |
     | `defiler()`     |     `7`     | $9\ ;\ 2$                |
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Ordonnancer des processus avec une file (d’après Amérique du Nord 2024, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-11 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Ordonnancer des processus avec une file (d’après Amérique du Nord 2024, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-13 }
 
 Un système d’exploitation partage le processeur entre plusieurs **processus** à l’aide d’une `File`, selon la méthode du *tourniquet* : à chaque cycle, on défile un processus, on l’exécute pendant un cycle, et s’il n’est pas terminé on le remet en fin de file. On dispose des deux classes suivantes.
 
@@ -423,7 +513,7 @@ class Processus:
 
     Noms renvoyés : `"p1"`, `"p2"`, `"p1"` ; la file finale est **vide**.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Une file de priorité de tâches (d’après Métropole 2025, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-12 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Une file de priorité de tâches (d’après Métropole 2025, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-14 }
 
 Pour ordonnancer des tâches, on stocke des tuples `(tache, priorite)` dans une `File` d’interface : `enfiler(e)` (ajoute `e` en fin de file), `defiler()` (retire et renvoie la tête), `examiner()` (renvoie la tête sans la retirer), `est_vide()`. La file est rangée de la plus **haute** priorité (en tête) à la plus basse.
 
@@ -497,7 +587,7 @@ On considère la file `f` suivante **(tête à droite)** :
         return resultat
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Une file écrite par un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-03-13 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Une file écrite par un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-03-15 }
 
 Un élève demande à un assistant d’IA : « Écris une classe Python `File` (structure FIFO) avec les méthodes `est_vide`, `enfiler`, `defiler` et `tete`, à partir d’une liste Python. » Voici la réponse obtenue :
 
@@ -546,9 +636,46 @@ class File:
 
     **3.** Enfiler **deux ou trois valeurs distinctes** puis défiler une fois : on doit ressortir la *première* entrée. Vérifier aussi la cohérence interne de la classe : `tete()` et `defiler()` doivent parler du **même** élément.
 
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Copier une file <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-16 }
+
+On dispose d’une classe `File` d’interface `est_vide`, `enfiler`, `defiler` et `tete` (sans méthode `taille`). On veut une fonction `copier_file(f)` qui renvoie une **nouvelle** file contenant les mêmes éléments que `f`, dans le même ordre, et qui laisse `f` dans son état d’origine.
+
+1.  On défile `f` jusqu’à ce qu’elle soit vide en enfilant chaque élément dans une nouvelle file `copie`. L’ordre est-il conservé ? Comparer avec la même méthode appliquée à une pile (exercice 8, question 2). Que manque-t-il encore ?
+
+2.  Pour ne pas vider `f`, un élève propose de réenfiler dans `f` chaque élément juste après l’avoir défilé (et de l’enfiler aussi dans `copie`). Expliquer pourquoi sa boucle `while not f.est_vide():` ne s’arrête jamais.
+
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire la fonction `copier_file(f)`.
+
+    ??? pouce "Coup de pouce"
+
+        Une file auxiliaire garde les éléments retirés, le temps de les remettre dans `f` une fois la copie terminée. Contrairement à une pile, un transvasement de file à file conserve l’ordre.
+
+??? corrige "Corrigé"
+
+    **1.** Oui : la file est FIFO, le premier défilé est le premier enfilé dans `copie`, qui reçoit donc les éléments dans le même ordre. Avec une pile, la même méthode *inverse* l’ordre (exercice 8). Il manque la restauration : `f` a été vidée.
+
+    **2.** Chaque tour de boucle défile un élément puis le réenfile : `f` garde toujours le même nombre d’éléments et n’est **jamais vide**. La condition `not f.est_vide()` reste vraie : boucle infinie (et `copie` grossit sans fin).
+
+    **3.** Une file auxiliaire garde les éléments, puis on les remet dans `f` :
+
+    ```python
+    def copier_file(f):
+        aux = File()
+        copie = File()
+        while not f.est_vide():
+            x = f.defiler()
+            copie.enfiler(x)             # la copie, dans l'ordre
+            aux.enfiler(x)               # de quoi restaurer f
+        while not aux.est_vide():        # f retrouve son etat d'origine
+            f.enfiler(aux.defiler())
+        return copie
+    ```
+
+    Le transvasement de `aux` vers `f` conserve l’ordre : `f` retrouve les mêmes éléments, avec la même tête.
+
 ### Piles et files ensemble
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 14</span> — LIFO ou FIFO ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-14 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 17</span> — LIFO ou FIFO ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-17 }
 
 Pour chaque situation, indiquer si la structure adaptée est une **pile** (LIFO) ou une **file** (FIFO), et justifier en une courte phrase.
 
@@ -574,7 +701,7 @@ Pour chaque situation, indiquer si la structure adaptée est une **pile** (LIFO)
 
     5.  **Pile** (LIFO) : « précédent » revient à la *dernière* page visitée.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 15</span> — Même séquence, deux structures <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-15 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 18</span> — Même séquence, deux structures <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-18 }
 
 On applique la *même* suite d’ajouts `1, 2, 3, 4` à une pile et à une file, puis on retire **tous** les éléments un par un.
 
@@ -588,7 +715,7 @@ On applique la *même* suite d’ajouts `1, 2, 3, 4` à une pile et à une file,
 
     **1.** De la pile : `4, 3, 2, 1` (le dernier entré sort en premier). **2.** De la file : `1, 2, 3, 4` (le premier entré sort en premier). **3.** La **pile** inverse l’ordre ; la **file** le conserve.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Piles et files pour parcourir un graphe (d’après Polynésie 2024, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-16 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Piles et files pour parcourir un graphe (d’après Polynésie 2024, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-19 }
 
 Un graphe est donné par un dictionnaire d’adjacence (les clés sont les sommets, la valeur est la liste des voisins) :
 
@@ -662,7 +789,7 @@ def parcours(graphe, depart):
 
     **4.** Un résultat possible : `[’A’, ’C’, ’D’, ’B’]` (l’ordre dépend de l’ordre d’empilement des voisins). Avec la pile, on repart toujours du dernier sommet ajouté : l’ordre de visite diffère de celui de la question 2.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 17</span> — Défi — une file avec deux piles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-17 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 20</span> — Défi — une file avec deux piles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-20 }
 
 On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux piles** `entree` et `sortie` : `enfiler` empile dans `entree` ; `defiler` dépile dans `sortie` — et si `sortie` est vide, on y transvase d’abord *tout* le contenu de `entree`.
 
@@ -700,7 +827,7 @@ On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux p
     lst = Cellule(1, Cellule(2, Cellule(3, None)))
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Longueur d’une liste (avec une boucle) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-18 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Longueur d’une liste (avec une boucle) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-21 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `longueur(lst)` qui renvoie le nombre de cellules de la liste chaînée `lst`, à l’aide d’une boucle `while` qui parcourt les cellules en suivant les liens. *(La liste vide a pour longueur `0`.)*
 
@@ -720,7 +847,7 @@ On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux p
         return n
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Nombre d’occurrences <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-19 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 22</span> — Nombre d’occurrences <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-22 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `occurrences(x, lst)` qui renvoie le nombre de fois que la valeur `x` apparaît dans la liste chaînée `lst`. L’écrire au choix récursivement ou avec une boucle.
 
@@ -752,7 +879,7 @@ On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux p
         return occurrences(x, lst.suivante)
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Le n-ième élément <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-20 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Le n-ième élément <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-23 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `nieme(n, lst)` qui renvoie la valeur de la cellule d’indice `n` (le premier élément a l’indice `0`). Si `n` dépasse la liste, la fonction lèvera `IndexError("indice invalide")`.
 
@@ -785,7 +912,7 @@ On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux p
         return c.valeur
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Le collier de bonbons : maillons chaînés (d’après Amérique du Nord 2025, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-21 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — Le collier de bonbons : maillons chaînés (d’après Amérique du Nord 2025, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-24 }
 
 Un « collier » de bonbons est une liste chaînée **circulaire** et **doublement** chaînée : chaque bonbon est un maillon possédant trois informations — une `valeur`, un `pred` (le bonbon précédent) et un `succ` (le suivant), tous deux des objets `Bonbon`.
 
@@ -883,7 +1010,42 @@ zero.pred = deux ; un.pred = zero ;   deux.pred = un
         return b.valeur
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 22</span> — Défi — insertion dans une liste triée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-22 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 25</span> — Copier une liste chaînée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-25 }
+
+1.  On exécute le programme suivant. Que vaut `lst.valeur` à la fin ? Pourquoi ?
+
+    ```text
+    lst = Cellule(1, Cellule(2, Cellule(3, None)))
+    autre = lst
+    autre.valeur = 10
+    ```
+
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction **récursive** `copier_liste(lst)` qui renvoie une **nouvelle** liste chaînée, faite de **nouvelles** cellules, contenant les mêmes valeurs que `lst` dans le même ordre.
+
+    ??? pouce "Coup de pouce"
+
+        Condition d’arrêt : la liste vide. Sinon, la copie commence par une nouvelle cellule : quelle valeur contient-elle, et que doit valoir sa cellule suivante ?
+
+3.  Vérifier qu’après `c = copier_liste(lst)`, l’instruction `c.valeur = 10` ne modifie pas `lst`.
+
+??? corrige "Corrigé"
+
+    **1.** `lst.valeur` vaut `10`. L’instruction `autre = lst` ne crée aucune cellule : `autre` et `lst` désignent la **même** première cellule, donc la modifier par l’un des noms la modifie pour l’autre.
+
+    **2.**
+
+    ```python
+    def copier_liste(lst):
+        if lst is None:                  # condition d'arret : liste vide
+            return None
+        return Cellule(lst.valeur, copier_liste(lst.suivante))
+    ```
+
+    Chaque appel crée une **nouvelle** cellule (`Cellule(…)`) avec la même valeur, suivie de la copie du reste.
+
+    **3.** `c` est une nouvelle cellule : `c.valeur = 10` ne change qu’elle : les cellules de `lst` ne sont pas touchées.
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 26</span> — Défi — insertion dans une liste triée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-26 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `inserer(x, lst)` qui prend un entier `x` et une liste chaînée `lst` **triée par ordre croissant**, et renvoie une **nouvelle** liste triée où `x` a été inséré à sa place. Ainsi, insérer `3` dans `1, 2, 5, 8` donne `1, 2, 3, 5, 8`.
 
@@ -910,7 +1072,7 @@ zero.pred = deux ; un.pred = zero ;   deux.pred = un
 
 ### S’entraîner à l’oral
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-23 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 27</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-27 }
 
 Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 

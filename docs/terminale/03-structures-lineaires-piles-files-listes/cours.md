@@ -54,7 +54,6 @@ L’image classique est une **pile d’assiettes** : on ne peut poser ou prendre
 | `empiler(x)` | pose `x` au sommet de la pile                       |
 | `depiler()`  | retire le sommet et le renvoie                      |
 | `sommet()`   | renvoie le sommet *sans* le retirer                 |
-| `taille()`   | renvoie le nombre d’éléments                        |
 
 !!! regle "Règle 2"
 
@@ -173,7 +172,7 @@ def parenthesage_correct(expr):
 
 <span id="cours-03-3" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-03-3) à [8](exercices.md#ex-03-8)** (parenthésage ; renverser ; balises ; notation polonaise inverse)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-03-3) à [10](exercices.md#ex-03-10)** (parenthésage ; renverser ; taille et copie d’une pile ; balises ; notation polonaise inverse)
 
 ## La file (FIFO)
 
@@ -193,7 +192,6 @@ L’image est la **file d’attente** devant un guichet : on rejoint la file par
 | `enfiler(x)` | ajoute `x` à la queue (en fin de file)              |
 | `defiler()`  | retire l’élément de tête et le renvoie              |
 | `tete()`     | renvoie l’élément de tête *sans* le retirer         |
-| `taille()`   | renvoie le nombre d’éléments                        |
 
 !!! remarque "Remarque — Pile ou file : la seule différence qui compte"
 
@@ -226,9 +224,9 @@ Le principe FIFO s’impose dès qu’il faut **traiter les demandes dans l’or
 
 - **Le parcours en largeur** d’un arbre ou d’un graphe (*BFS*) utilise une file pour visiter les sommets niveau par niveau (vous l’étudierez aux chapitres *Arbres* et *Graphes*). Symétriquement, le parcours en profondeur utilise, lui, une *pile*.
 
-<span id="cours-03-9" class="ancre"></span>
+<span id="cours-03-11" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-03-9) à [12](exercices.md#ex-03-12)** (opérations et trace d’une file ; ordonnancement ; file de priorité) et **[14](exercices.md#ex-03-14) à [16](exercices.md#ex-03-16)** (piles et files ensemble)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[11](exercices.md#ex-03-11) à [14](exercices.md#ex-03-14)** (opérations et trace d’une file ; ordonnancement ; file de priorité) et **[17](exercices.md#ex-03-17) à [19](exercices.md#ex-03-19)** (piles et files ensemble)
 
 ## Une implémentation possible (à admettre le plus souvent)
 
@@ -246,13 +244,12 @@ class Pile:
         self._contenu.append(x)          # ajout en fin de liste = sommet
 
     def depiler(self):
-        return self._contenu.pop()       # retire et renvoie le dernier
+        if not self.est_vide():          # pile vide : on ne fait rien
+            return self._contenu.pop()   # retire et renvoie le dernier
 
     def sommet(self):
-        return self._contenu[-1]
-
-    def taille(self):
-        return len(self._contenu)
+        if not self.est_vide():
+            return self._contenu[-1]
 ```
 
 De la même façon, une **file** se construit en cachant une `list` : on ajoute à la queue avec `append`, et on retire la tête, c’est-à-dire le *premier* élément, avec `pop(0)`.
@@ -269,14 +266,19 @@ class File:
         self._contenu.append(x)          # ajout en fin de liste = queue
 
     def defiler(self):
-        return self._contenu.pop(0)      # retire et renvoie le premier = tete
+        if not self.est_vide():          # file vide : on ne fait rien
+            return self._contenu.pop(0)  # retire et renvoie le premier = tete
 
     def tete(self):
-        return self._contenu[0]
-
-    def taille(self):
-        return len(self._contenu)
+        if not self.est_vide():
+            return self._contenu[0]
 ```
+
+!!! remarque "Remarque — Une interface volontairement minimale"
+
+    Le test `if not self.est_vide():` évite l’erreur de Python (`IndexError`) quand on dépile une pile vide ou qu’on défile une file vide : la méthode ne fait alors rien et renvoie `None`. Ce garde-fou ne dispense pas de tester `est_vide()` *avant* de retirer un élément : un `None` inattendu cache souvent une erreur de raisonnement.
+
+    Il n’y a pas non plus de méthode `taille` : on n’en a pas besoin pour utiliser une pile ou une file, et l’on sait la **reconstruire** avec les seules méthodes de l’interface, tout comme une copie de la structure (feuille, exercices **7**, **8** et **16**).
 
 !!! remarque "Remarque — Attention au coût de pop(0)"
 
@@ -290,9 +292,9 @@ class File:
 
     La `list` de Python *n’est pas* le type abstrait « liste » de ce chapitre : c’est un **tableau dynamique**. Elle permet certes de *simuler* une pile (`append`/`pop`) ou une file, mais elle offre bien plus d’opérations (accès à n’importe quel indice). Restreindre son usage aux seules méthodes de l’interface, c’est justement respecter la structure choisie.
 
-<span id="cours-03-13" class="ancre"></span>
+<span id="cours-03-15" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[13](exercices.md#ex-03-13) et [17](exercices.md#ex-03-17)** (une file écrite par un assistant d’IA ; une file avec deux piles)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[15](exercices.md#ex-03-15) et [20](exercices.md#ex-03-20)** (une file écrite par un assistant d’IA ; une file avec deux piles), puis **[7](exercices.md#ex-03-7)**, **[8](exercices.md#ex-03-8)** et **[16](exercices.md#ex-03-16)** (taille et copie avec la seule interface)
 
 ## Les listes chaînées : l’autre grande implémentation
 
@@ -361,9 +363,9 @@ Insérer un maillon ne demande que de **rebrancher deux liens**, sans déplacer 
 
         Pour `lst = Cellule(4, Cellule(7, Cellule(2, None)))`, la boucle fait trois tours et affiche `4`, `7` puis `2`. Le même schéma (`c = lst`, `while c is not None:`, `c = c.suivante`) sert à tous les parcours : calculer la longueur, chercher une valeur, faire une somme, accéder au $n$-ième élément…
 
-<span id="cours-03-18" class="ancre"></span>
+<span id="cours-03-21" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[18](exercices.md#ex-03-18) à [22](exercices.md#ex-03-22)** (listes chaînées)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[21](exercices.md#ex-03-21) à [26](exercices.md#ex-03-26)** (listes chaînées)
 
 ## Ouverture : des structures qu’on retrouvera partout
 
@@ -418,19 +420,21 @@ Piles et files ne sont pas des curiosités isolées : ce sont les **outils de ba
 
 *À la fin du chapitre, je sais…*
 
-- distinguer **pile (LIFO)** et **file (FIFO)** et en donner des usages concrets $\to$ ex. [14](exercices.md#ex-03-14), [15](exercices.md#ex-03-15) ;
+- distinguer **pile (LIFO)** et **file (FIFO)** et en donner des usages concrets $\to$ ex. [17](exercices.md#ex-03-17), [18](exercices.md#ex-03-18) ;
 
-- utiliser l’**interface** d’une pile (`empiler / depiler / est_vide / sommet`) et d’une file (`enfiler / defiler / est_vide / tete`) $\to$ ex. [1](exercices.md#ex-03-1), [6](exercices.md#ex-03-6), [9](exercices.md#ex-03-9) ;
+- utiliser l’**interface** d’une pile (`empiler / depiler / est_vide / sommet`) et d’une file (`enfiler / defiler / est_vide / tete`) $\to$ ex. [1](exercices.md#ex-03-1), [6](exercices.md#ex-03-6), [11](exercices.md#ex-03-11) ;
 
-- **dérouler** l’état d’une pile ou d’une file après une suite d’opérations $\to$ ex. [2](exercices.md#ex-03-2), [10](exercices.md#ex-03-10), [15](exercices.md#ex-03-15) ;
+- **dérouler** l’état d’une pile ou d’une file après une suite d’opérations $\to$ ex. [2](exercices.md#ex-03-2), [12](exercices.md#ex-03-12), [18](exercices.md#ex-03-18) ;
 
-- appliquer une pile à un problème (**parenthésage**, évaluation, *annuler*) $\to$ ex. [3](exercices.md#ex-03-3), [4](exercices.md#ex-03-4), [8](exercices.md#ex-03-8) ;
+- appliquer une pile à un problème (**parenthésage**, évaluation, *annuler*) $\to$ ex. [3](exercices.md#ex-03-3), [4](exercices.md#ex-03-4), [10](exercices.md#ex-03-10) ;
 
-- parcourir une **liste chaînée** (longueur, occurrences, $n$-ième élément) $\to$ ex. [18](exercices.md#ex-03-18), [19](exercices.md#ex-03-19), [20](exercices.md#ex-03-20) ;
+- écrire une fonction qui n’utilise **que l’interface** et rend la structure **intacte** (taille, copie) $\to$ ex. [7](exercices.md#ex-03-7), [8](exercices.md#ex-03-8), [16](exercices.md#ex-03-16) ;
 
-- raisonner sur le **coût** des opérations (dont `pop(0)` en O(n)) $\to$ ex. [11](exercices.md#ex-03-11), [12](exercices.md#ex-03-12) ;
+- parcourir une **liste chaînée** (longueur, occurrences, $n$-ième élément, copie) $\to$ ex. [21](exercices.md#ex-03-21), [22](exercices.md#ex-03-22), [23](exercices.md#ex-03-23), [25](exercices.md#ex-03-25) ;
 
-- distinguer **interface** et **implémentation** $\to$ ex. [13](exercices.md#ex-03-13), [17](exercices.md#ex-03-17).
+- raisonner sur le **coût** des opérations (dont `pop(0)` en O(n)) $\to$ ex. [13](exercices.md#ex-03-13), [14](exercices.md#ex-03-14) ;
+
+- distinguer **interface** et **implémentation** $\to$ ex. [15](exercices.md#ex-03-15), [20](exercices.md#ex-03-20).
 
 ## Vers le Grand Oral
 
