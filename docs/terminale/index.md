@@ -19,7 +19,7 @@ hide:
 
     Tout le cours, les exercices et les corrigés de l'année, dans la version distribuée en classe (version du 16 octobre 2026).
 
-    [:material-download: Télécharger le manuel (17,4 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-terminale.pdf){ .md-button .md-button--primary }
+    [:material-download: Télécharger le manuel (18,9 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-terminale.pdf){ .md-button .md-button--primary }
 
 ## Chapitres
 
