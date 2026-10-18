@@ -381,7 +381,7 @@ Piles et files ne sont pas des curiosités isolées : ce sont les **outils de ba
 
     L’idée de **pile** apparaît dès **1946** chez **Alan Turing**, qui décrit, pour gérer le retour des sous-programmes, deux opérations qu’il nomme joliment « *bury* » (enterrer) et « *unbury* » (déterrer). Elle est redécouverte et formalisée en Allemagne vers **1955–1957** par **Klaus Samelson** et **Friedrich L. Bauer**, sous le nom de *Kellerprinzip* (« principe du cellier »), et même brevetée. Les **listes chaînées**, elles, sont inventées vers **1955–1956** par **Allen Newell**, **Cliff Shaw** et **Herbert Simon** pour leur langage *IPL* de traitement de l’information, une idée reprise dès **1958** par **John McCarthy** dans le langage **Lisp** (les fameuses « cellules » `cons`). Trois de ces chercheurs — Bauer, Newell, Simon — ont marqué durablement l’informatique ; Simon a même reçu le prix Nobel d’économie *et* le prix Turing.
 
-    \*(image manquante : 03_hist_bauer)\*  
+    ![](../img/03_hist_bauer.jpg){ .photo loading=lazy style="width:131px" }  
     Friedrich L. Bauer, co-inventeur de la pile
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"

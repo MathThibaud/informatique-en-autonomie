@@ -110,7 +110,7 @@ Maintenant, la question fatale. Puisque `paradoxe` est un programme, donnons-le 
 
     Il ne peut exister **aucun** programme qui, recevant en entrée un programme `P` et une entrée `E` quelconques, déciderait à coup sûr si `P` lancé sur `E` **s’arrête ou non**. Le **problème de l’arrêt** est **indécidable**.
 
-\*(image manquante : 13_hist_turing_16ans)\*  
+![](../img/13_hist_turing_16ans.jpg){ .photo loading=lazy style="width:122px" }  
 Alan Turing (1912–1954), vers 16 ans
 
 ### Pourquoi ça marche : l’auto-référence
@@ -201,7 +201,7 @@ Le problème de l’arrêt a un **grand frère**, né cinq ans plus tôt en math
 
 En **1931**, un logicien viennois de 25 ans, Kurt **Gödel**, le fait voler en éclats. Entré à l’université de Vienne en 1924 pour étudier la physique, il bascule vers les mathématiques et la logique ; fuyant l’Autriche annexée par l’Allemagne nazie, il s’installera en 1940 à Princeton, où il deviendra l’ami inséparable d’Albert Einstein.
 
-\*(image manquante : 13_hist_godel_1925)\*  
+![](../img/13_hist_godel_1925.jpg){ .photo loading=lazy style="width:109px" }  
 Kurt Gödel étudiant, en 1925
 
 !!! theoreme "Théorème 3 — Théorèmes d’incomplétude de Gödel — version imagée"

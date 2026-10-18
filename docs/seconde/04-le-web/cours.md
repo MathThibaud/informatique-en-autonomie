@@ -14,15 +14,15 @@
 
     **Un peu d’histoire.** L’idée d’un texte « augmenté » de renvois — l’<span id="lex-hypertexte04" class="ancre"></span>**hypertexte** — est imaginée dès **1965** par l’Américain **Ted Nelson**. Mais c’est en **1989** au **CERN** (près de Genève) que le Britannique **Tim Berners-Lee**, avec le Belge **Robert Cailliau**, invente le **World Wide Web** : relier des documents *de machine à machine* par des **hyperliens**. Il écrit le premier **navigateur** et met en ligne la **première page web** de l’histoire, dont le CERN a restauré une copie, consultable aujourd’hui. Fait remarquable : il choisit de ne rien breveter — le Web est **libre et gratuit**.
 
-    \*(image manquante : 04_hist_premier_serveur)\*  
+    ![](../img/04_hist_premier_serveur.jpg){ .photo loading=lazy style="width:100%" }  
     Le premier serveur web, un ordinateur NeXT
 
-    \*(image manquante : 04_hist_berners_lee)\*  
+    ![](../img/04_hist_berners_lee.jpg){ .photo loading=lazy style="width:100%" }  
     Tim Berners-Lee (2009)
 
 !!! navigateur "Rendu dans le navigateur — info.cern.ch/hypertext/WWW/TheProject.html"
 
-    (image manquante : 04_premiere_page_web)\*
+    ![](../img/04_premiere_page_web.png){ .photo loading=lazy style="width:100%" }
 
 La toute première page web (1991), dans la copie restaurée par le CERN et consultable sur `info.cern.ch` : les hyperliens y sont déjà soulignés.
 

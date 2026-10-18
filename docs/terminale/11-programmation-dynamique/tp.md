@@ -16,7 +16,7 @@
 
 On dispose d’une image en **noir et blanc**. On cherche la taille du **plus grand carré entièrement blanc** que l’on peut y dessiner (côtés parallèles aux bords).
 
-\*(image manquante : 11t1_carre_blanc)\*
+![](../img/11t1_carre_blanc.png){ .photo loading=lazy style="width:271px" }
 
 **Convention.** Un pixel a pour coordonnées `(x, y)`, où `x` est la **colonne** et `y` la **ligne** (comme dans la bibliothèque `PIL`). L’idée centrale, qui va tout débloquer :
 
@@ -204,14 +204,14 @@ largeur, hauteur = img.size          # ici (600, 600)
 
     Sur l’image fournie : `total_pgcb()` renvoie **(200, (559, 239))** — un carré blanc de **côté 200**, dont le coin inférieur droit est le pixel `(559, 239)` (le grand bloc blanc en haut à droite).
 
-    \*(image manquante : 11ct1_carre_blanc_solution)\*  
+    ![](../img/11ct1_carre_blanc_solution.png){ .photo loading=lazy style="width:271px" }  
     Le plus grand carré blanc trouvé (contour rouge), côté $200$.
 
 ### <span class="exo-num">Exercice 8</span> — Défi — la grande image { #ex-11-programmation-dynamique-tp-1-8 }
 
 Voici une image beaucoup plus grande ($1200 \times 1200$ pixels), fournie sous le nom `carre_blanc_grand.png`. Cette fois, **impossible de deviner à l’œil** où se cache le plus grand carré blanc : plusieurs zones blanches se ressemblent ! C’est tout l’intérêt de l’algorithme.
 
-\*(image manquante : 11t1_carre_blanc_grand)\*
+![](../img/11t1_carre_blanc_grand.png){ .photo loading=lazy style="width:288px" }
 
 Dans `carre_blanc.py`, remplacer `NOM_IMAGE = "carre_blanc.png"` par `NOM_IMAGE = "carre_blanc_grand.png"` (les tests sont alors remplacés par l’affichage des résultats), lancer `total_pgcb()` (ou `pgcb_bottom_up()`) et **noter sur le cahier la taille du plus grand carré blanc et son coin**. Sauriez-vous, *sans le programme*, désigner à coup sûr le bon carré ? (C’est bien là que la machine gagne.)
 
@@ -219,7 +219,7 @@ Dans `carre_blanc.py`, remplacer `NOM_IMAGE = "carre_blanc.png"` par `NOM_IMAGE 
 
     Sur `carre_blanc_grand.png` ($1200 \times 1200$), après avoir remplacé `NOM_IMAGE` par `"carre_blanc_grand.png"`, le programme renvoie un carré blanc de **côté 181**, de coin inférieur droit `(198, 627)` — une zone que l’œil n’aurait pas su désigner parmi toutes les taches blanches voisines. C’est précisément ce qu’apporte la programmation dynamique : une réponse **exacte** et **rapide** là où l’intuition est impuissante.
 
-    \*(image manquante : 11ct1_carre_blanc_grand_solution)\*  
+    ![](../img/11ct1_carre_blanc_grand_solution.png){ .photo loading=lazy style="width:288px" }  
     Le plus grand carré blanc de la grande image (contour rouge), côté $181$ — indevinable à l’œil.
 
 ## Bonus : tabulation (bottom-up)

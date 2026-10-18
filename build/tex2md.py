@@ -106,7 +106,8 @@ MATH_RE = re.compile(r'(\$\$.*?\$\$|(?<!\\)\$.*?(?<!\\)\$|\\\[.*?\\\]|\\\(.*?\\\
                      r'\\begin\{(equation|align|displaymath|gather|multline)\*?\}.*?\\end\{\2\*?\})', re.S)
 
 
-MACROS_LIVRE = re.compile(r'\\(?:pageimage|pageimagecredit)\{[^{}]*\}|\\prochainentete\{[^{}]*\}\{[^{}]*\}\{[^{}]*\}|\\sansonglet\b')
+# \copiercode{…} : icône « copier le code » du PDF (le site a ses propres boutons de copie)
+MACROS_LIVRE = re.compile(r'\\(?:pageimage|pageimagecredit|copiercode)\{[^{}]*\}|\\prochainentete\{[^{}]*\}\{[^{}]*\}\{[^{}]*\}|\\sansonglet\b')
 TEXORPDF = re.compile(r'\\texorpdfstring\{((?:[^{}]|\{[^{}]*\})*)\}\{((?:[^{}]|\{[^{}]*\})*)\}')
 
 
@@ -420,10 +421,14 @@ class Converter:
     def image(self, opts, path):
         path = path.strip()
         src = None
-        for ext in ('', '.pdf', '.png', '.jpg', '.jpeg', '.svg', '.PNG', '.JPG'):
-            p = os.path.join(self.srcdir, path + ext)
-            if os.path.isfile(p):
-                src = p
+        # livre_edition.tex pose \graphicspath{{img/}} : les images des chapitres sont dans img/
+        for d in (self.srcdir, os.path.join(self.srcdir, 'img')):
+            for ext in ('', '.pdf', '.png', '.jpg', '.jpeg', '.svg', '.PNG', '.JPG'):
+                p = os.path.join(d, path + ext)
+                if os.path.isfile(p):
+                    src = p
+                    break
+            if src:
                 break
         if not src:
             return '*(image manquante : %s)*' % path

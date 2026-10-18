@@ -14,10 +14,10 @@
 
     **Un peu d’histoire.** La toute première photographie est prise vers **1826** par le Français **Nicéphore Niépce** (« Point de vue du Gras ») : il a fallu *plusieurs heures* de pose ! En **1888**, **George Eastman** lance l’appareil **Kodak** avec un slogan resté célèbre : « *Vous appuyez sur le bouton, nous faisons le reste.* » Mais la vraie révolution est de **1975** : l’ingénieur **Steven Sasson**, chez Kodak, construit le **premier appareil photo numérique**. Il pesait environ 3,6 kg, enregistrait sur une cassette en **23 secondes**… une image de $100 \times 100$ pixels en noir et blanc ! (IEEE, 2022) Aujourd’hui, le capteur qui tient dans votre téléphone compte plus de **mille fois** plus de pixels (souvent 12 millions ou davantage, contre 10 000), en couleurs.
 
-    \*(image manquante : 03_hist_niepce)\*  
+    ![](../img/03_hist_niepce.jpg){ .photo loading=lazy style="width:100%" }  
     « Point de vue du Gras » (Niépce, vers 1826)
 
-    \*(image manquante : 03_hist_sasson)\*  
+    ![](../img/03_hist_sasson.jpg){ .photo loading=lazy style="width:100%" }  
     Le premier appareil numérique (Sasson, 1975)
 
     Sources : Harry Ransom Center (université du Texas à Austin), qui conserve le « Point de vue du Gras » de Nicéphore Niépce (vers 1826–1827), `hrc.utexas.edu` ; George Eastman Museum (Rochester), histoire de l’appareil Kodak de 1888 et de son slogan ; IEEE, *Milestone* « Handheld Digital Camera, 1975 » (appareil de Steven Sasson : environ 3,6 kg, image de $100 \times 100$ pixels enregistrée en 23 s), inaugurée en 2022, `ethw.org`.
@@ -30,13 +30,13 @@ Autrefois, l’appareil photo contenait une **pellicule** : une surface sensible
 
     Un <span id="lex-capteurphoto03" class="ancre"></span>**capteur** est une surface couverte de millions de petites cellules, les <span id="lex-photosite03" class="ancre"></span>**photosites**. Chaque photosite mesure la **quantité de lumière** qu’il reçoit et la transforme en un **nombre** (c’est la *numérisation*) : plus il reçoit de lumière, plus le nombre est grand.
 
-\*(image manquante : 03_capteur_cmos_sony_a7riii)\*
+![](../img/03_capteur_cmos_sony_a7riii.jpg){ .photo loading=lazy style="width:306px" }
 
 Le capteur d’un appareil photo hybride, démonté (un capteur « CMOS », du nom de la technologie de fabrication utilisée par presque tous les appareils actuels) : la surface rectangulaire centrale porte des dizaines de millions de photosites.
 
 Seul, un photosite ne distingue pas les couleurs : on obtiendrait une image en **niveaux de gris**. Pour capter la couleur, on place devant les photosites un <span id="lex-bayer03" class="ancre"></span>**filtre de Bayer** : des petits filtres rouges, verts et bleus. Fait amusant, il y a **deux fois plus de filtres verts** que de rouges ou de bleus, car notre œil est plus sensible au vert.
 
-\*(image manquante : 03_hist_capteur_macro)\*  
+![](../img/03_hist_capteur_macro.jpg){ .photo loading=lazy style="width:100%" }  
 Un capteur vu de très près : la mosaïque du filtre coloré
 
 ![](../figures/5613c5f36d3a9885.svg){ .tikz loading=lazy }  

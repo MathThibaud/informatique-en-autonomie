@@ -356,10 +356,10 @@ Sélection et insertion ne sont que deux membres d’une grande famille.
 
     Trier des données mécaniquement est *antérieur* aux ordinateurs : dès le recensement américain de **1890**, les machines à cartes perforées de **Herman Hollerith** (dont l’entreprise deviendra IBM) triaient des millions de fiches : on plaçait un paquet de cartes dans la trieuse, qui faisait tomber chacune dans un casier selon la position d’un trou. En **1945**, dans l’un des tout premiers programmes de l’histoire, **John von Neumann** écrit un *tri fusion* pour la machine EDVAC : le tri fut ainsi l’un des premiers problèmes que l’on chercha à faire résoudre par une machine à programme enregistré. Depuis, il reste un terrain d’étude central : c’est sur des problèmes simples à énoncer comme « ranger dans l’ordre » que l’informatique a forgé sa science du **coût** des algorithmes.
 
-    \*(image manquante : 06_hist_trieuse_hollerith)\*  
+    ![](../img/06_hist_trieuse_hollerith.jpg){ .photo loading=lazy style="width:157px" }  
     Une trieuse de cartes perforées Hollerith
 
-    \*(image manquante : 06_hist_edvac)\*  
+    ![](../img/06_hist_edvac.jpg){ .photo loading=lazy style="width:118px" }  
     L’EDVAC, en service à partir de 1951
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"

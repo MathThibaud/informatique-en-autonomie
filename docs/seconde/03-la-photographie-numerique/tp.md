@@ -56,7 +56,7 @@ img.save("monaco.png")
 img.show()
 ```
 
-\*(image manquante : 03t1_drapeau_monaco)\*
+![](../img/03t1_drapeau_monaco.png){ .photo loading=lazy style="width:184px" }
 
 ## Exemple 2 : le drapeau de la France
 
@@ -85,7 +85,7 @@ img.save("france.png")
 img.show()
 ```
 
-\*(image manquante : 03t1_drapeau_france)\*
+![](../img/03t1_drapeau_france.png){ .photo loading=lazy style="width:218px" }
 
 !!! activite "Activité — Prendre le programme en main"
 
@@ -135,7 +135,7 @@ img.save("japon.png")
 img.show()
 ```
 
-\*(image manquante : 03t1_drapeau_japon)\*  
+![](../img/03t1_drapeau_japon.png){ .photo loading=lazy style="width:201px" }  
 Le résultat attendu.
 
 !!! activite "Activité — Le disque du Japon"
@@ -174,7 +174,7 @@ img.save("diagonale.png")
 img.show()
 ```
 
-\*(image manquante : 03t1_drapeau_diagonale)\*  
+![](../img/03t1_drapeau_diagonale.png){ .photo loading=lazy style="width:201px" }  
 Le résultat attendu.
 
 !!! activite "Activité — La diagonale"
@@ -486,9 +486,9 @@ img.show()
 
 *(Le parcours de tous les pixels peut prendre quelques secondes : c’est normal.)*
 
-|  |  |
-|:--:|:--:|
-| \*(image manquante : 03t2_nuit_etoilee)\* | \*(image manquante : 03t2_nuit_etoilee_modif)\* |
+|           |                         |
+|:---------:|:-----------------------:|
+| ![](../img/03t2_nuit_etoilee.jpg){ .photo loading=lazy style="width:280px" }  |        ![](../img/03t2_nuit_etoilee_modif.jpg){ .photo loading=lazy style="width:280px" }         |
 |  Original |  Canaux R et B échangés |
 
 !!! activite "Activité — Premiers essais sur La Nuit étoilée"
@@ -525,9 +525,9 @@ img.save("garcon_modifie.jpg")
 img.show()
 ```
 
-|  |  |
-|:--:|:--:|
-| \*(image manquante : 03t2_blue_boy)\* | \*(image manquante : 03t2_blue_boy_modif)\* |
+|           |                   |
+|:---------:|:-----------------:|
+| ![](../img/03t2_blue_boy.jpg){ .photo loading=lazy style="height:271px" }  |     ![](../img/03t2_blue_boy_modif.jpg){ .photo loading=lazy style="height:271px" }      |
 |  Original |  Costume recoloré |
 
 !!! activite "Activité — Améliorer et personnaliser"

@@ -23,7 +23,7 @@ def fibo(n):
     return fibo(n - 1) + fibo(n - 2)
 ```
 
-\*(image manquante : 11_hist_liber_abbaci)\*  
+![](../img/11_hist_liber_abbaci.jpg){ .photo loading=lazy style="width:122px" }  
 Le problème des lapins dans le *Liber abbaci*
 
 Ce code est *juste*, mais son temps de calcul explose : il est multiplié par environ $1{,}6$ chaque fois que $n$ augmente de $1$ (environ $2$ secondes pour `fibo(35)`, une dizaine pour `fibo(38)`, et de l’ordre d’une heure pour `fibo(50)`). L’**arbre des appels** de `fibo(5)` montre pourquoi :

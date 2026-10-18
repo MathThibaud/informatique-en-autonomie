@@ -301,12 +301,12 @@ Ce chapitre est l’application la plus directe du chapitre *Graphes* : un rése
 
 Dans la première moitié des années 1960, l’idée de **commutation de paquets** germe indépendamment chez **Paul Baran** (États-Unis) et **Donald Davies** (Royaume-Uni) : découper l’information en morceaux pour bâtir un réseau qui *survive* à la panne d’un nœud. En 1969 naît **ARPANET**, ancêtre d’Internet, reliant quatre universités américaines. Le croquis ci-contre, dessiné en décembre 1969, montre ce réseau tout entier : quatre nœuds seulement, à UCLA, au Stanford Research Institute (SRI), à Santa Barbara (UCSB) et à l’université de l’Utah. Le tout premier message, envoyé de UCLA vers SRI le 29 octobre 1969, devait être « LOGIN »… le système a planté après « LO ».
 
-\*(image manquante : 09_hist_arpanet_1969)\*  
+![](../img/09_hist_arpanet_1969.png){ .photo loading=lazy style="width:131px" }  
 Le réseau ARPANET en décembre 1969
 
 En France, **Louis Pouzin** conçoit à partir de 1971 le réseau **Cyclades**, qui invente le **datagramme** : le réseau se contente d’acheminer chaque paquet indépendamment, au mieux, et ce sont les machines situées aux extrémités qui vérifient que tout est bien arrivé. En 1974, **Vint Cerf** et **Bob Kahn** conçoivent, en reprenant cette idée, **TCP/IP**, le langage commun qui permet à des réseaux *différents* de se comprendre — l’acte de naissance d’Internet, officiellement adopté le 1<sup>er</sup> janvier 1983. Aujourd’hui, ces mêmes principes acheminent chaque jour des milliards de paquets : à chaque page ouverte, un petit algorithme de plus court chemin travaille pour vous.
 
-\*(image manquante : 09_hist_pouzin)\*  
+![](../img/09_hist_pouzin.jpg){ .photo loading=lazy style="width:166px" }  
 Louis Pouzin, père de Cyclades
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"

@@ -391,10 +391,10 @@ pandas.merge(communes, departements)          # fusionner
 
     En **1890**, recenser les 63 millions d’Américains à la main menaçait de prendre plus de dix ans. **Herman Hollerith** (1860–1929) invente une machine qui lit des **cartes perforées** — une carte par personne, un trou par caractéristique : c’est déjà « une fiche par individu, les mêmes rubriques pour tous », l’idée même d’une table. Grâce à elle, le total de la population est connu dès la fin de 1890, et le dépouillement complet ne prend que quelques années au lieu de la décennie redoutée. Hollerith fonde en 1896 une société qui, par fusions, deviendra en **1924** une certaine… **IBM**.
 
-    \*(image manquante : 08_hist_hollerith)\*  
+    ![](../img/08_hist_hollerith.jpg){ .photo loading=lazy style="width:105px" }  
     Herman Hollerith
 
-    \*(image manquante : 08_hist_carte_hollerith)\*  
+    ![](../img/08_hist_carte_hollerith.jpg){ .photo loading=lazy style="width:306px" }  
     Une carte perforée Hollerith : chaque position de trou code une réponse
 
     En **1970**, **Edgar Codd** pose la théorie des **bases de données relationnelles** (des tables reliées par des descripteurs communs — notre jointure !), qu’on étudiera en Terminale. Le format **CSV**, lui, traîne dans les ordinateurs depuis les années 1970 pour sa simplicité désarmante. Et depuis **2011**, l’État français ouvre ses données sur `data.gouv.fr` : le *parcours de tables* n’est plus un exercice, c’est un pouvoir citoyen. (Petit vertige : une fois compressé, le fichier des prénoms tout entier, plus de 700 000 lignes, ne pèse que quelques mégaoctets, à peu près autant qu’*une seule* photo de votre téléphone.)

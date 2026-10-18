@@ -14,7 +14,7 @@
 
     La « tortue » vient du langage **Logo**, créé en 1967 par **Seymour Papert** et Wally Feurzeig. À l’origine, c’était un vrai petit robot en forme de tortue qui traçait au sol ! Papert, mathématicien du MIT qui avait travaillé à Genève avec le psychologue Jean Piaget, en tire une idée forte : on apprend le mieux en **fabriquant** des choses. Dans les années 1980, des robots tortues comme celui ci-contre entrent dans les écoles : munis d’un feutre, ils dessinent sur une grande feuille posée par terre les figures programmées en Logo. Python a hérité de cette tortue, devenue virtuelle.
 
-    \*(image manquante : T_hist_robot_tortue)\*  
+    ![](../img/T_hist_robot_tortue.jpg){ .photo loading=lazy style="width:157px" }  
     Un robot tortue de sol et ses dessins
 
 ## Partie 1 — Des instructions en séquence, puis la boucle `for`

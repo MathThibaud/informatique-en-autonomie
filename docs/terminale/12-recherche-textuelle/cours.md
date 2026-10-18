@@ -330,5 +330,5 @@ C’est le **prodige** de Boyer-Moore : il peut trouver un mot **sans lire tout 
 
     Parmi ces noms, **Donald Knuth** (né en 1938) est une légende : il écrit depuis 1962 *The Art of Computer Programming*, encyclopédie de l’algorithmique toujours inachevée, et il a créé **TeX**, le logiciel de composition sur lequel repose… la mise en page de ce cours.
 
-    \*(image manquante : 12_hist_knuth)\*  
+    ![](../img/12_hist_knuth.jpg){ .photo loading=lazy style="width:114px" }  
     Donald Knuth en 2012

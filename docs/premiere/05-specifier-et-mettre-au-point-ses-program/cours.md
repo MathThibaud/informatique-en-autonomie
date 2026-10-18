@@ -391,10 +391,10 @@ On ne réécrit pas tout à chaque fois. En regroupant des fonctions utiles dans
 
     Le **9 septembre 1947**, à Harvard, l’équipe du calculateur électromécanique **Mark II**, dont fait partie **Grace Hopper**, cherche pourquoi la machine se trompe. Coupable : un **papillon de nuit** coincé dans un relais. On le colle dans le cahier de bord avec la mention « *First actual case of bug being found* » — « premier cas *réel* de bogue trouvé », preuve que le mot *bug* (« insecte ») désignait déjà un défaut chez les ingénieurs. Celle qui a rendu l’anecdote célèbre, Grace Hopper (1906–1992), mathématicienne et officière de la marine américaine, est surtout une pionnière des langages : elle écrit en 1952 l’un des premiers **compilateurs** et défend l’idée, jugée farfelue à l’époque, de programmer avec des **mots** plutôt qu’avec des nombres — idée qui mènera au langage <span class="smallcaps">Cobol</span> (1959), et dont Python est l’héritier lointain.
 
-    \*(image manquante : 05_hist_first_bug_1947)\*  
+    ![](../img/05_hist_first_bug_1947.jpg){ .photo loading=lazy style="width:236px" }  
     Le cahier de bord du Mark II (9 septembre 1947), avec le papillon collé
 
-    \*(image manquante : 05_hist_grace_hopper)\*  
+    ![](../img/05_hist_grace_hopper.jpg){ .photo loading=lazy style="width:118px" }  
     Grace Hopper en 1984
 
     Un demi-siècle plus tard, un bug coûte beaucoup plus cher qu’un papillon. Le **4 juin 1996**, la fusée **Ariane 5** explose moins de 40 secondes après son premier décollage, en Guyane. En cause, un programme de navigation **réutilisé d’Ariane 4** : il convertissait une vitesse en un entier trop petit pour contenir les valeurs, bien plus grandes, de la nouvelle fusée. Le programme était correct… pour Ariane 4. Sa **précondition** (« la vitesse reste petite ») n’avait été ni vérifiée par un `assert`, ni **testée** dans les conditions de vol d’Ariane 5. Environ 370 millions de dollars partent en fumée — sans aucune victime heureusement.

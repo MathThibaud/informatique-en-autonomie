@@ -45,10 +45,10 @@ En apprentissage, tout part d’un **jeu de données** (*dataset*) : un tableau 
     |       5.5        |       2.1        | virginica  |
     |       5.8        |       2.2        | virginica  |
 
-    \*(image manquante : 12_hist_iris_versicolor)\*  
+    ![](../img/12_hist_iris_versicolor.jpg){ .photo loading=lazy style="width:149px" }  
     Iris versicolor
 
-    \*(image manquante : 12_hist_iris_virginica)\*  
+    ![](../img/12_hist_iris_virginica.jpg){ .photo loading=lazy style="width:149px" }  
     Iris virginica
 
 !!! remarque "Remarque — Un individu $=$ un point"
@@ -169,7 +169,7 @@ On assemble le tout en Python. On réutilise le **tri par clé** (chapitres *Les
 
 Imaginons qu’on **colorie** tout le plan selon la classe que le $k$-NN prédirait en chaque point : on obtient des **régions** colorées, séparées par une **frontière de décision**. Cette frontière change avec $k$.
 
-\*(image manquante : 12_frontiere_knn)\*
+![](../img/12_frontiere_knn.png){ .photo loading=lazy style="width:100%" }
 
 *Jeu Iris (pétales). À gauche $k=1$ : la frontière est très **découpée** et forme même un petit « îlot » autour d’un point isolé. À droite $k=15$ : la frontière est **lisse** et ignore ces détails.*
 

@@ -22,7 +22,7 @@ La réponse tient en un mot : la **vitesse**. Le système donne le processeur à
 
 Parmi les grandes fonctions d’un OS : gérer les processus (notre sujet), la mémoire, les fichiers, les périphériques, les droits des utilisateurs, et la sécurité. Nous nous concentrons ici sur la **gestion des processus**.
 
-\*(image manquante : 04_Intel_4004)\*  
+![](../img/04_Intel_4004.jpg){ .photo loading=lazy style="width:100%" }  
 La ressource à partager : **le processeur** (ici l’Intel 4004, 1971, l’un des tout premiers).
 
 ![](../figures/a9517bd1613733c8.svg){ .tikz loading=lazy }
@@ -263,14 +263,14 @@ Les processus ne sont pas un monde à part : ce chapitre réutilise les outils d
 
 Les tout premiers ordinateurs (années 1950) exécutaient les programmes **un par un**, à la file (*traitement par lots*) : pendant qu’un programme attendait une lecture sur bande, le processeur, hors de prix, restait *oisif*. Quel gâchis ! Les programmeurs de l’époque, comme l’Américaine **Grace Hopper** (1906–1992), officier de la marine et pionnière qui écrit en 1952 l’un des tout premiers **compilateurs** puis inspire le langage COBOL, confient leurs programmes à un opérateur et attendent le résultat… parfois jusqu’au lendemain.
 
-\*(image manquante : 04_hist_grace_hopper)\*  
+![](../img/04_hist_grace_hopper.jpg){ .photo loading=lazy style="width:114px" }  
 Grace Hopper en 1984
 
 L’idée de partager le processeur entre plusieurs tâches — le **temps partagé** (*time-sharing*) — naît au début des années 1960 (système CTSS au MIT, 1961, puis l’ambitieux Multics). En 1969, aux laboratoires Bell, **Ken Thompson** et **Dennis Ritchie** en tirent un système plus simple et élégant, **Unix**, dont descendent aujourd’hui Linux, macOS, Android et iOS. Toute la gestion des processus de ce cours vient de là.
 
 Côté théorie, le Néerlandais **Edsger Dijkstra** (déjà croisé avec l’algorithme de la gare de triage, et qu’on retrouvera pour les plus courts chemins) pose en 1965 les outils de la synchronisation (les *sémaphores*) et illustre l’interblocage par son célèbre « dîner des philosophes » <span class="horsprog">au-delà du programme</span>. En 1971, **Edward Coffman** énonce les quatre conditions qui portent son nom. La prochaine fois que votre téléphone jongle avec vingt applications sans sourciller, vous saurez quel héritage se cache derrière cette fluidité.
 
-\*(image manquante : 04_hist_dijkstra)\*  
+![](../img/04_hist_dijkstra.jpg){ .photo loading=lazy style="width:114px" }  
 Edsger W. Dijkstra
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"

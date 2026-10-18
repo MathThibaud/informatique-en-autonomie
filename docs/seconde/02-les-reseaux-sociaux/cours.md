@@ -16,10 +16,10 @@
 
     Il faudra attendre **1997** et le site *SixDegrees.com* (dont le nom rend justement hommage à Milgram !) pour voir le premier réseau social en ligne. Puis tout s’accélère : **2003** MySpace et LinkedIn, **2004** Facebook (créé par **Mark Zuckerberg**, étudiant de 19 ans à Harvard), **2005** YouTube, **2006** Twitter, **2010** Instagram, **2011** Snapchat, **2016** TikTok. En moins de vingt ans, une poignée d’entreprises se sont retrouvées à relier… une bonne partie de l’humanité.
 
-    \*(image manquante : 02_hist_milgram)\*  
+    ![](../img/02_hist_milgram.jpg){ .photo loading=lazy style="width:100%" }  
     Stanley Milgram (1974)
 
-    \*(image manquante : 02_hist_zuckerberg)\*  
+    ![](../img/02_hist_zuckerberg.jpg){ .photo loading=lazy style="width:100%" }  
     Mark Zuckerberg (2019)
 
 ## Qu’est-ce qu’un réseau social ?

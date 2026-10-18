@@ -325,7 +325,7 @@ Le cours affirme qu’un ABR de $n$ valeurs « bien rempli » a une hauteur proc
     plt.show()
     ```
 
-    \*(image manquante : 05ct1_tp_arbres_hauteurs)\*
+    ![](../img/05ct1_tp_arbres_hauteurs.png){ .photo loading=lazy style="width:78%" }
 
     En échelles logarithmiques, la droite rouge (pente $1$) traduit une hauteur proportionnelle à $n$ ; la courbe verte reste parallèle à $\log_2(n)$, environ deux fois au-dessus.
 

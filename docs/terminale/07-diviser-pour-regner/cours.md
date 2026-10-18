@@ -87,7 +87,7 @@ On sait déjà trier (tri par insertion, tri par sélection, vus en Première), 
 
 **Un peu d’histoire.** Mathématicien d’origine hongroise, von Neumann collabore alors au laboratoire de **Los Alamos** (projet Manhattan) et participe à la conception de l’**EDVAC**, l’un des premiers ordinateurs à programme enregistré, dont il décrit l’organisation, toujours celle de nos ordinateurs (« architecture de von Neumann »). Pour montrer qu’elle sait faire autre chose que du calcul, il écrit l’un des tout premiers programmes de tri : un tri fusion.
 
-\*(image manquante : 07_hist_von_neumann_badge)\*  
+![](../img/07_hist_von_neumann_badge.jpg){ .photo loading=lazy style="width:122px" }  
 John von Neumann (photo de son badge de Los Alamos)
 
 !!! regle "Règle 1 — Tri fusion : les trois temps"

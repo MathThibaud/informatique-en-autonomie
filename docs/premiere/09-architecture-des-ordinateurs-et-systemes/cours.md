@@ -369,7 +369,7 @@ Linux est **multi-utilisateur** : plusieurs comptes partagent la machine, chacun
     **1945** — Dans un rapport resté célèbre (le *First Draft of a Report on the EDVAC*), le mathématicien **John von Neumann** (1903–1957) décrit une machine où **programme et données partagent la même mémoire**. L’idée n’est pas de lui seul : elle doit beaucoup à **Alan Turing** (sa « machine universelle » de 1936) et aux ingénieurs **Eckert** et **Mauchly**, bâtisseurs de l’ENIAC. Mais c’est ce rapport qui diffuse le modèle — au point qu’il porte, un peu injustement, son seul nom.  
     **1947** — Aux **Bell Labs**, **Bardeen**, **Brattain** et **Shockley** inventent le **transistor** (prix Nobel 1956). Fini les tubes à vide fragiles et brûlants des premiers ordinateurs — l’**ENIAC** (1945), premier grand calculateur électronique, en alignait près de $18\,000$ dans une salle entière, pour $30$ tonnes — : la brique moderne est née.
 
-    \*(image manquante : 09_hist_eniac)\*  
+    ![](../img/09_hist_eniac.png){ .photo loading=lazy style="width:100%" }  
     L’ENIAC et ses armoires de tubes à vide
 
     **1965** — **Gordon Moore** énonce sa loi. La miniaturisation s’emballe : l’Intel 4004 (1971) tient 2 300 transistors ; une puce actuelle en aligne des dizaines de milliards.  

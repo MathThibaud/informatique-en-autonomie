@@ -25,7 +25,7 @@ Pour désigner un point sur le globe sans ambiguïté, on utilise deux nombres, 
     La <span id="lex-latitude07" class="ancre"></span>**latitude** indique la position **Nord–Sud** : c’est un angle de $-90^\circ$ (pôle Sud) à $+90^\circ$ (pôle Nord), l’**équateur** valant $0^\circ$.  
     La **longitude** indique la position **Est–Ouest** : un angle de $-180^\circ$ à $+180^\circ$, le **méridien de Greenwich** (Londres) valant $0^\circ$.
 
-\*(image manquante : 07_hist_greenwich)\*  
+![](../img/07_hist_greenwich.jpg){ .photo loading=lazy style="width:100%" }  
 La ligne du méridien de Greenwich : longitude 0°
 
 ![](../figures/e12760deea5437c2.svg){ .tikz loading=lazy }
@@ -48,7 +48,7 @@ La ligne du méridien de Greenwich : longitude 0°
 
 Autour de la Terre gravitent une trentaine de **satellites** GPS (31 en service en 2023 ; GPS.gov). Chacun connaît sa position et diffuse en permanence un message radio contenant… l’**heure exacte** de l’envoi (il embarque une horloge atomique).
 
-\*(image manquante : 07_hist_navstar)\*  
+![](../img/07_hist_navstar.jpg){ .photo loading=lazy style="width:100%" }  
 Un satellite GPS en orbite (vue d’artiste)
 
 !!! regle "Règle 1 — Du temps à la distance"

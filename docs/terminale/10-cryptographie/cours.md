@@ -136,7 +136,7 @@ En **1976**, **Whitfield Diffie** et **Martin Hellman** (Stanford) publient une 
 
 **Un peu d’histoire.** Passionné de cryptographie, à une époque où ce domaine était presque entièrement réservé aux militaires, **Whitfield Diffie** avait sillonné les États-Unis au début des années 1970 pour rencontrer les rares chercheurs qui s’y intéressaient ; c’est ainsi qu’il rejoint Martin Hellman à Stanford. Leur article de 1976, *New Directions in Cryptography*, fonde la cryptographie à clé publique et leur vaut le prix Turing en 2015.
 
-\*(image manquante : 10_hist_diffie)\*  
+![](../img/10_hist_diffie.jpg){ .photo loading=lazy style="width:109px" }  
 Whitfield Diffie
 
 !!! definition "Définition 3 — Chiffrement asymétrique (à clé publique)"
@@ -373,5 +373,5 @@ La cryptographie avance avec ses attaquants : chaque progrès du calcul oblige �
 
     La cryptographie a changé le cours de l’Histoire. Pendant la Seconde Guerre mondiale, l’armée allemande chiffrait ses ordres avec la machine **Enigma**, réputée inviolable : ses rotors, qui tournent à chaque lettre frappée, changent la substitution à chaque caractère, avec environ $10^{20}$ réglages possibles. À **Bletchley Park**, une équipe menée par **Alan Turing** construisit une machine électromécanique, la « Bombe », pour la casser : les historiens estiment que cet exploit a raccourci la guerre de *deux ans*. Turing, père de l’informatique théorique, fut aussi l’un des plus grands cryptanalystes de l’Histoire. Dès **1883**, **Auguste Kerckhoffs** avait énoncé le principe qui gouverne encore toute la discipline : ne comptez jamais sur le secret de la méthode, seulement sur celui de la clé.
 
-    \*(image manquante : 10_hist_enigma)\*  
+    ![](../img/10_hist_enigma.jpg){ .photo loading=lazy style="width:118px" }  
     Une machine Enigma à trois rotors

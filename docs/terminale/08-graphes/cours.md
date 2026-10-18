@@ -26,13 +26,13 @@ Regardez autour de vous. Le plan du métro : des stations, reliées par des lign
 
     Au <span class="smallcaps">xviii</span><sup>e</sup> siècle, la ville de Königsberg est traversée par une rivière formant deux îles, reliées aux berges et entre elles par **sept ponts**. Les habitants se demandaient si l’on pouvait se promener en traversant chaque pont **une fois et une seule**. En 1736, **Leonhard Euler** règle la question en **oubliant la carte** : peu importe la forme des îles ou la longueur des ponts, seul compte **ce qui est relié à quoi**. Il remplace la ville par quatre points (les berges `N` et `S`, les îles `O` et `E`) et sept traits (les ponts) : c’est le **premier graphe de l’histoire**, et l’acte de naissance de la **théorie des graphes**. En comptant les ponts qui partent de chaque terre, il *prouve* que la promenade est impossible (voir le théorème d’Euler, à la fin de la section II). Euler (1707–1783), Suisse alors membre de l’Académie des sciences de Saint-Pétersbourg, est l’un des mathématiciens les plus féconds de l’histoire : ses œuvres complètes remplissent plus de soixante-dix volumes.
 
-    \*(image manquante : 08_hist_koenigsberg_merian)\*  
+    ![](../img/08_hist_koenigsberg_merian.jpg){ .photo loading=lazy style="width:201px" }  
     Königsberg et ses ponts (gravure de 1652)
 
     ![](../figures/6b89ab3e8a0a107e.svg){ .tikz loading=lazy }  
     Le graphe d’Euler
 
-    \*(image manquante : 08_hist_euler_handmann)\*  
+    ![](../img/08_hist_euler_handmann.jpg){ .photo loading=lazy style="width:96px" }  
     Euler (par J. E. Handmann, 1753)
 
 !!! remarque "Remarque"

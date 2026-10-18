@@ -20,7 +20,7 @@ Comment un ordinateur complet — processeur, mémoire, périphériques — a-t-
 
     Gordon Moore, cofondateur d’Intel, prévoit en 1965 que le nombre de transistors sur une puce va doubler chaque année ; en 1975, il révise sa prévision : **le nombre de transistors sur une puce double environ tous les deux ans**. Ce n’est pas une loi physique, mais une prédiction économique — restée étonnamment juste pendant un demi-siècle. Le premier microprocesseur, l’**Intel 4004** (1971), comptait $2\,300$ transistors ; une puce d’aujourd’hui en compte **des dizaines de milliards**, gravés « en $3$ **nanomètres** », voire « en $2$ nm ». Ces noms sont devenus commerciaux et ne mesurent plus exactement un transistor, mais l’ordre de grandeur est là : les motifs les plus fins ne font que quelques dizaines d’atomes de large.
 
-\*(image manquante : 14_Intel_C4004)\*  
+![](../img/14_Intel_C4004.jpg){ .photo loading=lazy style="width:140px" }  
 *L’Intel 4004 (1971), l’un des tout premiers microprocesseurs : $2\,300$ transistors.*
 
 Cette miniaturisation a tout changé : en rapprochant les composants, on a pu **augmenter la fréquence** (les signaux vont plus vite sur de courtes distances), **baisser le coût** (tout est fabriqué d’un coup) et **réduire la consommation** (des transistors plus petits fonctionnent sous une tension plus faible).
@@ -61,7 +61,7 @@ Un SoC est un **vrai ordinateur**, aussi puissant : plusieurs cœurs cadencés �
 
     Plus de puissance, dans votre poche, que tous les ordinateurs de la mission Apollo réunis.
 
-\*(image manquante : 14_Apple_A13_Bionic)\*  
+![](../img/14_Apple_A13_Bionic.jpg){ .photo loading=lazy style="width:114px" }  
 *La puce Apple A13 Bionic.*
 
 <span id="cours-14-2" class="ancre"></span>

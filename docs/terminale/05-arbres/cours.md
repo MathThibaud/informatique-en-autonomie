@@ -332,10 +332,10 @@ On obtient exactement l’ABR dessiné plus haut.
 
     En informatique, l’arbre est le seul à **pousser la tête en bas** : racine en haut, feuilles en bas — un botaniste s’en évanouirait. La structure est ancienne : le mot « arbre » entre en mathématiques en **1857** avec le Britannique **Arthur Cayley**, qui s’en sert ensuite, en **1874–1875**, pour *compter* les molécules chimiques possibles (vues comme des arbres d’atomes). Mais l’**arbre binaire de recherche** est formalisé autour de **1960** par plusieurs chercheurs indépendamment (dont **P. F. Windley**, **A. D. Booth**, **T. N. Hibbard**). En **1952**, un étudiant du MIT, **David Huffman**, invente pour un devoir noté un codage par arbre qui reste, soixante-dix ans plus tard, au cœur des formats de compression (ZIP, JPEG…) : le plus rentable des devoirs maison. Enfin, les **B-arbres** (Bayer et McCreight, **1970**) organisent aujourd’hui les données de la quasi-totalité des bases de données et systèmes de fichiers de la planète.
 
-\*(image manquante : 05_hist_cayley)\*  
+![](../img/05_hist_cayley.jpg){ .photo loading=lazy style="width:114px" }  
 Arthur Cayley (1821–1895), qui a donné son nom mathématique à l’arbre
 
-\*(image manquante : 05_baia_figuier_renverse)\*
+![](../img/05_baia_figuier_renverse.jpg){ .photo loading=lazy style="width:210px" }
 
 Et la nature s’y met aussi : à **Baïes** (Italie), un figuier sauvage pousse **la tête en bas** depuis la voûte d’une salle romaine, sa racine au plafond et ses branches feuillues vers le sol — un véritable arbre informatique !
 

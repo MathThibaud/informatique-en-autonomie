@@ -22,13 +22,13 @@ Nous sommes le **29 octobre 1969**. Dans un laboratoire de l’université de Ca
 
 Une heure plus tard, après réparation, `LOGIN` passait en entier. Le réseau **ARPANET** était né : l’ancêtre direct d’Internet.
 
-\*(image manquante : 06_hist_imp_log)\*  
+![](../img/06_hist_imp_log.jpg){ .photo loading=lazy style="width:100%" }  
 Le cahier de bord du 29 octobre 1969 : « LO »
 
-\*(image manquante : 06_hist_arpanet_1969)\*  
+![](../img/06_hist_arpanet_1969.jpg){ .photo loading=lazy style="width:100%" }  
 ARPANET en 1969 : quatre ordinateurs reliés
 
-\*(image manquante : 06_hist_vint_cerf)\*  
+![](../img/06_hist_vint_cerf.jpg){ .photo loading=lazy style="width:100%" }  
 Vinton Cerf, co-inventeur de TCP/IP
 
 ### Les grandes étapes

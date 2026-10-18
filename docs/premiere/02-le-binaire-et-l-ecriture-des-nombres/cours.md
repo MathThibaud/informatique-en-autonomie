@@ -34,10 +34,10 @@ Une fois qu’on sait coder des *nombres* avec des `0` et des `1`, on sait tout 
 
     Le système binaire est décrit dès **1703** par le mathématicien et philosophe allemand *Gottfried Wilhelm Leibniz*, dans un mémoire présenté à l’Académie royale des sciences de Paris, l’*Explication de l’arithmétique binaire* : on y voit, ci-contre, la table des premiers entiers écrits avec des `0` et des `1`, et les additions, soustractions et multiplications posées en binaire. Leibniz admire la simplicité de ces calculs, sans imaginer encore de machine pour les faire. C’est *Claude Shannon* qui, en **1937**, montre que l’algèbre des deux valeurs « vrai/faux » de *George Boole* permet de **concevoir des circuits électriques** : le pont était jeté entre la logique et la machine.
 
-    \*(image manquante : 02_hist_leibniz_francke)\*  
+    ![](../img/02_hist_leibniz_francke.jpg){ .photo loading=lazy style="width:114px" }  
     Leibniz vers 1695 (portrait par C. B. Francke)
 
-    \*(image manquante : 02_hist_leibniz_binaire_1703)\*  
+    ![](../img/02_hist_leibniz_binaire_1703.png){ .photo loading=lazy style="width:131px" }  
     L’arithmétique binaire de Leibniz (1703)
 
 !!! remarque "Remarque"

@@ -18,13 +18,13 @@ Un **programme** est une suite d’instructions, écrites dans un **langage de p
 
     **Ada Lovelace** (1815–1852), fille du poète Byron, se passionne pour la *machine analytique* imaginée par l’Anglais **Charles Babbage** : une calculatrice mécanique programmable par cartes perforées. En 1843, elle traduit un article sur cette machine et l’enrichit de notes trois fois plus longues que le texte. La dernière, la **note G**, détaille pas à pas comment la machine calculerait les *nombres de Bernoulli*, avec des opérations répétées : c’est le premier programme publié. Mille ans plus tôt, vers 820, **al-Khwârizmî**, savant de la « Maison de la sagesse » de Bagdad, écrit un traité de calcul dont le titre a donné le mot *algèbre* (*al-jabr*), et un autre sur les chiffres indiens dont la traduction latine, *Algoritmi de numero Indorum*, a donné le mot *algorithme*.
 
-    \*(image manquante : 01_hist_ada_lovelace)\*  
+    ![](../img/01_hist_ada_lovelace.jpg){ .photo loading=lazy style="width:109px" }  
     Ada Lovelace (portrait par A. E. Chalon, v. 1840)
 
-    \*(image manquante : 01_hist_note_g_bernoulli)\*  
+    ![](../img/01_hist_note_g_bernoulli.jpg){ .photo loading=lazy style="width:227px" }  
     Le tableau de la note G (1843)
 
-    \*(image manquante : 01_hist_al_khwarizmi)\*  
+    ![](../img/01_hist_al_khwarizmi.jpg){ .photo loading=lazy style="width:201px" }  
     L’*Algèbre* d’al-Khwârizmî (copie de 1342, Oxford)
 
 !!! definition "Définition 1 — Algorithme et programme"

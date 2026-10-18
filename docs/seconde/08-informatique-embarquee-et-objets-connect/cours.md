@@ -14,10 +14,10 @@
 
     **Un peu d’histoire.** L’un des tout premiers ordinateurs *embarqués* est l’**Apollo Guidance Computer** qui, en **1969**, a guidé les astronautes jusqu’à la Lune avec une puissance… ridicule face à un smartphone d’aujourd’hui. Le **premier objet connecté** de l’histoire serait un **grille-pain** branché à Internet, présenté pour s’amuser en **1990**. L’expression « **Internet des objets** » (*Internet of Things*) est lancée en **1999** par **Kevin Ashton** (Ashton, *RFID Journal*, 2009). On comptait fin 2024 **près de 20 milliards** d’objets connectés dans le monde (sans compter smartphones et ordinateurs) — plus de deux fois le nombre d’humains (IoT Analytics, 2024 ; ONU, 2022).
 
-    \*(image manquante : 08_hist_agc)\*  
+    ![](../img/08_hist_agc.jpg){ .photo loading=lazy style="width:100%" }  
     L’ordinateur de guidage d’Apollo
 
-    \*(image manquante : 08_hist_kevin_ashton)\*  
+    ![](../img/08_hist_kevin_ashton.jpg){ .photo loading=lazy style="width:100%" }  
     Kevin Ashton (2015)
 
     Sources : K. Ashton, « That “Internet of Things” Thing », *RFID Journal*, 2009 ; IoT Analytics, *State of IoT – Summer 2024*, septembre 2024 (18,8 milliards d’objets connectés estimés fin 2024), `iot-analytics.com` ; ONU (Département des affaires économiques et sociales), *World Population Prospects 2022* (8 milliards d’humains en novembre 2022), `un.org`.
@@ -46,7 +46,7 @@ L’ordinateur n’est plus seulement la machine posée sur un bureau. Il a **r�
 
 Pour interagir avec le monde physique, un système embarqué a besoin de deux sortes d’organes.
 
-\*(image manquante : 08_hist_microbit)\*  
+![](../img/08_hist_microbit.jpg){ .photo loading=lazy style="width:100%" }  
 Une carte micro:bit : capteurs, boutons et LED
 
 !!! definition "Définition 2"

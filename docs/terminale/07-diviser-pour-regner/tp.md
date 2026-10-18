@@ -962,7 +962,7 @@ sortie.putdata(plat)
 sortie.save("joconde_tournee.png")
 ```
 
-\*(image manquante : 07t4_joconde)\*\*(image manquante : 07t4_joconde_tournee)\*
+![](../img/07t4_joconde.png){ .photo loading=lazy style="width:157px" }![](../img/07t4_joconde_tournee.png){ .photo loading=lazy style="width:157px" }
 
 À gauche l’image de départ, à droite le résultat attendu après un quart de tour horaire.
 

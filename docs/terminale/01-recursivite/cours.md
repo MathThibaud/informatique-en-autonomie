@@ -409,10 +409,10 @@ Ce chapitre est une **clé** pour toute la fin de l’année. On la retrouve dè
 
     En **1883**, le mathématicien français **Édouard Lucas** publie, sous le pseudonyme de « N. Claus de Siam » (anagramme de « Lucas d’Amiens »), le casse-tête des **tours de Hanoï** : déplacer une pile de disques d’un piquet à un autre, un disque à la fois, sans jamais poser un disque sur un plus petit. La solution est récursive par nature : pour déplacer $n$ disques, on déplace les $n-1$ du dessus sur le piquet intermédiaire, puis le grand disque, puis à nouveau les $n-1$ disques par-dessus — soit $2^n-1$ déplacements. La récursivité n’entre dans les langages de programmation qu’en **1958–1960**, avec **Lisp**, créé par **John McCarthy** (qui a aussi forgé l’expression « intelligence artificielle ») : en Lisp, presque tout s’écrit par des fonctions récursives. Algol 60 l’adopte aussitôt, puis presque tous les langages, dont Python.
 
-    \*(image manquante : 01_hist_hanoi_lucas)\*  
+    ![](../img/01_hist_hanoi_lucas.jpg){ .photo loading=lazy style="width:131px" }  
     Les tours de Hanoï (É. Lucas, 1883)
 
-    \*(image manquante : 01_hist_mccarthy)\*  
+    ![](../img/01_hist_mccarthy.jpg){ .photo loading=lazy style="width:100%" }  
     John McCarthy en 2006
 
 !!! remarque "Remarque — Au bac, on vous demandera surtout de…"

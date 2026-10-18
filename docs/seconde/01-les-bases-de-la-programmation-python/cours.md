@@ -30,10 +30,10 @@ Nous utiliserons **Python** (version 3), un langage de haut niveau réputé pou
 
     Près de quarante ans plus tard, pendant les vacances de Noël 1989, le Néerlandais **Guido van Rossum** commence à écrire, à Amsterdam, un nouveau langage qu’il veut **simple à lire**. Il le baptise **Python**, non pas pour le serpent, mais en hommage à la troupe comique britannique des *Monty Python*. La première version est publiée en 1991 ; il y reprend, d’un langage plus ancien nommé ABC, l’**indentation obligatoire** que vous allez découvrir. Python est aujourd’hui l’un des langages les plus utilisés au monde, de l’enseignement à l’intelligence artificielle.
 
-    \*(image manquante : 01_hist_grace_hopper)\*  
+    ![](../img/01_hist_grace_hopper.jpg){ .photo loading=lazy style="height:175px" }  
     Grace Hopper en 1984
 
-    \*(image manquante : 01_hist_guido_van_rossum)\*  
+    ![](../img/01_hist_guido_van_rossum.jpg){ .photo loading=lazy style="height:175px" }  
     Guido van Rossum en 2006
 
 ### De Scratch à Python : ce qui change (et ce qui ne change pas)
@@ -59,7 +59,7 @@ Pour écrire et exécuter nos programmes, il nous faut un outil. Nous utiliseron
 
 Une fois Spyder lancé, vous obtenez une fenêtre qui ressemble à ceci :
 
-\*(image manquante : 01_spyder)\*
+![](../img/01_spyder.png){ .photo loading=lazy style="width:100%" }
 
 Spyder est divisé en plusieurs sous-fenêtres. Deux seulement vont nous intéresser pour l’instant :
 
@@ -88,7 +88,7 @@ Il existe une tradition en informatique : le premier programme qu’on écrit da
     Puis cliquez sur le **triangle vert** $\blacktriangleright$ (en haut) pour **exécuter** le programme. Spyder va vous demander d’enregistrer votre fichier : rangez-le dans un dossier de travail que vous retrouverez (par exemple `Documents/SNT/`, sous le nom `hello.py`). Dans la console, vous devez voir apparaître :
 
     ```text
-    In [1]: runfile('.../Documents/SNT/hello.py', wdir='.../Documents/SNT')
+    In [1]: %runfile .../Documents/SNT/hello.py --wdir
     Hello World !
 
     In [2]:
@@ -201,7 +201,7 @@ print(points_de_vie)
 
 **2. Dans la console**, en tapant simplement le nom de la variable après avoir exécuté le programme :
 
-\*(image manquante : 01_pointdevie)\*
+![](../img/01_pointdevie.png){ .photo loading=lazy style="width:437px" }
 
 ### Bien nommer ses variables
 
@@ -269,7 +269,7 @@ Pour connaître le type d’une donnée, on utilise l’instruction `type(...)` 
     b = 12
     ```
 
-    \*(image manquante : 01_types)\*
+    ![](../img/01_types.png){ .photo loading=lazy style="width:140px" }
 
     La console répond `float` pour `a` et `int` pour `b`.
 
@@ -554,7 +554,7 @@ Définir une fonction ne la fait pas travailler : c’est comme acheter un robot
 
     Au moment de l’exécution, `ma_fonction(4)` est *remplacé* par la valeur renvoyée, c’est-à-dire $14$.
 
-    \*(image manquante : 01_mafonction)\*
+    ![](../img/01_mafonction.png){ .photo loading=lazy style="width:437px" }
 
 ### Plusieurs paramètres, ou aucun
 

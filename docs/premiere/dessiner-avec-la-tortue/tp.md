@@ -16,7 +16,7 @@
 
     Vous avancez par **étapes** ; chacun va aussi loin qu’il le peut. Un programme qui écrit proprement dix lettres vaut mieux qu’un alphabet complet qui déraille.
 
-    \*(image manquante : Tt1_rendu_ecriture_turtle)\*
+    ![](../img/Tt1_rendu_ecriture_turtle.png){ .photo loading=lazy style="width:92%" }
 
     Ce que l’on vise (étape 5).
 

@@ -204,7 +204,7 @@ Parti de A, le glouton enchaîne les sauts courts (B, C, D, E)… en oubliant F
 
     Le revers de la médaille — les problèmes que le glouton ne sait qu’*approcher* — a donné naissance en **1971** (**Stephen Cook**) à la théorie des problèmes **NP-complets**, et à la question **P $=$ NP**, l’un des sept « problèmes du millénaire » dotés d’un prix d’un million de dollars. Le mathématicien américain **Stephen Cook**, alors jeune professeur (ci-contre en 1968, à Berkeley), montre en 1971 qu’un problème de logique (le problème SAT) est « NP-complet » : savoir le résoudre vite permettrait de résoudre vite tous les problèmes d’une très vaste famille. Dès 1972, Richard Karp en exhibe 21 autres, dont le sac à dos ; on en connaît aujourd’hui des milliers, dont le voyageur de commerce, qui sont en fait *le même* problème déguisé : savoir en résoudre un vite permettrait de les résoudre tous. Cette découverte vaut à Cook le prix Turing en 1982 (Karp le recevra en 1985). *Ainsi, un chapitre de Première touche à l’une des plus grandes questions ouvertes de l’informatique.*
 
-    \*(image manquante : 11_hist_stephen_cook)\*  
+    ![](../img/11_hist_stephen_cook.jpg){ .photo loading=lazy style="width:157px" }  
     Stephen Cook en 1968
 
 !!! remarque "Remarque — Liens avec d’autres chapitres"

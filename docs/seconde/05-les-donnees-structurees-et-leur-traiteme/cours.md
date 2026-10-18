@@ -14,10 +14,10 @@
 
     **Un peu d’histoire.** Ranger des données par machine est *plus vieux* que l’ordinateur ! En **1890**, les États-Unis doivent recenser près de 63 millions d’habitants ; le recensement précédent, celui de 1880, avait demandé **sept ans** de dépouillement à la main. L’ingénieur **Herman Hollerith** invente une machine qui lit des **cartes perforées** — une carte par personne, un trou par caractéristique : c’est déjà « une fiche par individu, les mêmes rubriques pour tous », l’idée même d’une **table**. Le recensement de 1890 est bouclé avec **plusieurs mois d’avance** (U.S. Census Bureau). La société de Hollerith deviendra, par fusions, une certaine… **IBM**.
 
-    \*(image manquante : 05_hist_hollerith_1890)\*  
+    ![](../img/05_hist_hollerith_1890.jpg){ .photo loading=lazy style="width:100%" }  
     Les machines de Hollerith en 1890
 
-    \*(image manquante : 05_hist_carte_perforee)\*  
+    ![](../img/05_hist_carte_perforee.jpg){ .photo loading=lazy style="width:100%" }  
     Une carte perforée : une carte par personne
 
     Source : U.S. Census Bureau, pages d’histoire « Herman Hollerith » et « Tabulation and Processing » (recensements de 1880 et 1890), `census.gov`.

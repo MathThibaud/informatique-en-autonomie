@@ -104,7 +104,7 @@
 
 Une expression arithmétique comme $(3+5)\times(7-2)$ peut être représentée par un **arbre binaire** : chaque **feuille** porte un nombre entier et chaque autre nœud porte un **opérateur** (`’+’`, `’-’` ou `’*’`) qui s’applique à la valeur de son sous-arbre gauche et à celle de son sous-arbre droit, **dans cet ordre**.
 
-\*(image manquante : P24_arbre_e1)\*
+![](../img/P24_arbre_e1.png){ .photo loading=lazy style="width:240px" }
 
 **Figure 1.** L’arbre `e1` de l’expression $(3+5)\times(7-2)$.
 
