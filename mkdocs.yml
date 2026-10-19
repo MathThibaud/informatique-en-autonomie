@@ -91,6 +91,7 @@ nav:
 - Seconde:
   - Accueil Seconde: seconde/index.md
   - Présentation de l'année: seconde/presentation-de-l-annee.md
+  - 'Méthode : débattre': seconde/methode-debattre.md
   - Frise chronologique: seconde/frise-chronologique.md
   - 1. Les bases de la programmation Python:
     - seconde/01-les-bases-de-la-programmation-python/index.md
@@ -355,6 +356,7 @@ nav:
     - Sujet 31: terminale/pratique/sujet-31.md
     - Sujet 32: terminale/pratique/sujet-32.md
   - Réussir la partie écrite: terminale/reussir-la-partie-ecrite.md
+  - Index des exercices type bac: terminale/index-des-exercices-type-bac.md
   - Réussir l'épreuve pratique: terminale/reussir-l-epreuve-pratique.md
   - Préparer le Grand Oral: terminale/preparer-le-grand-oral.md
   - Crédits iconographiques: terminale/credits.md

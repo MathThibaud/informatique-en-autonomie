@@ -190,11 +190,15 @@ def parse_book(path):
             if target is not None:
                 target.append(('input', m.group(1)))
             continue
-        if re.match(r'^\\phantomsection\\addcontentsline\{toc\}\{chapter\}\{([^}]*)\}', st):
-            title = re.search(r'\{chapter\}\{([^}]*)\}', st).group(1)
+        # \\ancre{…} facultative entre \\phantomsection et \\addcontentsline (frise SNT, 18-10-2026)
+        m = re.match(r'^\\phantomsection(\\ancre\{[^}]*\})?\\addcontentsline\{toc\}\{chapter\}\{([^}]*)\}', st)
+        if m:
+            title = m.group(2)
             page = dict(title=title, items=[], slug=slugify(title))
             book['front'].append(page)
             target = page['items']
+            if m.group(1):
+                target.append(('raw', m.group(1)))
             continue
         if target is not None:
             target.append(('raw', line))

@@ -30,7 +30,7 @@
     ![](../img/02_hist_zuckerberg.jpg){ .photo loading=lazy style="width:100%" }  
     Mark Zuckerberg (2019)
 
-    [$\to$ frise chronologique](../methode-debattre.md#frise)
+    [$\to$ frise chronologique](../frise-chronologique.md#frise)
 
 ## Qu’est-ce qu’un réseau social ?
 

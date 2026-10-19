@@ -30,7 +30,7 @@
 
     Sources : K. Ashton, « That “Internet of Things” Thing », *RFID Journal*, 2009 ; IoT Analytics, *State of IoT – Summer 2024*, septembre 2024 (18,8 milliards d’objets connectés estimés fin 2024), `iot-analytics.com` ; ONU (Département des affaires économiques et sociales), *World Population Prospects 2022* (8 milliards d’humains en novembre 2022), `un.org`.
 
-    [$\to$ frise chronologique](../methode-debattre.md#frise)
+    [$\to$ frise chronologique](../frise-chronologique.md#frise)
 
 ## L’informatique invisible : les systèmes embarqués
 

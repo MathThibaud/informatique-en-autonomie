@@ -28,7 +28,7 @@
     ![](../img/04_hist_berners_lee.jpg){ .photo loading=lazy style="width:100%" }  
     Tim Berners-Lee (2009)
 
-    [$\to$ frise chronologique](../methode-debattre.md#frise)
+    [$\to$ frise chronologique](../frise-chronologique.md#frise)
 
 !!! navigateur "Rendu dans le navigateur — info.cern.ch/hypertext/WWW/TheProject.html"
 

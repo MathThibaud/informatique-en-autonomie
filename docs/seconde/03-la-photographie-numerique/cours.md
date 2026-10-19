@@ -30,7 +30,7 @@
 
     Sources : Harry Ransom Center (université du Texas à Austin), qui conserve le « Point de vue du Gras » de Nicéphore Niépce (vers 1826–1827), `hrc.utexas.edu` ; George Eastman Museum (Rochester), histoire de l’appareil Kodak de 1888 et de son slogan ; IEEE, *Milestone* « Handheld Digital Camera, 1975 » (appareil de Steven Sasson : environ 3,6 kg, image de $100 \times 100$ pixels enregistrée en 23 s), inaugurée en 2022, `ethw.org`.
 
-    [$\to$ frise chronologique](../methode-debattre.md#frise)
+    [$\to$ frise chronologique](../frise-chronologique.md#frise)
 
 ## De la lumière à l’image : le capteur
 

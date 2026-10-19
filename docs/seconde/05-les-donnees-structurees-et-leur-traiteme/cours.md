@@ -30,7 +30,7 @@
 
     Source : U.S. Census Bureau, pages d’histoire « Herman Hollerith » et « Tabulation and Processing » (recensements de 1880 et 1890), `census.gov`.
 
-    [$\to$ frise chronologique](../methode-debattre.md#frise)
+    [$\to$ frise chronologique](../frise-chronologique.md#frise)
 
 ## Une donnée, c’est quoi au juste ?
 

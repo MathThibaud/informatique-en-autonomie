@@ -24,7 +24,7 @@
 
     Sources : GPS.gov (gouvernement des États-Unis), pages « Selective Availability » (fin de la dégradation le 1<sup>er</sup> mai 2000) et présentation du système (pleine capacité opérationnelle en 1995), `gps.gov` ; Commission européenne, communiqué « Galileo goes live! », décembre 2016, `ec.europa.eu`.
 
-    [$\to$ frise chronologique](../methode-debattre.md#frise)
+    [$\to$ frise chronologique](../frise-chronologique.md#frise)
 
 ## Se repérer sur la Terre : latitude et longitude
 

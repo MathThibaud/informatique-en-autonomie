@@ -21,7 +21,7 @@
     ![](../img/T_hist_papert.jpg){ .photo loading=lazy style="width:100%" }  
     Seymour Papert présente Logo (1987)
 
-    [$\to$ frise chronologique](../methode-debattre.md#frise)
+    [$\to$ frise chronologique](../frise-chronologique.md#frise)
 
 ## Prendre la tortue en main
 

@@ -44,7 +44,7 @@ Nous utiliserons **Python** (version 3), un langage de haut niveau réputé pou
     ![](../img/01_hist_guido_van_rossum.jpg){ .photo loading=lazy style="height:175px" }  
     Guido van Rossum en 2006
 
-    [$\to$ frise chronologique](../methode-debattre.md#frise)
+    [$\to$ frise chronologique](../frise-chronologique.md#frise)
 
 ### De Scratch à Python : ce qui change (et ce qui ne change pas)
 
