@@ -18,7 +18,13 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Pure ou pas pure ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-1 }
 
+<span class="essentiel">• essentiel</span>
+
 Pour chacune de ces fonctions, dire si elle est **pure**, et justifier.
+
+??? pouce "Coup de pouce"
+
+    Pour chaque fonction, se poser deux questions. Son résultat dépend-il d’autre chose que de ses paramètres ? Modifie-t-elle une variable ou un objet qui existe en dehors d’elle (variable globale, liste reçue en paramètre) ?
 
 ```python
 compteur = 0
@@ -99,6 +105,8 @@ def double_tout(tab):
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 3</span> — Défi — des fonctions qui manipulent des fonctions <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-3 }
 
+<span class="duree">≈ 20 min</span>
+
 En paradigme fonctionnel, une fonction est une **valeur** comme une autre : on peut la passer en paramètre à une autre fonction, ou la renvoyer. On donne :
 
 ```python
@@ -158,7 +166,13 @@ def plus_un(x):
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Lister attributs et méthodes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-4 }
 
+<span class="essentiel">• essentiel</span>
+
 On donne la classe suivante.
+
+??? pouce "Coup de pouce"
+
+    Les attributs sont les noms écrits `self.… = …` dans le constructeur ; leur type se lit sur la valeur reçue ou affectée. Les méthodes sont les fonctions définies (`def`) à l’intérieur de la classe.
 
 ```python
 class Livre:
@@ -192,6 +206,10 @@ class Livre:
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Prévoir l’affichage <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-5 }
 
 En reprenant la classe `Livre` ci-dessus, donner *sans machine* ce qu’affiche ce programme, puis vérifier.
+
+??? pouce "Coup de pouce"
+
+    Relire le constructeur : que vaut l’attribut `emprunte` juste après la création de `b` ? Quelle méthode le modifie, et quand est-elle appelée ?
 
 ```python
 b = Livre("1984", "Orwell", 328)
@@ -249,6 +267,8 @@ print(nom)
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 7</span> — Créer des instances <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-7 }
 
+<span class="essentiel">• essentiel</span>
+
 On donne la classe des points du plan.
 
 ```python
@@ -260,7 +280,13 @@ class Point:
 
 <span class="run" title="À programmer et tester sur machine">▶</span> **1.** Écrire le code qui crée deux instances : `origine` au point $(0, 0)$ et `p` au point $(3, 5)$. **2.** Afficher l’abscisse de `p` (attendu : `3`).
 
+??? pouce "Coup de pouce"
+
+    Relire dans le cours comment on crée une instance : le constructeur est appelé automatiquement. Quelles valeurs faut-il fournir, et quel paramètre de `__init__` ne se donne jamais ? Un attribut d’un objet se lit avec la notation pointée.
+
 ??? corrige "Corrigé"
+
+    **Démarche :** on appelle la classe comme une fonction, avec les valeurs de `x` et `y` (`self` ne se donne pas : c’est l’objet créé) ; un attribut se lit avec la notation pointée.
 
     ```python
     origine = Point(0, 0)
@@ -270,7 +296,13 @@ class Point:
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Compléter un constructeur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-8 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span> Recopier et compléter le constructeur de la classe `Eleve` pour qu’elle possède trois attributs : `nom`, `classe` et une liste `notes` **vide** au départ.
+
+??? pouce "Coup de pouce"
+
+    Chaque attribut `self.…` reçoit le paramètre du même nom. Pour `notes`, il n’y a pas de paramètre : quelle valeur représente une liste vide ?
 
 ```python
 class Eleve:
@@ -285,6 +317,8 @@ print(e.nom, e.classe, e.notes)   # attendu : Zoe TG1 []
 
 ??? corrige "Corrigé"
 
+    **Démarche :** dans le constructeur, chaque attribut `self.…` reçoit le paramètre correspondant ; `notes` n’a pas de paramètre : on lui affecte une liste vide, propre à chaque élève.
+
     ```python
     class Eleve:
         def __init__(self, nom, classe):
@@ -294,6 +328,8 @@ print(e.nom, e.classe, e.notes)   # attendu : Zoe TG1 []
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Ajouter des méthodes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-9 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> En repartant de la classe `Eleve` précédente, ajouter deux méthodes :
 
@@ -317,6 +353,8 @@ Exemple d’utilisation :
 
 ??? corrige "Corrigé"
 
+    **Démarche :** chaque méthode reçoit `self` en premier paramètre et agit sur l’attribut `self.notes` : `ajouter_note` le modifie (`append`), `moyenne` le parcourt avec un accumulateur, puis divise par le nombre de notes.
+
     ```python
     class Eleve:
         def __init__(self, nom, classe):
@@ -334,9 +372,13 @@ Exemple d’utilisation :
             return total / len(self.notes)
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `notes.append(note)` sans `self.` : dans la méthode, `notes` n’est pas une variable, Python lève `NameError`. L’attribut de l’objet s’écrit toujours `self.notes`.
+
 ### Écrire une classe complète
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — La classe Rectangle <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-10 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire entièrement une classe `Rectangle` avec :
 
@@ -364,6 +406,8 @@ False
 
 ??? corrige "Corrigé"
 
+    **Démarche :** le constructeur range les deux dimensions dans des attributs ; chaque méthode ne fait qu’un calcul sur `self.largeur` et `self.hauteur` ; `est_carre` renvoie directement le résultat de la comparaison.
+
     ```python
     class Rectangle:
         def __init__(self, largeur, hauteur):
@@ -379,6 +423,8 @@ False
         def est_carre(self):
             return self.largeur == self.hauteur
     ```
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Appeler une méthode sans parenthèses (`r.aire`) : on obtient la méthode elle-même, pas son résultat. On écrit `r.aire()`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — La classe Chronometre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-11 }
 
@@ -419,9 +465,13 @@ Exemple : après $75$ appels à `tic`, `affichage()` renvoie `"01:15"`.
             return f"{m:02d}:{s:02d}"
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `f"{m}:{s}"` : après $75$ secondes, on obtient `"1:15"` et non `"01:15"`. Le format `02d` complète par un zéro à gauche.
+
 ### Encapsulation
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Corriger une mauvaise pratique <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-12 }
+
+<span class="essentiel">• essentiel</span>
 
 Un élève manipule un compte directement par son attribut :
 
@@ -445,7 +495,7 @@ print(c.solde)
 
     **1.** En écrivant directement `c.solde = c.solde - 500`, on *court-circuite* la classe : aucun contrôle n’est fait, et le solde peut devenir absurde (négatif). L’objet n’a plus la garantie de rester dans un état correct.
 
-    **2.**
+    **2.** **Démarche :** le solde devient un attribut « interne » (`_solde`) ; on n’y accède plus que par les méthodes de l’interface. `retirer` **teste d’abord** le montant, et ne modifie l’état que si le retrait est accepté.
 
     ```python
     class Compte:
@@ -464,9 +514,13 @@ print(c.solde)
 
     Désormais `c.retirer(500)` sur un solde de $100$ renvoie `False` et laisse le solde inchangé.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Ne tester que `montant <= self._solde` : `c.retirer(-50)` serait accepté et *augmenterait* le solde. La condition `0 < montant` ferme cette porte.
+
 ### Méthodes spéciales et objets qui interagissent
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Défi — la classe Fraction <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-13 }
+
+<span class="duree">≈ 20 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une classe `Fraction` représentant un nombre rationnel par un `numerateur` et un `denominateur`.
 
@@ -522,6 +576,8 @@ Exemple :
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Défi — un réseau d’amis <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-14 }
+
+<span class="duree">≈ 30 min</span>
 
 On modélise un petit réseau social : chaque personne est un objet de la classe `Personne`, qui possède un attribut `nom` et un attribut `amis`, liste d’**objets** `Personne` (vide à la création).
 
@@ -605,6 +661,10 @@ Pour chacune des situations suivantes, indiquer le paradigme *a priori* le plus 
 
 3.  dérouler un algorithme de tri étape par étape.
 
+??? pouce "Coup de pouce"
+
+    Relire ce qui caractérise chaque paradigme dans le cours : des objets qui ont un état et des comportements, des fonctions pures sans effet de bord, ou une suite d’instructions qui modifient des variables. Lequel décrit le mieux chaque situation ?
+
 ??? corrige "Corrigé"
 
     1.  **objet** : chaque entité (personnage, monstre, objet) a un état et des comportements propres ;
@@ -616,6 +676,8 @@ Pour chacune des situations suivantes, indiquer le paradigme *a priori* le plus 
 ### Vers le bac
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Le domaine skiable (d’après Métropole 2024, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-16 }
+
+<span class="essentiel">• essentiel</span> <span class="duree">≈ 20 min</span>
 
 *On ne traite ici que la partie « programmation objet » du sujet.* Une station de ski modélise ses pistes par une classe `Piste` et son domaine par une classe `Domaine`. Le code est donné en **annexe** ci-dessous ; il se termine par la création du domaine `lievre_blanc` et de ses pistes.
 
@@ -678,9 +740,11 @@ for piste in lievre_blanc.get_pistes():
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 3) : Q1 : 0,5 ; Q2 : 0,75 ; Q3 : 0,25 ; Q4 : 0,75 ; Q5 : 0,75
+
     1.  Attributs de `Piste` : `nom` (`str`), `denivele` (`int`), `longueur` (`float`), `couleur` (`str`), `ouverte` (`bool`).
 
-    2.
+    2.  **Démarche :** une cascade `if` / `elif` / `else`, en partant du seuil le plus élevé : le premier test vrai l’emporte.
 
         ```python
         def set_couleur(self):
@@ -694,9 +758,11 @@ for piste in lievre_blanc.get_pistes():
                 self.couleur = 'verte'
         ```
 
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Tester les seuils dans l’ordre croissant (`if self.denivele >= 40` en premier) : une piste noire de $120$ m serait classée bleue, car le premier test vrai l’emporte.
+
     3.  Proposition **(D)** : une liste d’objets de type `Piste`.
 
-    4.
+    4.  **Démarche :** on parcourt la liste d’objets `Piste` renvoyée par `get_pistes()` et on modifie l’attribut `ouverte` de chaque piste verte.
 
         ```python
         for piste in lievre_blanc.get_pistes():
@@ -705,6 +771,8 @@ for piste in lievre_blanc.get_pistes():
         ```
 
         *(`set_couleur` a été appelée sur chaque piste à la fin de l’annexe : ici, `Les Marmottes` et `Le Jardin` sont fermées.)*
+
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `piste.ouverte == False` : c’est une comparaison, qui ne modifie rien. L’affectation s’écrit avec un seul `=`.
 
     5.  On parcourt les pistes et on garde le nom de celles qui ont la bonne couleur :
 
@@ -727,6 +795,8 @@ for piste in lievre_blanc.get_pistes():
         Par exemple `pistes_de_couleur(lievre_blanc.get_pistes(), ’noire’)` renvoie `[’Petit Bonheur’, ’Foret’, ’Duvallon’]`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Valeurs nutritionnelles (d’après La Réunion 2023, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-17 }
+
+<span class="duree">≈ 20 min</span>
 
 Pour chaque aliment, on stocke ses caractéristiques nutritionnelles (pour 100 g) dans un objet de la classe `Aliment` : énergie (kcal), protéines, glucides et lipides (en grammes).
 
@@ -762,6 +832,8 @@ class Aliment:
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 3) : Q1 : 0,25 ; Q2 : 0,25 ; Q3 : 0,25 ; Q4 : 0,75 ; Q5 : 0,5 ; Q6 : 1
+
     1.  `lait = Aliment(65.1, 3.32, 4.85, 3.63)`.
 
     2.  `lait.energie` (renvoie `65.1`).
@@ -779,7 +851,7 @@ class Aliment:
 
     5.  `aliments[’pain’].energie_reelle(220)`.
 
-    6.
+    6.  **Démarche :** une recherche de maximum : on parcourt les clés du dictionnaire en mémorisant le nom du « champion », et l’on compare les attributs `energie` des objets associés.
 
         ```python
         def plus_calorique(aliments):
@@ -791,6 +863,8 @@ class Aliment:
         ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — La classe Date (d’après Asie 2025, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-18 }
+
+<span class="duree">≈ 30 min</span>
 
 On manipule des dates grâce à la classe `Date` ci-dessous.
 
@@ -828,13 +902,15 @@ class Date:
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 4) : Q1 : 0,5 ; Q2 : 0,25 ; Q3 : 0,25 ; Q4 : 0,75 ; Q5 : 1,25 ; Q6 : 1
+
     1.  `self.jour = jour` ; `self.mois = mois` ; `self.annee = annee`.
 
     2.  `d = Date(19, 6, 2024)`.
 
     3.  `return self.annee`.
 
-    4.
+    4.  **Démarche :** on traduit la règle de l’énoncé avec `and` et `or`, en testant la divisibilité par le reste `%`.
 
         ```python
         def est_bissextile(self):
@@ -844,7 +920,7 @@ class Date:
 
         *Ainsi 2024 et 2000 sont bissextiles, mais 1900 ne l’est pas.*
 
-    5.
+    5.  **Démarche :** un accumulateur initialisé au jour de la date, auquel on ajoute les jours des mois **précédents** (indices `0` à `self.mois - 2`), puis $1$ si l’année est bissextile et que la date est après février.
 
         ```python
         def nb_jours_passes(self):
@@ -856,7 +932,7 @@ class Date:
             return total
         ```
 
-    6.
+    6.  **Démarche :** on réutilise `est_bissextile` pour connaître le nombre de jours de l’année, puis on retranche `nb_jours_passes()`.
 
         ```python
         def nb_jours_restants(self):
@@ -866,6 +942,8 @@ class Date:
         ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Colorier une carte (d’après Métropole 2023, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-19 }
+
+<span class="duree">≈ 15 min</span>
 
 On modélise une région d’un pays par la classe `Region` ci-dessous.
 
@@ -897,11 +975,13 @@ class Region:
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 2) : Q1 : 0,5 ; Q2 : 0,25 ; Q3 : 1,25
+
     1.  `nom`, `tab_voisines` et `couleur_attribuee` sont des **attributs** ; le paramètre `nom_region` est de type `str` (chaîne de caractères).
 
     2.  `ge = Region("Grand Est")`.
 
-    3.
+    3.  **Démarche :** chaque méthode lit un attribut de `self` : le premier élément de la liste, sa longueur, ou le test « une couleur a-t-elle été attribuée ? ».
 
         ```python
         def renvoie_premiere_couleur_disponible(self):
@@ -915,6 +995,8 @@ class Region:
         ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Des colis à expédier (d’après Amérique du Nord 2025, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-20 }
+
+<span class="duree">≈ 60 min</span>
 
 *Sujet repris en entier : programmation objet, puis tri, récursivité (revoir le chapitre Récursivité) et algorithme glouton.*
 
@@ -1025,6 +1107,8 @@ def chargement_glouton(liste, rang, capacite):
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 8) : Q1 : 0,5 ; Q2 : 0,75 ; Q3 : 0,5 ; Q4 : 0,5 ; Q5 : 1 ; Q6 : 0,75 ; Q7 : 0,5 ; Q8 : 1,25 ; Q9 : 0,75 ; Q10 : 1,5
+
     1.  Méthode à placer dans la classe `Colis` :
 
         ```python
@@ -1032,7 +1116,7 @@ def chargement_glouton(liste, rang, capacite):
                 self.etat = 'transit'
         ```
 
-    2.
+    2.  **Démarche :** un test sur l’attribut `poids` du colis décide entre l’ajout et le message.
 
         ```python
         def ajouter_colis(liste, colis):
@@ -1062,7 +1146,7 @@ def chargement_glouton(liste, rang, capacite):
 
     7.  Par exemple le **tri par insertion** (vu en Première), lui aussi de coût quadratique ($n^2$) dans le pire des cas. *Le tri fusion, que l’on étudiera au chapitre Diviser pour régner, fera mieux : $n \log_2 n$.*
 
-    8.
+    8.  **Démarche :** condition d’arrêt : plus de colis à examiner (on renvoie une liste vide) ; si le colis de rang `rang` tient, on le charge et la capacité diminue de son poids ; sinon on passe au suivant sans le charger.
 
         ```python
         def chargement_glouton(liste, rang, capacite):
@@ -1077,7 +1161,7 @@ def chargement_glouton(liste, rang, capacite):
 
     9.  Chaque appel récursif augmente `rang` de 1 : pour une liste de $n$ colis, il y a $n + 1$ appels imbriqués. Python limite la profondeur de la pile d’appels (environ 1000 par défaut) : avec une liste de plusieurs milliers de colis, la limite est dépassée et Python lève `RecursionError`.
 
-    10.
+    10. **Démarche :** on parcourt les colis dans l’ordre en tenant à jour la charge du camion ; on garde un colis seulement s’il tient encore.
 
         ```python
         def chargement_glouton2(liste, capacite):
@@ -1094,9 +1178,11 @@ def chargement_glouton(liste, rang, capacite):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Puissance 4 : la grille de jeu (d’après Amérique du Nord 2026, jour 1, partie A) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-21 }
 
+<span class="duree">≈ 30 min</span>
+
 Le jeu puissance 4 se joue à deux joueurs dans une grille de 6 lignes et 7 colonnes. Une couleur de pion, blanc ou noir, est attribuée à chaque joueur ; ils jouent à tour de rôle. À son tour, un joueur choisit une colonne dans laquelle il introduit un pion de sa couleur : la grille étant verticale, le pion tombe et bute soit sur le bas de la grille, soit sur un pion déjà placé. Le but est d’aligner au moins quatre pions de sa couleur dans n’importe quelle direction (horizontalement, verticalement, en diagonale). Le premier à y parvenir a gagné.
 
-![](../figures/e6913f0d248e85fc.svg){ .tikz loading=lazy }
+![](../figures/5e8703a2e787b09c.svg){ .tikz loading=lazy }
 
 Figure 1. Une partie gagnée par le joueur blanc (numéros des lignes à gauche, des colonnes en bas).
 
@@ -1135,7 +1221,7 @@ Voici le tableau représentant la grille de jeu à la fin du troisième coup d�
 
 On suppose écrite une fonction `valeur_case(ligne, colonne)` qui renvoie le nombre d’alignements de quatre cases contenant la case `(ligne, colonne)`. Par exemple, `valeur_case(0, 1)` renvoie `4` : les quatre alignements de quatre cases contenant la case `(0, 1)` sont représentés sur la figure 2.
 
-![](../figures/e95a1500fdef2473.svg){ .tikz loading=lazy } ![](../figures/d4b9cad004cbf0e8.svg){ .tikz loading=lazy } ![](../figures/454c65a63d84e17a.svg){ .tikz loading=lazy } ![](../figures/a52dcaf79f23bcc5.svg){ .tikz loading=lazy }
+![](../figures/b915f92e1c24beae.svg){ .tikz loading=lazy } ![](../figures/826f42c5a69a2f5e.svg){ .tikz loading=lazy } ![](../figures/6609b43fd56bf195.svg){ .tikz loading=lazy } ![](../figures/23f441ebc7d695bc.svg){ .tikz loading=lazy }
 
 Figure 2. Les alignements contenant la case `(0, 1)` (marquée d’un point blanc).
 
@@ -1151,6 +1237,8 @@ Le **score** d’une grille s’obtient en **additionnant** les valeurs de toute
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 4) : Q1 : 0,75 ; Q2 : 1 ; Q3 : 0,5 ; Q4 : 0,5 ; Q5 : 1,25
+
     1.
 
         ```python
@@ -1158,7 +1246,7 @@ Le **score** d’une grille s’obtient en **additionnant** les valeurs de toute
             self.grille = [[0 for j in range(7)] for i in range(6)]
         ```
 
-        *Attention : `[[0]*7]*6` créerait six références vers la **même** ligne.*
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `[[0] * 7] * 6` : on crée six références vers la **même** ligne, et un pion posé dans une ligne apparaîtrait dans les six.
 
     2.  Ligne 4 : `ligne = ligne - 1` (on remonte d’une rangée) ; ligne 6 : `self.grille[ligne][colonne] = joueur` ; ligne 7 : `return True` ; ligne 9 : `return False` (colonne pleine).
 
@@ -1173,7 +1261,7 @@ Le **score** d’une grille s’obtient en **additionnant** les valeurs de toute
 
     4.  Case `(5, 3)` (joueur 2) : 7 alignements (4 horizontaux, 1 vertical, 1 dans chaque diagonale). Case `(4, 3)` (joueur 1) : 10 alignements (4 horizontaux, 2 verticaux, 2 dans chaque diagonale). Case `(5, 2)` (joueur 1) : 5 alignements (3 horizontaux, 1 vertical, 1 diagonal). Score : $7 - (10 + 5) = -8$.
 
-    5.
+    5.  **Démarche :** deux boucles imbriquées parcourent les cases ; on ajoute la valeur des cases du joueur 2 et l’on retranche celle des cases du joueur 1.
 
         ```python
         def score(self):
@@ -1206,7 +1294,7 @@ class Panier:
         return len(self.articles)
 ```
 
-*« Le paramètre `articles=[]` donne une liste vide à chaque nouveau panier, sauf si l’on en fournit une ; `ajouter` l’enrichit et `nb_articles` renvoie sa longueur. »*
+« Le paramètre `articles=[]` donne une liste vide à chaque nouveau panier, sauf si l’on en fournit une ; `ajouter` l’enrichit et `nb_articles` renvoie sa longueur. »
 
 1.  La réponse est-elle correcte ? <span class="run" title="À programmer et tester sur machine">▶</span> Prévoir l’affichage du scénario suivant, puis l’exécuter :
 
@@ -1246,7 +1334,7 @@ class Panier:
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-23 }
 
-Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
+Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans lire ses notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 
 1.  Expliquer à un camarade de Première la différence entre une **classe** et une **instance**.
 
@@ -1254,7 +1342,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
 3.  Expliquer le rôle de la méthode `__init__` et du paramètre `self`.
 
-**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus, puis retourner la feuille. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire de notes** : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
+**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus : comme au Grand Oral, ces notes servent d’aide-mémoire. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire ses notes** et sans rien écrire : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
 
 ??? pouce "Coup de pouce"
 

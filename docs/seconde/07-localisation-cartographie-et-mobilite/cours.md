@@ -10,11 +10,21 @@
 | **Idée** | Votre téléphone sait, à quelques mètres près, *où* vous êtes. Derrière cette magie : des **satellites**, un peu de **géométrie** et beaucoup de **calcul**. Comprendre le GPS, c’est aussi reprendre la main sur ses **traces**. |
 | **Objectifs** | Se repérer par **latitude/longitude** ; expliquer le principe du GPS (temps de trajet du signal, **trilatération**) ; **décoder** une trame NMEA ; utiliser une carte numérique (itinéraire, distance) ; mesurer les enjeux de **vie privée**. |
 
-!!! remarque "Remarque"
+!!! situation "Situation de départ"
 
-    **Un peu d’histoire.** Le **GPS** (*Global Positioning System*) est conçu par l’armée américaine dans les années 1970 et devient pleinement opérationnel en **1995**. Jusqu’en **2000**, le signal civil était volontairement **dégradé** (« disponibilité sélective ») : la précision était de l’ordre de 100 m ! Le président Bill Clinton met fin à cette dégradation en mai 2000, et la précision grand public passe d’un coup à quelques mètres (GPS.gov). L’Europe a depuis déployé son propre système **civil**, **Galileo** (premiers services ouverts en décembre 2016 ; Commission européenne, 2016).
+    1.  Votre téléphone affiche votre position à quelques mètres près. D’où tient-il cette information ?
+
+    2.  Parmi des milliers de rues, comment une application de navigation trouve-t-elle le trajet le plus court ?
+
+    3.  Une application de météo demande à vous localiser « toujours », même quand elle est fermée. Qu’est-ce que cela peut révéler de vous ?
+
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
+
+    Le **GPS** (*Global Positioning System*) est conçu par l’armée américaine dans les années 1970 et devient pleinement opérationnel en **1995**. Jusqu’en **2000**, le signal civil était volontairement **dégradé** (« disponibilité sélective ») : la précision était de l’ordre de 100 m ! Le président Bill Clinton met fin à cette dégradation en mai 2000, et la précision grand public passe d’un coup à quelques mètres (GPS.gov). L’Europe a depuis déployé son propre système **civil**, **Galileo** (premiers services ouverts en décembre 2016 ; Commission européenne, 2016).
 
     Sources : GPS.gov (gouvernement des États-Unis), pages « Selective Availability » (fin de la dégradation le 1<sup>er</sup> mai 2000) et présentation du système (pleine capacité opérationnelle en 1995), `gps.gov` ; Commission européenne, communiqué « Galileo goes live! », décembre 2016, `ec.europa.eu`.
+
+    [$\to$ frise chronologique](../methode-debattre.md#frise)
 
 ## Se repérer sur la Terre : latitude et longitude
 
@@ -28,13 +38,13 @@ Pour désigner un point sur le globe sans ambiguïté, on utilise deux nombres, 
 ![](../img/07_hist_greenwich.jpg){ .photo loading=lazy style="width:100%" }  
 La ligne du méridien de Greenwich : longitude 0°
 
-![](../figures/e12760deea5437c2.svg){ .tikz loading=lazy }
+![](../figures/5399565fba452050.svg){ .tikz loading=lazy }
 
 !!! exemple "Exemple"
 
     La Principauté de **Monaco** se situe à la latitude $\mathbf{43{,}7384^\circ}$ **Nord** et à la longitude $\mathbf{7{,}4246^\circ}$ **Est**. On note aussi ce couple $(43{,}7384\,;\ 7{,}4246)$.
 
-!!! remarque "Remarque — Degrés décimaux ou degrés-minutes"
+!!! encadre "À retenir — Degrés décimaux ou degrés-minutes"
 
     Un même point s’écrit de deux façons : en **degrés décimaux** ($43{,}7384^\circ$) ou en **degrés et minutes** ($43^\circ\,44{,}304'$), sachant qu’**un degré vaut 60 minutes**. Pour convertir des minutes en degrés, on **divise par 60** : $43^\circ\,44{,}304' = 43 + \dfrac{44{,}304}{60} \approx 43{,}7384^\circ$. Dans l’autre sens, pour passer des degrés décimaux aux degrés-minutes, on garde la partie entière et on **multiplie la partie décimale par 60** : $7{,}5^\circ = 7^\circ\,(0{,}5 \times 60)' = 7^\circ\,30'$. Le GPS, on le verra, « parle » en degrés-minutes.
 
@@ -73,7 +83,7 @@ Connaître sa distance à *un* satellite ne suffit pas : on peut être n’impor
 
     En pratique, on capte un **4<sup>e</sup> satellite** pour corriger la petite erreur de l’horloge du récepteur.
 
-![](../figures/e977b01e25e8b536.svg){ .tikz loading=lazy }  
+![](../figures/91fa025066194d75.svg){ .tikz loading=lazy }  
 Trois « cercles de distance » se croisent en **un seul** point : votre position.
 
 !!! remarque "Remarque"
@@ -84,7 +94,7 @@ Trois « cercles de distance » se croisent en **un seul** point : votre positio
 
     Sur la carte quadrillée ci-dessous (**1 carreau = 1 km**), un randonneur repère trois lieux : un refuge A, un lac B et un sommet C. Son téléphone lui indique qu’il est à $5$ km du refuge A, à $3$ km du lac B et à $4$ km du sommet C.
 
-    ![](../figures/7121aa4ace7db94f.svg){ .tikz loading=lazy }  
+    ![](../figures/a977fe26f1f75ebf.svg){ .tikz loading=lazy }  
     A$(0\,;0)$, B$(4\,;0)$, C$(0\,;3)$.
 
     Recopier le quadrillage, tracer au compas les trois cercles (centre : le lieu ; rayon : la distance) et marquer sa **position** : le point commun aux trois cercles. Donner ses coordonnées.
@@ -150,7 +160,7 @@ Une position seule ne sert à rien sans une **carte**. Les cartes numériques (G
 
     Pour calculer un trajet, l’application modélise le réseau routier par un **graphe** : chaque **carrefour** est un **sommet**, chaque **route** une **arête** *pondérée* par sa longueur (ou son temps de parcours). Trouver « le plus court chemin » revient à additionner les poids et à retenir le trajet de **somme minimale**.
 
-![](../figures/aa9883e3e9d95c32.svg){ .tikz loading=lazy }  
+![](../figures/384ea57980a4c675.svg){ .tikz loading=lazy }  
 De A à E : le trajet A–C–D–E mesure $2+3+4 = 9$ km, plus court que A–B–D–E ($4+10+4 = 18$).
 
 !!! activite "Activité — Sur une carte en ligne"
@@ -171,7 +181,7 @@ Le mot « GPS » est passé dans le langage courant, mais c’est en réalité *
 
     On regroupe tous les systèmes de positionnement par satellites sous le sigle **GNSS**. Les principaux : **GPS** (États-Unis), **GLONASS** (Russie), **Galileo** (Europe), **BeiDou** (Chine). Un smartphone récent en utilise **plusieurs à la fois** pour se localiser mieux et plus vite.
 
-!!! remarque "Remarque — Comment le téléphone se localise… même sans voir le ciel"
+!!! encadre "À retenir — Localisation « assistée » : même sans voir le ciel"
 
     Le GPS fonctionne mal **en intérieur** ou entre de hauts immeubles (le signal des satellites est bloqué). Le téléphone se repère alors, en complément, grâce aux **antennes-relais** de l’opérateur et aux **réseaux Wi-Fi** environnants, dont les positions sont répertoriées. C’est plus rapide et fonctionne à l’intérieur, mais c’est moins précis.
 
@@ -191,11 +201,11 @@ Savoir où l’on est, c’est pratique. Mais chaque position est une **donnée 
 
     Dans les *réglages* du téléphone, on peut : **couper la localisation** quand elle est inutile, choisir **quelles applications** y ont droit (« toujours » / « seulement pendant l’usage » / « jamais »), et **effacer l’historique** des positions. Avant de publier une photo, on peut aussi **retirer ses métadonnées**.
 
-!!! remarque "Remarque — Ce que dit la loi : le RGPD"
+!!! encadre "À retenir — Ce que dit la loi : le RGPD"
 
     Les données de localisation sont des **données personnelles** : dans l’Union européenne, elles sont protégées par le **RGPD** (règlement européen 2016/679). Une application doit dire quelles données elle collecte et pourquoi, et chacun dispose de **droits** : accès, rectification, effacement, opposition… Si vous résidez en France (ou dans l’UE), vos droits relèvent du RGPD et de la loi Informatique et libertés (autorité : la **CNIL**).
 
-!!! remarque "Remarque — Et à Monaco ?"
+!!! encadre "À retenir — Et à Monaco ?"
 
     La loi n° 1.565 (2024) y protège de la même façon les données de localisation, sous le contrôle de l’**APDP** (voir l’encadré « Et à Monaco ? » du chapitre *Les réseaux sociaux*).
 
@@ -229,13 +239,19 @@ Consulter une carte ou calculer un itinéraire semble « immatériel ». Pourtan
 
 <span id="cours-07-15" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[15](exercices.md#ex-07-15)** (localisation et environnement), exercice **[16](exercices.md#ex-07-16)** (critiquer une réponse d’IA)
+<span class="afaire">▶ Exercices d'application :</span> exercice **[15](exercices.md#ex-07-15)** (localisation et environnement), exercice **[16](exercices.md#ex-07-16)** (critiquer une réponse d’IA), exercice **[17](exercices.md#ex-07-17)** (Python au service du thème)
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    La localisation croise plusieurs thèmes de SNT. Le récepteur GPS est un **capteur** : montres et objets connectés l’utilisent pour suivre vos déplacements (on le verra au chapitre *Informatique embarquée et objets connectés*). La position est une **donnée personnelle**, qui se glisse jusque dans les **métadonnées EXIF** des photos (chapitres *Les données structurées et leur traitement* et *Photographie numérique*) ; quant à la trame NMEA, ses valeurs séparées par des virgules rappellent une ligne de fichier **CSV**. Le calcul d’itinéraire cherche un plus court chemin dans un **graphe**, la structure même d’un **réseau social**, et les fonds de carte arrivent par **Internet**, depuis des serveurs. En spécialité NSI de Terminale, on apprend à parcourir des graphes et à y chercher des chemins.
+    - **Déjà vu :** un itinéraire est un plus court chemin dans un **graphe**, la structure même d’un **réseau social** ; la position se glisse dans les **métadonnées EXIF** des photos, et la trame NMEA ressemble à une ligne de **CSV** (chapitres *Photographie numérique* et *Les données structurées et leur traitement*).
+
+    - **À venir :** le récepteur GPS est un **capteur**, comme ceux des montres et des objets connectés du dernier chapitre.
+
+    - **Plus loin :** en spécialité NSI de Terminale, on apprend à parcourir des graphes et à y chercher des chemins.
 
 ## Bilan — la carte mémoire
+
+Les mots importants du thème sont définis dans le lexique.
 
 | **Notion** | **À retenir** |
 |:---|:---|
@@ -249,6 +265,14 @@ Consulter une carte ou calculer un itinéraire semble « immatériel ». Pourtan
 | GNSS | GPS, GLONASS, Galileo, BeiDou ; Wi-Fi/antennes en complément. |
 | Vie privée | position = **donnée personnelle** ; traces, EXIF ; RGPD (UE), loi n° 1.565 (Monaco). |
 | Environnement | localisation permanente : batterie, traces, réseau ; cartes hors-ligne. |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Des **satellites** : il mesure le **temps de trajet** de leurs signaux, en déduit ses **distances** à chacun (distance $= c \times t$), puis sa position par **trilatération** (§ II), exprimée en **latitude** et **longitude** (§ I).
+
+    2.  Elle modélise les rues par un **graphe** (carrefours $=$ sommets, routes $=$ arêtes pondérées par leur longueur ou leur durée) et y cherche un **plus court chemin** (§ IV).
+
+    3.  Recoupées, vos **traces** de localisation révèlent domicile, lycée, trajets et habitudes : ce sont des **données personnelles** (§ VI). Dans les réglages, on choisit « seulement pendant l’usage » ou « jamais ».
 
 !!! encadre "Débat argumenté"
 

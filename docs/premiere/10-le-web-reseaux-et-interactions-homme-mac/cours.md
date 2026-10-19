@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *Interactions homme-machine sur le Web* : décomposer une **URL** ; distinguer ce qui relève du **client** et du **serveur** ; requêtes **HTTP** `GET`/`POST` ; réaliser et analyser une page **HTML**/**CSS** simple ; rôle de **HTML**, **CSS**, **JavaScript** ; **événements** et modification du document ; **formulaires** ; distinguer ce qui est mémorisé dans le client (**cookies**) et retransmis au serveur. *Réseaux* : notion de **protocole**, **adresse IP**, acheminement par **paquets** (routeurs, commutateurs), modèles **client-serveur** et **pair-à-pair**. |
-| **Prérequis** | le chapitre *Architecture des ordinateurs et systèmes d’exploitation* (client/serveur $=$ deux machines en réseau) ; savoir écrire une fonction. |
+| **Prérequis** | le chapitre *Architecture des ordinateurs et systèmes d’exploitation* (client/serveur $=$ deux machines en réseau) ; savoir écrire une fonction. (→ fiches de révision : ch. 9) |
 | **Objectifs** | comprendre **ce qui se passe** entre un clic et l’affichage d’une page ; **lire une URL** ; savoir ce qu’est un **protocole**, une **adresse IP**, un **paquet** ; distinguer **client** et **serveur** ; écrire une page **HTML**/**CSS** et la rendre **interactive** en JavaScript ; envoyer des données par un **formulaire** (`GET`/`POST`). |
+
+!!! situation "Situation de départ"
+
+    1.  Que se passe-t-il entre le clic sur un lien et l’affichage de la page ?
+
+    2.  Si un morceau d’une vidéo se perd en route, comment l’ordinateur qui l’a envoyé peut-il le savoir ?
+
+    3.  Comment un site marchand se souvient-il de votre panier d’une page à l’autre ?
 
 !!! remarque "Remarque — Le fil conducteur : le voyage d’un clic"
 
@@ -18,7 +26,7 @@
 
 !!! definition "Définition 1 — Internet et le Web"
 
-    **Internet** est le **réseau** mondial : l’*infrastructure* de câbles, fibres, antennes et machines qui relient les ordinateurs entre eux. **Le Web** (*World Wide Web*) est **l’un des services** qui circulent sur Internet : l’ensemble des pages reliées par des **liens hypertextes**, consultées avec un navigateur.
+    **Internet** est le réseau mondial : l’*infrastructure* de câbles, fibres, antennes et machines qui relient les ordinateurs entre eux. **Le Web** (*World Wide Web*) est l’un des services qui circulent sur Internet : l’ensemble des pages reliées par des liens hypertextes, consultées avec un navigateur.
 
 Internet transporte bien d’autres choses que le Web : le courriel, les messageries, les jeux en ligne, le streaming… *Confondre les deux, c’est confondre la route (Internet) et l’un des véhicules qui roulent dessus (le Web).*
 
@@ -28,21 +36,23 @@ Internet transporte bien d’autres choses que le Web : le courriel, les message
 
     Un **protocole** est un **ensemble de règles** précises que deux machines respectent pour communiquer. Comme deux personnes doivent parler la même langue et respecter des tours de parole, deux ordinateurs doivent suivre le même protocole pour se comprendre.
 
+<span class="retouract">↺ Retour sur l'activité.</span> La dernière question de l’activité « Le réseau qui perd des papiers » y répondait : les règles des manches 2 et 3, que l’émetteur et le récepteur devaient respecter tous les deux, formaient un protocole.
+
 !!! definition "Définition 3 — Adresse IP"
 
     Pour être jointe sur le réseau, chaque machine possède une **adresse IP** (*Internet Protocol*), son « numéro » unique. En version IPv4, c’est une suite de quatre nombres de 0 à 255, par exemple `193.51.208.14`. C’est l’équivalent d’une **adresse postale** : sans elle, impossible de livrer un message à la bonne machine.
 
 !!! regle "Règle 1 — On voyage en paquets"
 
-    Un message (une page, un mail, une vidéo) n’est pas envoyé d’un bloc : il est **découpé en petits morceaux**, les **paquets**. Chaque paquet porte l’**adresse IP** de départ et d’arrivée, voyage **indépendamment** à travers le réseau, et les paquets sont **réassemblés** à l’arrivée. Si un paquet se perd, il est **renvoyé**.
+    Un message (une page, un mail, une vidéo) n’est pas envoyé d’un bloc : il est découpé en petits morceaux, les **paquets**. Chaque paquet porte l’adresse IP de départ et d’arrivée, voyage indépendamment à travers le réseau, et les paquets sont réassemblés à l’arrivée. Si un paquet se perd, il est renvoyé.
 
-![](../figures/ee1eab51157abdf3.svg){ .tikz loading=lazy }
+![](../figures/661773685443ed6e.svg){ .tikz loading=lazy }
 
 !!! definition "Définition 4 — Routeur et commutateur"
 
-    Un **routeur** est une machine qui **aiguille** les paquets : il lit l’adresse IP de destination et choisit vers quel voisin renvoyer le paquet pour le rapprocher du but (comme un centre de tri postal). Un **commutateur** (*switch*) relie les machines d’un **même** réseau local (une salle, une maison). L’ensemble des routeurs interconnectés forme Internet.
+    Un **routeur** est une machine qui aiguille les paquets : il lit l’adresse IP de destination et choisit vers quel voisin renvoyer le paquet pour le rapprocher du but (comme un centre de tri postal). Un **commutateur** (*switch*) relie les machines d’un *même* réseau local (une salle, une maison). L’ensemble des routeurs interconnectés forme Internet.
 
-!!! remarque "Remarque — Trouver l’adresse : le DNS"
+!!! encadre "À retenir — Trouver l’adresse : le DNS"
 
     On ne retient pas des suites de chiffres : on tape `www.lycee.mc`, pas `193.51.208.14`. Le **DNS** (*Domain Name System*) est l’**annuaire** du réseau : il **traduit un nom** de domaine en **adresse IP**. Première étape du voyage : le navigateur demande au DNS « quelle est l’IP de `www.lycee.mc` ? ».
 
@@ -50,9 +60,9 @@ Internet transporte bien d’autres choses que le Web : le courriel, les message
 
     Deux façons d’organiser les échanges :
 
-    - **client-serveur** : des machines **clientes** *demandent* des ressources à une machine **serveur** qui les *fournit* (le modèle du Web) ;
+    - **client-serveur** : des machines clientes *demandent* des ressources à une machine serveur qui les *fournit* (le modèle du Web) ;
 
-    - **pair-à-pair** (*peer-to-peer*, P2P) : chaque machine est à la fois cliente **et** serveur, et échange directement avec les autres, sans passer par un serveur central (partage de fichiers, certaines messageries).
+    - **pair-à-pair** (*peer-to-peer*, P2P) : chaque machine est à la fois cliente *et* serveur, et échange directement avec les autres, sans passer par un serveur central (partage de fichiers, certaines messageries).
 
 ### Ne perdre aucun paquet : l’accusé de réception et le bit alterné
 
@@ -62,31 +72,31 @@ Un paquet perdu est *renvoyé* : encore faut-il que l’émetteur **sache** qu�
 
     Après avoir reçu un paquet, le récepteur renvoie un petit message de confirmation, l’**accusé de réception** (*ACK*, de *acknowledgement*). Tant que l’émetteur n’a pas reçu l’accusé au bout d’un certain délai, il considère le paquet perdu et le **renvoie**.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Le papier « reçu » de la manche 2 était un accusé de réception, et les 10 secondes comptées par l’émetteur le délai au-delà duquel il renvoyait sa lettre.
+
 Si c’est l’**accusé** qui se perd, l’émetteur renvoie un paquet déjà reçu : le récepteur doit pouvoir **reconnaître ce doublon**.
 
 !!! regle "Règle 2 — Le protocole du bit alterné"
 
     On étiquette chaque paquet avec un **seul bit**, qui vaut alternativement `0`, `1`, `0`, `1`… L’accusé renvoie le numéro du paquet attendu ensuite. Les règles :
 
-    - l’émetteur **n’envoie le paquet suivant** (avec le bit changé) que lorsqu’il a reçu l’accusé du paquet courant ;
+    - l’émetteur n’envoie le paquet suivant (avec le bit changé) que lorsqu’il a reçu l’accusé du paquet courant ;
 
-    - sans accusé au bout du délai, il **renvoie le même paquet**, avec le **même** bit ;
+    - sans accusé au bout du délai, il renvoie le même paquet, avec le *même* bit ;
 
-    - si le récepteur reçoit un paquet portant le bit qu’il a **déjà** traité, c’est un **doublon** : il le **jette** mais renvoie quand même l’accusé.
+    - si le récepteur reçoit un paquet portant le bit qu’il a *déjà* traité, c’est un **doublon** : il le jette mais renvoie quand même l’accusé.
 
     Un seul bit suffit à distinguer « le nouveau paquet » de « le même, renvoyé ».
 
-![](../figures/82620f353c4fd492.svg){ .tikz loading=lazy }
+<span class="retouract">↺ Retour sur l'activité.</span> Dans la manche 2, un papier « reçu » perdu faisait écrire `BALLLON` au récepteur, incapable de reconnaître le `L` renvoyé. Dans la manche 3, le chiffre `0` ou `1` de chaque papier lui permettait de jeter ce doublon : c’était le protocole du bit alterné.
+
+![](../figures/b4eebebf788c6d02.svg){ .tikz loading=lazy }
 
 Le paquet `1` est perdu ; faute d’accusé, l’émetteur le renvoie à l’identique. Le bit permet au récepteur de ne pas confondre un renvoi avec un nouveau paquet.
 
 !!! remarque "Remarque"
 
     Ce mécanisme d’accusés et de renvois est au cœur du protocole **TCP**, qui garantit sur Internet qu’aucune donnée n’est perdue ni dupliquée ; le bit alterné en est la version la plus simple.
-
-!!! remarque "Remarque — En Terminale"
-
-    Le chapitre *Réseaux* détaille comment les routeurs choisissent le chemin des paquets (protocoles RIP et OSPF) et comment on découpe les adresses IP en sous-réseaux.
 
 <span id="cours-10-1" class="ancre"></span>
 
@@ -100,7 +110,7 @@ Sur le Web, votre navigateur est un **client** : il demande des pages à des **s
 
     Une URL est l’**adresse d’une ressource** sur le Web. On la décompose :
 
-    ![](../figures/e51e97677715ffc0.svg){ .tikz loading=lazy }
+    ![](../figures/d871083f5ca59324.svg){ .tikz loading=lazy }
 
     - `https` : le **protocole** utilisé (ici la version *sécurisée* de HTTP) ;
 
@@ -108,11 +118,11 @@ Sur le Web, votre navigateur est un **client** : il demande des pages à des **s
 
     - `/nsi/cours.html` : le **chemin** de la ressource sur le serveur.
 
-!!! remarque "Remarque — Reconnaître une page sécurisée (capacité attendue)"
+!!! encadre "À retenir — Reconnaître une page sécurisée"
 
     Quand l’URL commence par `https` (et non `http`), la communication est **chiffrée** : personne ne peut lire au passage ce qui circule. **Réflexe** : avant de saisir un mot de passe ou des coordonnées bancaires, **vérifier le `https`**. Le « s » veut dire *secure*. Attention : le `https` (le cadenas) prouve que la liaison est chiffrée, **pas** que le site est honnête ; un site d’hameçonnage peut lui aussi être en `https`, il faut donc aussi vérifier le nom de domaine. On étudiera le chiffrement en Terminale.
 
-!!! remarque "Remarque — Le port au-delà du programme"
+!!! curieux "Pour les curieux (facultatif) — Le port"
 
     L’adresse IP désigne la **machine** ; le **port** (un numéro) désigne le **service** visé sur cette machine. Le Web utilise par convention le port **80** en `http` et le port **443** en `https`. C’est pourquoi on ne les écrit presque jamais dans l’URL : ils sont **sous-entendus**.
 
@@ -122,13 +132,13 @@ Une fois le serveur trouvé, client et serveur dialoguent selon le protocole **H
 
 !!! regle "Règle 3 — Requête et réponse HTTP"
 
-    Une **requête** contient notamment une **méthode** et le chemin de la ressource :
+    Une requête contient notamment une méthode et le chemin de la ressource :
 
     ```http
     GET /nsi/cours.html HTTP/1.1
     ```
 
-    La **réponse** commence par un **code de statut**, suivi d’**en-têtes** (des métadonnées : type et taille du contenu, date…), puis d’une ligne vide et enfin du **corps** (la ressource elle-même) :
+    La réponse commence par un **code de statut**, suivi d’**en-têtes** (des métadonnées : type et taille du contenu, date…), puis d’une ligne vide et enfin du **corps** (la ressource elle-même) :
 
     ```http
     HTTP/1.1 200 OK
@@ -140,25 +150,25 @@ Une fois le serveur trouvé, client et serveur dialoguent selon le protocole **H
 
 !!! definition "Définition 8 — Les deux méthodes à connaître : GET et POST"
 
-    - `GET` : **demander** une ressource (le cas le plus courant : afficher une page). Les éventuels paramètres sont **visibles dans l’URL**.
+    - `GET` : **demander** une ressource (le cas le plus courant : afficher une page). Les éventuels paramètres sont visibles dans l’URL.
 
-    - `POST` : **envoyer** des données au serveur pour qu’il les traite (typiquement, les données d’un **formulaire**). Les données ne sont **pas** dans l’URL.
+    - `POST` : **envoyer** des données au serveur pour qu’il les traite (typiquement, les données d’un formulaire). Les données ne sont *pas* dans l’URL.
 
-!!! remarque "Remarque — Quelques codes de statut"
+!!! encadre "À retenir — Quelques codes de statut"
 
     Le code résume ce qui s’est passé : **200** « OK, voici la ressource » ; **304** « pas modifiée, garde ta version en *cache* » (évite de re-télécharger un fichier inchangé) ; **404** « ressource introuvable » (la fameuse page d’erreur) ; **403** « accès interdit » ; **500** « erreur du serveur ». Les codes qui commencent par **2** sont des succès, par **3** des redirections ou du cache, par **4** des erreurs du client, par **5** des erreurs du serveur.
 
 !!! regle "Règle 4 — Une page $=$ souvent des dizaines de requêtes"
 
-    Afficher une page « simple » ne demande presque jamais **une seule** ressource. Le navigateur reçoit d’abord le **HTML**, le **lit**, et y découvre des références vers d’autres fichiers (feuilles `.css`, scripts `.js`, images, polices…) : pour **chacun** il envoie **une nouvelle requête HTTP**. Une page riche déclenche ainsi facilement **plusieurs dizaines** d’échanges requête/réponse avant d’être complète.
+    Afficher une page « simple » ne demande presque jamais une seule ressource. Le navigateur reçoit d’abord le HTML, le lit, et y découvre des références vers d’autres fichiers (feuilles `.css`, scripts `.js`, images, polices…) : pour chacun il envoie **une nouvelle requête HTTP**. Une page riche déclenche ainsi facilement plusieurs dizaines d’échanges requête/réponse avant d’être complète.
 
-!!! remarque "Remarque — Observer les échanges : les outils de développement (capacité attendue)"
+!!! encadre "Méthode — Observer les échanges : les outils de développement"
 
     Tous les navigateurs offrent des **outils de développement** (touche `F12`, onglet **Réseau**). On y voit **en direct**, pour chaque page, la **liste des requêtes**, leur **méthode** (`GET`…), leur **code de statut** (`200`, `304`, `404`…), leur **taille** et leur **temps** de chargement. C’est le meilleur moyen de *voir* concrètement le protocole HTTP à l’œuvre.
 
 <span id="cours-10-6" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-10-6) à [9](exercices.md#ex-10-9)** (URL et HTTP)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-10-6) à [9](exercices.md#ex-10-9)** et **[27](exercices.md#ex-10-27)** (URL et HTTP)
 
 ## HTML : structurer la page
 
@@ -166,7 +176,7 @@ La ressource renvoyée est le plus souvent un fichier **HTML** (*HyperText Marku
 
 !!! definition "Définition 9 — Balises"
 
-    Le contenu est encadré par des **balises** : une balise **ouvrante** `<p>` et une balise **fermante** `</p>`. Certaines portent des **attributs**.
+    Le contenu est encadré par des **balises** : une balise ouvrante `<p>` et une balise fermante `</p>`. Certaines portent des **attributs**.
 
 ```html
 <!doctype html>
@@ -207,11 +217,11 @@ La ressource renvoyée est le plus souvent un fichier **HTML** (*HyperText Marku
 
     - `class="bouton"` : une étiquette **partagée**, que plusieurs balises peuvent avoir en commun (pour les traiter ensemble).
 
-!!! remarque "Remarque — Une page est un arbre : le DOM"
+!!! encadre "À retenir — Une page est un arbre : le DOM"
 
     Les balises s’**emboîtent** sans se croiser : le document forme un **arbre**, appelé **DOM** (*Document Object Model*). C’est cet arbre que le navigateur construit en mémoire, et que le JavaScript pourra modifier.
 
-    ![](../figures/7a8c540d0e6a7bc4.svg){ .tikz loading=lazy }
+    ![](../figures/7c2c92b1d150107b.svg){ .tikz loading=lazy }
 
 <span id="cours-10-10" class="ancre"></span>
 
@@ -248,7 +258,7 @@ Le **CSS** (*Cascading Style Sheets*) décrit la **présentation** : couleurs, t
 
     `color` (couleur du texte), `background-color` (fond), `font-size`, `font-family`, `text-align` ; et pour l’espacement : `margin` (marge *extérieure*), `padding` (marge *intérieure*), `border` (bordure), `width`/`height` (dimensions). Les tailles s’expriment en `px` (pixels), `%` ou `em`.
 
-!!! remarque "Remarque — Pourquoi « cascade » ? au-delà du programme"
+!!! curieux "Pour les curieux (facultatif) — Pourquoi « cascade » ?"
 
     Plusieurs règles peuvent viser la même balise. En cas de **conflit**, la plus **spécifique** l’emporte (un `#id` bat une `.classe`, qui bat un nom de balise) ; à spécificité égale, la **dernière** écrite gagne. Les styles « ruissellent » ainsi du général vers le particulier — d’où le nom *Cascading Style Sheets*.
 
@@ -267,7 +277,7 @@ Par défaut, les blocs (`<div>`, `<p>`, `<li>`…) s’empilent **verticalement*
 
 Appliquée à un bloc `<div class="barre">``…</div>`, cette règle aligne **tous ses enfants directs** sur une même ligne. `justify-content` règle la **répartition horizontale** (`center`, `space-between`, `flex-start`…), `align-items` l’**alignement vertical**, et `gap` l’espace entre les éléments. C’est l’outil standard pour construire une **barre de navigation** ou disposer des cartes côte à côte.
 
-![](../figures/168341d2a2662e3c.svg){ .tikz loading=lazy }
+![](../figures/6a079a35258a10e9.svg){ .tikz loading=lazy }
 
 <span id="cours-10-14" class="ancre"></span>
 
@@ -335,13 +345,13 @@ function changer() {
 
     Puis le **modifier** :
 
-    - `.textContent` ou `.innerHTML` : changer le **contenu** ;
+    - `.textContent` ou `.innerHTML` : changer le contenu ;
 
-    - `.style.color`, `.style.background`… : changer la **forme** ;
+    - `.style.color`, `.style.background`… : changer la forme ;
 
-    - `.classList.add("actif")` / `.classList.remove("actif")` : ajouter/retirer une **classe** CSS ;
+    - `.classList.add("actif")` / `.classList.remove("actif")` : ajouter/retirer une classe CSS ;
 
-    - `.value` : lire (ou écrire) le **contenu d’un champ** de formulaire.
+    - `.value` : lire (ou écrire) le contenu d’un champ de formulaire.
 
 !!! exemple "Exemple — Réagir à une saisie"
 
@@ -362,7 +372,7 @@ function changer() {
 
     Rien n’est envoyé au serveur : tout se passe **dans le navigateur**, instantanément.
 
-!!! remarque "Remarque — Côté client, côté serveur (capacité attendue)"
+!!! encadre "À retenir — Côté client, côté serveur"
 
     Le **JavaScript** est le langage de l’interaction **côté client** : il s’exécute **sur votre machine**, **après** réception de la page, pour les réactions immédiates (afficher/masquer, vérifier qu’un champ n’est pas vide…). D’autres traitements se font **côté serveur**, sur la machine distante, dans un **autre langage** — par exemple **PHP**, ou Python : consulter une base de données, vérifier un mot de passe, générer une page personnalisée. *Savoir qui fait quoi* est essentiel : ce qui se passe côté client est visible et modifiable par l’utilisateur, donc jamais sûr pour des vérifications sensibles.
 
@@ -444,17 +454,17 @@ Jusqu’ici le client *recevait*. Un **formulaire** lui permet d’**envoyer** d
 
 !!! regle "Règle 7 — GET ou POST pour un formulaire ?"
 
-    - `GET` : les données apparaissent dans l’URL après un `?`, sous la forme `clef=valeur` séparées par `&` (`.../recherche?q=chat&tri=date`). Pratique pour une **recherche** qu’on peut partager ou mettre en favori ; à **éviter** pour un mot de passe (visible et enregistré dans l’historique).
+    - `GET` : les données apparaissent dans l’URL après un `?`, sous la forme `clef=valeur` séparées par `&` (`.../recherche?q=chat&tri=date`). Pratique pour une **recherche** qu’on peut partager ou mettre en favori ; à éviter pour un mot de passe (visible et enregistré dans l’historique).
 
-    - `POST` : les données ne sont pas dans l’URL. À utiliser dès qu’on **envoie** quelque chose de sensible ou qui **modifie** l’état du serveur (connexion, publication…).
+    - `POST` : les données ne sont pas dans l’URL. À utiliser dès qu’on envoie quelque chose de sensible ou qui **modifie** l’état du serveur (connexion, publication…).
 
-!!! remarque "Remarque — Le web dynamique au-delà du programme"
+!!! curieux "Pour les curieux (facultatif) — Le web dynamique"
 
     Quand le serveur **fabrique** la page en fonction de la requête (heure, utilisateur connecté, résultats d’une recherche), on parle de **web dynamique**. Un programme s’exécute alors **côté serveur**, dans un langage comme PHP, Python (*Flask*), etc., pour **générer** le HTML renvoyé. C’est ce qui distingue un site vivant d’un simple fichier figé.
 
 <span id="cours-10-22" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[22](exercices.md#ex-10-22) et [23](exercices.md#ex-10-23)** (lire et écrire un formulaire)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[22](exercices.md#ex-10-22), [23](exercices.md#ex-10-23)** et **[28](exercices.md#ex-10-28)** (lire et écrire un formulaire)
 
 ### Les cookies : ce que le navigateur retient
 
@@ -462,11 +472,11 @@ Le protocole HTTP est **sans mémoire** : chaque requête est traitée seule, et
 
 !!! regle "Règle 8 — Le cookie : mémorisé dans le client, retransmis au serveur"
 
-    - Le **serveur** envoie le cookie dans un en-tête de sa réponse, `Set-Cookie`, sous la forme `nom=valeur`.
+    - Le serveur envoie le cookie dans un en-tête de sa réponse, `Set-Cookie`, sous la forme `nom=valeur`.
 
-    - Le **navigateur** (le client) le **mémorise**, rangé avec le nom du site qui l’a déposé.
+    - Le navigateur (le client) le **mémorise**, rangé avec le nom du site qui l’a déposé.
 
-    - À **chaque** nouvelle requête vers **ce même site**, le navigateur le **retransmet automatiquement** dans l’en-tête `Cookie`. Il ne l’envoie jamais à un autre site.
+    - À chaque nouvelle requête vers ce même site, le navigateur le **retransmet automatiquement** dans l’en-tête `Cookie`. Il ne l’envoie jamais à un autre site.
 
     ```http
     HTTP/1.1 200 OK                          <- reponse du serveur
@@ -476,7 +486,7 @@ Le protocole HTTP est **sans mémoire** : chaque requête est traitée seule, et
     Cookie: langue=fr
     ```
 
-    La **durée** est fixée par le serveur : `Max-Age=2592000` (en secondes) garde le cookie 30 jours ; sans durée, il est effacé à la fermeture du navigateur.
+    La durée est fixée par le serveur : `Max-Age=2592000` (en secondes) garde le cookie 30 jours ; sans durée, il est effacé à la fermeture du navigateur.
 
 !!! remarque "Remarque — Usages et vie privée"
 
@@ -488,14 +498,16 @@ Le protocole HTTP est **sans mémoire** : chaque requête est traitée seule, et
 
 ## Un peu d’histoire
 
-!!! remarque "Remarque — D’ARPANET au CERN"
+!!! curieux "Pour les curieux (facultatif) — D’ARPANET au CERN"
 
     **Fin des années 1960**, la recherche militaire américaine crée **ARPANET**, l’ancêtre d’Internet. Dans les années 1970, **Vinton Cerf** et **Robert Kahn** conçoivent **TCP/IP**, la famille de protocoles qui permet à des réseaux différents de communiquer : Internet devient possible. En **1983** apparaît le **DNS**, l’annuaire des noms.  
     **1989–1991**, au **CERN** (le laboratoire européen de physique, près de Genève), **Tim Berners-Lee** invente le **World Wide Web** pour que les chercheurs partagent leurs documents : il crée d’un coup le **HTML**, les **URL** et le protocole **HTTP**. Le premier site est en ligne en 1991. En **1993**, le navigateur *Mosaic* popularise le Web auprès du grand public, et en 1995 **Brendan Eich** écrit **JavaScript** en dix jours. *Trente ans plus tard, ce système imaginé pour quelques physiciens relie la planète entière.*
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    Les adresses IP (quatre **octets**) et `utf-8` viennent du chapitre **Le binaire et l’écriture des nombres**, et le DNS agit comme un **dictionnaire** (chapitre **Les types construits**) ; en Terminale, le DOM devient un **arbre** et le `https` s’explique en **Cryptographie**.
+    - **Ce qu’il réutilise.** Les adresses IP (quatre **octets**) et `utf-8` viennent du chapitre *Le binaire et l’écriture des nombres* ; le DNS agit comme un **dictionnaire** (*Les types construits*) ; les serveurs sont des machines comme celles d’*Architecture des ordinateurs et systèmes d’exploitation*.
+
+    - **En Terminale.** *Réseaux* détaillera comment les routeurs choisissent le chemin des paquets ; le DOM deviendra un **arbre** (*Les arbres*) et le `https` s’expliquera en *Cryptographie*.
 
 ## Bilan — la carte mémoire
 
@@ -518,6 +530,14 @@ Le protocole HTTP est **sans mémoire** : chaque requête est traitée seule, et
 | JavaScript | *comportement* : événement (`click`…) $\to$ `querySelector` $+$ `.value`/DOM, côté client |
 | Formulaire | `<form action method>` ; `POST` pour envoyer/du sensible |
 | Cookie | `Set-Cookie` : *mémorisé* par le client, *renvoyé* au serveur à chaque requête vers ce site |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Le navigateur (le **client**) obtient du **DNS** l’adresse IP du serveur, puis lui envoie une **requête HTTP** `GET`, découpée en **paquets** aiguillés par des routeurs (§ II à IV). Le serveur répond (code `200`) avec le HTML, et le navigateur demande ensuite les feuilles CSS, les scripts et les images avant d’afficher la page (§ IV).
+
+    2.  Le récepteur renvoie un **accusé de réception** ; sans accusé au bout d’un délai, l’émetteur renvoie le paquet, et un **bit alterné** `0`/`1` permet au récepteur de reconnaître un doublon (§ II).
+
+    3.  Par un **cookie** : le serveur demande au navigateur de mémoriser une petite information (`Set-Cookie`), que le navigateur lui renvoie à chaque requête vers ce site (§ VIII).
 
 ## Erreurs fréquentes
 

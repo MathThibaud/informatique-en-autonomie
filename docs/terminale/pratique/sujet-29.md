@@ -1,10 +1,14 @@
 # Sujet 29 — Recherche dichotomique
 
+<span id="sujet-29" class="ancre"></span>[$\blacktriangleright$ corrigé](#csujet-29)
+
 !!! fichiers "Fichiers à télécharger"
 
     [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-29-dichotomie){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-29-dichotomie.zip){ .md-button }
 
 ??? corrige "Corrigé"
+
+    <span id="csujet-29" class="ancre"></span>[$\uparrow$ énoncé](#sujet-29)
 
     !!! remarque "Remarque"
 
@@ -215,6 +219,8 @@ Le dossier fourni au candidat comporte les éléments suivants :
 - un code source de départ `dichotomie.py`.
 
 ??? corrige "Corrigé"
+
+    <span id="csujet-29" class="ancre"></span>[$\uparrow$ énoncé](#sujet-29)
 
     !!! remarque "Remarque"
 

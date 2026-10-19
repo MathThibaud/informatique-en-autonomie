@@ -6,7 +6,7 @@
 
     - Niveau : ★ échauffement, ★★ classique (niveau bac), ★★★ défi ; les *coups de pouce* et les *corrigés* se déplient sous chaque exercice.
 
-    - <span class="tag">sur papier</span> *à faire sur papier*. Les fonctions des capteurs et actionneurs (`lire_humidite()`, `detecte()`, `attendre()`…) n’existent que sur une vraie carte : les programmes de cette feuille s’écrivent donc sur papier.
+    - <span class="tag">sur papier</span> *à faire sur papier* ; <span class="tag">sur machine</span> *à faire sur machine*. Les fonctions des capteurs et actionneurs (`lire_humidite()`, `detecte()`, `attendre()`…) n’existent que sur une vraie carte : les programmes de cette feuille s’écrivent donc sur papier, sauf au dernier exercice, qui simule l’objet sur ordinateur.
 
     - Réflexe « objet embarqué » : **capteur** (mesure) $\to$ **programme** (décision) $\to$ **actionneur** (action) $\to$ on recommence.
 
@@ -16,9 +16,49 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Embarqué ou pas ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-1 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  Pour chaque objet, dire s’il contient un **système embarqué**, et si oui, la tâche qu’il accomplit : un lave-linge ; un marteau ; un régulateur de vitesse de voiture ; une chaise ; une montre connectée ; un feu tricolore.
 
+??? pouce "Coup de pouce"
+
+    Relisez la définition d’un système embarqué : y a-t-il, à l’intérieur de l’objet, un petit ordinateur qui exécute un programme pour une tâche précise ?
+
 ??? corrige "Corrigé"
+
+    *Réponses aux questions fermées ; pour les questions ouvertes, des pistes attendues (d’autres réponses sont possibles).*
+
+    Activité 1 — Capteurs ou actionneurs ?
+
+    **Capteurs** : l’appareil photo, le micro, le capteur de luminosité, et la surface tactile de l’écran (elle détecte le doigt). **Actionneurs** : le haut-parleur, le vibreur, la lampe torche, et l’affichage de l’écran. L’écran tactile est donc **les deux à la fois**.
+
+    Activité 2 — Compléter une boucle de commande
+
+    \(a\) La condition est `lum < 30` (la luminosité devient faible). (b) La ligne `allumer_led()` commande l’**actionneur** : la LED s’allume. Programme complété :
+
+    ```python
+    while True:
+        lum = lire_luminosite()
+        if lum < 30:                  # (a) il fait sombre
+            allumer_led()             # (b)
+        else:
+            eteindre_led()
+        attendre(1)
+    ```
+
+    Activité 3 — Enquête sur un objet connecté
+
+    Réponse personnelle. Exemple attendu pour une **montre connectée** : capteurs (cardiofréquencemètre, GPS, accéléromètre, écran tactile) et actionneurs (écran, vibreur) ; elle envoie le rythme cardiaque, les pas et les positions au téléphone, puis aux serveurs du fabricant. Risque de **sécurité** : un compte ou un objet piraté (mot de passe par défaut, mises à jour non faites) ; risque de **vie privée** : des données de santé et de déplacement collectées et parfois partagées. Geste : changer le mot de passe par défaut, faire les mises à jour, limiter les partages dans les réglages.
+
+    Activité 4 — Un objet connecté, pour quoi faire ?
+
+    1.  D’après le document, $99\,\%$ des $80$ kg CO<sub>2</sub>e d’un smartphone sont émis à la **fabrication** : l’éteindre n’agit que sur le $1\,\%$ restant. Le garder longtemps **répartit** l’empreinte de fabrication : environ $32$ kg par an sur $2{,}5$ ans, mais $80 \div 5 = 16$ kg par an sur $5$ ans, et cela évite d’en fabriquer un nouveau.
+
+    2.  Réponse personnelle (par exemple : une ampoule connectée rend le même service qu’un interrupteur ou une minuterie).
+
+    3.  Par exemple : les **mises à jour** qui s’arrêtent (l’objet n’est plus sûr, des applications ne fonctionnent plus) ; une **réparation** impossible ou trop chère (pièces collées, pièces introuvables) ; une **batterie** usée qu’on ne peut pas remplacer ; un service en ligne que le fabricant arrête.
+
+    4.  Par exemple : éteindre vraiment les objets la nuit (multiprise à interrupteur) ; garder son téléphone plus longtemps ; réduire la qualité vidéo et couper la lecture automatique.
 
     - **Oui** : lave-linge (piloter le cycle de lavage) ; régulateur de vitesse (maintenir la vitesse) ; montre connectée (afficher l’heure, mesurer l’activité) ; feu tricolore (gérer l’alternance des feux).
 
@@ -28,6 +68,10 @@
 
 <span class="tag">sur papier</span>  Citer **deux** différences entre un système embarqué (dans un objet) et un ordinateur de bureau.
 
+??? pouce "Coup de pouce"
+
+    Relisez l’encadré « Différence avec un ordinateur ordinaire » : combien de tâches, quels moyens de dialoguer avec l’utilisateur, en combien de temps doit-il réagir ?
+
 ??? corrige "Corrigé"
 
     Un système embarqué ne réalise **qu’une tâche** (au lieu d’être polyvalent), n’a en général **ni écran ni clavier** classiques, est **minuscule et sobre**, et doit souvent réagir **en temps réel**.
@@ -36,13 +80,21 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Qui mesure, qui agit ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-3 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  Classer en deux colonnes (**capteur** / **actionneur**) : thermomètre, radiateur, détecteur de mouvement, haut-parleur, microphone, moteur de volet, capteur de luminosité, LED.
+
+??? pouce "Coup de pouce"
+
+    Pour chaque élément, demandez-vous s’il *mesure* quelque chose (entrée) ou s’il *agit* sur le monde (sortie).
 
 ??? corrige "Corrigé"
 
     - **Capteurs** : thermomètre, détecteur de mouvement, microphone, capteur de luminosité.
 
     - **Actionneurs** : radiateur, haut-parleur, moteur de volet, LED.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Ranger le capteur de luminosité avec la LED parce que les deux « parlent de lumière » : le capteur *mesure* la lumière (entrée), la LED en *produit* (sortie). On classe un élément selon ce qu’il fait, pas selon le sujet.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Dans un objet du quotidien <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-4 }
 
@@ -67,6 +119,8 @@
 ### La boucle de commande
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Que fait ce programme ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-5 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="tag">sur papier</span>  On lit le programme d’un objet embarqué :
 
@@ -99,6 +153,8 @@ while True:
     3.  À $22\,^\circ$C : $22>25$ est faux $\to$ ventilateur **éteint**. À $28\,^\circ$C : $28>25$ est vrai $\to$ ventilateur **allumé**.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Dérouler une boucle <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-6 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="tag">sur papier</span>  Une veilleuse exécute le programme suivant :
 
@@ -138,7 +194,11 @@ Combien de temps s’est-il écoulé entre la première et la dernière mesure ?
 
     Entre la première et la dernière mesure, il y a trois attentes de $60$ s : **3 minutes**.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Répondre $4$ minutes parce qu’il y a $4$ mesures : entre $4$ mesures, il n’y a que $3$ attentes (comme il n’y a que $3$ intervalles entre $4$ poteaux).
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Compléter un arrosage automatique <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-7 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="tag">sur papier</span>  Un système arrose une plante dès que la terre est trop sèche : l’humidité `h` passe sous `40`. Recopier et compléter :
 
@@ -168,7 +228,11 @@ while True:
         attendre(3600)
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `if h > 40:` : la pompe s’ouvrirait quand la terre est déjà humide et se fermerait quand elle est sèche. Pour vérifier une condition, il suffit de la tester sur deux valeurs, par exemple $h = 20$ (terre sèche) et $h = 70$.
+
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 8</span> — Défi — une alarme <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-8 }
+
+<span class="duree">≈ 10 min</span>
 
 <span class="tag">sur papier</span>  Écrire une boucle de commande pour une **alarme** : tant qu’elle fonctionne, si le détecteur de mouvement renvoie `True` (`detecte()`), elle déclenche la sirène (`sonner()`) et allume une LED (`allumer_led()`) ; sinon elle éteint tout. On testera dix fois par seconde.
 
@@ -198,6 +262,8 @@ while True:
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 9</span> — Le thermostat à deux seuils <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-9 }
+
+<span class="duree">≈ 15 min</span>
 
 <span class="tag">sur papier</span>  Le thermostat du cours allume le chauffage sous $19\,^\circ$C et l’éteint sinon : autour de $19\,^\circ$C, le radiateur s’allume et s’éteint sans arrêt, ce qui l’use. On veut un thermostat plus malin : il **allume** le chauffage si la température passe sous $19\,^\circ$C, l’**éteint** si elle dépasse $21\,^\circ$C, et **ne change rien** entre les deux.
 
@@ -234,6 +300,8 @@ while True:
     2.  À $20\,^\circ$C, aucune des deux conditions n’est vraie : le programme **ne change rien**. Le chauffage éteint **reste éteint** ; s’il était allumé, il **reste allumé** (jusqu’à dépasser $21\,^\circ$C). Le radiateur ne bascule donc plus sans arrêt autour d’un seul seuil.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Le compteur de passages <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-10 }
+
+<span class="duree">≈ 20 min</span>
 
 <span class="tag">sur papier</span>  À l’entrée d’une petite salle, un détecteur `detecte()` renvoie `True` quand quelqu’un passe. On veut **compter** les entrées, afficher le total sur un écran (`afficher(n)`) et déclencher un signal sonore (`sonner()`) dès que plus de $20$ personnes sont entrées.
 
@@ -292,6 +360,10 @@ while True:
 
 <span class="tag">sur papier</span>  Pour un **four à micro-ondes**, citer deux éléments d’**entrée** (l’humain vers la machine) et deux éléments de **sortie** (la machine vers l’humain).
 
+??? pouce "Coup de pouce"
+
+    Imaginez-vous devant le four : sur quoi appuyez-vous pour le régler ? Comment vous montre-t-il le temps restant, et comment vous prévient-il que c’est prêt ?
+
 ??? corrige "Corrigé"
 
     *(Four à micro-ondes.)* **Entrées** : les boutons / la molette (durée, puissance), le bouton « départ ». **Sorties** : l’écran (temps restant), le **bip** de fin, la lumière intérieure.
@@ -330,11 +402,17 @@ while True:
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 14</span> — Objet connecté <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-14 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span> 
 
 1.  Qu’est-ce qui distingue un **objet connecté** d’un simple objet embarqué ?
 
 2.  Citer deux objets connectés et, pour chacun, une donnée qu’il transmet.
+
+??? pouce "Coup de pouce"
+
+    Relisez la définition d’un objet connecté : qu’a-t-il de plus qu’un simple système embarqué ?
 
 ??? corrige "Corrigé"
 
@@ -369,6 +447,10 @@ while True:
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 16</span> — Vie privée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-16 }
 
 <span class="tag">sur papier</span>  Une enceinte connectée « écoute » pour réagir à la voix de ses utilisateurs. Expliquer, en deux phrases, en quoi cela pose une question de **vie privée**, et quel texte protège les données personnelles en France (et dans l’UE) ; et à Monaco ?
+
+??? pouce "Coup de pouce"
+
+    Relisez la règle « Deux enjeux à retenir » et l’encadré « Et à Monaco ? » du cours.
 
 ??? corrige "Corrigé"
 
@@ -435,3 +517,75 @@ while True:
     2.  L’erreur : les deux **actions** sont inversées dans le `if` / `else` (le commentaire « il fait nuit » est juste, l’action qui le suit ne l’est pas). Correction : `fermer_volet()` sous `if lum < 20:` et `ouvrir_volet()` sous `else:`.
 
     3.  Dérouler la boucle « à la main » avec **une valeur de chaque côté du seuil** (une mesure de nuit, une de jour) avant d’accepter le programme : c’est exactement la vérification de l’exercice 5.
+
+### Python au service du thème
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Python au service du thème — simuler un thermostat <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-19 }
+
+<span class="tag">sur machine</span>  En Python (Spyder ou Basthon). Sans carte électronique, on peut quand même faire tourner un objet embarqué sur ordinateur en le **simulant** : une variable remplace le capteur, un affichage remplace l’actionneur, et une boucle `for` remplace `while True` (on ne simule que quelques minutes).
+
+1.  Écrire une fonction `commande(t)` qui renvoie la chaîne `"allumer"` si la température `t` est strictement inférieure à $19\,^\circ$C, et `"eteindre"` sinon (c’est la décision du thermostat du cours). Tester `commande(17)` et `commande(19)`.
+
+2.  On simule la pièce : chaque minute, le radiateur allumé la réchauffe de $2\,^\circ$C ; éteint, elle se refroidit de $1\,^\circ$C. Compléter, puis exécuter ce programme, qui part de $15\,^\circ$C et simule $8$ minutes :
+
+    ```python
+    t = 15
+    for minute in range(8):
+        ordre = commande(t)
+        print(f"minute {minute} : {t} degres -> {ordre}")
+        if ordre == "allumer":
+            t = ...
+        else:
+            t = ...
+    ```
+
+3.  À partir de la minute 2, entre quelles températures la pièce oscille-t-elle ? Que fait le radiateur pendant ce temps ? Pourquoi est-ce gênant, et quel exercice de cette feuille propose une solution ?
+
+??? pouce "Coup de pouce"
+
+    Question 1 : un `if` pour le cas « trop froid », un `else` pour l’autre ; chaque branche renvoie une chaîne avec `return`. Question 2 : « se réchauffer de $2\,^\circ$C », c’est augmenter la variable `t` de $2$, comme dans `a = a + 1`.
+
+??? corrige "Corrigé"
+
+    **1.** La fonction reprend la décision du thermostat du cours, mais **renvoie** l’ordre au lieu de commander le radiateur :
+
+    ```python
+    def commande(t):
+        if t < 19:
+            return "allumer"
+        else:
+            return "eteindre"
+
+    print(commande(17))   # allumer
+    print(commande(19))   # eteindre
+    ```
+
+    **2.** Allumé, le radiateur ajoute $2$ à la température ; éteint, la pièce perd $1$ :
+
+    ```python
+    t = 15
+    for minute in range(8):
+        ordre = commande(t)
+        print(f"minute {minute} : {t} degres -> {ordre}")
+        if ordre == "allumer":
+            t = t + 2
+        else:
+            t = t - 1
+    ```
+
+    Le programme affiche :
+
+    ```text
+    minute 0 : 15 degres -> allumer
+    minute 1 : 17 degres -> allumer
+    minute 2 : 19 degres -> eteindre
+    minute 3 : 18 degres -> allumer
+    minute 4 : 20 degres -> eteindre
+    minute 5 : 19 degres -> eteindre
+    minute 6 : 18 degres -> allumer
+    minute 7 : 20 degres -> eteindre
+    ```
+
+    **3.** À partir de la minute 2, la pièce oscille entre $\mathbf{18}$ et $\mathbf{20\,^\circ}$**C**. Le radiateur est rallumé (minutes 3 et 6) puis éteint (minutes 4 et 7) presque à chaque minute : ces marche-arrêt incessants l’usent et gaspillent de l’énergie. C’est le défaut que corrige l’exercice 9, « Le thermostat à deux seuils » : on n’allume que sous $19\,^\circ$C et on n’éteint qu’au-dessus de $21\,^\circ$C.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `t = 15` *dans* la boucle : la température repart de $15$ à chaque tour, le programme affiche huit fois `15 degres -> allumer` et la simulation n’avance jamais. Comme pour le compteur de passages (exercice 10), une variable qui doit garder sa valeur d’un tour à l’autre se crée **avant** la boucle.

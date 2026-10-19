@@ -29,6 +29,8 @@ prenoms = charger("prenoms.csv")
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Vocabulaire <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-1 }
 
+<span class="essentiel">• essentiel</span>
+
 On donne le début d’un fichier CSV public (jeux de la médiathèque) :
 
 ```text
@@ -44,6 +46,10 @@ Dixit;Libellud;30;8
 
 3.  Ce fichier est-il « à la française » ou « anglo-saxon » ? Justifier.
 
+??? pouce "Coup de pouce"
+
+    La première ligne contient les descripteurs (les noms de colonnes) ; chaque ligne suivante est un enregistrement. Quel caractère sépare les valeurs d’une même ligne ?
+
 ??? corrige "Corrigé"
 
     !!! remarque "Remarque"
@@ -52,13 +58,23 @@ Dixit;Libellud;30;8
 
     **1.** Le séparateur est le **point-virgule** `;`. Il y a **4 descripteurs** et **3 enregistrements**. **2.** Descripteurs : `titre`, `editeur`, `duree`, `age_min`. Pour `Dixit`, `duree` vaut `30`. **3.** « À la française » : le séparateur est le point-virgule, comme il se doit quand on veut réserver la virgule aux décimaux.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> compter la ligne d’en-tête parmi les enregistrements (4 au lieu de 3) : elle contient les noms des descripteurs, pas des données.
+
 ### Représenter une table en Python
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Une table à la main <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-2 }
 
+<span class="essentiel">• essentiel</span>
+
 Écrire la variable `jeux` représentant les **trois** lignes de l’exercice 1 sous forme d’une **liste de dictionnaires**.
 
+??? pouce "Coup de pouce"
+
+    Une fiche par enregistrement : un dictionnaire dont les clés sont les descripteurs. Comme `csv.DictReader`, écrire les valeurs sous forme de chaînes.
+
 ??? corrige "Corrigé"
+
+    Une liste de trois dictionnaires, un par enregistrement, avec les descripteurs pour clés ; les valeurs sont des chaînes, comme après une lecture par `csv.DictReader`.
 
     ```python
     jeux = [
@@ -84,10 +100,16 @@ Avec la variable `jeux` précédente, que renvoient ces expressions ?
 
 Écrire une expression qui donne l’éditeur de `7 Wonders`.
 
+??? pouce "Coup de pouce"
+
+    On choisit d’abord la fiche par son indice dans la liste (à partir de `0`), puis la valeur par le nom du descripteur.
+
 ??? corrige "Corrigé"
 
     `jeux[1]["titre"]` $\rightarrow$ `’Dixit’` ; `jeux[0]["age_min"]` $\rightarrow$ `’8’` ; `len(jeux)` $\rightarrow$ `3`.  
     Éditeur de `7 Wonders` : `jeux[2]["editeur"]`.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> inverser les deux accès, `jeux["editeur"][2]` : `jeux` est une *liste*, on y choisit d’abord une fiche par son indice ; c’est la fiche, un dictionnaire, qui se lit par clé.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Descripteurs automatiques <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-4 }
 
@@ -106,6 +128,8 @@ Avec la variable `jeux` précédente, que renvoient ces expressions ?
 
 ??? corrige "Corrigé"
 
+    Les noms de colonnes sont les clés de la première fiche ; une compréhension sur ce dictionnaire parcourt ses clés.
+
     ```python
     def descripteurs(table):
         return [cle for cle in table[0]]
@@ -116,6 +140,10 @@ Avec la variable `jeux` précédente, que renvoient ces expressions ?
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Un fichier mal formé <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-5 }
 
 Un camarade obtient `prenoms.csv` avec **une seule colonne** géante quand il l’ouvre. Quelle est l’erreur la plus probable ? Comment la corriger dans l’appel à `csv.DictReader` ?
+
+??? pouce "Coup de pouce"
+
+    Par défaut, `csv.DictReader` sépare les valeurs par une virgule. Quel séparateur utilisent les fichiers « à la française » ? Le paramètre s’appelle `delimiter`.
 
 ??? corrige "Corrigé"
 
@@ -156,13 +184,17 @@ def mystere(table):
 
 Que calcule cette fonction, en une phrase ?
 
+??? pouce "Coup de pouce"
+
+    C’est le patron du compteur : `r` augmente de 1 pour chaque fiche qui vérifie la condition. Combien de fiches de filles contient `prenoms` (deux années, un top 10 par année) ?
+
 ??? corrige "Corrigé"
 
     Elle renvoie `20`. Elle **compte le nombre de fiches de filles** dans la table (10 en 2023 $+$ 10 en 2025).
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Le piège du texte <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-8 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> 
+<span class="run" title="À programmer et tester sur machine">▶</span>  <span class="essentiel">• essentiel</span>
 
 Prédire, *puis* vérifier, la valeur de chaque expression :
 
@@ -173,6 +205,10 @@ Prédire, *puis* vérifier, la valeur de chaque expression :
 ```
 
 Expliquer la différence entre les deux dernières lignes.
+
+??? pouce "Coup de pouce"
+
+    Quel est le type de `prenoms[0]["nombre"]` ? Que fait `+` entre deux chaînes ?
 
 ??? corrige "Corrigé"
 
@@ -187,11 +223,13 @@ Expliquer la différence entre les deux dernières lignes.
 
     Sur des **chaînes**, `+` *colle* les textes (concaténation). Il faut `int(...)` pour obtenir une vraie **addition**.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> convertir après l’addition, `int(prenoms[0]["nombre"] + prenoms[1]["nombre"])` : les chaînes sont déjà collées, on obtient `31773168`. On convertit chaque valeur *avant* de calculer.
+
 ### Rechercher et filtrer
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 9</span> — Filtrer <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-9 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> 
+<span class="run" title="À programmer et tester sur machine">▶</span>  <span class="essentiel">• essentiel</span>
 
 Écrire `selection(table, sexe, annee)` qui renvoie la liste des fiches correspondant à ce `sexe` et cette `annee`. Vérifier :
 
@@ -202,7 +240,13 @@ Expliquer la différence entre les deux dernières lignes.
  'Alma', 'Alice', 'Romy', 'Anna']
 ```
 
+??? pouce "Coup de pouce"
+
+    Partir d’une liste vide et y ajouter (`append`) chaque fiche qui vérifie les deux conditions. Attention : l’année est lue comme une chaîne, d’où `"2023"` entre guillemets.
+
 ??? corrige "Corrigé"
+
+    On part d’une liste vide et on y ajoute chaque fiche qui vérifie les deux conditions, reliées par `and`.
 
     ```python
     def selection(table, sexe, annee):
@@ -212,6 +256,8 @@ Expliquer la différence entre les deux dernières lignes.
                 resultat.append(ligne)
         return resultat
     ```
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> appeler `selection(prenoms, "F", 2023)` avec l’entier `2023` : `"2023" == 2023` est faux, et la sélection est vide, sans aucun message d’erreur.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — En compréhension <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-10 }
 
@@ -225,6 +271,8 @@ Réécrire `selection` en **une seule ligne** avec une compréhension de liste.
 
 ??? corrige "Corrigé"
 
+    La condition du `if` de `selection` devient le filtre de la compréhension, et l’élément gardé est la fiche elle-même.
+
     ```python
     def selection(table, sexe, annee):
         return [l for l in table if l["sexe"] == sexe and l["annee"] == annee]
@@ -232,7 +280,7 @@ Réécrire `selection` en **une seule ligne** avec une compréhension de liste.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Rechercher une fiche <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-11 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> 
+<span class="run" title="À programmer et tester sur machine">▶</span>  <span class="essentiel">• essentiel</span>
 
 Écrire `chercher(table, prenom, annee)` qui renvoie **la** fiche de ce prénom pour cette année, ou `None` si elle n’existe pas. On s’arrêtera dès qu’on l’a trouvée.
 
@@ -249,6 +297,8 @@ None
 
 ??? corrige "Corrigé"
 
+    Recherche séquentielle : on renvoie la fiche dès que les deux critères sont vérifiés, et `None` seulement après avoir tout parcouru.
+
     ```python
     def chercher(table, prenom, annee):
         for ligne in table:
@@ -256,6 +306,8 @@ None
                 return ligne
         return None
     ```
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> placer `return None` dans un `else`, à l’intérieur de la boucle : la fonction répond dès la première fiche et ne trouve que le premier prénom de la table.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Deux critères <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-12 }
 
@@ -285,7 +337,13 @@ None
 
 Écrire `compter(table, sexe)` qui renvoie le nombre de *fiches* pour ce sexe. Combien pour `"G"` ?
 
+??? pouce "Coup de pouce"
+
+    Même patron que `mystere` dans l’exercice « Lecture de trace » ; seule la valeur comparée change.
+
 ??? corrige "Corrigé"
+
+    Patron du compteur : `n` part de `0` et augmente de 1 pour chaque fiche de ce sexe.
 
     ```python
     def compter(table, sexe):
@@ -300,7 +358,7 @@ None
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Total et moyenne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-14 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> 
+<span class="run" title="À programmer et tester sur machine">▶</span>  <span class="essentiel">• essentiel</span>
 
 1.  Écrire `total(table, sexe, annee)` qui renvoie la **somme** des `nombre` des fiches correspondantes.
 
@@ -318,6 +376,8 @@ None
 
 ??? corrige "Corrigé"
 
+    Patron de l’accumulateur : on ajoute `int(ligne["nombre"])` pour chaque fiche retenue ; la moyenne divise la somme par `len(table)`.
+
     ```python
     def total(table, sexe, annee):
         s = 0
@@ -334,6 +394,8 @@ None
     ```
 
     `total(prenoms, "G", "2023")` $\rightarrow$ `32684`. `nombre_moyen(filles23)` $\rightarrow$ `2628.7`.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> oublier `int` dans l’accumulateur : `s + ligne["nombre"]` ajoute une chaîne à un entier, et Python lève une `TypeError`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Champion et lanterne rouge <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-15 }
 
@@ -371,6 +433,8 @@ None
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 16</span> — Coût <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-16 }
 
+<span class="duree">≈ 10 min</span>
+
 On veut, pour *chaque* fiche, afficher son `nombre` **et** la moyenne de la table. Un élève écrit :
 
 ```python
@@ -402,7 +466,7 @@ Pourquoi le coût devient-il **quadratique** ? Comment le rendre **linéaire** ?
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Trier par nombre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-17 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> 
+<span class="run" title="À programmer et tester sur machine">▶</span>  <span class="essentiel">• essentiel</span>
 
 Écrire `trier_par_nombre(table)` qui renvoie la table triée du plus donné au moins donné. Afficher les **3 premiers** prénoms de garçons de 2025.
 
@@ -411,6 +475,8 @@ Pourquoi le coût devient-il **quadratique** ? Comment le rendre **linéaire** ?
     `sorted` avec `key` (sur quoi comparer ?) et `reverse=True` ; pour la clé, penser au piège n<sup>o</sup> 1. Pour les 3 premiers : filtrer avec `selection`, trier, puis une tranche `[:3]`.
 
 ??? corrige "Corrigé"
+
+    `sorted` avec une clé qui convertit le `nombre` en entier, et `reverse=True` pour aller du plus donné au moins donné ; on filtre d’abord, on garde les 3 premiers à la fin.
 
     ```python
     def trier_par_nombre(table):
@@ -472,6 +538,10 @@ for lg in gauche:
 for c in ld:
 ```
 
+??? pouce "Coup de pouce"
+
+    Deux boucles imbriquées (gauche, puis droite) et un test d’égalité sur la clé. Quand les clés sont égales : copier la fiche de gauche, y ajouter les colonnes de droite, ranger le résultat.
+
 ??? corrige "Corrigé"
 
     ```python
@@ -491,7 +561,7 @@ for c in ld:
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Jointure <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-21 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> 
+<span class="run" title="À programmer et tester sur machine">▶</span>  <span class="essentiel">• essentiel</span>
 
 On charge `communes = charger("communes.csv")` et `departements = charger("departements.csv")`, reliées par le descripteur `dep`.
 
@@ -556,7 +626,7 @@ On charge `communes = charger("communes.csv")` et `departements = charger("depar
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 23</span> — Le palmarès à la loupe <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-23 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> 
+<span class="run" title="À programmer et tester sur machine">▶</span>  <span class="duree">≈ 20 min</span>
 
 Écrire un programme qui, à partir de `prenoms.csv`, affiche pour l’année **2025** :
 
@@ -592,7 +662,7 @@ On charge `communes = charger("communes.csv")` et `departements = charger("depar
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 24</span> — Qui monte, qui descend ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-24 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> 
+<span class="run" title="À programmer et tester sur machine">▶</span>  <span class="duree">≈ 20 min</span>
 
 On veut comparer 2023 et 2025 chez les **garçons**.
 
@@ -631,7 +701,7 @@ On veut comparer 2023 et 2025 chez les **garçons**.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 25</span> — Entrants et sortants <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-25 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> 
+<span class="run" title="À programmer et tester sur machine">▶</span>  <span class="duree">≈ 15 min</span>
 
 On note `noms2023` et `noms2025` les listes des prénoms du top 10 des filles en 2023 et en 2025. À l’aide de **tests d’appartenance** (`in` / `not in`, par exemple dans une compréhension), déterminer : les prénoms présents **en 2023 et en 2025**, ceux qui en sont **sortis** (en 2023 mais plus en 2025), ceux qui y sont **entrés** (en 2025 mais pas en 2023). *(Résultat attendu : `’Anna’` sort, `’Adele’` entre — les prénoms sont écrits sans accents dans le fichier.)*
 
@@ -669,7 +739,7 @@ On note `noms2023` et `noms2025` les listes des prénoms du top 10 des filles en
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 26</span> — Écrire un CSV <span class="horsprog">au-delà du programme</span> <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-26 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> 
+<span class="run" title="À programmer et tester sur machine">▶</span>  <span class="duree">≈ 20 min</span>
 
 *Bonus, au-delà du programme.* À l’aide de `csv.DictWriter`, écrire une fonction `exporter(table, fichier)` qui **sauvegarde** une table (par exemple le résultat d’un filtre) dans un nouveau fichier CSV, puis vérifier en le rechargeant avec `charger`.
 
@@ -744,3 +814,65 @@ def moyenne_nombre(table):
     ```
 
     **3.** Regarder une fiche avant de calculer : `prenoms[0]` affiche `’nombre’: ’3177’`, avec des guillemets, donc du texte (ou demander `type(prenoms[0]["nombre"])`). C’est le réflexe du cours : dès qu’on calcule sur une colonne, on convertit.
+
+### Entraînement
+
+*Exercices courts pour s’entraîner aux gestes de base, chacun avec plusieurs données. Ils font tous partie du parcours essentiel.*
+
+Dans les deux exercices, on utilise la petite table suivante, lue dans un CSV (les valeurs sont donc des chaînes) :
+
+```python
+eleves = [{"nom": "Ada", "classe": "1A", "note": "15"},
+          {"nom": "Léo", "classe": "1B", "note": "9"},
+          {"nom": "Zoé", "classe": "1A", "note": "12"}]
+```
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 28</span> — Lire et filtrer une table <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-28 }
+
+<span class="essentiel">• essentiel</span>
+
+Sans machine, donner la valeur de chaque expression, puis <span class="run" title="À programmer et tester sur machine">▶</span> vérifier.
+
+1.  `eleves[2]["nom"]`
+
+2.  `eleves[0]["note"] + eleves[1]["note"]`
+
+3.  `int(eleves[0]["note"]) + int(eleves[1]["note"])`
+
+4.  `[e["nom"] for e in eleves if e["classe"] == "1A"]`
+
+5.  `[e["nom"] for e in eleves if int(e["note"]) < 10]`
+
+??? pouce "Coup de pouce"
+
+    D’abord la fiche (indice dans la liste), puis la valeur (nom du descripteur). Entre deux chaînes, `+` colle les textes.
+
+??? corrige "Corrigé"
+
+    a) `’Zoé’` b) `’159’` (deux chaînes collées) c) `24` d) `[’Ada’, ’Zoé’]` e) `[’Léo’]`.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 29</span> — Trier une table : prédire l’ordre <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-29 }
+
+<span class="essentiel">• essentiel</span>
+
+Sans machine, donner la liste des noms dans l’ordre obtenu par chaque tri, puis <span class="run" title="À programmer et tester sur machine">▶</span> vérifier.
+
+1.  `sorted(eleves, key=lambda e: e["nom"])`
+
+2.  `sorted(eleves, key=lambda e: int(e["note"]))`
+
+3.  `sorted(eleves, key=lambda e: int(e["note"]), reverse=True)`
+
+4.  `sorted(eleves, key=lambda e: e["note"])`
+
+Pourquoi les résultats de b) et d) diffèrent-ils ?
+
+??? pouce "Coup de pouce"
+
+    La clé dit sur quoi comparer les fiches. Sans `int`, on compare des chaînes caractère par caractère, comme des mots du dictionnaire : comparer d’abord les premiers caractères de `"15"`, `"9"` et `"12"`.
+
+??? corrige "Corrigé"
+
+    a) `[’Ada’, ’Léo’, ’Zoé’]` (ordre alphabétique des noms) ; b) `[’Léo’, ’Zoé’, ’Ada’]` (notes 9, 12, 15) ; c) `[’Ada’, ’Zoé’, ’Léo’]` (notes décroissantes) ; d) `[’Zoé’, ’Ada’, ’Léo’]`. En d), les notes sont comparées comme des **chaînes** : `"12"` et `"15"` commencent par `’1’`, qui vient avant `’9’` : `"9"` passe en dernier, comme si c’était la meilleure note. C’est le piège n<sup>o</sup> 1 : on convertit avec `int` dans la clé.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> trier une colonne de nombres lue dans un CSV sans `int` : le tri ne signale aucune erreur, mais il range les valeurs dans l’ordre du dictionnaire, pas dans l’ordre numérique.

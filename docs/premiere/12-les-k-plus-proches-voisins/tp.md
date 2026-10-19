@@ -49,7 +49,7 @@ On a **4 exemples** déjà étiquetés, décrits par deux nombres $(x_1 ; x_2)$,
 |     5     |     4     |     B      |
 |     6     |     5     |     B      |
 
-![](../figures/00d72c0f929025c6.svg){ .tikz loading=lazy }
+![](../figures/5792c944d10947ae.svg){ .tikz loading=lazy }
 
 On veut deviner la classe du nouveau point **$x=(2 ; 2)$** (l’étoile rouge). À l’œil, il est clairement du côté des `A`… vérifions-le par le calcul.
 
@@ -686,7 +686,7 @@ En une poignée de fonctions, sans aucune bibliothèque d’« intelligence arti
 
     Vous savez faire reconnaître *un* caractère par le $k$-NN (TP précédent). Ici, on construit la **chaîne complète** qui lit une **plaque entière**, depuis une **photo** jusqu’au **texte**. On **suppose** qu’on dispose d’une photo ne montrant **que la plaque** (rien autour), bien nette.
 
-    ![](../figures/6f36e48d4355f824.svg){ .tikz loading=lazy }
+    ![](../figures/a8f2eb02fe615e27.svg){ .tikz loading=lazy }
 
     On avance étape par étape, en testant à chaque fois. On réutilise votre fichier `ocr.py` du TP OCR (fonctions `charger`, `classer`, `afficher`) ; on complète le fichier fourni `plaque.py`, placé dans le même dossier : c’est la **trame** du projet (fonctions à trous, fonctions fournies et tests qui affichent `[OK]` ou `[A FAIRE]` à chaque lancement). Autres fichiers fournis : `plaque_photo.png` (une photo de plaque), `caracteres_train.csv` (caractères imprimés), `image_vers_grille.py` (outil). Vos essais de `ocr.py` doivent rester sous la ligne `if __name__ == ’__main__’:` de la fin : sinon, ils seraient relancés à chaque `import`.
 

@@ -70,66 +70,7 @@ La feuille `Exercice 4` donne les salaires d’une entreprise (colonne `A`).
 
 ??? corrige "Corrigé de l'activité"
 
-    Notions du cours mobilisées
-
-    - **Donnée**, **donnée personnelle** (identification directe ou indirecte), **métadonnée**.
-
-    - **Table** : descripteurs (colonnes), enregistrements (lignes) ; **format CSV**, **format ouvert**.
-
-    - **Rechercher, filtrer, trier**, et surtout **croiser deux tables** : c’est le mécanisme de la réidentification (doc. 4).
-
-    - **Open data** (`data.gouv.fr`, portail de Monaco) et pouvoir citoyen, data-journalisme.
-
-    - **RGPD** (consentement, but précis, droits) ; **loi n° 1.565** et **APDP** à Monaco ; **big data**.
-
-    Arguments attendus
-
-    <table>
-    <thead>
-    <tr>
-    <th style="text-align: left;"><strong>POUR (oui) : ouvrir le plus possible</strong></th>
-    <th style="text-align: left;"><strong>CONTRE (non) : limiter fortement</strong></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td style="text-align: left;"><ul>
-    <li><p><strong>Transparence démocratique</strong> : contrôler l’usage de l’argent public (doc. 2).</p></li>
-    <li><p><strong>Utilité concrète</strong> : transports, santé, environnement, recherche (doc. 2).</p></li>
-    <li><p><strong>Données payées par les contribuables</strong> : elles appartiennent à tous (doc. 2).</p></li>
-    <li><p><strong>C’est la loi</strong> en France depuis 2016, avec retrait des données personnelles (doc. 1).</p></li>
-    <li><p><strong>On peut protéger</strong> : regrouper les cas rares (INSEE), interdire la réidentification (doc. 3 et 4).</p></li>
-    <li><p><strong>Format ouvert</strong> (CSV) : tout le monde peut vérifier et réutiliser, pas seulement les grandes entreprises (cours).</p></li>
-    </ul></td>
-    <td style="text-align: left;"><ul>
-    <li><p><strong>Réidentification</strong> : trois informations suffisent à retrouver une personne (doc. 4) ; croiser des tables est facile (cours).</p></li>
-    <li><p><strong>Curiosité mal placée</strong> : le prix payé par son voisin (doc. 3).</p></li>
-    <li><p><strong>Une fois publiée, une table est copiée</strong> : on ne peut plus la retirer (permanence, comme sur les réseaux sociaux).</p></li>
-    <li><p><strong>Une interdiction d’usage ne garantit rien</strong> : qui contrôle ceux qui téléchargent (doc. 3) ?</p></li>
-    <li><p><strong>Pas de consentement</strong> des personnes concernées : elles n’ont pas choisi d’être dans la table.</p></li>
-    <li><p><strong>Big data</strong> : plus il y a de tables publiques, plus les croisements possibles sont nombreux (cours).</p></li>
-    </ul></td>
-    </tr>
-    </tbody>
-    </table>
-
-    *Arguments de l’autre camp souvent jugés solides dans la trace écrite :* un élève POUR retient souvent « retirer le nom ne suffit pas à rendre une table anonyme » ; un élève CONTRE, « les données ouvertes ont rendu de vrais services pendant l’épidémie ».
-
-    Questions de relance (pour le modérateur)
-
-    1.  Dans la base DVF (doc. 3), quelle colonne faudrait-il retirer ou rendre moins précise pour mieux protéger les personnes ? Que perd-on alors ?
-
-    2.  Avec quelles colonnes d’une autre table pourrait-on « croiser » une table sans nom pour retrouver quelqu’un (doc. 4) ?
-
-    3.  Qui doit décider de ce qui est publié : l’administration, la loi, les personnes concernées ?
-
-    4.  Les résultats d’une élection par bureau de vote sont publics : pourquoi est-ce important ? Est-ce une donnée personnelle ?
-
-    !!! encadre "Synthèse possible"
-
-        L’**open data** met à la disposition de tous des tables publiques (souvent en CSV) : transparence, recherche, nouveaux services. En France, l’ouverture est la règle depuis 2016, à condition de retirer les données personnelles. Mais **retirer le nom ne suffit pas** : en **croisant** plusieurs tables, quelques descripteurs (code postal, date de naissance, sexe, adresse) suffisent souvent à retrouver une personne. Une donnée pseudonymisée reste une donnée personnelle (RGPD ; loi n° 1.565 à Monaco). Ouvrir les données suppose donc de choisir **quelles colonnes publier, avec quelle précision**, et d’encadrer leur réutilisation.
-
-??? corrige "Corrigé de l'activité"
+    **À lire après le débat.** Ces éléments de réponse servent à vérifier et à compléter votre trace écrite : les lire avant le débat lui ôterait son intérêt.
 
     Notions du cours mobilisées
 
@@ -191,6 +132,71 @@ La feuille `Exercice 4` donne les salaires d’une entreprise (colonne `A`).
         L’**open data** met à la disposition de tous des tables publiques (souvent en CSV) : transparence, recherche, nouveaux services. En France, l’ouverture est la règle depuis 2016, à condition de retirer les données personnelles. Mais **retirer le nom ne suffit pas** : en **croisant** plusieurs tables, quelques descripteurs (code postal, date de naissance, sexe, adresse) suffisent souvent à retrouver une personne. Une donnée pseudonymisée reste une donnée personnelle (RGPD ; loi n° 1.565 à Monaco). Ouvrir les données suppose donc de choisir **quelles colonnes publier, avec quelle précision**, et d’encadrer leur réutilisation.
 
 ??? corrige "Corrigé de l'activité"
+
+    **À lire après le débat.** Ces éléments de réponse servent à vérifier et à compléter votre trace écrite : les lire avant le débat lui ôterait son intérêt.
+
+    Notions du cours mobilisées
+
+    - **Donnée**, **donnée personnelle** (identification directe ou indirecte), **métadonnée**.
+
+    - **Table** : descripteurs (colonnes), enregistrements (lignes) ; **format CSV**, **format ouvert**.
+
+    - **Rechercher, filtrer, trier**, et surtout **croiser deux tables** : c’est le mécanisme de la réidentification (doc. 4).
+
+    - **Open data** (`data.gouv.fr`, portail de Monaco) et pouvoir citoyen, data-journalisme.
+
+    - **RGPD** (consentement, but précis, droits) ; **loi n° 1.565** et **APDP** à Monaco ; **big data**.
+
+    Arguments attendus
+
+    <table>
+    <thead>
+    <tr>
+    <th style="text-align: left;"><strong>POUR (oui) : ouvrir le plus possible</strong></th>
+    <th style="text-align: left;"><strong>CONTRE (non) : limiter fortement</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Transparence démocratique</strong> : contrôler l’usage de l’argent public (doc. 2).</p></li>
+    <li><p><strong>Utilité concrète</strong> : transports, santé, environnement, recherche (doc. 2).</p></li>
+    <li><p><strong>Données payées par les contribuables</strong> : elles appartiennent à tous (doc. 2).</p></li>
+    <li><p><strong>C’est la loi</strong> en France depuis 2016, avec retrait des données personnelles (doc. 1).</p></li>
+    <li><p><strong>On peut protéger</strong> : regrouper les cas rares (INSEE), interdire la réidentification (doc. 3 et 4).</p></li>
+    <li><p><strong>Format ouvert</strong> (CSV) : tout le monde peut vérifier et réutiliser, pas seulement les grandes entreprises (cours).</p></li>
+    </ul></td>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Réidentification</strong> : trois informations suffisent à retrouver une personne (doc. 4) ; croiser des tables est facile (cours).</p></li>
+    <li><p><strong>Curiosité mal placée</strong> : le prix payé par son voisin (doc. 3).</p></li>
+    <li><p><strong>Une fois publiée, une table est copiée</strong> : on ne peut plus la retirer (permanence, comme sur les réseaux sociaux).</p></li>
+    <li><p><strong>Une interdiction d’usage ne garantit rien</strong> : qui contrôle ceux qui téléchargent (doc. 3) ?</p></li>
+    <li><p><strong>Pas de consentement</strong> des personnes concernées : elles n’ont pas choisi d’être dans la table.</p></li>
+    <li><p><strong>Big data</strong> : plus il y a de tables publiques, plus les croisements possibles sont nombreux (cours).</p></li>
+    </ul></td>
+    </tr>
+    </tbody>
+    </table>
+
+    *Arguments de l’autre camp souvent jugés solides dans la trace écrite :* un élève POUR retient souvent « retirer le nom ne suffit pas à rendre une table anonyme » ; un élève CONTRE, « les données ouvertes ont rendu de vrais services pendant l’épidémie ».
+
+    Questions de relance (pour le modérateur)
+
+    1.  Dans la base DVF (doc. 3), quelle colonne faudrait-il retirer ou rendre moins précise pour mieux protéger les personnes ? Que perd-on alors ?
+
+    2.  Avec quelles colonnes d’une autre table pourrait-on « croiser » une table sans nom pour retrouver quelqu’un (doc. 4) ?
+
+    3.  Qui doit décider de ce qui est publié : l’administration, la loi, les personnes concernées ?
+
+    4.  Les résultats d’une élection par bureau de vote sont publics : pourquoi est-ce important ? Est-ce une donnée personnelle ?
+
+    !!! encadre "Synthèse possible"
+
+        L’**open data** met à la disposition de tous des tables publiques (souvent en CSV) : transparence, recherche, nouveaux services. En France, l’ouverture est la règle depuis 2016, à condition de retirer les données personnelles. Mais **retirer le nom ne suffit pas** : en **croisant** plusieurs tables, quelques descripteurs (code postal, date de naissance, sexe, adresse) suffisent souvent à retrouver une personne. Une donnée pseudonymisée reste une donnée personnelle (RGPD ; loi n° 1.565 à Monaco). Ouvrir les données suppose donc de choisir **quelles colonnes publier, avec quelle précision**, et d’encadrer leur réutilisation.
+
+??? corrige "Corrigé de l'activité"
+
+    **À lire après le débat.** Ces éléments de réponse servent à vérifier et à compléter votre trace écrite : les lire avant le débat lui ôterait son intérêt.
 
     Notions du cours mobilisées
 
@@ -381,7 +387,7 @@ Tailles de 885 nourrissons :
 
 Tailles de 640 nourrissons :
 
-| Taille $t$ | \[45;46\[ | \[46;47\[ | \[47;48\[ | \[48;49\[ | \[49;50\[ | \[50;51\[ | \[51;52\[ | \[52;53\[ | \[53;54\[ | \[54;55\[ | TOTAL |
+| Taille $t$ | \45;46\[ | \[46;47\[ | \[47;48\[ | \[48;49\[ | \[49;50\[ | \[50;51\[ | \[51;52\[ | \[52;53\[ | \[53;54\[ | \[54;55\[ | TOTAL |
 |:--:|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
 | Effectif $n$ | 10 | 25 | 35 | 65 | 128 | 190 | 95 | 45 | 32 | 15 |  |
 | Fréquence | 1,56% |  |  |  |  |  |  |  |  |  |  |
@@ -421,54 +427,37 @@ Les documents
 
 !!! encadre "Document 1 — L’ouverture par défaut"
 
-    Depuis 2011, l’État français publie ses données sur `data.gouv.fr` ; la Principauté de Monaco dispose elle aussi d’un portail *open data*. En France, la loi pour une République numérique du 7 octobre 2016 a fait de l’ouverture **la règle** : les administrations de plus de 50 agents et les collectivités de plus de 3 500 habitants doivent publier en ligne, dans un format ouvert, leurs principales bases de données. Avant publication, elles doivent en principe en retirer les **données personnelles**, sauf exceptions prévues par la loi.
+    Depuis 2011, l’État français publie ses données sur `data.gouv.fr` ; Monaco a aussi son portail *open data*. En France, une loi de 2016 a fait de l’ouverture **la règle** : les administrations de plus de 50 agents et les collectivités de plus de 3 500 habitants doivent publier leurs principales bases de données dans un format ouvert, après en avoir retiré, en principe, les **données personnelles**.
+
+    **À retenir :** en France, publier les données publiques est la règle, pas l’exception.
 
     Source : loi n° 2016-1321 du 7 octobre 2016 pour une République numérique ; `data.gouv.fr`.
 
 !!! encadre "Document 2 — À quoi servent les données ouvertes ?"
 
-    Horaires des bus, qualité de l’air, résultats des élections, dépenses des communes : grâce aux données ouvertes, des développeurs créent des applications de transport, des journalistes vérifient l’usage de l’argent public, des chercheurs étudient la pollution. Pendant l’épidémie de COVID-19, des citoyens bénévoles ont utilisé les données publiées par Santé publique France pour créer des sites de suivi des cas et de la vaccination, très consultés. Ces données ont été produites grâce à l’argent des contribuables : pour beaucoup, il est normal qu’elles reviennent à tous.
+    Horaires des bus, qualité de l’air, dépenses des communes : grâce aux données ouvertes, des développeurs créent des applications de transport, des journalistes vérifient l’usage de l’argent public, des chercheurs étudient la pollution. Pendant l’épidémie de COVID-19, des bénévoles ont créé, à partir des données de Santé publique France, des sites de suivi des cas très consultés. Payées par les contribuables, ces données doivent, pour beaucoup, revenir à tous.
+
+    **À retenir :** les données ouvertes servent à créer des services et à contrôler l’action publique.
 
     Source : `data.gouv.fr` ; Santé publique France, données COVID-19 publiées en *open data* (2020–2022).
 
 !!! encadre "Document 3 — Le prix de la maison du voisin"
 
-    Depuis 2019, l’État publie en données ouvertes la base « Demandes de valeurs foncières » (DVF) : pour chaque vente immobilière des dernières années, on y trouve la **date**, le **prix**, la **surface** et la **localisation** du bien (adresse ou parcelle), sans le nom du vendeur ni de l’acheteur. Très utile pour connaître les prix d’un quartier avant d’acheter… mais, quand on connaît ses voisins, on peut deviner combien chacun a payé sa maison. Les conditions d’utilisation interdisent de chercher à réidentifier les personnes et de faire apparaître ces données dans les moteurs de recherche.
+    Depuis 2019, la base publique « Demandes de valeurs foncières » (DVF) donne, pour chaque vente immobilière récente, la **date**, le **prix**, la **surface** et la **localisation** du bien, sans le nom du vendeur ni de l’acheteur. Très utile pour connaître les prix d’un quartier… mais, quand on connaît ses voisins, on devine combien chacun a payé. Les conditions d’utilisation interdisent de chercher à réidentifier les personnes.
+
+    **À retenir :** même sans nom, une table peut en dire beaucoup sur des personnes.
 
     Source : `data.gouv.fr`, jeu de données « Demandes de valeurs foncières » (Direction générale des Finances publiques).
 
 !!! encadre "Document 4 — « Anonyme » ne veut pas dire « introuvable »"
 
-    En 2000, la chercheuse Latanya Sweeney (université Carnegie Mellon) a montré qu’environ **87 %** des Américains pouvaient être identifiés de façon unique avec seulement trois informations : **code postal**, **date de naissance** et **sexe**. Retirer la colonne « nom » d’une table ne suffit donc pas : en la croisant avec une autre table, on peut retrouver qui est qui. Le RGPD fait la différence : une donnée **pseudonymisée** (nom remplacé par un numéro) reste une donnée personnelle ; seule une donnée réellement **anonymisée** échappe au règlement. C’est pourquoi l’INSEE, dans son fichier des prénoms, regroupe les prénoms trop rares sous une mention commune.
+    En 2000, la chercheuse Latanya Sweeney a montré qu’environ **87 %** des Américains pouvaient être identifiés avec trois informations : **code postal**, **date de naissance** et **sexe**. Retirer la colonne « nom » ne suffit donc pas : en croisant la table avec une autre, on retrouve qui est qui. Pour le RGPD, une donnée **pseudonymisée** (nom remplacé par un numéro) reste personnelle. C’est pourquoi l’INSEE regroupe les prénoms trop rares de son fichier.
+
+    **À retenir :** retirer ou remplacer le nom ne rend pas une donnée anonyme.
 
     Source : L. Sweeney, « *Simple Demographics Often Identify People Uniquely* », 2000 ; RGPD, considérant 26 ; INSEE, fichier des prénoms.
 
-Organisation du débat
-
-| **Rôle** | **Préparation (15 min), puis débat** |
-|:---|:---|
-| Groupe POUR ($\approx$ 1/3) | Défend **oui** : au moins trois arguments, chacun appuyé sur un document ou le cours ; prévoit la réponse à deux arguments adverses ; choisit qui ouvre et qui conclut. |
-| Groupe CONTRE ($\approx$ 1/3) | Défend **non** : même travail que le groupe POUR. |
-| Modérateur (1 ou 2) | Prépare deux questions de relance ; donne la parole en alternant les camps, tient le temps, recentre. Ne donne **pas** son avis. |
-| Secrétaire (1 ou 2) | Note au tableau, en deux colonnes POUR / CONTRE, chaque argument et le numéro du document cité. |
-| Observateurs (les autres) | Suivent deux ou trois élèves (citent-ils un document ? répondent-ils à l’argument précédent ?) et notent le meilleur argument de chaque camp. |
-
-| **Min.** | **Étape** | **Min.** | **Étape** |
-|---:|:---|---:|:---|
-| 0–3 | **Mise en place** : tirage des rôles, groupes face à face. | 26–38 | **Échanges** : 12 min, parole alternée entre les camps. |
-| 3–18 | **Préparation** en groupes, tableau d’arguments ci-dessous. | 38–42 | **Observateurs** : meilleur argument de chaque camp. |
-| 18–20 | **Ouverture** : le modérateur lit la question et les règles. | 42–44 | **Conclusions** : 1 min par groupe. |
-| 20–26 | **Prises de position** : 3 min POUR, puis 3 min CONTRE. | 44–50 | **Bilan** : trace écrite individuelle, puis vote. |
-
-!!! encadre "Règles de prise de parole"
-
-    - On lève la main, le modérateur donne la parole ; une seule personne à la fois, une minute au plus.
-
-    - On **argumente** (« je pense que… **parce que**… ») et on **cite** un document ou le cours (« d’après le document 2… »).
-
-    - On **répond à l’argument précédent** avant d’en avancer un nouveau : « vous dites que…, mais… ».
-
-    - On **respecte** : on critique une idée, jamais une personne ; pas de moquerie ; on ne raconte pas la vie privée de quelqu’un.
+Rôles, déroulé minuté, règles de prise de parole et trace écrite : voir la page [« Méthode : débattre ».
 
 Tableau d’arguments
 
@@ -481,8 +470,6 @@ Recopier ce tableau sur le cahier et le compléter pendant le débat.
 Trace écrite finale (individuelle)
 
 Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes, justifiez-la avec vos **deux meilleurs arguments**, dont **un argument de l’autre camp** que vous trouvez solide (avec le document qui l’appuie).
-
-\newgeometry{inner=1.8cm,outer=1.6cm,top=2.2cm,bottom=1.9cm,headheight=16pt,headsep=0.5cm,footskip=0.9cm}
 
 ## Corrigé
 

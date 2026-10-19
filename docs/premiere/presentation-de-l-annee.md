@@ -26,43 +26,43 @@ En Première, la NSI, c’est **4 heures par semaine**. Une grande partie se pas
 
 ## Ce que vous allez apprendre cette année
 
-*Les chapitres s’enchaînent dans cet ordre : chacun s’appuie sur les précédents. La programmation, elle, sera de toutes les séances.*
+Les chapitres s’enchaînent dans cet ordre : chacun s’appuie sur les précédents. La programmation, elle, sera de toutes les séances.
 
 ### De la rentrée aux vacances de Toussaint
 
-**Chapitre 1 — Les bases de la programmation Python.** *Vous allez apprendre à écrire vos premiers programmes : ranger des informations dans des variables, faire faire des choix à la machine (si… alors…), lui faire répéter des actions, et fabriquer vos propres « fonctions ».*
+**Chapitre 1 — Les bases de la programmation Python.** Vous allez apprendre à écrire vos premiers programmes : ranger des informations dans des variables, faire faire des choix à la machine (si… alors…), lui faire répéter des actions, et fabriquer vos propres « fonctions ».
 
-**Complément — Dessiner avec la tortue.** *Juste après ce premier chapitre, vos programmes **dessinent** : une « tortue » avance et tourne à l’écran selon vos ordres ; boucles et fonctions suffisent pour tracer polygones, spirales et rosaces… puis pour lui faire écrire des mots entiers (projet « La tortue écrivain »).*
+**Complément — Dessiner avec la tortue.** Juste après ce premier chapitre, vos programmes **dessinent** : une « tortue » avance et tourne à l’écran selon vos ordres ; boucles et fonctions suffisent pour tracer polygones, spirales et rosaces… puis pour lui faire écrire des mots entiers (projet « La tortue écrivain »).
 
-**Chapitre 2 — Le binaire et l’écriture des nombres.** *Vous allez découvrir comment une machine représente un nombre avec seulement des `0` et des `1`, pourquoi elle ne connaît que ça… et pourquoi, sur un ordinateur, $0{,}1 + 0{,}2$ ne fait pas tout à fait $0{,}3$ !*
+**Chapitre 2 — Le binaire et l’écriture des nombres.** Vous allez découvrir comment une machine représente un nombre avec seulement des `0` et des `1`, pourquoi elle ne connaît que ça… et pourquoi, sur un ordinateur, $0{,}1 + 0{,}2$ ne fait pas tout à fait $0{,}3$ !
 
 ### De la Toussaint à Noël
 
-**Chapitre 3 — Les types construits.** *Vous allez apprendre à regrouper des données par paquets : des p-uplets figés, des tableaux (listes) de valeurs, et des « dictionnaires » qui associent une information à une étiquette.*
+**Chapitre 3 — Les types construits.** Vous allez apprendre à regrouper des données par paquets : des p-uplets figés, des tableaux (listes) de valeurs, et des « dictionnaires » qui associent une information à une étiquette.
 
-**Chapitre 4 — Algorithmique : le parcours séquentiel.** *Vous allez écrire des méthodes pour explorer des données : retrouver un élément, repérer le plus grand, calculer une moyenne… et vous demander si votre méthode est rapide.*
+**Chapitre 4 — Algorithmique : le parcours séquentiel.** Vous allez écrire des méthodes pour explorer des données : retrouver un élément, repérer le plus grand, calculer une moyenne… et vous demander si votre méthode est rapide.
 
 ### De janvier aux vacances d’hiver
 
-**Chapitre 5 — Spécifier et mettre au point ses programmes.** *Vous allez apprendre à écrire des programmes fiables : dire précisément ce que fait un programme, le protéger des erreurs, le **tester** et **traquer les bugs** — et vous verrez qu’il existe bien d’autres langages que Python.*
+**Chapitre 5 — Spécifier et mettre au point ses programmes.** Vous allez apprendre à écrire des programmes fiables : dire précisément ce que fait un programme, le protéger des erreurs, le **tester** et **traquer les bugs** — et vous verrez qu’il existe bien d’autres langages que Python.
 
 **Chapitre 6 — Les algorithmes de tri.** *Vous allez apprendre à trier des données, comme on range un jeu de cartes, et à mesurer le travail que cela demande.*
 
-**Chapitre 7 — La recherche dichotomique.** *Vous allez retrouver une valeur très vite dans une liste triée, sans tout parcourir, en coupant la zone de recherche en deux à chaque étape.*
+**Chapitre 7 — La recherche dichotomique.** Vous allez retrouver une valeur très vite dans une liste triée, sans tout parcourir, en coupant la zone de recherche en deux à chaque étape.
 
-**Chapitre 8 — Les données en tables.** *Vous allez travailler sur de vraies données (des fichiers comme ceux d’un tableur) : les filtrer, les trier, croiser deux tables. Un avant-goût des bases de données.*
+**Chapitre 8 — Les données en tables.** Vous allez travailler sur de vraies données (des fichiers comme ceux d’un tableur) : les filtrer, les trier, croiser deux tables. Un avant-goût des bases de données.
 
 ### Des vacances d’hiver à celles de printemps
 
-**Chapitre 9 — Architecture des ordinateurs et systèmes d’exploitation.** *Vous allez ouvrir le capot : comment marche un ordinateur, avec son processeur et sa mémoire, et le rôle du système d’exploitation, que vous piloterez en ligne de commande.*
+**Chapitre 9 — Architecture des ordinateurs et systèmes d’exploitation.** Vous allez ouvrir le capot : comment marche un ordinateur, avec son processeur et sa mémoire, et le rôle du système d’exploitation, que vous piloterez en ligne de commande.
 
-**Chapitre 10 — Le Web : réseaux et interactions homme-machine.** *Vous allez découvrir comment les machines s’échangent des informations à travers un réseau, puis comprendre ce qui se passe quand vous cliquez sur une page : ce que fait votre navigateur, ce que fait le serveur à l’autre bout, comment un formulaire envoie vos réponses et ce que le navigateur garde en mémoire (les cookies).*
+**Chapitre 10 — Le Web : réseaux et interactions homme-machine.** Vous allez découvrir comment les machines s’échangent des informations à travers un réseau, puis comprendre ce qui se passe quand vous cliquez sur une page : ce que fait votre navigateur, ce que fait le serveur à l’autre bout, comment un formulaire envoie vos réponses et ce que le navigateur garde en mémoire (les cookies).
 
 ### Du printemps à la fin de l’année
 
-**Chapitre 11 — Les algorithmes gloutons.** *Vous allez résoudre des problèmes en faisant, à chaque étape, le choix qui semble le meilleur sur le moment : rendre la monnaie, remplir un sac au mieux…*
+**Chapitre 11 — Les algorithmes gloutons.** Vous allez résoudre des problèmes en faisant, à chaque étape, le choix qui semble le meilleur sur le moment : rendre la monnaie, remplir un sac au mieux…
 
-**Chapitre 12 — Les $k$ plus proches voisins.** *Une première intelligence artificielle. Vous allez programmer un algorithme qui « devine », c’est-à-dire qui classe un élément d’après ceux qui lui ressemblent le plus. C’est l’une des idées derrière l’IA d’aujourd’hui.*
+**Chapitre 12 — Les $k$ plus proches voisins.** Une première intelligence artificielle. Vous allez programmer un algorithme qui « devine », c’est-à-dire qui classe un élément d’après ceux qui lui ressemblent le plus. C’est l’une des idées derrière l’IA d’aujourd’hui.
 
 !!! remarque "Remarque"
 
@@ -100,11 +100,11 @@ Nos **4 heures par semaine** se partagent entre :
 
     - **Cours** : les notions, des exemples corrigés et un bilan ;
 
-    - **Exercices** : du plus simple au plus exigeant, avec des coups de pouce en fin de rubrique ; leurs corrigés sont en fin de livre ;
+    - **Exercices** : du plus simple au plus exigeant, avec des coups de pouce en fin de rubrique ; environ un tiers sont marqués $\bullet$ essentiel (le minimum pour suivre) ; leurs corrigés sont en fin de livre ;
 
     - **TP et projets** : un travail plus long sur machine qui réinvestit tout le chapitre ;
 
-    - **Fiche de révision** : l’essentiel du chapitre en deux pages, à relire avant un test ou un contrôle ;
+    - **Fiche de révision** : l’essentiel du chapitre en deux pages, à relire avant un test ou un contrôle, avec « Se tester » (questions sur le chapitre), « Et avant ? » (questions sur les chapitres précédents, pour ne pas oublier) et, à partir du chapitre 2, les problèmes de synthèse que vous pouvez désormais traiter ;
 
     - **Défis Advent of Code** : un défi par chapitre, une énigme de programmation tirée d’*Advent of Code* (`adventofcode.com`), un concours en ligne créé et animé depuis 2015 par le développeur **Eric Wastl**, qui publie chaque mois de décembre une série d’énigmes, chacune en deux parties. L’énoncé, en anglais, se lit sur le site (QR code sur chaque défi ; le navigateur peut le traduire) ; le défi fournit un lexique, un résumé, un petit exemple pour se tester et des coups de pouce. Ces défis sont **facultatifs** et n’utilisent que des notions déjà vues dans l’année, ou présentées dans un encadré « Outil Python » du défi.
 
@@ -137,5 +137,47 @@ Nos **4 heures par semaine** se partagent entre :
     - le site de **Gilles Lassus** : `glassus.github.io` ;
 
     - le site de **David Roche** : `pixees.fr/informatiquelycee`.
+
+## Travailler avec ce livre
+
+### Avec quel outil ?
+
+Au lycée, on programme avec **Spyder**, un logiciel libre et gratuit. Installez-le aussi chez vous : l’installateur officiel se télécharge sur `spyder-ide.org` et contient Python, il n’y a rien d’autre à installer. En dépannage (ordinateur prêté, installation impossible), **Basthon** fonctionne dans un navigateur, sans installation (`basthon.fr`) : parfait pour un exercice court, moins pratique pour un TP ou un défi qui lit des fichiers, qu’il faut alors déposer dans la page à chaque séance.
+
+![](img/00_spyder.png){ .photo loading=lazy style="width:82%" }
+
+Deux zones de Spyder servent tout le temps :
+
+- **l’éditeur** (à gauche) : on y écrit le programme. Il est enregistré dans un fichier `.py` et s’exécute en entier avec le bouton vert $\blacktriangleright$ (ou la touche F5) ;
+
+- **la console** (en bas à droite, `In [1]:`) : on y lit ce que le programme affiche, et on peut y taper une instruction pour tester une idée tout de suite, ou appeler une fonction du fichier une fois celui-ci exécuté. Ce qu’on tape dans la console n’est pas enregistré.
+
+### Une méthode pour chaque chapitre
+
+1.  **Après chaque séance** (20 à 30 minutes) : relire le passage du cours en *retapant* les exemples dans Spyder, puis faire les exercices $\bullet$ essentiel indiqués par les renvois « Exercices d’application ».
+
+2.  **Bloqué ?** Chercher vraiment (5 à 10 minutes), relire le message d’erreur s’il y en a un, puis lire le **coup de pouce** ($\triangleright$) : d’abord la piste, ensuite seulement le début de solution.
+
+3.  **Le corrigé** se lit *après* avoir essayé : comparer, repérer son erreur (les corrigés signalent les *erreurs fréquentes*), puis refaire l’exercice sans regarder quelques jours plus tard.
+
+4.  **Deux ou trois jours après** : répondre de mémoire aux questions « Se tester » et « Et avant ? » de la fiche de révision, puis vérifier avec le lien « $\blacktriangleright$ réponses ». Revenir régulièrement sur les chapitres passés, c’est ce qui fait tenir les connaissances.
+
+5.  **Avant un test** : la fiche de révision et sa liste « Savoir-faire » ; pour chaque case que vous ne pouvez pas cocher, refaire un exercice essentiel.
+
+Les exercices ★★★, les défis et les encadrés « Pour les curieux » servent à aller plus loin : utiles, mais facultatifs.
+
+### Lire ce livre sur un ordinateur
+
+- **Tout est cliquable** : le sommaire, le petit sommaire de chaque chapitre, « $\blacktriangleright$ corrigé p. 437 » et « $\uparrow$ énoncé », les coups de pouce, les numéros d’exercices des renvois et les mentions « chapitre 3 ». L’**onglet de couleur** au bord de la page ramène à la page de titre du chapitre ; le **numéro de page** ramène au sommaire.
+
+- **Les signets** (panneau latéral « Signets » ou « Table des matières » du lecteur PDF) donnent le plan détaillé : chapitre, rubrique, section.
+
+- **Revenir où l’on était** après un lien : le lien « $\uparrow$ énoncé » ou l’onglet du chapitre, ou bien la commande « page précédente » du lecteur (Alt + $\leftarrow$ dans Acrobat Reader sous Windows, Cmd + \[ dans Aperçu sur Mac).
+
+- **Copier un programme** : cliquer sur l’icône ![](figures/c05ba0af77e5b716.svg){ .tikz .tikz-inline loading=lazy } en haut à droite d’un bloc de code ; une page s’ouvre avec le programme prêt à être copié. Un copier-coller direct depuis le PDF emporte souvent les numéros de ligne et l’indentation est perdue.
+
+- **Chercher un mot** : Ctrl + F (Cmd + F sur Mac).
+
+- Pour lire confortablement, choisir l’affichage « ajuster à la largeur ». Les numéros de page du lecteur sont ceux du livre imprimé.
 
 *Prêt(e)s ? On passe de l’autre côté de l’écran. Bienvenue en NSI !*

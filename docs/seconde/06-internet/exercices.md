@@ -18,13 +18,29 @@
 
 <span class="tag">sur papier</span>  Ranger ces événements du plus ancien au plus récent, avec leur date : *invention du Web* $\bullet$ *premier message sur ARPANET* $\bullet$ *naissance d’Internet (bascule TCP/IP)* $\bullet$ *invention du protocole TCP/IP*.
 
+??? pouce "Coup de pouce"
+
+    Relisez l’encadré « Repères historiques » au début du cours : chaque événement y figure avec sa date.
+
 ??? corrige "Corrigé"
+
+    Activité 1 — Le routage débranché
+
+    Activité d’observation. Ce qu’il faut en retenir : aucun « routeur » ne connaît tout le réseau, chacun ne connaît que ses **voisins directs** et choisit seulement la **prochaine étape** ; de proche en proche, le paquet arrive quand même. Quand un routeur disparaît, ses voisins font passer le paquet par un **autre chemin** : c’est ce qui rend Internet résistant aux pannes.
+
+    Activité 2 — Retrouver une adresse IP
+
+    L’adresse obtenue dépend du moment et du lieu : on note celle qui s’affiche (par exemple `141.94.212.184` pour `wikipedia.fr` le 28/09/2026) ; de même pour le site du lycée. **Oui**, deux noms différents peuvent mener à la même adresse IP : un même serveur peut héberger plusieurs sites, et un site a souvent plusieurs noms (avec ou sans `www`, par exemple). Le DNS associe un nom à une adresse, mais rien n’interdit que plusieurs noms pointent vers la même.
 
     \; premier message ARPANET (**1969**) $\to$ protocole TCP/IP (**1974**) $\to$ naissance d’Internet, bascule TCP/IP (**1983**) $\to$ invention du Web (**1989–1991**).
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — « LO…» <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-2 }
 
 <span class="tag">sur papier</span>  En 1969, quel mot voulait-on transmettre pour le premier message d’ARPANET ? Que s’est-il passé, et quelles ont donc été les deux premières lettres réellement reçues ?
+
+??? pouce "Coup de pouce"
+
+    Relisez le récit « Le premier message », au début du cours.
 
 ??? corrige "Corrigé"
 
@@ -34,11 +50,17 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Pourquoi découper ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-3 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span> 
 
 1.  Qu’appelle-t-on un **paquet** ? Citer les trois informations de son « étiquette ».
 
 2.  À quoi sert le **numéro** porté par chaque paquet ?
+
+??? pouce "Coup de pouce"
+
+    Relisez la définition d’un paquet : que trouve-t-on sur son étiquette, en plus des données transportées ? Pensez à ce qui arrive si les paquets prennent des chemins différents.
 
 ??? corrige "Corrigé"
 
@@ -65,6 +87,8 @@
     2.  C’est **TCP** qui remet dans l’ordre.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 5</span> — Découper une photo <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-5 }
+
+<span class="duree">≈ 10 min</span>
 
 <span class="tag">sur papier</span>  On envoie une photo de $3$ Mo ($3 \times 10^{6}$ octets). On suppose que chaque paquet transporte $1500$ octets de la photo, et que son étiquette ajoute $40$ octets (on simplifie : en réalité, étiquette comprise, un paquet ne dépasse pas $1500$ octets environ).
 
@@ -94,6 +118,8 @@
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Qui fait quoi ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-6 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  Associer chaque tâche au bon protocole (**IP** ou **TCP**) :
 
 1.  donner une adresse à chaque machine ;
@@ -112,6 +138,8 @@
 
     a\) **IP** \; ; b) **TCP** \; ; c) **IP** \; ; d) **TCP**.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Confier à IP la remise dans l’ordre (d) : IP achemine chaque paquet séparément, sans s’occuper des autres. C’est TCP, à l’arrivée, qui vérifie que tout est là et remet les paquets dans l’ordre.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Fiable mais pas à l’heure <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-7 }
 
 <span class="tag">sur papier</span>  « Internet garantit que mes paquets arriveront, mais pas *quand*. » Expliquer cette phrase, puis dire pourquoi cela peut gêner une **visioconférence** en direct.
@@ -128,9 +156,11 @@
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Suivre un paquet <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-8 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  On considère le réseau de routeurs suivant (PC-A veut joindre PC-B) :
 
-![](../figures/ebf36768c073f390.svg){ .tikz loading=lazy }
+![](../figures/6feffdf6a87b51aa.svg){ .tikz loading=lazy }
 
 1.  Donner **deux** chemins possibles de PC-A vers PC-B.
 
@@ -152,6 +182,8 @@
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Le compteur TTL <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-9 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  Chaque paquet a un compteur « nombre maximal de routeurs » (TTL), qui diminue de 1 à chaque routeur.
 
 1.  À quoi sert ce compteur ? Que devient un paquet dont le compteur atteint 0 ?
@@ -170,9 +202,11 @@
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Le chemin le plus court <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-10 }
 
+<span class="duree">≈ 15 min</span>
+
 <span class="tag">sur papier</span>  Dans le réseau ci-dessous, PC-A envoie des paquets à PC-B. Chaque routeur traversé **ralentit** un peu le paquet.
 
-![](../figures/2e55be10370d336e.svg){ .tikz loading=lazy }
+![](../figures/712c08286028432d.svg){ .tikz loading=lazy }
 
 1.  Quel chemin traverse le **moins** de routeurs ? Combien en traverse-t-il ?
 
@@ -200,7 +234,13 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 11</span> — Est-ce une adresse IPv4 valide ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-11 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  Pour chacune, dire si c’est une adresse IPv4 **valide** et justifier : `192.168.0.1` $\bullet$ `10.0.300.5` $\bullet$ `172.16.4` $\bullet$ `8.8.8.8`.
+
+??? pouce "Coup de pouce"
+
+    Pour chaque adresse, vérifiez deux choses : combien y a-t-il de nombres ? Chacun est-il compris entre $0$ et $255$ ?
 
 ??? corrige "Corrigé"
 
@@ -211,6 +251,8 @@
     - `172.16.4` : **invalide** (seulement 3 nombres).
 
     - `8.8.8.8` : **valide**.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Déclarer `172.16.4` valide parce que chacun de ses nombres est entre $0$ et $255$ : une adresse IPv4 compte *exactement quatre* nombres. Les deux conditions doivent être vérifiées.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Combien d’adresses IPv4 ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-12 }
 
@@ -228,15 +270,23 @@
 
     1.  Chaque nombre prend **256** valeurs (de $0$ à $255$). Nombre d’adresses : $256 \times 256 \times 256 \times 256 = 256^{4} = \mathbf{4\,294\,967\,296}$, soit environ **4 milliards**.
 
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Calculer $256 \times 4 = 1\,024$ : les quatre nombres se choisissent indépendamment, il faut donc *multiplier* $256$ par lui-même quatre fois ($256^4$).
+
     2.  **Non** : il y a moins d’adresses que d’humains ($8$ milliards), alors que chacun peut avoir plusieurs appareils connectés (sans compter les objets connectés et les serveurs). Solution : **IPv6**, aux adresses bien plus longues (des milliards de milliards d’adresses).
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 13</span> — Le rôle du DNS <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-13 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="tag">sur papier</span> 
 
 1.  Que fait le **DNS** ? Dans quel sens traduit-il : de `wikipedia.fr` vers `141.94.212.184` (adresse relevée le 28/09/2026 ; elle peut varier dans le temps et selon le lieu), ou l’inverse ?
 
 2.  Pourquoi utilise-t-on des adresses symboliques plutôt que de taper directement l’adresse IP ?
+
+??? pouce "Coup de pouce"
+
+    Relisez la définition du DNS dans le cours : ce que l’on tape dans le navigateur, est-ce le nom du site ou son numéro ?
 
 ??? corrige "Corrigé"
 
@@ -246,17 +296,21 @@
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Sur machine <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-14 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Dans un terminal, taper `ping wikipedia.fr` (ou un autre site réel). Relever l’**adresse IP** affichée. Recommencer avec un deuxième site. *(But : voir le DNS à l’œuvre.)*
+<span class="run" title="À programmer et tester sur machine">▶</span>  Dans un terminal, taper `nslookup www.gouv.mc` (le site du Gouvernement princier). Relever l’**adresse IP** affichée. Recommencer avec un deuxième site, `www.service-public.fr`, puis taper `ping www.service-public.fr` : retrouve-t-on la même adresse qu’avec `nslookup` ? *(But : voir le DNS à l’œuvre.)*
 
 ??? pouce "Coup de pouce"
 
-    Sous Windows, le terminal s’appelle « Invite de commandes » ; on tape la commande puis Entrée. L’adresse IP apparaît sur la première ligne, souvent entre crochets ou entre parenthèses.
+    Sous Windows, le terminal s’appelle « Invite de commandes » ; on tape la commande puis Entrée. Avec `nslookup`, lisez toute la réponse : les premières lignes concernent le serveur qui répond à votre question, l’adresse du site vient après son nom. Avec `ping`, l’adresse apparaît sur la première ligne.
 
 ??? corrige "Corrigé"
 
-    *Réponse selon le poste.* On observe qu’un **nom** de site est bien associé à une **adresse IP** numérique (c’est le DNS qui a fait la traduction).
+    *Les adresses dépendent du poste, du moment et du lieu : on note celles qui s’affichent.* Chaque **nom** de site est associé à une **adresse IP** numérique : c’est le DNS qui fait la traduction. En général, `ping` et `nslookup` donnent la **même adresse**, car `ping` commence lui aussi par demander l’adresse au DNS avant de tester la liaison. Pour un très gros site, réparti sur plusieurs serveurs, on peut obtenir des adresses différentes d’une fois sur l’autre. Si un serveur ne répond pas au `ping` (certains l’ignorent), son adresse s’affiche quand même : la traduction par le DNS a bien eu lieu.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Relever, dans la réponse de `nslookup`, la première adresse affichée : c’est celle du *serveur DNS* interrogé (souvent la box, en `192.168…`), pas celle du site. L’adresse du site vient après la ligne qui rappelle son nom.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Quand le DNS ne répond plus <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-15 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="tag">sur papier</span>  Un matin, le serveur DNS de votre box tombe en panne ; tout le reste fonctionne.
 
@@ -284,6 +338,10 @@
 
 <span class="tag">sur papier</span>  Classer en deux colonnes (**filaire** / **sans fil**) : Wi-Fi, fibre optique, 4G, Ethernet, Bluetooth, ADSL. Lequel offre le **plus gros débit** ?
 
+??? pouce "Coup de pouce"
+
+    Relisez le tableau des réseaux physiques du cours (colonnes « Filaire ? » et « Débit »). Pour ceux qui n’y figurent pas, demandez-vous s’il faut brancher un câble.
+
 ??? corrige "Corrigé"
 
     - **Filaire** : fibre optique, Ethernet, ADSL.
@@ -299,6 +357,10 @@
 1.  Quelle est la différence entre un modèle **client/serveur** et un modèle **pair-à-pair** ?
 
 2.  Citer un **intérêt** du pair-à-pair, et un **usage illicite** qu’on peut en faire.
+
+??? pouce "Coup de pouce"
+
+    Relisez la section du cours sur le pair-à-pair : dans chaque modèle, quelle machine fournit les fichiers ?
 
 ??? corrige "Corrigé"
 
@@ -325,6 +387,8 @@
     2.  $7$ Zo $=7 \times 10^{21}$ octets ; le préfixe **Zo** (zetta) vaut $10^{21}$.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 19</span> — Le temps d’un téléchargement <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-19 }
+
+<span class="duree">≈ 15 min</span>
 
 <span class="tag">sur papier</span>  Rappel du cours : les débits se mesurent en **bits par seconde** ; $1$ octet $= 8$ bits et $1$ Mbit/s $= 10^{6}$ bits par seconde. On télécharge un film de $4$ Go ($4 \times 10^{9}$ octets).
 
@@ -375,3 +439,62 @@
     2.  L’erreur : « c’est le protocole IP qui s’en aperçoit et redemande le paquet ». IP ne fait qu’acheminer ; c’est **TCP** qui s’aperçoit de la perte, redemande le paquet et remet les paquets dans l’ordre. Correction : remplacer « IP » par « TCP » dans cette phrase.
 
     3.  Reprendre les quatre tâches de l’exercice 6 (« Qui fait quoi ? ») et vérifier que chacune est attribuée au bon protocole : « redemander un paquet perdu » est une tâche de TCP.
+
+### Python au service du thème
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Python au service du thème — paquets et durée d’envoi <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-21 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  En Python (Spyder ou Basthon). Une machine découpe chaque fichier en morceaux de $1500$ octets ; le dernier morceau peut être plus petit, mais il occupe quand même un paquet.
+
+1.  Sans machine : combien de paquets faut-il pour un fichier de $4500$ octets ? de $4501$ octets ? de $700$ octets ?
+
+2.  Compléter la fonction suivante, qui renvoie le nombre de paquets nécessaires pour un fichier de `taille` octets, puis vérifier les réponses de la question 1.
+
+    ```python
+    def nb_paquets(taille):
+        n = taille // 1500
+        if ...:
+            n = ...
+        return n
+    ```
+
+3.  Chaque paquet porte en plus une étiquette de $40$ octets. Écrire une fonction `duree(taille, debit)` qui renvoie la durée d’envoi en secondes, étiquettes comprises, d’un fichier de `taille` octets à `debit` Mbit/s ($1$ octet $= 8$ bits). L’utiliser pour une photo de $4\,500\,000$ octets à $20$ Mbit/s.
+
+    ??? pouce "Coup de pouce"
+
+        Question 2 : `taille // 1500` compte les morceaux complets. Il faut un paquet de plus s’il reste des octets : relisez dans le chapitre *Les bases de Python* l’opérateur qui donne le reste d’une division.
+
+    ??? pouce "Coup de pouce 2 (début de solution)"
+
+        Question 3 : le nombre d’octets envoyés vaut `taille + 40 * nb_paquets(taille)` ; multipliez-le par $8$ pour obtenir des bits, puis divisez par le nombre de bits envoyés chaque seconde, `debit * 1000000`.
+
+??? corrige "Corrigé"
+
+    **1.** $4500 = 3 \times 1500$ : **3** paquets pleins. $4501$ octets : $3$ paquets pleins et il reste $1$ octet, qui occupe un paquet de plus, soit **4** paquets. $700$ octets tiennent dans **1** seul paquet, incomplet.  
+    **2.** `taille // 1500` compte les morceaux complets ; s’il reste des octets (`taille % 1500` n’est pas nul), on ajoute un paquet pour le dernier morceau.
+
+    ```python
+    def nb_paquets(taille):
+        n = taille // 1500
+        if taille % 1500 != 0:
+            n = n + 1
+        return n
+
+    print(nb_paquets(4500))   # 3
+    print(nb_paquets(4501))   # 4
+    print(nb_paquets(700))    # 1
+    ```
+
+    **3.** On ajoute les $40$ octets d’étiquette de chaque paquet, on convertit en bits ($\times 8$), puis on divise par le nombre de bits envoyés chaque seconde :
+
+    ```python
+    def duree(taille, debit):
+        total = taille + 40 * nb_paquets(taille)   # octets envoyes, etiquettes comprises
+        return total * 8 / (debit * 1000000)
+
+    print(duree(4500000, 20))   # 1.848
+    ```
+
+    La photo est découpée en $3000$ paquets, soit $4\,500\,000 + 40 \times 3000 = 4\,620\,000$ octets envoyés, ou $36\,960\,000$ bits : à $20$ Mbit/s, l’envoi dure $\mathbf{1{,}848}$ **s**, un peu moins de deux secondes (sans compter les paquets perdus à renvoyer).
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire seulement `return taille // 1500` : `nb_paquets(4501)` renvoie alors $3$ au lieu de $4$, et le dernier octet n’est jamais envoyé. La division entière « oublie » le reste ; c’est le test sur `taille % 1500` qui le rattrape.

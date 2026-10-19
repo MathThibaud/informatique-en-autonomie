@@ -16,6 +16,8 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Qu’optimise-t-on ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-1 }
 
+<span class="essentiel">• essentiel</span>
+
 Pour chaque problème, dire ce qu’on cherche à **minimiser** ou à **maximiser**.
 
 1.  rendre une somme avec des pièces ;
@@ -24,7 +26,11 @@ Pour chaque problème, dire ce qu’on cherche à **minimiser** ou à **maximise
 
 3.  choisir un trajet passant par plusieurs villes ;
 
-4.  répartir des fichiers sur des CD sans dépasser leur capacité.
+4.  répartir des fichiers sur des CD sans dépasser leur capacité.0
+
+    ??? pouce "Coup de pouce"
+
+        Pour chaque problème, chercher la quantité qui mesure la qualité d’une solution (un nombre de pièces, une valeur, une distance…) : veut-on qu’elle soit la plus petite ou la plus grande possible ?
 
 ??? corrige "Corrigé"
 
@@ -32,7 +38,9 @@ Pour chaque problème, dire ce qu’on cherche à **minimiser** ou à **maximise
 
         On donne **une** version simple ; d’autres écritures sont possibles.
 
-    a\) **minimiser** le nombre de pièces ; b) **maximiser** la valeur emportée ; c) **minimiser** la distance totale ; d) **minimiser** le nombre de CD utilisés.
+    Pour chaque problème, on repère la quantité qui juge une solution, puis le sens dans lequel on veut la pousser. a) **minimiser** le nombre de pièces ; b) **maximiser** la valeur emportée ; c) **minimiser** la distance totale ; d) **minimiser** le nombre de CD utilisés.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> répondre pour le sac à dos « minimiser le poids » : le poids est une *contrainte* (ne pas dépasser la capacité) ; ce que l’on optimise, c’est la valeur.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Vrai ou faux <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-2 }
 
@@ -44,11 +52,17 @@ Répondre et justifier en une phrase.
 
 3.  Un algorithme glouton donne toujours la solution optimale.
 
-4.  Un algorithme glouton est en général rapide.
+4.  Un algorithme glouton est en général rapide.0
+
+    ??? pouce "Coup de pouce"
+
+        Relire la définition de la stratégie gloutonne dans le cours : à chaque étape, combien de choix fait-on, et peut-on les remettre en cause ensuite ? Pour c), penser à un contre-exemple.
 
 ??? corrige "Corrigé"
 
     **a) V**. \; **b) F** : un glouton ne revient *jamais* sur un choix. \; **c) F** : il n’est pas toujours optimal. \; **d) V** : il est en général très rapide (un seul choix par étape).
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> croire qu’un algorithme rapide et « raisonnable » donne forcément la meilleure solution : le système {1, 6, 10} de l’exercice 6 suffit à le contredire.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Les ingrédients <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-3 }
 
@@ -66,13 +80,21 @@ Pour le rendu de monnaie glouton, identifier : (a) les **candidats**, (b) le **c
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Dérouler à la main <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-4 }
 
+<span class="essentiel">• essentiel</span>
+
 Avec les coupures en euros, appliquer la stratégie gloutonne et donner la liste des coupures rendues, puis leur nombre :
 
 1.  8 € b) 27 € c) 63 € d) 199 €
 
+??? pouce "Coup de pouce"
+
+    À chaque étape, prendre la plus grande coupure qui ne dépasse pas la somme restante, puis recalculer ce qui reste. La même coupure peut servir plusieurs fois.
+
 ??? corrige "Corrigé"
 
-    a\) $8 = 5+2+1$ : **3** pièces. \; b) $27 = 20+5+2$ : **3**. \; c) $63 = 50+10+2+1$ : **4**. \; d) $199 = 100+50+20+20+5+2+2$ : **7**.
+    À chaque étape, la plus grande coupure qui ne dépasse pas la somme restante, autant de fois que possible. a) $8 = 5+2+1$ : **3** pièces. \; b) $27 = 20+5+2$ : **3**. \; c) $63 = 50+10+2+1$ : **4**. \; d) $199 = 100+50+20+20+5+2+2$ : **7**.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> ne prendre chaque coupure qu’une seule fois : pour 199, on oublierait le second 20 et le second 2. On garde la même coupure tant qu’elle ne dépasse pas la somme restante.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  La fonction `rendre` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-5 }
 
@@ -126,6 +148,8 @@ def rendre(somme):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Un système qui piège le glouton <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-6 }
 
+<span class="essentiel">• essentiel</span>
+
 Dans un pays imaginaire, les pièces valent **1, 6 et 10**. On rend la somme **12**.
 
 1.  Quelle solution donne l’algorithme glouton (plus grande pièce d’abord) ? Combien de pièces ?
@@ -141,6 +165,8 @@ Dans un pays imaginaire, les pièces valent **1, 6 et 10**. On rend la somme **1
 ??? corrige "Corrigé"
 
     **a)** Glouton : $10$, puis $1$, puis $1$ $\to$ `[10, 1, 1]`, soit **3 pièces**. **b)** Oui : $6 + 6$, soit **2 pièces**. **c)** Le glouton **n’est pas optimal** pour le système {1, 6, 10} : ce système n’est **pas canonique**.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> en conclure que le glouton ne marche jamais : il est optimal pour les systèmes canoniques, comme celui des euros ; un contre-exemple montre seulement qu’il n’est pas optimal *pour ce système*.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Quand le glouton échoue carrément <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-7 }
 
@@ -176,7 +202,11 @@ for p in systeme:
 
 1.  Remettre les lignes dans l’ordre et les indenter correctement.
 
-2.  Que renvoie `rendre_general([4, 3, 1], 6)` ? Est-ce le moins de pièces possible ?
+2.  Que renvoie `rendre_general([4, 3, 1], 6)` ? Est-ce le moins de pièces possible ?0
+
+    ??? pouce "Coup de pouce"
+
+        C’est la fonction `rendre` de l’exercice précédent, avec le système en paramètre. Quelle ligne doit précéder la boucle, laquelle vient tout à la fin ?
 
 ??? corrige "Corrigé"
 
@@ -195,6 +225,8 @@ for p in systeme:
     **b)** `[4, 1, 1]` : 3 pièces. Ce n’est **pas** le minimum, car $3 + 3 = 6$ n’utilise que 2 pièces : le système {4, 3, 1} n’est pas canonique.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 9</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  Tester si un système est canonique <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-9 }
+
+<span class="duree">≈ 20 min</span>
 
 Un système est **canonique** si le glouton y est toujours optimal. On ne teste ici que les sommes de 1 à 30.
 
@@ -240,6 +272,8 @@ Un système est **canonique** si le glouton y est toujours optimal. On ne teste 
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Remplir le sac <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-10 }
 
+<span class="essentiel">• essentiel</span>
+
 Sac de capacité **4 kg**. Objets : A (valeur 30, 2 kg), B (valeur 20, 2 kg), C (valeur 24, 3 kg).
 
 1.  Calculer le rapport **valeur / poids** de chaque objet et les classer du meilleur au moins bon.
@@ -255,6 +289,8 @@ Sac de capacité **4 kg**. Objets : A (valeur 30, 2 kg), B (valeur 20, 2 kg), C 
 ??? corrige "Corrigé"
 
     **a)** Rapports valeur/poids : A $=30/2=\textbf{15}$, B $=20/2=\textbf{10}$, C $=24/3=\textbf{8}$. Classement : A, B, C. **b)** Glouton : A (2 kg, reste 2 kg, valeur 30), B (2 kg, reste 0, valeur 50), C (3 kg) ne rentre pas $\to$ on emporte **A $+$ B**, poids 4 kg, **valeur 50**. **c)** Les combinaisons qui tiennent dans 4 kg : {A}=30, {B}=20, {C}=24, {A,B}=50. La meilleure est A$+$B $=50$ : le glouton était **optimal** ici.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> classer les objets par valeur seule (ou par poids seul) : le critère glouton est le rapport valeur/poids, la valeur apportée par kilogramme.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Un sac à dos où le glouton se trompe <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-11 }
 
@@ -299,9 +335,13 @@ On part de **A**, on visite toutes les villes et on revient à A, en allant à c
 
     **a)** Départ A. Plus proche : B (10). Depuis B, non visitées C (35) et D (25) $\to$ D (25). Depuis D, reste C (30) $\to$ C. Retour C$\to$A (15). Itinéraire **A–B–D–C–A**, distance $10+25+30+15 = \textbf{80}$ km. **b)** A–C–B–D–A $= 15+35+25+20 = 95$ km, donc **plus long**. Ici la solution gloutonne (80 km) est en fait la **meilleure** — mais ce n’**est pas garanti** : sur de nombreuses villes, le glouton « plus proche voisin » est rarement optimal (cf. cours).
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> oublier le retour à la ville de départ dans la distance totale : le trajet doit revenir en A.
+
 ### Mini-problème de synthèse
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Le distributeur de billets <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-13 }
+
+<span class="duree">≈ 15 min</span>
 
 Un distributeur ne contient que des billets de **50, 20 et 10** euros. On retire une somme (multiple de 10).
 
@@ -353,3 +393,49 @@ def rendre(somme, pieces):
 ??? corrige "Corrigé"
 
     **a)** Non. Avec `pieces = [4, 3, 1]` et `somme = 6`, la fonction renvoie `[4, 1, 1]` (3 pièces), alors que `[3, 3]` rend 6 avec **2 pièces**. **b)** Le *code* est bien un glouton ; l’erreur est dans l’*explication* : « quel que soit le système de pièces ». Le glouton n’est optimal que pour les systèmes **canoniques** (comme les euros). Correction : « elle donne le nombre minimal de pièces *pour un système canonique* ; pour un autre système, la solution peut ne pas être optimale, et même ne pas rendre la somme du tout s’il n’y a pas de pièce de 1 ». Par exemple, `rendre(4, [3, 2])` renvoie `[3]` : il reste 1 à rendre, alors que $2 + 2$ convenait. Une version sûre vérifie à la fin que `somme == 0`. **c)** Tester la fonction sur un petit système **non canonique**, comme celui du cours ({1, 6, 10} pour 12 : le glouton donne 3 pièces, $6 + 6$ en donne 2). Une affirmation en « toujours » se réfute avec un seul contre-exemple.
+
+### Entraînement
+
+*Exercices courts pour s’entraîner aux gestes de base, chacun avec plusieurs données. Ils font tous partie du parcours essentiel.*
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 15</span> — Le glouton dans d’autres systèmes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-15 }
+
+<span class="essentiel">• essentiel</span>
+
+Pour chaque système de pièces et chaque somme, appliquer le rendu glouton, donner les pièces rendues et leur nombre, puis dire s’il existe une solution avec moins de pièces.
+
+1.  système {1, 2, 5, 10}, somme 14 ;
+
+2.  système {1, 4, 6}, somme 8 ;
+
+3.  système {1, 5, 12}, somme 15 ;
+
+4.  système {1, 10, 25}, somme 30.
+
+??? pouce "Coup de pouce"
+
+    Le glouton commence toujours par la plus grande pièce qui ne dépasse pas la somme restante. Pour chercher mieux, essayer de ne pas prendre cette plus grande pièce.
+
+??? corrige "Corrigé"
+
+    a) $10 + 2 + 2$ : 3 pièces, c’est le minimum. b) $6 + 1 + 1$ : 3 pièces ; mieux : $4 + 4$ (2 pièces). c) $12 + 1 + 1 + 1$ : 4 pièces ; mieux : $5 + 5 + 5$ (3 pièces). d) $25 + 1 + 1 + 1 + 1 + 1$ : 6 pièces ; mieux : $10 + 10 + 10$ (3 pièces). Seul le système a) (celui des euros, réduit) est sans piège ici : les trois autres ne sont pas canoniques.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 16</span> — Le sac à dos glouton <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-16 }
+
+<span class="essentiel">• essentiel</span>
+
+Pour chaque sac, calculer le rapport valeur/poids des objets, appliquer le glouton (meilleur rapport d’abord, tant que l’objet rentre), puis comparer à la meilleure combinaison possible.
+
+1.  capacité 10 kg ; objets A (valeur 40, 5 kg), B (valeur 30, 4 kg), C (valeur 12, 3 kg) ;
+
+2.  capacité 6 kg ; objets A (valeur 30, 4 kg), B (valeur 18, 3 kg), C (valeur 18, 3 kg).
+
+??? pouce "Coup de pouce"
+
+    Après chaque objet pris, noter la place qui reste. Un objet qui ne rentre pas est simplement sauté. Pour la meilleure combinaison, lister toutes celles qui respectent la capacité.
+
+??? corrige "Corrigé"
+
+    a) Rapports : A $= 40/5 = 8$, B $= 30/4 = 7{,}5$, C $= 12/3 = 4$. Glouton : A (reste 5 kg), B (reste 1 kg), C ne rentre pas : valeur **70**. Combinaisons possibles : {A, B} $= 70$, {A, C} $= 52$, {B, C} $= 42$ ({A, B, C} pèse 12 kg) : le glouton est **optimal**. b) Rapports : A $= 7{,}5$, B $= C = 6$. Glouton : A (reste 2 kg), ni B ni C ne rentrent : valeur **30**. Or {B, C} pèse 6 kg et vaut **36** : le glouton se trompe de 6.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> chercher la meilleure combinaison sans vérifier son poids : en a), {A, B, C} vaudrait 82, mais pèse 12 kg et ne rentre pas dans le sac.

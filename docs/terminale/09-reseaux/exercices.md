@@ -12,6 +12,8 @@ Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title=
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Qui fait quoi ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-09-1 }
 
+<span class="essentiel">• essentiel</span>
+
 1.  Quelle est la différence entre un **switch** et un **routeur** ?
 
 2.  Deux machines du *même* réseau local doivent-elles passer par un routeur pour communiquer ?
@@ -19,6 +21,10 @@ Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title=
 3.  Qu’est-ce qu’une **interface** d’un routeur ? Pourquoi un routeur en a-t-il plusieurs ?
 
 4.  Compléter : « Internet est l’interconnexion de … par des … ».
+
+??? pouce "Coup de pouce"
+
+    Relire dans le cours le rôle de chaque appareil : lequel travaille à l’intérieur d’un réseau local, lequel fait passer les paquets d’un réseau à un autre ? Pour la question 3 : sur combien de réseaux un routeur est-il branché ?
 
 ??? corrige "Corrigé"
 
@@ -38,6 +44,10 @@ On considère la machine d’adresse `192.168.1.37/24`.
 
 4.  Pourquoi l’écriture `192.168.1.300` ne peut-elle pas être une adresse IPv4 ?
 
+??? pouce "Coup de pouce"
+
+    Chaque nombre de l’adresse occupe un octet. Pour la conversion, décomposer chaque nombre en somme de puissances de $2$ ($128$, $64$, $32$…, $1$). Le `/24` indique combien de bits, en partant de la gauche, forment la partie réseau.
+
 ??? corrige "Corrigé"
 
     **1.** $4$ octets, soit $4 \times 8 = \textbf{32}$ bits.  
@@ -45,7 +55,11 @@ On considère la machine d’adresse `192.168.1.37/24`.
     **3.** `/24` : les $24$ premiers bits (les trois premiers octets) forment la partie **réseau**, `192.168.1` ; les $8$ derniers bits forment la partie **machine**, ici $37$.  
     **4.** Chaque nombre est un octet ($8$ bits), donc compris entre $0$ et $2^8 - 1 = 255$ : $300$ ne tient pas sur un octet.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire $1$ sous la forme `1` au lieu de `00000001` : chaque octet compte exactement $8$ bits, zéros de tête compris.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Même réseau ou pas ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-09-3 }
+
+<span class="essentiel">• essentiel</span>
 
 *Rappels :* avec un masque `/n`, les `n` premiers bits donnent la partie « réseau ». L’adresse dont tous les bits d’hôte valent $0$ est l’**adresse du réseau** ; celle dont ils valent tous $1$ est l’**adresse de diffusion** (*broadcast*).
 
@@ -64,6 +78,8 @@ On considère la machine d’adresse `192.168.1.37/24`.
     **1.** `192.168.16.12` et `192.168.16.240` (masque `/24`) : mêmes 24 premiers bits (`192.168.16`) $\Rightarrow$ **même** réseau. `192.168.16.12` et `192.168.17.3` : le 3<sup>e</sup> octet diffère ($16 \neq 17$) $\Rightarrow$ réseaux **différents** (il faut un routeur).  
     **2.** Réseau de `192.168.16.12/24` : adresse du réseau `192.168.16.0`, diffusion `192.168.16.255`. Nombre de machines : $2^{8} - 2 = \textbf{254}$ (8 bits d’hôte, moins l’adresse réseau et l’adresse de diffusion).  
     **3.** `172.16.5.3/16` : adresse réseau `172.16.0.0` ; hôtes sur $32-16=16$ bits $\Rightarrow 2^{16}-2 = \textbf{65\,534}$ machines.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Annoncer $2^8 = 256$ machines pour un `/24` : l’adresse du réseau et l’adresse de diffusion ne peuvent pas être attribuées à une machine, il en reste $254$.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Dimensionner les réseaux d’une entreprise <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-4 }
 
@@ -105,6 +121,8 @@ L’entreprise **CaféNet** raccorde plusieurs sites. Pour chacun, on veut chois
 ### Le modèle en couches
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Des enveloppes emboîtées <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-09-5 }
+
+<span class="essentiel">• essentiel</span>
 
 Depuis son ordinateur portable relié en Wi-Fi, Léa ouvre une page web : son navigateur envoie une requête **HTTP** à un serveur situé à l’autre bout d’Internet. Le paquet traverse **trois routeurs** avant d’arriver.
 
@@ -154,6 +172,10 @@ Un routeur A a la table de routage suivante :
 
 3.  Que signifie une métrique de $0$ ?
 
+??? pouce "Coup de pouce"
+
+    Une métrique de $0$ correspond à un réseau atteint par une interface du routeur lui-même. Pour les autres lignes, la colonne « Sortir par » indique à qui le routeur confie le paquet.
+
 ??? corrige "Corrigé"
 
     **1.** R1 et R3 (métrique $0$, atteints par une interface propre, eth0 et eth2). **2.** A transmet le paquet au **routeur G** (qui saura continuer). **3.** Métrique $0$ $=$ réseau **directement raccordé** au routeur.
@@ -162,9 +184,11 @@ Un routeur A a la table de routage suivante :
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Construire une table RIP <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-09-7 }
 
+<span class="essentiel">• essentiel</span>
+
 On considère le réseau ci-dessous (les nombres sont les débits en Mbps ; on les **ignore** pour RIP). Chaque routeur dessert son propre réseau local.
 
-![](../figures/d4bb5f6ef25d59e1.svg){ .tikz .tikz-inline loading=lazy }
+![](../figures/f22336cf06a8e044.svg){ .tikz .tikz-inline loading=lazy }
 
 1.  Donner, pour le routeur **A**, le nombre de sauts vers chacun des routeurs B, C, D, E (métrique RIP).
 
@@ -188,6 +212,8 @@ On considère le réseau ci-dessous (les nombres sont les débits en Mbps ; on l
     | réseau de D |      B      |   2   |
     | réseau de E |      B      |   2   |
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire dans la colonne « sortir vers » le routeur de destination (D) au lieu du **premier** voisin du chemin (B) : un routeur ne connaît que le prochain saut.
+
     **3.** La métrique est plafonnée à $15$ (au-delà, réseau réputé inaccessible) ; et l’envoi périodique (toutes les 30 s) de toute la table à tous les voisins **sature** un grand réseau.
 
 ### Le protocole OSPF
@@ -202,13 +228,21 @@ En OSPF, le coût d’une liaison vaut $10^8/\text{débit}$, le débit étant ex
 
 3.  Un chemin emprunte une liaison à $1$ Gbit/s puis deux liaisons à $50$ Mbit/s. Quel est son coût total ?
 
+??? pouce "Coup de pouce"
+
+    Convertir d’abord chaque débit en bit/s, puis diviser $10^8$ par ce débit. Plus le coût est petit, plus la liaison est intéressante ; le coût d’un chemin est la somme des coûts de ses liaisons.
+
 ??? corrige "Corrigé"
 
     **1.** $1$ Gbit/s : $10^8/10^9 = \textbf{0,1}$ ; \; $50$ Mbit/s : $10^8/(5 \times 10^7) = \textbf{2}$ ; \; $20$ Mbit/s : $10^8/(2 \times 10^7) = \textbf{5}$.  
     **2.** OSPF préfère le coût le plus **petit** : $1$ Gbit/s (coût $0{,}1$), puis $50$ Mbit/s (coût $2$), puis $20$ Mbit/s (coût $5$).  
     **3.** $0{,}1 + 2 + 2 = \textbf{4,1}$.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Diviser $10^8$ par le débit exprimé en Mbit/s ($10^8/50$) : il faut d’abord convertir le débit en bit/s ($50$ Mbit/s $= 5\times 10^7$ bit/s).
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Coûts, table OSPF, et duel avec RIP <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-9 }
+
+<span class="essentiel">• essentiel</span>
 
 On reprend **le même réseau**, mais cette fois les nombres sont les **débits** qui servent à calculer les coûts OSPF ($\text{coût}=10^8/\text{débit}$).
 
@@ -234,16 +268,21 @@ On reprend **le même réseau**, mais cette fois les nombres sont les **débits*
     | réseau de D |      C      | 4 (A–C–B–E–D) |
     | réseau de E |      C      |  3 (A–C–B–E)  |
 
-    Pour D, on compare par exemple A–B–D ($100+10=110$), A–C–B–D ($1+1+10=12$) et A–C–B–E–D ($1+1+1+1=4$) : le chemin le plus long en nombre de liaisons est le moins coûteux.  
+    Pour D, on compare par exemple A–B–D ($100+10=110$), A–C–B–D ($1+1+10=12$) et A–C–B–E–D ($1+1+1+1=4$) : le chemin le plus long en nombre de liaisons est le moins coûteux.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Prendre pour OSPF le chemin qui a le moins de liaisons : OSPF additionne les coûts des liaisons, et ici le meilleur chemin vers D en compte quatre.
+
     **3.** Les deux protocoles **divergent** pour B, D et E : RIP prend le lien **direct** A–B ($1$ saut vers B, puis A–B–D et A–B–E en $2$ sauts) ; OSPF passe par C (A–C–B, A–C–B–E–D, A–C–B–E). En effet A–B n’a qu’un débit de $1$ Mbps (coût $100$), et B–D seulement $10$ Mbps (coût $10$) : RIP ne « voit » pas cette lenteur, OSPF si. Seule la route vers C est la même (lien direct A–C).
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Dijkstra derrière OSPF <span class="horsprog">au-delà du programme</span> <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-10 }
+
+<span class="duree">≈ 45 min</span>
 
 *Cet exercice va **au-delà du programme officiel** : au bac, les tables de routage sont données, ou se lisent sur un petit réseau. Il sert à comprendre ce que fait vraiment un routeur OSPF.*
 
 Voici un réseau de six routeurs ; les nombres sont les **débits** des liaisons, en Mbit/s. On rappelle : $\text{coût}=10^8/\text{débit}$ (débit en bit/s).
 
-![](../figures/7f1ea32d0cd9c8d8.svg){ .tikz loading=lazy }
+![](../figures/de6aa1cfd661a910.svg){ .tikz loading=lazy }
 
 1.  Calculer le coût OSPF de chaque liaison et le reporter sur un schéma.
 
@@ -251,13 +290,13 @@ Voici un réseau de six routeurs ; les nombres sont les **débits** des liaisons
 
     ??? pouce "Coup de pouce"
 
-        Reprendre le principe rappelé dans le cours : à chaque tour, fixer le sommet non traité de plus petite distance provisoire, puis relâcher ses liaisons (`si distance[u] + coût(u,v) < distance[v]`…).
+        Question 2 : reprendre le principe rappelé dans le cours : à chaque tour, fixer le sommet non traité de plus petite distance provisoire, puis relâcher ses liaisons (`si distance[u] + coût(u,v) < distance[v]`…).
 
 3.  En déduire la table de routage OSPF de `A` (réseau visé, sortir vers, coût total).
 
     ??? pouce "Coup de pouce"
 
-        La colonne « sortir vers » est le **premier** routeur du chemin : remonter les prédécesseurs depuis la destination jusqu’à `A`.
+        Question 3 : la colonne « sortir vers » est le **premier** routeur du chemin : remonter les prédécesseurs depuis la destination jusqu’à `A`.
 
 4.  Par quelle route RIP enverrait-il un paquet de `A` vers le réseau de `B` ? Et OSPF ? Expliquer.
 
@@ -303,9 +342,11 @@ Voici un réseau de six routeurs ; les nombres sont les **débits** des liaisons
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 11</span> — Réseau d’un établissement *(d’après La Réunion 2023, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-11 }
 
+<span class="duree">≈ 60 min</span>
+
 Un ensemble scolaire « Établissement » regroupe plusieurs sites (l’Administration, l’école primaire, le collège, le lycée général, le lycée professionnel). Les postes de chaque site sont reliés entre eux par des commutateurs (switchs), eux-mêmes reliés à des routeurs. R1, R2, R3, R4, R5 et R6 sont les routeurs de l’établissement ; la figure 1 montre leurs liaisons et le routeur qui dessert trois des secteurs.
 
-![](../figures/0592b1c2e6713e0b.svg){ .tikz loading=lazy }  
+![](../figures/8e20d5b6f6149f1f.svg){ .tikz loading=lazy }  
 Figure 1 : les routeurs de l’établissement (en pointillés : le routeur qui dessert un secteur)
 
 **Rappels.** Une adresse IPv4 est composée de $4$ octets, soit $32$ bits, notée `A.B.C.D`. La notation `A.B.C.D/n` signifie que les $n$ premiers bits de l’adresse représentent la partie « réseau », les bits suivants la partie « hôte » ; les $n$ premiers bits du masque valent donc $1$, les autres $0$. L’adresse dont tous les bits de la partie hôte sont à $0$ est l’*adresse du réseau* ; celle dont tous les bits de la partie hôte sont à $1$ est l’*adresse de diffusion*.
@@ -497,7 +538,7 @@ Figure 1 : les routeurs de l’établissement (en pointillés : le routeur qui d
 
     2.  Recopier le schéma ci-dessous et indiquer le coût de chacune des liaisons connues.
 
-        ![](../figures/63d0d420b357e09b.svg){ .tikz loading=lazy }  
+        ![](../figures/eaf45efecb5f4d3f.svg){ .tikz loading=lazy }  
         Figure 2 : types des liaisons entre les routeurs
 
     3.  On sait que le parcours R6 – R4 – R5 – R2 a un coût de $11{,}1$. Déterminer le type de liaison entre R6 et R4.
@@ -513,6 +554,8 @@ Figure 1 : les routeurs de l’établissement (en pointillés : le routeur qui d
             Question 4 (c) : écrire $11{,}1 = \text{coût}(\text{R6--R4}) + \text{coût}(\text{R4--R5}) + \text{coût}(\text{R5--R2})$, lire les deux derniers coûts sur le schéma complété, puis retrouver le type de liaison dans le tableau.
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 8) : Q1 : 0,5 ; Q2.a : 0,5 ; Q2.b : 0,5 ; Q2.c : 0,5 ; Q3.a : 1 ; Q3.b : 0,5 ; Q3.c : 0,5 ; Q4.a : 1 ; Q4.b : 1 ; Q4.c : 1 ; Q4.d : 1
 
     **1.** $162 = 128+32+2 = \texttt{10100010}$ et $4 = \texttt{00000100}$ : `11000000.10101000.10100010.00000100`.  
     **2.** (a) Avec `/24`, les trois premiers octets forment la partie réseau : adresse du réseau `192.168.16.0`, masque `255.255.255.0`.  
@@ -611,16 +654,18 @@ Figure 1 : les routeurs de l’établissement (en pointillés : le routeur qui d
     **4.** (a) Ethernet : $d = 10^{8}/10 = 10^{7}$ bit/s. Fast-Ethernet : $10^{8}/10^{8} = 1$. Fibre : $10^{8}/10^{9} = 0{,}1$.  
     (b) Ethernet $\to 10$, Fast-Ethernet $\to 1$, Fibre $\to 0{,}1$ (la liaison R6–R4 reste inconnue) :
 
-    ![](../figures/b7923dd540e53d46.svg){ .tikz loading=lazy }
+    ![](../figures/e05913228c988633.svg){ .tikz loading=lazy }
 
     \(c\) Coût(R6–R4) $+ 10 + 0{,}1 = 11{,}1$, donc coût(R6–R4) $= 1$ : c’est une liaison **Fast-Ethernet**.  
     (d) Le Lycée général est desservi par R2. On compare les coûts des routes de R6 à R2 : R6–R1–R5–R2 : $1 + 1 + 0{,}1 = \textbf{2{,}1}$ ; R6–R1–R5–R3–R2 : $3{,}1$ ; toutes les routes passant par R4 coûtent au moins $1 + 10 + 0{,}1 = 11{,}1$. OSPF choisit donc **PC Admin 01 $\to$ R6 $\to$ R1 $\to$ R5 $\to$ R2 $\to$ PC LG 01**.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Des adresses, RIP puis OSPF *(d’après Centres étrangers 2023, jour 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-12 }
 
+<span class="duree">≈ 30 min</span>
+
 Voici un réseau dans lequel A, B, C, D, E, F, G et H sont des routeurs ; chaque liaison est étiquetée par l’adresse du réseau qui relie les deux routeurs.
 
-![](../figures/4865273365e772f3.svg){ .tikz loading=lazy }
+![](../figures/ef23dea0035f7b3a.svg){ .tikz loading=lazy }
 
 Les adresses IPv4 sont composées de $4$ octets, notées `X1.X2.X3.X4` en décimal. La notation CIDR `X1.X2.X3.X4/n` signifie que les $n$ premiers bits de poids forts représentent la partie « réseau », les suivants la partie « hôte ». Tous les hôtes d’un même réseau local ont la même partie réseau ; l’adresse dont tous les bits de la partie hôte sont à $0$ est l’*adresse du réseau*.
 
@@ -634,7 +679,7 @@ Les adresses IPv4 sont composées de $4$ octets, notées `X1.X2.X3.X4` en décim
 
 Voici maintenant le type de connexion entre les routeurs :
 
-![](../figures/bbc41015a995641c.svg){ .tikz loading=lazy }
+![](../figures/a1722acb6520864e.svg){ .tikz loading=lazy }
 
 On travaille avec le protocole OSPF. Le coût d’une liaison est donné par $\text{coût} = 10^{9}/BP$, où $BP$ est la bande passante en bit/s, estimée selon le type de connexion : Ethernet $10^{8}$, Fast-Ethernet $10^{9}$, Fibre $10^{10}$.
 
@@ -650,22 +695,28 @@ On travaille avec le protocole OSPF. Le coût d’une liaison est donné par $\t
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 4) : Q1.a : 0,5 ; Q1.b : 0,5 ; Q2 : 0,75 ; Q3.a : 0,75 ; Q3.b : 0,75 ; Q3.c : 0,75
+
     **1.** (a) $2 = \texttt{00000010}$ et $13 = 8+4+1 = \texttt{00001101}$ : `10100100.10110010.00000010.00001101`.  
     (b) Avec `/24`, les $24$ premiers bits (les trois premiers octets) forment la partie réseau ; on met les $8$ bits d’hôte à $0$ : adresse du réseau `164.178.2.0`.  
     **2.** Il faut au minimum $3$ sauts, et trois chemins les réalisent : **A–B–E–G**, **A–D–E–G** et **A–D–F–G**.
 
     **3.** (a) Coûts $10^9/BP$ : Ethernet $10^9/10^8 = 10$ ; Fast-Ethernet $10^9/10^9 = 1$ ; Fibre $10^9/10^{10} = 0{,}1$.
 
-    ![](../figures/4f7c522085a1fb37.svg){ .tikz loading=lazy }
+    ![](../figures/91729223d8887046.svg){ .tikz loading=lazy }
 
     \(b\) OSPF choisit le chemin de coût total minimal : **A–D–F–G**, de coût $10+1+1 = 12$ (devant A–B–C–H–G : $1+10+0{,}1+1 = 12{,}1$).  
     (c) Sans F, le meilleur chemin est **A–B–C–H–G**, de coût $12{,}1$ (A–D–E–G coûte $20{,}1$).
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Reprendre la formule du cours ($10^8/\text{débit}$) alors que l’énoncé donne $\text{coût} = 10^9/BP$ : on applique toujours la formule de l’énoncé.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Bob écrit à Alice *(d’après Sujet zéro 2023, sujet A)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-13 }
+
+<span class="duree">≈ 30 min</span>
 
 Bob et Alice communiquent au travers du réseau ci-dessous, dont le protocole de routage est OSPF, qui minimise le coût des communications (LAN : réseau local ; WAN : réseau étendu ; R : routeur ; Sw : switch).
 
-![](../figures/5a3e02bda2ddb319.svg){ .tikz loading=lazy }
+![](../figures/8cb3ecc27cfc97a5.svg){ .tikz loading=lazy }
 
 Une adresse IPv4 est composée de quatre octets, soit $32$ bits. La notation `/n` signifie que les $n$ premiers bits de l’adresse forment la partie « réseau » et les suivants la partie « machine ». L’adresse dont tous les bits machine sont à $0$ est l’adresse du réseau, celle dont ils sont tous à $1$ l’adresse de diffusion : ces deux adresses ne peuvent pas être attribuées à des machines. Le choix des routes est uniquement basé sur OSPF, avec un débit de référence de $10\,000$ Mbit/s : $$\text{coût} = \frac{\text{débit de référence}}{\text{débit du réseau concerné}}.$$
 
@@ -1018,6 +1069,8 @@ Une adresse IPv4 est composée de quatre octets, soit $32$ bits. La notation `/n
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 4) : Q1 : 0,75 ; Q2 : 0,5 ; Q3 : 1 ; Q4 : 0,75 ; Q5 : 1
+
     **1.** Avec le masque `/24`, `172.16.2.3` appartient au réseau `172.16.2.0/24`, c’est-à-dire **LAN2** (la passerelle `172.16.2.253` est l’interface de R6 sur ce réseau) : c’est l’ordinateur d’**Alice**.  
     **2.** $\text{coût} = 10\,000 / 1\,000 = \mathbf{10}$.
 
@@ -1044,9 +1097,11 @@ Une adresse IPv4 est composée de quatre octets, soit $32$ bits. La notation `/n
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Du réseau local L1 au réseau local L2 *(d’après Centres étrangers 2024, groupe 1, jour 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-14 }
 
+<span class="duree">≈ 45 min</span>
+
 *Rappels.* Une adresse IPv4 est composée de $4$ octets, soit $32$ bits, notée `a.b.c.d` (« notation décimale pointée »). La notation CIDR `a.b.c.d/n` signifie que les $n$ premiers bits de l’adresse représentent la partie réseau, les bits suivants la partie machine. L’adresse dont tous les bits machine sont à $0$ est l’*adresse du réseau* ; celle dont ils sont tous à $1$ est l’*adresse de diffusion*. On considère le réseau suivant :
 
-![](../figures/347f639f171c9550.svg){ .tikz loading=lazy }
+![](../figures/337192f16281e3da.svg){ .tikz loading=lazy }
 
 **Partie A — Adresses IP**
 
@@ -1106,6 +1161,8 @@ La liaison entre H et D est rétablie. Pour tenir compte du débit des liaisons,
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 6) : Q1 : 0,5 ; Q2 : 0,5 ; Q3 : 0,5 ; Q4 : 0,5 ; Q5 : 0,5 ; Q6 : 0,5 ; Q7 : 1 ; Q8 : 0,75 ; Q9 : 0,5 ; Q10 : 0,75
+
     **Partie A.** **1.** `255.255.0.0`. **2.** On garde les $16$ premiers bits de `172.16.8.8` : adresse du réseau `172.16.0.0`. **3.** On met les $16$ bits machine à $1$ : diffusion `172.16.255.255`. **4.** $2^{16} - 2 = \mathbf{65\,534}$ machines (on retire l’adresse du réseau et celle de diffusion).
 
     **Partie B.** **5.** A envoie vers la passerelle `53.10.10.2`, interface de H ; H envoie vers `53.10.10.6`, interface de D, qui est connecté à L2 : **A $\to$ H $\to$ D**.
@@ -1128,9 +1185,11 @@ La liaison entre H et D est rétablie. Pour tenir compte du débit des liaisons,
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Le réseau d’une société *(d’après Métropole septembre 2024, jour 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-15 }
 
+<span class="duree">≈ 30 min</span>
+
 Le réseau informatique d’une société est constitué de routeurs interconnectés par des fibres optiques. Il comporte deux réseaux locaux : L1, relié au routeur R1, et L2, relié au routeur R9.
 
-![](../figures/72c1d380d9b2c5ae.svg){ .tikz loading=lazy }
+![](../figures/f14a546a98d4d360.svg){ .tikz loading=lazy }
 
 **Partie A.** Les adresses IP sont notées `X1.X2.X3.X4`, et `X1.X2.X3.X4/n` signifie que les $n$ premiers bits de poids forts représentent la partie réseau. Toutes les machines d’un réseau local ont la même partie réseau. Voici les adresses IPv4 du réseau de la société :
 
@@ -1165,7 +1224,7 @@ Le réseau informatique d’une société est constitué de routeurs interconnec
 
 **Partie C.** On utilise maintenant le protocole OSPF. Le poids de chaque arête ci-dessous est la bande passante de la liaison, en mégabits par seconde (Mb/s), et le coût d’une liaison est $C = \dfrac{10^{8}}{BP}$, où $BP$ est la bande passante en bits par seconde.
 
-![](../figures/1ac3abfd59fd23e7.svg){ .tikz loading=lazy }
+![](../figures/49de6ec34a4f05e3.svg){ .tikz loading=lazy }
 
 1.  Déterminer la route empruntée par un paquet allant de l’ordinateur P1 à l’ordinateur P3. Préciser le coût de ce trajet.
 
@@ -1175,8 +1234,12 @@ Le réseau informatique d’une société est constitué de routeurs interconnec
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 4) : Q1 : 0,5 ; Q2 : 0,75 ; Q3 : 1,25 ; Q4 : 0,5 ; Q5 : 1
+
     **Partie A.** **1.** P1 (`192.168.1.10`) et l’interface 1 de R1 (`192.168.1.1/24`) sont dans le réseau L1 `192.168.1.0/24`. P2 peut prendre toute adresse libre de ce réseau, par exemple `192.168.1.11` (ni `.0`, ni `.255`, ni `.1`, ni `.10`).  
     **2.** L2 est relié à l’interface 3 de R9, `192.168.18.1/24` : adresse du réseau `192.168.18.0`. Il y a $2^8 - 2 = 254$ adresses de machines, dont une prise par R9 : **253** adresses possibles pour P3 et P4.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Répondre $254$ en oubliant que l’interface de R9 occupe déjà une adresse du réseau L2.
 
     **Partie B.** **3.** Table RIP de R1 :
 
@@ -1201,7 +1264,9 @@ Le réseau informatique d’une société est constitué de routeurs interconnec
 
 Un élève demande à un assistant d’IA : « Quelle est la différence entre RIP et OSPF, et comment calcule-t-on la métrique d’une route en OSPF ? » Voici la réponse obtenue :
 
-> « RIP et OSPF sont deux protocoles de routage dynamique : ils remplissent automatiquement les tables de routage. RIP mesure une route par son nombre de sauts (le nombre de routeurs traversés) ; chaque routeur échange périodiquement sa table avec ses voisins (algorithme de Bellman-Ford), et une destination à plus de 15 sauts est considérée comme inaccessible. OSPF, lui, connaît la carte complète du réseau et applique l’algorithme de Dijkstra : la métrique d’une route est la somme des coûts des liaisons traversées. Le coût d’une liaison se calcule à partir de son débit par la formule $\text{coût} = \text{débit} / 10^8$ (débit en bits par seconde) : une liaison à 100 Mbit/s coûte donc 1. Ainsi, OSPF tient compte de la vitesse des liaisons, contrairement à RIP qui traite de la même façon une fibre et une liaison lente. »
+!!! encadre "Réponse de l’assistant"
+
+    « RIP et OSPF sont deux protocoles de routage dynamique : ils remplissent automatiquement les tables de routage. RIP mesure une route par son nombre de sauts (le nombre de routeurs traversés) ; chaque routeur échange périodiquement sa table avec ses voisins (algorithme de Bellman-Ford), et une destination à plus de 15 sauts est considérée comme inaccessible. OSPF, lui, connaît la carte complète du réseau et applique l’algorithme de Dijkstra : la métrique d’une route est la somme des coûts des liaisons traversées. Le coût d’une liaison se calcule à partir de son débit par la formule $\text{coût} = \text{débit} / 10^8$ (débit en bits par seconde) : une liaison à 100 Mbit/s coûte donc 1. Ainsi, OSPF tient compte de la vitesse des liaisons, contrairement à RIP qui traite de la même façon une fibre et une liaison lente. »
 
 1.  La réponse est-elle correcte ? La vérifier par un calcul : avec la formule de l’assistant, quel est le coût d’une liaison à $1$ Mbit/s ? à $100$ Mbit/s ? Laquelle OSPF préférerait-il alors ?
 
@@ -1225,7 +1290,7 @@ Un élève demande à un assistant d’IA : « Quelle est la différence entre R
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-09-17 }
 
-Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
+Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans lire ses notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 
 1.  Expliquer comment un paquet trouve son chemin à travers plusieurs réseaux grâce aux **tables de routage**.
 
@@ -1233,7 +1298,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
 3.  Expliquer à un camarade de Première pourquoi un **protocole de routage** est nécessaire, au lieu de remplir les tables à la main.
 
-**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus, puis retourner la feuille. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire de notes** : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
+**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus : comme au Grand Oral, ces notes servent d’aide-mémoire. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire ses notes** et sans rien écrire : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
 
 ??? pouce "Coup de pouce"
 
@@ -1306,3 +1371,164 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
     - Exemple : une liaison est coupée ; les routeurs voisins s’en aperçoivent et recalculent une route qui la contourne.
 
     - Lien avec les graphes : routeurs $=$ sommets, liaisons $=$ arêtes pondérées ; on cherche un plus court chemin.
+
+### Entraînement
+
+Des séries courtes pour rendre une méthode automatique : même consigne, données différentes. Les réponses sont brèves dans le corrigé.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 18</span> — Adresses de réseau en série <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-09-18 }
+
+<span class="essentiel">• essentiel</span>
+
+Pour chacune des machines ci-dessous, donner l’**adresse du réseau**, l’**adresse de diffusion** et le **nombre maximal de machines** de ce réseau.
+
+??? pouce "Coup de pouce"
+
+    Avec un masque `/24`, les trois premiers octets forment la partie réseau ; avec `/16`, les deux premiers ; avec `/8`, le premier. L’adresse du réseau met tous les octets de la partie machine à $0$, l’adresse de diffusion les met tous à $255$. Pour le nombre de machines, compter les bits de la partie machine, sans oublier les deux adresses réservées.
+
+1.  `192.168.42.17/24`
+
+2.  `172.20.3.200/16`
+
+3.  `10.4.7.19/8`
+
+4.  `192.168.43.250/24`
+
+5.  Les machines des questions a) et d) peuvent-elles communiquer sans passer par un routeur ?
+
+??? corrige "Corrigé"
+
+    **a)** Réseau `192.168.42.0`, diffusion `192.168.42.255`, $2^8 - 2 = 254$ machines.  
+    **b)** Réseau `172.20.0.0`, diffusion `172.20.255.255`, $2^{16} - 2 = 65\,534$ machines.  
+    **c)** Réseau `10.0.0.0`, diffusion `10.255.255.255`, $2^{24} - 2 = 16\,777\,214$ machines.  
+    **d)** Réseau `192.168.43.0`, diffusion `192.168.43.255`, $254$ machines.  
+    **e)** Non : avec le masque `/24`, leurs parties réseau diffèrent (troisième octet $42 \neq 43$) ; elles sont dans deux réseaux différents, et il faut un routeur.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> En b), mettre à $0$ le seul dernier octet (`172.20.3.0`) : avec `/16`, la partie machine compte **deux** octets, qui passent tous les deux à $0$ (ou à $255$ pour la diffusion).
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 19</span> — Tables RIP en série <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-09-19 }
+
+<span class="essentiel">• essentiel</span>
+
+Dans chacun des réseaux ci-dessous, chaque routeur dessert son propre réseau local. Donner la **table de routage RIP** du routeur **A** : pour chaque routeur de destination, le voisin vers lequel A envoie les paquets et le nombre de sauts. En cas d’égalité, donner les deux possibilités.
+
+??? pouce "Coup de pouce"
+
+    Pour chaque destination, chercher le chemin qui traverse le moins de liaisons : le nombre de sauts est le nombre de liaisons de ce chemin, et la colonne « sortir vers » contient le **premier** routeur du chemin, qui est toujours un voisin de A.
+
+|           |           |
+|:---------:|:---------:|
+| ![](../figures/05386ad9fd0942b6.svg){ .tikz loading=lazy } | ![](../figures/4c6fef967fb302e9.svg){ .tikz loading=lazy } |
+|  **a)**   |  **b)**   |
+
+![](../figures/bb978c94c3dea1ef.svg){ .tikz loading=lazy }  
+**c)**
+
+??? corrige "Corrigé"
+
+    <table>
+    <thead>
+    <tr>
+    <th colspan="3" style="text-align: left;"><strong>a)</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;">Dest.</td>
+    <td style="text-align: center;">Sortir vers</td>
+    <td style="text-align: center;">Sauts</td>
+    </tr>
+    <tr>
+    <td style="text-align: center;">B</td>
+    <td style="text-align: center;">B</td>
+    <td style="text-align: center;">1</td>
+    </tr>
+    <tr>
+    <td style="text-align: center;">C</td>
+    <td style="text-align: center;">C</td>
+    <td style="text-align: center;">1</td>
+    </tr>
+    <tr>
+    <td style="text-align: center;">D</td>
+    <td style="text-align: center;">C</td>
+    <td style="text-align: center;">2</td>
+    </tr>
+    </tbody>
+    </table>
+
+    <table>
+    <thead>
+    <tr>
+    <th colspan="3" style="text-align: left;"><strong>b)</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;">Dest.</td>
+    <td style="text-align: center;">Sortir vers</td>
+    <td style="text-align: center;">Sauts</td>
+    </tr>
+    <tr>
+    <td style="text-align: center;">B</td>
+    <td style="text-align: center;">B</td>
+    <td style="text-align: center;">1</td>
+    </tr>
+    <tr>
+    <td style="text-align: center;">C</td>
+    <td style="text-align: center;">B ou D</td>
+    <td style="text-align: center;">2</td>
+    </tr>
+    <tr>
+    <td style="text-align: center;">D</td>
+    <td style="text-align: center;">D</td>
+    <td style="text-align: center;">1</td>
+    </tr>
+    <tr>
+    <td style="text-align: center;">E</td>
+    <td style="text-align: center;">D</td>
+    <td style="text-align: center;">2</td>
+    </tr>
+    </tbody>
+    </table>
+
+    <table>
+    <thead>
+    <tr>
+    <th colspan="3" style="text-align: left;"><strong>c)</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;">Dest.</td>
+    <td style="text-align: center;">Sortir vers</td>
+    <td style="text-align: center;">Sauts</td>
+    </tr>
+    <tr>
+    <td style="text-align: center;">B</td>
+    <td style="text-align: center;">B</td>
+    <td style="text-align: center;">1</td>
+    </tr>
+    <tr>
+    <td style="text-align: center;">C</td>
+    <td style="text-align: center;">B</td>
+    <td style="text-align: center;">2</td>
+    </tr>
+    <tr>
+    <td style="text-align: center;">D</td>
+    <td style="text-align: center;">B</td>
+    <td style="text-align: center;">2</td>
+    </tr>
+    <tr>
+    <td style="text-align: center;">E</td>
+    <td style="text-align: center;">B</td>
+    <td style="text-align: center;">3</td>
+    </tr>
+    <tr>
+    <td style="text-align: center;">F</td>
+    <td style="text-align: center;">B</td>
+    <td style="text-align: center;">4</td>
+    </tr>
+    </tbody>
+    </table>
+
+    En c), A n’a qu’un voisin : toutes ses routes sortent vers B.

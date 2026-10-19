@@ -22,7 +22,7 @@
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 1</span> — Le binaire avec des entiers <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-1 }
 
-Chapitres croisés : *Les bases de la programmation Python (boucle `while`, fonctions) ; Le binaire et l’écriture des nombres*
+<span class="duree">≈ 45 min</span> Chapitres croisés : *Les bases de la programmation Python (boucle `while`, fonctions) ; Le binaire et l’écriture des nombres*
 
 On veut faire écrire par Python l’écriture binaire d’un entier, **sans chaîne de caractères** : on la représente par un entier « qui ne contient que des 0 et des 1 ». Par exemple, l’écriture binaire de $13$ est représentée par l’entier `1101` (mille cent un).
 
@@ -96,7 +96,7 @@ On veut faire écrire par Python l’écriture binaire d’un entier, **sans cha
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 2</span> — Le bit de parité <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-2 }
 
-Chapitres croisés : *Les bases de la programmation Python (accumulateur, booléens) ; Le binaire et l’écriture des nombres*
+<span class="duree">≈ 30 min</span> Chapitres croisés : *Les bases de la programmation Python (accumulateur, booléens) ; Le binaire et l’écriture des nombres*
 
 Lors d’une transmission, un bit peut être modifié par une perturbation. Pour détecter l’erreur, l’émetteur ajoute à droite du message un **bit de parité**, choisi pour que le nombre total de bits à $1$ soit **pair**.
 
@@ -150,7 +150,7 @@ Lors d’une transmission, un bit peut être modifié par une perturbation. Pour
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 3</span> — Des entiers relatifs sur 8 bits <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-3 }
 
-Chapitres croisés : *Le binaire et l’écriture des nombres (complément à deux) ; Les bases de la programmation Python*
+<span class="duree">≈ 45 min</span> Chapitres croisés : *Le binaire et l’écriture des nombres (complément à deux) ; Les bases de la programmation Python*
 
 Sur 8 bits, on code les entiers de $-128$ à $127$ en complément à deux. Le code d’un entier est un nombre de $0$ à $255$ (l’octet qu’on range en mémoire).
 
@@ -202,7 +202,7 @@ Sur 8 bits, on code les entiers de $-128$ à $127$ en complément à deux. Le co
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Le bulletin de notes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-4 }
 
-Chapitres croisés : *Les types construits (dictionnaires, tableaux, p-uplets) ; Algorithmique : le parcours séquentiel*
+<span class="duree">≈ 30 min</span> Chapitres croisés : *Les types construits (dictionnaires, tableaux, p-uplets) ; Algorithmique : le parcours séquentiel*
 
 Les notes d’une petite classe sont rangées dans un dictionnaire qui associe à chaque prénom le tableau de ses notes.
 
@@ -276,7 +276,7 @@ notes = {"Léa": [12, 15, 9], "Noé": [8, 11, 14, 10], "Zoé": [17, 13]}
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 5</span> — Une image en noir et blanc <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-5 }
 
-Chapitres croisés : *Les types construits (tableaux de tableaux) ; Algorithmique : le parcours séquentiel ; Le binaire et l’écriture des nombres*
+<span class="duree">≈ 45 min</span> Chapitres croisés : *Les types construits (tableaux de tableaux) ; Algorithmique : le parcours séquentiel ; Le binaire et l’écriture des nombres*
 
 Une image de $8 \times 8$ pixels en noir et blanc est représentée par un tableau de $8$ lignes, chaque ligne étant un tableau de $8$ entiers : `1` pour un pixel noir, `0` pour un pixel blanc.
 
@@ -377,7 +377,7 @@ image = [[0, 0, 1, 1, 1, 1, 0, 0],
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Le classement d’un cross <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-6 }
 
-Chapitres croisés : *Spécifier et mettre au point ses programmes ; Les algorithmes de tri ; La recherche dichotomique ; Les données en tables ; Algorithmique : le parcours séquentiel*
+<span class="duree">≈ 60 min</span> Chapitres croisés : *Spécifier et mettre au point ses programmes ; Les algorithmes de tri ; La recherche dichotomique ; Les données en tables ; Algorithmique : le parcours séquentiel*
 
 Les résultats d’un cross du lycée sont rangés dans une table : une liste de dictionnaires, un par coureur, avec son temps en secondes.
 
@@ -469,7 +469,7 @@ coureurs = [{"nom": "Inès", "classe": "1G1", "temps": 754},
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Les doublons d’une liste d’inscriptions <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-7 }
 
-Chapitres croisés : *Spécifier et mettre au point ses programmes (tests, débogage) ; Les algorithmes de tri (coût) ; Algorithmique : le parcours séquentiel ; Les types construits*
+<span class="duree">≈ 45 min</span> Chapitres croisés : *Spécifier et mettre au point ses programmes (tests, débogage) ; Les algorithmes de tri (coût) ; Algorithmique : le parcours séquentiel ; Les types construits*
 
 Les élèves s’inscrivent à un atelier avec leur identifiant. Certains se sont inscrits plusieurs fois.
 
@@ -564,7 +564,7 @@ inscrits = ["lea.m", "tom.b", "ines.k", "hugo.p",
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Les droits d’un fichier, en binaire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-8 }
 
-Chapitres croisés : *Architecture des ordinateurs et systèmes d’exploitation (droits) ; Le binaire et l’écriture des nombres ; Les types construits (chaînes)*
+<span class="duree">≈ 45 min</span> Chapitres croisés : *Architecture des ordinateurs et systèmes d’exploitation (droits) ; Le binaire et l’écriture des nombres ; Les types construits (chaînes)*
 
 La commande `ls -l` affiche les droits d’un fichier sur 10 caractères, par exemple `-rwxr-x---` : le type, puis trois groupes de trois droits. On utilise l’écriture des droits en chiffres vue dans le cours *Architecture des ordinateurs et systèmes d’exploitation* (règle « Les droits en chiffres » : `r`$\,=4$, `w`$\,=2$, `x`$\,=1$, un chiffre par catégorie) : `-rwxr-x---` s’écrit `750`.
 
@@ -647,7 +647,7 @@ La commande `ls -l` affiche les droits d’un fichier sur 10 caractères, par ex
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Un conseil de film <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-9 }
 
-Chapitres croisés : *Le Web : réseaux et interactions homme-machine (formulaire, URL, cookies) ; Les données en tables ; Les $k$ plus proches voisins*
+<span class="duree">≈ 45 min</span> Chapitres croisés : *Le Web : réseaux et interactions homme-machine (formulaire, URL, cookies) ; Les données en tables ; Les $k$ plus proches voisins*
 
 Le site `https://www.cine.mc` demande au visiteur de noter de $0$ à $10$ son goût pour l’action, l’humour et l’émotion, puis lui conseille des films.
 
@@ -745,7 +745,7 @@ Le site `https://www.cine.mc` demande au visiteur de noter de $0$ à $10$ son go
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — La soirée cinéma <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-10 }
 
-Chapitres croisés : *Les algorithmes gloutons ; Les algorithmes de tri ; Le binaire et l’écriture des nombres ; Les types construits*
+<span class="duree">≈ 45 min</span> Chapitres croisés : *Les algorithmes gloutons ; Les algorithmes de tri ; Le binaire et l’écriture des nombres ; Les types construits*
 
 Une soirée dure au plus $240$ minutes. Chaque film est un p-uplet `(titre, durée en minutes, points d’envie)`, et l’on veut le plus de points possible sans dépasser $240$ minutes.
 

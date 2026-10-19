@@ -7,14 +7,22 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *Modèle d’architecture de von Neumann* : unité de traitement (UAL, registres), unité de commande, mémoire, dispositifs d’entrée-sortie. *Dérouler* l’exécution d’une séquence d’instructions simples de type langage machine. Le *transistor*, brique de base ; quelques ordres de grandeur. *Systèmes d’exploitation* : rôles et fonctions ; utiliser les commandes de base en ligne de commande ; gérer les droits et permissions d’accès aux fichiers. *Périphériques d’entrée-sortie* : identifier le rôle des *capteurs* et des *actionneurs*. |
-| **Prérequis** | le **binaire** et le codage de l’information (chapitre *Le binaire et l’écriture des nombres*) ; savoir ce qu’est un **programme** et une **variable**. |
+| **Prérequis** | le **binaire** et le codage de l’information (chapitre *Le binaire et l’écriture des nombres*) ; savoir ce qu’est un **programme** et une **variable**. (→ fiches de révision : ch. 2) |
 | **Objectifs** | comprendre **comment** une machine exécute un programme ; nommer les **composants** d’un ordinateur et leur rôle ; **dérouler** un petit programme en langage machine ; savoir ce que fait un **système d’exploitation** ; **se déplacer et manipuler** des fichiers en ligne de commande sous Linux ; **lire et modifier** les droits d’un fichier. |
+
+!!! situation "Situation de départ"
+
+    1.  Où se trouve un programme pendant qu’il s’exécute, et qui lit ses instructions une à une ?
+
+    2.  Comment plusieurs applications ouvertes en même temps se partagent-elles un seul ordinateur sans se gêner ?
+
+    3.  Sur un ordinateur partagé, qu’est-ce qui empêche un autre utilisateur de lire vos fichiers ?
 
 !!! remarque "Remarque — Le fil conducteur : un mille-feuille de couches"
 
     Un ordinateur qui affiche cette page fait, à la base, circuler des **électrons** dans des interrupteurs microscopiques. Comment passe-t-on de l’électron au clic de souris ? Grâce à un empilement de **couches d’abstraction** : chaque couche ne parle qu’à celle juste en dessous, et **cache sa complexité** à celle du dessus.
 
-    ![](../figures/7dc67e6641b5038f.svg){ .tikz loading=lazy }
+    ![](../figures/07c506314e6875eb.svg){ .tikz loading=lazy }
 
     Ce chapitre gravit ce mille-feuille : on part de la brique du bas (**le transistor**), on monte au **matériel** (von Neumann) puis au **langage machine**, et on termine par la couche qui donne le plus de confort : le **système d’exploitation**. Les points qui dépassent le programme portent le badge <span class="horsprog">au-delà du programme</span>.
 
@@ -28,7 +36,7 @@ Tout, dans un ordinateur, se ramène à deux états : le courant **passe** ou **
 
 En combinant quelques transistors, on fabrique des **portes logiques** qui calculent sur les 0 et les 1. Rappel du chapitre *Le binaire et l’écriture des nombres* : les portes **ET**, **OU**, **NON** (et le **OU exclusif**) réalisent les opérateurs booléens du même nom, décrits par leurs **tables de vérité**, et une porte OU exclusif associée à une porte ET forme déjà un **demi-additionneur**, qui additionne deux bits. En combinant ainsi des portes, on fabrique des circuits qui **additionnent**, **comparent**, **mémorisent**… et de proche en proche, tout un **processeur**. Le transistor est donc la **brique élémentaire** à partir de laquelle tout est construit.
 
-!!! remarque "Remarque — Quelques ordres de grandeur (capacité attendue)"
+!!! encadre "À retenir — Quelques ordres de grandeur"
 
     Il faut avoir en tête des *ordres de grandeur*, pas des chiffres exacts :
 
@@ -60,7 +68,7 @@ Comment organiser ces milliards d’interrupteurs pour **exécuter un programme*
 
     L’unité de commande et l’UAL, réunies avec quelques cases de travail ultra-rapides, forment le **processeur** (ou **CPU**, *Central Processing Unit*).
 
-![](../figures/d1a2074b6e15743c.svg){ .tikz loading=lazy }
+![](../figures/17c2a6e3babf211d.svg){ .tikz loading=lazy }
 
 Les organes sont reliés par des **bus** : des faisceaux de fils qui transportent les données, les adresses et les commandes.
 
@@ -68,7 +76,7 @@ Les organes sont reliés par des **bus** : des faisceaux de fils qui transporten
 
     Dans le modèle de von Neumann, le **programme est rangé dans la même mémoire que les données**, sous forme de nombres. Un ordinateur ne « connaît » donc pas ses programmes à l’avance : il en **lit** un depuis la mémoire, exactement comme il lirait un nombre. C’est ce qui rend une machine **universelle** : changer de programme, c’est juste changer les nombres en mémoire — pas recâbler la machine.
 
-!!! remarque "Remarque — La hiérarchie des mémoires"
+!!! encadre "À retenir — La hiérarchie des mémoires"
 
     Toutes les mémoires ne se valent pas. Plus une mémoire est **rapide**, plus elle est **petite et chère** :
 
@@ -88,7 +96,7 @@ L’unité d’**entrées-sorties** est la porte par laquelle la machine **écha
 
     Un **capteur** *mesure* une grandeur du monde physique et la transforme en une valeur numérique *entrant* dans la machine (c’est une **entrée**). Un **actionneur** fait l’inverse : il reçoit un ordre numérique et *agit* sur le monde physique (c’est une **sortie**).
 
-![](../figures/92bf2459cb565ddb.svg){ .tikz loading=lazy }
+![](../figures/c994c62fc21e9b20.svg){ .tikz loading=lazy }
 
 La chaîne capteur $\to$ programme $\to$ actionneur, au cœur de tout objet connecté.
 
@@ -110,7 +118,7 @@ La chaîne capteur $\to$ programme $\to$ actionneur, au cœur de tout objet conn
 
 Le processeur ne fait qu’**une** chose, mais des milliards de fois par seconde : répéter le **cycle** suivant.
 
-![](../figures/b871f9587d984448.svg){ .tikz loading=lazy }
+![](../figures/480549c5f55e9f79.svg){ .tikz loading=lazy }
 
 À chaque tour, l’unité de commande utilise un registre spécial, le **compteur de programme** (ou *compteur ordinal*), qui contient l’**adresse de la prochaine instruction**. Normalement il avance d’un cran à chaque cycle ; une instruction de **saut** peut le forcer à une autre adresse — c’est ainsi qu’on réalise les **tests** et les **boucles**.
 
@@ -213,13 +221,9 @@ Pour *dérouler* un vrai programme machine sans se noyer, on utilise une machine
 
     Toujours le même mot-clé : **abstraction**. L’OS offre des actions simples (« ouvrir un fichier ») et cache la complexité du matériel dessous.
 
-!!! remarque "Remarque — Les grandes familles d’aujourd’hui"
+!!! encadre "À retenir — Les grandes familles de systèmes d’exploitation"
 
     Trois lignées se partagent le monde : **Windows** (Microsoft), **macOS** (Apple) et surtout la famille **UNIX/Linux**. Cette dernière, **invisible** au grand public, est pourtant la plus répandue : elle fait tourner l’immense majorité des **serveurs** du Web, la plupart des **smartphones** (Android est bâti sur un noyau Linux) et les objets connectés. Windows et macOS sont des logiciels **propriétaires** (code source fermé) ; Linux est **libre** : chacun peut l’étudier, le modifier et le partager. *Attention* : « libre » ne veut pas dire « gratuit » — l’anglais *free* entretient la confusion.
-
-!!! remarque "Remarque — En Terminale"
-
-    Le chapitre *Processus et systèmes d’exploitation* montre comment l’OS partage le processeur entre tous les programmes en cours d’exécution (les **processus**) : états d’un processus, ordonnancement, blocages.
 
 <span id="cours-09-12" class="ancre"></span>
 
@@ -229,7 +233,7 @@ Pour *dérouler* un vrai programme machine sans se noyer, on utilise une machine
 
 L’interface graphique (fenêtres, souris) est confortable, mais la **ligne de commande** (le **terminal**) reste indispensable : plus rapide, automatisable, et incontournable sur les serveurs (souvent sans écran). On travaille ici sous **Linux** : pour essayer les commandes, il suffit d’un terminal Linux en ligne, comme **JSLinux** (`bellard.org/jslinux`), déjà utilisé dans l’activité de découverte (on y est l’utilisateur `root`, de répertoire personnel `/root`).
 
-!!! remarque "Remarque — L’invite de commande"
+!!! encadre "À retenir — L’invite de commande"
 
     Le terminal affiche une **invite** qui rappelle qui vous êtes et où vous êtes, puis attend votre commande :
 
@@ -238,6 +242,8 @@ L’interface graphique (fenêtres, souris) est confortable, mais la **ligne de 
     ```
 
     Ici l’utilisateur est `eleve`, la machine `pc-nsi`, et le répertoire courant est `~/Documents`. Le **tilde** `~` désigne votre **répertoire personnel** (`/home/eleve`).
+
+<span class="retouract">↺ Retour sur l'activité.</span> L’invite `localhost:~#` de l’activité « Perdu dans le terminal » se lisait de la même façon : la machine s’appelait `localhost`, et l’on se trouvait dans son répertoire personnel `~`, c’est-à-dire `/root`, puisqu’on y était l’administrateur `root`.
 
 ### L’arborescence des fichiers
 
@@ -266,6 +272,8 @@ Sous Linux, les fichiers sont organisés en **arbre**, dont la base est la **rac
 
     Deux raccourcis universels : `.` désigne le répertoire **courant**, et `..` le répertoire **parent** (un cran au-dessus).
 
+<span class="retouract">↺ Retour sur l'activité.</span> Depuis `/root`, l’activité faisait atteindre `bin` de deux façons : `cd /bin` suivait un chemin absolu, parti de la racine `/` ; `cd ../bin` un chemin relatif, qui remontait d’abord d’un cran avec `..`.
+
 !!! exemple "Exemple — Se repérer"
 
     Depuis `/home/eleve/Documents`, pour atteindre `logo.png` :
@@ -274,7 +282,7 @@ Sous Linux, les fichiers sont organisés en **arbre**, dont la base est la **rac
 
     - chemin relatif : `../Images/logo.png` (**tirets** : on remonte d’un cran avec `..`, puis on descend dans `Images`).
 
-    ![](../figures/9836b6edfb593504.svg){ .tikz loading=lazy }
+    ![](../figures/21a991015c59fd8b.svg){ .tikz loading=lazy }
 
 ### Les commandes de base (capacité attendue)
 
@@ -302,7 +310,7 @@ Ces commandes se combinent : par exemple, depuis `~/Documents`, `mkdir archives`
 
 <span id="cours-09-15" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[15](exercices.md#ex-09-15) à [19](exercices.md#ex-09-19)** (la ligne de commande Linux)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[15](exercices.md#ex-09-15) à [19](exercices.md#ex-09-19)** et **[27](exercices.md#ex-09-27)** (la ligne de commande Linux)
 
 ## Droits et permissions
 
@@ -360,11 +368,11 @@ Linux est **multi-utilisateur** : plusieurs comptes partagent la machine, chacun
 
 <span id="cours-09-20" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[20](exercices.md#ex-09-20) à [23](exercices.md#ex-09-23)** (droits et permissions)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[20](exercices.md#ex-09-20) à [23](exercices.md#ex-09-23)** et **[26](exercices.md#ex-09-26)** (droits et permissions)
 
 ## Un peu d’histoire
 
-!!! remarque "Remarque — De l’ampoule au smartphone : la grande accélération"
+!!! curieux "Pour les curieux (facultatif) — De l’ampoule au smartphone : la grande accélération"
 
     **1945** — Dans un rapport resté célèbre (le *First Draft of a Report on the EDVAC*), le mathématicien **John von Neumann** (1903–1957) décrit une machine où **programme et données partagent la même mémoire**. L’idée n’est pas de lui seul : elle doit beaucoup à **Alan Turing** (sa « machine universelle » de 1936) et aux ingénieurs **Eckert** et **Mauchly**, bâtisseurs de l’ENIAC. Mais c’est ce rapport qui diffuse le modèle — au point qu’il porte, un peu injustement, son seul nom.  
     **1947** — Aux **Bell Labs**, **Bardeen**, **Brattain** et **Shockley** inventent le **transistor** (prix Nobel 1956). Fini les tubes à vide fragiles et brûlants des premiers ordinateurs — l’**ENIAC** (1945), premier grand calculateur électronique, en alignait près de $18\,000$ dans une salle entière, pour $30$ tonnes — : la brique moderne est née.
@@ -376,15 +384,19 @@ Linux est **multi-utilisateur** : plusieurs comptes partagent la machine, chacun
     **1969** — Aux Bell Labs encore, **Ken Thompson** et **Dennis Ritchie** créent **UNIX**, un système élégant et portable qui inspirera presque tous les suivants (et donnera naissance au langage C).  
     **1991** — Un étudiant finlandais, **Linus Torvalds**, écrit « pour le plaisir » un noyau libre inspiré d’UNIX : **Linux**. Trois décennies plus tard, ce projet d’étudiant fait tourner le Web, Android et les super-calculateurs. *Le mille-feuille de couches sur lequel vous lisez cette page a mis moins d’un siècle à se construire.*
 
-!!! remarque "Remarque — Margaret Hamilton et l’ordinateur d’Apollo 11"
+!!! curieux "Pour les curieux (facultatif) — Margaret Hamilton et l’ordinateur d’Apollo 11"
 
     Dans les années 1960, au laboratoire d’instrumentation du MIT, l’Américaine **Margaret Hamilton** dirige l’équipe qui écrit le **logiciel de vol** des missions Apollo. L’ordinateur de bord, l’*Apollo Guidance Computer*, est minuscule à nos yeux : **2 048 mots** de mémoire vive (16 bits chacun, soit 4 ko), **36 864 mots** de mémoire morte, littéralement *tissée* à la main avec des fils passant ou non dans de petits anneaux magnétiques, et une horloge à **2 MHz**, environ mille fois moins qu’un processeur actuel.  
     Le **20 juillet 1969**, pendant la descente vers la Lune, l’écran affiche les alarmes `1202` puis `1201` : un radar inutile à cet instant envoie des données en continu, et le processeur a **plus de travail qu’il ne peut en faire**. Le logiciel avait été conçu pour résister à une telle surcharge : il partage le temps du processeur entre les tâches **par ordre de priorité**, abandonne les moins urgentes et garde le guidage du module lunaire. L’alunissage se poursuit. C’est exactement le premier rôle d’un système d’exploitation vu dans ce chapitre : **gérer le processeur**. En 2016, Margaret Hamilton reçoit la médaille présidentielle de la Liberté pour ce logiciel.  
     *Sources :* F. O’Brien, *The Apollo Guidance Computer: Architecture and Operation*, Springer, 2010 ; NASA, « Margaret Hamilton », nasa.gov.
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    Les 0 et les 1 du chapitre **Le binaire et l’écriture des nombres** prennent ici corps : ce sont les états des **transistors**, et un programme en langage machine n’est qu’une suite de nombres rangés en mémoire. Les sauts `BRZ` et `BRP` du *Little Man Computer* montrent comment se réalisent, tout en bas, les `if` et les `while` du chapitre **Les bases de la programmation Python**, et c’est la traduction vers ce langage machine qui distingue langages **compilés** et **interprétés** (chapitre **Spécifier et mettre au point ses programmes**). Les serveurs du chapitre suivant, **Le Web : réseaux et interactions homme-machine**, seront le plus souvent des machines Linux, administrées en ligne de commande. En Terminale, **Processus et systèmes d’exploitation** détaille le partage du processeur, **Systèmes sur puce** réunit processeur, mémoire et entrées-sorties sur une seule puce, et l’arborescence des fichiers devient un exemple d’**arbre**.
+    - **Ce qu’il réutilise.** Les 0 et les 1 du chapitre *Le binaire et l’écriture des nombres* sont les états des transistors ; les sauts `BRZ` et `BRP` du *Little Man Computer* réalisent les `if` et les `while` des *Bases de la programmation Python* ; la traduction en langage machine distingue langages compilés et interprétés (*Spécifier et mettre au point ses programmes*).
+
+    - **Ce qu’il prépare.** Les serveurs du chapitre suivant, *Le Web : réseaux et interactions homme-machine*, seront le plus souvent des machines Linux, administrées en ligne de commande.
+
+    - **En Terminale.** *Processus et systèmes d’exploitation* détaillera le partage du processeur entre les programmes en cours, *Systèmes sur puce* réunira processeur, mémoire et entrées-sorties sur une seule puce.
 
 ## Bilan — la carte mémoire
 
@@ -403,6 +415,14 @@ Linux est **multi-utilisateur** : plusieurs comptes partagent la machine, chacun
 | Ligne de commande | `pwd ls cd mkdir touch cat cp mv rm man` ; `.` courant, `..` parent |
 | Chemins | absolu (commence par `/`) vs relatif (part du répertoire courant) |
 | Droits | `rwx` pour `u`/`g`/`o` ; lire `ls -l` ; modifier avec `chmod` ; en chiffres `r`$=4$, `w`$=2$, `x`$=1$ (`754`) |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Dans la **mémoire**, avec les données : c’est le modèle de **von Neumann** (§ II). L’**unité de commande** du processeur le lit instruction par instruction, en répétant le cycle chercher $\to$ décoder $\to$ exécuter (§ III).
+
+    2.  C’est le travail du **système d’exploitation** : il décide quel programme utilise le processeur, et quand, et attribue à chacun sa part de mémoire sans qu’ils s’écrasent (§ IV).
+
+    3.  Les **droits d’accès** : chaque fichier porte des droits `r`, `w`, `x` pour le propriétaire, le groupe et les autres ; `chmod o-r` retire aux autres le droit de lecture. Seul l’administrateur `root` garde tous les droits (§ VI).
 
 ## Erreurs fréquentes
 

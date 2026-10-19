@@ -340,7 +340,7 @@ Le module `time` fournit `time.perf_counter()`, qui renvoie l’heure d’une ho
 
     4.  Mesure réelle de `variance` sur $10^6$ valeurs : **0,15 s** — la prédiction linéaire tombe juste.
 
-    ![](../figures/4336e66317b31253.svg){ .tikz loading=lazy }
+    ![](../figures/8c3105afe190543b.svg){ .tikz loading=lazy }
 
     *Mesures du tableau ; en pointillés, la parabole $c\,n^2$ passant par le dernier point.*
 

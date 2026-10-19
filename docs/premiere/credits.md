@@ -2,7 +2,10 @@
 
 *Illustrations d’ouverture de chapitre* — dessins originaux de l’auteur.
 
-Panorama de l’année
+Présentation et panorama de l’année
+
+*Capture d’écran du logiciel Spyder (logiciel libre, licence MIT)* — capture réalisée par l’auteur — licence MIT pour le logiciel  
+<https://www.spyder-ide.org>
 
 *Manuscrit de l’Algèbre d’al-Khwârizmî (MS. Huntington 214)* — Bodleian Library, Oxford — domaine public  
 <https://commons.wikimedia.org/wiki/File:Bodleian_MS._Huntington_214_roll332_frame36.jpg>

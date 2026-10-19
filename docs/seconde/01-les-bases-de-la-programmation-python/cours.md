@@ -4,7 +4,15 @@
 
 <span id="chap-01" class="ancre"></span>
 
-*Bienvenue ! Rassurez-vous tout de suite : il n’y a rien de magique et rien de réservé aux « génies de l’informatique » dans ce chapitre. Programmer, c’est simplement donner des ordres très précis à une machine qui, soyons honnêtes, est extrêmement rapide mais aussi extraordinairement bête : elle fait exactement ce qu’on lui dit, ni plus, ni moins, même quand c’est absurde. Tout l’art consiste donc à lui parler correctement. Et bonne nouvelle : vous avez déjà fait de la programmation au collège avec Scratch. Ici, on va faire pareil… mais en tapant du texte au lieu d’emboîter des blocs.*
+Bienvenue ! Rassurez-vous tout de suite : il n’y a rien de magique et rien de réservé aux « génies de l’informatique » dans ce chapitre. Programmer, c’est simplement donner des ordres très précis à une machine qui, soyons honnêtes, est extrêmement rapide mais aussi extraordinairement bête : elle fait exactement ce qu’on lui dit, ni plus, ni moins, même quand c’est absurde. Tout l’art consiste donc à lui parler correctement. Et bonne nouvelle : vous avez déjà fait de la programmation au collège avec Scratch. Ici, on va faire pareil… mais en tapant du texte au lieu d’emboîter des blocs.
+
+!!! situation "Situation de départ"
+
+    1.  Vous tapez votre prénom sur un site, qui vous répond « Bonjour Léa ! ». Où le programme a-t-il gardé ce prénom pour pouvoir le réutiliser ?
+
+    2.  Un petit programme doit additionner les deux nombres que vous tapez. Vous tapez 3 puis 4… et il affiche 34. Qu’est-ce qui a cloché ?
+
+    3.  Dans un jeu « devinez le nombre », l’ordinateur répond « trop grand » ou « trop petit » jusqu’à ce que vous trouviez. Comment peut-il recommencer sans savoir combien d’essais il vous faudra ?
 
 ## Programmer, c’est quoi au juste ?
 
@@ -24,7 +32,7 @@ Le seul langage que le processeur comprend vraiment est le <span id="lex-langage
 
 Nous utiliserons **Python** (version 3), un langage de haut niveau réputé pour sa clarté. C’est aussi le langage officiel du programme de SNT et de la spécialité NSI : autant prendre de bonnes habitudes tout de suite.
 
-!!! remarque "Remarque — Un peu d’histoire : des mots plutôt que des nombres"
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire : des mots plutôt que des nombres"
 
     L’idée d’écrire un programme avec des **mots** n’allait pas de soi. Dans les années 1950, on programme encore les ordinateurs avec des suites de nombres. L’Américaine **Grace Hopper** (1906–1992), mathématicienne et officière de la marine des États-Unis, pense au contraire que l’ordinateur doit s’adapter à l’humain. En 1952, elle écrit l’un des tout premiers **compilateurs** : un programme qui *traduit* des instructions lisibles en langage machine. On lui répond que « les ordinateurs ne comprennent pas l’anglais » ; elle s’obstine, et ses travaux mènent au langage <span class="smallcaps">Cobol</span> (1959), utilisé dans les banques jusqu’à aujourd’hui.
 
@@ -36,16 +44,18 @@ Nous utiliserons **Python** (version 3), un langage de haut niveau réputé pou
     ![](../img/01_hist_guido_van_rossum.jpg){ .photo loading=lazy style="height:175px" }  
     Guido van Rossum en 2006
 
+    [$\to$ frise chronologique](../methode-debattre.md#frise)
+
 ### De Scratch à Python : ce qui change (et ce qui ne change pas)
 
 Au collège, vous avez construit des programmes en **empilant des blocs** colorés dans Scratch. En Python, vous allez faire exactement la même chose, mais en **écrivant du texte**. Les grandes idées sont identiques : des variables, des boucles, des tests, des messages à afficher…
 
 | **En Scratch (blocs)** | **En Python (texte)** |
 |:-----------------------|:----------------------|
-| ![](../figures/257a05f7c506dcd9.svg){ .tikz .tikz-inline loading=lazy }               | `print("Bonjour")`             |
-| ![](../figures/babe3f90a47d8258.svg){ .tikz .tikz-inline loading=lazy }               | `score = 0`             |
-| ![](../figures/17676c51a68cddba.svg){ .tikz .tikz-inline loading=lazy }               | `for i in range(10):`             |
-| ![](../figures/42e4fd4687f781d5.svg){ .tikz .tikz-inline loading=lazy }               | `if ... :`             |
+| ![](../figures/cbd31aab51f716c6.svg){ .tikz .tikz-inline loading=lazy }               | `print("Bonjour")`             |
+| ![](../figures/3956f638d978fe60.svg){ .tikz .tikz-inline loading=lazy }               | `score = 0`             |
+| ![](../figures/816e1b4753f22efd.svg){ .tikz .tikz-inline loading=lazy }               | `for i in range(10):`             |
+| ![](../figures/80764ecdc1496b62.svg){ .tikz .tikz-inline loading=lazy }               | `if ... :`             |
 
 Ce qui change vraiment, c’est la **rigueur**. Dans Scratch, un bloc mal placé, au pire, ne s’emboîte pas. En Python, une virgule oubliée, une majuscule de trop ou un guillemet manquant, et l’ordinateur boude en affichant une erreur. Ce n’est pas de la méchanceté : la machine a juste besoin qu’on lui parle *exactement* dans les règles. On s’y habitue très vite.
 
@@ -96,7 +106,7 @@ Il existe une tradition en informatique : le premier programme qu’on écrit da
 
     La ligne `In [1]` est écrite par Spyder quand il lance le programme ; la ligne suivante est l’affichage produit par `print`.
 
-L’instruction `print(...)` (« imprimer » en anglais, au sens d’« afficher ») sert à **afficher un message dans la console**. C’est l’équivalent du bloc ![](../figures/e1f92541e5fb492e.svg){ .tikz .tikz-inline loading=lazy } de Scratch. Le message à afficher se met entre **guillemets** et entre **parenthèses**.
+L’instruction `print(...)` (« imprimer » en anglais, au sens d’« afficher ») sert à **afficher un message dans la console**. C’est l’équivalent du bloc ![](../figures/dc34f9e41b52a217.svg){ .tikz .tikz-inline loading=lazy } de Scratch. Le message à afficher se met entre **guillemets** et entre **parenthèses**.
 
 !!! remarque "Remarque"
 
@@ -112,7 +122,7 @@ L’instruction `print(...)` (« imprimer » en anglais, au sens d’« afficher
 
 Il arrivera qu’un poste ne veuille rien savoir : Spyder plante, n’est pas installé, ou vous travaillez sur votre propre ordinateur à la maison. Dans ce cas, direction **Basthon**, un « bac à sable » Python qui fonctionne **directement dans le navigateur**, sans rien installer.
 
-![](../figures/1398ed5c9f17f4b0.svg){ .tikz loading=lazy }
+![](../figures/5f654075c335a158.svg){ .tikz loading=lazy }
 
 On retrouve exactement la même organisation que dans Spyder : **on écrit à gauche**, on clique sur **Exécuter**, et **le résultat s’affiche à droite**. Rien de nouveau à apprendre, c’est rassurant.
 
@@ -168,7 +178,7 @@ Un ordinateur passe son temps à *traiter des données* : des nombres, des mots,
 
     On dit qu’elle est « variable » car sa valeur peut **changer** au cours du programme.
 
-![](../figures/8f8658cacb244b8e.svg){ .tikz loading=lazy }
+![](../figures/8370c26e72082a7d.svg){ .tikz loading=lazy }
 
 Pour créer une variable, on utilise le signe `=`, appelé <span id="lex-affectation01" class="ancre"></span>**affectation** :
 
@@ -180,7 +190,7 @@ Cette ligne se lit : « la variable `points_de_vie` prend la valeur $15$ ». On 
 
 !!! passerelle "Passerelle avec Scratch"
 
-    Vous connaissez déjà ça ! Dans Scratch, le bloc ![](../figures/a3597c06a576aecb.svg){ .tikz .tikz-inline loading=lazy } fait exactement la même chose. En Python, on écrit simplement `points_de_vie = 15`.
+    Vous connaissez déjà ça ! Dans Scratch, le bloc ![](../figures/4a11a0c29282d816.svg){ .tikz .tikz-inline loading=lazy } fait exactement la même chose. En Python, on écrit simplement `points_de_vie = 15`.
 
 !!! remarque "Remarque"
 
@@ -359,7 +369,7 @@ Déroulons `a = a + 1` : à droite, `a + 1` vaut $11 + 1 = 12$. On range donc $1
 
 !!! passerelle "Passerelle avec Scratch"
 
-    Encore une vieille connaissance ! Le bloc Scratch ![](../figures/d19b2a6158b09447.svg){ .tikz .tikz-inline loading=lazy } fait exactement ce que fait `a = a + 1`.
+    Encore une vieille connaissance ! Le bloc Scratch ![](../figures/1c0cbf8a05c2c706.svg){ .tikz .tikz-inline loading=lazy } fait exactement ce que fait `a = a + 1`.
 
 ### Fonctions mathématiques : le module `math`
 
@@ -463,7 +473,7 @@ print(f"Bonjour {prenom} !")
 
 !!! passerelle "Passerelle avec Scratch"
 
-    Souvenir de Scratch : le bloc ![](../figures/e91292b6f90fae8b.svg){ .tikz .tikz-inline loading=lazy } affichait une question et rangeait la réponse dans le bloc ![](../figures/a76743bf4692ab83.svg){ .tikz .tikz-inline loading=lazy }. En Python, `input("...")` fait les deux d’un coup : il pose la question *et* renvoie ce que l’utilisateur a tapé.
+    Souvenir de Scratch : le bloc ![](../figures/ad16847467d9d619.svg){ .tikz .tikz-inline loading=lazy } affichait une question et rangeait la réponse dans le bloc ![](../figures/b8b122d080c97bfd.svg){ .tikz .tikz-inline loading=lazy }. En Python, `input("...")` fait les deux d’un coup : il pose la question *et* renvoie ce que l’utilisateur a tapé.
 
 !!! regle "Règle 6"
 
@@ -736,11 +746,11 @@ else:
 
 Si la condition `age >= 18` est `True`, le bloc du `if` s’exécute (et celui du `else` est ignoré). Sinon, c’est l’inverse. Remarquez encore l’**indentation** et les **deux-points** : ce sont eux qui délimitent chaque bloc.
 
-![](../figures/996f1d5c45070367.svg){ .tikz loading=lazy }
+![](../figures/dffaca95ad91833c.svg){ .tikz loading=lazy }
 
 !!! passerelle "Passerelle avec Scratch"
 
-    C’est le bloc Scratch ![](../figures/17ff2c44dd90ecbe.svg){ .tikz .tikz-inline loading=lazy } que vous connaissez. En Python, `si` devient `if` et `sinon` devient `else`.
+    C’est le bloc Scratch ![](../figures/c6a06264fbc6504c.svg){ .tikz .tikz-inline loading=lazy } que vous connaissez. En Python, `si` devient `if` et `sinon` devient `else`.
 
 ### Plusieurs cas : `elif`
 
@@ -816,7 +826,7 @@ Quand on connaît le **nombre de répétitions** à l’avance, on utilise `for`
 
 !!! passerelle "Passerelle avec Scratch"
 
-    C’est le bloc ![](../figures/f774af6c679fede0.svg){ .tikz .tikz-inline loading=lazy } de Scratch. Simple, non ?
+    C’est le bloc ![](../figures/2e5becb927b823d1.svg){ .tikz .tikz-inline loading=lazy } de Scratch. Simple, non ?
 
 ### La boucle non bornée : `while`
 
@@ -832,15 +842,15 @@ print("Termine !")
 
 Tant que la condition `i < 10` est vraie, le bloc indenté se répète. À chaque tour, on augmente `i` de $1$ ; quand `i` atteint $10$, la condition devient fausse et on sort de la boucle.
 
-![](../figures/4899117055467d13.svg){ .tikz loading=lazy }
+![](../figures/54593c22987f62e6.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 10"
 
-    **Danger : la boucle infinie !** Si la condition d’un `while` ne devient *jamais* fausse, le programme tourne pour l’éternité (ou jusqu’à ce qu’on l’arrête). Dans l’exemple ci-dessus, si on oublie la ligne `i = i + 1`, alors `i` reste à $0$, la condition `i < 10` reste vraie… et Python affiche $0$ jusqu’à la fin des temps. Pour arrêter un programme emballé dans Spyder : le bouton **stop** rouge (ou ![](../figures/1b1e09926fd5397b.svg){ .tikz .tikz-inline loading=lazy } + ![](../figures/5d5fe4ddcb92d6f5.svg){ .tikz .tikz-inline loading=lazy } dans la console).
+    **Danger : la boucle infinie !** Si la condition d’un `while` ne devient *jamais* fausse, le programme tourne pour l’éternité (ou jusqu’à ce qu’on l’arrête). Dans l’exemple ci-dessus, si on oublie la ligne `i = i + 1`, alors `i` reste à $0$, la condition `i < 10` reste vraie… et Python affiche $0$ jusqu’à la fin des temps. Pour arrêter un programme emballé dans Spyder : le bouton **stop** rouge (ou ![](../figures/bf443afe667dd6a0.svg){ .tikz .tikz-inline loading=lazy } + ![](../figures/f21765b12e3f8049.svg){ .tikz .tikz-inline loading=lazy } dans la console).
 
 !!! passerelle "Passerelle avec Scratch"
 
-    Cela ressemble au bloc ![](../figures/3514e8c85d674ef3.svg){ .tikz .tikz-inline loading=lazy } de Scratch — avec une petite subtilité : Scratch répète *jusqu’à ce que* la condition soit vraie, alors que `while` répète *tant que* la condition est vraie. C’est la même idée vue à l’envers.
+    Cela ressemble au bloc ![](../figures/bc8c19be4a9a1fee.svg){ .tikz .tikz-inline loading=lazy } de Scratch — avec une petite subtilité : Scratch répète *jusqu’à ce que* la condition soit vraie, alors que `while` répète *tant que* la condition est vraie. C’est la même idée vue à l’envers.
 
 ### `for` ou `while` : lequel choisir ?
 
@@ -1001,11 +1011,17 @@ Vous avez maintenant toutes les briques : variables, types, calculs, chaînes, f
 
         Le programme affiche `0 C = 32.0 F`, `10 C = 50.0 F`, …, jusqu’à `100 C = 212.0 F`.
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    Python servira d’outil dans plusieurs thèmes de SNT. Au chapitre *Photographie numérique*, deux boucles `for` imbriquées parcourront tous les **pixels** d’une image pour la retoucher ; au chapitre *Informatique embarquée et objets connectés*, une boucle `while` et un test `if` formeront la **boucle de commande** d’un thermostat. Le complément *Dessiner avec la tortue*, juste après ce chapitre, met en images les boucles et les fonctions, et **filtrer** une table de données (chapitre *Les données structurées et leur traitement*) reviendra à tester des conditions combinées par `and` et `or`. En spécialité NSI de Première, ces mêmes bases s’enrichissent de nouveaux types (**listes**, **dictionnaires**) pour traiter des données plus volumineuses.
+    - **Déjà vu :** les blocs de Scratch, au collège ; variables, conditions et boucles y étaient déjà, seule l’écriture change.
+
+    - **À venir :** le complément *Dessiner avec la tortue*, juste après, met en images boucles et fonctions ; au chapitre *Photographie numérique*, deux boucles `for` parcourront les **pixels** d’une image, et au chapitre *Informatique embarquée et objets connectés*, une boucle `while` et un test `if` piloteront un thermostat.
+
+    - **Plus loin :** en spécialité NSI de Première, ces bases s’enrichissent de nouveaux types (**listes**, **dictionnaires**) pour traiter beaucoup de données.
 
 ## Bilan — la carte mémoire
+
+Les mots importants du thème sont définis dans le lexique.
 
 | **Je veux…**                        | **J’écris…** |
 |:------------------------------------|:-------------|
@@ -1019,6 +1035,14 @@ Vous avez maintenant toutes les briques : variables, types, calculs, chaînes, f
 | répéter un nombre connu de fois     | `for i in range(n):`   |
 | répéter tant qu’une condition tient | `while condition:`   |
 | définir une fonction                | `def f(x): ... return ...`   |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Dans une **variable** (§ III) : le prénom, lu au clavier par `input`, est rangé sous un nom, puis recollé dans le message (§ VI).
+
+    2.  `input` renvoie toujours du **texte** : le `+` colle alors les deux chaînes (**concaténation**) et donne `"34"`. Il fallait **convertir** chaque saisie avec `int` (§ IV et VI).
+
+    3.  Une condition `if`/`else` choisit la réponse (§ IX), et une boucle `while` recommence *tant que* la proposition diffère du secret, sans connaître à l’avance le nombre de tours (§ X) ; c’est le mini-projet « Deviner le nombre » (§ XI).
 
 ### Les messages d’erreur les plus fréquents (et ce qu’ils veulent dire)
 

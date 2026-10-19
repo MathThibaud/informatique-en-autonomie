@@ -6,7 +6,7 @@
 
 *trois dessins, sept ponts, une règle à découvrir*
 
-<p class="infos-activite">Durée : 25 min · Sans ordinateur, par deux</p>
+<p class="infos-activite">Durée : 35 min · Sans ordinateur, par deux</p>
 
 !!! consignes "Consignes"
 
@@ -82,7 +82,7 @@ Au <span class="smallcaps">xviii</span><sup>e</sup> siècle, la ville de Königs
 
     2.  Le schéma attendu (îles `O` et `E`, berges `N` et `S`) :
 
-        ![](../figures/f693ab7db12d8244.svg){ .tikz loading=lazy }
+        ![](../figures/ffda15f26ebcfdaa.svg){ .tikz loading=lazy }
 
     3.  `O` : $5$ ; `N` : $3$ ; `S` : $3$ ; `E` : $3$. Quatre points impairs : la promenade est **impossible**, sans avoir à essayer tous les trajets.
 
@@ -116,3 +116,35 @@ Au <span class="smallcaps">xviii</span><sup>e</sup> siècle, la ville de Königs
         « Nœud » est aussi employé en informatique (arbres, réseaux).
 
     2.  Impossible. Chaque trait a deux extrémités : en additionnant les nombres de traits de tous les points, on compte chaque trait deux fois, donc on obtient un nombre **pair**. Une somme paire ne peut pas contenir un seul nombre impair : le nombre de points impairs est toujours **pair**.
+
+### <span class="exo-num">Exercice 5</span> — Visiter tous les points <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-graphes-act-1-5 }
+
+On ne cherche plus à passer par tous les **traits**, mais par tous les **points**. Le dessin ci-dessous est le plan d’un musée : chaque point est une salle, chaque trait un couloir. Un gardien part de la salle `A` et doit passer dans **toutes** les salles ; il a le droit d’emprunter plusieurs fois le même couloir.
+
+![](../figures/7c3c4dbb5bf833aa.svg){ .tikz loading=lazy }
+
+1.  Un premier gardien applique la règle : « depuis la salle où je suis, je prends toujours le couloir qui mène à la salle de plus petite lettre ». Écrire les dix premières salles de sa tournée, en commençant par `A`. Qu’observe-t-on ?
+
+2.  Un deuxième gardien **coche** sur le plan chaque salle où il passe, et prend toujours le couloir qui mène à la salle **non cochée** de plus petite lettre. Écrire sa tournée depuis `A`. Que se passe-t-il ?
+
+3.  **Comment visiter toutes les salles sans tourner en rond ni rester bloqué ?** Au moment où le deuxième gardien est bloqué, de quoi aurait-il dû se souvenir ? Proposer une méthode « papier-crayon » : ce que l’on note au fur et à mesure, et comment on choisit la salle suivante. L’appliquer depuis `A` : dans quel ordre les salles sont-elles visitées ? Comment sait-on que la visite est terminée ?
+
+??? corrige "Corrigé"
+
+    1.  `A-B-A-B-A-B-A-B-A-B` : depuis `A`, la plus petite lettre voisine est `B` ; depuis `B`, c’est `A`. Le gardien **tourne en rond** entre deux salles et ne verra jamais `C`, `D`, …, `G` : il ne se souvient pas des salles où il est déjà passé.
+
+    2.  `A-B-C`, puis plus rien : en `C`, les deux voisines `A` et `B` sont cochées. Le gardien est **bloqué**, alors que `D`, `E`, `F` et `G` n’ont pas été visitées. Cocher évite de tourner en rond, mais ne suffit pas.
+
+    3.  En `A`, le gardien avait aperçu `C` et `D` sans y aller : il aurait dû **s’en souvenir**. Méthode attendue, avec deux choses à noter :
+
+        - on **coche** les salles déjà visitées ;
+
+        - on tient une **liste des salles à visiter** : celles que l’on a aperçues (voisines d’une salle visitée) mais pas encore visitées.
+
+        Au départ, la liste contient `A`. Tant que la liste n’est pas vide, on en retire une salle, on la visite et on la coche, puis on ajoute à la liste ses voisines qui ne sont ni cochées ni déjà dans la liste. La visite est **terminée quand la liste est vide**. En retirant toujours la salle la plus **ancienne** de la liste :
+
+        |      **Salle visitée**      |   `A`   |  `B`  | `C` |  `D`  |  `E`  | `F` |  `G`   |
+        |:---------------------------:|:-------:|:-----:|:---:|:-----:|:-----:|:---:|:------:|
+        | **Liste à visiter ensuite** | `B C D` | `C D` | `D` | `E F` | `F G` | `G` | (vide) |
+
+        Ordre de visite : `A`, `B`, `C`, `D`, `E`, `F`, `G`. L’ordre dépend de la salle retirée à chaque étape : en retirant toujours la plus **récente**, on obtient `A`, `D`, `F`, `G`, `E`, `C`, `B`. Dans les deux cas, chaque salle est visitée une fois et une seule. On accepte toute méthode équivalente (par exemple : revenir sur ses pas jusqu’à la dernière salle qui a encore une voisine non cochée).

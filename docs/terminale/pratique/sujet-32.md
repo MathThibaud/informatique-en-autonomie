@@ -1,10 +1,14 @@
 # Sujet 32 — Le grand escalier
 
+<span id="sujet-32" class="ancre"></span>[$\blacktriangleright$ corrigé](#csujet-32)
+
 !!! fichiers "Fichiers à télécharger"
 
     [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-32-grand-escalier){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-32-grand-escalier.zip){ .md-button }
 
 ??? corrige "Corrigé"
+
+    <span id="csujet-32" class="ancre"></span>[$\uparrow$ énoncé](#sujet-32)
 
     !!! remarque "Remarque"
 
@@ -36,7 +40,7 @@
 
     L’arbre des appels de $E(4)$ (les deux appels $E(2)$, qui refont exactement le même calcul, sont grisés) :
 
-    ![](../figures/549b0e63b2a51c93.svg){ .tikz loading=lazy }
+    ![](../figures/9b4a6fdc2bc2a71a.svg){ .tikz loading=lazy }
 
     L’appel $E(4)$ lance $E(3)$ et $E(2)$ ; or $E(3)$ relance lui-même $E(2)$ et $E(1)$, soit $9$ appels en tout. $E(2)$ est donc calculé **deux fois**, $E(1)$ trois fois, et ainsi de suite : les sous-problèmes **se recouvrent**. Chaque marche supplémentaire multiplie environ par $1{,}6$ le nombre d’appels (comme la suite de Fibonacci) : le coût est **exponentiel**. Pour $100$ marches, il faudrait de l’ordre de $10^{21}$ appels : c’est impossible en pratique.
 
@@ -151,6 +155,8 @@ Le dossier fourni au candidat comporte les éléments suivants :
 
 ??? corrige "Corrigé"
 
+    <span id="csujet-32" class="ancre"></span>[$\uparrow$ énoncé](#sujet-32)
+
     !!! remarque "Remarque"
 
         On donne une version simple ; d’autres réponses sont possibles. Le fichier complet, `corrige_sujet_32.py`, est en ligne : [`github.com/MathThibaud/nsi-fichiers-eleves/tree/main/corriges/terminale/pratique-32`](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/corriges/terminale/pratique-32).
@@ -181,7 +187,7 @@ Le dossier fourni au candidat comporte les éléments suivants :
 
     L’arbre des appels de $E(4)$ (les deux appels $E(2)$, qui refont exactement le même calcul, sont grisés) :
 
-    ![](../figures/549b0e63b2a51c93.svg){ .tikz loading=lazy }
+    ![](../figures/9b4a6fdc2bc2a71a.svg){ .tikz loading=lazy }
 
     L’appel $E(4)$ lance $E(3)$ et $E(2)$ ; or $E(3)$ relance lui-même $E(2)$ et $E(1)$, soit $9$ appels en tout. $E(2)$ est donc calculé **deux fois**, $E(1)$ trois fois, et ainsi de suite : les sous-problèmes **se recouvrent**. Chaque marche supplémentaire multiplie environ par $1{,}6$ le nombre d’appels (comme la suite de Fibonacci) : le coût est **exponentiel**. Pour $100$ marches, il faudrait de l’ordre de $10^{21}$ appels : c’est impossible en pratique.
 

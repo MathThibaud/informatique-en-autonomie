@@ -8,7 +8,13 @@ Niveau : ★ échauffement, ★★ classique (niveau bac), ★★★ défi ; les
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Le bon vocabulaire <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-14-1 }
 
+<span class="essentiel">• essentiel</span>
+
 Associer chaque terme à sa définition.
+
+??? pouce "Coup de pouce"
+
+    Commencer par les termes les plus simples : un capteur mesure, un actionneur agit. Pour les trois autres, se demander : tout est-il sur une seule puce ? Y a-t-il un système d’exploitation ? Les composants sont-ils séparés et remplaçables ?
 
 |  |  |
 |:---|:---|
@@ -22,13 +28,23 @@ Associer chaque terme à sa définition.
 
     **(1)**–(c) ; **(2)**–(e) ; **(3)**–(b) ; **(4)**–(a) ; **(5)**–(d).
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Inverser capteur et actionneur : le capteur *mesure* (il fournit une entrée au programme), l’actionneur *agit* (il exécute une commande de sortie).
+
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — SoC ou pas SoC ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-14-2 }
 
+<span class="essentiel">• essentiel</span>
+
 Pour chacun de ces objets, dire s’il repose plutôt sur un **microcontrôleur**, un **SoC de smartphone/tablette**, ou une **carte mère classique**, et justifier en une ligne : *(a)* une carte bancaire ; *(b)* un smartphone ; *(c)* un PC de jeu que l’on fait évoluer ; *(d)* un thermostat connecté ; *(e)* une montre connectée.
+
+??? pouce "Coup de pouce"
+
+    Pour chaque objet, se demander s’il fait une seule tâche précise avec peu de ressources, s’il s’agit d’un ordinateur complet et polyvalent mais compact, ou si l’on veut pouvoir changer ses composants un par un.
 
 ??? corrige "Corrigé"
 
     *(a)* carte bancaire $\to$ **microcontrôleur** (une tâche précise, minuscule, sobre) ; *(b)* smartphone $\to$ **SoC** (ordinateur complet intégré) ; *(c)* PC de jeu évolutif $\to$ **carte mère classique** (on remplace/ajoute des composants) ; *(d)* thermostat connecté $\to$ **microcontrôleur** (embarqué, capteur $+$ actionneur) ; *(e)* montre connectée $\to$ **SoC** (petit, mais ordinateur complet avec OS).
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Ranger la montre connectée parmi les microcontrôleurs parce qu’elle est petite : elle fait tourner un système d’exploitation et des applications ; c’est un ordinateur complet, donc un SoC.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Microcontrôleur contre SoC <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-14-3 }
 
@@ -70,6 +86,8 @@ En 1971, l’Intel 4004 comptait $2\,300$ transistors. La loi de Moore affirme q
 
     1.  $50 \div 2 = \mathbf{25}$ doublements.
 
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Compter $50$ doublements en $50$ ans : la loi prévoit un doublement tous les **deux** ans.
+
     2.  $2\,300\times 2^{25}\approx 2\,300\times 33{,}5\text{ millions}\approx \mathbf{7{,}7\times 10^{10}}$, soit environ **80 milliards** de transistors.
 
     3.  Non : la loi prévoit $\approx 80$ milliards, la réalité (A15, 2021) est $\approx 15$ milliards, soit environ **$5$ fois moins**. La loi de Moore donne le bon *ordre de grandeur* et la bonne *tendance*, mais elle a **ralenti** ces dernières années (elle reste une prédiction empirique, pas une loi physique).
@@ -77,6 +95,8 @@ En 1971, l’Intel 4004 comptait $2\,300$ transistors. La loi de Moore affirme q
     4.  $3 \div 0{,}2 = \mathbf{15}$ atomes environ : c’est un ordre de grandeur, car « 3 nm » est un nom commercial (les motifs réels sont un peu plus larges), mais on reste à quelques dizaines d’atomes au plus. On approche des limites **physiques** : on ne peut pas graver plus fin qu’un atome. La loi de Moore ne pourra donc pas continuer éternellement.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Dérouler un thermostat <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-5 }
+
+<span class="essentiel">• essentiel</span>
 
 Un thermostat connecté maintient une pièce à la température `consigne`. Il dispose d’un capteur de température et peut commander un radiateur (l’allumer ou l’éteindre).
 
@@ -104,9 +124,11 @@ Un thermostat connecté maintient une pièce à la température `consigne`. Il d
 
     1.  **Capteur** : le capteur de température (entrée). **Actionneur** : le radiateur (sortie).
 
-    2.  `(a)` `t = lire_temperature()` ; `(b)` `allumer_radiateur()` ; `(c)` `eteindre_radiateur()`.
+    2.  **Démarche :** un tour de boucle lit le capteur, décide (trop froid ou non), puis commande l’actionneur. `(a)` `t = lire_temperature()` ; `(b)` `allumer_radiateur()` ; `(c)` `eteindre_radiateur()`.
 
     3.  **Non** : quelques secondes de retard sur un chauffage sont sans danger, alors qu’un freinage ABS doit réagir en quelques millisecondes. La contrainte de temps réel est bien plus **faible** ici (d’où le `attendre(30)`).
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Confondre « temps réel » et « très rapide » : un système temps réel doit répondre dans un délai **garanti**, adapté à sa tâche ; pour un thermostat, ce délai peut être de plusieurs secondes.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Von Neumann ou Harvard ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-14-6 }
 
@@ -124,11 +146,15 @@ Un thermostat connecté maintient une pièce à la température `consigne`. Il d
 
     1.  **Von Neumann** : programme *et* données dans la **même** mémoire. **Harvard** : programme (mémoire morte, Flash) et données (mémoire vive, RAM) dans **deux mémoires séparées**.
 
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Inverser les deux modèles : c’est l’architecture de von Neumann qui range programme et données dans une **même** mémoire ; celle de Harvard les sépare.
+
     2.  Avec deux bus, le processeur peut charger **une instruction et une donnée en même temps** (au même cycle), au lieu de faire deux accès successifs : c’est plus rapide.
 
     3.  Un microcontrôleur vise la **simplicité et la vitesse** sur une tâche fixe : Harvard (deux mémoires dédiées) y est efficace. Un SoC vise la **polyvalence** (exécuter n’importe quel programme, chargé en mémoire) : le modèle de von Neumann, plus souple, s’y prête mieux.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Le prix de l’intégration <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-7 }
+
+<span class="essentiel">• essentiel</span>
 
 1.  Citer **deux intérêts** et **deux limites** d’un système sur puce par rapport à une carte mère classique.
 
@@ -184,7 +210,9 @@ Une voiture moderne embarque des dizaines de calculateurs. On s’intéresse au 
 
     4.  `v`$=120 <$ `consigne`$=130$ : la condition `v < consigne` est vraie, donc le système **accélère** (`accelerer()`), puis attend $0{,}1$ s avant de re-mesurer.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 9</span> — Type bac — plusieurs processeurs sur une puce *(d’après Amérique du Nord 2026, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-9 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 9</span> — Type bac — Plusieurs processeurs sur une puce *(d’après Amérique du Nord 2026, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-9 }
+
+<span class="duree">≈ 15 min</span>
 
 Un système d’exploitation permet d’exécuter plusieurs applications à la fois en donnant l’impression qu’elles fonctionnent simultanément. En réalité, le système répartit le temps de calcul du processeur entre les différents processus, de sorte qu’ils s’exécutent chacun à leur tour très rapidement. Même si un seul processus utilise réellement le processeur à un instant donné, cette alternance rapide donne l’impression que tout s’exécute en même temps.
 
@@ -194,7 +222,13 @@ Un smartphone dispose de plusieurs ressources, dont un processeur graphique (GPU
 
 2.  Décrire un avantage et un inconvénient des systèmes sur puces, tels que ceux utilisés dans les smartphones.
 
+??? pouce "Coup de pouce"
+
+    Question 1 : avec un seul processeur, deux processus peuvent-ils s’exécuter réellement au même instant ? Question 2 : relire dans le cours les intérêts et les limites de l’intégration sur une seule puce.
+
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 2) : Q1 : 1 ; Q2 : 1
 
     1.  Avec un seul processeur, un seul processus s’exécute à un instant donné : le parallélisme n’est qu’**apparent** (alternance). Avec plusieurs processeurs (ou plusieurs cœurs), plusieurs processus s’exécutent **réellement en même temps**, un par processeur : plus de calculs sont réalisés par seconde, les processus attendent moins leur tour et la machine reste réactive même quand l’un d’eux calcule beaucoup (par exemple décoder de la musique pendant que l’interface répond à l’utilisateur).
 
@@ -202,6 +236,8 @@ Un smartphone dispose de plusieurs ressources, dont un processeur graphique (GPU
         **Inconvénient** (un seul suffit) : le SoC n’est **ni réparable ni évolutif** : si un composant tombe en panne ou devient insuffisant (mémoire par exemple), on ne peut pas le remplacer seul, il faut changer toute la puce, voire l’appareil ; sa conception est aussi très coûteuse.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Type bac — Choisir la puce d’une montre connectée *(sujet maison, façon bac)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-10 }
+
+<span class="duree">≈ 45 min</span>
 
 Une entreprise conçoit une montre connectée destinée aux coureurs. La montre doit mesurer le rythme cardiaque en continu, afficher l’heure, et, de temps en temps, faire tourner de petites applications (carte, messages) sous un système d’exploitation. Sa batterie a une capacité de $300$ mAh. Les ingénieurs hésitent entre trois puces :
 
@@ -249,6 +285,8 @@ On admet que l’autonomie d’un appareil, en heures, est égale à la capacit�
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 6) : Q1 : 0,75 ; Q2 : 0,5 ; Q3 : 0,75 ; Q4 : 0,75 ; Q5 : 1,25 ; Q6 : 1,25 ; Q7 : 0,75
+
     1.  **A** et **C** sont des **microcontrôleurs** : fréquence de quelques dizaines à une centaine de MHz, mémoire de quelques centaines de Ko à $1$ Mo, **aucun système d’exploitation**, consommation et prix très faibles. **B** est un **SoC** de type smartphone : plusieurs cœurs à plus d’un GHz, $2$ Go de mémoire, un système d’exploitation.
 
     2.  Dans les deux cas, **tous les composants d’un ordinateur** (processeur, mémoire, entrées-sorties) sont intégrés sur **un seul circuit intégré**.
@@ -286,6 +324,8 @@ On admet que l’autonomie d’un appareil, en heures, est égale à la capacit�
     7.  C’est une **contrainte de temps réel** : la mesure doit être faite à intervalle régulier, sans retard. Le microcontrôleur, **sans système d’exploitation**, exécute directement son programme de façon **prévisible**, alors que l’OS de la puce B partage le processeur entre de nombreux processus et pourrait retarder la lecture. De plus, la puce A consomme $10$ fois moins, ce qui compte pour une tâche permanente.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 11</span> — Type bac — Une station météo au lycée *(sujet maison, façon bac)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-11 }
+
+<span class="duree">≈ 45 min</span>
 
 Le club de sciences du lycée installe sur le toit une station météo. Elle est pilotée par un **microcontrôleur** d’architecture de Harvard, qui dispose de $32$ Ko de mémoire Flash et de $2$ Ko ($2\,048$ octets) de mémoire vive. Toutes les $10$ minutes, il lit trois capteurs (température, humidité, vitesse du vent) ; si la température passe sous $0$ ° C, il allume une LED rouge d’alerte « gel » sur le boîtier.
 
@@ -331,6 +371,8 @@ Le club de sciences du lycée installe sur le toit une station météo. Elle est
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 6) : Q1 : 0,5 ; Q2 : 0,75 ; Q3 : 0,5 ; Q4 : 0,75 ; Q5 : 1 ; Q6 : 1 ; Q7 : 0,75 ; Q8 : 0,75
+
     1.  **Capteurs** : température, humidité, vitesse du vent (anémomètre). **Actionneur** : la LED rouge d’alerte.
 
     2.  Le **programme** est dans la mémoire **Flash** (mémoire morte) ; les **mesures** (données) sont dans la mémoire **vive** (RAM). La mémoire Flash est **non volatile** : elle conserve son contenu sans alimentation, contrairement à la RAM.
@@ -365,6 +407,8 @@ Le club de sciences du lycée installe sur le toit une station météo. Elle est
     8.  Avec deux mémoires et **deux bus**, le processeur lit **une instruction et une donnée en même temps**, ce qui est plus rapide. Pas besoin d’OS : le microcontrôleur exécute **une seule tâche**, toujours la même, directement dès la mise sous tension ; un OS n’apporterait rien et ne tiendrait d’ailleurs pas dans $2$ Ko de RAM.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Type bac — Une salle informatique à renouveler *(sujet maison, façon bac)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-12 }
+
+<span class="duree">≈ 45 min</span>
 
 Le lycée doit renouveler les $30$ ordinateurs d’une salle. Deux solutions sont étudiées :
 
@@ -405,6 +449,8 @@ La salle est utilisée $8$ heures par jour, $160$ jours par an. On rappelle que 
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 6) : Q1 : 0,5 ; Q2 : 0,75 ; Q3 : 1 ; Q4 : 1,25 ; Q5 : 0,75 ; Q6 : 0,75 ; Q7 : 1
+
     1.  Sont intégrés sur la puce : le **CPU**, le **GPU**, le **contrôleur Wi-Fi** et la **mémoire vive**. L’alimentation électrique n’est pas sur la puce, et il n’y a pas de ventilateur.
 
     2.  Les signaux parcourent de **très courtes distances**, sans longs fils de cuivre : il faut moins d’énergie, donc il se dégage **moins de chaleur**, et un ventilateur devient inutile. Autre avantage : la machine est **silencieuse** (et beaucoup plus petite).
@@ -431,9 +477,11 @@ La salle est utilisée $8$ heures par jour, $160$ jours par an. On rappelle que 
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Type bac — Au cœur d’un smartphone *(sujet maison, façon bac)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-13 }
 
+<span class="duree">≈ 45 min</span>
+
 Le schéma ci-dessous décrit la puce **Azur X1** (fictive) d’un smartphone sorti en 2025. Elle compte $16$ milliards de transistors.
 
-![](../figures/72668adc8097d93e.svg){ .tikz loading=lazy }
+![](../figures/f1eda9ab6450046a.svg){ .tikz loading=lazy }
 
 **Partie A — Architecture.**
 
@@ -475,6 +523,8 @@ Le schéma ci-dessous décrit la puce **Azur X1** (fictive) d’un smartphone so
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 6) : Q1 : 0,5 ; Q2 : 0,75 ; Q3 : 0,5 ; Q4 : 0,5 ; Q5 : 0,5 ; Q6 : 0,75 ; Q7 : 1,25 ; Q8 : 0,5 ; Q9 : 0,75
+
     **Partie A.**
 
     1.  C’est un **ordinateur complet et puissant** sur une seule puce : processeur multi-cœur à plusieurs GHz, $8$ **Go** de mémoire (et non quelques Ko), GPU, processeurs spécialisés, modules de communication ; il fait tourner un **système d’exploitation** complet, ce qu’un microcontrôleur ne fait pas.
@@ -513,6 +563,10 @@ Des dizaines de milliards d’objets connectés (*IoT*) nous entourent, chacun a
 
 2.  Chaque objet connecté est à la fois une **porte d’entrée** sur un réseau et un **capteur** du monde. En quoi cela pose-t-il, respectivement, un problème de **sécurité** et de **vie privée** ?
 
+??? pouce "Coup de pouce"
+
+    Question 1 : penser aux objets de la maison, du poignet, de la voiture. Question 2 : un objet relié à un réseau peut être joint à distance, par n’importe qui ; un capteur enregistre des informations sur son utilisateur : qui peut y accéder ?
+
 ??? corrige "Corrigé"
 
     1.  Par exemple : montre connectée, ampoule connectée, thermostat, enceinte vocale, caméra de surveillance, voiture connectée.
@@ -523,7 +577,9 @@ Des dizaines de milliards d’objets connectés (*IoT*) nous entourent, chacun a
 
 Un élève demande à un assistant d’IA : « Qu’est-ce qu’un système sur puce, et qu’est-ce qui l’a rendu possible ? » Voici la réponse obtenue :
 
-> « Un système sur puce (*SoC*, *System on a Chip*) regroupe sur un seul circuit intégré tous les composants d’un ordinateur : processeur, processeur graphique, mémoire vive, contrôleurs d’entrées-sorties et modules de communication (Wi-Fi, Bluetooth…). Ses avantages : composants très proches donc communications rapides, faible consommation et peu de chaleur (souvent sans ventilateur), encombrement et coût réduits ; son inconvénient : il n’est ni réparable ni évolutif. Cette intégration a été rendue possible par la miniaturisation des transistors, décrite par la loi de Moore : selon cette loi, la fréquence d’horloge des processeurs double environ tous les deux ans, ce qui a permis de passer des $2\,300$ transistors de l’Intel 4004 (1971) aux dizaines de milliards d’aujourd’hui. Les SoC équipent les smartphones, les tablettes, les objets connectés et de plus en plus d’ordinateurs portables. »
+!!! encadre "Réponse de l’assistant"
+
+    « Un système sur puce (*SoC*, *System on a Chip*) regroupe sur un seul circuit intégré tous les composants d’un ordinateur : processeur, processeur graphique, mémoire vive, contrôleurs d’entrées-sorties et modules de communication (Wi-Fi, Bluetooth…). Ses avantages : composants très proches donc communications rapides, faible consommation et peu de chaleur (souvent sans ventilateur), encombrement et coût réduits ; son inconvénient : il n’est ni réparable ni évolutif. Cette intégration a été rendue possible par la miniaturisation des transistors, décrite par la loi de Moore : selon cette loi, la fréquence d’horloge des processeurs double environ tous les deux ans, ce qui a permis de passer des $2\,300$ transistors de l’Intel 4004 (1971) aux dizaines de milliards d’aujourd’hui. Les SoC équipent les smartphones, les tablettes, les objets connectés et de plus en plus d’ordinateurs portables. »
 
 1.  La réponse est-elle correcte ? Pour le vérifier, faire un calcul d’ordre de grandeur : si la fréquence d’horloge avait doublé tous les deux ans depuis 1971 (le 4004 tournait à environ $0{,}7$ MHz), quelle fréquence aurait un processeur de 2021 ? Est-ce réaliste (un processeur actuel tourne entre $2$ et $5$ GHz) ?
 
@@ -545,7 +601,7 @@ Un élève demande à un assistant d’IA : « Qu’est-ce qu’un système sur 
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-14-16 }
 
-Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
+Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans lire ses notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 
 1.  Expliquer à un parent ce qu’est un **système sur puce** et pourquoi son smartphone en contient un.
 
@@ -553,7 +609,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
 3.  Expliquer ce que dit la **loi de Moore**, ce qu’elle ne dit pas, et ses limites.
 
-**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus, puis retourner la feuille. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire de notes** : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
+**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus : comme au Grand Oral, ces notes servent d’aide-mémoire. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire ses notes** et sans rien écrire : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
 
 ??? pouce "Coup de pouce"
 
@@ -626,3 +682,87 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
     - Piège : ce n’est **pas** la fréquence d’horloge qui double ; elle plafonne à quelques GHz.
 
     - Limites : la taille des atomes (gravure à quelques nanomètres), la chaleur, le coût des usines ; on multiplie désormais les cœurs et les processeurs spécialisés.
+
+### Entraînement
+
+Des séries courtes pour rendre une méthode automatique : même consigne, données différentes. Les réponses sont brèves dans le corrigé.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 17</span> — Systèmes embarqués en série <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-14-17 }
+
+<span class="essentiel">• essentiel</span>
+
+Pour chacun des trois systèmes embarqués ci-dessous, nommer le **capteur** et l’**actionneur**, puis dérouler la boucle sur la suite de mesures donnée : pour chaque tour, indiquer la commande envoyée (ou l’absence de commande) et l’état de l’actionneur à la fin du tour. Au départ, tous les actionneurs sont à l’arrêt.
+
+??? pouce "Coup de pouce"
+
+    Un tour de boucle suit toujours le même schéma : lire le capteur, décider avec les tests, commander l’actionneur. Faire un tableau avec une ligne par mesure : valeur lue, test vrai, commande envoyée, état de l’actionneur. Si aucun test n’est vrai, aucune commande n’est envoyée : l’actionneur reste dans son état.
+
+1.  **Éclairage d’un couloir.** Mesures successives (en lux) : $120$, $60$, $40$, $35$, $80$.
+
+    ```python
+    while True:
+        lum = lire_luminosite()        # en lux
+        if lum < 50:
+            allumer_lampe()
+        else:
+            eteindre_lampe()
+        attendre(1)
+    ```
+
+2.  **Arrosage d’un jardin.** Mesures successives (humidité du sol, en %) : $45$, $28$, $35$, $62$, $50$.
+
+    ```python
+    while True:
+        h = lire_humidite()            # en pourcentage
+        if h < 30:
+            demarrer_pompe()
+        elif h > 60:
+            arreter_pompe()
+        attendre(600)
+    ```
+
+3.  **Ventilation d’un boîtier.** Mesures successives (en ° C) : $45$, $55$, $72$, $68$, $49$.
+
+    ```python
+    while True:
+        t = lire_temperature()         # en degres C
+        if t >= 70:
+            ventiler(2)                # vitesse rapide
+        elif t >= 50:
+            ventiler(1)                # vitesse lente
+        else:
+            ventiler(0)                # arret
+        attendre(5)
+    ```
+
+??? corrige "Corrigé"
+
+    **a)** Capteur : capteur de luminosité ; actionneur : la lampe. Tours : $120$ $\to$ `eteindre_lampe()` ; $60$ $\to$ `eteindre_lampe()` ; $40$ $\to$ `allumer_lampe()` ; $35$ $\to$ `allumer_lampe()` ; $80$ $\to$ `eteindre_lampe()`. La lampe est donc successivement éteinte, éteinte, allumée, allumée, éteinte (une commande est envoyée à chaque tour, même si l’état ne change pas).
+
+    **b)** Capteur : capteur d’humidité du sol ; actionneur : la pompe. Tours : $45$ $\to$ aucune commande, pompe arrêtée ; $28$ $\to$ `demarrer_pompe()`, en marche ; $35$ $\to$ aucune commande, la pompe **reste en marche** ; $62$ $\to$ `arreter_pompe()`, arrêtée ; $50$ $\to$ aucune commande, arrêtée.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> En b), considérer que la pompe s’arrête à $35$ % parce que l’humidité dépasse $30$ % : entre $30$ et $60$, aucun test n’est vrai, aucune commande n’est envoyée, et la pompe continue de tourner jusqu’à dépasser $60$ %.
+
+    **c)** Capteur : capteur de température ; actionneur : le ventilateur. Tours : $45$ $\to$ `ventiler(0)`, arrêt ; $55$ $\to$ `ventiler(1)`, lent ; $72$ $\to$ `ventiler(2)`, rapide ; $68$ $\to$ `ventiler(1)`, lent ; $49$ $\to$ `ventiler(0)`, arrêt.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 18</span> — La loi de Moore en série <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-14-18 }
+
+<span class="essentiel">• essentiel</span>
+
+On admet la loi de Moore : le nombre de transistors d’une puce **double tous les deux ans**. Estimer le nombre de transistors prévu :
+
+??? pouce "Coup de pouce"
+
+    Commencer par compter les périodes de deux ans, c’est-à-dire le nombre de doublements $d$. Le nombre de transistors est alors multiplié par $2^d$. On rappelle $2^{10} = 1\,024 \approx 1\,000$.
+
+1.  pour une puce de $5\,000$ transistors, $10$ ans plus tard ;
+
+2.  pour une puce d’un million de transistors, $20$ ans plus tard ;
+
+3.  pour une puce de $3$ milliards de transistors, $6$ ans plus tard.
+
+??? corrige "Corrigé"
+
+    **a)** $10$ ans $= 5$ doublements : $5\,000 \times 2^5 = 5\,000 \times 32 = \mathbf{160\,000}$ transistors.  
+    **b)** $20$ ans $= 10$ doublements : $10^6 \times 2^{10} = 1\,024 \times 10^6$, soit environ **un milliard** de transistors.  
+    **c)** $6$ ans $= 3$ doublements : $3 \times 2^3 = \mathbf{24}$ **milliards** de transistors.

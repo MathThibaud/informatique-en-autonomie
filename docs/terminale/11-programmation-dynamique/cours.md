@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *« Programmation dynamique. Résoudre un problème grâce à la programmation dynamique. »* |
-| **Prérequis** | la **récursivité** (absolument indispensable), la notion de **coût** d’un algorithme (linéaire, quadratique, exponentiel), les **listes** et les **dictionnaires**, et le souvenir des **algorithmes gloutons** de Première. |
+| **Prérequis** | la **récursivité** (absolument indispensable), la notion de **coût** d’un algorithme (linéaire, quadratique, exponentiel), les **listes** et les **dictionnaires**, et le souvenir des **algorithmes gloutons** de Première. (→ fiches de révision : ch. 1) |
 | **Objectifs** | *reconnaître* un problème qui se prête à la programmation dynamique (sous-problèmes qui *se recouvrent*) ; *mémoïser* une fonction récursive (*top-down*) ; *tabuler* un problème de bas en haut (*bottom-up*) ; *comprendre* que ce sont deux faces d’une même idée ; l’*appliquer* au rendu de monnaie, au sac à dos, à la comparaison de deux mots. |
+
+!!! situation "Situation de départ"
+
+    1.  Le calcul récursif de Fibonacci du chapitre 1 met environ une heure pour `fibo(50)`. Peut-on le rendre instantané, sans changer la formule ?
+
+    2.  Pour rendre $6$ euros avec des pièces de $1$, $3$ et $4$ euros, prendre toujours la plus grosse pièce possible donne-t-il le moins de pièces ? Comment être sûr d’avoir le minimum ?
+
+    3.  Un randonneur ne peut pas porter plus de $10$ kg et hésite entre plusieurs objets, chacun avec son poids et son utilité. Faut-il essayer toutes les combinaisons pour trouver le meilleur chargement ?
 
 ## Le problème : quand la récursivité recalcule mille fois la même chose
 
@@ -28,13 +36,15 @@ Le problème des lapins dans le *Liber abbaci*
 
 Ce code est *juste*, mais son temps de calcul explose : il est multiplié par environ $1{,}6$ chaque fois que $n$ augmente de $1$ (environ $2$ secondes pour `fibo(35)`, une dizaine pour `fibo(38)`, et de l’ordre d’une heure pour `fibo(50)`). L’**arbre des appels** de `fibo(5)` montre pourquoi :
 
-![](../figures/44a0bcd55d91a027.svg){ .tikz loading=lazy }
+![](../figures/b56fda5ca3344bcc.svg){ .tikz loading=lazy }
 
 `fibo(2)` y est calculé **trois** fois, `fibo(3)` deux fois, chacun relançant tout son sous-arbre : $15$ appels pour `fibo(5)`, plus de $300$ millions pour `fibo(40)`. Le nombre d’appels, et donc le temps, croît comme $1{,}6^n$ : le coût est **exponentiel**.
 
 !!! regle "Règle 1 — Le constat qui lance tout le chapitre"
 
     La récursivité naïve est parfois catastrophique parce qu’elle **recalcule sans cesse les mêmes sous-problèmes**. L’idée de toute la programmation dynamique tient en une phrase : **ne jamais calculer deux fois la même chose**. On *retient* le résultat d’un sous-problème la première fois, et on le *réutilise* ensuite.
+
+<span class="retouract">↺ Retour sur l'activité.</span> Dans l’activité, le temps de `fibo` était multiplié par environ $4$ chaque fois que $n$ augmentait de $3$ (car $1{,}6^3 \approx 4$), et l’arbre de `fibo(5)` comptait $15$ appels, dont trois calculs de `fibo(2)` : ce recalcul rend le programme inutilisable pour $n = 50$.
 
 Ce fil rouge — « garder pour ne pas refaire » — va traverser tout le chapitre. Il existe **deux façons** de l’appliquer, et le programme demande de les connaître toutes les deux.
 
@@ -45,6 +55,8 @@ Ce fil rouge — « garder pour ne pas refaire » — va traverser tout le chapi
 !!! definition "Définition 1 — Mémoïsation"
 
     La **mémoïsation** consiste à munir une fonction récursive d’un **dictionnaire** (le « carnet ») qui associe à chaque argument déjà rencontré le résultat correspondant. On dit que l’on résout le problème **de haut en bas** (*top-down*) : on garde la structure récursive descendante, mais chaque sous-problème n’est **résolu qu’une seule fois**.
+
+<span class="retouract">↺ Retour sur l'activité.</span> Le « carnet » imaginé dans l’activité était exactement ce dictionnaire : avec lui, `fibo(6)` ne demande plus que $5$ additions au lieu de $12$, et `fibo(40)` seulement $39$.
 
 ```python
 def fibo(n, memo={}):
@@ -61,7 +73,7 @@ Avec cette seule modification, `fibo(50)` est **instantané**, et même `fibo(50
 
 Sur l’arbre des appels, la mémoïsation **coupe** toutes les branches redondantes : la deuxième fois qu’une valeur est demandée, on la *lit dans le carnet* au lieu de relancer tout son sous-arbre.
 
-![](../figures/b3cd969477cb11c1.svg){ .tikz loading=lazy }  
+![](../figures/698d7bb210433965.svg){ .tikz loading=lazy }  
 Arbre de `fibo(5)` *mémoïsé* : les nœuds en pointillés gris (`3`, `2`, `1` déjà rencontrés) sont **lus dans le carnet** — leurs sous-arbres ne sont jamais recalculés. Comparez avec l’arbre complet du début !
 
 !!! remarque "Remarque"
@@ -80,6 +92,8 @@ L’autre stratégie renverse le point de vue. Plutôt que de partir du problèm
 
     La **tabulation** consiste à résoudre les sous-problèmes **du plus petit au plus grand** en rangeant leurs résultats dans un **tableau** (une « table »). On dit que l’on résout le problème **de bas en haut** (*bottom-up*) : chaque case du tableau se calcule à partir de cases déjà remplies.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Le tableau rempli de gauche à droite à la fin de l’activité ($0, 1, 1, 2, 3, 5, 8, \dots, 55$) était une tabulation : on part des petits cas et l’on remonte, sans aucun appel récursif.
+
 ```python
 def fibo(n):
     if n <= 1:
@@ -94,7 +108,7 @@ def fibo(n):
 
 Ici encore le coût est **linéaire**. On construit `table[2]`, puis `table[3]`, etc. : quand on calcule `table[k]`, les deux cases dont on a besoin sont *déjà là*. On avance en terrain conquis.
 
-![](../figures/68557ec419dd7cdb.svg){ .tikz loading=lazy }  
+![](../figures/91815fdf37806459.svg){ .tikz loading=lazy }  
 **Tabulation :** on remplit de gauche à droite. Chaque nouvelle case ne lit que des cases *déjà calculées* à sa gauche.
 
 !!! exemple "Exemple"
@@ -122,7 +136,7 @@ Mémoïsation et tabulation résolvent **le même problème** avec **la même id
 | Ce qu’on calcule | **seulement** les sous-problèmes utiles | **tous** les sous-problèmes jusqu’à la cible |
 | Atout | naturel si on part de la formule récursive | pas de récursivité, pas de pile d’appels qui déborde |
 
-!!! remarque "Remarque"
+!!! encadre "Méthode — mémoïser ou tabuler ?"
 
     Aucune des deux n’est « meilleure » dans l’absolu. La mémoïsation est souvent la plus facile à écrire quand on tient déjà la formule récursive ; la tabulation évite le risque de « dépassement de la profondeur de récursion » et se prête bien quand on a besoin de *toutes* les valeurs intermédiaires. Un bon réflexe de contrôle : **écrire la relation de récurrence**, puis choisir l’un des deux emballages.
 
@@ -194,7 +208,7 @@ L’idée : on considère les objets un par un. Notons $T[i][c]$ la meilleure va
 
 On garde le meilleur des deux : $$T[i][c] = \max\big(\ T[i-1][c],\ \ v_i + T[i-1][c - w_i]\ \big).$$
 
-![](../figures/f0675b562395dcfa.svg){ .tikz loading=lazy }  
+![](../figures/bd40791665eb4620.svg){ .tikz loading=lazy }  
 **Table 2D :** chaque case de la ligne $i$ se calcule à partir de **deux cases de la ligne $i-1$** (celle juste au-dessus, et celle décalée de $w_i$ vers la gauche).
 
 ```python
@@ -216,7 +230,9 @@ def sac_a_dos(poids, valeurs, capacite):
 
     Le sac à dos « entier » (on prend un objet ou pas, jamais un morceau) n’a **pas** de bon algorithme glouton : c’est justement ce qui le rend intéressant. Sa version dynamique remplit une table de taille $n \times C$, donc en coût $O(n \times C)$ — bien mieux que d’essayer les $2^n$ sous-ensembles d’objets.
 
-    **Une nuance importante.** Ce coût est polynomial en la **valeur** de $C$, mais pas en sa **taille**. Écrite en binaire avec $b$ bits, la capacité peut valoir jusqu’à $2^b$ : la table a alors de l’ordre de $n \times 2^b$ cases. Chaque bit ajouté à $C$ double la table : le coût est **exponentiel** en la taille de $C$. On parle de coût **pseudo-polynomial** : l’algorithme est excellent pour une capacité de quelques milliers, mais inutilisable pour une capacité de $30$ chiffres. On verra au chapitre *Calculabilité* pourquoi cette nuance compte.
+!!! curieux "Pour les curieux (facultatif) — Une nuance importante"
+
+    Ce coût est polynomial en la **valeur** de $C$, mais pas en sa **taille**. Écrite en binaire avec $b$ bits, la capacité peut valoir jusqu’à $2^b$ : la table a alors de l’ordre de $n \times 2^b$ cases. Chaque bit ajouté à $C$ double la table : le coût est **exponentiel** en la taille de $C$. On parle de coût **pseudo-polynomial** : l’algorithme est excellent pour une capacité de quelques milliers, mais inutilisable pour une capacité de $30$ chiffres. On verra au chapitre *Calculabilité* pourquoi cette nuance compte.
 
 <span id="cours-11-12" class="ancre"></span>
 
@@ -245,7 +261,7 @@ def plsc(a, b):
     return L[n][m]
 ```
 
-![](../figures/aa57ab66876314fd.svg){ .tikz loading=lazy }
+![](../figures/74dbc77856ac5e76.svg){ .tikz loading=lazy }
 
 table `L` pour `plsc("CHIEN", "NICHE")`
 
@@ -331,15 +347,17 @@ Tous ces exemples partagent la même ossature. C’est elle qu’il faut savoir 
 
     **Gloutons, diviser-pour-régner, programmation dynamique : ne pas confondre.** Le *glouton* fait un choix définitif à chaque étape (rapide, mais parfois faux). *Diviser pour régner* découpe en sous-problèmes **indépendants** (comme le tri fusion : les deux moitiés n’ont rien en commun). La *programmation dynamique* s’attaque au cas où les sous-problèmes **se chevauchent** : c’est précisément ce chevauchement qui rend la mémoire payante.
 
-## Ouverture : mémoriser plutôt que recalculer
+## Ouverture et liens avec les autres chapitres
 
-La programmation dynamique prolonge la **récursivité** (chapitre 1) et **diviser pour régner** (chapitre 7) : on découpe toujours en sous-problèmes, mais quand ils se répètent, on **mémorise** leurs résultats.
+La programmation dynamique découpe toujours en sous-problèmes, mais quand ils se répètent, elle **mémorise** leurs résultats : elle échange du **temps** contre de la **mémoire**.
 
-- l’algorithme de Bellman-Ford, sur lequel repose le protocole RIP (chapitre *Réseaux*), est lui-même un algorithme de programmation dynamique ;
+- **Ce qu’il réutilise** : la **récursivité** (chapitre 1, où Fibonacci naïf était déjà exponentiel) et **diviser pour régner** (chapitre 7), prolongé lorsque les sous-problèmes se recouvrent ; le **rendu de monnaie**, résolu de façon gloutonne en 1<sup>re</sup>, trouve ici sa version toujours optimale.
 
-- le chapitre suivant, *Recherche textuelle*, retrouvera la même idée « dépenser de la mémoire pour gagner du temps » avec une table de prétraitement ;
+- **Déjà croisé** : l’algorithme de Bellman-Ford, sur lequel repose le protocole RIP (chapitre 9), est lui-même un algorithme de programmation dynamique.
 
-- au **bac**, on vous demandera surtout d’écrire une **relation de récurrence**, de compléter une version **mémoïsée** ou une version **tabulée** (remplissage d’un tableau), et de comparer avec un algorithme **glouton**.
+- **Ouverture.** Le chapitre suivant, *Recherche textuelle*, retrouvera l’idée « dépenser de la mémoire pour gagner du temps » avec une table de prétraitement ; il y cherchera un motif *exact*, quand la plus longue sous-séquence commune cherche une ressemblance.
+
+- Au **bac**, on vous demandera surtout d’écrire une **relation de récurrence**, de compléter une version **mémoïsée** ou une version **tabulée** (remplissage d’un tableau), et de comparer avec un algorithme **glouton**.
 
 ## Un peu d’histoire : Bellman et un nom choisi pour tromper un ministre
 
@@ -348,10 +366,6 @@ La programmation dynamique est née dans les années 1950 sous la plume du math�
 Et le mot « dynamique » ? Bellman a raconté l’avoir choisi… par ruse. Son financeur, le secrétaire à la Défense Charles Wilson, « avait une peur et une haine viscérales du mot *recherche* ». Pour faire accepter ses travaux de mathématiques, Bellman cherchait un nom qui sonne concret, impossible à critiquer : « dynamique » avait une allure décidée, positive, et « il était impossible d’employer ce mot dans un sens péjoratif ». La discipline la plus élégante de l’algorithmique doit donc son nom à une opération de camouflage administratif !
 
 Derrière l’anecdote, une idée profonde : le **principe d’optimalité** de Bellman — *une politique optimale est faite de sous-décisions elles-mêmes optimales* — est exactement la « sous-structure optimale » de notre recette. On la retrouve aujourd’hui partout : dans les GPS, la reconnaissance vocale, l’alignement de séquences d’ADN, et jusque dans l’apprentissage par renforcement des IA qui jouent aux échecs ou au go.
-
-!!! remarque "Remarque — Liens avec d’autres chapitres"
-
-    La programmation dynamique mémorise les résultats d’appels **récursifs** pour ne jamais recalculer deux fois (mémoïsation) : elle échange du **temps** contre de la **mémoire**. Elle prolonge **diviser pour régner** lorsque les sous-problèmes se recouvrent. Le **rendu de monnaie**, résolu de façon gloutonne en Première (**algorithmes gloutons**), trouve ici sa version **toujours optimale**. Comparer deux textes (plus longue sous-séquence commune, `diff`) est cousin de la **recherche textuelle**, étudiée au chapitre suivant : on y cherchera un motif exact ; ici, on cherche une ressemblance.
 
 ## Bilan — la carte mémoire
 
@@ -367,6 +381,14 @@ Derrière l’anecdote, une idée profonde : le **principe d’optimalité** de 
 | Sac à dos | table 2D $T[i][c]$ : prendre ou laisser l’objet $i$ |
 | Mots | PLSC (ressemblance) et distance d’édition (différence), tables 2D |
 | Ne pas confondre | glouton (choix définitif) / diviser-pour-régner (sous-pb **indépendants**) |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Oui : en **mémoïsant** la fonction (un dictionnaire note chaque résultat) ou en **tabulant** (une boucle remplit un tableau des petits cas vers le grand), chaque $F_k$ n’est calculé qu’une fois : le coût passe d’exponentiel à **linéaire** (§ I à IV).
+
+    2.  Non : le glouton prend $4+1+1$, soit trois pièces, alors que $3+3$ suffit. La relation de récurrence $R(s) = 1 + \min_{p \leq s} R(s-p)$, mémoïsée ou tabulée, donne à coup sûr le minimum (§ V).
+
+    3.  Non : c’est le problème du **sac à dos**. Une table à deux dimensions $T[i][c]$, remplie en choisissant pour chaque objet de le laisser ou de le prendre, donne la meilleure valeur en $n \times C$ étapes au lieu des $2^n$ combinaisons (§ VI).
 
 ## Erreurs fréquentes
 

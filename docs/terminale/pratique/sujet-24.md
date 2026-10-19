@@ -1,10 +1,14 @@
 # Sujet 24 — Arbre d'une expression arithmétique
 
+<span id="sujet-24" class="ancre"></span>[$\blacktriangleright$ corrigé](#csujet-24)
+
 !!! fichiers "Fichiers à télécharger"
 
     [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-24-arbre-expression){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-24-arbre-expression.zip){ .md-button }
 
 ??? corrige "Corrigé"
+
+    <span id="csujet-24" class="ancre"></span>[$\uparrow$ énoncé](#sujet-24)
 
     !!! remarque "Remarque"
 
@@ -151,6 +155,8 @@ Le dossier fourni au candidat comporte les éléments suivants :
 - l’image de la figure 1 (`arbre_e1.png`).
 
 ??? corrige "Corrigé"
+
+    <span id="csujet-24" class="ancre"></span>[$\uparrow$ énoncé](#sujet-24)
 
     !!! remarque "Remarque"
 

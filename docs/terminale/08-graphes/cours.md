@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *« Graphes : structures relationnelles. Sommets, arcs, arêtes, graphe orienté ou non orienté. Modéliser des situations sous forme de graphes. Écrire les implémentations correspondantes d’un graphe : matrice d’adjacence, liste de successeurs / de prédécesseurs. Passer d’une représentation à une autre. Parcourir un graphe en largeur, en profondeur. Repérer la présence d’un cycle. Chercher un chemin dans un graphe. »* |
-| **Prérequis** | les **piles** et les **files** (indispensables pour les parcours !), les **dictionnaires** et les listes de listes, la **récursivité**, les **classes**, la notion de **coût** d’un algorithme. Les **arbres** (un arbre est un graphe particulier). |
+| **Prérequis** | les **piles** et les **files** (indispensables pour les parcours !), les **dictionnaires** et les listes de listes, la **récursivité**, les **classes**, la notion de **coût** d’un algorithme. Les **arbres** (un arbre est un graphe particulier). (→ fiches de révision : ch. 1, ch. 2, ch. 3, ch. 5) |
 | **Objectifs** | *reconnaître* une situation qui appelle un graphe et la *modéliser* ; *maîtriser* le vocabulaire ; *implémenter* un graphe de trois façons et *passer* de l’une à l’autre ; *parcourir* un graphe en largeur (file) et en profondeur (pile) ; *trouver* un chemin, le plus court chemin, détecter un cycle. |
+
+!!! situation "Situation de départ"
+
+    1.  Comment ranger dans un programme un plan de métro, un réseau d’amis ou le Web, où n’importe quel élément peut être relié à n’importe quel autre ?
+
+    2.  Comment une application de transport trouve-t-elle le trajet qui passe par le moins de stations, sans essayer tous les chemins possibles ?
+
+    3.  Comment explorer un labyrinthe ou un réseau sans tourner en rond indéfiniment ?
 
 ## Pourquoi un graphe ? Parce que le monde est un réseau
 
@@ -22,20 +30,20 @@ Regardez autour de vous. Le plan du métro : des stations, reliées par des lign
 
 ### L’acte de naissance : les sept ponts de Königsberg (1736)
 
-!!! encadre "Un peu d’histoire"
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
 
     Au <span class="smallcaps">xviii</span><sup>e</sup> siècle, la ville de Königsberg est traversée par une rivière formant deux îles, reliées aux berges et entre elles par **sept ponts**. Les habitants se demandaient si l’on pouvait se promener en traversant chaque pont **une fois et une seule**. En 1736, **Leonhard Euler** règle la question en **oubliant la carte** : peu importe la forme des îles ou la longueur des ponts, seul compte **ce qui est relié à quoi**. Il remplace la ville par quatre points (les berges `N` et `S`, les îles `O` et `E`) et sept traits (les ponts) : c’est le **premier graphe de l’histoire**, et l’acte de naissance de la **théorie des graphes**. En comptant les ponts qui partent de chaque terre, il *prouve* que la promenade est impossible (voir le théorème d’Euler, à la fin de la section II). Euler (1707–1783), Suisse alors membre de l’Académie des sciences de Saint-Pétersbourg, est l’un des mathématiciens les plus féconds de l’histoire : ses œuvres complètes remplissent plus de soixante-dix volumes.
 
     ![](../img/08_hist_koenigsberg_merian.jpg){ .photo loading=lazy style="width:201px" }  
     Königsberg et ses ponts (gravure de 1652)
 
-    ![](../figures/6b89ab3e8a0a107e.svg){ .tikz loading=lazy }  
+    ![](../figures/5c6288e1cf868572.svg){ .tikz loading=lazy }  
     Le graphe d’Euler
 
     ![](../img/08_hist_euler_handmann.jpg){ .photo loading=lazy style="width:96px" }  
     Euler (par J. E. Handmann, 1753)
 
-!!! remarque "Remarque"
+!!! encadre "À retenir — la leçon d’Euler : modéliser"
 
     Retenez la leçon d’Euler, car c’est **toute** la démarche de ce chapitre : *modéliser*, c’est jeter les détails inutiles pour ne garder que la structure des relations. Une fois le bon graphe dessiné, le problème est souvent à moitié résolu.
 
@@ -69,11 +77,13 @@ Un graphe est un ensemble de **sommets** (*vertices* ou *nodes* en anglais) reli
 
 ### Graphe non orienté
 
-![](../figures/63fdcabccac45b01.svg){ .tikz loading=lazy }
+![](../figures/e7894468f7391ac6.svg){ .tikz loading=lazy }
 
 Dans un graphe **non orienté**, une arête se parcourt **dans les deux sens**. Une **chaîne** est une suite de sommets reliés de proche en proche, par exemple `A -- C -- E -- D` ; sa **longueur** est le nombre d’arêtes, ici $3$.
 
 Les sommets `B` et `C` sont **adjacents** à `A` : ce sont ses **voisins**. Le **degré** d’un sommet est son nombre de voisins ($\deg(\texttt{A})=2$, $\deg(\texttt{B})=3$).
+
+<span class="retouract">↺ Retour sur l'activité.</span> Les points et les traits de l’activité étaient des **sommets** et des **arêtes**, et le « nombre de traits en un point » était le **degré**. Remplacer la carte de Königsberg par quatre points et sept traits, c’était **modéliser**.
 
 *Exemple concret :* le graphe des amis sur Facebook est **non orienté** — si vous êtes ami avec quelqu’un, la réciproque est vraie.
 
@@ -85,13 +95,15 @@ Les sommets `B` et `C` sont **adjacents** à `A` : ce sont ses **voisins**. Le *
 
     Chaque arête relie exactement deux sommets ; elle est donc comptée **deux fois** dans la somme des degrés (une fois à chaque extrémité). La somme des degrés vaut donc $2m$. Comme $2m$ est pair, la somme des degrés est paire : les sommets de degré impair doivent se « compenser » deux par deux, donc ils sont en nombre pair.
 
-!!! remarque "Remarque"
+<span class="retouract">↺ Retour sur l'activité.</span> Voilà pourquoi le défi de l’activité était impossible : aucune figure ne peut avoir **exactement un** point « impair », puisque ces points sont toujours en nombre pair.
+
+!!! curieux "Pour les curieux (facultatif)"
 
     Joli nom : si, dans une soirée, chaque poignée de main relie deux personnes, alors le nombre total de mains serrées (comptées par personne) est pair — et il y a toujours un nombre pair d’invités ayant serré un nombre impair de mains !
 
 ### Graphe orienté
 
-![](../figures/50a7f41c475ec401.svg){ .tikz loading=lazy }
+![](../figures/8409234ad30f96b3.svg){ .tikz loading=lazy }
 
 Dans un graphe **orienté**, un **arc** ne se parcourt que dans le sens de la flèche. Un **chemin** est une suite de sommets reliés par des arcs *dans le bon sens*, par exemple `A `$\to$` B `$\to$` D `$\to$` E`. Les voisins (ou **successeurs**) de `B` sont `C` et `D` (mais pas `A` !).
 
@@ -99,7 +111,7 @@ Dans un graphe **orienté**, un **arc** ne se parcourt que dans le sens de la fl
 
 ### Graphe pondéré
 
-![](../figures/3d8e9bc1a3efda10.svg){ .tikz loading=lazy }
+![](../figures/1107076f3b18b6fe.svg){ .tikz loading=lazy }
 
 Un graphe est **pondéré** (ou valué) si chaque arête porte une valeur numérique — son **poids** (coût, distance, temps, débit…). Exemples : les **distances** entre villes sur une carte routière, le **coût** d’une liaison entre routeurs (on le retrouvera au chapitre *Réseaux*, avec le protocole OSPF).
 
@@ -109,7 +121,7 @@ Un graphe est **pondéré** (ou valué) si chaque arête porte une valeur numér
 
     Un graphe est **connexe** s’il est « d’un seul tenant » : n’importe quelle paire de sommets peut être reliée par une chaîne. Sinon, il se décompose en plusieurs **composantes connexes** (ses « morceaux »).
 
-![](../figures/92aaf258b0acf710.svg){ .tikz loading=lazy }
+![](../figures/0cc599e7bdcc7709.svg){ .tikz loading=lazy }
 
 Ce graphe n’est **pas** connexe : aucune chaîne ne relie `A` à `F`. Il a **deux** composantes connexes : $\{$A,B,C,D$\}$ et $\{$F,G,H$\}$.
 
@@ -135,7 +147,7 @@ Revenons à l’énigme fondatrice des **sept ponts de Königsberg** (§ I). O
 
     Une **chaîne eulérienne** est une chaîne qui emprunte **chaque arête du graphe une fois et une seule**. Si, de plus, elle revient à son point de départ, c’est un **cycle eulérien**.
 
-La question de Königsberg était donc : *ce graphe admet-il une chaîne eulérienne ?* (une promenade qui franchit chaque pont une fois et une seule, sans forcément revenir au départ). Euler y répond **complètement**, et sa réponse ne dépend que des **degrés** des sommets.
+La question de Königsberg était donc : *ce graphe admet-il une chaîne eulérienne ?* Euler y répond **complètement**, et sa réponse ne dépend que des **degrés** des sommets.
 
 !!! theoreme "Théorème 1 — Euler, 1736 ; Hierholzer, 1873 au-delà du programme"
 
@@ -145,7 +157,7 @@ La question de Königsberg était donc : *ce graphe admet-il une chaîne euléri
 
     - $G$ admet une **chaîne eulérienne** (sans forcément revenir au départ) si et seulement s’il a **exactement zéro ou deux** sommets de degré **impair** (et, s’il y en a deux, ce sont nécessairement le départ et l’arrivée).
 
-!!! remarque "Remarque — L’idée"
+!!! curieux "Pour les curieux (facultatif) — L’idée"
 
     Le sens « facile » est intuitif : chaque fois qu’on **traverse** un sommet intermédiaire, on « consomme » deux arêtes (une pour entrer, une pour sortir). Un sommet par lequel on ne fait que passer doit donc avoir un degré **pair**. Seuls le départ et l’arrivée peuvent avoir un degré impair — et ils coïncident dans le cas d’un cycle, qui exige alors **tous** les degrés pairs. C’est ce sens que démontre Euler en 1736 ; la réciproque (si les degrés conviennent et que le graphe est connexe, la chaîne existe) ne sera démontrée qu’en 1873, par Carl **Hierholzer**.
 
@@ -153,7 +165,9 @@ La question de Königsberg était donc : *ce graphe admet-il une chaîne euléri
 
     Dans le graphe des ponts, les quatre terres ont pour degrés $3,3,3,5$ : **quatre** sommets de degré impair. Comme il en faudrait au plus deux, **aucune** chaîne eulérienne n’existe : la promenade rêvée par les habitants est bel et bien **impossible**. Euler l’a démontré sans essayer un seul trajet — juste en comptant des degrés.
 
-!!! remarque "Remarque"
+<span class="retouract">↺ Retour sur l'activité.</span> La règle conjecturée dans l’activité est ce théorème : la maison (deux points impairs, `A` et `B`) se trace en partant de `A` ou de `B`, l’enveloppe fermée (quatre points impairs) est impossible, et le nœud papillon (aucun point impair) se trace en revenant au départ, d’où que l’on parte.
+
+!!! curieux "Pour les curieux (facultatif)"
 
     Ce théorème n’est **pas au programme** : on le donne pour la culture, et parce qu’il montre magnifiquement la puissance de la modélisation par graphes. À ne pas confondre avec le parcours d’un graphe (passer par tous les **sommets**) : ici on veut passer par toutes les **arêtes**.
 
@@ -167,7 +181,7 @@ Pour représenter un graphe, il faut se donner une convention répondant à deux
 
 Dans toute cette partie, on illustre avec ce petit graphe non orienté, appelé $G$ :
 
-![](../figures/5469b4a074d106fe.svg){ .tikz loading=lazy }
+![](../figures/b566ef9ceca2eb80.svg){ .tikz loading=lazy }
 
 ### Représentation par matrice d’adjacence
 
@@ -185,7 +199,7 @@ $$\begin{array}{c}
 \end{pmatrix}
 \end{array}$$
 
-!!! remarque "Remarque"
+!!! encadre "À retenir — matrice symétrique ou non"
 
     Pour un graphe **non orienté**, $M[i][j]=M[j][i]$ : la matrice est **symétrique** (l’arête B–C donne un $1$ de part et d’autre de la diagonale). Pour un graphe **orienté**, elle ne l’est pas forcément. Pour un graphe **pondéré**, on remplace les $1$ par les poids.
 
@@ -240,7 +254,7 @@ G = {'A': ['B', 'C'],
 
 Quand les sommets sont **numérotés** de $0$ à $n-1$, on peut se passer du dictionnaire : la liste d’adjacence devient une simple **liste de listes**, où la case d’indice $i$ contient la liste des voisins du sommet $i$. C’est la convention de plusieurs sujets de bac. Par exemple, le graphe
 
-![](../figures/af343a25f7c7db20.svg){ .tikz loading=lazy }
+![](../figures/b86016d26f28bf73.svg){ .tikz loading=lazy }
 
 se représente par `adj = [[1, 2], [0, 3], [0], [1], [5], [4]]` : le sommet $0$ a pour voisins $1$ et $2$, le sommet $1$ a pour voisins $0$ et $3$, etc.
 
@@ -324,6 +338,8 @@ Tous les parcours suivent le même squelette :
 
     Dans un arbre, on ne peut jamais revenir sur ses pas : les sous-arbres sont disjoints. Dans un graphe, un voisin peut **déjà avoir été vu** (par un cycle, un raccourci…). Il est donc **indispensable de mémoriser les sommets déjà découverts**, sinon le parcours tourne en rond **indéfiniment**.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Dans l’activité du musée, le premier gardien tournait en rond faute de cocher les salles visitées, et le second restait bloqué faute de liste des salles à visiter : la mémoire des sommets découverts et la structure d’attente `S` corrigent exactement ces deux défauts.
+
 Et voici la clé de tout le chapitre : **le choix de la structure `S` change la nature du parcours**. C’est là que les piles et les files du début d’année reviennent en force.
 
 !!! regle "Règle 6 — File ou pile : les deux parcours"
@@ -334,7 +350,7 @@ Et voici la clé de tout le chapitre : **le choix de la structure `S` change la 
 
 Pour la suite, on utilise ce graphe à 8 sommets (les voisins sont toujours donnés par ordre alphabétique) :
 
-![](../figures/f3392a7ef9cd93f4.svg){ .tikz loading=lazy }
+![](../figures/b30d9f2a017aaec2.svg){ .tikz loading=lazy }
 
 ### Le parcours en largeur (BFS)
 
@@ -368,7 +384,7 @@ Sur le graphe ci-dessus, `BFS(g, ’B’)` renvoie `[’B’, ’A’, ’D’, 
 
 Voici l’état de la file `en_attente` après chaque tour de boucle (à gauche, le sommet défilé et visité ; la tête de la file est à gauche, les sommets qui viennent d’être enfilés sont foncés) :
 
-![](../figures/b6977ea4714c9366.svg){ .tikz loading=lazy }
+![](../figures/d2112afea46e6403.svg){ .tikz loading=lazy }
 
 !!! remarque "Remarque — Pourquoi decouverts ?"
 
@@ -455,9 +471,74 @@ Sur le graphe précédent, `DFS_iteratif(g, ’A’)` renvoie `[’A’, ’C’
 
     - **En largeur (file)** : on teste `decouverts` **avant d’enfiler**. Chaque sommet n’entre qu’une fois dans la file, et l’ordre « par couches » est respecté.
 
-    - **En profondeur itératif (pile)** : on fait l’inverse, **exprès**. Un sommet peut être empilé plusieurs fois (par plusieurs voisins) ; on le marque `traites` seulement **quand on le dépile**, et on ignore les exemplaires suivants. C’est ce qui garantit que l’on plonge toujours depuis le sommet le plus *récent* : si l’on marquait les sommets dès l’empilement, le parcours obtenu ne serait plus vraiment « en profondeur ». Exemple : arêtes `A--B`, `A--C`, `B--E`, `C--D`, `C--E`, départ `A`. En marquant dès l’empilement, `A` marque `B` et `C` ; on dépile `C`, qui empile `D` et `E` ; on dépile `E`, dont le voisin `B` est déjà marqué, donc pas empilé : on repart de `D`. Ordre obtenu : `A, C, E, D, B`. Or un vrai parcours en profondeur, arrivé en `E`, continue vers son voisin `B`, encore jamais visité, avant de revenir en arrière : `A, C, E, B, D`, que donne bien `DFS_iteratif`.
+    - **En profondeur itératif (pile)** : on fait l’inverse, **exprès**. Un sommet peut être empilé plusieurs fois (par plusieurs voisins) ; on le marque `traites` seulement **quand on le dépile**, et on ignore les exemplaires suivants. C’est ce qui garantit que l’on plonge toujours depuis le sommet le plus *récent* : si l’on marquait les sommets dès l’empilement, le parcours obtenu ne serait plus vraiment « en profondeur » (exemple ci-dessous).
 
-!!! remarque "Remarque"
+!!! exemple "Exemple — Marquer à l’empilement ou au dépilement ?"
+
+    Arêtes `A--B`, `A--C`, `B--E`, `C--D`, `C--E`, départ `A`, voisins pris par ordre alphabétique. Dans le tableau, la pile est écrite en ligne, **sommet à droite** ; chaque ligne correspond à un sommet dépilé.
+
+    ![](../figures/07afa234bcf79343.svg){ .tikz loading=lazy }
+
+    <table>
+    <thead>
+    <tr>
+    <th colspan="2" style="text-align: left;"><strong>marqué à l’empilement</strong></th>
+    <th colspan="2" style="text-align: left;"><strong>marqué au dépilement</strong> (<code>DFS_iteratif</code>)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: center;"><strong>dépile</strong></td>
+    <td style="text-align: left;"><strong>pile ensuite</strong></td>
+    <td style="text-align: center;"><strong>dépile</strong></td>
+    <td style="text-align: left;"><strong>pile ensuite</strong></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>A</code></td>
+    <td style="text-align: left;"><code>B C</code> (<code>B</code>, <code>C</code> marqués)</td>
+    <td style="text-align: center;"><code>A</code></td>
+    <td style="text-align: left;"><code>B C</code></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>C</code></td>
+    <td style="text-align: left;"><code>B D E</code> (<code>D</code>, <code>E</code> marqués)</td>
+    <td style="text-align: center;"><code>C</code></td>
+    <td style="text-align: left;"><code>B D E</code></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>E</code></td>
+    <td style="text-align: left;"><code>B D</code> (<code>B</code> déjà marqué)</td>
+    <td style="text-align: center;"><code>E</code></td>
+    <td style="text-align: left;"><code>B D B</code> (<code>B</code> pas encore traité)</td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>D</code></td>
+    <td style="text-align: left;"><code>B</code></td>
+    <td style="text-align: center;"><code>B</code></td>
+    <td style="text-align: left;"><code>B D</code></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"><code>B</code></td>
+    <td style="text-align: left;">(vide)</td>
+    <td style="text-align: center;"><code>D</code></td>
+    <td style="text-align: left;"><code>B</code></td>
+    </tr>
+    <tr>
+    <td style="text-align: center;"></td>
+    <td style="text-align: left;"></td>
+    <td style="text-align: center;"><code>B</code></td>
+    <td style="text-align: left;">(vide) : déjà traité, ignoré</td>
+    </tr>
+    <tr>
+    <td colspan="2" style="text-align: left;">ordre : <code>A, C, E, D, B</code></td>
+    <td colspan="2" style="text-align: left;">ordre : <code>A, C, E, B, D</code></td>
+    </tr>
+    </tbody>
+    </table>
+
+    En marquant dès l’empilement (à gauche), `E` ne peut pas empiler `B`, déjà marqué mais jamais visité : on repart de `D`. Or un vrai parcours en profondeur, arrivé en `E`, continue vers son voisin `B` avant de revenir en arrière : c’est l’ordre `A, C, E, B, D` que donne bien `DFS_iteratif` (à droite).
+
+!!! encadre "À retenir — une file pour la largeur, une pile pour la profondeur"
 
     **BFS et DFS partagent le même squelette, mais pas la même structure** : le BFS range les sommets en attente dans une **file** (FIFO, premier arrivé, premier sorti), le DFS dans une **pile** (LIFO, dernier arrivé, premier sorti). Ce seul choix explique leurs comportements opposés : la file sert d’abord les sommets découverts le plus tôt, donc les plus **proches** du départ (cercles concentriques) ; la pile sert d’abord le dernier découvert, donc on s’**enfonce** le plus loin possible. Toute la puissance du chapitre *Structures linéaires* est là : la structure de données choisie *dicte* le comportement de l’algorithme. Il n’existe pas « un seul » BFS ni « un seul » DFS : ce qui les caractérise est la **méthode de découverte**, pas l’ordre exact des voisins.
 
@@ -475,7 +556,7 @@ Sur le graphe précédent, `DFS_iteratif(g, ’A’)` renvoie `[’A’, ’C’
 
 **Graphe orienté : ce critère est faux.** Reprenons le graphe orienté de la partie II (rappelé ci-dessous) et oublions un instant l’arc `C`$\to$`A`, en pointillés. Un parcours en profondeur depuis `A` découvre `B`, `C`, puis `E` (par l’arc `C`$\to$`E`) ; il revient en arrière, explore `D`, et l’arc `D`$\to$`E` le fait retomber sur `E`, déjà découvert, alors qu’il arrive de `D`. Le critère non orienté crierait au cycle… à tort : `B`$\to$`C`$\to$`E` et `B`$\to$`D`$\to$`E` sont deux chemins qui **se rejoignent**, mais aucun arc ne permet de repartir de `E` pour revenir en arrière. Même piège dans la recette de l’exercice 14 du chapitre : la tâche `(f)` est atteinte à la fois depuis `(e)` et depuis `(d)`, sans le moindre cycle.
 
-![](../figures/63fc24820520f5be.svg){ .tikz loading=lazy }
+![](../figures/ac617813cfb0eff3.svg){ .tikz loading=lazy }
 
 Pour s’en sortir, on distingue, pendant un parcours en **profondeur**, trois états pour chaque sommet :
 
@@ -539,19 +620,21 @@ False
 
 <span id="cours-08-9" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-08-9) à [12](exercices.md#ex-08-12)** (parcours ; chemins, connexité) ; pour les cycles orientés, voir aussi l’exercice type bac 14 (questions 4 et 5)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-08-9) à [12](exercices.md#ex-08-12)** (parcours ; chemins, connexité) et **[20](exercices.md#ex-08-20)** (parcours à la main en série) ; pour les cycles orientés, voir aussi l’exercice type bac 14 (questions 4 et 5)
 
-## Ouverture et histoire
+## Ouverture et liens avec les autres chapitres
 
-!!! remarque "Remarque — Un peu d’histoire… et beaucoup de génie"
+- **Ce qu’il réutilise** : les **files** et les **piles** (chapitre 3) font les deux parcours, la **récursivité** (chapitre 1) écrit le parcours en profondeur, la classe `Graphe` vient de la **programmation objet** (chapitre 2) ; un **arbre** (chapitre 5) est un graphe connexe sans cycle, parcouru avec les mêmes outils.
 
-    Nous l’avons vu : la théorie des graphes naît en **1736** d’une promenade impossible, quand **Leonhard Euler** règle le problème des **sept ponts de Königsberg** en inventant l’idée d’abstraire une carte en points et traits. Deux siècles plus tard, en **1956**, le Néerlandais **Edsger Dijkstra** cherche un joli exemple pour montrer les capacités d’un nouvel ordinateur. Assis à la **terrasse d’un café d’Amsterdam** avec sa fiancée, **sans papier ni crayon**, il conçoit *en vingt minutes* son fameux algorithme du plus court chemin — publié en 1959 dans un article de **trois pages**. « L’une des raisons pour lesquelles il est si élégant, dira-t-il, c’est que je l’ai conçu sans stylo. » Aujourd’hui, cet algorithme guide chacun de vos trajets GPS.
+- **Déjà croisé** : le graphe d’attente des **processus** (chapitre 4) est un graphe orienté, où un cycle signale un interblocage ; le critère du sommet « en cours » permet enfin de le détecter.
+
+- **Ouverture.** Le plus court chemin pondéré (l’algorithme de Dijkstra du projet) sera au cœur du **routage** des paquets dans les **réseaux** (protocole OSPF, chapitre 9).
+
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire… et beaucoup de génie"
+
+    La théorie des graphes naît avec Euler et les ponts de Königsberg, en 1736 (§ I). Deux siècles plus tard, en **1956**, le Néerlandais **Edsger Dijkstra** cherche un joli exemple pour montrer les capacités d’un nouvel ordinateur. Assis à la **terrasse d’un café d’Amsterdam** avec sa fiancée, **sans papier ni crayon**, il conçoit *en vingt minutes* son fameux algorithme du plus court chemin — publié en 1959 dans un article de **trois pages**. « L’une des raisons pour lesquelles il est si élégant, dira-t-il, c’est que je l’ai conçu sans stylo. » Aujourd’hui, cet algorithme guide chacun de vos trajets GPS.
 
     Et l’histoire continue : en **1967**, le psychologue **Stanley Milgram** met en évidence le phénomène du « petit monde » — les fameux **six degrés de séparation** qui relieraient deux humains quelconques. En **1998**, deux étudiants, **Larry Page** et **Sergueï Brin**, modélisent le Web comme un gigantesque graphe orienté : leur algorithme **PageRank** deviendra… **Google**. Des ponts de Königsberg à votre moteur de recherche, c’est la même idée qui travaille : *ce qui compte, ce sont les relations*.
-
-!!! remarque "Remarque — Liens avec d’autres chapitres"
-
-    Un **arbre** est un cas particulier de graphe (connexe, sans cycle). On parcourt un graphe en **profondeur** (avec une **pile**, ou par **récursivité**) ou en **largeur** (avec une **file**) — les mêmes outils que pour les **arbres** et les **structures linéaires**. La recherche d’un **plus court chemin pondéré** (l’algorithme de Dijkstra du projet) sera au cœur du **routage** des paquets dans les **réseaux** (protocole OSPF, au chapitre suivant). Un graphe s’implémente par une classe `Graphe` (**programmation objet**), et un **cycle** dans le graphe d’attente des **processus** — un graphe orienté — signale un interblocage.
 
 ## Bilan — la carte mémoire
 
@@ -571,6 +654,14 @@ False
 | Mémoriser les visités | **obligatoire** sur un graphe (cycles !) |
 | Cycle, non orienté | retomber sur un sommet déjà découvert, autre que le parent |
 | Cycle, orienté | retomber (en profondeur) sur un sommet **en cours** |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Par un **graphe** : des **sommets** reliés par des **arêtes** (ou des arcs, s’il est orienté), représenté en Python par une **matrice d’adjacence** ou une **liste d’adjacence**, un dictionnaire qui associe à chaque sommet ses voisins (§ I à III).
+
+    2.  Elle lance un **parcours en largeur**, avec une **file**, depuis la station de départ : les sommets sont découverts par distance croissante, et en remontant les « parents » on obtient un **plus court chemin** en nombre d’arêtes (§ V.B).
+
+    3.  En **mémorisant les sommets déjà découverts** : un parcours, en largeur ou en profondeur, visite ainsi chaque sommet une seule fois. Retomber sur un sommet déjà vu (autre que le parent, ou « en cours » s’il est orienté) révèle un **cycle** (§ V).
 
 ## Erreurs fréquentes
 

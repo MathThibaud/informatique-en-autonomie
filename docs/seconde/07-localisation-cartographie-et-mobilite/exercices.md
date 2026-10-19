@@ -16,6 +16,8 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Nord ou Sud, Est ou Ouest ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-1 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span> 
 
 1.  Que vaut la latitude d’un point situé sur l’**équateur** ? la longitude d’un point sur le **méridien de Greenwich** ?
@@ -24,7 +26,29 @@
 
 3.  Monaco est à $(43{,}7384\,;\ 7{,}4246)$. Dire, pour chaque nombre, s’il s’agit de la latitude ou de la longitude, et préciser Nord/Sud et Est/Ouest.
 
+??? pouce "Coup de pouce"
+
+    Relisez la définition de la latitude et de la longitude au début du cours : à partir de quelle ligne chacune est-elle mesurée, et entre quelles valeurs ?
+
 ??? corrige "Corrigé"
+
+    *Réponses aux questions fermées ; pour les questions ouvertes ou les relevés sur machine, des pistes attendues.*
+
+    Activité 1 — Trilatération à la règle et au compas
+
+    Corrigée dans le cours, juste après l’énoncé : le randonneur est au point $\mathbf{(4\,;3)}$ (à $5$ km de A, $3$ km de B et $4$ km de C).
+
+    Activité 2 — Sur une carte en ligne
+
+    **1.** et **2.** Relevés personnels (pour un lycée de Monaco, la latitude est proche de $43{,}7^\circ$ N et la longitude de $7{,}4^\circ$ E). **3.** La distance « à vol d’oiseau » est **plus courte** : c’est la ligne droite, alors que l’itinéraire suit les routes, avec leurs virages, les sens interdits et le relief (à Monaco, beaucoup de rues en lacets).
+
+    Activité 3 — Enquête sur mes traces
+
+    **1.** Réponse personnelle (par exemple : cartes, météo, réseau social, appareil photo). **2.** Recoupées, les positions enregistrées révèlent le **domicile**, le lycée, les trajets et les **habitudes** ; stockées chez une entreprise, elles peuvent être revendues, piratées ou servir à suivre quelqu’un. **3.** Par exemple : couper la localisation quand elle est inutile ; n’autoriser une application que « pendant l’utilisation » ; effacer l’historique des positions ; retirer les métadonnées d’une photo avant de la publier.
+
+    Activité 4 — Localisation et sobriété
+
+    **1.** Les trois : le **terminal** (le téléphone calcule sa position à partir des signaux des satellites et affiche la carte), les **réseaux** (données mobiles ou Wi-Fi) et les **centres de données** (fonds de carte, calcul de l’itinéraire, état du trafic). **2.** En arrière-plan, le récepteur GPS et les liaisons radio fonctionnent sans arrêt : la **batterie** se vide plus vite (et une batterie usée trop tôt pousse à changer de téléphone) ; dans le même temps, les positions sont enregistrées et envoyées en continu, ce qui grossit les **traces** sur la vie privée. **3.** Les deux gestes cités dans l’énoncé conviennent ; autres exemples : couper la localisation quand on ne s’en sert pas, désactiver l’historique des positions.
 
     1.  Sur l’équateur, la latitude vaut $0^\circ$ ; sur le méridien de Greenwich, la longitude vaut $0^\circ$.
 
@@ -42,6 +66,10 @@
 
 3.  Ranger les trois villes de la plus au nord à la plus au sud.
 
+??? pouce "Coup de pouce"
+
+    D’après la définition du cours, que signifie une latitude négative ? Une longitude négative ? Pour la question 3, comparez les latitudes.
+
 ??? corrige "Corrigé"
 
     1.  **Rio de Janeiro** : sa latitude est **négative** ($-22{,}91$), donc au sud de l’équateur.
@@ -51,6 +79,8 @@
     3.  Du nord au sud (latitude décroissante) : **Monaco** ($43{,}74$), **Tokyo** ($35{,}68$), **Rio de Janeiro** ($-22{,}91$).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Degrés, minutes et degrés décimaux <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-3 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="tag">sur papier</span>  On rappelle que $1^\circ = 60'$.
 
@@ -68,7 +98,11 @@
 
     2.  $6{,}25^\circ = 6^\circ + 0{,}25\times 60' = 6^\circ 15'$ ; $7{,}5^\circ = 7^\circ 30'$.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire $45^\circ\,30' = 45{,}30^\circ$ : les minutes sont des *soixantièmes* de degré, pas des centièmes. $30'$, c’est la moitié de $60'$, donc $0{,}5^\circ$.
+
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 4</span> — Des degrés aux kilomètres <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-4 }
+
+<span class="duree">≈ 15 min</span>
 
 <span class="tag">sur papier</span>  On admet qu’un écart de $1^\circ$ de latitude correspond, sur le terrain, à environ $111$ km (en se déplaçant vers le nord ou vers le sud).
 
@@ -98,11 +132,17 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Du temps à la distance <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-5 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  Un signal met $0{,}06$ seconde pour parvenir d’un satellite au récepteur.
 
 1.  À quelle **distance** (en km) le récepteur se trouve-t-il de ce satellite ?
 
 2.  Que devrait mesurer le récepteur pour calculer ce temps de trajet ?
+
+??? pouce "Coup de pouce"
+
+    Relisez la règle « Du temps à la distance » du cours et l’exemple qui la suit.
 
 ??? corrige "Corrigé"
 
@@ -133,6 +173,8 @@
     3.  Une toute petite erreur de temps donne une énorme erreur de distance : il faut des horloges **extrêmement précises** (atomiques) dans les satellites. L’horloge d’un téléphone, elle, n’est pas assez précise : le **quatrième satellite** sert à calculer et corriger son erreur.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Combien de satellites ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-7 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="tag">sur papier</span> 
 
@@ -174,6 +216,8 @@
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 9</span> — Que dit le GPS ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-9 }
 
+<span class="duree">≈ 20 min</span>
+
 <span class="tag">sur papier</span>  On capte la trame suivante :
 
 ```text
@@ -206,13 +250,17 @@ $GPGGA,142012,4342.054,N,00716.098,E,1,06,1.2,10.0,M,,,,*20
 
     4.  Ces coordonnées correspondent à **Nice**.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Lire `4342.054` comme $43{,}42054^\circ$ : après les deux chiffres des degrés viennent des *minutes* ($42{,}054'$), qu’il faut diviser par $60$.
+
 ### Cartes numériques et itinéraires
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Le plus court chemin <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-10 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  On modélise un réseau routier par le graphe suivant (distances en km) :
 
-![](../figures/c34d700061f3d103.svg){ .tikz loading=lazy }
+![](../figures/bdb53c793fc9becc.svg){ .tikz loading=lazy }
 
 1.  Donner deux itinéraires possibles de A à E et leur longueur totale.
 
@@ -230,13 +278,17 @@ $GPGGA,142012,4342.054,N,00716.098,E,1,06,1.2,10.0,M,,,,*20
 
     2.  Il n’y a que quatre chemins de A à E sans repasser par un même sommet : A–B–D–E ($14$ km), A–C–F–E ($15$ km), A–C–F–D–E ($2+5+2+4 = 13$ km) et A–B–D–F–E ($3+7+2+8 = 20$ km). Le plus court est **A–C–F–D–E**, de longueur **13 km**. Ce n’est **pas** celui qui passe par le moins de carrefours (A–B–D–E n’a que deux étapes intermédiaires, mais mesure $14$ km) : seule la **somme des poids** compte.
 
+        <span class="erreurfreq">▷ Erreur fréquente.</span> S’arrêter aux deux chemins de la question 1 sans chercher les autres : le plus court (A–C–F–D–E) fait un détour par F et D. Il faut lister *tous* les chemins avant de conclure.
+
     3.  Une application GPS modélise de même le réseau routier par un **graphe** (carrefours = sommets, routes pondérées) et cherche le trajet de **somme minimale**.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 11</span> — Le chemin le plus rapide <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-11 }
 
+<span class="duree">≈ 15 min</span>
+
 <span class="tag">sur papier</span>  Pour aller de A à D, deux itinéraires sont possibles (distance et vitesse moyenne sur chaque tronçon) :
 
-![](../figures/4bd48cde471b0c78.svg){ .tikz loading=lazy }
+![](../figures/3ce1e92fb1779b55.svg){ .tikz loading=lazy }
 
 1.  Quel est l’itinéraire le plus **court** ?
 
@@ -264,19 +316,25 @@ $GPGGA,142012,4342.054,N,00716.098,E,1,06,1.2,10.0,M,,,,*20
 
 <span class="tag">sur machine</span>  Ouvrir une carte en ligne (Géoportail ou `openstreetmap.org`).
 
-1.  Retrouver le lycée et **lire ses coordonnées** (latitude, longitude).
+1.  Retrouver le **Musée océanographique** et le **stade Louis-II**, à Monaco, et **lire leurs coordonnées** (latitude, longitude). Lequel est le plus au nord ? le plus à l’est ?
 
-2.  Calculer l’**itinéraire** du lycée à la gare la plus proche : relever la **distance** et la **durée** proposées.
+2.  Calculer l’**itinéraire** entre ces deux lieux **à pied**, puis **en voiture** : relever chaque fois la **distance** et la **durée** proposées. Pourquoi les deux trajets ne sont-ils pas les mêmes ?
 
-3.  Comparer avec la distance « à vol d’oiseau ». Pourquoi le trajet routier est-il plus long ?
+3.  Comparer avec la distance « à vol d’oiseau ». Pourquoi les deux trajets sont-ils plus longs ?
 
 ??? pouce "Coup de pouce"
 
-    Sur OpenStreetMap, un clic droit sur la carte permet d’afficher l’adresse et les coordonnées d’un point ; le bouton d’itinéraire (les flèches) calcule le trajet.
+    Sur OpenStreetMap, un clic droit sur la carte permet d’afficher l’adresse et les coordonnées d’un point ; le bouton d’itinéraire (les flèches) calcule le trajet, et le mode de déplacement se choisit dans sa fenêtre. Pour comparer deux positions, relisez la définition de la latitude et de la longitude.
 
 ??? corrige "Corrigé"
 
-    Réponse ouverte. Le trajet routier est plus long que « à vol d’oiseau » car il suit les **routes** (virages, sens interdits, obstacles), et non la ligne droite.
+    Relevés sur machine : les valeurs varient un peu selon le point cliqué et l’application.
+
+    1.  Environ $(43{,}731\,;\ 7{,}425)$ pour le Musée océanographique, sur le Rocher, et $(43{,}727\,;\ 7{,}415)$ pour le stade Louis-II, à Fontvieille. Le musée a la plus grande latitude *et* la plus grande longitude : il est à la fois un peu plus au **nord** et plus à l’**est**.
+
+    2.  L’application calcule un plus court chemin dans un **graphe** qui dépend du mode de déplacement : à pied, elle peut emprunter escaliers, ascenseurs publics et rues piétonnes, interdits aux voitures ; en voiture, elle doit suivre les rues ouvertes à la circulation et respecter les sens interdits. Les deux trajets, leurs longueurs et surtout leurs durées (la vitesse n’est pas la même) diffèrent donc.
+
+    3.  À vol d’oiseau, les deux lieux sont à un peu moins d’un kilomètre. C’est la ligne droite, alors que les deux trajets suivent les rues, leurs lacets et les escaliers : ils sont forcément plus longs.
 
 ### GNSS et vie privée
 
@@ -288,6 +346,10 @@ $GPGGA,142012,4342.054,N,00716.098,E,1,06,1.2,10.0,M,,,,*20
 
 2.  Pourquoi le GPS fonctionne-t-il mal à l’intérieur d’un bâtiment ? Comment le téléphone se localise-t-il alors ?
 
+??? pouce "Coup de pouce"
+
+    Relisez la règle sur les GNSS et l’encadré « Localisation assistée » du cours.
+
 ??? corrige "Corrigé"
 
     1.  **GLONASS** (Russie), **Galileo** (Europe), **BeiDou** (Chine).
@@ -296,21 +358,34 @@ $GPGGA,142012,4342.054,N,00716.098,E,1,06,1.2,10.0,M,,,,*20
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 14</span> — Mes traces <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-14 }
 
-<span class="tag">sur papier</span> 
+<span class="essentiel">• essentiel</span>
 
-1.  Pourquoi une position est-elle une **donnée personnelle** ?
+<span class="tag">sur papier</span>  Voici un extrait, simplifié, de l’historique de localisation enregistré par le téléphone de Léa pendant une semaine. Son nom n’y figure nulle part.
 
-2.  Une photo peut « révéler » où elle a été prise : de quoi parle-t-on ?
+| **Quand ?** | **Où ?** |
+|:---|:---|
+| toutes les nuits, de 21 h à 7 h | toujours le même immeuble d’habitation |
+| du lundi au vendredi, de 8 h à 16 h | un lycée |
+| le mercredi, de 17 h à 19 h | une piscine |
+| le jeudi, de 10 h à 11 h | un cabinet médical |
 
-3.  Proposer deux réglages simples pour protéger sa localisation.
+1.  Que peut-on **déduire** de ces traces sur Léa ? Pourquoi sont-elles des **données personnelles**, alors que son nom n’y figure pas ?
+
+2.  Léa publie une photo de son chat, prise chez elle avec son téléphone. Comment un inconnu pourrait-il retrouver son adresse, alors que rien sur l’image ne la montre ?
+
+3.  Trois applications demandent à accéder à la localisation de Léa : une **lampe de poche**, une application de **navigation** et l’application qui permet de **retrouver son téléphone** en cas de perte ou de vol. Pour chacune, quel réglage lui conseiller (« toujours », « seulement pendant l’utilisation » ou « jamais ») ? Justifier.
+
+??? pouce "Coup de pouce"
+
+    Relisez la section « Localisation et vie privée » du cours : ce que révèlent des traces recoupées, les métadonnées d’une photo, puis la règle « Reprendre la main ». Pour la question 3, demandez-vous si l’application a vraiment besoin de savoir où est Léa pour fonctionner, et à quel moment.
 
 ??? corrige "Corrigé"
 
-    1.  Une position permet d’identifier et de **suivre** une personne (domicile, lycée, trajets) : c’est donc une donnée personnelle.
+    1.  On devine son **domicile** (le lieu de toutes ses nuits), qu’elle est **lycéenne** et dans quel lycée, qu’elle fait de la **natation** le mercredi, et même une information de **santé** (un rendez-vous médical), particulièrement sensible. Recoupées, ces traces désignent une seule personne : très peu de gens dorment dans cet immeuble *et* vont dans ce lycée *et* dans cette piscine. Elles permettent donc d’**identifier** Léa et de la **suivre** : ce sont des données personnelles, même sans son nom.
 
-    2.  Des **métadonnées EXIF** : une photo prise au smartphone contient souvent les coordonnées GPS du lieu.
+    2.  Par les **métadonnées EXIF** de la photo : prise au smartphone, elle contient souvent les **coordonnées GPS** du lieu de la prise de vue, c’est-à-dire son domicile. Il suffit de télécharger le fichier pour les lire, sauf si Léa les a retirées avant de publier.
 
-    3.  Couper la localisation quand elle est inutile ; limiter les applications qui y ont accès ; effacer l’historique ; retirer l’EXIF avant de publier une photo.
+    3.  Lampe de poche : **« jamais »**, elle n’a aucun besoin de la position. Navigation : **« seulement pendant l’utilisation »**, elle en a besoin pour guider, mais pas une fois fermée. Retrouver son téléphone : **« toujours »** se justifie, car l’application doit pouvoir localiser le téléphone perdu, quand personne ne l’utilise ; c’est un choix à réserver à un service de confiance. En plus : effacer régulièrement l’historique des positions.
 
 ### Localisation et environnement
 
@@ -365,3 +440,62 @@ $GPGGA,142012,4342.054,N,00716.098,E,1,06,1.2,10.0,M,,,,*20
     2.  L’erreur : le sens de la communication est inversé. Le téléphone n’**envoie** rien aux satellites : il ne fait que **recevoir** leurs messages, calcule lui-même sa distance à chacun, puis sa position. Correction : « chaque satellite diffuse l’heure d’envoi ; le téléphone la compare à l’heure de réception et en déduit la distance ».
 
     3.  Un argument de bon sens suffisait : le GPS fonctionne sans réseau ni carte SIM (en mode avion, en pleine montagne), donc le téléphone ne peut qu’*écouter*. Ou relire, avant de croire l’assistant, la phrase du cours qui décrit ce que fait le récepteur.
+
+### Python au service du thème
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Python au service du thème — convertir des coordonnées <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-17 }
+
+<span class="tag">sur machine</span>  En Python (Spyder ou Basthon). Un récepteur GPS donne ses positions en degrés-minutes, alors qu’une carte en ligne les attend en degrés décimaux : programmons la conversion du cours.
+
+1.  Écrire une fonction `en_decimal(degres, minutes)` qui renvoie la valeur en degrés décimaux. La tester : `en_decimal(45, 30)` doit renvoyer `45.5`, et `en_decimal(43, 44.304)` la latitude de Monaco.
+
+2.  Dans une trame, le sens est donné par une lettre : `N` ou `S` pour la latitude, `E` ou `W` (*West*, ouest) pour la longitude. Compléter la fonction suivante, qui renvoie une coordonnée **négative** au sud et à l’ouest :
+
+    ```python
+    def coordonnee(degres, minutes, sens):
+        valeur = en_decimal(degres, minutes)
+        if ...:
+            valeur = -valeur
+        return valeur
+    ```
+
+3.  Rio de Janeiro est à $22^\circ\,54{,}6'$ S et $43^\circ\,10{,}2'$ W. Calculer ses coordonnées en degrés décimaux avec la fonction `coordonnee`, puis les comparer à celles de l’exercice « Trois villes sur le globe ». Utiliser enfin la fonction pour vérifier la question 2 de l’exercice « Que dit le GPS ? ».
+
+??? pouce "Coup de pouce"
+
+    Question 1 : relisez l’encadré « Degrés décimaux ou degrés-minutes » du cours et traduisez son calcul en Python. Question 2 : dans quels cas faut-il changer le signe ? Relisez comment on compare deux chaînes de caractères et comment on relie deux conditions.
+
+??? corrige "Corrigé"
+
+    **1.** Comme dans le cours, on divise les minutes par $60$ avant de les ajouter aux degrés ; la priorité de la division sur l’addition évite les parenthèses.
+
+    ```python
+    def en_decimal(degres, minutes):
+        return degres + minutes / 60
+
+    print(en_decimal(45, 30))       # 45.5
+    print(en_decimal(43, 44.304))   # 43.7384
+    ```
+
+    **2.** On change le signe si le sens est `S` **ou** `W` :
+
+    ```python
+    def coordonnee(degres, minutes, sens):
+        valeur = en_decimal(degres, minutes)
+        if sens == "S" or sens == "W":
+            valeur = -valeur
+        return valeur
+    ```
+
+    **3.** On appelle la fonction avec les données de Rio, puis avec celles de la trame :
+
+    ```python
+    print(coordonnee(22, 54.6, "S"))     # -22.91
+    print(coordonnee(43, 10.2, "W"))     # -43.17
+    print(coordonnee(43, 42.054, "N"))   # 43.7009
+    print(coordonnee(7, 16.098, "E"))    # 7.2683
+    ```
+
+    Rio de Janeiro est en $(-22{,}91\,;\ -43{,}17)$ : ce sont exactement les coordonnées de l’exercice « Trois villes sur le globe », négatives car Rio est au sud de l’équateur et à l’ouest de Greenwich. La trame de l’exercice « Que dit le GPS ? » donne bien $43{,}7009^\circ$ N et $7{,}2683^\circ$ E (Nice).
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Ne tester que le sud (`if sens == "S":`) : la latitude de Rio devient bien négative, mais sa longitude reste positive, $43{,}17$ : on placerait Rio à l’*est* de Greenwich, dans l’océan Indien, au large de Madagascar. Il faut changer le signe dans les deux cas, reliés par `or`.

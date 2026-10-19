@@ -1,10 +1,14 @@
 # Sujet 28 — Ordonnancement de tâches : le tourniquet
 
+<span id="sujet-28" class="ancre"></span>[$\blacktriangleright$ corrigé](#csujet-28)
+
 !!! fichiers "Fichiers à télécharger"
 
     [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-28-tourniquet){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-28-tourniquet.zip){ .md-button }
 
 ??? corrige "Corrigé"
+
+    <span id="csujet-28" class="ancre"></span>[$\uparrow$ énoncé](#sujet-28)
 
     !!! remarque "Remarque"
 
@@ -150,6 +154,8 @@ Le dossier fourni au candidat comporte les éléments suivants :
 - un fichier de données `taches.csv` (colonnes `nom` et `duree`).
 
 ??? corrige "Corrigé"
+
+    <span id="csujet-28" class="ancre"></span>[$\uparrow$ énoncé](#sujet-28)
 
     !!! remarque "Remarque"
 

@@ -18,9 +18,15 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Lecture de trace <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-1 }
 
+<span class="essentiel">• essentiel</span>
+
 Sans machine, donner la valeur de chaque expression. `t = (5, 10, 15, 20, 25)`
 
 1.  `t[0]` **b)** `t[-1]` **c)** `t[1:3]` **d)** `len(t)` **e)** `15 in t` **f)** `t[-2]`
+
+??? pouce "Coup de pouce"
+
+    Les indices commencent à `0` ; un indice négatif compte à partir de la fin (`-1` désigne le dernier élément). Dans une tranche `t[a:b]`, l’indice `b` est exclu.
 
 ??? corrige "Corrigé"
 
@@ -28,7 +34,9 @@ Sans machine, donner la valeur de chaque expression. `t = (5, 10, 15, 20, 25)`
 
         Plusieurs écritures sont souvent possibles : on donne **une** version simple.
 
-    **a)** `5` **b)** `25` **c)** `(10, 15)` **d)** `5` **e)** `True` **f)** `20`.
+    Les indices vont de `0` à `4` (ou de `-5` à `-1` en partant de la fin) ; la tranche `t[1:3]` prend les indices `1` et `2`. **a)** `5` **b)** `25` **c)** `(10, 15)` **d)** `5` **e)** `True` **f)** `20`.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> inclure l’élément d’indice `3` dans `t[1:3]` : comme pour `range`, la borne de droite est exclue.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Vrai ou faux ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-2 }
 
@@ -42,9 +50,15 @@ Justifier en une ligne (ou par un contre-exemple).
 
 4.  `()` est un p-uplet vide valide.
 
+??? pouce "Coup de pouce"
+
+    Relire la sous-section « Création : c’est la virgule qui compte » du cours, puis tester chaque affirmation dans la console (par exemple `type((7))`).
+
 ??? corrige "Corrigé"
 
     **1.** Faux : `(7)` vaut l’entier `7` ; le singleton s’écrit `(7,)`. **2.** Faux : un p-uplet est immuable, l’affectation lève une `TypeError`. **3.** Vrai : `(1, "deux", 3.0)` est valide. **4.** Vrai : `()` est le p-uplet vide.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> croire que les parenthèses font le p-uplet : c’est la virgule. `(7)` est un simple entier entre parenthèses.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Une fonction, plusieurs résultats <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-3 }
 
@@ -55,6 +69,8 @@ Justifier en une ligne (ou par un contre-exemple).
     Deux étapes : un accumulateur pour la somme, puis la moyenne à partir de la somme et de `len(t)`. Comment une fonction renvoie-t-elle deux valeurs à la fois ?
 
 ??? corrige "Corrigé"
+
+    Un accumulateur donne la somme ; la moyenne s’en déduit. Pour renvoyer deux valeurs, on renvoie le p-uplet `s, s / len(t)`, que l’appelant déballe avec `s, m = ...`.
 
     ```python
     def somme_moyenne(t):
@@ -78,6 +94,8 @@ Justifier en une ligne (ou par un contre-exemple).
     Combien de secondes dans une heure ? dans une minute ? Penser au quotient entier `//` et au reste `%`.
 
 ??? corrige "Corrigé"
+
+    Une heure fait $3600$ secondes : le quotient `n // 3600` donne les heures ; dans le reste `n % 3600`, le quotient par $60$ donne les minutes, et le reste par $60$ les secondes.
 
     ```python
     def convertir(n):
@@ -110,6 +128,8 @@ Soit `a, b, c = 1, 2, 3`. Écrire les instructions (avec une **variable temporai
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — Lecture de trace <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-6 }
 
+<span class="essentiel">• essentiel</span>
+
 Sans machine, donner l’état du tableau après chaque ligne.
 
 ```python
@@ -121,6 +141,10 @@ n = len(t)
 ```
 
 Que valent `t`, `x` et `n` à la fin ?
+
+??? pouce "Coup de pouce"
+
+    Écrire le contenu de `t` après chaque ligne. La tranche `x` est prise *après* les deux modifications, et `t[1:3]` s’arrête avant l’indice `3`.
 
 ??? corrige "Corrigé"
 
@@ -136,7 +160,13 @@ Que valent `t`, `x` et `n` à la fin ?
 
 3.  un tableau de `8` cases valant toutes `0`.
 
+??? pouce "Coup de pouce"
+
+    Pour a) et b), une compréhension sur un `range` bien choisi (avec un pas pour b). Pour c), penser à la répétition `*`, déjà vue avec les chaînes.
+
 ??? corrige "Corrigé"
+
+    Compréhension sur un `range` (de 10 à 50 inclus, avec un pas de 10, d’où la borne `51`), et répétition `*` pour le tableau de zéros.
 
     ```python
     a = [i for i in range(10)]            # [0, 1, ..., 9]
@@ -145,6 +175,8 @@ Que valent `t`, `x` et `n` à la fin ?
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Parcours : les grands classiques <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-8 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire, **sans** utiliser les fonctions `sum`, `max`, `min`, les fonctions suivantes (tableau de nombres non vide) :
 
@@ -168,6 +200,8 @@ Que valent `t`, `x` et `n` à la fin ?
     puis comparer `x` à `m`.
 
 ??? corrige "Corrigé"
+
+    Somme et comptage : accumulateur initialisé à `0` avant la boucle. Maximum : on part d’un élément qui existe, `t[0]`, et on le remplace dès qu’on trouve plus grand. La moyenne réutilise `somme`.
 
     ```python
     def somme(t):
@@ -193,6 +227,8 @@ Que valent `t`, `x` et `n` à la fin ?
                 c = c + 1
         return c
     ```
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> initialiser le maximum à `0` : pour `[-5, -2, -9]`, la fonction renverrait `0`, qui n’est même pas dans le tableau.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Modifier sur place <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-9 }
 
@@ -221,6 +257,8 @@ Que valent `t`, `x` et `n` à la fin ?
                 t[i] = m
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> écrire `for x in t:` puis `x = x + 1` : on modifie la variable `x`, pas la case du tableau, qui reste inchangé.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Chercher et compter <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-10 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire sans utiliser les méthodes `count`/`index` :
@@ -236,6 +274,8 @@ Que valent `t`, `x` et `n` à la fin ?
     Pour `premier_indice`, parcourir par indice et sortir avec `return` dès qu’on trouve `x`. Que renvoyer si la boucle se termine sans avoir rien trouvé ?
 
 ??? corrige "Corrigé"
+
+    Compteur pour `occurrences` ; pour les deux recherches, on sort par `return` dès que `x` est trouvé, et l’on ne conclut à l’absence qu’*après* la boucle.
 
     ```python
     def occurrences(t, x):
@@ -257,6 +297,8 @@ Que valent `t`, `x` et `n` à la fin ?
                 return i
         return -1
     ```
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> ajouter `else: return False` dans la boucle de `est_present` : la fonction conclut dès le premier élément examiné.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Renverser sans `reverse` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-11 }
 
@@ -294,6 +336,10 @@ Que valent `t`, `x` et `n` à la fin ?
 
 5.  ne garder que les trois premiers éléments, à l’aide d’une tranche.
 
+??? pouce "Coup de pouce"
+
+    Les méthodes `append` et `pop` sont présentées dans la sous-section « Méthodes des tableaux » du cours. Recalculer les indices après chaque étape : le tableau change à chaque ligne.
+
 ??? corrige "Corrigé"
 
     Avec `t = [3, 1, 4, 1, 5]` :
@@ -320,11 +366,17 @@ Sans machine, donner le tableau produit.
 
 4.  `[n for n in range(30) if n % 5 == 0]`
 
+??? pouce "Coup de pouce"
+
+    Lire la compréhension comme une boucle : pour chaque valeur de la variable, si la condition est vraie, on ajoute l’expression au tableau. Écrire d’abord la liste des valeurs prises par la variable.
+
 ??? corrige "Corrigé"
 
-    **a)** `[1, 2, 3, 4, 5]` **b)** `[1, 2, 4, 8, 16]` **c)** `[’y’, ’o’]` **d)** `[0, 5, 10, 15, 20, 25]`.
+    On écrit les valeurs de la variable, on garde celles qui vérifient la condition, on calcule l’expression. **a)** `[1, 2, 3, 4, 5]` **b)** `[1, 2, 4, 8, 16]` **c)** `[’y’, ’o’]` **d)** `[0, 5, 10, 15, 20, 25]`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Écrire des compréhensions <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-14 }
+
+<span class="essentiel">• essentiel</span>
 
 Donner **en une ligne** (compréhension) le tableau :
 
@@ -369,6 +421,8 @@ for x in [5, -2, 7, -8, 3]:        for mot in ["le", "chat", "dort"]:
 
 ??? corrige "Corrigé"
 
+    Ce qui est ajouté par `append` vient en tête, puis la ligne `for`, puis la condition éventuelle.
+
     ```python
     r = [x for x in [5, -2, 7, -8, 3] if x > 0]   # (a) -> [5, 7, 3]
     r = [mot[0] for mot in ["le", "chat", "dort"]]   # (b) -> ['l', 'c', 'd']
@@ -388,6 +442,8 @@ for x in [5, -2, 7, -8, 3]:        for mot in ["le", "chat", "dort"]:
     Le filtre porte sur chaque caractère : est-il dans `"aeiouyAEIOUY"` ? Pour `nb_voyelles`, réutiliser `voyelles`.
 
 ??? corrige "Corrigé"
+
+    Compréhension avec filtre : on garde chaque caractère `c` qui est dans la chaîne des voyelles ; `nb_voyelles` n’est que la longueur de ce tableau.
 
     ```python
     def voyelles(phrase):
@@ -420,11 +476,17 @@ On pose `M = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`.
 
 3.  Écrire l’instruction qui met la case centrale à `0`.
 
+??? pouce "Coup de pouce"
+
+    `M[i]` est la ligne d’indice `i` (elle-même un tableau) ; `M[i][j]` est la case d’indice `j` de cette ligne. Lignes et colonnes sont numérotées à partir de `0`.
+
 ??? corrige "Corrigé"
 
-    **a)** `M[0] = [1, 2, 3]`, `M[2][1] = 8`, `M[1][0] = 4`. **b)** `len(M) = 3` (nombre de lignes), `len(M[0]) = 3` (nombre de colonnes). **c)** `M[1][1] = 0`.
+    On choisit d’abord la ligne (premier indice), puis la case dans la ligne (second indice). **a)** `M[0] = [1, 2, 3]`, `M[2][1] = 8`, `M[1][0] = 4`. **b)** `len(M) = 3` (nombre de lignes), `len(M[0]) = 3` (nombre de colonnes). **c)** `M[1][1] = 0`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Parcourir une matrice <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-18 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Pour une matrice `M` de nombres (`n` lignes, `p` colonnes), écrire :
 
@@ -446,6 +508,8 @@ On pose `M = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`.
     `for x in ligne:`
 
 ??? corrige "Corrigé"
+
+    Deux boucles imbriquées (les lignes, puis les cases de chaque ligne) avec un accumulateur ou un « meilleur jusqu’ici » initialisé avec une case existante, `M[0][0]` ; une seule boucle pour une ligne donnée.
 
     ```python
     def somme_matrice(M):
@@ -493,7 +557,7 @@ On pose `M = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`.
 
     **1.** `g` vaut `[[1, 0, 0], [1, 0, 0]]` : **pas** le résultat attendu ! Avec `*`, les deux « lignes » sont *le même* objet (deux flèches vers un seul tableau) ; modifier `g[0][0]` modifie donc aussi `g[1]`.
 
-    ![](../figures/c685619810a99880.svg){ .tikz loading=lazy }
+    ![](../figures/4e09a05238956a88.svg){ .tikz loading=lazy }
 
     **2.** Avec une compréhension, chaque tour crée une ligne *neuve* :
 
@@ -508,6 +572,8 @@ On pose `M = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`.
     *Autre méthode :* `return [[0] * p for i in range(n)]`. Chaque tour réévalue `[0] * p`, donc crée une ligne neuve.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 20</span> — Transposée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-20 }
+
+<span class="duree">≈ 15 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `transposee(M)` qui renvoie la **transposée** d’une matrice `n`$\times$`p` (les lignes deviennent les colonnes), sans modifier `M`.
 
@@ -552,6 +618,8 @@ On pose `M = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 21</span> — Traitement d’image <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-21 }
 
+<span class="duree">≈ 20 min</span>
+
 Une image en niveaux de gris est une matrice d’entiers de `0` à `255`.
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> `negatif(image)` : **modifie** l’image en remplaçant chaque pixel `p` par `255 - p`.
@@ -588,6 +656,8 @@ Une image en niveaux de gris est une matrice d’entiers de `0` à `255`.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 22</span> — Lecture de trace <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-22 }
 
+<span class="essentiel">• essentiel</span>
+
 On part de `d = {"a": 1, "b": 2}`. Donner l’état de `d` (ou la valeur) après chaque ligne, dans l’ordre.
 
 ```python
@@ -599,9 +669,15 @@ y = 3 in d
 z = len(d)
 ```
 
+??? pouce "Coup de pouce"
+
+    Affecter une clé absente l’ajoute ; affecter une clé présente remplace sa valeur. Le mot-clé `in` teste-t-il les clés ou les valeurs ?
+
 ??? corrige "Corrigé"
 
     Dans l’ordre : `d = {"a": 1, "b": 2, "c": 3}`, puis `{"a": 10, "b": 2, "c": 3}`, puis `{"a": 10, "c": 3}`. Ensuite `x = True` (`"c"` est une clé), `y = False` (`in` teste les clés, pas les valeurs), `z = 2`.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> croire que `3 in d` cherche parmi les valeurs : `in` ne regarde que les clés.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Parcourir un dictionnaire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-23 }
 
@@ -661,6 +737,10 @@ def compter_votes(votes):
 {'Ada': 2, 'Léo': 1}
 ```
 
+??? pouce "Coup de pouce"
+
+    Le résultat part vide. Pour chaque prénom : s’il est déjà une clé, on augmente son compte ; sinon, on le crée. Avec quelle valeur ?
+
 ??? corrige "Corrigé"
 
     ```python
@@ -678,6 +758,8 @@ def compter_votes(votes):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 25</span> — Comptage d’occurrences <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-25 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `compter_lettres(mot)` qui renvoie un dictionnaire associant à chaque lettre de `mot` son nombre d’occurrences.
 
 ```text
@@ -691,6 +773,8 @@ def compter_votes(votes):
 
 ??? corrige "Corrigé"
 
+    Même schéma que « Compter des votes » : chaque lettre est une clé ; à la première rencontre, on la crée avec la valeur `1`, ensuite on augmente sa valeur.
+
     ```python
     def compter_lettres(mot):
         compteur = {}
@@ -701,6 +785,8 @@ def compter_votes(votes):
                 compteur[lettre] = 1
         return compteur
     ```
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> écrire seulement `compteur[lettre] = compteur[lettre] + 1`, sans tester la présence de la clé : à la première lettre, la clé n’existe pas encore et Python lève une `KeyError`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 26</span> — Inverser un dictionnaire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-26 }
 
@@ -719,6 +805,8 @@ def compter_votes(votes):
 
 ??? corrige "Corrigé"
 
+    On remplit un dictionnaire neuf en parcourant les couples (clé, valeur) de `d` : chaque valeur devient une clé, associée à l’ancienne clé.
+
     ```python
     def inverser(d):
         resultat = {}
@@ -730,6 +818,8 @@ def compter_votes(votes):
     Si deux clés partageaient la même valeur, cette valeur deviendrait une **clé unique** dans le résultat : la seconde écraserait la première, et une information serait perdue.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 27</span> — Un mini-annuaire à clés composées <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-27 }
+
+<span class="duree">≈ 15 min</span>
 
 On enregistre les notes d’une classe dans un dictionnaire dont la clé est le p-uplet `(élève, matière)`.
 
@@ -776,6 +866,8 @@ releve = {("Ada", "NSI"): 18, ("Ada", "Maths"): 15, ("Léo", "NSI"): 12}
 ### Le fil rouge à l’épreuve : références, alias, copie
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 28</span> — Alias ou copie ? (lecture de trace) <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-28 }
+
+<span class="essentiel">• essentiel</span>
 
 Sans machine, prédire l’affichage. Pour chaque cas, dire s’il y a **un** ou **deux** objets en mémoire.
 
@@ -826,6 +918,8 @@ print(notes)
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 30</span> — Le piège en dictionnaire <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-30 }
+
+<span class="duree">≈ 10 min</span>
 
 Sans machine, prédire l’affichage.
 
@@ -884,6 +978,8 @@ carnet = {"Alice": [12, 15, 9], "Bob": [8, 14]}
 
 ??? corrige "Corrigé"
 
+    Pour ajouter, on crée l’élève absent avec un tableau d’une note, sinon on ajoute la note à son tableau ; la moyenne est un accumulateur sur ce tableau ; `moyennes` réutilise `moyenne_eleve` pour chaque clé.
+
     ```python
     def ajouter_note(carnet, eleve, note):
         if eleve in carnet:
@@ -906,6 +1002,8 @@ carnet = {"Alice": [12, 15, 9], "Bob": [8, 14]}
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 32</span> — Panier d’une boutique <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-32 }
+
+<span class="duree">≈ 20 min</span>
 
 Un panier est un dictionnaire `produit `$\to$` quantité`, et `prix` un dictionnaire `produit `$\to$` prix unitaire`.
 
@@ -959,6 +1057,8 @@ prix   = {"pomme": 0.5, "pain": 1.2, "lait": 0.9}
     Comme pour `meilleur` (exercice « Parcourir un dictionnaire »), le sous-total fictif `-1` est une sentinelle, valable parce que les sous-totaux sont positifs.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 33</span> — Vers le bac — le jeu du démineur (grille) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-33 }
+
+<span class="duree">≈ 20 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> On représente un champ de mines par une matrice de `0` et de `1` (`1` = mine). Écrire `compter_voisines(champ, i, j)` qui renvoie le nombre de mines dans les (au plus `8`) cases voisines de la case `(i, j)`. *Attention aux bords : ne pas sortir de la grille.*
 
@@ -1033,7 +1133,7 @@ print(doubles, notes)
 
     **1.** Non. L’affichage est `[24, 30, 18] [24, 30, 18]` : le tableau d’origine `notes` a été modifié, contrairement à ce qui était demandé. Dessin : `notes`, puis `t` et `copie` pendant l’appel, puis `doubles` au retour ; ces quatre noms pointent tous vers **un seul** tableau.
 
-    ![](../figures/22545a518677de91.svg){ .tikz loading=lazy }
+    ![](../figures/b55d4e2e08467994.svg){ .tikz loading=lazy }
 
     **2.** L’erreur est la ligne `copie = t` : elle ne copie rien, elle crée un **alias** (deux noms qui pointent vers le *même* tableau, fil rouge du cours). Modifier `copie[i]`, c’est modifier `t`. Il faut construire un nouvel objet, `copie = [x for x in t]` (ou `t[:]`) :
 
@@ -1050,3 +1150,103 @@ print(doubles, notes)
     ```
 
     **3.** Afficher le tableau d’origine **après** l’appel : c’est exactement ce que la demande promettait (« sans modifier ») et donc la première chose à tester. Un commentaire qui dit « copie » ne prouve pas qu’il y a copie.
+
+### Entraînement
+
+*Exercices courts pour s’entraîner aux gestes de base, chacun avec plusieurs données. Ils font tous partie du parcours essentiel.*
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 35</span> — Indices et tranches <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-35 }
+
+<span class="essentiel">• essentiel</span>
+
+Sans machine, donner `t[0]`, `t[-1]`, `t[1:3]`, `t[len(t) - 2]` et `len(t)` pour chacune des valeurs suivantes de `t`, puis <span class="run" title="À programmer et tester sur machine">▶</span> vérifier dans la console : a) `[7, 3, 9, 1, 5]` ; b) `("lun", "mar", "mer", "jeu")` ; c) `"Monaco"`.
+
+??? pouce "Coup de pouce"
+
+    Écrire les indices sous chaque élément : `0`, `1`, `2`… puis, en partant de la fin, `-1`, `-2`… Une tranche d’un tableau est un tableau, celle d’un p-uplet un p-uplet, celle d’une chaîne une chaîne.
+
+??? corrige "Corrigé"
+
+    Dans l’ordre `t[0]`, `t[-1]`, `t[1:3]`, `t[len(t) - 2]`, `len(t)` : a) `7`, `5`, `[3, 9]`, `1`, `5` ; b) `’lun’`, `’jeu’`, `(’mar’, ’mer’)`, `’mer’`, `4` ; c) `’M’`, `’o’`, `’on’`, `’c’`, `6`. `t[len(t) - 2]` est l’avant-dernier élément, comme `t[-2]`.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 36</span> — Dictionnaires : prédire l’état <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-36 }
+
+<span class="essentiel">• essentiel</span>
+
+Sans machine, donner l’état du dictionnaire après chaque ligne, puis la valeur des dernières expressions. <span class="run" title="À programmer et tester sur machine">▶</span> Vérifier ensuite.
+
+a\)
+
+```python
+stock = {"pomme": 4, "poire": 0}
+stock["kiwi"] = 7
+stock["pomme"] = stock["pomme"] + 2
+del stock["poire"]
+len(stock)
+7 in stock
+```
+
+b\)
+
+```python
+ages = {"Ada": 16, "Léo": 15}
+ages["Zoé"] = 17
+ages["Ada"] = 17
+"Léo" in ages
+15 in ages
+len(ages)
+```
+
+??? pouce "Coup de pouce"
+
+    Une affectation `d[cle] = valeur` crée la clé si elle est absente et remplace sa valeur sinon. `in` et `len` portent sur les clés.
+
+??? corrige "Corrigé"
+
+    États successifs, puis valeurs des expressions :
+
+    a\)
+
+    ```text
+    {'pomme': 4, 'poire': 0, 'kiwi': 7}
+    {'pomme': 6, 'poire': 0, 'kiwi': 7}
+    {'pomme': 6, 'kiwi': 7}
+    2
+    False
+    ```
+
+    b\)
+
+    ```text
+    {'Ada': 16, 'Léo': 15, 'Zoé': 17}
+    {'Ada': 17, 'Léo': 15, 'Zoé': 17}
+    True
+    False
+    3
+    ```
+
+    `7 in stock` et `15 in ages` valent `False` : ce sont des valeurs, pas des clés. Dans b), la clé `"Ada"` existait déjà : sa valeur est remplacée, aucune clé n’est ajoutée.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 37</span> — Compréhensions : prédire le tableau <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-37 }
+
+<span class="essentiel">• essentiel</span>
+
+Sans machine, donner le tableau construit par chaque compréhension, puis <span class="run" title="À programmer et tester sur machine">▶</span> vérifier.
+
+1.  `[3 * k for k in range(4)]`
+
+2.  `[len(m) for m in ["a", "bb", "ccc"]]`
+
+3.  `[x for x in [4, -1, 0, 7] if x > 0]`
+
+4.  `[c + c for c in "nsi"]`
+
+5.  `[k for k in range(10) if k % 2 == 1]`
+
+??? pouce "Coup de pouce"
+
+    Écrire d’abord les valeurs successives de la variable, puis barrer celles qui ne vérifient pas la condition, et enfin calculer l’expression pour chacune des valeurs restantes.
+
+??? corrige "Corrigé"
+
+    a) `[0, 3, 6, 9]` b) `[1, 2, 3]` c) `[4, 7]` (`0` n’est pas strictement positif) d) `[’nn’, ’ss’, ’ii’]` e) `[1, 3, 5, 7, 9]`.

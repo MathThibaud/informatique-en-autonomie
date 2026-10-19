@@ -14,7 +14,7 @@ Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title=
 
 **Prise en main.** Filius a deux modes (en haut) : le mode **construction** (le marteau) pour poser et relier les composants avec le **Câble**, et le mode **simulation** (la flèche verte) pour lancer les échanges. Les composants (barre de gauche) sont l’**Ordinateur**, le **Switch**, le **Routeur** et le **Câble** :
 
-![](../figures/a5337ec15a2df869.svg){ .tikz loading=lazy }
+![](../figures/42b6fc1c29a55f4b.svg){ .tikz loading=lazy }
 
 Un **double-clic** sur une machine ouvre sa configuration (adresse IP, masque, passerelle). En mode simulation, un double-clic permet d’installer la « **Ligne de commande** » : on y tape `ping`, `ipconfig`, `traceroute`. Le clic droit « **Afficher les échanges de données** » montre les paquets qui passent.
 
@@ -34,7 +34,7 @@ Un **double-clic** sur une machine ouvre sa configuration (adresse IP, masque, p
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  En mode **construction**, poser **trois Ordinateurs** reliés à un même **Switch**. Double-cliquer sur chacun et saisir son **adresse IP** et le **masque** `255.255.255.0` (laisser la passerelle vide) :
 
-![](../figures/fba3a781af3b3232.svg){ .tikz loading=lazy }
+![](../figures/dd99db8b0eae3ab4.svg){ .tikz loading=lazy }
 
 1.  Les trois machines ont des adresses `192.168.0._`. À quoi sert le **switch** ?
 
@@ -72,7 +72,7 @@ Un **double-clic** sur une machine ouvre sa configuration (adresse IP, masque, p
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Construire **deux** réseaux locaux reliés par **un Routeur**. À la création du routeur, Filius demande le **nombre d’interfaces** : en mettre **2**.
 
-![](../figures/9b1f1288be07d9fc.svg){ .tikz loading=lazy }
+![](../figures/e5dc7294aed40e53.svg){ .tikz loading=lazy }
 
 Interface du routeur côté réseau 0 : `192.168.0.254` ; côté réseau 1 : `192.168.1.254` (masque `255.255.255.0` partout).
 
@@ -131,54 +131,37 @@ Les documents
 
 !!! encadre "Document 1 — La règle en Europe : un Internet ouvert"
 
-    Depuis le 30 avril 2016, un règlement européen impose aux FAI de traiter tout le trafic **de façon égale**, sans discrimination, restriction ni interférence, quels que soient l’expéditeur, le destinataire, le contenu ou l’application. Une gestion « raisonnable » du trafic reste permise : un FAI peut traiter différemment des *catégories* de trafic qui ont des besoins techniques différents (un appel vidéo supporte mal le retard, un téléchargement peut attendre), ou faire face à une congestion temporaire, mais jamais pour des raisons commerciales. En France, c’est l’**Arcep** qui veille au respect de ces règles. Monaco n’étant pas membre de l’Union européenne, ce règlement ne s’y applique pas directement.
+    Depuis 2016, un règlement européen oblige les FAI à traiter tout le trafic **de façon égale**, quels que soient l’expéditeur, le contenu ou l’application. Une gestion « raisonnable » reste permise (congestion passagère, *catégories* de trafic aux besoins différents : un appel vidéo supporte mal le retard, un téléchargement peut attendre), jamais pour des raisons commerciales. En France, l’**Arcep** y veille. Monaco, hors de l’Union européenne, n’est pas directement concerné.
+
+    **À retenir :** en Europe, la neutralité est la loi, avec des exceptions techniques limitées.
 
     Source : règlement (UE) 2015/2120 du 25 novembre 2015, article 3 ; Arcep, rapport annuel « L’état de l’internet en France ».
 
 !!! encadre "Document 2 — L’« illimité »… sur certaines applications seulement"
 
-    Certains forfaits mobiles ont proposé des options « tarif zéro » : le trafic de quelques applications partenaires (musique, vidéo, réseau social) n’était pas décompté du forfait, alors que celui des autres l’était, et pouvait même être ralenti une fois le forfait épuisé. Pour le client, c’est une bonne affaire ; pour une petite application concurrente, c’est un handicap. La Cour de justice de l’Union européenne a jugé, le 15 septembre 2020 (affaire Telenor, en Hongrie), que ralentir ou bloquer les autres applications était contraire au règlement européen, puis, le 2 septembre 2021, que ces options « tarif zéro » étaient elles-mêmes incompatibles avec l’égalité de traitement du trafic.
+    Certains forfaits mobiles ont proposé un « tarif zéro » : le trafic de quelques applications partenaires (musique, vidéo, réseau social) n’était pas décompté du forfait, celui des autres si. Bonne affaire pour le client ; handicap pour une petite application concurrente. En 2020 puis en 2021 (affaire Telenor, en Hongrie), la Cour de justice de l’Union européenne a jugé ces offres contraires à l’égalité de traitement du trafic.
+
+    **À retenir :** en Europe, un FAI ne peut pas avantager quelques applications, même au profit du client.
 
     Source : Cour de justice de l’Union européenne, arrêts du 15 septembre 2020 (Telenor Magyarország) et du 2 septembre 2021.
 
 !!! encadre "Document 3 — Les opérateurs : « que les plus gros paient leur part »"
 
-    Une poignée de grandes plateformes, surtout de vidéo en ligne, produit une part importante du trafic qui arrive chez les abonnés. Or ce sont les opérateurs qui paient les antennes, la fibre et les routeurs. Plusieurs grands opérateurs européens demandent donc que ces plateformes contribuent au financement des réseaux : c’est le débat de la « juste part » (*fair share*), sur lequel la Commission européenne a lancé une consultation publique en février 2023. Les plateformes répondent qu’elles investissent déjà (câbles sous-marins, serveurs installés au plus près des abonnés) et que ce sont les abonnés eux-mêmes qui demandent ces vidéos, et paient leur abonnement pour cela.
+    Quelques grandes plateformes, surtout de vidéo, produisent une grande part du trafic, mais ce sont les opérateurs qui paient antennes, fibre et routeurs. Plusieurs opérateurs européens réclament donc aux plateformes une « juste part » (*fair share*) ; la Commission européenne a ouvert une consultation en février 2023. Les plateformes répondent qu’elles investissent déjà (câbles sous-marins, serveurs proches des abonnés) et que les abonnés paient leur abonnement pour regarder ces vidéos.
+
+    **À retenir :** derrière la neutralité se pose une autre question : qui paie le réseau ?
 
     Source : Commission européenne, consultation « L’avenir du secteur des communications électroniques et de ses infrastructures », février 2023.
 
 !!! encadre "Document 4 — Aux États-Unis, la règle fait le yo-yo"
 
-    Aux États-Unis, l’autorité fédérale des télécoms (FCC) a adopté des règles de neutralité du Net en 2015, les a supprimées fin 2017, puis rétablies en avril 2024 ; en janvier 2025, une cour d’appel fédérale les a annulées. Sans règle, un FAI peut en principe créer des « voies rapides » payantes, réservées aux services qui ont les moyens de payer. Les partisans de la suppression font valoir que l’Internet américain a continué à se développer pendant ces années ; leurs adversaires rappellent que plusieurs États, comme la Californie en 2018, ont voté leur propre loi de neutralité pour combler le vide.
+    Aux États-Unis, l’autorité des télécoms (FCC) a adopté des règles de neutralité en 2015, les a supprimées fin 2017, rétablies en 2024 ; une cour d’appel les a annulées en janvier 2025. Sans règle, un FAI peut vendre des « voies rapides » à ceux qui en ont les moyens. Pour les uns, l’Internet américain s’est développé quand même ; pour les autres, plusieurs États, comme la Californie en 2018, ont voté leur propre loi.
+
+    **À retenir :** la neutralité est un choix politique, qui varie selon les pays.
 
     Source : FCC, décisions de 2015, 2017 et 2024 ; cour d’appel fédérale (6<sup>e</sup> circuit), 2 janvier 2025.
 
-Organisation du débat
-
-| **Rôle** | **Préparation (15 min), puis débat** |
-|:---|:---|
-| Groupe POUR ($\approx$ 1/3) | Défend **oui** : au moins trois arguments, chacun appuyé sur un document ou le cours ; prévoit la réponse à deux arguments adverses ; choisit qui ouvre et qui conclut. |
-| Groupe CONTRE ($\approx$ 1/3) | Défend **non** : même travail que le groupe POUR. |
-| Modérateur (1 ou 2) | Prépare deux questions de relance ; donne la parole en alternant les camps, tient le temps, recentre. Ne donne **pas** son avis. |
-| Secrétaire (1 ou 2) | Note au tableau, en deux colonnes POUR / CONTRE, chaque argument et le numéro du document cité. |
-| Observateurs (les autres) | Suivent deux ou trois élèves (citent-ils un document ? répondent-ils à l’argument précédent ?) et notent le meilleur argument de chaque camp. |
-
-| **Min.** | **Étape** | **Min.** | **Étape** |
-|---:|:---|---:|:---|
-| 0–3 | **Mise en place** : tirage des rôles, groupes face à face. | 26–38 | **Échanges** : 12 min, parole alternée entre les camps. |
-| 3–18 | **Préparation** en groupes, tableau d’arguments ci-dessous. | 38–42 | **Observateurs** : meilleur argument de chaque camp. |
-| 18–20 | **Ouverture** : le modérateur lit la question et les règles. | 42–44 | **Conclusions** : 1 min par groupe. |
-| 20–26 | **Prises de position** : 3 min POUR, puis 3 min CONTRE. | 44–50 | **Bilan** : trace écrite individuelle, puis vote. |
-
-!!! encadre "Règles de prise de parole"
-
-    - On lève la main, le modérateur donne la parole ; une seule personne à la fois, une minute au plus.
-
-    - On **argumente** (« je pense que… **parce que**… ») et on **cite** un document ou le cours (« d’après le document 2… »).
-
-    - On **répond à l’argument précédent** avant d’en avancer un nouveau : « vous dites que…, mais… ».
-
-    - On **respecte** : on critique une idée, jamais une personne ; pas de moquerie ; on ne raconte pas la vie privée de quelqu’un.
+Rôles, déroulé minuté, règles de prise de parole et trace écrite : voir la page « Méthode : débattre ».
 
 Tableau d’arguments
 
@@ -193,6 +176,8 @@ Trace écrite finale (individuelle)
 Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes, justifiez-la avec vos **deux meilleurs arguments**, dont **un argument de l’autre camp** que vous trouvez solide (avec le document qui l’appuie).
 
 ??? corrige "Corrigé de l'activité"
+
+    **À lire après le débat.** Ces éléments de réponse servent à vérifier et à compléter votre trace écrite : les lire avant le débat lui ôterait son intérêt.
 
     Notions du cours mobilisées
 
@@ -255,9 +240,9 @@ Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujo
 
         La **neutralité du Net** est le principe selon lequel les FAI traitent tous les paquets de la même façon, sans favoriser un contenu, un service ou une entreprise. Dans l’Union européenne, c’est une **obligation légale** depuis 2016 (règlement 2015/2120), contrôlée en France par l’Arcep, avec des exceptions techniques limitées (congestion, catégories de trafic aux besoins différents). Le débat porte sur deux questions : **qui paie** les réseaux dont le trafic explose, et **qui décide** de ce qui passe en premier. Les choix diffèrent selon les pays (États-Unis, Monaco hors UE).
 
-\newgeometry{inner=1.8cm,outer=1.6cm,top=2.2cm,bottom=1.9cm,headheight=16pt,headsep=0.5cm,footskip=0.9cm}
-
 ??? corrige "Corrigé de l'activité"
+
+    **À lire après le débat.** Ces éléments de réponse servent à vérifier et à compléter votre trace écrite : les lire avant le débat lui ôterait son intérêt.
 
     Notions du cours mobilisées
 

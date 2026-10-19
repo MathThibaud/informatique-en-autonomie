@@ -10,6 +10,14 @@
 | **Prérequis** | fonctions et paramètres, listes, chaînes de caractères, notion de coût. |
 | **Objectifs** | *savoir écrire* une fonction récursive (méthode) et *savoir l’analyser* (trace, pile, terminaison, coût). |
 
+!!! situation "Situation de départ"
+
+    1.  Quand une fonction en appelle une autre, qui en appelle encore une autre, comment l’ordinateur sait-il ensuite où reprendre ?
+
+    2.  Une poupée russe contient une poupée plus petite, qui en contient une plus petite… Peut-on résoudre un problème en le ramenant au *même* problème en plus petit ? Comment être sûr que cela s’arrête ?
+
+    3.  Pourquoi un programme de quelques lignes peut-il mettre plusieurs dizaines de secondes à calculer le 40<sup>e</sup> terme d’une suite ?
+
 ## Une fonction peut en appeler une autre
 
 Une fonction peut en appeler une *autre*. Dans le programme ci-dessous, l’appel `fctB()` affiche `Debut fctB`, puis `fctA` (tout l’affichage de `fctA`), puis `Fin fctB` :
@@ -30,9 +38,11 @@ La chose essentielle à observer : l’exécution de `fctB` est **interrompue** 
 
     La *pile d’exécution* enregistre les fonctions en cours d’exécution. Les appels « s’empilent » les uns sur les autres. La fonction située **au sommet** est celle qui s’exécute ; toutes celles « en dessous » sont **en pause**. Quand une fonction se termine, elle est **dépilée**, et l’exécution reprend dans celle qui est désormais au sommet.
 
-![](../figures/989acc538d79437c.svg){ .tikz loading=lazy }
+![](../figures/b4e9b16f2a771e95.svg){ .tikz loading=lazy }
 
 La pile ne retient pas seulement « quelle fonction » : elle conserve aussi **où reprendre** (la prochaine instruction) et la **valeur des variables locales**. Ainsi, si `fctA` et `fctB` utilisent chacune une variable `i`, ces deux variables portent le même nom mais sont **indépendantes** : chaque appel possède ses propres variables.
+
+<span class="retouract">↺ Retour sur l'activité.</span> Le tas de post-it de l’activité était exactement la pile d’exécution : le post-it du dessus est l’appel en cours, ceux du dessous sont en pause, et chacun indiquait la ligne où reprendre. Le `i` de `fctB` et celui de `fctA` étaient bien deux variables distinctes, une par post-it.
 
 !!! remarque "Remarque"
 
@@ -61,6 +71,8 @@ Pour éviter cela, il faut une **condition d’arrêt**.
     - la **condition d’arrêt** (ou **cas de base**) : le ou les cas où l’on sait répondre *directement* (`if n == 0 : return ...`) ;
 
     - le **cas récursif** : les autres cas, où la fonction s’appelle elle-même sur un problème **plus petit**, qui se rapproche de la condition d’arrêt.
+
+<span class="retouract">↺ Retour sur l'activité.</span> La plus petite poupée russe, qui ne s’ouvre pas, était la condition d’arrêt de `ouvrir` (le test `if n > 1`). Sans elle, le « miroir sans fin » posait des post-it sans jamais en retirer : c’est le `RecursionError`.
 
 !!! exemple "Exemple — Prévoyez l’affichage, puis vérifiez à la machine"
 
@@ -92,11 +104,13 @@ Pour éviter cela, il faut une **condition d’arrêt**.
 
         L’affichage est donc `1 2 3`. C’est contre-intuitif : le `print(n)` est *écrit après* l’appel récursif, il ne s’exécute donc qu’**au retour**, dans l’ordre inverse des appels.
 
-![](../figures/1468717664de306e.svg){ .tikz loading=lazy }
+![](../figures/c0247d7ef263dd69.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 2 — Avant ou après l’appel ?"
 
     Le code placé **avant** l’appel récursif s’exécute « à la descente » (dans l’ordre des appels) ; le code placé **après** s’exécute « à la remontée » (dans l’ordre inverse). Déplacer une ligne d’un côté à l’autre change complètement le résultat.
+
+<span class="retouract">↺ Retour sur l'activité.</span> Dans les poupées russes, « J’ouvre la poupee » était écrit avant l’appel et s’affichait à la descente (3, 2, 1), « Je referme la poupee » était écrit après et s’affichait à la remontée (1, 2, 3).
 
 <span id="cours-01-1" class="ancre"></span>
 
@@ -134,7 +148,7 @@ def fact(n):
 
 La fonction **recopie mot pour mot** la définition mathématique : c’est la grande force de la récursivité.
 
-![](../figures/b8c9353d254101b8.svg){ .tikz loading=lazy }
+![](../figures/5e37e0307efedeb7.svg){ .tikz loading=lazy }
 
 ### Des exemples de domaines variés
 
@@ -283,7 +297,7 @@ Savoir écrire ne suffit pas : le programme demande de **savoir analyser**. Troi
 
     La suite des appels est donc finie : l’appel `somme(n)` se termine.
 
-!!! remarque "Remarque"
+!!! encadre "Au bac — justifier la terminaison"
 
     On retrouve exactement le raisonnement attendu au bac : *« décrire ce qui garantit la terminaison de la fonction récursive »* (sujet Métropole 2025, jour 2 : la longueur du tableau traité diminue à chaque appel). Attention aussi à la condition d’arrêt mal choisie : `fact` écrite avec `if n == 1` au lieu de `if n == 0` *boucle* sur `fact(-1)`, `fact(-2)`… si on l’appelle sur `fact(0)`. La condition d’arrêt doit être **réellement atteinte** par le variant.
 
@@ -291,7 +305,7 @@ Savoir écrire ne suffit pas : le programme demande de **savoir analyser**. Troi
 
 La fonction `fib` écrite plus haut est correcte, mais **terriblement lente**. La raison : chaque appel déclenche **deux** appels, et les mêmes calculs sont refaits un très grand nombre de fois. Dessinons l’**arbre des appels** de `fib(5)` :
 
-![](../figures/45a50ccd4c3da661.svg){ .tikz loading=lazy }
+![](../figures/6898a450a569bdf0.svg){ .tikz loading=lazy }
 
 On voit que `fib(2)` est recalculé **trois** fois, `fib(3)` deux fois… Le nombre d’appels est multiplié par environ $1{,}6$ quand $n$ augmente de $1$ (il fait plus que **doubler** quand $n$ augmente de $2$) : le coût est **exponentiel**.
 
@@ -345,7 +359,7 @@ Toute fonction récursive peut se réécrire de façon **itérative** (avec des 
 | Mémoire | empile un appel par caractère | un seul cadre, deux indices |
 | Terminaison | la chaîne raccourcit (variant) | `j - i` décroît |
 
-!!! remarque "Remarque"
+!!! encadre "Au bac — les limites d’une fonction"
 
     Le bac aime aussi les **limites** : `tester_palindrome(53235)` *échoue*, car `len` ne s’applique pas à un entier. Une fonction n’est correcte que pour le **type de données** qu’elle attend.
 
@@ -385,7 +399,7 @@ La récursivité produit naturellement les **fractales** : des figures qui se r�
 
         `longueur` est la longueur du segment à tracer ; à chaque niveau, on la divise par 3 pour tracer quatre segments trois fois plus petits. `n` est le **niveau de détail** : pour `n = 0`, on trace un simple segment ; sinon, on remplace le segment par quatre courbes de niveau `n - 1`.
 
-        ![](../figures/4e8ebdc7122d33a8.svg){ .tikz .tikz-inline loading=lazy }![](../figures/bcbaa50b9c89e41e.svg){ .tikz .tikz-inline loading=lazy }![](../figures/5c2416cac4913ae4.svg){ .tikz .tikz-inline loading=lazy }![](../figures/9cd7283b8c915590.svg){ .tikz .tikz-inline loading=lazy }
+        ![](../figures/c362d572b81feb54.svg){ .tikz .tikz-inline loading=lazy }![](../figures/c04201b40d1fa9fe.svg){ .tikz .tikz-inline loading=lazy }![](../figures/1a27b66b612ee7ef.svg){ .tikz .tikz-inline loading=lazy }![](../figures/952d0daecbd9d44c.svg){ .tikz .tikz-inline loading=lazy }
 
         La courbe de Koch pour `n = 0, 1, 2, 3` : chaque segment est remplacé par quatre segments trois fois plus petits.
 
@@ -395,17 +409,19 @@ La récursivité produit naturellement les **fractales** : des figures qui se r�
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[25](exercices.md#ex-01-25) à [28](exercices.md#ex-01-28)** (dessins récursifs en Turtle)
 
-## Ouverture : la récursivité, partout au programme
+## Ouverture et liens avec les autres chapitres
 
-Ce chapitre est une **clé** pour toute la fin de l’année. On la retrouve dès qu’une structure ou une méthode est « faite de copies plus petites d’elle-même ».
+Ce chapitre est une **clé** pour toute la fin de l’année : on retrouve la récursivité dès qu’une structure ou une méthode est « faite de copies plus petites d’elle-même ».
 
-- **Structures récursives : les arbres** (chapitre 5). Un arbre est un nœud reliant des *sous-arbres*. Presque tout algorithme sur les arbres est récursif (*ex.* bac Polynésie 2023, jour 2 : `maximum(abr)` qui descend dans le sous-arbre droit).
+- **Ce qu’il réutilise** : les fonctions, les listes et les chaînes de 1<sup>re</sup>, et le raisonnement par récurrence des mathématiques.
 
-- **Diviser pour régner : le tri fusion.** On coupe la liste en deux, on trie *récursivement* chaque moitié, puis on fusionne (*ex.* bac Liban 2023, jour 2). Coût $n\log_2 n$ au lieu de $n^2$. *(Tout un chapitre y est consacré : **Diviser pour régner**, chapitre 7.)*
+- **La pile d’exécution** sera étudiée pour elle-même au chapitre 3 (*structures linéaires*) : ce sera la structure de **pile**.
 
-- **Retour sur trace (*backtracking*) : le Sudoku.** On essaie, on poursuit récursivement, on **revient en arrière** au premier échec (voir le projet Sudoku en fin de chapitre).
+- **Les arbres** (chapitre 5) sont des structures récursives : presque tout algorithme sur un arbre sera récursif (*ex.* bac Polynésie 2023, jour 2 : `maximum(abr)`). Le tri fusion de **diviser pour régner** (chapitre 7, *ex.* bac Liban 2023, jour 2) et le parcours en profondeur des **graphes** (chapitre 8) le seront aussi.
 
-!!! remarque "Remarque — Un peu d’histoire"
+- **Ouverture.** Les appels répétés de Fibonacci seront évités par la **programmation dynamique** (chapitre 11) ; le **retour sur trace** (on essaie, on revient en arrière au premier échec) se pratique dans le projet Sudoku ; enfin, savoir si *n’importe quel* programme atteint sa condition d’arrêt est impossible : ce sera le **problème de l’arrêt** (chapitre 13).
+
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
 
     En **1883**, le mathématicien français **Édouard Lucas** publie, sous le pseudonyme de « N. Claus de Siam » (anagramme de « Lucas d’Amiens »), le casse-tête des **tours de Hanoï** : déplacer une pile de disques d’un piquet à un autre, un disque à la fois, sans jamais poser un disque sur un plus petit. La solution est récursive par nature : pour déplacer $n$ disques, on déplace les $n-1$ du dessus sur le piquet intermédiaire, puis le grand disque, puis à nouveau les $n-1$ disques par-dessus — soit $2^n-1$ déplacements. La récursivité n’entre dans les langages de programmation qu’en **1958–1960**, avec **Lisp**, créé par **John McCarthy** (qui a aussi forgé l’expression « intelligence artificielle ») : en Lisp, presque tout s’écrit par des fonctions récursives. Algol 60 l’adopte aussitôt, puis presque tous les langages, dont Python.
 
@@ -415,7 +431,7 @@ Ce chapitre est une **clé** pour toute la fin de l’année. On la retrouve dè
     ![](../img/01_hist_mccarthy.jpg){ .photo loading=lazy style="width:100%" }  
     John McCarthy en 2006
 
-!!! remarque "Remarque — Au bac, on vous demandera surtout de…"
+!!! encadre "Au bac — on vous demandera surtout de…"
 
     - **justifier** qu’une fonction est récursive, et pourquoi elle **se termine** (variant) ;
 
@@ -424,10 +440,6 @@ Ce chapitre est une **clé** pour toute la fin de l’année. On la retrouve dè
     - **compléter** l’appel récursif dans une fonction donnée ;
 
     - comparer une version **récursive** et une version **itérative**.
-
-!!! remarque "Remarque — Liens avec d’autres chapitres"
-
-    La récursivité est la clé de presque toute la suite du programme : les **arbres** (structure récursive), la méthode **diviser pour régner**, le parcours des **graphes** en profondeur, et la **programmation dynamique** (qui mémorise les appels récursifs). Chaque appel en attente est empilé dans la **pile d’appels** : c’est exactement la structure **pile** que vous étudierez au chapitre « structures linéaires ». Savoir si *n’importe quel* programme atteint sa condition d’arrêt est en revanche impossible : c’est le **problème de l’arrêt**, qui sera étudié au chapitre « calculabilité ».
 
 ## Bilan — la carte mémoire
 
@@ -440,6 +452,14 @@ Ce chapitre est une **clé** pour toute la fin de l’année. On la retrouve dè
 | Terminaison | assurée par un **variant** (entier $\geqslant 0$ qui décroît) |
 | Coût | attention aux **appels répétés** (Fibonacci : exponentiel) |
 | Récursif vs itératif | récursif = lisible sur les structures récursives |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Grâce à la **pile d’exécution** : chaque appel y est empilé avec l’endroit où reprendre et ses variables locales ; quand il se termine, on le dépile et l’on reprend dans la fonction du sommet (§ I).
+
+    2.  Oui : c’est une **fonction récursive**, qui s’appelle sur un problème strictement plus petit (§ II et III). Elle s’arrête si sa **condition d’arrêt** est réellement atteinte, ce que l’on justifie par un **variant** (§ IV.A).
+
+    3.  La fonction `fib` naïve fait deux appels à chaque étape et recalcule sans cesse les mêmes valeurs : plus de 330 millions d’appels pour `fib(40)`, un coût **exponentiel** (§ IV.B).
 
 ## Erreurs fréquentes
 
@@ -461,7 +481,7 @@ Ce chapitre est une **clé** pour toute la fin de l’année. On la retrouve dè
 
 - identifier le **cas de base** et le **cas récursif** d’une fonction donnée $\to$ ex. [1](exercices.md#ex-01-1), [3](exercices.md#ex-01-3) ;
 
-- écrire une fonction récursive sur les **entiers** (factorielle, somme, puissance, PGCD) $\to$ ex. [6](exercices.md#ex-01-6), [7](exercices.md#ex-01-7), [10](exercices.md#ex-01-10) ;
+- écrire une fonction récursive sur les **entiers** (factorielle, somme, puissance, PGCD, produit par additions) $\to$ ex. [6](exercices.md#ex-01-6), [7](exercices.md#ex-01-7), [10](exercices.md#ex-01-10) ;
 
 - écrire une fonction récursive sur une **chaîne** ou un **tableau** (compter, inverser, somme / maximum, recherche) $\to$ ex. [14](exercices.md#ex-01-14), [15](exercices.md#ex-01-15), [17](exercices.md#ex-01-17) ;
 

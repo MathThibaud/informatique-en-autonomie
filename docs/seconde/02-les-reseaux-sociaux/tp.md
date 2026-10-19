@@ -29,54 +29,37 @@ Les documents
 
 !!! encadre "Document 1 — Ce que disent les règles"
 
-    La plupart des grands réseaux sociaux fixent dans leurs conditions d’utilisation un âge minimal de **13 ans**, souvent contrôlé par une simple date de naissance déclarée. Le RGPD fixe à 16 ans l’âge à partir duquel on peut accepter seul l’utilisation de ses données par un service en ligne, chaque pays pouvant l’abaisser jusqu’à 13 ans : la France l’a fixé à **15 ans**, comme Monaco. En France, la loi du 7 juillet 2023 a créé une « majorité numérique » à 15 ans, avec obligation pour les réseaux de vérifier l’âge et de recueillir l’accord d’un parent ; son entrée en application a été retardée, notamment pour des questions de compatibilité avec le droit européen. En 2026, le Parlement a voté une interdiction des réseaux sociaux avant 15 ans, mais le Conseil constitutionnel l’a censurée le 14 août 2026, la jugeant disproportionnée (liberté d’expression, vie privée).
+    Les grands réseaux sociaux fixent souvent un âge minimal de **13 ans**, contrôlé par une simple date de naissance déclarée. En France comme à Monaco, avant **15 ans**, un service en ligne doit avoir l’accord d’un parent pour utiliser vos données. Une loi française de 2023 impose de vérifier l’âge, mais son application a été retardée ; en 2026, une interdiction avant 15 ans a été censurée par le Conseil constitutionnel, qui l’a jugée disproportionnée.
+
+    **À retenir :** des règles existent, mais l’âge déclaré n’est presque jamais vérifié.
 
     Source : RGPD, article 8 ; loi française n° 2023-566 du 7 juillet 2023 ; loi monégasque n° 1.565 du 3 décembre 2024, article 6 ; Conseil constitutionnel, décision n° 2026-911 DC du 14 août 2026.
 
 !!! encadre "Document 2 — Dans la vraie vie"
 
-    Selon une étude publiée par la CNIL en 2021, la **première inscription** sur un réseau social intervient en moyenne vers **8 ans et demi**, bien avant l’âge minimal affiché par les plateformes. En avril 2024, une commission d’experts (médecins, chercheurs) chargée par le président de la République française d’étudier l’exposition des enfants aux écrans a recommandé de ne pas donner accès aux réseaux sociaux avant 15 ans, en citant notamment les effets sur le sommeil et l’exposition au harcèlement. D’autres spécialistes rappellent que les réseaux sont aussi, pour les adolescents, un lieu de lien avec les amis, de création et d’information.
+    Selon une étude de la CNIL publiée en 2021, la **première inscription** sur un réseau social a lieu en moyenne vers **8 ans et demi**. En avril 2024, une commission d’experts (médecins, chercheurs) a recommandé au président de la République française de ne pas donner accès aux réseaux sociaux avant 15 ans (sommeil, harcèlement). D’autres spécialistes rappellent que les réseaux sont aussi un lieu d’amitié, de création et d’information.
+
+    **À retenir :** on s’inscrit tôt, avec des risques mais aussi des bénéfices.
 
     Source : CNIL, sondage réalisé avec l’IFOP (février 2020), résultats publiés en janvier 2021 ; rapport de la commission d’experts « Enfants et écrans. À la recherche du temps perdu », avril 2024.
 
 !!! encadre "Document 3 — L’Australie passe à l’acte"
 
-    En novembre 2024, l’Australie a voté une loi qui fixe à **16 ans** l’âge minimal pour avoir un compte sur les principaux réseaux sociaux, **sans dérogation** possible avec l’accord des parents. Elle s’applique depuis le 10 décembre 2025 : ce sont les plateformes, et non les familles, qui doivent prendre des « mesures raisonnables » pour empêcher les plus jeunes de s’inscrire, sous peine d’amendes pouvant atteindre 49,5 millions de dollars australiens. Ses opposants craignent que des adolescents contournent l’interdiction (fausse date de naissance, compte d’un adulte) ou se replient vers des espaces en ligne moins surveillés.
+    En Australie, depuis le 10 décembre 2025, une loi votée en 2024 interdit d’avoir un compte sur les principaux réseaux sociaux avant **16 ans**, **même avec l’accord des parents**. Ce sont les plateformes qui doivent empêcher les plus jeunes de s’inscrire, sous peine d’amendes pouvant atteindre 49,5 millions de dollars australiens. Ses opposants craignent des contournements (fausse date de naissance, compte d’un adulte) ou un repli vers des espaces moins surveillés.
+
+    **À retenir :** l’interdiction existe déjà dans un pays, à la charge des plateformes.
 
     Source : *Online Safety Amendment (Social Media Minimum Age) Act 2024*, Australie.
 
 !!! encadre "Document 4 — Vérifier l’âge : à quel prix pour la vie privée ?"
 
-    Vérifier vraiment un âge suppose de **prouver** quelque chose : envoyer une copie de sa pièce d’identité, utiliser une carte bancaire, passer par un organisme qui certifie l’âge… Tous ces moyens collectent des **données personnelles**, et concernent tout le monde, adultes compris. Dans une analyse publiée en 2022, la CNIL constate qu’aucun dispositif n’est à la fois parfaitement fiable, simple et respectueux de la vie privée. Elle recommande le « **double anonymat** » : un tiers certifie votre âge sans savoir sur quel site vous allez, et le site reçoit seulement la réponse « plus de 15 ans : oui ou non », sans connaître votre identité.
+    Vérifier vraiment un âge suppose de le **prouver** : copie de pièce d’identité, carte bancaire, organisme qui certifie l’âge… Tous ces moyens collectent des **données personnelles**, et concernent tout le monde, adultes compris. En 2022, la CNIL a recommandé le « **double anonymat** » : un tiers certifie votre âge sans savoir sur quel site vous allez, et le site reçoit seulement la réponse « plus de 15 ans : oui ou non », sans connaître votre identité.
+
+    **À retenir :** vérifier l’âge de chacun, c’est collecter des données sur tous.
 
     Source : CNIL, analyse des dispositifs de vérification de l’âge en ligne, juillet 2022.
 
-Organisation du débat
-
-| **Rôle** | **Préparation (15 min), puis débat** |
-|:---|:---|
-| Groupe POUR ($\approx$ 1/3) | Défend **oui** : au moins trois arguments, chacun appuyé sur un document ou le cours ; prévoit la réponse à deux arguments adverses ; choisit qui ouvre et qui conclut. |
-| Groupe CONTRE ($\approx$ 1/3) | Défend **non** : même travail que le groupe POUR. |
-| Modérateur (1 ou 2) | Prépare deux questions de relance ; donne la parole en alternant les camps, tient le temps, recentre. Ne donne **pas** son avis. |
-| Secrétaire (1 ou 2) | Note au tableau, en deux colonnes POUR / CONTRE, chaque argument et le numéro du document cité. |
-| Observateurs (les autres) | Suivent deux ou trois élèves (citent-ils un document ? répondent-ils à l’argument précédent ?) et notent le meilleur argument de chaque camp. |
-
-| **Min.** | **Étape** | **Min.** | **Étape** |
-|---:|:---|---:|:---|
-| 0–3 | **Mise en place** : tirage des rôles, groupes face à face. | 26–38 | **Échanges** : 12 min, parole alternée entre les camps. |
-| 3–18 | **Préparation** en groupes, tableau d’arguments ci-dessous. | 38–42 | **Observateurs** : meilleur argument de chaque camp. |
-| 18–20 | **Ouverture** : le modérateur lit la question et les règles. | 42–44 | **Conclusions** : 1 min par groupe. |
-| 20–26 | **Prises de position** : 3 min POUR, puis 3 min CONTRE. | 44–50 | **Bilan** : trace écrite individuelle, puis vote. |
-
-!!! encadre "Règles de prise de parole"
-
-    - On lève la main, le modérateur donne la parole ; une seule personne à la fois, une minute au plus.
-
-    - On **argumente** (« je pense que… **parce que**… ») et on **cite** un document ou le cours (« d’après le document 2… »).
-
-    - On **répond à l’argument précédent** avant d’en avancer un nouveau : « vous dites que…, mais… ».
-
-    - On **respecte** : on critique une idée, jamais une personne ; pas de moquerie ; on ne raconte pas la vie privée de quelqu’un.
+Rôles, déroulé minuté, règles de prise de parole et trace écrite : voir la page « Méthode : débattre ».
 
 Tableau d’arguments
 
@@ -91,6 +74,8 @@ Trace écrite finale (individuelle)
 Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes, justifiez-la avec vos **deux meilleurs arguments**, dont **un argument de l’autre camp** que vous trouvez solide (avec le document qui l’appuie).
 
 ??? corrige "Corrigé de l'activité"
+
+    **À lire après le débat.** Ces éléments de réponse servent à vérifier et à compléter votre trace écrite : les lire avant le débat lui ôterait son intérêt.
 
     Notions du cours mobilisées
 
@@ -153,9 +138,9 @@ Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujo
 
         Les réseaux sociaux fixent un âge minimal (souvent 13 ans) rarement vérifié, alors que la loi (RGPD, loi française ; loi n° 1.565 à Monaco) exige l’accord des parents avant 15 ans. Interdire avant 15 ans peut **protéger** (santé, harcèlement, exploitation commerciale de l’attention), mais une interdiction n’a de sens que si l’âge est **vérifié**, ce qui demande de fournir des **données personnelles** : il faut alors des solutions respectueuses de la vie privée, comme le **double anonymat** recommandé par la CNIL. Dans tous les cas, l’éducation (régler sa confidentialité, esprit critique, réflexes contre le harcèlement) reste indispensable.
 
-\newgeometry{inner=1.8cm,outer=1.6cm,top=2.2cm,bottom=1.9cm,headheight=16pt,headsep=0.5cm,footskip=0.9cm}
-
 ??? corrige "Corrigé de l'activité"
+
+    **À lire après le débat.** Ces éléments de réponse servent à vérifier et à compléter votre trace écrite : les lire avant le débat lui ôterait son intérêt.
 
     Notions du cours mobilisées
 

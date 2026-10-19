@@ -77,7 +77,7 @@ Chacun joue le robot, sur son cahier. Le robot part du point, tourné vers la fl
     **2.** 9 ordres, dont 5 **AVANCER** qui tracent ; les 4 virages ne tracent rien.  
     **3.** Chaque virage change de sens : la figure devient son symétrique par rapport à la première ligne horizontale, un **5**, qui monte au lieu de descendre et sort du quadrillage par le haut. Une seule inversion gauche/droite suffit à tout changer.
 
-    ![](../figures/9bb05b574c688293.svg){ .tikz loading=lazy }
+    ![](../figures/f157036eb5502d1e.svg){ .tikz loading=lazy }
 
 ### <span class="exo-num">Exercice 2</span> — Le programmeur et le robot <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-dessiner-avec-la-tortue-act-1-2 }
 
@@ -118,7 +118,7 @@ On autorise un nouvel ordre : **RÉPÉTER k FOIS :** suivi d’un bloc d’ordre
     **9.** **RÉPÉTER 3 FOIS : AVANCER 1, DROITE, AVANCER 1, GAUCHE** — le dernier **GAUCHE**, en trop par rapport au programme de la question 5, ne trace rien.  
     **10.** Une frise de **4 créneaux** ; sans **RÉPÉTER**, il faudrait $4 \times 8 = 32$ ordres, contre une ligne de répétition et 8 ordres.
 
-    ![](../figures/60eeae20baa2aff8.svg){ .tikz loading=lazy }
+    ![](../figures/f92730fcf3a7ec9f.svg){ .tikz loading=lazy }
 
 ### <span class="exo-num">Exercice 4</span> — Faire le tour <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-dessiner-avec-la-tortue-act-1-4 }
 

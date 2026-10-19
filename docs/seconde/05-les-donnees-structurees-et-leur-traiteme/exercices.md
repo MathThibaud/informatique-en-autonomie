@@ -35,6 +35,8 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Donnée personnelle ou pas ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-1 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  Pour chaque information, dire si c’est une **donnée personnelle** (elle permet d’identifier une personne) ou non. Justifier en trois mots.
 
 1.  l’adresse e-mail d’un élève ;
@@ -47,7 +49,39 @@
 
 5.  la position GPS enregistrée dans votre dernière photo.
 
+??? pouce "Coup de pouce"
+
+    Pour chaque information, demandez-vous : en la lisant, pourrait-on retrouver une personne précise, directement ou en la recoupant avec d’autres informations ?
+
 ??? corrige "Corrigé"
+
+    *Réponses aux questions fermées ; pour les questions ouvertes, des pistes attendues (d’autres réponses sont possibles).*
+
+    Activité 1 — Chasse aux métadonnées
+
+    Les valeurs dépendent du fichier choisi (par exemple : $2{,}4$ Mo, modifié le 12/09, format `.jpg`). En général, la **taille** et le **format** ne sont pas des données personnelles ; la **date** peut en devenir une quand elle est reliée à vous (elle dit quand vous avez travaillé ou pris la photo). D’autres métadonnées sont nettement personnelles : le **nom de l’auteur** d’un document, ou les **coordonnées GPS** d’une photo.
+
+    Activité 2 — Lire une table
+
+    1.  **7** descripteurs et **6** enregistrements (la ligne d’en-tête ne compte pas).
+
+    2.  *Mario Kart 8* : `ventes` vaut `60` (millions d’exemplaires).
+
+    3.  Des **nombres** : `annee`, `pegi`, `ventes` (ou `id`, `studio`) ; du **texte** : `titre`, `genre`.
+
+    Activité 3 — Data-détective : premières fouilles
+
+    1.  *Red Dead Redemption 2* est sorti en **2018**.
+
+    2.  `pegi` = 18 : *GTA V* et *Red Dead Redemption 2*.
+
+    3.  Par `annee` croissante : Wii Sports (2006), Minecraft (2011), GTA V (2013), Mario Kart 8 (2014), Red Dead Redemption 2 (2018), Animal Crossing (2020).
+
+    4.  *Mario Kart 8* a `studio` = `1` ; dans la table *studio*, l’`id` `1` est Nintendo : le jeu est édité au **Japon**.
+
+    Activité 4 — Explorer un vrai jeu de données ouvert
+
+    Réponse personnelle. On attend : le titre exact du jeu de données et son format (le plus souvent CSV) ; le nombre de colonnes, lu sur la ligne d’en-tête, et trois noms de descripteurs ; une question précise du type « Quel est le plus grand…? » (tri décroissant, puis lecture de la première ligne) ou « Combien de…vérifient…? » (filtre, puis comptage des lignes).
 
     1.  **Oui** : une adresse e-mail identifie une personne.
 
@@ -63,6 +97,10 @@
 
 <span class="tag">sur papier</span>  Vous prenez une photo. Classer en deux colonnes (**donnée** / **métadonnée**) : les pixels de l’image ; la date de la prise de vue ; le modèle de l’appareil ; le contenu visible (un chat) ; les coordonnées GPS ; le poids du fichier.
 
+??? pouce "Coup de pouce"
+
+    Relisez la définition d’une métadonnée dans le cours : est-ce le contenu de la photo lui-même, ou une information qui le *décrit* ?
+
 ??? corrige "Corrigé"
 
     - **Donnée** (le contenu) : les pixels de l’image ; le chat visible sur la photo.
@@ -73,25 +111,33 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Vocabulaire de la table <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-3 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  À l’aide de la table *jeu* :
 
-1.  Combien la table a-t-elle de **descripteurs** ? d’**enregistrements** ?
+1.  On complète la table *jeu* : on ajoute un descripteur `plateforme`, puis trois nouveaux jeux. Combien la table a-t-elle alors de **descripteurs** ? d’**enregistrements** ?
 
-2.  Citer tous les descripteurs.
+2.  Citer tous les descripteurs de la table ainsi complétée.
 
 3.  Donner la valeur du descripteur `genre` pour l’enregistrement d’`id` `5`.
 
 4.  Pourquoi le descripteur `titre` ferait-il un moins bon **identifiant** que `id` ? (une phrase)
 
+??? pouce "Coup de pouce"
+
+    Un descripteur est une colonne, un enregistrement est une ligne (la ligne d’en-tête n’en est pas un). Pour la question 1, comptez d’abord sur la table actuelle, puis ajoutez ce qui est nouveau. Pour la question 4, relisez l’encadré du cours « Pourquoi un descripteur id ? ».
+
 ??? corrige "Corrigé"
 
-    1.  **7** descripteurs et **6** enregistrements.
+    1.  La table *jeu* a $7$ descripteurs (colonnes) et $6$ enregistrements (lignes, sans compter l’en-tête). Une colonne de plus et trois lignes de plus : $7 + 1 = \mathbf{8}$ descripteurs et $6 + 3 = \mathbf{9}$ enregistrements.
 
-    2.  `id`, `titre`, `studio`, `annee`, `genre`, `pegi`, `ventes`.
+    2.  `id`, `titre`, `studio`, `annee`, `genre`, `pegi`, `ventes` et `plateforme`.
 
     3.  L’`id` `5` est *Red Dead Redemption 2*, de genre `action`.
 
     4.  Deux jeux pourraient porter le **même titre** (rééditions, versions) : le titre n’est pas forcément *unique*, contrairement à l’`id`.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Compter la ligne d’en-tête comme un enregistrement et trouver $10$ enregistrements : la première ligne donne les noms des descripteurs, elle ne décrit aucun jeu. Autre piège : ajouter le nouveau descripteur aux enregistrements (ou les nouveaux jeux aux descripteurs) ; une colonne de plus ne crée aucune ligne.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Concevoir une table <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-4 }
 
@@ -123,6 +169,8 @@
 ### Le format CSV
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Lire du CSV <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-5 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="tag">sur papier</span>  On donne le début d’un fichier CSV public (jeux de société d’une médiathèque) :
 
@@ -219,6 +267,10 @@ Tom;Beausoleil;quinze
 
 2.  Quel jeu s’est vendu à **300** millions d’exemplaires ?
 
+??? pouce "Coup de pouce"
+
+    Repérez d’abord la bonne ligne (celle du jeu, ou celle qui contient la valeur cherchée), puis lisez la valeur dans la bonne colonne.
+
 ??? corrige "Corrigé"
 
     1.  *Mario Kart 8* est de genre `course`.
@@ -226,6 +278,8 @@ Tom;Beausoleil;quinze
     2.  Le jeu vendu à **300** millions est *Minecraft*.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Filtrer <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-9 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="tag">sur papier</span>  Donner la liste des **titres** des jeux qui vérifient chaque critère :
 
@@ -247,13 +301,17 @@ Tom;Beausoleil;quinze
 
     3.  après 2013 **et** plus de 50 M : *Mario Kart 8* (2014, 60) et *Red Dead Redemption 2* (2018, 55). *(Animal Crossing est écarté : 45 M seulement.)*
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Retenir *GTA V* : il est sorti *en* 2013, pas *après* 2013. Autre piège : lire « ET » comme « OU », ce qui ferait aussi retenir *Minecraft*, *GTA V*, *Wii Sports* et *Animal Crossing*.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Trier <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-10 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="tag">sur papier</span> 
 
 1.  Ranger les jeux par `ventes` **décroissantes** (donner la liste des titres).
 
-2.  Ranger les jeux par `annee` **croissante**.
+2.  Ranger les jeux par `titre`, dans l’ordre **alphabétique**.
 
 3.  **Filtrer puis trier** : les jeux `pegi` = 18, du plus récent au plus ancien.
 
@@ -265,7 +323,7 @@ Tom;Beausoleil;quinze
 
     1.  ventes décroissantes : Minecraft (300), GTA V (190), Wii Sports (83), Mario Kart 8 (60), Red Dead Redemption 2 (55), Animal Crossing (45).
 
-    2.  annee croissante : Wii Sports (2006), Minecraft (2011), GTA V (2013), Mario Kart 8 (2014), Red Dead Redemption 2 (2018), Animal Crossing (2020).
+    2.  ordre alphabétique des titres : Animal Crossing, GTA V, Mario Kart 8, Minecraft, Red Dead Redemption 2, Wii Sports. *(Mario Kart 8 passe avant Minecraft : à première lettre égale, on compare la deuxième, et « a » vient avant « i ».)*
 
     3.  `pegi` = 18, du plus récent au plus ancien : *Red Dead Redemption 2* (2018), *GTA V* (2013).
 
@@ -289,9 +347,13 @@ Tom;Beausoleil;quinze
 
     2.  Jeux d’action : $190$ et $55$ ; moyenne $= (190 + 55) \div 2 = \mathbf{122{,}5}$ millions.
 
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Diviser par $6$ (le nombre total de jeux) au lieu de $2$ : on doit d’abord *filtrer* les jeux d’action, puis faire la moyenne sur eux seuls.
+
     3.  Le jeu le plus ancien est sorti en **2006** : c’est *Wii Sports*.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 12</span> — Croiser deux tables <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-12 }
+
+<span class="duree">≈ 15 min</span>
 
 <span class="tag">sur papier</span>  En utilisant les tables *jeu* **et** *studio* (reliées par le numéro de studio) :
 
@@ -327,6 +389,8 @@ Tom;Beausoleil;quinze
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Pourquoi deux tables ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-13 }
 
+<span class="duree">≈ 10 min</span>
+
 <span class="tag">sur papier</span>  Un élève propose de supprimer la table *studio* : dans la table *jeu*, il remplacerait le numéro de studio par deux descripteurs, `nom_studio` et `pays_studio`.
 
 1.  Combien de fois faudrait-il alors écrire « Nintendo » et « Japon » ?
@@ -358,6 +422,8 @@ Tom;Beausoleil;quinze
 ### Au tableur
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Fouiller au tableur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-14 }
+
+<span class="essentiel">• essentiel</span>
 
 \[ au tableur \]  On fournit le fichier `jeux.csv` (la table *jeu*, séparateur `;`, encodage UTF-8). L’ouvrir dans un tableur, puis :
 
@@ -411,6 +477,10 @@ Tom;Beausoleil;quinze
 
 2.  Pourquoi les données ouvertes sont-elles souvent publiées en **CSV** plutôt qu’en `.xlsx` ?
 
+??? pouce "Coup de pouce"
+
+    Relisez l’encadré du cours sur l’*open data* et la règle « Format ouvert / format fermé ».
+
 ??? corrige "Corrigé"
 
     1.  L’*open data* désigne des données **publiques librement réutilisables**, par exemple sur `data.gouv.fr` (ou le portail open data de Monaco).
@@ -418,6 +488,8 @@ Tom;Beausoleil;quinze
     2.  Le CSV est un **format ouvert** (texte) : lisible par tous les logiciels, durable et sans limite de lignes, alors que le `.xlsx` est un format de tableur bien plus complexe, conçu pour un type de logiciel (et l’ancien `.xls` était même **propriétaire**, avec une limite de 65 536 lignes).
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 17</span> — Mes données, mes droits <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-17 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="tag">sur papier</span> 
 
@@ -428,6 +500,10 @@ Tom;Beausoleil;quinze
 3.  Les « 3 V » du **big data** : les nommer.
 
 4.  Monaco n’est pas dans l’Union européenne. Quelle **loi** protège les données personnelles d’un lycéen qui réside à Monaco, et quelle **autorité** contrôle son application ?
+
+??? pouce "Coup de pouce"
+
+    Toutes les réponses sont dans la dernière section du cours : la règle sur le RGPD, l’encadré sur Monaco, la partie sur le nuage et celle sur le *big data*.
 
 ??? corrige "Corrigé"
 
@@ -440,6 +516,8 @@ Tom;Beausoleil;quinze
     4.  À Monaco, c’est la **loi n° 1.565** du 3 décembre 2024 relative à la protection des données personnelles (mêmes grands droits que le RGPD) ; l’autorité de contrôle est l’**APDP** (Autorité de protection des données personnelles), qui a succédé à la CCIN. *(En France : RGPD et loi Informatique et libertés, autorité CNIL.)*
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 18</span> — Défi — data-détective sur l’open data <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-18 }
+
+<span class="duree">≈ 30 min</span>
 
 \[ au tableur \]  Sur `data.gouv.fr` (ou le portail open data de Monaco), télécharger un jeu de données en CSV qui vous intéresse, l’ouvrir au tableur, et **répondre à une question** de votre choix en utilisant un **tri** ou un **filtre**. Rédiger : la question posée, l’opération faite, la réponse trouvée.
 
@@ -480,3 +558,63 @@ Tom;Beausoleil;quinze
     2.  L’erreur : le tri porte sur la **mauvaise colonne**. « Le plus récent » se lit sur le descripteur `annee` (tri décroissant), pas sur `ventes`. Bonne réponse : *Animal Crossing* ($2020$), studio $1$ $=$ **Nintendo**, au Japon.
 
     3.  Relire la **question** et vérifier que le descripteur trié est celui qu’elle nomme (« récent » $\to$ `annee`) ; puis contrôler la réponse sur la table : l’année de Minecraft ($2011$) n’est visiblement pas la plus grande.
+
+### Python au service du thème
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Python au service du thème — filtrer avec une fonction <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-20 }
+
+<span class="tag">sur papier</span>  Un tableur filtre une table ligne par ligne : pour chaque enregistrement, le critère est vrai ou faux. En Python, un critère s’écrit donc comme une fonction qui renvoie un **booléen**. On prend celui du cours : « `action` **ET** sorti après 2015 ».
+
+1.  Compléter la fonction suivante, qui renvoie `True` si le jeu vérifie le critère et `False` sinon.
+
+    ??? pouce "Coup de pouce"
+
+        Une fonction peut renvoyer directement le résultat d’une comparaison : `return pegi == 18` renvoie `True` ou `False`. Relisez dans le chapitre *Les bases de Python* comment on *compare* deux valeurs (et pas comment on les affecte), puis comment on relie deux conditions.
+
+    ```python
+    def garder(genre, annee):
+        return ...
+    ```
+
+2.  Sans machine, écrire ce qu’affichent les trois lignes suivantes, puis vérifier sur machine. Que deviendraient ces trois affichages si l’on remplaçait `and` par `or` dans la fonction ?
+
+    ```python
+    print(garder("action", 2013))       # GTA V
+    print(garder("action", 2018))       # Red Dead Redemption 2
+    print(garder("simulation", 2020))   # Animal Crossing
+    ```
+
+3.  Écrire une fonction `succes(annee, ventes)` qui traduit le critère 3 de l’exercice « Filtrer » (sortis après 2013 **et** vendus à plus de $50$ millions). La tester sur *Mario Kart 8*, *GTA V* et *Animal Crossing*.
+
+??? corrige "Corrigé"
+
+    **1.** Le critère relie deux comparaisons par `and` ; la fonction renvoie directement le booléen obtenu :
+
+    ```python
+    def garder(genre, annee):
+        return genre == "action" and annee > 2015
+    ```
+
+    **2.** GTA V est un jeu d’action, mais sorti en $2013$ : une des deux conditions est fausse. Red Dead Redemption 2 vérifie les deux. Animal Crossing est récent, mais ce n’est pas un jeu d’action. Le programme affiche :
+
+    ```text
+    False
+    True
+    False
+    ```
+
+    On retrouve le résultat du cours : seul *Red Dead Redemption 2* est gardé. Avec `or`, il suffit qu’*une* des deux conditions soit vraie : les trois lignes affichent `True` (GTA V est un jeu d’action ; Animal Crossing est sorti après 2015). Sur toute la table, le filtre « `action` **OU** après 2015 » garde *GTA V*, *Red Dead Redemption 2* et *Animal Crossing*.  
+    **3.** Même méthode, avec les descripteurs `annee` et `ventes` :
+
+    ```python
+    def succes(annee, ventes):
+        return annee > 2013 and ventes > 50
+
+    print(succes(2014, 60))    # Mario Kart 8 : True
+    print(succes(2013, 190))   # GTA V : False
+    print(succes(2020, 45))    # Animal Crossing : False
+    ```
+
+    Comme à l’exercice « Filtrer » : GTA V est sorti *en* 2013, pas après, et Animal Crossing s’est vendu à moins de $50$ millions.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `genre = "action"` avec un seul signe égal : `=` range une valeur dans une variable, il ne compare pas, et Python signale une erreur de syntaxe (`SyntaxError`). Pour comparer, il faut le double égal `==`.

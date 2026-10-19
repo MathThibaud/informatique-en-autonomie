@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *« Sécurisation des communications. Décrire les principes de chiffrement symétrique (clé partagée) et asymétrique (clé publique / clé privée). Décrire l’échange d’une clé symétrique en utilisant un protocole de chiffrement asymétrique pour sécuriser une communication. »* |
-| **Prérequis** | la **division euclidienne** et le **reste** (opérateur `%`), la notion de **coût** d’un algorithme (croissance exponentielle), les **réseaux** et le fait qu’un paquet peut être **intercepté**. |
+| **Prérequis** | la **division euclidienne** et le **reste** (opérateur `%`), la notion de **coût** d’un algorithme (croissance exponentielle), les **réseaux** et le fait qu’un paquet peut être **intercepté**. (→ fiches de révision : ch. 9) |
 | **Objectifs** | *chiffrer* et *déchiffrer* avec un code symétrique ; *comprendre* l’idée du chiffrement asymétrique et *dérouler RSA* à la main ; *expliquer* l’échange de clé et le protocole **HTTPS**. |
+
+!!! situation "Situation de départ"
+
+    1.  Votre mot de passe traverse une dizaine de machines inconnues avant d’arriver au site. Comment reste-t-il secret, alors que n’importe qui peut intercepter les paquets ?
+
+    2.  Deux personnes qui ne se sont jamais rencontrées peuvent-elles convenir d’un code secret en ne se parlant qu’en public ?
+
+    3.  Que garantit exactement le petit cadenas affiché par votre navigateur ?
 
 ## Le problème : se parler en secret au milieu de tous
 
@@ -19,6 +27,8 @@ C’est la question de la **cryptographie**, l’art de rendre un message illisi
 !!! definition "Définition 1 — Le vocabulaire du secret"
 
     **Chiffrer**, c’est transformer un message **clair** en un message **chiffré** (illisible) à l’aide d’une **clé**. **Déchiffrer**, c’est faire l’opération inverse quand on possède la clé. **Décrypter** (ou « casser »), c’est retrouver le message clair *sans* posséder la clé : c’est le travail de l’**attaquant** (la **cryptanalyse**).
+
+<span class="retouract">↺ Retour sur l'activité.</span> Dans l’activité, vous avez **décrypté** le message intercepté, sans connaître la clé ; son destinataire, qui connaît $k$, l’aurait simplement **déchiffré**.
 
 !!! remarque "Remarque"
 
@@ -38,7 +48,7 @@ C’est la question de la **cryptographie**, l’art de rendre un message illisi
 
     Un chiffrement est **symétrique** lorsque **la même clé** sert à chiffrer et à déchiffrer. Alice et Bob doivent donc **partager un secret commun** (la clé) avant de communiquer.
 
-![](../figures/76132ee2d674eedc.svg){ .tikz loading=lazy }
+![](../figures/8b57c087d3954408.svg){ .tikz loading=lazy }
 
 ### Le chiffre de César : le décalage
 
@@ -63,6 +73,8 @@ def cesar(message, k):
 !!! propriete "Propriété 2 — Un code très faible"
 
     La clé de César est un nombre entre $0$ et $25$ : il n’y a que **26 clés possibles**. Un attaquant les essaie *toutes* en une fraction de seconde (**attaque par force brute**). Pire : même sans force brute, une **analyse des fréquences** suffit. En français, la lettre la plus fréquente est le **E** ; la lettre la plus fréquente du texte chiffré est donc, très probablement, un E décalé — ce qui révèle la clé.
+
+<span class="retouract">↺ Retour sur l'activité.</span> C’est exactement l’attaque menée dans l’activité : `P`, de loin la lettre la plus fréquente du message, ne pouvait être qu’un `E` décalé, d’où $k=11$, et la deuxième, `D`, redonne bien un `S`. Le décalage déplace les fréquences sans les changer : un bon chiffrement doit les brouiller, ce que commence à faire Vigenère (ci-dessous).
 
 ### Le chiffrement affine : un peu d’arithmétique
 
@@ -149,7 +161,7 @@ Whitfield Diffie
 
     Un message chiffré avec la clé publique ne peut être déchiffré que par la clé privée associée — et *réciproquement*. Surtout : **connaître la clé publique ne permet pas de retrouver la clé privée**.
 
-![](../figures/1b5d9571a189d10b.svg){ .tikz loading=lazy }
+![](../figures/2755d1c13984a7de.svg){ .tikz loading=lazy }
 
 *Bob veut écrire à Alice ? Il prend le cadenas public d’Alice (que tout le monde peut copier), ferme la boîte avec, et l’envoie. Seule Alice, qui a la clé privée, peut l’ouvrir — même Bob ne le pourrait plus !*
 
@@ -180,7 +192,7 @@ Avant même RSA, Diffie et Hellman résolvent le fameux problème de l’échang
 
     Publics : $p=23$, $g=5$. Alice choisit en secret $a=6$ et publie $A=5^{6}\bmod 23 = 8$. Bob choisit $b=15$ et publie $B=5^{15}\bmod 23 = 19$. Chacun calcule alors le secret commun : Alice fait $B^{a}=19^{6}\bmod 23 = 2$ ; Bob fait $A^{b}=8^{15}\bmod 23 = 2$. **Même résultat : $2$**, sans jamais l’avoir transmis ! Ève connaît $p,g,A,B$ mais ne peut pas retrouver $a$ ni $b$ (c’est le *problème du logarithme discret*, très difficile).
 
-![](../figures/b97955bdfdf8fb9b.svg){ .tikz loading=lazy }
+![](../figures/af6e8ae127b46bbc.svg){ .tikz loading=lazy }
 
 ### Authentification : la signature numérique
 
@@ -196,7 +208,7 @@ Diffie et Hellman avaient l’*idée* du chiffrement à clé publique, mais pas 
 
 ### Une histoire à rebondissement
 
-!!! remarque "Remarque — La double invention"
+!!! curieux "Pour les curieux (facultatif) — La double invention"
 
     En **1977** au MIT, **Ron Rivest**, **Adi Shamir** et **Leonard Adleman** cherchent à prouver qu’une telle recette est *impossible*… et démontrent l’inverse : ils inventent **RSA** (leurs initiales). Coup de théâtre : on apprendra en **1997** que le Britannique **Clifford Cocks**, au service secret GCHQ, avait trouvé exactement le même système **quatre ans plus tôt** (1973), mais classé « Secret Défense ». Il fut le véritable inventeur… que le monde ignora près de vingt-cinq ans.
 
@@ -264,7 +276,7 @@ Python fait tous ces calculs grâce à la fonction `pow` « à trois arguments �
 
 ### RSA est-il éternel ? (l’ombre quantique)
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif)"
 
     Deux évènements pourraient faire tomber RSA : (1) la découverte d’un algorithme *classique* rapide de factorisation (régulièrement annoncée, régulièrement démentie) ; (2) surtout, l’**ordinateur quantique**. L’**algorithme de Shor** (1994) factorise en temps *polynomial* sur une telle machine : le jour où un ordinateur quantique assez grand existera, RSA s’effondrera. C’est pourquoi les chercheurs préparent déjà la **cryptographie post-quantique**.
 
@@ -286,9 +298,9 @@ Aujourd’hui, le petit cadenas de votre navigateur signifie **HTTPS** : le traf
 
 ### La poignée de main TLS (*handshake*)
 
-![](../figures/502949a02344efde.svg){ .tikz loading=lazy }
+![](../figures/fdd82ad22e943b7e.svg){ .tikz loading=lazy }
 
-!!! remarque "Remarque"
+!!! encadre "À retenir — le rôle du certificat"
 
     Le **certificat** et l’**autorité de certification** apportent l’**authentification** : sans eux, un attaquant pourrait se placer au milieu (*man in the middle*) en présentant *sa* clé publique à la place de celle du serveur. Le certificat, signé par une autorité de confiance, garantit que la clé publique est bien celle du bon serveur.
 
@@ -296,19 +308,17 @@ Aujourd’hui, le petit cadenas de votre navigateur signifie **HTTPS** : le traf
 
 <span class="afaire">▶ Exercices d'application :</span> exercice **[11](exercices.md#ex-10-11)** (le cadenas HTTPS du navigateur)
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
-
-    Le chiffrement répond à une faiblesse des **réseaux** : un paquet traverse des routeurs inconnus et peut être intercepté. HTTPS chiffre le message de la couche **application** (HTTP) avant qu’il ne descende les couches **TCP/IP** : les routeurs acheminent les paquets sans pouvoir en lire le contenu. La sécurité de **RSA** est une question de **coût** : factoriser semble demander un temps exponentiel, ce qui la relie à la question P versus NP, que l’on évoquera au chapitre « calculabilité ». Enfin, les puces de nos téléphones intègrent un module dédié au chiffrement AES (on le retrouvera au chapitre « systèmes sur puce »).
-
-## Ouverture : une course sans fin
+## Ouverture et liens avec les autres chapitres
 
 La cryptographie avance avec ses attaquants : chaque progrès du calcul oblige à revoir les tailles de clés et les algorithmes.
 
-- les clés grandissent avec la puissance de calcul : un $n$ de $512$ bits a été factorisé en 1999, et l’on recommande aujourd’hui au moins $2\,048$ bits pour RSA ;
+- **Ce qu’il réutilise** : les **réseaux** (chapitre 9), où un paquet traverse des routeurs inconnus et peut être intercepté. HTTPS chiffre le message de la couche application (HTTP) avant qu’il ne descende les couches TCP/IP : les routeurs acheminent les paquets sans pouvoir en lire le contenu.
 
-- un ordinateur quantique suffisamment puissant saurait factoriser rapidement : des algorithmes dits **post-quantiques** sont déjà normalisés et commencent à être déployés <span class="horsprog">au-delà du programme</span> ;
+- **Une course sans fin.** Les clés grandissent avec la puissance de calcul : un $n$ de $512$ bits a été factorisé en 1999, et l’on recommande aujourd’hui au moins $2\,048$ bits pour RSA ; contre l’ordinateur quantique, des algorithmes dits **post-quantiques** sont déjà normalisés <span class="horsprog">au-delà du programme</span>.
 
-- au **bac**, on vous demandera surtout de **programmer** ou **dérouler** un chiffrement simple (César, Vigenère, `XOR`), de distinguer chiffrement **symétrique** et **asymétrique**, et d’expliquer le rôle de chacun dans **HTTPS**.
+- **Ouverture.** La sécurité de RSA est une question de **coût** : factoriser semble demander un temps exponentiel, ce qui la relie à la question « P versus NP », que l’on évoquera au chapitre 13 ; et les puces de nos téléphones intègrent un module dédié au chiffrement AES (chapitre 14, *systèmes sur puce*).
+
+- Au **bac**, on vous demandera surtout de **programmer** ou **dérouler** un chiffrement simple (César, Vigenère, `XOR`), de distinguer chiffrement **symétrique** et **asymétrique**, et d’expliquer le rôle de chacun dans **HTTPS**.
 
 ## Bilan — la carte mémoire
 
@@ -326,6 +336,14 @@ La cryptographie avance avec ses attaquants : chaque progrès du calcul oblige �
 | RSA (formules) | $C=M^{e}\bmod n$ ; $M=C^{d}\bmod n$ ; `d = pow(e,-1,phi)` |
 | Sécurité de RSA | difficulté de **factoriser** $n$ ; menace : **Shor** (quantique) |
 | HTTPS | asymétrique pour **échanger la clé** $+$ symétrique pour **les données** |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Il est **chiffré** : seul le détenteur de la **clé** peut le déchiffrer, et l’attaquant qui intercepte le chiffré ne lit rien — à condition que la clé résiste à la force brute et que le code ne trahisse pas les fréquences des lettres (§ I et II).
+
+    2.  Oui : l’échange de **Diffie-Hellman** fabrique une clé commune en public. Plus généralement, le chiffrement **asymétrique** chiffre avec la clé **publique** du destinataire, et seule sa clé **privée** déchiffre, comme dans **RSA** (§ III et IV).
+
+    3.  Il signale **HTTPS** : le **certificat** authentifie le serveur, l’asymétrique sert à échanger une clé de session, puis toutes les données sont chiffrées en **symétrique** (AES), bien plus rapide (§ V).
 
 ## Erreurs fréquentes
 
@@ -369,7 +387,7 @@ La cryptographie avance avec ses attaquants : chaque progrès du calcul oblige �
 
 ## Un peu d’histoire
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif)"
 
     La cryptographie a changé le cours de l’Histoire. Pendant la Seconde Guerre mondiale, l’armée allemande chiffrait ses ordres avec la machine **Enigma**, réputée inviolable : ses rotors, qui tournent à chaque lettre frappée, changent la substitution à chaque caractère, avec environ $10^{20}$ réglages possibles. À **Bletchley Park**, une équipe menée par **Alan Turing** construisit une machine électromécanique, la « Bombe », pour la casser : les historiens estiment que cet exploit a raccourci la guerre de *deux ans*. Turing, père de l’informatique théorique, fut aussi l’un des plus grands cryptanalystes de l’Histoire. Dès **1883**, **Auguste Kerckhoffs** avait énoncé le principe qui gouverne encore toute la discipline : ne comptez jamais sur le secret de la méthode, seulement sur celui de la clé.
 

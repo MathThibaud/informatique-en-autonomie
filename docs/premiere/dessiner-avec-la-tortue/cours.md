@@ -10,7 +10,7 @@
 | **Prérequis** | le chapitre *Les bases de la programmation Python* (boucles et fonctions). Le complément est ouvert par l’activité débranchée qui précède. La **partie 1** utilise des instructions en séquence puis la boucle `for` ; la **partie 2**, les fonctions. |
 | **Pourquoi** | `turtle` rend **visibles** les boucles et les fonctions : on *voit* la répétition et la factorisation. C’est un formidable terrain d’entraînement. |
 
-!!! remarque "Remarque — Un peu d’histoire"
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
 
     La « tortue » vient du langage **Logo**, créé en 1967 par **Seymour Papert** et Wally Feurzeig. À l’origine, c’était un vrai petit robot en forme de tortue qui traçait au sol ! Papert, mathématicien du MIT qui avait travaillé à Genève avec le psychologue Jean Piaget, en tire une idée forte : on apprend le mieux en **fabriquant** des choses. Dans les années 1980, des robots tortues comme celui ci-contre entrent dans les écoles : munis d’un feutre, ils dessinent sur une grande feuille posée par terre les figures programmées en Logo. Python a hérité de cette tortue, devenue virtuelle.
 
@@ -63,9 +63,9 @@ t.done()
 
     La tortue a une **position** et une **direction** (le « cap »). `left`/`right` ne font que changer le cap ; le trait n’apparaît qu’avec `forward`/`backward`. Les angles sont en degrés.
 
-![](../figures/7e8ee2a184414e69.svg){ .tikz loading=lazy }
+![](../figures/ee097982200e28df.svg){ .tikz loading=lazy }
 
-![](../figures/fd673decd6e8e00a.svg){ .tikz loading=lazy }
+![](../figures/6684f05b9d9e2250.svg){ .tikz loading=lazy }
 
 ## Répéter : la boucle `for`
 
@@ -98,7 +98,7 @@ t.done()
 
     `for cote in range(4):` répète **4 fois** les lignes qui suivent et qui sont **décalées** vers la droite (4 espaces) : c’est le **corps** de la boucle. Ne pas oublier le **deux-points** en fin de ligne. La ligne `t.done()`, non décalée, n’est exécutée qu’une fois, après la boucle. (`range` a été présenté au chapitre *Les bases de la programmation Python*.)
 
-![](../figures/8d63efdca3f291ad.svg){ .tikz loading=lazy }
+![](../figures/8f68c0421922053b.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 2 — Le secret des polygones réguliers"
 
@@ -114,7 +114,11 @@ for cote in range(6):    # hexagone
 t.done()
 ```
 
-![](../figures/ffe9f774dc9fff10.svg){ .tikz loading=lazy }
+![](../figures/06ad692029f7826c.svg){ .tikz loading=lazy }
+
+<span id="cours-T-15" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercices **[15](exercices.md#ex-T-15) et [16](exercices.md#ex-T-16)** (prédire une figure ; trouver l’angle)
 
 ## Colorier une forme
 
@@ -180,13 +184,13 @@ for k in range(12):     # 12 carres...
 t.done()
 ```
 
-![](../figures/006f1b5dd1c74395.svg){ .tikz loading=lazy }
+![](../figures/9e67b9fe3ef49aa4.svg){ .tikz loading=lazy }
 
 !!! remarque "Remarque"
 
     On tient là toute la puissance du complément : une **fonction** (le motif), une **boucle** (la répétition) et un petit **tour** à chaque étape suffisent à produire des figures très riches. À vous de jouer dans les exercices !
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
     Ce complément met en images les boucles et les fonctions du chapitre *Les bases de la programmation Python*, et `turtle` est une **bibliothèque**, au sens vu dans ce même chapitre (section *Les fonctions*). En Terminale, la tortue tracera des fractales au chapitre *La récursivité*.
 

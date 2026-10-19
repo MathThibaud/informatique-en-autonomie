@@ -10,9 +10,17 @@
 | **Idée** | Une photo numérique n’est qu’un immense tableau de **nombres**. Comprendre ces nombres, c’est pouvoir *lire*, *fabriquer* et *transformer* une image **soi-même**, avec quelques lignes de Python. |
 | **Objectifs** | Expliquer comment un capteur forme une image ; coder une couleur en RVB ; calculer définition, résolution et poids ; modifier une image pixel par pixel ; lire les métadonnées et en mesurer l’enjeu pour la vie privée. |
 
-!!! remarque "Remarque"
+!!! situation "Situation de départ"
 
-    **Un peu d’histoire.** La toute première photographie est prise vers **1826** par le Français **Nicéphore Niépce** (« Point de vue du Gras ») : il a fallu *plusieurs heures* de pose ! En **1888**, **George Eastman** lance l’appareil **Kodak** avec un slogan resté célèbre : « *Vous appuyez sur le bouton, nous faisons le reste.* » Mais la vraie révolution est de **1975** : l’ingénieur **Steven Sasson**, chez Kodak, construit le **premier appareil photo numérique**. Il pesait environ 3,6 kg, enregistrait sur une cassette en **23 secondes**… une image de $100 \times 100$ pixels en noir et blanc ! (IEEE, 2022) Aujourd’hui, le capteur qui tient dans votre téléphone compte plus de **mille fois** plus de pixels (souvent 12 millions ou davantage, contre 10 000), en couleurs.
+    1.  Votre téléphone prend des photos de « 12 millions de pixels ». Qu’est-ce qu’un pixel, et pourquoi une photo pèse-t-elle plusieurs mégaoctets ?
+
+    2.  Vous publiez une photo prise dans votre chambre. Un inconnu peut-il savoir où et quand elle a été prise, alors que rien ne se voit sur l’image ?
+
+    3.  Comment une application met-elle votre photo en noir et blanc en une fraction de seconde ?
+
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
+
+    La toute première photographie est prise vers **1826** par le Français **Nicéphore Niépce** (« Point de vue du Gras ») : il a fallu *plusieurs heures* de pose ! En **1888**, **George Eastman** lance l’appareil **Kodak** avec un slogan resté célèbre : « *Vous appuyez sur le bouton, nous faisons le reste.* » Mais la vraie révolution est de **1975** : l’ingénieur **Steven Sasson**, chez Kodak, construit le **premier appareil photo numérique**. Il pesait environ 3,6 kg, enregistrait sur une cassette en **23 secondes**… une image de $100 \times 100$ pixels en noir et blanc ! (IEEE, 2022) Aujourd’hui, le capteur qui tient dans votre téléphone compte plus de **mille fois** plus de pixels (souvent 12 millions ou davantage, contre 10 000), en couleurs.
 
     ![](../img/03_hist_niepce.jpg){ .photo loading=lazy style="width:100%" }  
     « Point de vue du Gras » (Niépce, vers 1826)
@@ -21,6 +29,8 @@
     Le premier appareil numérique (Sasson, 1975)
 
     Sources : Harry Ransom Center (université du Texas à Austin), qui conserve le « Point de vue du Gras » de Nicéphore Niépce (vers 1826–1827), `hrc.utexas.edu` ; George Eastman Museum (Rochester), histoire de l’appareil Kodak de 1888 et de son slogan ; IEEE, *Milestone* « Handheld Digital Camera, 1975 » (appareil de Steven Sasson : environ 3,6 kg, image de $100 \times 100$ pixels enregistrée en 23 s), inaugurée en 2022, `ethw.org`.
+
+    [$\to$ frise chronologique](../methode-debattre.md#frise)
 
 ## De la lumière à l’image : le capteur
 
@@ -39,7 +49,7 @@ Seul, un photosite ne distingue pas les couleurs : on obtiendrait une image en *
 ![](../img/03_hist_capteur_macro.jpg){ .photo loading=lazy style="width:100%" }  
 Un capteur vu de très près : la mosaïque du filtre coloré
 
-![](../figures/5613c5f36d3a9885.svg){ .tikz loading=lazy }  
+![](../figures/3764d33196c1492a.svg){ .tikz loading=lazy }  
 Filtre de Bayer : 1 photosite rouge, 1 bleu et *2 verts* par groupe de quatre.
 
 !!! activite "Activité — Expliquer le capteur"
@@ -58,13 +68,13 @@ L’image finale est un quadrillage de points colorés : les **pixels** (de l’
 
     Chaque <span id="lex-pixel03" class="ancre"></span>**pixel** porte une couleur codée par **trois nombres** entre **0 et 255** : la quantité de **R**ouge, de **V**ert et de **B**leu (système **RVB**, ou *RGB* en anglais). Exemple : $(247,\ 56,\ 98)$. C’est la <span id="lex-rvb03" class="ancre"></span>**synthèse additive** : en mélangeant de la lumière rouge, verte et bleue, on obtient toutes les autres couleurs.
 
-![](../figures/561ec56e8c32bd88.svg){ .tikz loading=lazy }
+![](../figures/95de1664973d2705.svg){ .tikz loading=lazy }
 
 !!! exemple "Exemple"
 
     Quelques couleurs utiles : rouge $=(255,0,0)$ vert $=(0,255,0)$ bleu $=(0,0,255)$ **noir** $=(0,0,0)$ **blanc** $=(255,255,255)$ jaune $=(255,255,0)$. Quand les trois canaux sont *égaux*, on obtient un **gris**.
 
-![](../figures/d3db162b8dd97dea.svg){ .tikz loading=lazy }  
+![](../figures/075dfbdd050d5368.svg){ .tikz loading=lazy }  
 La synthèse additive : rouge + vert $=$ jaune, les trois ensemble $=$ blanc.
 
 !!! activite "Activité — Jouer avec les couleurs"
@@ -111,7 +121,7 @@ La synthèse additive : rouge + vert $=$ jaune, les trois ensemble $=$ blanc.
 
 Une image étant un tableau de nombres, on peut la **transformer** avec un programme. On utilise la bibliothèque **PIL**. Chaque pixel est repéré par des coordonnées $(x, y)$ : $(0,0)$ est en **haut à gauche**.
 
-![](../figures/9c8e11da46303ffb.svg){ .tikz loading=lazy }  
+![](../figures/44921f2c19c5fc9e.svg){ .tikz loading=lazy }  
 Le pixel $(0,0)$ est en haut à gauche ; $x$ va vers la droite, $y$ vers le bas.
 
 Les programmes de ce chapitre utilisent l’image `terre.jpg` ($500 \times 500$ pixels) : c’est la célèbre photo de la Terre « *The Blue Marble* » prise par l’équipage d’Apollo 17 en 1972, dans le domaine public. Elle est à télécharger ici : <https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/03-photo-image-terre> ; à défaut, n’importe quelle photo `.jpg` renommée `terre.jpg` convient. Elle doit être rangée dans le même dossier que le programme.
@@ -235,11 +245,17 @@ La photo « parfaite » du smartphone n’est pas seulement captée : elle est *
 
     Une image numérique est **facile à modifier** : une retouche peut être invisible. Une photo n’est donc plus une **preuve** en soi. Avec l’IA (images générées, *deepfakes*), il faut plus que jamais garder un **esprit critique** : d’où vient l’image ? qui l’a publiée ?
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    Une photo numérique est un tableau de nombres : on la traite avec les **boucles** et les **conditions** du chapitre *Les bases de Python*. Ses **métadonnées EXIF** sont des **données** au sens que l’on précisera au chapitre *Les données structurées et leur traitement*, et leurs coordonnées viennent du récepteur **GPS** (on le verra au chapitre *Localisation*). Le capteur d’image est un **capteur**, comme ceux des objets connectés que l’on étudiera en fin d’année : il transforme une grandeur physique, la lumière, en nombre. Chaque valeur de 0 à 255 tient sur un octet, c’est-à-dire 8 **bits** (des 0 et des 1) : on reverra le bit au chapitre *Internet*, et l’écriture binaire en spécialité NSI de Première.
+    - **Déjà vu :** une photo est un tableau de nombres, que l’on parcourt et modifie avec les **boucles** et les **conditions** du chapitre *Les bases de Python*.
+
+    - **À venir :** les coordonnées des métadonnées viennent du récepteur **GPS** (chapitre *Localisation*), et le capteur d’image rejoindra les autres **capteurs** au chapitre *Informatique embarquée et objets connectés*.
+
+    - **Plus loin :** chaque valeur de 0 à 255 tient sur un octet, soit 8 **bits** (des 0 et des 1) ; l’écriture binaire s’étudie en spécialité NSI de Première.
 
 ## Bilan — la carte mémoire
+
+Les mots importants du thème sont définis dans le lexique.
 
 | **Notion** | **À retenir** |
 |:---|:---|
@@ -254,6 +270,14 @@ La photo « parfaite » du smartphone n’est pas seulement captée : elle est *
 | Négatif / gris | $255-c$ pour chaque canal ; moyenne $(r+v+b)//3$ pour le gris. |
 | EXIF | métadonnées cachées (date, appareil, **GPS**) $\to$ enjeu de vie privée. |
 | Algorithmes | HDR, filtres, retouche ; une photo n’est plus une preuve $\to$ esprit critique. |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Un **pixel** est un point de l’image, codé par 3 nombres **RVB** de 0 à 255 (§ II). À un octet par nombre, 12 millions de pixels (la **définition**) font environ 36 Mo « bruts », que le JPEG **compresse** en quelques Mo (§ III).
+
+    2.  Oui, souvent : les **métadonnées EXIF** cachées dans le fichier donnent la date, l’appareil et, sur un smartphone, les **coordonnées GPS** du lieu (§ V). Tous les réseaux ne les retirent pas : dans le doute, on les efface avant de partager.
+
+    3.  Une image est un tableau de nombres : un programme parcourt chaque pixel avec deux boucles `for` et remplace R, V et B par leur moyenne $(r+v+b)//3$ (§ IV) ; trois canaux égaux donnent un **gris** (§ II).
 
 !!! encadre "Débat argumenté"
 

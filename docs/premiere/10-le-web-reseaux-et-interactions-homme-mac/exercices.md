@@ -16,6 +16,8 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Internet ou Web ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-1 }
 
+<span class="essentiel">• essentiel</span>
+
 Pour chaque phrase, dire si elle concerne **Internet** (le réseau) ou **le Web** (le service).
 
 1.  consulter une page de cours avec des liens hypertextes ;
@@ -24,7 +26,11 @@ Pour chaque phrase, dire si elle concerne **Internet** (le réseau) ou **le Web*
 
 3.  l’ensemble des câbles, fibres et routeurs qui relient les machines ;
 
-4.  cliquer d’article en article sur une encyclopédie en ligne.
+4.  cliquer d’article en article sur une encyclopédie en ligne.0
+
+    ??? pouce "Coup de pouce"
+
+        Internet est le réseau physique qui relie les machines ; le Web est *un* service qui l’utilise, fait de pages reliées par des liens hypertextes. Le courriel est un autre service.
 
 ??? corrige "Corrigé"
 
@@ -32,7 +38,9 @@ Pour chaque phrase, dire si elle concerne **Internet** (le réseau) ou **le Web*
 
         On donne **une** version simple ; d’autres écritures sont possibles.
 
-    a\) **Web** ; b) **Internet** (le courriel est un service d’Internet, pas du Web) ; c) **Internet** ; d) **Web**.
+    Internet est le réseau (les machines et leurs liaisons) ; le Web est un service qui l’utilise (des pages reliées par des liens). a) **Web** ; b) **Internet** (le courriel est un service d’Internet, pas du Web) ; c) **Internet** ; d) **Web**.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> employer « Internet » et « le Web » comme synonymes : le courriel, les jeux en ligne ou la visioconférence utilisent Internet sans passer par le Web.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Le bon mot <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-2 }
 
@@ -44,19 +52,29 @@ Compléter avec : *protocole* / *adresse IP* / *paquet* / *routeur* / *DNS*.
 
 3.  Un … aiguille ces morceaux vers leur destination.
 
-4.  HTTP est un … : un ensemble de règles de communication.
+4.  HTTP est un … : un ensemble de règles de communication.0
+
+    ??? pouce "Coup de pouce"
+
+        Le mot « adresse IP » complète la première phrase ; pour les autres, revoir le vocabulaire de la section sur le réseau du cours.
 
 ??? corrige "Corrigé"
 
-    a\) le **DNS** traduit un nom de domaine en **adresse IP** ; b) **paquets** ; c) **routeur** ; d) **protocole**.
+    On suit le trajet d’un message : on trouve l’adresse, on découpe, on aiguille, en respectant des règles communes. a) le **DNS** traduit un nom de domaine en **adresse IP** ; b) **paquets** ; c) **routeur** ; d) **protocole**.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Client-serveur ou pair-à-pair ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-3 }
+
+<span class="essentiel">• essentiel</span>
 
 1.  Décrire, avec les mots *demande* et *fournit*, le modèle client-serveur.
 
 2.  Dans un logiciel de partage de fichiers en *pair-à-pair*, quel(s) rôle(s) joue votre machine ?
 
-3.  Quand vous consultez un site web, votre ordinateur est-il plutôt client ou serveur ? Pourquoi ?
+3.  Quand vous consultez un site web, votre ordinateur est-il plutôt client ou serveur ? Pourquoi ?0
+
+    ??? pouce "Coup de pouce"
+
+        Le client est celui qui demande, le serveur celui qui fournit. En pair-à-pair, une même machine peut-elle faire les deux ?
 
 ??? corrige "Corrigé"
 
@@ -79,6 +97,8 @@ Un paquet part de votre machine (IP `192.168.1.10`) vers un serveur (IP `193.51.
     **a)** L’adresse IP de **destination** `193.51.208.14` *et* l’adresse IP **source** `192.168.1.10` (sans elle, le serveur ne saurait pas à qui répondre). **b)** Oui, deux paquets peuvent suivre des **chemins différents** ; un paquet perdu est simplement **renvoyé**.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Dérouler le protocole du bit alterné <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-5 }
+
+<span class="essentiel">• essentiel</span>
 
 Alice envoie à Bob quatre paquets, étiquetés successivement `0`, `1`, `0`, `1`. Après chaque paquet reçu, Bob renvoie un accusé de réception (ACK). Sans ACK au bout du délai, Alice renvoie le *même* paquet.
 
@@ -108,17 +128,25 @@ Alice envoie à Bob quatre paquets, étiquetés successivement `0`, `1`, `0`, `1
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — Décomposer une URL <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-6 }
 
+<span class="essentiel">• essentiel</span>
+
 On donne l’URL \; `https://www.lycee.mc/nsi/web/cours.html`
 
 1.  Quel est le **protocole** ? La communication est-elle sécurisée ? À quoi le voit-on ?
 
 2.  Quel est le **nom de domaine** du serveur ?
 
-3.  Quel est le **chemin** de la ressource sur le serveur ?
+3.  Quel est le **chemin** de la ressource sur le serveur ?0
+
+    ??? pouce "Coup de pouce"
+
+        Une URL se lit de gauche à droite : le protocole avant `://`, puis le nom du serveur jusqu’au premier `/`, puis le chemin.
 
 ??? corrige "Corrigé"
 
-    a\) protocole `https` : oui, **sécurisée** (chiffrée), on le voit au « s » de `https`. \; b) `www.lycee.mc`. \; c) `/nsi/web/cours.html`.
+    On lit l’URL de gauche à droite : protocole avant `://`, domaine jusqu’au premier `/`, puis chemin. a) protocole `https` : oui, **sécurisée** (chiffrée), on le voit au « s » de `https`. \; b) `www.lycee.mc`. \; c) `/nsi/web/cours.html`.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> inclure le protocole ou le chemin dans le nom de domaine : le domaine est seulement `www.lycee.mc`, entre `://` et le premier `/`.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 7</span> — Les codes de réponse HTTP <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-7 }
 
@@ -132,7 +160,11 @@ Associer chaque code à la situation correspondante : \; `200` \;/\; `304` \;/\;
 
 4.  la page existe, mais vous n’avez pas le droit de la consulter ;
 
-5.  l’image n’a pas changé depuis votre dernière visite : le navigateur garde sa copie.
+5.  l’image n’a pas changé depuis votre dernière visite : le navigateur garde sa copie.0
+
+    ??? pouce "Coup de pouce"
+
+        Les codes en `2..` signalent un succès, en `3..` une redirection ou une copie déjà à jour, en `4..` une erreur du client, en `5..` une erreur du serveur.
 
 ??? corrige "Corrigé"
 
@@ -160,6 +192,8 @@ Content-Type: text/html
 ??? corrige "Corrigé"
 
     **a)** La première ligne (`GET…`) est envoyée par le **client** ; la partie `HTTP/1.1 404…` est la **réponse du serveur**. **b)** La méthode est `GET`. **c)** **404** signifie « ressource **introuvable** » : elle n’a pas été trouvée. En cas de succès, le serveur renverrait `200 OK` suivi du code HTML de la page.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> croire qu’un code `404` signale une panne du serveur : le serveur a bien répondu ; c’est la ressource demandée qui n’existe pas (les pannes du serveur sont les codes `5..`).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — `GET` ou `POST` ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-9 }
 
@@ -197,13 +231,19 @@ Associer chaque balise à son rôle : \; `<h1>` \;/\; `<p>` \;/\; `<a>` \;/\; `<
 
 6.  une liste à puces.
 
-Laquelle de ces balises s’écrit **sans** balise fermante ?
+Laquelle de ces balises s’écrit **sans** balise fermante ?0
+
+??? pouce "Coup de pouce"
+
+    `h` comme *heading* (titre), `p` comme paragraphe, `a` comme ancre, `ul` comme liste non ordonnée, `li` comme élément de liste. Quelle balise n’entoure aucun texte ?
 
 ??? corrige "Corrigé"
 
     a\) `<a>` ; \; b) `<li>` ; \; c) `<h1>` ; \; d) `<img>` ; \; e) `<p>` ; \; f) `<ul>`. La balise `<img>` n’a pas de balise fermante : elle n’entoure aucun contenu (`<img src="logo.png" alt="logo">`).
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 11</span> — Lire du HTML <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-11 }
+
+<span class="essentiel">• essentiel</span>
 
 ```html
 <body>
@@ -217,13 +257,17 @@ Laquelle de ces balises s’écrit **sans** balise fermante ?
 
 2.  Vers quelle page mène le lien ? Est-ce un chemin relatif ou absolu ?
 
-3.  Dessiner l’**arbre** (DOM) de ce fragment.
+3.  Dessiner l’**arbre** (DOM) de ce fragment.0
+
+    ??? pouce "Coup de pouce"
+
+        Dans l’arbre, chaque balise est un nœud ; les balises placées *entre* l’ouverture et la fermeture d’une autre en sont les enfants.
 
 ??? corrige "Corrigé"
 
     **a)** Titre : `<h1>` ; paragraphe : `<p>` ; lien : `<a>`. **b)** Vers `dessert.html` ; c’est un chemin **relatif** (pas de `/` ni de domaine au début). **c)** Arbre (DOM) :
 
-    ![](../figures/95d9933fb9b1ac8e.svg){ .tikz loading=lazy }
+    ![](../figures/a37fa545b935a51b.svg){ .tikz loading=lazy }
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Corriger le HTML <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-12 }
 
@@ -247,6 +291,8 @@ Ce fragment contient deux erreurs de balises. Les repérer et corriger.
     <h2>Un sous-titre</h2>
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> fermer les balises dans l’ordre où on les a ouvertes : la dernière ouverte (`<strong>`) doit être la première fermée.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  Ma première page <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-13 }
 
 Écrire une page HTML complète (avec `<!doctype html>`, `<head>` et `<body>`) affichant un titre « Mon site NSI », un paragraphe de présentation, et un lien vers `eduscol.education.fr`. L’ouvrir dans un navigateur.
@@ -257,7 +303,7 @@ Ce fragment contient deux erreurs de balises. Les repérer et corriger.
 
 ??? corrige "Corrigé"
 
-    Une solution :
+    On part du squelette du cours (`<!doctype html>`, puis `<head>` pour les informations sur la page et `<body>` pour ce qui s’affiche) ; le lien vers un autre site prend une adresse complète dans `href`.
 
     ```html
     <!doctype html>
@@ -275,6 +321,8 @@ Ce fragment contient deux erreurs de balises. Les repérer et corriger.
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Relier le CSS <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-14 }
+
+<span class="essentiel">• essentiel</span>
 
 On donne le CSS :
 
@@ -327,6 +375,8 @@ On donne ce fragment :
     .plat  { color: green; }   /* . pour la classe partagee : les deux plats */
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> inverser les symboles : `#` désigne un `id`, `.` une classe. `#plat` ne désigne aucun élément ici.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  Aligner avec Flexbox <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-16 }
 
 Écrire une page contenant une barre de navigation : un `<div class="barre">` qui contient trois liens (`<a>`) « Accueil », « Cours », « Contact ».
@@ -367,6 +417,8 @@ On donne ce fragment :
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 17</span> — Prévoir l’effet <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-17 }
 
+<span class="essentiel">• essentiel</span>
+
 ```html
 <p id="message">Bonjour</p>
 <button onclick="saluer()">Clique</button>
@@ -383,13 +435,19 @@ function saluer() {
 
 2.  À quel **événement** réagit-on ? Quel rôle joue `querySelector` ?
 
-3.  Ce traitement s’exécute-t-il côté client ou côté serveur ?
+3.  Ce traitement s’exécute-t-il côté client ou côté serveur ?0
+
+    ??? pouce "Coup de pouce"
+
+        Repérer dans le HTML l’attribut qui relie le bouton à la fonction, puis lire la fonction ligne par ligne : quelle balise est sélectionnée, et que devient son contenu ?
 
 ??? corrige "Corrigé"
 
     **a)** Au clic, le paragraphe « Bonjour » devient « **Bonsoir !** ». **b)** On réagit à l’événement `click` (le clic sur le bouton), branché par l’attribut `onclick` ; `querySelector("#message")` **sélectionne** dans le DOM la balise d’`id message`. **c)** Ce traitement s’exécute **côté client** (dans le navigateur).
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 18</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  Un compteur de clics <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-18 }
+
+<span class="duree">≈ 15 min</span>
 
 Sur une page contenant `<p id="score">0</p>` et un bouton, écrire une fonction JavaScript qui, à chaque clic, **augmente de 1** le nombre affiché.
 
@@ -461,9 +519,13 @@ Une page contient deux champs et un bouton :
     document.querySelector("#calc").addEventListener("click", additionner);
     ```
 
-    **c)** **Non** : le calcul se fait entièrement **côté client**, dans le navigateur. *(Attention : `.value` renvoie du texte ; `parseInt` le convertit en entier, sinon `"2"+"3"` donnerait `"23"`.)*
+    **c)** **Non** : le calcul se fait entièrement **côté client**, dans le navigateur.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> additionner directement les `.value` : ce sont des chaînes, et `+` les colle (`"2" + "3"` donne `"23"`). On convertit d’abord avec `parseInt`.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 20</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  Mini-projet : un thème clair/sombre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-20 }
+
+<span class="duree">≈ 30 min</span>
 
 Construire une page **complète** (HTML $+$ CSS $+$ JS dans un seul fichier) avec un titre, un paragraphe, et un bouton « Changer de thème ».
 
@@ -567,6 +629,8 @@ Construire une page **complète** (HTML $+$ CSS $+$ JS dans un seul fichier) ave
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 22</span> — Lire un formulaire <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-22 }
 
+<span class="essentiel">• essentiel</span>
+
 ```html
 <form action="/inscription" method="post">
     <input type="text" name="prenom">
@@ -589,7 +653,11 @@ Construire une page **complète** (HTML $+$ CSS $+$ JS dans un seul fichier) ave
 
     **a)** Vers `/inscription`, avec la méthode `post`. **b)** Sous les noms `prenom` et `courriel` (les attributs `name`). **c)** **Non** : avec `POST`, les données ne figurent pas dans l’URL.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> chercher le nom d’envoi dans `type` ou dans le texte affiché : c’est l’attribut `name` qui donne l’étiquette sous laquelle la valeur arrive au serveur.
+
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 23</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  Un formulaire de recherche <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-23 }
+
+<span class="duree">≈ 20 min</span>
 
 Le site `https://www.recettes.mc` veut un formulaire de recherche, envoyé à l’adresse `/recherche`.
 
@@ -706,3 +774,78 @@ Un élève demande à un assistant d’IA : « Quelle est la différence entre l
 ??? corrige "Corrigé"
 
     **a)** Non. Le cours dit : « `GET` : les éventuels paramètres sont **visibles dans l’URL** » et « `POST` : les données ne sont **pas** dans l’URL ». En pratique, après une recherche sur un moteur (formulaire en `get`), l’URL contient bien les mots cherchés après le `?` (par exemple `...?q=lycee+monaco`). **b)** L’erreur est l’**inversion** de la dernière phrase. Correction : avec `GET`, les données sont ajoutées à la fin de l’URL après un `?` ; avec `POST`, elles voyagent dans le **corps** de la requête et n’apparaissent pas dans l’URL. Le reste (rôles de `GET` et `POST`, client-serveur, codes de statut) est juste. **c)** Un test d’une minute : soumettre un formulaire en `get` et regarder la barre d’adresse, ou ouvrir l’onglet Réseau des outils de développement (`F12`) et lire la méthode et l’URL de la requête. Le ton assuré ne prouve rien : l’inversion est l’erreur la plus facile à commettre sur deux notions symétriques.
+
+### Entraînement
+
+*Exercices courts pour s’entraîner aux gestes de base, chacun avec plusieurs données. Ils font tous partie du parcours essentiel.*
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 27</span> — Lire des URL <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-27 }
+
+<span class="essentiel">• essentiel</span>
+
+Pour chaque URL, donner le **protocole**, le **nom de domaine**, le **chemin** et, s’il y en a, les **paramètres** (noms et valeurs).
+
+1.  `http://www.lycee.mc/index.html`
+
+2.  `https://fr.wikipedia.org/wiki/Alan_Turing`
+
+3.  `https://www.recettes.mc/recherche?q=soupe&tri=date`
+
+??? pouce "Coup de pouce"
+
+    Lire de gauche à droite : avant `://`, le protocole ; jusqu’au premier `/`, le domaine ; puis le chemin, jusqu’à un éventuel `?`. Après le `?`, des paires `nom=valeur` séparées par `&`.
+
+??? corrige "Corrigé"
+
+    a) protocole `http` (non sécurisé), domaine `www.lycee.mc`, chemin `/index.html`, pas de paramètre. b) `https`, `fr.wikipedia.org`, chemin `/wiki/Alan_Turing`, pas de paramètre. c) `https`, `www.recettes.mc`, chemin `/recherche`, paramètres `q` (valeur `soupe`) et `tri` (valeur `date`).
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 28</span> — Formulaires : `GET`, `POST` et l’URL <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-28 }
+
+<span class="essentiel">• essentiel</span>
+
+Les formulaires ci-dessous sont sur le site `https://www.site.mc`. Pour chacun, l’utilisateur remplit les champs comme indiqué, puis envoie. Donner la méthode, l’URL demandée au serveur, et dire si les valeurs saisies sont visibles dans cette URL.
+
+a\) on saisit « Nice » :
+
+```html
+<form action="/meteo" method="get">
+  <input type="text" name="ville">
+  <button type="submit">OK</button>
+</form>
+```
+
+b\) on saisit « ada » et « 1815 » :
+
+```html
+<form action="/connexion" method="post">
+  <input type="text" name="login">
+  <input type="password" name="mdp">
+  <button type="submit">OK</button>
+</form>
+```
+
+c\) on saisit « velo » et « 100 » :
+
+```html
+<form action="/annonces" method="get">
+  <input type="text" name="cat">
+  <input type="number" name="prix_max">
+  <button type="submit">OK</button>
+</form>
+```
+
+d\) Dans l’autre sens : après l’envoi d’un formulaire, la barre d’adresse affiche
+
+`https://www.site.mc/films?genre=comedie&annee=2024`
+
+Quelles étaient la méthode, l’adresse `action`, les noms des champs et les valeurs saisies ?
+
+??? pouce "Coup de pouce"
+
+    Avec `get`, l’URL est l’adresse `action`, suivie d’un `?` puis des paires `name=valeur` séparées par `&`. Avec `post`, l’URL est seulement l’adresse `action` : les valeurs voyagent dans le corps de la requête.
+
+??? corrige "Corrigé"
+
+    a) `GET` : `https://www.site.mc/meteo?ville=Nice`, la valeur est visible dans l’URL. b) `POST` : `https://www.site.mc/connexion` ; `login` et `mdp` voyagent dans le corps de la requête, ils n’apparaissent pas dans l’URL (c’est la bonne méthode pour un mot de passe). c) `GET` : `https://www.site.mc/annonces?cat=velo&prix_max=100`, valeurs visibles. d) Méthode `get` (les valeurs sont dans l’URL), `action="/films"`, deux champs nommés `genre` et `annee`, où l’on avait saisi `comedie` et `2024`.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> croire que `POST` rend les données secrètes : elles ne sont pas dans l’URL, mais restent lisibles dans la requête ; seul `https` les chiffre pendant le transport.

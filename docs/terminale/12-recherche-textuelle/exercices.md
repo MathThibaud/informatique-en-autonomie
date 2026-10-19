@@ -10,21 +10,33 @@ Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title=
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Naïf, à la main <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-12-1 }
 
+<span class="essentiel">• essentiel</span>
+
 On cherche le motif `AA` dans le texte `CAAAB`.
 
 1.  Dérouler la méthode naïve : à quelle(s) position(s) trouve-t-on le motif ?
 
 2.  Cette méthode compare le motif de la gauche vers la droite et décale d’un cran à chaque échec. Quel est son coût dans le **pire des cas**, en fonction de $n$ (longueur du texte) et $m$ (longueur du motif) ?
 
+??? pouce "Coup de pouce"
+
+    Placer le motif sous le texte à chaque position possible, de $0$ à $n - m$, et comparer lettre à lettre. Pour le coût, imaginer un texte et un motif où presque toutes les lettres coïncident à chaque position.
+
 ??? corrige "Corrigé"
 
     1.  `C``AA``AB` et `CA``AA``B` : le motif `AA` est trouvé aux positions **1** et **2**.
+
+        <span class="erreurfreq">▷ Erreur fréquente.</span> S’arrêter à la première occurrence, ou sauter après elle : la méthode naïve teste *toutes* les positions, et deux occurrences peuvent se chevaucher (`AA` en $1$ et en $2$).
 
     2.  Au pire, on compare presque tout le motif ($m$ comparaisons) à chacune des $\approx n$ positions : coût **$O(n\times m)$** (quadratique).
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Naïf, en Python <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-2 }
 
 Recopier et compléter la fonction de recherche naïve :
+
+??? pouce "Coup de pouce"
+
+    Ligne `(a)` : la dernière position de départ possible est celle où le motif touche la fin du texte. Ligne `(b)` : à la sortie de la boucle `while`, que vaut `j` si toutes les lettres ont correspondu ?
 
 ```python
 def recherche_naive(motif, texte):
@@ -41,11 +53,17 @@ def recherche_naive(motif, texte):
 
 ??? corrige "Corrigé"
 
+    **Démarche :** on teste chaque position de départ, de $0$ à $n - m$ ; la boucle `while` avance tant que les lettres coïncident, et le motif est trouvé si elle est allée jusqu’au bout.
+
     `(a)` `range(n - m + 1)` ; `(b)` `if j == m:`.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `range(n - m)` : la dernière position de départ, $n - m$, ne serait pas testée, et un motif placé tout à la fin du texte serait manqué.
 
 ### Boyer-Moore
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Les deux idées, et un grand saut <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-12-3 }
+
+<span class="essentiel">• essentiel</span>
 
 1.  Rappeler les **deux idées** de l’algorithme de Boyer-Moore.
 
@@ -62,6 +80,8 @@ def recherche_naive(motif, texte):
     1.  **(1)** comparer le motif **de droite à gauche** ; **(2)** **prétraiter** le motif pour **sauter de plusieurs crans** en cas d’échec (règle du mauvais caractère).
 
     2.  `CGGCAG` : `C`$\to 3$, `G`$\to 5$, `A`$\to 4$ (dernières positions ; `C0 G1 G2 C3 A4 G5`).
+
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Retenir la *première* position d’une lettre répétée (`G`$\to 1$) : la table de Boyer-Moore garde la **dernière** position, ici `G`$\to 5$.
 
     3.  `T` n’apparaît pas dans le motif : aucun alignement où `T` tomberait *dans* le motif ne peut réussir. On saute donc de **6 crans** (toute la longueur du motif) d’un seul coup.
 
@@ -137,7 +157,11 @@ Construire la table de décalage de chacun de ces motifs (préciser le décalage
 
     3.  `ABRACADABRA` ($m=11$) : `A`$\to 3$, `B`$\to 2$, `R`$\to 1$, `C`$\to 6$, `D`$\to 4$, défaut **11**.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Donner à la dernière lettre du motif le décalage $0$ : on parcourt les lettres **sauf la dernière**. Dans `ANANAS`, `S` n’apparaît qu’en dernière position : il prend le décalage par défaut, $6$.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Dérouler Horspool <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-12-6 }
+
+<span class="essentiel">• essentiel</span>
 
 On cherche `ACGT` dans `GTACACGTAC`. Table : `A`$\to 3$, `C`$\to 2$, `G`$\to 1$, autres $\to 4$.
 
@@ -181,6 +205,8 @@ Conclure : le motif est-il présent, et où ?
 
     Le motif `ACGT` est trouvé à la position **4**.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Chercher la lettre de fin dans le motif au lieu du texte : c’est la lettre du **texte** alignée avec la dernière case de la fenêtre qui commande le saut.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Horspool en Python <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-7 }
 
 Recopier et compléter les deux fonctions :
@@ -218,11 +244,15 @@ def horspool(motif, texte):
 
 ??? corrige "Corrigé"
 
+    **Démarche :** la table parcourt les lettres du motif sauf la dernière, la lettre en position $k$ recevant $m - 1 - k$ ; une lettre absente de la table autorise le saut maximal.
+
     `(a)` `range(m - 1)` ; `(b)` `dec[motif[k]] = m - 1 - k` ; `(c)` `i += m` (lettre absente de la table : saut maximal).
 
 ### Coût
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Le miracle du sous-linéaire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-8 }
+
+<span class="essentiel">• essentiel</span>
 
 1.  Combien coûte le **prétraitement** (construction de la table) en fonction de $m$ ?
 
@@ -230,7 +260,7 @@ def horspool(motif, texte):
 
     ??? pouce "Coup de pouce"
 
-        Quand on saute de $m$ crans, quelles lettres du texte n’ont jamais été lues ?
+        Q2 : quand on saute de $m$ crans, quelles lettres du texte n’ont jamais été lues ?
 
 3.  Vrai ou faux (justifier) : « plus le motif est long, plus la recherche est *lente* ».
 
@@ -238,7 +268,7 @@ def horspool(motif, texte):
 
     ??? pouce "Coup de pouce"
 
-        Penser au pire cas, par exemple chercher `AAA` dans `AAAAAAAA` : les sauts sont-ils grands ? combien de comparaisons par alignement ?
+        Q4 : penser au pire cas, par exemple chercher `AAA` dans `AAAAAAAA` : les sauts sont-ils grands ? combien de comparaisons par alignement ?
 
 ??? corrige "Corrigé"
 
@@ -252,6 +282,8 @@ def horspool(motif, texte):
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 9</span> — Exercice d’entraînement — Chercher un gène dans l’ADN <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-9 }
 
+<span class="duree">≈ 30 min</span>
+
 On modélise un brin d’ADN par une chaîne sur l’alphabet `{A, T, G, C}`, et on cherche le motif `GATTACA` par l’algorithme de Horspool.
 
 1.  Construire la **table de décalage** de `GATTACA` (préciser le décalage par défaut).
@@ -260,17 +292,17 @@ On modélise un brin d’ADN par une chaîne sur l’alphabet `{A, T, G, C}`, et
 
     ??? pouce "Coup de pouce"
 
-        Le motif a $7$ lettres : la lettre de fin de la fenêtre $i$ est `brin[i + 6]`.
+        Q2 : le motif a $7$ lettres : la lettre de fin de la fenêtre $i$ est `brin[i + 6]`.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        Première étape : $i=0$, fenêtre `GTAGATT`, lettre de fin `T`, décalage $3$.
+        Q2 : première étape : $i=0$, fenêtre `GTAGATT`, lettre de fin `T`, décalage $3$.
 
 3.  On donne la fonction ci-dessous, qui **compte** le nombre d’occurrences. Compléter les lignes `(a)` et `(b)`.
 
     ??? pouce "Coup de pouce"
 
-        Comparer avec la fonction `horspool` du cours : quelle condition signalait une occurrence ?
+        Q3 : comparer avec la fonction `horspool` du cours : quelle condition signalait une occurrence ?
 
     ```python
     def compte_occurrences(motif, texte):
@@ -316,6 +348,8 @@ On modélise un brin d’ADN par une chaîne sur l’alphabet `{A, T, G, C}`, et
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 10</span> — Type bac — Parcourir une chaîne de caractères *(d’après Centres étrangers 2023, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-10 }
 
+<span class="duree">≈ 15 min</span>
+
 On rappelle quelques notions sur la manipulation des chaînes de caractères en Python. Une chaîne de caractères se comporte comme un tableau de caractères que l’on ne peut pas modifier. Par exemple :
 
 ```text
@@ -358,13 +392,19 @@ def bonjour(nom):
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `occurrences_lettre(une_chaine, une_lettre)` prenant en paramètres une chaîne `une_chaine` et une lettre `une_lettre` et renvoyant le nombre d’occurrences de `une_lettre` dans `une_chaine`.
 
+??? pouce "Coup de pouce"
+
+    Question 2 : relever les lettres d’indices $1$, $2$, $3$ et $4$ de `’Bonjour’` (le premier indice est $0$) ; une comparaison avec `==` donne un booléen. Question 3 : un compteur et une boucle sur les caractères de la chaîne.
+
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 2) : Q1 : 0,5 ; Q2 : 0,5 ; Q3 : 1
 
     1.  `bonjour(’Alan’)` renvoie la chaîne `’Bonjour Alan !’` (concaténation de trois chaînes).
 
     2.  `une_chaine[2]` vaut `’n’` et `une_chaine[3]` vaut `’j’` : `x` vaut `False`. `une_chaine[4]` et `une_chaine[1]` valent tous deux `’o’` : `y` vaut `True`. Les deux variables sont de type **booléen** (`bool`).
 
-    3.  On parcourt la chaîne caractère par caractère (c’est la méthode naïve pour un motif d’une seule lettre) :
+    3.  **Démarche :** on parcourt la chaîne caractère par caractère avec un compteur (c’est la méthode naïve pour un motif d’une seule lettre) :
 
         ```python
         def occurrences_lettre(une_chaine, une_lettre):
@@ -379,15 +419,25 @@ def bonjour(nom):
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 11</span> — Type bac — Le principe de Boyer-Moore *(d’après Asie 2025, jour 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-11 }
 
+<span class="duree">≈ 10 min</span>
+
 Dans ce sujet, on veut repérer un mot-clé (par exemple `"while"`) dans le texte d’un programme Python. On suppose disposer d’une fonction `recherche(mot, texte)` qui renvoie `True` si la chaîne de caractères `mot` est présente dans la chaîne de caractères `texte`, et `False` sinon.
 
 1.  Expliquer succinctement le principe de l’algorithme de Boyer-Moore, qui permet d’implémenter cette fonction `recherche`.
 
+??? pouce "Coup de pouce"
+
+    Relire les deux idées de Boyer-Moore dans le cours : dans quel sens compare-t-on le motif au texte, et que permet la table calculée à l’avance quand une comparaison échoue ?
+
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 1) : Q1 : 1
 
     1.  On aligne le `mot` sous le début du `texte`, puis on compare les caractères **de droite à gauche**, en partant de la **fin** du mot. Si tous les caractères coïncident, le mot est trouvé (`True`). Sinon, on regarde le caractère du texte qui a provoqué la différence (règle du « mauvais caractère ») : grâce à une table calculée à l’avance à partir du mot seul (prétraitement), on **décale le mot vers la droite** de façon à aligner ce caractère avec sa dernière occurrence dans le mot, ou **au-delà de ce caractère** s’il n’apparaît pas dans le mot. On recommence jusqu’à trouver le mot ou dépasser la fin du texte (`False`). Ces sauts permettent de ne pas lire tous les caractères du texte : l’algorithme est en pratique bien plus rapide que la méthode naïve, surtout pour des mots longs.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 12</span> — Type bac — Rechercher et remplacer dans un éditeur *(sujet maison, façon bac)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-12 }
+
+<span class="duree">≈ 45 min</span>
 
 Un éditeur de texte propose deux commandes : **Rechercher**, qui surligne toutes les occurrences d’un motif, et **Remplacer tout**, qui remplace chaque occurrence d’un motif par un autre texte. On étudie leur programmation avec la méthode naïve. On rappelle la fonction du cours :
 
@@ -418,12 +468,13 @@ Dans les questions 1 à 3 et 6, la variable `texte` contient la chaîne `’LE C
 
     ??? pouce "Coup de pouce"
 
-        Pour que chaque position de départ coûte $m$ comparaisons, le motif doit « presque » correspondre partout : quel texte et quel motif choisir avec seulement deux lettres ?
+        Q4 : pour que chaque position de départ coûte $m$ comparaisons, le motif doit « presque » correspondre partout : quel texte et quel motif choisir avec seulement deux lettres ?
 
 5.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `est_occurrence(motif, texte, i)` qui renvoie `True` si `motif` apparaît dans `texte` à partir de la position `i`, et `False` sinon. On suppose que `i + len(motif) <= len(texte)`.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
+        Q5 :  
         `def est_occurrence(motif, texte, i):`  
         `for j in range(len(motif)):`  
         `if texte[i + j] != motif[j]:`
@@ -432,7 +483,7 @@ Dans les questions 1 à 3 et 6, la variable `texte` contient la chaîne `’LE C
 
     ??? pouce "Coup de pouce"
 
-        Deux cas : une occurrence commence en `i`, ou non. Dans chaque cas, que faut-il ajouter à `resultat`, et de combien faut-il avancer ?
+        Q6 : deux cas : une occurrence commence en `i`, ou non. Dans chaque cas, que faut-il ajouter à `resultat`, et de combien faut-il avancer ?
 
     ```python
     def remplacer_tout(motif, nouveau, texte):
@@ -454,6 +505,8 @@ Dans les questions 1 à 3 et 6, la variable `texte` contient la chaîne `’LE C
 8.  Un fichier contient un million de caractères et l’on cherche un motif de $10$ caractères. Donner l’ordre de grandeur du nombre de comparaisons de la méthode naïve dans le pire des cas. Citer un algorithme du cours plus efficace en pratique, et l’idée qui le rend plus rapide.
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 6) : Q1 : 0,75 ; Q2 : 0,5 ; Q3 : 0,75 ; Q4 : 0,75 ; Q5 : 1 ; Q6 : 1,25 ; Q7 : 0,5 ; Q8 : 0,5
 
     1.  $n = 20$ (les espaces comptent). `recherche_naive(’CHAT’, texte)` renvoie `[3, 14]` et `recherche_naive(’LE’, texte)` renvoie `[0, 11]`.
 
@@ -483,6 +536,8 @@ Dans les questions 1 à 3 et 6, la variable `texte` contient la chaîne `’LE C
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Type bac — Un antivirus à la recherche de signatures *(sujet maison, façon bac)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-13 }
 
+<span class="duree">≈ 45 min</span>
+
 Un antivirus repère un logiciel malveillant connu en cherchant sa **signature** — une courte suite d’octets qui le caractérise — dans le contenu des fichiers. Pour simplifier, le contenu d’un fichier et les signatures sont représentés par des chaînes de caractères écrites avec les chiffres hexadécimaux `0` à `9` et `A` à `F`, et l’on ne se préoccupe pas du découpage en octets.
 
 L’antivirus utilise l’algorithme de **Boyer-Moore-Horspool**. On dispose des fonctions `table_decalage(motif)` et `horspool(motif, texte)` du cours ; `horspool` renvoie la liste des positions des occurrences de `motif` dans `texte`.
@@ -493,7 +548,7 @@ L’antivirus utilise l’algorithme de **Boyer-Moore-Horspool**. On dispose des
 
     ??? pouce "Coup de pouce"
 
-        Seule la *dernière position* du motif est ignorée : la lettre `F` apparaît-elle aussi ailleurs dans `E8FFFF` ?
+        Q2 : seule la *dernière position* du motif est ignorée : la lettre `F` apparaît-elle aussi ailleurs dans `E8FFFF` ?
 
 3.  Le contenu d’un fichier, de $22$ caractères, est :
 
@@ -529,13 +584,15 @@ L’antivirus utilise l’algorithme de **Boyer-Moore-Horspool**. On dispose des
 
     ??? pouce "Coup de pouce"
 
-        Parcourir la liste des signatures : que renvoie `horspool` quand la signature est absente ? Peut-on conclure dès la première trouvée ?
+        Q5 : parcourir la liste des signatures : que renvoie `horspool` quand la signature est absente ? Peut-on conclure dès la première trouvée ?
 
 6.  L’antivirus analyse $100\,000$ fichiers avec la même liste de $1\,000$ signatures. Combien de fois la table de décalage de chaque signature est-elle construite avec la fonction `est_infecte` ? Proposer, sans écrire tout le code, une organisation qui évite ce travail inutile.
 
 7.  L’éditeur de l’antivirus affirme : « plus nos signatures sont longues, plus l’analyse est rapide ». Cette affirmation est-elle plausible ? Justifier.
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 6) : Q1 : 0,75 ; Q2 : 0,75 ; Q3 : 1,25 ; Q4 : 0,75 ; Q5 : 1 ; Q6 : 0,75 ; Q7 : 0,75
 
     1.  On parcourt les lettres du motif **sauf la dernière** : la lettre en position $k$ reçoit le décalage $m - 1 - k$ (si une lettre apparaît plusieurs fois, c’est sa dernière position qui l’emporte) ; toute autre lettre reçoit le décalage par défaut $m$.
 
@@ -578,6 +635,8 @@ L’antivirus utilise l’algorithme de **Boyer-Moore-Horspool**. On dispose des
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Type bac — Repérer des amorces dans un brin d’ADN *(sujet maison, façon bac)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-14 }
 
+<span class="duree">≈ 45 min</span>
+
 En biologie moléculaire, une **amorce** est une courte séquence d’ADN qui ne peut se fixer sur un brin qu’à l’endroit où elle apparaît telle quelle. Avant une expérience, un laboratoire vérifie par programme où ses amorces apparaissent dans un brin. Un brin et une amorce sont représentés par des chaînes de caractères sur l’alphabet `{A, C, G, T}`. Dans tout l’exercice, `brin = ’CATGGATGCATGCC’` ($14$ caractères) et l’on cherche l’amorce `’TGCATG’`.
 
 **Partie A — Boyer-Moore (règle du mauvais caractère)**
@@ -619,13 +678,13 @@ def boyer_moore(motif, texte):
 
     ??? pouce "Coup de pouce"
 
-        Commencer à $i=0$ : comparer `brin[5]` et `motif[5]`, puis reculer tant que les lettres coïncident ; le décalage vient de la ligne `i += max(1, ...)`.
+        Q2 : commencer à $i=0$ : comparer `brin[5]` et `motif[5]`, puis reculer tant que les lettres coïncident ; le décalage vient de la ligne `i += max(1, ...)`.
 
 3.  Lors de ce déroulé, la quantité `j - k` a été négative. À quelle position $i$ ? Que se passerait-il si l’on remplaçait `max(1, j - k)` par `j - k` ?
 
     ??? pouce "Coup de pouce"
 
-        Chercher l’étape où la dernière occurrence de `c` dans le motif est *à droite* de l’indice $j$.
+        Q3 : chercher l’étape où la dernière occurrence de `c` dans le motif est *à droite* de l’indice $j$.
 
 **Partie B — Boyer-Moore-Horspool**
 
@@ -639,6 +698,7 @@ def boyer_moore(motif, texte):
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
+        Q6 :  
         `def cherche_amorces(amorces, brin):`  
         `resultat = {}`  
         `for amorce in amorces:`
@@ -648,6 +708,8 @@ def boyer_moore(motif, texte):
 3.  Un génome humain compte environ $3$ milliards de bases et une amorce environ $20$ bases. Donner l’ordre de grandeur du nombre d’alignements testés par la méthode naïve, puis par Horspool dans un cas favorable où chaque saut vaut la longueur de l’amorce.
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 6) : Q1 : 0,5 ; Q2 : 1 ; Q3 : 0,75 ; Q4 : 0,5 ; Q5 : 1 ; Q6 : 1 ; Q7 : 0,5 ; Q8 : 0,75
 
     **Partie A**
 
@@ -749,7 +811,7 @@ def horspool(motif, texte):
     return -1
 ```
 
-*« La table donne, pour chaque lettre du motif, sa distance à la fin ; une lettre absente vaut `m`. La recherche compare de droite à gauche et saute selon la lettre alignée avec la fin de la fenêtre. »*
+« La table donne, pour chaque lettre du motif, sa distance à la fin ; une lettre absente vaut `m`. La recherche compare de droite à gauche et saute selon la lettre alignée avec la fin de la fenêtre. »
 
 1.  La réponse est-elle correcte ? Construire la table pour `ANANAS`, puis dérouler `horspool("ANANAS", "ANANES ANANAS")` : noter $i$, la lettre de fin de fenêtre et le décalage à chaque étape.
 
@@ -779,7 +841,7 @@ def horspool(motif, texte):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-12-16 }
 
-Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
+Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans lire ses notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 
 1.  Expliquer à un camarade de Première la recherche **naïve** d’un motif dans un texte et son coût.
 
@@ -787,7 +849,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
 3.  Expliquer pourquoi Boyer-Moore-Horspool est d’autant plus rapide que le motif est long, et dans quel cas il ne gagne rien.
 
-**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus, puis retourner la feuille. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire de notes** : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
+**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus : comme au Grand Oral, ces notes servent d’aide-mémoire. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire ses notes** et sans rien écrire : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
 
 ??? pouce "Coup de pouce"
 
@@ -860,3 +922,87 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
     - Pire cas : petit alphabet et nombreuses répétitions (ADN, `AAAA…`) ; les décalages valent $1$, et l’on retrouve le coût de la méthode naïve.
 
     - On paie un peu de mémoire (la table) pour gagner beaucoup de temps ; usages : « Rechercher » d’un éditeur, antivirus, bio-informatique.
+
+### Entraînement
+
+Des séries courtes pour rendre une méthode automatique : même consigne, données différentes. Les réponses sont brèves dans le corrigé.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 17</span> — Tables de décalage en série <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-12-17 }
+
+<span class="essentiel">• essentiel</span>
+
+Construire la table de décalage de Horspool de chacun des motifs suivants, en précisant le décalage par défaut.
+
+??? pouce "Coup de pouce"
+
+    Écrire la position de chaque lettre sous le motif. Parcourir les lettres de gauche à droite **sauf la dernière** : la lettre en position $k$ reçoit $m - 1 - k$, et une lettre qui revient voit sa valeur remplacée. Toute lettre absente de la table reçoit $m$.
+
+1.  `CHAT`
+
+2.  `MAMAN`
+
+3.  `RADAR`
+
+4.  `BONBON`
+
+??? corrige "Corrigé"
+
+    1.  `CHAT` ($m=4$) : `C`$\to 3$, `H`$\to 2$, `A`$\to 1$, défaut **4**.
+
+    2.  `MAMAN` ($m=5$) : `M`$\to 2$, `A`$\to 1$, défaut **5** (`M` en position $2$ et `A` en position $3$ remplacent leurs valeurs précédentes).
+
+    3.  `RADAR` ($m=5$) : `R`$\to 4$, `A`$\to 1$, `D`$\to 2$, défaut **5** (le `R` final est ignoré, seul compte celui de la position $0$).
+
+    4.  `BONBON` ($m=6$) : `B`$\to 2$, `O`$\to 1$, `N`$\to 3$, défaut **6**.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> En c), donner à `R` le décalage $0$ à cause du `R` final : la dernière case du motif est ignorée. `R` garde la valeur de sa position $0$, soit $5 - 1 - 0 = 4$.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 18</span> — Horspool à la main en série <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-12-18 }
+
+<span class="essentiel">• essentiel</span>
+
+Pour chaque recherche, construire la table de décalage du motif, puis dérouler l’algorithme de Horspool : à chaque étape, donner la position $i$, la fenêtre, la lettre de fin de fenêtre et le décalage. Donner enfin les positions des occurrences.
+
+??? pouce "Coup de pouce"
+
+    La lettre de fin de fenêtre est la lettre du **texte** en position $i + m - 1$. On compare la fenêtre au motif de droite à gauche, puis, trouvé ou non, on décale de la valeur que la table donne pour la lettre de fin. On s’arrête quand la fenêtre dépasse la fin du texte.
+
+1.  motif `TAC`, texte `TICTACTOC`
+
+2.  motif `GAG`, texte `TGAGCGAGT`
+
+3.  motif `CODE`, texte `DECODERLECODE`
+
+??? corrige "Corrigé"
+
+    **a)** Table de `TAC` : `T`$\to 2$, `A`$\to 1$, défaut $3$.
+
+    | **position $i$** | **fenêtre** | **lettre de fin** |     **décalage**     |
+    |:----------------:|:-----------:|:-----------------:|:--------------------:|
+    |      $i=0$       |    `TIC`    |        `C`        |         $3$          |
+    |      $i=3$       |    `TAC`    | `C` (**trouvé**)  |         $3$          |
+    |      $i=6$       |    `TOC`    |        `C`        | $3$ (dépasse la fin) |
+
+    Occurrence en position **3**.
+
+    **b)** Table de `GAG` : `G`$\to 2$, `A`$\to 1$, défaut $3$.
+
+    | **position $i$** | **fenêtre** | **lettre de fin** |     **décalage**     |
+    |:----------------:|:-----------:|:-----------------:|:--------------------:|
+    |      $i=0$       |    `TGA`    |        `A`        |         $1$          |
+    |      $i=1$       |    `GAG`    | `G` (**trouvé**)  |         $2$          |
+    |      $i=3$       |    `GCG`    |        `G`        |         $2$          |
+    |      $i=5$       |    `GAG`    | `G` (**trouvé**)  | $2$ (dépasse la fin) |
+
+    Occurrences en positions **1** et **5**.
+
+    **c)** Table de `CODE` : `C`$\to 3$, `O`$\to 2$, `D`$\to 1$, défaut $4$.
+
+    | **position $i$** | **fenêtre** | **lettre de fin** |     **décalage**     |
+    |:----------------:|:-----------:|:-----------------:|:--------------------:|
+    |      $i=0$       |   `DECO`    |        `O`        |         $2$          |
+    |      $i=2$       |   `CODE`    | `E` (**trouvé**)  |         $4$          |
+    |      $i=6$       |   `RLEC`    |        `C`        |         $3$          |
+    |      $i=9$       |   `CODE`    | `E` (**trouvé**)  | $4$ (dépasse la fin) |
+
+    Occurrences en positions **2** et **9**.

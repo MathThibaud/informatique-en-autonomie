@@ -18,7 +18,13 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Bonjour <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-1 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui affiche : *Bonjour, je m’appelle …* (en y mettant son prénom).
+
+??? pouce "Coup de pouce"
+
+    Relisez le tout premier programme du cours (« Hello World ») : il suffit d’en changer le texte.
 
 ??? corrige "Corrigé"
 
@@ -34,6 +40,10 @@
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui affiche le menu du jour **sur trois lignes** : l’entrée, le plat, puis le dessert (par exemple *Entrée : salade niçoise*).
 
+??? pouce "Coup de pouce"
+
+    Une instruction `print` affiche une ligne : combien en faut-il pour trois lignes ?
+
 ??? corrige "Corrigé"
 
     Une instruction `print` par ligne à afficher.
@@ -48,7 +58,13 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Deux variables <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-3 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Créer une variable `sport` contenant son sport préféré (du texte) et une variable `heures` contenant le nombre d’heures qu’on y consacre par semaine (un nombre), puis les afficher.
+
+??? pouce "Coup de pouce"
+
+    Du texte s’écrit entre guillemets, un nombre sans guillemets. Pour afficher la valeur d’une variable, on écrit son nom *sans* guillemets dans `print`.
 
 ??? corrige "Corrigé"
 
@@ -63,7 +79,13 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Valeur finale <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-4 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  Sans machine, donner la valeur finale de `a` *et* de `b`, puis vérifier.
+
+??? pouce "Coup de pouce"
+
+    Lisez les lignes une par une, dans l’ordre : au moment où l’on calcule `b`, combien vaut `a` ? La troisième ligne revient-elle en arrière ?
 
 ```python
 a = 5
@@ -74,6 +96,8 @@ a = 10
 ??? corrige "Corrigé"
 
     *Sur papier.* `a` $= \mathbf{10}$ et `b` $= \mathbf{6}$. La valeur de `b` a été calculée *une fois pour toutes* quand `a` valait $5$ : modifier `a` ensuite ne change pas `b`.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Répondre que `b` vaut $11$. La ligne `b = a + 1` n’est pas une formule qui se met à jour toute seule : c’est un calcul fait une seule fois, avec la valeur que `a` avait à ce moment-là.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Des noms parlants <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-5 }
 
@@ -89,6 +113,10 @@ z = x * y
 
 2.  Un camarade propose `prix place`, `3places` et `total€`. Pourquoi Python les refuse-t-il ?
 
+    ??? pouce "Coup de pouce"
+
+        Relisez dans le cours les règles pour nommer une variable : espaces, chiffre au début, caractères spéciaux.
+
 ??? corrige "Corrigé"
 
     *Sur papier.*
@@ -98,6 +126,8 @@ z = x * y
     2.  `prix place` contient une espace ; `3places` commence par un chiffre ; `total€` contient un symbole (`€`) interdit dans un nom.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — L’échange <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-6 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  On a `a = 1` et `b = 2`. Écrire les instructions qui **échangent** leurs valeurs (à la fin, `a` vaut $2$ et `b` vaut $1$).
 
@@ -117,11 +147,17 @@ z = x * y
     b = temporaire
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `a = b` puis `b = a` : après la première ligne, `a` vaut déjà $2$, et l’ancienne valeur ($1$) est perdue. Les deux variables finissent à $2$.
+
 ### Calculs
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 7</span> — Somme et produit <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-7 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Ranger deux nombres dans `a` et `b`, puis afficher leur somme *et* leur produit.
+
+??? pouce "Coup de pouce"
+
+    Deux lignes pour ranger les nombres (`a = ...`), puis un `print` par résultat. La multiplication s’écrit avec le symbole `*`.
 
 ??? corrige "Corrigé"
 
@@ -134,7 +170,13 @@ z = x * y
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Le trajet <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-8 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  À partir de deux variables `vitesse` (en km/h) et `duree` (en heures), calculer et afficher la distance parcourue. Test : $90$ km/h pendant $2{,}5$ h donnent $225$ km.
+
+??? pouce "Coup de pouce"
+
+    Distance $=$ vitesse $\times$ durée. Attention : en Python, $2{,}5$ s’écrit avec un point.
 
 ??? corrige "Corrigé"
 
@@ -147,6 +189,8 @@ z = x * y
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — La tirelire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-9 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  La variable `tirelire` de Léa vaut $20$. Sa grand-mère **double** son contenu, puis Léa dépense $15$ € au cinéma, puis elle ajoute $8$ € d’argent de poche. En modifiant `tirelire` à chaque étape, afficher le contenu final (attendu : $33$).
 
@@ -196,49 +240,52 @@ z = x * y
 
     - `20 // 3 % 2` $= 0$ (`int`) : même priorité, on calcule de gauche à droite, `20 // 3` $= 6$ puis `6 % 2` $= 0$.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — La moyenne avec coefficients <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-11 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — La note d’une application <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-11 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Un élève a $14$ en maths (coefficient $3$), $11$ en français (coefficient $2$) et $17$ en SNT (coefficient $1$). Ranger notes et coefficients dans des variables, puis calculer et afficher sa moyenne pondérée (attendu : $13{,}5$).
-
-??? pouce "Coup de pouce"
-
-    Moyenne pondérée = (somme des notes multipliées chacune par son coefficient) divisée par (somme des coefficients). Attention aux parenthèses.
-
-??? corrige "Corrigé"
-
-    On additionne les notes multipliées par leur coefficient, puis on divise par la *somme des coefficients* (et non par le nombre de notes).
-
-    ```python
-    maths = 14
-    coef_maths = 3
-    francais = 11
-    coef_francais = 2
-    snt = 17
-    coef_snt = 1
-    total = maths * coef_maths + francais * coef_francais + snt * coef_snt
-    moyenne = total / (coef_maths + coef_francais + coef_snt)
-    print(moyenne)   # 13.5
-    ```
-
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Le solde <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-12 }
-
-<span class="run" title="À programmer et tester sur machine">▶</span>  Un article coûte $80$ €. Le magasin fait une remise de $25\,\%$. Écrire un programme qui calcule et affiche le prix après remise.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Sur une boutique d’applications, un jeu a reçu $12$ avis à $5$ étoiles, $5$ avis à $4$ étoiles et $3$ avis à $1$ étoile. Ranger ces nombres d’avis dans des variables, puis calculer et afficher la note moyenne du jeu (attendu : $4{,}15$).
 
 ??? pouce "Coup de pouce"
 
-    Calculez d’abord le montant de la remise, puis retirez-le du prix de départ. Rappel : prendre $25\,\%$ d’un nombre, c’est le multiplier par $25/100$.
+    Note moyenne = (nombre total d’étoiles données) divisé par (nombre total d’avis). Les $12$ avis à $5$ étoiles rapportent à eux seuls $12 \times 5$ étoiles. Attention aux parenthèses.
 
 ??? corrige "Corrigé"
 
-    On calcule d’abord le montant de la remise ($25\,\%$ de $80$, soit $20$ €), puis on le retire du prix de départ. (Autre écriture : payer $75\,\%$ du prix, `prix * 75 / 100`.)
+    On compte toutes les étoiles données (chaque nombre d’avis multiplié par sa note), puis on divise par le *nombre total d’avis* ($20$), et non par $3$ (le nombre de notes différentes).
 
     ```python
-    prix = 80
-    remise = prix * 25 / 100
-    print(prix - remise)   # 60.0
+    avis_5 = 12
+    avis_4 = 5
+    avis_1 = 3
+    etoiles = avis_5 * 5 + avis_4 * 4 + avis_1 * 1
+    moyenne = etoiles / (avis_5 + avis_4 + avis_1)
+    print(moyenne)   # 4.15
     ```
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Oublier les parenthèses : `etoiles / avis_5 + avis_4 + avis_1` divise seulement par $12$ *puis* ajoute $5$ et $3$ (la division passe avant l’addition), ce qui donne environ $14{,}9$ : une note impossible sur $5$ étoiles, qui aurait dû alerter.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Le forfait de données <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-12 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Un forfait mobile comprend $80$ Go de données par mois (Go : gigaoctet). Vous en avez déjà utilisé $25\,\%$. Écrire un programme qui calcule et affiche le nombre de gigaoctets qu’il vous reste.
+
+??? pouce "Coup de pouce"
+
+    Calculez d’abord la quantité déjà utilisée, puis retirez-la du forfait de départ. Rappel : prendre $25\,\%$ d’un nombre, c’est le multiplier par $25/100$.
+
+??? corrige "Corrigé"
+
+    On calcule d’abord la quantité utilisée ($25\,\%$ de $80$ Go, soit $20$ Go), puis on la retire du forfait. (Autre écriture : il reste $75\,\%$ du forfait, `forfait * 75 / 100`.)
+
+    ```python
+    forfait = 80
+    utilise = forfait * 25 / 100
+    print(forfait - utilise)   # 60.0
+    ```
+
+    Il reste $60$ Go.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Quel jour serons-nous ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-13 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  On numérote les jours de la semaine : lundi $= 0$, mardi $= 1$, …, dimanche $= 6$. Aujourd’hui, c’est mercredi (jour $2$). Écrire un programme qui calcule et affiche :
 
@@ -261,6 +308,8 @@ z = x * y
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Le rendu de monnaie <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-14 }
+
+<span class="duree">≈ 15 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui, à partir d’une somme en euros entiers (variable `montant`), affiche comment la payer avec le **moins de coupures possible** en billets de $10$, pièces de $2$ et pièces de $1$. Par exemple pour $27$ € : $2$ billets de $10$, $3$ pièces de $2$, $1$ pièce de $1$ ($20 + 6 + 1 = 27$).
 
@@ -295,6 +344,8 @@ z = x * y
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 15</span> — Texte ou calcul ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-15 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui affiche **exactement** les trois lignes ci-dessous. La deuxième doit être *calculée* par Python (interdit d’écrire `17` soi-même !).
 
 ```text
@@ -319,7 +370,13 @@ Bonjour Monaco
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 16</span> — Nom de code <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-16 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Demander à l’utilisateur son prénom, puis sa ville, et afficher à l’aide d’une f-string : « Agent *prénom*, votre mission vous attend à *ville*. »
+
+??? pouce "Coup de pouce"
+
+    Deux `input`, chacun rangé dans sa variable. Dans une f-string (un `f` juste avant le guillemet), chaque variable s’écrit entre accolades.
 
 ??? corrige "Corrigé"
 
@@ -349,6 +406,8 @@ Bonjour Monaco
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Le temps d’écran <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-18 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Demander à l’utilisateur combien d’heures par jour il passe devant un écran, puis afficher combien d’heures cela représente sur une année ($365$ jours), et combien de **jours entiers** cela fait. (Attention : `input` renvoie du texte, il faut le convertir avec `int` !)
 
 ??? pouce "Coup de pouce"
@@ -357,7 +416,7 @@ Bonjour Monaco
 
 ??? corrige "Corrigé"
 
-    Sans le `int(...)`, le calcul planterait (on multiplierait du texte). Pour $3$ h par jour : $1095$ h, soit $45$ jours entiers.
+    Pour $3$ h par jour : $1095$ h, soit $45$ jours entiers.
 
     ```python
     par_jour = int(input("Heures d'ecran par jour ? "))
@@ -366,23 +425,27 @@ Bonjour Monaco
     print(f"soit {par_an // 24} jours entiers")
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — L’aire au clavier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-19 }
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Oublier `int(...)` autour de `input`. La réponse tapée reste du texte : `"3" * 365` ne multiplie pas, il *répète* le texte $365$ fois, puis `par_an // 24` provoque une erreur (`TypeError`).
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Demander la longueur puis la largeur d’un rectangle (des nombres **à virgule**, à taper avec un point : convertir avec `float`), puis afficher en une seule f-string : « Un rectangle de *L* sur *l* a une aire de *A*. »
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Le temps de téléchargement <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-19 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Demander la taille d’un fichier en mégaoctets (Mo), puis le débit de la connexion en mégaoctets par seconde (Mo/s : chaque seconde, on reçoit ce nombre de mégaoctets). Ce sont des nombres **à virgule**, à taper avec un point : convertir avec `float`. Afficher ensuite en une seule f-string : « Un fichier de *T* Mo se télécharge en *D* secondes. » Test : $45$ Mo à $2{,}5$ Mo/s donnent $18$ secondes.
 
 ??? pouce "Coup de pouce"
 
-    Convertissez chaque `input` avec `float(...)` *avant* de calculer ; dans une f-string, chaque valeur s’écrit entre accolades `{...}`.
+    Combien de secondes faut-il pour recevoir $45$ Mo si l’on en reçoit $2{,}5$ chaque seconde ? Posez le calcul avec les nombres, puis remplacez-les par les variables. Convertissez chaque `input` avec `float(...)` *avant* de calculer.
 
 ??? corrige "Corrigé"
 
-    `float` convertit le texte saisi en nombre à virgule (`int` planterait sur `2.5`).
+    Chaque seconde, on reçoit `debit` mégaoctets : la durée est donc la taille *divisée* par le débit. `float` convertit le texte saisi en nombre à virgule (`int` planterait sur `2.5`).
 
     ```python
-    longueur = float(input("Longueur : "))
-    largeur = float(input("Largeur : "))
-    print(f"Un rectangle de {longueur} sur {largeur} a une aire de {longueur * largeur}.")
+    taille = float(input("Taille du fichier (Mo) : "))
+    debit = float(input("Debit (Mo/s) : "))
+    print(f"Un fichier de {taille} Mo se telecharge en {taille / debit} secondes.")
     ```
+
+    Avec $45$ et $2.5$, le programme affiche : `Un fichier de 45.0 Mo se telecharge en 18.0 secondes.`
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — L’écho <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-20 }
 
@@ -435,22 +498,38 @@ TOTAL : 4.5 euros
 
 ### Les fonctions
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 22</span> — Le volume du cube <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-22 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 22</span> — Les codes PIN <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-22 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `volume_cube(c)` qui renvoie le volume d’un cube d’arête `c`. Tester avec `volume_cube(3)` (attendu : $27$).
+<span class="essentiel">• essentiel</span>
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Un code PIN est formé de chiffres (chacun de $0$ à $9$). Avec $1$ chiffre, il y a $10$ codes possibles ; avec $2$ chiffres, $10 \times 10 = 100$ ; chaque chiffre de plus multiplie le nombre de codes par $10$. Écrire une fonction `nb_codes(n)` qui renvoie le nombre de codes possibles à `n` chiffres. Tester avec `nb_codes(4)` (attendu : $10\,000$).
+
+??? pouce "Coup de pouce"
+
+    Avec $3$ chiffres, on a $10 \times 10 \times 10$ codes. Quel opérateur de Python calcule une puissance ?
 
 ??? corrige "Corrigé"
 
-    ```python
-    def volume_cube(c):
-        return c ** 3
+    Avec `n` chiffres, on multiplie `n` fois par $10$ : c’est $10^n$, qui s’écrit `10 ** n` en Python.
 
-    print(volume_cube(3))   # 27
+    ```python
+    def nb_codes(n):
+        return 10 ** n
+
+    print(nb_codes(4))   # 10000
     ```
+
+    Seulement $10\,000$ codes à $4$ chiffres : c’est pour cela qu’un téléphone se bloque après quelques essais ratés.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `print(10 ** n)` au lieu de `return 10 ** n` dans la fonction. L’écran montre bien $10000$, mais `nb_codes(4)` ne *renvoie* rien (`None`) : impossible de réutiliser le résultat dans un calcul.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 23</span> — L’aire du triangle <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-23 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `aire_triangle(base, hauteur)` qui renvoie l’aire d’un triangle (rappel : $\dfrac{\text{base} \times \text{hauteur}}{2}$).
+
+??? pouce "Coup de pouce"
+
+    Le corps de la fonction tient en une ligne : `return` suivi du calcul, écrit avec les noms des paramètres.
 
 ??? corrige "Corrigé"
 
@@ -480,26 +559,28 @@ TOTAL : 4.5 euros
     print(note_sur_20(12, 15))   # 16.0
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 25</span> — Retrouver le prix HT <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-25 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 25</span> — Retrouver le poids d’origine <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-25 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Sur un ticket, on lit le prix TTC (TVA de $20\,\%$ comprise). Écrire une fonction `prix_ht(prix_ttc)` qui renvoie le prix hors taxes. Vérifier que `prix_ht(60)` vaut $50$. (Attention : retirer $20\,\%$ au prix TTC ne donne *pas* le bon résultat !)
+<span class="run" title="À programmer et tester sur machine">▶</span>  Une messagerie compresse les photos avant de les envoyer : la photo envoyée pèse $75\,\%$ du poids de la photo d’origine. Écrire une fonction `poids_origine(poids_envoye)` qui renvoie le poids de la photo d’origine. Vérifier que `poids_origine(3)` vaut $4$ (en Mo). (Attention : ajouter $25\,\%$ au poids envoyé ne donne *pas* le bon résultat !)
 
 ??? pouce "Coup de pouce"
 
-    Ajouter $20\,\%$ de TVA revient à multiplier le prix HT par $1{,}2$. Pour revenir en arrière, quelle opération faut-il faire ?
+    Compresser revient à multiplier le poids d’origine par $0{,}75$. Pour revenir en arrière, quelle opération faut-il faire ?
 
 ??? corrige "Corrigé"
 
-    Le prix TTC vaut $1{,}2$ fois le prix HT, donc on **divise** par $1{,}2$. (Retirer $20\,\%$ de $60$ donnerait $48$, et $48 \times 1{,}2 = 57{,}6 \neq 60$.)
+    Le poids envoyé vaut $0{,}75$ fois le poids d’origine, donc on **divise** par $0{,}75$. (Ajouter $25\,\%$ à $3$ donnerait $3{,}75$, et $3{,}75 \times 0{,}75 = 2{,}8125 \neq 3$.)
 
     ```python
-    def prix_ht(prix_ttc):
-        return prix_ttc / 1.2
+    def poids_origine(poids_envoye):
+        return poids_envoye / 0.75
 
-    print(prix_ht(60))   # 50.0
+    print(poids_origine(3))   # 4.0
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 26</span> — Le poids d’une photo <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-26 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Une photo numérique non compressée utilise $3$ octets par pixel (un pour le rouge, un pour le vert, un pour le bleu). Écrire une fonction `poids_photo(largeur, hauteur)` qui renvoie le poids de l’image en octets, puis calculer celui d’une photo de $4000 \times 3000$ pixels. Combien de mégaoctets cela fait-il ($1$ Mo $= 1\,000\,000$ octets) ?
 
@@ -541,6 +622,8 @@ TOTAL : 4.5 euros
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 28</span> — Deviner l’affichage (fonctions) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-28 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  Sans machine, écrire ce qu’affiche ce programme, puis vérifier sur machine.
 
 ```python
@@ -570,6 +653,8 @@ print(f(g(2)) + 1)
     - `g(2)` $= 4$, puis `f(4)` $= 9$, et $9 + 1 = 10$ : affiche `10`.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 29</span> — Le coût d’un trajet <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-29 }
+
+<span class="duree">≈ 15 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Une voiture consomme `conso` litres d’essence aux $100$ km.
 
@@ -609,11 +694,17 @@ print(f(g(2)) + 1)
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 30</span> — Le code secret <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-30 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `verifier(code)` qui renvoie `"Acces autorise"` si le code reçu vaut $2468$, et `"Acces refuse"` sinon.
+
+??? pouce "Coup de pouce"
+
+    Un `if` pour le bon code, un `else` pour tous les autres. Relisez dans le cours quel signe sert à *comparer* deux valeurs.
 
 ??? corrige "Corrigé"
 
-    Attention : on compare avec `==` (le `=` simple sert à ranger une valeur).
+    Un `if` pour le bon code, un `else` pour tous les autres.
 
     ```python
     def verifier(code):
@@ -622,6 +713,8 @@ print(f(g(2)) + 1)
         else:
             return "Acces refuse"
     ```
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `if code = 2468:` avec un seul signe égal : Python refuse le programme (`SyntaxError`). Le `=` simple *range* une valeur ; pour *comparer*, il faut `==`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 31</span> — Pair ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-31 }
 
@@ -662,26 +755,27 @@ print(f(g(2)) + 1)
             return "positif"
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 33</span> — Divisible ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-33 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 33</span> — Le découpage en paquets <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-33 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui demande deux entiers `a` et `b`, puis affiche « *a* est divisible par *b* » ou « *a* n’est pas divisible par *b* » (avec les vraies valeurs, à l’aide d’une f-string).
+<span class="run" title="À programmer et tester sur machine">▶</span>  Sur un réseau, un fichier voyage découpé en **paquets** de $1500$ octets au plus : tous les paquets sont pleins, sauf peut-être le dernier. Écrire un programme qui demande la taille d’un fichier (en octets, un entier), puis affiche « Il faut *n* paquets. » (avec la vraie valeur, à l’aide d’une f-string). Tester avec $3000$ ($2$ paquets) et $3001$ ($3$ paquets).
 
 ??? pouce "Coup de pouce"
 
-    `a` est divisible par `b` lorsque le reste de la division, `a % b`, vaut $0$.
+    Avec $3001$ octets : combien de paquets pleins de $1500$ octets ? Reste-t-il des octets à envoyer ? Pensez à `//` et à `%`.
 
 ??? corrige "Corrigé"
 
-    `a` est divisible par `b` quand le reste de la division, `a % b`, est nul.
+    `taille // 1500` donne le nombre de paquets *pleins* ; s’il reste des octets (`taille % 1500` différent de $0$), il faut un paquet de plus pour eux.
 
     ```python
-    a = int(input("a = "))
-    b = int(input("b = "))
-    if a % b == 0:
-        print(f"{a} est divisible par {b}")
-    else:
-        print(f"{a} n'est pas divisible par {b}")
+    taille = int(input("Taille du fichier (octets) : "))
+    paquets = taille // 1500
+    if taille % 1500 != 0:
+        paquets = paquets + 1
+    print(f"Il faut {paquets} paquets.")
     ```
+
+    Pour $3000$ octets : $2$ paquets (reste $0$) ; pour $3001$ octets : $2$ paquets pleins et un dernier paquet d’un seul octet, soit $3$ paquets.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 34</span> — Valeur absolue maison <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-34 }
 
@@ -704,6 +798,8 @@ print(f(g(2)) + 1)
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 35</span> — L’icône de batterie <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-35 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Un téléphone affiche une icône selon le niveau de batterie (en %). Écrire une fonction `icone(niveau)` qui renvoie `"critique"` si le niveau est inférieur à $10$, `"faible"` s’il est inférieur à $30$, `"moyenne"` s’il est inférieur à $70$, et `"pleine"` sinon. Tester avec $5$, $50$ et $100$.
 
@@ -731,13 +827,15 @@ print(f(g(2)) + 1)
     print(icone(100))   # pleine
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 36</span> — Le maximum de trois <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-36 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 36</span> — La meilleure antenne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-36 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `max3(a, b, c)` qui renvoie le plus grand des trois nombres.
+<span class="duree">≈ 15 min</span>
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Un téléphone capte trois antennes-relais et se connecte à celle dont le signal est le plus fort. Écrire une fonction `meilleur_signal(a, b, c)` qui renvoie le plus grand des trois niveaux de signal reçus (sans utiliser la fonction `max` de Python). Tester avec `meilleur_signal(40, 75, 62)` (attendu : $75$).
 
 ??? pouce "Coup de pouce"
 
-    Gardez le plus grand nombre « vu jusqu’ici » dans une variable `grand`, puis comparez-la aux autres nombres un par un.
+    Gardez le plus grand niveau « vu jusqu’ici » dans une variable `grand`, puis comparez-la aux autres niveaux un par un.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -748,19 +846,23 @@ print(f(g(2)) + 1)
 
 ??? corrige "Corrigé"
 
-    On garde le plus grand vu jusqu’ici dans une variable `grand`.
+    On garde le plus grand niveau vu jusqu’ici dans une variable `grand`.
 
     ```python
-    def max3(a, b, c):
+    def meilleur_signal(a, b, c):
         grand = a
         if b > grand:
             grand = b
         if c > grand:
             grand = c
         return grand
+
+    print(meilleur_signal(40, 75, 62))   # 75
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 37</span> — Année bissextile <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-37 }
+
+<span class="duree">≈ 15 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `bissextile(annee)` qui renvoie `True` si l’année est bissextile. Règle : une année est bissextile si elle est divisible par $4$, *sauf* les années de siècle (divisibles par $100$) qui doivent en plus être divisibles par $400$. Tester avec $2024$ (oui), $1900$ (non) et $2000$ (oui).
 
@@ -802,28 +904,44 @@ print(f(g(2)) + 1)
         return (annee % 4 == 0 and annee % 100 != 0) or (annee % 400 == 0)
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 38</span> — Un triangle est-il possible ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-38 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 38</span> — Une couleur valide ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-38 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `triangle(a, b, c)` qui renvoie `True` si trois longueurs peuvent former un triangle. Règle : chaque côté doit être plus petit que la somme des deux autres.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Sur un écran, une couleur est codée par trois nombres : sa part de rouge, de vert et de bleu. Chacun doit être compris entre $0$ et $255$ (bornes incluses). Écrire une fonction `couleur_valide(rouge, vert, bleu)` qui renvoie `True` si les trois nombres sont valides, et `False` sinon. Tester avec `couleur_valide(255, 128, 0)` (`True`) et `couleur_valide(300, 0, 0)` (`False`).
 
 ??? pouce "Coup de pouce"
 
-    Il y a trois inégalités à vérifier (une par côté) ; elles doivent être vraies *toutes les trois* : pensez à `and`.
+    Chaque nombre doit être à la fois supérieur ou égal à $0$ *et* inférieur ou égal à $255$, et cela pour les trois nombres : toutes ces conditions doivent être vraies, pensez à `and`.
 
 ??? corrige "Corrigé"
 
-    Chaque côté doit être plus petit que la somme des deux autres (les trois conditions reliées par `and`).
+    Chaque nombre doit être entre $0$ et $255$ : deux comparaisons reliées par `and` pour chacun, puis les trois résultats reliés par `and`.
 
     ```python
-    def triangle(a, b, c):
-        return a < b + c and b < a + c and c < a + b
+    def couleur_valide(rouge, vert, bleu):
+        rouge_ok = rouge >= 0 and rouge <= 255
+        vert_ok = vert >= 0 and vert <= 255
+        bleu_ok = bleu >= 0 and bleu <= 255
+        return rouge_ok and vert_ok and bleu_ok
+
+    print(couleur_valide(255, 128, 0))   # True
+    print(couleur_valide(300, 0, 0))     # False
     ```
+
+    (Avec l’écriture raccourcie vue dans le cours : `0 <= rouge <= 255`.) On retrouvera ces nombres de $0$ à $255$ au chapitre sur la photographie numérique.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Relier les conditions par `or` : `couleur_valide(300, 0, 0)` renverrait alors `True`, puisqu’il suffirait qu’*une* condition soit vraie. Ici, *toutes* doivent l’être.
 
 ### Les boucles
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 39</span> — De 1 à 10 <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-39 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui affiche tous les entiers de $1$ à $10$ (boucle `for`).
+
+??? pouce "Coup de pouce"
+
+    `range(1, 6)` donne $1, 2, 3, 4, 5$ : la borne de droite est exclue. Que faut-il écrire pour aller jusqu’à $10$ ?
 
 ??? corrige "Corrigé"
 
@@ -834,7 +952,11 @@ print(f(g(2)) + 1)
         print(i)
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `range(10)` (qui affiche $0$ à $9$) ou `range(1, 10)` (qui s’arrête à $9$) : la borne de droite n’est jamais atteinte.
+
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 40</span> — Trace de boucle <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-40 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="tag">sur papier</span>  Sans machine, écrire ce qu’affiche ce programme, puis vérifier.
 
@@ -842,6 +964,10 @@ print(f(g(2)) + 1)
 for i in range(4):
     print(i * i)
 ```
+
+??? pouce "Coup de pouce"
+
+    Notez d’abord la liste des valeurs que prend `i` avec `range(4)` (on part de $0$), puis calculez `i * i` pour chacune.
 
 ??? corrige "Corrigé"
 
@@ -854,27 +980,34 @@ for i in range(4):
     9
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 41</span> — La pyramide de boulets <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-41 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 41</span> — Un message qui se propage <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-41 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  On empile des boulets en pyramide à base carrée : $1$ au sommet, $4$ ($2 \times 2$) à l’étage du dessous, puis $9$, $16$… Écrire une fonction `pyramide(n)` qui renvoie le nombre total de boulets d’une pyramide de `n` étages. Vérifier que `pyramide(10)` vaut $385$.
+<span class="essentiel">• essentiel</span>
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Une personne publie un message (étape $0$). À l’étape $1$, ses $3$ amis le reçoivent ; à l’étape $2$, chacun d’eux le relaie à $3$ nouveaux amis, soit $9$ personnes ; et ainsi de suite (on suppose que personne ne le reçoit deux fois) : à l’étape `i`, $3^i$ nouvelles personnes reçoivent le message. Écrire une fonction `diffusion(n)` qui renvoie le nombre total de personnes touchées de l’étape $0$ à l’étape `n` (l’auteur compris). Vérifier que `diffusion(3)` vaut $40$, puis calculer `diffusion(10)`.
 
 ??? pouce "Coup de pouce"
 
-    À l’étage numéro `i`, il y a `i * i` boulets. Additionnez-les dans une variable `total` qui commence à $0$, en parcourant `range(1, n + 1)`.
+    À l’étape `i`, `3 ** i` personnes reçoivent le message. Additionnez-les dans une variable `total` qui commence à $0$, en parcourant `range(n + 1)`.
 
 ??? corrige "Corrigé"
 
-    On accumule dans `total` le carré de chaque numéro d’étage.
+    On accumule dans `total` le nombre de personnes touchées à chaque étape, de $0$ à `n` inclus.
 
     ```python
-    def pyramide(n):
+    def diffusion(n):
         total = 0
-        for etage in range(1, n + 1):
-            total = total + etage * etage
+        for i in range(n + 1):
+            total = total + 3 ** i
         return total
 
-    print(pyramide(10))   # 385
+    print(diffusion(3))    # 40
+    print(diffusion(10))   # 88573
     ```
+
+    $1 + 3 + 9 + 27 = 40$. En $10$ étapes seulement, près de $90\,000$ personnes : c’est ainsi qu’un message devient « viral ».
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `total = 0` *à l’intérieur* de la boucle : le total repart de $0$ à chaque tour et la fonction ne renvoie que le dernier terme ($27$ pour `diffusion(3)`). Autre piège : `range(n)` oublie la dernière étape.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 42</span> — Les puissances de 2 <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-42 }
 
@@ -897,6 +1030,8 @@ for i in range(4):
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 43</span> — Les écouteurs <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-43 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Léa part de $0$ € et économise $15$ € par semaine. Avec une boucle `while`, calculer et afficher au bout de combien de semaines elle aura **au moins** $200$ € pour s’offrir des écouteurs.
 
@@ -939,35 +1074,41 @@ for i in range(4):
 
     Autre méthode, sans boucle : tout simplement `1000 // 7`.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 45</span> — Le livret d’épargne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-45 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 45</span> — Les abonnés <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-45 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Un capital placé à $3\,\%$ par an est multiplié par $1{,}03$ chaque année. Écrire une fonction `capital(depart, n)` qui renvoie le capital au bout de `n` années, à l’aide d’une boucle `for` (sans utiliser `**`). Vérifier que `capital(1000, 10)` vaut environ $1343{,}92$.
+<span class="duree">≈ 15 min</span>
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Le compte d’une créatrice de vidéos gagne $3\,\%$ d’abonnés par mois : chaque mois, son nombre d’abonnés est multiplié par $1{,}03$. Écrire une fonction `abonnes(depart, n)` qui renvoie le nombre d’abonnés au bout de `n` mois, à l’aide d’une boucle `for` (sans utiliser `**`). Vérifier que `abonnes(1000, 10)` vaut environ $1343{,}92$ (soit environ $1344$ abonnés).
 
 ??? pouce "Coup de pouce"
 
-    Une variable `c` part de `depart` ; chaque année (un tour de boucle), elle est multipliée par $1{,}03$.
+    Une variable `a` part de `depart` ; chaque mois (un tour de boucle), elle est multipliée par $1{,}03$.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    `def capital(depart, n):`  
-    `c = depart`  
-    `for annee in range(n):`
+    `def abonnes(depart, n):`  
+    `a = depart`  
+    `for mois in range(n):`
 
 ??? corrige "Corrigé"
 
-    On multiplie le capital par $1{,}03$ autant de fois qu’il y a d’années.
+    On multiplie le nombre d’abonnés par $1{,}03$ autant de fois qu’il y a de mois.
 
     ```python
-    def capital(depart, n):
-        c = depart
-        for annee in range(n):
-            c = c * 1.03
-        return c
+    def abonnes(depart, n):
+        a = depart
+        for mois in range(n):
+            a = a * 1.03
+        return a
 
-    print(capital(1000, 10))   # 1343.916...
+    print(abonnes(1000, 10))   # 1343.916...
     ```
 
+    Le calcul donne un nombre à virgule ; on l’arrondit : environ $1344$ abonnés. Remarquer que le compte gagne $344$ abonnés en $10$ mois, et non $10 \times 30 = 300$ : chaque mois, les $3\,\%$ portent sur un nombre d’abonnés plus grand.
+
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 46</span> — Combien de chiffres ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-46 }
+
+<span class="duree">≈ 15 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `nb_chiffres(n)` qui renvoie le nombre de chiffres d’un entier positif. Par exemple `nb_chiffres(2048)` vaut $4$.
 
@@ -998,6 +1139,8 @@ for i in range(4):
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 47</span> — Nombre premier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-47 }
+
+<span class="duree">≈ 20 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `est_premier(n)` qui renvoie `True` si `n` est un nombre premier (divisible seulement par $1$ et par lui-même), et `False` sinon.
 
@@ -1032,6 +1175,8 @@ for i in range(4):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 48</span> — Fizz <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-48 }
 
+<span class="duree">≈ 10 min</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Afficher les entiers de $1$ à $30$, mais remplacer par le mot « Fizz » ceux qui sont des multiples de $3$.
 
 ??? pouce "Coup de pouce"
@@ -1049,6 +1194,8 @@ for i in range(4):
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 49</span> — L’ordinateur devine <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-49 }
+
+<span class="duree">≈ 30 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Cette fois, c’est **l’utilisateur** qui pense à un nombre entre $1$ et $100$, et l’ordinateur qui cherche. Il propose toujours le milieu de l’intervalle encore possible (variables `bas` et `haut`) ; l’utilisateur répond `+` (c’est plus grand), `-` (c’est plus petit) ou `=` (trouvé), et il resserre l’intervalle. Afficher à la fin le nombre d’essais. Combien lui en faut-il au maximum ?
 
@@ -1088,6 +1235,8 @@ for i in range(4):
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 50</span> — Moyenne d’une série de notes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-50 }
 
+<span class="duree">≈ 20 min</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  L’utilisateur saisit des notes une par une ; il tape $-1$ pour terminer. Afficher alors la moyenne des notes saisies.
 
 ??? pouce "Coup de pouce"
@@ -1121,6 +1270,8 @@ for i in range(4):
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 51</span> — Le PGCD <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-51 }
 
+<span class="duree">≈ 15 min</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `pgcd(a, b)` qui renvoie le plus grand diviseur commun de deux entiers, par la méthode des soustractions successives : tant que les deux nombres sont différents, on remplace le plus grand par sa différence avec le plus petit. Tester avec `pgcd(24, 36)` (attendu : $12$).
 
 ??? pouce "Coup de pouce"
@@ -1152,6 +1303,8 @@ for i in range(4):
 ### Critiquer une réponse d’IA
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 52</span> — Une puissance calculée par un assistant <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-01-52 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Un élève a demandé à un assistant d’IA : « Écris une fonction `puissance(x, n)` qui renvoie `x` multiplié `n` fois par lui-même, avec une boucle `for` et sans utiliser l’opérateur `**`. » Voici la réponse obtenue :
 
@@ -1191,5 +1344,3 @@ print(puissance(2, 3))   # affiche 8
     ```
 
     **3.** Exécuter la fonction sur **un petit exemple dont on connaît le résultat** ($2 \times 2 \times 2 = 8$) : le commentaire `# affiche 8` n’est qu’une affirmation de l’assistant ; seule la console fait foi.
-
-\newgeometry{inner=1.8cm,outer=1.6cm,top=2.2cm,bottom=1.9cm,headheight=16pt,headsep=0.5cm,footskip=0.9cm}

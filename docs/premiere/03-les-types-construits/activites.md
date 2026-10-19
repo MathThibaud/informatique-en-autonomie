@@ -108,7 +108,7 @@ En Python, une variable est plutôt une **étiquette** (un post-it) collée sur 
     `[’brioche’, ’lait’, ’pommes’]`. Beaucoup d’élèves prédisent `[’pain’, ’lait’, ’pommes’]`, car ils pensent que `papa = maman` « copie » la liste : c’est exactement la confusion que l’activité doit faire apparaître.  
     **10.** Il faut **photocopier** (ou recopier) la feuille et coller l’étiquette `papa` sur la copie : deux feuilles, une flèche chacune. En Python, on fabriquera cette copie avec une compréhension (que l’on verra dans le cours) : `papa = [x for x in maman]` ; Maman garde alors `[’pain’, ’lait’, ’pommes’]`.
 
-    ![](../figures/15712a2c4b0d31d1.svg){ .tikz loading=lazy }
+    ![](../figures/901f9198d4d3087c.svg){ .tikz loading=lazy }
 
 ### <span class="exo-num">Exercice 4</span> — Mettre des mots <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-les-types-construits-act-1-4 }
 

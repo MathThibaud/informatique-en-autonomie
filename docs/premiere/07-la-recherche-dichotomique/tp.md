@@ -277,7 +277,7 @@ Chaque fonction renvoie un **couple** : le numéro trouvé (ou `None` si le nom 
 
     - **4.**  $\log_2(8 \times 10^9) \approx 32{,}9$ : au plus **33** comparaisons ; jusqu’à **8 milliards** en séquentiel.
 
-    ![](../figures/44331b028bfbb959.svg){ .tikz loading=lazy }
+    ![](../figures/7ca9df2b1e120d0d.svg){ .tikz loading=lazy }
 
     *L’axe vertical commence à 8 : la courbe mesurée suit $\log_2 n$ à une unité près.*
 

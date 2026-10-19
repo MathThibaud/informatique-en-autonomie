@@ -20,7 +20,11 @@
 
 1.  Combien de valeurs différentes peut-on coder sur `4` bits ? sur `8` bits ? sur `n` bits ?
 
-2.  Quel est le plus grand entier positif codable sur un octet (8 bits) ?
+2.  Quel est le plus grand entier positif codable sur un octet (8 bits) ?0
+
+    ??? pouce "Coup de pouce"
+
+        Énumérer à la main les valeurs possibles sur 1 bit, puis sur 2 bits, puis sur 3 bits : que devient leur nombre chaque fois qu’on ajoute un bit ? Pour la question 2, attention : la première valeur est $0$.
 
 ??? corrige "Corrigé"
 
@@ -28,11 +32,19 @@
 
         Les conversions à la main sont détaillées ; on peut toujours les vérifier avec `bin`, `hex` et `int`.
 
-    **1.** Sur `4` bits : $2^4 = 16$ valeurs ; sur `8` bits : $2^8 = 256$ ; sur `n` bits : $2^n$. **2.** Le plus grand entier sur un octet est $2^8 - 1 = 255$ (soit `11111111`).
+    Chaque bit ajouté double le nombre de possibilités (2 sur 1 bit, 4 sur 2 bits, 8 sur 3 bits…). **1.** Sur `4` bits : $2^4 = 16$ valeurs ; sur `8` bits : $2^8 = 256$ ; sur `n` bits : $2^n$. **2.** Le plus grand entier sur un octet est $2^8 - 1 = 255$ (soit `11111111`).
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> répondre $256$ : il y a bien 256 valeurs, mais elles vont de $0$ à $255$.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Du binaire vers le décimal <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-2 }
 
-\[ à la main \]  Convertir en base 10 : $\texttt{1011}_2$ ; $\texttt{11001}_2$ ; $\texttt{10111001}_2$.
+<span class="essentiel">• essentiel</span>
+
+\[ à la main \]  Convertir en base 10 : $\texttt{1011}_2$ ; $\texttt{11001}_2$ ; $\texttt{10111001}_2$.0
+
+??? pouce "Coup de pouce"
+
+    Écrire au-dessus de chaque bit son poids, en partant de la **droite** : $1$, $2$, $4$, $8$… Puis additionner les poids des bits qui valent `1`.
 
 ??? corrige "Corrigé"
 
@@ -44,23 +56,56 @@
 
     - $\texttt{10111001}_2 = 128 + 32 + 16 + 8 + 1 = 185$.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> attribuer les poids en partant de la gauche : c’est le bit de **droite** qui pèse $1$. Le bit de gauche de `11001` pèse $16$, pas $1$.
+
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Du décimal vers le binaire <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-3 }
 
-\[ à la main \]  Convertir en base 2 (méthode des divisions par 2) : $13$ ; $42$ ; $200$.
+<span class="essentiel">• essentiel</span>
+
+\[ à la main \]  Convertir en base 2 (méthode des divisions par 2) : $13$ ; $42$ ; $200$.0
+
+??? pouce "Coup de pouce"
+
+    Disposer les divisions comme dans l’exemple de $185$ du cours, une ligne par division, jusqu’à un quotient nul. Dans quel sens lire ensuite la colonne des restes ?
 
 ??? corrige "Corrigé"
 
-    Divisions successives par 2, restes lus de bas en haut :
+    Divisions successives par 2 jusqu’à un quotient nul, restes lus **de bas en haut** : $$\begin{array}{rcl}
+    13 &=& 2 \times 6 + \mathbf{1}\\
+     6 &=& 2 \times 3 + \mathbf{0}\\
+     3 &=& 2 \times 1 + \mathbf{1}\\
+     1 &=& 2 \times 0 + \mathbf{1}
+    \end{array}
+    \qquad
+    \begin{array}{rcl}
+    42 &=& 2 \times 21 + \mathbf{0}\\
+    21 &=& 2 \times 10 + \mathbf{1}\\
+    10 &=& 2 \times\phantom{0}5 + \mathbf{0}\\
+     5 &=& 2 \times\phantom{0}2 + \mathbf{1}\\
+     2 &=& 2 \times\phantom{0}1 + \mathbf{0}\\
+     1 &=& 2 \times\phantom{0}0 + \mathbf{1}
+    \end{array}
+    \qquad
+    \begin{array}{rcl}
+    200 &=& 2 \times 100 + \mathbf{0}\\
+    100 &=& 2 \times\phantom{0}50 + \mathbf{0}\\
+     50 &=& 2 \times\phantom{0}25 + \mathbf{0}\\
+     25 &=& 2 \times\phantom{0}12 + \mathbf{1}\\
+     12 &=& 2 \times\phantom{00}6 + \mathbf{0}\\
+      6 &=& 2 \times\phantom{00}3 + \mathbf{0}\\
+      3 &=& 2 \times\phantom{00}1 + \mathbf{1}\\
+      1 &=& 2 \times\phantom{00}0 + \mathbf{1}
+    \end{array}$$ D’où $13 = \texttt{1101}_2$, $42 = \texttt{101010}_2$ et $200 = \texttt{11001000}_2$. On peut contrôler en sens inverse : $32 + 8 + 2 = 42$ et $128 + 64 + 8 = 200$.
 
-    - $13 = \texttt{1101}_2$ ($13,6,3,1 \to$ restes $1,0,1,1$) ;
-
-    - $42 = \texttt{101010}_2$ ;
-
-    - $200 = \texttt{11001000}_2$.
+    <span class="erreurfreq">▷ Erreur fréquente.</span> lire les restes de haut en bas : on obtient l’écriture à l’envers ($13$ donnerait `1011`, qui vaut $11$). Le premier reste obtenu est le bit de poids faible, écrit à droite.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Vérifier à la machine <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-4 }
 
-\[ sur machine \]  Vérifier les réponses des exercices 2 et 3 en console.
+\[ sur machine \]  Vérifier les réponses des exercices 2 et 3 en console.0
+
+??? pouce "Coup de pouce"
+
+    Le préfixe `0b` affiché par `bin` signale simplement une écriture binaire ; le second argument de `int` indique la base dans laquelle la chaîne est écrite.
 
 ```text
 >>> bin(200)
@@ -68,6 +113,8 @@
 ```
 
 ??? corrige "Corrigé"
+
+    `bin` donne l’écriture binaire (précédée de `0b`) ; `int(..., 2)` lit une chaîne écrite en base 2 :
 
     ```text
     >>> bin(200)
@@ -159,13 +206,19 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 7</span> — Évaluer des opérateurs booléens <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-7 }
 
+<span class="essentiel">• essentiel</span>
+
 \[ à la main \] 
 
 1.  On prend $a = 1$ et $b = 0$. Donner la valeur de : non $a$ ; $a$ et $b$ ; $a$ ou $b$ ; $a$ xor $b$ ; non$(a$ ou $b)$.
 
 2.  Même question avec $a = 1$ et $b = 1$.
 
-3.  \[ sur machine \]  Vérifier en console, en écrivant `True` pour `1`, `False` pour `0` et `a != b` pour $a$ xor $b$ :
+3.  \[ sur machine \]  Vérifier en console, en écrivant `True` pour `1`, `False` pour `0` et `a != b` pour $a$ xor $b$ :0
+
+    ??? pouce "Coup de pouce"
+
+        Relire la table de vérité de chaque opérateur dans le cours. Pour non$(a$ ou $b)$, calculer d’abord la parenthèse. Le xor vaut `1` quand les deux bits sont différents.
 
     ```text
     >>> not True
@@ -197,6 +250,8 @@
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Dresser la table d’une expression <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-8 }
+
+<span class="essentiel">• essentiel</span>
 
 \[ à la main \] 
 
@@ -235,6 +290,8 @@
     \texttt{1} & \texttt{1} & \texttt{1} & \texttt{1} & \texttt{1} \\
     \hline
     \end{array}$$ L’expression vaut `1` pour **5** lignes sur 8 : les quatre où $c = 1$, plus la ligne $a = b = 1$, $c = 0$.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> oublier des combinaisons : avec 3 variables, il faut $2^3 = 8$ lignes. Les énumérer en comptant en binaire (`000`, `001`… `111`) garantit de n’en oublier aucune.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Le demi-additionneur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-9 }
 
@@ -278,6 +335,8 @@
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Binaire et hexadécimal <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-10 }
 
+<span class="essentiel">• essentiel</span>
+
 \[ à la main \]  En regroupant les bits par paquets de 4 : convertir $\texttt{11011010}_2$ en hexadécimal, et $\texttt{3F}_{16}$ en binaire.0
 
 ??? pouce "Coup de pouce"
@@ -287,6 +346,8 @@
 ??? corrige "Corrigé"
 
     On regroupe par 4 bits : $$\texttt{11011010}_2 = \underbrace{\texttt{1101}}_{\texttt{D}}\,\underbrace{\texttt{1010}}_{\texttt{A}} = \texttt{DA}_{16}, \qquad \texttt{3F}_{16} = \underbrace{\texttt{0011}}_{\texttt{3}}\,\underbrace{\texttt{1111}}_{\texttt{F}} = \texttt{00111111}_2.$$
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> faire les paquets en partant de la gauche quand le nombre de bits n’est pas un multiple de 4 : `1111001` se découpe en `(0)111 1001`, soit `79`, et non `1111 001`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Décimal et hexadécimal <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-11 }
 
@@ -298,8 +359,20 @@
 
 ??? corrige "Corrigé"
 
-    $255 = \texttt{FF}_{16}$ ; $3000 = \texttt{BB8}_{16}$ (car $3000 = 11{\cdot}256 + 11{\cdot}16 + 8$).  
-    $\texttt{2A}_{16} = 2{\cdot}16 + 10 = 42$ ; $\texttt{FF}_{16} = 15{\cdot}16 + 15 = 255$.
+    Du décimal vers l’hexadécimal : divisions successives par 16, restes lus de bas en haut (un reste de 10 à 15 s’écrit `A` à `F`). $$\begin{array}{rcl}
+    255 &=& 16 \times 15 + \mathbf{15}\ (\texttt{F})\\
+     15 &=& 16 \times\phantom{0}0 + \mathbf{15}\ (\texttt{F})
+    \end{array}
+    \qquad\qquad
+    \begin{array}{rcl}
+    3000 &=& 16 \times 187 + \mathbf{8}\\
+     187 &=& 16 \times\phantom{0}11 + \mathbf{11}\ (\texttt{B})\\
+      11 &=& 16 \times\phantom{00}0 + \mathbf{11}\ (\texttt{B})
+    \end{array}$$ D’où $255 = \texttt{FF}_{16}$ et $3000 = \texttt{BB8}_{16}$ (contrôle : $11{\cdot}256 + 11{\cdot}16 + 8 = 2816 + 176 + 8 = 3000$).
+
+    De l’hexadécimal vers le décimal, on additionne les chiffres multipliés par leur poids : $\texttt{2A}_{16} = 2{\cdot}16 + 10 = 42$ ; $\texttt{FF}_{16} = 15{\cdot}16 + 15 = 255$.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> recopier un reste à deux chiffres tel quel : $3000$ n’est pas « `11118` ». Chaque reste, de $0$ à $15$, donne **un seul** chiffre hexadécimal : $11$ s’écrit `B`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Une couleur du Web <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-12 }
 
@@ -319,6 +392,8 @@
 
 ??? corrige "Corrigé"
 
+    On découpe `FF8000` en trois octets, `FF`, `80` et `00` (rouge, vert, bleu), et l’on convertit chacun en décimal : $\texttt{80}_{16} = 8 \times 16 = 128$.
+
     ```text
     >>> int("FF", 16)
     255
@@ -331,6 +406,8 @@
     Rouge à fond (`255`), vert à moitié (`128`), pas de bleu : on obtient un **orange**.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Changer de base <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-13 }
+
+<span class="duree">≈ 20 min</span>
 
 \[ sur machine \]  Écrire une fonction `decimal_vers_base(n, b)` qui renvoie, sous forme de chaîne, l’écriture d’un entier `n` $\geqslant 0$ en base `b`, pour $2 \leqslant b \leqslant 16$. Les chiffres utilisés sont ceux de la chaîne `"0123456789ABCDEF"`.0
 
@@ -386,6 +463,8 @@ Vérifier les résultats avec `hex`, `bin` et `int("144", 8)`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Coder et décoder <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-14 }
 
+<span class="essentiel">• essentiel</span>
+
 \[ à la main \] 
 
 1.  Donner la représentation de $-20$ sur `8` bits (complément à deux).
@@ -401,6 +480,8 @@ Vérifier les résultats avec `hex`, `bin` et `int("144", 8)`.
     **1.** Coder $-20$ sur 8 bits : $20 = \texttt{00010100}$ ; on inverse : `11101011` ; on ajoute 1 : `11101100`. Donc $-20 = \texttt{11101100}$.
 
     **2.** `11111011` commence par `1` : c’est un **négatif**. Pour trouver sa valeur, on inverse (`00000100`) et on ajoute 1 (`00000101` $= 5$) : la valeur est donc $-5$.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> inverser $20$ écrit sans les zéros de gauche (`10100`) : il faut d’abord l’écrire sur **8** bits, `00010100`, car ces zéros deviennent des `1` à l’inversion.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Le complément à deux selon un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-02-15 }
 
@@ -423,6 +504,8 @@ Un élève demande à un assistant d’IA : « Comment écrit-on $-5$ sur 8 bits
     **1.** Non. Posons $5 + (-5)$ avec l’écriture proposée : $\texttt{00000101} + \texttt{11111010} = \texttt{11111111}$, et non `00000000` : ce n’est pas l’opposé de $5$. D’ailleurs `11111010` est l’écriture de $-6$ (l’addition avec `00000110` donne bien `1 00000000`, où la retenue déborde des 8 bits). **2.** L’erreur est dans l’étape « inverser tous les bits » : le complément à deux, c’est inverser **puis ajouter 1** ; l’assistant a oublié le $+1$. $5 = \texttt{00000101}$ $\to$ inversion `11111010` $\to$ $+1$ : **`11111011`**. Vérification : $\texttt{00000101} + \texttt{11111011} = \texttt{1\,00000000}$, il reste $0$ sur 8 bits. Le reste de la réponse (signe lu sur le bit de poids fort, bornes $-128$ à $+127$) est juste. **3.** Additionner le nombre et son opposé supposé : on doit trouver $0$ sur 8 bits. Sur machine, on peut aussi utiliser le fait que, sur $n$ bits, $-x$ se code comme l’entier positif $2^n - x$ : `bin(256 - 5)` affiche `’0b11111011’`, ce qui contredit `11111010`.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 16</span> — Débordement <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-16 }
+
+<span class="duree">≈ 10 min</span>
 
 \[ à la main \]  \[ sur machine \] 
 
@@ -447,6 +530,8 @@ Un élève demande à un assistant d’IA : « Comment écrit-on $-5$ sur 8 bits
     **2.** `2 ** 64` vaut `18446744073709551616` : Python le calcule car ses entiers sont de **taille arbitraire** (ils grandissent avec la mémoire). Sur « 64 bits fixes » (comme dans le matériel ou d’autres langages), cette valeur **dépasse** le plus grand entier codable : elle « déborde ».
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 17</span> — Le cas étrange de $-128$ <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-17 }
+
+<span class="duree">≈ 15 min</span>
 
 \[ à la main \] 
 
@@ -498,9 +583,17 @@ Un élève demande à un assistant d’IA : « Comment écrit-on $-5$ sur 8 bits
 
     **2.** $\texttt{101,101}_2 = 4 + 1 + \tfrac{1}{2} + \tfrac{1}{8} = 5{,}625$.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> lire les chiffres après la virgule de bas en haut, comme les restes de la partie entière : ceux-là se lisent dans l’**ordre** où on les obtient.
+
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 19</span> — La trahison des flottants <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-19 }
 
-\[ sur machine \]  En console, taper `0.1 + 0.2`, puis `0.1 + 0.2 == 0.3`. Expliquer en une phrase ce que l’on observe. Proposer une manière **correcte** de tester si deux flottants sont « égaux ».
+<span class="essentiel">• essentiel</span>
+
+\[ sur machine \]  En console, taper `0.1 + 0.2`, puis `0.1 + 0.2 == 0.3`. Expliquer en une phrase ce que l’on observe. Proposer une manière **correcte** de tester si deux flottants sont « égaux ».0
+
+??? pouce "Coup de pouce"
+
+    Les nombres `0.1` et `0.2` ont-ils une écriture binaire finie ? Plutôt que l’égalité exacte, regarder si l’écart entre les deux nombres est très petit (la fonction `abs` donne la valeur absolue).
 
 ??? corrige "Corrigé"
 
@@ -548,7 +641,11 @@ Quel résultat obtient-on ? Est-il exactement égal à `1.0` ? Relier cette obse
 
 2.  Quel caractère a pour code $90 - 25 = 65$ ? Quel caractère a pour code $57$ ?
 
-3.  Écrire le code du caractère `A` ($65$) en binaire sur 7 bits.
+3.  Écrire le code du caractère `A` ($65$) en binaire sur 7 bits.0
+
+    ??? pouce "Coup de pouce"
+
+        Les lettres majuscules ont des codes consécutifs : `B` suit `A`, et ainsi de suite ; de même pour les chiffres à partir de `0`${=}48$. Pour la question 3, décomposer $65$ en puissances de 2.
 
 ??? corrige "Corrigé"
 
@@ -560,7 +657,11 @@ Quel résultat obtient-on ? Est-il exactement égal à `1.0` ? Relier cette obse
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 22</span> — `ord` et `chr` <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-22 }
 
-\[ sur machine \]  En console, prévoir *puis vérifier* :
+\[ sur machine \]  En console, prévoir *puis vérifier* :0
+
+??? pouce "Coup de pouce"
+
+    `ord` donne le code d’un caractère, `chr` le caractère d’un code. Retrouver les codes à partir de `A`${=}65$ et `a`${=}97$ (exercice précédent).
 
 ```python
 ord("H")
@@ -570,6 +671,8 @@ ord("i") - ord("H")
 ```
 
 ??? corrige "Corrigé"
+
+    `H` est la 8<sup>e</sup> lettre : $65 + 7 = 72$ ; `i` vaut $97 + 8 = 105$ ; ajouter $32$ au code d’une majuscule donne sa minuscule.
 
     ```text
     >>> ord("H")
@@ -583,6 +686,8 @@ ord("i") - ord("H")
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Caractères et octets <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-23 }
+
+<span class="essentiel">• essentiel</span>
 
 \[ sur machine \]  Soit le mot `"élève"`.
 
@@ -643,3 +748,58 @@ ord("i") - ord("H")
 
     afficher_codes("Hi")   # affiche  H 72  puis  i 105
     ```
+
+### Entraînement
+
+*Exercices courts pour s’entraîner aux gestes de base, chacun avec plusieurs données. Ils font tous partie du parcours essentiel.*
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 26</span> — Décimal, binaire, hexadécimal <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-26 }
+
+<span class="essentiel">• essentiel</span>
+
+\[ à la main \]  Recopier et compléter le tableau : sur chaque ligne, une seule écriture est donnée ; trouver les deux autres (le binaire sur 8 bits). Pour passer du décimal à l’hexadécimal, faire les divisions successives par $16$.0
+
+??? pouce "Coup de pouce"
+
+    Le binaire sert de relais : un chiffre hexadécimal correspond à un paquet de 4 bits. Du décimal vers l’hexadécimal : diviser par 16 et lire les restes de bas en haut (un reste de 11 s’écrit `B`).
+
+|     | décimal | binaire (8 bits) | hexadécimal |
+|:---:|:-------:|:----------------:|:-----------:|
+| a\) |  $75$   |                  |             |
+| b\) |         |    `10110110`    |             |
+| c\) |         |                  |    `C8`     |
+| d\) |         |                  |    `3D`     |
+
+\[ sur machine \]  Vérifier avec `bin`, `hex` et `int("...", 16)`.
+
+??? corrige "Corrigé"
+
+    a) $75 = 16 \times 4 + 11$ et $4 = 16 \times 0 + 4$ : $75 = \texttt{4B}_{16} = \texttt{0100\,1011}_2$. b) $\texttt{1011\,0110}_2 = \texttt{B6}_{16}$, et $128 + 32 + 16 + 4 + 2 = 182$. c) $\texttt{C8}_{16} = \texttt{1100\,1000}_2$, et $12 \times 16 + 8 = 200$. d) $\texttt{3D}_{16} = \texttt{0011\,1101}_2$, et $3 \times 16 + 13 = 61$.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> oublier les zéros de gauche d’un paquet : `3` s’écrit `0011` sur 4 bits ; sans eux, l’écriture binaire de `3D` serait fausse.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 27</span> — Complément à deux sur 8 bits <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-27 }
+
+<span class="essentiel">• essentiel</span>
+
+\[ à la main \] 
+
+1.  Coder sur 8 bits, en complément à deux : a) $-1$ ; b) $-37$ ; c) $-100$ ; d) $77$.
+
+2.  Décoder ces mots de 8 bits écrits en complément à deux : a) `11111110` ; b) `11100111` ; c) `01011010` ; d) `10000001`.
+
+3.  \[ sur machine \]  Vérifier les codages de la question 1 avec `bin(256 - 37)`, etc.0
+
+    ??? pouce "Coup de pouce"
+
+        Commencer par regarder le signe. Un positif s’écrit directement en binaire sur 8 bits ; pour un négatif, appliquer « inverser, puis ajouter 1 ». Au décodage, le bit de poids fort donne le signe.
+
+??? corrige "Corrigé"
+
+    **1.** a) $1 = \texttt{00000001} \to \texttt{11111110} \to$ `11111111` ; b) $37 = \texttt{00100101} \to \texttt{11011010} \to$ `11011011` ; c) $100 = \texttt{01100100} \to \texttt{10011011} \to$ `10011100` ; d) $77$ est positif : on l’écrit directement, `01001101`.
+
+    **2.** a) bit de poids fort `1` : on inverse (`00000001`), on ajoute 1 (`00000010` $= 2$) : $-2$. b) `00011000` puis `00011001` $= 25$ : $-25$. c) bit de poids fort `0` : positif, $64 + 16 + 8 + 2 = 90$. d) `01111110` puis `01111111` $= 127$ : $-127$.
+
+    **3.** `bin(256 - 1)`, `bin(256 - 37)`, `bin(256 - 100)` affichent `’0b11111111’`, `’0b11011011’`, `’0b10011100’`.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> appliquer « inverser, ajouter 1 » à un nombre positif comme $77$, ou à un mot qui commence par `0` comme `01011010` : la méthode ne concerne que les négatifs.

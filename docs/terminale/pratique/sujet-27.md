@@ -1,10 +1,14 @@
 # Sujet 27 — Calculatrice en notation polonaise inverse
 
+<span id="sujet-27" class="ancre"></span>[$\blacktriangleright$ corrigé](#csujet-27)
+
 !!! fichiers "Fichiers à télécharger"
 
     [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-27-npi){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-27-npi.zip){ .md-button }
 
 ??? corrige "Corrigé"
+
+    <span id="csujet-27" class="ancre"></span>[$\uparrow$ énoncé](#sujet-27)
 
     !!! remarque "Remarque"
 
@@ -308,6 +312,8 @@ Le dossier fourni au candidat comporte les éléments suivants :
 - un code source de départ `npi.py`.
 
 ??? corrige "Corrigé"
+
+    <span id="csujet-27" class="ancre"></span>[$\uparrow$ énoncé](#sujet-27)
 
     !!! remarque "Remarque"
 

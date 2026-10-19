@@ -10,6 +10,8 @@ Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title=
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Le chiffre de César, à la main <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-1 }
 
+<span class="essentiel">• essentiel</span>
+
 1.  Chiffrer le mot `NSI` avec la clé $k=4$.
 
 2.  Le mot `KHOOR` a été chiffré avec la clé $k=3$. Le déchiffrer.
@@ -18,11 +20,17 @@ Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title=
 
 4.  On intercepte le mot chiffré `YLUKLGCVBZ`, obtenu avec une clé de César inconnue. Expliquer la stratégie de l’**attaque par force brute** pour retrouver le message clair (on ne demande pas de tout dérouler).
 
+??? pouce "Coup de pouce"
+
+    Remplacer chaque lettre par son rang, ajouter la clé (la retrancher pour déchiffrer), revenir entre $0$ et $25$ si besoin, puis reconvertir en lettre. Pour la question 4 : sans la clé, combien d’essais faut-il au plus pour être sûr de la trouver ?
+
 ??? corrige "Corrigé"
 
     1.  `N`(13)$\to$<!-- -->17 `R`, `S`(18)$\to$<!-- -->22 `W`, `I`(8)$\to$<!-- -->12 `M` : `NSI` devient **`RWM`**.
 
     2.  On décale de $3$ en arrière : `K`$\to$`H`, `H`$\to$`E`, `O`$\to$`L`, `O`$\to$`L`, `R`$\to$`O` : **`HELLO`**.
+
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Décaler dans le mauvais sens pour déchiffrer : on *retranche* la clé (`K` $\to$ `H`), et l’on ajoute $26$ si le rang devient négatif.
 
     3.  Il y a **26 clés** ($k$ de $0$ à $25$). Un ordinateur les teste *toutes* instantanément : le code est cassé en quelques microsecondes.
 
@@ -46,11 +54,19 @@ def cesar(message, k):
 
 2.  Comment appeler `cesar` pour *déchiffrer* un message chiffré avec la clé `k` ? (Deux façons possibles.)
 
+??? pouce "Coup de pouce"
+
+    Ligne `(a)` : le rang décalé doit rester entre $0$ et $25$ ; quel opérateur Python donne le reste d’une division ? Ligne `(b)` : `chr` fait l’inverse de `ord` ; à quel code faut-il ajouter le nouveau rang ? Pour déchiffrer, on décale dans l’autre sens.
+
 ??? corrige "Corrigé"
+
+    **Démarche :** pour chaque lettre, on calcule son rang, on le décale de `k` en restant entre $0$ et $25$ (reste de la division par $26$), puis on reconvertit le nouveau rang en lettre.
 
     1.  `(a)` `nouveau = (rang + k) % 26` ; `(b)` `resultat + chr(nouveau + ord("A"))`.
 
     2.  Pour déchiffrer : `cesar(message, -k)` ou, de façon équivalente, `cesar(message, 26 - k)`.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Oublier le `% 26` : `cesar("XYZ", 3)` donnerait `[`, `\` et `]`, qui ne sont pas des lettres, au lieu de `ABC`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Le chiffrement affine <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-3 }
 
@@ -60,7 +76,7 @@ Chaque lettre de rang $x$ devient $(a\,x+b)\bmod 26$. La clé est le couple $(a,
 
     ??? pouce "Coup de pouce"
 
-        Essayer $a=2$ : quelles lettres deviennent `A` ? Peut-on encore déchiffrer sans ambiguïté ?
+        Q1 : essayer $a=2$ : quelles lettres deviennent `A` ? Peut-on encore déchiffrer sans ambiguïté ?
 
 2.  Chiffrer `NSI` avec la clé $(a,b)=(3,1)$.
 
@@ -70,13 +86,15 @@ Chaque lettre de rang $x$ devient $(a\,x+b)\bmod 26$. La clé est le couple $(a,
 
     ??? pouce "Coup de pouce"
 
-        Partir de $y=(a\,x+b)\bmod 26$ et isoler $x$ : on ne divise pas par $a$ modulo $26$, on multiplie par son inverse.
+        Q4 : partir de $y=(a\,x+b)\bmod 26$ et isoler $x$ : on ne divise pas par $a$ modulo $26$, on multiplie par son inverse.
 
 ??? corrige "Corrigé"
 
     1.  Si $a$ n’est pas premier avec $26$, la fonction $x\mapsto(ax+b)\bmod 26$ n’est pas une bijection : deux lettres différentes peuvent avoir le même chiffré, le déchiffrement devient impossible. Valeurs possibles : **$1,3,5,7,9,11,15,17,19,21,23,25$**.
 
     2.  `N`(13)$\to 3\times13+1=40\equiv14$ `O` ; `S`(18)$\to 3\times18+1=55\equiv3$ `D` ; `I`(8)$\to 3\times8+1=25$ `Z`. Résultat : **`ODZ`**.
+
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Oublier de réduire modulo $26$ : $3\times 13 + 1 = 40$ ne correspond à aucune lettre ; on retranche $26$ autant de fois que nécessaire ($40 - 26 = 14$, soit `O`).
 
     3.  $3\times 9 = 27 = 26 + 1$, donc $3\times 9\equiv 1\ [26]$ : $9$ est bien l’inverse de $3$.
 
@@ -106,6 +124,8 @@ On chiffre en additionnant, modulo $26$, chaque lettre du message avec la lettre
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Le masque jetable et le XOR <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-5 }
 
+<span class="essentiel">• essentiel</span>
+
 En informatique, le masque jetable combine chaque caractère du message avec la clé par un **OU exclusif** (XOR, noté `^`).
 
 ```python
@@ -125,6 +145,10 @@ def chiffre(message, masque):
 
 4.  Pourquoi, malgré cette perfection théorique, n’utilise-t-on pas le masque jetable partout ?
 
+??? pouce "Coup de pouce"
+
+    Pour la question 1, écrire $3$ et $66$ en binaire sur $8$ bits et appliquer la règle du XOR bit à bit ($1$ si les deux bits sont différents, $0$ sinon). Pour les questions 3 et 4, relire la partie du cours sur le masque jetable.
+
 ??? corrige "Corrigé"
 
     1.  $3\ \texttt{\^{}}\ 66 = 65$ (car $65\ \texttt{\^{}}\ 66 = 3$, et appliquer $\texttt{\^{}}\,66$ de nouveau annule l’opération). Le XOR est son **propre inverse** : $(m\oplus k)\oplus k = m$.
@@ -138,6 +162,8 @@ def chiffre(message, masque):
 ### Chiffrement asymétrique et RSA
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Symétrique ou asymétrique ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-6 }
+
+<span class="essentiel">• essentiel</span>
 
 1.  Expliquer en une phrase la différence entre un chiffrement **symétrique** et un chiffrement **asymétrique**.
 
@@ -159,9 +185,13 @@ def chiffre(message, masque):
 
     3.  Alice chiffre avec la clé **publique de Bob** ; Bob déchiffre avec sa clé **privée**.
 
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Faire chiffrer Alice avec *sa propre* clé publique : seule Alice, qui détient la clé privée correspondante, pourrait déchiffrer, pas Bob. Pour la confidentialité, on chiffre avec la clé publique du **destinataire**.
+
     4.  Pour signer, Alice chiffre avec sa **propre clé privée** : n’importe qui peut vérifier avec la clé publique d’Alice que le message vient bien d’elle.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — RSA à la main — fabriquer les clés (1) <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-7 }
+
+<span class="essentiel">• essentiel</span>
 
 Alice choisit les nombres premiers $p=3$ et $q=11$.
 
@@ -186,6 +216,8 @@ Alice choisit les nombres premiers $p=3$ et $q=11$.
     2.  $\text{PGCD}(3,20)=1$ : $e=3$ convient. **Clé publique : $(3,\,33)$**.
 
     3.  On cherche $d$ tel que $3d\equiv 1\ [20]$ : $3\times 7 = 21 = 20+1$, donc $\mathbf{d=7}$. **Clé privée : $(7,\,33)$**.
+
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Chercher l’inverse de $e$ modulo $n = 33$ : ici, $3$ n’a même pas d’inverse modulo $33$ (car $3$ divise $33$). L’inverse se calcule toujours modulo $\varphi = (p-1)(q-1)$.
 
     4.  $C = 5^{3}\bmod 33 = 125\bmod 33 = 125 - 3\times 33 = \mathbf{26}$.
 
@@ -227,13 +259,13 @@ En Python, on calcule $d$ par `d = pow(e, -1, phi)`.
 
     ??? pouce "Coup de pouce"
 
-        Imaginer $M$ et $e$ de plusieurs centaines de chiffres : combien de chiffres aurait `M ** e` ?
+        Q2 : imaginer $M$ et $e$ de plusieurs centaines de chiffres : combien de chiffres aurait `M ** e` ?
 
 3.  Compléter la fonction de génération de clés :
 
     ??? pouce "Coup de pouce"
 
-        Reprendre les trois premières étapes de RSA du cours : une ligne par étape.
+        Q3 : reprendre les trois premières étapes de RSA du cours : une ligne par étape.
 
     ```python
     def generer_cles(p, q, e):
@@ -259,7 +291,7 @@ Alice et Bob veulent fabriquer une clé secrète commune *en public*. Ils convie
 
     ??? pouce "Coup de pouce"
 
-        Calculer $5^{4}$, puis lui retirer le plus grand multiple de $23$ possible.
+        Q1 : calculer $5^{4}$, puis lui retirer le plus grand multiple de $23$ possible.
 
 2.  Bob choisit en secret $b=3$ et publie $B=g^{b}\bmod p$. Calculer $B$.
 
@@ -269,7 +301,7 @@ Alice et Bob veulent fabriquer une clé secrète commune *en public*. Ils convie
 
     ??? pouce "Coup de pouce"
 
-        Pour calculer le secret, il faut connaître $a$ ou $b$. Quelle opération Ève devrait-elle savoir « inverser » pour les retrouver à partir de $A$ ou $B$ ?
+        Q4 : pour calculer le secret, il faut connaître $a$ ou $b$. Quelle opération Ève devrait-elle savoir « inverser » pour les retrouver à partir de $A$ ou $B$ ?
 
 ??? corrige "Corrigé"
 
@@ -285,6 +317,8 @@ Alice et Bob veulent fabriquer une clé secrète commune *en public*. Ils convie
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 11</span> — Le petit cadenas du navigateur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-11 }
 
+<span class="essentiel">• essentiel</span>
+
 1.  HTTPS combine un chiffrement **asymétrique** et un chiffrement **symétrique**. Lequel sert à *échanger la clé*, lequel sert à chiffrer *les données* ? Pourquoi ce partage des rôles ?
 
 2.  Remettre dans l’ordre les étapes de la poignée de main (*handshake*) TLS :
@@ -299,6 +333,10 @@ Alice et Bob veulent fabriquer une clé secrète commune *en public*. Ils convie
 
 3.  À quoi sert le **certificat** ? Que risquerait-on sans lui ?
 
+??? pouce "Coup de pouce"
+
+    Question 1 : lequel des deux chiffrements est lent, mais permet d’échanger une clé sans secret partagé au départ ? Question 2 : le client ne peut rien chiffrer tant qu’il n’a pas reçu, et vérifié, la clé publique du serveur. Question 3 : comment le client saurait-il, sans certificat, que la clé publique reçue appartient bien au serveur ?
+
 ??? corrige "Corrigé"
 
     1.  L’**asymétrique** sert à *échanger la clé* de session ; le **symétrique** (AES) chiffre ensuite *les données*. Raison : l’asymétrique résout l’échange de clé mais est lent ; le symétrique est rapide mais suppose une clé partagée — on combine leurs forces.
@@ -309,7 +347,9 @@ Alice et Bob veulent fabriquer une clé secrète commune *en public*. Ils convie
 
 ### Vers le bac
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Type bac — La méthode du masque jetable *(Métropole 2025, jour 2,* `25-NSIJ2ME1`*)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-12 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Type bac — La méthode du masque jetable *(d’après Métropole 2025, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-12 }
+
+<span class="essentiel">• essentiel</span> <span class="duree">≈ 60 min</span>
 
 **Partie A — Le masque jetable.** On attribue à chaque lettre son rang ($0$ à $25$). Pour chiffrer, on additionne le rang de chaque lettre du message avec celui de la lettre correspondante du masque ; si le résultat dépasse $25$, on retranche $26$ (calcul « modulo $26$ »). Exemple : `HELLO` avec le masque `WMCKL` donne `DQNVZ`.
 
@@ -321,12 +361,13 @@ On dispose de la variable `alphabet` (liste des $26$ lettres dans l’ordre) acc
 
     ??? pouce "Coup de pouce"
 
-        On veut l’*indice*, pas l’élément : quelle forme de boucle `for` donne accès aux indices ?
+        Q2 : on veut l’*indice*, pas l’élément : quelle forme de boucle `for` donne accès aux indices ?
 
 2.  Écrire `lettres_vers_indices(chaine)` qui renvoie la liste des indices des lettres. Par exemple `lettres_vers_indices(’HELLO’)` renvoie `[7, 4, 11, 11, 14]`.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
+        Q3 :  
         `def lettres_vers_indices(chaine):`  
         `resultat = []`  
         `for lettre in chaine:`  
@@ -356,13 +397,13 @@ def chiffrement(msg, cle):
 
     ??? pouce "Coup de pouce"
 
-        Comparer les longueurs du message et de la clé, puis relire la première ligne de la fonction.
+        Q5 : comparer les longueurs du message et de la clé, puis relire la première ligne de la fonction.
 
 3.  Déchiffrer le message `GMEDH` avec la clé `FVEIT`. Expliquer la méthode de déchiffrement quand on connaît la clé.
 
     ??? pouce "Coup de pouce"
 
-        On fait l’opération inverse : soustraire au lieu d’additionner. Si le résultat est négatif, comment revenir entre $0$ et $25$ ?
+        Q6 : on fait l’opération inverse : soustraire au lieu d’additionner. Si le résultat est négatif, comment revenir entre $0$ et $25$ ?
 
 4.  Adapter la fonction `chiffrement` pour obtenir une fonction `dechiffrement` (indiquer les lignes à modifier).
 
@@ -378,11 +419,13 @@ def chiffrement(msg, cle):
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 8) : Q1 : 0,5 ; Q2 : 0,75 ; Q3 : 0,75 ; Q4 : 1 ; Q5 : 0,75 ; Q6 : 0,75 ; Q7 : 0,5 ; Q8 : 0,5 ; Q9 : 0,5 ; Q10 : 0,75 ; Q11 : 1,25
+
     **Partie A.**
 
     1.  `L`(11)+`E`(4)$=15$ `P` ; `I`(8)+`Y`(24)$=32\equiv6$ `G` ; `B`(1)+`Q`(16)$=17$ `R` ; `R`(17)+`M`(12)$=29\equiv3$ `D` ; `E`(4)+`T`(19)$=23$ `X`. Résultat : **`PGRDX`**.
 
-    2.
+    2.  **Démarche :** on parcourt les **indices** de la liste (`range(len(L))`) et l’on renvoie le premier indice où se trouve l’élément.
 
         ```python
         def indice(L, element):
@@ -391,7 +434,7 @@ def chiffrement(msg, cle):
                     return i
         ```
 
-    3.
+    3.  **Démarche :** une liste vide que l’on remplit en parcourant la chaîne : à chaque lettre, on ajoute son indice dans `alphabet`.
 
         ```python
         def lettres_vers_indices(chaine):
@@ -413,6 +456,8 @@ def chiffrement(msg, cle):
     5.  L’assertion `len(cle) >= len(msg)` est fausse (`len(’GFTZ’)`$=4 < 6=$`len(’RESEAU’)`) : l’appel **lève une `AssertionError` « impossible »**. Le masque doit être au moins aussi long que le message.
 
     6.  Déchiffrement : on *soustrait* le rang de la clé (et on ajoute $26$ si le résultat est négatif). `G`(6)$-$`F`(5)$=1$ `B` ; `M`(12)$-$`V`(21)$=-9\equiv17$ `R` ; `E`(4)$-$`E`(4)$=0$ `A` ; `D`(3)$-$`I`(8)$=-5\equiv21$ `V` ; `H`(7)$-$`T`(19)$=-12\equiv14$ `O`. Message : **`BRAVO`**.
+
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Oublier d’ajouter $26$ quand la différence est négative : `M`(12)$-$`V`(21)$=-9$ ne correspond à aucune lettre ; $-9+26 = 17$ donne `R`.
 
     7.  Il suffit de remplacer l’addition par une **soustraction** et le test « $\ge 26$, on retranche $26$ » par « $< 0$, on ajoute $26$ » :
 
@@ -441,7 +486,9 @@ def chiffrement(msg, cle):
 
     4.  **HTTPS** utilise un chiffrement **asymétrique** au début pour échanger de façon sûre une **clé symétrique** de session, puis chiffre toutes les données en **symétrique** (AES). On n’utilise pas que l’asymétrique car il est trop **lent** pour de gros volumes.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Type bac — Le chiffrement de Polybe *(Centres étrangers 2026, groupe 1, jour 1,* `26-NSIJ1G11`*)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-13 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Type bac — Le chiffrement de Polybe *(d’après Centres étrangers 2026, groupe 1, jour 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-13 }
+
+<span class="duree">≈ 60 min</span>
 
 Le chiffrement de Polybe range les $26$ lettres et les $10$ chiffres dans une grille $6\times 6$. Chaque caractère est remplacé par le couple (numéro de ligne, numéro de colonne) de sa case. Exemple de grille :
 
@@ -465,7 +512,7 @@ Pour construire une grille, on choisit une **clé** (lettres toutes différentes
 
     ??? pouce "Coup de pouce"
 
-        Écrire d’abord l’ordre d’insertion complet, puis remplir la grille ligne par ligne, $6$ caractères par ligne.
+        Q2 : écrire d’abord l’ordre d’insertion complet, puis remplir la grille ligne par ligne, $6$ caractères par ligne.
 
 2.  Pourquoi ce chiffrement est-il qualifié de **symétrique** ?
 
@@ -489,7 +536,7 @@ def generer_ordre(cle):
 
     ??? pouce "Coup de pouce"
 
-        La variable `indice` avance de $1$ à chaque case : quel caractère de `ordre_insertion` placer en case `(i, j)` ?
+        Q6 : la variable `indice` avance de $1$ à chaque case : quel caractère de `ordre_insertion` placer en case `(i, j)` ?
 
     ```python
     def generer_grille(cle):
@@ -507,6 +554,7 @@ def generer_ordre(cle):
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
+        Q7 :  
         `def generer_dico(cle):`  
         `grille = generer_grille(cle)`  
         `dico = {}`  
@@ -517,6 +565,8 @@ def generer_ordre(cle):
 5.  Alice et Bob changent de clé chaque jour et souhaitent se l’échanger par un chiffrement **asymétrique**. Expliquer la différence entre chiffrement symétrique et asymétrique.
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 8) : Q1 : 0,5 ; Q2 : 0,75 ; Q3 : 0,5 ; Q4 : 0,75 ; Q5 : 0,75 ; Q6 : 1,25 ; Q7 : 2 ; Q8 : 1,5
 
     1.  $(6,2)\to$`C`, $(3,6)\to$`O`, $(3,5)\to$`D`, $(2,2)\to$`E` : le message est **`CODE`**.
 
@@ -568,7 +618,9 @@ def generer_ordre(cle):
 
     8.  Symétrique : *une* clé partagée (ici la grille) ; le problème est de **se l’échanger** en sécurité. Asymétrique : *deux* clés (publique/privée), ce qui permet justement d’échanger la clé symétrique quotidienne sans l’avoir jamais transmise en clair.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 14</span> — Type bac — Transmettre une clé de session *(Métropole 2024, jour 2,* `24-NSIJ2ME1`*)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-14 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 14</span> — Type bac — Transmettre une clé de session *(d’après Métropole 2024, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-14 }
+
+<span class="duree">≈ 15 min</span>
 
 Bob a mis en place une base de données pour gérer sa collection de CD. Cette base est hébergée sur un serveur auquel il accède depuis un client installé sur son ordinateur personnel. Pour sécuriser la connexion, un algorithme de chiffrement **symétrique** est utilisé.
 
@@ -582,7 +634,13 @@ On suppose à présent que Bob possède une clé publique et une clé privée, e
 
 1.  Proposer une solution pour que le serveur envoie la clé $C$ à l’ordinateur de Bob de façon sécurisée, c’est-à-dire pour que **seul Bob** puisse déchiffrer la clé envoyée.
 
+??? pouce "Coup de pouce"
+
+    Relire dans le cours la différence entre les deux familles de chiffrement. Pour la question 3 : des deux clés de Bob, laquelle le serveur connaît-il, et laquelle Bob est-il seul à posséder ?
+
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 2) : Q1 : 0,5 ; Q2 : 0,5 ; Q3 : 1
 
     1.  Un algorithme de chiffrement **symétrique** utilise une **même clé**, partagée par l’émetteur et le destinataire, pour chiffrer et pour déchiffrer (exemple : AES).
 
@@ -590,7 +648,11 @@ On suppose à présent que Bob possède une clé publique et une clé privée, e
 
     3.  Le serveur **chiffre la clé $C$ avec la clé publique de Bob** et envoie le résultat. Seul Bob possède la clé privée associée : lui seul peut déchiffrer et retrouver $C$. Ensuite, client et serveur échangent leurs données chiffrées en symétrique avec $C$ (plus rapide) — c’est le principe de HTTPS.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 15</span> — Type bac — Les mots de passe d’un hôpital *(Polynésie 2024, jour 2,* `24-NSIJ2PO1`*)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-15 }
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Chiffrer $C$ avec une clé *privée* : le serveur ne possède pas celle de Bob, et ce qui est chiffré avec une clé privée se déchiffre avec la clé publique correspondante, connue de tous.
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 15</span> — Type bac — Les mots de passe d’un hôpital *(d’après Polynésie 2024, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-15 }
+
+<span class="duree">≈ 45 min</span>
 
 Pour utiliser les ordinateurs d’un hôpital, tout le personnel doit saisir son identifiant puis son mot de passe. Pour davantage de sécurité, ce dernier doit être fort et changé régulièrement. On appelle « mot de passe fort » une chaîne de caractères composée : d’au minimum $12$ caractères ; d’au moins $2$ majuscules ; d’au moins $2$ chiffres ; d’au moins $2$ symboles parmi `#@!?%<>=€$+-*/&`. Par exemple, un médecin utilise le mot de passe fort `@20!HôPiTaL&24#`.
 
@@ -615,7 +677,7 @@ liste_symboles = '#@!?%<>=€$+-*/&'
 
     ??? pouce "Coup de pouce"
 
-        Ligne 2 : la longueur. Ligne 14 : il suffit qu’*une seule* des trois conditions de comptage échoue pour renvoyer `False`.
+        Q1, ligne 2 : la longueur. Ligne 14 : il suffit qu’*une seule* des trois conditions de comptage échoue pour renvoyer `False`.
 
     ```python
     def mdp_fort(mdp):
@@ -678,7 +740,7 @@ On suppose que les mots présents dans un mot de passe sont entiers et séparés
 
     ??? pouce "Coup de pouce"
 
-        La boucle intérieure doit s’arrêter en fin de chaîne *ou* sur un chiffre ou un symbole : tester `i < len(mot)` en premier.
+        Q3 : la boucle intérieure doit s’arrêter en fin de chaîne *ou* sur un chiffre ou un symbole : tester `i < len(mot)` en premier.
 
     ```python
     def recherche_mot(mdp):
@@ -706,16 +768,19 @@ On suppose que les mots présents dans un mot de passe sont entiers et séparés
 
     ??? pouce "Coup de pouce"
 
-        Réutiliser `mdp_fort` et `recherche_mot`, puis examiner chaque mot trouvé : sa longueur et sa présence dans `dicoFR`.
+        Q4 : réutiliser `mdp_fort` et `recherche_mot`, puis examiner chaque mot trouvé : sa longueur et sa présence dans `dicoFR`.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
+        Q4 :  
         `def mdp_extra_fort(mdp):`  
         `if not mdp_fort(mdp):`  
         `return False`  
         `for mot in recherche_mot(mdp):`
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 6) : Q1 : 1,5 ; Q2 : 1,5 ; Q3 : 1,5 ; Q4 : 1,5
 
     1.  Lignes 2, 10, 12 et 14 :
 
@@ -800,6 +865,8 @@ On suppose que les mots présents dans un mot de passe sont entiers et séparés
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 16</span> — Type bac — Les casiers connectés du lycée *(sujet maison, façon bac)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-16 }
 
+<span class="duree">≈ 60 min</span>
+
 *Cet exercice n’est pas un sujet officiel : il a été écrit au format du bac pour s’entraîner.*
 
 Le lycée installe des casiers connectés. Pour ouvrir son casier, un élève utilise une application sur son téléphone, qui envoie au casier, par radio, un court message texte, par exemple `"OUVRE07"` pour le casier numéro $07$. Comme n’importe qui peut capter ces ondes, le message est chiffré.
@@ -823,7 +890,7 @@ def chiffrer_xor(codes, cle):
 
     ??? pouce "Coup de pouce"
 
-        Pour faire « tourner » un indice sur une clé de longueur $3$, utiliser le reste de la division de `i` par `len(cle)`.
+        Q2 : pour faire « tourner » un indice sur une clé de longueur $3$, utiliser le reste de la division de `i` par `len(cle)`.
 
 2.  Expliquer pourquoi la *même* fonction `chiffrer_xor`, avec la même clé, permet au casier de **déchiffrer**. Ce chiffrement est-il symétrique ou asymétrique ? Justifier.
 
@@ -835,10 +902,11 @@ def chiffrer_xor(codes, cle):
 
     ??? pouce "Coup de pouce"
 
-        Appliquer la question 4 à chaque position : le $i$-ième nombre de la clé s’obtient à partir de `intercepte[i]` et `debut_connu[i]`.
+        Q5 : appliquer la question 4 à chaque position : le $i$-ième nombre de la clé s’obtient à partir de `intercepte[i]` et `debut_connu[i]`.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
+        Q5 :  
         `def retrouver_cle(intercepte, debut_connu, n):`  
         `cle = []`  
         `for i in range(n):`
@@ -855,13 +923,15 @@ def chiffrer_xor(codes, cle):
 
     ??? pouce "Coup de pouce"
 
-        Avec $n=323$, combien de divisions faut-il essayer pour trouver $p$ et $q$ ? Et avec un $n$ de $600$ chiffres ?
+        Q9 : avec $n=323$, combien de divisions faut-il essayer pour trouver $p$ et $q$ ? Et avec un $n$ de $600$ chiffres ?
 
 **Partie C — Le faux casier.**
 
 1.  Ève installe un émetteur qui se fait passer pour le casier et envoie à l’application *sa propre* clé publique. Expliquer ce qu’elle peut alors faire. Quel élément, utilisé par HTTPS lors de la poignée de main TLS, permettrait à l’application de déjouer cette attaque ?
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 8) : Q1 : 0,75 ; Q2 : 0,75 ; Q3 : 0,75 ; Q4 : 1 ; Q5 : 1 ; Q6 : 0,75 ; Q7 : 1 ; Q8 : 0,75 ; Q9 : 0,5 ; Q10 : 0,75
 
     **Partie A.**
 
@@ -934,7 +1004,7 @@ def dechiffrer(C):
     return pow(C, d, n)    # M = C^d mod n
 ```
 
-*« La clé publique est `(e, n)`, la clé privée `(d, n)` ; `pow(e, -1, n)` calcule l’inverse modulaire de `e`, exactement comme dans le cours. »*
+« La clé publique est `(e, n)`, la clé privée `(d, n)` ; `pow(e, -1, n)` calcule l’inverse modulaire de `e`, exactement comme dans le cours. »
 
 1.  La réponse est-elle correcte ? La vérifier à la main (ou en console) avec le message $M = 7$ : calculer $C =$ `chiffrer(7)`, puis `dechiffrer(C)`. Retrouve-t-on $7$ ?
 
@@ -965,7 +1035,7 @@ def dechiffrer(C):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-18 }
 
-Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
+Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans lire ses notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 
 1.  Expliquer à un camarade de Première la différence entre chiffrement **symétrique** et chiffrement **asymétrique**.
 
@@ -973,7 +1043,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
 3.  Expliquer pourquoi **RSA** est considéré comme sûr alors que la clé publique est connue de tous.
 
-**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus, puis retourner la feuille. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire de notes** : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
+**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus : comme au Grand Oral, ces notes servent d’aide-mémoire. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire ses notes** et sans rien écrire : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
 
 ??? pouce "Coup de pouce"
 

@@ -20,7 +20,11 @@ Répondre par une phrase.
 
 2.  Dans le $k$-NN, que représentent les **descripteurs** d’un individu ? son **étiquette** ?
 
-3.  Résumer la méthode des $k$ plus proches voisins en une phrase.
+3.  Résumer la méthode des $k$ plus proches voisins en une phrase.0
+
+    ??? pouce "Coup de pouce"
+
+        « Supervisée » : la machine apprend à partir d’exemples dont on connaît déjà la bonne réponse. Pour c), trois verbes suffisent : mesurer, garder, voter.
 
 ??? corrige "Corrigé"
 
@@ -32,17 +36,27 @@ Répondre par une phrase.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Calculer des distances <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-12-2 }
 
+<span class="essentiel">• essentiel</span>
+
 1.  Distance euclidienne entre $A=(3 ; 4)$ et $B=(0 ; 0)$.
 
 2.  Distance entre $A=(1 ; 2 ; 2)$ et $B=(4 ; 2 ; 6)$ (trois descripteurs).
 
-3.  Entre $A=(4.7 ; 1.4)$ et $B=(4.5 ; 1.5)$, donner la distance **au carré**, puis la distance.
+3.  Entre $A=(4.7 ; 1.4)$ et $B=(4.5 ; 1.5)$, donner la distance **au carré**, puis la distance.0
+
+    ??? pouce "Coup de pouce"
+
+        Pour chaque descripteur, calculer l’écart, puis son carré ; additionner ces carrés : c’est la distance au carré. La distance est sa racine carrée.
 
 ??? corrige "Corrigé"
 
-    **a)** $\sqrt{3^2+4^2}=\sqrt{25}=\textbf{5}$. **b)** $\sqrt{3^2+0^2+4^2}=\sqrt{25}=\textbf{5}$. **c)** $d^2=0.2^2+0.1^2=0.04+0.01=\textbf{0.05}$ ; $d=\sqrt{0.05}\approx\textbf{0.22}$.
+    On élève au carré l’écart sur chaque descripteur, on additionne (c’est $d^2$), puis on prend la racine. **a)** $\sqrt{3^2+4^2}=\sqrt{25}=\textbf{5}$. **b)** $\sqrt{3^2+0^2+4^2}=\sqrt{25}=\textbf{5}$. **c)** $d^2=0.2^2+0.1^2=0.04+0.01=\textbf{0.05}$ ; $d=\sqrt{0.05}\approx\textbf{0.22}$.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> additionner les écarts avant de les élever au carré : $(3 + 4)^2 = 49$, et non $3^2 + 4^2 = 25$.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Qui gagne le vote ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-12-3 }
+
+<span class="essentiel">• essentiel</span>
 
 On a déjà calculé la distance au carré entre un fruit inconnu $x$ et six fruits étiquetés.
 
@@ -53,13 +67,21 @@ On a déjà calculé la distance au carré entre un fruit inconnu $x$ et six fru
 
 1.  Ranger les six fruits du plus proche au plus lointain de $x$.
 
-2.  Quelle étiquette prédit le $1$-NN ? le $3$-NN ? le $5$-NN ?
+2.  Quelle étiquette prédit le $1$-NN ? le $3$-NN ? le $5$-NN ?0
+
+    ??? pouce "Coup de pouce"
+
+        Il suffit de comparer les $d^2$ : ranger les fruits par $d^2$ croissant, puis, pour chaque valeur de $k$, compter les étiquettes parmi les $k$ premiers seulement.
 
 ??? corrige "Corrigé"
 
     **a)** Fruit 3 ($d^2=1$, poire), 1 (2, pomme), 5 (3, pomme), 4 (5, pomme), 2 (9, poire), 6 (12, poire). **b)** $1$-NN : **poire**. $3$-NN : poire, pomme, pomme $\to$ **pomme**. $5$-NN : 3 pommes contre 2 poires $\to$ **pomme**. La prédiction peut changer avec $k$.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> voter avec les $k$ premiers fruits du tableau (fruits 1, 2, 3 pour $k = 3$) : il faut d’abord ranger par distance, puis garder les $k$ plus *proches*.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Dérouler le $k$-NN à la main (iris) <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-12-4 }
+
+<span class="essentiel">• essentiel</span>
 
 On dispose des exemples suivants (longueur ; largeur de pétale $\to$ espèce) :
 
@@ -99,6 +121,8 @@ On veut classer la fleur $x = (4.7 ; 1.4)$.
 
     **b)** $1$-NN : le plus proche est une *versicolor* $\to$ **versicolor**. **c)** $3$-NN : deux versicolor (0.05 ; 0.05) et une virginica (1.13) $\to$ **versicolor**.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> calculer les racines carrées pour comparer : c’est inutile, les distances au carré sont rangées dans le même ordre que les distances.
+
 ### Programmer le $k$-NN
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  Les briques de base <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-5 }
@@ -114,6 +138,8 @@ On veut classer la fleur $x = (4.7 ; 1.4)$.
         `distance2` : un accumulateur et une boucle sur les indices. `vote` : compter d’abord chaque étiquette dans un dictionnaire, puis chercher l’étiquette de compte maximal (invariant du champion).
 
 ??? corrige "Corrigé"
+
+    `distance2` : un accumulateur et une boucle sur les indices des descripteurs. `vote` : un dictionnaire d’occurrences, puis une recherche du champion (l’étiquette de plus grand compte).
 
     ```python
     def distance2(a, b):
@@ -153,7 +179,11 @@ def plus_proche(exemples, x):
 
 2.  Que contient la liste `dists` après le tri ? Que désigne `dists[0][1]` ?
 
-3.  Tester avec les six iris de l’exercice 4 et `x = [4.7, 1.4]` : on doit obtenir `’versicolor’`.
+3.  Tester avec les six iris de l’exercice 4 et `x = [4.7, 1.4]` : on doit obtenir `’versicolor’`.0
+
+    ??? pouce "Coup de pouce"
+
+        Chaque couple rangé dans `dists` est `(distance, etiquette)`. Sur quel élément du couple faut-il trier ? Après le tri, où se trouve le plus proche ?
 
 ??? corrige "Corrigé"
 
@@ -169,6 +199,8 @@ def plus_proche(exemples, x):
     ```
 
     **b)** Après le tri, `dists` contient les couples `(distance au carré, etiquette)` rangés par distance **croissante**. `dists[0]` est le couple le plus proche ; `dists[0][1]` est donc l’étiquette du plus proche voisin. **c)** `plus_proche(iris, [4.7, 1.4])` renvoie `’versicolor’` (distance au carré $0.05$).
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> renvoyer `dists[0][0]` : c’est la *distance* du plus proche voisin, pas son étiquette, qui est le second élément du couple.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  Classer <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-7 }
 
@@ -193,6 +225,8 @@ Tester sur la table des iris de l’exercice 4 avec `x = [4.7, 1.4]` et $k=3$.
 
 ??? corrige "Corrigé"
 
+    On range les couples `(distance, etiquette)`, on les trie par distance, on garde les étiquettes des $k$ premiers, puis on vote avec la fonction `vote`.
+
     ```python
     def k_plus_proches(exemples, x, k):
         dists = []
@@ -213,6 +247,8 @@ Tester sur la table des iris de l’exercice 4 avec `x = [4.7, 1.4]` et $k=3$.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — L’effet de $k$ <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-12-8 }
 
+<span class="essentiel">• essentiel</span>
+
 1.  Pourquoi $k=1$ est-il très sensible à un exemple **aberrant** (mal étiqueté) ?
 
 2.  Que prédit le $k$-NN si l’on prend $k$ égal au **nombre total** d’exemples ? Le résultat dépend-il encore de $x$ ?
@@ -227,7 +263,11 @@ Tester sur la table des iris de l’exercice 4 avec `x = [4.7, 1.4]` et $k=3$.
 
     **a)** Avec $k=1$, la prédiction **copie** le seul voisin le plus proche : si c’est un exemple mal étiqueté, la réponse est fausse. **b)** Si $k=$ nombre total d’exemples, tous votent : on renvoie **toujours** la classe globalement majoritaire, *sans plus dépendre* de $x$. **c)** Un $k$ **impair** évite les **égalités** de vote entre les deux classes.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> croire qu’un $k$ impair évite toute égalité : avec *trois* classes ou plus, un vote à 3 voisins peut donner une voix à chacune.
+
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 9</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  Départager une égalité <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-9 }
+
+<span class="duree">≈ 30 min</span>
 
 Le vote peut aboutir à une **égalité**. Une règle courante : en cas d’égalité, on **retire le voisin le plus lointain** et on revote, jusqu’à ce qu’une seule classe arrive en tête.
 
@@ -301,7 +341,11 @@ Une base contient $10\,000$ exemples, chacun décrit par $196$ pixels.
 
 1.  Pour classer **une** image, à combien d’exemples doit-on calculer la distance ?
 
-2.  Pourquoi dit-on que le $k$-NN est un algorithme « paresseux » ? Quel est le coût par prédiction (linéaire, quadratique…) en le nombre d’exemples ?
+2.  Pourquoi dit-on que le $k$-NN est un algorithme « paresseux » ? Quel est le coût par prédiction (linéaire, quadratique…) en le nombre d’exemples ?0
+
+    ??? pouce "Coup de pouce"
+
+        Relire l’algorithme : avant de pouvoir voter, de quels exemples faut-il connaître la distance ? Le $k$-NN prépare-t-il quelque chose avant qu’on lui demande de classer ?
 
 ??? corrige "Corrigé"
 
@@ -372,6 +416,8 @@ L=\begin{smallmatrix}1&0&0\\1&0&0\\1&1&1\end{smallmatrix}\quad(\text{« L »})$$
 ### Mini-problème de synthèse
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Évaluer la qualité <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-14 }
+
+<span class="duree">≈ 20 min</span>
 
 On dispose d’exemples **d’entraînement** (étiquetés) et d’exemples **de test** (étiquetés eux aussi, mais on *cache* l’étiquette pour évaluer).
 
@@ -466,3 +512,41 @@ def classer(exemples, x, k):
     ```
 
     Avec cette correction, l’appel renvoie `’versicolor’`. **c)** Afficher `dists` après le tri (les distances ne sont pas dans l’ordre croissant, cela saute aux yeux), ou tester sur l’exemple du cours dont on connaît la réponse.
+
+### Entraînement
+
+*Exercices courts pour s’entraîner aux gestes de base, chacun avec plusieurs données. Ils font tous partie du parcours essentiel.*
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 16</span> — Distances au carré <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-12-16 }
+
+<span class="essentiel">• essentiel</span>
+
+Calculer la distance au carré $d^2$ entre $A$ et $B$, puis la distance $d$ (valeur approchée si besoin) : a) $A = (2 ; 5)$, $B = (6 ; 2)$ ; b) $A = (0 ; 3)$, $B = (2 ; 0)$ ; c) $A = (1 ; 2 ; 3)$, $B = (3 ; 1 ; 0)$ ; d) $A = (1.5 ; 0.4)$, $B = (1.2 ; 0.2)$.
+
+??? pouce "Coup de pouce"
+
+    Un écart par descripteur, que l’on élève au carré ; on additionne. L’ordre ne compte pas : $(2 - 6)^2 = (6 - 2)^2$.
+
+??? corrige "Corrigé"
+
+    a) $4^2 + 3^2 = 25$, $d = 5$. b) $2^2 + 3^2 = 13$, $d = \sqrt{13} \approx 3{,}6$. c) $2^2 + 1^2 + 3^2 = 14$, $d = \sqrt{14} \approx 3{,}7$. d) $0{,}3^2 + 0{,}2^2 = 0{,}09 + 0{,}04 = 0{,}13$, $d \approx 0{,}36$.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 17</span> — Le vote des $k$ plus proches voisins <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-12-17 }
+
+<span class="essentiel">• essentiel</span>
+
+On donne la distance au carré entre un individu inconnu $x$ et des exemples étiquetés. Pour chaque série, donner la prédiction du $k$-NN pour $k = 1$, $k = 3$ et $k = 5$.
+
+1.  $d^2$ : 4 (rouge), 1 (bleu), 9 (rouge), 2 (rouge), 6 (bleu) ;
+
+2.  $d^2$ : 3 (chat), 7 (chien), 1 (chien), 5 (chat), 2 (chat), 8 (chien). Que se passe-t-il pour $k = 6$ ?
+
+??? pouce "Coup de pouce"
+
+    Toujours commencer par ranger les exemples du plus proche au plus lointain. Le vote ne porte que sur les $k$ premiers de ce classement.
+
+??? corrige "Corrigé"
+
+    a) Classement : 1 (bleu), 2 (rouge), 4 (rouge), 6 (bleu), 9 (rouge). $k = 1$ : **bleu** ; $k = 3$ : 2 rouges contre 1 bleu, **rouge** ; $k = 5$ : 3 rouges contre 2 bleus, **rouge**. b) Classement : 1 (chien), 2 (chat), 3 (chat), 5 (chat), 7 (chien), 8 (chien). $k = 1$ : **chien** ; $k = 3$ : **chat** ; $k = 5$ : 3 chats contre 2 chiens, **chat** ; $k = 6$ : 3 contre 3, **égalité** : le vote ne permet pas de conclure sans règle pour départager (voir l’exercice « Départager une égalité »).
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> garder pour tout $k$ la prédiction du plus proche voisin : en a) comme en b), la prédiction change entre $k = 1$ et $k = 3$.

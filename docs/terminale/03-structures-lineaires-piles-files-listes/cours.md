@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *« Structures de données : listes, piles, files. Interfaces et implémentations. Distinguer des structures par le jeu des méthodes qui les caractérisent. Écrire et utiliser des programmes manipulant ces structures, indépendamment de leur implémentation. »* |
-| **Prérequis** | fonctions, boucles, listes et dictionnaires Python ; notion de classe et de méthode (chapitre *Programmation objet*). |
+| **Prérequis** | fonctions, boucles, listes et dictionnaires Python ; notion de classe et de méthode (chapitre *Programmation objet*). (→ fiches de révision : ch. 2) |
 | **Objectifs** | *distinguer* l’interface d’une structure de son implémentation ; *connaître* le jeu de méthodes qui caractérise une pile et une file ; *utiliser* ces structures pour résoudre un problème (parenthésage, parcours…) ; *comprendre* le rôle des listes chaînées comme brique d’implémentation. |
+
+!!! situation "Situation de départ"
+
+    1.  Comment la commande « Annuler » d’un éditeur sait-elle quelle action défaire en premier ? Et dans quel ordre une imprimante partagée imprime-t-elle les documents qu’elle reçoit ?
+
+    2.  Un éditeur de code signale que `([)]` est mal écrit, alors qu’il contient autant de symboles ouvrants que de fermants. Comment le vérifie-t-il ?
+
+    3.  Pourquoi deux programmes qui offrent exactement les mêmes commandes peuvent-ils être l’un rapide, l’autre très lent ?
 
 ## Interface et implémentation : le point de vue de l’année
 
@@ -42,9 +50,11 @@ Les trois structures de ce chapitre sont dites **linéaires** : leurs éléments
 
     Une **pile** (*stack*) est une structure linéaire dans laquelle on ne peut ajouter ou retirer un élément que d’un seul côté, appelé le **sommet**. Le dernier élément entré est donc le premier à sortir : on parle de politique **LIFO** (*Last In, First Out*).
 
+<span class="retouract">↺ Retour sur l'activité.</span> La « règle du tas » de l’activité était celle d’une pile : la carte du dessus est le sommet, les cartes ressortent dans l’ordre inverse de leur arrivée (`4`, `3`, `2`, `1`), et il fallait retirer sept cartes pour atteindre le fond d’un tas de huit.
+
 L’image classique est une **pile d’assiettes** : on ne peut poser ou prendre qu’*en haut* de la pile ; l’assiette du fond est la dernière accessible.
 
-![](../figures/f117d24d52c3362d.svg){ .tikz loading=lazy }
+![](../figures/02c80782541ded8c.svg){ .tikz loading=lazy }
 
 ### L’interface d’une pile
 
@@ -88,6 +98,8 @@ La pile n’est pas un jouet : le principe LIFO se retrouve partout dès qu’il
 - **Le bouton « Précédent » d’un navigateur.** Les pages visitées sont empilées ; « précédent » dépile la dernière.
 
 - **L’évaluation d’expressions** par un compilateur ou une calculatrice, et la vérification du parenthésage, que nous détaillons maintenant.
+
+<span class="retouract">↺ Retour sur l'activité.</span> Le bouton « Annuler » de l’activité demandait deux piles : celle des mots tapés, que `Ctrl+Z` dépile, et celle des mots annulés, que `Ctrl+Y` dépile à son tour ; taper un nouveau mot vide la seconde.
 
 ### Exemple phare : vérifier un parenthésage
 
@@ -166,7 +178,7 @@ def parenthesage_correct(expr):
 
         Sur `([)]`, au symbole `)` on dépile `[` : cela ne correspond pas à `(`, donc **incorrect**. C’est précisément le cas qu’un simple **comptage** ne détecterait pas : `([)]` contient autant de `(` que de `)`, et autant de `[` que de `]` ; seule la pile vérifie l’**ordre** des fermetures.
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif)"
 
     Ce même principe (empiler les ouvertures, dépiler aux fermetures) est utilisé par votre éditeur de code pour surligner les parenthèses appariées, et par tout **compilateur** pour vérifier la syntaxe des accolades et parenthèses.
 
@@ -180,9 +192,11 @@ def parenthesage_correct(expr):
 
     Une **file** (*queue*) est une structure linéaire dans laquelle on **ajoute d’un côté** (la queue) et on **retire de l’autre** (la tête). Le premier élément entré est donc le premier à sortir : politique **FIFO** (*First In, First Out*).
 
+<span class="retouract">↺ Retour sur l'activité.</span> La « règle de la rangée » (poser à gauche, prendre à droite) était celle d’une file, dessinée comme ci-dessous, tête à droite : les cartes ressortent dans leur ordre d’arrivée (`1`, `2`, `3`, `4`).
+
 L’image est la **file d’attente** devant un guichet : on rejoint la file par la **queue** (ici à gauche) et l’on est servi à la **tête** (ici à droite), « premier arrivé, premier servi ».
 
-![](../figures/43b0dac18c000fac.svg){ .tikz loading=lazy }
+![](../figures/022295c83facfbbd.svg){ .tikz loading=lazy }
 
 ### L’interface d’une file
 
@@ -193,7 +207,7 @@ L’image est la **file d’attente** devant un guichet : on rejoint la file par
 | `defiler()`  | retire l’élément de tête et le renvoie              |
 | `tete()`     | renvoie l’élément de tête *sans* le retirer         |
 
-!!! remarque "Remarque — Pile ou file : la seule différence qui compte"
+!!! encadre "À retenir — pile ou file : la seule différence qui compte"
 
     Piles et files offrent presque les mêmes opérations (ajouter, retirer, tester si vide). Ce qui les **distingue**, c’est *où* le retrait a lieu : au **même** bout que l’ajout pour la pile (LIFO), à l’**autre** bout pour la file (FIFO). C’est un exemple parfait de ce que dit le BO : « distinguer des structures par le jeu des méthodes qui les caractérisent ».
 
@@ -308,7 +322,7 @@ Comment ranger des éléments *à l’intérieur* de la machine ? Il existe deux
 
     Une **liste chaînée** range ses éléments dans des **maillons** dispersés en mémoire. Chaque maillon contient une **valeur** et un **lien** (l’adresse) vers le maillon **suivant**. Un lien spécial (`None`) marque la fin. On accède à la structure par son **premier** maillon, appelé la **tête**.
 
-![](../figures/0c2f9d07aeac3dd3.svg){ .tikz loading=lazy }
+![](../figures/0e87ce1511c7f89a.svg){ .tikz loading=lazy }
 
 ### Pourquoi cette structure ? Le compromis
 
@@ -320,7 +334,7 @@ Comment ranger des éléments *à l’intérieur* de la machine ? Il existe deux
 
 Insérer un maillon ne demande que de **rebrancher deux liens**, sans déplacer aucune donnée — ce qui rend la liste chaînée idéale pour implémenter une pile ou une file où l’on ajoute et retire sans cesse à une extrémité.
 
-![](../figures/28d442dd848d40f0.svg){ .tikz loading=lazy }
+![](../figures/7d8c0b773fab3788.svg){ .tikz loading=lazy }
 
 !!! remarque "Remarque — À nouveau le faux ami list"
 
@@ -334,7 +348,7 @@ Insérer un maillon ne demande que de **rebrancher deux liens**, sans déplacer 
 
 - **La gestion de la mémoire** par le système : les blocs de mémoire libres sont souvent chaînés entre eux dans une *liste de blocs libres*.
 
-!!! remarque "Remarque"
+!!! encadre "À retenir — une liste chaînée en Python : la classe Cellule"
 
     En Python, on peut représenter un maillon par un petit objet (chapitre *Programmation objet*) : une classe `Cellule` avec deux attributs, `valeur` (l’élément) et `suivante` (la cellule d’après, ou `None` à la fin). On construit alors une liste en emboîtant les cellules : `Cellule(1, Cellule(2, Cellule(3, None)))`. Pour les piles et les files, il suffit le plus souvent d’**admettre** l’existence d’une implémentation ; en revanche, il faut savoir **parcourir** une liste chaînée construite avec `Cellule`, en suivant les liens d’une cellule à la suivante.
 
@@ -367,26 +381,24 @@ Insérer un maillon ne demande que de **rebrancher deux liens**, sans déplacer 
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[21](exercices.md#ex-03-21) à [26](exercices.md#ex-03-26)** (listes chaînées)
 
-## Ouverture : des structures qu’on retrouvera partout
+## Ouverture et liens avec les autres chapitres
 
 Piles et files ne sont pas des curiosités isolées : ce sont les **outils de base** de la fin de l’année.
 
-- les **arbres** et les **graphes** se parcourent avec une **file** (en largeur) ou une **pile** (en profondeur) ;
+- **Ce qu’il réutilise** : les **classes** du chapitre 2 (piles, files et cellules s’écrivent comme des classes dont les méthodes forment l’interface) ; et la **pile d’appels** de la récursivité (chapitre 1) est une pile.
 
-- la **récursivité** repose, en coulisses, sur une pile d’appels ;
+- Les **arbres** et les **graphes** (chapitres 5 et 8) se parcourront avec une **file** (en largeur) ou une **pile** (en profondeur).
 
-- au **bac**, on vous donne l’**interface** d’une pile ou d’une file et l’on demande de **tracer** une suite d’opérations, de **choisir** la bonne structure pour un problème, ou d’**écrire un court algorithme** qui n’utilise que ces méthodes — rarement de reprogrammer la structure elle-même.
+- **Ouverture.** Le système d’exploitation rangera les **processus** prêts dans une file (chapitre 4) ; en **réseaux** (chapitre 9), une file modélisera les paquets en attente dans un routeur.
 
-!!! remarque "Remarque — Un peu d’histoire"
+- Au **bac**, on vous donne l’**interface** d’une pile ou d’une file et l’on demande de **tracer** une suite d’opérations, de **choisir** la bonne structure pour un problème, ou d’**écrire un court algorithme** qui n’utilise que ces méthodes — rarement de reprogrammer la structure elle-même.
+
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
 
     L’idée de **pile** apparaît dès **1946** chez **Alan Turing**, qui décrit, pour gérer le retour des sous-programmes, deux opérations qu’il nomme joliment « *bury* » (enterrer) et « *unbury* » (déterrer). Elle est redécouverte et formalisée en Allemagne vers **1955–1957** par **Klaus Samelson** et **Friedrich L. Bauer**, sous le nom de *Kellerprinzip* (« principe du cellier »), et même brevetée. Les **listes chaînées**, elles, sont inventées vers **1955–1956** par **Allen Newell**, **Cliff Shaw** et **Herbert Simon** pour leur langage *IPL* de traitement de l’information, une idée reprise dès **1958** par **John McCarthy** dans le langage **Lisp** (les fameuses « cellules » `cons`). Trois de ces chercheurs — Bauer, Newell, Simon — ont marqué durablement l’informatique ; Simon a même reçu le prix Nobel d’économie *et* le prix Turing.
 
     ![](../img/03_hist_bauer.jpg){ .photo loading=lazy style="width:131px" }  
     Friedrich L. Bauer, co-inventeur de la pile
-
-!!! remarque "Remarque — Liens avec d’autres chapitres"
-
-    Ces structures resservent partout : on **parcourt** un **arbre** ou un **graphe** avec une **pile** (parcours en profondeur) ou une **file** (parcours en largeur). La pile est aussi la structure cachée derrière la **récursivité** (la « pile d’appels »). En **réseaux**, une file modélise les paquets en attente dans un routeur. Le système d’exploitation range les **processus** prêts dans une file (ordonnancement), et piles, files et cellules s’écrivent comme des **classes** (programmation objet).
 
 ## Bilan — la carte mémoire
 
@@ -401,6 +413,14 @@ Piles et files ne sont pas des curiosités isolées : ce sont les **outils de ba
 | Tableau | cases contiguës, accès direct, taille fixe |
 | Liste chaînée | maillons `valeur + lien`, taille libre, insertion rapide |
 | Réflexe d’exercice | **admettre** l’implémentation, **utiliser** l’interface |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  « Annuler » range les actions dans une **pile** (LIFO) : la dernière action faite est la première défaite (§ II.B). L’imprimante range les documents dans une **file** (FIFO) : premier arrivé, premier imprimé (§ III.B).
+
+    2.  Avec une **pile** : chaque ouvrant est empilé, chaque fermant dépile le sommet, qui doit être l’ouvrant correspondant. Un simple comptage ne vérifie pas l’**ordre** des fermetures (§ II.C).
+
+    3.  Une même **interface** admet plusieurs **implémentations**, aux coûts très différents : une file qui cache une `list` paie $n$ opérations à chaque `pop(0)`, alors qu’une liste chaînée retire sa tête immédiatement (§ I, IV et V).
 
 ## Erreurs fréquentes
 

@@ -10,9 +10,17 @@
 | **Idée** | Le monde est noyé sous les **données**. Bien rangées dans une **table** (lignes et colonnes), elles deviennent une mine que l’on peut *fouiller* : chercher, filtrer, trier, croiser. Ce chapitre vous transforme en **data-détective**. |
 | **Objectifs** | Distinguer donnée, donnée personnelle et métadonnée ; lire une table (descripteur, enregistrement) ; comprendre le format **CSV** ; **rechercher**, **filtrer**, **trier** et **croiser** des tables ; utiliser un site d’*open data* ; mesurer les enjeux (vie privée, nuage, *big data*). |
 
-!!! remarque "Remarque"
+!!! situation "Situation de départ"
 
-    **Un peu d’histoire.** Ranger des données par machine est *plus vieux* que l’ordinateur ! En **1890**, les États-Unis doivent recenser près de 63 millions d’habitants ; le recensement précédent, celui de 1880, avait demandé **sept ans** de dépouillement à la main. L’ingénieur **Herman Hollerith** invente une machine qui lit des **cartes perforées** — une carte par personne, un trou par caractéristique : c’est déjà « une fiche par individu, les mêmes rubriques pour tous », l’idée même d’une **table**. Le recensement de 1890 est bouclé avec **plusieurs mois d’avance** (U.S. Census Bureau). La société de Hollerith deviendra, par fusions, une certaine… **IBM**.
+    1.  Sur un site de vente, vous cochez « moins de 30 € » et « taille M », puis « prix croissant ». Que fait le site, au juste, de la liste de ses articles ?
+
+    2.  Vos photos sont « dans le nuage ». Où sont-elles vraiment, et qui peut les voir ?
+
+    3.  Une application vous demande votre âge, votre position et vos contacts. A-t-elle le droit de tout garder et d’en faire ce qu’elle veut ?
+
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
+
+    Ranger des données par machine est *plus vieux* que l’ordinateur ! En **1890**, les États-Unis doivent recenser près de 63 millions d’habitants ; le recensement précédent, celui de 1880, avait demandé **sept ans** de dépouillement à la main. L’ingénieur **Herman Hollerith** invente une machine qui lit des **cartes perforées** — une carte par personne, un trou par caractéristique : c’est déjà « une fiche par individu, les mêmes rubriques pour tous », l’idée même d’une **table**. Le recensement de 1890 est bouclé avec **plusieurs mois d’avance** (U.S. Census Bureau). La société de Hollerith deviendra, par fusions, une certaine… **IBM**.
 
     ![](../img/05_hist_hollerith_1890.jpg){ .photo loading=lazy style="width:100%" }  
     Les machines de Hollerith en 1890
@@ -21,6 +29,8 @@
     Une carte perforée : une carte par personne
 
     Source : U.S. Census Bureau, pages d’histoire « Herman Hollerith » et « Tabulation and Processing » (recensements de 1880 et 1890), `census.gov`.
+
+    [$\to$ frise chronologique](../methode-debattre.md#frise)
 
 ## Une donnée, c’est quoi au juste ?
 
@@ -46,7 +56,7 @@ Certaines données sont banales ; d’autres vous concernent *directement* et m
 
     Une <span id="lex-metadonnee05" class="ancre"></span>**métadonnée** est une donnée qui **décrit une autre donnée**. Elle ne fait pas partie du contenu, mais l’accompagne : pour une photo, sa **date**, l’**appareil** utilisé, le lieu (**GPS**) ; pour un fichier, son **nom**, sa **taille**, sa date de **modification**.
 
-!!! remarque "Remarque"
+!!! encadre "Méthode — Retrouver les métadonnées d’un fichier"
 
     On peut **retrouver les métadonnées** d’un fichier personnel : un clic droit » « Propriétés » (ou « Informations ») révèle taille, dates, format… Une photo prise au smartphone embarque même, souvent, les **coordonnées GPS** du lieu de la prise de vue (chapitre *Photographie numérique*) : une métadonnée qui peut, sans qu’on y pense, **trahir où l’on habite**.
 
@@ -83,7 +93,7 @@ Source : chiffres de ventes arrondis (2023), communiqués des éditeurs (Micros
 
 Ainsi, la table ci-dessus a **7 descripteurs** et **6 enregistrements**. La ligne d’`id` `1` est *un* enregistrement ; sa valeur pour le descripteur `genre` est `bac à sable`.
 
-!!! remarque "Remarque — Pourquoi un descripteur « id » ?"
+!!! encadre "À retenir — Pourquoi un descripteur « id » ?"
 
     Deux jeux pourraient porter le même titre, ou sortir la même année. Pour **distinguer sans ambiguïté** chaque enregistrement, on ajoute souvent un descripteur `id` : un numéro **unique**. On dit que c’est un **identifiant**.
 
@@ -133,7 +143,7 @@ id,titre,studio,annee,genre,pegi,ventes
 
     Sources : Public Health England, communiqué du 5 octobre 2020 (15 841 cas non signalés) ; BBC News, « Excel: Why using Microsoft’s tool caused Covid-19 results to be lost », 5 octobre 2020.
 
-!!! remarque "Remarque — L’open data : les données publiques, à tous"
+!!! encadre "À retenir — L’open data : les données publiques, à tous"
 
     Depuis **2011**, l’État français ouvre ses données sur `data.gouv.fr` (portail géré par *Etalab*, le service de l’État chargé d’ouvrir les données publiques) ; la Principauté de Monaco fait de même sur son portail <span id="lex-opendata05" class="ancre"></span>**open data**. Horaires de bus, qualité de l’air, résultats d’élections, prénoms donnés chaque année… des milliers de tables sont **librement téléchargeables**, le plus souvent en CSV. Fouiller ces données est devenu un vrai pouvoir citoyen — et le métier des **data-journalistes**.
 
@@ -162,9 +172,9 @@ C’est le cœur du chapitre — et du métier de data-détective. Trois opérat
 
     *« Les jeux tout public (`pegi` $\leqslant$ 7), du plus récent au plus ancien. »* On **filtre** d’abord (`pegi` vaut 3 ou 7) : Minecraft, Wii Sports, Mario Kart 8, Animal Crossing. Puis on **trie** par `annee` décroissante : Animal Crossing (2020), Mario Kart 8 (2014), Minecraft (2011), Wii Sports (2006).
 
-!!! remarque "Remarque — Un critère peut en combiner plusieurs"
+!!! encadre "À retenir — Un critère peut en combiner plusieurs"
 
-    On combine des conditions avec **ET** (les deux à la fois) ou **OU** (au moins une). *« Les jeux `action` **ET** sortis après 2015 »* ne garde que Red Dead Redemption 2.
+    On combine des conditions avec **ET** (les deux à la fois) ou **OU** (au moins une). *« Les jeux `action` **ET** sortis après 2015 »* ne garde que Red Dead Redemption 2. C’est le rôle de `and` et de `or` en Python (chapitre *Les bases de Python*).
 
 ### Croiser deux tables
 
@@ -216,7 +226,7 @@ Pour réaliser ces opérations *sans programmer*, l’outil roi est le <span id=
 
 !!! remarque "Remarque"
 
-    Le tableur reste **le** logiciel le plus utilisé au monde pour manipuler des données. Les **TP tableur** proposés en fin de chapitre en font pratiquer les gestes de base (formules, recopie, calculs sur une colonne) ; les mêmes gestes servent ensuite à trier et filtrer une vraie table, par exemple `jeux.csv` ouvert dans le tableur (menu *Données* : *Trier*, *Filtre automatique*). *(Attention toutefois au piège du §III : un tableur a des **limites** cachées que le CSV n’a pas.)*
+    Le tableur reste **le** logiciel le plus utilisé au monde pour manipuler des données. Les **TP tableur** proposés en fin de chapitre en font pratiquer les gestes de base (formules, recopie, calculs sur une colonne) ; les mêmes gestes servent ensuite à trier et filtrer une vraie table, par exemple `jeux.csv` ouvert dans le tableur (menu *Données* : *Trier*, *Filtre automatique*). *(Attention toutefois au piège du § III : un tableur a des **limites** cachées que le CSV n’a pas.)*
 
 <span id="cours-05-14" class="ancre"></span>
 
@@ -246,7 +256,7 @@ Chaque site, chaque application **collecte** des données sur vous. La loi encad
 
     Stocker ses données **dans le nuage** (*cloud*), c’est les enregistrer non pas sur son appareil, mais sur des **serveurs distants**, accessibles par Internet (photos synchronisées, documents partagés, sauvegardes…).
 
-!!! remarque "Remarque — Pratique… mais"
+!!! encadre "À retenir — Le nuage : pratique… mais"
 
     Le nuage offre l’**accès partout** et le **partage** facile. En contrepartie : vos données sont **chez quelqu’un d’autre** (une entreprise, souvent à l’étranger), il faut une **connexion**, et la question se pose : *qui* peut les lire, et *où* sont-elles vraiment stockées ?
 
@@ -268,13 +278,19 @@ Chaque site, chaque application **collecte** des données sur vous. La loi encad
 
 <span id="cours-05-16" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[16](exercices.md#ex-05-16) et [17](exercices.md#ex-05-17)** (open data ; mes données, mes droits), défi **[18](exercices.md#ex-05-18)** (data-détective sur l’open data), exercice **[19](exercices.md#ex-05-19)** (critiquer une réponse d’IA)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[16](exercices.md#ex-05-16) et [17](exercices.md#ex-05-17)** (open data ; mes données, mes droits), défi **[18](exercices.md#ex-05-18)** (data-détective sur l’open data), exercice **[19](exercices.md#ex-05-19)** (critiquer une réponse d’IA), exercice **[20](exercices.md#ex-05-20)** (Python au service du thème)
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    Les données en tables se retrouvent dans presque tous les thèmes de SNT. Les **métadonnées EXIF** d’une photo (date, appareil, coordonnées **GPS**) forment une petite fiche de descripteurs (chapitre *Photographie numérique*) ; on verra au chapitre *Localisation* qu’une **trame NMEA** est, comme une ligne de **CSV**, une suite de valeurs séparées par des virgules. Les données collectées par les **réseaux sociaux**, et bientôt les mesures des **capteurs** des objets connectés, s’accumulent dans le **nuage** et nourrissent le *big data*. Enfin, une boucle `for` et un test `if` (chapitre *Les bases de Python*) suffisent pour **filtrer** une table par programme : c’est ce que vous ferez en spécialité NSI de Première, en lisant directement des fichiers CSV en Python.
+    - **Déjà vu :** les **métadonnées EXIF** d’une photo (chapitre *Photographie numérique*) forment une petite fiche de descripteurs ; un critère combiné s’écrit avec `and` et `or` en Python (chapitre *Les bases de Python*).
+
+    - **À venir :** au chapitre *Localisation*, une **trame NMEA** se lira comme une ligne de **CSV** ; au dernier chapitre, les mesures des **capteurs** d’objets connectés viendront grossir le **nuage** et le *big data*.
+
+    - **Plus loin :** en spécialité NSI de Première, on lit des fichiers CSV en Python et on filtre une table avec une boucle `for` et un test `if`.
 
 ## Bilan — la carte mémoire
+
+Les mots importants du thème sont définis dans le lexique.
 
 | **Notion** | **À retenir** |
 |:---|:---|
@@ -292,6 +308,14 @@ Chaque site, chaque application **collecte** des données sur vous. La loi encad
 | Monaco | loi n° 1.565 (2024) : les mêmes grands droits ; autorité : APDP. |
 | Nuage (*cloud*) | données sur des **serveurs distants**, accessibles par Internet. |
 | Big data | les « 3 V » : **V**olume, **V**élocité, **V**ariété. |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Ses articles sont rangés dans une **table** : une ligne par article (un **enregistrement**), une colonne par caractéristique (un **descripteur**) (§ II). Le site **filtre** avec un critère combiné par ET (prix et taille), puis **trie** selon le descripteur prix (§ IV).
+
+    2.  Sur des **serveurs distants**, accessibles par Internet, chez une entreprise souvent à l’étranger (§ VI) : c’est pratique, mais il faut une connexion, et il faut se demander qui peut les lire.
+
+    3.  Non : ce sont des **données personnelles** (§ I). Le **RGPD** (UE) et la loi n° 1.565 (Monaco) imposent votre **consentement** et un **but précis**, et vous donnent le droit d’accéder à vos données, de les corriger et de les faire effacer (§ VI).
 
 !!! encadre "Débat argumenté"
 

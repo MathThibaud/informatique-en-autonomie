@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *Langages et programmation.* **Spécification** : prototyper une fonction, décrire les **préconditions** sur les arguments et les **postconditions** sur les résultats (des assertions peuvent les garantir). **Mise au point** : utiliser des **jeux de tests** (le succès d’un jeu de tests ne garantit pas la correction). **Diversité des langages** : repérer traits communs et particuliers d’un langage. **Bibliothèques** : utiliser une documentation. |
-| **Prérequis** | écrire des **fonctions**, avec la première approche de la docstring, de `assert` et des jeux de tests (chapitre *Les bases de la programmation Python*) ; **boucles** `for`/`while` et **conditions** ; **tableaux** (listes) ; la notion d’**invariant de boucle** (vue au chapitre *Algorithmique : le parcours séquentiel*). |
+| **Prérequis** | écrire des **fonctions**, avec la première approche de la docstring, de `assert` et des jeux de tests (chapitre *Les bases de la programmation Python*) ; **boucles** `for`/`while` et **conditions** ; **tableaux** (listes) ; la notion d’**invariant de boucle** (vue au chapitre *Algorithmique : le parcours séquentiel*). (→ fiches de révision : ch. 1) |
 | **Objectifs** | **spécifier** une fonction (rôle, pré/postconditions, docstring) ; la **documenter** sans excès ; adopter une **programmation défensive** (`assert`, valeur sentinelle) ; écrire un **bon jeu de tests** et comprendre ses limites ; **déboguer** par la trace et l’affichage ; formaliser un **invariant de boucle** ; situer Python parmi la **diversité des langages** (compilé ou interprété, typage statique ou dynamique). |
+
+!!! situation "Situation de départ"
+
+    1.  Un programme a donné le bon résultat sur les trois exemples essayés : peut-on en conclure qu’il est juste ?
+
+    2.  Que doit faire une fonction qui calcule une moyenne si on lui donne une liste vide ?
+
+    3.  Un programme plante, ou donne un résultat faux : par où commencer pour trouver l’erreur ?
 
 !!! remarque "Remarque — Le fil conducteur : peut-on faire confiance à un programme ?"
 
@@ -122,6 +130,8 @@ C’est de la **programmation défensive** : on échoue *tôt*, *clairement*, à
 
     - **renvoyer une valeur sentinelle** qui ne peut pas être confondue avec un résultat valide — en Python, `None`. Celui qui appelle teste alors le résultat avant de l’utiliser.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Dans l’activité « La chasse aux bugs », `mention(23)` renvoyait `"Tres bien"` et `moyenne([])` provoquait une division par zéro : les préconditions « note entre 0 et 20 » et « tableau non vide » n’étaient ni écrites, ni vérifiées.
+
 ```python
 r = indice_maximum(t)
 if r is not None:
@@ -156,6 +166,8 @@ Si l’un échoue, on corrige, puis on **relance tout** : corriger une erreur en
 
     Passer tous ses tests **ne garantit pas** qu’un programme est correct : il peut échouer sur un cas non testé. On ne peut pas tout tester (les entiers, les tableaux sont en nombre infini). L’objectif est un **bon** jeu de tests, qui couvre tous les *comportements* du programme.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Les essais du programmeur de l’activité (17, 15 et 8) passaient tous, et pourtant `mention(12)` renvoyait `"Admis"` au lieu de `"Assez bien"`.
+
 !!! propriete "Propriété 1 — Ingrédients d’un bon jeu de tests"
 
     - chaque **cas** de la spécification a son test (le tableau vide en particulier) ;
@@ -165,6 +177,8 @@ Si l’un échoue, on corrige, puis on **relance tout** : corriger une erreur en
     - les **valeurs limites** : $0$, un nombre négatif, le premier et le dernier indice ;
 
     - les **cas particuliers** : maximum au début ou à la fin, égalités, doublons.
+
+<span class="retouract">↺ Retour sur l'activité.</span> Les cinq ou six notes à choisir dans l’activité étaient les valeurs limites 10, 12, 14 et 16, avec 0 et 20. Et la moyenne qui oubliait `notes[0]` ne se trahissait ni sur `[0, 10, 20]` ni sur `[0, 0]`, dont le premier élément vaut 0 : il manquait un cas où il n’est pas nul.
 
 !!! remarque "Remarque — Réponses multiples"
 
@@ -188,7 +202,7 @@ for n in range(2, 30):
 
 <span id="cours-05-6" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-05-6) à [10](exercices.md#ex-05-10)** (tester ses programmes)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-05-6) à [10](exercices.md#ex-05-10)** et **[27](exercices.md#ex-05-27)** (tester ses programmes)
 
 ## Corriger les erreurs (déboguer)
 
@@ -234,7 +248,7 @@ assert est_croissant([]) == True
 
 <span id="cours-05-11" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[11](exercices.md#ex-05-11) à [13](exercices.md#ex-05-13)** (corriger, déboguer)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[11](exercices.md#ex-05-11) à [13](exercices.md#ex-05-13)** et **[26](exercices.md#ex-05-26)** (corriger, déboguer)
 
 ## Invariant de boucle
 
@@ -306,7 +320,7 @@ Un processeur ne comprend que le **langage machine** (des 0 et des 1 ; le chapit
 
     - Un langage **interprété** est traduit *au fur et à mesure*, pendant l’exécution, par un **interpréteur**. Il faut l’interpréteur à chaque exécution.
 
-![](../figures/bee9230328ed8075.svg){ .tikz loading=lazy }
+![](../figures/a0f746e1a99210ef.svg){ .tikz loading=lazy }
 
 !!! exemple "Exemple"
 
@@ -318,9 +332,9 @@ Un processeur ne comprend que le **langage machine** (des 0 et des 1 ; le chapit
 
     - **Interprété** : **souple** et rapide à mettre au point (on teste immédiatement dans la console), le *même* fichier tourne sur toute machine qui a l’interpréteur ; mais l’exécution est **plus lente**, et certaines erreurs n’apparaissent qu’*au moment* où la ligne fautive est atteinte.
 
-!!! remarque "Remarque — La réalité est plus nuancée"
+!!! curieux "Pour les curieux (facultatif) — La réalité est plus nuancée"
 
-    <span class="horsprog">au-delà du programme</span> Beaucoup de langages, dont Python et Java, sont d’abord traduits en un langage intermédiaire (le *bytecode*), lui-même exécuté par une **machine virtuelle** : un compromis entre les deux mondes. On dira simplement, en Première, que Python est interprété et C compilé.
+    Beaucoup de langages, dont Python et Java, sont d’abord traduits en un langage intermédiaire (le *bytecode*), lui-même exécuté par une **machine virtuelle** : un compromis entre les deux mondes. On dira simplement, en Première, que Python est interprété et C compilé.
 
 ### Typage statique ou dynamique
 
@@ -377,17 +391,13 @@ Aucun langage n’est « le meilleur » : chacun est un **compromis** adapté à
 
 On ne réécrit pas tout à chaque fois. En regroupant des fonctions utiles dans des **modules** réutilisables, on constitue des **bibliothèques** (`math`, `random`, `turtle`…). Pour s’en servir, pas besoin de connaître leur code : il suffit de lire leur **documentation**, qui joue le rôle de la spécification vue plus haut. La boucle est bouclée : *bien spécifier ses propres fonctions, c’est déjà écrire la documentation d’une future bibliothèque.*
 
-!!! remarque "Remarque — En Terminale"
-
-    Deux chapitres prolongent directement celui-ci : *La récursivité* (une fonction qui s’appelle elle-même, avec sa condition d’arrêt — ses tests et ses préconditions se pensent exactement comme ici) et *Programmation objet et paradigmes* (définir ses propres types avec des classes, et comparer vraiment les styles impératif, fonctionnel et objet).
-
 <span id="cours-05-19" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[19](exercices.md#ex-05-19) à [25](exercices.md#ex-05-25)** (diversité des langages)
 
 ## Un peu d’histoire
 
-!!! remarque "Remarque — Des bugs qui ont fait l’histoire"
+!!! curieux "Pour les curieux (facultatif) — Des bugs qui ont fait l’histoire"
 
     Le **9 septembre 1947**, à Harvard, l’équipe du calculateur électromécanique **Mark II**, dont fait partie **Grace Hopper**, cherche pourquoi la machine se trompe. Coupable : un **papillon de nuit** coincé dans un relais. On le colle dans le cahier de bord avec la mention « *First actual case of bug being found* » — « premier cas *réel* de bogue trouvé », preuve que le mot *bug* (« insecte ») désignait déjà un défaut chez les ingénieurs. Celle qui a rendu l’anecdote célèbre, Grace Hopper (1906–1992), mathématicienne et officière de la marine américaine, est surtout une pionnière des langages : elle écrit en 1952 l’un des premiers **compilateurs** et défend l’idée, jugée farfelue à l’époque, de programmer avec des **mots** plutôt qu’avec des nombres — idée qui mènera au langage <span class="smallcaps">Cobol</span> (1959), et dont Python est l’héritier lointain.
 
@@ -401,9 +411,13 @@ On ne réécrit pas tout à chaque fois. En regroupant des fonctions utiles dans
 
     Le chercheur néerlandais **Edsger Dijkstra** (1930–2002) avait prévenu dès 1970 : « *tester un programme peut montrer la présence de bugs, jamais leur absence* ». C’est exactement la règle de ce chapitre : les tests sont indispensables, mais seul un **raisonnement** (spécification, invariant de boucle) peut garantir qu’un programme est correct.
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    Ces réflexes serviront aussitôt pour les **tris** et la **dichotomie** ; en Terminale, le chapitre *Calculabilité* prouvera qu’aucun programme ne décide l’arrêt de tous les autres.
+    - **Ce qu’il réutilise.** Docstring, `assert` et jeux de tests amorcés dans les *Bases de la programmation Python* ; l’invariant du champion du *Parcours séquentiel*.
+
+    - **Ce qu’il prépare.** Ces réflexes serviront aussitôt pour les **tris** et la **dichotomie** (spécification, tests, invariants).
+
+    - **En Terminale.** *La récursivité* se spécifie et se teste exactement comme ici ; *Programmation objet et paradigmes* comparera les styles de programmation ; *Calculabilité* prouvera qu’aucun programme ne décide l’arrêt de tous les autres.
 
 ## Bilan — la carte mémoire
 
@@ -420,6 +434,14 @@ On ne réécrit pas tout à chaque fois. En regroupant des fonctions utiles dans
 | Compilé / interprété | traduit une fois, rapide (C) / traduit à la volée, souple (Python) |
 | Typage | **statique** : vérifié avant l’exécution (C) ; **dynamique** : pendant (Python) |
 | Bibliothèques | on les utilise en lisant leur **documentation** |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Non : le succès des tests ne prouve pas la correction (§ IV). On vise un **bon jeu de tests** (cas de la spécification, valeurs limites, cas particuliers), et seul un raisonnement, comme un **invariant de boucle**, garantit le résultat (§ VI).
+
+    2.  C’est à la **spécification** de le dire (§ I) : soit une précondition « liste non vide » vérifiée par un `assert`, qui échoue tôt et clairement, soit une **valeur sentinelle** `None` que l’appelant teste (§ III).
+
+    3.  On **déroule** l’exécution au voisinage du problème et on ajoute des **affichages** temporaires des variables ; une fois l’erreur corrigée, on retire les affichages et on garde les tests (§ V).
 
 ## Erreurs fréquentes
 

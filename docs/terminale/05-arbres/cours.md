@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *« Structures arborescentes : arbres, arbres binaires. Identifier des situations où une structure arborescente s’impose. Vocabulaire (racine, nœud, feuille, sous-arbre, taille, hauteur…). Évaluer la taille et la hauteur d’un arbre. Arbres binaires de recherche. Parcours d’un arbre. »* |
-| **Prérequis** | la **récursivité** (indispensable ici !), les classes et objets (chapitre *Programmation objet*), les piles et les files, la recherche par dichotomie. |
+| **Prérequis** | la **récursivité** (indispensable ici !), les classes et objets (chapitre *Programmation objet*), les piles et les files, la recherche par dichotomie. (→ fiches de révision : ch. 1, ch. 2, ch. 3) |
 | **Objectifs** | *reconnaître* une situation qui appelle un arbre ; *maîtriser* le vocabulaire ; *calculer* taille et hauteur ; *implémenter* un arbre binaire (de plusieurs façons) et le *parcourir* ; *comprendre* l’arbre binaire de recherche, y *rechercher* et y *insérer* une valeur. |
+
+!!! situation "Situation de départ"
+
+    1.  Comment représenter dans un programme les dossiers d’un ordinateur, qui contiennent des fichiers et d’autres dossiers ? Pourquoi une simple liste de noms ne suffit-elle pas ?
+
+    2.  Comment retrouver une valeur parmi un million en une vingtaine d’étapes, tout en pouvant en ajouter de nouvelles à tout moment ?
+
+    3.  Pour afficher un arbre généalogique génération par génération, ou branche par branche, dans quel ordre faut-il visiter les personnes ?
 
 ## Pourquoi un arbre ? Des situations où rien d’autre ne convient
 
@@ -32,7 +40,7 @@ Depuis le début de l’année, vos structures étaient **linéaires** : listes,
 
 Voici un arbre. On le dessine, par tradition informatique, **la racine en haut** et les feuilles en bas.
 
-![](../figures/3187999d92a8e721.svg){ .tikz loading=lazy }
+![](../figures/f68630cf0d0b20c5.svg){ .tikz loading=lazy }
 
 !!! definition "Définition 1 — Le vocabulaire de l’arbre"
 
@@ -48,11 +56,15 @@ Voici un arbre. On le dessine, par tradition informatique, **la racine en haut**
 
     - tout nœud est la racine d’un **sous-arbre** (celui de `C` contient `C`, `F`, `G`, `H`).
 
+<span class="retouract">↺ Retour sur l'activité.</span> Les mots inventés dans l’activité ont maintenant leur nom officiel : l’élément du haut (`Documents`, le vainqueur du tournoi) est la **racine**, ceux du bas (les fichiers, les joueurs du premier tour) sont des **feuilles**, et « un élément avec tout ce qui est en dessous de lui » est un **sous-arbre**.
+
 !!! definition "Définition 2 — Arbre binaire"
 
     Un arbre est **binaire** si chaque nœud possède **au plus deux** fils, appelés **fils gauche** et **fils droit** (l’un des deux, ou les deux, peuvent manquer). L’arbre ci-dessus est binaire. Dans la suite, sauf mention contraire, « arbre » signifiera « arbre binaire ».
 
-!!! remarque "Remarque — Un arbre, c’est récursif"
+<span class="retouract">↺ Retour sur l'activité.</span> Le tournoi et la famille de l’activité étaient des arbres binaires (au plus deux traits vers le bas à chaque élément) ; l’arborescence des dossiers ne l’était pas, puisque `Documents` a trois fils.
+
+!!! encadre "À retenir — un arbre, c’est récursif"
 
     Regardez bien : **un arbre est soit vide, soit un nœud (la racine) muni de deux sous-arbres** (gauche et droit), qui sont eux-mêmes des arbres… On retrouve la structure du chapitre *Récursivité* : un cas de base (l’arbre vide) et un cas qui se ramène à des cas plus petits. C’est pourquoi **presque tous les algorithmes sur les arbres seront récursifs**.
 
@@ -84,11 +96,13 @@ Voici un arbre. On le dessine, par tradition informatique, **la racine en haut**
 
     Aucune n’est « la bonne » : il faut juste **préciser laquelle on utilise**. **Au bac, l’énoncé le dit toujours.** Dans ce cours, nous comptons les **nœuds** (racine seule $\to$ hauteur $1$, arbre vide $\to$ hauteur $0$) : c’est la définition de **Donald Knuth** (*The Art of Computer Programming*, vol. 3), pour qui la hauteur est la longueur du plus long chemin de la racine jusqu’à un sous-arbre **vide**. Si un énoncé adopte l’autre convention, **adaptez-vous** : toutes les hauteurs diminuent de $1$ (l’exemple ci-dessus aurait une hauteur de $3$).
 
-!!! remarque "Remarque — Comme les étages d’un immeuble"
+<span class="retouract">↺ Retour sur l'activité.</span> L’arbre du tournoi à huit joueurs a pour taille $15$ (les $8$ joueurs et les $7$ cases de vainqueurs) et pour hauteur $4$ ; les « marches » comptées de `Documents` à `jeu.py`, au nombre de $3$, donnent la profondeur de `jeu.py`.
+
+!!! curieux "Pour les curieux (facultatif) — Comme les étages d’un immeuble"
 
     Cette querelle vous rappellera quelque chose. En France, on entre au **rez-de-chaussée** (l’étage « $0$ »), et le premier étage est *au-dessus* : on compte les **volées d’escalier** (les arêtes). Aux États-Unis, le rez-de-chaussée *est* le « *first floor* » : on compte les **niveaux** (les nœuds). Bref, le même bâtiment a « deux hauteurs » selon le pays — exactement comme nos arbres. Un Américain et un Français se donnent rendez-vous « au premier étage » : l’un attend l’autre un étage plus bas. Précisez toujours votre convention !
 
-!!! remarque "Remarque"
+!!! encadre "À retenir — la hauteur d’un arbre de $n$ nœuds"
 
     Un arbre binaire de $n$ nœuds a une hauteur comprise entre environ $\log_2(n)$ (arbre bien « équilibré ») et $n$ (arbre « filiforme », dégénéré en une sorte de liste). Cette hauteur gouverne la rapidité des recherches : plus l’arbre est équilibré, plus il est efficace.
 
@@ -96,7 +110,7 @@ Voici un arbre. On le dessine, par tradition informatique, **la racine en haut**
 
 Python ne fournit pas d’arbre « tout prêt » : on l’implémente. Comme pour les piles et les files, une **même structure** admet **plusieurs implémentations** — et les sujets de bac en utilisent plusieurs. En voici deux, sur le même petit arbre :
 
-![](../figures/f293ee1ee0981952.svg){ .tikz loading=lazy }
+![](../figures/d2d3d0d5f6c32767.svg){ .tikz loading=lazy }
 
 ### Par une classe (programmation objet)
 
@@ -170,7 +184,7 @@ Pour l’**infixe** et le **suffixe**, il suffit de **déplacer** la ligne `prin
 
 Une astuce pour retrouver ces trois ordres sans se tromper : on fait le **tour de l’arbre** en longeant son contour, en partant de la gauche de la racine. On note un nœud quand on passe à sa **gauche** (préfixe), **sous** lui (infixe) ou à sa **droite** (suffixe). Les numéros donnent l’ordre de visite :
 
-![](../figures/030a386c59e065a0.svg){ .tikz loading=lazy }
+![](../figures/af6056f16699bcd2.svg){ .tikz loading=lazy }
 
 ### Le parcours en largeur
 
@@ -191,13 +205,13 @@ def largeur(a):
             f.enfiler(n.droite)
 ```
 
-!!! remarque "Remarque"
+!!! encadre "À retenir — largeur et file, profondeur et pile"
 
     Retenez le duo : parcours en **largeur** $\leftrightarrow$ **file** ; parcours en **profondeur** $\leftrightarrow$ récursivité (donc, en coulisses, une **pile**). Les deux structures du chapitre « structures linéaires » resservent ici.
 
 <span id="cours-05-3" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-05-3) à [5](exercices.md#ex-05-5)** (les quatre parcours, en profondeur et en largeur).
+<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-05-3) à [5](exercices.md#ex-05-5) et [22](exercices.md#ex-05-22)** (les quatre parcours, en profondeur et en largeur ; parcours en série).
 
 ## Calculer sur un arbre : taille et hauteur
 
@@ -219,7 +233,7 @@ def hauteur(a):
     return 1 + max(hauteur(a.gauche), hauteur(a.droite))
 ```
 
-!!! remarque "Remarque — Et avec l’autre convention ?"
+!!! encadre "Au bac — hauteur : et avec l’autre convention ?"
 
     Si l’énoncé compte les **arêtes**, seul le **cas de base** change : l’arbre vide a pour hauteur $-1$, donc `return -1` au lieu de `return 0`. Ainsi une feuille a bien une hauteur de $1 + \max(-1, -1) = 0$. Lisez toujours la définition donnée par le sujet avant d’écrire `hauteur`.
 
@@ -245,7 +259,7 @@ Un arbre quelconque ne facilite pas la recherche. Mais si l’on **range** les v
 
     Autrement dit : `gauche `$<$` nœud `$\leq$` droite`. Une valeur **égale** à celle du nœud (un doublon) se range donc **à droite** : c’est la convention de tout ce chapitre.
 
-![](../figures/c8f1196fb3ebde17.svg){ .tikz loading=lazy }
+![](../figures/26b42f74d4fa6165.svg){ .tikz loading=lazy }
 
 ### Rechercher une valeur dans un ABR
 
@@ -265,7 +279,7 @@ def recherche(a, x):
         return recherche(a.droite, x)   # a droite : les plus grands (ou egaux)
 ```
 
-!!! remarque "Remarque"
+!!! encadre "À retenir — le coût d’une recherche dans un ABR"
 
     La recherche coûte au plus **la hauteur** de l’arbre. Pour un ABR équilibré de $n$ valeurs, cela fait environ $\log_2(n)$ comparaisons : chercher parmi un **million** de valeurs ne demande qu’une **vingtaine** d’étapes ! C’est cette efficacité qui fait des arbres le cœur des **index de bases de données**. Petit bonus : un **parcours infixe** d’un ABR affiche ses valeurs **déjà triées**.
 
@@ -286,7 +300,7 @@ Chercher, c’est bien ; mais comment **construire** un ABR ? En y insérant les
     `7` : $7 < 8$ (gauche), $7 > 3$ (droite), $7 > 6$ (droite) : `7` devient le fils droit de `6`.  
     `8` : $8 = 8$, donc à droite (convention), puis $8 < 10$ (gauche) : ce second `8` devient le fils gauche de `10`.
 
-    ![](../figures/0c3c145f4839551f.svg){ .tikz loading=lazy }
+    ![](../figures/4dcbdb56bb91976b.svg){ .tikz loading=lazy }
 
     Le parcours infixe donne `1, 3, 6, 7, 8, 8, 10, 14` : toujours trié, doublon compris.
 
@@ -318,17 +332,25 @@ On obtient exactement l’ABR dessiné plus haut.
 
     Comme la recherche, l’insertion coûte au plus **la hauteur** de l’arbre. Mais la forme de l’arbre dépend de l’**ordre** dans lequel on insère : avec `4, 2, 6, 1, 3, 5, 7`, on obtient un arbre équilibré de hauteur $3$ ; avec `1, 2, 3, 4, 5, 6, 7` (déjà trié !), chaque valeur part à droite de la précédente et l’on obtient un arbre « en peigne » de hauteur $7$, aussi lent qu’une simple liste. (Il existe des ABR qui se rééquilibrent tout seuls, comme les arbres AVL ou rouge-noir <span class="horsprog">au-delà du programme</span>.)
 
-!!! remarque "Remarque — Les doublons : lire la convention de l’énoncé"
+!!! encadre "Au bac — les doublons : lire la convention de l’énoncé"
 
     Ce cours range une valeur **égale** au nœud dans le sous-arbre **droit**. Ce n’est qu’une convention : certains sujets de bac interdisent les doublons (on n’insère pas une valeur déjà présente, comme dans le TP proposé en fin de chapitre), d’autres les placent à gauche. Dans tous les cas, la recherche et l’insertion suivent le même principe ; il suffit de **lire la définition donnée** et de l’appliquer de façon cohérente.
 
 <span id="cours-05-10" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-05-10) et [11](exercices.md#ex-05-11)** (insérer à la main ; programmer l’insertion).
+<span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-05-10), [11](exercices.md#ex-05-11) et [23](exercices.md#ex-05-23)** (insérer à la main ; programmer l’insertion ; insertions en série).
 
-## Ouverture et histoire
+## Ouverture et liens avec les autres chapitres
 
-!!! remarque "Remarque — Un peu d’histoire… et de botanique"
+- **Ce qu’il réutilise** : la **récursivité** (chapitre 1 : taille, hauteur et parcours en profondeur), les **classes** (chapitre 2 : la classe `Noeud`), la **file** et la **pile** (chapitre 3 : parcours en largeur et en profondeur), et la **recherche dichotomique** de 1<sup>re</sup>, que l’ABR incarne dans une structure de données.
+
+- **Déjà croisé** : l’**arbre des processus**, créé par `fork` (chapitre 4).
+
+- **Ce qui servira ailleurs** : les arbres organisent les **index** des bases de données (chapitre 6), et la recherche dans un ABR sera relue comme un exemple de « diviser pour régner » (chapitre 7).
+
+- **Ouverture.** Le chapitre 8 (*Graphes*) généralisera l’arbre (un arbre est un graphe particulier, sans cycle), et l’on y retrouvera les parcours en **largeur** (file) et en **profondeur** (pile).
+
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire… et de botanique"
 
     En informatique, l’arbre est le seul à **pousser la tête en bas** : racine en haut, feuilles en bas — un botaniste s’en évanouirait. La structure est ancienne : le mot « arbre » entre en mathématiques en **1857** avec le Britannique **Arthur Cayley**, qui s’en sert ensuite, en **1874–1875**, pour *compter* les molécules chimiques possibles (vues comme des arbres d’atomes). Mais l’**arbre binaire de recherche** est formalisé autour de **1960** par plusieurs chercheurs indépendamment (dont **P. F. Windley**, **A. D. Booth**, **T. N. Hibbard**). En **1952**, un étudiant du MIT, **David Huffman**, invente pour un devoir noté un codage par arbre qui reste, soixante-dix ans plus tard, au cœur des formats de compression (ZIP, JPEG…) : le plus rentable des devoirs maison. Enfin, les **B-arbres** (Bayer et McCreight, **1970**) organisent aujourd’hui les données de la quasi-totalité des bases de données et systèmes de fichiers de la planète.
 
@@ -338,14 +360,6 @@ Arthur Cayley (1821–1895), qui a donné son nom mathématique à l’arbre
 ![](../img/05_baia_figuier_renverse.jpg){ .photo loading=lazy style="width:210px" }
 
 Et la nature s’y met aussi : à **Baïes** (Italie), un figuier sauvage pousse **la tête en bas** depuis la voûte d’une salle romaine, sa racine au plafond et ses branches feuillues vers le sol — un véritable arbre informatique !
-
-!!! remarque "Remarque — La suite"
-
-    Le chapitre *Graphes* généralisera l’arbre (un arbre est un graphe particulier, sans cycle). Et l’on retrouvera les parcours en **largeur** (file) et en **profondeur** (pile), déjà rencontrés ici.
-
-!!! remarque "Remarque — Liens avec d’autres chapitres"
-
-    Un arbre est une structure **récursive** : taille, hauteur et parcours s’écrivent naturellement par **récursivité**. On le parcourt en **largeur** avec une **file** et en **profondeur** avec une **pile** (chapitre « structures linéaires »). Un **arbre binaire de recherche** retrouve une valeur en coût **logarithmique**, exactement comme la **recherche dichotomique** vue en Première. Un arbre est enfin un cas particulier de **graphe**. On le programme avec une classe `Noeud` (**programmation objet**) ; on le retrouve dans l’**arbre des processus** (chapitre « processus ») et dans les **index** des bases de données.
 
 ## Bilan — la carte mémoire
 
@@ -362,6 +376,14 @@ Et la nature s’y met aussi : à **Baïes** (Italie), un figuier sauvage pousse
 | ABR | gauche $<$ nœud $\leq$ droite (doublon à droite) |
 | Recherche, insertion | on descend d’un seul côté ; coût $=$ hauteur ($\approx \log_2(n)$ si équilibré) |
 | Insérer dans un ABR | descendre comme pour chercher ; `x` devient une **feuille** |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Par un **arbre** : chaque dossier est un **nœud** dont les fils sont ses fichiers et ses sous-dossiers. Une liste, structure linéaire, perdrait la relation « qui est dans qui » (§ I et II).
+
+    2.  Avec un **arbre binaire de recherche** (à gauche les valeurs plus petites, à droite les autres) : chercher ou insérer coûte au plus la **hauteur**, soit environ $\log_2(n)$ comparaisons, une vingtaine pour un million de valeurs si l’arbre est équilibré (§ VII).
+
+    3.  Génération par génération, c’est le parcours en **largeur**, avec une **file** ; branche par branche, ce sont les parcours en **profondeur** (préfixe, infixe, suffixe), récursifs (§ V).
 
 ## Erreurs fréquentes
 

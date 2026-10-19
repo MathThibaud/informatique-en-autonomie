@@ -10,6 +10,8 @@ Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title=
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Qui est la machine, qui est la donnée ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-13-1 }
 
+<span class="essentiel">• essentiel</span>
+
 Pour chacune des situations, préciser quel est le **programme** (la machine) et quelle est sa **donnée d’entrée**.
 
 1.  Dans un terminal, on tape `python3 tri.py`.
@@ -19,6 +21,10 @@ Pour chacune des situations, préciser quel est le **programme** (la machine) et
 3.  Un antivirus analyse le fichier `photo.exe`.
 
 4.  Un éditeur de texte colore la syntaxe d’un fichier `code.py`.
+
+??? pouce "Coup de pouce"
+
+    Le programme est celui que l’on lance, celui qui « travaille » ; la donnée est ce qu’il reçoit, puis lit ou transforme. Une fois les quatre réponses écrites, que remarque-t-on sur la nature des données ?
 
 ??? corrige "Corrigé"
 
@@ -48,6 +54,10 @@ while x > 0:
 
 2.  En déduire pourquoi il n’y a rien d’absurde à donner un programme **en argument** à un autre programme — ni même à un programme de se prendre **lui-même** en argument.
 
+??? pouce "Coup de pouce"
+
+    De quoi est fait le code source d’un programme quand on l’ouvre dans un éditeur ? Et que peut faire un programme d’une chaîne de caractères qu’il reçoit ?
+
 ??? corrige "Corrigé"
 
     1.  Un programme est écrit avec des caractères (lettres, chiffres, symboles, retours à la ligne) : son code source **est** une chaîne de caractères, que l’on peut stocker dans une variable, dans un fichier, transmettre, etc.
@@ -57,6 +67,8 @@ while x > 0:
 ### Décidable ou indécidable ?
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Tri sélectif <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-13-3 }
+
+<span class="essentiel">• essentiel</span>
 
 Pour chaque problème de décision, dire s’il est **décidable** ou **indécidable**. Justifier d’un mot.
 
@@ -70,6 +82,10 @@ Pour chaque problème de décision, dire s’il est **décidable** ou **indécid
 
 5.  « Les deux programmes `P` et `Q` calculent-ils exactement la même fonction ? »
 
+??? pouce "Coup de pouce"
+
+    Un problème est décidable s’il existe un algorithme qui répond, en un temps fini, pour **toute** entrée. Chercher pour chacun un tel algorithme (un parcours fini, des divisions à tester…) ; quand la question porte sur le comportement d’un programme quelconque, se rappeler les résultats du cours.
+
 ??? corrige "Corrigé"
 
     1.  **Décidable** (tester les diviseurs ; l’algorithme s’arrête toujours).
@@ -82,6 +98,8 @@ Pour chaque problème de décision, dire s’il est **décidable** ou **indécid
 
     5.  **Indécidable** : décider si deux programmes calculent la même fonction est une question sur leur *comportement* (théorème de Rice).
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Répondre « décidable : il suffit d’exécuter `P` et `Q` et de comparer leurs résultats » : il y a une infinité d’entrées, et une exécution peut ne jamais s’arrêter.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Un décideur qui s’arrête toujours <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-4 }
 
 On veut décider le problème « $n$ est-il premier ? » pour un entier $n \ge 2$.
@@ -90,7 +108,7 @@ On veut décider le problème « $n$ est-il premier ? » pour un entier $n \ge
 
     ??? pouce "Coup de pouce"
 
-        Un diviseur $d$ de $n$, autre que $1$ et $n$, est compris entre $2$ et $n-1$. Dès qu’on en trouve un, peut-on conclure ?
+        Q1 : un diviseur $d$ de $n$, autre que $1$ et $n$, est compris entre $2$ et $n-1$. Dès qu’on en trouve un, peut-on conclure ?
 
     ```python
     def est_premier(n):
@@ -104,11 +122,11 @@ On veut décider le problème « $n$ est-il premier ? » pour un entier $n \ge
 
     ??? pouce "Coup de pouce"
 
-        Combien de tours la boucle `for` fait-elle au plus ? Peut-elle tourner indéfiniment ?
+        Q2 : combien de tours la boucle `for` fait-elle au plus ? Peut-elle tourner indéfiniment ?
 
 ??? corrige "Corrigé"
 
-    1.
+    1.  **Démarche :** on teste tous les diviseurs possibles, de $2$ à $n - 1$ ; dès qu’on en trouve un, on peut conclure « pas premier » ; on ne conclut « premier » qu’après la boucle.
 
         ```python
         def est_premier(n):
@@ -118,11 +136,15 @@ On veut décider le problème « $n$ est-il premier ? » pour un entier $n \ge
             return True                 # (c) aucun diviseur -> premier
         ```
 
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Placer `return True` dans la boucle (dans un `else`) : la fonction conclurait « premier » dès le premier entier testé qui ne divise pas $n$ (`est_premier(9)` renverrait `True`).
+
     2.  La boucle `for` parcourt un intervalle **fini** ($2$ à $n-1$) : elle se termine forcément, donc la fonction **s’arrête toujours** et renvoie la bonne réponse. Le problème « $n$ est-il premier ? » est donc **décidable**.
 
 ### Le problème de l’arrêt
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Va-t-il s’arrêter ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-13-5 }
+
+<span class="essentiel">• essentiel</span>
 
 Pour chaque appel, dire s’il **s’arrête** ou non, et le justifier brièvement.
 
@@ -150,11 +172,15 @@ def compte(n):                 def mystere(n):
 
     1.  `compte(5)` : `n` vaut $5,4,3,2,1,0$ $\rightarrow$ **s’arrête** (renvoie `"fini"`). `compte(-3)` : `n` vaut $-3,-4,-5,\dots$ et ne vaut **jamais** $0$ $\rightarrow$ **ne s’arrête pas**.
 
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Conclure que `compte(-3)` s’arrête parce que `n` diminue : `n` s’*éloigne* de $0$. Un variant doit être un entier positif qui décroît vers la condition d’arrêt.
+
     2.  `mystere(6)` : `n` vaut $6,3,10,5,16,8,4,2,1$ $\rightarrow$ **s’arrête**.
 
     3.  On a là un programme d’une **extrême simplicité** dont **personne** ne sait s’il s’arrête pour toute entrée. C’est une illustration frappante : prédire l’arrêt d’un programme peut être arbitrairement difficile — et le théorème de l’arrêt dit que, *dans le cas général*, aucune méthode automatique ne peut le faire.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Refaire la preuve du problème de l’arrêt <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-13-6 }
+
+<span class="essentiel">• essentiel</span>
 
 On **suppose** disposer d’une fonction `halt(prog, x)` renvoyant `True` si `prog(x)` s’arrête, `False` sinon. On écrit alors :
 
@@ -181,6 +207,8 @@ def paradoxe(prog):
 
     1.  **Cas 1** : `halt(paradoxe, paradoxe)` vaut `True`, donc le test du `if` est vrai : on exécute `while True` $\rightarrow$ l’appel **ne s’arrête pas**. Or `halt` avait annoncé qu’il s’arrêtait : **contradiction**.
 
+        <span class="erreurfreq">▷ Erreur fréquente.</span> S’arrêter à « on entre dans `while True` » : il faut encore confronter ce comportement à la prédiction de `halt`, qui annonçait l’arrêt, pour obtenir la contradiction.
+
     2.  **Cas 2** : `halt(paradoxe, paradoxe)` vaut `False`, donc le test est faux : on exécute le `else`, qui fait `return` $\rightarrow$ l’appel **s’arrête**. Or `halt` avait annoncé qu’il ne s’arrêtait pas : **contradiction**.
 
     3.  Dans les deux cas, `halt` se trompe : la fonction `halt` **ne peut pas exister**. Le problème de l’arrêt est **indécidable** (Turing, 1936).
@@ -206,6 +234,8 @@ Expliquer en quoi les deux énoncés suivants « tournent en rond », et quel 
     **Lien** : dans les deux cas, un objet **parle de lui-même** et se retourne contre sa propre affirmation. C’est exactement le ressort de `paradoxe(paradoxe)`, qui fait *le contraire* de ce que `halt` prédit de lui : l’**auto-référence**.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 8</span> — La contagion de l’indécidable <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-8 }
+
+<span class="duree">≈ 15 min</span>
 
 On admet le **théorème de l’arrêt** (indécidable). On voudrait maintenant un programme `renvoie42(prog, x)` qui dirait à coup sûr si `prog(x)` finit par renvoyer la valeur $42$.
 
@@ -239,6 +269,8 @@ On admet le **théorème de l’arrêt** (indécidable). On voudrait maintenant 
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 9</span> — Vrai ou faux <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-13-9 }
 
+<span class="essentiel">• essentiel</span>
+
 Répondre **vrai** ou **faux** et justifier d’un mot.
 
 1.  Le langage C est « plus puissant » que Python : il peut calculer des fonctions que Python ne peut pas.
@@ -251,6 +283,10 @@ Répondre **vrai** ou **faux** et justifier d’un mot.
 
 5.  Le problème de l’arrêt serait décidable si on l’écrivait en C plutôt qu’en Python.
 
+??? pouce "Coup de pouce"
+
+    Relire dans le cours les définitions de fonction calculable, de la thèse de Church-Turing et de la Turing-complétude. Pour les affirmations 1, 4 et 5, se demander si elles comparent des langages Turing-complets.
+
 ??? corrige "Corrigé"
 
     1.  **Faux** : C et Python sont tous deux Turing-complets, ils calculent *les mêmes* fonctions.
@@ -258,6 +294,8 @@ Répondre **vrai** ou **faux** et justifier d’un mot.
     2.  **Vrai** : c’est la définition d’une fonction calculable.
 
     3.  **Faux** : la thèse de Church-Turing n’est pas un théorème (elle relie l’intuition de « calcul » à un modèle formel) ; elle est *admise*, jamais démentie.
+
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Parler du « théorème » de Church-Turing : une notion intuitive (« calculer ») ne peut pas entrer dans une démonstration ; la thèse est admise parce qu’elle n’a jamais été démentie.
 
     4.  **Faux** : le nombre d’instructions ne fait pas la puissance ; Brainfuck est Turing-complet, donc aussi puissant que Python (juste beaucoup moins commode).
 
@@ -275,6 +313,10 @@ Pour chaque problème, dire si **vérifier** une solution qu’on vous propose e
 
 3.  « Existe-t-il une tournée passant par ces $30$ villes, de longueur $\le 500$ km ? »
 
+??? pouce "Coup de pouce"
+
+    Pour chaque problème, distinguer deux tâches : contrôler une solution qu’on vous donne, ou la fabriquer soi-même. Pour fabriquer, combien de possibilités faudrait-il essayer ?
+
 ??? corrige "Corrigé"
 
     1.  Trier : **trouver** est facile (algorithme en $n\log n$) et **vérifier** aussi. Problème de classe **P**.
@@ -287,7 +329,7 @@ Pour chaque problème, dire si **vérifier** une solution qu’on vous propose e
 
 On veut colorier les sommets du graphe ci-dessous avec **$3$ couleurs**, sans que deux sommets reliés aient la même couleur.
 
-![](../figures/d8644abfabf4f4b3.svg){ .tikz loading=lazy }
+![](../figures/854d4cd59a3c3ca2.svg){ .tikz loading=lazy }
 
 1.  On vous **propose** le coloriage : A rouge, B vert, C bleu, D rouge, E rouge. Vérifier s’il est correct (parcourir les arêtes). Ce travail de vérification est-il long ?
 
@@ -333,6 +375,8 @@ Un mathématicien annonce un algorithme **polynomial** qui résout le problème 
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Terminaison et problème de l’arrêt (d’après Métropole septembre 2024, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-13 }
 
+<span class="essentiel">• essentiel</span> <span class="duree">≈ 45 min</span>
+
 On dit qu’un appel `f(x)` *termine* lorsque son évaluation renvoie une valeur au bout d’un nombre fini d’étapes.
 
 **Partie A — boucle `while`.**
@@ -355,7 +399,7 @@ def f1(n):
 
     ??? pouce "Coup de pouce"
 
-        Distinguer $n \le 10$ et $n > 10$ : dans quel cas `i` s’éloigne-t-il de $10$ ?
+        Q4 : distinguer $n \le 10$ et $n > 10$ : dans quel cas `i` s’éloigne-t-il de $10$ ?
 
 **Partie B — fonction récursive.**
 
@@ -375,13 +419,13 @@ def f2(n):
 
     ??? pouce "Coup de pouce"
 
-        `n` diminue de $2$ à chaque appel : pour quels `n` atteint-on la condition d’arrêt `n == 0` ?
+        Q7 : `n` diminue de $2$ à chaque appel : pour quels `n` atteint-on la condition d’arrêt `n == 0` ?
 
 4.  Écrire une fonction récursive `infini` telle que `infini(n)` ne termine pour *aucun* entier `n`.
 
     ??? pouce "Coup de pouce"
 
-        Que se passe-t-il pour une fonction récursive sans aucun cas de base ?
+        Q8 : que se passe-t-il pour une fonction récursive sans aucun cas de base ?
 
 **Partie C — le problème de l’arrêt.** On suppose disposer d’une fonction `arret(code_f, x)` qui renvoie `True` si `f(x)` termine et `False` sinon. On écrit :
 
@@ -403,6 +447,8 @@ On dispose d’une variable `code_paradoxe` contenant le code de `paradoxe`, et 
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 6) : Q1 : 0,5 ; Q2 : 0,5 ; Q3 : 0,5 ; Q4 : 0,5 ; Q5 : 0,5 ; Q6 : 0,5 ; Q7 : 0,75 ; Q8 : 0,5 ; Q9 : 0,5 ; Q10 : 0,5 ; Q11 : 0,75
+
     **Partie A.**
 
     1.  `f1(7)` : `i` vaut $7, 8, 9, 10$ $\rightarrow$ le `while` s’arrête, **f1(7) termine** et renvoie $10$.
@@ -419,9 +465,11 @@ On dispose d’une variable `code_paradoxe` contenant le code de `paradoxe`, et 
 
     2.  `f2(5)` : $5 + f2(3) = 5+3+f2(1) = 5+3+1+f2(-1) = \dots$ : on décroît de $2$ à partir d’un impair, on **saute** $0$ et `n` devient négatif sans jamais valoir $0$ $\rightarrow$ **ne termine pas**.
 
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Répondre que `f2(5)` renvoie $5 + 3 + 1 = 9$ : après $1$, l’appel suivant porte sur $-1$, et la condition d’arrêt `n == 0` n’est jamais atteinte (en pratique, Python s’interrompt sur une `RecursionError`).
+
     3.  `f2(n)` termine (pour $n$ entier naturel) si et seulement si **$n$ est pair**.
 
-    4.
+    4.  **Démarche :** une fonction récursive sans aucune condition d’arrêt, dont l’appel récursif ne se rapproche de rien.
 
         ```python
         def infini(n):
@@ -439,6 +487,8 @@ On dispose d’une variable `code_paradoxe` contenant le code de `paradoxe`, et 
     3.  Dans les deux cas, `arret` donne une réponse démentie par les faits : une telle fonction `arret` **ne peut pas exister**.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Un programme comme chaîne de caractères (d’après Asie 2025, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-14 }
+
+<span class="duree">≈ 45 min</span>
 
 En Python, `exec(chaine)` exécute le programme contenu dans la chaîne. On définit :
 
@@ -471,18 +521,19 @@ while x > 0:
 
     ??? pouce "Coup de pouce"
 
-        Que se passe-t-il si le programme passé ne s’arrête pas ?
+        Q4 : que se passe-t-il si le programme passé ne s’arrête pas ?
 
 5.  Une autre idée : décréter qu’un programme s’arrête s’il ne contient pas le mot `"while"`. Écrire `arret_essai2(programme)` qui renvoie `True` si `"while"` **n’apparaît pas** dans `programme`, `False` sinon. Montrer, par un contre-exemple de chaque type, que cette fonction se trompe.
 
     ??? pouce "Coup de pouce"
 
-        Il faut un cas où elle répond `False` à tort et un cas où elle répond `True` à tort. Une boucle `while` est-elle le seul moyen de ne pas s’arrêter ?
+        Q5 : il faut un cas où elle répond `False` à tort et un cas où elle répond `True` à tort. Une boucle `while` est-elle le seul moyen de ne pas s’arrêter ?
 
 6.  On suppose finalement disposer d’une vraie fonction `arret(programme)` (renvoyant `True` si `exec(programme)` termine, `False` sinon). Écrire `terminaison_inverse(programme)` qui **termine** si `programme` ne termine pas, et **ne termine pas** si `programme` termine.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
+        Q6 :  
         `def terminaison_inverse(programme):`  
         `if arret(programme):`  
         `...`
@@ -494,6 +545,8 @@ while x > 0:
 8.  Cette impossibilité est-elle due à une limite du langage Python ?
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 6) : Q1 : 0,5 ; Q2 : 0,5 ; Q3 : 1 ; Q4 : 0,75 ; Q5 : 0,75 ; Q6 : 0,75 ; Q7 : 1,25 ; Q8 : 0,5
 
     1.  À la fin : `x` passe de $10$ à $0$ (dix tours), et `y` monte de $10$ à $20$. Donc **`x` vaut $0$ et `y` vaut $20$**.
 
@@ -528,6 +581,8 @@ while x > 0:
     8.  **Non** : l’impossibilité n’a rien à voir avec Python. Tout langage assez expressif (Turing-complet) permet d’écrire ce même paradoxe : le problème de l’arrêt est indécidable **quel que soit le langage**.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Un correcteur automatique d’exercices (sujet maison, façon bac) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-15 }
+
+<span class="duree">≈ 45 min</span>
 
 Une plateforme d’entraînement en ligne corrige automatiquement les fonctions Python écrites par les élèves. Pour l’exercice « écrire une fonction qui renvoie le carré d’un entier `n` », elle dispose d’une liste de tests, chaque test étant un couple `(entree, resultat_attendu)`, et de la fonction suivante :
 
@@ -570,7 +625,7 @@ tests = [(0, 0), (2, 4), (3, 9)]
 
     ??? pouce "Coup de pouce"
 
-        Essayer chaque fonction sur une entrée qui ne figure pas dans la liste de tests.
+        Q3 : essayer chaque fonction sur une entrée qui ne figure pas dans la liste de tests.
 
 **Partie B — Le piège de la terminaison.**
 
@@ -580,7 +635,7 @@ tests = [(0, 0), (2, 4), (3, 9)]
 
     ??? pouce "Coup de pouce"
 
-        La boucle doit faire autant de tours que la valeur absolue de `n`. Un variant est un entier positif qui diminue strictement à chaque tour.
+        Q5 : la boucle doit faire autant de tours que la valeur absolue de `n`. Un variant est un entier positif qui diminue strictement à chaque tour.
 
     *On pourra utiliser la fonction `abs` de Python, qui renvoie la valeur absolue d’un nombre.*
 
@@ -591,6 +646,8 @@ tests = [(0, 0), (2, 4), (3, 9)]
 5.  Il voudrait aussi une fonction `equivalentes(f, g)` qui dirait, à coup sûr, si deux fonctions renvoient le même résultat pour **toutes** les entrées. Est-ce possible ? Citer le résultat du cours qui permet de répondre.
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 6) : Q1 : 0,5 ; Q2 : 1 ; Q3 : 0,75 ; Q4 : 0,75 ; Q5 : 0,75 ; Q6 : 0,75 ; Q7 : 1 ; Q8 : 0,5
 
     **Partie A.**
 
@@ -626,6 +683,8 @@ tests = [(0, 0), (2, 4), (3, 9)]
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 16</span> — Un antivirus infaillible ? (sujet maison, façon bac) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-16 }
 
+<span class="duree">≈ 45 min</span>
+
 Une jeune entreprise affirme avoir mis au point un antivirus « infaillible ». Son cœur est une fonction `dangereux(code)` qui prend en paramètre le code source d’un programme Python (une chaîne de caractères) et qui renverrait `True` si l’exécution de ce programme **appelle un jour** la fonction `formater_disque()`, et `False` sinon.
 
 **Partie A — Une première version, purement textuelle.**
@@ -636,10 +695,11 @@ Une jeune entreprise affirme avoir mis au point un antivirus « infaillible »
 
     ??? pouce "Coup de pouce"
 
-        Comparer `motif` à chaque tranche `texte[i:i + len(motif)]` : quelles valeurs de `i` faut-il essayer ?
+        Q2 : comparer `motif` à chaque tranche `texte[i:i + len(motif)]` : quelles valeurs de `i` faut-il essayer ?
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
+        Q2 :  
         `def contient(texte, motif):`  
         `n = len(motif)`  
         `for i in range(len(texte) - n + 1):`
@@ -673,13 +733,15 @@ On suppose maintenant qu’une fonction `dangereux(code)` parfaite existe : elle
 
     ??? pouce "Coup de pouce"
 
-        D’après la question 5, demander si `piege` est dangereux revient à poser une autre question sur `programme` : laquelle ?
+        Q6 : d’après la question 5, demander si `piege` est dangereux revient à poser une autre question sur `programme` : laquelle ?
 
 3.  Quelle contradiction obtient-on ? Que peut-on en conclure sur la fonction `dangereux` ?
 
 4.  Quel théorème du cours généralise ce raisonnement ? Les antivirus réels sont-ils pour autant inutiles ? Que doit-on accepter en les utilisant ?
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 6) : Q1 : 0,5 ; Q2 : 1 ; Q3 : 0,5 ; Q4 : 1 ; Q5 : 0,75 ; Q6 : 0,75 ; Q7 : 0,75 ; Q8 : 0,75
 
     **Partie A.**
 
@@ -718,6 +780,8 @@ On suppose maintenant qu’une fonction `dangereux(code)` parfaite existe : elle
     4.  Le **théorème de Rice** : toute question non triviale sur le **comportement** d’un programme est indécidable. Les antivirus réels restent très utiles (signatures de virus connus, analyse des comportements suspects, exécution surveillée…), mais ils doivent accepter de **se tromper parfois** : des fausses alertes et des virus non détectés. Aucun ne peut être infaillible.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 17</span> — Un interpréteur miniature (sujet maison, façon bac) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-17 }
+
+<span class="duree">≈ 60 min</span>
 
 On invente un langage de programmation minuscule. Un programme agit sur une **seule** variable `x`, un entier positif ou nul ; c’est une liste d’instructions, numérotées à partir de $0$, parmi :
 
@@ -766,10 +830,11 @@ def executer(programme, x, limite):
 
     ??? pouce "Coup de pouce"
 
-        Pour `"dec"`, penser au cas où `x` vaut déjà $0$ ; pour `"sinul"`, `mots[1]` est une chaîne, et il y a deux cas selon la valeur de `x`.
+        Q2 : pour `"dec"`, penser au cas où `x` vaut déjà $0$ ; pour `"sinul"`, `mots[1]` est une chaîne, et il y a deux cas selon la valeur de `x`.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
+        Q2 :  
         `elif mots[0] == "dec":`  
         `if x > 0:`  
         `x = x - 1`  
@@ -783,7 +848,7 @@ def executer(programme, x, limite):
 
     ??? pouce "Coup de pouce"
 
-        Dérouler `P3` avec `x` valant $2$, puis $3$, et comparer les deux exécutions.
+        Q5 : dérouler `P3` avec `x` valant $2$, puis $3$, et comparer les deux exécutions.
 
 6.  On propose la fonction suivante :
 
@@ -799,6 +864,8 @@ def executer(programme, x, limite):
 8.  On enrichit ce langage (plusieurs variables, nouvelles instructions) jusqu’à le rendre **Turing-complet**. Existe-t-il alors un programme qui décide, pour tout programme de ce langage et toute valeur de départ, s’il s’arrête ? Justifier à l’aide du cours.
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 8) : Q1 : 0,5 ; Q2 : 1 ; Q3 : 1 ; Q4 : 1 ; Q5 : 1,25 ; Q6 : 1 ; Q7 : 1 ; Q8 : 1,25
 
     1.  Le programme est donné sous forme d’une **liste de chaînes de caractères** : c’est une simple **donnée**. `executer` est un **interpréteur**, exactement comme `python3`, qui lit et exécute le texte d’un programme Python.
 
@@ -834,7 +901,9 @@ def executer(programme, x, limite):
 
 Un élève demande à un assistant d’IA : « Le problème de l’arrêt est indécidable : cela veut-il dire qu’on ne peut jamais savoir si un programme s’arrête ? » Voici la réponse obtenue :
 
-> « Le problème de l’arrêt consiste à décider, pour un programme `P` et une entrée `E` quelconques, si `P` lancé sur `E` s’arrête. Alan Turing a démontré en 1936 qu’aucun algorithme ne peut le résoudre dans tous les cas : on suppose qu’un tel programme `halt` existe, on construit un programme `paradoxe` qui fait le contraire de ce que `halt` prédit sur lui-même, et l’on aboutit à une contradiction. Ce résultat ne dépend pas du langage : il vaut pour tout langage Turing-complet, Python compris. Conséquence directe : il est impossible de prouver qu’un programme donné s’arrête ; la seule chose que l’on puisse faire est de l’exécuter et d’attendre. C’est aussi pourquoi de nombreuses questions sur le comportement d’un programme (renvoie-t-il toujours 0 ? affiche-t-il un jour quelque chose ?) sont elles aussi indécidables. »
+!!! encadre "Réponse de l’assistant"
+
+    « Le problème de l’arrêt consiste à décider, pour un programme `P` et une entrée `E` quelconques, si `P` lancé sur `E` s’arrête. Alan Turing a démontré en 1936 qu’aucun algorithme ne peut le résoudre dans tous les cas : on suppose qu’un tel programme `halt` existe, on construit un programme `paradoxe` qui fait le contraire de ce que `halt` prédit sur lui-même, et l’on aboutit à une contradiction. Ce résultat ne dépend pas du langage : il vaut pour tout langage Turing-complet, Python compris. Conséquence directe : il est impossible de prouver qu’un programme donné s’arrête ; la seule chose que l’on puisse faire est de l’exécuter et d’attendre. C’est aussi pourquoi de nombreuses questions sur le comportement d’un programme (renvoie-t-il toujours 0 ? affiche-t-il un jour quelque chose ?) sont elles aussi indécidables. »
 
 1.  La réponse est-elle correcte ? Pour le vérifier, considérer le programme ci-dessous : peut-on affirmer, *sans l’exécuter*, qu’il s’arrête ? Comment ?
 
@@ -864,7 +933,7 @@ Un élève demande à un assistant d’IA : « Le problème de l’arrêt est in
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-13-19 }
 
-Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
+Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans lire ses notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 
 1.  Expliquer à un camarade de Première en quoi « un **programme** est aussi une **donnée** », avec des exemples.
 
@@ -872,7 +941,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
 3.  Expliquer pourquoi « **indécidable** » ne veut pas dire « on ne sait jamais répondre ».
 
-**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus, puis retourner la feuille. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire de notes** : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
+**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus : comme au Grand Oral, ces notes servent d’aide-mémoire. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire ses notes** et sans rien écrire : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
 
 ??? pouce "Coup de pouce"
 

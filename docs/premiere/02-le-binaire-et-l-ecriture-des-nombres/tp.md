@@ -288,7 +288,7 @@ Rappel du cours : le OU exclusif (*xor*) vaut `"1"` lorsque **exactement un** de
 
 Le cours l’a établi : en additionnant deux bits, la **somme** est donnée par une porte **xor** et la **retenue** par une porte **et**. On programme maintenant ce circuit, en réutilisant les portes de la partie précédente.
 
-![](../figures/9208daa0d68e5202.svg){ .tikz loading=lazy }
+![](../figures/cf5df59dc47977c5.svg){ .tikz loading=lazy }
 
 \[ sur machine \]  Écrire `demi_additionneur(a, b)` qui renvoie la chaîne `retenue + somme`. C’est donc exactement $a + b$ écrit en binaire sur deux bits.
 
@@ -310,7 +310,7 @@ Le cours l’a établi : en additionnant deux bits, la **somme** est donnée par
 
 Pour additionner des nombres de plusieurs bits, chaque colonne reçoit **trois** bits : `a`, `b` et la retenue `r` venue de la colonne de droite. L’additionneur complet se construit avec **deux demi-additionneurs** et une porte OU :
 
-![](../figures/1ce44473f554a47a.svg){ .tikz loading=lazy }
+![](../figures/644b50c5d84da3c1.svg){ .tikz loading=lazy }
 
 \[ sur machine \]  Écrire `additionneur_complet(a, b, r)` qui renvoie `retenue + somme` de $a+b+r$, en appelant deux fois `demi_additionneur`. Si `d1 = demi_additionneur(a, b)`, alors `d1[0]` est la retenue et `d1[1]` la somme.
 
@@ -534,7 +534,7 @@ Les quatre tests passent, la fonction est donc correcte. »
 
 ## Le matériel en deux minutes
 
-![](../figures/250263a7db3512b8.svg){ .tikz loading=lazy }
+![](../figures/74f33919dd9d683e.svg){ .tikz loading=lazy }
 
 La rampe est une barre inclinée terminée par un crochet : la bille roule jusqu’au crochet, la rampe bascule et lâche la bille de ce côté, puis le **contrepoids** (le rond) la remet en place. Le bit, lui, n’a pas de contrepoids : il **reste** dans sa nouvelle position.
 
@@ -553,7 +553,7 @@ La rampe est une barre inclinée terminée par un crochet : la bille roule jusqu
 
     Un bit qui pointe **à droite** vaut `1` ; un bit qui pointe **à gauche** vaut `0`. Quand une bille le traverse, elle tombe du côté **opposé** à la flèche, puis le bit **bascule**.
 
-![](../figures/b82f39e5df3c57d2.svg){ .tikz loading=lazy }
+![](../figures/0d2043fa9a0a04b6.svg){ .tikz loading=lazy }
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Table du bit <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-tp-2-1 }
 
@@ -578,7 +578,7 @@ Quelle opération le bit réalise-t-il sur sa propre valeur ? Quelle porte logiq
 
 Un bit peut servir d’**entrée** : on le règle à la main avant de lancer la bille (`1` = vrai, `0` = faux). La bille teste les bits l’un après l’autre et finit dans l’intercepteur **T** (vrai, *true*) ou **F** (faux, *false*). Voici deux montages, testés dans le simulateur, qui ne diffèrent que par l’orientation de quelques rampes.
 
-![](../figures/8dcacc5c44439b1f.svg){ .tikz loading=lazy }
+![](../figures/325e5def83590039.svg){ .tikz loading=lazy }
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 2</span> — Deux portes à reconnaître <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-tp-2-2 }
 
@@ -616,7 +616,7 @@ Un bit peut servir d’**entrée** : on le règle à la main avant de lancer la 
 
 Voici le montage du puzzle **21** (« Quantum Number ») : quatre bits **empilés en colonne** forment le registre A, entourés de rampes. Le bit du **haut** vaut 1, le suivant 2, puis 4, puis 8. La valeur du registre est la somme des poids des bits qui pointent à droite.
 
-![](../figures/b0bc3a0318dbed58.svg){ .tikz loading=lazy }
+![](../figures/bc093d80c2e0ea7d.svg){ .tikz loading=lazy }
 
 !!! propriete "Propriété 4 — Un registre compte en binaire"
 
@@ -626,7 +626,7 @@ Voici le montage du puzzle **21** (« Quantum Number ») : quatre bits **empilé
 
 \[ à la main \]  Donner la valeur de chaque registre (le bit du haut vaut 1).
 
-![](../figures/b99d03c50ae79f65.svg){ .tikz loading=lazy }
+![](../figures/e483ac4ff9501dc9.svg){ .tikz loading=lazy }
 
 ??? corrige "Corrigé"
 
@@ -685,7 +685,7 @@ Voici le montage du puzzle **21** (« Quantum Number ») : quatre bits **empilé
 
 En retournant les rampes de l’autre côté du registre, il **décompte** : chaque bille retire 1 (puzzle **22**, « Depletion »).
 
-![](../figures/72edbbd3f32c3795.svg){ .tikz loading=lazy }
+![](../figures/eb407882ee750601.svg){ .tikz loading=lazy }
 
 1.  \[ à la main \]  Comparer avec le compteur : pourquoi suffit-il de changer les rampes de côté pour passer de « $+1$ » à « $-1$ » ? (Penser à la règle de l’emprunt quand on pose $\texttt{1000} - 1$.)
 
@@ -701,7 +701,7 @@ En retournant les rampes de l’autre côté du registre, il **décompte** : cha
 
 En complément à deux, $-A$ s’obtient en **inversant** tous les bits de $A$, puis en **ajoutant 1**. La machine sait faire les deux, avec le *même* registre : il suffit de changer l’orientation des quatre rampes situées juste à droite des bits. Ces montages ont été testés dans le simulateur.
 
-![](../figures/1d6fb8aca40b43a5.svg){ .tikz loading=lazy }
+![](../figures/2d862c2f2bf0b932.svg){ .tikz loading=lazy }
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Calculer $-4$ avec deux billes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-tp-2-9 }
 

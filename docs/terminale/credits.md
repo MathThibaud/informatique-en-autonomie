@@ -2,7 +2,10 @@
 
 *Illustrations d’ouverture de chapitre* — dessins originaux de l’auteur.
 
-Panorama de l’année
+Présentation et panorama de l’année
+
+*Capture d’écran du logiciel Spyder (logiciel libre, licence MIT)* — capture réalisée par l’auteur — licence MIT pour le logiciel  
+<https://www.spyder-ide.org>
 
 *Leonhard Euler (portrait de 1753)* — Jakob Emanuel Handmann — domaine public  
 <https://commons.wikimedia.org/wiki/File:Leonhard_Euler.jpg>

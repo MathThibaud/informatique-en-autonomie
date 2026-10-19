@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *« Algorithmes sur les tableaux »* : *parcours séquentiel* d’un tableau ; *recherche* d’un élément ; calcul de la *moyenne*, du *minimum*, du *maximum* ; *notion de coût* d’un algorithme (coût *linéaire*). |
-| **Prérequis** | les boucles `for`/`while`, les fonctions, et les **tableaux** (chapitre *Les types construits* : indices, `len`, parcours). |
+| **Prérequis** | les boucles `for`/`while`, les fonctions, et les **tableaux** (chapitre *Les types construits* : indices, `len`, parcours). (→ fiches de révision : ch. 1, ch. 3) |
 | **Objectifs** | reconnaître et écrire le **patron** du parcours séquentiel ; le décliner (somme, moyenne, comptage, recherche, min/max) ; **évaluer et comparer** le coût d’un algorithme. |
+
+!!! situation "Situation de départ"
+
+    1.  Pour savoir si un jour de l’année a atteint 40 °C, faut-il forcément lire tous les relevés de température ? Et pour trouver la température la plus basse ?
+
+    2.  Si l’on double le nombre de relevés, le programme met-il toujours deux fois plus de temps ?
+
+    3.  Comment être certain qu’une fonction qui cherche le plus grand nombre d’une liste répond juste pour *toutes* les listes, et pas seulement pour celles qu’on a essayées ?
 
 !!! remarque "Remarque — Le fil conducteur : un patron, et sa facture"
 
@@ -34,7 +42,7 @@ La plupart des traitements suivent le même **squelette**, dit motif de l’**ac
 
     Écrire un algorithme de parcours, c’est simplement **choisir** l’initialisation et la mise à jour.
 
-!!! remarque "Remarque — Par élément ou par indice ?"
+!!! encadre "Méthode — Par élément ou par indice ?"
 
     On parcourt **par élément** (`for x in t`) quand seules les valeurs comptent ; **par indice** (`for i in range(len(t))`) quand on a besoin de la position (ou pour *modifier* le tableau). Les deux réalisent le même parcours.
 
@@ -70,7 +78,7 @@ La plupart des traitements suivent le même **squelette**, dit motif de l’**ac
         return c
     ```
 
-!!! remarque "Remarque — Le bon élément neutre"
+!!! encadre "À retenir — Le bon élément neutre"
 
     On initialise l’accumulateur avec l’**élément neutre** de l’opération : `0` pour une somme ou un compteur, `1` pour un produit, `""` pour concaténer du texte, `[]` pour construire un tableau.
 
@@ -103,11 +111,11 @@ def indice(t, x):
 
 !!! remarque "Remarque — « Sortir tôt » : un réflexe utile"
 
-    Renvoyer dès qu’on a trouvé évite de parcourir inutilement la fin du tableau. C’est correct *et* souvent plus rapide — on y revient au §V (meilleur/pire cas).
+    Renvoyer dès qu’on a trouvé évite de parcourir inutilement la fin du tableau. C’est correct *et* souvent plus rapide — on y revient au § V (meilleur/pire cas).
 
 <span id="cours-04-5" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-04-5) à [7](exercices.md#ex-04-7)** (recherche séquentielle)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-04-5) à [7](exercices.md#ex-04-7)** et **[26](exercices.md#ex-04-26)** (recherche séquentielle)
 
 ## Le plus grand, le plus petit : l’invariant du champion
 
@@ -124,15 +132,19 @@ def maximum(t):               # t suppose NON vide
 
 Déroulons `maximum([4, 9, 2, 11, 7, 3])`. Les barres sont les éléments, dans l’ordre de visite ; le trait **orange** est la valeur de `m` *après* chaque tour. Il ne fait que **monter**, et seulement quand un nouveau champion (barre colorée) apparaît.
 
-![](../figures/0e943e60cf7b5d1f.svg){ .tikz loading=lazy }
+![](../figures/3257f3940e6975d4.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 3 — Un invariant de boucle"
 
     À **chaque** tour, la variable `m` contient le maximum des éléments **déjà vus**. Cette propriété, vraie au départ et préservée à chaque tour, s’appelle un **invariant de boucle** : elle *garantit* qu’à la fin, `m` est bien le maximum de *tout* le tableau. C’est ainsi qu’on **prouve** qu’un algorithme est correct.
 
+<span class="retouract">↺ Retour sur l'activité.</span> La carte en main du chercheur, dans l’activité « La carte la plus haute », était ce champion : à tout moment, c’était la plus haute des cartes déjà retournées. Impossible de s’arrêter avant la fin de la pile : la dernière carte pouvait être plus haute.
+
 !!! remarque "Remarque — Pourquoi initialiser avec t[0] et non 0 ?"
 
     Initialiser à `0` donnerait un résultat faux sur un tableau de nombres tous négatifs (le maximum de `[-3, -7]` est `-3`, pas `0`). On part donc d’un **vrai** élément du tableau. Pour le minimum, on remplace `>` par `<`.
+
+<span class="retouract">↺ Retour sur l'activité.</span> Les températures $-3$, $-8$, $-1$, $-5$, $-6$ de l’activité le montraient : en partant d’une carte imaginaire de valeur $0$, le camarade annonçait $0$, une valeur absente du paquet, au lieu de $-1$.
 
 !!! exemple "Exemple — Renvoyer aussi la position"
 
@@ -173,7 +185,7 @@ Dire qu’une propriété est un invariant, cela ne se devine pas : cela se **d�
 
 !!! exemple "Exemple — Un second invariant : la somme"
 
-    Pour `somme` (§II), propriété $P$ : « `s` contient la somme des éléments déjà visités ».
+    Pour `somme` (§ II), propriété $P$ : « `s` contient la somme des éléments déjà visités ».
 
     - **Initialisation** : avant le premier tour, aucun élément n’est visité et `s = 0` : la somme de rien vaut `0`. $P$ est vraie.
 
@@ -181,13 +193,13 @@ Dire qu’une propriété est un invariant, cela ne se devine pas : cela se **d�
 
     À la fin, `s` est la somme du tableau entier. $\square$
 
-!!! remarque "Remarque — Bien choisir l’invariant : « déjà visités »"
+!!! encadre "Méthode — Bien choisir l’invariant : « déjà visités »"
 
     La clé est presque toujours la même formulation : « la variable contient le résultat **pour les éléments déjà visités** ». C’est cette petite phrase qui rend l’hérédité facile à écrire. On retrouvera les invariants au chapitre *Spécifier et mettre au point ses programmes* (les vérifier par un `assert`), puis pour justifier les tris.
 
 <span id="cours-04-8" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[8](exercices.md#ex-04-8) à [13](exercices.md#ex-04-13)** (minimum, mot le plus long, position du champion, amplitude, moyenne sans la pire note, deuxième plus grand) et **[14](exercices.md#ex-04-14) à [16](exercices.md#ex-04-16)** (invariants)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[8](exercices.md#ex-04-8) à [13](exercices.md#ex-04-13)** (minimum, mot le plus long, position du champion, amplitude, moyenne sans la pire note, deuxième plus grand), **[25](exercices.md#ex-04-25)** (dérouler la recherche du maximum) et **[14](exercices.md#ex-04-14) à [16](exercices.md#ex-04-16)** (invariants)
 
 ## Combien ça coûte ?
 
@@ -197,9 +209,11 @@ Deux algorithmes peuvent tous deux être *corrects*, mais l’un être bien plus
 
     Le **coût** d’un algorithme est le nombre d’opérations élémentaires qu’il effectue, exprimé en fonction de la taille `n` des données. Un parcours simple fait un nombre d’opérations **proportionnel à `n`** : on dit que son coût est **linéaire**.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Pour 10 cartes, le chercheur faisait 9 comparaisons, pour 52 cartes 51, et $n - 1$ pour $n$ cartes, quel que soit l’ordre de la pile : si le paquet double, le travail double. C’est un coût linéaire.
+
 Toutes les fonctions vues jusqu’ici (`somme`, `moyenne`, `maximum`, `est_present`…) font **un** parcours : leur coût est **linéaire**. Si l’on double `n`, le temps double.
 
-!!! remarque "Remarque — Meilleur cas, pire cas — l’exemple de la recherche"
+!!! encadre "À retenir — Meilleur cas, pire cas : l’exemple de la recherche"
 
     La recherche séquentielle ne coûte pas toujours pareil :
 
@@ -248,7 +262,7 @@ Ici, un parcours pour la moyenne, un parcours pour la somme : environ `2n` opér
 
 Chaque case représente une opération, pour un tableau de $n = 6$ éléments. Dans `variance_naive`, *chaque* tour de boucle (une ligne) refait tout le parcours de `moyenne` : on remplit un **carré** de $6 \times 6 = 36$ cases. Dans `variance`, deux parcours *l’un après l’autre* : $2 \times 6 = 12$ cases seulement.
 
-![](../figures/c8191e19ce4906cf.svg){ .tikz loading=lazy }
+![](../figures/7bf4afbddcb88ee7.svg){ .tikz loading=lazy }
 
 Ces ordres de grandeur se vérifient au chronomètre (TP proposé en fin de chapitre) : quand $n$ double, le temps de `variance_naive` est multiplié par 4, celui de `variance` par 2.
 
@@ -256,13 +270,9 @@ Ces ordres de grandeur se vérifient au chronomètre (TP proposé en fin de chap
 
     *Où* l’on place un calcul change tout. Un calcul qui ne dépend pas de la boucle doit être **sorti** de la boucle. Placer un parcours *à l’intérieur* d’un autre parcours fait passer le coût de **linéaire** ($n$) à **quadratique** ($n^2$) — pour $n = 1000$, on passe de quelques milliers à un **million** d’opérations.
 
-!!! remarque "Remarque — Reconnaître le quadratique au-delà du programme"
+!!! curieux "Pour les curieux (facultatif) — Reconnaître le quadratique"
 
     Deux boucles **imbriquées** sur le même tableau (ou un appel de parcours *dans* une boucle) sont le signe d’un coût quadratique. En notation savante, on écrit un coût linéaire $O(n)$ et un coût quadratique $O(n^2)$ (notation « grand O », que vous formaliserez en terminale).
-
-!!! remarque "Remarque — En Terminale"
-
-    Le même patron de parcours s’applique à d’autres structures : les listes chaînées (*Structures linéaires : piles, files, listes chaînées*), puis des structures qui ne sont plus « en ligne » (*Les arbres*, *Les graphes*). La recherche séquentielle se prolonge dans *La recherche textuelle*.
 
 <span id="cours-04-17" class="ancre"></span>
 
@@ -270,13 +280,17 @@ Ces ordres de grandeur se vérifient au chronomètre (TP proposé en fin de chap
 
 ## Un peu d’histoire
 
-!!! remarque "Remarque — Du mot « algorithme » à l’analyse de leur coût"
+!!! curieux "Pour les curieux (facultatif) — Du mot « algorithme » à l’analyse de leur coût"
 
     Le mot **algorithme** vient du savant persan **al-Khwârizmî** (IX<sup>e</sup> siècle), dont le nom latinisé donna *algorismus*. Mais *mesurer* le coût d’un algorithme est bien plus récent : la notation « grand O » est due aux mathématiciens **Paul Bachmann** (1894) et **Edmund Landau**, et c’est **Donald Knuth** qui, à partir des années 1960, en fait l’outil central de l’*analyse des algorithmes* dans son œuvre monumentale *The Art of Computer Programming*. Choisir le bon algorithme, et pas seulement un algorithme correct, est depuis au cœur de l’informatique : sur des milliards de données, la différence entre linéaire et quadratique, c’est la différence entre une seconde et… des années.
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    Le patron du parcours généralise l’**accumulateur** du chapitre *Les bases de la programmation Python* et resservira partout : boucle interne du **tri par sélection**, étalon de la **dichotomie**, filtres sur les **données en tables**, distances des **$k$ plus proches voisins**. En Terminale, la **programmation dynamique** pousse à l’extrême la leçon de la variance : ne jamais recalculer.
+    - **Ce qu’il réutilise.** Le patron du parcours généralise l’**accumulateur** des *Bases de la programmation Python* et s’applique aux tableaux des *Types construits*.
+
+    - **Ce qu’il prépare.** Il resservira partout : boucle interne du **tri par sélection**, point de comparaison pour la **dichotomie**, filtres sur les **données en tables**, distances des **$k$ plus proches voisins**.
+
+    - **En Terminale.** Le même patron parcourra les listes chaînées, les arbres et les graphes ; la **programmation dynamique** poussera à l’extrême la leçon de la variance : ne jamais recalculer.
 
 ## Bilan — la carte mémoire
 
@@ -291,6 +305,14 @@ Ces ordres de grandeur se vérifient au chronomètre (TP proposé en fin de chap
 | Coût linéaire | un parcours : $\approx n$ opérations (recherche : pire cas = absent) |
 | Coût quadratique | un parcours *dans* un parcours : $\approx n^2$ (piège de la variance !) |
 | Le réflexe | **sortir de la boucle** ce qui n’en dépend pas |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Pour 40 °C, non : la **recherche séquentielle** s’arrête dès qu’elle trouve (§ III) ; seul le pire cas, aucun jour à 40 °C, oblige à tout lire (§ V). Pour la plus basse, oui : on garde un **champion** jusqu’au bout, car la dernière valeur peut être la plus basse (§ IV).
+
+    2.  Pour un parcours simple, oui : son coût est **linéaire**. Mais un parcours placé *dans* un autre (la variance naïve) a un coût **quadratique** : le temps est multiplié par 4 (§ V).
+
+    3.  On prouve un **invariant de boucle** : « `m` contient le maximum des éléments déjà visités », vrai au départ (initialisation) et conservé à chaque tour (hérédité) ; à la fin, tout a été visité (§ IV).
 
 ## Erreurs fréquentes
 

@@ -1,10 +1,14 @@
 # Sujet 25 — Arbre binaire de recherche
 
+<span id="sujet-25" class="ancre"></span>[$\blacktriangleright$ corrigé](#csujet-25)
+
 !!! fichiers "Fichiers à télécharger"
 
     [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-25-abr){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-25-abr.zip){ .md-button }
 
 ??? corrige "Corrigé"
+
+    <span id="csujet-25" class="ancre"></span>[$\uparrow$ énoncé](#sujet-25)
 
     !!! remarque "Remarque"
 
@@ -22,7 +26,7 @@
 
     - `4` à gauche de `6` ; `7` à droite de `6`.
 
-    ![](../figures/1c6de196589b8628.svg){ .tikz loading=lazy }
+    ![](../figures/c69b698f813f4bc7.svg){ .tikz loading=lazy }
 
     La hauteur est `4` (chemin `8`, `3`, `6`, `4`) :
 
@@ -192,6 +196,8 @@ Le dossier fourni au candidat comporte les éléments suivants :
 
 ??? corrige "Corrigé"
 
+    <span id="csujet-25" class="ancre"></span>[$\uparrow$ énoncé](#sujet-25)
+
     !!! remarque "Remarque"
 
         On donne une version simple ; d’autres réponses sont possibles. Le fichier complet, `corrige_sujet_25.py`, est en ligne : [`github.com/MathThibaud/nsi-fichiers-eleves/tree/main/corriges/terminale/pratique-25`](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/corriges/terminale/pratique-25).
@@ -208,7 +214,7 @@ Le dossier fourni au candidat comporte les éléments suivants :
 
     - `4` à gauche de `6` ; `7` à droite de `6`.
 
-    ![](../figures/1c6de196589b8628.svg){ .tikz loading=lazy }
+    ![](../figures/c69b698f813f4bc7.svg){ .tikz loading=lazy }
 
     La hauteur est `4` (chemin `8`, `3`, `6`, `4`) :
 

@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *« Protocoles de routage. Identifier, suivant le protocole de routage utilisé, la route empruntée par un paquet. »* Commentaire du programme : *« En mode débranché, les tables de routage étant données, on se réfère au nombre de sauts (protocole RIP) ou au coût des routes (protocole OSPF). Le lien avec les algorithmes de recherche de chemin sur un graphe est mis en évidence. »* |
-| **Prérequis** | la notion de **réseau** et d’**adresse IP** (Première), les **graphes** (chemins, plus court chemin), la notion de **coût**. L’algorithme de **Dijkstra** (projet du chapitre *Graphes*) éclaire OSPF, mais n’est **pas exigé** (voir la section dédiée, au-delà du programme). |
+| **Prérequis** | la notion de **réseau** et d’**adresse IP** (Première), les **graphes** (chemins, plus court chemin), la notion de **coût**. L’algorithme de **Dijkstra** (projet du chapitre *Graphes*) éclaire OSPF, mais n’est **pas exigé** (voir la section dédiée, au-delà du programme). (→ fiches de révision : ch. 8) |
 | **Objectifs** | *distinguer* machine, switch et routeur ; *comprendre* le voyage d’un paquet à travers les *couches* ; *lire* et *utiliser* une table de routage **donnée** ; *identifier* la route empruntée par un paquet selon le protocole (sauts pour RIP, coûts pour OSPF), et *compléter* la table d’un petit réseau ; *comparer* les choix de RIP et d’OSPF. |
+
+!!! situation "Situation de départ"
+
+    1.  Votre message traverse une dizaine de machines avant d’arriver à l’autre bout du monde. Comment chacune sait-elle à qui le transmettre, sans connaître le trajet complet ?
+
+    2.  Si un câble est coupé pendant l’envoi, pourquoi la suite du message arrive-t-elle quand même ?
+
+    3.  Entre une route qui traverse peu de machines et une route plus longue mais faite de liaisons rapides, laquelle choisir ?
 
 ## Le problème : relier des milliards de machines
 
@@ -26,7 +34,7 @@ C’est toute la question de ce chapitre. **Internet** n’est pas une machine g
 
     Un **réseau local** (LAN) regroupe des machines proches partageant la même **adresse réseau**. Un **switch** (commutateur) relie les machines *à l’intérieur* d’un même réseau local. Un **routeur** relie *plusieurs réseaux locaux entre eux* : il possède plusieurs **interfaces** (cartes réseau), une par réseau auquel il est raccordé. **Internet $=$ l’interconnexion de tous ces réseaux par des routeurs.**
 
-![](../figures/6b7b45e89cd9fff9.svg){ .tikz loading=lazy }
+![](../figures/2d71d3dd0e29f129.svg){ .tikz loading=lazy }
 
 Dans un réseau local, un paquet destiné à une machine *du même réseau* y va directement via le switch. Mais s’il vise une machine d’un *autre* réseau, le switch le remet au **routeur**, qui devra l’aiguiller de proche en proche jusqu’au bon réseau.
 
@@ -56,17 +64,19 @@ L’intérêt de CIDR, c’est que `n` peut prendre **n’importe quelle valeur*
 
 <span id="cours-09-2" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[2](exercices.md#ex-09-2) à [4](exercices.md#ex-09-4)** (lire une adresse IP ; adressage IP ; dimensionner des sous-réseaux)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[2](exercices.md#ex-09-2) à [4](exercices.md#ex-09-4) et [18](exercices.md#ex-09-18)** (lire une adresse IP ; adressage IP ; dimensionner des sous-réseaux ; adresses de réseau en série)
 
 ## Le voyage d’un paquet : le modèle en couches
 
 Comment une même donnée peut-elle à la fois s’adresser à *une application* précise, être acheminée d’un *bout à l’autre* d’Internet, et circuler sur *un câble* local ? En empilant plusieurs **couches**, chacune ne s’occupant que d’une chose. C’est le modèle **TCP/IP**.
 
-![](../figures/f2bc9047a65e9042.svg){ .tikz loading=lazy }
+![](../figures/ec495e54aeb8975d.svg){ .tikz loading=lazy }
 
 À l’émission, la donnée **descend** les couches : chacune ajoute son **en-tête** (son étiquette) — c’est l’**encapsulation**, comme des enveloppes emboîtées. À l’arrivée, la donnée **remonte** : chaque couche retire son en-tête et transmet le reste au-dessus.
 
-![](../figures/8bf6c0060d9fc095.svg){ .tikz loading=lazy }  
+<span class="retouract">↺ Retour sur l'activité.</span> L’étiquette collée sur chaque paquet de l’activité (expéditeur, destinataire, numéro, compteur) était un **en-tête**. Celui de la couche Réseau (IP) porte bien les adresses, et le compteur qui faisait jeter le paquet tournant en rond entre A et B y existe vraiment.
+
+![](../figures/4478ed23f2cb7190.svg){ .tikz loading=lazy }  
 **Encapsulation :** en descendant les couches, chaque en-tête s’ajoute **à gauche** du bloc précédent. À l’arrivée, on les retire un à un.
 
 Ce chapitre se concentre sur la couche **Réseau (IP)** : c’est là que se joue le **routage**.
@@ -82,6 +92,8 @@ Plutôt que de réserver une ligne entière pour toute la durée d’un échange
 !!! propriete "Propriété 1 — Pourquoi des paquets ?"
 
     La commutation de paquets **partage** efficacement les liens entre tous les échanges, et surtout elle est **robuste** : si un routeur ou un câble tombe, les paquets suivants *contournent* la panne par un autre chemin. C’est cette robustesse qui a fondé Internet.
+
+<span class="retouract">↺ Retour sur l'activité.</span> Le message de Léa, découpé en $5$ paquets numérotés, voyageait ainsi : chaque paquet porte l’adresse de Hugo parce qu’il voyage seul, son numéro permet de recoller les morceaux arrivés dans le désordre, et après la coupure du câble B–D les paquets suivants passaient par C, toujours en $3$ sauts.
 
 ## Le routage : la table de routage
 
@@ -101,13 +113,15 @@ Un routeur qui reçoit un paquet consulte sa **table de routage** : pour chaque 
 
 Comment remplir ces tables ? Deux façons : le **routage statique** (chaque ligne écrite à la main — possible seulement pour de tout petits réseaux) et le **routage dynamique**, où des **protocoles** découvrent les routes automatiquement. C’est ce dernier qui nous intéresse.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Chaque élève-routeur tenait une table de routage : B ne connaissait pas le chemin jusqu’à Hugo, seulement le voisin à qui transmettre (D). Après la panne, corriger les tables à la main était faisable pour six routeurs, impossible pour des millions : c’est le travail des protocoles de routage dynamique.
+
 !!! regle "Règle 2 — Un réseau de routeurs $=$ un graphe"
 
     Modélisons : chaque **routeur** est un **sommet**, chaque **liaison** entre routeurs est une **arête**. Trouver la meilleure route, c’est chercher un **plus court chemin** dans ce graphe. Les protocoles de routage sont donc des **algorithmes de graphes** — ceux du chapitre *Graphes* !
 
 Prenons ce réseau pour toute la suite (les nombres sur les liens seront expliqués plus loin) :
 
-![](../figures/eb0e4f04a15f0e63.svg){ .tikz loading=lazy }
+![](../figures/459eafbd831143ad.svg){ .tikz loading=lazy }
 
 <span id="cours-09-6" class="ancre"></span>
 
@@ -138,7 +152,7 @@ Le protocole **RIP** (*Routing Information Protocol*) mesure une route par son *
 
     Voici un réseau à **six** routeurs (les nombres sont des débits, ignorés par RIP) :
 
-    ![](../figures/1879fbb9798f0e18.svg){ .tikz .tikz-inline loading=lazy }
+    ![](../figures/4267d45c07534da9.svg){ .tikz .tikz-inline loading=lazy }
 
     Table de routage **RIP** de A (on compte les sauts en remontant de proche en proche) :
 
@@ -150,13 +164,13 @@ Le protocole **RIP** (*Routing Information Protocol*) mesure une route par son *
     | réseau de E |      C      |  2 (A–C–E)  |
     | réseau de F |      B      | 3 (A–B–D–F) |
 
-!!! remarque "Remarque"
+!!! encadre "À retenir — les limites de RIP"
 
     RIP est simple, mais il a deux gros défauts : ses messages périodiques **encombrent** le réseau, et il est **plafonné à 15 sauts** (au-delà, la destination est réputée inaccessible). Surtout, il ne regarde que le *nombre* de routeurs, jamais leur *vitesse* : un saut par une liaison poussive compte autant qu’un saut par la fibre. D’où OSPF.
 
 <span id="cours-09-7" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[7](exercices.md#ex-09-7)** (construire une table RIP)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[7](exercices.md#ex-09-7) et [19](exercices.md#ex-09-19)** (construire une table RIP ; tables RIP en série)
 
 ## OSPF : le coût des liens
 
@@ -166,7 +180,7 @@ Le protocole **RIP** (*Routing Information Protocol*) mesure une route par son *
 
     Le **coût** d’une liaison se calcule à partir de son débit : $$\text{coût} = \frac{10^8}{\text{débit (en bits/s)}}.$$ La **métrique d’une route** est la **somme des coûts** des liaisons traversées. Chaque routeur connaît la carte complète du réseau (*état de liens*) et en déduit les routes de coût minimal (en coulisses, par l’algorithme de **Dijkstra** : voir la dernière section sur le routage, au-delà du programme). Sur les petits réseaux du bac, on trouve ces routes en comparant les coûts totaux de quelques chemins.
 
-!!! remarque "Remarque"
+!!! encadre "Au bac — lire la formule de coût donnée par l’énoncé"
 
     Le **$10^8$ n’est qu’une convention** (une « bande passante de référence », ici $100$ Mbit/s) : selon les énoncés, on rencontre aussi $10^9$ ou $10^{10}$, ce qui ne change pas *quelle* route est la meilleure, seulement l’échelle des coûts. Dans la vraie norme OSPF, le coût est de plus **arrondi à un entier** (avec un minimum de $1$). Il faut donc toujours **lire la formule donnée dans l’énoncé** avant de calculer.
 
@@ -205,7 +219,7 @@ Le protocole **RIP** (*Routing Information Protocol*) mesure une route par son *
 
     Voici un réseau plus étendu ; les nombres sont les **débits** (Mbps). On applique OSPF (coût $=10^8/$débit) depuis A.
 
-    ![](../figures/b8380a4568e02575.svg){ .tikz loading=lazy }
+    ![](../figures/8cd04838dbec425b.svg){ .tikz loading=lazy }
 
     Coûts : les liens à $100$ Mbps valent $1$, les liens A–C et D–F ($10$ Mbps) valent $10$. Table **OSPF** de A :
 
@@ -235,7 +249,7 @@ Comparons les deux tables de A. Elles **diffèrent** là où le lien direct A–
 
 RIP fonce sur le lien **direct** A–C … sans voir que c’est une liaison **poussive** à $1$ Mbps ! OSPF, lui, préfère faire **un détour par B** sur des liaisons rapides : la route est plus longue en nombre de routeurs, mais bien plus rapide en réalité.
 
-![](../figures/7bb4a80f4203bac3.svg){ .tikz loading=lazy }
+![](../figures/30e9065e978f92b0.svg){ .tikz loading=lazy }
 
 !!! propriete "Propriété 2 — La leçon"
 
@@ -275,7 +289,7 @@ Le programme officiel est clair : au bac, **les tables de routage sont données*
 
     Au deuxième tour, la distance provisoire de `C` tombe de $100$ (lien direct, lent) à $2$ (par B) : c’est le relâchement qui « découvre » le détour rapide. Pour remplir la colonne « sortir vers » de la table, on **remonte les prédécesseurs** jusqu’au départ : E $\leftarrow$ C $\leftarrow$ B $\leftarrow$ A, donc on sort vers **B**. On retrouve exactement la table OSPF de A donnée plus haut.
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif)"
 
     Si tous les liens avaient le même coût $1$, Dijkstra fixerait les sommets dans l’ordre d’un parcours en largeur, et la table obtenue serait celle de RIP (nombre de sauts), au choix près entre routes de même longueur. RIP, lui, ne fonctionne pas ainsi : chaque routeur n’a pas la carte complète, il ne connaît que ce que ses voisins lui annoncent (algorithme de **Bellman-Ford**, réparti entre les routeurs).
 
@@ -287,15 +301,15 @@ Le programme officiel est clair : au bac, **les tables de routage sont données*
 
 Juste au-dessus d’IP, la couche **Transport** offre deux services au choix. **TCP** garantit que *tout* arrive, *dans l’ordre*, sans perte (il numérote les paquets, les réordonne, redemande ceux qui manquent) : idéal pour un fichier ou une page web. **UDP** envoie sans garantie ni accusé de réception, mais **sans attendre** : idéal quand la vitesse prime sur la perfection (appel vidéo, jeu en ligne, où un paquet en retard est inutile de toute façon).
 
-## Ouverture : des graphes au service des paquets
+## Ouverture et liens avec les autres chapitres
 
 Ce chapitre est l’application la plus directe du chapitre *Graphes* : un réseau de routeurs *est* un graphe, et le routage est une recherche de plus court chemin.
 
-- RIP compte les arêtes d’un chemin, OSPF additionne leurs poids : deux métriques pour le même problème de **plus court chemin** ;
+- **Ce qu’il réutilise** : les **graphes** (chapitre 8) — RIP compte les arêtes d’un chemin, OSPF additionne leurs poids : deux métriques pour le même problème de **plus court chemin** ; de la 1<sup>re</sup>, les adresses IP et l’écriture binaire, et le **bit alterné** (chapitre « Le Web »), que prolongent les accusés de réception de TCP.
 
-- un paquet traverse des routeurs inconnus et peut être lu en chemin : le chapitre suivant, *Cryptographie*, montrera comment le protéger ;
+- **Ouverture.** Un paquet traverse des routeurs inconnus et peut être lu en chemin : le chapitre suivant, *Cryptographie*, montrera comment HTTPS le protège. RIP s’appuie sur l’algorithme de Bellman-Ford, qui relève de la **programmation dynamique** (chapitre 11).
 
-- au **bac**, on vous demandera surtout de manipuler des **adresses IP** (notation CIDR, appartenance à un réseau), de **lire** ou **compléter** une table de routage, de calculer des **coûts OSPF** et de **déterminer** la route suivie par un paquet selon RIP ou selon OSPF.
+- Au **bac**, on vous demandera surtout de manipuler des **adresses IP** (notation CIDR, appartenance à un réseau), de **lire** ou **compléter** une table de routage, de calculer des **coûts OSPF** et de **déterminer** la route suivie par un paquet selon RIP ou selon OSPF.
 
 ## Un peu d’histoire : d’ARPANET à Internet
 
@@ -308,10 +322,6 @@ En France, **Louis Pouzin** conçoit à partir de 1971 le réseau **Cyclades**, 
 
 ![](../img/09_hist_pouzin.jpg){ .photo loading=lazy style="width:166px" }  
 Louis Pouzin, père de Cyclades
-
-!!! remarque "Remarque — Liens avec d’autres chapitres"
-
-    Le **routage** d’un paquet est un problème de **plus court chemin** dans un **graphe** dont les sommets sont les routeurs : RIP compte les sauts, OSPF additionne le coût des liens. Le mécanisme d’**accusés de réception** et de renvoi (TCP) prolonge le **bit alterné** rencontré en Première (chapitre « Le Web »). Un paquet pouvant être intercepté en chemin, HTTPS chiffre les données échangées : on le verra au chapitre « cryptographie ».
 
 ## Bilan — la carte mémoire
 
@@ -327,6 +337,14 @@ Louis Pouzin, père de Cyclades
 | OSPF | métrique $=$ **somme des coûts**, coût $=10^8/$débit |
 | Dijkstra <span class="horsprog">au-delà du programme</span> | le calcul qui se cache derrière OSPF (nuage $+$ relâchement) |
 | RIP vs OSPF | RIP ignore la vitesse ; OSPF évite les liens lents |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Chaque **routeur** consulte sa **table de routage**, qui indique, pour chaque réseau de destination, par où sortir : il décide localement du saut suivant. Les tables se remplissent automatiquement grâce aux **protocoles de routage** (§ VI à VIII).
+
+    2.  Grâce à la **commutation de paquets** : le message est découpé en paquets indépendants, et une fois les tables mises à jour, les paquets suivants **contournent** la panne par un autre chemin (§ V).
+
+    3.  Cela dépend du protocole : **RIP** compte les **sauts** et prend la route qui traverse le moins de routeurs ; **OSPF** additionne les **coûts** des liaisons ($10^8/$débit) et préfère les liaisons rapides, même au prix d’un détour (§ VII à IX).
 
 ## Erreurs fréquentes
 

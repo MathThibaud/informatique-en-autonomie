@@ -7,16 +7,24 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *« Notion de calculabilité, de décidabilité. Montrer, par un exemple, qu’un programme peut prendre un autre programme pour argument. Comprendre l’impossibilité de construire un programme qui déciderait si un programme quelconque termine. »* |
-| **Prérequis** | la notion de **fonction** et de **paramètre** ; les **boucles** et la **terminaison** (variant de boucle) ; la notion de **coût** d’un algorithme (linéaire, quadratique, exponentiel, vue en Première) ; les **paradigmes** de programmation (voir le chapitre *Programmation objet et paradigmes*). |
-| **Objectifs** | *comprendre* qu’un programme est une **donnée** comme une autre ; *connaître* la distinction **décidable / indécidable** ; *savoir refaire* le raisonnement du **problème de l’arrêt** ; *situer* la **thèse de Church-Turing** et la **Turing-complétude** ; *découvrir* la question **P versus NP**. |
+| **Prérequis** | la notion de **fonction** et de **paramètre** ; les **boucles** et la **terminaison** (variant de boucle) ; la notion de **coût** d’un algorithme (linéaire, quadratique, exponentiel, vue en Première) ; les **paradigmes** de programmation (voir le chapitre *Programmation objet et paradigmes*). (→ fiches de révision : ch. 2) |
+| **Objectifs** | *comprendre* qu’un programme est une **donnée** comme une autre ; *connaître* la distinction **décidable / indécidable** ; *savoir refaire* le raisonnement du **problème de l’arrêt** ; *situer* la **thèse de Church-Turing** et la **Turing-complétude** ; *découvrir* la question **P versus NP** <span class="horsprog">au-delà du programme</span>. |
 
 *Ce chapitre ne demande presque pas de code : c’est un chapitre d’**idées**. Nous allons prouver, avec quelques lignes de Python et un raisonnement d’une élégance redoutable, qu’il existe des questions parfaitement claires… auxquelles **aucun** programme ne pourra **jamais** répondre. Non pas parce que nos ordinateurs sont trop lents ou nos programmeurs trop paresseux : parce que c’est **impossible**. Bienvenue à la frontière de l’informatique.*
+
+!!! situation "Situation de départ"
+
+    1.  Pour l’ordinateur, le texte d’un programme est-il seulement une suite d’instructions à exécuter, ou peut-il aussi être lu et analysé comme n’importe quelle donnée ?
+
+    2.  Pourrait-on écrire un logiciel qui lit n’importe quel programme et annonce, sans le lancer, s’il finira par s’arrêter ?
+
+    3.  Un antivirus peut-il garantir qu’il détecte tous les virus, même ceux qu’il ne connaît pas encore ?
 
 ## Un programme peut en manger un autre
 
 Tout part d’une remarque en apparence anodine. Une fonction comme `accueil(n)`, qui affiche `n` fois « bonjour », est une **machine** : elle reçoit une **donnée d’entrée** (l’entier `n`) et produit une **sortie**. Enregistrons-la dans un fichier `test.py` et lançons, dans un terminal, la commande `python3 test.py`. **Qui est la machine, ici ? Qui est la donnée ?** La machine, c’est `python3`. Et sa donnée d’entrée, c’est `test.py` — un **programme**, c’est-à-dire une simple suite de caractères. Le programme `accueil` est devenu une **donnée** avalée par un autre programme :
 
-![](../figures/c8d89e23348404c2.svg){ .tikz loading=lazy }
+![](../figures/6715eb06876635df.svg){ .tikz loading=lazy }
 
 Et l’on peut poursuivre la poupée russe : `python3` est lui-même lancé par le programme `Terminal`, qui tourne sur le **système d’exploitation**…
 
@@ -24,7 +32,9 @@ Et l’on peut poursuivre la poupée russe : `python3` est lui-même lancé par
 
     Le **code source** d’un programme n’est qu’une **chaîne de caractères**. Rien n’interdit donc de le donner en **paramètre** à un autre programme — ni même de le donner **à lui-même**. Cette idée, qui semble un jeu, est la clé de tout le chapitre.
 
-!!! remarque "Remarque"
+<span class="retouract">↺ Retour sur l'activité.</span> La recette de crêpes de l’activité était tantôt exécutée (par le cuisinier), tantôt traitée comme un simple texte (par la photocopieuse, le traducteur, le correcteur) ; de même, `compter_lignes(source)` lisait le texte d’`accueil` sans afficher un seul « bonjour », alors qu’`exec` l’exécutait. Et `compter_lignes` pouvait recevoir son propre texte : elle renverrait $6$.
+
+!!! encadre "À retenir — un programme est une donnée comme une autre"
 
     Vous connaissez déjà des programmes qui prennent des programmes en entrée : un **interpréteur** (comme `python3`), un **compilateur** (qui traduit du C en langage machine), un **éditeur** qui colore la syntaxe, un **antivirus** qui inspecte un exécutable (recherche de signatures, chapitre 12)… Traiter « un programme comme une donnée » n’a rien d’exotique.
 
@@ -79,7 +89,7 @@ Rêvons donc d’un programme `halt` qui prendrait en entrée :
 
 et qui renverrait `True` si `prog(x)` s’arrête, `False` sinon — **sans jamais l’exécuter** (il l’*analyse*, comme nous l’avons fait à l’œil).
 
-![](../figures/b6225f8770218636.svg){ .tikz loading=lazy }
+![](../figures/de3267ce5f23e9a4.svg){ .tikz loading=lazy }
 
 Par exemple, `halt(compte, 10)` renverrait `True`, et `halt(compte, 10.5)` renverrait `False`. Un tel outil serait **prodigieux** : fini les bugs de boucles infinies, on pourrait vérifier automatiquement que n’importe quel logiciel termine ! Nous n’écrivons pas le *contenu* de `halt` (on le suppose seulement possible) ; contentons-nous de nous en **servir**.
 
@@ -102,13 +112,15 @@ Maintenant, la question fatale. Puisque `paradoxe` est un programme, donnons-le 
 
 **Que fait `paradoxe(paradoxe)` ?**
 
-![](../figures/ffc4fa123eb877c8.svg){ .tikz loading=lazy }
+![](../figures/94e47e66b52b197f.svg){ .tikz loading=lazy }
 
 **Dans les deux cas**, la réponse de `halt` est **démentie** par `paradoxe` lui-même. Il n’y a pas d’échappatoire : `halt` ne peut donner *aucune* réponse correcte sur cette entrée. La seule hypothèse qu’on avait faite — *`halt` existe* — est donc **intenable**.
 
 !!! theoreme "Théorème 1 — Indécidabilité du problème de l’arrêt — Turing, 1936"
 
     Il ne peut exister **aucun** programme qui, recevant en entrée un programme `P` et une entrée `E` quelconques, déciderait à coup sûr si `P` lancé sur `E` **s’arrête ou non**. Le **problème de l’arrêt** est **indécidable**.
+
+<span class="retouract">↺ Retour sur l'activité.</span> Le devin de l’activité ne pouvait jamais gagner contre le contrariant, qui lisait la prédiction puis faisait l’inverse : `halt` est ce devin, `paradoxe` ce contrariant. La question laissée ouverte à la fin de l’activité a donc sa réponse : **non**, un programme « devin » qui prédirait l’arrêt de n’importe quel programme ne peut pas exister.
 
 ![](../img/13_hist_turing_16ans.jpg){ .photo loading=lazy style="width:122px" }  
 Alan Turing (1912–1954), vers 16 ans
@@ -125,7 +137,9 @@ Ce raisonnement porte un nom : la **diagonale**. Son moteur secret est l’**au
 
     « Le barbier rase tous ceux qui ne se rasent pas eux-mêmes, et *seulement* ceux-là. » Le barbier se rase-t-il lui-même ? S’il se rase, il ne devrait pas ; s’il ne se rase pas, il devrait. Même impasse.
 
-!!! remarque "Remarque — Est-ce grave, docteur ?"
+<span class="retouract">↺ Retour sur l'activité.</span> Le point commun du contrariant, du menteur et du barbier, demandé dans l’activité, est cette auto-référence : chacun lit ce qui le concerne et fait le contraire, si bien qu’aucune réponse ne tient.
+
+!!! encadre "À retenir — impossible en général, possible au cas par cas"
 
     Rassurez-vous : on peut très bien, **au cas par cas**, prouver qu’*un* programme donné s’arrête (avec un **variant de boucle**, vu en Première). Ce qui est impossible, c’est une **unique méthode automatique et universelle** qui marcherait sur **tous** les programmes. La différence est capitale : on n’a pas prouvé que « c’est trop dur », on a prouvé que « ça ne peut pas exister ».
 
@@ -165,7 +179,7 @@ Un problème de décision est alors **décidable** exactement quand sa fonction 
 
 Mais qu’est-ce, au juste, qu’une « opération élémentaire » ? En 1936, pour donner un sens **mathématique** précis au mot « calculer », Turing imagine une machine idéale, d’une simplicité extrême :
 
-![](../figures/7f459507bccaf470.svg){ .tikz loading=lazy }
+![](../figures/25664d827f5387d5.svg){ .tikz loading=lazy }
 
 Un **ruban infini** découpé en cases ; une **tête** qui lit et écrit un symbole sur la case courante ; un **état** interne (parmi un nombre fini) ; et une **table de règles** du type *« si je suis dans l’état $q$ et que je lis `1`, j’écris `0`, je me déplace à droite et je passe dans l’état $q'$ »*. C’est tout. Et pourtant :
 
@@ -187,7 +201,7 @@ Notre preuve du problème de l’arrêt était écrite en Python, mais elle n’
 
     Python, C, Java, OCaml, Scratch, … sont **tous** Turing-complets : ils calculent tous *le même* ensemble de fonctions. Ils diffèrent par la **commodité** et la **vitesse**, jamais par la **puissance** théorique.
 
-!!! remarque "Remarque — La Turing-complétude est partout, parfois par accident"
+!!! curieux "Pour les curieux (facultatif) — La Turing-complétude est partout, parfois par accident"
 
     Sont Turing-complets, entre autres : le langage volontairement minimaliste **Brainfuck** (8 instructions !), le **jeu de la vie** de Conway, les circuits de ***redstone*** de *Minecraft*, le système de règles de **Magic: The Gathering**, et même… les **tableurs** avec leurs formules. Dès qu’on a « mémoire + test + boucle », la pleine puissance du calcul surgit — et, avec elle, le problème de l’arrêt.
 
@@ -214,7 +228,7 @@ Kurt Gödel étudiant, en 1925
 
 L’astuce de Gödel ? Fabriquer un énoncé mathématique qui, décodé, affirme : « *Cet énoncé n’est pas démontrable.* » S’il était démontrable, il serait faux (le système prouverait un faux : incohérent). Il est donc **vrai mais indémontrable**. On reconnaît, mot pour mot, le **menteur** et `paradoxe(paradoxe)` : la **même auto-référence**, le même vertige.
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif)"
 
     Gödel (1931, en *logique*) et Turing (1936, en *informatique*) racontent la même histoire vue de deux fenêtres. Turing a d’ailleurs *« informatisé »* Gödel : là où Gödel exhibe une **vérité** indémontrable, Turing exhibe un **programme** dont on ne peut pas décider l’arrêt. La toute-puissance mécanique — des maths comme des machines — a une **frontière**, et cette frontière est **la même**.
 
@@ -238,7 +252,7 @@ Voici la distinction sur laquelle tout repose. Il y a un monde entre **trouver**
 
     Remplir une grille de Sudoku vide peut être **très long**. Mais si je vous **tends** une grille remplie, vérifier qu’elle est correcte (chaque ligne, colonne et bloc contient $1$ à $9$ ; $1$ à $4$ dans la grille réduite ci-dessous) est **immédiat**. **Vérifier** est facile ; **trouver** paraît dur.
 
-![](../figures/8c4e37a39f3f6a3c.svg){ .tikz loading=lazy }
+![](../figures/9c86b384d1580c76.svg){ .tikz loading=lazy }
 
 !!! definition "Définition 6 — Classe NP"
 
@@ -254,7 +268,7 @@ Beaucoup de problèmes « cauchemardesques » de l’informatique sont dans NP
 
 - **SAT** : une formule logique (un grand « ET » de « OU ») peut-elle être rendue **vraie** ? (*comme composer un club où chaque membre pose ses conditions, et où il faut contenter tout le monde à la fois.*)
 
-![](../figures/20ba3d9ced84e434.svg){ .tikz loading=lazy }
+![](../figures/5e9e3d32598ba2cd.svg){ .tikz loading=lazy }
 
 ### La question à un million de dollars
 
@@ -266,13 +280,13 @@ D’abord, une évidence : si on sait **résoudre** vite (P), alors on sait **v
 
     Un problème est **NP-complet** s’il est « parmi les plus durs » de NP : **tout** problème de NP peut s’y **ramener** (réduction en temps polynomial). **SAT** (Cook, 1971), le Sudoku, le voyageur de commerce, la coloration à $3$ couleurs sont NP-complets.
 
-!!! remarque "Remarque — Le sac à dos : NP-complet, et pourtant résolu au chapitre 11 ?"
+!!! curieux "Pour les curieux (facultatif) — Le sac à dos : NP-complet, et pourtant résolu au chapitre 11 ?"
 
     Le sac à dos est lui aussi NP-complet. Pourtant, au chapitre *Programmation dynamique*, on l’a résolu en $O(n \times C)$, où $C$ est la capacité. Ce n’est **pas** une contradiction : la taille d’une entrée se mesure en **nombre de bits**. La capacité $C$ s’écrit avec environ $\log_2 C$ bits, donc $C$ vaut environ $2^{\text{nombre de bits}}$ : le coût $n \times C$ est **exponentiel** en la taille de l’entrée. C’est un coût **pseudo-polynomial** : rapide quand les nombres sont petits, impraticable quand ils ont des dizaines de chiffres. Un algorithme vraiment polynomial (en $n$ et en le nombre de bits de $C$) prouverait que P $=$ NP.
 
 Conséquence spectaculaire : si l’on trouvait un jour un algorithme polynomial pour **un seul** problème NP-complet, on en aurait **d’un coup** pour **tous** les problèmes de NP — et alors **P $=$ NP**. À l’inverse, une seule preuve d’impossibilité fermerait la question dans l’autre sens. La quasi-totalité des chercheurs **parient** que **P $\ne$ NP**… sans savoir le démontrer.
 
-!!! remarque "Remarque — Pourquoi ça compte, vraiment"
+!!! curieux "Pour les curieux (facultatif) — Pourquoi ça compte, vraiment"
 
     Si **P $=$ NP** :
 
@@ -290,15 +304,17 @@ Conséquence spectaculaire : si l’on trouvait un jour un algorithme polynomia
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-13-10) à [12](exercices.md#ex-13-12)** (P versus NP)
 
-## Ouverture : ce que l’on sait, ce que l’on ne pourra jamais savoir
+## Ouverture et liens avec les autres chapitres
 
 Ce chapitre prend du recul sur toute l’année : chaque programme écrit depuis le chapitre 1 est une donnée qu’un autre programme peut lire, et certaines questions sur ces programmes n’auront jamais de réponse automatique.
 
-- la **terminaison** étudiée dès la récursivité (le variant) se prouve programme par programme, à la main : le problème de l’arrêt dit qu’aucun programme ne peut le faire pour tous ;
+- **Ce qu’il réutilise** : la **terminaison** étudiée dès la récursivité (chapitre 1 : condition d’arrêt, variant) se prouve programme par programme ; le problème de l’arrêt dit qu’aucun programme ne peut le faire pour tous. Traiter un programme comme une donnée, c’est le quotidien de l’**interpréteur** et du **système d’exploitation**, qui charge et lance les programmes (chapitre 4).
 
-- la question P versus NP éclaire la **cryptographie** (chapitre 10) : RSA parie qu’un problème reste difficile ;
+- **Déjà croisé** : un antivirus cherche des signatures connues (recherche textuelle, chapitre 12) ; le théorème de Rice explique pourquoi il ne pourra jamais garantir de tout détecter.
 
-- au **bac**, on vous demandera surtout d’expliquer qu’un programme est une **donnée**, de **dérouler** le raisonnement par l’absurde du problème de l’arrêt et de dire si une question sur des programmes est **décidable**.
+- La question P versus NP <span class="horsprog">au-delà du programme</span> prolonge la notion de **coût** : le plus court chemin dans un **graphe** (chapitre 8) se calcule vite, le voyageur de commerce semble ne pas le pouvoir, et la sécurité de **RSA** (chapitre 10) parie que factoriser reste difficile.
+
+- Au **bac**, on vous demandera surtout d’expliquer qu’un programme est une **donnée**, de **dérouler** le raisonnement par l’absurde du problème de l’arrêt et de dire si une question sur des programmes est **décidable**.
 
 ## Un peu d’histoire — les explorateurs de l’impossible
 
@@ -316,10 +332,6 @@ Ce chapitre prend du recul sur toute l’année : chaque programme écrit depuis
 
 *Épilogue : Turing, persécuté pour son homosexualité, meurt en 1954 ; il sera réhabilité, et son nom donné à la plus haute récompense de l’informatique, le **prix Turing** — le « Nobel » de la discipline.*
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
-
-    Le problème de l’arrêt pose, pour *tous* les programmes à la fois, la question que l’on se pose devant chaque fonction **récursive** : la **condition d’arrêt** sera-t-elle atteinte ? On sait le prouver au cas par cas, jamais par une méthode universelle. Traiter un programme comme une donnée, c’est le quotidien de l’**interpréteur** et du **système d’exploitation**, qui charge et lance les programmes (chapitre « processus »). Enfin, P versus NP prolonge la notion de **coût** : le **plus court chemin** dans un **graphe** se calcule vite, le **voyageur de commerce** semble ne pas le pouvoir, et la sécurité de **RSA** repose sur la difficulté de **factoriser** (chapitre « cryptographie »).
-
 ## Bilan — la carte mémoire
 
 | **Notion** | **À retenir** |
@@ -333,9 +345,17 @@ Ce chapitre prend du recul sur toute l’année : chaque programme écrit depuis
 | Théorème de Rice | toute question non triviale sur le *comportement* est indécidable |
 | Calculable | calculable par une machine de Turing (thèse de Church-Turing) |
 | Turing-complet | un langage qui calcule tout le calculable ; tous équivalents |
-| Classe P | résoluble en temps polynomial (« raisonnable ») |
-| Classe NP | solution *vérifiable* en temps polynomial |
-| P versus NP | *trouver* $=$ *vérifier* ? ($1$ M\$, ouvert, on croit P $\ne$ NP) |
+| Classe P <span class="horsprog">au-delà du programme</span> | résoluble en temps polynomial (« raisonnable ») |
+| Classe NP <span class="horsprog">au-delà du programme</span> | solution *vérifiable* en temps polynomial |
+| P versus NP <span class="horsprog">au-delà du programme</span> | *trouver* $=$ *vérifier* ? ($1$ M\$, ouvert, on croit P $\ne$ NP) |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Les deux : le code source n’est qu’une **chaîne de caractères**, qu’un autre programme peut lire, analyser ou exécuter (comme l’interpréteur `python3`), et que l’on peut même donner en entrée au programme lui-même (§ I).
+
+    2.  Non : le **problème de l’arrêt** est **indécidable** (Turing, 1936). Un tel programme `halt` permettrait d’écrire `paradoxe`, qui le contredit dans les deux cas. On peut prouver l’arrêt au cas par cas (variant), jamais par une méthode universelle (§ II et III).
+
+    3.  Non : « ce programme a-t-il un comportement de virus ? » porte sur ce que le programme *fait* ; d’après le **théorème de Rice**, c’est indécidable. Un antivirus repère des signatures connues, sans garantie de tout détecter (§ III.E).
 
 ## Erreurs fréquentes
 
@@ -361,7 +381,7 @@ Ce chapitre prend du recul sur toute l’année : chaque programme écrit depuis
 
 - énoncer la **thèse de Church-Turing** et la **Turing-complétude** $\to$ ex. [9](exercices.md#ex-13-9), [17](exercices.md#ex-13-17) ;
 
-- expliquer la différence **vérifier / trouver**, et situer **P**, **NP**, **P versus NP** $\to$ ex. [10](exercices.md#ex-13-10), [11](exercices.md#ex-13-11), [12](exercices.md#ex-13-12).
+- <span class="horsprog">au-delà du programme</span> expliquer la différence **vérifier / trouver**, et situer **P**, **NP**, **P versus NP** $\to$ ex. [10](exercices.md#ex-13-10), [11](exercices.md#ex-13-11), [12](exercices.md#ex-13-12).
 
 ## Vers le Grand Oral
 

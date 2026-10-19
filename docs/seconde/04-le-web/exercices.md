@@ -16,6 +16,8 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Vrai ou faux <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-1 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  Répondre et corriger les phrases fausses.
 
 1.  Le Web et Internet, c’est la même chose.
@@ -26,7 +28,56 @@
 
 4.  Le Web a été inventé par Tim Berners-Lee, au CERN.
 
+??? pouce "Coup de pouce"
+
+    Relisez la section « Le Web n’est pas Internet » : le Web est-il le réseau lui-même, ou un service qui circule sur ce réseau ?
+
 ??? corrige "Corrigé"
+
+    *Réponses aux questions fermées ; pour les questions ouvertes, des pistes attendues (d’autres réponses sont possibles).*
+
+    Activité 1 — Ma première page
+
+    Le résultat dépend de chacun ; voici une réalisation possible des trois questions (zone HTML, puis zone CSS de l’éditeur en ligne).
+
+    ```html
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8" />
+        <title>Ma premiere page</title>
+      </head>
+      <body>
+        <h1>Bienvenue</h1>
+        <p>Ceci est ma page web.</p>
+        <p id="important">Ce paragraphe est important.</p>
+        <img src="renard.jpg" alt="Un renard dans la neige" />
+      </body>
+    </html>
+    ```
+
+    ```css
+    h1 {
+      text-align: center;
+      color: crimson;
+    }
+    p {
+      font-family: Verdana;
+    }
+    #important {
+      color: red;
+    }
+    ```
+
+    Seul le paragraphe qui porte `id="important"` passe en rouge : en CSS, l’identifiant se cible avec un dièse `#`.
+
+    Activité 2 — Aiguiser son esprit critique
+
+    1.  Réponse personnelle. On constate en général que les premiers résultats ne sont pas tout à fait les mêmes, ni dans le même ordre : chaque moteur a son propre **index** et son propre **algorithme de classement**.
+
+    2.  Les publicités sont signalées par une mention du type « **Sponsorisé** » (ou « Annonce ») et sont souvent placées tout en haut ; les autres résultats sont classés par l’algorithme, sans paiement.
+
+    3.  La plupart des internautes cliquent sur les tout premiers résultats et vont rarement en deuxième page : être en tête apporte beaucoup de visiteurs, donc de ventes ou de revenus publicitaires. C’est pourquoi des entreprises paient des annonces ou cherchent à améliorer leur classement.
 
     1.  **Faux.** Internet est le *réseau* ; le Web est un *service* (les pages) qui circule dessus.
 
@@ -40,15 +91,23 @@
 
 <span class="tag">sur papier</span>  Ranger dans deux colonnes ce qui relève du **Web** et ce qui relève d’**Internet** (mais pas du Web) : une page consultée dans un navigateur ; un e-mail ; un lien hypertexte ; un transfert de fichier par FTP ; le protocole HTTP.
 
+??? pouce "Coup de pouce"
+
+    Pour chaque élément, demandez-vous s’il fait partie des trois technologies du Web (pages HTML, adresses URL, protocole HTTP) ou s’il utilise le réseau autrement.
+
 ??? corrige "Corrigé"
 
     - **Web** : une page consultée dans un navigateur ; un lien hypertexte ; le protocole HTTP.
 
     - **Internet (hors Web)** : un e-mail (SMTP) ; un transfert de fichier par FTP.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Ranger l’e-mail dans le Web parce qu’on le lit parfois dans un navigateur (messagerie en ligne). Le courrier lui-même voyage avec son propre protocole (SMTP) : c’est un autre service d’Internet que le Web.
+
 ### La requête HTTP, client et serveur
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Décomposer une requête <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-3 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="tag">sur papier</span>  On tape dans le navigateur l’adresse : `https://www.meteo.mc/prevoir?ville=Nice&jour=mardi`.
 
@@ -79,6 +138,10 @@
 | **200** | **403** | **404** | **500** |
 
 *Significations :* page non trouvée $\bullet$ tout va bien $\bullet$ erreur du serveur $\bullet$ accès interdit.
+
+??? pouce "Coup de pouce"
+
+    Relisez le tableau des codes de réponse dans la section du cours sur le protocole HTTP.
 
 ??? corrige "Corrigé"
 
@@ -128,6 +191,8 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Le formulaire de recherche <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-7 }
 
+<span class="duree">≈ 15 min</span>
+
 <span class="tag">sur papier</span>  Sur le site d’une médiathèque, on cherche « Harry Potter » au format « livre ». Après validation du formulaire, la barre d’adresse affiche (le `+` remplace l’espace) :
 
 `https://www.mediatheque.mc/chercher?titre=Harry+Potter&format=livre`
@@ -162,6 +227,8 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Décomposer une URL <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-8 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  On considère l’URL : `https://www.lycee.mc/cours/snt/web.html`.
 
 1.  Quel est le **protocole** ? Que garantit-il de plus que `http` ?
@@ -169,6 +236,10 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 2.  Quel est le **nom du serveur** (domaine) ?
 
 3.  Quel est le **chemin** du fichier demandé ?
+
+??? pouce "Coup de pouce"
+
+    Une URL se lit de gauche à droite : ce qui précède `://`, puis le nom du serveur jusqu’au premier `/` qui suit, puis le reste.
 
 ??? corrige "Corrigé"
 
@@ -182,7 +253,7 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
 <span class="tag">sur papier</span>  On dispose de l’arborescence suivante (la racine est `/`) :
 
-![](../figures/bae69bd7d62b65a8.svg){ .tikz loading=lazy }
+![](../figures/ded51b7fda9802fa.svg){ .tikz loading=lazy }
 
 1.  Donner le **chemin absolu** du fichier `sable.jpg`.
 
@@ -202,7 +273,11 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
     3.  Depuis `musique` : `../photos/ete/mer.png` (on remonte à la racine avec `..`, puis on redescend dans `photos`, puis dans `ete`).
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `/ete/sable.jpg` pour le chemin relatif : avec un `/` au début, le chemin part de la *racine* du site, où il n’y a pas de dossier `ete`. Le lien est cassé.
+
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Le site déménage <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-10 }
+
+<span class="duree">≈ 20 min</span>
 
 <span class="tag">sur papier</span>  Le site d’un club est rangé ainsi : à la racine, le fichier `index.html` et deux dossiers, `images` (qui contient `logo.png`) et `pages` (qui contient `contact.html`).
 
@@ -226,7 +301,7 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
     1.  Arborescence :
 
-        ![](../figures/d30f8cd8b2afb392.svg){ .tikz loading=lazy }
+        ![](../figures/a1e85c0a74a7741a.svg){ .tikz loading=lazy }
 
     2.  Un chemin relatif part du dossier de la page qui l’utilise. Depuis `pages`, `images/logo.png` désigne `pages/images/logo.png`, qui n’existe pas. Il faut d’abord **remonter** à la racine : `<img src="../images/logo.png" alt="Logo du club" />`.
 
@@ -238,6 +313,8 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 11</span> — Que voit-on ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-11 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  Décrire ce que le navigateur affiche pour ce code :
 
 ```html
@@ -248,6 +325,10 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
   <li>sucre</li>
 </ul>
 ```
+
+??? pouce "Coup de pouce"
+
+    Relisez dans le cours le rôle de chaque balise : `<h1>`, `<p>`, `<strong>`, `<ul>` et `<li>`.
 
 ??? corrige "Corrigé"
 
@@ -279,6 +360,8 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
     <h2>Chapitre 1</h2>
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Refermer les balises dans le désordre, comme `<p>…<strong>…</p></strong>` : la dernière balise ouverte doit être la première refermée (les balises s’emboîtent comme des boîtes).
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Du rendu au code <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-13 }
 
 <span class="tag">sur papier</span>  Écrire le code HTML (contenu du `<body>` seulement) qui produit l’affichage suivant : un grand titre « Mon club de foot » ; un paragraphe « Entraînement le mercredi. » où le mot *mercredi* est mis en valeur (en gras) ; une liste à puces de deux éléments, « gardiens » et « joueurs » ; enfin un lien « Le site du club » vers `https://www.monclub.mc`.
@@ -304,6 +387,8 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 ### Écrire du HTML et du CSS
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Ma page de présentation <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-14 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une page HTML **complète** (squelette compris) qui contient : un titre `<h1>` avec votre prénom, un paragraphe de présentation, une **liste** de trois loisirs, et un **lien** vers un site de votre choix.
 
@@ -373,6 +458,8 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Le bon sélecteur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-16 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  On considère le code suivant :
 
 ```html
@@ -406,6 +493,8 @@ p { font-family: Verdana; }
         h1 { color: blue; }
         #haut { color: blue; }
         ```
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Confondre le point et le dièse : `.info` cible tous les éléments de *classe* `info`, `#fin` le seul élément d’*identifiant* `fin`. Écrire `#info` ne cible rien ici.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Prévoir le rendu <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-17 }
 
@@ -459,6 +548,8 @@ p { font-family: Verdana; }
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 19</span> — Le moteur de recherche <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-19 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span> 
 
 1.  Qu’est-ce que l’**index** d’un moteur de recherche ? Quand vous tapez une requête, le moteur cherche-t-il « dans le Web » ou « dans son index » ?
@@ -466,6 +557,10 @@ p { font-family: Verdana; }
 2.  Citer un critère qui aide un moteur à **classer** les pages (par exemple le PageRank).
 
 3.  Comment reconnaît-on, en haut d’une page de résultats, ce qui est une **publicité** ?
+
+??? pouce "Coup de pouce"
+
+    Relisez la définition du moteur de recherche et la règle « L’ordre des résultats n’est pas neutre », dans le cours.
 
 ??? corrige "Corrigé"
 
@@ -477,9 +572,11 @@ p { font-family: Verdana; }
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 20</span> — Le graphe des liens <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-20 }
 
+<span class="duree">≈ 15 min</span>
+
 <span class="tag">sur papier</span>  Quatre pages A, B, C et D se font des liens (une flèche de A vers B signifie : « la page A contient un lien vers la page B ») :
 
-![](../figures/e375b09ae0d11a4b.svg){ .tikz loading=lazy }
+![](../figures/15b3e322d4d15479.svg){ .tikz loading=lazy }
 
 1.  Pour chaque page, compter le nombre de liens qui pointent **vers** elle.
 
@@ -519,6 +616,10 @@ p { font-family: Verdana; }
 
 3.  Avant de cliquer sur un lien reçu par message, quel **geste simple** permet de vérifier vers quelle adresse il mène réellement ?
 
+??? pouce "Coup de pouce"
+
+    Relisez la section « Sécurité et confidentialité » du cours. Pour la question 3 : le texte affiché d’un lien est-il forcément l’adresse vers laquelle il mène ?
+
 ??? corrige "Corrigé"
 
     1.  Par exemple : refuser les cookies (tiers), effacer l’historique / navigation privée, gérer les autorisations (caméra, micro, position), bloquer les traceurs.
@@ -552,3 +653,67 @@ p { font-family: Verdana; }
     2.  L’erreur : « avec HTTPS, les cookies sont désactivés et votre navigation est totalement anonyme ». HTTPS protège le **contenu** des échanges contre une lecture en chemin, rien de plus : le site (et ses cookies) sait très bien qui vous êtes et ce que vous y faites, et votre adresse IP reste visible. Correction : « le cadenas ne rend pas anonyme ; pour limiter le suivi, il faut régler les cookies ou utiliser la navigation privée ».
 
     3.  Ouvrir un site en HTTPS où l’on est resté connecté (le portail du lycée, une boutique) : il vous reconnaît malgré le cadenas, donc il n’y a pas d’anonymat. Ou, plus simplement, relire l’encadré « Cookies et traces » du cours avant de croire l’assistant.
+
+### Python au service du thème
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Python au service du thème — fabriquer du HTML <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-23 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  En Python (Spyder ou Basthon). Un serveur peut **fabriquer** une page sur mesure avant de l’envoyer (page *dynamique*) : c’est alors un programme qui écrit le code HTML. On le fait ici en Python, en collant des chaînes de caractères (concaténation).
+
+1.  Écrire une fonction `balise(nom, contenu)` qui renvoie le code d’un élément HTML : `balise("h1", "Mon club")` doit renvoyer `"<h1>Mon club</h1>"`. La tester aussi avec `balise("strong", "mercredi")`.
+
+2.  Sans machine, écrire ce qu’affiche le programme suivant, puis vérifier. Que montrerait un navigateur qui recevrait ce code HTML ?
+
+    ```python
+    print("<ul>")
+    for i in range(1, 4):
+        print(balise("li", f"Photo {i}"))
+    print("</ul>")
+    ```
+
+3.  Écrire une fonction `url(protocole, serveur, chemin)` qui reconstitue une URL complète. La tester avec les trois morceaux trouvés à l’exercice « Décomposer une URL » : on doit retrouver l’URL complète de cet exercice.
+
+??? pouce "Coup de pouce"
+
+    Écrivez d’abord sur papier le résultat attendu, `<h1>Mon club</h1>`, et repérez les morceaux qui changent d’un appel à l’autre (le nom de la balise, le contenu) et ceux qui ne changent jamais (les chevrons, la barre oblique) : il reste à les coller avec `+`.
+
+??? pouce "Coup de pouce 2 (début de solution)"
+
+    `def balise(nom, contenu):`  
+    `return "<" + nom + ">" + contenu + …`  
+    (il reste la balise fermante.) Pour `url`, n’oubliez ni `"://"` ni la barre `"/"` entre le serveur et le chemin.
+
+??? corrige "Corrigé"
+
+    **1.** Un élément HTML, c’est la balise ouvrante, le contenu, puis la balise fermante (avec sa barre oblique). Seuls le nom et le contenu changent : ce sont les deux paramètres.
+
+    ```python
+    def balise(nom, contenu):
+        return "<" + nom + ">" + contenu + "</" + nom + ">"
+
+    print(balise("h1", "Mon club"))       # <h1>Mon club</h1>
+    print(balise("strong", "mercredi"))   # <strong>mercredi</strong>
+    ```
+
+    **2.** `i` prend les valeurs $1$, $2$ et $3$ ; le programme affiche :
+
+    ```text
+    <ul>
+    <li>Photo 1</li>
+    <li>Photo 2</li>
+    <li>Photo 3</li>
+    </ul>
+    ```
+
+    C’est le code d’une **liste à puces** : le navigateur afficherait trois puces, « Photo 1 », « Photo 2 » et « Photo 3 ». Avec `range(1, 101)`, la même boucle écrirait une liste de cent photos : c’est ainsi qu’un serveur fabrique une page dynamique (une galerie, des résultats de recherche) sans que personne n’écrive le HTML à la main.  
+    **3.** On recolle les trois morceaux avec les séparateurs `"://"` et `"/"` :
+
+    ```python
+    def url(protocole, serveur, chemin):
+        return protocole + "://" + serveur + "/" + chemin
+
+    print(url("https", "www.lycee.mc", "cours/snt/web.html"))
+    # https://www.lycee.mc/cours/snt/web.html
+    ```
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Oublier la barre oblique de la balise fermante : `"<" + nom + ">" + contenu + "<" + nom + ">"` renvoie `<h1>Mon club<h1>`, où la balise `<h1>` est ouverte deux fois et jamais fermée. Afficher le résultat d’un appel avec `print` et le comparer à un code HTML correct montre tout de suite l’erreur.

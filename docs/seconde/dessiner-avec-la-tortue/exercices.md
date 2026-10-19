@@ -16,9 +16,15 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Le carré <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-T-1 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span> Dessiner un carré de côté `100`, **sans boucle** : on écrit les quatre « avancer, tourner de `90` » les uns après les autres.
 
-![](../figures/1fab7621799b42e2.svg){ .tikz loading=lazy }
+??? pouce "Coup de pouce"
+
+    Relisez dans le cours le tableau des instructions de la tortue : laquelle fait avancer, laquelle fait tourner ? Il faut un couple « avancer, tourner » par côté.
+
+![](../figures/5559c0c35a19a7bb.svg){ .tikz loading=lazy }
 
 ??? corrige "Corrigé"
 
@@ -47,6 +53,10 @@
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Dessiner un rectangle de `200` de large sur `100` de haut. *(Les quatre côtés ne sont pas tous égaux, mais on tourne toujours de `90`.)*
 
+??? pouce "Coup de pouce"
+
+    Faites le tour d’un rectangle dessiné sur une feuille en notant la longueur de chaque côté, dans l’ordre : quelle alternance observez-vous ?
+
 ??? corrige "Corrigé"
 
     Deux longueurs et deux largeurs, en alternance, en tournant toujours de `90`.
@@ -70,9 +80,15 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — L’escalier <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-T-3 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span> Dessiner un escalier de **5 marches** : une marche, c’est « avancer, tourner, avancer, tourner ». Utiliser une boucle qui répète 5 fois ce motif.
 
-![](../figures/2610f848dae6336a.svg){ .tikz loading=lazy }
+??? pouce "Coup de pouce"
+
+    Commencez par les quatre lignes d’*une seule* marche et vérifiez qu’à la fin la tortue regarde de nouveau dans la direction de départ. Placez ensuite ces lignes dans la boucle.
+
+![](../figures/cb94bee4c024bf6d.svg){ .tikz loading=lazy }
 
 ??? corrige "Corrigé"
 
@@ -88,7 +104,11 @@
     t.done()
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Tourner deux fois à gauche dans la marche : à la fin de la première marche, la tortue regarde vers la gauche et repart en arrière, l’escalier ne monte pas. Après avoir monté, il faut tourner *à droite*.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Triangle et hexagone <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-T-4 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Dessiner un **triangle équilatéral** (3 côtés), puis un **hexagone** (6 côtés). Dans chaque cas, de combien de degrés faut-il tourner à chaque sommet ?
 
@@ -96,7 +116,7 @@
 
     Pour revenir à son point de départ dans la même direction, la tortue doit avoir tourné de $360$ degrés en tout, répartis également entre les sommets.
 
-![](../figures/2520ee0a6ddf121b.svg){ .tikz loading=lazy }
+![](../figures/cdf8d3627e1c0b9c.svg){ .tikz loading=lazy }
 
 ??? corrige "Corrigé"
 
@@ -113,6 +133,8 @@
     t.done()
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Tourner de $60$ degrés pour le triangle, parce que ses angles mesurent $60$ degrés : la tortue tourne de l’angle *extérieur* ($180 - 60 = 120$), et avec $60$ la figure ne se ferme pas. La règle $360 / n$ évite le piège.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — L’étoile à cinq branches <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-5 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Dessiner une étoile à 5 branches.
@@ -125,7 +147,7 @@
 
     On répète 5 fois : avancer, puis tourner de `144` degrés.
 
-![](../figures/31fbcee1aec94967.svg){ .tikz loading=lazy }
+![](../figures/c0c3c1d591744911.svg){ .tikz loading=lazy }
 
 ??? corrige "Corrigé"
 
@@ -142,6 +164,8 @@
 ### Réutiliser : les fonctions
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — La fonction carré <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-6 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `carre(cote)` qui dessine un carré, puis l’appeler trois fois pour dessiner trois carrés de tailles différentes (par exemple $50$, $100$, $150$).
 
@@ -165,6 +189,8 @@
     carre(150)
     t.done()
     ```
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire la définition `def carre(cote):` sans jamais l’appeler : rien ne se dessine. Définir une fonction ne l’exécute pas ; ce sont les lignes `carre(50)`… qui la font travailler.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Un polygone au choix <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-7 }
 
@@ -231,13 +257,15 @@
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Rosace de carrés <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-9 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span> En réutilisant la fonction `carre(cote)`, dessiner une rosace formée de **12 carrés**, chacun pivoté de `30` degrés par rapport au précédent. *(Pourquoi 30 ? Parce que $12 \times 30 = 360$.)*
 
 ??? pouce "Coup de pouce"
 
     Dans une boucle de 12 tours : on dessine un carré, puis on fait pivoter la tortue avant le carré suivant. Pensez à recopier la définition de `carre` au début du programme.
 
-![](../figures/07813e9e21745c4b.svg){ .tikz loading=lazy }
+![](../figures/0831745ab48c5e04.svg){ .tikz loading=lazy }
 
 ??? corrige "Corrigé"
 
@@ -264,7 +292,7 @@
 
     Les 18 cercles doivent se répartir régulièrement sur un tour complet de $360$ degrés.
 
-![](../figures/2b0837d84fe24200.svg){ .tikz loading=lazy }
+![](../figures/f8b67dbd6d40e941.svg){ .tikz loading=lazy }
 
 ??? corrige "Corrigé"
 
@@ -282,6 +310,8 @@
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 11</span> — La maison <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-11 }
 
+<span class="duree">≈ 15 min</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span> Dessiner une maison : un **carré** pour la façade, surmonté d’un **triangle** pour le toit. *(Il faudra bien placer la tortue et choisir les bons angles pour le toit.)*
 
 ??? pouce "Coup de pouce"
@@ -297,7 +327,7 @@
     `t.forward(100)`  
     (la tortue est au coin haut-gauche ; il reste à l’orienter vers le sommet du toit.)
 
-![](../figures/f06ce8bf0c1eec64.svg){ .tikz loading=lazy }
+![](../figures/d846609d5a753e69.svg){ .tikz loading=lazy }
 
 ??? corrige "Corrigé"
 
@@ -322,6 +352,8 @@
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 12</span> — La spirale carrée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-12 }
 
+<span class="duree">≈ 10 min</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span> Dessiner une spirale : on tourne toujours de `90` degrés, mais la longueur du côté **augmente** à chaque tour (par exemple `10, 20, 30, …`). Tracer une vingtaine de segments.
 
 ??? pouce "Coup de pouce"
@@ -335,7 +367,7 @@
     `t.forward(cote)`  
     (il reste à tourner, puis à faire grandir `cote`.)
 
-![](../figures/5b4b1dd34cf754ac.svg){ .tikz loading=lazy }
+![](../figures/ebd0a7106976dd12.svg){ .tikz loading=lazy }
 
 ??? corrige "Corrigé"
 
@@ -353,6 +385,8 @@
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Du triangle à l’heptagone <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-13 }
 
+<span class="duree">≈ 20 min</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span> Dessiner, **côte à côte** sur une même ligne, un triangle, un carré, un pentagone, un hexagone et un heptagone (7 côtés), tous de côté `50`, en n’écrivant qu’**une seule** boucle pour enchaîner les cinq figures.
 
 ??? pouce "Coup de pouce"
@@ -366,7 +400,7 @@
     `t.penup()`  
     (il reste à avancer assez loin, puis à reposer le crayon.)
 
-![](../figures/151c361a311baa7c.svg){ .tikz loading=lazy }
+![](../figures/d075d90a86ab01f4.svg){ .tikz loading=lazy }
 
 ??? corrige "Corrigé"
 

@@ -14,6 +14,8 @@ Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title=
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Compter les appels <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-1 }
 
+<span class="essentiel">• essentiel</span>
+
 On reprend Fibonacci naïf :
 
 ```python
@@ -31,6 +33,10 @@ def fibo(n):
 
 4.  Expliquer en une phrase pourquoi ce coût rend `fibo(60)` inutilisable.
 
+??? pouce "Coup de pouce"
+
+    Chaque appel `fibo(n)` avec $n \geq 2$ a deux enfants, `fibo(n - 1)` et `fibo(n - 2)` ; `fibo(1)` et `fibo(0)` sont des feuilles. Pour la question 3 : l’appel compte pour $1$ ; combien d’appels chacun de ses deux enfants déclenche-t-il ?
+
 ??? corrige "Corrigé"
 
     !!! remarque "Remarque"
@@ -39,7 +45,7 @@ def fibo(n):
 
     **1.** Arbre des appels de `fibo(4)` :
 
-    ![](../figures/20bbd7880c5e8a7b.svg){ .tikz loading=lazy }
+    ![](../figures/01ffdb6b2fd25dde.svg){ .tikz loading=lazy }
 
     **2.** `fibo(1)` apparaît **3 fois** dans cet arbre.
 
@@ -49,15 +55,23 @@ def fibo(n):
     |:------:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
     | $A(n)$ |  1  |  1  |  3  |  5  |  9  | 15  | 25  |
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Trouver $A(4) = 5$ en ne comptant que les feuilles, ou $8$ en oubliant l’appel initial : chaque nœud de l’arbre est un appel, d’où $9$.
+
     **4.** $A(n)$ croît comme Fibonacci lui-même, c’est-à-dire **exponentiellement** : `fibo(60)` déclencherait environ $5 \times 10^{12}$ appels (cinq mille milliards). Au rythme mesuré dans l’activité de découverte (environ $2$ secondes pour les $30$ millions d’appels de `fibo(35)`), cela représente de l’ordre de $4$ jours de calcul ininterrompu.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Ajouter un carnet de notes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-2 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Recopier la fonction `fibo` et la transformer en une fonction **mémoïsée** `fibo_memo(n, memo)` qui utilise un dictionnaire `memo` pour ne calculer chaque $F_k$ qu’une seule fois. Vérifier que `fibo_memo(50)` vaut `12586269025` et s’obtient instantanément.
+
+??? pouce "Coup de pouce"
+
+    Avant de calculer $F_n$, regarder si `n` est déjà une clé de `memo` ; sinon, le calculer comme dans `fibo`, le ranger dans `memo[n]`, puis le renvoyer. Le dictionnaire est transmis à chaque appel récursif ; pour pouvoir écrire `fibo_memo(50)`, lui donner la valeur par défaut `None` (chapitre *Récursivité*).
 
 ??? corrige "Corrigé"
 
-    Version mémoïsée :
+    **Démarche :** on garde la fonction récursive ; avant de calculer $F_n$, on regarde s’il est déjà dans le dictionnaire `memo` ; sinon, on le calcule une seule fois et on l’y range. La valeur par défaut `None`, remplacée par un dictionnaire neuf, permet l’appel `fibo_memo(50)`.
 
     ```python
     def fibo_memo(n, memo=None):
@@ -73,6 +87,8 @@ def fibo(n):
 
     `fibo_memo(50)` renvoie bien `12586269025`, instantanément : chaque $F_k$ n’est calculé qu’une fois, le coût est linéaire.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Créer `memo = {}` au début de chaque appel sans le transmettre aux appels récursifs : chaque appel repart d’un carnet vide, et l’on retrouve le coût exponentiel.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Monter un escalier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-3 }
 
 Un escalier a $n$ marches. On peut monter les marches **une par une** ou **deux par deux**. On note $M(n)$ le nombre de façons différentes d’arriver en haut.
@@ -83,13 +99,13 @@ Un escalier a $n$ marches. On peut monter les marches **une par une** ou **deux 
 
     ??? pouce "Coup de pouce"
 
-        Le dernier pas est de 1 ou de 2 marches : sur quelle marche était-on juste avant, dans chacun des deux cas ?
+        Q2 : le dernier pas est de 1 ou de 2 marches : sur quelle marche était-on juste avant, dans chacun des deux cas ?
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction **mémoïsée** `monter(n)` qui renvoie $M(n)$. Tester `monter(10)`.
 
     ??? pouce "Coup de pouce"
 
-        Reprendre le schéma de `fibo_memo` ; attention, les conditions d’arrêt ne sont pas celles de Fibonacci.
+        Q3 : reprendre le schéma de `fibo_memo` ; attention, les conditions d’arrêt ne sont pas celles de Fibonacci.
 
 ??? corrige "Corrigé"
 
@@ -97,7 +113,7 @@ Un escalier a $n$ marches. On peut monter les marches **une par une** ou **deux 
 
     **2.** Pour arriver en haut de $n$ marches, le **dernier** pas est soit de $1$ (on venait de la marche $n-1$), soit de $2$ (on venait de $n-2$). Ces deux familles de chemins sont disjointes et couvrent tout : $M(n) = M(n-1) + M(n-2)$. On reconnaît la suite de **Fibonacci** (décalée).
 
-    **3.**
+    **3.** **Démarche :** même schéma que `fibo_memo`, avec la relation $M(n) = M(n-1) + M(n-2)$ et les conditions d’arrêt $M(0) = M(1) = 1$.
 
     ```python
     def monter(n, memo=None):
@@ -113,9 +129,13 @@ Un escalier a $n$ marches. On peut monter les marches **une par une** ou **deux 
 
     `monter(10)` renvoie `89`.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Reprendre telles quelles les conditions d’arrêt de Fibonacci (`return n`) : on aurait $M(0) = 0$, puis $M(2) = 1$ au lieu de $2$.
+
 ### De bas en haut : construire une table
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Remplir une table à la main <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-4 }
+
+<span class="essentiel">• essentiel</span>
 
 On définit la suite $u$ par $u_0 = 2$, $u_1 = 1$ et, pour $n \geq 2$, $u_n = u_{n-1} + 2\,u_{n-2}$.
 
@@ -128,6 +148,10 @@ On définit la suite $u$ par $u_0 = 2$, $u_1 = 1$ et, pour $n \geq 2$, $u_n = u_
 2.  Dans quel ordre a-t-on rempli les cases ? Pour calculer la case $6$, de quelles cases a-t-on eu besoin ?
 
 3.  Combien de cases faut-il remplir pour obtenir $u_n$ ? Quel est l’ordre de grandeur du coût de cette méthode ?
+
+??? pouce "Coup de pouce"
+
+    Appliquer la relation case après case, de gauche à droite : chaque nouvelle case se calcule avec les deux cases qui la précèdent, déjà remplies.
 
 ??? corrige "Corrigé"
 
@@ -145,9 +169,17 @@ On définit la suite $u$ par $u_0 = 2$, $u_1 = 1$ et, pour $n \geq 2$, $u_n = u_
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Fibonacci tabulé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-5 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire `fibo_tab(n)` qui calcule $F_n$ **sans récursivité**, en remplissant un tableau `table` de bas en haut. Comparer les valeurs obtenues avec celles de `fibo_memo` pour $n$ de $0$ à $20$.
 
+??? pouce "Coup de pouce"
+
+    Créer un tableau de `n + 1` cases, y placer $F_0$ et $F_1$, puis une boucle qui remplit chaque case suivante à partir des deux précédentes. Que faire si `n` vaut $0$ ?
+
 ??? corrige "Corrigé"
+
+    **Démarche :** un tableau de $n + 1$ cases ; on y place $F_0$ et $F_1$, puis une boucle remplit chaque case à partir des deux précédentes, des petits indices vers les grands.
 
     ```python
     def fibo_tab(n):
@@ -179,7 +211,13 @@ On définit la suite $u$ par $u_0 = 2$, $u_1 = 1$ et, pour $n \geq 2$, $u_n = u_
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Réécrire l’exercice de l’escalier en **tabulation** : une fonction `monter_tab(n)` avec une boucle et un tableau, sans récursivité. Vérifier qu’elle donne les mêmes résultats que la version mémoïsée.
 
+??? pouce "Coup de pouce"
+
+    Même structure que `fibo_tab` ; seules les premières cases changent : relire les conditions d’arrêt de `monter`.
+
 ??? corrige "Corrigé"
+
+    **Démarche :** même structure que `fibo_tab` ; seules changent les deux premières cases, $M(0) = M(1) = 1$.
 
     ```python
     def monter_tab(n):
@@ -193,9 +231,11 @@ On définit la suite $u$ par $u_0 = 2$, $u_1 = 1$ et, pour $n \geq 2$, $u_n = u_
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Le plus grand chemin dans un triangle <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-7 }
 
+<span class="essentiel">• essentiel</span>
+
 On dispose un triangle de nombres, par exemple :
 
-![](../figures/6c6be54ae633fb46.svg){ .tikz loading=lazy }
+![](../figures/56f82151f030a39d.svg){ .tikz loading=lazy }
 
 Partant du sommet, on descend à chaque étage vers le voisin de gauche ou de droite, jusqu’en bas. Le **score** d’un chemin est la somme des nombres traversés.
 
@@ -205,16 +245,17 @@ Partant du sommet, on descend à chaque étage vers le voisin de gauche ou de dr
 
     ??? pouce "Coup de pouce"
 
-        Depuis la case $(i, j)$, quelles sont les deux cases atteignables à l’étage suivant ? Laquelle a-t-on intérêt à choisir ?
+        Q2 : depuis la case $(i, j)$, quelles sont les deux cases atteignables à l’étage suivant ? Laquelle a-t-on intérêt à choisir ?
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Le triangle est donné en liste de listes, ici `t = [[3],[7,4],[2,4,6],[8,5,9,3]]`. Écrire une fonction **tabulée** `meilleur_score(t)` qui remplit une table *du bas vers le haut* et renvoie $S(0,0)$.
 
     ??? pouce "Coup de pouce"
 
-        La table a la même forme que le triangle, et son dernier niveau est déjà connu (condition d’arrêt) : on remonte niveau par niveau.
+        Q3 : la table a la même forme que le triangle, et son dernier niveau est déjà connu (condition d’arrêt) : on remonte niveau par niveau.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
+        Q3 :  
         `s = [[x for x in niveau] for niveau in t]`  
         `for i in range(len(t) - 2, -1, -1):`  
         `for j in range(len(t[i])):` …
@@ -225,7 +266,7 @@ Partant du sommet, on descend à chaque étage vers le voisin de gauche ou de dr
 
     **2.** Depuis la case $(i, j)$, on descend vers $(i+1, j)$ ou $(i+1, j+1)$, et on garde le meilleur : $$S(i, j) = t[i][j] + \max\big(S(i+1, j),\ S(i+1, j+1)\big),$$ avec le cas de base $S(\text{dernier niveau}, j) = t[\text{dernier}][j]$.
 
-    **3.**
+    **3.** **Démarche :** la table a la forme du triangle ; son dernier niveau est connu (cas de base) ; on remonte niveau par niveau avec la relation de la question 2.
 
     ```python
     def meilleur_score(t):
@@ -238,6 +279,8 @@ Partant du sommet, on descend à chaque étage vers le voisin de gauche ou de dr
     ```
 
     `meilleur_score([[3],[7,4],[2,4,6],[8,5,9,3]])` renvoie `23`.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Remplir la table du sommet vers la base : la case $(i, j)$ a besoin des deux cases du niveau $i + 1$, qui doivent être déjà remplies. On part du dernier niveau et l’on remonte.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Reconnaître les deux approches <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-8 }
 
@@ -268,6 +311,10 @@ def trib_b(n):
 
 3.  Dans `trib_a`, quelle ligne empêche de recalculer deux fois le même terme ?
 
+??? pouce "Coup de pouce"
+
+    Une fonction qui reste récursive et range ses résultats dans un dictionnaire mémoïse ; une fonction qui remplit un tableau avec une boucle, sans s’appeler elle-même, tabule. Pour la question 2, calculer à la main les termes $T_0$ à $T_6$.
+
 ??? corrige "Corrigé"
 
     **1.** `trib_a` procède par **mémoïsation** (*top-down*) : elle reste récursive et range ses résultats dans le dictionnaire `memo`. `trib_b` procède par **tabulation** (*bottom-up*) : une boucle remplit le tableau `table` des petits indices vers les grands, sans aucun appel récursif.
@@ -280,6 +327,8 @@ def trib_b(n):
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 9</span> — Le glouton se trompe <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-9 }
 
+<span class="essentiel">• essentiel</span>
+
 On dispose du système de pièces $\{1, 3, 4\}$.
 
 1.  Rendre la somme $6$ avec l’algorithme glouton (toujours la plus grosse pièce possible). Combien de pièces ?
@@ -288,15 +337,23 @@ On dispose du système de pièces $\{1, 3, 4\}$.
 
 3.  Rappeler la relation de récurrence donnant $R(s)$, le nombre *minimal* de pièces pour rendre $s$, et le cas de base.
 
+??? pouce "Coup de pouce"
+
+    Question 1 : à chaque étape, prendre la plus grosse pièce qui ne dépasse pas ce qu’il reste à rendre. Question 2 : peut-on rendre $6$ avec seulement deux pièces ? Question 3 : la dernière pièce rendue est l’une des pièces du système ; que reste-t-il alors à rendre ?
+
 ??? corrige "Corrigé"
 
     **1.** Glouton pour $6$ avec $\{1,3,4\}$ : $4$, puis $1$, puis $1$ $\Rightarrow$ **3 pièces**.
 
     **2.** $3 + 3 = 6$ $\Rightarrow$ **2 pièces**. Le glouton n’est donc **pas optimal**.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Croire le glouton toujours optimal parce qu’il l’est avec les pièces en euros : c’est le système de pièces qui décide.
+
     **3.** $R(0) = 0$ et $R(s) = 1 + \min\limits_{p \leq s} R(s - p)$ (on essaie chaque première pièce $p$ et on garde la meilleure suite).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Rendre au plus juste <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-10 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire, au choix en mémoïsation *ou* en tabulation, une fonction `rendu(somme, pieces)` qui renvoie le nombre minimal de pièces. Tester : `rendu(6, [1,3,4])` doit valoir `2`, et `rendu(11, [1,2,5])` doit valoir `3`.
 
@@ -312,6 +369,8 @@ On dispose du système de pièces $\{1, 3, 4\}$.
 
 ??? corrige "Corrigé"
 
+    **Démarche :** on tabule la relation $R(s) = 1 + \min R(s - p)$ : `table[0]` vaut $0$, les autres cases $+\infty$ au départ (« pas encore de solution ») ; pour chaque somme, de la plus petite à la plus grande, on essaie chaque pièce comme dernière pièce.
+
     ```python
     def rendu(somme, pieces):
         table = [0] + [float("inf")] * somme
@@ -324,7 +383,11 @@ On dispose du système de pièces $\{1, 3, 4\}$.
 
     `rendu(6, [1,3,4]) == 2` et `rendu(11, [1,2,5]) == 3`.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Initialiser toute la table à $0$ : le test « strictement plus petit » n’est alors jamais vrai, et la fonction renvoie $0$ (c’est l’erreur de l’exercice 21). Seule `table[0]` vaut $0$.
+
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 11</span> — Quelles pièces, exactement ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-11 }
+
+<span class="duree">≈ 20 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Modifier la version tabulée pour qu’elle renvoie non pas le *nombre* de pièces mais **la liste des pièces** d’une solution optimale. Tester avec `[1,3,4]` et la somme $6$.
 
@@ -369,19 +432,19 @@ Un robot part du coin supérieur gauche d’une grille de $L$ lignes et $C$ colo
 
     ??? pouce "Coup de pouce"
 
-        De quelles cases le robot peut-il arriver sur la case $(i, j)$ ? Combien de chemins mènent à une case de la première ligne ?
+        Q1 : de quelles cases le robot peut-il arriver sur la case $(i, j)$ ? Combien de chemins mènent à une case de la première ligne ?
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction **tabulée** `nb_chemins(L, C)` qui renvoie le nombre de chemins jusqu’au coin bas-droit. Vérifier que `nb_chemins(3, 3)` vaut `6` et `nb_chemins(2, 2)` vaut `2`.
 
     ??? pouce "Coup de pouce"
 
-        Créer une table de `L` lignes et `C` colonnes remplie de $1$, puis remplir les autres cases ligne par ligne.
+        Q2 : créer une table de `L` lignes et `C` colonnes remplie de $1$, puis remplir les autres cases ligne par ligne.
 
 ??? corrige "Corrigé"
 
     **1.** Pour atteindre $(i, j)$, le robot arrive soit de la case du dessus $(i-1, j)$, soit de celle de gauche $(i, j-1)$ : $N(i, j) = N(i-1, j) + N(i, j-1)$. Sur la première ligne et la première colonne, il n’y a qu’un seul chemin (tout droit), donc les valeurs y valent toutes $1$.
 
-    **2.**
+    **2.** **Démarche :** une table de `L` lignes et `C` colonnes remplie de $1$ (première ligne et première colonne) ; on remplit les autres cases ligne par ligne avec la relation de la question 1.
 
     ```python
     def nb_chemins(L, C):
@@ -393,6 +456,8 @@ Un robot part du coin supérieur gauche d’une grille de $L$ lignes et $C$ colo
     ```
 
     `nb_chemins(3, 3) == 6` et `nb_chemins(2, 2) == 2`.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Mettre des $0$ sur la première ligne et la première colonne : il y a exactement *un* chemin jusqu’à chacune de ces cases (tout droit), d’où des $1$.
 
     *Autre méthode :* la même relation en **mémoïsation**, avec un dictionnaire de clé `(i, j)` ; on appelle `nb_chemins_memo(L - 1, C - 1, {})`.
 
@@ -406,6 +471,8 @@ Un robot part du coin supérieur gauche d’une grille de $L$ lignes et $C$ colo
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Le sac à dos <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-13 }
+
+<span class="duree">≈ 30 min</span>
 
 Un sac supporte une capacité `C`. On dispose d’objets de poids `poids[i]` et de valeurs `valeurs[i]` ; on veut maximiser la valeur emportée sans dépasser `C` (chaque objet est pris ou laissé, jamais coupé).
 
@@ -452,23 +519,25 @@ Un sac supporte une capacité `C`. On dispose d’objets de poids `poids[i]` et 
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Comparer deux mots <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-14 }
 
+<span class="duree">≈ 30 min</span>
+
 La **plus longue sous-séquence commune** (PLSC) à deux mots est utilisée par les correcteurs et par la commande `diff`. Une sous-séquence s’obtient en effaçant des lettres sans changer l’ordre des autres.
 
 1.  Donner à la main la PLSC de `"CHIEN"` et `"NICHE"`, et sa longueur.
 
     ??? pouce "Coup de pouce"
 
-        Chercher les lettres communes aux deux mots, puis le plus grand nombre d’entre elles que l’on retrouve **dans le même ordre** dans les deux.
+        Q1 : chercher les lettres communes aux deux mots, puis le plus grand nombre d’entre elles que l’on retrouve **dans le même ordre** dans les deux.
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire `plsc(a, b)` qui renvoie la longueur de la PLSC, en remplissant une table $L$ où `L[i][j]` est la longueur de la PLSC des `i` premières lettres de `a` et des `j` premières de `b`. Tester avec `"CHIEN"`/`"NICHE"` (attendu $3$) et `"ABCBDAB"`/`"BDCAB"` (attendu $4$).
 
     ??? pouce "Coup de pouce"
 
-        Comparer les dernières lettres `a[i-1]` et `b[j-1]` : si elles sont égales, elles peuvent terminer la sous-séquence commune ; sinon, on retire la dernière lettre de l’un **ou** de l’autre mot. Condition d’arrêt : un mot vide.
+        Q2 : comparer les dernières lettres `a[i-1]` et `b[j-1]` : si elles sont égales, elles peuvent terminer la sous-séquence commune ; sinon, on retire la dernière lettre de l’un **ou** de l’autre mot. Condition d’arrêt : un mot vide.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        `L = [[0] * (m + 1) for _ in range(n + 1)]` (ligne et colonne $0$ : mot vide).  
+        Q2 : `L = [[0] * (m + 1) for _ in range(n + 1)]` (ligne et colonne $0$ : mot vide).  
         Si `a[i-1] == b[j-1]` : `L[i][j] = L[i-1][j-1] + 1` ; sinon, garder la meilleure de deux cases voisines.
 
 ??? corrige "Corrigé"
@@ -500,7 +569,7 @@ La **distance d’édition** entre deux mots est le nombre minimal d’opératio
 
     ??? pouce "Coup de pouce"
 
-        Aligner les deux mots lettre à lettre : quelles lettres faut-il changer, ajouter ou retirer ?
+        Q1 : aligner les deux mots lettre à lettre : quelles lettres faut-il changer, ajouter ou retirer ?
 
 2.  Justifier que $D[i][0] = i$ et $D[0][j] = j$ (transformer un mot en le mot vide).
 
@@ -508,7 +577,7 @@ La **distance d’édition** entre deux mots est le nombre minimal d’opératio
 
     ??? pouce "Coup de pouce"
 
-        Remplir d’abord la première colonne et la première ligne (question 2), puis les autres cases ligne par ligne avec la règle donnée ; les `i` premières lettres de `a` se terminent par `a[i-1]`.
+        Q3 : remplir d’abord la première colonne et la première ligne (question 2), puis les autres cases ligne par ligne avec la règle donnée ; les `i` premières lettres de `a` se terminent par `a[i-1]`.
 
 ??? corrige "Corrigé"
 
@@ -516,7 +585,7 @@ La **distance d’édition** entre deux mots est le nombre minimal d’opératio
 
     **2.** Pour transformer les $i$ premières lettres de `a` en le mot vide, il faut **supprimer** ces $i$ lettres, donc $D[i][0] = i$. Symétriquement, obtenir les $j$ premières lettres de `b` à partir du mot vide demande $j$ **insertions**, donc $D[0][j] = j$.
 
-    **3.**
+    **3.** **Démarche :** on remplit d’abord la première colonne et la première ligne (question 2), puis chaque autre case, ligne par ligne, avec la règle de l’énoncé.
 
     ```python
     def distance(a, b):
@@ -541,6 +610,8 @@ La **distance d’édition** entre deux mots est le nombre minimal d’opératio
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Vue sur la mer *(d’après Amérique du Nord 2026, jour 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-16 }
 
+<span class="duree">≈ 30 min</span>
+
 On considère la liste des nombres d’étages des immeubles d’une rue, en partant de la mer. On cherche une **sous-séquence strictement croissante de longueur maximale** : chaque élément retenu est strictement supérieur au précédent, l’ordre étant conservé. On prend `L2 = [3, 1, 8, 2, 5]`.
 
 1.  Donner toutes les sous-séquences strictement croissantes de *longueur 2* de `L2`.
@@ -553,7 +624,7 @@ On considère la liste des nombres d’étages des immeubles d’une rue, en par
 
     ??? pouce "Coup de pouce"
 
-        Condition d’arrêt : que vaut la réponse pour l’indice $0$ ? Ligne 6 : on ne peut prolonger par `tab[i]` qu’une sous-séquence qui se termine par une valeur…
+        Q4 : condition d’arrêt : que vaut la réponse pour l’indice $0$ ? Ligne 6 : on ne peut prolonger par `tab[i]` qu’une sous-séquence qui se termine par une valeur…
 
     ```python
     def llsc_fin(tab, i):
@@ -574,7 +645,7 @@ On considère la liste des nombres d’étages des immeubles d’une rue, en par
 
     ??? pouce "Coup de pouce"
 
-        Comparer avec la ligne 7 de `llsc_fin` : quel appel récursif est remplacé par une case de `dyn` ? La réponse est-elle forcément dans la dernière case ?
+        Q5 : comparer avec la ligne 7 de `llsc_fin` : quel appel récursif est remplacé par une case de `dyn` ? La réponse est-elle forcément dans la dernière case ?
 
     ```python
     def llsc_dyn(tab):
@@ -591,11 +662,13 @@ On considère la liste des nombres d’étages des immeubles d’une rue, en par
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 4) : Q1 : 0,5 ; Q2 : 0,5 ; Q3 : 0,75 ; Q4 : 1 ; Q5 : 0,75 ; Q6 : 0,5
+
     **1.** Sous-séquences strictement croissantes de longueur $2$ de `[3,1,8,2,5]` : `[3,8]`, `[3,5]`, `[1,8]`, `[1,2]`, `[1,5]`, `[2,5]`.
 
     **2.** La plus longue est `[1, 2, 5]`, de longueur **3**.
 
-    **3.**
+    **3.** **Démarche :** on compare chaque élément au précédent ; dès qu’un élément n’est pas strictement plus grand, la réponse est `False`.
 
     ```python
     def est_strict_croissante(seq):
@@ -641,6 +714,8 @@ On considère la liste des nombres d’étages des immeubles d’une rue, en par
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 17</span> — Justifier un texte *(d’après Pays étrangers 2025, sujet PE2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-17 }
 
+<span class="duree">≈ 45 min</span>
+
 On veut couper un texte en lignes de manière « esthétique », pour une largeur (justification) donnée. On modélise un découpage par une liste de couples : pour `[’An’,’algorithm’,’must’,’be’,’seen’,’to’,’be’,’believed’]`, le découpage `[(0,2),(2,5),(5,7),(7,8)]` signifie « ligne 1 = mots 0 à 1, ligne 2 = mots 2 à 4, etc. ».
 
 Le **coût inesthétique** d’une ligne est le *carré* du nombre d’espaces supplémentaires nécessaires pour atteindre la justification ; le coût d’un découpage est la somme des coûts de ses lignes.
@@ -649,10 +724,11 @@ Le **coût inesthétique** d’une ligne est le *carré* du nombre d’espaces s
 
     ??? pouce "Coup de pouce"
 
-        La longueur d’une ligne est la somme des longueurs de ses mots, plus le nombre d’espaces entre eux : combien y en a-t-il entre les mots `i` à `j-1` ?
+        Q1 : la longueur d’une ligne est la somme des longueurs de ses mots, plus le nombre d’espaces entre eux : combien y en a-t-il entre les mots `i` à `j-1` ?
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
+        Q1 :  
         `longueur = j - i - 1  # les espaces`  
         `for k in range(i, j):`  
         `longueur += len(liste_mots[k])`  
@@ -663,7 +739,7 @@ Le **coût inesthétique** d’une ligne est le *carré* du nombre d’espaces s
 
     ??? pouce "Coup de pouce"
 
-        Après chaque mot sauf le dernier, on coupe ou non : combien de découpages cela fait-il en tout ?
+        Q2 : après chaque mot sauf le dernier, on coupe ou non : combien de découpages cela fait-il en tout ?
 
 3.  On donne la fonction `justifie_dynamique` suivante. Elle remplit `cout_mini[i]` = coût minimal pour justifier les mots d’indice `i` jusqu’à la fin.
 
@@ -693,11 +769,13 @@ Le **coût inesthétique** d’une ligne est le *carré* du nombre d’espaces s
 
     ??? pouce "Coup de pouce"
 
-        Si la première ligne contient les mots `i` à `j-1`, que reste-t-il à justifier ? Dans quel ordre les cases de `cout_mini` sont-elles remplies ?
+        Q3 : si la première ligne contient les mots `i` à `j-1`, que reste-t-il à justifier ? Dans quel ordre les cases de `cout_mini` sont-elles remplies ?
 
 4.  Proposer une modification pour que la fonction renvoie **aussi** le coût inesthétique total du découpage retenu.
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 6) : Q1 : 2 ; Q2 : 1 ; Q3 : 1,75 ; Q4 : 1,25
 
     **1.**
 
@@ -729,6 +807,8 @@ Le **coût inesthétique** d’une ligne est le *carré* du nombre d’espaces s
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Charger un camion au meilleur prix *(d’après Métropole 2024, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-18 }
 
+<span class="duree">≈ 60 min</span>
+
 Dans cet exercice, l’entête d’une fonction précise le type de ses paramètres et de la valeur renvoyée : ainsi `puissance(x: float, n: int) -> float` prend un flottant `x` et un entier `n` et renvoie le flottant `x**n`.
 
 Une entreprise transporte des marchandises et souhaite maximiser son profit en optimisant le remplissage de ses moyens de transport, limités par leur **volume** (en litres). Chaque marchandise est caractérisée par son **prix** (en euros) et son **volume** indivisible (en litres). Par exemple, avec trois marchandises de couples (prix, volume) $m_1 = (100, 10)$, $m_2 = (100, 10)$ et $m_3 = (250, 20)$, s’il reste 25 litres, il vaut mieux charger $m_3$, qui rapporte 250 €, plutôt que $m_1$ et $m_2$, qui rapportent 200 € au total pour le même espace utilisé.
@@ -755,7 +835,7 @@ On définit une classe `Marchandise` dont chaque instance possède deux attribut
 
     ??? pouce "Coup de pouce"
 
-        Un accumulateur initialisé à $0$, auquel on ajoute l’attribut `prix` de chaque marchandise.
+        Q4 : un accumulateur initialisé à $0$, auquel on ajoute l’attribut `prix` de chaque marchandise.
 
 **Partie B — Première approche de rangement**
 
@@ -783,7 +863,7 @@ Le tri dans l’ordre décroissant des prix volumiques donne $m_3, m_2, m_1, m_4
 
     ??? pouce "Coup de pouce"
 
-        Tant qu’on n’est pas sorti du tableau, on décale d’une case vers la droite les marchandises dont le ratio est **plus petit** que celui de `marchandise`.
+        Q7 : tant qu’on n’est pas sorti du tableau, on décale d’une case vers la droite les marchandises dont le ratio est **plus petit** que celui de `marchandise`.
 
     ```python
     def tri(tab: list) -> None:
@@ -827,7 +907,7 @@ L’algorithme glouton ne renvoie pas toujours une solution optimale. On écrit 
 
     ??? pouce "Coup de pouce"
 
-        `option1` : on n’utilise pas la marchandise `i` ; `option2` : on l’utilise, et le volume restant diminue de son volume.
+        Q10 : `option1` : on n’utilise pas la marchandise `i` ; `option2` : on l’utilise, et le volume restant diminue de son volume.
 
     ```python
     def chargeOptimale(tab: list, v_restant: int, i: int) -> list:
@@ -853,13 +933,16 @@ L’algorithme glouton ne renvoie pas toujours une solution optimale. On écrit 
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
+        Q12 :  
         `if (i, v_restant) in memo:`  
         `return memo[(i, v_restant)]`  
         puis la même structure que `chargeOptimale`, en ne manipulant que des prix, et `memo[(i, v_restant)] = …` avant de renvoyer.
 
 ??? corrige "Corrigé"
 
-    **1.**
+    **Barème indicatif** (sur 8) : Q1 : 0,75 ; Q2 : 0,25 ; Q3 : 0,5 ; Q4 : 0,5 ; Q5 : 0,75 ; Q6 : 0,25 ; Q7 : 1 ; Q8 : 0,5 ; Q9 : 1 ; Q10 : 1 ; Q11 : 0,5 ; Q12 : 1
+
+    **1.** **Démarche :** on vérifie d’abord le volume avec `assert`, puis on range les deux paramètres dans les attributs.
 
     ```python
     class Marchandise:
@@ -878,7 +961,7 @@ L’algorithme glouton ne renvoie pas toujours une solution optimale. On écrit 
         return self.prix / self.volume
     ```
 
-    **4.**
+    **4.** **Démarche :** un accumulateur initialisé à $0$, auquel on ajoute l’attribut `prix` de chaque marchandise.
 
     ```python
     def prixListe(tab: list) -> int:
@@ -901,7 +984,7 @@ L’algorithme glouton ne renvoie pas toujours une solution optimale. On écrit 
 
     **6.** **Glouton** (à chaque étape, on fait le choix qui paraît localement le meilleur, sans revenir en arrière).
 
-    **7.**
+    **7.** **Démarche :** c’est le tri par insertion : on décale vers la droite les marchandises de ratio plus petit que celui de `marchandise`, puis on l’insère dans la case libérée.
 
     ```python
     def tri(tab: list) -> None:
@@ -919,7 +1002,7 @@ L’algorithme glouton ne renvoie pas toujours une solution optimale. On écrit 
 
     **8.** Tri par **insertion**, de coût **quadratique** dans le pire des cas.
 
-    **9.**
+    **9.** **Démarche :** on trie, puis on parcourt les marchandises dans l’ordre en chargeant chacune de celles qui tiennent encore dans le volume restant.
 
     ```python
     def charge(tab: list, volume: int) -> list:
@@ -978,6 +1061,8 @@ L’algorithme glouton ne renvoie pas toujours une solution optimale. On écrit 
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Découper des planches au meilleur prix *(sujet maison, façon bac)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-19 }
 
+<span class="duree">≈ 60 min</span>
+
 Une scierie vend des morceaux de planche au détail. Le prix d’un morceau ne dépend que de sa longueur, un nombre entier de mètres, au plus égal à $5$ :
 
 | Longueur du morceau (m) |  1  |  2  |  3  |  4  |  5  |
@@ -992,7 +1077,7 @@ On représente ces tarifs par la liste `prix = [0, 2, 5, 10, 13, 14]`, où `prix
 
     ??? pouce "Coup de pouce"
 
-        Écrire $4$ comme somme d’entiers de toutes les façons possibles, en rangeant les morceaux du plus long au plus court.
+        Q1 : écrire $4$ comme somme d’entiers de toutes les façons possibles, en rangeant les morceaux du plus long au plus court.
 
 2.  Est-il intéressant de vendre entière une planche de $5$ m ? Justifier.
 
@@ -1000,7 +1085,7 @@ On représente ces tarifs par la liste `prix = [0, 2, 5, 10, 13, 14]`, où `prix
 
     ??? pouce "Coup de pouce"
 
-        À chacune des $n - 1$ marques, combien de choix ?
+        Q3 : à chacune des $n - 1$ marques, combien de choix ?
 
 **Partie B — Une relation de récurrence**
 
@@ -1029,6 +1114,7 @@ On représente ces tarifs par la liste `prix = [0, 2, 5, 10, 13, 14]`, où `prix
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
+        Q7 :  
         `if n in memo:`  
         `return memo[n]`  
         en tête de fonction (après la condition d’arrêt), et `memo[n] = meilleur` juste avant le `return`.
@@ -1043,7 +1129,7 @@ On représente ces tarifs par la liste `prix = [0, 2, 5, 10, 13, 14]`, où `prix
 
     ??? pouce "Coup de pouce"
 
-        Quand `V[L]` s’améliore grâce à un premier morceau de longueur `k`, c’est `k` qu’il faut retenir. Pour remonter : couper ce premier morceau, puis recommencer avec ce qui reste.
+        Q9 : quand `V[L]` s’améliore grâce à un premier morceau de longueur `k`, c’est `k` qu’il faut retenir. Pour remonter : couper ce premier morceau, puis recommencer avec ce qui reste.
 
     ```python
     def decoupe_optimale(n, prix):
@@ -1066,6 +1152,8 @@ On représente ces tarifs par la liste `prix = [0, 2, 5, 10, 13, 14]`, où `prix
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 8) : Q1 : 0,75 ; Q2 : 0,5 ; Q3 : 0,75 ; Q4 : 1 ; Q5 : 0,75 ; Q6 : 0,75 ; Q7 : 1 ; Q8 : 1,25 ; Q9 : 0,75 ; Q10 : 0,5
+
     **1.** Découpes d’une planche de $4$ m :
 
     | Morceaux | $4$ | $3 + 1$ | $2 + 2$ | $2 + 1 + 1$ | $1 + 1 + 1 + 1$ |
@@ -1080,7 +1168,7 @@ On représente ces tarifs par la liste `prix = [0, 2, 5, 10, 13, 14]`, où `prix
 
     **4.** Une planche de $0$ m ne rapporte rien : $V(0) = 0$. Pour $n \geq 1$, une découpe commence par un premier morceau de longueur $k$, avec $1 \leq k \leq \min(n, 5)$ ; il reste alors une planche de $n - k$ mètres, qu’il faut découper au mieux, ce qui rapporte au plus $V(n - k)$. On essaie toutes les longueurs $k$ possibles et on garde la meilleure, d’où la relation.
 
-    **5.**
+    **5.** **Démarche :** on traduit la relation de la question 4 : condition d’arrêt $V(0) = 0$, puis on essaie chaque longueur `k` possible du premier morceau et l’on garde la meilleure recette.
 
     ```python
     def valeur_rec(n, prix):
@@ -1097,7 +1185,7 @@ On représente ces tarifs par la liste `prix = [0, 2, 5, 10, 13, 14]`, où `prix
 
     **6.** Chaque appel relance jusqu’à cinq appels récursifs, et les mêmes sous-problèmes sont rencontrés par de nombreux chemins : $V(1)$ est utile pour $V(2)$, $V(3)$, $V(4)$, $V(5)$, $V(6)$…, et il est **recalculé** à chaque fois. Les sous-problèmes **se recouvrent** : le nombre d’appels croît exponentiellement avec $n$, alors qu’il n’y a que $n + 1$ valeurs différentes $V(0), \dots, V(n)$ à calculer. C’est le signal de la programmation dynamique.
 
-    **7.**
+    **7.** **Démarche :** la fonction de la question 5, avec un dictionnaire : on regarde d’abord si `V(n)` est déjà connu, et l’on y range chaque résultat calculé.
 
     ```python
     def valeur_memo(n, prix, memo):
@@ -1117,7 +1205,7 @@ On représente ces tarifs par la liste `prix = [0, 2, 5, 10, 13, 14]`, où `prix
 
     On l’appelle avec un dictionnaire vide : `valeur_memo(8, prix, {})` renvoie `26`.
 
-    **8.**
+    **8.** **Démarche :** un tableau `V` rempli des petites longueurs vers les grandes : chaque case utilise la relation de la question 4 et des cases déjà remplies.
 
     ```python
     def valeur_tab(n, prix):
@@ -1143,6 +1231,8 @@ On représente ces tarifs par la liste `prix = [0, 2, 5, 10, 13, 14]`, où `prix
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Décoder un message secret *(sujet maison, façon bac)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-20 }
 
+<span class="duree">≈ 60 min</span>
+
 Dans un jeu d’énigmes, on code un mot en remplaçant chaque lettre par son rang dans l’alphabet (`A`$\to 1$, `B`$\to 2$, …, `Z`$\to 26$) et en écrivant les nombres à la suite, **sans séparateur**. Ainsi `NSI` est codé par le message `’14199’`. Mais le décodage est ambigu : `’14199’` peut aussi se lire `NAII`, `ADSI` ou `ADAII`. On veut **compter** les décodages possibles d’un message, représenté par une chaîne de chiffres.
 
 **Partie A — À la main**
@@ -1151,7 +1241,7 @@ Dans un jeu d’énigmes, on code un mot en remplaçant chaque lettre par son ra
 
     ??? pouce "Coup de pouce"
 
-        Chercher où l’on peut regrouper deux chiffres consécutifs en un nombre compris entre $10$ et $26$.
+        Q1 : chercher où l’on peut regrouper deux chiffres consécutifs en un nombre compris entre $10$ et $26$.
 
 2.  Donner les cinq décodages du message `’1226’`.
 
@@ -1159,7 +1249,7 @@ Dans un jeu d’énigmes, on code un mot en remplaçant chaque lettre par son ra
 
     ??? pouce "Coup de pouce"
 
-        Un `0` ne code aucune lettre à lui seul : avec quel chiffre doit-il être regroupé ?
+        Q3 : un `0` ne code aucune lettre à lui seul : avec quel chiffre doit-il être regroupé ?
 
 **Partie B — Une relation de récurrence**
 
@@ -1181,7 +1271,7 @@ def lettre_seule(message, i):
 
     ??? pouce "Coup de pouce"
 
-        Commencer par traiter le cas $i < 2$ ; `int` s’applique aussi à une chaîne de deux chiffres.
+        Q5 : commencer par traiter le cas $i < 2$ ; `int` s’applique aussi à une chaîne de deux chiffres.
 
 3.  Recopier et compléter la fonction récursive suivante, qui renvoie $D(i)$ :
 
@@ -1207,6 +1297,7 @@ def lettre_seule(message, i):
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
+        Q9 :  
         `D = [0] * (n + 1)`  
         `D[0] = 1`  
         `for i in range(1, n + 1):`  
@@ -1220,6 +1311,8 @@ def lettre_seule(message, i):
 3.  On considère un message formé de $n$ chiffres `1`. Montrer que, pour $i \geq 2$, $D(i) = D(i-1) + D(i-2)$. Quelle suite célèbre reconnaît-on ? Combien de décodages admet le message `’111111’` ?
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 8) : Q1 : 0,75 ; Q2 : 0,5 ; Q3 : 0,75 ; Q4 : 1 ; Q5 : 0,75 ; Q6 : 0,75 ; Q7 : 1 ; Q8 : 0,75 ; Q9 : 1 ; Q10 : 0,75
 
     **1.** `BAC` est codé par `’213’`. On peut lire `2|1|3` (`BAC`), `21|3` (`UC`) ou `2|13` (`BM`) ; `213` n’est pas une lettre. Il y a donc exactement **trois** décodages.
 
@@ -1235,7 +1328,7 @@ def lettre_seule(message, i):
 
     On additionne les deux familles. *(La convention $D(0) = 1$ compte le décodage « vide » : par exemple $D(2) = 2$ pour `’12’`.)*
 
-    **5.**
+    **5.** **Démarche :** on écarte d’abord le cas $i < 2$, puis on forme le nombre des deux chiffres et l’on teste s’il est compris entre $10$ et $26$.
 
     ```python
     def deux_chiffres(message, i):
@@ -1247,7 +1340,7 @@ def lettre_seule(message, i):
 
     Le test `10 <= nombre` écarte les nombres commençant par `0` (comme `’06’`).
 
-    **6.**
+    **6.** **Démarche :** on traduit la relation de la question 4 : condition d’arrêt $D(0) = 1$, puis deux termes ajoutés sous condition.
 
     ```python
     def nb_rec(message, i):
@@ -1263,11 +1356,11 @@ def lettre_seule(message, i):
 
     **7.** Arbre des appels de `nb_rec(’1111’, 4)` (on note seulement la valeur de `i`) :
 
-    ![](../figures/35925e4bba665cc1.svg){ .tikz loading=lazy }
+    ![](../figures/92a81d577445ee50.svg){ .tikz loading=lazy }
 
     La fonction renvoie $5$ (le nombre de feuilles `0`). L’appel avec `i = 2` est effectué $2$ fois, avec `i = 1` $3$ fois et avec `i = 0` $5$ fois ($12$ appels en tout). Comme pour Fibonacci, le nombre d’appels croît exponentiellement : plus de $3{,}5$ millions d’appels (exactement $3\,524\,577$) pour $30$ chiffres, alors qu’il n’y a que $31$ sous-problèmes différents, $D(0)$ à $D(30)$.
 
-    **8.**
+    **8.** **Démarche :** la fonction `nb_rec`, avec un dictionnaire de clé `i` consulté avant tout calcul et rempli avant de renvoyer.
 
     ```python
     def nb_memo(message, i, memo):
@@ -1286,7 +1379,7 @@ def lettre_seule(message, i):
 
     Appel : `nb_memo(message, len(message), {})`.
 
-    **9.**
+    **9.** **Démarche :** un tableau `D` rempli de $D(0)$ à $D(n)$ ; les appels récursifs de `nb_rec` sont remplacés par les cases `D[i - 1]` et `D[i - 2]`, déjà remplies.
 
     ```python
     def nb_decodages(message):
@@ -1326,7 +1419,7 @@ def rendu(somme, pieces):
     return table[somme]
 ```
 
-*« On remplit la table de $0$ à `somme` : pour chaque montant `s`, on essaie chaque pièce `p` et on garde le meilleur `table[s - p] + 1`. C’est la relation de récurrence du cours, en version bottom-up. »*
+« On remplit la table de $0$ à `somme` : pour chaque montant `s`, on essaie chaque pièce `p` et on garde le meilleur `table[s - p] + 1`. C’est la relation de récurrence du cours, en version bottom-up. »
 
 1.  La réponse est-elle correcte ? <span class="run" title="À programmer et tester sur machine">▶</span> Remplir la table à la main pour `rendu(6, [1, 3, 4])` (cases `table[0]` à `table[6]`), puis comparer avec la valeur attendue (le cours donne $2$ : $3 + 3$).
 
@@ -1356,7 +1449,7 @@ def rendu(somme, pieces):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 22</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-22 }
 
-Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
+Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans lire ses notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 
 1.  Expliquer pourquoi le calcul récursif naïf de la suite de **Fibonacci** est très lent et comment la **mémoïsation** le corrige.
 
@@ -1364,7 +1457,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
 3.  Expliquer à un camarade de Première pourquoi la méthode gloutonne ne rend pas toujours la monnaie avec le moins de pièces, et ce que change la programmation dynamique.
 
-**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus, puis retourner la feuille. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire de notes** : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
+**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus : comme au Grand Oral, ces notes servent d’aide-mémoire. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire ses notes** et sans rien écrire : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
 
 ??? pouce "Coup de pouce"
 

@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *« Types construits »* : *p-uplets*, *tableaux indexés* (listes) et *tableaux de tableaux*, *dictionnaires* (tableaux associatifs). Capacités attendues : écrire une fonction renvoyant un p-uplet ; lire et *modifier* les éléments d’un tableau par leur index ; construire un tableau *par compréhension* ; *itérer* sur les éléments d’un tableau ; représenter des matrices par des tableaux de tableaux ; itérer sur les éléments d’un dictionnaire. |
-| **Prérequis** | les bases de Python : variables, types simples (`int`, `float`, `bool`, `str`), boucles `for`/`while`, fonctions. |
+| **Prérequis** | les bases de Python : variables, types simples (`int`, `float`, `bool`, `str`), boucles `for`/`while`, fonctions. (→ fiches de révision : ch. 1) |
 | **Objectifs** | savoir **regrouper** des données dans le bon type construit, y **accéder**, les **parcourir** et, quand c’est possible, les **modifier** — en comprenant *ce qui se passe en mémoire*. Ce chapitre est le socle des chapitres suivants (algorithmique, tris, données en tables…). |
+
+!!! situation "Situation de départ"
+
+    1.  Comment un programme peut-il garder ensemble les 30 notes d’une classe, sans créer 30 variables ?
+
+    2.  Comment retrouver directement le numéro de casier de Hugo, sans chercher à quelle place il se trouve dans une liste ?
+
+    3.  Après `copie = notes`, on change `copie[0]` : pourquoi `notes` a-t-elle changé aussi ? Comment faire une vraie copie ?
 
 !!! remarque "Remarque — Deux fils conducteurs, à garder en tête tout le chapitre"
 
@@ -30,7 +38,7 @@ Avant tout, installons le modèle mental qui va tout éclairer.
 
     En Python, l’instruction `notes = [12, 8, 15]` fait *deux* choses : elle crée l’objet `[12, 8, 15]` quelque part en mémoire, puis fait **pointer** le nom `notes` vers cet objet. La variable **ne contient pas** l’objet : elle le **désigne**.
 
-![](../figures/775b593ef261f83a.svg){ .tikz loading=lazy }
+![](../figures/b7922f83db334be1.svg){ .tikz loading=lazy }
 
 De cette image découle une distinction **fondamentale** : peut-on modifier l’objet vers lequel on pointe ?
 
@@ -68,6 +76,8 @@ Les réponses désignent le type à utiliser — c’est la **carte de décision
 | `tuple` (p-uplet) | par indice | **non** (immuable) | des données figées, plusieurs valeurs renvoyées |
 | `list` (tableau) | par indice | **oui** (mutable) | une collection ordonnée qui évolue |
 | `dict` (dictionnaire) | par **clé** | **oui** (mutable) | associer une valeur à une étiquette |
+
+<span class="retouract">↺ Retour sur l'activité.</span> Ce sont les deux questions du tableau rempli dans l’activité « Des données en vrac » : la carte d’identité, figée et lue par position, sera un p-uplet ; la liste de courses, qui change, un tableau ; les casiers, retrouvés par le prénom, un dictionnaire.
 
 On étudie maintenant les trois, dans cet ordre : le plus simple (figé) d’abord, puis le mutable, puis l’accès par clé.
 
@@ -120,7 +130,7 @@ TypeError: 'tuple' object does not support item assignment
 
 !!! remarque "Remarque — À quoi sert un type qu’on ne peut pas modifier ?"
 
-    À **garantir** qu’une donnée ne bougera pas par erreur : coordonnées d’un point, date, couleur RVB. Et — on le verra au §VI — seul un objet immuable peut servir de **clé** de dictionnaire.
+    À **garantir** qu’une donnée ne bougera pas par erreur : coordonnées d’un point, date, couleur RVB. Et — on le verra au § VI — seul un objet immuable peut servir de **clé** de dictionnaire.
 
 ### Affectation multiple : déballer un p-uplet
 
@@ -267,7 +277,7 @@ for i in range(len(notes)):
 [0, 3, 6, 9, 12, 15, 18]
 ```
 
-!!! remarque "Remarque — Un premier pas vers la programmation fonctionnelle"
+!!! curieux "Pour les curieux (facultatif) — Un premier pas vers la programmation fonctionnelle"
 
     Une compréhension est une **expression** qui *construit un nouveau tableau* sans modifier quoi que ce soit d’autre : c’est un élément de **programmation fonctionnelle**, un paradigme (une manière de programmer) que l’on étudiera en **Terminale**.
 
@@ -326,11 +336,13 @@ Un tableau étant mutable, il possède des **méthodes** (appel avec un point). 
 
 ### Le fil rouge à l’œuvre : références, alias et copie
 
-Voici le point le plus important — et le plus piégeux — du chapitre. Reprenons le dessin du §I.
+Voici le point le plus important — et le plus piégeux — du chapitre. Reprenons le dessin du § I.
 
 !!! regle "Règle 7 — Affecter un tableau ne le copie pas !"
 
     `b = a` ne crée **aucun** nouvel objet : il fait simplement pointer `b` vers **le même** tableau que `a`. On dit que `a` et `b` sont des **alias**. Modifier via l’un se voit via l’autre.
+
+<span class="retouract">↺ Retour sur l'activité.</span> C’est la liste de courses de l’activité : Papa et Maman avaient collé deux étiquettes sur la même feuille, et `print(maman)` affichait `[’brioche’, ’lait’, ’pommes’]`. Pour que Papa ait sa propre liste, il fallait recopier la feuille : c’est la vraie copie présentée ci-dessous.
 
 ```text
 >>> a = [1, 2, 3]
@@ -340,7 +352,7 @@ Voici le point le plus important — et le plus piégeux — du chapitre. Repren
 [99, 2, 3]
 ```
 
-![](../figures/48e769354f31410a.svg){ .tikz loading=lazy }
+![](../figures/dfd32eb0603893ea.svg){ .tikz loading=lazy }
 
 Pour une **vraie copie** (objet indépendant), on *reconstruit* un tableau :
 
@@ -378,7 +390,7 @@ Pour une **vraie copie** (objet indépendant), on *reconstruit* un tableau :
 
 <span id="cours-03-6" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-03-6) à [16](exercices.md#ex-03-16)** (les tableaux ; les compréhensions)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-03-6) à [16](exercices.md#ex-03-16)**, **[35](exercices.md#ex-03-35)** et **[37](exercices.md#ex-03-37)** (les tableaux ; les compréhensions)
 
 ## Tableaux de tableaux : les matrices (capacité attendue)
 
@@ -411,7 +423,7 @@ for i in range(len(M)):
 
 ### Le fil rouge tranche le débat : `[[0]*p]*n` est un piège
 
-Comment créer une grille de zéros ? On serait tenté d’écrire `[[0] * p] * n`, par exemple `[[0] * 3] * 2`. **Erreur.** Le modèle mémoire l’explique d’un coup : l’opérateur `*` ne *copie pas* la ligne, il **répète la même référence**. Les deux lignes sont alors **un seul et même tableau** — exactement l’alias du §IV.
+Comment créer une grille de zéros ? On serait tenté d’écrire `[[0] * p] * n`, par exemple `[[0] * 3] * 2`. **Erreur.** Le modèle mémoire l’explique d’un coup : l’opérateur `*` ne *copie pas* la ligne, il **répète la même référence**. Les deux lignes sont alors **un seul et même tableau** — exactement l’alias du § IV.
 
 ```text
 >>> grille = [[0] * 3] * 2    # PIEGE
@@ -420,7 +432,7 @@ Comment créer une grille de zéros ? On serait tenté d’écrire `[[0] * p] * 
 [[1, 0, 0], [1, 0, 0]]        # la 2e ligne a change aussi !
 ```
 
-![](../figures/08148b339d51efae.svg){ .tikz loading=lazy }
+![](../figures/7a40901b8216f101.svg){ .tikz loading=lazy }
 
 La **bonne** façon : une **compréhension imbriquée**, qui crée à chaque tour une ligne *distincte*.
 
@@ -429,7 +441,7 @@ n, p = 2, 3
 grille = [[0 for j in range(p)] for i in range(n)]   # 2 lignes INDEPENDANTES
 ```
 
-![](../figures/158d1842e2cf6cdc.svg){ .tikz loading=lazy }
+![](../figures/73c53074bdce9dc5.svg){ .tikz loading=lazy }
 
 !!! exemple "Exemple — Une image est une matrice"
 
@@ -455,6 +467,8 @@ Dans un tableau, l’étiquette d’accès est **imposée** : un indice $0, 1, 2
 !!! definition "Définition 5 — Dictionnaire"
 
     Un **dictionnaire** (type `dict`) est un ensemble de couples **clé $\to$ valeur**. Les clés sont **uniques** et **immuables** (souvent `str`, `int` ou `tuple`). On l’écrit entre **accolades**, chaque couple sous la forme `clé: valeur`.
+
+<span class="retouract">↺ Retour sur l'activité.</span> Les tiroirs étiquetés de l’activité formaient un dictionnaire : le prénom est la clé, le numéro de casier la valeur. Deux tiroirs « Hugo » étaient impossibles, comme deux clés égales dans un dictionnaire.
 
 ```text
 >>> age = {"Alice": 17, "Bob": 16, "Chloe": 17}
@@ -556,7 +570,7 @@ moyenne = total / len(age)         # moyenne des ages
 
     Un tableau ne peut pas être une clé ; un p-uplet, si. Le modèle mémoire l’explique : le dictionnaire range chaque valeur *à une place calculée à partir de la clé*. Si la clé pouvait **changer** après coup (comme un tableau mutable), cette place ne correspondrait plus à rien et la valeur serait **introuvable**. D’où l’exigence d’une clé **figée**.
 
-!!! remarque "Remarque — Copier un dictionnaire au-delà du programme"
+!!! curieux "Pour les curieux (facultatif) — Copier un dictionnaire"
 
     Comme pour les tableaux, `d2 = d` crée un **alias**, pas une copie. Pour obtenir un nouveau dictionnaire contenant les mêmes couples clé-valeur, on le reconstruit par compréhension : `d2 = {cle: d[cle] for cle in d}`.
 
@@ -571,27 +585,27 @@ moyenne = total / len(age)         # moyenne des ages
     # "Chambre 12 le mardi ?"  ->  reservations[(12, "mardi")]  vaut "Bob"
     ```
 
-!!! remarque "Remarque — En Terminale"
-
-    Le chapitre *Structures linéaires : piles, files, listes chaînées* présente d’autres façons de ranger des données en séquence, et *Programmation objet et paradigmes* permet de créer ses propres types (les classes). Les dictionnaires y resservent partout, par exemple pour représenter un graphe (chapitre *Les graphes*).
-
 <span id="cours-03-22" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[22](exercices.md#ex-03-22) à [30](exercices.md#ex-03-30)** (les dictionnaires ; le fil rouge alias/copie)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[22](exercices.md#ex-03-22) à [30](exercices.md#ex-03-30)** et **[36](exercices.md#ex-03-36)** (les dictionnaires ; le fil rouge alias/copie)
 
 ## Un peu d’histoire, et pour aller plus loin
 
-!!! remarque "Remarque — Aux origines du tableau associatif"
+!!! curieux "Pour les curieux (facultatif) — Aux origines du tableau associatif"
 
     Accéder à une donnée par une **clé** plutôt que par une position repose sur le **hachage** (*hashing*), inventé en **1953** chez IBM par **Hans Peter Luhn** : une fonction transforme la clé en une adresse mémoire, rendant l’accès quasi instantané — et exigeant, on l’a vu, une clé *figée* (« hachable »). Les **tableaux**, eux, sont aussi anciens que les premiers ordinateurs : ranger des valeurs dans des cases mémoire *contiguës* et numérotées est au cœur de l’architecture de **von Neumann** (1945).
 
-!!! remarque "Remarque — Ces types sont partout au-delà du programme"
+!!! curieux "Pour les curieux (facultatif) — Ces types sont partout"
 
     Le format **JSON**, qui fait circuler la quasi-totalité des données du Web, n’est que des tableaux et des dictionnaires emboîtés. En calcul scientifique, la bibliothèque **NumPy** fournit de vrais tableaux à $n$ dimensions, bien plus rapides que les `list` sur de gros volumes.
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    Les tableaux sont la matière première de l’année (**parcours**, **tris**, **dichotomie**) ; une **table de données** sera une liste de dictionnaires. En Terminale, *Diviser pour régner* fera tourner une image stockée dans une matrice.
+    - **Ce qu’il réutilise.** Les chaînes et les boucles des *Bases de la programmation Python* ; le modèle provisoire du casier y est remplacé par celui de l’étiquette et de la flèche.
+
+    - **Ce qu’il prépare.** Les tableaux seront la matière première de l’année (**parcours**, **tris**, **dichotomie**) ; une **table de données** sera une liste de dictionnaires.
+
+    - **En Terminale.** *Structures linéaires* et *Programmation objet* présenteront d’autres façons de ranger des données ; les dictionnaires représenteront les graphes, et *Diviser pour régner* fera tourner une image stockée dans une matrice.
 
 ## Bilan — la carte mémoire
 
@@ -606,6 +620,14 @@ moyenne = total / len(age)         # moyenne des ages
 | Alias vs copie | `b = a` $\to$ même objet ; `[x for x in a]` / `a[:]` $\to$ vraie copie |
 | Piège des matrices | `[[0]*p]*n` partage une seule ligne ; utiliser une **compréhension** |
 | Clé de dictionnaire | doit être **immuable** : p-uplet oui, tableau non |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Dans un **tableau** (`list`) : `notes = [12, 8, 15, ...]` ; chaque note se lit et se modifie par son **indice**, `notes[i]`, à partir de 0 (§ IV).
+
+    2.  Avec un **dictionnaire** : `casiers = {"Léa": 112, "Hugo": 87}`, puis `casiers["Hugo"]` donne `87` ; on accède par la **clé**, non par une position (§ VI).
+
+    3.  `copie = notes` ne crée aucun objet : les deux noms sont des **alias** du même tableau. Pour une vraie copie, on reconstruit le tableau : `copie = [x for x in notes]` (§ IV).
 
 ## Erreurs fréquentes
 

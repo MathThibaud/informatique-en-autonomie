@@ -23,6 +23,8 @@ emprunt (id, #id_livre, #id_adherent, date_emprunt)
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Lire un schéma <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-1 }
 
+<span class="essentiel">• essentiel</span>
+
 1.  Combien de relations comporte la base ? Combien d’attributs pour la relation `emprunt` ?
 
 2.  Donner la clé primaire de `livre`, puis les clés étrangères de `emprunt`.
@@ -30,6 +32,10 @@ emprunt (id, #id_livre, #id_adherent, date_emprunt)
 3.  Quel est le **rôle** de l’attribut `id_auteur` dans la relation `livre` ?
 
 4.  Proposer un **domaine** (type) raisonnable pour `annee` et pour `date_emprunt`.
+
+??? pouce "Coup de pouce"
+
+    Chaque ligne du schéma est une relation ; ses attributs sont les noms entre parenthèses. La clé primaire est soulignée, une clé étrangère est précédée de `#`. Pour un domaine, se demander quel genre de valeur l’attribut contient : un nombre entier, un texte, une date ?
 
 ??? corrige "Corrigé"
 
@@ -45,6 +51,10 @@ emprunt (id, #id_livre, #id_adherent, date_emprunt)
 2.  Le SGBD refuse d’insérer dans `emprunt` une ligne dont l’`id_livre` vaut `99`. Quelle **contrainte** est en cause ? L’expliquer.
 
 3.  Rappeler la **différence** entre une clé primaire et une clé étrangère.
+
+??? pouce "Coup de pouce"
+
+    Question 1 : deux livres différents peuvent-ils porter le même titre ? Question 2 : l’attribut `id_livre` d’un emprunt doit correspondre à une ligne existante de quelle relation ?
 
 ??? corrige "Corrigé"
 
@@ -228,7 +238,7 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Sélections simples <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-4 }
 
-\[base `pays` — Basthon\]
+<span class="essentiel">• essentiel</span>\[base `pays` — Basthon\]
 
 Écrire une requête qui affiche :
 
@@ -238,7 +248,13 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 3.  le `nom` des pays d’`Asie` dont la superficie dépasse `1000`.
 
+??? pouce "Coup de pouce"
+
+    Chaque requête suit le même schéma : `SELECT` (les colonnes voulues), `FROM` (la table), `WHERE` (la condition que doivent vérifier les lignes). Les chaînes de caractères s’écrivent entre apostrophes ; deux conditions exigées ensemble se relient par `AND`.
+
 ??? corrige "Corrigé"
+
+    **Démarche :** pour chaque requête, on choisit les colonnes à afficher (`SELECT`), la table (`FROM`), puis la condition que doivent vérifier les lignes (`WHERE`).
 
     ```sql
     SELECT nom FROM pays WHERE continent = 'Europe';                 -- 1.
@@ -248,9 +264,11 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
     SELECT nom FROM pays WHERE continent = 'Asie' AND superficie > 1000; -- 3.
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `WHERE continent = Europe` sans apostrophes : le SGBD cherche alors une *colonne* nommée `Europe`. Les chaînes de caractères s’écrivent entre apostrophes.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Conditions composées <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-5 }
 
-\[base `pays` — Basthon\]
+<span class="essentiel">• essentiel</span>\[base `pays` — Basthon\]
 
 1.  le `nom` des pays d’`Afrique` **ou** d’`Océanie` ;
 
@@ -264,6 +282,8 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 ??? corrige "Corrigé"
 
+    **Démarche :** chaque question combine deux conditions : `OR` si l’une suffit, `AND` si les deux sont exigées (« compris entre ») ; « pas en Europe » se traduit par `<>` (ou par `NOT`).
+
     ```sql
     SELECT nom FROM pays                                             -- 1.
     WHERE continent = 'Afrique' OR continent = 'Océanie';
@@ -274,17 +294,25 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
     SELECT nom FROM pays WHERE continent <> 'Europe';                -- 3.
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `continent = ’Afrique’ AND continent = ’Océanie’` : aucun pays n’est sur les deux continents à la fois, et le résultat est vide. « Afrique ou Océanie » se traduit par `OR`.
+
 ### Trier, dédoublonner, rechercher un motif
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — Trier et dédoublonner <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-6 }
 
-\[base `pays` — Basthon\]
+<span class="essentiel">• essentiel</span>\[base `pays` — Basthon\]
 
 1.  le `nom` de tous les pays, triés par population **décroissante** ;
 
 2.  la liste des `continent`s, **sans doublon**.
 
+??? pouce "Coup de pouce"
+
+    Question 1 : `ORDER BY` trie par ordre croissant si l’on ne précise rien ; quel mot-clé ajouter pour l’ordre décroissant ? Question 2 : quel mot-clé, placé juste après `SELECT`, supprime les doublons ?
+
 ??? corrige "Corrigé"
+
+    **Démarche :** `ORDER BY … DESC` trie par ordre décroissant ; `DISTINCT`, placé juste après `SELECT`, supprime les doublons.
 
     ```sql
     SELECT nom FROM pays ORDER BY population DESC;   -- 1.
@@ -307,6 +335,8 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 ??? corrige "Corrigé"
 
+    **Démarche :** pour les trois plus vastes, on trie par superficie décroissante, puis `LIMIT` ne garde que les premières lignes. Dans un motif `LIKE`, `%` remplace n’importe quelle suite de caractères (même vide).
+
     ```sql
     SELECT nom, superficie FROM pays                 -- 1.
     ORDER BY superficie DESC LIMIT 3;
@@ -316,11 +346,13 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
     SELECT capitale FROM pays WHERE capitale LIKE '% %';  -- 3.
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `LIKE ’A’` sans `%` : on ne trouve que les pays dont le nom est exactement « A ». Le `%` représente la suite du nom.
+
 ### Agréger
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Fonctions d’agrégation <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-8 }
 
-\[base `pays` — Basthon\]
+<span class="essentiel">• essentiel</span>\[base `pays` — Basthon\]
 
 1.  le **nombre** de pays de la base ;
 
@@ -328,7 +360,13 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 3.  la plus grande `superficie`.
 
+??? pouce "Coup de pouce"
+
+    Une fonction d’agrégation (`COUNT`, `SUM`, `AVG`, `MIN`, `MAX`) se place dans le `SELECT` et renvoie une seule valeur pour toute la table. `COUNT(*)` compte les lignes.
+
 ??? corrige "Corrigé"
+
+    **Démarche :** une fonction d’agrégation, placée dans le `SELECT`, résume toute une colonne en une seule valeur.
 
     ```sql
     SELECT COUNT(*) FROM pays;         -- 1.
@@ -350,10 +388,14 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 ??? corrige "Corrigé"
 
+    **Démarche :** le `WHERE` filtre d’abord les lignes, l’agrégat est calculé ensuite sur les lignes restantes ; plusieurs agrégats se séparent par des virgules.
+
     ```sql
     SELECT SUM(population) FROM pays WHERE continent = 'Asie';  -- 1.
     SELECT MIN(population), MAX(population) FROM pays;          -- 2.
     ```
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Mettre l’agrégat dans le `WHERE` (`WHERE population = MAX(population)`) : le `WHERE` examine les lignes une par une, avant tout calcul ; les agrégats se placent dans le `SELECT`.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 10</span> — Agréger la base musique <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-10 }
 
@@ -365,7 +407,13 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 3.  le total des `streams` de la base.
 
+??? pouce "Coup de pouce"
+
+    Mêmes outils qu’à l’exercice 8, sur la table `chanson`. Question 1 : le `WHERE` garde d’abord les chansons de 2013, puis l’on compte les lignes restantes.
+
 ??? corrige "Corrigé"
+
+    **Démarche :** mêmes agrégats sur la table `chanson` ; après un `WHERE`, `COUNT(*)` compte les lignes qui vérifient la condition.
 
     ```sql
     SELECT COUNT(*) FROM chanson WHERE annee = 2013;  -- 1.
@@ -377,7 +425,7 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 11</span> — Regrouper par continent <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-11 }
 
-\[base `pays` — Basthon\]
+<span class="duree">≈ 15 min</span>\[base `pays` — Basthon\]
 
 1.  le **nombre de pays** par continent ;
 
@@ -415,7 +463,7 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Jointure de deux tables <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-12 }
 
-\[base `bibliotheque` — Basthon\]
+<span class="essentiel">• essentiel</span>\[base `bibliotheque` — Basthon\]
 
 1.  le `titre` de chaque livre **avec le nom** de son auteur ;
 
@@ -428,6 +476,8 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
     Quelle clé étrangère de `livre` référence la relation `auteur` ? C’est elle qui donne la condition du `ON`. Préfixer les attributs par le nom de leur table en cas d’ambiguïté.
 
 ??? corrige "Corrigé"
+
+    **Démarche :** la clé étrangère `livre.id_auteur` référence `auteur.id` : c’est la condition du `ON`. On filtre ensuite avec `WHERE` sur les attributs de `auteur`.
 
     ```sql
     SELECT livre.titre, auteur.nom                    -- 1.
@@ -445,9 +495,11 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
     WHERE auteur.pays = 'Royaume-Uni';
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Joindre sur `livre.id = auteur.id` : on associe le livre numéro 1 à l’auteur numéro 1, sans rapport entre eux. La condition relie la clé étrangère (`livre.id_auteur`) à la clé primaire qu’elle référence.
+
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Jointure de trois tables <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-13 }
 
-\[base `bibliotheque` — Basthon\]
+<span class="duree">≈ 15 min</span>\[base `bibliotheque` — Basthon\]
 
 1.  pour chaque emprunt, le `nom` et le `prenom` de l’adhérent **avec le titre** du livre emprunté ;
 
@@ -479,7 +531,7 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Jointure et agrégat (musique) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-14 }
 
-\[base `musique` — Basthon\]
+<span class="duree">≈ 10 min</span>\[base `musique` — Basthon\]
 
 Afficher le `nom` de chaque artiste **belge** avec son **total de streams**.
 
@@ -507,7 +559,7 @@ Afficher le `nom` de chaque artiste **belge** avec son **total de streams**.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Ajouter, modifier, supprimer <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-15 }
 
-\[base `bibliotheque` — Basthon\]
+<span class="essentiel">• essentiel</span>\[base `bibliotheque` — Basthon\]
 
 1.  ajouter l’auteur Victor `Hugo` (`id` `6`, pays `’France’`) ;
 
@@ -521,6 +573,8 @@ Afficher le `nom` de chaque artiste **belge** avec son **total de streams**.
 
 ??? corrige "Corrigé"
 
+    **Démarche :** une instruction par opération : `INSERT INTO … VALUES`, `UPDATE … SET … WHERE`, `DELETE FROM … WHERE` ; le `WHERE` désigne la ou les lignes concernées.
+
     ```sql
     INSERT INTO auteur (id, nom, pays) VALUES (6, 'Hugo', 'France'); -- 1.
 
@@ -531,7 +585,11 @@ Afficher le `nom` de chaque artiste **belge** avec son **total de streams**.
 
     **3.** Sans le `WHERE`, `DELETE FROM emprunt;` effacerait **tous** les emprunts.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `VALUES (6, Hugo, France)` sans apostrophes autour des chaînes : le SGBD prend `Hugo` et `France` pour des noms de colonnes et refuse la requête.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Le virement bancaire : transactions et ACID <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-16 }
+
+<span class="essentiel">• essentiel</span>
 
 Une banque stocke ses comptes dans la relation `compte (``id``, titulaire, solde)`, avec la contrainte `CHECK (solde >= 0)` : un solde ne peut pas être négatif. Au départ, le compte `1` (Léa) contient `100` € et le compte `2` (Noé) `30` €.
 
@@ -561,7 +619,7 @@ Un SGBD garantit qu’une **transaction** (un groupe d’opérations, ouvert par
 
 ??? corrige "Corrigé"
 
-    **1.**
+    **1.** **Démarche :** un virement, c’est un débit et un crédit : deux `UPDATE`, chacun ciblant un compte par son `id`.
 
     ```sql
     UPDATE compte SET solde = solde - 50 WHERE id = 1;
@@ -589,6 +647,8 @@ Un SGBD garantit qu’une **transaction** (un groupe d’opérations, ouvert par
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Location entre particuliers (d’après Polynésie 2023, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-17 }
 
+<span class="duree">≈ 30 min</span>
+
 Un site de location d’objets entre particuliers utilise le schéma relationnel suivant. La table `Possede` relie un membre aux objets qu’il propose.
 
 Membre (id_membre, nom, prenom, cp)  
@@ -606,13 +666,13 @@ Possede (#id_membre, #id_objet)
 
     ??? pouce "Coup de pouce"
 
-        Ce membre apparaît-il dans d’autres relations ? Que garantit une contrainte de clé étrangère ?
+        Question 4 : ce membre apparaît-il dans d’autres relations ? Que garantit une contrainte de clé étrangère ?
 
 5.  Mohamed Ali a pour `id_membre` `1`. Proposer la **suite de requêtes** permettant de le supprimer **correctement** de la base.
 
     ??? pouce "Coup de pouce"
 
-        Dans quel ordre supprimer : les lignes qui **référencent** ce membre, ou le membre lui-même ?
+        Question 5 : dans quel ordre supprimer : les lignes qui **référencent** ce membre, ou le membre lui-même ?
 
 6.  *(jointure)* Écrire une requête comptant le **nombre de réservations** réalisées par le membre Fernando Alonso.
 
@@ -620,9 +680,13 @@ Possede (#id_membre, #id_objet)
 
     ??? pouce "Coup de pouce"
 
-        `Possede` fait le lien entre `Membre` et `Objet` : il faut donc deux jointures.
+        Question 7 : `Possede` fait le lien entre `Membre` et `Objet` : il faut donc deux jointures.
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 4) : Q1 : 0,5 ; Q2 : 0,5 ; Q3 : 0,5 ; Q4 : 0,5 ; Q5 : 0,5 ; Q6 : 0,75 ; Q7 : 0,75
+
+    **Démarche :** une sélection avec `WHERE`, une mise à jour avec `UPDATE … SET … WHERE`, un ajout avec `INSERT INTO … VALUES`.
 
     ```sql
     SELECT nom, prenom FROM Membre WHERE cp = '69003';   -- 1.
@@ -642,6 +706,10 @@ Possede (#id_membre, #id_objet)
     DELETE FROM Membre WHERE id_membre = 1;
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Supprimer le membre en premier : la contrainte de référence l’interdit tant que des lignes de `Reservation` ou de `Possede` le référencent. On supprime d’abord ce qui le référence.
+
+    **Démarche :** pour les questions 6 et 7, chaque `JOIN … ON` relie une clé étrangère à la clé primaire qu’elle référence ; `Possede` sert de lien entre `Membre` et `Objet`.
+
     ```sql
     SELECT COUNT(*)                                      -- 6.
     FROM Reservation
@@ -656,6 +724,8 @@ Possede (#id_membre, #id_objet)
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Location de véhicules (d’après La Réunion 2023, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-18 }
+
+<span class="duree">≈ 30 min</span>
 
 Schéma de la base :
 
@@ -692,7 +762,7 @@ Extrait de la relation `vehicule` :
 
     ??? pouce "Coup de pouce"
 
-        Quel est le rôle de `id_location` dans la relation, et quelle propriété doit-il vérifier ?
+        Question 5 : quel est le rôle de `id_location` dans la relation, et quelle propriété doit-il vérifier ?
 
     ```sql
     INSERT INTO location
@@ -705,9 +775,11 @@ Extrait de la relation `vehicule` :
 
     ??? pouce "Coup de pouce"
 
-        Les informations demandées sont réparties dans trois relations : laquelle contient les deux clés étrangères ?
+        Question 7 : les informations demandées sont réparties dans trois relations : laquelle contient les deux clés étrangères ?
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 4) : Q1 : 0,5 ; Q2 : 0,5 ; Q3 : 0,5 ; Q4 : 0,5 ; Q5 : 0,5 ; Q6 : 0,5 ; Q7 : 1
 
     **1.** Résultat : `1`, `2`, `4` (les trois citadines).
 
@@ -734,6 +806,8 @@ Extrait de la relation `vehicule` :
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Podcasts de radio (d’après Centres étrangers 2023, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-19 }
 
+<span class="duree">≈ 30 min</span>
+
 Extraits de `podcast` (clé primaire `id_podcast`, `#id_emission` clé étrangère vers `emission`) :
 
 | **id_podcast** | **theme** | **annee** | **id_emission** |
@@ -749,7 +823,7 @@ La relation `emission` (id_emission, nom, radio, animateur) décrit les émiss
 
     ??? pouce "Coup de pouce"
 
-        Repérer l’attribut qui identifie chaque description, puis celui qui fait référence à une autre relation.
+        Question 1 : repérer l’attribut qui identifie chaque description, puis celui qui fait référence à une autre relation.
 
 2.  Écrire ce qu’**affiche** :
 
@@ -771,9 +845,11 @@ La relation `emission` (id_emission, nom, radio, animateur) décrit les émiss
 
     ??? pouce "Coup de pouce"
 
-        `description` est reliée à `podcast` par `id_podcast`, et `podcast` à `emission` par `id_emission` : ce sont ces attributs qui servent dans les conditions de jointure.
+        Question 7 : `description` est reliée à `podcast` par `id_podcast`, et `podcast` à `emission` par `id_emission` : ce sont ces attributs qui servent dans les conditions de jointure.
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 4) : Q1 : 0,75 ; Q2 : 0,5 ; Q3 : 0,5 ; Q4 : 0,5 ; Q5 : 0,5 ; Q6 : 0,5 ; Q7 : 0,75
 
     **1.** `description (``id_description``:INT, resume:TEXT, duree:INT, #id_podcast:INT)`.  
     **2.** `(’L’enseignement supérieur est-il juste ?’, 2022)`.
@@ -800,6 +876,8 @@ La relation `emission` (id_emission, nom, radio, animateur) décrit les émiss
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Vols spatiaux (d’après Métropole 2023, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-20 }
+
+<span class="duree">≈ 30 min</span>
 
 La base comporte les relations suivantes ; extrait de `Fusee` ci-dessous.
 
@@ -835,6 +913,8 @@ Equipe (#id_vol, #id_astronaute)
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 4) : Q1 : 0,5 ; Q2 : 0,5 ; Q3 : 0,75 ; Q4 : 0,25 ; Q5 : 0,5 ; Q6 : 0,5 ; Q7 : 1
+
     **1.** Une clé primaire est un attribut (ou groupe d’attributs) qui **identifie de façon unique** chaque enregistrement.  
     **2.** `id_astronaute = 1` est déjà attribué : l’insertion violerait la **contrainte d’entité** (unicité de la clé primaire).  
     **3.** `Fusee (``id_fusee``:INT, modele:TEXT, constructeur:TEXT, nb_places:INT)`.  
@@ -856,7 +936,11 @@ Equipe (#id_vol, #id_astronaute)
     WHERE Vol.date = '25/10/2022';
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Joindre directement `Astronaute` et `Vol` : aucune clé étrangère ne les relie. Il faut passer par la relation `Equipe`, qui contient une clé étrangère vers chacune.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Ludothèque (d’après Métropole 2025, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-21 }
+
+<span class="duree">≈ 30 min</span>
 
 Une ludothèque (un seul exemplaire par jeu) utilise le schéma (`#` = clé étrangère). Quand un jeu est emprunté et pas encore rendu, `dateRendu` vaut `NULL`.
 
@@ -874,7 +958,7 @@ emprunt (idEmprunt, #nomJeu, #idAdherent, dateEmprunt, dateRendu)
 
     ??? pouce "Coup de pouce"
 
-        Une valeur `NULL` ne se teste pas avec `=` : quel opérateur SQL du cours teste l’absence de valeur ?
+        Question 4 : une valeur `NULL` ne se teste pas avec `=` : quel opérateur SQL du cours teste l’absence de valeur ?
 
 5.  *(jointure)* Écrire une requête affichant le `nom` et le `prenom` des adhérents ayant emprunté le jeu « Catan ».
 
@@ -884,9 +968,11 @@ emprunt (idEmprunt, #nomJeu, #idAdherent, dateEmprunt, dateRendu)
 
     ??? pouce "Coup de pouce"
 
-        Une participation associe **un** adhérent et **un** événement : comment chacun est-il identifié dans sa relation ?
+        Question 7 : une participation associe **un** adhérent et **un** événement : comment chacun est-il identifié dans sa relation ?
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 4) : Q1 : 0,5 ; Q2 : 0,5 ; Q3 : 0,5 ; Q4 : 0,75 ; Q5 : 0,75 ; Q6 : 0,5 ; Q7 : 0,5
 
     **1.** Deux adhérents peuvent avoir le **même nom** (homonymes) : `nom` ne serait pas **unique**.  
     **2.** Affiche le `nomJeu` et l’`editeur` de tous les jeux, **triés par ordre alphabétique** du nom.
@@ -927,7 +1013,7 @@ JOIN adherent
 WHERE adherent.nom = 'Durand';
 ```
 
-*« On joint la table des emprunts à celle des adhérents, on ne garde que les lignes de l’adhérente Durand, et `COUNT(*)` compte les lignes restantes. »*
+« On joint la table des emprunts à celle des adhérents, on ne garde que les lignes de l’adhérente Durand, et `COUNT(*)` compte les lignes restantes. »
 
 1.  La réponse est-elle correcte ? La vérifier sur une mini-base : `adherent` contient `(1, ’Durand’, ’Léa’)`, `(2, ’Martin’, ’Noé’)`, `(3, ’Petit’, ’Zoé’)` ; `emprunt` contient cinq lignes, dont deux d’`id_adherent` `1`, deux d’`id_adherent` `2` et une d’`id_adherent` `3`. Quel résultat attend-on ? Quel résultat renvoie la requête ? (On pourra créer ces deux tables dans Basthon et tester.)
 
@@ -958,7 +1044,7 @@ WHERE adherent.nom = 'Durand';
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-23 }
 
-Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
+Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans lire ses notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 
 1.  Expliquer à un camarade pourquoi une médiathèque gère ses emprunts avec une **base de données relationnelle** plutôt qu’avec un tableur.
 
@@ -966,7 +1052,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
 3.  Expliquer ce que fait une **jointure**, sur l’exemple de deux tables.
 
-**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus, puis retourner la feuille. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire de notes** : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
+**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus : comme au Grand Oral, ces notes servent d’aide-mémoire. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire ses notes** et sans rien écrire : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
 
 ??? pouce "Coup de pouce"
 

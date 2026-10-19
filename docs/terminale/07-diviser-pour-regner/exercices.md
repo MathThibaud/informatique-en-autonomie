@@ -18,6 +18,8 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Recherche dichotomique à la main <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-1 }
 
+<span class="essentiel">• essentiel</span>
+
 On cherche dans le tableau trié `tab = [3, 8, 12, 19, 25, 31, 40, 42, 55, 60, 71]`.
 
 1.  Donner, dans l’ordre, les valeurs comparées lors de la recherche de `40`. Combien de comparaisons ?
@@ -25,6 +27,10 @@ On cherche dans le tableau trié `tab = [3, 8, 12, 19, 25, 31, 40, 42, 55, 60, 7
 2.  Même question pour la recherche de `7` (absent). Comment sait-on qu’il est absent ?
 
 3.  Sur un tableau trié de $1000$ valeurs, combien de comparaisons au maximum ? (donner un ordre de grandeur, en justifiant par les divisions par $2$).
+
+??? pouce "Coup de pouce"
+
+    Noter à chaque étape les bornes `g` et `d` de la zone de recherche et l’indice du milieu `(g + d) // 2`, puis ne garder que la moitié où la valeur peut encore se trouver. Pour la question 3 : combien de fois peut-on diviser $1000$ par $2$ avant d’arriver à $1$ ?
 
 ??? corrige "Corrigé"
 
@@ -56,9 +62,13 @@ On cherche dans le tableau trié `tab = [3, 8, 12, 19, 25, 31, 40, 42, 55, 60, 7
 
     Maintenant `g=1 > d=0` : l’intervalle de recherche est **vide**, donc `7` est **absent**. Valeurs comparées : `31`, `12`, `3`, `8` $\rightarrow$ **4 comparaisons**.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Garder le milieu dans la zone (`g = 5` au lieu de `g = 6`) : l’élément du milieu vient d’être comparé, on l’exclut. Sinon, la zone peut cesser de rétrécir et la recherche ne s’arrête plus.
+
     **3.** À chaque comparaison, la zone de recherche est **divisée par deux**. Partant de $1000$, on atteint $1$ en une dizaine d’étapes : $2^{10} = 1024 > 1000$, donc **au plus $\mathbf{10}$ comparaisons** (coût logarithmique $\log_2 n$).
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Maximum d’un tableau par diviser pour régner <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-2 }
+
+<span class="essentiel">• essentiel</span>
 
 Pour trouver le maximum d’un tableau **non vide** `t`, on peut procéder ainsi : si `t` n’a qu’un élément, c’est lui le maximum ; sinon, on coupe `t` en deux moitiés, on cherche le maximum de chaque moitié, et on garde le plus grand des deux.
 
@@ -81,11 +91,15 @@ def maximum(t):
 
 3.  Dessiner l’arbre des appels de `maximum([4, 9, 2, 7])` en notant, à côté de chaque appel, la valeur qu’il renvoie.
 
+??? pouce "Coup de pouce"
+
+    Que vaut le maximum d’un tableau d’un seul élément ? Les deux appels récursifs portent sur les deux moitiés de `t`, à écrire avec des tranches autour de `milieu`. Pour l’arbre, noter les valeurs renvoyées en remontant, des feuilles vers la racine.
+
 ??? corrige "Corrigé"
 
     **1.** **Diviser** : `milieu = len(t) // 2` coupe `t` en deux moitiés ; **régner** : les deux appels récursifs calculent `m_g` et `m_d` ; **combiner** : le `if` garde le plus grand des deux. La condition d’arrêt est le tableau d’un seul élément.
 
-    **2.**
+    **2.** **Démarche :** condition d’arrêt : un seul élément, c’est le maximum ; les deux appels récursifs portent sur les tranches `t[:milieu]` et `t[milieu:]`.
 
     ```python
     def maximum(t):
@@ -119,9 +133,11 @@ def maximum(t):
 
     **3.** Arbre des appels (valeur renvoyée entre parenthèses) :
 
-    ![](../figures/a618f88f40016bbc.svg){ .tikz loading=lazy }
+    ![](../figures/c7fe80595e9bbb53.svg){ .tikz loading=lazy }
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Tri fusion : l’arbre des appels <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-3 }
+
+<span class="essentiel">• essentiel</span>
 
 On trie `[8, 3, 5, 1, 9, 2]` par tri fusion (on coupe à `milieu = len(tab) // 2`).
 
@@ -129,19 +145,19 @@ On trie `[8, 3, 5, 1, 9, 2]` par tri fusion (on coupe à `milieu = len(tab) // 2
 
     ??? pouce "Coup de pouce"
 
-        Chaque liste de longueur au moins $2$ est coupée en `tab[:milieu]` et `tab[milieu:]` ; attention, pour une longueur impaire, la moitié gauche est la plus courte.
+        Q1 : chaque liste de longueur au moins $2$ est coupée en `tab[:milieu]` et `tab[milieu:]` ; attention, pour une longueur impaire, la moitié gauche est la plus courte.
 
 2.  Détailler la **remontée** : donner chaque liste obtenue par fusion, jusqu’à la liste triée finale.
 
     ??? pouce "Coup de pouce"
 
-        Lire l’arbre de bas en haut : chaque nœud reçoit la fusion des deux listes triées de ses fils.
+        Q2 : lire l’arbre de bas en haut : chaque nœud reçoit la fusion des deux listes triées de ses fils.
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> Compléter les deux appels récursifs de la fonction ci-dessous, puis la tester.
 
     ??? pouce "Coup de pouce"
 
-        Que faut-il trier récursivement ? Exprimer chacune des deux moitiés avec une tranche de `tab` autour de `milieu`.
+        Q3 : que faut-il trier récursivement ? Exprimer chacune des deux moitiés avec une tranche de `tab` autour de `milieu`.
 
 ```python
 def tri_fusion(tab):
@@ -157,7 +173,9 @@ def tri_fusion(tab):
 
     **1.** Phase « diviser » de `[8, 3, 5, 1, 9, 2]` (coupe à `milieu = len // 2`) :
 
-    ![](../figures/16ed8649299a1637.svg){ .tikz loading=lazy }
+    ![](../figures/2b87486979ee39e5.svg){ .tikz loading=lazy }
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Couper `[8, 3, 5]` en `[8, 3]` et `[5]` : avec `milieu = 3 // 2 = 1`, la moitié gauche est `tab[:1] = [8]`, la plus courte.
 
     **2.** Remontée (fusions) :
 
@@ -189,9 +207,15 @@ On reprend la fonction `tri_fusion` de l’exercice précédent.
 
 3.  Pour une liste de $1024 = 2^{10}$ éléments, combien de niveaux de découpe y a-t-il sous l’appel initial ? Quel lien avec $\log_2$ ?
 
+??? pouce "Coup de pouce"
+
+    Un appel sur une liste d’au moins deux éléments lance exactement deux appels, sur des listes deux fois plus courtes. Compter niveau par niveau : combien d’appels au niveau suivant pour chaque appel du niveau courant ?
+
 ??? corrige "Corrigé"
 
     **1.** `[6,2,7,1]` appelle `[6,2]` et `[7,1]`, qui appellent chacun deux listes d’un élément (`[6]`, `[2]`, `[7]`, `[1]`) : $1 + 2 + 4 = \mathbf{7}$ **appels**.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Oublier l’appel initial, ou ne compter que les feuilles : on trouve $6$ ou $4$ au lieu de $7$. Chaque nœud de l’arbre est un appel.
 
     **2.** Pour $8$ éléments : $1$ appel (taille $8$), puis $2$ (taille $4$), $4$ (taille $2$), $8$ (taille $1$). Il y a donc **3 niveaux** sous l’appel initial et $1+2+4+8 = \mathbf{15}$ **appels** en tout.
 
@@ -199,16 +223,19 @@ On reprend la fonction `tri_fusion` de l’exercice précédent.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Écrire la fusion de deux listes triées <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-5 }
 
+<span class="essentiel">• essentiel</span>
+
 1.  Fusionner **à la main** les listes triées `[1, 4, 9]` et `[2, 3, 10, 12]` : à chaque étape, noter les deux éléments comparés et celui qui est recopié. Combien de comparaisons ?
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `fusion(a, b)` qui prend deux listes **triées** et renvoie une **nouvelle** liste triée contenant tous leurs éléments, sans utiliser `sort` ni `sorted`. La tester sur l’exemple de la question 1, puis avec une liste vide.
 
     ??? pouce "Coup de pouce"
 
-        Garder un indice par liste. Tant que **les deux** listes ont encore des éléments, comparer leurs « têtes » et recopier la plus petite. Que reste-t-il à faire quand l’une des deux est épuisée ?
+        Q2 : garder un indice par liste. Tant que **les deux** listes ont encore des éléments, comparer leurs « têtes » et recopier la plus petite. Que reste-t-il à faire quand l’une des deux est épuisée ?
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
+        Q2 :  
         `resultat = []`  
         `i, j = 0, 0`  
         `while i < len(a) and j < len(b):`  
@@ -218,13 +245,13 @@ On reprend la fonction `tri_fusion` de l’exercice précédent.
 
     ??? pouce "Coup de pouce"
 
-        Chaque comparaison est suivie de la recopie d’un élément ; combien d’éléments au plus sont recopiés avant que l’une des listes soit vide ?
+        Q3 : chaque comparaison est suivie de la recopie d’un élément ; combien d’éléments au plus sont recopiés avant que l’une des listes soit vide ?
 
 ??? corrige "Corrigé"
 
     **1.** `1` contre `2` $\to$ `1` ; `4` contre `2` $\to$ `2` ; `4` contre `3` $\to$ `3` ; `4` contre `10` $\to$ `4` ; `9` contre `10` $\to$ `9`. La première liste est épuisée : on recopie le reste `[10, 12]`. Résultat `[1, 2, 3, 4, 9, 10, 12]`, en **5 comparaisons**.
 
-    **2.**
+    **2.** **Démarche :** un indice par liste ; tant que les deux listes ont encore des éléments, on compare leurs têtes et l’on recopie la plus petite ; à la fin, on recopie le reste de la liste non épuisée.
 
     ```python
     def fusion(a, b):
@@ -242,11 +269,15 @@ On reprend la fonction `tri_fusion` de l’exercice précédent.
 
     `fusion([1, 4, 9], [2, 3, 10, 12])` renvoie `[1, 2, 3, 4, 9, 10, 12]` ; `fusion([], [1, 2])` renvoie `[1, 2]` (on n’entre pas dans la boucle).
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Oublier de recopier la fin de la liste non épuisée (`a[i:]` ou `b[j:]`) : sur l’exemple, `10` et `12` disparaîtraient du résultat.
+
     **3.** Chaque tour de boucle fait **une** comparaison et recopie **un** élément. La boucle s’arrête dès qu’une liste est épuisée, donc au plus quand tous les éléments sauf un ont été recopiés : au plus `len(a) + len(b) - 1` comparaisons. Le coût de la fusion est **linéaire** en la taille totale $n$ = `len(a) + len(b)`.
 
 ### Vers le bac
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Coder un texte avec « diviser pour régner » *(d’après Métropole 2025, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-6 }
+
+<span class="duree">≈ 45 min</span>
 
 Pour **compresser** un texte, on donne aux caractères **fréquents** un code binaire **court**. L’algorithme de **Shannon-Fano** est un « diviser pour régner » :
 
@@ -277,13 +308,13 @@ On considère le texte dont les effectifs sont : $$\texttt{tab = [("A", 15), ("B
 
     ??? pouce "Coup de pouce"
 
-        Calculer d’abord l’effectif total, puis cumuler les effectifs dans l’ordre jusqu’à atteindre la moitié de ce total.
+        Q1 : calculer d’abord l’effectif total, puis cumuler les effectifs dans l’ordre jusqu’à atteindre la moitié de ce total.
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Compléter la fonction récursive `shannon`, qui renvoie le code binaire d’un `symbole` :
 
     ??? pouce "Coup de pouce"
 
-        Le code du symbole, c’est le bit de son groupe suivi du code du symbole *à l’intérieur de ce groupe* : sur quelle liste faire l’appel récursif ?
+        Q2 : le code du symbole, c’est le bit de son groupe suivi du code du symbole *à l’intérieur de ce groupe* : sur quelle liste faire l’appel récursif ?
 
     ```python
     def shannon(symbole, tab):
@@ -306,19 +337,21 @@ On considère le texte dont les effectifs sont : $$\texttt{tab = [("A", 15), ("B
 
     ??? pouce "Coup de pouce"
 
-        Comparer la longueur de `tab` à celle du groupe passé à l’appel récursif : chacun des deux groupes peut-il être vide ?
+        Q6 : comparer la longueur de `tab` à celle du groupe passé à l’appel récursif : chacun des deux groupes peut-il être vide ?
 
 7.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `encode_shannon(texte, tab)` qui renvoie le **texte codé** : la concaténation des codes `shannon` de chacun de ses caractères. Exemple : `encode_shannon("CAD", tab)` renvoie `"011"+"11"+"010" = "01111010"`.
 
     ??? pouce "Coup de pouce"
 
-        Partir d’une chaîne vide et la compléter en parcourant le texte caractère par caractère.
+        Q7 : partir d’une chaîne vide et la compléter en parcourant le texte caractère par caractère.
 
 !!! remarque "Remarque"
 
     Ce sujet (Métropole 2025, jour 2) montre que « diviser pour régner » ne sert pas qu’à **trier** : il structure aussi la **compression** des données.
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 6) : Q1 : 0,75 ; Q2 : 1,25 ; Q3 : 1 ; Q4 : 0,75 ; Q5 : 0,75 ; Q6 : 1 ; Q7 : 0,5
 
     **1.** L’effectif total est $15+7+6+6+5 = 39$, et $39/2 = 19{,}5$. Le cumul atteint $19{,}5$ dès `"B"` ($15+7 = 22$). Donc $$\texttt{separe(tab)} = \big(\,[("A",15),("B",7)]\ ,\ [("C",6),("D",6),("E",5)]\,\big).$$ `"A"` est dans le premier groupe $\rightarrow$ son code commence par `"1"` ; `"C"` est dans le second $\rightarrow$ son code commence par `"0"`.
 
@@ -353,7 +386,7 @@ On considère le texte dont les effectifs sont : $$\texttt{tab = [("A", 15), ("B
 
     **6.** **Terminaison.** Le variant est `len(tab)` (nombre de caractères). `separe` renvoie deux groupes **non vides** dont la réunion est `tab` (le premier contient au moins `tab[0]` ; comme la liste est triée par effectifs **décroissants**, le dernier effectif vaut au plus la moitié du total, donc le cumul atteint la moitié *avant* le dernier caractère et le second groupe n’est pas vide — sans ce tri, `separe([("A", 1), ("B", 3)])` renverrait un second groupe vide et `shannon("A", ...)` ne s’arrêterait pas) ; le groupe sur lequel on récurse contient donc **strictement moins** de caractères que `tab`. Cet entier positif décroît d’au moins $1$ à chaque appel et atteint $1$ (cas d’arrêt) : la fonction s’arrête toujours.
 
-    **7.**
+    **7.** **Démarche :** une chaîne vide que l’on complète en parcourant le texte : à chaque caractère, on ajoute son code `shannon`.
 
     ```python
     def encode_shannon(texte, tab):
@@ -366,6 +399,8 @@ On considère le texte dont les effectifs sont : $$\texttt{tab = [("A", 15), ("B
     Ainsi `encode_shannon("CAD", tab)` vaut `"011" + "11" + "010" = "01111010"`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Le tri de Stooge *(d’après Amérique du Nord 2024, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-7 }
+
+<span class="duree">≈ 45 min</span>
 
 On se penche sur un algorithme pour trier un tableau appelé le **tri de Stooge**. Pour trier les éléments situés entre les indices $i$ et $j$, où $i < j$, dans un tableau `t` par ce tri, on procède ainsi :
 
@@ -381,7 +416,7 @@ On se penche sur un algorithme pour trier un tableau appelé le **tri de Stooge*
 
 Pour réaliser ce découpage en tiers, on considère l’entier `k` défini par l’expression `(j - i + 1) // 3`, et on considère les indices intermédiaires `i + k` et `j - k`.
 
-![](../figures/7a3af0a21c46fef7.svg){ .tikz loading=lazy }
+![](../figures/bb99856ccc67cf5e.svg){ .tikz loading=lazy }
 
 Voici le code partiel du tri de Stooge en Python, qui trie les éléments d’un tableau par ordre croissant :
 
@@ -402,7 +437,7 @@ def triStooge(tab, i, j):
 
     ??? pouce "Coup de pouce"
 
-        Relire la figure : entre quels indices se trouvent les « deux premiers tiers » ? les « deux derniers tiers » ? Dans quel ordre la méthode les trie-t-elle ?
+        Q2 : relire la figure : entre quels indices se trouvent les « deux premiers tiers » ? les « deux derniers tiers » ? Dans quel ordre la méthode les trie-t-elle ?
 
 3.  Indiquer, en le justifiant, si cet algorithme est itératif ou récursif.
 
@@ -412,14 +447,14 @@ Soit l’appel `triStooge(A, 0, 5)` avec `A = [5, 6, 4, 2, 3, 1]`.
 
 La figure ci-dessous présente l’arbre (incomplet) des appels récursifs effectués depuis l’appel `triStooge(A, 0, 5)`.
 
-![](../figures/1aff691bc20a0974.svg){ .tikz loading=lazy }  
+![](../figures/13556bb44a29b100.svg){ .tikz loading=lazy }  
 *Arbre des appels récursifs pour `triStooge(A, 0, 5)` (au dernier niveau, les trois appels issus d’un même nœud sont empilés verticalement).*
 
 1.  Dénombrer les appels récursifs effectués lors du tri, sans compter l’appel initial.
 
     ??? pouce "Coup de pouce"
 
-        Combien d’appels un nœud qui n’est pas une feuille déclenche-t-il ? Compter niveau par niveau.
+        Q5 : combien d’appels un nœud qui n’est pas une feuille déclenche-t-il ? Compter niveau par niveau.
 
 2.  Déterminer les appels effectués dans les cases **1**, **2** et **3** de cet arbre des appels.
 
@@ -427,7 +462,7 @@ La figure ci-dessous présente l’arbre (incomplet) des appels récursifs effec
 
     ??? pouce "Coup de pouce"
 
-        Calculer `k` pour l’appel `triStooge(A,0,3)`, en déduire ses trois appels ; la valeur « après » d’une ligne est la valeur « avant » de la suivante.
+        Q7 : calculer `k` pour l’appel `triStooge(A,0,3)`, en déduire ses trois appels ; la valeur « après » d’une ligne est la valeur « avant » de la suivante.
 
     | **Appel** | **Valeur de A avant l’appel** | **Valeur de A après l’appel** |
     |:---|:--:|:--:|
@@ -441,6 +476,8 @@ On montre que le coût en temps dans le pire des cas du tri de Stooge est de l�
 1.  Donner un algorithme de tri dont le coût est strictement meilleur.
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 6) : Q1 : 0,5 ; Q2 : 1 ; Q3 : 0,5 ; Q4 : 0,5 ; Q5 : 1,25 ; Q6 : 0,75 ; Q7 : 1 ; Q8 : 0,5
 
     **1.** Échange sur place (la liste est modifiée, rien n’est renvoyé) :
 
@@ -468,6 +505,8 @@ On montre que le coût en temps dans le pire des cas du tri de Stooge est de l�
 
     **4.** `k = (5 - 0 + 1) // 3 = 6 // 3 = 2`. Le premier appel porte sur $6$ éléments, chaque tiers en contient $2$.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Calculer `k = (5 - 0) // 3 = 1` : la formule compte les **éléments** de l’indice `i` à l’indice `j` inclus, soit `j - i + 1 = 6`, d’où `k = 2`.
+
     **5.** Niveau 1 : $3$ appels ; niveau 2 : $3 \times 3 = 9$ appels ; niveau 3 : $9 \times 3 = 27$ appels (sur deux ou trois éléments, ces appels n’ont plus d’enfants lorsque `j - i = 1`). Total : $3 + 9 + 27 = \mathbf{39}$ appels récursifs.
 
     **6.** Sur les arêtes partant de la racine, `k = 2` ; sur celles partant du niveau 1 (sous-tableaux de $4$ éléments), `k = 1`.
@@ -491,6 +530,8 @@ On montre que le coût en temps dans le pire des cas du tri de Stooge est de l�
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 8</span> — L’élément absolument majoritaire *(d’après Asie 2024, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-8 }
 
+<span class="duree">≈ 60 min</span>
+
 On cherche à déterminer, s’il existe, l’élément **absolument majoritaire** d’une liste : un élément qui apparaît dans *strictement plus de la moitié* des emplacements de la liste.
 
 Par exemple, la liste `[1, 4, 1, 6, 1, 7, 2, 1, 1]` admet `1` comme élément absolument majoritaire, car il apparaît $5$ fois sur $9$ éléments. En revanche, la liste `[1, 4, 6, 1, 7, 2, 1, 1]` n’admet pas d’élément absolument majoritaire : le plus fréquent est `1`, mais il n’apparaît que $4$ fois sur $8$, ce qui ne fait pas plus que la moitié.
@@ -503,7 +544,7 @@ Par exemple, la liste `[1, 4, 1, 6, 1, 7, 2, 1, 1]` admet `1` comme élément ab
 
     ??? pouce "Coup de pouce"
 
-        Un compteur initialisé à $0$ et une boucle sur les éléments de `lst`.
+        Q2 : un compteur initialisé à $0$ et une boucle sur les éléments de `lst`.
 
 2.  Déterminer le nombre de comparaisons effectuées par l’appel `effectif(1, [1, 4, 1, 6, 1, 7, 2, 1, 1])`.
 
@@ -538,7 +579,7 @@ On suppose que l’on a partagé `lst` en deux listes : `lst1 = lst[:n//2]` (les
 
     ??? pouce "Coup de pouce"
 
-        Raisonner par l’absurde : si un élément apparaît au plus la moitié des fois dans `lst1` **et** dans `lst2`, que dire de son effectif dans `lst` ?
+        Q9 : raisonner par l’absurde : si un élément apparaît au plus la moitié des fois dans `lst1` **et** dans `lst2`, que dire de son effectif dans `lst` ?
 
 2.  Si `lst1` admet un élément absolument majoritaire `maj1`, donner un algorithme pour vérifier si `maj1` est l’élément absolument majoritaire de `lst`.
 
@@ -546,11 +587,11 @@ On suppose que l’on a partagé `lst` en deux listes : `lst1 = lst[:n//2]` (les
 
     ??? pouce "Coup de pouce"
 
-        Un candidat majoritaire d’une moitié doit être recompté dans la liste **entière** `lst`, pas seulement dans sa moitié.
+        Q11 : un candidat majoritaire d’une moitié doit être recompté dans la liste **entière** `lst`, pas seulement dans sa moitié.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        Ligne 4 : une liste d’un seul élément a cet élément pour majoritaire, `return lst[0]`. Ligne 11 : `eff = effectif(maj_g, lst)`.
+        Q11, ligne 4 : une liste d’un seul élément a cet élément pour majoritaire, `return lst[0]`. Ligne 11 : `eff = effectif(maj_g, lst)`.
 
     ```python
     def majo_abs3(lst):
@@ -573,6 +614,8 @@ On suppose que l’on a partagé `lst` en deux listes : `lst1 = lst[:n//2]` (les
     ```
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 8) : Q1 : 0,5 ; Q2 : 0,75 ; Q3 : 0,5 ; Q4 : 1 ; Q5 : 0,75 ; Q6 : 0,75 ; Q7 : 0,75 ; Q8 : 0,5 ; Q9 : 0,75 ; Q10 : 0,5 ; Q11 : 1,25
 
     **1.** Il faut apparaître strictement plus de $10/2 = 5$ fois : effectifs possibles $6, 7, 8, 9$ ou $10$.
 
@@ -659,6 +702,8 @@ On suppose que l’on a partagé `lst` en deux listes : `lst1 = lst[:n//2]` (les
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Les deux points les plus proches *(d’après Polynésie 2023, jour 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-9 }
 
+<span class="duree">≈ 60 min</span>
+
 L’objectif est de trouver les deux points les plus proches dans un nuage de points dont on connaît les coordonnées dans un repère orthogonal. On rappelle que la distance entre deux points $A(x_A ; y_A)$ et $B(x_B ; y_B)$ est donnée par la formule : $$AB = \sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}.$$ Les coordonnées d’un point sont stockées dans un tuple de deux nombres réels. Le nuage de points est représenté en Python par une liste de tuples de taille $n$, $n$ étant le nombre total de points. On suppose qu’il n’y a pas de points confondus et qu’il y a au moins deux points dans le nuage. Pour calculer la racine carrée, on utilise la fonction `sqrt` du module `math` :
 
 ```text
@@ -721,7 +766,7 @@ L’objectif est de trouver les deux points les plus proches dans un nuage de po
 
         ??? pouce "Coup de pouce"
 
-            Pour ne construire $[AB]$ qu’une fois, l’indice `j` doit toujours être strictement plus grand que `i` ; que doit valoir `i` au plus ?
+            Q2 b : pour ne construire $[AB]$ qu’une fois, l’indice `j` doit toujours être strictement plus grand que `i` ; que doit valoir `i` au plus ?
 
     2.  Donner, en fonction de $n$, la longueur de la liste `segments`. Le résultat peut être laissé sous la forme d’une somme.
 
@@ -754,10 +799,11 @@ L’objectif est de trouver les deux points les plus proches dans un nuage de po
 
     ??? pouce "Coup de pouce"
 
-        On compare les segments par leur attribut `longueur`, mais on renvoie l’**objet** `Segment` lui-même.
+        Q3 : on compare les segments par leur attribut `longueur`, mais on renvoie l’**objet** `Segment` lui-même.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
+        Q3 :  
         `def plus_court_segment(segments):`  
         `if len(segments) == 1:`  
         `return segments[0]`  
@@ -771,6 +817,8 @@ L’objectif est de trouver les deux points les plus proches dans un nuage de po
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 8) : Q1.a : 0,25 ; Q1.b : 0,5 ; Q1.c : 0,5 ; Q2.a : 0,5 ; Q2.b : 1,25 ; Q2.c : 0,75 ; Q2.d : 0,75 ; Q3 : 2 ; Q4.a : 0,5 ; Q4.b : 1
+
     **1. a)** Elle importe la fonction `sqrt` (racine carrée) du module `math`, pour pouvoir l’utiliser directement sous le nom `sqrt`.
 
     **1. b)** Les nombres flottants sont stockés en binaire avec un nombre limité de bits : `0.1`, `0.2` et `0.3` n’ont pas d’écriture binaire finie et sont arrondis. La somme vaut en réalité `0.30000000000000004`, différente de l’arrondi de `0.3`. On ne doit donc jamais tester l’égalité de deux flottants avec `==`.
@@ -783,7 +831,7 @@ L’objectif est de trouver les deux points les plus proches dans un nuage de po
             self.longueur = sqrt((point2[0] - point1[0])**2 + (point2[1] - point1[1])**2)
     ```
 
-    **2. b)** On associe chaque point `i` uniquement aux points `j` situés *après* lui, pour ne pas construire $[BA]$ en plus de $[AB]$ :
+    **2. b)** **Démarche :** on associe chaque point `i` uniquement aux points `j` situés *après* lui, pour ne pas construire $[BA]$ en plus de $[AB]$ :
 
     ```python
     def liste_segments(liste_points):
@@ -796,11 +844,13 @@ L’objectif est de trouver les deux points les plus proches dans un nuage de po
         return segments
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Faire partir `j` de `0` : on construit alors $[AB]$ et $[BA]$, et même des « segments » $[AA]$ de longueur nulle, qui fausseraient la recherche du plus court.
+
     **2. c)** Le point d’indice $0$ donne $n-1$ segments, le point d’indice $1$ en donne $n-2$, …, le point d’indice $n-2$ en donne $1$ : la longueur vaut $(n-1) + (n-2) + \dots + 1 = \dfrac{n(n-1)}{2}$.
 
     **2. d)** On construit $\dfrac{n(n-1)}{2}$ segments, chacun en temps constant : la complexité est **quadratique**, en $O(n^2)$.
 
-    **3.**
+    **3.** **Démarche :** condition d’arrêt : un seul segment ; sinon, deux appels récursifs sur les deux moitiés de la liste, puis on garde le segment de plus petite `longueur` (on renvoie l’objet, pas sa longueur).
 
     ```python
     def plus_court_segment(segments):
@@ -818,7 +868,7 @@ L’objectif est de trouver les deux points les plus proches dans un nuage de po
 
     **4. a)** `nuage_points = [(3, 4), (2, 3), (-3, -1)]`
 
-    **4. b)**
+    **4. b)** **Démarche :** on construit la liste de tous les segments, on cherche le plus court par diviser pour régner, puis on affiche ses deux extrémités.
 
     ```python
     segments = liste_segments(nuage_points)
@@ -829,6 +879,8 @@ L’objectif est de trouver les deux points les plus proches dans un nuage de po
     Affichage obtenu : `(3, 4) (2, 3)` : les points $A$ et $B$, à distance $\sqrt{2} \approx 1{,}41$.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Comparer deux classements *(sujet maison, façon bac)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-10 }
+
+<span class="duree">≈ 60 min</span>
 
 *Cet exercice n’est pas un sujet officiel : il a été écrit au format du bac pour s’entraîner.*
 
@@ -844,7 +896,7 @@ On appelle **inversion** d’une liste `t` tout couple d’indices `(i, j)` tel 
 
     ??? pouce "Coup de pouce"
 
-        Deux boucles imbriquées, la seconde commençant juste après l’indice de la première.
+        Q2 : deux boucles imbriquées, la seconde commençant juste après l’indice de la première.
 
 3.  Donner, en fonction de la longueur $n$ de la liste `t`, le nombre de comparaisons `t[i] > t[j]` effectuées par la fonction `inversions_naif`. Quel est le coût de cette fonction ? Estimer ce nombre pour une liste d’un million de chansons.
 
@@ -856,7 +908,7 @@ On appelle **inversion** d’une liste `t` tout couple d’indices `(i, j)` tel 
 
     ??? pouce "Coup de pouce"
 
-        `gauche` est triée : comparer `droite[j]` à `gauche[i]`, `gauche[i+1]`, … D’autre part, les éléments `gauche[0]`, …, `gauche[i-1]` déjà placés sont-ils plus grands ou plus petits que `droite[j]` ?
+        Q5 : `gauche` est triée : comparer `droite[j]` à `gauche[i]`, `gauche[i+1]`, … D’autre part, les éléments `gauche[0]`, …, `gauche[i-1]` déjà placés sont-ils plus grands ou plus petits que `droite[j]` ?
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> Recopier et compléter la fonction `fusion_compte`, qui renvoie la liste fusionnée **et** le nombre d’inversions croisées.
 
@@ -882,11 +934,11 @@ On appelle **inversion** d’une liste `t` tout couple d’indices `(i, j)` tel 
 
     ??? pouce "Coup de pouce"
 
-        Le nombre total d’inversions est la somme de trois nombres : relire l’introduction de la Partie B.
+        Q7 : le nombre total d’inversions est la somme de trois nombres : relire l’introduction de la Partie B.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        Condition d’arrêt : une liste d’au plus un élément est triée et n’a aucune inversion, `return t, 0`. Puis `gauche, inv_g = tri_compte(t[:milieu])`.
+        Q7 : condition d’arrêt : une liste d’au plus un élément est triée et n’a aucune inversion, `return t, 0`. Puis `gauche, inv_g = tri_compte(t[:milieu])`.
 
     ```python
     def tri_compte(t):
@@ -904,6 +956,8 @@ On appelle **inversion** d’une liste `t` tout couple d’indices `(i, j)` tel 
 6.  Justifier que `tri_compte` se termine. Le coût de `tri_compte` est du même ordre que celui du tri fusion : lequel ? Comparer avec la Partie A pour un million de chansons (on prendra $\log_2(10^6) \approx 20$).
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 8) : Q1 : 0,75 ; Q2 : 1 ; Q3 : 1 ; Q4 : 0,75 ; Q5 : 0,75 ; Q6 : 1,25 ; Q7 : 1 ; Q8 : 0,5 ; Q9 : 1
 
     **1.** Dans `[2, 4, 1, 3, 5]`, les couples rangés « à l’envers » sont $(2, 1)$, $(4, 1)$ et $(4, 3)$ : **3 inversions**. Le classement `[1, 2, 3, 4, 5]` (identique au classement officiel) n’en a aucune. Le classement `[5, 4, 3, 2, 1]` a le maximum : *tous* les couples sont inversés, soit $4 + 3 + 2 + 1 = \mathbf{10}$ inversions.
 
@@ -1003,7 +1057,7 @@ def recherche(tab, cible, debut, fin):
         return recherche(tab, cible, milieu + 1, fin)    # moitie droite
 ```
 
-*« À chaque appel, on compare la cible à l’élément du milieu et on ne garde que la moitié utile : l’intervalle est divisé par deux, d’où un coût en $\log_2 n$. »*
+« À chaque appel, on compare la cible à l’élément du milieu et on ne garde que la moitié utile : l’intervalle est divisé par deux, d’où un coût en $\log_2 n$. »
 
 1.  La réponse est-elle correcte ? <span class="run" title="À programmer et tester sur machine">▶</span> Dérouler à la main `recherche([3, 8, 12, 19, 25], 12, 0, 4)`, puis `recherche([3, 8, 12, 19, 25], 5, 0, 4)` (noter à chaque appel les valeurs de `debut`, `fin` et `milieu`).
 
@@ -1033,7 +1087,7 @@ def recherche(tab, cible, debut, fin):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-12 }
 
-Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
+Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans lire ses notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 
 1.  Expliquer les trois étapes de la méthode « **diviser pour régner** » sur l’exemple du tri fusion.
 
@@ -1041,7 +1095,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
 3.  Expliquer pourquoi la recherche dichotomique est un « diviser pour régner » et pourquoi elle exige un tableau **trié**.
 
-**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus, puis retourner la feuille. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire de notes** : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
+**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus : comme au Grand Oral, ces notes servent d’aide-mémoire. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire ses notes** et sans rien écrire : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
 
 ??? pouce "Coup de pouce"
 
@@ -1114,3 +1168,67 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
     - Coût : environ $\log_2 n$ étapes (une vingtaine pour un million de valeurs), contre $n$ pour une recherche séquentielle.
 
     - Le tri est indispensable : sans lui, rien ne permet d’éliminer une moitié ; piège des bornes (`milieu - 1`, `milieu + 1`) pour que la boucle termine.
+
+### Entraînement
+
+Des séries courtes pour rendre une méthode automatique : même consigne, données différentes. Les réponses sont brèves dans le corrigé.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 13</span> — Arbres d’appels du tri fusion en série <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-13 }
+
+<span class="essentiel">• essentiel</span>
+
+Pour chacune des listes ci-dessous, dessiner l’**arbre des appels** de `tri_fusion` (coupe à `milieu = len(tab) // 2`, jusqu’aux listes d’un élément), compter les appels (appel initial compris), puis donner, dans l’ordre de la remontée, chaque **fusion** effectuée et la liste obtenue.
+
+??? pouce "Coup de pouce"
+
+    Même méthode qu’à l’exercice 3 : chaque liste d’au moins deux éléments est coupée en `tab[:milieu]` et `tab[milieu:]` (pour une longueur impaire, la moitié gauche est la plus courte). Pour la remontée, chaque nœud reçoit la fusion des deux listes triées de ses fils, en commençant par le bas de l’arbre.
+
+1.  `[7, 2, 9, 4]`
+
+2.  `[6, 1, 8, 3, 5]`
+
+3.  `[4, 10, 2, 7, 1, 9, 3]`
+
+??? corrige "Corrigé"
+
+    **a)** et **b)** :
+
+    ![](../figures/8524ae5b232081f4.svg){ .tikz loading=lazy }
+
+    ![](../figures/ebe3059ba52f1b8e.svg){ .tikz loading=lazy }
+
+    **a)** $7$ appels. Remontée : `[7]` & `[2]` $\rightarrow$ `[2,7]` ; `[9]` & `[4]` $\rightarrow$ `[4,9]` ; `[2,7]` & `[4,9]` $\rightarrow$ `[2,4,7,9]`.
+
+    **b)** $9$ appels. Remontée : `[6]` & `[1]` $\rightarrow$ `[1,6]` ; `[3]` & `[5]` $\rightarrow$ `[3,5]` ; `[8]` & `[3,5]` $\rightarrow$ `[3,5,8]` ; `[1,6]` & `[3,5,8]` $\rightarrow$ `[1,3,5,6,8]`.
+
+    **c)**
+
+    ![](../figures/8d1b372132a88599.svg){ .tikz loading=lazy }
+
+    $13$ appels. Remontée : `[10]` & `[2]` $\rightarrow$ `[2,10]` ; `[4]` & `[2,10]` $\rightarrow$ `[2,4,10]` ; `[7]` & `[1]` $\rightarrow$ `[1,7]` ; `[9]` & `[3]` $\rightarrow$ `[3,9]` ; `[1,7]` & `[3,9]` $\rightarrow$ `[1,3,7,9]` ; enfin `[2,4,10]` & `[1,3,7,9]` $\rightarrow$ `[1,2,3,4,7,9,10]`. *(Pour une liste de $n$ éléments, on trouve toujours $2n - 1$ appels : $n$ feuilles et $n - 1$ fusions.)*
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 14</span> — Fusions à la main en série <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-14 }
+
+<span class="essentiel">• essentiel</span>
+
+Fusionner **à la main** chacun des couples de listes triées ci-dessous : à chaque étape, noter les deux éléments comparés et celui qui est recopié. Donner la liste obtenue et le nombre de comparaisons.
+
+??? pouce "Coup de pouce"
+
+    Garder un doigt sur la tête de chaque liste : comparer les deux têtes, recopier la plus petite et avancer dans sa liste. Quand une liste est épuisée, que reste-t-il à faire, et faut-il encore comparer ?
+
+1.  `[2, 5, 8]` et `[1, 6, 7]`
+
+2.  `[1, 2, 3]` et `[4, 5]`
+
+3.  `[3, 9]` et `[1, 4, 10, 11]`
+
+??? corrige "Corrigé"
+
+    **a)** `2` contre `1` $\to$ `1` ; `2` contre `6` $\to$ `2` ; `5` contre `6` $\to$ `5` ; `8` contre `6` $\to$ `6` ; `8` contre `7` $\to$ `7` ; la seconde liste est épuisée, on recopie `8`. Résultat `[1, 2, 5, 6, 7, 8]`, **5 comparaisons**.
+
+    **b)** `1` contre `4` $\to$ `1` ; `2` contre `4` $\to$ `2` ; `3` contre `4` $\to$ `3` ; la première liste est épuisée, on recopie `[4, 5]`. Résultat `[1, 2, 3, 4, 5]`, **3 comparaisons**.
+
+    **c)** `3` contre `1` $\to$ `1` ; `3` contre `4` $\to$ `3` ; `9` contre `4` $\to$ `4` ; `9` contre `10` $\to$ `9` ; la première liste est épuisée, on recopie `[10, 11]`. Résultat `[1, 3, 4, 9, 10, 11]`, **4 comparaisons**.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> En b), continuer à comparer `4` et `5` à une liste vide : dès qu’une liste est épuisée, on recopie le reste de l’autre, déjà trié, sans aucune comparaison.

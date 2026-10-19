@@ -12,7 +12,13 @@ Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title=
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Programme ou processus ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-1 }
 
+<span class="essentiel">• essentiel</span>
+
 Pour chaque affirmation, dire si elle décrit un *programme* ou un *processus*, et justifier.
+
+??? pouce "Coup de pouce"
+
+    Relire la définition du cours. Pour chaque phrase, se demander s’il s’agit d’un texte inerte, ou de quelque chose qui est en train de s’exécuter (et qui a donc un état à un instant donné).
 
 1.  Le fichier `jeu.py` rangé sur le disque dur.
 
@@ -34,6 +40,10 @@ Pour chaque affirmation, dire si elle décrit un *programme* ou un *processus*, 
 
 3.  Citer une transition **impossible** entre deux états, et expliquer pourquoi.
 
+??? pouce "Coup de pouce"
+
+    Pour la question 2, se demander pour chaque événement dans quel état se trouve le processus juste avant, et dans quel état juste après : la transition est la flèche qui relie les deux. Pour la question 3, qui décide de donner le processeur à un processus ?
+
 ??? corrige "Corrigé"
 
     **1.** **Élu** (utilise le processeur, s’exécute) ; **prêt** (pourrait s’exécuter, attend son tour) ; **bloqué** (attend une ressource).  
@@ -52,11 +62,19 @@ Un processus P démarre, s’exécute, demande une lecture sur le disque, l’ob
 
     Prêt (création) $\xrightarrow{\text{élection}}$ Élu $\xrightarrow{\text{blocage}}$ Bloqué (attente disque) $\xrightarrow{\text{déblocage}}$ Prêt $\xrightarrow{\text{élection}}$ Élu $\xrightarrow{\text{terminaison}}$ fin. On passe bien par « prêt » après le déblocage, et la terminaison a lieu depuis « élu ».
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Faire passer P directement de « bloqué » à « élu » quand sa donnée arrive : il redevient d’abord **prêt**, et c’est l’ordonnanceur qui l’élira, quand le processeur sera libre.
+
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Compléter l’automate des états <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-4 }
+
+<span class="essentiel">• essentiel</span>
 
 Recopier le schéma ci-dessous et le compléter : nommer les trois **états** ( 1), ( 2), ( 3) et les quatre **transitions** **(a)**, **(b)**, **(c)**, **(d)**, en choisissant dans les étiquettes proposées.
 
-![](../figures/b0b9a4b14496b4bb.svg){ .tikz loading=lazy }
+??? pouce "Coup de pouce"
+
+    Commencer par l’état où arrive la flèche « création » : un processus qui vient d’être créé s’exécute-t-il aussitôt, ou attend-il son tour ? Puis, pour chaque flèche, chercher l’événement qui la déclenche.
+
+![](../figures/b00809085c9c6851.svg){ .tikz loading=lazy }
 
 **Étiquettes.** États : *Élu*, *Prêt*, *Bloqué*. Transitions : *élection*, *blocage*, *déblocage*, *fin du quantum*.
 
@@ -68,9 +86,11 @@ Recopier le schéma ci-dessous et le compléter : nommer les trois **états** ( 
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Lire un arbre de processus <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-5 }
 
+<span class="essentiel">• essentiel</span>
+
 On donne la hiérarchie de processus suivante (chaque nœud est étiqueté par son PID) :
 
-![](../figures/813d4b26300aef96.svg){ .tikz loading=lazy }
+![](../figures/d28d787f43c7b74b.svg){ .tikz loading=lazy }
 
 1.  Donner le PPID du processus $42$, puis celui du processus $23$.
 
@@ -80,9 +100,15 @@ On donne la hiérarchie de processus suivante (chaque nœud est étiqueté par s
 
 4.  On `kill` le processus $17$. Que deviennent les processus $42$ et $43$ ? Préciser leur nouveau PPID.
 
+??? pouce "Coup de pouce"
+
+    Le PPID d’un processus est le PID de son père, c’est-à-dire du nœud situé juste au-dessus de lui dans l’arbre. Pour la question 4, relire dans le cours ce que devient un processus dont le père disparaît.
+
 ??? corrige "Corrigé"
 
     **1.** PPID de $42$ : c’est $17$. PPID de $23$ : c’est $1$. **2.** $17$ a **deux** fils : $42$ et $43$. **3.** $1$ (`init`) n’a pas de père utile ici ; son PPID vaut $0$ (le processus de démarrage). **4.** Tuer $17$ ne tue pas ses fils : $42$ et $43$ deviennent **orphelins** et sont **adoptés par `init`** ; leur PPID devient $1$.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Confondre PID et PPID : le PPID de $42$ n’est pas $42$, c’est le PID de son **père**, le nœud juste au-dessus dans l’arbre.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Reconstruire l’arbre <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-6 }
 
@@ -103,7 +129,7 @@ Une commande `ps` donne le tableau suivant. Dessiner l’arbre des processus cor
 
 ??? corrige "Corrigé"
 
-    ![](../figures/4b72aaeae07fd458.svg){ .tikz loading=lazy }
+    ![](../figures/8d3fd9acc0e84e28.svg){ .tikz loading=lazy }
 
     (`init` $1$ a pour fils `bash` $8$ et `sshd` $9$ ; $8$ a pour fils `python` $40$ et `vim` $41$ ; $9$ a pour fils `bash` $57$.)
 
@@ -133,14 +159,18 @@ L’appel `fork` **duplique** le processus qui l’exécute : après un `fork`, 
     **1.** Après la ligne 2 (un `fork`) : **2** processus. Après la ligne 3 (un second `fork`) : $2 \times 2 = \textbf{4}$ processus. « A » est donc affiché **4 fois**.  
     **2.** Arbre des processus (chaque `fork` fait naître un fils, qui peut à son tour engendrer) :
 
-    ![](../figures/7a931990b266f7a2.svg){ .tikz loading=lazy }
+    ![](../figures/d2f7ed77bce142a0.svg){ .tikz loading=lazy }
 
     ($P_0$ crée $P_1$ au 1<sup>er</sup> `fork` ; au 2<sup>e</sup>, $P_0$ crée $P_2$ et $P_1$ crée $P_3$ : quatre processus en tout.)  
     **3.** Avec un troisième `fork`, on double encore : $2^3 = \textbf{8}$ processus. En général, $n$ appels `fork` successifs donnent $\mathbf{2^n}$ processus.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Compter un processus de plus par `fork` ($1 + 2 = 3$) : le second `fork` est exécuté par *chacun* des deux processus déjà présents, et le nombre double.
+
 ### Ordonnancer à la main
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Trois stratégies, un même jeu de processus <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-8 }
+
+<span class="essentiel">• essentiel</span>
 
 Quatre processus arrivent et demandent le processeur :
 
@@ -167,21 +197,27 @@ Pour chacune des trois stratégies ci-dessous, tracer le **chronogramme** (de $t
 
     Rappel des données : A$(0,3)$, B$(1,4)$, C$(2,2)$, D$(4,1)$.
 
+    **Démarche :** pour chaque stratégie, on avance dans le temps ; à chaque libération du processeur (ou fin de quantum), on applique la règle d’élection aux seuls processus **déjà arrivés** ; on remplit ensuite, pour chaque processus, l’instant de fin et le temps d’attente.
+
     **1. Premier arrivé, premier servi.**
 
-    ![](../figures/d3d81a640cc7f289.svg){ .tikz loading=lazy }
+    ![](../figures/2bb53aee3509ec93.svg){ .tikz loading=lazy }
 
     Attente : A$=0$, B$=2$, C$=5$, D$=5$. **Moyenne $= 3{,}00$**.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Compter l’attente depuis $t=0$ au lieu de l’instant d’arrivée : pour B, on trouverait $7-4=3$ au lieu de $7-1-4=2$.
+
     **2. Plus court d’abord.**
 
-    ![](../figures/5c6692552cc7d8ec.svg){ .tikz loading=lazy }
+    ![](../figures/29b8c7418a50c2fa.svg){ .tikz loading=lazy }
 
     Attente : A$=0$, C$=1$, D$=1$, B$=5$. **Moyenne $= 1{,}75$**.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Choisir à $t=3$ parmi *tous* les processus : D, le plus court, n’arrive qu’à $t=4$. À $t=3$, seuls B et C sont prêts, et l’on élit C.
+
     **3. Tourniquet (quantum $1$).**
 
-    ![](../figures/b922637401e122fe.svg){ .tikz loading=lazy }
+    ![](../figures/69674630091263fb.svg){ .tikz loading=lazy }
 
     Fins : A$=6$, B$=10$, C$=8$, D$=7$. Attente : A$=3$, B$=5$, C$=4$, D$=2$. **Moyenne $= 3{,}50$**.
 
@@ -190,6 +226,8 @@ Pour chacune des trois stratégies ci-dessous, tracer le **chronogramme** (de $t
 ### Programmer un ordonnanceur
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 9</span> — Le tourniquet en Python *(d’après Polynésie 2023, jour 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-9 }
+
+<span class="duree">≈ 45 min</span>
 
 On simule la file d’attente par une liste, et chaque processus par un objet de la classe :
 
@@ -210,7 +248,7 @@ On considère trois processus, dans cet ordre d’arrivée : PID $11$ (durée $4
 
     ??? pouce "Coup de pouce"
 
-        Simuler la file à la main : écrire son contenu après chaque passage au processeur, sans oublier qu’un processus qui n’a pas fini repart *en queue* de file.
+        Question 2 : simuler la file à la main : écrire son contenu après chaque passage au processeur, sans oublier qu’un processus qui n’a pas fini repart *en queue* de file.
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Recopier et compléter les trois méthodes de la classe `Processus` :
 
@@ -229,7 +267,7 @@ On considère trois processus, dans cet ordre d’arrivée : PID $11$ (durée $4
 
     ??? pouce "Coup de pouce"
 
-        Se demander dans quels *deux* cas le processus doit rendre le processeur : ce sont les deux conditions de la boucle intérieure. Le test qui suit la boucle décide s’il faut remettre le processus dans la file.
+        Question 4 : se demander dans quels *deux* cas le processus doit rendre le processeur : ce sont les deux conditions de la boucle intérieure. Le test qui suit la boucle décide s’il faut remettre le processus dans la file.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -257,6 +295,8 @@ On considère trois processus, dans cet ordre d’arrivée : PID $11$ (durée $4
 5.  <span class="run" title="À programmer et tester sur machine">▶</span>  Créer la liste d’attente des trois processus ci-dessus et vérifier, en appelant `tourniquet`, les suites trouvées aux questions 1 et 2.
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 6) : Q1 : 1 ; Q2 : 1 ; Q3 : 1,5 ; Q4 : 1,5 ; Q5 : 1
 
     **1.** Quantum $1$ : `11, 20, 32, 11, 20, 32, 11, 32, 11`.  
     **2.** Quantum $2$ : `11, 11, 20, 20, 32, 32, 11, 11, 32`.
@@ -306,9 +346,11 @@ On considère trois processus, dans cet ordre d’arrivée : PID $11$ (durée $4
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Lire un graphe d’attente <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-10 }
 
+<span class="essentiel">• essentiel</span>
+
 Dans le graphe d’attente ci-dessous, une flèche $P \to R$ se lit « $P$ attend $R$ » et $R \to P$ se lit « $R$ est détenue par $P$ ».
 
-![](../figures/e79b417d982f8883.svg){ .tikz loading=lazy }
+![](../figures/bdc17335fbcf683d.svg){ .tikz loading=lazy }
 
 1.  Quelle ressource $P_1$ détient-il ? Laquelle attend-il ?
 
@@ -326,7 +368,11 @@ Dans le graphe d’attente ci-dessous, une flèche $P \to R$ se lit « $P$ atten
     **2.** Oui : le graphe contient un **cycle** $P_1 \to R_2 \to P_2 \to R_1 \to P_1$. Chacun attend une ressource tenue par l’autre : c’est un interblocage.  
     **3.** On peut **tuer** l’un des deux processus (par exemple `kill` sur $P_2$) : il libère alors sa ressource, ce qui débloque l’autre.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Lire les flèches à l’envers : $R_1 \to P_1$ signifie que $R_1$ est *détenue* par $P_1$ ; c’est $P_1 \to R_2$ qui signifie que $P_1$ attend $R_2$.
+
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 11</span> — Éviter l’interblocage <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-11 }
+
+<span class="duree">≈ 15 min</span>
 
 Deux processus partagent une imprimante $I$ et un scanner $S$. $P_1$ a besoin des deux dans l’ordre $I$ puis $S$ ; $P_2$ en a besoin dans l’ordre $S$ puis $I$.
 
@@ -351,6 +397,8 @@ Deux processus partagent une imprimante $I$ et un scanner $S$. $P_1$ a besoin de
 ### Exercices type bac
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Type bac — Observer puis ordonnancer des processus *(d’après Amérique du Nord 2023, jour 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-12 }
+
+<span class="duree">≈ 30 min</span>
 
 **Partie A — Processus.** La commande `ps` tapée dans un terminal donne la liste des processus du système. La commande `ps -eo user,pid,ppid,time,cmd` affiche, pour tous les processus, les colonnes suivantes : `USER` (l’utilisateur qui exécute le processus), `PID` (l’identifiant du processus), `PPID` (l’identifiant du processus parent), `TIME` (le temps d’utilisation du processeur par le processus) et `CMD` (la commande ou l’application à l’origine du processus). Voici un extrait de l’écran après exécution de la commande :
 
@@ -410,9 +458,11 @@ Le système utilise un ordonnancement par **tourniquet** : le processus élu dis
 
         Partie A : pour les questions 3 et 5, n’utiliser que la colonne PPID (compter ses répétitions ; remonter de père en père). Question 7 : écrire le contenu de la file d’attente à chaque fin de quantum, en y ajoutant d’abord les processus arrivés entre-temps.
 
-    ![](../figures/70102bcf6949c8e2.svg){ .tikz loading=lazy }
+    ![](../figures/97d3e1e3a650bed1.svg){ .tikz loading=lazy }
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 4) : Q1 : 0,25 ; Q2 : 0,25 ; Q3 : 0,5 ; Q4 : 0,5 ; Q5 : 0,75 ; Q6 : 0,75 ; Q7 : 1
 
     **Partie A.** **1.** Le processus $5468$ est issu de `/snap/gimp/393/usr/bin/gimp` : c’est l’application **GIMP**. **2.** C’est le processus de PID **1770** (`gnome-shell`), avec `00:00:51` de temps processeur. **3.** On compte les apparitions de chaque PPID : $1611$ apparaît $5$ fois (fils $1752$, $1770$, $5564$, $5571$, $5615$), aucun autre plus de $2$ fois : c’est le processus **1611**. **4.** Le PPID de `ps` ($5629$) est $5622$, qui est un **`bash`** : la commande a été lancée depuis ce shell. **5.** On remonte les PPID : $5629 \to 5622 \to 5571 \to 1611 \to 1$, d’où la succession $\mathbf{1 \to 1611 \to 5571 \to 5622 \to 5629}$.
 
@@ -420,11 +470,15 @@ Le système utilise un ordonnancement par **tourniquet** : le processus élu dis
 
     **7.** À $t=0$, seul $P_1$ est là : il s’exécute un quantum ($0$–$2$), puis passe derrière $P_2$ (arrivé à $t=1$). $P_2$ s’exécute de $2$ à $4$, puis $P_1$ de $4$ à $6$ ; entre-temps $P_3$ est arrivé ($t=5$) et se trouve *devant* $P_1$ qui revient en fin de file à $t=6$. D’où :
 
-    ![](../figures/5c3bd1d9156e1f2d.svg){ .tikz loading=lazy }
+    ![](../figures/28fd9687f6553df6.svg){ .tikz loading=lazy }
 
     $P_2$ se termine à $t=7$, $P_1$ à $t=10$ et $P_3$ à $t=12$.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Remettre $P_1$ dans la file devant $P_3$ à $t=6$ : $P_3$, arrivé à $t=5$ pendant le quantum de $P_1$, est déjà dans la file ; $P_1$ se place derrière lui.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Type bac — Tourniquet cycle par cycle et interblocage *(d’après Amérique du Nord 2024, jour 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-13 }
+
+<span class="duree">≈ 45 min</span>
 
 On s’intéresse aux processus et à leur ordonnancement au sein d’un système d’exploitation, sur un **monoprocesseur**.
 
@@ -436,7 +490,7 @@ On simule l’ordonnancement avec des objets. On dispose d’une classe `Process
 
 On ordonnance les processus selon une méthode du type tourniquet telle qu’**à chaque cycle** : si un nouveau processus est créé, il est mis dans la file d’attente ; ensuite, on défile un processus de la file d’attente et on l’exécute pendant un cycle ; si le processus exécuté n’est pas terminé, on le replace dans la file. Par exemple, avec les processus A (créé au cycle $2$, durée $3$), B (cycle $1$, durée $4$), C (cycle $4$, durée $3$) et D (cycle $0$, durée $5$), on obtient le chronogramme :
 
-![](../figures/b29f82c85eac1ced.svg){ .tikz loading=lazy }
+![](../figures/f76a5879b1b8606d.svg){ .tikz loading=lazy }
 
 On décrit maintenant d’autres processus et leur moment de création ; le dictionnaire `depart_proc` associe à un cycle le processus créé à ce moment (un seul processus peut être créé lors d’un cycle donné) :
 
@@ -450,7 +504,7 @@ depart_proc = {0: p1, 1: p3, 2: p2, 3: p4}
 
 1.  Recopier et compléter le chronogramme ci-dessous pour les processus `p1`, `p2`, `p3` et `p4`.
 
-    ![](../figures/3f4bc6b3a6142e9e.svg){ .tikz loading=lazy }
+    ![](../figures/ce24a0c2daf46121.svg){ .tikz loading=lazy }
 
 L’ordonnancement est mis en place par les classes `File` et `Ordonnanceur` déjà écrites dans l’exercice « Ordonnancer des processus avec une file » du chapitre Piles et files (même sujet de bac). On les reprend telles que vous les avez complétées, avec deux précisions : `defile` renvoie `None` si la file est vide, et `tourniquet` renvoie le nom du processus élu (ou `None` si la file est vide) ; ici, la méthode qui exécute un processus pendant un cycle s’appelle `execute_un_cycle`. Rappel de l’interface utile :
 
@@ -485,15 +539,17 @@ Dans la situation donnée en exemple (premier chronogramme), les processus utili
 
     ??? pouce "Coup de pouce"
 
-        Suivre le premier chronogramme cycle par cycle en notant, à chaque cycle, l’instruction exécutée et qui détient quelle ressource. Chercher deux processus qui attendent chacun une ressource tenue par l’autre.
+        Question 5 : suivre le premier chronogramme cycle par cycle en notant, à chaque cycle, l’instruction exécutée et qui détient quelle ressource. Chercher deux processus qui attendent chacun une ressource tenue par l’autre.
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 6) : Q1 : 0,5 ; Q2 : 0,5 ; Q3 : 1,5 ; Q4 : 2 ; Q5 : 1,5
 
     **1.** Élu, prêt, bloqué. **2.** Sans ressource à attendre, un processus ne peut jamais être bloqué : il est soit **élu**, soit **prêt**.
 
     **3.** Au cycle $c$, on enfile d’abord le processus créé à ce cycle, puis on exécute la tête de file. On obtient la suite `p1 p1 p3 p1 p2 p3 p4 p1 p2 p3 p4 p2 p3 p4 p3` ($15$ cycles $= 4+3+5+3$) :
 
-    ![](../figures/8f9bd36840f5177e.svg){ .tikz loading=lazy }
+    ![](../figures/241a54b4dcf6a152.svg){ .tikz loading=lazy }
 
     **4.** On boucle tant qu’il reste un processus à créer ou un processus dans la file. `ordo.temps` est le cycle en cours (il est incrémenté par `tourniquet`) ; on calcule d’abord `dernier`, la plus grande *clé* du dictionnaire, c’est-à-dire la date de création du dernier processus (ici $3$), par une recherche de maximum :
 
@@ -515,13 +571,15 @@ Dans la situation donnée en exemple (premier chronogramme), les processus utili
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Type bac — Une application de streaming *(d’après Amérique du Nord 2026, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-14 }
 
+<span class="duree">≈ 45 min</span>
+
 Un système d’exploitation exécute plusieurs applications « à la fois » en répartissant le temps de calcul du processeur entre les différents processus, qui s’exécutent chacun à leur tour très rapidement. Même si un seul processus utilise réellement le processeur à un instant donné, cette alternance rapide donne l’impression que tout s’exécute en même temps. Lorsque le système interrompt un processus pour en exécuter un autre, on parle de *préemption*.
 
 **Partie A**
 
 1.  Recopier et compléter le schéma ci-dessous avec les termes : « élu », « prêt », « bloqué », « élection », « blocage », « déblocage ».
 
-    ![](../figures/e489257f2771b16c.svg){ .tikz loading=lazy }
+    ![](../figures/ddc0662b8408b2c7.svg){ .tikz loading=lazy }
 
 Une application de streaming musical se compose de trois processus : P1 gère l’interface utilisateur (listes de morceaux, boutons lecture-pause…) ; P2 télécharge la musique et l’écrit dans une mémoire cache locale ; P3, le *lecteur audio*, décode la musique et envoie le flux au système pour lecture. Dans la situation suivante : l’utilisateur a mis l’application en arrière-plan, cachant l’interface ; P2 attend un accès à la carte Wi-Fi pour recharger des données ; P3 décode de la musique et l’envoie au système.
 
@@ -546,7 +604,7 @@ On considère quatre ressources : un processeur graphique (GPU), un microphone (
 
     ??? pouce "Coup de pouce"
 
-        Il suffit d’*un* scénario : chercher deux processus qui détiennent chacun une ressource que l’autre demande ensuite.
+        Question 4 : il suffit d’*un* scénario : chercher deux processus qui détiennent chacun une ressource que l’autre demande ensuite.
 
 **Partie B**
 
@@ -561,7 +619,7 @@ On s’intéresse à un ordonnanceur de type tourniquet dont le *quantum* vaut $
 
 1.  Recopier et compléter le chronogramme suivant, en indiquant quel processus utilise le processeur à chaque instant, de $0$ ms à la fin de l’exécution de tous les processus (P1 s’exécute déjà entre $0$ et $2$ ms ; les flèches indiquent les instants d’arrivée).
 
-    ![](../figures/37a66b03dfd5c3f1.svg){ .tikz loading=lazy }
+    ![](../figures/6ba8fdc2d0f1535b.svg){ .tikz loading=lazy }
 
 En Python, chaque processus est un dictionnaire de clés `’nom’`, `’arrivee’` et `’temps’` (temps d’exécution *restant*, en ms) :
 
@@ -614,6 +672,8 @@ On suppose désormais que tous les processus sont déjà arrivés (ils sont tous
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 6) : Q1 : 0,75 ; Q2 : 0,5 ; Q3 : 0,5 ; Q4 : 0,75 ; Q5 : 1 ; Q6 : 0,5 ; Q7 : 1 ; Q8 : 1
+
     **Partie A.** **1.** Les trois états : à gauche **prêt**, à droite **élu**, en bas **bloqué**. Flèche prêt $\to$ élu : **élection** ; élu $\to$ bloqué : **blocage** ; bloqué $\to$ prêt : **déblocage**.
 
     **2.** P1 (interface cachée, en attente d’une action de l’utilisateur) : **bloqué**. P2 (attend la carte Wi-Fi) : **bloqué**. P3 (décode et envoie la musique) : **élu** — il s’exécute (sur un monoprocesseur, il alterne en réalité entre élu et prêt).
@@ -624,7 +684,7 @@ On suppose désormais que tous les processus sont déjà arrivés (ils sont tous
 
     **Partie B.** **5.** Les arrivées se placent en fin de file ; un processus préempté y revient après les processus arrivés pendant son quantum :
 
-    ![](../figures/3692e5ca1e5fbf9a.svg){ .tikz loading=lazy }
+    ![](../figures/39cc026652d9ed60.svg){ .tikz loading=lazy }
 
     P2 se termine à $10$ ms, P1 à $14$ ms, P4 à $17$ ms et P3 à $18$ ms.
 
@@ -664,6 +724,8 @@ On suppose désormais que tous les processus sont déjà arrivés (ils sont tous
     Avec la file `fp`, l’appel renvoie $18$ : la somme des temps d’exécution ($6+4+5+3$), puisque le processeur n’est jamais inoccupé.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 15</span> — Type bac — Des files de priorité pour l’ordonnanceur *(d’après Asie 2025, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-15 }
+
+<span class="duree">≈ 60 min</span>
 
 On souhaite élaborer un programme système qui gère l’ordre d’exécution des processus sur le processeur.
 
@@ -748,6 +810,8 @@ Pour régler ce phénomène, on ajoute au processus l’attribut `temps_d_attent
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 8) : Q1 : 0,25 ; Q2 : 0,5 ; Q3 : 0,5 ; Q4 : 0,5 ; Q5 : 1 ; Q6 : 0,75 ; Q7 : 0,5 ; Q8 : 1,25 ; Q9 : 1,25 ; Q10 : 1,5
+
     **1.** Un **ordonnanceur**. **2.** Élu, prêt, bloqué. **3.** Une **file** : parmi les processus de même priorité, le premier arrivé doit être le premier servi.
 
     **4.**
@@ -825,7 +889,9 @@ Pour régler ce phénomène, on ajoute au processus l’attribut `temps_d_attent
 
 Un élève demande à un assistant d’IA : « Explique-moi les trois états d’un processus et les passages de l’un à l’autre. » Voici la réponse obtenue :
 
-> « Un processus est un programme en cours d’exécution. Il passe par trois états. **Élu** : il utilise le processeur ; il n’y a qu’un seul processus élu à la fois par cœur. **Prêt** : il pourrait s’exécuter mais attend son tour, le processeur étant occupé. **Bloqué** : il attend une ressource (lecture disque, saisie clavier…) et ne peut pas avancer même si le processeur se libère. Les transitions sont les suivantes : l’ordonnanceur *élit* un processus prêt (prêt $\to$ élu) ; quand son quantum est écoulé, il est *réquisitionné* (élu $\to$ prêt) ; s’il demande une ressource indisponible, il se *bloque* (élu $\to$ bloqué) ; enfin, dès que la ressource attendue arrive, le processus bloqué *reprend immédiatement le processeur* (bloqué $\to$ élu), puisqu’il a déjà assez attendu. Un processus ne peut se terminer que depuis l’état élu. »
+!!! encadre "Réponse de l’assistant"
+
+    « Un processus est un programme en cours d’exécution. Il passe par trois états. **Élu** : il utilise le processeur ; il n’y a qu’un seul processus élu à la fois par cœur. **Prêt** : il pourrait s’exécuter mais attend son tour, le processeur étant occupé. **Bloqué** : il attend une ressource (lecture disque, saisie clavier…) et ne peut pas avancer même si le processeur se libère. Les transitions sont les suivantes : l’ordonnanceur *élit* un processus prêt (prêt $\to$ élu) ; quand son quantum est écoulé, il est *réquisitionné* (élu $\to$ prêt) ; s’il demande une ressource indisponible, il se *bloque* (élu $\to$ bloqué) ; enfin, dès que la ressource attendue arrive, le processus bloqué *reprend immédiatement le processeur* (bloqué $\to$ élu), puisqu’il a déjà assez attendu. Un processus ne peut se terminer que depuis l’état élu. »
 
 1.  La réponse est-elle correcte ? Pour le vérifier, considérer un cœur où $P_1$ est élu et $P_2$ bloqué en attente d’une lecture disque ; la lecture se termine. Que se passerait-il si la description de l’assistant était vraie ? Est-ce compatible avec « un seul élu à la fois » ?
 
@@ -849,7 +915,7 @@ Un élève demande à un assistant d’IA : « Explique-moi les trois états d�
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-17 }
 
-Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
+Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans lire ses notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 
 1.  Expliquer à un camarade la différence entre un **programme** et un **processus**.
 
@@ -857,7 +923,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
 3.  Expliquer ce qu’est un **interblocage**, avec un exemple concret.
 
-**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus, puis retourner la feuille. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire de notes** : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
+**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus : comme au Grand Oral, ces notes servent d’aide-mémoire. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire ses notes** et sans rien écrire : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
 
 ??? pouce "Coup de pouce"
 
@@ -930,3 +996,61 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
     - On le repère par un **cycle** dans le graphe d’attente.
 
     - Pour l’éviter : demander les ressources toujours dans le même ordre ; pour en sortir : arrêter l’un des processus. Piège : ce n’est pas le « bug » d’un seul programme, mais une interaction.
+
+### Entraînement
+
+Des séries courtes pour rendre une méthode automatique : même consigne, données différentes. Les réponses sont brèves dans le corrigé.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 18</span> — Chronogrammes en série <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-18 }
+
+<span class="essentiel">• essentiel</span>
+
+Pour chacun des trois jeux de données ci-dessous, tracer le **chronogramme**, puis calculer le **temps d’attente** de chaque processus et le **temps d’attente moyen** (temps d’attente $=$ instant de fin $-$ instant d’arrivée $-$ durée).
+
+??? pouce "Coup de pouce"
+
+    Avancer dans le temps : à chaque fois que le processeur se libère (ou qu’un quantum se termine), écrire la liste des processus déjà arrivés et non terminés, puis appliquer la règle de la stratégie pour choisir l’élu. Pour le tourniquet, écrire le contenu de la file à chaque fin de quantum. Remplir enfin un petit tableau : instant de fin, temps d’attente.
+
+1.  **Premier arrivé, premier servi.**
+
+    |     Processus     | P1  | P2  | P3  | P4  |
+    |:-----------------:|:---:|:---:|:---:|:---:|
+    | Instant d’arrivée |  0  |  1  |  2  |  4  |
+    |       Durée       |  5  |  2  |  3  |  1  |
+
+2.  **Tourniquet de quantum $2$.** On applique la convention du cours : un processus qui arrive à l’instant où un quantum se termine entre dans la file **avant** le processus qui vient d’être interrompu.
+
+    |     Processus     | R1  | R2  | R3  | R4  |
+    |:-----------------:|:---:|:---:|:---:|:---:|
+    | Instant d’arrivée |  0  |  1  |  2  |  4  |
+    |       Durée       |  4  |  3  |  2  |  1  |
+
+3.  **Par priorités, sans préemption.** Chaque fois que le processeur se libère, on élit, parmi les processus déjà arrivés, celui dont la **valeur de priorité** est la plus petite (la valeur $1$ est la plus urgente) ; à valeur égale, on élit le premier arrivé. L’élu s’exécute jusqu’au bout.
+
+    |     Processus      | S1  | S2  | S3  | S4  |
+    |:------------------:|:---:|:---:|:---:|:---:|
+    | Instant d’arrivée  |  0  |  1  |  2  |  3  |
+    |       Durée        |  3  |  2  |  4  |  1  |
+    | Valeur de priorité |  3  |  1  |  2  |  1  |
+
+??? corrige "Corrigé"
+
+    **a) Premier arrivé, premier servi.**
+
+    ![](../figures/2806d9618b76fcf2.svg){ .tikz loading=lazy }
+
+    Attente : P1$=0$, P2$=7-1-2=4$, P3$=10-2-3=5$, P4$=11-4-1=6$. **Moyenne $= 3{,}75$**.
+
+    **b) Tourniquet de quantum $2$.** File (dans l’ordre de passage) à $t=2$ : R2, R3, R1 (R3, arrivé à $t=2$, passe devant R1) ; à $t=4$ : R3, R1, R4, R2 (R4 passe devant R2).
+
+    ![](../figures/d6674dbce5c9415a.svg){ .tikz loading=lazy }
+
+    Fins : R1$=8$, R2$=10$, R3$=6$, R4$=9$. Attente : R1$=4$, R2$=6$, R3$=2$, R4$=4$. **Moyenne $= 4{,}00$**.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Remettre R1 dans la file avant R3 à $t=2$ : d’après la convention, le processus qui arrive à la fin d’un quantum passe devant celui qui vient d’être interrompu.
+
+    **c) Par priorités.** À $t=3$, S2, S3 et S4 sont arrivés ; S2 et S4 ont la valeur $1$, et S2 est arrivé le premier.
+
+    ![](../figures/b38b542c3e946dfd.svg){ .tikz loading=lazy }
+
+    Attente : S1$=0$, S2$=5-1-2=2$, S3$=10-2-4=4$, S4$=6-3-1=2$. **Moyenne $= 2{,}00$**.

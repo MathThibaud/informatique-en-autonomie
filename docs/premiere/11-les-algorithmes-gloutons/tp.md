@@ -402,7 +402,7 @@ Un livreur part de Monaco, doit passer une fois dans chacune des dix villes ci-d
 | `Antibes`              | $-24{,}1$ | $-17{,}4$ |
 | `Saint-Martin-Vesubie` | $-13{,}6$ |      36,5 |
 
-![](../figures/04cceb010bfc3908.svg){ .tikz .tikz-inline loading=lazy }
+![](../figures/155f35ab12c76575.svg){ .tikz .tikz-inline loading=lazy }
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 11</span> — Longueur d’une tournée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-les-algorithmes-gloutons-tp-1-11 }
 

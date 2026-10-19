@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *« Écrire un algorithme utilisant la méthode "diviser pour régner". »* Le BO cite deux exemples : *« la rotation d’une image bitmap d’un quart de tour avec un coût en mémoire constant »* et *« le tri fusion, qui permet d’exploiter la récursivité et d’exhiber un algorithme de coût en $n\log_2 n$ dans le pire des cas »*. |
-| **Prérequis** | récursivité (condition d’arrêt, variant, coût), listes et tableaux, tris déjà vus (insertion, sélection), notion de coût et de logarithme base 2. |
+| **Prérequis** | récursivité (condition d’arrêt, variant, coût), listes et tableaux, tris déjà vus (insertion, sélection), notion de coût et de logarithme base 2. (→ fiches de révision : ch. 1) |
 | **Objectifs** | *reconnaître* un problème qui se prête à « diviser pour régner », *écrire* l’algorithme récursif correspondant, et *analyser* son coût (passage de $n^2$ à $n\log_2 n$, de $n$ à $\log_2 n$). |
+
+!!! situation "Situation de départ"
+
+    1.  Quelqu’un pense à un nombre entre $1$ et un million ; vous ne pouvez lui demander que « plus grand ? » ou « plus petit ? ». Combien de questions vous faut-il, au plus ?
+
+    2.  Trier un million de valeurs avec le tri par insertion de Première demande de l’ordre de $10^{12}$ opérations. Peut-on faire beaucoup mieux, et comment ?
+
+    3.  Qu’ont en commun ces deux stratégies, et pourquoi s’écrivent-elles naturellement avec une fonction qui s’appelle elle-même ?
 
 ## Un paradigme : diviser pour régner
 
@@ -24,7 +32,7 @@ Pour chercher un mot dans un dictionnaire de $2\,000$ pages, on ouvre *au milieu
 
     - **Combiner** : recoller les solutions des sous-problèmes en une solution du problème de départ.
 
-![](../figures/f39bcadf0dbb64a4.svg){ .tikz loading=lazy }
+![](../figures/69cb92003d664a5e.svg){ .tikz loading=lazy }
 
 !!! remarque "Remarque"
 
@@ -59,7 +67,7 @@ Reprenons le dictionnaire. On dispose d’un tableau **déjà trié** et on veut
 
         On doit l’appeler sur un tableau **trié** dans l’ordre croissant : sinon, comparer `cible` au milieu ne dit pas de quel côté chercher. Le premier appel porte sur **tout** le tableau : pour chercher `17` dans `t`, on écrit `recherche(t, 17, 0, len(t) - 1)`. À chaque appel, l’**intervalle de recherche est coupé en deux**.
 
-![](../figures/6e9dea66bebfde51.svg){ .tikz loading=lazy }
+![](../figures/1c580ab93898aafe.svg){ .tikz loading=lazy }
 
 !!! propriete "Propriété 1 — Coût de la recherche dichotomique"
 
@@ -69,9 +77,11 @@ Reprenons le dictionnaire. On dispose d’un tableau **déjà trié** et on veut
 
     À chaque appel, la taille de l’intervalle est **divisée par deux**. Partant de $n$, on obtient successivement $n,\ n/2,\ n/4,\dots$ On atteint la condition d’arrêt (intervalle vide ou de taille $1$) après le nombre de divisions par $2$ nécessaires pour descendre de $n$ à $1$ : ce nombre est, par définition, $\log_2 n$.
 
-!!! remarque "Remarque"
+!!! encadre "À retenir — un coût $log_2 n$ au lieu de $n$"
 
     L’ordre de grandeur est spectaculaire : dans un tableau d’**un million** d’éléments, une recherche naïve (élément par élément) demande jusqu’à un million de comparaisons, là où la dichotomie en demande environ $20$ (car $2^{20} \approx 10^6$). On passe d’un coût $n$ à un coût $\log_2 n$ : c’est exactement le gain que le programme demande de « montrer ». C’est aussi l’idée de la recherche dans un arbre binaire de recherche (chapitre 5), où chaque comparaison élimine tout un sous-arbre.
+
+<span class="retouract">↺ Retour sur l'activité.</span> La stratégie de Léa dans le dictionnaire était une recherche dichotomique : $2\,000$ pages, puis $1\,000$, $500$… $11$ coups d’œil suffisent ($2^{11} = 2\,048$), un seul de plus pour $4\,000$ pages, et $7$ questions au plus pour un nombre entre $1$ et $100$. Le temps « combiner » n’y a rien à faire.
 
 !!! remarque "Remarque — Un « diviser pour régner » un peu particulier"
 
@@ -184,9 +194,11 @@ def fusion(gauche, droite):
     return resultat
 ```
 
-!!! remarque "Remarque"
+!!! encadre "À retenir — le coût linéaire de la fusion"
 
     Fusionner deux listes dont les tailles totalisent $n$ coûte de l’ordre de $n$ opérations : chaque élément est recopié **une seule fois**. Retenez ce « coût linéaire de la fusion » : il explique le coût final du tri.
+
+<span class="retouract">↺ Retour sur l'activité.</span> La fusion des paquets G et D de l’activité suivait exactement cette règle : $7$ comparaisons pour $8$ cartes, la dernière se recopiant sans comparaison, et au plus $99$ comparaisons pour deux paquets de $50$ cartes.
 
 ### Le tri fusion complet
 
@@ -204,15 +216,15 @@ def tri_fusion(tab):
 
 Suivons l’algorithme sur `[5, 2, 8, 1, 9, 3, 7, 4]`. On **descend** en coupant en deux (diviser), jusqu’aux singletons ; puis on **remonte** en fusionnant (combiner).
 
-![](../figures/c532a5e85c2ecbd2.svg){ .tikz loading=lazy }
+![](../figures/c84aafedf4f8fea9.svg){ .tikz loading=lazy }
 
 Descente (diviser) : on coupe en deux jusqu’aux singletons.
 
-![](../figures/46893b9952555b58.svg){ .tikz loading=lazy }
+![](../figures/f341f7172af157b5.svg){ .tikz loading=lazy }
 
 Remontée (combiner) : on fusionne deux à deux les moitiés triées.
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif)"
 
     Cette version renvoie une **nouvelle liste** (claire, mais elle recopie les données). On peut aussi écrire des versions « en place », qui rangent les valeurs directement dans le tableau donné au lieu de renvoyer une nouvelle liste : c’est le cas du *tri rapide* et du *Tim sort* des TP proposés en fin de chapitre.
 
@@ -228,7 +240,7 @@ Remontée (combiner) : on fusionne deux à deux les moitiés triées.
 
 <span id="cours-07-3" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-07-3) à [5](exercices.md#ex-07-5)** (tri fusion : l’arbre des appels, compter les appels, écrire la fusion)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-07-3) à [5](exercices.md#ex-07-5), [13](exercices.md#ex-07-13) et [14](exercices.md#ex-07-14)** (tri fusion : l’arbre des appels, compter les appels, écrire la fusion ; arbres d’appels et fusions en série)
 
 ## Analyser le coût : pourquoi $n\log_2 n$ ?
 
@@ -240,7 +252,9 @@ C’est le point que le programme demande d’« exhiber ». Reprenons l’arbre
 
 En multipliant, *« $\log_2 n$ niveaux, chacun coûtant $n$ »*, on obtient un coût total de l’ordre de $\boxed{n\log_2 n}$, et cela **même dans le pire des cas** — contrairement au tri rapide que l’on verra plus loin.
 
-![](../figures/3b28f49b76e86dce.svg){ .tikz loading=lazy }
+![](../figures/d66ff983deb81fae.svg){ .tikz loading=lazy }
+
+<span class="retouract">↺ Retour sur l'activité.</span> Le tri en équipe de l’activité était un tri fusion, la consigne jouant le rôle de la fonction récursive : $3$ étages de coupes pour $8$ cartes, au plus $8$ comparaisons par étage de fusions, soit environ $8 \times 3 = 24$ contre $28$ pour le tri par sélection ; avec $1\,024$ cartes, $10\,240$ contre $523\,776$.
 
 ### Comparaison $n^2$ contre $n\log_2 n$
 
@@ -252,7 +266,7 @@ Le gain n’a l’air de rien sur un petit tableau ; il devient énorme quand $n
 | $1\,000$ |     $1\,000\,000$ |      $\approx 10\,000$ |     $100\times$ |
 |   $10^6$ |         $10^{12}$ | $\approx 2\times 10^7$ | $50\,000\times$ |
 
-![](../figures/18192dcfbb1d63df.svg){ .tikz loading=lazy }
+![](../figures/4bb642e30550754a.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 2 — À retenir sur le coût"
 
@@ -276,7 +290,7 @@ def tri_rapide(tab, bas, haut):
 
 La **partition** range les éléments autour du pivot ; celui-ci se retrouve à sa **place définitive**, les petits à gauche, les grands à droite. On trie ensuite *récursivement* chaque zone.
 
-![](../figures/859e27369917aecb.svg){ .tikz loading=lazy }
+![](../figures/86b0c815650585f3.svg){ .tikz loading=lazy }
 
 !!! remarque "Remarque"
 
@@ -290,13 +304,19 @@ L’algorithme utilisé par `sorted()` et `list.sort()` en Python s’appelle **
 
 Le BO cite la **rotation d’un quart de tour d’une image** carrée. On découpe l’image en **quatre quadrants**, on fait tourner récursivement chacun, puis on les **repositionne** en tournant (le quadrant haut-gauche va en haut-droite, etc.). En permutant directement les pixels, cette approche atteint un **coût mémoire constant** — la précision demandée par le programme.
 
-![](../figures/75ff7f692744f187.svg){ .tikz loading=lazy }
+![](../figures/78eec9de9f0bc863.svg){ .tikz loading=lazy }
 
-## Ouverture et ancrage bac
+## Ouverture et liens avec les autres chapitres
 
 « Diviser pour régner » est une **clé** de la fin d’année et un grand classique de l’épreuve.
 
-!!! remarque "Remarque — Au bac, on vous demandera surtout de…"
+- **Ce qu’il réutilise** : la **récursivité** (chapitre 1 : condition d’arrêt, variant, arbre des appels), les tris par insertion et par sélection de 1<sup>re</sup>, de coût $n^2$, et la recherche dans un **arbre binaire de recherche** (chapitre 5), qui suit la même idée que la dichotomie.
+
+- Face à un problème d’optimisation, diviser pour régner est une stratégie parmi d’autres, à comparer aux **algorithmes gloutons** de 1<sup>re</sup>.
+
+- **Ouverture.** Quand les sous-problèmes se **répètent**, on ne recoupera plus : on **mémorisera** — ce sera la **programmation dynamique** (chapitre 11).
+
+!!! encadre "Au bac — on vous demandera surtout de…"
 
     - **identifier** les trois temps (diviser / régner / combiner) sur un algorithme donné ;
 
@@ -307,10 +327,6 @@ Le BO cite la **rotation d’un quart de tour d’une image** carrée. On décou
     - **justifier** la terminaison (variant = taille du tableau) et **comparer** les coûts $n^2$, $n\log_2 n$, $\log_2 n$.
 
     Exemples de sujets : *tri fusion* (Liban 2023, jour 2), *recherche dichotomique* récurrente sur de nombreux sujets.
-
-!!! remarque "Remarque — Liens avec d’autres chapitres"
-
-    Diviser pour régner repose sur la **récursivité**. Le **tri fusion** fait tomber le coût d’un tri de $n^2$ à $n\log_2 n$ (notion de **coût**, algorithmique). Quand les sous-problèmes se **répètent**, on ne recoupe plus : on **mémorise** — c’est la **programmation dynamique**, qu’on étudiera au chapitre 11. Et face à un problème d’optimisation, diviser pour régner est une stratégie parmi d’autres, à comparer aux **algorithmes gloutons** (Première).
 
 ## Bilan — la carte mémoire
 
@@ -324,6 +340,14 @@ Le BO cite la **rotation d’un quart de tour d’une image** carrée. On décou
 | Coût du tri fusion | $n\log_2 n$ **même dans le pire des cas** |
 | Tri rapide (quicksort) | pivot + partition ; $n\log_2 n$ en moyenne, $n^2$ au pire |
 | Terminaison | variant = **taille** du tableau (décroît) |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Par **recherche dichotomique** : chaque question élimine la moitié des nombres restants ; une vingtaine de questions suffisent, car $2^{20} \approx 10^6$. Le coût passe de $n$ à $\log_2 n$ (§ II).
+
+    2.  Oui : le **tri fusion** coupe le tableau en deux, trie récursivement chaque moitié puis **fusionne** les deux moitiés triées. Il coûte $n\log_2 n$, environ $2\times 10^7$ opérations pour un million de valeurs, même dans le pire des cas (§ III et IV).
+
+    3.  Toutes deux appliquent la méthode **diviser pour régner** : diviser en sous-problèmes du même type mais plus petits, les résoudre (régner), puis combiner. Comme les sous-problèmes sont du même type, l’algorithme est **récursif**, avec une condition d’arrêt (§ I).
 
 ## Erreurs fréquentes
 

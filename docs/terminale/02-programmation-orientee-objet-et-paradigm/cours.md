@@ -10,6 +10,14 @@
 | **Prérequis** | fonctions et paramètres, variables, listes, dictionnaires, chaînes de caractères. |
 | **Objectifs** | *savoir écrire* une classe (attributs, méthodes, constructeur) et *savoir l’utiliser* (créer des instances, appeler des méthodes) ; *distinguer* les paradigmes impératif, objet et fonctionnel. |
 
+!!! situation "Situation de départ"
+
+    1.  Dans un jeu vidéo, des centaines de personnages ont chacun un nom et des points de vie, et savent tous attaquer ou se soigner. Comment les programmer sans recopier cent fois le même code ?
+
+    2.  Pourquoi une application bancaire ne laisse-t-elle pas n’importe quelle partie du programme écrire directement un nouveau solde ?
+
+    3.  Écrire une suite d’instructions exécutées l’une après l’autre : est-ce la seule façon de programmer ?
+
 ## Programmer autrement : la notion de paradigme
 
 Depuis la classe de Première, vous programmez d’une seule manière : vous écrivez une **suite d’instructions** qui manipulent des variables, l’une après l’autre. C’est ce qu’on appelle un *style* de programmation, ou plus savamment un **paradigme**.
@@ -80,7 +88,7 @@ Les effets de bord rendent les programmes difficiles à prévoir et à relire : 
         return tab + [element]      # cree une nouvelle liste, tab intact
     ```
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif)"
 
     Certains langages sont conçus pour *favoriser* ce style (Haskell, Lisp, OCaml, Scheme ; Haskell va jusqu’à l’imposer), mais on peut programmer « fonctionnel » dans un langage généraliste comme Python. Le paradigme fonctionnel s’appuie aussi beaucoup sur des données **immuables** (tuples plutôt que listes) et sur des fonctions qui en prennent d’autres en paramètre (*ex.* une fonction qui applique une autre fonction à chaque élément d’une liste).
 
@@ -150,7 +158,9 @@ On ne décrit pas chaque objet un par un : on écrit un **plan** commun à tous 
 
     Une **classe** est le modèle (le « plan ») qui décrit les attributs et les méthodes communs à toute une famille d’objets. Un objet construit à partir d’une classe est appelé une **instance** de cette classe.
 
-![](../figures/1548396ae94f419a.svg){ .tikz loading=lazy }
+<span class="retouract">↺ Retour sur l'activité.</span> Les deux colonnes des fiches, « ce qu’il sait » et « ce qu’il sait faire », étaient les attributs et les méthodes ; la fiche « modèle » commune à toutes les lampes était une classe, et la lampe bleue de Léa et la lampe rouge de Tom en sont deux instances : mêmes attributs, valeurs différentes.
+
+![](../figures/0f5ec3c89eafed6c.svg){ .tikz loading=lazy }
 
 !!! remarque "Remarque"
 
@@ -229,6 +239,8 @@ Ici, tous les personnages naissent avec 20 points de vie. Pour que chaque instan
 
         Le programme affiche `Bilbo 15`. Au moment de `Personnage("Bilbo", 15)`, la valeur `"Bilbo"` est reçue par le paramètre `nom` et `15` par `nb_vies`. Attention : `nom` et `nb_vies` sont de simples *paramètres* (ils ne commencent pas par `self`) ; ce sont les lignes `self.nom = …` qui créent les *attributs*.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Les informations à donner « à l’usine » (la couleur, la puissance de l’ampoule) sont les paramètres du constructeur ; l’état « éteinte » de toute lampe neuve est un attribut fixé dans `__init__` sans paramètre, comme `self.vie = 20` plus haut.
+
 <span id="cours-02-7" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[7](exercices.md#ex-02-7) et [8](exercices.md#ex-02-8)** (créer une instance, compléter un constructeur)
@@ -264,7 +276,7 @@ Distinguons deux rôles très courants : une méthode qui **renvoie** une inform
 
         Le programme affiche `11 True`. `perd_vie(4)` **modifie** l’état : `bilbo.vie` passe de 15 à 11. `est_vivant()` ne modifie rien, elle **renvoie** une information : `11 > 0`, donc `True`.
 
-!!! remarque "Remarque — Fonction ou méthode ?"
+!!! encadre "À retenir — fonction ou méthode ?"
 
     Une **fonction** s’appelle seule : `len(bilbo_liste)`. Une **méthode** s’appelle « sur » un objet, après un point : `bilbo_liste.append(3)`. L’objet placé à gauche du point est passé, en coulisses, comme `self`.
 
@@ -304,6 +316,8 @@ Techniquement, rien n’empêche d’écrire directement `bilbo.vie = -999` depu
 
     L’**encapsulation** consiste à *cacher* l’état interne d’un objet et à ne le laisser manipuler qu’à travers ses méthodes. L’utilisateur de la classe se sert des méthodes (les « boutons ») sans toucher directement aux attributs.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Le camarade qui écrivait directement « solde : $-50$ » sur la fiche de la carte de cantine court-circuitait l’objet ; n’autoriser que les actions « recharger » et « payer », qui vérifient l’opération, c’est l’encapsulation.
+
 !!! remarque "Remarque"
 
     C’est l’esprit du paradigme fonctionnel (vu en début de chapitre) transposé aux objets : là, on protégeait le programme des **effets de bord** ; ici, on protège l’**état d’un objet** des modifications sauvages. Deux façons de garder la maîtrise de ses données.
@@ -339,7 +353,7 @@ print(compte.solde())                   # affiche 120
 
     En Python, on **préfixe d’un tiret bas** (`_solde`) un attribut qui n’est pas censé être utilisé de l’extérieur. C’est une **convention** entre programmeurs : Python ne l’interdit pas techniquement, mais tout le monde comprend « ceci est interne, manipule-le par les méthodes ». Une méthode qui *lit* un attribut s’appelle un **accesseur** (ici `solde`) ; une méthode qui le *modifie*, un **mutateur**.
 
-!!! remarque "Remarque"
+!!! encadre "Au bac — passer par les méthodes"
 
     On retrouve cette pratique dans les sujets de bac : la classe fournit des méthodes `get_…` (accesseurs) et `set_…` (mutateurs), et l’énoncé demande explicitement de « ne pas accéder directement aux attributs » depuis une autre classe (*ex.* Asie 2024, jour 1 : la méthode `couvre` d’une antenne doit passer par `get_pos_maison()`).
 
@@ -419,7 +433,7 @@ Illisible ! Par défaut, un objet ne sait pas se décrire. On corrige cela en d�
 
     **Règle d’or :** si `__str__` n’existe pas, `print()` se rabat sur `__repr__`. Définir le seul `__repr__` suffit donc à obtenir un affichage propre *partout* — dans la console *comme* avec `print`. L’inverse est faux : `__str__` seule ne change rien quand on tape le nom dans la console. Pour simplement « voir » un objet, `__repr__` est donc le réflexe le plus direct.
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif)"
 
     `__init__`, `__repr__` et `__str__` font partie des méthodes dites *spéciales* (entourées de doubles tirets bas). Il en existe d’autres, hors programme, qui permettent par exemple d’utiliser `+` ou `==` sur vos propres objets. De même, l’**héritage** (créer une classe à partir d’une autre) et le **polymorphisme** sont *explicitement hors du programme* de Terminale : nous nous arrêtons ici.
 
@@ -494,7 +508,7 @@ fact(N, F) :- N > 0, M is N - 1, fact(M, G), F is N * G.
 
 On interroge alors : `?- fact(4, X).` et Prolog trouve `X = 24`.
 
-!!! remarque "Remarque — Au-delà des paradigmes : deux autres façons dont les langages diffèrent"
+!!! curieux "Pour les curieux (facultatif) — Au-delà des paradigmes : deux autres façons dont les langages diffèrent"
 
     En plus du paradigme qu’ils encouragent, les langages se distinguent notamment par :
 
@@ -504,7 +518,7 @@ On interroge alors : `?- fact(4, X).` et Prolog trouve `X = 24`.
 
     Aucun de ces choix n’est « meilleur » : ce sont des compromis entre rapidité, sûreté et souplesse. *(Cette diversité est étudiée en détail dès la Première.)*
 
-!!! remarque "Remarque — Un peu d’histoire"
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
 
     Les idées du paradigme objet naissent en **1967** avec le langage **Simula**, conçu en Norvège par **Ole-Johan Dahl** et **Kristen Nygaard** pour *simuler* des systèmes réels (files d’attente, navires) : d’où les objets. Le terme « orienté objet » est popularisé dans les années 1970 par **Alan Kay** avec **Smalltalk**. Dahl, Nygaard et Kay ont chacun reçu le prix Turing. Le paradigme fonctionnel, lui, plonge ses racines dans le **$\lambda$-calcul** d’**Alonzo Church** (1936), un modèle de calcul purement mathématique, concrétisé dès 1958 par le langage **Lisp** de John McCarthy.
 
@@ -512,19 +526,17 @@ On interroge alors : `?- fact(4, X).` et Prolog trouve `X = 24`.
 
 <span class="afaire">▶ Exercices d'application :</span> exercice **[15](exercices.md#ex-02-15)** (choisir le bon paradigme)
 
-## Ouverture : la POO, partout au programme
+## Ouverture et liens avec les autres chapitres
 
-La programmation objet n’est pas une curiosité isolée : elle sert à **implémenter les structures de données** de toute la fin de l’année.
+La programmation objet n’est pas une curiosité isolée : elle servira à **implémenter les structures de données** de toute la fin de l’année.
 
-- **Structures linéaires.** Une *pile*, une *file*, une *liste chaînée* s’écrivent naturellement comme des classes offrant des méthodes (`empiler`, `depiler`…), l’implémentation restant cachée.
+- **Ce qu’il réutilise** : les fonctions de 1<sup>re</sup> et la **récursivité** du chapitre 1 (la factorielle en OCaml, de style fonctionnel, est une définition récursive).
 
-- **Arbres et graphes.** Le BO le dit explicitement : « l’exemple des arbres permet d’illustrer la programmation par classe » (une classe `Noeud` avec un sous-arbre gauche et droit).
+- **Structures de données.** `Pile`, `File` et la `Cellule` d’une liste chaînée (chapitre 3) s’écriront comme des classes offrant des méthodes, l’implémentation restant cachée ; de même le `Noeud` d’un **arbre** (chapitre 5 ; le BO le dit : « l’exemple des arbres permet d’illustrer la programmation par classe ») et les **graphes** (chapitre 8).
 
 - **Au bac**, on vous demandera surtout de **lire** une classe donnée, d’en **lister les attributs** et leur type, de **compléter** ou **écrire** une méthode, de **créer des instances**, et de **respecter l’encapsulation**.
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
-
-    Les classes serviront à écrire les **structures de données** des chapitres suivants : `Pile`, `File` et la `Cellule` d’une liste chaînée (chapitre « structures linéaires »), le `Noeud` d’un **arbre**, le `Graphe`. La définition de `fact` en OCaml rappelle que le style **fonctionnel** s’appuie sur la **récursivité**. Enfin, une table de **base de données** ressemble à une collection d’objets (chaque colonne est un **attribut**) ; SQL, lui, est **déclaratif** : comme en Prolog, on décrit le résultat voulu plutôt que la façon de l’obtenir.
+- **Ouverture.** Une table de **base de données** (chapitre 6) ressemblera à une collection d’objets, chaque colonne jouant le rôle d’un attribut ; SQL sera **déclaratif** : comme en Prolog, on y décrira le résultat voulu plutôt que la façon de l’obtenir.
 
 ## Bilan — la carte mémoire
 
@@ -539,6 +551,14 @@ La programmation objet n’est pas une curiosité isolée : elle sert à **impl�
 | Encapsulation | cacher l’état, n’y toucher que par des méthodes (`_attribut`) |
 | Paradigmes | impératif / objet / fonctionnel : styles au choix, combinables |
 | Fonction pure | résultat dépendant des seuls paramètres, sans effet de bord |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  On écrit une seule **classe** `Personnage`, le plan : chaque personnage en est une **instance**, avec ses propres **attributs** (`nom`, `vie`) mis en place par `__init__`, et des **méthodes** communes à toutes (§ III à V).
+
+    2.  Par **encapsulation** : l’attribut `_solde` n’est modifié que par des méthodes (`deposer`, `retirer`) qui contrôlent l’opération et peuvent lever une erreur avec `raise` (§ VI).
+
+    3.  Non : ce style est le paradigme **impératif** ; il existe aussi les paradigmes **fonctionnel** (fonctions pures, sans effet de bord) et **objet**, que l’on choisit, et que l’on mélange, selon le problème (§ I, II et VIII).
 
 ## Erreurs fréquentes
 

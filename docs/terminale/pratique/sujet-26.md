@@ -1,10 +1,14 @@
 # Sujet 26 — Sortir d'un labyrinthe
 
+<span id="sujet-26" class="ancre"></span>[$\blacktriangleright$ corrigé](#csujet-26)
+
 !!! fichiers "Fichiers à télécharger"
 
     [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-26-labyrinthe){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-26-labyrinthe.zip){ .md-button }
 
 ??? corrige "Corrigé"
+
+    <span id="csujet-26" class="ancre"></span>[$\uparrow$ énoncé](#sujet-26)
 
     !!! remarque "Remarque"
 
@@ -170,6 +174,8 @@ Le dossier fourni au candidat comporte les éléments suivants :
 - deux labyrinthes au format texte : `petit.txt` et `labyrinthe.txt`.
 
 ??? corrige "Corrigé"
+
+    <span id="csujet-26" class="ancre"></span>[$\uparrow$ énoncé](#sujet-26)
 
     !!! remarque "Remarque"
 

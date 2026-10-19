@@ -1,10 +1,14 @@
 # Sujet 30 — Messages secrets
 
+<span id="sujet-30" class="ancre"></span>[$\blacktriangleright$ corrigé](#csujet-30)
+
 !!! fichiers "Fichiers à télécharger"
 
     [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-30-messages-secrets){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-30-messages-secrets.zip){ .md-button }
 
 ??? corrige "Corrigé"
+
+    <span id="csujet-30" class="ancre"></span>[$\uparrow$ énoncé](#sujet-30)
 
     !!! remarque "Remarque"
 
@@ -160,6 +164,8 @@ Le dossier fourni au candidat comporte les éléments suivants :
 - un fichier de données `message_secret.txt`.
 
 ??? corrige "Corrigé"
+
+    <span id="csujet-30" class="ancre"></span>[$\uparrow$ énoncé](#sujet-30)
 
     !!! remarque "Remarque"
 

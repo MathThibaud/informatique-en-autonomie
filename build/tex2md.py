@@ -54,9 +54,16 @@ BOXES = {
     'testetoi': ('testetoi', 'Se tester', False),
     'autopositionnement': ('autopos', 'Savoir-faire : je me positionne', False),
     'tcolorbox': ('encadre', None, False),
+    # ajoutés au livre le 18-10-2026 (audit pédagogique)
+    'curieux': ('curieux', 'Pour les curieux (facultatif)', False),
+    'etavant': ('etavant', 'Et avant ? (chapitres précédents)', False),
+    'situationdepart': ('situation', 'Situation de départ', False),
+    'retoursituation': ('situation', 'Retour à la situation de départ', False),
 }
 BOX_ARGS = {'encadre': 'm', 'activite': 'm', 'etudedoc': 'm', 'projet': 'm', 'flash': 'm',
-            'navigateur': 'o', 'tcolorbox': 'o'}
+            'navigateur': 'o', 'tcolorbox': 'o', 'curieux': 'o'}
+# encadrés dont le contenu est une suite de \item (liste numérotée ouverte et fermée ici)
+LISTE_BOXES = {'testetoi', 'etavant', 'situationdepart', 'retoursituation'}
 THEOREMS = {'defi', 'regle', 'propr', 'prop', 'thm', 'remarque', 'rem', 'exemple', 'ex',
             'demonstration', 'demo'}
 
@@ -497,7 +504,7 @@ class Converter:
         s = self.extract_figures(s, localdefs, graphic, store)
         # environnements locaux (newenvironment) simples : remplacés par leur définition
         for name, (n, d, b, e) in envs.items():
-            if name in BOXES or name in ('flash', 'testetoi', 'autopositionnement', 'resultat'):
+            if name in BOXES or name in ('flash', 'testetoi', 'etavant', 'autopositionnement', 'resultat'):
                 continue
             s = re.sub(r'\\begin\{%s\}' % re.escape(name), lambda m, b=b: b, s)
             s = re.sub(r'\\end\{%s\}' % re.escape(name), lambda m, e=e: e, s)
@@ -629,6 +636,26 @@ class Converter:
         s = sub_macro(s, 'creditimage', 5, 0, lambda o, a, st:
                       '\n\n' + I('<span class="credit">') + '\\emph{%s} --- %s, %s, \\url{%s}' %
                       (a[1], a[2], a[3], a[4]) + I('</span>') + '\n\n')
+        # --- repères ajoutés au livre le 18-10-2026 (audit pédagogique)
+        for nm in ('avantexercice', 'apresdefinitionslocales', 'restoregeometry'):
+            s = sub_macro(s, nm, 0, 0, lambda o, a, st: '')
+        for nm in ('fichedechapitre', 'reponsessetester', 'input', 'newgeometry'):
+            s = sub_macro(s, nm, 1, 0, lambda o, a, st: '')     # réponses déjà dépliables sous chaque question
+        s = sub_macro(s, 'duree', 1, 0, lambda o, a, st:
+                      ' ' + I('<span class="duree">≈ %s min</span>' % a[0].strip()))
+        s = sub_macro(s, 'essentiel', 0, 0, lambda o, a, st: ' ' + I('<span class="essentiel">• essentiel</span>'))
+        s = sub_macro(s, 'erreurfrequente', 1, 0, lambda o, a, st:
+                      '\n\n' + I('<span class="erreurfreq">▷ Erreur fréquente.</span>') + ' ' + a[0] + '\n\n')
+        s = sub_macro(s, 'retouractivite', 1, 0, lambda o, a, st:
+                      '\n\n' + I('<span class="retouract">↺ Retour sur l\'activité.</span>') + ' ' + a[0] + '\n\n')
+        s = sub_macro(s, 'renvoipage', 2, 0, lambda o, a, st: self.link(a[0].strip(), a[1]))
+        s = sub_macro(s, 'fichesprerequis', 1, 0, lambda o, a, st:
+                      ' (→ fiches de révision : %s)' % ', '.join(
+                          'ch. %d' % int(x) for x in a[0].split(',') if x.strip().isdigit()))
+        s = sub_macro(s, 'S', 0, 0, lambda o, a, st: '§')
+        # \oe (comme toute commande-mot) avale l'espace qui la suit : « c\oe ur » -> « cœur »
+        s = re.sub(r'\\(oe|OE)(?![a-zA-Z@])(?:\{\}| +)?', lambda m: 'œ' if m.group(1) == 'oe' else 'Œ', s)
+        s = sub_macro(s, 'textbullet', 0, 0, lambda o, a, st: '•')
         # --- coups de pouce (dépliables)
         s = sub_macro(s, 'coupdepouce', 1, 1, lambda o, a, st:
                       self.adm_begin('pouce', 'Coup de pouce' if (o[0] or '1').strip() == '1'
@@ -788,7 +815,7 @@ class Converter:
                 else:
                     title = label or ''
                 extra = ''
-                if name == 'testetoi':
+                if name in LISTE_BOXES:
                     extra = '\\begin{enumerate}'
                 if name == 'autopositionnement':
                     extra = '\\begin{itemize}'
@@ -812,7 +839,7 @@ class Converter:
             out.append(cur[pos:])
             cur = ''.join(out)
             extra = ''
-            if name == 'testetoi':
+            if name in LISTE_BOXES:
                 extra = '\\end{enumerate}'
             if name == 'autopositionnement':
                 extra = '\\end{itemize}'
@@ -1168,4 +1195,6 @@ HANDLED = {'ancre', 'exref', 'coursretour', 'corrref', 'enoncref', 'titrecours',
            'iadefaut', 'coupdepouce', 'afaire', 'horsprog', 'labelP', 'pts', 'correction',
            'fichierseleves', 'enteteactivite', 'edsection', 'edsubsection', 'qrcode',
            'legendeniveaux', 'ialegendecourte', 'ialegende', 'renvoicharte', 'testq',
-           'autoposcases', 'afficherCoupsDePouce', 'arraystretch', 'aocurl_'}
+           'autoposcases', 'afficherCoupsDePouce', 'arraystretch', 'aocurl_',
+           'avantexercice', 'apresdefinitionslocales', 'fichedechapitre', 'reponsessetester',
+           'duree', 'essentiel', 'erreurfrequente', 'retouractivite', 'renvoipage', 'fichesprerequis'}

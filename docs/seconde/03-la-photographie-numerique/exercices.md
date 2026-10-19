@@ -16,6 +16,8 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Vrai ou faux <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-1 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  Répondre par **vrai** ou **faux**, et corriger les phrases fausses.
 
 1.  Un photosite mesure une couleur et la transforme directement en trois nombres.
@@ -26,7 +28,49 @@
 
 4.  Plus un photosite reçoit de lumière, plus le nombre qu’il produit est grand.
 
+??? pouce "Coup de pouce"
+
+    Relisez la partie du cours sur le capteur et le schéma du filtre de Bayer : que mesure un photosite à lui seul ? Comptez les filtres de chaque couleur dans un groupe de quatre.
+
 ??? corrige "Corrigé"
+
+    *Réponses aux questions fermées ; pour les questions ouvertes, des pistes attendues (d’autres formulations sont possibles).*
+
+    Activité 1 — Expliquer le capteur
+
+    Production personnelle. Éléments attendus : le capteur est un quadrillage de millions de **photosites** ; chacun reçoit de la **lumière** à travers un petit filtre rouge, vert ou bleu (le **filtre de Bayer**, avec deux fois plus de filtres verts) et la transforme en un **nombre**, d’autant plus grand que la lumière est intense ; l’appareil combine ensuite les mesures voisines pour obtenir les trois valeurs R, V, B de chaque pixel.
+
+    Activité 2 — Jouer avec les couleurs
+
+    1.  $256 \times 256 \times 256 = 256^3 = \mathbf{16\,777\,216}$ couleurs (environ $16{,}8$ millions).
+
+    2.  Noir $(0,0,0)$ ; blanc $(255,255,255)$ ; jaune $(255,255,0)$ ; violet $(255,0,255)$.
+
+    3.  $(125,125,125)$ : un **gris moyen** (trois canaux égaux) ; $(30,30,30)$ : un **gris très foncé**, presque noir.
+
+    Activité 3 — Calculer sur les images
+
+    1.  $20$ cm $= 20 \div 2{,}54 \approx 7{,}87$ pouces, et $1200 \div 7{,}87 \approx \mathbf{152}$ **ppp** (même résultat en hauteur : $15$ cm $\approx 5{,}91$ pouces et $900 \div 5{,}91 \approx 152$).
+
+    2.  $15$ cm $\approx 5{,}91$ pouces, soit $5{,}91 \times 300 \approx 1772$ pixels ; $10$ cm $\approx 3{,}94$ pouces, soit $3{,}94 \times 300 \approx 1181$ pixels. Il faut une définition d’au moins $\mathbf{1772 \times 1181}$ environ (de l’ordre de $2$ mégapixels).
+
+    3.  $4000 \times 3000 \times 3 = 36\,000\,000$ octets, soit $\mathbf{36}$ **Mo**.
+
+    Activité 4 — Ses premières retouches
+
+    1.  On remplace les coordonnées dans la ligne de lecture : `r, v, b = img.getpixel((250, 300))`.
+
+    2.  Chaque pixel prend pour rouge son ancien vert, pour vert son ancien bleu et pour bleu son ancien rouge : les couleurs sont **permutées** (ce qui était bleu devient vert, le rouge devient bleu, le vert devient rouge).
+
+    3.  Négatif : dans le programme à deux boucles du cours, on remplace la ligne `putpixel` par `img.putpixel((x, y), (255 - r, 255 - v, 255 - b))` (l’exercice « Le négatif » applique la même ligne à la moitié gauche de l’image seulement).
+
+    4.  Niveaux de gris : dans les deux boucles, on calcule `gris = (r + v + b) // 3`, puis on écrit le pixel `(gris, gris, gris)` (l’exercice « Niveaux de gris » utilise une autre formule, qui tient compte de la sensibilité de l’œil).
+
+    Activité 5 — Enquêter sur une photo
+
+    1.  Les valeurs dépendent de la photo fournie : la date se lit sur la ligne `DateTime`, le fabricant sur la ligne `Make` (et le modèle sur `Model`), la définition sur la ligne `definition` affichée en premier (largeur, hauteur).
+
+    2.  Les coordonnées GPS permettent de situer la prise de vue sur une carte : en publiant la photo, on peut révéler sans le vouloir son **domicile**, son école ou ses habitudes (et, avec la date, *quand* on y était).
 
     **a. Faux.** Un photosite ne mesure qu’**une seule** composante (une quantité de lumière derrière *un* filtre rouge, vert *ou* bleu) ; les trois nombres RVB d’un pixel sont **reconstitués** ensuite à partir des photosites voisins (dématriçage).  
     **b. Faux.** Dans le filtre de **Bayer**, il y a **deux fois plus de filtres verts** que de rouges ou de bleus (l’œil humain est plus sensible au vert).  
@@ -35,19 +79,31 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Expliquer à un camarade <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-2 }
 
-<span class="tag">sur papier</span>  En trois ou quatre lignes, expliquer comment un capteur fabrique une image. Employer les mots : *photosite*, *lumière*, *nombre*, *filtre de Bayer*.
+<span class="tag">sur papier</span>  Un camarade photographie une affiche entièrement **rouge**. En trois ou quatre lignes, lui expliquer ce que mesurent les photosites placés derrière un filtre rouge, puis ceux placés derrière un filtre vert ou bleu, et quels nombres ils produisent. Employer les mots : *photosite*, *lumière*, *nombre*, *filtre de Bayer*.
+
+??? pouce "Coup de pouce"
+
+    Suivez le trajet de la lumière rouge : quels petits filtres la laissent passer jusqu’au photosite, et lesquels l’arrêtent ? Relisez ensuite la définition du photosite : quel lien entre la quantité de lumière reçue et le nombre produit ?
 
 ??? corrige "Corrigé"
 
-    *Exemple.* Le capteur est quadrillé de millions de **photosites**. Chaque photosite reçoit de la **lumière** à travers un petit **filtre de couleur** (rouge, vert ou bleu, disposés selon le **filtre de Bayer**) et la transforme en un **nombre** d’autant plus grand que la lumière est intense. L’appareil combine ensuite ces mesures voisines pour reconstituer, en chaque **pixel**, ses trois valeurs R, V et B.
+    *Exemple.* Devant les **photosites**, le **filtre de Bayer** place de petits filtres rouges, verts ou bleus. L’affiche renvoie de la **lumière** rouge : elle traverse les filtres rouges, donc les photosites placés derrière en reçoivent beaucoup et produisent un **grand nombre**. Les filtres verts et bleus arrêtent cette lumière rouge : leurs photosites n’en reçoivent presque pas et produisent un **nombre proche de zéro**. L’appareil en déduit que chaque pixel est rouge, avec un code proche de $(255, 0, 0)$.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Croire qu’un photosite « voit » les couleurs : il ne mesure qu’une quantité de lumière, celle que laisse passer *son* petit filtre. C’est la couleur de ce filtre, connue d’avance, qui permet ensuite à l’appareil de savoir à quelle couleur correspond chaque nombre.
 
 ### Le pixel et le codage RVB
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Nommer la couleur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-3 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span>  Donner la couleur obtenue par chacun des codes RVB suivants :
 
 $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
+
+??? pouce "Coup de pouce"
+
+    Pour chaque code, repérez les canaux « allumés » (proches de $255$) et les canaux « éteints » ($0$), puis aidez-vous du schéma de la synthèse additive du cours.
 
 ??? corrige "Corrigé"
 
@@ -55,15 +111,21 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Coder une couleur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-4 }
 
-<span class="tag">sur papier</span>  Donner un code RVB plausible pour : du **noir**, du **blanc**, un **gris moyen**, du **jaune** (rouge + vert), du **violet** (rouge + bleu), un **rouge très sombre**.
+<span class="tag">sur papier</span>  Donner un code RVB plausible pour : un **gris clair**, du **cyan** (vert + bleu), un **bleu très sombre**, un **vert moyen** (le vert seul, à moitié de sa force), de l’**orange** (beaucoup de rouge, un peu moins de vert), un **rose pâle** (du rouge éclairci par du blanc).
+
+??? pouce "Coup de pouce"
+
+    Partez des couleurs de l’exemple du cours et du schéma de la synthèse additive. Pour un gris, que doivent avoir en commun les trois nombres ? Pour une couleur sombre, les nombres sont-ils petits ou grands ? Pour éclaircir une couleur, on lui « ajoute du blanc » : que deviennent les canaux qui valaient $0$ ?
 
 ??? corrige "Corrigé"
 
-    *Exemples plausibles.* Noir $(0,0,0)$ ; blanc $(255,255,255)$ ; gris moyen $(128,128,128)$ ; jaune $(255,255,0)$ ; violet $(200,0,200)$ (rouge $+$ bleu) ; rouge très sombre $(80,0,0)$.
+    *Exemples plausibles.* Gris clair $(200,200,200)$ (trois canaux égaux et assez grands) ; cyan $(0,255,255)$ (vert $+$ bleu) ; bleu très sombre $(0,0,60)$ ; vert moyen $(0,128,0)$ ; orange $(255,140,0)$ ; rose pâle $(255,200,200)$ : le rouge reste au maximum, et le vert et le bleu, égaux, sont montés pour « blanchir » la couleur (avec $255$ partout, on obtiendrait du blanc).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Combien de couleurs ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-5 }
 
-<span class="tag">sur papier</span>  Chaque canal (R, V, B) prend une valeur entière de $0$ à $255$, soit $256$ possibilités.
+<span class="essentiel">• essentiel</span>
+
+<span class="tag">sur papier</span>  Un ancien format d’image codait chaque canal (R, V, B) par une valeur entière de $0$ à $15$ seulement, soit $16$ possibilités.
 
 1.  Combien de couleurs différentes peut-on coder en tout ? Donner le calcul.
 
@@ -75,11 +137,16 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
 
 ??? corrige "Corrigé"
 
-    **1.** Chaque canal a $256$ valeurs, et il y a trois canaux indépendants : $$256 \times 256 \times 256 = 256^3 = \mathbf{16\,777\,216} \text{ couleurs} \quad (\approx 16{,}7 \text{ millions}).$$ **2.** Un gris a ses trois canaux **égaux** : il y a donc autant de gris que de valeurs communes possibles, soit **256** nuances (du noir au blanc).
+    **1.** Chaque canal a $16$ valeurs, et il y a trois canaux indépendants : $$16 \times 16 \times 16 = 16^3 = \mathbf{4\,096} \text{ couleurs},$$ bien moins que les $256^3 = 16\,777\,216$ couleurs du codage de $0$ à $255$ (activité 2 du cours) : $4\,096$ fois moins.  
+    **2.** Un gris a ses trois canaux **égaux** : il y a donc autant de gris que de valeurs communes possibles, soit **16** nuances (du noir au blanc).
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Additionner au lieu de multiplier : $16 + 16 + 16 = 48$. Or chaque valeur du rouge peut s’associer à *chacune* des $16$ valeurs du vert, et chaque couple à chacune des $16$ valeurs du bleu : les possibilités se multiplient.
 
 ### Définition, résolution et poids
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Compter les pixels <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-6 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="tag">sur papier</span>  Une image a pour définition $1920 \times 1080$.
 
@@ -116,7 +183,11 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
     **2.** $1\,920\,000 \div 480\,000 = \mathbf{4}$ : B contient **quatre fois** plus de pixels, et non deux. La largeur *et* la hauteur ont doublé : $2 \times 2 = 4$.  
     **3.** Poids brut de B $= 1\,920\,000 \times 3 = 5\,760\,000$ octets $\approx \mathbf{5{,}8}$ **Mo** (quatre fois le poids brut de A, $1{,}44$ Mo).
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Répondre « deux fois plus de pixels » parce que la définition « double » : la largeur double *et* la hauteur double, donc le nombre de pixels est multiplié par $2 \times 2 = 4$.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Résolution d’une impression <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-8 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="tag">sur papier</span>  On imprime une photo de définition $1500 \times 1000$ sur du papier de $12{,}7 \times 8{,}47$ cm.
 
@@ -133,7 +204,11 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
     **1.** $12{,}7~\text{cm} \div 2{,}54 = \mathbf{5}$ **pouces**.  
     **2.** Résolution $= \dfrac{1500 \text{ pixels}}{5 \text{ pouces}} = \mathbf{300}$ **ppp**. C’est exactement la valeur visée pour une « belle » impression : **le résultat convient**. *(En hauteur : $8{,}47~\text{cm} \approx 3{,}33$ pouces, et $1000 / 3{,}33 \approx 300$ ppp également.)*
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Diviser les pixels par la largeur en *centimètres* : $1500 \div 12{,}7 \approx 118$. On obtient des pixels par centimètre, pas des pixels par pouce ; il faut d’abord convertir en pouces.
+
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 9</span> — Imprimer en grand <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-9 }
+
+<span class="duree">≈ 15 min</span>
 
 <span class="tag">sur papier</span>  Un appareil photo donne des images de $4000 \times 3000$ pixels.
 
@@ -216,26 +291,32 @@ img.show()
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Le négatif <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-13 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui transforme `terre.jpg` en son **négatif** : chaque canal $c$ est remplacé par $255-c$. Tester, puis afficher le résultat.
+<span class="essentiel">• essentiel</span>
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui transforme en **négatif** (chaque canal $c$ est remplacé par $255-c$) seulement la **moitié gauche** de `terre.jpg` ; la moitié droite reste intacte. Tester, puis afficher le résultat.
 
 ??? pouce "Coup de pouce"
 
-    Reprenez le programme à deux boucles du cours (celui qui décale les canaux) : seule la ligne `putpixel` change.
+    Reprenez le programme à deux boucles du cours (celui qui décale les canaux). Deux changements : la ligne `putpixel`, et les valeurs que prend `x` (jusqu’où aller pour rester dans la moitié gauche ?).
 
 ??? corrige "Corrigé"
 
-    On remplace chaque canal $c$ par $255 - c$.
+    On remplace chaque canal $c$ par $255 - c$, mais seulement pour les colonnes de la moitié gauche : `x` ne prend que les valeurs de $0$ à `largeur // 2 - 1`.
 
     ```python
     from PIL import Image
     img = Image.open("terre.jpg").convert("RGB")
     largeur, hauteur = img.size
     for y in range(hauteur):
-        for x in range(largeur):
+        for x in range(largeur // 2):     # moitie gauche seulement
             r, v, b = img.getpixel((x, y))
             img.putpixel((x, y), (255 - r, 255 - v, 255 - b))
     img.show()
     ```
+
+    *Autre solution : garder `range(largeur)` et ne modifier le pixel que `if x < largeur // 2:`. Sur `terre.jpg` ($500 \times 500$), l’espace noir devient blanc à gauche et reste noir à droite : par exemple, le pixel $(10, 250)$, qui valait $(3, 1, 4)$, devient $(252, 254, 251)$.*
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `range(largeur / 2)` : la division `/` donne un nombre à virgule (`250.0`), que `range` refuse (`TypeError`). Il faut la division entière `//`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Éclaircir l’image <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-14 }
 
@@ -264,7 +345,9 @@ img.show()
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 15</span> — Niveaux de gris <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-15 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui rend l’image **grise** : remplacer R, V et B par leur moyenne $m = (r+v+b)\ //\ 3$. Vérifier qu’une image grise a bien ses trois canaux égaux.
+<span class="duree">≈ 15 min</span>
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Notre œil est plus sensible au vert (c’est pourquoi le filtre de Bayer compte deux fois plus de filtres verts). Écrire un programme qui rend l’image **grise** en en tenant compte : remplacer R, V et B par $m = (3r + 6v + b)\ //\ 10$. Vérifier qu’une image grise a bien ses trois canaux égaux. Calculer enfin à la main $m$ pour le pixel $(100, 200, 50)$, et le comparer à la simple moyenne $(r+v+b)\ //\ 3$ vue dans le cours.
 
 ??? pouce "Coup de pouce"
 
@@ -274,12 +357,12 @@ img.show()
 
     Dans les deux boucles :  
     `r, v, b = img.getpixel((x, y))`  
-    `m = (r + v + b) // 3`  
+    `m = (3 * r + 6 * v + b) // 10`  
     (il reste à écrire le pixel gris avec `putpixel`.)
 
 ??? corrige "Corrigé"
 
-    On remplace R, V, B par leur moyenne $m$ ; les trois canaux deviennent égaux, donc le pixel est gris.
+    On remplace R, V, B par la valeur $m$ ; les trois canaux deviennent égaux, donc le pixel est gris.
 
     ```python
     from PIL import Image
@@ -288,14 +371,18 @@ img.show()
     for y in range(hauteur):
         for x in range(largeur):
             r, v, b = img.getpixel((x, y))
-            m = (r + v + b) // 3
+            m = (3 * r + 6 * v + b) // 10
             img.putpixel((x, y), (m, m, m))
     img.show()
     ```
 
-    *Vérification : après ce traitement, tout pixel vaut $(m, m, m)$ — ses trois canaux sont bien **égaux**, ce qui caractérise un gris.*
+    *Vérification : après ce traitement, tout pixel vaut $(m, m, m)$ — ses trois canaux sont bien **égaux**, ce qui caractérise un gris.* Pour le pixel $(100, 200, 50)$ : $m = (300 + 1200 + 50) // 10 = 1550 // 10 = \mathbf{155}$, alors que la simple moyenne donne $350 // 3 = \mathbf{116}$. Ce pixel, surtout vert, paraît clair à l’œil : la formule pondérée le rend plus fidèlement. Les coefficients $3 + 6 + 1$ font $10$ : un pixel déjà gris $(g, g, g)$ garde la valeur $g$.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Oublier les parenthèses : `m = 3 * r + 6 * v + b // 10` ne divise que `b` par $10$ (la division passe avant l’addition). Un test sur un pixel connu, par exemple $(90, 90, 90)$, montre l’erreur : on trouve $819$ au lieu de $90$, une valeur impossible pour un canal, qui ne dépasse jamais $255$.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 16</span> — Le miroir <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-16 }
+
+<span class="duree">≈ 20 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui retourne `terre.jpg` comme dans un **miroir** : la colonne de gauche passe à droite, et inversement. On ne crée pas de nouvelle image : on **échange** les pixels deux à deux.
 
@@ -333,6 +420,8 @@ img.show()
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 17</span> — Les données cachées <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-17 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="tag">sur papier</span> 
 
 1.  Qu’appelle-t-on les **métadonnées EXIF** d’une photo ? Citer trois informations qu’elles peuvent contenir.
@@ -340,6 +429,10 @@ img.show()
 2.  En quoi la présence de coordonnées **GPS** dans une photo publiée peut-elle poser un problème de vie privée ?
 
 3.  Proposer une précaution simple avant de partager une photo prise au smartphone.
+
+??? pouce "Coup de pouce"
+
+    Relisez dans le cours la définition des métadonnées EXIF, le tableau d’exemple et la règle qui le suit.
 
 ??? corrige "Corrigé"
 
@@ -350,6 +443,10 @@ img.show()
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 18</span> — Une photo est-elle une preuve ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-18 }
 
 <span class="tag">sur papier</span>  « Puisque c’est une photo, c’est forcément vrai. » Discuter cette affirmation en une ou deux phrases (on pourra parler de retouche, de filtres et d’images générées par IA).
+
+??? pouce "Coup de pouce"
+
+    Pensez à tout ce qui peut modifier une image entre la prise de vue et sa publication, et à la partie du cours sur les images *calculées* par les smartphones.
 
 ??? corrige "Corrigé"
 

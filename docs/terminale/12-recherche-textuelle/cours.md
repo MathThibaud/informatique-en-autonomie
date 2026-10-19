@@ -10,6 +10,14 @@
 | **Prérequis** | les **chaînes de caractères** et l’accès par indice ($0$ à $n-1$), la notion de **coût** (linéaire, quadratique), les **dictionnaires** (pour le prétraitement). |
 | **Objectifs** | *écrire* la recherche naïve ; *comprendre* les deux idées de **Boyer-Moore** (lire à l’envers, sauter loin) ; *construire* la table de prétraitement et *dérouler* **Boyer-Moore** et **Horspool**. |
 
+!!! situation "Situation de départ"
+
+    1.  Quand vous faites `Ctrl+F` dans un long document, l’ordinateur compare-t-il le mot cherché à chaque position du texte, lettre par lettre ?
+
+    2.  Peut-on trouver un mot dans un texte sans même en lire toutes les lettres ?
+
+    3.  Pourquoi la recherche d’un mot long peut-elle être plus rapide que celle d’un mot court ?
+
 ## Le problème : trouver une aiguille dans une botte de foin
 
 Chaque fois que vous faites `Ctrl+F` dans un document, que `grep` fouille un fichier, qu’un antivirus reconnaît la « signature » d’un virus, ou qu’un biologiste cherche un gène dans un génome de **trois milliards** de bases, le même problème se pose : **trouver un motif dans un texte**.
@@ -26,7 +34,7 @@ Chaque fois que vous faites `Ctrl+F` dans un document, que `grep` fouille un fic
 
     le motif `violons` apparaît à la position **23** (on compte à partir de $0$, espaces compris).
 
-!!! remarque "Remarque — Un terrain de jeu magnifique : l’ADN"
+!!! curieux "Pour les curieux (facultatif) — Un terrain de jeu magnifique : l’ADN"
 
     L’information génétique est une immense chaîne sur un alphabet de **quatre lettres** — `A`, `T`, `G`, `C` (les bases azotées). Chercher si le triplet `ACG` ou le gène `GATTACA` apparaît dans un brin, c’est *exactement* de la recherche textuelle — sur des textes de milliards de caractères. D’où l’importance d’algorithmes… rapides.
 
@@ -36,7 +44,7 @@ L’idée la plus simple : on **superpose** le motif au début du texte, on comp
 
 *Cherchons `ACG` dans `CAAGACG`. On compare de gauche à droite ; au premier désaccord, on glisse d’un cran.*
 
-![](../figures/418f5908a8c26006.svg){ .tikz loading=lazy }
+![](../figures/c5c1faf451339d61.svg){ .tikz loading=lazy }
 
 *Cinq alignements, chacun décalé d’un seul cran : c’est lent. On « redécouvre » le texte à chaque pas.*
 
@@ -57,6 +65,8 @@ def recherche_naive(motif, texte):
 
     Dans le pire des cas (par exemple motif `AAAA…AB` dans un texte `AAAA…A`), on compare presque tout le motif à chaque position : environ $n\times m$ comparaisons — un coût **quadratique**. Trop lent pour de très longs textes. Et surtout : la méthode naïve *oublie* tout ce qu’elle vient d’apprendre à chaque décalage.
 
+<span class="retouract">↺ Retour sur l'activité.</span> La première méthode de l’activité, la bande `SOLEIL` glissée d’une case à la fois, était cette recherche naïve : $38$ positions essayées et $45$ comparaisons pour trouver le motif.
+
 <span id="cours-12-1" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-12-1) et [2](exercices.md#ex-12-2)** (méthode naïve)
@@ -70,7 +80,9 @@ En 1977, Robert **Boyer** et J Strother **Moore** ont une double idée, à la fo
     **(1) Comparer le motif de la *droite* vers la *gauche*** (en commençant par sa dernière lettre).  
     **(2) Prétraiter le motif** pour, en cas d’échec, **sauter de plusieurs crans d’un coup** au lieu d’un seul — grâce à la **règle du mauvais caractère**.
 
-![](../figures/4ae68179d8dde33a.svg){ .tikz loading=lazy }
+<span class="retouract">↺ Retour sur l'activité.</span> La deuxième méthode de l’activité appliquait ces deux idées : en regardant d’abord la dernière case, et en sautant toute la bande quand la lettre n’était pas dans `SOLEIL`, $9$ positions et $14$ comparaisons ont suffi ; les lettres survolées n’ont jamais été lues.
+
+![](../figures/6d89f1cd4619dfa4.svg){ .tikz loading=lazy }
 
 **La règle du mauvais caractère.** Supposons qu’en comparant de droite à gauche, on bute sur un caractère `c` du texte qui ne correspond pas. Deux cas :
 
@@ -90,7 +102,7 @@ Le prétraitement consiste donc à connaître, pour chaque lettre, sa **dernièr
 
     Cherchons `ANANAS` dans `MANGER UN ANANAS`. On aligne le motif au début et on compare **par la droite**. Selon la lettre fautive, le saut change :
 
-![](../figures/9cc74c484e6e660c.svg){ .tikz loading=lazy }
+![](../figures/c8ab13ba11b83cb3.svg){ .tikz loading=lazy }
 
 *Le saut n’est pas toujours « toute la longueur » : quand la lettre fautive *existe* dans le motif (ici le `N`, en dernière position $3$), on décale juste ce qu’il faut pour l’aligner — soit $5-3=\textbf{2}$ crans.*
 
@@ -153,6 +165,8 @@ Autrement dit : quand la comparaison échoue *avant* la fin (une partie du suffi
 |:--------:|:---:|:---:|:---:|:---:|:--------:|
 | décalage |  4  |  3  |  2  |  1  |    5     |
 
+<span class="retouract">↺ Retour sur l'activité.</span> Le « pense-bête » de `SOLEIL` rempli à la fin de l’activité (`S`$\to 5$, `O`$\to 4$, `L`$\to 3$, `E`$\to 2$, `I`$\to 1$, toute autre lettre $\to 6$) est exactement cette table : le `L` final ne compte pas, c’est celui de la position $2$ qui donne le saut $3$.
+
 ```python
 def table_decalage(motif):
     m = len(motif)
@@ -182,7 +196,7 @@ def horspool(motif, texte):
 
 *Visualisons Horspool sur `ACGT` cherché dans `GTACACGTAC` (table `A`$\to 3$, `C`$\to 2$, `G`$\to 1$, autres $\to 4$). La case orangée est la lettre alignée avec la **fin** de la fenêtre : c’est elle, et elle seule, qui décide du saut.*
 
-![](../figures/40b259e84578484e.svg){ .tikz loading=lazy }
+![](../figures/67e60bf2543efa6c.svg){ .tikz loading=lazy }
 
 !!! exemple "Exemple — Dérouler Horspool : MOTIF dans UN TEXTE AVEC UN MOTIF ICI"
 
@@ -234,17 +248,17 @@ def horspool(motif, texte):
 
 *Le même déroulé, en images (la case orangée $=$ la lettre de fin de fenêtre qui décide du saut) :*
 
-![](../figures/66e18f53bc77c4d3.svg){ .tikz loading=lazy }
+![](../figures/c62e646b65f05f43.svg){ .tikz loading=lazy }
 
 !!! exemple "Exemple — Un clin d’œil à l’ADN : GATTACA"
 
     Table de `GATTACA` : `G`$\to 6$, `A`$\to 2$, `T`$\to 3$, `C`$\to 1$, autres $\to 7$. Dans le brin `ACGTGATTACAGGT`, Horspool teste $i=0$ (fin `T` $\to$ saut $3$), $i=3$ (fin `C` $\to$ saut $1$), puis $i=4$ : **`GATTACA` trouvé** ! Trois alignements au lieu de cinq pour la méthode naïve, qui essaie $i = 0, 1, 2, 3, 4$ avant de trouver.
 
-![](../figures/8f4e3f1a15805c8e.svg){ .tikz loading=lazy }
+![](../figures/0f7fc536d33609f9.svg){ .tikz loading=lazy }
 
 <span id="cours-12-5" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-12-5) à [7](exercices.md#ex-12-7)** (Horspool : la table de décalage, dérouler, en Python)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-12-5) à [7](exercices.md#ex-12-7), [17](exercices.md#ex-12-17) et [18](exercices.md#ex-12-18)** (Horspool : la table de décalage, dérouler, en Python ; tables et déroulés en série)
 
 ## Le coût, ou le miracle du sous-linéaire
 
@@ -259,19 +273,13 @@ C’est le **prodige** de Boyer-Moore : il peut trouver un mot **sans lire tout 
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[8](exercices.md#ex-12-8) et [9](exercices.md#ex-12-9)** (le coût sous-linéaire ; chercher un gène dans l’ADN)
 
-## Ouverture : la recherche textuelle est partout
+## Ouverture et liens avec les autres chapitres
 
-- **Éditeurs et `grep`** : le `Ctrl+F` de vos logiciels.
+- **La recherche textuelle est partout** : le `Ctrl+F` des éditeurs et `grep`, la bio-informatique (localiser un gène dans un génome de milliards de bases), les antivirus (repérer la « signature » d’un logiciel malveillant), la détection de plagiat, les moteurs de recherche, les filtres anti-spam…
 
-- **Bio-informatique** : localiser un gène, une mutation, une amorce dans un génome de milliards de bases.
+- **Ce qu’il réutilise** : la table de prétraitement est un **dictionnaire** ; comme la mémoïsation (chapitre 11), on dépense un peu de **mémoire** pour gagner beaucoup de **temps**. La même recherche de motif existe en SQL avec `LIKE` (chapitre 6), et *comparer* deux textes ou deux brins d’ADN (plus longue sous-séquence commune) relève de la programmation dynamique (chapitre 11).
 
-- **Antivirus** : repérer la « signature » (un motif d’octets) d’un logiciel malveillant dans un fichier.
-
-- **Détection de plagiat**, **moteurs de recherche**, **filtres anti-spam**…
-
-!!! remarque "Remarque — Liens avec d’autres chapitres"
-
-    La table de prétraitement est un **dictionnaire** : on dépense un peu de **mémoire** pour gagner beaucoup de **temps**, et le **coût** devient, en pratique, sous-linéaire. La même recherche de motif existe en SQL avec `LIKE` (chapitre « bases de données »). Un antivirus cherche des signatures connues, mais le chapitre « calculabilité », plus loin dans l’année, montrera qu’aucun outil ne peut détecter *tous* les virus. Enfin, *comparer* deux textes ou deux brins d’ADN (plus longue sous-séquence commune) relève de la **programmation dynamique**.
+- **Ouverture.** Un antivirus cherche des signatures connues, mais le chapitre 13 (*calculabilité*) montrera qu’aucun outil ne peut détecter *tous* les virus.
 
 ## Bilan — la carte mémoire
 
@@ -285,6 +293,14 @@ C’est le **prodige** de Boyer-Moore : il peut trouver un mot **sans lire tout 
 | Horspool | saut selon la lettre **alignée avec la fin** ; 1 table |
 | Table (Horspool) | lettre en position $k$ $\to$ décalage $m-1-k$ ; défaut $m$ |
 | Coût | prétraitement $O(m)$ ; recherche souvent **sous-linéaire** $O(n/m)$ |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  C’est ce que fait la méthode **naïve** : elle décale le motif d’un cran à chaque échec, jusqu’à $n\times m$ comparaisons au pire. Les éditeurs utilisent plutôt **Boyer-Moore** ou ses cousins, qui comparent de droite à gauche et sautent plusieurs crans d’un coup (§ II et III).
+
+    2.  Oui : grâce au **prétraitement** du motif (une table de décalage), si la lettre observée n’apparaît pas dans le motif, on saute toute sa longueur sans lire les lettres survolées (§ III et IV).
+
+    3.  Parce que les sauts peuvent atteindre la longueur $m$ du motif : en pratique, la recherche demande de l’ordre de $n/m$ comparaisons, elle est **sous-linéaire** (§ V).
 
 ## Erreurs fréquentes
 
@@ -324,7 +340,7 @@ C’est le **prodige** de Boyer-Moore : il peut trouver un mot **sans lire tout 
 
 ## Un peu d’histoire
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif)"
 
     En **1977**, Robert **Boyer** et J Strother **Moore** publient leur algorithme : le premier à trouver un motif en lisant *moins* de caractères qu’il n’y en a. La même année, une autre équipe (**Knuth**, **Morris** et **Pratt**) propose une approche différente, fondée sur les *préfixes* du motif. En **1980**, Nigel **Horspool** simplifie Boyer-Moore en ne gardant que la règle du mauvais caractère — une version si claire et si efficace qu’elle est aujourd’hui la plus enseignée. Un demi-siècle plus tard, ces idées font encore battre chaque `Ctrl+F` de la planète.
 

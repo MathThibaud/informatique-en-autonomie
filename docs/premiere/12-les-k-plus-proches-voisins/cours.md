@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *Algorithmique* : écrire un algorithme de **classification** par la méthode des **$k$ plus proches voisins** ($k$-NN). |
-| **Prérequis** | **listes** et **dictionnaires** ; **patron de parcours** et **invariant du champion** ; **tri** (`sorted` et clé) ; **données en tables** (un individu $=$ une fiche de descripteurs). |
+| **Prérequis** | **listes** et **dictionnaires** ; **patron de parcours** et **invariant du champion** ; **tri** (`sorted` et clé) ; **données en tables** (un individu $=$ une fiche de descripteurs). (→ fiches de révision : ch. 3, ch. 4, ch. 6, ch. 8) |
 | **Objectifs** | comprendre la **classification supervisée** ; définir une **distance** entre deux individus ; écrire l’algorithme des **$k$ plus proches voisins** ; comprendre la **frontière de décision** et **choisir $k$** ; **évaluer** un classifieur (entraînement / test) ; connaître ses **forces et limites** ; l’appliquer à la **reconnaissance d’images**. |
+
+!!! situation "Situation de départ"
+
+    1.  Comment un ordinateur peut-il reconnaître un chiffre écrit à la main, sans qu’on lui ait écrit une règle pour chaque chiffre ?
+
+    2.  Peut-on mesurer à quel point deux fleurs « se ressemblent » ?
+
+    3.  Pour deviner l’espèce d’une fleur, vaut-il mieux consulter la seule fleur connue qui lui ressemble le plus, ou plusieurs ? Combien ?
 
 !!! remarque "Remarque — Le fil conducteur : « qui se ressemble s’assemble »"
 
@@ -22,9 +30,11 @@ Reconnaître un visage, filtrer un courriel indésirable, diagnostiquer une mala
 
     On dispose d’un ensemble d’**exemples déjà étiquetés** : pour chacun, on connaît ses **descripteurs** (des mesures) *et* sa **classe** (son étiquette). On reçoit ensuite un **nouvel individu** dont on connaît les descripteurs mais **pas** la classe, et on veut la **prédire**. C’est de l’**apprentissage supervisé** : la machine apprend « sous la supervision » d’exemples corrigés.
 
-!!! remarque "Remarque — Supervisé, non supervisé"
+<span class="retouract">↺ Retour sur l'activité.</span> Dans l’activité « Quel est ce fruit ? », le primeur disposait ainsi de 15 fruits déjà étiquetés (mandarine, orange ou citron), décrits par deux descripteurs, la largeur et la hauteur ; il fallait prédire la sorte de A, B et C.
 
-    Si les exemples sont **étiquetés** (on connaît la bonne réponse), on parle d’apprentissage **supervisé** — c’est le cas du $k$-NN. Quand aucune étiquette n’est fournie et que la machine doit *regrouper* seule les individus qui se ressemblent, on parle d’apprentissage **non supervisé** (*clustering*). <span class="horsprog">au-delà du programme</span>
+!!! curieux "Pour les curieux (facultatif) — Supervisé, non supervisé"
+
+    Si les exemples sont **étiquetés** (on connaît la bonne réponse), on parle d’apprentissage **supervisé** — c’est le cas du $k$-NN. Quand aucune étiquette n’est fournie et que la machine doit *regrouper* seule les individus qui se ressemblent, on parle d’apprentissage **non supervisé** (*clustering*).
 
 Le $k$-NN est sans doute l’algorithme d’apprentissage supervisé **le plus simple** qui soit — et pourtant redoutablement efficace sur beaucoup de problèmes. C’est une excellente porte d’entrée dans le monde de l’intelligence artificielle.
 
@@ -55,7 +65,7 @@ En apprentissage, tout part d’un **jeu de données** (*dataset*) : un tableau 
 
     Chaque descripteur est une **coordonnée**. Avec 2 descripteurs, un individu est un **point du plan** ; avec $p$ descripteurs, un point d’un espace à $p$ dimensions. **Classer**, c’est regarder **où** tombe le nouveau point par rapport aux points déjà étiquetés. On se limite souvent à 2 descripteurs pour pouvoir **dessiner** — ici la longueur et la largeur du pétale, qui séparent déjà très bien les trois espèces.
 
-![](../figures/42c88bc2e2f825e6.svg){ .tikz loading=lazy }
+![](../figures/c79b6496ef9cfa20.svg){ .tikz loading=lazy }
 
 ## Mesurer la ressemblance : la distance
 
@@ -65,12 +75,14 @@ Pour dire qui « ressemble » à qui, il faut mesurer une **distance**. En 2D, c
 
     Entre deux individus $A=(a_1, \dots, a_p)$ et $B=(b_1, \dots, b_p)$ décrits par $p$ descripteurs, $$d(A,B) = \sqrt{(a_1-b_1)^2 + (a_2-b_2)^2 + \dots + (a_p-b_p)^2}\,.$$ C’est la généralisation de Pythagore : la racine de la **somme des carrés des écarts**, descripteur par descripteur.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Pour le fruit C de l’activité, la mandarine $(5\,;\,5{,}5)$ et l’orange $(8\,;\,7{,}5)$ donnaient les mêmes écarts, 1,5 cm et 1 cm, donc la même distance $\sqrt{1{,}5^2 + 1^2} \approx 1{,}80$ cm : le plus proche voisin ne pouvait pas trancher.
+
 **Sur l’exemple des iris** (2 descripteurs), entre la fleur inconnue $x = (4.7 ; 1.4)$ et la *virginica* $(5.5 ; 2.1)$ : les écarts sont $5.5 - 4.7 = 0.8$ (longueur) et $2.1 - 1.4 = 0.7$ (largeur). Ce sont les deux côtés de l’angle droit, et la distance est l’hypoténuse :
 
 $d^2 = 0.8^2 + 0.7^2 = 0.64 + 0.49 = 1.13$  
 donc  $d = \sqrt{1.13} \approx 1.06$.
 
-![](../figures/c8350e819cd8214e.svg){ .tikz loading=lazy }
+![](../figures/84a75c65d0a326cd.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 1 — La distance en Python"
 
@@ -87,13 +99,13 @@ donc  $d = \sqrt{1.13} \approx 1.06$.
 
     Pour **comparer** des distances, la racine est **inutile** : $\sqrt{u}<\sqrt{v}$ exactement quand $u<v$. On peut donc trier sur la **somme des carrés** (plus rapide) et ne garder `**0.5` que si l’on veut la vraie valeur. *On note $d^2$ cette « distance au carré ».*
 
-!!! remarque "Remarque — Il existe d’autres distances au-delà du programme"
+!!! curieux "Pour les curieux (facultatif) — Il existe d’autres distances"
 
     La distance euclidienne n’est pas la seule. La distance de **Manhattan** (somme des écarts en *valeur absolue*, comme un taxi qui suit les rues) est parfois préférée. Le choix de la distance fait partie de la conception du classifieur.
 
 <span id="cours-12-1" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-12-1) et [2](exercices.md#ex-12-2)** (vocabulaire, calculer des distances)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-12-1), [2](exercices.md#ex-12-2)** et **[16](exercices.md#ex-12-16)** (vocabulaire, calculer des distances)
 
 ## L’algorithme des $k$ plus proches voisins
 
@@ -163,7 +175,7 @@ On assemble le tout en Python. On réutilise le **tri par clé** (chapitres *Les
 
 <span id="cours-12-3" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-12-3) à [7](exercices.md#ex-12-7)** (voter, dérouler puis programmer le k-NN)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-12-3) à [7](exercices.md#ex-12-7)** et **[17](exercices.md#ex-12-17)** (voter, dérouler puis programmer le k-NN)
 
 ## La frontière de décision et le choix de $k$
 
@@ -182,6 +194,8 @@ Imaginons qu’on **colorie** tout le plan selon la classe que le $k$-NN prédir
     - **$k$ impair** (pour 2 classes) : évite les **égalités** de vote.
 
     Le bon $k$ est un **compromis** : ni trop petit (frontière qui épouse le bruit), ni trop grand (frontière qui efface l’information locale).
+
+<span class="retouract">↺ Retour sur l'activité.</span> Pour le fruit B de l’activité, un voisin désignait un citron, trois voisins une orange, cinq voisins de nouveau un citron : la réponse dépend bien de $k$.
 
 <span id="cours-12-8" class="ancre"></span>
 
@@ -214,7 +228,7 @@ def taux_reussite(train, test, k):
 
     Mesurer la qualité sur les exemples d’entraînement est trompeur : avec $k=1$, chaque exemple est son propre plus proche voisin, donc on aurait **100 %**… sans rien prouver ! Seul le jeu de **test** dit si le modèle **généralise**. Tester plusieurs valeurs de $k$ et garder la meilleure sur le jeu de test est la façon habituelle de **choisir $k$**.
 
-!!! remarque "Remarque — La matrice de confusion au-delà du programme"
+!!! curieux "Pour les curieux (facultatif) — La matrice de confusion"
 
     Pour comprendre *où* un classifieur se trompe, on dresse une **matrice de confusion** : un tableau qui croise la *vraie* classe et la classe *prédite*. On y lit d’un coup d’œil les confusions fréquentes (par exemple « des 4 pris pour des 9 »). C’est l’outil de base pour diagnostiquer un modèle.
 
@@ -224,7 +238,7 @@ def taux_reussite(train, test, k):
 
     Si un descripteur va de 0 à 1 et un autre de 0 à 1000, le second **écrase** le premier dans la distance. Exemple : classer des personnes par leur **âge** (0–100) et leur **revenu** (0–5000). Un écart de 10 ans (énorme) pèse $10^2=100$, un écart de 200 € (minime) pèse $200^2 = 40\,000$ : le revenu **domine** tout. **Solution** : *normaliser*, c’est-à-dire ramener chaque descripteur à la même échelle (par exemple entre 0 et 1) pour qu’ils comptent **équitablement**.
 
-!!! remarque "Remarque — La malédiction de la dimension au-delà du programme"
+!!! curieux "Pour les curieux (facultatif) — La malédiction de la dimension"
 
     Quand le nombre de descripteurs devient très grand, un phénomène contre-intuitif apparaît : tous les points finissent par être *à peu près aussi loin* les uns des autres, et la notion de « plus proche voisin » perd de son sens. C’est la **malédiction de la dimension**. Le $k$-NN reste néanmoins très efficace tant que les descripteurs sont peu nombreux et bien choisis.
 
@@ -253,7 +267,7 @@ Le plus beau : une **image** n’est qu’un **tableau de pixels**, donc… une
 
     On dispose d’une **base d’exemples** étiquetés : des milliers d’images de chiffres (**MNIST**) ou de lettres (**EMNIST**). Pour reconnaître une image inconnue, on lui applique le $k$-NN : ses $k$ images les plus proches votent pour un chiffre (ou une lettre). C’est ce que vous ferez dans le **TP** proposé en fin de chapitre — sur de *vraies* écritures manuscrites.
 
-!!! remarque "Remarque — C’est ainsi qu’on a longtemps lu les codes postaux"
+!!! curieux "Pour les curieux (facultatif) — C’est ainsi qu’on a longtemps lu les codes postaux"
 
     La lecture automatique des **codes postaux** et des **montants sur les chèques** a d’abord reposé sur des méthodes de ce genre. Le $k$-NN sur MNIST atteint déjà, sans réglage sophistiqué, **plus de 95 %** de bonnes réponses — de quoi trier bien des lettres.
 
@@ -271,14 +285,18 @@ Le plus beau : une **image** n’est qu’un **tableau de pixels**, donc… une
 
 ## Un peu d’histoire
 
-!!! remarque "Remarque — Des statisticiens de 1951 à l’intelligence artificielle"
+!!! curieux "Pour les curieux (facultatif) — Des statisticiens de 1951 à l’intelligence artificielle"
 
     La **règle du plus proche voisin** est formalisée dès **1951** par deux statisticiens américains, **Evelyn Fix** et **Joseph Hodges**, dans un rapport pour l’armée de l’air. En **1967**, **Thomas Cover** et **Peter Hart** en donnent l’analyse théorique et démontrent une propriété étonnante : quand les exemples sont très nombreux, la règle du plus proche voisin ne se trompe **jamais plus de deux fois** plus que la *meilleure* méthode imaginable.  
     Le jeu de données **Iris**, lui, vient du statisticien **Ronald Fisher** (1936), à partir de mesures du botaniste Edgar Anderson : c’est le jeu de données le plus célèbre de la classification. Les images de chiffres manuscrits **MNIST**, popularisées par le Français **Yann LeCun** (pionnier de l’IA, prix Turing 2018) dans les années 1990, sont devenues le « bonjour le monde » de la reconnaissance d’images. Aujourd’hui, le $k$-NN reste utilisé dans les **systèmes de recommandation** (« les personnes qui vous ressemblent ont aimé…») et comme **référence** à battre pour tout nouveau modèle. *Une idée de 1951 fait partie des tout premiers pas de l’intelligence artificielle moderne.*
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    Ce chapitre réinvestit presque toute l’année. Le jeu de données est une table au sens du chapitre **Les données en tables** ; la distance se calcule avec le motif de l’accumulateur et le vote garde un champion (**Algorithmique : le parcours séquentiel**) ; les voisins s’obtiennent par un tri par clé (**Les algorithmes de tri**) et les voix se comptent dans un dictionnaire d’occurrences (**Les types construits**). Une image n’est qu’un tableau de pixels codés par des nombres (**Le binaire et l’écriture des nombres**), d’où la reconnaissance de caractères. Séparer jeu d’entraînement et jeu de test rejoint la leçon de **Spécifier et mettre au point ses programmes** : un résultat ne vaut que vérifié sur des cas bien choisis, ici des exemples jamais vus. En Terminale, les **arbres** (l’arbre binaire de recherche, et ses cousins les arbres $k$-d évoqués plus haut) permettent de retrouver une valeur, ou des voisins, sans tout parcourir.
+    - **Des données déjà rencontrées.** Le jeu de données est une table (*Les données en tables*) ; les voix se comptent dans un dictionnaire (*Les types construits*) ; une image n’est qu’un tableau de pixels codés par des nombres (*Le binaire et l’écriture des nombres*).
+
+    - **Des algorithmes déjà rencontrés.** La distance est un accumulateur et le vote garde un champion (*Algorithmique : le parcours séquentiel*) ; les voisins s’obtiennent par un tri (*Les algorithmes de tri*) ; séparer entraînement et test rejoint la leçon de *Spécifier et mettre au point ses programmes* : un résultat ne vaut que vérifié sur des cas bien choisis.
+
+    - **En Terminale.** Les *arbres* (l’arbre binaire de recherche, les arbres $k$-d) permettront de retrouver des voisins sans tout parcourir.
 
 ## Bilan — la carte mémoire
 
@@ -295,6 +313,14 @@ Le plus beau : une **image** n’est qu’un **tableau de pixels**, donc… une
 | Normalisation | ramener les descripteurs à la même échelle |
 | Coût | linéaire en le nombre d’exemples *à chaque* prédiction (paresseux) |
 | Image $\to$ vecteur | une image $=$ une liste de pixels $\to$ OCR par $k$-NN |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  On lui montre des milliers d’images de chiffres **déjà étiquetées** (§ I). Une image étant une liste de pixels, une image inconnue reçoit l’**étiquette majoritaire** parmi ses $k$ plus proches voisins (§ IV et IX).
+
+    2.  Oui : chaque fleur devient un **point** dont les coordonnées sont ses mesures (ses **descripteurs**), et la **distance euclidienne**, généralisation de Pythagore, mesure leur ressemblance (§ II et III).
+
+    3.  Plusieurs : avec $k = 1$, on copie le plus proche, même s’il est aberrant ; avec $k$ trop grand, on répond toujours la classe la plus fréquente (§ V). Le bon $k$, impair s’il y a deux classes, se choisit en le testant sur un **jeu de test** (§ VI).
 
 ## Erreurs fréquentes
 

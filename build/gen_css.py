@@ -30,6 +30,9 @@ ADM = {
     'pouce': ('--c-yellow', 'lightbulb-on-outline'),
     'fichiers': ('--c-blue', 'file-download-outline'),
     'livre': ('--c-green', 'book-open-variant'),
+    'curieux': ('--c-dim', 'telescope'),
+    'etavant': ('--c-purple', 'history'),
+    'situation': ('--c-teal', 'map-marker-question-outline'),
 }
 
 
@@ -155,6 +158,9 @@ body { background: var(--fond-image) center / cover fixed, var(--md-default-bg-c
 .md-typeset .horsprog { font-family: var(--font-mono); font-size: .7em; color: var(--c-orange);
   border: 1px solid currentColor; border-radius: 4px; padding: 0 .35em; }
 .md-typeset .afaire { color: var(--c-green); font-weight: 700; }
+.md-typeset .duree, .md-typeset .essentiel { font-size: .75em; color: var(--c-teal); white-space: nowrap; }
+.md-typeset .erreurfreq { color: var(--c-orange); font-weight: 700; }
+.md-typeset .retouract { color: var(--c-green); font-weight: 700; }
 .md-typeset .credit { font-size: .8em; color: var(--text-dim); }
 
 /* Feu tricolore « usage de l'IA » */

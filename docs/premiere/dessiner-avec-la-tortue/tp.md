@@ -36,7 +36,7 @@
 
 On note `larg` la **largeur** des lettres (en pixels) : une lettre tient dans un rectangle de largeur `larg` et de hauteur `2 * larg`. On découpe ce rectangle en un quadrillage d’unité `u = larg / 2` : une lettre fait **2 unités de large** et **4 unités de haut**, et on laisse **1 unité** d’espace avant la lettre suivante.
 
-![](../figures/96d0c6680a17167b.svg){ .tikz loading=lazy }
+![](../figures/8ecacf8a5289a57f.svg){ .tikz loading=lazy }
 
 !!! encadre "Le contrat de toutes les lettres"
 
@@ -169,7 +169,7 @@ def lettre_L(larg):
 
     **Le test visuel** `essayer(lettre_E)` dessine en gris le quadrillage de la case et le point d’arrivée attendu, puis la lettre, puis un **tampon** de la tortue (`t.stamp()`). Le contrat est respecté si la flèche est **sur le point gris** et pointe **vers la droite**. On voit aussi tout de suite si la lettre déborde de sa case.
 
-    ![](../figures/b37322381859271a.svg){ .tikz loading=lazy }
+    ![](../figures/a1df388ef6cb43d1.svg){ .tikz loading=lazy }
 
     **Le test automatique** `verifier(lettre_E)` dessine la lettre puis **contrôle** l’arrivée (position, cap, crayon) avec des `assert` : s’il ne se passe rien, le contrat est respecté ; sinon, Python s’arrête avec un message (`AssertionError: mauvaise position d’arrivee`). C’est le **seul** endroit où l’on a le droit de demander sa position à la tortue.
 
@@ -248,7 +248,7 @@ Pour aller de `dx` vers la droite et `dy` vers le haut, la tortue suit l’**hyp
 
 Après le trait, `t.right(angle)` annule le virage : la tortue regarde de nouveau vers la droite.
 
-![](../figures/58864b37cfb8eefc.svg){ .tikz loading=lazy }
+![](../figures/30d084de2549ffda.svg){ .tikz loading=lazy }
 
 !!! remarque "Remarque"
 
@@ -264,7 +264,7 @@ def lettre_A(larg):
     saut(2.5 * u, -2 * u)     # case suivante : -> (3u, 0)
 ```
 
-![](../figures/43496c2304f4f2a2.svg){ .tikz loading=lazy }
+![](../figures/74e0868fa0bc929a.svg){ .tikz loading=lazy }
 
 On repère les points **en unités** sur le quadrillage : c’est beaucoup plus simple que de raisonner en pixels, et la lettre s’adapte toute seule à la taille `larg`.
 
@@ -284,7 +284,7 @@ On repère les points **en unités** sur le quadrillage : c’est beaucoup plus 
 
 - avant un `trait` ou un `saut`, revenir au **cap 0** (`left`/`right`).
 
-![](../figures/b4254219a2d6cbc8.svg){ .tikz loading=lazy }
+![](../figures/a0330a84015ffa80.svg){ .tikz loading=lazy }
 
 ```python
 def lettre_O(larg):
@@ -299,7 +299,7 @@ def lettre_O(larg):
     saut(2 * u, 0)          # case suivante
 ```
 
-![](../figures/0e83e36511a4139d.svg){ .tikz loading=lazy }
+![](../figures/d2ba95272230edff.svg){ .tikz loading=lazy }
 
 1.  Écrire sur le cahier le journal de bord du `O` (position et cap après chaque ligne).
 
@@ -311,7 +311,7 @@ def lettre_O(larg):
 
 Au lancement, la tortue est au **centre** de la fenêtre, cap 0. C’est le seul point que l’on connaît « gratuitement » : tout le reste se calcule à partir de là. La taille de la fenêtre s’obtient avec `t.window_width()` (largeur `W`) et `t.window_height()` (hauteur `H`).
 
-![](../figures/44b1bd89f3759900.svg){ .tikz loading=lazy }
+![](../figures/6cc56d0a05456de3.svg){ .tikz loading=lazy }
 
 1.  **Partir du bon endroit.** <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction qui amène la tortue, depuis le centre, au début de la première ligne (en haut à gauche, en laissant une marge), et qui la laisse avec cap 0 et crayon levé.
 
@@ -379,7 +379,7 @@ def caractere(c, larg):
 
 **Idée 2 — la vraie minuscule (ambitieuse).** On dessine une autre forme, avec trois repères sur le quadrillage : la **ligne de base** (`y = 0`), la **hauteur des minuscules** (`2u = larg`, la moitié d’une majuscule) et le **jambage** qui descend sous la ligne (jusqu’à `-u`, comme dans le `p`) ou qui monte jusqu’à `4u` (comme dans le `l`).
 
-![](../figures/771cb4a362f76b68.svg){ .tikz loading=lazy }
+![](../figures/0d99c14583fbf80d.svg){ .tikz loading=lazy }
 
 ```python
 def minuscule_o(larg):
@@ -474,7 +474,7 @@ def lettre_H_serif(larg):
     saut(u, 0)
 ```
 
-![](../figures/2f2d3b71bd740014.svg){ .tikz loading=lazy }
+![](../figures/2b2d547f955d0c55.svg){ .tikz loading=lazy }
 
 H, T et A à empattements
 

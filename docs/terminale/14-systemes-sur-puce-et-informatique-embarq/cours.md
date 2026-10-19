@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *« Systèmes sur puce. Décrire l’architecture d’un système sur puce. »* |
-| **Prérequis** | le modèle de **von Neumann** (unité de calcul, mémoire, entrées-sorties, bus — vu en Première), la différence **mémoire vive / mémoire morte**, la notion de **processus**. |
+| **Prérequis** | le modèle de **von Neumann** (unité de calcul, mémoire, entrées-sorties, bus — vu en Première), la différence **mémoire vive / mémoire morte**, la notion de **processus**. (→ fiches de révision : ch. 4) |
 | **Objectifs** | *comprendre* pourquoi un ordinateur entier tient sur une puce ; *distinguer* microcontrôleur et SoC ; *dérouler* le fonctionnement d’un système embarqué ; *peser* les intérêts et les limites de l’intégration. |
+
+!!! situation "Situation de départ"
+
+    1.  Un téléphone qui tient dans la poche est aussi puissant qu’un ordinateur de bureau. Où sont donc son processeur, sa mémoire, sa carte graphique ?
+
+    2.  Un thermostat, une ampoule connectée ou un airbag contiennent eux aussi un petit ordinateur. Que fait-il, sans écran ni système comme Windows ou Android ?
+
+    3.  Pourquoi ne peut-on presque jamais réparer ou améliorer un téléphone en changeant une seule pièce ?
 
 ## L’ordinateur qui a rétréci
 
@@ -31,11 +39,11 @@ Depuis la Première, vous connaissez le **modèle de von Neumann** : un ordinate
 
 Dans un ordinateur classique, ces éléments sont des **composants séparés**, enfichés sur une grande **carte mère** : le processeur ici, les barrettes de mémoire là, la carte graphique dans son connecteur… On peut les **choisir**, les **remplacer**, les **faire évoluer**. C’est modulaire — mais encombrant, coûteux et gourmand en énergie (les longs fils de cuivre consomment et ralentissent).
 
-![](../figures/8c645278a716218f.svg){ .tikz loading=lazy }
+![](../figures/c5827b96c2ab481e.svg){ .tikz loading=lazy }
 
 <span id="cours-14-1" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-14-1) et [4](exercices.md#ex-14-4)** (le bon vocabulaire ; la loi de Moore chiffrée)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-14-1), [4](exercices.md#ex-14-4) et [18](exercices.md#ex-14-18)** (le bon vocabulaire ; la loi de Moore chiffrée ; la loi de Moore en série)
 
 ## Le système sur puce (SoC)
 
@@ -43,7 +51,7 @@ Dans un ordinateur classique, ces éléments sont des **composants séparés**, 
 
     Un **système sur puce** rassemble sur un **unique circuit intégré** tous les composants qui étaient dispersés sur la carte mère : le **processeur** (souvent multi-cœur, comme au chapitre 4), la **mémoire**, un **processeur graphique** (GPU), et une foule de **périphériques** (Wi-Fi, Bluetooth, GPS, modem, capteurs…). Un ordinateur complet, sur un seul morceau de silicium.
 
-![](../figures/f64ec2cfc8a7ca25.svg){ .tikz loading=lazy }
+![](../figures/bc34a764a37ddf87.svg){ .tikz loading=lazy }
 
 Un SoC est un **vrai ordinateur**, aussi puissant : plusieurs cœurs cadencés à plusieurs gigahertz, des gigaoctets de mémoire, des **processeurs spécialisés** (graphisme, intelligence artificielle, cryptographie)… le tout sur une centaine de millimètres carrés.
 
@@ -85,13 +93,17 @@ Tous les systèmes sur puce ne sont pas des monstres de puissance. À l’autre 
 
     Un microcontrôleur, en général, ne fait pas tourner de système d’exploitation complet (il existe seulement de petits systèmes dits « temps réel », très légers) : dès qu’il est sous tension, il exécute *directement* le programme gravé dans sa mémoire. C’est justement ce qu’on veut pour du **temps réel** : un airbag ne peut pas attendre que l’OS ait fini de basculer entre ses processus.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Le micro:bit de l’activité est un microcontrôleur : dès qu’elle est alimentée, la carte exécute directement le programme, sans Windows ni Android, et son processeur comme sa mémoire se trouvent dans la puce elle-même.
+
 ### Capteurs, actionneurs, et l’architecture de Harvard
 
 Un système embarqué dialogue avec le **monde physique** par ses ports d’entrée-sortie : il **lit** des grandeurs physiques grâce à des **capteurs** (température, vitesse, lumière…) et **agit** grâce à des **actionneurs** (moteur, chauffage, LED, frein…). Un **convertisseur analogique-numérique** transforme la tension d’un capteur en nombre binaire exploitable.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Sur le micro:bit, les boutons A et B et le capteur de température étaient des capteurs ; l’écran de LED, qui jouait le « radiateur » du thermostat, était un actionneur.
+
 Beaucoup de microcontrôleurs adoptent l’**architecture de Harvard** : contrairement à von Neumann (une seule mémoire pour tout), le **programme** (en mémoire morte, Flash) et les **données** (en mémoire vive, RAM) sont dans *deux mémoires séparées*, reliées par *deux bus distincts*. Avantage : on peut lire une instruction *et* une donnée **en même temps** — un vrai gain de temps.
 
-![](../figures/1f6397a0d03cea48.svg){ .tikz loading=lazy }
+![](../figures/8f00ecd0623d3ce9.svg){ .tikz loading=lazy }
 
 ### Dérouler le fonctionnement d’un système embarqué
 
@@ -107,15 +119,17 @@ while True:                          # boucle sans fin
     attendre(0.1)                    # contrainte TEMPS RÉEL : réagir vite
 ```
 
-![](../figures/394b0ecc7b931ed5.svg){ .tikz loading=lazy }
+![](../figures/2ff6a8f256bc6519.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 2 — Les trois caractéristiques d’un système embarqué"
 
     **(1) Acquisition** de grandeurs physiques par des capteurs ; **(2) contrôle** d’un procédé par des actionneurs ; **(3) contraintes de temps** fortes (la réponse doit arriver *à temps* — pensez à un airbag ou à un frein ABS).
 
+<span class="retouract">↺ Retour sur l'activité.</span> Les trois programmes de l’activité avaient exactement cette forme : une boucle sans fin qui perçoit, décide (`if`) et agit. Sans le `while True`, la carte ne lisait le bouton qu’une fois ; et un airbag qui ne consulterait ses capteurs que toutes les dix minutes ne servirait à rien : c’est la contrainte de temps.
+
 <span id="cours-14-5" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-14-5) et [6](exercices.md#ex-14-6)** (dérouler un thermostat ; von Neumann ou Harvard)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-14-5), [6](exercices.md#ex-14-6) et [17](exercices.md#ex-14-17)** (dérouler un thermostat ; von Neumann ou Harvard ; systèmes embarqués en série)
 
 ## Le prix de l’intégration : intérêts et limites
 
@@ -128,7 +142,7 @@ Pourquoi tout intégrer sur une puce plutôt que garder une carte mère modulair
 | **Coût** : fabriqué en masse, d’un seul tenant. | **Obsolescence** : la puce vieillit d’un bloc ; on remplace tout l’objet. |
 | **Vitesse** : les signaux parcourent de très courtes distances. | **Déchets électroniques** : des milliards d’objets non réparables $\to$ montagne de déchets (enjeu du *droit à la réparation*). |
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif)"
 
     Ce compromis est au cœur d’un débat de société : l’intégration rend les objets *plus petits, moins chers, moins gourmands*… mais *jetables*. Face à la montagne de déchets électroniques, des lois sur le **droit à la réparation** et l’**indice de réparabilité** cherchent à rééquilibrer la balance.
 
@@ -136,17 +150,17 @@ Pourquoi tout intégrer sur une puce plutôt que garder une carte mère modulair
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[7](exercices.md#ex-14-7) et [8](exercices.md#ex-14-8)** (le prix de l’intégration ; un microcontrôleur dans la voiture)
 
-## Ouverture : l’informatique invisible, les objets connectés
+## Ouverture et liens avec les autres chapitres
 
-Le SoC et le microcontrôleur ont fait naître l’**Internet des objets** (*Internet of Things*, IoT) : montres, ampoules, thermostats, voitures, capteurs agricoles… **des dizaines de milliards** d’objets, chacun avec sa puce, souvent connectés au réseau. L’ordinateur a tellement rétréci qu’il a disparu *dans les choses*. C’est une révolution silencieuse — et elle pose, en retour, des questions de **sécurité** (chaque objet est une porte d’entrée) et de **vie privée** (chaque objet est un capteur).
+- **L’informatique invisible.** SoC et microcontrôleurs ont fait naître l’**Internet des objets** (*Internet of Things*, IoT) : montres, ampoules, thermostats, voitures, capteurs agricoles… **des dizaines de milliards** d’objets à puce, souvent connectés. Cette révolution silencieuse pose des questions de **sécurité** (chaque objet est une porte d’entrée) et de **vie privée** (chaque objet est un capteur).
+
+- **Ce qu’il réutilise** : le modèle de von Neumann de 1<sup>re</sup> ; et les **processus** (chapitre 4) : un SoC fait tourner un système d’exploitation complet, qui ordonnance ses processus sur plusieurs cœurs, alors que le microcontrôleur exécute en général un seul programme, sans OS complet.
+
+- **Déjà croisé** : les modules Wi-Fi, Bluetooth et modem relient chaque objet aux **réseaux** (chapitre 9) ; chaque objet connecté devient une machine d’Internet à protéger, d’où le module de **chiffrement** AES intégré à la puce (chapitre 10).
 
 <span id="cours-14-14" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercice **[14](exercices.md#ex-14-14)** (l’informatique invisible)
-
-!!! remarque "Remarque — Liens avec d’autres chapitres"
-
-    Un SoC fait tourner un **système d’exploitation** complet, qui ordonnance ses **processus** sur plusieurs cœurs (chapitre « processus ») ; le microcontrôleur, lui, exécute en général un seul programme, sans OS complet. Ses modules Wi-Fi, Bluetooth et modem le relient aux **réseaux** : chaque objet connecté devient une machine d’Internet, et une porte d’entrée à protéger — d’où le module de **chiffrement** AES intégré à la puce (chapitre « cryptographie »).
 
 ## Bilan — la carte mémoire
 
@@ -161,6 +175,14 @@ Le SoC et le microcontrôleur ont fait naître l’**Internet des objets** (*Int
 | Intérêts SoC | énergie, taille, coût, vitesse |
 | Limites SoC | non réparable, non évolutif, déchets |
 | IoT | des milliards d’objets connectés à puce |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Ils sont réunis sur une seule puce, un **système sur puce** (SoC) : processeur multi-cœur, GPU, mémoire et périphériques (Wi-Fi, modem…) sur un unique circuit intégré, grâce à la miniaturisation décrite par la **loi de Moore** (§ I et III).
+
+    2.  C’est un **microcontrôleur** : sans système d’exploitation complet, il exécute directement son programme, une boucle sans fin « lire les **capteurs**, décider, commander les **actionneurs** », sous des contraintes de temps fortes (§ IV).
+
+    3.  Parce que tout est intégré sur la même puce : c’est la contrepartie des gains de l’intégration (énergie, taille, coût, vitesse), qui rend un SoC **non réparable** et **non évolutif** (§ V).
 
 ## Erreurs fréquentes
 
@@ -196,6 +218,6 @@ Le SoC et le microcontrôleur ont fait naître l’**Internet des objets** (*Int
 
 ## Un peu d’histoire
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif)"
 
     Tout commence en **1958–1959** : **Jack Kilby** (Texas Instruments, 1958, sur un morceau de germanium) et **Robert Noyce** (Fairchild, 1959, sur du silicium ; futur cofondateur d’Intel) inventent, chacun de leur côté, le **circuit intégré** — l’idée de graver plusieurs composants sur un seul morceau de semi-conducteur. Kilby recevra le prix Nobel de physique en 2000. En **1971**, une petite équipe d’Intel menée par **Federico Faggin** grave le premier **microprocesseur**, l’**Intel 4004** : $2\,300$ transistors, aussi puissant que l’ENIAC de $30$ tonnes… sur une puce de la taille d’un ongle. Un demi-siècle plus tard, ses descendants en comptent des dizaines de milliards. L’ordinateur n’a jamais cessé de rétrécir — jusqu’à se glisser dans les objets du quotidien.

@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *« Algorithmes sur les tableaux »* : *tri par insertion*, *tri par sélection* ; *coût* d’un tri (coût *quadratique*). |
-| **Prérequis** | les boucles `for`/`while`, les tableaux (indices, `len`), et surtout le chapitre **« Algorithmique : le parcours séquentiel »** : patron du parcours, invariant de boucle, coûts linéaire et quadratique. |
+| **Prérequis** | les boucles `for`/`while`, les tableaux (indices, `len`), et surtout le chapitre **« Algorithmique : le parcours séquentiel »** : patron du parcours, invariant de boucle, coûts linéaire et quadratique. (→ fiches de révision : ch. 4) |
 | **Objectifs** | comprendre *pourquoi* on trie ; connaître et savoir écrire **deux** algorithmes de tri (sélection, insertion) ; **tracer** leur exécution ; **évaluer leur coût** et les comparer. |
+
+!!! situation "Situation de départ"
+
+    1.  Pourquoi prendre la peine de ranger une liste dans l’ordre, si c’est seulement pour y chercher ensuite ?
+
+    2.  Pour ranger un paquet de cartes, vaut-il mieux chercher à chaque fois la plus petite carte restante, ou glisser chaque nouvelle carte à sa place dans la main ?
+
+    3.  Ranger 1 000 fois plus de cartes demande-t-il 1 000 fois plus de travail ?
 
 !!! remarque "Remarque — Une histoire de rangement — et de vitesse"
 
@@ -34,7 +42,7 @@ Trier un tableau, c’est ranger ses éléments **dans l’ordre** (croissant, l
 
     **Trier** un tableau `t`, c’est réorganiser ses éléments de sorte que $$\texttt{t[0]} \leq \texttt{t[1]} \leq \texttt{t[2]} \leq \cdots \leq \texttt{t[n-1]}.$$ On travaillera **en place** : on réarrange le tableau donné, sans en créer un nouveau. Les seules opérations autorisées sont **comparer** deux éléments et les **échanger** (ou les déplacer).
 
-!!! remarque "Remarque — Deux opérations à compter"
+!!! encadre "À retenir — Deux opérations à compter"
 
     Pour mesurer le coût d’un tri, on compte deux choses : le nombre de **comparaisons** (`t[j] < t[i]` ?) et le nombre d’**échanges**. C’est là que se joue la rapidité de l’algorithme.
 
@@ -64,6 +72,8 @@ Trier un tableau, c’est ranger ses éléments **dans l’ordre** (croissant, l
 !!! regle "Règle 3 — Principe du tri par sélection"
 
     Pour chaque position `i` de gauche à droite : on **cherche le minimum** de la partie non encore triée (les cases d’indice `i` à la fin), puis on l’**échange** avec la case `i`. À la fin de l’étape, la case `i` contient sa valeur définitive.
+
+<span class="retouract">↺ Retour sur l'activité.</span> La méthode 1 de l’activité « Trier sans tricher », « le plus petit d’abord », était déjà le tri par sélection : la carte « championne » est le minimum de la partie non encore triée.
 
 ```python
 def tri_selection(t):
@@ -163,7 +173,7 @@ Traçons le tri de `[5, 3, 8, 1, 9, 2]`. Le tableau est montré **au début de c
 
 La même trace en **histogramme** : chaque barre a la hauteur de sa valeur. On voit la zone triée (colorée) grandir d’une barre à chaque étape, en partant de la gauche, et le minimum (orange) venir prendre sa place par un échange (flèche).
 
-![](../figures/27e70c6cc11e0f19.svg){ .tikz loading=lazy }
+![](../figures/6d9b593f32c386fe.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 4 — L’invariant du tri par sélection"
 
@@ -171,7 +181,7 @@ La même trace en **histogramme** : chaque barre a la hauteur de sa valeur. On v
 
 <span id="cours-06-1" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-06-1) à [5](exercices.md#ex-06-5)** (dérouler la sélection ; programmer le tri par sélection)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-06-1) à [5](exercices.md#ex-06-5)** et **[22](exercices.md#ex-06-22)** (dérouler la sélection ; programmer le tri par sélection)
 
 ## Le tri par insertion
 
@@ -180,6 +190,8 @@ La même trace en **histogramme** : chaque barre a la hauteur de sa valeur. On v
 !!! regle "Règle 5 — Principe du tri par insertion"
 
     On parcourt le tableau de la gauche vers la droite. À chaque étape, la partie de gauche est *déjà triée* ; on prend l’élément suivant et on l’**insère** à sa place dans cette partie triée, en **décalant** vers la droite tous les éléments plus grands que lui.
+
+<span class="retouract">↺ Retour sur l'activité.</span> La méthode 2 de l’activité, « comme une main de cartes », était le tri par insertion : chaque carte, comparée à ses voisines de gauche, était glissée à sa place parmi les cartes déjà rangées.
 
 ```python
 def tri_insertion(t):
@@ -277,19 +289,19 @@ Traçons le tri de `[5, 3, 8, 1, 9, 2]`. Le tableau est montré **après chaque 
 
 En **histogramme**, après chaque insertion : la zone triée (colorée) grandit d’une barre, mais ses barres *changent de place* ; la barre orange vient d’être glissée à sa place (la flèche part de sa case d’origine), et les barres plus grandes qu’elle ont été décalées d’un cran vers la droite.
 
-![](../figures/5647063c6bc86c12.svg){ .tikz loading=lazy }
+![](../figures/1c34be866985d587.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 6 — L’invariant du tri par insertion"
 
     Au début de l’étape `i`, la partie `t[0..i-1]` est **triée** (mais ne contient pas forcément les bons éléments : ils pourront être « poussés » plus loin par les insertions suivantes). À la fin, `i` vaut `n` et le tableau entier est trié.
 
-!!! remarque "Remarque — Sélection ou insertion : deux philosophies"
+!!! encadre "À retenir — Sélection ou insertion : deux philosophies"
 
     Le tri par **sélection** place, à chaque étape, un élément à sa position *définitive* (il ne bougera plus). Le tri par **insertion** garde une partie gauche toujours triée, mais qui *grandit et se réorganise* au fil de l’eau. Même résultat, chemins différents.
 
 <span id="cours-06-6" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-06-6) à [10](exercices.md#ex-06-10)** (dérouler l’insertion, comparer les deux tris ; programmer le tri par insertion)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-06-6) à [10](exercices.md#ex-06-10)** et **[23](exercices.md#ex-06-23)** (dérouler l’insertion, comparer les deux tris ; programmer le tri par insertion)
 
 ## Combien ça coûte ?
 
@@ -311,14 +323,16 @@ Les deux tris sont quadratiques *dans le pire des cas*. Mais l’insertion a une
 
     Si le tableau est **déjà trié** (ou presque), la boucle `while` du tri par insertion ne fait *aucun* (ou très peu de) décalage : elle s’arrête tout de suite, ou presque. Le tri se réduit alors à un **seul parcours** : son coût devient **linéaire** ! Le tri par sélection, lui, refait bêtement tout son travail : il est quadratique *même sur un tableau déjà trié*.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Dans l’activité, la méthode 1 faisait toujours $7 + 6 + \cdots + 1 = 28$ comparaisons pour 8 cartes, quel que soit l’ordre de départ ; la méthode 2 n’en faisait que 7 sur des cartes déjà rangées, mais 28 sur des cartes dans l’ordre inverse.
+
 | **Tri**   |     **meilleur cas**      | **pire cas**  |     **échanges**     |
 |:----------|:-------------------------:|:-------------:|:--------------------:|
 | Sélection | $\approx n^2$ (toujours)  | $\approx n^2$ |  peu ($\approx n$)   |
 | Insertion | $\approx n$ (déjà trié !) | $\approx n^2$ | beaucoup (décalages) |
 
-!!! remarque "Remarque — Concrètement, ce que « quadratique » veut dire"
+!!! curieux "Pour les curieux (facultatif) — Concrètement, ce que « quadratique » veut dire"
 
-    Pour $n = 1\,000$ éléments, un tri quadratique fait de l’ordre de $500\,000$ comparaisons : instantané. Mais pour $n = 1\,000\,000$, il en faudrait de l’ordre de $5 \times 10^{11}$ : **des minutes, voire des heures**. C’est pourquoi les vrais logiciels utilisent des tris plus malins (coût $n\log_2 n$), que vous découvrirez en terminale. <span class="horsprog">au-delà du programme</span>
+    Pour $n = 1\,000$ éléments, un tri quadratique fait de l’ordre de $500\,000$ comparaisons : instantané. Mais pour $n = 1\,000\,000$, il en faudrait de l’ordre de $5 \times 10^{11}$ : **des minutes, voire des heures**. C’est pourquoi les vrais logiciels utilisent des tris plus malins (coût $n\log_2 n$), que vous découvrirez en terminale.
 
 <span id="cours-06-11" class="ancre"></span>
 
@@ -334,17 +348,13 @@ Sélection et insertion ne sont que deux membres d’une grande famille.
 
 - En Python, il suffit d’écrire `t.sort()` (tri en place) ou `sorted(t)` (nouveau tableau trié). Derrière ces mots se cache **Timsort**, un algorithme hybride très rapide inventé en 2002 par Tim Peters, aujourd’hui utilisé aussi par Java et Android. <span class="horsprog">au-delà du programme</span>
 
-!!! remarque "Remarque — Culture — danser un algorithme"
+!!! curieux "Pour les curieux (facultatif) — Danser un algorithme"
 
     Pour *voir* un tri prendre vie, cherchez les vidéos « **AlgoRythmics** » : une université hongroise y met en scène des **danses folkloriques** qui exécutent, pas à pas, le tri par sélection, par insertion, à bulles ou le tri rapide. C’est étrangement hypnotique — et bien plus parlant qu’un long discours.
 
-!!! remarque "Remarque — Le pire tri du monde, pour rire"
+!!! curieux "Pour les curieux (facultatif) — Le pire tri du monde, pour rire"
 
     Le **bogosort** (« tri stupide ») consiste à… mélanger le tableau au hasard, puis vérifier s’il est trié ; sinon, recommencer. Sur un jeu de 52 cartes, il faudrait en moyenne de l’ordre de $8 \times 10^{67}$ tirages (autant que d’ordres possibles pour les 52 cartes), bien plus qu’il n’y a d’atomes dans toute la Terre (environ $10^{50}$). À ne *jamais* utiliser — mais il rappelle avec humour qu’un algorithme *correct* peut être catastrophiquement *lent*.
-
-!!! remarque "Remarque — En Terminale"
-
-    Le chapitre *Diviser pour régner* présente le **tri fusion** : on coupe le tableau en deux, on trie chaque moitié, puis on fusionne. Son coût, en $n\log_2 n$, le rend bien plus rapide que nos tris quadratiques sur de grands tableaux.
 
 <span id="cours-06-14" class="ancre"></span>
 
@@ -352,7 +362,7 @@ Sélection et insertion ne sont que deux membres d’une grande famille.
 
 ## Un peu d’histoire
 
-!!! remarque "Remarque — Trier, aux origines de l’informatique"
+!!! curieux "Pour les curieux (facultatif) — Trier, aux origines de l’informatique"
 
     Trier des données mécaniquement est *antérieur* aux ordinateurs : dès le recensement américain de **1890**, les machines à cartes perforées de **Herman Hollerith** (dont l’entreprise deviendra IBM) triaient des millions de fiches : on plaçait un paquet de cartes dans la trieuse, qui faisait tomber chacune dans un casier selon la position d’un trou. En **1945**, dans l’un des tout premiers programmes de l’histoire, **John von Neumann** écrit un *tri fusion* pour la machine EDVAC : le tri fut ainsi l’un des premiers problèmes que l’on chercha à faire résoudre par une machine à programme enregistré. Depuis, il reste un terrain d’étude central : c’est sur des problèmes simples à énoncer comme « ranger dans l’ordre » que l’informatique a forgé sa science du **coût** des algorithmes.
 
@@ -362,9 +372,13 @@ Sélection et insertion ne sont que deux membres d’une grande famille.
     ![](../img/06_hist_edvac.jpg){ .photo loading=lazy style="width:118px" }  
     L’EDVAC, en service à partir de 1951
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    Le tri par sélection n’est qu’une suite de recherches du minimum (**Algorithmique : le parcours séquentiel**), justifiée par un **invariant de boucle** ; trier rend possible la **recherche dichotomique**, et `sorted` avec une clé servira dans les chapitres **Les données en tables**, **Les algorithmes gloutons** et **Les k plus proches voisins**. En Terminale : le **tri fusion** (**Diviser pour régner**) et le parcours infixe d’un **arbre binaire de recherche**.
+    - **Ce qu’il réutilise.** Le tri par sélection n’est qu’une suite de recherches du minimum (*Algorithmique : le parcours séquentiel*), justifiée par un **invariant de boucle** (*Spécifier et mettre au point ses programmes*).
+
+    - **Ce qu’il prépare.** Trier rendra possible la **recherche dichotomique** ; trier une table selon une colonne servira dans *Les données en tables*, *Les algorithmes gloutons* et *Les $k$ plus proches voisins*.
+
+    - **En Terminale.** *Diviser pour régner* présentera le **tri fusion**, en $n\log_2 n$, bien plus rapide que nos tris quadratiques sur de grands tableaux.
 
 ## Bilan — la carte mémoire
 
@@ -379,6 +393,14 @@ Sélection et insertion ne sont que deux membres d’une grande famille.
 | Coût des deux tris | **quadratique** ($\approx n^2$) : une boucle dans une boucle |
 | Atout de l’insertion | **linéaire** si le tableau est déjà (presque) trié |
 | En pratique | `t.sort()` / `sorted(t)` : Python utilise Timsort ($n\log_2 n$) |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Trier est un **investissement** : une fois le tableau trié, chercher devient fulgurant (recherche dichotomique), le minimum et le maximum sont aux deux bouts, les doublons côte à côte (§ I).
+
+    2.  Ce sont le **tri par sélection** et le **tri par insertion** (§ II et III). Tous deux sont quadratiques dans le pire cas, mais l’insertion devient **linéaire** sur une main déjà presque rangée, alors que la sélection fait toujours $n(n-1)/2$ comparaisons (§ IV).
+
+    3.  Non : le coût est **quadratique**, de l’ordre de $n^2$ comparaisons. Pour 1 000 fois plus de cartes, il faut environ un million de fois plus de comparaisons (§ IV).
 
 ## Erreurs fréquentes
 

@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *Algorithmique* : résoudre un **problème d’optimisation** à l’aide d’un **algorithme glouton** (exemple emblématique : le *rendu de monnaie*). |
-| **Prérequis** | les boucles `for`/`while`, les listes, écrire une fonction ; la **notion de coût** (chapitre *Algorithmique : le parcours séquentiel*) ; l’**invariant du champion** (garder le meilleur vu jusque-là). |
+| **Prérequis** | les boucles `for`/`while`, les listes, écrire une fonction ; la **notion de coût** (chapitre *Algorithmique : le parcours séquentiel*) ; l’**invariant du champion** (garder le meilleur vu jusque-là). (→ fiches de révision : ch. 4) |
 | **Objectifs** | reconnaître un **problème d’optimisation** ; comprendre et appliquer la **stratégie gloutonne** ; la **programmer** sur le rendu de monnaie ; savoir qu’un algorithme glouton est **rapide mais pas toujours optimal** (voire pas toujours une solution). |
+
+!!! situation "Situation de départ"
+
+    1.  Un commerçant doit rendre 48 € avec le moins de pièces et de billets possible : quelle méthode simple peut-il suivre ?
+
+    2.  Prendre à chaque étape ce qui paraît le meilleur sur le moment donne-t-il toujours le meilleur résultat final ?
+
+    3.  Pourquoi un ordinateur ne peut-il pas simplement essayer tous les trajets possibles pour trouver la tournée la plus courte d’un livreur qui passe par 20 villes ?
 
 !!! remarque "Remarque — Le fil conducteur : le meilleur choix, ici et maintenant"
 
@@ -34,7 +42,7 @@
 
     - **voyageur de commerce** : visiter des villes et revenir au départ en parcourant le *moins de kilomètres possible*.
 
-!!! remarque "Remarque — Pourquoi ne pas tout essayer ? L’explosion combinatoire"
+!!! curieux "Pour les curieux (facultatif) — Pourquoi ne pas tout essayer ? L’explosion combinatoire"
 
     On pourrait **énumérer toutes** les solutions et garder la meilleure. Mais leur nombre **explose** : pour le voyageur, il y a déjà $181\,440$ circuits différents pour 10 villes, environ 240 millions pour 13, et plus de 60 *millions de milliards* pour 20 (en partant d’une ville fixée, on peut visiter les $n-1$ autres dans $(n-1) \times (n-2) \times \cdots \times 1$ ordres, et chaque circuit est compté deux fois, une fois dans chaque sens). Même un ordinateur ne peut pas les parcourir. Le tableau ci-dessous donne la taille $n$ traitable en environ un milliard d’opérations selon le coût de l’algorithme :
 
@@ -63,6 +71,8 @@
 
     3.  on s’arrête quand la solution est complète.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Dans l’activité « La caisse du marchand », vous n’avez jamais eu à reprendre une pièce déjà posée : c’est le point 2 du principe.
+
 Pour appliquer la méthode à un problème, il faut donc décider :
 
 - quels sont les **candidats** (les morceaux qu’on ajoute) ;
@@ -71,7 +81,7 @@ Pour appliquer la méthode à un problème, il faut donc décider :
 
 - la **contrainte de faisabilité** (ce qui reste possible).
 
-!!! remarque "Remarque — La force et la faiblesse, en une phrase"
+!!! encadre "À retenir — La force et la faiblesse, en une phrase"
 
     Ne faire qu’**un** choix à chaque étape (au lieu de tout explorer) rend l’algorithme **très rapide**. Mais ce choix est **myope** : le meilleur coup immédiat peut mener à une solution globale médiocre. *Rapide n’est pas optimal.*
 
@@ -86,6 +96,8 @@ Un commerçant doit rendre une somme avec le **moins de pièces et billets possi
 !!! regle "Règle 2 — La stratégie gloutonne pour le rendu de monnaie"
 
     Tant qu’il reste une somme à rendre, on choisit **la plus grande coupure qui ne dépasse pas** la somme restante (le choix qui fait *décroître le plus vite* ce qui reste à rendre).
+
+<span class="retouract">↺ Retour sur l'activité.</span> C’est la règle que vous avez formulée dans l’activité : pour 36 €, on pose d’abord le billet de 20, puis 10, 5 et 1, soit 4 pièces et billets.
 
 !!! exemple "Exemple — Rendre 9 €"
 
@@ -132,11 +144,13 @@ Un commerçant doit rendre une somme avec le **moins de pièces et billets possi
 
     **Leçon :** un algorithme glouton doit toujours être *justifié* sur le problème précis ; on ne peut pas supposer qu’il est optimal.
 
-![](../figures/0d586debbf2bc6d9.svg){ .tikz loading=lazy }
+<span class="retouract">↺ Retour sur l'activité.</span> Les pièces de Nsiland (1, 5 et 12 nsis) de l’activité formaient un autre contre-exemple : pour 15 nsis, la règle donnait $12 + 1 + 1 + 1$, soit 4 pièces, au lieu de $5 + 5 + 5$ ; il en allait de même pour 16 et pour 20 nsis.
+
+![](../figures/39c275371296d454.svg){ .tikz loading=lazy }
 
 <span id="cours-11-3" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-11-3)** (les ingrédients du rendu de monnaie) et **[4](exercices.md#ex-11-4) à [9](exercices.md#ex-11-9)** (le rendu de monnaie)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-11-3)** (les ingrédients du rendu de monnaie) et **[4](exercices.md#ex-11-4) à [9](exercices.md#ex-11-9)**, **[15](exercices.md#ex-11-15)** (le rendu de monnaie)
 
 ## Un deuxième exemple : le sac à dos
 
@@ -166,11 +180,11 @@ On dispose d’objets ayant chacun une **valeur** et un **poids**, et d’un sac
 
     Ici le meilleur choix réel était **B $+$ C** (5 kg, valeur **220**) : le glouton, en prenant A « le plus rentable au kilo » d’abord, est passé à côté. Le glouton par rapport valeur/poids est **optimal si l’on peut couper les objets** (sac à dos « fractionnaire »), mais **pas** quand on doit prendre chaque objet en entier ou pas du tout. *Le même piège que le rendu de monnaie.*
 
-![](../figures/eb5afe5938e156e6.svg){ .tikz loading=lazy }
+![](../figures/e283a7a3a02c615f.svg){ .tikz loading=lazy }
 
 <span id="cours-11-10" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-11-10) et [11](exercices.md#ex-11-11)** (le sac à dos)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-11-10), [11](exercices.md#ex-11-11)** et **[16](exercices.md#ex-11-16)** (le sac à dos)
 
 ## Quand le glouton se trompe : le voyageur de commerce
 
@@ -180,17 +194,13 @@ Le **voyageur de commerce** doit visiter toutes les villes d’une liste et reve
 
     Ce glouton « du plus proche voisin » donne **très vite** un itinéraire correct, souvent bon, mais **rarement optimal** : en fonçant toujours vers le plus proche, on peut laisser une ville isolée qu’il faudra rejoindre par un long détour final. C’est le cas typique où le glouton sert d’**approximation** rapide, faute de pouvoir tout essayer.
 
-![](../figures/7860d7d46dfc1bfb.svg){ .tikz loading=lazy }
+![](../figures/ffea3b701e2b7f9c.svg){ .tikz loading=lazy }
 
 Parti de A, le glouton enchaîne les sauts courts (B, C, D, E)… en oubliant F, isolée au sud-est. Il doit alors traverser toute la carte pour aller la chercher, puis revenir en A : deux longues traversées. La meilleure tournée passe par F « en chemin », juste après B. (Longueurs à vol d’oiseau, un carreau $=$ une unité.)
 
-!!! remarque "Remarque — Un problème « difficile » et une question à un million de dollars au-delà du programme"
+!!! curieux "Pour les curieux (facultatif) — Un problème « difficile » et une question à un million de dollars"
 
     Le voyageur de commerce fait partie des problèmes dits **NP-complets** : on **sait vérifier** vite qu’un itinéraire donné est court, mais personne ne **sait trouver** la solution optimale rapidement quand il y a beaucoup de villes. Savoir si un algorithme rapide existe pour *tous* ces problèmes est la fameuse question **« P $=$ NP ? »**, non résolue à ce jour : un prix d’**un million de dollars** récompense qui la tranchera. En attendant, pour ces problèmes, les algorithmes gloutons (et d’autres heuristiques) sont précieux : ils donnent une bonne réponse en un temps raisonnable.
-
-!!! remarque "Remarque — En Terminale"
-
-    Le chapitre *La programmation dynamique* résout de façon **exacte** des problèmes où le glouton échoue (rendu de monnaie avec des pièces $\{1, 6, 10\}$, sac à dos) : on combine les solutions de sous-problèmes, sans jamais les recalculer.
 
 <span id="cours-11-12" class="ancre"></span>
 
@@ -198,7 +208,7 @@ Parti de A, le glouton enchaîne les sauts courts (B, C, D, E)… en oubliant F
 
 ## Un peu d’histoire
 
-!!! remarque "Remarque — Des télécommunications à la conjecture du siècle"
+!!! curieux "Pour les curieux (facultatif) — Des télécommunications à la conjecture du siècle"
 
     Les stratégies « au plus pressé » sont étudiées dès les années 1950, bien avant d’avoir un nom : l’expression « algorithme glouton » (*greedy algorithm*) ne se répand qu’autour de 1970 (on l’attribue souvent au mathématicien Jack Edmonds, en 1971). En **1952**, **David Huffman**, étudiant au MIT, invente un algorithme glouton de **compression** de données (le codage de Huffman) qui sert encore aujourd’hui. En **1956–1957**, **Joseph Kruskal** et **Robert Prim** publient des algorithmes gloutons pour relier des points au moindre coût (les « arbres couvrants », utiles pour les réseaux électriques et de télécommunications). Le glouton est donc né avec des applications très concrètes.
 
@@ -207,9 +217,11 @@ Parti de A, le glouton enchaîne les sauts courts (B, C, D, E)… en oubliant F
     ![](../img/11_hist_stephen_cook.jpg){ .photo loading=lazy style="width:157px" }  
     Stephen Cook en 1968
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    Le glouton suppose les candidats triés (**Les algorithmes de tri**) et prend à chaque étape le meilleur, comme l’invariant du champion (**Algorithmique : le parcours séquentiel**) ; le coût $2^n$ de l’exploration complète vient des $2^n$ nombres de $n$ bits (**Le binaire et l’écriture des nombres**). En Terminale, la **programmation dynamique** résout exactement ces problèmes, et **Dijkstra** (**Graphes**) est un glouton prouvé optimal.
+    - **Ce qu’il réutilise.** Les candidats sont triés (*Les algorithmes de tri*) ; à chaque étape, on garde le meilleur, comme le champion du *Parcours séquentiel* ; les $2^n$ choix d’une exploration complète sont les $2^n$ nombres de $n$ bits (*Le binaire et l’écriture des nombres*).
+
+    - **En Terminale.** *La programmation dynamique* résoudra de façon exacte les problèmes où le glouton échoue (pièces $\{1, 6, 10\}$, sac à dos), et l’algorithme de Dijkstra (*Les graphes*) sera un glouton prouvé optimal.
 
 ## Bilan — la carte mémoire
 
@@ -224,6 +236,14 @@ Parti de A, le glouton enchaîne les sauts courts (B, C, D, E)… en oubliant F
 | Rendu de monnaie | prendre la plus grande coupure $\leq$ somme restante |
 | Système canonique | système où le glouton est *toujours* optimal (ex. les euros) |
 | Contre-exemples | {1,6,10} rendre 12 (sous-optimal) ; {2,3} rendre 4 (échec) |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  La **stratégie gloutonne** : prendre à chaque fois la plus grande coupure qui ne dépasse pas la somme restante, soit $20 + 20 + 5 + 2 + 1$ (5 pièces et billets). Les euros formant un système **canonique**, c’est optimal (§ III).
+
+    2.  Non. Avec les pièces $\{1, 6, 10\}$, rendre 12 donne $10 + 1 + 1$ au lieu de $6 + 6$, et avec $\{2, 3\}$, rendre 4 échoue (§ III) ; pour le sac à dos et le voyageur de commerce aussi, le glouton donne une solution seulement **approchée** (§ IV et V).
+
+    3.  Le nombre de circuits **explose** : plus de 60 millions de milliards pour 20 villes, trop pour un ordinateur (§ I). On se contente d’une bonne solution obtenue vite, par exemple avec le glouton du plus proche voisin (§ V).
 
 ## Erreurs fréquentes
 

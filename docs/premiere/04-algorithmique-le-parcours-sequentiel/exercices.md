@@ -18,6 +18,8 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Lecture de trace <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-1 }
 
+<span class="essentiel">• essentiel</span>
+
 Sans machine, dire ce que renvoie `mystere([4, 1, 7, 2])`.
 
 ```python
@@ -30,6 +32,10 @@ def mystere(t):
 ```
 
 Que calcule cette fonction en général ? Renvoie-t-elle un résultat correct si tous les éléments sont négatifs ? Expliquer.
+
+??? pouce "Coup de pouce"
+
+    Faire un tableau de trace : une ligne par tour, avec `x` et `r`. Refaire ensuite la trace avec `[-3, -7]` : la condition `x > r` est-elle vraie une seule fois ?
 
 ??? corrige "Corrigé"
 
@@ -47,7 +53,13 @@ Que calcule cette fonction en général ? Renvoie-t-elle un résultat correct si
 
 2.  `concatener(mots)` : la chaîne obtenue en collant tous les mots d’un tableau de chaînes.
 
+??? pouce "Coup de pouce"
+
+    Seules l’initialisation et la mise à jour changent. Par quelle valeur commencer pour qu’elle ne modifie pas le résultat : pour un produit ? pour une chaîne que l’on allonge ?
+
 ??? corrige "Corrigé"
+
+    Même patron que la somme ; on change l’initialisation (l’élément neutre : `1` pour un produit, la chaîne vide pour une concaténation) et la mise à jour.
 
     ```python
     def produit(t):
@@ -67,6 +79,8 @@ Que calcule cette fonction en général ? Renvoie-t-elle un résultat correct si
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Compter dans un intervalle : code à trous <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-3 }
 
+<span class="essentiel">• essentiel</span>
+
 La fonction `nb_entre(t, a, b)` doit renvoyer le nombre d’éléments du tableau `t` compris entre `a` et `b` (bornes incluses). Recopier et compléter les pointillés en suivant le patron du parcours (initialisation, mise à jour, renvoi).
 
 ```python
@@ -83,6 +97,10 @@ def nb_entre(t, a, b):
 2
 ```
 
+??? pouce "Coup de pouce"
+
+    C’est un compteur : quelle valeur avant la boucle, et de combien augmente-t-il ? « Compris entre `a` et `b` » se traduit par deux comparaisons qui doivent être vraies *toutes les deux*.
+
 ??? corrige "Corrigé"
 
     ```python
@@ -96,7 +114,11 @@ def nb_entre(t, a, b):
 
     `nb_entre([12, 5, 18, 9, 15], 10, 15)` renvoie bien `2` (les éléments `12` et `15`). Les deux conditions sont reliées par `and` : il faut *à la fois* `x >= a` et `x <= b`.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> relier les deux conditions par `or` : tout nombre est supérieur à `a` *ou* inférieur à `b`, et la fonction compte alors tous les éléments.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Taux de réussite et moyenne pondérée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-4 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Les notes d’un élève sont rangées dans un tableau `notes` **non vide** ; le tableau `coefs`, de même longueur, donne leurs coefficients (`coefs[i]` est le coefficient de `notes[i]`). Écrire :
 
@@ -143,9 +165,13 @@ def nb_entre(t, a, b):
 
     Pour `moyenne_ponderee`, on parcourt par **indice** : le même `i` donne la note et son coefficient. Les deux accumulateurs sont mis à jour dans la même boucle : un seul parcours. Sur l’exemple : $(12 \times 2 + 8 + 15) / (2 + 1 + 1) = 47 / 4 = 11{,}75$.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> diviser par `len(notes)` au lieu de la somme des coefficients : on obtiendrait $47 / 3$, qui n’est pas la moyenne pondérée.
+
 ### Recherche séquentielle
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Un multiple dans le tableau <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-5 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `a_un_multiple(t, k)` qui renvoie `True` si au moins un élément de `t` est un multiple de `k`, `False` sinon. La fonction doit **s’arrêter** dès qu’un multiple est trouvé. Combien de tours de boucle effectue `a_un_multiple([7, 10, 3, 20], 5)` ? Et `a_un_multiple([7, 10, 3, 20], 6)` ?
 
@@ -164,6 +190,8 @@ def nb_entre(t, a, b):
     ```
 
     `a_un_multiple([7, 10, 3, 20], 5)` fait **2** tours : `10` est trouvé au deuxième tour, et `return` arrête aussitôt la fonction. `a_un_multiple([7, 10, 3, 20], 6)` fait **4** tours : aucun multiple de 6, il faut tout parcourir avant de répondre `False`. C’est le pire cas.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> écrire `else: return False` dans la boucle : la fonction répond dès le premier élément, et `a_un_multiple([7, 10, 3, 20], 5)` renverrait `False`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Où est-il ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-6 }
 
@@ -228,6 +256,8 @@ def nb_entre(t, a, b):
 
 ??? corrige "Corrigé"
 
+    Recherche séquentielle : on renvoie l’élément dès que la condition `x < 0` est vraie ; si la boucle se termine sans succès, on renvoie `None`.
+
     ```python
     def premier_negatif(t):
         for x in t:
@@ -240,7 +270,13 @@ def nb_entre(t, a, b):
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Le plus petit <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-8 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `minimum(t)` (tableau non vide), **sans** `min`. Préciser l’**invariant** de votre boucle. Pourquoi serait-il faux d’initialiser le champion à `0` ? (Penser au tableau `[3, 8, 5]`.)
+
+??? pouce "Coup de pouce"
+
+    Reprendre le patron du champion du cours en changeant le sens de la comparaison. Pour l’invariant, compléter : « à chaque tour, `m` est … des éléments déjà visités ».
 
 ??? corrige "Corrigé"
 
@@ -255,6 +291,8 @@ def nb_entre(t, a, b):
 
     **Invariant** : à chaque tour, `m` est le minimum des éléments déjà visités. Initialiser `m` à `0` serait faux : sur `[3, 8, 5]`, aucun élément n’est inférieur à `0`, et la fonction renverrait `0`, qui n’est même pas dans le tableau (c’est le défaut de l’exercice « Lecture de trace »). On initialise avec un élément *existant* : `t[0]`.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> placer `m = t[0]` *dans* la boucle : le champion est remis à `t[0]` à chaque tour, et la fonction renvoie seulement le plus petit de `t[0]` et du dernier élément.
+
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 9</span> — Le mot le plus long : lignes à remettre dans l’ordre <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-9 }
 
 Les lignes de la fonction `mot_le_plus_long(mots)` (tableau de chaînes **non vide**) ont été mélangées et leur indentation a été perdue. Les recopier **dans le bon ordre** et **correctement indentées**, puis <span class="run" title="À programmer et tester sur machine">▶</span> tester sur `["chat", "girafe", "ours", "souris"]`. Pourquoi obtient-on `"girafe"` et non `"souris"`, qui a pourtant la même longueur ?
@@ -267,6 +305,10 @@ if len(mot) > len(champion):
 champion = mots[0]
 for mot in mots:
 ```
+
+??? pouce "Coup de pouce"
+
+    La ligne `def` vient en premier. Qu’est-ce qui doit être fait une seule fois avant la boucle, à chaque tour (et seulement sous condition), une seule fois après ?
 
 ??? corrige "Corrigé"
 
@@ -291,6 +333,8 @@ for mot in mots:
 
 ??? corrige "Corrigé"
 
+    On retient l’**indice** du champion, `i_min`, initialisé à `0` ; on parcourt par indice et l’on compare `t[i]` à la valeur du champion, `t[i_min]`.
+
     ```python
     def indice_du_min(t):
         i_min = 0
@@ -299,6 +343,8 @@ for mot in mots:
                 i_min = i
         return i_min
     ```
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> écrire `t[i] <= t[i_min]` : en cas d’égalité, le champion est remplacé, et l’on renvoie le *dernier* indice du minimum.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Amplitude <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-11 }
 
@@ -354,6 +400,8 @@ for mot in mots:
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Le deuxième plus grand <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-13 }
 
+<span class="duree">≈ 20 min</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `deuxieme_max(t)` qui renvoie le deuxième plus grand élément *distinct* d’un tableau (on suppose au moins deux valeurs distinctes), en **un seul** parcours.
 
 ```text
@@ -396,6 +444,8 @@ for mot in mots:
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 14</span> — Que contient la variable ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-14 }
 
+<span class="essentiel">• essentiel</span>
+
 On considère la fonction suivante :
 
 ```python
@@ -411,10 +461,16 @@ def f(t):
 
 2.  En déduire ce que calcule la fonction.
 
+??? pouce "Coup de pouce"
+
+    Faire la trace sur un petit tableau, par exemple `[3, 4, 7, 8]` : après chaque tour, que compte `c` parmi les éléments déjà visités ?
+
 ??? corrige "Corrigé"
 
     **1.** Invariant : à chaque tour, `c` contient le **nombre d’éléments pairs déjà visités**.  
     **2.** À la fin, tous les éléments ont été visités : la fonction renvoie le **nombre d’éléments pairs** du tableau.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> énoncer l’invariant sur « tous les éléments du tableau » : il ne porte que sur les éléments **déjà visités** ; c’est seulement à la sortie de la boucle que ce sont tous les éléments.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Énoncer un invariant <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-15 }
 
@@ -434,6 +490,8 @@ On reprend la fonction `produit(t)` (initialisation `p = 1`, puis `p = p * x` à
     **2.** Comme l’invariant est vrai à chaque tour, il l’est encore au dernier : quand tous les éléments ont été visités, `p` est le produit de *tout* le tableau — le résultat est donc correct.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 16</span> — Une preuve d’invariant en deux étapes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-16 }
+
+<span class="duree">≈ 15 min</span>
 
 On considère `nb_positifs(t)`, qui compte les éléments strictement positifs (initialisation `c = 0` ; à chaque tour, `c = c + 1` si `x > 0`). Soit la propriété $$P : \text{«~\texttt{c} contient le nombre d'éléments strictement positifs \textbf{déjà visités}~».}$$ En suivant la méthode du cours, **démontrer** que $P$ est un invariant :
 
@@ -469,6 +527,8 @@ On considère `nb_positifs(t)`, qui compte les éléments strictement positifs (
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 17</span> — Compter les tours <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-17 }
 
+<span class="essentiel">• essentiel</span>
+
 Pour chaque fonction, dire combien de tours de boucle sont effectués pour un tableau de `n` éléments, et si le coût est **linéaire** ou **quadratique**.
 
 ```python
@@ -482,9 +542,15 @@ def f(t):                          def g(t):
                                        return c
 ```
 
+??? pouce "Coup de pouce"
+
+    Combien de tours fait une boucle `for` sur un tableau de `n` éléments ? Dans (b), la boucle intérieure est exécutée en entier à *chaque* tour de la boucle extérieure.
+
 ??? corrige "Corrigé"
 
     **(a)** `n` tours de boucle : coût **linéaire**. **(b)** deux boucles imbriquées sur `t` : $n \times n = n^2$ tours : coût **quadratique**.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> ne compter que les $n$ tours de la boucle intérieure : elle est exécutée en entier à chacun des $n$ tours de la boucle extérieure.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Min et max en une seule passe <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-18 }
 
@@ -520,6 +586,8 @@ def f(t):                          def g(t):
 
 ??? corrige "Corrigé"
 
+    Deux boucles imbriquées sur les indices : on compare chaque élément à ceux qui sont *après* lui (`j` part de `i + 1`), et l’on s’arrête dès qu’on trouve deux éléments égaux.
+
     ```python
     def a_un_doublon(t):
         for i in range(len(t)):
@@ -532,6 +600,8 @@ def f(t):                          def g(t):
     Dans le pire cas (aucun doublon), on examine toutes les paires, soit environ $\dfrac{n^2}{2}$ comparaisons : coût **quadratique**. <span class="horsprog">au-delà du programme</span>
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 20</span> — Deux tableaux <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-20 }
+
+<span class="duree">≈ 15 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `element_commun(t1, t2)` qui renvoie `True` si les deux tableaux ont (au moins) un élément en commun. Combien de fois, dans le pire cas, compare-t-on deux éléments si `t1` et `t2` ont chacun `n` éléments ? Quel est le coût ? <span class="horsprog">au-delà du programme</span>
 
@@ -559,6 +629,8 @@ def f(t):                          def g(t):
     Dans le pire cas (aucun élément commun), on compare chaque élément de `t1` à chaque élément de `t2`, soit $n \times n = n^2$ comparaisons : coût **quadratique**. <span class="horsprog">au-delà du programme</span>
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 21</span> — Moyenne, variance — et le piège du coût <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-21 }
+
+<span class="duree">≈ 30 min</span>
 
 C’est **l’exercice central** du chapitre. La variance mesure la dispersion : $V = \dfrac{1}{n}\displaystyle\sum_i (x_i - m)^2$, où $m$ est la moyenne.
 
@@ -637,6 +709,8 @@ C’est **l’exercice central** du chapitre. La variance mesure la dispersion :
 
 ??? corrige "Corrigé"
 
+    1 : position du champion (on retient l’indice du maximum) ; 2 : un compteur ; 3 : deux variables, la longueur de la série en cours (remise à `0` un jour plus froid) et le record.
+
     ```python
     def jour_le_plus_chaud(temperatures):
         i_max = 0
@@ -678,6 +752,8 @@ C’est **l’exercice central** du chapitre. La variance mesure la dispersion :
     1 : renvoyer `False` dès qu’une note sort de l’intervalle, et `True` seulement après la boucle. 2 : partir d’un tableau vide et y ajouter des *indices*, donc parcourir par indice.
 
 ??? corrige "Corrigé"
+
+    1 : recherche séquentielle d’une note invalide : on renvoie `False` dès qu’on en trouve une, `True` seulement après la boucle. 2 : on garde les *indices* des notes hors de l’intervalle.
 
     ```python
     def toutes_valides(notes):
@@ -740,3 +816,48 @@ def est_present(t, x):
     ```
 
     Avec cette correction, `est_present([3, 8, 5], 5)` renvoie `True` et `est_present([3, 8, 5], 7)` renvoie `False`. **3.** Tester la fonction sur un exemple où `x` n’est *pas* en première position : un seul appel suffisait. Un `return False` placé dans un `for` est presque toujours suspect.
+
+### Entraînement
+
+*Exercices courts pour s’entraîner aux gestes de base, chacun avec plusieurs données. Ils font tous partie du parcours essentiel.*
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 25</span> — Dérouler la recherche du maximum <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-25 }
+
+<span class="essentiel">• essentiel</span>
+
+On considère la fonction du cours :
+
+```python
+def maximum(t):
+    m = t[0]
+    for x in t:
+        if x > m:
+            m = x
+    return m
+```
+
+Sans machine, donner la valeur de `m` après chaque tour de boucle, puis le résultat, pour : a) `[5, 2, 8, 1, 8]` ; b) `[-4, -9, -2, -7]` ; c) `[7]`.
+
+??? pouce "Coup de pouce"
+
+    Un tableau de trace à deux colonnes, `x` et `m`, une ligne par tour. Avant le premier tour, `m` vaut déjà `t[0]`. `m` ne change que si `x` est *strictement* plus grand.
+
+??? corrige "Corrigé"
+
+    Valeurs de `m` après chaque tour : a) `5, 5, 8, 8, 8` : résultat `8` (le second `8` ne remplace pas le premier : `8 > 8` est faux). b) `-4, -4, -2, -2` : résultat `-2`. c) `7` : un seul tour, résultat `7`.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> partir de `m = 0` au lieu de `t[0]` : sur b), `m` resterait à `0`, qui n’est pas dans le tableau.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 26</span> — Recherche séquentielle : combien de tours ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-26 }
+
+<span class="essentiel">• essentiel</span>
+
+Avec la fonction `est_present(t, x)` du cours (on renvoie `True` dès qu’on trouve, `False` après la boucle), donner sans machine le résultat **et** le nombre de tours de boucle effectués pour chaque appel : a) `est_present([4, 7, 1, 9], 1)` ; b) `est_present([4, 7, 1, 9], 5)` ; c) `est_present([], 3)` ; d) `est_present([2, 2, 2], 2)`. Lequel de ces appels illustre le pire cas ?
+
+??? pouce "Coup de pouce"
+
+    Compter les éléments examinés : la boucle s’arrête au premier élément égal à `x`. Si `x` est absent, combien d’éléments faut-il examiner avant de répondre ?
+
+??? corrige "Corrigé"
+
+    a) `True` en **3** tours (`1` est le troisième élément). b) `False` en **4** tours : `5` est absent, il faut tout examiner. c) `False` en **0** tour : le tableau est vide. d) `True` en **1** tour : le meilleur cas. Le pire cas est b) : l’élément est absent et l’on examine les $n$ éléments.

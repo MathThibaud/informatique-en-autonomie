@@ -10,7 +10,7 @@ hide:
 <div class="liens-annee" markdown>
 
 [Présentation de l'année](presentation-de-l-annee.md){ .md-button }
-[Frise chronologique](frise-chronologique.md){ .md-button }
+[Méthode : débattre](methode-debattre.md){ .md-button }
 
 </div>
 

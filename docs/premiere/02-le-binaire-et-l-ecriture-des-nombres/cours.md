@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *« Écriture d’un entier positif dans une base $b \geqslant 2$ ; passer de la représentation d’une base dans une autre (bases 2, 10 et 16 privilégiées). Représentation binaire d’un entier relatif (complément à 2). Valeurs booléennes : 0, 1. Opérateurs booléens : `and`, `or`, `not`. Expressions booléennes. Représentation approximative des réels : notion de nombre flottant. Représentation d’un texte en machine : encodages ASCII, ISO-8859-1, Unicode. »* |
-| **Prérequis** | les bases de Python (opérateurs `//` et `%`, boucles, opérateurs `and`, `or`, `not`). |
+| **Prérequis** | les bases de Python (opérateurs `//` et `%`, boucles, opérateurs `and`, `or`, `not`). (→ fiches de révision : ch. 1) |
 | **Objectifs** | comprendre *comment* une machine stocke un nombre ; *convertir* entre bases 2, 10 et 16 ; dresser une *table de vérité* et comprendre comment des *portes logiques* additionnent ; coder un entier *relatif* (complément à 2) ; comprendre *pourquoi* les nombres à virgule sont *approchés* ; comprendre comment un *texte* est codé (ASCII, Unicode) et *pourquoi* un même fichier peut s’afficher en charabia. |
+
+!!! situation "Situation de départ"
+
+    1.  Pourquoi un octet ne peut-il pas dépasser 255 ?
+
+    2.  Pourquoi Python affiche-t-il `0.30000000000000004` quand on lui demande `0.1 + 0.2` ?
+
+    3.  Pourquoi un texte s’affiche-t-il parfois avec « cafÃ© » à la place de « café » ?
 
 ## Pourquoi le binaire ? De quoi parle-t-on dans la machine
 
@@ -22,7 +30,9 @@ Pourquoi deux et pas dix ? Parce que distinguer *deux* niveaux (« il y a du cou
 
     Un **bit** (de l’anglais *binary digit*, « chiffre binaire ») est la plus petite information : un `0` ou un `1`. On regroupe les bits par paquets de huit : un paquet de 8 bits s’appelle un **octet** (*byte* en anglais).
 
-![](../figures/5519829334e4bf6d.svg){ .tikz loading=lazy }
+<span class="retouract">↺ Retour sur l'activité.</span> La rangée de lampes allumées ou éteintes de l’activité « Les cartes à points » transmettait déjà des bits, et la question des dix niveaux de luminosité était celle de la robustesse : deux états se distinguent sans erreur.
+
+![](../figures/287a108aaf37f0f9.svg){ .tikz loading=lazy }
 
 Un octet : 8 cases valant chacune `0` ou `1`. Ici, on lira bientôt le nombre `185`.
 
@@ -30,7 +40,7 @@ Un octet : 8 cases valant chacune `0` ou `1`. Ici, on lira bientôt le nombre `1
 
 Une fois qu’on sait coder des *nombres* avec des `0` et des `1`, on sait tout coder : un texte (chaque caractère reçoit un numéro), une image (chaque pixel, trois nombres de couleur), un son (des milliers de mesures par seconde)… C’est l’idée fondatrice de l’informatique : **une même machine, manipulant des bits, peut tout représenter**. Ce chapitre s’attaque à la brique de base : **les nombres**.
 
-!!! remarque "Remarque — Un peu d’histoire"
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
 
     Le système binaire est décrit dès **1703** par le mathématicien et philosophe allemand *Gottfried Wilhelm Leibniz*, dans un mémoire présenté à l’Académie royale des sciences de Paris, l’*Explication de l’arithmétique binaire* : on y voit, ci-contre, la table des premiers entiers écrits avec des `0` et des `1`, et les additions, soustractions et multiplications posées en binaire. Leibniz admire la simplicité de ces calculs, sans imaginer encore de machine pour les faire. C’est *Claude Shannon* qui, en **1937**, montre que l’algèbre des deux valeurs « vrai/faux » de *George Boole* permet de **concevoir des circuits électriques** : le pont était jeté entre la logique et la machine.
 
@@ -40,7 +50,7 @@ Une fois qu’on sait coder des *nombres* avec des `0` et des `1`, on sait tout 
     ![](../img/02_hist_leibniz_binaire_1703.png){ .photo loading=lazy style="width:131px" }  
     L’arithmétique binaire de Leibniz (1703)
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif) — Une blague d’informaticien"
 
     La blague classique des informaticiens : « *Il existe 10 sortes de gens : ceux qui comprennent le binaire, et les autres.* » (Ici `10` se lit « deux »…)
 
@@ -61,6 +71,8 @@ La **base 2** (binaire) n’utilise que deux chiffres, `0` et `1`, et chaque ran
 !!! propriete "Propriété 1 — Combien de valeurs sur $n$ bits ?"
 
     Avec **1** bit on code $2$ valeurs (`0`, `1`) ; avec **2** bits, $4$ (`00`, `01`, `10`, `11`) ; avec **3** bits, $8$… Chaque bit ajouté **double** le nombre de possibilités : sur $n$ bits, on code $2^n$ valeurs, soit les entiers de $0$ à $2^n - 1$.
+
+<span class="retouract">↺ Retour sur l'activité.</span> Les cartes à points portaient les poids de la base 2 : 1, 2, 4, 8, 16, chacune valant le double de sa voisine de droite. Une carte montrée était un `1`, une carte cachée un `0`, et les $2^5 = 32$ configurations des cinq cartes donnaient tous les nombres de 0 à $31 = 2^5 - 1$.
 
 Un **octet** (8 bits) code donc $2^8 = 256$ valeurs : les entiers de `0` à `255`. C’est pourquoi ce nombre revient partout en informatique.
 
@@ -127,6 +139,8 @@ On pose l’addition comme en base 10, rang par rang **de droite à gauche**, en
     \end{array}
     \qquad\qquad \texttt{11000}_2 = 16 + 8 = 24 = 13 + 11.$$ Une retenue qui sort à gauche ajoute un rang : la somme de deux nombres de 4 bits peut demander 5 bits. Cette addition, que le processeur effectue sans cesse, resservira plus loin pour coder les entiers négatifs (complément à deux).
 
+<span class="retouract">↺ Retour sur l'activité.</span> En comptant de 7 à 8 avec les cartes, les trois cartes de droite se cachaient et la carte « 8 points » se montrait : c’est l’addition $\texttt{00111}_2 + 1 = \texttt{01000}_2$, dont la retenue se propage de rang en rang.
+
 <span id="cours-02-2" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[2](exercices.md#ex-02-2) à [6](exercices.md#ex-02-6)** (convertir binaire/décimal ; les programmer)
@@ -163,7 +177,7 @@ On résume le comportement d’un opérateur par sa **table de vérité** : une 
 
 Ce sont exactement les opérateurs `not`, `and` et `or` de Python, rencontrés au chapitre *Les bases de la programmation Python* pour combiner des conditions, avec `True` à la place de `1` et `False` à la place de `0`. Dans un processeur, chacun est réalisé par une **porte logique** de quelques transistors, que les schémas électroniques dessinent ainsi :
 
-![](../figures/dbeb0fb369be8959.svg){ .tikz loading=lazy }
+![](../figures/d52205548d545100.svg){ .tikz loading=lazy }
 
 Les portes NON, ET, OU et OU exclusif (symboles américains, les plus répandus).
 
@@ -235,9 +249,9 @@ Revenons à l’addition posée plus haut (« Additionner en binaire »). Dans l
 
     La colonne de la somme est la table du **xor**, celle de la retenue est la table du **et** : $$s = a \text{ xor } b \qquad\qquad r = a \text{ et } b.$$ Le circuit formé d’une porte **xor** et d’une porte **et** s’appelle un **demi-additionneur** : il additionne deux bits.
 
-![](../figures/8eacb89cbd81c608.svg){ .tikz loading=lazy }
+![](../figures/2e442c3c9f5592ad.svg){ .tikz loading=lazy }
 
-!!! remarque "Remarque — Pourquoi « demi » ? au-delà du programme"
+!!! curieux "Pour les curieux (facultatif) — Pourquoi « demi » ?"
 
     Dans les autres colonnes de l’addition posée, il faut aussi ajouter la **retenue venue de la droite** : trois bits et non deux (c’est le cas $1 + 1 + 1 = \texttt{11}_2$ vu plus haut). On assemble pour cela deux demi-additionneurs en un **additionneur complet**, puis on place un additionneur complet par colonne : le processeur additionne ainsi des nombres de 64 bits avec, en tout et pour tout, des portes logiques (on retrouvera ce circuit dans l’unité arithmétique et logique, au chapitre *Architecture des ordinateurs et systèmes d’exploitation*). Le TP « Programmer l’arithmétique binaire » fait construire cette chaîne en Python, porte après porte.
 
@@ -283,7 +297,7 @@ Pour passer du **décimal** à l’hexadécimal, on divise par 16 (au lieu de 2)
 
 <span id="cours-02-10" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-02-10) à [13](exercices.md#ex-02-13)** (l’hexadécimal ; changer de base)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-02-10) à [13](exercices.md#ex-02-13)** et **[26](exercices.md#ex-02-26)** (l’hexadécimal ; changer de base)
 
 ## Les entiers relatifs : le complément à deux
 
@@ -313,7 +327,7 @@ On pourrait réserver le bit de poids fort au signe (`0` pour $+$, `1` pour $-$)
 
 Pourquoi ça marche ? Parce qu’avec cette convention, l’addition binaire ordinaire donne le bon résultat, **sans traitement spécial** : $12 + (-12)$ doit valoir $0$.
 
-![](../figures/26d5ad7ae05a5b41.svg){ .tikz loading=lazy }
+![](../figures/9ed2c0f717657224.svg){ .tikz loading=lazy }
 
 La retenue finale « déborde » au-delà des 8 bits : il reste `00000000`, soit $0$. Tout fonctionne.
 
@@ -341,7 +355,7 @@ La retenue finale « déborde » au-delà des 8 bits : il reste `00000000`, soit
 
 **Le cadran du complément à deux sur 4 bits.** On range les 16 mots de 4 bits en cercle, comme les heures d’une horloge. Ajouter 1, c’est avancer d’un cran dans le sens des aiguilles d’une montre : de `1111` ($-1$) on passe à `0000` ($0$), la retenue « déborde » comme plus haut. Les mots qui commencent par `0` (à droite) sont les positifs $0$ à $7$ ; ceux qui commencent par `1` (à gauche) sont les négatifs $-8$ à $-1$. Seul piège : en bas, de `0111` ($+7$) à `1000` ($-8$), on passe brutalement du plus grand au plus petit : c’est le **dépassement de capacité**.
 
-![](../figures/1107dfa2024e13b9.svg){ .tikz loading=lazy }
+![](../figures/2a5a0f4d0f4497e6.svg){ .tikz loading=lazy }
 
 !!! remarque "Remarque — sur machine"
 
@@ -349,7 +363,7 @@ La retenue finale « déborde » au-delà des 8 bits : il reste `00000000`, soit
 
 <span id="cours-02-14" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[14](exercices.md#ex-02-14) à [17](exercices.md#ex-02-17)** (entiers relatifs : complément à deux)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[14](exercices.md#ex-02-14) à [17](exercices.md#ex-02-17)** et **[27](exercices.md#ex-02-27)** (entiers relatifs : complément à deux)
 
 ## Les nombres à virgule : les flottants
 
@@ -393,7 +407,7 @@ Reprenons la méthode sur $0{,}1$ : $$0{,}1 \times 2 = \mathbf{0}{,}2 \to \mathb
 
 Comme en base 10 on écrit $6{,}02 \times 10^{23}$, on met un flottant binaire sous la forme $1{,}\!\ldots \times 2^{e}$ (un seul `1` avant la virgule). La norme **IEEE 754** (1985) range alors, sur 32 bits (« simple précision ») :
 
-![](../figures/cfcd66315a4ef608.svg){ .tikz loading=lazy }
+![](../figures/50493647feaf51e1.svg){ .tikz loading=lazy }
 
 - **1 bit de signe** (`0` positif, `1` négatif) ;
 
@@ -417,7 +431,7 @@ Le programme demande de savoir **estimer la taille** d’un nombre en mémoire.
 
 Ordre de grandeur à retenir : additionner deux nombres de $k$ bits peut demander $k+1$ bits (à cause de la retenue) ; multiplier deux nombres de $k$ bits peut en demander jusqu’à $2k$.
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif) — Les tailles « rondes » de l’informatique"
 
     C’est ce comptage qui explique les tailles « rondes » de l’informatique : un octet $\to$ 256 valeurs ; 32 bits $\to \approx 4$ milliards (la limite des « anciennes » adresses mémoire) ; 64 bits $\to$ un nombre astronomique, largement suffisant aujourd’hui.
 
@@ -441,7 +455,7 @@ Extrait de la table ASCII (codes en décimal).
 
 Deux régularités bien pratiques : les chiffres, les majuscules et les minuscules se suivent *dans l’ordre* ; et une minuscule vaut toujours sa majuscule $+\,32$ (`A`${=}65$, `a`${=}97$).
 
-!!! remarque "Remarque — sur machine"
+!!! encadre "À retenir — ord et chr en Python"
 
     En Python, `ord` donne le code d’un caractère, et `chr` fait l’inverse.
 
@@ -499,9 +513,13 @@ Un fichier texte n’est qu’une suite d’octets : **rien** n’y indique de f
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[21](exercices.md#ex-02-21) à [25](exercices.md#ex-02-25)** (coder le texte : ASCII, Unicode)
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    Les conversions reposent sur les opérateurs `//` et `%` et la boucle `while` du chapitre *Les bases de la programmation Python*, où l’on avait constaté sans l’expliquer que `0.1 + 0.2` ne vaut pas `0.3`. Les deux états du bit sont ceux du **transistor**, brique de base que l’on retrouvera au chapitre *Architecture des ordinateurs et systèmes d’exploitation*, où les **portes logiques** et l’additionneur de ce chapitre deviendront l’unité arithmétique et logique du processeur, et le **débordement** d’un entier stocké sur trop peu de bits est à l’origine de l’explosion d’Ariane 5, que racontera le chapitre *Spécifier et mettre au point ses programmes*. Une adresse IPv4 du chapitre *Le Web : réseaux et interactions homme-machine* ne sera rien d’autre que quatre **octets** (d’où les nombres de 0 à 255), et l’encodage **UTF-8** réapparaîtra dès qu’on ouvrira un fichier CSV (*Les données en tables*) ou qu’on écrira `<meta charset="utf-8">` dans une page HTML. En Terminale, le chapitre *Réseaux et routage* découpera ces 32 bits en partie réseau et partie hôte (le masque `/n`), et la *Cryptographie* chiffrera un message en calculant sur les rangs de ses lettres (chiffre de César).
+    - **Ce qu’il réutilise.** Les conversions reposent sur `//`, `%` et la boucle `while` des *Bases de la programmation Python*, où l’on avait constaté sans l’expliquer que `0.1 + 0.2` ne vaut pas `0.3`.
+
+    - **Ce qu’il prépare.** Transistors et portes logiques formeront le cœur du processeur (*Architecture des ordinateurs et systèmes d’exploitation*) ; l’adresse d’une machine sur Internet (*Le Web : réseaux et interactions homme-machine*) sera faite de quatre octets ; UTF-8 reviendra avec les fichiers CSV (*Les données en tables*) et les pages HTML.
+
+    - **En Terminale.** La *Cryptographie* chiffrera un message en calculant sur les numéros de ses lettres (chiffre de César).
 
 ## Bilan — la carte mémoire
 
@@ -511,15 +529,24 @@ Un fichier texte n’est qu’une suite d’octets : **rien** n’y indique de f
 | Base $b$ | chaque rang pèse une puissance de $b$ ; $n$ bits codent $2^n$ valeurs |
 | Bin. $\to$ déc. | additionner les poids ($128, 64, 32, \ldots$) des rangs à `1` |
 | Déc. $\to$ bin. | divisions successives par 2, restes lus **de bas en haut** |
-| Logique booléenne | tables de vérité de **et**, **ou**, **non**, **xor** ; $n$ variables $\to 2^n$ lignes |
+| Logique booléenne | tables de **et**, **ou**, **non**, **xor** ; $n$ variables $\to 2^n$ lignes |
 | Demi-additionneur | somme $=$ $a$ xor $b$ ; retenue $=$ $a$ et $b$ |
 | Hexadécimal | 1 chiffre hexa $=$ 4 bits ; on regroupe les bits par 4 |
-| Entier relatif | **complément à 2** : inverser les bits, puis $+1$ ; bornes $-2^{n-1}\ldots 2^{n-1}-1$ ; décoder : bit de poids fort `1` $\Rightarrow$ négatif, inverser puis $+1$ donne la valeur absolue |
-| Flottant | écriture souvent **approchée** ; ne jamais tester `==` sur des *float* |
-| Texte (ASCII) | chaque caractère a un **numéro** ; ASCII $=$ 7 bits (128 car.) ; `ord`/`chr` |
+| Relatif : coder | **complément à 2** : inverser les bits, puis $+1$ ; de $-2^{n-1}$ à $2^{n-1}-1$ sur $n$ bits |
+| Relatif : décoder | bit de poids fort `1` $\Rightarrow$ négatif ; inverser puis $+1$ donne la valeur absolue |
+| Flottant | écriture souvent **approchée** ; jamais de `==` entre *float* |
+| Texte (ASCII) | un **numéro** par caractère ; ASCII $=$ 7 bits (128 car.) ; `ord`/`chr` |
 | Unicode / UTF-8 | Unicode $=$ catalogue universel (`U+`) ; UTF-8 $=$ 1 à 4 octets, compatible ASCII |
-| Charabia (*mojibake*) | lire un fichier avec le **mauvais encodage** $\Rightarrow$ « cafÃ© » ; `encode`/`decode` |
+| Charabia | *mojibake* : **mauvais encodage** à la lecture $\Rightarrow$ « cafÃ© » ; `encode`/`decode` |
 | Pourquoi le binaire | deux états $=$ fiabilité ; tout (texte, image, son) se ramène à des bits |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Un octet compte 8 bits, et chaque bit ajouté double le nombre de valeurs : $2^8 = 256$ valeurs, les entiers de $0$ à $2^8 - 1 = 255$ (§ II).
+
+    2.  $0{,}1$ n’a pas d’écriture binaire finie ; sur un nombre fini de bits, la machine n’en stocke qu’une valeur **approchée** (un **flottant**), et les petites erreurs s’ajoutent (§ VII).
+
+    3.  Le texte a été écrit en **UTF-8**, où « é » occupe deux octets (`C3 A9`), puis relu en **Latin-1**, un octet par caractère : `C3` devient « Ã » et `A9` devient « © » (§ IX).
 
 ## Erreurs fréquentes
 

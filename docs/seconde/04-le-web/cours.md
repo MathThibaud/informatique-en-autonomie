@@ -10,15 +10,25 @@
 | **Idée** | Une page web est un simple **fichier texte** : du **HTML** pour le *contenu*, du **CSS** pour l’*apparence*. En comprenant ces deux langages, vous passez de *consommateur* à *auteur* du Web. |
 | **Objectifs** | Situer l’invention du Web ; ne plus confondre Web et Internet ; lire une URL et un échange client/serveur ; écrire une page en HTML ; la mettre en forme en CSS ; comprendre comment un moteur de recherche classe ses réponses. |
 
-!!! remarque "Remarque"
+!!! situation "Situation de départ"
 
-    **Un peu d’histoire.** L’idée d’un texte « augmenté » de renvois — l’<span id="lex-hypertexte04" class="ancre"></span>**hypertexte** — est imaginée dès **1965** par l’Américain **Ted Nelson**. Mais c’est en **1989** au **CERN** (près de Genève) que le Britannique **Tim Berners-Lee**, avec le Belge **Robert Cailliau**, invente le **World Wide Web** : relier des documents *de machine à machine* par des **hyperliens**. Il écrit le premier **navigateur** et met en ligne la **première page web** de l’histoire, dont le CERN a restauré une copie, consultable aujourd’hui. Fait remarquable : il choisit de ne rien breveter — le Web est **libre et gratuit**.
+    1.  Vous tapez l’adresse d’un site et la page s’affiche. Qui vous l’a envoyée, et sous quelle forme ? Et que veut dire « Erreur 404 » quand cela échoue ?
+
+    2.  Pourquoi tel site arrive-t-il en tête de vos recherches, et pas un autre ?
+
+    3.  Après avoir regardé une paire de baskets sur un site, vous la voyez en publicité partout ailleurs. Comment ces sites vous reconnaissent-ils ?
+
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
+
+    L’idée d’un texte « augmenté » de renvois — l’<span id="lex-hypertexte04" class="ancre"></span>**hypertexte** — est imaginée dès **1965** par l’Américain **Ted Nelson**. Mais c’est en **1989** au **CERN** (près de Genève) que le Britannique **Tim Berners-Lee**, avec le Belge **Robert Cailliau**, invente le **World Wide Web** : relier des documents *de machine à machine* par des **hyperliens**. Il écrit le premier **navigateur** et met en ligne la **première page web** de l’histoire, dont le CERN a restauré une copie, consultable aujourd’hui. Fait remarquable : il choisit de ne rien breveter — le Web est **libre et gratuit**.
 
     ![](../img/04_hist_premier_serveur.jpg){ .photo loading=lazy style="width:100%" }  
     Le premier serveur web, un ordinateur NeXT
 
     ![](../img/04_hist_berners_lee.jpg){ .photo loading=lazy style="width:100%" }  
     Tim Berners-Lee (2009)
+
+    [$\to$ frise chronologique](../methode-debattre.md#frise)
 
 !!! navigateur "Rendu dans le navigateur — info.cern.ch/hypertext/WWW/TheProject.html"
 
@@ -72,7 +82,7 @@ Quand vous consultez un site, deux ordinateurs dialoguent.
     <span id="lex-navigateur04" class="ancre"></span>Le <span id="lex-clientserveur04" class="ancre"></span>**client** est votre navigateur (Firefox, Chrome…) : il **demande** une page.  
     Le **serveur** est un ordinateur, allumé en permanence, qui **stocke** le site et **répond** en envoyant la page. Ce dialogue suit des règles précises : le protocole <span id="lex-http04" class="ancre"></span>**HTTP** (*HyperText Transfer Protocol*).
 
-![](../figures/fea4b74b068e5c3f.svg){ .tikz loading=lazy }
+![](../figures/9c49be03fdd78c9f.svg){ .tikz loading=lazy }
 
 Le navigateur envoie une **requête**, le serveur renvoie une **réponse** (la page, une image…) accompagnée d’un **code** qui dit si la requête a **réussi** ou **échoué** :
 
@@ -136,7 +146,7 @@ https://www.lycee.mc/cours/snt/web.html
 
 Les fichiers d’un site sont rangés dans des dossiers, comme sur votre ordinateur : c’est une structure en **arborescence** (un arbre à l’envers dont la racine est notée `/`).
 
-![](../figures/2f9a02254f2f483b.svg){ .tikz loading=lazy }  
+![](../figures/777b30c068af448a.svg){ .tikz loading=lazy }  
 Les **dossiers** sont encadrés, les **fichiers** sont les feuilles de l’arbre.
 
 !!! regle "Règle 6 — Chemin absolu, chemin relatif"
@@ -306,11 +316,11 @@ Une couleur s’écrit par son **nom** anglais (`red`, `crimson`, `teal`) ou par
 
     On peut cibler les éléments d’une page de trois façons différentes :
 
-| **On cible…**                      | **En HTML**      | **En CSS**     |
-|:-----------------------------------|:-----------------|:---------------|
-| **toutes** les balises d’un type   | `<p>`            | `p { …}`       |
-| un élément par son **id** (unique) | `id="intro"`     | `#intro { …}`  |
-| tous les éléments d’une **classe** | `class="alerte"` | `.alerte { …}` |
+    | **On cible…**                      | **En HTML**      | **En CSS**     |
+    |:-----------------------------------|:-----------------|:---------------|
+    | **toutes** les balises d’un type   | `<p>`            | `p { …}`       |
+    | un élément par son **id** (unique) | `id="intro"`     | `#intro { …}`  |
+    | tous les éléments d’une **classe** | `class="alerte"` | `.alerte { …}` |
 
 En CSS, l’`id` se cible avec un **dièse** `#`, la `class` avec un **point** `.` . C’est ainsi qu’on met en forme *un* paragraphe précis sans toucher aux autres.
 
@@ -429,13 +439,19 @@ Naviguer n’est jamais tout à fait anonyme, et laisser un site exécuter du co
 
 <span id="cours-04-21" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[21](exercices.md#ex-04-21)** (régler et sécuriser son navigateur), exercice **[22](exercices.md#ex-04-22)** (critiquer une réponse d’IA)
+<span class="afaire">▶ Exercices d'application :</span> exercice **[21](exercices.md#ex-04-21)** (régler et sécuriser son navigateur), exercice **[22](exercices.md#ex-04-22)** (critiquer une réponse d’IA), exercice **[23](exercices.md#ex-04-23)** (Python au service du thème)
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    Le Web s’appuie sur **Internet** : au chapitre *Internet*, on verra comment le navigateur trouve l’adresse du serveur et comment la page voyage en **paquets**. Les hyperliens forment un **graphe**, comme les amitiés d’un **réseau social** ; c’est sur ce graphe que travaille le PageRank. Cookies et traces de navigation sont des **données personnelles** (on y reviendra au chapitre *Les données structurées et leur traitement*). En spécialité NSI de Première, on étudie les formulaires, les méthodes `GET` et `POST` et le **JavaScript**.
+    - **Déjà vu :** les hyperliens forment un **graphe**, comme les amitiés d’un **réseau social** (c’est sur ce graphe que travaille le PageRank) ; en CSS, une couleur se code en **RVB**, comme un pixel (chapitre *Photographie numérique*).
+
+    - **À venir :** au chapitre *Internet*, on verra comment le navigateur trouve l’adresse du serveur et comment la page voyage en petits morceaux, les **paquets**.
+
+    - **Plus loin :** en spécialité NSI de Première, on étudie de plus près les formulaires et le **JavaScript**.
 
 ## Bilan — la carte mémoire
+
+Les mots importants du thème sont définis dans le lexique.
 
 | **Notion** | **À retenir** |
 |:---|:---|
@@ -455,6 +471,14 @@ Naviguer n’est jamais tout à fait anonyme, et laisser un site exécuter du co
 | Droit d’auteur | toute création a un auteur ; une **licence** fixe le droit d’usage (ex. Creative Commons). |
 | Moteur de recherche | robots + *index* ; résultats **classés** (PageRank), pubs incluses. |
 | Sécurité navigateur | régler cookies/historique/navigation privée ; se méfier de l’**hameçonnage**. |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Un **serveur**, qui répond à la **requête HTTP** de votre navigateur, le **client** (§ II) : il envoie un simple fichier texte écrit en **HTML** (§ IV), mis en forme par du **CSS** (§ V). Le code **404** signifie « page non trouvée » (§ II).
+
+    2.  Le **moteur de recherche** cherche dans son **index** et **classe** les pages avec un algorithme : une page est jugée importante si beaucoup de pages importantes pointent vers elle (PageRank). Les premiers résultats peuvent aussi être des **publicités** (§ VIII).
+
+    3.  Grâce aux **cookies** déposés dans votre navigateur, en particulier les cookies « tiers », qui vous suivent d’un site à l’autre ; on peut les refuser dans les réglages du navigateur (§ IX).
 
 !!! encadre "Débat argumenté"
 

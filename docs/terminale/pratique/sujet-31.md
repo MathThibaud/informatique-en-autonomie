@@ -1,10 +1,14 @@
 # Sujet 31 — Recherche d'un motif
 
+<span id="sujet-31" class="ancre"></span>[$\blacktriangleright$ corrigé](#csujet-31)
+
 !!! fichiers "Fichiers à télécharger"
 
     [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-31-recherche-motif){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-31-recherche-motif.zip){ .md-button }
 
 ??? corrige "Corrigé"
+
+    <span id="csujet-31" class="ancre"></span>[$\uparrow$ énoncé](#sujet-31)
 
     !!! remarque "Remarque"
 
@@ -184,6 +188,8 @@ Le dossier fourni au candidat comporte les éléments suivants :
 - un fichier de données `adn.txt`.
 
 ??? corrige "Corrigé"
+
+    <span id="csujet-31" class="ancre"></span>[$\uparrow$ énoncé](#sujet-31)
 
     !!! remarque "Remarque"
 

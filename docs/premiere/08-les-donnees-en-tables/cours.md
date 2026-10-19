@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *« Données en table »* : *indexation* d’une table ; *recherche* de lignes répondant à un critère ; *tri* d’une table selon les valeurs d’un descripteur ; *fusion* de deux tables ayant un descripteur commun. *Importer* une table depuis un fichier au format **CSV**. |
-| **Prérequis** | les **listes** et les **dictionnaires** (chapitre *Les types construits*) ; le **patron du parcours** et la **notion de coût** (chapitre *Algorithmique : le parcours séquentiel*) ; les boucles `for` et les fonctions. |
+| **Prérequis** | les **listes** et les **dictionnaires** (chapitre *Les types construits*) ; le **patron du parcours** et la **notion de coût** (chapitre *Algorithmique : le parcours séquentiel*) ; les boucles `for` et les fonctions. (→ fiches de révision : ch. 3, ch. 4) |
 | **Objectifs** | représenter une table par une **liste de dictionnaires** ; l’**importer** depuis un CSV ; **rechercher / filtrer** selon un critère ; **calculer** sur une colonne (moyenne, min, max, comptage) ; **trier** selon un descripteur ; **fusionner** deux tables. |
+
+!!! situation "Situation de départ"
+
+    1.  Comment un programme peut-il retrouver, parmi les 700 000 lignes d’un fichier de prénoms, celles des filles nées en 2023 ?
+
+    2.  Pourquoi Python affiche-t-il `’31773168’` quand on additionne les nombres `3177` et `3168` lus dans un fichier de données ?
+
+    3.  Une ville est décrite dans un fichier, sa région dans un autre : comment réunir les deux informations ?
 
 !!! remarque "Remarque — Le fil conducteur : une table, c’est un classeur de fiches"
 
@@ -51,6 +59,8 @@ Ici les **descripteurs** sont `prenom`, `sexe`, `annee`, `nombre`. La ligne de L
 
     - sur une ligne, les valeurs sont séparées par un **séparateur** (souvent la virgule `,` ou le point-virgule `;`).
 
+<span class="retouract">↺ Retour sur l'activité.</span> Dans l’activité « Ouvrir un fichier CSV », l’éditeur de texte montrait exactement cela : une première ligne à part (l’en-tête), puis un enregistrement par ligne, comme `Jade,F,2025,2925`. Et choisir le point-virgule comme séparateur dans le tableur mettait chaque ligne entière dans une seule colonne.
+
 Le contenu du fichier `prenoms.csv` commence ainsi (c’est du texte, on peut l’ouvrir avec un simple éditeur) :
 
 ```text
@@ -60,7 +70,7 @@ Ambre,F,2023,3168
 Alba,F,2023,3088
 ```
 
-!!! remarque "Remarque — Pourquoi un simple fichier texte, et pas un tableur ?"
+!!! curieux "Pour les curieux (facultatif) — Pourquoi un simple fichier texte, et pas un tableur ?"
 
     Un fichier CSV n’est *que* du texte. C’est en apparence pauvre, mais c’est une force :
 
@@ -109,7 +119,7 @@ prenoms = [
 ]
 ```
 
-![](../figures/5394182f11d05686.svg){ .tikz loading=lazy }
+![](../figures/4e771ddc232240f4.svg){ .tikz loading=lazy }
 
 Chaque ligne devient un dictionnaire ; les en-têtes de colonnes deviennent ses clés ; l’indice de la fiche dans la liste est en couleur.
 
@@ -124,7 +134,7 @@ On accède alors à une valeur en deux temps : d’abord la fiche (par son **ind
 
 !!! remarque "Remarque — Pourquoi des dictionnaires, et pas des listes de listes ?"
 
-    On *pourrait* coder chaque fiche par une liste `["Louise","F","2023","3177"]`. Mais il faudrait alors se souvenir que `nombre` est la case `3`… et écrire `ligne[3]`, illisible et fragile (si on ajoute une colonne, tout décale). Avec un dictionnaire, on écrit `ligne["nombre"]` : **on nomme ce qu’on manipule**. C’est exactement la promesse des $p$-uplets nommés du chapitre *Les types construits*.
+    On *pourrait* coder chaque fiche par une liste `["Louise","F","2023","3177"]`. Mais il faudrait alors se souvenir que `nombre` est la case `3`… et écrire `ligne[3]`, illisible et fragile (si on ajoute une colonne, tout décale). Avec un dictionnaire, on écrit `ligne["nombre"]` : **on nomme ce qu’on manipule**. C’est exactement le dictionnaire-*fiche* (l’enregistrement) annoncé au chapitre *Les types construits*.
 
 <span id="cours-08-2" class="ancre"></span>
 
@@ -170,6 +180,8 @@ Saisir la table à la main serait absurde pour 700 000 lignes. La bibliothèqu
     ```
 
     **Le réflexe** : dès qu’on veut *calculer* sur une colonne numérique, on **convertit** avec `int(...)` ou `float(...)`.
+
+<span class="retouract">↺ Retour sur l'activité.</span> Le tableur de l’activité, lui, devinait les types : il affichait `6` au lieu du code `06` de Nice. Python garde le texte tel quel, et c’est à vous de convertir ce qui doit l’être : un code de département n’est pas un nombre.
 
 <span id="cours-08-5" class="ancre"></span>
 
@@ -220,7 +232,7 @@ def chercher(table, prenom):
 
 <span id="cours-08-9" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-08-9) à [12](exercices.md#ex-08-12)** (rechercher et filtrer)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-08-9) à [12](exercices.md#ex-08-12)** et **[28](exercices.md#ex-08-28)** (rechercher et filtrer)
 
 ## Calculer sur une colonne : moyenne, min, max, comptage
 
@@ -315,7 +327,7 @@ Trier une table, c’est ranger ses fiches selon les valeurs d’**un** descript
 
 <span id="cours-08-17" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[17](exercices.md#ex-08-17) à [19](exercices.md#ex-08-19)** (trier une table)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[17](exercices.md#ex-08-17) à [19](exercices.md#ex-08-19)** et **[29](exercices.md#ex-08-29)** (trier une table)
 
 ## Fusionner deux tables : la jointure
 
@@ -325,9 +337,11 @@ L’information est souvent **répartie** sur plusieurs tables reliées par un d
 
     Fusionner deux tables partageant un descripteur, c’est produire une table où chaque enregistrement de la première est **complété** par les informations de la seconde **ayant la même valeur** pour ce descripteur.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Pour trouver la région de Menton dans l’activité, vous avez fait une jointure à la main : passer de `communes.csv` à `departements.csv` grâce à la colonne `dep`. Ajaccio, de code `2A` absent du second fichier, restait sans réponse.
+
 Prenons une table de communes et une table de départements, reliées par le code `dep` :
 
-![](../figures/eafcbefad41f2167.svg){ .tikz loading=lazy }
+![](../figures/1f3cfd5dc78fb6d6.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 6 — Le patron de la jointure"
 
@@ -354,7 +368,7 @@ Prenons une table de communes et une table de départements, reliées par le cod
 
 La table obtenue réunit les colonnes des deux tables, une ligne par commune :
 
-![](../figures/91533ae63e036d3e.svg){ .tikz loading=lazy }
+![](../figures/b0bdd9e84293c11c.svg){ .tikz loading=lazy }
 
 !!! remarque "Remarque — Une fiche sans correspondance disparaît"
 
@@ -377,17 +391,13 @@ t.sort_values(by="nombre", ascending=False)   # trier
 pandas.merge(communes, departements)          # fusionner
 ```
 
-!!! remarque "Remarque — Le prix de la magie"
+!!! curieux "Pour les curieux (facultatif) — Le prix de la magie"
 
     `pandas` devine tout seul que `nombre` est un entier (plus besoin de `int`). C’est confortable, mais c’est une **boîte noire** : au bac comme dans ce cours, on veut savoir écrire soi-même le parcours, le filtre, le tri et la jointure. `pandas` viendra *après*.
 
-!!! remarque "Remarque — En Terminale"
-
-    Le chapitre *Bases de données et langage SQL* change de point de vue : on n’écrit plus le parcours soi-même, on *décrit* les lignes voulues (`SELECT`… `WHERE`…) et le système de gestion de base de données s’occupe du reste, jointures comprises.
-
 ## Un peu d’histoire
 
-!!! remarque "Remarque — Des cartes perforées à l’open data"
+!!! curieux "Pour les curieux (facultatif) — Des cartes perforées à l’open data"
 
     En **1890**, recenser les 63 millions d’Américains à la main menaçait de prendre plus de dix ans. **Herman Hollerith** (1860–1929) invente une machine qui lit des **cartes perforées** — une carte par personne, un trou par caractéristique : c’est déjà « une fiche par individu, les mêmes rubriques pour tous », l’idée même d’une table. Grâce à elle, le total de la population est connu dès la fin de 1890, et le dépouillement complet ne prend que quelques années au lieu de la décennie redoutée. Hollerith fonde en 1896 une société qui, par fusions, deviendra en **1924** une certaine… **IBM**.
 
@@ -399,9 +409,13 @@ pandas.merge(communes, departements)          # fusionner
 
     En **1970**, **Edgar Codd** pose la théorie des **bases de données relationnelles** (des tables reliées par des descripteurs communs — notre jointure !), qu’on étudiera en Terminale. Le format **CSV**, lui, traîne dans les ordinateurs depuis les années 1970 pour sa simplicité désarmante. Et depuis **2011**, l’État français ouvre ses données sur `data.gouv.fr` : le *parcours de tables* n’est plus un exercice, c’est un pouvoir citoyen. (Petit vertige : une fois compressé, le fichier des prénoms tout entier, plus de 700 000 lignes, ne pèse que quelques mégaoctets, à peu près autant qu’*une seule* photo de votre téléphone.)
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    Ce chapitre assemble des outils déjà connus : la liste de dictionnaires vient du chapitre **Les types construits** ; filtrer, compter ou garder la fiche championne relèvent du patron du chapitre **Algorithmique : le parcours séquentiel** ; le tri selon un descripteur prolonge **Les algorithmes de tri**, en déléguant le travail à `sorted`. Le charabia « Ã© » d’un fichier mal ouvert est celui qu’explique le chapitre **Le binaire et l’écriture des nombres** (de l’UTF-8 relu comme du Latin-1). Le jeu de données du chapitre **Les k plus proches voisins** sera exactement une telle table : une fiche par individu, des descripteurs, plus une étiquette. En Terminale, le chapitre **Bases de données et SQL** appelle **clé étrangère** le descripteur commun d’une jointure, et la **clé primaire** y garantit que chaque fiche est identifiée sans ambiguïté.
+    - **Ce qu’il réutilise.** La liste de dictionnaires (*Les types construits*) ; filtrer, compter, garder la fiche championne (*Algorithmique : le parcours séquentiel*) ; le tri (*Les algorithmes de tri*) ; le charabia « Ã© », expliqué dans *Le binaire et l’écriture des nombres*.
+
+    - **Ce qu’il prépare.** Le jeu de données des *$k$ plus proches voisins* sera exactement une telle table : une fiche par individu, des descripteurs, plus une étiquette.
+
+    - **En Terminale.** Avec *Bases de données et langage SQL*, on n’écrira plus le parcours : on *décrira* les lignes voulues (`SELECT`… `WHERE`…), jointures comprises.
 
 ## Bilan — la carte mémoire
 
@@ -416,6 +430,14 @@ pandas.merge(communes, departements)          # fusionner
 | Calculer | moyenne / min / max / comptage $=$ le **patron du parcours**, coût *linéaire* |
 | Trier | `sorted(table, key=lambda l: l["..."] , reverse=...)` ; ne modifie pas l’original |
 | Fusionner | jointure sur un descripteur commun ; les fiches sans correspondance *disparaissent* |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  On importe le fichier en **liste de dictionnaires** (§ III), puis on le **parcourt** en gardant les fiches dont le sexe vaut `"F"` et l’année `"2023"` : c’est un **filtre**, de coût linéaire (§ IV).
+
+    2.  Tout ce qu’on lit dans un CSV est du **texte** : `"3177" + "3168"` **concatène** deux chaînes. Il faut convertir avec `int(...)` avant de calculer (§ III).
+
+    3.  Par une **jointure** sur le descripteur commun `dep` : chaque commune est complétée par la fiche du département de même code ; une commune sans correspondance disparaît (§ VII).
 
 ## Erreurs fréquentes
 

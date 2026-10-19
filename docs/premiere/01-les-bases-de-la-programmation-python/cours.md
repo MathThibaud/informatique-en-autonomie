@@ -10,11 +10,19 @@
 | **Prérequis** | aucun. Il suffit de savoir ouvrir une console ou un éditeur Python en ligne. |
 | **Objectifs** | *lire*, *écrire* et *exécuter* un programme simple ; maîtriser les six constructions élémentaires ; *spécifier* et *tester* une fonction. C’est le socle de toute l’année (et de toute la suite). |
 
+!!! situation "Situation de départ"
+
+    1.  Comment faire échanger leurs contenus à deux « boîtes » d’un programme sans perdre aucune des deux valeurs ?
+
+    2.  Comment faire calculer $1 + 2 + \dots + 100$ à un ordinateur sans écrire soi-même les cent nombres ?
+
+    3.  Un programme qui répète une action peut-il ne jamais s’arrêter ? Comment être sûr qu’il s’arrêtera ?
+
 ## Programmer, c’est quoi ?
 
 Un **programme** est une suite d’instructions, écrites dans un **langage de programmation**, qu’un ordinateur exécute pour accomplir une tâche. L’idée est plus ancienne que les ordinateurs eux-mêmes : dès 1843, la mathématicienne **Ada Lovelace** rédige ce que l’on considère comme le premier programme de l’histoire, destiné à une machine qui ne sera jamais construite. Le mot **algorithme**, lui, vient du nom du savant persan **al-Khwârizmî** (IX<sup>e</sup> siècle).
 
-!!! remarque "Remarque — Un peu d’histoire"
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
 
     **Ada Lovelace** (1815–1852), fille du poète Byron, se passionne pour la *machine analytique* imaginée par l’Anglais **Charles Babbage** : une calculatrice mécanique programmable par cartes perforées. En 1843, elle traduit un article sur cette machine et l’enrichit de notes trois fois plus longues que le texte. La dernière, la **note G**, détaille pas à pas comment la machine calculerait les *nombres de Bernoulli*, avec des opérations répétées : c’est le premier programme publié. Mille ans plus tôt, vers 820, **al-Khwârizmî**, savant de la « Maison de la sagesse » de Bagdad, écrit un traité de calcul dont le titre a donné le mot *algèbre* (*al-jabr*), et un autre sur les chiffres indiens dont la traduction latine, *Algoritmi de numero Indorum*, a donné le mot *algorithme*.
 
@@ -33,7 +41,7 @@ Un **programme** est une suite d’instructions, écrites dans un **langage de p
 
 Nous utiliserons le langage **Python**, créé en 1991 par le Néerlandais **Guido van Rossum**. Il est aujourd’hui l’un des langages les plus enseignés et les plus utilisés au monde, pour sa lisibilité.
 
-!!! remarque "Remarque — Pourquoi « Python » ?"
+!!! curieux "Pour les curieux (facultatif) — Pourquoi « Python » ?"
 
     Rien à voir avec le serpent ! Guido van Rossum était fan de la troupe comique britannique *Monty Python*. C’est pourquoi la documentation officielle fourmille encore de références à leurs sketchs (et de `spam`, `eggs` et autres `ham` en guise d’exemples).
 
@@ -85,9 +93,11 @@ prenom = "Ada"
 
 L’image classique est celle du **casier étiqueté** : le nom de la variable est l’étiquette collée sur le casier, la valeur est ce qui se trouve à l’intérieur. On ne s’intéresse jamais à *l’adresse exacte* du casier dans la mémoire ; l’étiquette suffit.
 
-![](../figures/194ae3a9b59b3d5c.svg){ .tikz loading=lazy }
+![](../figures/6b64d9a2cdfb8b4e.svg){ .tikz loading=lazy }
 
 Trois casiers en mémoire : l’étiquette (le nom) désigne le contenu (la valeur).
+
+Ce modèle du casier est **provisoire** : il suffit pour tout ce chapitre. Le chapitre *Les types construits* le précisera : on y verra qu’une variable est plutôt une **étiquette** attachée à une valeur rangée ailleurs en mémoire.
 
 ### L’affectation : une histoire en deux temps
 
@@ -103,6 +113,8 @@ L’instruction `age = 15` s’appelle une **affectation**. Le symbole `=` ne ve
 
     On lit et on calcule à *droite*, on range à *gauche*.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Dans le programme 2 de l’activité « L’ordinateur humain », vous avez déjà commencé par la droite : calculer `n + 1` avec l’ancienne valeur `5`, puis gommer la boîte `n` pour y écrire `6`.
+
 Ce mécanisme éclaire une ligne qui, sinon, semble absurde en mathématiques :
 
 ```python
@@ -110,7 +122,7 @@ n = 5
 n = n + 1
 ```
 
-![](../figures/6380443647193f9e.svg){ .tikz loading=lazy }
+![](../figures/b1208910b53cea43.svg){ .tikz loading=lazy }
 
 La valeur de `n` passe donc de `5` à `6`. Cette écriture, très fréquente, s’appelle un **incrément**.
 
@@ -141,9 +153,15 @@ b = temp
 print(a, b)   # affiche : 2 1
 ```
 
+<span class="retouract">↺ Retour sur l'activité.</span> Le programme 3 de l’activité affichait `2 2` pour cette raison ; la troisième boîte `c` que vous avez proposée pour le corriger joue exactement le rôle de `temp`.
+
 !!! remarque "Remarque"
 
     La variable temporaire est **indispensable** : sans elle, la première affectation `a = b` écraserait la valeur de `a`, alors définitivement perdue. C’est l’image des deux verres, l’un d’eau, l’autre de jus : pour intervertir leurs contenus, il faut un **troisième verre vide**.
+
+<span id="cours-01-1" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-01-1) et [2](exercices.md#ex-01-2)** (lire une trace, échanger deux variables)
 
 ### Les types de données de base
 
@@ -172,7 +190,7 @@ Sur les nombres, Python dispose des opérations usuelles, et de deux opérations
 | addition | soustraction | multiplication | division | quotient entier | reste | puissance |
 | `7 + 2` $\to$ `9` | `7 - 2` $\to$ `5` | `7 * 2` $\to$ `14` | `7 / 2` $\to$ `3.5` | `7 // 2` $\to$ `3` | `7 % 2` $\to$ `1` | `7 ** 2` $\to$ `49` |
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif) — Typage dynamique"
 
     Python est à **typage dynamique** : on ne déclare pas le type d’une variable, il est déduit de la valeur rangée, et il peut changer au fil du programme. Pratique, mais il faut rester vigilant : additionner un `int` et un `str` provoque une erreur.
 
@@ -278,9 +296,9 @@ Un programme se lit bien plus souvent qu’il ne s’écrit. Le choix des noms e
         0
         ```
 
-<span id="cours-01-1" class="ancre"></span>
+<span id="cours-01-3" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-01-1) à [5](exercices.md#ex-01-5)** (variables, affectation, `//` et `%` ; les fonctions s’écrivent avec le gabarit ci-dessus)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-01-3) à [5](exercices.md#ex-01-5)** (`//` et `%` ; les fonctions s’écrivent avec le gabarit ci-dessus) et **[40](exercices.md#ex-01-40), [41](exercices.md#ex-01-41)** (entraînement : `int(input(...))`, longueur et indices d’une chaîne)
 
 ## Les conditionnelles : `if`, `elif`, `else`
 
@@ -306,7 +324,7 @@ age >= 13 and age <= 17    # True : un adolescent
 not (age == 18)            # True
 ```
 
-!!! remarque "Remarque — Évaluation « paresseuse » (au programme)"
+!!! encadre "À retenir — Évaluation « paresseuse » de and et or"
 
     Les opérateurs `and` et `or` sont **séquentiels** : Python évalue les conditions *de gauche à droite* et s’arrête dès que le résultat est connu. Dans `a and b`, si `a` est déjà `False`, `b` n’est même pas évalué (le résultat est forcément `False`). On exploite cela pour se protéger, par exemple dans `n != 0 and total / n > 1`.
 
@@ -328,7 +346,7 @@ Deux points de syntaxe sont **obligatoires** en Python : le **deux-points** `:` 
 
     Là où d’autres langages utilisent des accolades, Python utilise le **décalage** pour délimiter un bloc d’instructions. Toutes les lignes indentées d’un même cran après le `:` forment le bloc exécuté si la condition est vraie. Une indentation fautive change le sens du programme, ou provoque une `IndentationError`. Une seule règle d’or : **on ne mélange jamais espaces et tabulations** (le standard : 4 espaces).
 
-!!! remarque "Remarque — Une histoire de goût… devenu règle"
+!!! curieux "Pour les curieux (facultatif) — Une histoire de goût… devenu règle"
 
     Dans la plupart des langages, l’indentation n’est qu’une politesse pour le lecteur humain. Python a fait un choix radical : la rendre *obligatoire* et *signifiante*. Résultat, un code Python mal rangé ne s’exécute pas — ce qui force chacun à écrire proprement. Certains détestent, beaucoup adorent.
 
@@ -437,7 +455,7 @@ Ce programme affiche cinq fois la même ligne. `range(5)` produit la suite des e
 
         Le programme affiche `A`, puis `d`, puis `a`, un par ligne. Avec un test `if lettre in "aeiouy":` dans la boucle, on peut par exemple repérer les voyelles d’un mot.
 
-!!! remarque "Remarque — Pourquoi commencer à 0 ?"
+!!! curieux "Pour les curieux (facultatif) — Pourquoi commencer à 0 ?"
 
     Ce choix déroute au début, mais il est partout en informatique : les cases d’un tableau seront elles aussi numérotées à partir de 0. Le grand informaticien *Edsger Dijkstra* a même écrit une note célèbre pour défendre les intervalles « borne de gauche incluse, borne de droite exclue » : ils rendent les calculs de longueurs plus simples ($b - a$ valeurs).
 
@@ -469,7 +487,9 @@ La boucle `for` sert rarement à répéter à l’identique : le plus souvent, l
 
         La **trace** d’exécution : suivre l’évolution des variables tour après tour est un réflexe essentiel.
 
-!!! remarque "Remarque"
+<span class="retouract">↺ Retour sur l'activité.</span> Le tableau rempli pour le programme 4 de l’activité était déjà une trace ; `total` y était un accumulateur, qui valait `10` après le tour 4, et remplacer `5` par `101` dans `range(1, 5)` donne exactement le programme ci-dessus.
+
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
 
     D’après la légende, le mathématicien *Carl Friedrich Gauss*, encore écolier, aurait trouvé ce résultat en une poignée de secondes en remarquant que $1+100 = 2+99 = \dots = 101$, et qu’il y a 50 telles paires : $50 \times 101 = 5050$. L’ordinateur, lui, additionne bêtement… mais très vite.
 
@@ -498,7 +518,7 @@ Le corps d’une boucle peut contenir… une autre boucle. On parle de **boucle
 
 <span id="cours-01-14" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[14](exercices.md#ex-01-14) à [24](exercices.md#ex-01-24)** (les boucles `for`)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[14](exercices.md#ex-01-14) à [24](exercices.md#ex-01-24)** et **[42](exercices.md#ex-01-42)** (les boucles `for`)
 
 ## Les boucles non bornées : `while`
 
@@ -517,7 +537,7 @@ print(annees, "annees")
 
     `while condition:` répète le bloc indenté **tant que** la condition est vraie. La condition est testée *avant chaque tour* : si elle est fausse dès le départ, le bloc n’est jamais exécuté.
 
-![](../figures/8e78773a4e5e6592.svg){ .tikz loading=lazy }
+![](../figures/1594c28c354536d8.svg){ .tikz loading=lazy }
 
 ### Le danger : la boucle infinie
 
@@ -561,7 +581,7 @@ Le programme demande explicitement de savoir justifier la **terminaison** d’un
 
 <span id="cours-01-25" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[25](exercices.md#ex-01-25) à [30](exercices.md#ex-01-30)** (les boucles `while`)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[25](exercices.md#ex-01-25) à [30](exercices.md#ex-01-30)** et **[43](exercices.md#ex-01-43)** (les boucles `while`)
 
 ## Les fonctions
 
@@ -584,13 +604,13 @@ surface = aire_rectangle(10, 2)   # surface recoit 20
 
 On voit une fonction comme une **boîte noire** : on lui fournit des valeurs en entrée (les **arguments**), elle rend une valeur en sortie. Peu importe *comment* elle travaille à l’intérieur : pour l’utiliser, il suffit de connaître ses entrées et sa sortie.
 
-![](../figures/59863d73a43fa62e.svg){ .tikz loading=lazy }
+![](../figures/0d7f2d46035fddfd.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 9 — return n’est pas print"
 
     `print` **affiche** une valeur à l’écran (pour un humain) ; `return` **renvoie** une valeur au programme (pour la réutiliser dans un calcul). Une fonction qui `print` mais ne `return` rien renvoie en réalité la valeur spéciale `None`, et son résultat ne peut pas être réutilisé. Confondre les deux est une erreur très fréquente.
 
-!!! remarque "Remarque"
+!!! encadre "À retenir — return termine la fonction"
 
     Dès que Python rencontre un `return`, il **sort immédiatement** de la fonction : les lignes situées après ne sont pas exécutées.
 
@@ -679,21 +699,23 @@ print(random.randint(1, 6))   # un de : entier au hasard entre 1 et 6
 print(random.randint(0, 100)) # un entier au hasard entre 0 et 100
 ```
 
-!!! remarque "Remarque"
+!!! encadre "Méthode — Utiliser une bibliothèque"
 
     Nul besoin de connaître une bibliothèque par cœur : l’essentiel est de savoir **lire sa documentation** pour trouver la fonction utile et comprendre ce qu’elle attend.
 
-!!! remarque "Remarque — En Terminale"
+!!! curieux "Pour les curieux (facultatif) — En Terminale"
 
     Deux chapitres prolongent les fonctions : *La récursivité* (une fonction peut s’appeler elle-même) et *Programmation objet et paradigmes* (créer ses propres types de données, avec leurs fonctions).
 
 <span id="cours-01-31" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[31](exercices.md#ex-01-31) à [34](exercices.md#ex-01-34)** (les fonctions : spécifier, tester)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[31](exercices.md#ex-01-31) à [34](exercices.md#ex-01-34)** et **[44](exercices.md#ex-01-44)** (les fonctions : spécifier, tester)
 
 ## Trouver et corriger ses erreurs
 
 Personne n’écrit un programme juste du premier coup. Savoir lire un message d’erreur fait partie du métier.
+
+### Les principaux types d’erreur
 
 | **Type d’erreur** | **Quand ?** |
 |:---|:---|
@@ -703,13 +725,82 @@ Personne n’écrit un programme juste du premier coup. Savoir lire un message d
 | `TypeError` | opération entre types incompatibles (`"a" + 1`) |
 | `ZeroDivisionError` | division par zéro |
 
-!!! remarque "Remarque — Le premier « bug » était un vrai insecte"
+!!! curieux "Pour les curieux (facultatif) — Le premier « bug » était un vrai insecte"
 
     En 1947, l’équipe du calculateur Mark II, dont fait partie l’informaticienne *Grace Hopper*, trouve un papillon de nuit coincé dans un relais. Elle le colle dans son cahier de bord avec la mention « premier cas réel de *bug* trouvé », et Grace Hopper rendra l’anecdote célèbre. Le mot est resté ; « déboguer » (*debug*), c’est chasser ces bestioles du code.
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+### Lire un message d’erreur
 
-    Ce chapitre est le socle de toute l’année. Le résultat surprenant de `0.1 + 0.2` s’expliquera au chapitre *Le binaire et l’écriture des nombres*, où les opérateurs `//` et `%` serviront à convertir un entier en binaire par divisions successives. Les chaînes et les `range`, numérotés à partir de 0, annoncent les tableaux du chapitre *Les types construits*, et le motif de l’**accumulateur** deviendra, au chapitre *Algorithmique : le parcours séquentiel*, le patron de tous les parcours (les boucles imbriquées y annonceront le coût **quadratique**). Docstrings, `assert` et jeux de tests seront approfondis dans *Spécifier et mettre au point ses programmes*, et le **variant** resservira pour prouver que la **recherche dichotomique** se termine. En Terminale, le chapitre **Calculabilité** montre qu’aucun programme ne peut décider, pour *toute* boucle, si elle s’arrête : d’où l’importance de savoir exhiber soi-même un variant.
+Quand Python rencontre une erreur, il s’arrête et affiche un message. Ce message impressionne (il est en anglais), mais il est toujours construit de la même façon. Voici un programme `age.py` où l’on a oublié de convertir la saisie :
+
+```python
+age = input("Votre age ? ")
+print("Dans un an :", age + 1)
+```
+
+On l’exécute et on tape `16` :
+
+```text
+Votre age ? 16
+Traceback (most recent call last):
+  File "/home/eleve/age.py", line 2, in <module>
+    print("Dans un an :", age + 1)
+                          ~~~~^~~
+TypeError: can only concatenate str (not "int") to str
+```
+
+Ce message se lit ainsi :
+
+- `Traceback (most recent call last):` : le programme a commencé à s’exécuter, puis s’est arrêté sur une erreur ;
+
+- `File "/home/eleve/age.py", line 2` : le **fichier** et le **numéro de la ligne** où l’erreur s’est produite ;
+
+- vient ensuite la **ligne fautive**, recopiée ; en dessous, le signe `^` (entouré de `~`) montre l’**endroit précis** : ici, le `+` ;
+
+- la **dernière ligne** est la plus importante : le **type d’erreur** (`TypeError`, voir le tableau ci-dessus), puis le **message** : « on ne peut concaténer à une `str` qu’une `str`, pas un `int` ».
+
+Le diagnostic suit : `age` est une chaîne, car `input` renvoie toujours une chaîne. On corrige avec `age = int(input("Votre age ? "))`.
+
+Une faute de **syntaxe** est détectée **avant** l’exécution : Python refuse le programme sans exécuter la moindre ligne, et le message n’a pas de ligne `Traceback`, mais il se lit de la même façon. Dans ce programme `note.py`, il manque le deux-points du `if` :
+
+```python
+note = int(input("Note ? "))
+if note >= 10
+    print("Admis")
+```
+
+La question « Note ? » n’est même pas posée ; Python affiche :
+
+```text
+  File "/home/eleve/note.py", line 2
+    if note >= 10
+                 ^
+SyntaxError: expected ':'
+```
+
+Le `^` pointe juste après `10`, là où Python attendait (*expected*) le `:`. La présentation varie un peu selon l’éditeur et la version de Python, mais on retrouve toujours le fichier, le numéro de ligne, la ligne fautive et, en dernier, le type d’erreur suivi du message.
+
+!!! encadre "Méthode — Quand ça ne marche pas"
+
+    1.  **Lire la dernière ligne** du message : le type d’erreur et le message.
+
+    2.  **Regarder la ligne indiquée**, puis **la ligne précédente** : une parenthèse ou un guillemet non refermé peut être signalé une ligne trop bas.
+
+    3.  **Vérifier les détails** : le `:` en fin de ligne `if`, `elif`, `else`, `for`, `while`, `def` ; chaque `(` a sa `)` ; chaque `"` ouvrant a son `"` fermant ; l’**indentation** (4 espaces par niveau).
+
+    4.  Si le programme ne s’arrête pas mais **donne un mauvais résultat**, ajouter un `print` **de contrôle** qui affiche les valeurs des variables, par exemple `print("i =", i, "total =", total)` dans une boucle ; le retirer une fois l’erreur trouvée.
+
+<span id="cours-01-45" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercices **[45](exercices.md#ex-01-45) et [46](exercices.md#ex-01-46)** (corriger d’après le message d’erreur)
+
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
+
+    - **Juste après.** Le résultat surprenant de `0.1 + 0.2` s’expliquera au chapitre *Le binaire et l’écriture des nombres*, où `//` et `%` serviront à convertir un entier en binaire.
+
+    - **Plus loin dans l’année.** Les chaînes et les `range`, numérotés à partir de 0, annoncent les tableaux des *Types construits* ; l’**accumulateur** deviendra le patron de tous les parcours ; docstrings, `assert` et tests seront approfondis dans *Spécifier et mettre au point ses programmes*.
+
+    - **En Terminale.** Le chapitre *Calculabilité* montrera qu’aucun programme ne peut décider, pour *toute* boucle, si elle s’arrête : d’où l’importance de savoir exhiber soi-même un variant.
 
 ## Bilan — la carte mémoire
 
@@ -731,6 +822,14 @@ Les **six constructions élémentaires** du programme, réunies :
 | `print` contre `return` | afficher contre renvoyer pour réutiliser |
 | Terminaison | un **variant** (entier $\geqslant 0$ qui décroît) garantit l’arrêt |
 | Spécifier / tester | docstring, préconditions (`assert`), jeu de tests |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Avec une **variable temporaire** : `temp = a`, puis `a = b`, puis `b = temp`. Sans elle, l’affectation `a = b` écrase l’ancienne valeur de `a`, qui est perdue (§ II).
+
+    2.  Avec une boucle bornée `for i in range(1, 101):` et un **accumulateur** `total`, initialisé à `0`, auquel on ajoute `i` à chaque tour ; le programme affiche `5050` (§ IV).
+
+    3.  Oui : une boucle `while` dont la condition reste toujours vraie est une **boucle infinie**. Pour garantir l’arrêt, on exhibe un **variant**, entier positif qui décroît strictement à chaque tour (§ V).
 
 ## Erreurs fréquentes
 

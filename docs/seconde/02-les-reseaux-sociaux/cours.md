@@ -10,9 +10,17 @@
 | **Idée** | Un réseau social, ce n’est pas seulement une application : c’est un immense **graphe** de relations entre des personnes, exploité par une **entreprise** qui a un modèle économique. Comprendre les deux, c’est reprendre la main. |
 | **Objectifs** | Distinguer les grands réseaux et leurs ordres de grandeur ; protéger sa vie privée ; comprendre *comment ils gagnent de l’argent* ; représenter et mesurer un réseau par un graphe ; comprendre *qui choisit ce que vous voyez*. |
 
-!!! remarque "Remarque"
+!!! situation "Situation de départ"
 
-    **Un peu d’histoire (et un ancêtre surprenant).** Avant Internet, en **1967**, le psychologue américain **Stanley Milgram** tente une expérience étonnante : faire parvenir une lettre à un inconnu à l’autre bout du pays, uniquement de connaissance en connaissance. Résultat : en moyenne **cinq ou six intermédiaires** suffisent. Le monde est bien plus « petit » qu’on ne le croit… nous y reviendrons.
+    1.  Votre application préférée est gratuite, et pourtant l’entreprise qui la possède gagne des milliards. Avec quoi la payez-vous ?
+
+    2.  Pourquoi votre fil ne vous montre-t-il pas les mêmes vidéos qu’à votre voisin de classe ?
+
+    3.  Un message passé d’ami en ami doit atteindre un inconnu à l’autre bout du monde. Combien d’intermédiaires faut-il, à votre avis ?
+
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire (et un ancêtre surprenant)"
+
+    Avant Internet, en **1967**, le psychologue américain **Stanley Milgram** tente une expérience étonnante : faire parvenir une lettre à un inconnu à l’autre bout du pays, uniquement de connaissance en connaissance. Résultat : en moyenne **cinq ou six intermédiaires** suffisent. Le monde est bien plus « petit » qu’on ne le croit… nous y reviendrons.
 
     Il faudra attendre **1997** et le site *SixDegrees.com* (dont le nom rend justement hommage à Milgram !) pour voir le premier réseau social en ligne. Puis tout s’accélère : **2003** MySpace et LinkedIn, **2004** Facebook (créé par **Mark Zuckerberg**, étudiant de 19 ans à Harvard), **2005** YouTube, **2006** Twitter, **2010** Instagram, **2011** Snapchat, **2016** TikTok. En moins de vingt ans, une poignée d’entreprises se sont retrouvées à relier… une bonne partie de l’humanité.
 
@@ -21,6 +29,8 @@
 
     ![](../img/02_hist_zuckerberg.jpg){ .photo loading=lazy style="width:100%" }  
     Mark Zuckerberg (2019)
+
+    [$\to$ frise chronologique](../methode-debattre.md#frise)
 
 ## Qu’est-ce qu’un réseau social ?
 
@@ -121,7 +131,7 @@ Une confusion fréquente : « s’identifier » et « s’authentifier », ce n
 
 !!! activite "Activité — Régler sa confidentialité"
 
-    1.  Sur un réseau que vous utilisez, retrouver le menu *Confidentialité* (ou *Paramètres*) et lister trois réglages qui protègent la vie privée (compte privé, qui peut commenter, partage de la position…).
+    1.  Voici le menu *Confidentialité* du compte de Léa, 15 ans, sur un réseau social imaginaire : *type de compte* : public ; *qui peut commenter* : tout le monde ; *qui peut vous envoyer un message* : tout le monde ; *ajouter la position aux publications* : activé ; *liste des abonnés* : visible par tous. Repérer trois réglages qui exposent la vie privée de Léa et indiquer, pour chacun, le choix qui la protège.
 
     2.  Proposer un mot de passe « solide » et expliquer, en une phrase, ce qui le rend difficile à deviner.
 
@@ -177,7 +187,7 @@ Pour *mesurer* un réseau, les informaticiens le dessinent sous forme de **graph
 
     Un <span id="lex-graphe02" class="ancre"></span>**graphe** est constitué de **sommets** (ici : les personnes) reliés par des **arêtes** (ici : « est ami avec », ou « suit »). Le <span id="lex-degre02" class="ancre"></span>**degré** d’un sommet est le nombre d’arêtes qui en partent : c’est, en gros, le nombre d’amis de la personne.
 
-![](../figures/e8208863a04dea6e.svg){ .tikz loading=lazy }
+![](../figures/12633ec10e622add.svg){ .tikz loading=lazy }
 
 Sur ce petit réseau d’amitiés, on peut déjà lire beaucoup de choses. Par exemple, le degré de David est 4 (il est relié à Bilal, Chloé, Ella et Farid) : c’est la personne la plus « connectée ».
 
@@ -315,7 +325,7 @@ Un fil infini, des vidéos qui s’enchaînent toutes seules… Tout cela circu
       *Source : Netflix, centre d’aide, page sur la consommation de données, consultée en 2026.*
 
     - **Combien de CO<sub>2</sub> ? Une estimation discutée.** En 2019, The Shift Project estimait que la vidéo en ligne émettait plus de 300 Mt CO<sub>2</sub>e par an (près de 1 % des émissions mondiales). L’Agence internationale de l’énergie (AIE) a jugé ce type de calcul très surestimé : selon elle, une heure de vidéo en streaming émettait en moyenne environ **36 g de CO<sub>2</sub>** en 2019. Les résultats changent beaucoup selon les hypothèses (appareil, réseau, électricité du pays) ; ce qui est sûr, c’est que plus on regarde, et en haute définition, plus on échange de données.  
-      *Sources : The Shift Project, « Climat : l’insoutenable usage de la vidéo en ligne », juillet 2019 ; AIE, « The carbon footprint of streaming video: fact-checking the headlines », décembre 2020.*
+      Sources : The Shift Project, « Climat : l’insoutenable usage de la vidéo en ligne », juillet 2019 ; AIE, « The carbon footprint of streaming video: fact-checking the headlines », décembre 2020.
 
     - **Et le numérique en général ?** Selon les études et ce qu’elles comptent, il pèse environ **2 à 4 %** des émissions mondiales (1,7 % pour le seul secteur des technologies de l’information selon l’UIT et la Banque mondiale, données 2022 ; près de 4 % selon The Shift Project, 2019). Pour la France et le calcul complet de l’empreinte d’un smartphone (environ 80 kg CO<sub>2</sub>e, presque tout à la fabrication), on y reviendra au chapitre *Informatique embarquée et objets connectés*.  
       *Source : UIT et Banque mondiale, *Measuring the Emissions and Energy Footprint of the ICT Sector*, 2024.*
@@ -334,13 +344,19 @@ Un fil infini, des vidéos qui s’enchaînent toutes seules… Tout cela circu
 
 <span id="cours-02-18" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[18](exercices.md#ex-02-18) et [19](exercices.md#ex-02-19)** (le coût d’un smartphone, haute ou basse définition), exercice **[20](exercices.md#ex-02-20)** (critiquer une réponse d’IA)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[18](exercices.md#ex-02-18) et [19](exercices.md#ex-02-19)** (le coût d’un smartphone, haute ou basse définition), exercice **[20](exercices.md#ex-02-20)** (critiquer une réponse d’IA), exercice **[21](exercices.md#ex-02-21)** (Python au service du thème)
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    Un réseau social est d’abord un **graphe** : on retrouvera la même structure dans le calcul d’itinéraire (chapitre *Localisation*) et dans les hyperliens du **Web**. Ce que vous publiez devient une **donnée personnelle**, rangée dans d’immenses **tables** chez l’entreprise (on le verra au chapitre *Les données structurées et leur traitement*) ; une photo peut même trahir, par ses **métadonnées EXIF**, le lieu où elle a été prise (chapitre *Photographie numérique*, juste après celui-ci). Comme le Web, un réseau social est un **service** qui circule sur **Internet** : votre fil arrive en paquets depuis des serveurs (on le verra au chapitre *Internet*). En spécialité NSI de Terminale, on apprend à parcourir des graphes et à y calculer des distances par programme.
+    - **Juste après :** une photo publiée peut trahir, par des informations cachées dans son fichier, le lieu où elle a été prise (chapitre *Photographie numérique*).
+
+    - **Plus tard :** le même **graphe** servira à calculer un itinéraire (chapitre *Localisation*), et vos publications, des **données personnelles**, seront rangées dans d’immenses **tables** (chapitre *Les données structurées et leur traitement*).
+
+    - **Plus loin :** en spécialité NSI de Terminale, on parcourt des graphes et on y calcule des distances par programme.
 
 ## Bilan — la carte mémoire
+
+Les mots importants du thème sont définis dans le lexique.
 
 | **Notion** | **À retenir** |
 |:---|:---|
@@ -357,6 +373,14 @@ Un fil infini, des vidéos qui s’enchaînent toutes seules… Tout cela circu
 | Données personnelles | RGPD ; seul dès **15 ans** ; accès, rectification, effacement ; CNIL (France), APDP et loi n° 1.565 (Monaco). |
 | Citoyenneté | cyberharcèlement interdit ; garder les preuves, bloquer, signaler, en parler (à Monaco : **98 98 96 96**). |
 | Impact environnemental | numérique $\approx 2$ à $4\,\%$ des GES mondiaux (estimations) ; vidéo $=$ majorité du trafic : stockage + diffusion ; garder ses appareils. |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Avec vos **données** et votre **attention** : le réseau vend aux annonceurs de la **publicité ciblée** (§ III). « Si c’est gratuit, le produit, c’est vous. »
+
+    2.  Un **algorithme de recommandation** choisit et ordonne votre fil d’après ce que vous avez regardé, aimé ou partagé (§ VI) : chacun reçoit le sien, au risque de s’enfermer dans une **bulle de filtres**.
+
+    3.  Très peu : dans le **graphe** d’un réseau (§ IV), la **distance** moyenne entre deux personnes reste de quelques unités, même parmi des milliards. C’est le **petit monde** : « six degrés » pour Milgram, environ 3,5 sur Facebook en 2016 (§ V).
 
 !!! encadre "Débat argumenté"
 

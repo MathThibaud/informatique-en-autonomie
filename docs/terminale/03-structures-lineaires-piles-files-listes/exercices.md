@@ -18,7 +18,13 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — La bonne opération sur une pile <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-1 }
 
+<span class="essentiel">• essentiel</span>
+
 On dispose d’une pile `p`. Pour chaque phrase, écrire l’**appel de méthode** correspondant.
+
+??? pouce "Coup de pouce"
+
+    Relire l’interface d’une pile (cours, ou « Réflexe » du mode d’emploi) : quatre méthodes, une par phrase. Lesquelles modifient la pile, lesquelles la laissent intacte ?
 
 1.  ajouter la valeur `7` au sommet de la pile `p` ;
 
@@ -34,7 +40,13 @@ On dispose d’une pile `p`. Pour chaque phrase, écrire l’**appel de méthode
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Trace d’une pile <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-2 }
 
+<span class="essentiel">• essentiel</span>
+
 On part d’une pile `p` vide. Donner, pour chaque appel qui renvoie une valeur, la **valeur renvoyée**, puis représenter le **contenu final** de la pile (sommet en haut).
+
+??? pouce "Coup de pouce"
+
+    Tenir un tableau à trois colonnes : instruction, valeur renvoyée, contenu de la pile après l’instruction. Seuls `depiler` et `sommet` renvoient une valeur : lequel des deux ne retire rien ?
 
 ```text
 p.empiler(4)
@@ -50,6 +62,8 @@ p.depiler()
 
     Valeurs renvoyées : `p.depiler()` $\to$ `2` ; `p.sommet()` $\to$ `9` ; `p.depiler()` $\to$ `9`.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Traiter `sommet()` comme `depiler()` : `sommet` renvoie l’élément du sommet *sans le retirer*. Sinon, le dernier `depiler()` renverrait `7` et il ne resterait que `4`.
+
     Contenu final (sommet en haut) : `7` au sommet, `4` en dessous. Détail :
 
     | **Instruction** | **Renvoie** | **Pile écrite en ligne (sommet à droite)** |
@@ -63,6 +77,8 @@ p.depiler()
     | `depiler()`     |     `9`     | $4\ ;\ 7$                                  |
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Parenthésage à la main <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-3 }
+
+<span class="essentiel">• essentiel</span>
 
 On reprend l’algorithme du cours : on **empile** chaque symbole ouvrant, et à chaque symbole fermant on **dépile** en vérifiant la correspondance. Pour chacune des expressions suivantes, dérouler l’algorithme (contenu de la pile étape par étape) et conclure : **correcte** ou **incorrecte** (et pourquoi).
 
@@ -88,6 +104,8 @@ On reprend l’algorithme du cours : on **empile** chaque symbole ouvrant, et à
 
     4.  `())(` : on empile `(` ; `)` dépile `(` (ok, pile vide) ; `)` suivante : la pile est **vide** $\Rightarrow$ fermante sans ouvrante $\Rightarrow$ **incorrecte**.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Conclure « correcte » pour `([]` parce qu’aucune erreur n’est apparue pendant la lecture : il faut encore vérifier qu’à la fin la pile est **vide**.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Programmer le parenthésage <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-4 }
 
 On admet disponible une classe `Pile` d’interface `empiler`, `depiler`, `est_vide`.
@@ -108,6 +126,8 @@ On admet disponible une classe `Pile` d’interface `empiler`, `depiler`, `est_v
 
 ??? corrige "Corrigé"
 
+    **Démarche :** on reprend l’algorithme du cours : chaque ouvrante est empilée ; une fermante doit trouver au sommet l’ouvrante qui lui correspond (un dictionnaire donne cette correspondance) ; à la fin, la pile doit être vide.
+
     ```python
     def parenthesage_correct(expr):
         p = Pile()
@@ -125,7 +145,11 @@ On admet disponible une classe `Pile` d’interface `empiler`, `depiler`, `est_v
 
     Tests : `{[()]}` $\to$ `True` ; `(]` $\to$ `False` ; `([]` $\to$ `False` ; `())(` $\to$ `False`.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Appeler `p.depiler()` sans tester d’abord `p.est_vide()` : sur `())(`, la deuxième fermante ferait dépiler une pile vide, ce qui provoque une erreur au lieu de renvoyer `False`.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Renverser avec une pile <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-5 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> En utilisant **uniquement** une pile (interface `empiler`/`depiler`/`est_vide`), écrire une fonction `renverser(tab)` qui renvoie une **nouvelle** liste contenant les éléments de `tab` dans l’ordre inverse.
 
@@ -140,6 +164,8 @@ On admet disponible une classe `Pile` d’interface `empiler`, `depiler`, `est_v
 
 ??? corrige "Corrigé"
 
+    **Démarche :** une pile inverse l’ordre : on empile tous les éléments de `tab`, puis on dépile tant que la pile n’est pas vide, en ajoutant chaque élément dépilé à la nouvelle liste.
+
     ```python
     def renverser(tab):
         p = Pile()
@@ -152,6 +178,8 @@ On admet disponible une classe `Pile` d’interface `empiler`, `depiler`, `est_v
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — La structure de pile (d’après Asie 2024, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-6 }
+
+<span class="duree">≈ 15 min</span>
 
 On dispose d’une classe `Pile` dont les objets représentent une pile, munie des méthodes :
 
@@ -184,11 +212,13 @@ On dispose d’une classe `Pile` dont les objets représentent une pile, munie d
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 2) : Q1 : 0,5 ; Q2 : 0,5 ; Q3 : 1
+
     **1.** On empile `3`, `2`, `10` (sommet `10`). Premier `depiler` $\to$ `10` ; second `depiler` $\to$ `2`. Donc `elt` vaut **2**. La pile `essai` ne contient plus que `3` (au sommet et au fond).
 
     **2.** Politique **LIFO** : le dernier empilé (`10`) sort en premier, puis l’avant-dernier (`2`). C’est donc `2` qui est la dernière valeur affectée à `elt` ; `3`, empilé en premier, reste au fond.
 
-    **3.**
+    **3.** **Démarche :** une boucle `while` qui tourne tant que la pile n’est pas vide ; chaque tour dépile un élément et l’affiche.
 
     ```python
     def vider(p):
@@ -199,6 +229,8 @@ On dispose d’une classe `Pile` dont les objets représentent une pile, munie d
     Pour `3, 2, 10` empilés dans cet ordre, l’affichage est `10`, puis `2`, puis `3` (du sommet vers le fond).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — La taille d’une pile <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-7 }
+
+<span class="essentiel">• essentiel</span>
 
 La classe `Pile` du cours n’a **pas** de méthode `taille` : on ne dispose que de `est_vide`, `empiler`, `depiler` et `sommet`.
 
@@ -226,6 +258,8 @@ La classe `Pile` du cours n’a **pas** de méthode `taille` : on ne dispose que
 ??? corrige "Corrigé"
 
     **1.** Le programme affiche `3`, puis `0`. Pour compter, la fonction **dépile tout** : elle modifie la pile reçue en paramètre (**effet de bord**), qui est vide après le premier appel. Connaître la taille d’une pile ne doit pas la détruire.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Répondre que le programme affiche deux fois `3` : la fonction a vidé la pile lors du premier appel, le second trouve une pile vide.
 
     **2.** On range chaque élément dépilé dans une pile auxiliaire, puis on le remet dans `p` :
 
@@ -290,6 +324,8 @@ On veut écrire une fonction `copier_pile(p)` qui renvoie une **nouvelle** pile 
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 9</span> — Défi — des balises bien imbriquées <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-9 }
 
+<span class="duree">≈ 20 min</span>
+
 Dans un document, les balises s’écrivent `<b>` (ouvrante) et `</b>` (fermante), comme en HTML. Une liste de balises est **bien imbriquée** si chaque fermante correspond à la dernière ouvrante non encore fermée.
 
 <span class="run" title="À programmer et tester sur machine">▶</span> On donne une liste de balises, par exemple `["<b>", "<i>", "</i>", "</b>"]` (bien imbriquée) ou `["<b>", "<i>", "</b>", "</i>"]` (mal imbriquée). Écrire `balises_ok(liste)` qui renvoie un booléen, en s’inspirant du parenthésage (une balise fermante `</x>` doit correspondre à l’ouvrante `<x>` au sommet de la pile).
@@ -326,6 +362,8 @@ Dans un document, les balises s’écrivent `<b>` (ouvrante) et `</b>` (fermante
     `["<b>", "<i>", "</i>", "</b>"]` $\to$ `True` ; `["<b>", "<i>", "</b>", "</i>"]` $\to$ `False` (à `</b>`, on dépile `<i>` qui ne correspond pas).
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Défi — notation polonaise inverse <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-10 }
+
+<span class="duree">≈ 20 min</span>
 
 En **notation polonaise inverse** (NPI), on écrit les opérateurs *après* leurs opérandes : `"3 4 +"` vaut $7$, et `"5 1 2 + 4 * +"` vaut $17$. On évalue avec une pile : chaque **nombre** est empilé ; à chaque **opérateur**, on dépile les *deux* derniers nombres, on applique l’opération et on empile le résultat.
 
@@ -372,6 +410,10 @@ En **notation polonaise inverse** (NPI), on écrit les opérateurs *après* leur
 
 On dispose d’une file `f`. Pour chaque phrase, écrire l’**appel de méthode** correspondant.
 
+??? pouce "Coup de pouce"
+
+    Même travail qu’à l’exercice 1, avec l’interface d’une file : `enfiler`, `defiler`, `est_vide`, `tete`. Par quel bout entre-t-on dans une file, par quel bout en sort-on ?
+
 1.  ajouter la valeur `7` à la queue de la file `f` ;
 
 2.  retirer et récupérer l’élément de tête de la file `f` ;
@@ -386,7 +428,13 @@ On dispose d’une file `f`. Pour chaque phrase, écrire l’**appel de méthode
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 12</span> — Trace d’une file <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-12 }
 
+<span class="essentiel">• essentiel</span>
+
 On part d’une file `f` vide. Même travail (la **tête est à droite** : on défile à droite).
+
+??? pouce "Coup de pouce"
+
+    Même tableau qu’à l’exercice 2. On enfile à gauche et l’on défile à droite : l’élément qui sort est toujours le plus ancien encore présent.
 
 ```text
 f.enfiler(4)
@@ -415,6 +463,8 @@ f.defiler()
     | `defiler()`     |     `7`     | $9\ ;\ 2$                |
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Ordonnancer des processus avec une file (d’après Amérique du Nord 2024, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-13 }
+
+<span class="essentiel">• essentiel</span> <span class="duree">≈ 30 min</span>
 
 Un système d’exploitation partage le processeur entre plusieurs **processus** à l’aide d’une `File`, selon la méthode du *tourniquet* : à chaque cycle, on défile un processus, on l’exécute pendant un cycle, et s’il n’est pas terminé on le remet en fin de file. On dispose des deux classes suivantes.
 
@@ -474,6 +524,8 @@ class Processus:
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 4) : Q1 : 0,75 ; Q2 : 1 ; Q3 : 1,5 ; Q4 : 0,75
+
     **1.** L’unique attribut est `contenu`, de type `list` (une liste Python). `enfile` ajoute en queue avec `append` (immédiat), tandis que `defile` retire la tête avec `pop(0)`, ce qui oblige à **décaler tous les éléments restants** : le coût est proportionnel au nombre d’éléments (cf. cours).
 
     **2.** Quand la file est vide, `self.contenu` vaut `[]` et `pop(0)` sur une liste vide lève une `IndexError`. On protège la méthode :
@@ -485,7 +537,7 @@ class Processus:
         return self.contenu.pop(0)
     ```
 
-    **3.**
+    **3.** **Démarche :** chaque ligne appelle une méthode de l’interface : on défile le processus élu, on l’exécute un cycle, puis on le réenfile (en fin de file) s’il n’est pas fini.
 
     ```python
     def ajoute_nouveau_processus(self, proc):
@@ -513,7 +565,11 @@ class Processus:
 
     Noms renvoyés : `"p1"`, `"p2"`, `"p1"` ; la file finale est **vide**.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Faire exécuter `p1` deux fois de suite : après son premier cycle, il est remis en **fin** de file, derrière `p2`, qui passe donc avant lui.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Une file de priorité de tâches (d’après Métropole 2025, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-14 }
+
+<span class="duree">≈ 30 min</span>
 
 Pour ordonnancer des tâches, on stocke des tuples `(tache, priorite)` dans une `File` d’interface : `enfiler(e)` (ajoute `e` en fin de file), `defiler()` (retire et renvoie la tête), `examiner()` (renvoie la tête sans la retirer), `est_vide()`. La file est rangée de la plus **haute** priorité (en tête) à la plus basse.
 
@@ -550,11 +606,15 @@ On considère la file `f` suivante **(tête à droite)** :
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 4) : Q1 : 0,5 ; Q2 : 0,5 ; Q3 : 1 ; Q4 : 0,5 ; Q5 : 0,5 ; Q6 : 1
+
     **1.** `defiler` retire la tête, ici `(<t3>, 4)` ; `f.defiler()[0]` vaut donc `<t3>` (la tâche). Après : `(<t5>, 1) ; (<t4>, 1) ; (<t2>, 3) ; (<t1>, 3)` (tête = `(<t1>, 3)`).
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Défiler `(<t5>, 1)`, l’élément écrit en premier : la tête est à **droite**, c’est `(<t3>, 4)` qui sort.
 
     **2.** `examiner` renvoie la tête *sans* la retirer, ici `(<t3>, 4)` ; `f.examiner()[1]` vaut donc `4` (la priorité). La file `f` est **inchangée**.
 
-    **3.**
+    **3.** **Démarche :** on défile vers `f_aux` les tâches plus prioritaires que `p`, on enfile `(t, p)`, puis on transvase le reste.
 
     ```python
     def ajouter_file_prio(f, t, p):
@@ -573,7 +633,7 @@ On considère la file `f` suivante **(tête à droite)** :
 
     **5.** Au pire, on défile puis ré-enfile les `m` éléments de `f` : le coût est **proportionnel à `m`** (linéaire).
 
-    **6.**
+    **6.** **Démarche :** tant que la file n’est pas vide : défiler, avancer la tâche, la noter, et la réinsérer à sa place (avec sa priorité) si elle n’est pas terminée.
 
     ```python
     def planning(f):
@@ -609,7 +669,7 @@ class File:
         return self.contenu[0]
 ```
 
-*« Les éléments entrent par la queue avec `append` et sortent par la tête avec `pop` : le premier entré est le premier sorti. »*
+« Les éléments entrent par la queue avec `append` et sortent par la tête avec `pop` : le premier entré est le premier sorti. »
 
 1.  La réponse est-elle correcte ? Dérouler à la main la séquence `f = File()`, `f.enfiler(7)`, `f.enfiler(19)`, `f.enfiler(22)`, puis `f.tete()` et `f.defiler()` (dessiner la file horizontalement, tête à droite, comme dans cette feuille).
 
@@ -677,7 +737,13 @@ On dispose d’une classe `File` d’interface `est_vide`, `enfiler`, `defiler` 
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 17</span> — LIFO ou FIFO ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-17 }
 
+<span class="essentiel">• essentiel</span>
+
 Pour chaque situation, indiquer si la structure adaptée est une **pile** (LIFO) ou une **file** (FIFO), et justifier en une courte phrase.
+
+??? pouce "Coup de pouce"
+
+    Pour chaque situation, se demander quel élément doit être traité en premier : le plus récent (pile) ou le plus ancien (file) ?
 
 1.  la fonction « Annuler » (`Ctrl+Z`) d’un traitement de texte ;
 
@@ -705,6 +771,10 @@ Pour chaque situation, indiquer si la structure adaptée est une **pile** (LIFO)
 
 On applique la *même* suite d’ajouts `1, 2, 3, 4` à une pile et à une file, puis on retire **tous** les éléments un par un.
 
+??? pouce "Coup de pouce"
+
+    Dessiner les deux structures après les quatre ajouts (pile verticale, sommet en haut ; file horizontale, tête à droite), puis retirer les éléments un par un en notant chaque valeur qui sort.
+
 1.  Dans quel ordre les valeurs sortent-elles de la **pile** ?
 
 2.  Dans quel ordre sortent-elles de la **file** ?
@@ -716,6 +786,8 @@ On applique la *même* suite d’ajouts `1, 2, 3, 4` à une pile et à une file,
     **1.** De la pile : `4, 3, 2, 1` (le dernier entré sort en premier). **2.** De la file : `1, 2, 3, 4` (le premier entré sort en premier). **3.** La **pile** inverse l’ordre ; la **file** le conserve.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Piles et files pour parcourir un graphe (d’après Polynésie 2024, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-19 }
+
+<span class="duree">≈ 20 min</span>
 
 Un graphe est donné par un dictionnaire d’adjacence (les clés sont les sommets, la valeur est la liste des voisins) :
 
@@ -767,11 +839,13 @@ def parcours(graphe, depart):
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 3) : Q1 : 0,5 ; Q2 : 0,75 ; Q3 : 1,25 ; Q4 : 0,5
+
     **1.** **LIFO** = *Last In, First Out* (dernier entré, premier sorti) : c’est la **pile**. **FIFO** = *First In, First Out* (premier entré, premier sorti) : c’est la **file**.
 
     **2.** On défile `A` et on ajoute `B`, `C` ; on défile `B` et on ajoute `D` ; on défile `C` puis `D` (voisins déjà vus). Ordre d’entrée dans `visite` : `A, B, C, D`.
 
-    **3.**
+    **3.** **Démarche :** on traduit l’algorithme ligne à ligne ; c’est la fonction `parcours` où la file est remplacée par une pile, et où un sommet n’est marqué visité qu’au dépilement.
 
     ```python
     def parcours2(graphe, depart):
@@ -790,6 +864,8 @@ def parcours(graphe, depart):
     **4.** Un résultat possible : `[’A’, ’C’, ’D’, ’B’]` (l’ordre dépend de l’ordre d’empilement des voisins). Avec la pile, on repart toujours du dernier sommet ajouté : l’ordre de visite diffère de celui de la question 2.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 20</span> — Défi — une file avec deux piles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-20 }
+
+<span class="duree">≈ 15 min</span>
 
 On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux piles** `entree` et `sortie` : `enfiler` empile dans `entree` ; `defiler` dépile dans `sortie` — et si `sortie` est vide, on y transvase d’abord *tout* le contenu de `entree`.
 
@@ -829,6 +905,8 @@ On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux p
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Longueur d’une liste (avec une boucle) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-21 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `longueur(lst)` qui renvoie le nombre de cellules de la liste chaînée `lst`, à l’aide d’une boucle `while` qui parcourt les cellules en suivant les liens. *(La liste vide a pour longueur `0`.)*
 
 ??? pouce "Coup de pouce"
@@ -836,6 +914,8 @@ On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux p
     Quelle variable sert de « curseur » sur les cellules, et comment avance-t-elle d’une cellule à la suivante ? Quand faut-il s’arrêter ?
 
 ??? corrige "Corrigé"
+
+    **Démarche :** une variable `c` sert de curseur : elle part de la première cellule et avance en suivant le lien `suivante` ; on compte une cellule à chaque tour, et l’on s’arrête quand le curseur vaut `None`.
 
     ```python
     def longueur(lst):
@@ -847,6 +927,8 @@ On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux p
         return n
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `while c.suivante is not None` : la dernière cellule n’est pas comptée, et la liste vide provoque une erreur (`None` n’a pas d’attribut `suivante`).
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 22</span> — Nombre d’occurrences <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-22 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `occurrences(x, lst)` qui renvoie le nombre de fois que la valeur `x` apparaît dans la liste chaînée `lst`. L’écrire au choix récursivement ou avec une boucle.
@@ -856,6 +938,8 @@ On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux p
     Avec une boucle : même parcours que pour la longueur, mais le compteur n’augmente que sous condition. En récursif : condition d’arrêt `lst is None`, puis l’appel porte sur `lst.suivante`.
 
 ??? corrige "Corrigé"
+
+    **Démarche :** même parcours que pour la longueur, mais le compteur n’augmente que si la valeur de la cellule est `x`.
 
     ```python
     def occurrences(x, lst):
@@ -889,6 +973,8 @@ On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux p
 
 ??? corrige "Corrigé"
 
+    **Démarche :** en récursif, deux conditions d’arrêt : la liste est vide (l’indice est trop grand : on lève `IndexError`) ou `n == 0` (on renvoie la valeur de la première cellule). Sinon, l’élément d’indice `n` de la liste est l’élément d’indice `n - 1` du reste.
+
     ```python
     def nieme(n, lst):
         if lst is None:
@@ -913,6 +999,8 @@ On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux p
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — Le collier de bonbons : maillons chaînés (d’après Amérique du Nord 2025, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-24 }
+
+<span class="duree">≈ 45 min</span>
 
 Un « collier » de bonbons est une liste chaînée **circulaire** et **doublement** chaînée : chaque bonbon est un maillon possédant trois informations — une `valeur`, un `pred` (le bonbon précédent) et un `succ` (le suivant), tous deux des objets `Bonbon`.
 
@@ -947,7 +1035,7 @@ zero.pred = deux ; un.pred = zero ;   deux.pred = un
 
     ??? pouce "Coup de pouce"
 
-        Créer le premier bonbon, puis, dans une boucle, chaque nouveau bonbon en le reliant au précédent dans les deux sens (une variable retient le précédent). Après la boucle, refermer le collier entre le dernier et le premier.
+        Q3 : créer le premier bonbon, puis, dans une boucle, chaque nouveau bonbon en le reliant au précédent dans les deux sens (une variable retient le précédent). Après la boucle, refermer le collier entre le dernier et le premier.
 
 4.  Écrire les **deux instructions** qui « mangent » le bonbon `deux`, c’est-à-dire le **retirent** du collier en reliant directement son prédécesseur et son successeur.
 
@@ -955,22 +1043,24 @@ zero.pred = deux ; un.pred = zero ;   deux.pred = un
 
     ??? pouce "Coup de pouce"
 
-        Que valent alors `b.succ` et `b.pred` ?
+        Q5 : que valent alors `b.succ` et `b.pred` ?
 
-6.  *(défi)* <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `dernier_chaine(n)` qui construit le collier de `n` bonbons (avec `creer_collier`), puis les « mange » de proche en proche — à chaque étape, le bonbon courant **mange son successeur** (on le retire du collier), puis on passe au bonbon suivant — jusqu’à ce qu’il n’en reste qu’**un**, dont on renvoie la `valeur`.
+6.  *(défi* ★★★*)* <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `dernier_chaine(n)` qui construit le collier de `n` bonbons (avec `creer_collier`), puis les « mange » de proche en proche — à chaque étape, le bonbon courant **mange son successeur** (on le retire du collier), puis on passe au bonbon suivant — jusqu’à ce qu’il n’en reste qu’**un**, dont on renvoie la `valeur`.
 
     ??? pouce "Coup de pouce"
 
-        Une boucle qui tourne tant que le collier n’est pas réduit à un bonbon (question 5) ; à chaque tour : retirer le successeur du bonbon courant (question 4), puis avancer.
+        Q6 : une boucle qui tourne tant que le collier n’est pas réduit à un bonbon (question 5) ; à chaque tour : retirer le successeur du bonbon courant (question 4), puis avancer.
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 6) : Q1 : 0,5 ; Q2 : 0,75 ; Q3 : 1,5 ; Q4 : 0,75 ; Q5 : 0,5 ; Q6 : 2
 
     **1.** Ce sont des **attributs** de la classe `Bonbon`. `pred` est le **prédécesseur**, `valeur` la **valeur** (le contenu) et `succ` le **successeur** du maillon. `pred` et `succ` sont eux-mêmes des maillons : la structure est une **liste doublement chaînée** (et ici circulaire).
 
     **2.** `a = zero.succ.valeur` : `zero.succ` est `un`, donc `a = 1`.  
     `b = un.succ.succ.pred.valeur` : `un.succ` $=$ `deux`, `deux.succ` $=$ `zero`, `zero.pred` $=$ `deux`, donc `b = 2`.
 
-    **3.**
+    **3.** **Démarche :** une variable `precedent` retient le dernier bonbon créé ; chaque nouveau bonbon lui est relié dans les deux sens ; après la boucle, on referme le collier entre le dernier et le premier.
 
     ```python
     def creer_collier(n):
@@ -1032,7 +1122,7 @@ zero.pred = deux ; un.pred = zero ;   deux.pred = un
 
     **1.** `lst.valeur` vaut `10`. L’instruction `autre = lst` ne crée aucune cellule : `autre` et `lst` désignent la **même** première cellule, donc la modifier par l’un des noms la modifie pour l’autre.
 
-    **2.**
+    **2.** **Démarche :** condition d’arrêt : la liste vide, dont la copie est vide ; sinon, une **nouvelle** cellule de même valeur, suivie de la copie du reste.
 
     ```python
     def copier_liste(lst):
@@ -1043,9 +1133,13 @@ zero.pred = deux ; un.pred = zero ;   deux.pred = un
 
     Chaque appel crée une **nouvelle** cellule (`Cellule(…)`) avec la même valeur, suivie de la copie du reste.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Renvoyer `Cellule(lst.valeur, lst.suivante)` : seule la première cellule est neuve, le reste est partagé avec `lst`. Il faut copier aussi le reste, par l’appel récursif.
+
     **3.** `c` est une nouvelle cellule : `c.valeur = 10` ne change qu’elle : les cellules de `lst` ne sont pas touchées.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 26</span> — Défi — insertion dans une liste triée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-26 }
+
+<span class="duree">≈ 20 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `inserer(x, lst)` qui prend un entier `x` et une liste chaînée `lst` **triée par ordre croissant**, et renvoie une **nouvelle** liste triée où `x` a été inséré à sa place. Ainsi, insérer `3` dans `1, 2, 5, 8` donne `1, 2, 3, 5, 8`.
 
@@ -1074,7 +1168,7 @@ zero.pred = deux ; un.pred = zero ;   deux.pred = un
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 27</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-27 }
 
-Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
+Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans lire ses notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 
 1.  Expliquer à un camarade de Première la différence entre une **pile** et une **file**, avec pour chacune un exemple de la vie courante et un usage en informatique.
 
@@ -1082,7 +1176,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
 3.  Expliquer pourquoi ajouter un élément en tête d’une **liste chaînée** est rapide, alors qu’accéder à son millième élément est lent.
 
-**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus, puis retourner la feuille. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire de notes** : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
+**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus : comme au Grand Oral, ces notes servent d’aide-mémoire. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire ses notes** et sans rien écrire : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
 
 ??? pouce "Coup de pouce"
 

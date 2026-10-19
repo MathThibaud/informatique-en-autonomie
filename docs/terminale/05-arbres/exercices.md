@@ -26,9 +26,15 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Vocabulaire <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-1 }
 
+<span class="essentiel">• essentiel</span>
+
 On considère l’arbre binaire suivant.
 
-![](../figures/ee5628933aa35433.svg){ .tikz loading=lazy }
+??? pouce "Coup de pouce"
+
+    Une feuille est un nœud sans fils. Pour la hauteur, chercher le plus long chemin de la racine à une feuille et appliquer la convention du mode d’emploi (on compte les nœuds). Pour la profondeur, relire la définition du cours : que compte-t-on depuis la racine ?
+
+![](../figures/303d55188bc2fc94.svg){ .tikz loading=lazy }
 
 1.  Donner la **racine**, puis la liste des **feuilles**.
 
@@ -45,13 +51,19 @@ On considère l’arbre binaire suivant.
     **1.** Racine : `A`. Feuilles : `D`, `G`, `F`. **2.** Taille $= 7$ ; hauteur $= 4$ (chemin `A--C--E--G`).  
     **3.** Père de `G` : `E`. Fils de `C` : `E` et `F`. **4.** Profondeur de `E` : $2$ (deux arêtes : `A--C--E` ; la racine est à la profondeur $0$). **5.** Sous-arbre de racine `C` : les nœuds `C`, `E`, `F`, `G`.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Donner $3$ pour la hauteur en comptant les arêtes du chemin `A--C--E--G` : la convention de la feuille compte les **nœuds**, d’où $4$. Toujours appliquer la convention de l’énoncé.
+
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Construire à partir d’une description <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-2 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Dessiner l’arbre `a = Noeud(5, Noeud(3, Noeud(2)), Noeud(8, None, Noeud(9)))`, puis donner sa taille et sa hauteur.
 
+??? pouce "Coup de pouce"
+
+    Le premier paramètre de `Noeud` est la valeur, le deuxième le sous-arbre gauche, le troisième le sous-arbre droit (absent ou `None` : pas de fils de ce côté). Dessiner d’abord la racine, puis traiter chaque sous-arbre de la même façon.
+
 ??? corrige "Corrigé"
 
-    ![](../figures/163f33c86bd61b33.svg){ .tikz loading=lazy }
+    ![](../figures/939d84ef86b7f842.svg){ .tikz loading=lazy }
 
     Taille $= 5$, hauteur $= 3$.
 
@@ -59,11 +71,17 @@ On considère l’arbre binaire suivant.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Les quatre parcours <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-3 }
 
+<span class="essentiel">• essentiel</span>
+
 On considère l’arbre suivant.
 
-![](../figures/7e330e77e31fed52.svg){ .tikz loading=lazy }
+![](../figures/7b1fc3d91da30a4e.svg){ .tikz loading=lazy }
 
 Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe**, **suffixe**, et **en largeur**. Que remarque-t-on pour le parcours infixe ?
+
+??? pouce "Coup de pouce"
+
+    En préfixe, en infixe et en suffixe, la racine est visitée avant, entre ou après ses deux sous-arbres, et cette règle s’applique à **chaque** sous-arbre. En largeur, on lit l’arbre niveau par niveau, de gauche à droite.
 
 ??? corrige "Corrigé"
 
@@ -77,6 +95,8 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
 
     Le parcours **infixe** donne les valeurs **triées par ordre croissant** : cet arbre est en fait un **ABR**.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire en préfixe `4, 2, 6, …`, niveau par niveau : c’est le parcours en largeur. En profondeur, on termine tout le sous-arbre gauche (`2, 1, 3`) avant de passer au droit.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Programmer les parcours en profondeur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-4 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `prefixe(a)` qui **affiche** les valeurs de `a` dans l’ordre préfixe. Indiquer ensuite la (seule) ligne à déplacer pour obtenir le parcours **infixe**, puis le parcours **suffixe**.
@@ -86,6 +106,8 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
     Condition d’arrêt : l’arbre vide, on n’affiche rien. Sinon, trois instructions : afficher la racine, parcourir le sous-arbre gauche, parcourir le sous-arbre droit. Dans quel ordre pour le préfixe ?
 
 ??? corrige "Corrigé"
+
+    **Démarche :** condition d’arrêt : l’arbre vide, on n’affiche rien. Sinon, trois instructions : afficher la racine, parcourir le sous-arbre gauche, parcourir le sous-arbre droit. Seule la place de l’affichage distingue les trois parcours.
 
     ```python
     def prefixe(a):
@@ -97,7 +119,11 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
 
     **Infixe** : placer `print(a.valeur)` *entre* `prefixe(a.gauche)` et `prefixe(a.droite)`. **Suffixe** : placer `print(a.valeur)` *après* les deux appels.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `print(a.valeur)` sans avoir testé `a is not None` : sur un sous-arbre vide, Python lève `AttributeError` (`None` n’a pas d’attribut `valeur`).
+
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 5</span> — Défi — parcours en largeur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-5 }
+
+<span class="duree">≈ 20 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `largeur(a)` qui affiche les valeurs de `a` **niveau par niveau**, de gauche à droite. On s’appuiera sur une `File` (interface `enfiler`, `defiler`, `est_vide`). *(On admet la classe `File`.)*
 
@@ -137,7 +163,13 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction récursive `taille(a)` qui renvoie le nombre de nœuds de l’arbre `a`. *(Rappel : l’arbre vide `None` a pour taille `0`.)*
 
+??? pouce "Coup de pouce"
+
+    Condition d’arrêt : l’arbre vide. Sinon, comment obtenir la taille d’un arbre à partir de sa racine et des tailles de ses deux sous-arbres ?
+
 ??? corrige "Corrigé"
+
+    **Démarche :** condition d’arrêt : l’arbre vide, de taille $0$. Sinon, on compte la racine ($1$) et l’on ajoute les tailles des deux sous-arbres, obtenues par deux appels récursifs.
 
     ```python
     def taille(a):
@@ -147,6 +179,8 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Hauteur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-7 }
+
+<span class="essentiel">• essentiel</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction récursive `hauteur(a)` qui renvoie la hauteur de `a` (convention : compter les nœuds ; l’arbre vide a pour hauteur `0`).
 
@@ -158,12 +192,16 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
 
 ??? corrige "Corrigé"
 
+    **Démarche :** condition d’arrêt : l’arbre vide, de hauteur $0$. Sinon, la racine ajoute un niveau au plus haut des deux sous-arbres.
+
     ```python
     def hauteur(a):
         if a is None:
             return 0
         return 1 + max(hauteur(a.gauche), hauteur(a.droite))
     ```
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `1 + hauteur(a.gauche) + hauteur(a.droite)` : on additionne les deux sous-arbres (on obtient presque la taille) au lieu de garder le plus haut des deux.
 
     Avec la convention des arêtes, seul le cas de base change : l’arbre vide vaut $-1$, pour qu’une feuille vaille $1 + \max(-1, -1) = 0$.
 
@@ -184,6 +222,8 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
 
 ??? corrige "Corrigé"
 
+    **Démarche :** deux conditions d’arrêt : l’arbre vide ($0$ feuille) et le nœud sans fils ($1$ feuille). Sinon, on additionne les nombres de feuilles des deux sous-arbres.
+
     ```python
     def nb_feuilles(a):
         if a is None:
@@ -197,6 +237,8 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Rechercher dans un ABR <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-9 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction récursive `recherche(a, x)` qui renvoie `True` si la valeur `x` est présente dans l’**ABR** `a`, `False` sinon, en profitant de l’ordre de l’ABR (on ne parcourt **pas** tout l’arbre). Combien de comparaisons, au maximum, pour un ABR de hauteur `h` ?
 
 ??? pouce "Coup de pouce"
@@ -204,6 +246,8 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
     Comparer `x` à la racine : trois cas. Un seul appel récursif, du côté où `x` peut encore se trouver. Pour le coût : combien de nœuds au plus sur un chemin de la racine à une feuille ?
 
 ??? corrige "Corrigé"
+
+    **Démarche :** on compare `x` à la racine : égal, il est trouvé ; plus petit, on cherche à gauche ; plus grand, à droite. Un seul appel récursif ; condition d’arrêt : l’arbre vide (`x` est absent).
 
     ```python
     def recherche(a, x):
@@ -235,9 +279,11 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Insérer dans un ABR <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-10 }
 
+<span class="essentiel">• essentiel</span>
+
 On part de l’arbre binaire de recherche suivant.
 
-![](../figures/3de7d3de290b5b02.svg){ .tikz loading=lazy }
+![](../figures/7295c1b2e01db406.svg){ .tikz loading=lazy }
 
 1.  Redessiner l’arbre après insertion, **dans cet ordre**, des valeurs `10`, `18` puis `2`.
 
@@ -251,7 +297,9 @@ On part de l’arbre binaire de recherche suivant.
 
     **1.** `10` : $<15$ (gauche), $>8$ (droite), $<12$ (gauche) $\to$ fils gauche de `12`. `18` : $>15$, $<20$ $\to$ fils gauche de `20`. `2` : $<15$, $<8$, $<5$ $\to$ fils gauche de `5`.
 
-    ![](../figures/075dad01c3dfb7e2.svg){ .tikz loading=lazy }
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Arrêter la descente trop tôt (placer `10` comme fils de `8`) : une nouvelle valeur descend jusqu’à une place **vide** et devient toujours une feuille.
+
+    ![](../figures/298c16c8638549ff.svg){ .tikz loading=lazy }
 
     **2.** Le parcours **infixe** (gauche, racine, droite) affiche les valeurs par ordre croissant.
 
@@ -263,11 +311,11 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
 
     ??? pouce "Coup de pouce"
 
-        Trois cas : arbre vide (on renvoie un nouveau `Noeud(x)`) ; `x` plus petit que la racine (on insère à gauche) ; sinon (on insère à droite). Ne pas oublier de **réaffecter** le sous-arbre modifié, puis de renvoyer `a`.
+        Q1 : trois cas : arbre vide (on renvoie un nouveau `Noeud(x)`) ; `x` plus petit que la racine (on insère à gauche) ; sinon (on insère à droite). Ne pas oublier de **réaffecter** le sous-arbre modifié, puis de renvoyer `a`.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        `if x < a.valeur:`  
+        Q1 : `if x < a.valeur:`  
         `a.gauche = inserer(a.gauche, x)`
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Partant de l’arbre vide, insérer dans cet ordre `5`, `3`, `8`, `3`, `9`, `5`. Dessiner l’ABR obtenu : où sont placés les deux doublons ? Vérifier que le parcours infixe donne les valeurs triées.
@@ -276,13 +324,13 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
 
     ??? pouce "Coup de pouce"
 
-        Insérer toutes les valeurs, puis écrire une variante du parcours infixe qui **renvoie une liste** : `infixe(a.gauche) + [a.valeur] + infixe(a.droite)`.
+        Q3 : insérer toutes les valeurs, puis écrire une variante du parcours infixe qui **renvoie une liste** : `infixe(a.gauche) + [a.valeur] + infixe(a.droite)`.
 
 4.  Dessiner l’ABR obtenu en insérant `1, 2, 3, 4, 5, 6, 7` dans cet ordre, puis celui obtenu avec `4, 2, 6, 1, 3, 5, 7`. Donner la hauteur de chacun. Combien de comparaisons faut-il, au pire, pour y chercher une valeur ?
 
 ??? corrige "Corrigé"
 
-    **1.**
+    **1.** **Démarche :** trois cas : l’arbre vide (la valeur devient une nouvelle feuille), `x` plus petit que la racine (on insère à gauche), sinon à droite. On réaffecte le sous-arbre modifié, puis on renvoie `a`.
 
     ```python
     def inserer(a, x):
@@ -295,15 +343,15 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
         return a
     ```
 
-    Sans la réaffectation `a.gauche = …`, le nœud créé quand `a.gauche` vaut `None` serait perdu.
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `inserer(a.gauche, x)` sans la réaffectation `a.gauche = …` : quand `a.gauche` vaut `None`, le nœud créé est perdu.
 
     **2.** Le second `3` va à droite du premier `3` ; le second `5` va à droite de la racine `5`, puis à gauche de `8`.
 
-    ![](../figures/451965c96bce5350.svg){ .tikz loading=lazy }
+    ![](../figures/4344cbe26fb69ab4.svg){ .tikz loading=lazy }
 
     Parcours infixe : `3, 3, 5, 5, 8, 9` — trié.
 
-    **3.**
+    **3.** **Démarche :** on insère les valeurs une à une dans un ABR vide ; un parcours infixe qui **renvoie une liste** donne alors les valeurs triées.
 
     ```python
     def infixe(a):
@@ -322,13 +370,15 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
 
     **4.** Avec `1, 2, …, 7`, chaque valeur devient le fils droit de la précédente : un arbre « en peigne » de hauteur $7$ (une chaîne `1`–`2`–…–`7`). Avec `4, 2, 6, 1, 3, 5, 7`, on obtient l’arbre équilibré ci-dessous, de hauteur $3$.
 
-    ![](../figures/3ab03d06c1117802.svg){ .tikz loading=lazy }
+    ![](../figures/798bb7173a3d91af.svg){ .tikz loading=lazy }
 
     Au pire, une recherche fait autant de comparaisons que la hauteur : $7$ dans le peigne (comme dans une liste), $3$ dans l’arbre équilibré. Mêmes valeurs, même nombre de nœuds : seul l’**ordre d’insertion** a changé.
 
 ### Pour aller plus loin
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 12</span> — Défi — l’arbre miroir <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-12 }
+
+<span class="duree">≈ 15 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `miroir(a)` qui renvoie un **nouvel** arbre, image de `a` dans un miroir : à chaque nœud, les sous-arbres gauche et droit sont échangés (récursivement).
 
@@ -343,7 +393,7 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
     `return None`  
     `return Noeud(a.valeur, ..., ...)`
 
-![](../figures/554fc2504bd79663.svg){ .tikz loading=lazy } $\longrightarrow$ ![](../figures/f411c1b0abaa86f8.svg){ .tikz loading=lazy }
+![](../figures/f4e2b52582f5cc08.svg){ .tikz loading=lazy } $\longrightarrow$ ![](../figures/7b44dfde28bdcf6c.svg){ .tikz loading=lazy }
 
 ??? corrige "Corrigé"
 
@@ -355,6 +405,8 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Défi — maximum d’un arbre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-13 }
+
+<span class="duree">≈ 15 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `maximum(a)` qui renvoie la plus grande valeur d’un arbre `a` **non vide** (attention : arbre *quelconque*, pas forcément un ABR — il faut donc bien tout explorer).
 
@@ -385,9 +437,11 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — ABR : mesures, insertion, recherche (d’après Métropole 2023, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-14 }
 
+<span class="essentiel">• essentiel</span> <span class="duree">≈ 20 min</span>
+
 On considère l’arbre binaire de recherche suivant.
 
-![](../figures/66ae96cabe8054c8.svg){ .tikz loading=lazy }
+![](../figures/39e679f44e1b3a24.svg){ .tikz loading=lazy }
 
 1.  Donner la **taille** et la **hauteur** de cet ABR.
 
@@ -415,16 +469,22 @@ On considère l’arbre binaire de recherche suivant.
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 3) : Q1 : 0,5 ; Q2 : 0,75 ; Q3 : 0,25 ; Q4 : 1,5
+
     **1.** Taille $= 6$, hauteur $= 3$.
 
     **2.** `15` : $<25$, $>12$, $<18$ $\to$ fils gauche de `18`. `30` : $>25$, $<40$ $\to$ fils gauche de `40`.
 
-    ![](../figures/23849e8776b7e809.svg){ .tikz loading=lazy }
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Placer `15` comme fils droit de `12` : `15` est bien plus grand que `12`, mais il faut continuer à descendre et le comparer à `18`.
+
+    ![](../figures/63ca3e7abe13b0e4.svg){ .tikz loading=lazy }
 
     **3.** **(C)** parcours infixe.  
     **4.** ligne 5 : `True` ; ligne 7 : `self.sd().present(x)` ; ligne 9 : `self.sg().present(x)`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Un arbre binaire par une classe (d’après Sujet zéro 2023, sujet B) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-15 }
+
+<span class="duree">≈ 20 min</span>
 
 On donne la classe `ArbreBinaire` suivante : chaque objet a une `valeur` et deux sous-arbres `enfant_gauche` et `enfant_droit` (`None` au départ).
 
@@ -480,13 +540,15 @@ class ArbreBinaire:
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 3) : Q1 : 0,5 ; Q2 : 1 ; Q3 : 1,5
+
     **1.** Un attribut : `valeur` (ou `enfant_gauche`, `enfant_droit`). Une méthode : `insert_gauche` (ou `get_valeur`, `get_gauche`…).
 
     **2.** `r` a la valeur `15`, un fils gauche `6` et un fils droit `18` ; puis `6` reçoit un fils droit `10`.
 
-    ![](../figures/70238556c88d2a72.svg){ .tikz loading=lazy }
+    ![](../figures/1d33c9bbf656713d.svg){ .tikz loading=lazy }
 
-    **3.**
+    **3.** **Démarche :** même structure que la fonction `taille` du cours ; seuls changent les accès aux sous-arbres, par les accesseurs.
 
     ```python
     def taille(arbre):
@@ -496,6 +558,8 @@ class ArbreBinaire:
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Un arbre de décision (d’après Amérique du Nord 2025, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-16 }
+
+<span class="duree">≈ 30 min</span>
 
 Un arbre de décision est représenté par deux classes : les **nœuds** portent une question, les **feuilles** portent un résultat.
 
@@ -513,7 +577,7 @@ class Feuille:
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire le code Python qui construit l’arbre de décision ci-dessous et l’affecte à une variable `arbre`.
 
-    ![](../figures/7b6cdcdd9cc6e6de.svg){ .tikz loading=lazy }
+    ![](../figures/751bb6a0f807bdd7.svg){ .tikz loading=lazy }
 
     *(Convention : la branche de **gauche** correspond à la réponse « oui », celle de **droite** à « non ».)*
 
@@ -523,17 +587,19 @@ class Feuille:
 
     ??? pouce "Coup de pouce"
 
-        Chaque classe a sa propre version de la méthode. Dans la classe `Noeud`, sur quels objets faut-il appeler la méthode `nb_resultats` ? Où se trouve alors la condition d’arrêt de cette récursion ?
+        Q3 : chaque classe a sa propre version de la méthode. Dans la classe `Noeud`, sur quels objets faut-il appeler la méthode `nb_resultats` ? Où se trouve alors la condition d’arrêt de cette récursion ?
 
 4.  <span class="run" title="À programmer et tester sur machine">▶</span> *(Défi)* Écrire une fonction `diagnostic(arbre)` qui pose les questions à l’utilisateur (fonction `input`) en descendant l’arbre, et renvoie le résultat de la feuille atteinte. *(On répondra `"oui"` ou `"non"`.)*
 
     ??? pouce "Coup de pouce"
 
-        Une boucle `while` qui descend tant que l’objet courant n’est pas un résultat (méthode `est_resultat`) ; selon la réponse donnée à la question du nœud courant, on passe à `sioui` ou à `sinon`.
+        Q4 : une boucle `while` qui descend tant que l’objet courant n’est pas un résultat (méthode `est_resultat`) ; selon la réponse donnée à la question du nœud courant, on passe à `sioui` ou à `sinon`.
 
 ??? corrige "Corrigé"
 
-    **1.**
+    **Barème indicatif** (sur 4) : Q1 : 1 ; Q2 : 0,75 ; Q3 : 1 ; Q4 : 1,25
+
+    **1.** **Démarche :** chaque question devient un `Noeud` (question, branche oui, branche non), chaque résultat une `Feuille` ; on écrit l’arbre de la racine vers les feuilles.
 
     ```python
     arbre = Noeud("A des plumes ?",
@@ -554,7 +620,7 @@ class Feuille:
 
     *Remarque : chaque classe a sa propre version de la méthode ; à l’appel `self.sioui.nb_resultats()`, Python exécute celle de la classe de l’objet (`Feuille` ou `Noeud`). C’est le **polymorphisme**, au-delà du programme.*
 
-    **4.**
+    **4.** **Démarche :** on part de la racine et l’on descend tant que l’objet courant n’est pas un résultat ; la réponse de l’utilisateur choisit la branche.
 
     ```python
     def diagnostic(arbre):
@@ -568,6 +634,8 @@ class Feuille:
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Un arbre représenté par des listes (d’après Amérique du Sud 2023, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-17 }
+
+<span class="duree">≈ 30 min</span>
 
 Ici, un arbre (pas forcément binaire) est représenté par une liste `[e, lst_sa]` où `e` est l’étiquette du nœud et `lst_sa` la **liste de ses sous-arbres**. L’arbre vide est `[]`, une feuille est `[e, []]`.
 
@@ -585,7 +653,7 @@ a  = [4, [n1, n8]]
 
     ??? pouce "Coup de pouce"
 
-        Reprendre le schéma du parcours en largeur du cours : quelle condition fait tourner la boucle ? D’où vient l’arbre traité à chaque tour ? Où se trouve l’étiquette dans la liste `[e, lst_sa]` ?
+        Q2 : reprendre le schéma du parcours en largeur du cours : quelle condition fait tourner la boucle ? D’où vient l’arbre traité à chaque tour ? Où se trouve l’étiquette dans la liste `[e, lst_sa]` ?
 
     ```python
     def poids(arbre):
@@ -602,17 +670,19 @@ a  = [4, [n1, n8]]
         return p
     ```
 
-3.  *(défi)* <span class="run" title="À programmer et tester sur machine">▶</span> Un arbre est un **mobile** si *tous* ses sous-arbres ont le **même poids** et sont eux-mêmes des mobiles (l’arbre vide et une feuille sont des mobiles). Écrire une fonction récursive `est_mobile(arbre)` qui renvoie un booléen ; on pourra utiliser `poids`.
+3.  *(défi* ★★★*)* <span class="run" title="À programmer et tester sur machine">▶</span> Un arbre est un **mobile** si *tous* ses sous-arbres ont le **même poids** et sont eux-mêmes des mobiles (l’arbre vide et une feuille sont des mobiles). Écrire une fonction récursive `est_mobile(arbre)` qui renvoie un booléen ; on pourra utiliser `poids`.
 
     ??? pouce "Coup de pouce"
 
-        Parcourir la liste des sous-arbres : chacun doit avoir le même poids que le premier, **et** être lui-même un mobile (appel récursif). Si aucun ne fait défaut, renvoyer `True`.
+        Q3 : parcourir la liste des sous-arbres : chacun doit avoir le même poids que le premier, **et** être lui-même un mobile (appel récursif). Si aucun ne fait défaut, renvoyer `True`.
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 4) : Q1 : 0,75 ; Q2 : 1,25 ; Q3 : 2
+
     **1.**
 
-    ![](../figures/2b3c69248d1b6745.svg){ .tikz loading=lazy }
+    ![](../figures/69db6d74cebfe4ef.svg){ .tikz loading=lazy }
 
     **2.** ligne 7 : `while not est_vide(file):` ; ligne 8 : `arbre = defiler(file)` ; ligne 11 : `p = p + arbre[0]`.
 
@@ -633,9 +703,11 @@ a  = [4, [n1, n8]]
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 18</span> — La plus grande somme racine-feuille (d’après Amérique du Sud 2022, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-18 }
 
+<span class="duree">≈ 20 min</span>
+
 Dans un arbre binaire étiqueté par des entiers, un **chemin racine-feuille** part de la racine et descend, de fils en fils, jusqu’à une feuille. Sa **somme** est la somme des étiquettes rencontrées. On cherche la **plus grande** de ces sommes.
 
-![](../figures/40f5e4b91357c91c.svg){ .tikz loading=lazy }
+![](../figures/f04fce8e61d57604.svg){ .tikz loading=lazy }
 
 1.  Déterminer « à la main » la plus grande somme racine-feuille de cet arbre.
 
@@ -655,6 +727,8 @@ Dans un arbre binaire étiqueté par des entiers, un **chemin racine-feuille** p
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 3) : Q1 : 1 ; Q2 : 2
+
     **1.** Les chemins racine-feuille et leurs sommes : `2-7-4-2`$=15$ ; `2-7-4-3`$=16$ ; `2-7-1-5`$=15$ ; `2-5-9-6`$=\textbf{22}$. La plus grande somme est **22**.
 
     **2.**
@@ -671,6 +745,8 @@ Dans un arbre binaire étiqueté par des entiers, un **chemin racine-feuille** p
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 19</span> — Puissance 4 : l’arbre de coups et l’algorithme min-max (d’après Amérique du Nord 2026, jour 1, parties B et C) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-19 }
+
+<span class="duree">≈ 45 min</span>
 
 *Suite de l’exercice « Puissance 4 : la grille de jeu » du chapitre POO.* Une grille de puissance 4 (6 lignes, 7 colonnes) est un objet de la classe `Grille` ; les deux joueurs sont notés 1 et 2. On dispose des méthodes suivantes :
 
@@ -696,7 +772,7 @@ On associe un arbre de coups à un joueur et à une grille de jeu. Il simule tou
 
 Pour construire l’arbre, on utilise une classe `Noeud` à trois attributs : `colonne` (soit `-1`, soit le numéro de la colonne où le coup est joué, de 0 à 6), `score` (le score associé au coup) et `suivants` (la liste des nœuds fils). La racine ne représente pas un coup : son attribut `colonne` vaut `-1` et ses fils représentent tous les premiers coups possibles du joueur 1.
 
-![](../figures/d5a0b7e69187d1b9.svg){ .tikz loading=lazy }
+![](../figures/b1f82297ef04cf9a.svg){ .tikz loading=lazy }
 
 Figure 1. Schéma partiel de l’arbre de coups pour `niveau_max = 2` (valeur de l’attribut `colonne`).
 
@@ -722,11 +798,11 @@ On suppose écrite de même une méthode `colonne_score_max` (fils de score le p
 
     ??? pouce "Coup de pouce"
 
-        Les trois premiers cas sont des scores directs : relire les règles de la partie 1. Dans la boucle : on crée le nœud du coup joué dans `colonne`, on l’ajoute aux fils, puis l’appel récursif se fait au niveau suivant, pour l’**autre** joueur, sur `grille2`.
+        Q3 : les trois premiers cas sont des scores directs : relire les règles de la partie 1. Dans la boucle : on crée le nœud du coup joué dans `colonne`, on l’ajoute aux fils, puis l’appel récursif se fait au niveau suivant, pour l’**autre** joueur, sur `grille2`.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        L’appel récursif s’écrit  
+        Q3 : l’appel récursif s’écrit  
         `nouveau_noeud.calcule_score(niveau + 1, 3 - joueur, grille2)`  
         (`3 - joueur` vaut `2` si `joueur` vaut `1`, et inversement).
 
@@ -760,9 +836,11 @@ On suppose écrite de même une méthode `colonne_score_max` (fils de score le p
 
     ??? pouce "Coup de pouce"
 
-        Créer la racine (colonne `-1`), lui faire calculer son score au niveau `0`, puis choisir parmi ses fils selon le joueur : `colonne_score_min` ou `colonne_score_max`.
+        Q5 : créer la racine (colonne `-1`), lui faire calculer son score au niveau `0`, puis choisir parmi ses fils selon le joueur : `colonne_score_min` ou `colonne_score_max`.
 
 ??? corrige "Corrigé"
+
+    **Barème indicatif** (sur 6) : Q1 : 0,5 ; Q2 : 1,25 ; Q3 : 2 ; Q4 : 0,75 ; Q5 : 1,5
 
     1.
 
@@ -842,7 +920,7 @@ def est_abr(a):
     return est_abr(a.gauche) and est_abr(a.droite)
 ```
 
-*« Cette fonction vérifie, pour chaque nœud, que son fils gauche est plus petit et son fils droit plus grand ou égal, puis fait de même récursivement dans les deux sous-arbres : c’est exactement la définition d’un ABR. »*
+« Cette fonction vérifie, pour chaque nœud, que son fils gauche est plus petit et son fils droit plus grand ou égal, puis fait de même récursivement dans les deux sous-arbres : c’est exactement la définition d’un ABR. »
 
 1.  La réponse est-elle correcte ? <span class="run" title="À programmer et tester sur machine">▶</span> La tester sur l’arbre `Noeud(8, Noeud(3, Noeud(1), Noeud(12)), Noeud(10))` : le dessiner d’abord, dire s’il est un ABR, puis comparer avec ce que renvoie la fonction.
 
@@ -879,7 +957,7 @@ def est_abr(a):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-21 }
 
-Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
+Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans lire ses notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 
 1.  Expliquer à un camarade de Première ce qu’est un **arbre binaire de recherche** et pourquoi y chercher une valeur est rapide.
 
@@ -887,7 +965,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
 3.  Expliquer pourquoi un ABR peut être très efficace, ou pas plus efficace qu’une liste, selon l’**ordre** dans lequel on insère les valeurs.
 
-**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus, puis retourner la feuille. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire de notes** : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
+**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus : comme au Grand Oral, ces notes servent d’aide-mémoire. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire ses notes** et sans rien écrire : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
 
 ??? pouce "Coup de pouce"
 
@@ -960,3 +1038,59 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
     - Valeurs insérées déjà triées ($1, 2, 3, \dots$) : chaque nœud n’a qu’un fils droit, l’arbre est **filiforme**, de hauteur $n$ : chercher revient à parcourir une liste.
 
     - Piège : il existe deux conventions de hauteur (arbre réduit à sa racine : $1$ ou $0$) ; annoncer celle qu’on utilise, comme dans un énoncé.
+
+### Entraînement
+
+Des séries courtes pour rendre une méthode automatique : même consigne, données différentes. Les réponses sont brèves dans le corrigé.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 22</span> — Parcours en série <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-22 }
+
+<span class="essentiel">• essentiel</span>
+
+Pour chacun des trois arbres ci-dessous, donner l’ordre de visite des nœuds pour les parcours **préfixe**, **infixe**, **suffixe** et **en largeur**.
+
+??? pouce "Coup de pouce"
+
+    Même méthode qu’à l’exercice 3. En profondeur, la racine est visitée avant, entre ou après ses deux sous-arbres, et cette règle s’applique à **chaque** sous-arbre : terminer tout le sous-arbre gauche avant de passer au droit. En largeur, lire l’arbre niveau par niveau, de gauche à droite.
+
+|           |           |           |
+|:---------:|:---------:|:---------:|
+| ![](../figures/3f61df9c2deca719.svg){ .tikz loading=lazy } | ![](../figures/fcc97757d5f4fcf8.svg){ .tikz loading=lazy } | ![](../figures/ef8efc1d45882303.svg){ .tikz loading=lazy } |
+|  **a)**   |  **b)**   |  **c)**   |
+
+??? corrige "Corrigé"
+
+    |        | **Préfixe**     | **Infixe**      | **Suffixe**     | **Largeur**     |
+    |:------:|:----------------|:----------------|:----------------|:----------------|
+    | **a)** | `A B D E C F`   | `D B E A C F`   | `D E B F C A`   | `A B C D E F`   |
+    | **b)** | `5 9 2 1 7 3 6` | `9 2 5 7 1 6 3` | `2 9 7 6 3 1 5` | `5 9 1 2 7 3 6` |
+    | **c)** | `M N O P Q`     | `O P N M Q`     | `P O N Q M`     | `M N Q O P`     |
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> En b), commencer le parcours infixe par `2, 9` : `9` n’a pas de fils gauche ; on le visite donc *avant* son fils droit `2` (sous-arbre gauche vide, racine, sous-arbre droit).
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 23</span> — Insertions en série dans un ABR <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-23 }
+
+<span class="essentiel">• essentiel</span>
+
+Pour chaque suite de valeurs, partir d’un ABR **vide**, insérer les valeurs **dans l’ordre donné** (convention du cours : une valeur égale à celle d’un nœud va à droite), puis dessiner l’ABR obtenu et donner sa **hauteur**.
+
+??? pouce "Coup de pouce"
+
+    Insérer les valeurs une par une. Chacune part de la racine et descend : à gauche si elle est plus petite que le nœud, à droite sinon, jusqu’à une place vide, où elle devient une feuille.
+
+1.  `7, 3, 9, 1, 5, 8`
+
+2.  `10, 15, 12, 20, 5, 13`
+
+3.  `4, 2, 6, 4, 5`
+
+4.  `1, 2, 3, 4, 5`
+
+??? corrige "Corrigé"
+
+    |                    |                    |                    |                    |
+    |:------------------:|:------------------:|:------------------:|:------------------:|
+    |     ![](../figures/c8f9899ce0724bb0.svg){ .tikz loading=lazy }      |     ![](../figures/d1a03063973f009a.svg){ .tikz loading=lazy }      |     ![](../figures/48362a4b942c9e38.svg){ .tikz loading=lazy }      |     ![](../figures/877e90d8b084dcb7.svg){ .tikz loading=lazy }      |
+    | **a)** hauteur $3$ | **b)** hauteur $4$ | **c)** hauteur $4$ | **d)** hauteur $5$ |
+
+    En c), le second `4` va à droite de la racine (égalité), puis à gauche de `6` ; `5` descend ensuite à droite des deux `4`. En d), les valeurs arrivent triées : l’arbre est un « peigne », aussi haut qu’il a de nœuds.

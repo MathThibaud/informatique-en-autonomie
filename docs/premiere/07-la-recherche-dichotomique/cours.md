@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *« Algorithmes sur les tableaux »* : *recherche dichotomique* dans un tableau *trié* ; *coût logarithmique* ; *terminaison* d’une boucle (variant). |
-| **Prérequis** | la boucle `while`, les tableaux (indices, `len`) ; la **recherche séquentielle** et la **notion de coût** (chapitre *Algorithmique : le parcours séquentiel*) ; le fait qu’un tableau puisse être **trié** (chapitre *Les algorithmes de tri*). |
+| **Prérequis** | la boucle `while`, les tableaux (indices, `len`) ; la **recherche séquentielle** et la **notion de coût** (chapitre *Algorithmique : le parcours séquentiel*) ; le fait qu’un tableau puisse être **trié** (chapitre *Les algorithmes de tri*). (→ fiches de révision : ch. 4, ch. 6) |
 | **Objectifs** | comprendre et écrire la recherche dichotomique ; **dérouler** son exécution ; prouver qu’elle **se termine** (variant de boucle) ; établir son **coût logarithmique** et mesurer à quel point il est petit. |
+
+!!! situation "Situation de départ"
+
+    1.  Pour trouver un mot dans un dictionnaire papier de 1 000 pages, pourquoi personne ne lit les pages une à une depuis le début ?
+
+    2.  Combien d’essais faut-il, au pire, pour trouver un nombre pensé entre 1 et 1 000 000, si l’on vous répond seulement « plus grand » ou « plus petit » ?
+
+    3.  Si le mot cherché n’est pas dans le dictionnaire, est-on sûr que la recherche finira par s’arrêter ?
 
 !!! remarque "Remarque — Le jeu qui cache un algorithme"
 
@@ -35,6 +43,8 @@ On recommence sur la moitié retenue, qui est deux fois plus petite. Et ainsi de
 !!! definition "Définition 1 — Recherche dichotomique"
 
     Rechercher `x` par **dichotomie** dans un tableau **trié**, c’est restreindre la zone de recherche à un intervalle `[deb ; fin]` que l’on **divise par deux** à chaque étape, en comparant `x` à l’élément du milieu.
+
+<span class="retouract">↺ Retour sur l'activité.</span> Dans l’activité « Le nombre mystère », la meilleure stratégie consistait à proposer le milieu des nombres encore possibles (50 pour commencer). Elle n’était possible que parce que le maître du jeu répondait « plus grand » ou « plus petit », et pas seulement « perdu » : dans un tableau, c’est le tri qui permet ce genre de réponse.
 
 ## L’algorithme
 
@@ -78,7 +88,7 @@ En **3** comparaisons seulement, sur 10 éléments. Un parcours séquentiel en a
 
 <span id="cours-07-1" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-07-1) à [3](exercices.md#ex-07-3)** (dérouler la recherche ; le rôle du tri) et **[4](exercices.md#ex-07-4) à [8](exercices.md#ex-07-8)** (écrire l’algorithme)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-07-1) à [3](exercices.md#ex-07-3)** et **[18](exercices.md#ex-07-18)** (dérouler la recherche ; le rôle du tri) et **[4](exercices.md#ex-07-4) à [8](exercices.md#ex-07-8)** (écrire l’algorithme)
 
 ## L’algorithme se termine-t-il ?
 
@@ -110,9 +120,13 @@ $$n \to \frac{n}{2} \to \frac{n}{4} \to \frac{n}{8} \to \cdots \to 1.$$
 
     La recherche dichotomique sur un tableau de taille `n` fait **au plus $\lfloor \log_2 n \rfloor + 1$ tours**, soit le nombre de divisions par 2 pour arriver à 1, **plus un** (le dernier tour examine la seule case restante). Par exemple, pour $n = 16$ : $16 \to 8 \to 4 \to 2 \to 1$ fait 4 divisions, donc au plus **5 tours**. Ce nombre est de l’ordre de $\log_2(n)$ : on dit que son coût est **logarithmique**. C’est *radicalement* plus petit que `n`.
 
-!!! remarque "Remarque — Le logarithme en deux mots au-delà du programme"
+<span class="retouract">↺ Retour sur l'activité.</span> La suite $100 \to 50 \to 25 \to 12 \to 6 \to 3 \to 1$ de l’activité donnait 7 coups au pire entre 1 et 100 ; même le maître du jeu malin ne pouvait pas dépasser ce nombre. Le tableau final montrait déjà l’effet du logarithme : un coup de plus quand on double les possibilités, dix de plus quand on les multiplie par 1 000.
 
-    Diviser `n` par 2 un nombre $a$ de fois pour tomber sur 1 revient à écrire $n = 2^a$. Ce nombre $a$ d’étapes se note $a = \log_2(n)$ : c’est la **réciproque** de la puissance de 2. Retenez surtout l’ordre de grandeur : **doubler la taille du tableau n’ajoute qu’*une seule* étape**.
+!!! curieux "Pour les curieux (facultatif) — Le logarithme en deux mots"
+
+    Diviser `n` par 2 un nombre $a$ de fois pour tomber sur 1 revient à écrire $n = 2^a$. Ce nombre $a$ d’étapes se note $a = \log_2(n)$ : c’est la **réciproque** de la puissance de 2.
+
+Retenez surtout l’ordre de grandeur : **doubler la taille du tableau n’ajoute qu’*une seule* étape** (un tour de plus, au plus).
 
 Le tableau ci-dessous donne le nombre *maximal* de comparaisons. Le contraste avec la recherche séquentielle est saisissant. À droite, pour `n = 1000`, la largeur de la zone de recherche *avant* chacune des 10 comparaisons, dans le pire des cas (élément absent, plus grand que tous) : chaque barre est la **moitié** de la précédente.
 
@@ -123,7 +137,7 @@ Le tableau ci-dessous donne le nombre *maximal* de comparaisons. Le contraste av
 | $1\,000\,000$ | $1\,000\,000$ | $20$ |
 | $1\,000\,000\,000$ | $1\,000\,000\,000$ | $30$ |
 
-![](../figures/68cf309c749b1ecd.svg){ .tikz loading=lazy }
+![](../figures/8600063e3345fb16.svg){ .tikz loading=lazy }
 
 Chercher dans l’annuaire du monde entier (8 milliards de noms triés) ne demanderait que **33 comparaisons**. Voilà pourquoi on trie.
 
@@ -131,7 +145,7 @@ Chercher dans l’annuaire du monde entier (8 milliards de noms triés) ne dema
 
 Voici les trois coûts rencontrés cette année : **linéaire** ($n$), **quadratique** ($n^2$) et **logarithmique** ($\log_2 n$). Plus une courbe reste *basse*, plus l’algorithme est *efficace* quand `n` grandit.
 
-![](../figures/eaf96a781e49ce98.svg){ .tikz loading=lazy }
+![](../figures/234bad98dff2fac2.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 4 — La hiérarchie à retenir"
 
@@ -141,23 +155,23 @@ Voici les trois coûts rencontrés cette année : **linéaire** ($n$), **quadrat
 
     La dichotomie **exige** un tableau trié. Si le tableau ne l’est pas, il faut d’abord le trier (coût quadratique avec les tris par sélection ou par insertion du chapitre *Les algorithmes de tri*, ou $n\log_2 n$ avec un bon tri). Cela ne vaut le coup que si l’on fait **beaucoup** de recherches : on trie *une* fois, on cherche *souvent*, très vite.
 
-!!! remarque "Remarque — En Terminale"
-
-    La dichotomie est l’exemple type de la méthode étudiée dans le chapitre *Diviser pour régner* : ramener un problème à un sous-problème plus petit, du même type. Elle s’y écrit aussi très naturellement sous forme *récursive* (chapitre *La récursivité*).
-
 <span id="cours-07-10" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-07-10) à [12](exercices.md#ex-07-12)** (le coût logarithmique)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-07-10) à [12](exercices.md#ex-07-12)** et **[19](exercices.md#ex-07-19)** (le coût logarithmique)
 
 ## Un peu d’histoire et de culture
 
-!!! remarque "Remarque — Un algorithme simple… et pourtant redoutable à écrire"
+!!! curieux "Pour les curieux (facultatif) — Un algorithme simple… et pourtant redoutable à écrire"
 
     La recherche dichotomique est décrite dès **1946**, mais la première version publiée *sans bug* pour un tableau quelconque n’apparaît qu’en **1962** ! Le grand informaticien **Donald Knuth** note que, si l’idée est limpide, « les détails » (les $\pm 1$ sur `deb` et `fin`, la condition d’arrêt) font trébucher la plupart des programmeurs. Plus fort encore : la recherche dichotomique de la bibliothèque standard de **Java** a contenu pendant **neuf ans** un bug (un calcul de milieu qui pouvait déborder sur de très grands tableaux), découvert seulement en 2006. La morale : un algorithme « évident » mérite d’être écrit, testé et *prouvé* avec soin — exactement ce que nous avons fait avec le variant de boucle.
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    La dichotomie s’appuie sur la recherche séquentielle et la notion de coût (**Algorithmique : le parcours séquentiel**), le tableau trié (**Les algorithmes de tri**) et le **variant** vu dans **Les bases de la programmation Python**. Son coût fait écho au chapitre **Le binaire et l’écriture des nombres** : il faut environ $\log_2 n$ bits pour écrire $n$, comme environ $\log_2 n$ étapes pour isoler une valeur parmi $n$. En Terminale, l’**arbre binaire de recherche** (**Les arbres**) inscrit la dichotomie dans la structure même des données.
+    - **Ce qu’il réutilise.** La recherche séquentielle et la notion de coût (*Algorithmique : le parcours séquentiel*), le tableau trié (*Les algorithmes de tri*), le **variant** (*Les bases de la programmation Python*).
+
+    - **Un écho au binaire.** Il faut environ $\log_2 n$ bits pour écrire $n$ (*Le binaire et l’écriture des nombres*), comme environ $\log_2 n$ étapes pour isoler une valeur parmi $n$.
+
+    - **En Terminale.** La dichotomie sera l’exemple type de *Diviser pour régner* et s’écrira sous forme récursive (*La récursivité*) ; l’**arbre binaire de recherche** (*Les arbres*) l’inscrira dans la structure même des données.
 
 ## Bilan — la carte mémoire
 
@@ -172,6 +186,14 @@ Voici les trois coûts rencontrés cette année : **linéaire** ($n$), **quadrat
 | Coût | **logarithmique** $\approx \log_2 n$ (doubler `n` $\to$ +1 étape) |
 | Ordre de grandeur | $1\,000\,000$ éléments $\to$ **20** comparaisons seulement |
 | Variant vs invariant | variant $\to$ *termine* ; invariant $\to$ *correct* |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Parce que les mots sont rangés dans l’ordre : en ouvrant au milieu et en comparant, on élimine la moitié du dictionnaire d’un coup. C’est la **recherche dichotomique**, qui exige un tableau **trié** (§ I et II).
+
+    2.  20 au plus : le coût est **logarithmique**, de l’ordre de $\log_2 n$, et doubler le nombre de possibilités n’ajoute qu’un essai (§ IV).
+
+    3.  Oui : la largeur `fin - deb` de la zone de recherche est un **variant**. Elle diminue strictement à chaque tour, jusqu’à `deb > fin` : l’élément est alors déclaré absent (§ III).
 
 ## Erreurs fréquentes
 

@@ -10,6 +10,14 @@
 | **Idée** | Internet, c’est le **réseau** : des millions de machines qui s’échangent des **paquets** de données, de proche en proche, sans chef d’orchestre central. Une idée simple, robuste… et devenue vitale. |
 | **Objectifs** | Situer la naissance d’Internet ; distinguer les rôles d’**IP** et de **TCP** ; comprendre le **routage** des paquets et ses limites ; passer d’une adresse symbolique à une adresse **IP** (DNS) ; connaître les grands types de réseaux physiques et l’ordre de grandeur du trafic. |
 
+!!! situation "Situation de départ"
+
+    1.  Votre photo de 6 Mo part chez un ami, à Montréal. Part-elle d’un seul bloc ? Par où passe-t-elle ? Et que se passe-t-il si un câble est coupé en route ?
+
+    2.  Vous tapez `wikipedia.fr` dans la barre d’adresse. Comment votre ordinateur sait-il à quelle machine s’adresser ?
+
+    3.  En rentrant chez vous, votre téléphone passe de la 4G au Wi-Fi sans couper la musique en cours. Comment Internet peut-il fonctionner sur des supports aussi différents ?
+
 !!! remarque "Remarque"
 
     **Internet n’est pas le Web !** On l’a vu au chapitre *Le Web* : **Internet** est le *réseau* (les câbles, la fibre, les ondes, les machines) ; le **Web** n’est que *l’un des services* qui circulent dessus, à côté des e-mails, des appels vidéo, des jeux en ligne… Ce chapitre ouvre la boîte : *comment* l’information voyage-t-elle d’un bout à l’autre du monde ?
@@ -49,9 +57,13 @@ Vinton Cerf, co-inventeur de TCP/IP
 
     Sources : UCLA, Samueli School of Engineering, pages sur le premier message d’ARPANET (29 octobre 1969, laboratoire de Leonard Kleinrock) ; Inria, pages historiques consacrées au réseau Cyclades (projet lancé en 1971), `inria.fr` ; V. Cerf et R. Kahn, « A Protocol for Packet Network Intercommunication », *IEEE Transactions on Communications*, mai 1974.
 
-!!! remarque "Remarque"
+!!! encadre "À retenir — Un réseau sans centre"
 
-    Détail crucial : personne ne « possède » Internet. Il n’a **pas de centre**, pas de chef. C’est justement ce qui le rend si **robuste** : si une partie tombe en panne, l’information trouve un autre chemin. On raconte souvent qu’ARPANET devait survivre à une guerre nucléaire : c’est en partie un mythe. L’idée d’un réseau qui *survit* à la destruction d’une partie de ses nœuds vient des travaux de Paul Baran (RAND Corporation, années 1960) ; ARPANET, lui, servait d’abord à partager des ordinateurs entre universités.
+    Personne ne « possède » Internet. Il n’a **pas de centre**, pas de chef. C’est justement ce qui le rend si **robuste** : si une partie tombe en panne, l’information trouve un autre chemin.
+
+!!! curieux "Pour les curieux (facultatif) — Un mythe tenace"
+
+    On raconte souvent qu’ARPANET devait survivre à une guerre nucléaire : c’est en partie un mythe. L’idée d’un réseau qui *survit* à la destruction d’une partie de ses nœuds vient des travaux de Paul Baran (RAND Corporation, années 1960) ; ARPANET, lui, servait d’abord à partager des ordinateurs entre universités.
 
 <span id="cours-06-1" class="ancre"></span>
 
@@ -67,7 +79,7 @@ Quand vous envoyez une photo, elle ne part pas d’un seul bloc. Internet la **d
 
 Chaque paquet fait son propre chemin, indépendamment des autres : c’est la **commutation par paquets**, le principe de base d’Internet.
 
-![](../figures/3474dafc9183008c.svg){ .tikz loading=lazy }
+![](../figures/9697b1ac45ff62d5.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 2 — Une force du système"
 
@@ -102,7 +114,7 @@ Comment un paquet trouve-t-il son chemin ? Grâce à des machines spécialisées
 
     Un <span id="lex-routeur06" class="ancre"></span>**routeur** est un ordinateur qui **aiguille** les paquets. Il ne connaît pas tout le réseau : il tient seulement une **carte locale** de ses voisins, et décide, pour chaque paquet, **la prochaine étape**. De proche en proche, le paquet progresse jusqu’à destination.
 
-![](../figures/e1126b8c9e5f403e.svg){ .tikz loading=lazy }
+![](../figures/9e8dd943d2a5b8a4.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 4 — Les limites du routage"
 
@@ -124,7 +136,7 @@ Comment un paquet trouve-t-il son chemin ? Grâce à des machines spécialisées
 
     Chaque machine connectée possède une <span id="lex-ip06" class="ancre"></span>**adresse IP** : son « numéro » sur le réseau. En version **IPv4**, c’est une suite de **quatre nombres** de **0 à 255**, séparés par des points.
 
-![](../figures/334da9989f2e283b.svg){ .tikz loading=lazy }
+![](../figures/f783df9c5815ca28.svg){ .tikz loading=lazy }
 
 Il y a environ **4 milliards** d’adresses IPv4 possibles… ce qui ne suffit plus ! On déploie donc <span id="lex-ipv606" class="ancre"></span>**IPv6**, avec des adresses bien plus longues (assez pour des milliards de milliards d’objets connectés).
 
@@ -136,7 +148,7 @@ Il y a environ **4 milliards** d’adresses IPv4 possibles… ce qui ne suffit 
 
     Une **adresse symbolique** (comme `wikipedia.fr`) est l’adresse « en toutes lettres », facile à retenir. Le **DNS** (*Domain Name System*) est l’annuaire géant d’Internet qui **traduit** une adresse symbolique en **adresse IP** numérique.
 
-![](../figures/59031e8bc4719f05.svg){ .tikz loading=lazy }
+![](../figures/8693216a7a69e37f.svg){ .tikz loading=lazy }
 
 Le DNS n’est pas une seule machine, mais un **immense ensemble d’ordinateurs** répartis dans le monde et sans cesse mis à jour.
 
@@ -167,9 +179,9 @@ Grâce à cette indépendance, votre téléphone passe **sans coupure** de la 4G
 
     Le **débit** d’une liaison est la quantité de données qu’elle transmet en une seconde. Il se mesure en **bits par seconde** (bit/s). Un **bit** est la plus petite donnée possible, un `0` ou un `1`, et $1$ octet $= 8$ bits. On utilise surtout le **mégabit par seconde** ($1$ Mbit/s $= 10^{6}$ bit/s) et le **gigabit par seconde** ($1$ Gbit/s $= 10^{9}$ bit/s). Ordres de grandeur : une fibre optique atteint souvent $1$ Gbit/s, une vieille ligne ADSL quelques Mbit/s.
 
-!!! remarque "Remarque"
+!!! encadre "Méthode — Calculer une durée de téléchargement"
 
-    Attention aux unités : les débits s’expriment en **bits** par seconde, mais la taille des fichiers en **octets**. Pour savoir combien de temps prend un téléchargement, on convertit d’abord la taille du fichier en bits (on multiplie par $8$).
+    Attention aux unités : les débits s’expriment en **bits** par seconde, mais la taille des fichiers en **octets**. Pour savoir combien de temps prend un téléchargement, on convertit d’abord la taille du fichier en bits (on multiplie par $8$), puis on la divise par le débit.
 
 ## Les réseaux pair-à-pair (P2P)
 
@@ -179,7 +191,7 @@ D’habitude, un **serveur** central distribue à des **clients** (le modèle du
 
     <span id="lex-p2p06" class="ancre"></span>Dans un réseau **pair-à-pair** (*peer-to-peer*, P2P), il n’y a plus de serveur central : **chaque machine est à la fois émetteur et récepteur**, et partage directement avec les autres.
 
-![](../figures/523f669413203b9a.svg){ .tikz loading=lazy }
+![](../figures/cc873a817510072f.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 5 — Intérêts… et dérives"
 
@@ -213,13 +225,19 @@ Rappel des unités : 1 **ko** $=10^3$ o, 1 **Mo** $=10^6$, 1 **Go** $=10^9$, 1 
 
 <span id="cours-06-18" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[18](exercices.md#ex-06-18) et [19](exercices.md#ex-06-19)** (ordres de grandeur ; temps d’un téléchargement), exercice **[20](exercices.md#ex-06-20)** (critiquer une réponse d’IA)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[18](exercices.md#ex-06-18) et [19](exercices.md#ex-06-19)** (ordres de grandeur ; temps d’un téléchargement), exercice **[20](exercices.md#ex-06-20)** (critiquer une réponse d’IA), exercice **[21](exercices.md#ex-06-21)** (Python au service du thème)
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    Internet est le socle de presque tous les thèmes de SNT. Le **Web** n’est qu’un de ses services : une requête HTTP part en paquets TCP/IP, après une question au **DNS**. Les **objets connectés**, que l’on étudiera en fin d’année, reçoivent eux aussi une adresse IP, d’où le besoin d’**IPv6**. Un réseau de routeurs se représente par un **graphe** (routeurs = sommets, liaisons = arêtes), comme les amitiés d’un **réseau social** ou, on le verra au chapitre *Localisation*, le réseau routier. En spécialité NSI de Première, on étudie de plus près les protocoles qui fiabilisent la transmission, comme le **protocole du bit alterné**.
+    - **Déjà vu :** le **Web** n’est qu’un des services d’Internet (une requête HTTP part en paquets, après une question au **DNS**) ; un réseau de routeurs se représente par un **graphe**, comme les amitiés d’un **réseau social**.
+
+    - **À venir :** au chapitre *Localisation*, le réseau routier sera lui aussi un graphe ; les **objets connectés** du dernier chapitre reçoivent une adresse IP, d’où le besoin d’**IPv6**.
+
+    - **Plus loin :** en spécialité NSI de Première, on étudie de plus près les protocoles qui fiabilisent la transmission, comme le **protocole du bit alterné**.
 
 ## Bilan — la carte mémoire
+
+Les mots importants du thème sont définis dans le lexique.
 
 | **Notion** | **À retenir** |
 |:---|:---|
@@ -235,6 +253,14 @@ Rappel des unités : 1 **ko** $=10^3$ o, 1 **Mo** $=10^6$, 1 **Go** $=10^9$, 1 
 | Réseau physique | indépendant : fibre, Ethernet, Wi-Fi, 4G/5G, ADSL, Bluetooth. |
 | Pair-à-pair (P2P) | pas de serveur central ; robuste ; aussi usages illicites. |
 | Trafic | ordres de grandeur : en zetta-octets/an ($10^{21}$) ; neutralité du Net. |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Non : elle est découpée en environ 4 000 **paquets** d’au plus 1 500 octets (§ II), qui avancent de **routeur** en routeur, chacun par son propre chemin (§ IV). Si un câble est coupé, les paquets passent ailleurs, et **TCP** redemande ceux qui se sont perdus (§ III).
+
+    2.  Il interroge le **DNS**, l’annuaire d’Internet, qui traduit cette **adresse symbolique** en **adresse IP**, le « numéro » de la machine sur le réseau (§ V).
+
+    3.  TCP/IP est un **logiciel**, présent dans chaque machine et non dans les câbles : Internet est **indépendant du réseau physique** et circule aussi bien sur la 4G que sur le Wi-Fi ou la fibre (§ VI).
 
 !!! encadre "Débat argumenté"
 

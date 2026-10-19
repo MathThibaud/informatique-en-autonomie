@@ -18,7 +18,7 @@
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 1</span> — Dérécursiver avec une pile <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-1 }
 
-Chapitres croisés : *Récursivité ; Piles*
+<span class="duree">≈ 30 min</span> Chapitres croisés : *Récursivité ; Piles*
 
 On considère la fonction récursive suivante, où `n` est un entier positif ou nul.
 
@@ -73,7 +73,7 @@ def afficher_binaire(n):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 2</span> — Annuler et rétablir <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-2 }
 
-Chapitres croisés : *Programmation objet ; Piles*
+<span class="duree">≈ 45 min</span> Chapitres croisés : *Programmation objet ; Piles*
 
 Un éditeur de texte très simple garde le texte saisi dans un attribut `texte` (une chaîne). Il propose deux boutons : **Annuler**, qui revient au texte d’avant la dernière modification, et **Rétablir**, qui refait une modification qu’on vient d’annuler. Pour cela, l’objet possède deux piles : `annulations` contient les textes précédents, `retablissements` les textes annulés.
 
@@ -281,7 +281,7 @@ class Editeur:
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 3</span> — Listes chaînées récursives <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-3 }
 
-Chapitres croisés : *Programmation objet ; Listes chaînées ; Récursivité*
+<span class="duree">≈ 45 min</span> Chapitres croisés : *Programmation objet ; Listes chaînées ; Récursivité*
 
 On rappelle la classe `Cellule` du cours : une liste chaînée est soit `None` (liste vide), soit une cellule dont l’attribut `suivante` est elle-même une liste chaînée. C’est une **définition récursive**, qui appelle naturellement des fonctions récursives.
 
@@ -370,7 +370,7 @@ lst = Cellule(3, Cellule(1, Cellule(4, None)))
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 4</span> — Trier avec un arbre binaire de recherche <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-4 }
 
-Chapitres croisés : *Arbres ; Récursivité ; coût des algorithmes*
+<span class="duree">≈ 45 min</span> Chapitres croisés : *Arbres ; Récursivité ; coût des algorithmes*
 
 On dispose de la fonction `inserer` du cours, qui insère `x` dans l’ABR `a` et renvoie l’arbre obtenu (une valeur égale à celle d’un nœud va à droite).
 
@@ -406,7 +406,7 @@ def inserer(a, x):
 
     **1.** Racine $5$ ; à gauche $3$ (avec $1$ à sa gauche et $4$ à sa droite) ; à droite $8$.
 
-    ![](../figures/74268ce87d1f29ed.svg){ .tikz loading=lazy }
+    ![](../figures/81f2f33c261b460c.svg){ .tikz loading=lazy }
 
     **2.**
 
@@ -440,11 +440,11 @@ def inserer(a, x):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — La largeur d’un arbre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-5 }
 
-Chapitres croisés : *Arbres ; Files ; dictionnaires*
+<span class="duree">≈ 30 min</span> Chapitres croisés : *Arbres ; Files ; dictionnaires*
 
 On appelle **niveau** d’un nœud le nombre de nœuds sur le chemin qui va de la racine jusqu’à lui (la racine est au niveau $1$). La **largeur** d’un arbre est le plus grand nombre de nœuds situés sur un même niveau.
 
-![](../figures/73f20ec29ff79c79.svg){ .tikz loading=lazy }
+![](../figures/fd4c8c294a2664ea.svg){ .tikz loading=lazy }
 
 1.  Pour l’arbre ci-dessus, donner le nombre de nœuds de chaque niveau, puis sa largeur.
 
@@ -504,7 +504,7 @@ On appelle **niveau** d’un nœud le nombre de nœuds sur le chemin qui va de l
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Une médiathèque, de la table à l’objet <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-6 }
 
-Chapitres croisés : *Bases de données ; Programmation objet*
+<span class="duree">≈ 45 min</span> Chapitres croisés : *Bases de données ; Programmation objet*
 
 Une médiathèque gère ses prêts avec trois relations : `adherent(id_adherent, nom, prenom)`, `livre(id_livre, titre, auteur)` et `emprunt(id_emprunt, #id_adherent, #id_livre, jour, rendu)`. L’attribut `jour` est le numéro, dans l’année, du jour de l’emprunt ; `rendu` vaut `1` si le livre a été rendu et `0` sinon.
 
@@ -622,7 +622,7 @@ Une médiathèque gère ses prêts avec trois relations : `adherent(id_adherent,
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Ordonnancer des tâches qui dépendent les unes des autres <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-7 }
 
-Chapitres croisés : *Graphes ; Files ; Processus*
+<span class="duree">≈ 60 min</span> Chapitres croisés : *Graphes ; Files ; Processus*
 
 Pour construire un logiciel, un système doit exécuter des tâches dont certaines ne peuvent commencer qu’une fois d’autres terminées. On représente ces dépendances par un dictionnaire qui associe à chaque tâche la liste de ses **prérequis** :
 
@@ -657,7 +657,7 @@ taches = {"A": [], "B": ["A"], "C": ["A"], "D": ["B", "C"],
 
     **1.** Les arcs sont `A`$\to$`B`, `A`$\to$`C`, `B`$\to$`D`, `C`$\to$`D`, `C`$\to$`E`, `D`$\to$`F` et `E`$\to$`F`.
 
-    ![](../figures/ff7ea93bbf9572fd.svg){ .tikz loading=lazy }
+    ![](../figures/55879652a736eba6.svg){ .tikz loading=lazy }
 
     **2.**
 
@@ -718,11 +718,11 @@ taches = {"A": [], "B": ["A"], "C": ["A"], "D": ["B", "C"],
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Router des paquets avec un dictionnaire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-8 }
 
-Chapitres croisés : *Réseaux ; Graphes ; Files*
+<span class="duree">≈ 60 min</span> Chapitres croisés : *Réseaux ; Graphes ; Files*
 
 Un réseau de cinq routeurs est représenté par un dictionnaire : à chaque routeur est associé le dictionnaire de ses voisins, avec le **débit** de la liaison en Mbit/s.
 
-![](../figures/2edfd4f2c407fadd.svg){ .tikz loading=lazy }
+![](../figures/abab1bae04e48f78.svg){ .tikz loading=lazy }
 
 ```python
 reseau = {"R1": {"R2": 10, "R3": 100},
@@ -816,7 +816,7 @@ reseau = {"R1": {"R2": 10, "R3": 100},
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — RSA miniature et exponentiation rapide <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-9 }
 
-Chapitres croisés : *Cryptographie ; Diviser pour régner ; Récursivité*
+<span class="duree">≈ 45 min</span> Chapitres croisés : *Cryptographie ; Diviser pour régner ; Récursivité*
 
 Alice choisit $p = 11$ et $q = 17$ ; sa clé publique est $(e, n)$ avec $e = 7$, et sa clé privée est $d = 23$. Un nombre $m$ (avec $0 \leq m < n$) se chiffre en $c = m^e \bmod n$ et se déchiffre en $m = c^d \bmod n$ (en Python, naïvement : `c = m ** e % n`, qui forme d’abord le nombre $m^e$, géant dans un vrai RSA ; la question 4 fait mieux, comme `pow(m, e, n)` vu au chapitre *Cryptographie*).
 
@@ -867,7 +867,7 @@ Alice choisit $p = 11$ et $q = 17$ ; sa clé publique est $(e, n)$ avec $e = 7$,
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Détecter un plagiat : la plus longue sous-chaîne commune <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-10 }
 
-Chapitres croisés : *Recherche textuelle ; Programmation dynamique*
+<span class="duree">≈ 45 min</span> Chapitres croisés : *Recherche textuelle ; Programmation dynamique*
 
 Pour repérer un passage recopié, on cherche la plus longue **sous-chaîne** commune à deux textes. Attention : une sous-chaîne est faite de caractères **consécutifs** (`a[i:j]`), contrairement à la sous-séquence du chapitre *Programmation dynamique*.
 
@@ -937,7 +937,7 @@ Pour repérer un passage recopié, on cherche la plus longue **sous-chaîne** co
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Une machine minuscule <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-11 }
 
-Chapitres croisés : *Calculabilité ; Systèmes sur puce*
+<span class="duree">≈ 45 min</span> Chapitres croisés : *Calculabilité ; Systèmes sur puce*
 
 Une machine très simple n’a qu’un registre `x` (un entier) et un compteur `position` qui indique l’instruction à exécuter, en partant de `0`. Un programme est une **liste** d’instructions :
 

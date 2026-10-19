@@ -10,6 +10,14 @@
 | **Prérequis** | la notion de **type** (domaine) ; les tableaux et dictionnaires (comme analogies) ; un peu de logique (**et**, **ou**, **non**). |
 | **Objectifs** | *comprendre* pourquoi une base de données s’impose ; *modéliser* des données en relationnel (relations, clés) ; *connaître* le rôle d’un SGBD ; *écrire* des requêtes SQL d’interrogation **et** de mise à jour. |
 
+!!! situation "Situation de départ"
+
+    1.  Un lycée note tout (élèves, classes, notes) dans un seul tableau partagé. Pourquoi, au bout de quelques semaines, y trouve-t-on des fautes de frappe, des doublons et des informations contradictoires ?
+
+    2.  Quand deux personnes modifient le même fichier en même temps, l’une écrase le travail de l’autre. Comment une banque ou un site marchand l’évitent-ils ?
+
+    3.  Les films sont rangés dans un tableau, leurs réalisateurs dans un autre. Comment obtenir, en une seule demande, le titre de chaque film avec le nom de son réalisateur ?
+
 ## Pourquoi une base de données ? Quand le tableur ne suffit plus
 
 Pour ranger quelques informations, un tableur (type Excel) ou un fichier texte peuvent suffire. Mais dès que les données deviennent **nombreuses**, **partagées** et **précieuses**, ces solutions craquent : une même information recopiée à plusieurs endroits finit par se contredire, deux personnes qui modifient le fichier en même temps écrasent le travail l’une de l’autre, la recherche devient lente. Une banque (un virement doit être fait en entier ou pas du tout : c’est une **transaction**), un site marchand (le dernier article en stock ne doit pas être vendu deux fois), un réseau social (des milliards de lignes interrogées en une fraction de seconde) ou le carnet de notes d’un lycée (pas de note pour un élève qui n’existe pas, chacun ne voit que ce qui le concerne) ne peuvent pas s’en contenter.
@@ -18,7 +26,7 @@ Pour ranger quelques informations, un tableur (type Excel) ou un fichier texte p
 
     Une base de données assure quatre choses qu’un tableur néglige : la **cohérence** (des règles empêchent les données absurdes), les **accès concurrents** (plusieurs utilisateurs à la fois, sans se marcher dessus), l’**efficacité** (recherche rapide même sur d’énormes volumes) et la **sécurité** (droits d’accès, sauvegarde, transactions).
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif)"
 
     Vous en utilisez sans le savoir des dizaines par jour : votre téléphone stocke ses contacts, ses messages, ses photos dans des bases de données. La quasi-totalité des applications du monde repose dessus.
 
@@ -62,7 +70,7 @@ Le modèle relationnel impose des **règles** qui empêchent les incohérences. 
 
     Chaque valeur d’un attribut doit appartenir à son **domaine**, c’est-à-dire à son **type**. Un attribut `annee` de type *entier* doit refuser la valeur `"hier"`. Bien choisir les domaines, c’est déjà interdire une foule d’erreurs.
 
-!!! remarque "Remarque — SQLite, un SGBD au typage souple"
+!!! curieux "Pour les curieux (facultatif) — SQLite, un SGBD au typage souple"
 
     La plupart des SGBD (PostgreSQL, MySQL…) refusent `"hier"` dans une colonne `INTEGER`. **SQLite, lui, peut l’accepter** : le type déclaré n’est qu’une *préférence* (on parle d’**affinité**). Il convertit `’2024’` en l’entier `2024`, mais range `’hier’` tel quel, comme du texte, sans erreur. Pour obtenir un vrai contrôle de domaine en SQLite, on ajoute une contrainte explicite, par exemple `annee INTEGER CHECK (typeof(annee) = ’integer’)`, ou l’on déclare la table `STRICT` (SQLite 3.37 et plus).
 
@@ -96,9 +104,11 @@ Dans `film`, l’attribut `id_real` ne contient pas le *nom* du réalisateur, ma
 
     Une **clé étrangère** est un attribut d’une relation dont la valeur doit être celle d’une **clé primaire** dans une autre (ou la même) relation. Son **rôle** est de *relier deux tables* et de garantir que la référence **existe** vraiment. Ici, `film.id_real` est une clé étrangère qui référence `realisateur.id`.
 
+<span class="retouract">↺ Retour sur l'activité.</span> La colonne inventée dans l’activité pour distinguer les deux Léa Martin était une **clé primaire** de ÉLÈVE ; la colonne « Élève » de NOTE, qui renvoie vers une ligne d’ÉLÈVE plutôt que de recopier le nom, était une **clé étrangère**.
+
 On représente souvent le schéma de la base par un dessin : une boîte par relation, la clé primaire soulignée, la clé étrangère précédée d’un `#`, et une flèche qui va de la clé étrangère vers la clé primaire qu’elle référence.
 
-![](../figures/f35e124aba61f922.svg){ .tikz loading=lazy }
+![](../figures/d92e26bd38c31f6a.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 4 — Contrainte de référence"
 
@@ -108,7 +118,7 @@ On représente souvent le schéma de la base par un dessin : une boîte par rela
 
     La **clé primaire** *identifie* de façon unique les lignes de **sa** table (unicité garantie). La **clé étrangère** *pointe* vers la clé primaire d’une **autre** table pour les relier (elle, peut se répéter : un même réalisateur a plusieurs films). En résumé : la primaire *distingue*, l’étrangère *relie*.
 
-!!! remarque "Remarque — Pourquoi deux tables plutôt qu’une ?"
+!!! encadre "À retenir — pourquoi deux tables plutôt qu’une ?"
 
     On aurait pu écrire le nom du réalisateur en toutes lettres dans chaque film. Mais alors « Nolan » serait recopié 3 fois : une faute de frappe (« Nollan ») créerait un second réalisateur fantôme, et corriger son pays obligerait à modifier partout. En **séparant** en deux tables reliées par une clé étrangère, chaque information n’est écrite **qu’une fois** : c’est plus sûr et plus léger. Relier des tables ainsi, c’est tout l’art du modèle relationnel.
 
@@ -125,6 +135,8 @@ Au-delà des trois grandes contraintes (domaine, entité, référence), on peut 
 !!! regle "Règle 6 — Récapitulatif : les contraintes d’intégrité"
 
     **de domaine** (bon type) ; **d’entité** (clé primaire unique) ; **de référence** (clé étrangère existante) ; et les contraintes complémentaires (`NOT NULL`, `UNIQUE`, règles métier). Toutes servent le même but : garder des données **cohérentes**.
+
+<span class="retouract">↺ Retour sur l'activité.</span> Les « règles vérifiées à chaque saisie » imaginées dans l’activité sont des contraintes d’intégrité : « abs » dans la colonne Note viole la contrainte de domaine, une note de $23$ une contrainte utilisateur.
 
 <span id="cours-06-2" class="ancre"></span>
 
@@ -150,7 +162,9 @@ On ne manipule jamais les fichiers d’une base « à la main » : on passe par 
 
     - **Accès concurrents** : plusieurs utilisateurs en même temps, sans conflit, grâce aux **transactions** (un problème de ressource partagée, comme entre les processus du chapitre 4).
 
-!!! remarque "Remarque — Question de bac : « intérêt d’un SGBD » / « deux services rendus »"
+<span class="retouract">↺ Retour sur l'activité.</span> Les deux secrétaires qui enregistraient le même fichier à une minute d’intervalle se heurtaient au problème des **accès concurrents** : la correction de M. Giraud effaçait la note saisie par Mme Leroy. Un SGBD empêche une modification d’en écraser une autre.
+
+!!! encadre "Au bac — « intérêt d’un SGBD » / « deux services rendus »"
 
     Il suffit d’en citer deux parmi la liste ci-dessus. Réponses attendues typiques : il **garantit la cohérence** des données (contraintes d’intégrité), il gère les **accès concurrents** de plusieurs utilisateurs, il assure la **persistance** et la **sécurité**, et il permet d’**interroger efficacement** de gros volumes. Là où un simple fichier laisserait apparaître des incohérences, le SGBD les *empêche*.
 
@@ -158,7 +172,7 @@ On ne manipule jamais les fichiers d’une base « à la main » : on passe par 
 
     Une **transaction** regroupe des opérations qui doivent réussir **ensemble** ou **pas du tout**. Le virement bancaire (débit *et* crédit) en est l’exemple parfait : si une panne survient au milieu, la transaction est **annulée** entièrement, comme si rien ne s’était passé. On résume ces garanties par l’acronyme **ACID**.
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif)"
 
     Des SGBD célèbres : **PostgreSQL**, **MySQL**, **Oracle**, **SQLite**. Ce dernier, minuscule et sans serveur, est embarqué dans presque toutes les applications et tous les téléphones. C’est celui que nous utiliserons (via *DB Browser* ou un site en ligne).
 
@@ -267,7 +281,7 @@ FROM film
 WHERE annee < 2015;
 ```
 
-!!! remarque "Remarque — Pour aller plus loin — au-delà du strict programme"
+!!! curieux "Pour les curieux (facultatif) — Au-delà du strict programme"
 
     Les clauses présentées d’ici aux jointures (`LIKE`, `LIMIT`, l’alias `AS`, `GROUP BY` et `HAVING`) ne sont pas exigées au bac, mais elles sont très courantes et rendent SQL vraiment puissant. Les fonctions d’agrégation ci-dessus, elles, sont au programme, à condition de les utiliser **sans** `GROUP BY` ni `HAVING`.
 
@@ -308,7 +322,7 @@ GROUP BY id_real;
 
 donne, **pour chaque réalisateur**, son nombre de films et sa note moyenne :
 
-![](../figures/60814565b771d1a6.svg){ .tikz loading=lazy }
+![](../figures/4f8c5eea5a27ee27.svg){ .tikz loading=lazy }
 
 On peut filtrer *après* regroupement avec `HAVING` :
 
@@ -321,7 +335,7 @@ HAVING COUNT(*) >= 2;
 
 ne garde que les réalisateurs ayant **au moins 2** films.
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif)"
 
     Retenez la différence : `WHERE` filtre les lignes *avant* le regroupement, `HAVING` filtre les paquets *après*.
 
@@ -349,7 +363,7 @@ associe à chaque film le nom de son réalisateur :
 | Parasite     | Bong Joon-ho |
 | Dunkerque    | Nolan        |
 
-!!! remarque "Remarque"
+!!! encadre "À retenir — préfixer un attribut par sa table"
 
     Quand un nom d’attribut existe dans les deux tables (ici `id`), on le **préfixe** par le nom de sa table (`realisateur.id`) pour lever l’ambiguïté. On peut évidemment combiner une jointure avec `WHERE`, `ORDER BY`, `GROUP BY`… et joindre **trois** tables ou plus.
 
@@ -386,22 +400,20 @@ WHERE annee < 2005;
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[15](exercices.md#ex-06-15) et [16](exercices.md#ex-06-16)** (insérer, modifier, supprimer ; transactions et ACID)
 
-## Ouverture et histoire
+## Ouverture et liens avec les autres chapitres
 
-!!! remarque "Remarque — Un peu d’histoire… et d’humour"
+- **Ce qu’il réutilise** : un enregistrement ressemble à un **objet** (chapitre 2), ses colonnes jouant le rôle d’attributs, et une table rassemble des entités de même structure, comme les instances d’une classe. SQL est **déclaratif** : on décrit *ce que* l’on veut, pas *comment* l’obtenir — un autre **paradigme** que l’impératif.
+
+- **Déjà croisé** : les **index** qui font retrouver vite une ligne sont souvent des **arbres** de recherche (chapitre 5) ; les **transactions** règlent un problème de ressource partagée, comme entre les processus (chapitre 4).
+
+- **Ouverture.** Pour un réseau social, un **modèle de graphe** (chapitre 8) est parfois plus adapté que des tables ; et `LIKE` est une forme simple de la **recherche textuelle** (trouver un motif dans un texte), étudiée au chapitre 12.
+
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire… et d’humour"
 
     Avant de ranger les données, il a fallu pouvoir les **retrouver vite**. Jusque dans les années 1950, elles dorment sur des cartes perforées ou des bandes magnétiques, qu’il faut dérouler du début. En **1956**, IBM commercialise le **premier disque dur**, l’**IBM 350** du système *RAMAC* : cinquante plateaux de 61 cm de diamètre pour… 5 millions de caractères (moins de 4 Mo), loués plus de $3\,000$ dollars par mois. Pour la première fois, on accède **directement** à n’importe quel enregistrement. Le modèle relationnel naît ensuite en **1970** sous la plume d’**Edgar F. Codd**, chez IBM — une idée si féconde qu’elle lui vaudra le prix **Turing** en 1981. Dans la foulée, **Donald Chamberlin** et **Raymond Boyce** conçoivent un langage pour l’interroger : *SEQUEL*, vite rebaptisé **SQL**. D’où l’éternelle querelle : faut-il prononcer « *ess-cue-elle* » ou « *sequel* » ? Un demi-siècle plus tard, personne n’a tranché — c’est la seule dispute plus vieille que celle des accolades. Codd et ses collègues cherchaient alors à gérer les **grandes masses de données** des entreprises (le prototype d’IBM s’appelait *System R*) ; depuis, SQL règne sans partage : les données de la planète, de votre banque à votre application de messagerie, s’expriment dans ce langage vieux d’un demi-siècle et jamais détrôné.
 
     ![](../img/06_hist_ibm_ramac.jpg){ .photo loading=lazy style="width:140px" }  
     Le mécanisme du disque IBM 350 (1956)
-
-!!! remarque "Remarque — La suite"
-
-    On a effleuré les **transactions** et les **index** (qui, en coulisses, sont souvent des *arbres* !). Les bases relationnelles ne sont pas les seules : pour un réseau social, un **modèle de graphe** est parfois plus adapté — clin d’œil au chapitre « graphes », que l’on étudiera plus loin.
-
-!!! remarque "Remarque — Liens avec d’autres chapitres"
-
-    Un enregistrement ressemble à un **objet** : ses colonnes sont des **attributs**, comme en **programmation objet**, et une table rassemble des entités de même structure, comme les instances d’une même classe. SQL est un langage **déclaratif** : on décrit *ce que* l’on veut, pas *comment* l’obtenir — un autre **paradigme** que l’impératif. Le SGBD retrouve vite une ligne grâce à des **index**, souvent des **arbres** de recherche, et `LIKE` est une forme simple de **recherche textuelle** (trouver un motif dans un texte).
 
 ## Bilan — la carte mémoire
 
@@ -418,6 +430,14 @@ WHERE annee < 2005;
 | `GROUP BY` / `HAVING` | regrouper, filtrer les groupes (au-delà du BO) |
 | `JOIN … ON` | croiser deux tables par une clé |
 | `INSERT` / `UPDATE` / `DELETE` | ajouter / modifier / supprimer (**penser au `WHERE` !**) |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Les mêmes informations y sont recopiées à plusieurs endroits, et rien ne contrôle la saisie. Le **modèle relationnel** découpe les données en **relations** reliées par des **clés étrangères**, où chaque information n’est écrite qu’une fois, et les **contraintes d’intégrité** refusent les valeurs absurdes (§ II et III).
+
+    2.  Elles confient leurs données à un **SGBD**, qui gère les **accès concurrents** grâce aux **transactions** (« tout ou rien ») et garantit la cohérence des données (§ IV).
+
+    3.  Par une requête SQL avec **jointure** (`JOIN … ON`), qui recolle chaque film à la ligne de `realisateur` désignée par sa clé étrangère `id_real` (§ V.J).
 
 ## Erreurs fréquentes
 

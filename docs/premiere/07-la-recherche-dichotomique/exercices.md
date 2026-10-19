@@ -18,7 +18,13 @@ On utilise le tableau trié $$\texttt{t = [3, 8, 11, 16, 19, 24, 30, 33, 38, 47,
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Un élément présent <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-1 }
 
-On cherche `x = 33` par dichotomie. Recopier et compléter un tableau donnant, à chaque tour : `deb`, `fin`, `mil`, la valeur `t[mil]` et la décision (à gauche / à droite / trouvé). Combien de tours ont été nécessaires ?
+<span class="essentiel">• essentiel</span>
+
+On cherche `x = 33` par dichotomie. Recopier et compléter un tableau donnant, à chaque tour : `deb`, `fin`, `mil`, la valeur `t[mil]` et la décision (à gauche / à droite / trouvé). Combien de tours ont été nécessaires ?0
+
+??? pouce "Coup de pouce"
+
+    Au départ, `deb = 0` et `fin = 10`. Le milieu est `(deb + fin) // 2`. Si `x` est plus grand que `t[mil]`, on garde la moitié droite : `deb` devient `mil + 1`.
 
 ??? corrige "Corrigé"
 
@@ -37,9 +43,17 @@ On cherche `x = 33` par dichotomie. Recopier et compléter un tableau donnant, �
 
     Trouvé en **4 tours**.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> calculer le milieu avec `(deb + fin) / 2` : on obtient un flottant (`5.0`), et `t[5.0]` provoque une `TypeError`. Le milieu s’obtient avec la division entière `//`.
+
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Un élément absent <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-2 }
 
-Même travail pour `x = 20`. Où et pourquoi la recherche s’arrête-t-elle ? Que renvoie l’algorithme ?
+<span class="essentiel">• essentiel</span>
+
+Même travail pour `x = 20`. Où et pourquoi la recherche s’arrête-t-elle ? Que renvoie l’algorithme ?0
+
+??? pouce "Coup de pouce"
+
+    Continuer les tours tant que `deb <= fin`. Que valent `deb` et `fin` à la fin ? Entre quelles valeurs du tableau `20` aurait-il dû se trouver ?
 
 ??? corrige "Corrigé"
 
@@ -53,6 +67,8 @@ Même travail pour `x = 20`. Où et pourquoi la recherche s’arrête-t-elle ? Q
     |  4   |   4   |   4   |   4   |    19    | $20 > 19$ : à droite (`deb` = 5) |
 
     Maintenant `deb = 5 > fin = 4` : la zone de recherche est **vide**, la boucle s’arrête et l’algorithme renvoie `False`. `20` est absent (il aurait dû se trouver entre `19` et `24`).
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> s’arrêter dès que `deb == fin` : il reste alors une case à examiner (ici `19`, au tour 4). La boucle continue tant que `deb <= fin`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Le rôle du tri <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-3 }
 
@@ -84,7 +100,13 @@ On applique *malgré tout* l’algorithme au tableau **non trié** `[9, 7, 5, 3,
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Compléter la recherche dichotomique <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-4 }
 
-Compléter les six trous `.....` de cette fonction, puis la tester sur le tableau `t` donné plus haut (avant l’exercice 1) avec `x = 24` (présent) et `x = 10` (absent).
+<span class="essentiel">• essentiel</span>
+
+Compléter les six trous `.....` de cette fonction, puis la tester sur le tableau `t` donné plus haut (avant l’exercice 1) avec `x = 24` (présent) et `x = 10` (absent).0
+
+??? pouce "Coup de pouce"
+
+    `fin` est le dernier *indice* du tableau. La zone `deb`…`fin` est vide quand `deb` dépasse `fin`. Comme `t[mil]` vient d’être examiné, on l’exclut de la nouvelle zone.
 
 ```text
 def recherche_dichotomique(t, x):
@@ -122,6 +144,8 @@ def recherche_dichotomique(t, x):
 
     Avec `t = [3, 8, 11, 16, 19, 24, 30, 33, 38, 47, 52]`, l’appel avec `24` renvoie `True` et l’appel avec `10` renvoie `False`. À noter : `fin` est le **dernier indice** (`len(t) - 1`, pas `len(t)`) ; on écrit `mil + 1` et `mil - 1` car `mil` vient d’être testé.
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> écrire `deb = mil` au lieu de `deb = mil + 1` : sur `[1, 3]` avec `x = 3`, `mil` vaut `0` à chaque tour, `deb` reste à `0` et la boucle ne s’arrête jamais.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — La recherche dichotomique <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-5 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `recherche_dichotomique(t, x)` qui renvoie `True` si `x` est présent dans le tableau trié `t`, `False` sinon. Tester sur `t = [3, 8, 11, 16, 19, 24, 30, 33, 38, 47, 52]` avec `x = 38` (présent) puis `x = 25` (absent).
@@ -138,6 +162,8 @@ def recherche_dichotomique(t, x):
     `mil = (deb + fin) // 2`
 
 ??? corrige "Corrigé"
+
+    La zone de recherche va de `deb` à `fin`. Tant qu’elle n’est pas vide, on compare `x` au milieu : trouvé, on renvoie `True` ; sinon on garde la moitié où `x` peut encore être. Zone vide : `x` est absent.
 
     ```python
     def recherche_dichotomique(t, x):
@@ -206,6 +232,8 @@ def recherche_dichotomique(t, x):
 
 ??? corrige "Corrigé"
 
+    On ajoute à la recherche un compteur `n`, augmenté au début de chaque tour et renvoyé aux *deux* sorties (trouvé ou zone vide).
+
     ```python
     def nb_tours(t, x):
         deb = 0
@@ -227,6 +255,8 @@ def recherche_dichotomique(t, x):
     **2.** Par exemple, chercher `7` dans `[0, 1, 2, 3, 4, 5, 6, 7]` : on examine `3`, `5`, `6`, `7` — soit **4** valeurs. *(Tout tableau de 8 à 15 éléments dont l’élément cherché est au « fond » convient.)*
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 8</span> — La première occurrence <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-8 }
+
+<span class="duree">≈ 20 min</span>
 
 Dans un tableau trié qui contient des **doublons**, `indice_dichotomique` renvoie une occurrence de `x`, mais pas forcément la première : `indice_dichotomique([2, 4, 4, 4, 7, 9], 4)` renvoie `2`.
 
@@ -277,6 +307,8 @@ Dans un tableau trié qui contient des **doublons**, `indice_dichotomique` renvo
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Pourquoi ça s’arrête <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-9 }
 
+<span class="essentiel">• essentiel</span>
+
 La recherche dichotomique utilise une boucle `while` : il faut s’assurer qu’elle ne tourne pas indéfiniment.
 
 1.  Montrer que la quantité `fin - deb` **diminue strictement** à chaque tour où l’on n’a pas trouvé `x` (examiner les deux cas : « à droite » et « à gauche »).
@@ -302,6 +334,8 @@ La recherche dichotomique utilise une boucle `while` : il faut s’assurer qu’
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 10</span> — Combien d’étapes ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-10 }
 
+<span class="essentiel">• essentiel</span>
+
 Sans machine, donner le nombre *maximal* de comparaisons d’une recherche dichotomique pour un tableau trié de :
 
 1.  $8$ éléments ; **2.** $16$ éléments ; **3.** $1\,000$ éléments (donner un ordre de grandeur).
@@ -316,6 +350,8 @@ Sans machine, donner le nombre *maximal* de comparaisons d’une recherche dicho
     **1.** Au pire, la zone de recherche passe par $8 \to 4 \to 2 \to 1$ : **3** divisions, puis une dernière comparaison sur la case restante, soit **4** comparaisons au maximum (c’est `nb_de_tour(8)`, car $2^3 = 8 \leq 8 < 2^4$).  
     **2.** $16 \to 8 \to 4 \to 2 \to 1$ : **4** divisions, plus la dernière comparaison, soit **5** comparaisons au maximum.  
     **3.** Pour $1\,000$ : $\log_2(1000) \approx 10$, donc **une dizaine** de comparaisons (à comparer aux 1000 d’un parcours !).
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> répondre $n / 2$ (4 pour 8 éléments, 500 pour 1000) : on ne divise pas la taille par 2 une seule fois, mais à *chaque* tour.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Le plus petit `k` tel que $2^k > n$ <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-11 }
 
@@ -372,14 +408,22 @@ On joue à deviner un nombre entre `1` et `100` : à chaque proposition, on rép
 
 1.  Quelle est la meilleure première proposition ? Pourquoi ?
 
-2.  Combien d’essais suffisent, dans le pire des cas, en jouant de façon **optimale** ? Relier ce nombre à la dichotomie.
+2.  Combien d’essais suffisent, dans le pire des cas, en jouant de façon **optimale** ? Relier ce nombre à la dichotomie.0
+
+    ??? pouce "Coup de pouce"
+
+        Quelle proposition élimine le plus de nombres, quelle que soit la réponse ? Combien de nombres restent possibles après chaque essai, dans le pire des cas ?
 
 ??? corrige "Corrigé"
 
     **1.** La meilleure première proposition est `50`, le **milieu** : quelle que soit la réponse, on élimine la moitié des possibilités (soit 1–49, soit 51–100).  
+    <span class="erreurfreq">▷ Erreur fréquente.</span> proposer 1, puis 2, puis 3… : on n’élimine qu’un nombre par essai, et il faut jusqu’à 100 essais.
+
     **2.** En proposant toujours le milieu, le nombre de possibilités restantes, au pire, passe par $100 \to 50 \to 25 \to 12 \to 6 \to 3 \to 1$ : six essais pour réduire à un seul nombre possible, et un septième pour le proposer. **7 essais** suffisent donc dans le pire des cas. C’est exactement $\texttt{nb\_de\_tour(100)} = 7$ : le jeu *est* une recherche dichotomique.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — L’ordinateur devine : la preuve <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-14 }
+
+<span class="duree">≈ 30 min</span>
 
 Au chapitre *Les bases de la programmation Python*, le défi « L’ordinateur devine » du TP « Le nombre mystère » vous a fait programmer un ordinateur qui devine un nombre en proposant toujours le **milieu**. On reprend ici ce programme, non pour le réécrire, mais pour l’**analyser** avec les outils du cours (la fonction `comparer` du TP est remplacée par des comparaisons directes).
 
@@ -435,6 +479,8 @@ def essais_ordinateur(secret, maxi):
     **4.** Après chaque essai raté, le nombre de candidats restants est au moins divisé par deux. Dans le pire des cas, le nombre d’essais est donc le plus petit $k$ tel que $2^k > \texttt{maxi}$, c’est-à-dire `nb_de_tour(maxi)` : **7** essais pour $100$ ($2^6 = 64 \leqslant 100 < 128 = 2^7$), **10** pour $1000$ ($2^{10} = 1024$) et **20** pour un million ($2^{20} = 1\,048\,576$). L’ordinateur naïf, lui, peut avoir besoin de `maxi` essais : $100$, $1000$, un million. Coût **logarithmique** contre coût **linéaire**, comme dans le cours.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 15</span> — La racine carrée entière <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-15 }
+
+<span class="duree">≈ 20 min</span>
 
 <span class="run" title="À programmer et tester sur machine">▶</span> La dichotomie ne sert pas qu’à chercher dans un tableau : elle permet de chercher un **nombre** dans un intervalle. Écrire `racine_entiere(n)` qui renvoie le plus grand entier `r` tel que `r * r <= n` (`n` entier positif), par dichotomie sur les entiers de `0` à `n`, sans utiliser `**` ni le module `math`.
 
@@ -569,3 +615,35 @@ def contient(t, x):
     - `deb > fin` : la boucle s’arrête et la fonction renvoie **`False`**, alors que `1` est bien dans le tableau (case 2).
 
     **2.** Le code est celui du cours et il est juste ; l’erreur est dans l’explication : « trié ou non ». La dichotomie **ne s’applique qu’à un tableau trié** : c’est parce que le tableau est trié qu’on peut éliminer une moitié entière sans la regarder. Correction : préciser la précondition (`t` trié, à écrire dans la docstring) ; si le tableau ne l’est pas, utiliser une recherche séquentielle, ou le trier d’abord. Sur `[1, 3, 7, 9]`, la même fonction renvoie bien `True`. **3.** Tester la fonction sur un petit tableau **non trié** contenant la valeur cherchée : un seul appel révèle le problème. Plus généralement, une affirmation du type « fonctionne dans tous les cas » appelle un contre-exemple.
+
+### Entraînement
+
+*Exercices courts pour s’entraîner aux gestes de base, chacun avec plusieurs données. Ils font tous partie du parcours essentiel.*
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 18</span> — Dérouler la dichotomie <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-18 }
+
+<span class="essentiel">• essentiel</span>
+
+On utilise le tableau trié `t = [2, 5, 7, 10, 13, 18, 21, 26, 30]` (indices 0 à 8). Pour chaque valeur cherchée, donner à chaque tour `deb`, `fin`, `mil`, `t[mil]` et la décision, puis le résultat et le nombre de tours : a) `x = 21` ; b) `x = 2` ; c) `x = 14` ; d) `x = 30`.0
+
+??? pouce "Coup de pouce"
+
+    Même tableau de trace que dans les exercices 1 et 2. Au premier tour, `mil` vaut `(0 + 8) // 2`. Pour une valeur absente, s’arrêter quand `deb` dépasse `fin`.
+
+??? corrige "Corrigé"
+
+    Lignes de la forme (`deb`, `fin`, `mil`, `t[mil]`) : a) (0, 8, 4, 13) à droite ; (5, 8, 6, 21) **trouvé** : `True` en 2 tours. b) (0, 8, 4, 13) à gauche ; (0, 3, 1, 5) à gauche ; (0, 0, 0, 2) **trouvé** : `True` en 3 tours. c) (0, 8, 4, 13) à droite ; (5, 8, 6, 21) à gauche ; (5, 5, 5, 18) à gauche ; puis `deb = 5 > fin = 4` : `False` en 3 tours (`14` aurait été entre `13` et `18`). d) (0, 8, 4, 13) à droite ; (5, 8, 6, 21) à droite ; (7, 8, 7, 26) à droite ; (8, 8, 8, 30) **trouvé** : `True` en 4 tours.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 19</span> — Combien de valeurs examinées au plus ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-19 }
+
+<span class="essentiel">• essentiel</span>
+
+Sans machine, donner le nombre maximal de valeurs examinées par une recherche dichotomique dans un tableau trié de : a) $7$ éléments ; b) $15$ éléments ; c) $50$ éléments ; d) $200$ éléments ; e) un million d’éléments.0
+
+??? pouce "Coup de pouce"
+
+    C’est le plus petit entier $k$ tel que $2^k > n$ (exercice « Le plus petit `k` »). Écrire la suite des puissances de 2 : $1, 2, 4, 8, 16\ldots$
+
+??? corrige "Corrigé"
+
+    a) $2^2 = 4 \leqslant 7 < 8 = 2^3$ : **3**. b) $8 \leqslant 15 < 16$ : **4**. c) $32 \leqslant 50 < 64$ : **6**. d) $128 \leqslant 200 < 256$ : **8**. e) $2^{19} = 524\,288 \leqslant 10^6 < 2^{20} = 1\,048\,576$ : **20**.

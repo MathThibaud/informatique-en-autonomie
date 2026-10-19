@@ -22,7 +22,13 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Avant ou après l’appel ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-1 }
 
+<span class="essentiel">• essentiel</span>
+
 Sans machine, donner ce qu’affichent `a(3)` puis `b(3)`. Expliquer la différence.
+
+??? pouce "Coup de pouce"
+
+    Écrire la suite des appels `a(3)`, `a(2)`… jusqu’à la condition d’arrêt. Pour chacun, le `print` a-t-il lieu avant de lancer l’appel suivant, ou seulement après son retour ? Même question pour `b`.
 
 ```python
 def a(n):
@@ -47,6 +53,8 @@ def b(n):
     Dans `a`, le `print` est *avant* l’appel récursif : il s’exécute « à la descente », dans l’ordre des appels ($3, 2, 1$). Dans `b`, le `print` est *après* : il s’exécute « à la remontée », donc dans l’ordre inverse ($1, 2, 3$).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 2</span> — Dérouler une trace <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-2 }
+
+<span class="essentiel">• essentiel</span>
 
 On donne la fonction ci-dessous.
 
@@ -77,6 +85,8 @@ def mystere(n):
 
     *(descente : $20 \to 10 \to 5 \to 2 \to 1$ ; puis on affiche en remontant.)*
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Répondre `20 10 5 2 1` : c’est l’ordre de la descente. Le `print` étant placé *après* l’appel récursif, chaque appel n’affiche qu’une fois l’appel suivant terminé.
+
     1.  voir ci-dessus.
 
     2.  elle affiche la suite des divisions entières par $2$, de $n$ jusqu’à $1$, dans l’ordre **croissant**.
@@ -84,6 +94,8 @@ def mystere(n):
     3.  **variant :** l’entier `n`. Il est positif, et à chaque appel on passe à `n // 2`, strictement plus petit tant que `n > 1`. Il atteint donc $1$ (condition d’arrêt) : la fonction **se termine**.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Cherchez l’erreur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-3 }
+
+<span class="essentiel">• essentiel</span>
 
 Chacun de ces deux programmes est **fautif**. Expliquer précisément *pourquoi*, puis **corriger**.
 
@@ -117,7 +129,11 @@ def fact(n):
 
     **(B)** la condition d’arrêt `n == 1` n’est **jamais atteinte** si on appelle `fact(0)` : on enchaîne `fact(-1)`, `fact(-2)`… $\Rightarrow$ `RecursionError`. Correction : mettre `if n == 0` (ou `if n <= 1`).
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Juger (B) correct parce qu’il contient une condition d’arrêt : il faut vérifier qu’elle est **atteinte** pour toutes les valeurs autorisées, ici aussi pour `n = 0`.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Compter les appels <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-4 }
+
+<span class="essentiel">• essentiel</span>
 
 On rappelle la version récursive naïve de Fibonacci ($u_0=0$, $u_1=1$, $u_n=u_{n-1}+u_{n-2}$).
 
@@ -144,9 +160,11 @@ def fib(n):
 
     Arbre des appels de `fib(4)` :
 
-    ![](../figures/f33f6370f45a3649.svg){ .tikz loading=lazy }
+    ![](../figures/ed7b4fb4091d72da.svg){ .tikz loading=lazy }
 
     En notant $C(n)$ le nombre d’appels, $C(0)=C(1)=1$ et $C(n)=1+C(n-1)+C(n-2)$, d’où $C(2)=3$, $C(3)=5$, $C(4)=\mathbf{9}$.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Oublier l’appel initial, ou ne compter que les feuilles de l’arbre : on trouve $8$ ou $5$ au lieu de $9$. Chaque nœud de l’arbre est un appel.
 
     - **3.**  le nombre d’appels est multiplié par environ $1{,}6$ quand $n$ augmente de $1$ (il fait plus que doubler quand $n$ augmente de $2$) : le coût est **exponentiel**, vite ingérable.
 
@@ -158,7 +176,13 @@ def fib(n):
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `moutons(n)` qui affiche `"Encore un mouton"` $n$ fois, puis `"Je dors !"`. Tester avec `n = 5`.
 
+??? pouce "Coup de pouce"
+
+    Se poser les trois questions du réflexe. Que faut-il afficher quand il ne reste plus de mouton ($n = 0$) ? Après avoir affiché un seul mouton, combien en reste-t-il à afficher ?
+
 ??? corrige "Corrigé"
+
+    **Démarche :** condition d’arrêt $n = 0$ : on affiche `"Je dors !"`. Sinon, on affiche *un* mouton et l’appel récursif sur `n - 1` affiche les autres ; `n` diminue de $1$ à chaque appel, on se rapproche donc de la condition d’arrêt.
 
     ```python
     def moutons(n):
@@ -169,31 +193,59 @@ def fib(n):
             moutons(n - 1)
     ```
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — Somme des entiers <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-6 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — Somme des nombres impairs <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-6 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `somme(n)` qui renvoie $0+1+2+\dots+n$. Exemple : `somme(4)` renvoie `10`.
+<span class="essentiel">• essentiel</span>
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `somme_impairs(n)` qui renvoie la somme des $n$ premiers nombres impairs, $1 + 3 + 5 + \dots + (2n - 1)$ (cette somme vaut $0$ pour $n = 0$). Exemple : `somme_impairs(3)` renvoie `9`. Afficher ensuite `somme_impairs(n)` pour `n` allant de $1$ à $6$ : que remarque-t-on ?
+
+??? pouce "Coup de pouce"
+
+    Quel est le $n$-ième nombre impair (tester avec $n = 1, 2, 3$) ? La somme des $n$ premiers impairs, c’est la somme des $n - 1$ premiers, plus ce dernier nombre. Que vaut `somme_impairs(0)` ?
 
 ??? corrige "Corrigé"
 
+    **Démarche :** le $n$-ième nombre impair est $2n - 1$ ($1$, $3$, $5$ pour $n = 1, 2, 3$). Condition d’arrêt : `somme_impairs(0)` $= 0$ (aucun terme) ; on se rapproche de $0$ en appelant `somme_impairs(n - 1)` ; on combine en ajoutant le dernier impair, car $1 + 3 + \dots + (2n-1) = \big(1 + 3 + \dots + (2n-3)\big) + (2n - 1)$.
+
     ```python
-    def somme(n):
+    def somme_impairs(n):
         if n == 0:
             return 0
-        return n + somme(n - 1)
+        return (2 * n - 1) + somme_impairs(n - 1)
+
+    for n in range(1, 7):
+        print(somme_impairs(n))
     ```
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 7</span> — Puissance <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-7 }
+    On obtient `1`, `4`, `9`, `16`, `25`, `36` : ce sont les **carrés**. La somme des $n$ premiers impairs vaut $n^2$ (on passe d’un carré de côté $n - 1$ au carré de côté $n$ en ajoutant une « équerre » de $2n - 1$ cases).
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `puissance(x, n)` qui renvoie $x^n$ (avec $x^0 = 1$), **sans** utiliser l’opérateur `**`. Exemple : `puissance(2, 10)` renvoie `1024`.
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `return n + somme_impairs(n - 1)` en recopiant la somme des entiers du cours : on additionne alors $1 + 2 + \dots + n$ (`somme_impairs(3)` renverrait `6`). Le terme ajouté doit être le $n$-ième impair, `2 * n - 1`.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 7</span> — Multiplier avec des additions <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-7 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `produit(a, n)` qui renvoie $a \times n$, pour un entier `n` positif ou nul, **sans** utiliser l’opérateur `*` : uniquement des additions. Exemple : `produit(7, 6)` renvoie `42`. Combien d’appels (appel initial compris) l’appel `produit(7, 6)` effectue-t-il ? Pour calculer $3 \times 1000$, vaut-il mieux appeler `produit(3, 1000)` ou `produit(1000, 3)` ?
+
+??? pouce "Coup de pouce"
+
+    Écrire $a \times n$ à l’aide de $a \times (n - 1)$. Que vaut $a \times 0$ ? Chaque appel fait diminuer `n` de $1$ : combien d’appels faut-il pour atteindre $0$ ?
 
 ??? corrige "Corrigé"
 
+    **Démarche :** condition d’arrêt $a \times 0 = 0$ ; appel récursif sur `n - 1` ; on combine en ajoutant `a`, car $a \times n = a + a \times (n-1)$. C’est la structure de `puissance` du cours, avec une addition à la place de la multiplication.
+
     ```python
-    def puissance(x, n):
+    def produit(a, n):
         if n == 0:
-            return 1
-        return x * puissance(x, n - 1)
+            return 0
+        return a + produit(a, n - 1)
+
+    print(produit(7, 6))      # 42
+    print(produit(1000, 3))   # 3000
     ```
+
+    `produit(7, 6)` appelle `produit(7, 5)`, puis `produit(7, 4)`, …, jusqu’à `produit(7, 0)` : $7$ appels en tout, et plus généralement $n + 1$ appels. Pour $3 \times 1000$, `produit(1000, 3)` ne fait que $4$ appels, contre $1\,001$ pour `produit(3, 1000)` ; ce dernier dépasse même la profondeur maximale réglée par défaut dans Python (environ $1\,000$ appels imbriqués) et provoque un `RecursionError`. Il vaut donc mieux faire porter la récursion sur le plus petit des deux nombres.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Prendre pour condition d’arrêt `if n == 1: return a` : le résultat est juste pour $n \geqslant 1$, mais l’appel `produit(7, 0)` ne rencontre jamais la condition d’arrêt et provoque un `RecursionError`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Compter les chiffres <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-8 }
 
@@ -205,7 +257,7 @@ def fib(n):
 
 ??? corrige "Corrigé"
 
-    Condition d’arrêt : un nombre à un seul chiffre (`n < 10`).
+    **Démarche :** condition d’arrêt : un nombre à un seul chiffre (`n < 10`) ; `n // 10` supprime le dernier chiffre, ce qui rapproche de la condition d’arrêt ; on combine en ajoutant $1$ pour le chiffre supprimé.
 
     ```python
     def nombre_de_chiffres(n):
@@ -213,6 +265,8 @@ def fib(n):
             return 1
         return 1 + nombre_de_chiffres(n // 10)
     ```
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `return nombre_de_chiffres(n // 10)` sans le `1 +` : on ne combine pas le résultat de l’appel, et la fonction renvoie toujours $1$.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Compter les bits à 1 <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-9 }
 
@@ -224,7 +278,7 @@ def fib(n):
 
 ??? corrige "Corrigé"
 
-    Même idée, mais en base $2$ : `n % 2` est le dernier bit, `n // 2` enlève ce bit.
+    **Démarche :** même idée qu’à l’exercice précédent, mais en base $2$. Condition d’arrêt `n == 0` (aucun bit à $1$) ; `n // 2` enlève le dernier bit ; on combine en ajoutant ce dernier bit `n % 2`, qui vaut $1$ ou $0$.
 
     ```python
     def nombre_de_bits(n):
@@ -235,11 +289,19 @@ def fib(n):
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 10</span> — PGCD (algorithme d’Euclide) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-10 }
 
+<span class="essentiel">• essentiel</span>
+
 On rappelle que $\text{pgcd}(a, b) = \text{pgcd}(b,\ a \,\%\, b)$ et que $\text{pgcd}(a, 0) = a$.
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `pgcd(a, b)` qui renvoie le PGCD de deux entiers positifs. Exemple : `pgcd(24, 18)` renvoie `6`.
 
+??? pouce "Coup de pouce"
+
+    Les deux égalités rappelées forment déjà la fonction : laquelle donne la condition d’arrêt, laquelle l’appel récursif ? Attention à l’ordre des deux paramètres dans l’appel.
+
 ??? corrige "Corrigé"
+
+    **Démarche :** on traduit les deux égalités de l’énoncé : $\text{pgcd}(a, 0) = a$ donne la condition d’arrêt, $\text{pgcd}(a, b) = \text{pgcd}(b,\ a \,\%\, b)$ l’appel récursif. Rien à combiner : on renvoie directement le résultat de l’appel.
 
     ```python
     def pgcd(a, b):
@@ -256,9 +318,13 @@ Soit la suite $\left(u_n\right)$ définie par $$u_n = \left\lbrace \begin{array}
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `serie(n, a, b)` qui renvoie le terme $u_n$, pour des premiers termes `a` et `b` donnés en paramètres.
 
+??? pouce "Coup de pouce"
+
+    Il faut ici **deux** conditions d’arrêt ($n = 0$ et $n = 1$) et deux appels récursifs. Les paramètres `a` et `b` sont transmis sans changement à chaque appel.
+
 ??? corrige "Corrigé"
 
-    Deux conditions d’arrêt ($n=0$ et $n=1$), deux appels récursifs.
+    **Démarche :** deux conditions d’arrêt ($n=0$ et $n=1$) ; deux appels récursifs, sur $n-1$ et $n-2$ (les paramètres `a` et `b` sont transmis tels quels) ; on combine leurs résultats avec la formule de l’énoncé.
 
     ```python
     def serie(n, a, b):
@@ -283,6 +349,8 @@ Soit la suite $\left(u_n\right)$ définie par $$u_n = \left\lbrace \begin{array}
 
 ??? corrige "Corrigé"
 
+    **Démarche :** on affiche d’abord le terme reçu. Condition d’arrêt : $u = 1$, on n’appelle plus. Sinon, un seul appel récursif, sur le terme suivant ($u / 2$ ou $3u + 1$). Rien à combiner : la fonction affiche, elle ne renvoie rien. *(Ici, on ne connaît pas de variant : c’est justement la conjecture.)*
+
     ```python
     def syracuse(u):
         print(u)
@@ -294,6 +362,8 @@ Soit la suite $\left(u_n\right)$ définie par $$u_n = \left\lbrace \begin{array}
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Exponentiation rapide <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-13 }
+
+<span class="duree">≈ 15 min</span>
 
 On peut calculer $x^n$ bien plus vite en remarquant que $x^n = \left(x^{n/2}\right)^2$ si $n$ est pair, et $x^n = x \times x^{n-1}$ si $n$ est impair.
 
@@ -329,11 +399,17 @@ On peut calculer $x^n$ bien plus vite en remarquant que $x^n = \left(x^{n/2}\rig
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 14</span> — Compter une lettre <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-14 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `compter(s, c)` qui renvoie le nombre d’occurrences du caractère `c` dans la chaîne `s`. Exemple : `compter("anticonstitutionnellement", "t")` renvoie `5`.
+
+??? pouce "Coup de pouce"
+
+    Ne regarder que le premier caractère `s[0]` : compte-t-il pour $1$ ou pour $0$ ? Le reste du travail porte sur la chaîne plus courte `s[1:]`. Que renvoyer pour la chaîne vide ?
 
 ??? corrige "Corrigé"
 
-    On regarde le premier caractère (il compte pour $1$ ou pour $0$), puis on compte dans le reste `s[1:]`.
+    **Démarche :** condition d’arrêt : la chaîne vide (aucune occurrence) ; on se rapproche en appelant sur le reste `s[1:]` ; on combine en ajoutant $1$ si le premier caractère est `c`, rien sinon.
 
     ```python
     def compter(s, c):
@@ -359,9 +435,13 @@ On peut calculer $x^n$ bien plus vite en remarquant que $x^n = \left(x^{n/2}\rig
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `inverser(s)` qui renvoie la chaîne `s` lue à l’envers. Exemple : `inverser("récursif")` renvoie `"fisrucér"`.
 
+??? pouce "Coup de pouce"
+
+    Où doit se retrouver le premier caractère `s[0]` dans la chaîne inversée ? Le reste `s[1:]` s’inverse par l’appel récursif.
+
 ??? corrige "Corrigé"
 
-    On met le premier caractère *à la fin* de l’inverse du reste.
+    **Démarche :** condition d’arrêt : la chaîne vide, qui est sa propre inverse ; appel récursif sur le reste `s[1:]` ; on combine en plaçant le premier caractère *à la fin* de l’inverse du reste.
 
     ```python
     def inverser(s):
@@ -392,7 +472,7 @@ Un brin d’ADN est un *palindrome* s’il se lit pareil dans les deux sens.
 
 ??? corrige "Corrigé"
 
-    On compare les deux bords, puis on récurse sur le milieu (c’est la fonction du cours).
+    **Démarche :** condition d’arrêt : une chaîne de moins de deux caractères est un palindrome ; si les deux bords diffèrent, ce n’en est pas un ; sinon, on recommence sur le milieu `s[1:-1]`, plus court de deux caractères (c’est la fonction du cours).
 
     ```python
     def palindrome(s):
@@ -407,6 +487,8 @@ Un brin d’ADN est un *palindrome* s’il se lit pareil dans les deux sens.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Somme et maximum d’une liste <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-17 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire deux fonctions récursives sur une liste `tab` **non vide** :
 
 1.  `somme_liste(tab)` qui renvoie la somme des éléments ;
@@ -419,7 +501,7 @@ Un brin d’ADN est un *palindrome* s’il se lit pareil dans les deux sens.
 
 ??? corrige "Corrigé"
 
-    Condition d’arrêt : la liste à **un seul** élément.
+    **Démarche :** condition d’arrêt : la liste à **un seul** élément (la liste est non vide) ; appel récursif sur le reste `tab[1:]` ; on combine `tab[0]` avec le résultat obtenu pour le reste (addition, ou comparaison pour le maximum).
 
     ```python
     def somme_liste(tab):
@@ -436,6 +518,8 @@ Un brin d’ADN est un *palindrome* s’il se lit pareil dans les deux sens.
         return m
     ```
 
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `if tab[0] > maximum(tab[1:])`, puis `return maximum(tab[1:])` : le résultat est juste, mais chaque niveau lance deux fois le même appel, et le coût devient exponentiel (plus de $1\,000$ appels pour une liste croissante de $10$ éléments). On range le résultat de l’appel dans une variable.
+
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Recherche dans un tableau <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-18 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `appartient(v, t, i)` qui renvoie `True` si la valeur `v` apparaît dans le tableau `t` à partir de l’indice `i` (inclus), et `False` sinon. On suppose $0 \leqslant \texttt{i} \leqslant \texttt{len(t)}$.
@@ -445,6 +529,8 @@ Un brin d’ADN est un *palindrome* s’il se lit pareil dans les deux sens.
     Il y a deux façons de s’arrêter : lesquelles ? Quel paramètre change d’un appel à l’autre pour se rapprocher de la fin du tableau ?
 
 ??? corrige "Corrigé"
+
+    **Démarche :** deux conditions d’arrêt : on a dépassé la fin du tableau (`i == len(t)` : la valeur est absente) ou `t[i]` est la valeur cherchée. Sinon, on se rapproche de la fin du tableau en appelant avec `i + 1`.
 
     ```python
     def appartient(v, t, i):
@@ -456,6 +542,8 @@ Un brin d’ADN est un *palindrome* s’il se lit pareil dans les deux sens.
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 19</span> — Recherche dichotomique récursive <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-19 }
+
+<span class="duree">≈ 15 min</span>
 
 On dispose d’un tableau `t` **trié** par ordre croissant.
 
@@ -492,6 +580,8 @@ On dispose d’un tableau `t` **trié** par ordre croissant.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Mots de A et B <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-20 }
 
+<span class="essentiel">• essentiel</span>
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `frises(n)` qui renvoie la liste de toutes les chaînes de longueur `n` composées des lettres `A` et `B`. Exemple : `frises(2)` renvoie `[’AA’, ’AB’, ’BA’, ’BB’]`.
 
 ??? pouce "Coup de pouce"
@@ -500,7 +590,7 @@ On dispose d’un tableau `t` **trié** par ordre croissant.
 
 ??? corrige "Corrigé"
 
-    Pour chaque mot de longueur `n-1`, on ajoute un `A` puis un `B` à la fin.
+    **Démarche :** condition d’arrêt : il existe un seul mot de longueur $0$, le mot vide (d’où la liste `[""]`) ; appel récursif sur `n - 1` ; on combine en prolongeant chaque mot obtenu par un `A`, puis par un `B`.
 
     ```python
     def frises(n):
@@ -527,7 +617,7 @@ On dispose d’un tableau `t` **trié** par ordre croissant.
 
 ??? corrige "Corrigé"
 
-    On construit la décomposition au fur et à mesure dans `debut` : elle continue soit par `1` (il reste `n - 1`), soit par `2` (il reste `n - 2`, si `n >= 2`).
+    **Démarche :** on construit la décomposition au fur et à mesure dans `debut` : elle continue soit par `1` (il reste `n - 1`), soit par `2` (il reste `n - 2`, si `n >= 2`). Condition d’arrêt : il ne reste plus rien à décomposer (`n == 0`), on affiche `debut`.
 
     ```python
     def decoupe(n, debut=""):
@@ -557,6 +647,8 @@ Le triangle de Pascal donne les coefficients binomiaux, définis récursivement 
 
 ??? corrige "Corrigé"
 
+    **Démarche :** on traduit la définition ligne à ligne : $p = 0$ ou $n = p$ donnent les conditions d’arrêt ; la somme des deux coefficients de la ligne $n - 1$ donne les deux appels récursifs ($n$ diminue de $1$ à chaque appel).
+
     ```python
     def pascal(n, p):
         if p == 0 or n == p:
@@ -578,6 +670,8 @@ Le triangle de Pascal donne les coefficients binomiaux, définis récursivement 
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 23</span> — Les tours de Hanoï <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-23 }
 
+<span class="duree">≈ 20 min</span>
+
 On veut déplacer une pile de `n` disques d’un piquet `depart` vers un piquet `arrivee`, en s’aidant d’un piquet `inter`, sans jamais poser un grand disque sur un plus petit. L’idée récursive :
 
 - déplacer les `n-1` disques du haut de `depart` vers `inter` ;
@@ -586,9 +680,9 @@ On veut déplacer une pile de `n` disques d’un piquet `depart` vers un piquet 
 
 - déplacer les `n-1` disques de `inter` vers `arrivee`.
 
-![](../figures/3263edd9c945e670.svg){ .tikz loading=lazy }
+![](../figures/5ba9555aabcb156f.svg){ .tikz loading=lazy }
 
-![](../figures/fcac8b734c9979bf.svg){ .tikz .tikz-inline loading=lazy } déplacer les $n-1$ disques du haut (**appel récursif**) A $\rightarrow$ B ![](../figures/3830d45c7b872919.svg){ .tikz .tikz-inline loading=lazy } déplacer le grand disque A $\rightarrow$ C ![](../figures/5dfa8e7ad787d44d.svg){ .tikz .tikz-inline loading=lazy } déplacer les $n-1$ disques (**appel récursif**) B $\rightarrow$ C
+![](../figures/b10117ed8e3fb332.svg){ .tikz .tikz-inline loading=lazy } déplacer les $n-1$ disques du haut (**appel récursif**) A $\rightarrow$ B ![](../figures/c8c82be9a520c649.svg){ .tikz .tikz-inline loading=lazy } déplacer le grand disque A $\rightarrow$ C ![](../figures/f8d107876564b5a6.svg){ .tikz .tikz-inline loading=lazy } déplacer les $n-1$ disques (**appel récursif**) B $\rightarrow$ C
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `hanoi(n, depart, inter, arrivee)` qui **affiche** la suite des déplacements (par ex. `"A -> C"`). Combien de déplacements sont nécessaires pour `n` disques ? *(On montrera que c’est $2^n - 1$.)*
 
@@ -620,6 +714,8 @@ On veut déplacer une pile de `n` disques d’un piquet `depart` vers un piquet 
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — Traduire dans les deux sens <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-24 }
 
+<span class="essentiel">• essentiel</span>
+
 1.  Réécrire de façon **itérative** (avec une boucle) : `factorielle`, `somme` (entiers de 0 à `n`) et `puissance`.
 
     ??? pouce "Coup de pouce"
@@ -640,7 +736,7 @@ On veut déplacer une pile de `n` disques d’un piquet `depart` vers un piquet 
 
 ??? corrige "Corrigé"
 
-    **1. Versions itératives.**
+    **1. Versions itératives.** **Démarche :** un accumulateur initialisé avec la valeur de la condition d’arrêt (`1` pour un produit, `0` pour une somme), mis à jour à chaque tour d’une boucle `for`.
 
     ```python
     def factorielle(n):
@@ -662,7 +758,7 @@ On veut déplacer une pile de `n` disques d’un piquet `depart` vers un piquet 
         return p
     ```
 
-    **2. Version récursive de `f`** (qui calcule la **somme des éléments** d’une liste) :
+    **2. Version récursive de `f`** (qui calcule la **somme des éléments** d’une liste). **Démarche :** condition d’arrêt : la liste vide, de somme $0$ ; on combine le premier élément avec la somme du reste `t[1:]` :
 
     ```python
     def f(t):
@@ -728,7 +824,7 @@ On veut déplacer une pile de `n` disques d’un piquet `depart` vers un piquet 
 
     Pas de nouvelle récursion ici : trois fois « tracer une courbe de Koch, puis tourner ». De quel angle tourner pour fermer un triangle équilatéral ?
 
-![](../figures/2572fb603b5ccd36.svg){ .tikz .tikz-inline loading=lazy } ![](../figures/a2f46837ac7d5a83.svg){ .tikz .tikz-inline loading=lazy } ![](../figures/bbd7c52ec45f2d01.svg){ .tikz .tikz-inline loading=lazy } ![](../figures/70c4e2b3effda978.svg){ .tikz .tikz-inline loading=lazy }  
+![](../figures/c3a4693cf66ad877.svg){ .tikz .tikz-inline loading=lazy } ![](../figures/7aa50078ca2d8bfb.svg){ .tikz .tikz-inline loading=lazy } ![](../figures/ab4a707985345520.svg){ .tikz .tikz-inline loading=lazy } ![](../figures/22c12016200f17c0.svg){ .tikz .tikz-inline loading=lazy }  
 Le flocon de Koch, aux étapes $n = 0, 1, 2$ puis $4$.
 
 ??? corrige "Corrigé"
@@ -744,9 +840,11 @@ Le flocon de Koch, aux étapes $n = 0, 1, 2$ puis $4$.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 27</span> — Le triangle de Sierpiński <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-27 }
 
+<span class="duree">≈ 30 min</span>
+
 Partant d’un triangle plein, on relie les milieux des côtés (ce qui délimite 4 petits triangles), on retire celui du centre, et on **recommence** sur chacun des trois triangles restants.
 
-![](../figures/a82206838ab7a82b.svg){ .tikz .tikz-inline loading=lazy }![](../figures/7cdc3888e43c8d32.svg){ .tikz .tikz-inline loading=lazy }![](../figures/3e04de3d17df4632.svg){ .tikz .tikz-inline loading=lazy } ![](../figures/57ab22c7b39c17d8.svg){ .tikz .tikz-inline loading=lazy }![](../figures/f6202bb361b121dd.svg){ .tikz .tikz-inline loading=lazy }  
+![](../figures/dce765c339746908.svg){ .tikz .tikz-inline loading=lazy }![](../figures/780ac04811bf5cb7.svg){ .tikz .tikz-inline loading=lazy }![](../figures/2805403502466f06.svg){ .tikz .tikz-inline loading=lazy } ![](../figures/2b882c9f4c72b71d.svg){ .tikz .tikz-inline loading=lazy }![](../figures/142adcc9472c546e.svg){ .tikz .tikz-inline loading=lazy }  
 Le triangle de Sierpiński, aux ordres $n = 0, 1, 2, 3, 4$.
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `sierpinski(a, b, c, n)` qui dessine le triangle de Sierpiński de sommets `a`, `b`, `c` (des couples de coordonnées) à l’ordre `n` (condition d’arrêt : `n == 0`, on trace le triangle plein). *(À chaque niveau, l’aire est multipliée par $3/4$.)*
@@ -790,9 +888,11 @@ Le triangle de Sierpiński, aux ordres $n = 0, 1, 2, 3, 4$.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 28</span> — La courbe de Hilbert <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-28 }
 
+<span class="duree">≈ 45 min</span>
+
 La courbe de Hilbert est une courbe qui « remplit » un carré : à chaque niveau, elle est faite de **quatre** copies plus petites d’elle-même, reliées et pivotées.
 
-![](../figures/d412945162ace700.svg){ .tikz .tikz-inline loading=lazy }![](../figures/008c62eb92ec6ff6.svg){ .tikz .tikz-inline loading=lazy }![](../figures/70c459ef23aeea25.svg){ .tikz .tikz-inline loading=lazy }![](../figures/df0c0a77589da1ea.svg){ .tikz .tikz-inline loading=lazy }  
+![](../figures/de88d64d1fcfa612.svg){ .tikz .tikz-inline loading=lazy }![](../figures/70bd1aea77048cc5.svg){ .tikz .tikz-inline loading=lazy }![](../figures/6ac9122b3ac42f08.svg){ .tikz .tikz-inline loading=lazy }![](../figures/b09dc6efdedc9563.svg){ .tikz .tikz-inline loading=lazy }  
 La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Chercher (documentation Turtle) puis écrire une fonction récursive traçant la courbe de Hilbert d’ordre `n`. *Défi de fin de chapitre.*
@@ -837,6 +937,8 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
 *On ne retire des sujets que les questions qui relèvent d’un autre chapitre (programmation objet, réseaux…).*
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 29</span> — Analyser et écrire des fonctions récursives (d’après Sujet zéro 2023, sujet B) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-29 }
+
+<span class="essentiel">• essentiel</span> <span class="duree">≈ 20 min</span>
 
 *Thème : l’analyse et l’écriture de programmes récursifs.*
 
@@ -887,11 +989,13 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 3) : Q1.a : 0,5 ; Q1.b : 0,5 ; Q2 : 0,5 ; Q3.a : 0,5 ; Q3.b : 0,25 ; Q4 : 0,75
+
     1.  1.  Une fonction **récursive** est une fonction qui **s’appelle elle-même** dans son propre corps ; elle doit posséder une **condition d’arrêt** qui garantit qu’elle se termine.
 
         2.  Chaque appel se fait avec `n - 1`. Après l’affichage de `0`, l’appel suivant est `compte_rebours(-1)` : la condition `n >= 0` est alors **fausse**, donc aucun nouvel appel n’est lancé, et la fonction s’arrête.
 
-    2.
+    2.  **Démarche :** on traduit la définition : $0! = 1$ donne la condition d’arrêt, et $n! = n \times (n-1)!$ l’appel récursif.
 
         ```python
         def fact(n):
@@ -909,9 +1013,11 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
             1
             ```
 
+            <span class="erreurfreq">▷ Erreur fréquente.</span> Ajouter `0` à la fin de l’affichage : le `print` est dans le `else`, il n’est pas exécuté pour `n == 0`.
+
         2.  `res` reçoit $0+1+2+3 = \mathbf{6}$.
 
-    4.
+    4.  **Démarche :** un accumulateur initialisé à $0$, auquel une boucle `for` ajoute chaque entier de $0$ à `n`.
 
         ```python
         def somme_entiers(n):
@@ -922,6 +1028,8 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
         ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 30</span> — Les scores au rugby (d’après Polynésie 2024, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-30 }
+
+<span class="duree">≈ 30 min</span>
 
 *Thème : la récursivité.* Au rugby, une équipe marque (pour simplifier) soit **3** points (pénalité), soit **5** (essai non transformé), soit **7** (essai transformé).
 
@@ -959,6 +1067,8 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 4) : Q1 : 0,5 ; Q2 : 1 ; Q3 : 1 ; Q4 : 0,5 ; Q5 : 1
+
     1.  On retire des pénalités (des $3$) tant qu’on peut.
 
         ```python
@@ -971,6 +1081,8 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
         ```
 
     2.  Cas de base (et $f(n)=0$ pour $n<0$) : $$f(0)=1,\quad f(1)=0,\quad f(2)=0,\quad f(3)=1,\quad f(4)=0,\quad f(5)=1,\quad f(6)=1.$$
+
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Poser $f(0) = 0$ : il y a bien *une* façon d’obtenir $0$ point, ne rien marquer. Avec $f(0) = 0$, tous les appels renverraient $0$.
 
     3.  Avec ces cas de base, la relation $f(n)=f(n-3)+f(n-5)+f(n-7)$ est en fait valable pour tout $n \geqslant 1$ :
 
@@ -985,7 +1097,7 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
 
     4.  La **programmation dynamique** (mémoïsation) : on garde en mémoire les valeurs déjà calculées pour ne pas les recalculer (méthode étudiée au chapitre 11).
 
-    5.
+    5.  **Démarche :** pour un score nul, une seule solution, la liste `[0]` ; sinon, chaque solution obtenue pour `score - coup` (avec `coup` parmi $3$, $5$ et $7$) est prolongée par `score`.
 
         ```python
         def solutions_possibles(score):
@@ -1008,6 +1120,8 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
         *Pourquoi l’indentation du sujet officiel (`resultat.append(...)` au niveau de la boucle `for coup`) ne peut pas fonctionner : la ligne ne s’exécute qu’une fois par coup, alors que `liste` peut contenir plusieurs solutions. `resultat.append(solution)` y lève une erreur si `liste` est vide (`solution` n’existe pas) ; `resultat.append(liste)` imbrique les listes d’un niveau de trop. Sans indenter, il faudrait écrire `resultat = resultat + liste`.*
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 31</span> — Itinéraires dans une grille (d’après Centres étrangers 2024, groupe 1, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-31 }
+
+<span class="duree">≈ 30 min</span>
 
 *Thème : la programmation Python et la récursivité. La partie A du sujet (programmation objet) n’est pas reprise.*
 
@@ -1060,6 +1174,8 @@ On se déplace dans une grille rectangulaire, du coin en haut à gauche jusqu’
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 4) : Q1 : 1,5 ; Q2 : 0,5 ; Q3 : 1 ; Q4 : 1
+
     1.  `i` compte les déplacements vers le bas, `j` ceux vers la droite :
 
         ```python
@@ -1097,15 +1213,19 @@ On se déplace dans une grille rectangulaire, du coin en haut à gauche jusqu’
             return nombre_chemins(m - 1, n) + nombre_chemins(m, n - 1)
         ```
 
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Ne tester que `m == 1` : l’appel `nombre_chemins(m, n - 1)` fait alors descendre `n` à $0$, puis en dessous, sans jamais s’arrêter (`RecursionError`). Il faut les deux conditions d’arrêt.
+
         Par exemple `nombre_chemins(3, 3)` renvoie `6`. *(Cette fonction recalcule de nombreuses fois les mêmes valeurs : on l’améliorera dans le chapitre sur la programmation dynamique.)*
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 32</span> — Les instructions d’un robot (d’après Asie 2026, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-32 }
+
+<span class="duree">≈ 45 min</span>
 
 *Thème : la programmation Python et la récursivité. Seule la partie A du sujet est reprise (les parties B et C portent sur les réseaux).*
 
 Des robots peuvent avancer et tourner de 90 degrés à droite ou à gauche. Chaque robot reçoit ses instructions sous la forme d’une chaîne de caractères contenant des lettres et éventuellement des entiers et des parenthèses. S’il lit `’A’`, le robot avance d’un « pas » (distance fixée dans ses réglages) ; il tourne à droite s’il lit `’D’` et à gauche s’il lit `’G’`. Un entier placé dans la chaîne répète l’action ou la suite d’actions écrite entre parenthèses qui le suit : `’12A’` équivaut à `’AAAAAAAAAAAA’` et `’3(AD)’` à `’ADADAD’`. La figure ci-dessous représente le parcours du robot lorsqu’il reçoit la chaîne `’3ADA’`, c’est-à-dire la séquence `’AAADA’`.
 
-![](../figures/5f7377d00c196758.svg){ .tikz loading=lazy }
+![](../figures/1ef27221c2ee89c6.svg){ .tikz loading=lazy }
 
 1.  Représenter le parcours effectué par le robot s’il reçoit la chaîne `’4(AG)’`.
 
@@ -1208,15 +1328,17 @@ def lire_parcours(chaine):
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 6) : Q1 : 0,5 ; Q2 : 0,5 ; Q3 : 1 ; Q4 : 1 ; Q5 : 1 ; Q6 : 1 ; Q7 : 1
+
     1.  `’4(AG)’` équivaut à `’AGAGAGAG’` : le robot avance d’un pas puis tourne à gauche, quatre fois. Il parcourt un **carré** de côté un pas, dans le sens inverse des aiguilles d’une montre, et revient à son point de départ (orienté comme au début).
 
-        ![](../figures/4aceb1dfc4700ffd.svg){ .tikz loading=lazy }
+        ![](../figures/2187326f5e95c2ae.svg){ .tikz loading=lazy }
 
     2.  Ligne 4 : `return len(intrus) == 0` (ou `return intrus == []`).
 
     3.  Ligne 4 : `return False` (entier en fin de chaîne) ; ligne 8 : `return False` (entier juste avant une parenthèse fermante) ; ligne 9 : `return True`. *Le test de la ligne 6 porte sur la parenthèse **fermante** : un entier juste avant une parenthèse ouvrante, comme dans `’3(AD)’`, est au contraire la répétition normale d’un bloc.*
 
-    4.
+    4.  **Démarche :** on traduit l’algorithme de l’énoncé : un compteur qui augmente sur `’(’` et diminue sur `’)’`, un échec dès qu’il devient négatif, un succès s’il vaut $0$ à la fin.
 
         ```python
         def parenthesage_correct(chaine):
@@ -1244,6 +1366,8 @@ def lire_parcours(chaine):
     7.  Ligne 12 : `t = lire_nombre(chaine, indice)` ; ligne 16 : `t = lire_bloc(chaine, indice)` ; ligne 20 : `lire_parcours(bloc)` — c’est l’**appel récursif** : le bloc est lui-même une chaîne d’instructions, éventuellement avec des blocs imbriqués. La récursivité s’arrête sur un bloc qui ne contient plus de parenthèse (condition d’arrêt : aucun nouveau bloc à lire). Par exemple, `lire_parcours(’2(3(AD)G)2A’)` exécute `ADADADG ADADADG AA`.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 33</span> — Le cadenas de l’escape game (sujet maison, façon bac) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-33 }
+
+<span class="duree">≈ 60 min</span>
 
 *Thème : la récursivité. Cet exercice n’est pas un sujet officiel : il a été écrit au format du bac pour s’entraîner.*
 
@@ -1305,6 +1429,8 @@ Pour vérifier si une proposition est une anagramme du bon mot, il est inutile d
 
 ??? corrige "Corrigé"
 
+    **Barème indicatif** (sur 8) : Q1 : 0,5 ; Q2 : 1 ; Q3 : 0,5 ; Q4 : 0,5 ; Q5 : 1 ; Q6 : 1 ; Q7 : 1 ; Q8 : 0,5 ; Q9 : 1 ; Q10 : 1
+
     1.  `ABC`, `ACB`, `BAC`, `BCA`, `CAB`, `CBA` : **6 anagrammes**.
 
     2.  Pour écrire une anagramme d’un mot de $n$ lettres différentes, on choisit d’abord la première lettre : $n$ choix. Il reste alors à écrire une anagramme des $n - 1$ lettres restantes, toutes différentes : $P(n-1)$ façons, quel que soit le premier choix. D’où $P(n) = n\times P(n-1)$. (On reconnaît la factorielle : $P(n) = n!$.)
@@ -1344,7 +1470,7 @@ Pour vérifier si une proposition est une anagramme du bon mot, il est inutile d
 
     6.  L’appel `anagrammes(’ABC’)` lance un appel par lettre placée en tête, sur les lettres restantes : `anagrammes(’BC’)`, puis `anagrammes(’AC’)`, puis `anagrammes(’AB’)`. Chacun lance à son tour deux appels sur un mot d’une lettre (condition d’arrêt) :
 
-        ![](../figures/f99d8965eb3ac972.svg){ .tikz loading=lazy }
+        ![](../figures/8a6de5ad1467c876.svg){ .tikz loading=lazy }
 
         Il y a $1 + 3 + 6 = \mathbf{10}$ appels. Pour `’ABCD’`, l’appel initial lance $4$ appels sur des mots de $3$ lettres, et chacun d’eux en provoque $10$ (arbre ci-dessus) : $1 + 4\times 10 = \mathbf{41}$ appels.
 
@@ -1403,7 +1529,7 @@ def est_triee(tab):
     return est_triee(tab[2:])         # les deux premiers sont en ordre
 ```
 
-*« La condition d’arrêt est claire (une liste d’au plus un élément est triée), l’appel récursif porte sur une liste strictement plus courte, donc la fonction termine ; et l’on vérifie chaque paire d’éléments consécutifs. »*
+« La condition d’arrêt est claire (une liste d’au plus un élément est triée), l’appel récursif porte sur une liste strictement plus courte, donc la fonction termine ; et l’on vérifie chaque paire d’éléments consécutifs. »
 
 1.  La réponse est-elle correcte ? <span class="run" title="À programmer et tester sur machine">▶</span> Dérouler à la main `est_triee([1, 5, 2, 8])` (écrire la liste reçue par chaque appel), puis `est_triee([1, 2, 5, 8])`.
 
@@ -1433,7 +1559,7 @@ def est_triee(tab):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 35</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-35 }
 
-Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
+Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans lire ses notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 
 1.  Expliquer à un camarade de Première pourquoi une fonction récursive bien écrite **termine**.
 
@@ -1441,7 +1567,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
 3.  Expliquer, sur un exemple, pourquoi le résultat d’une fonction récursive se construit « à la remontée ».
 
-**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus, puis retourner la feuille. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire de notes** : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
+**Préparation (5 min, seul).** Noter au brouillon **trois idées** et **un exemple**, rien de plus : comme au Grand Oral, ces notes servent d’aide-mémoire. **Exposé (2 min, chronométré).** Debout, face à un camarade, **sans lire ses notes** et sans rien écrire : tout passe par la parole. **Retour (2 min).** Le camarade pose une question de relance (on peut alors s’aider d’un schéma), remplit la grille ci-dessous et donne un conseil ; puis on échange les rôles. Cette grille reprend les critères d’évaluation du Grand Oral.
 
 ??? pouce "Coup de pouce"
 

@@ -7,8 +7,16 @@
 |  |  |
 |:---|:---|
 | **Programme (BO)** | *« Systèmes d’exploitation : identifier les principales fonctions d’un système d’exploitation. Processus : décrire les états d’un processus et l’ordonnancement des processus par le système. Mettre en évidence et décrire une situation d’interblocage. »* |
-| **Prérequis** | la notion de **programme** et de **langage machine** (Première), l’**arborescence** des fichiers (Première), pour la relation père/fils entre processus, un peu de **files** (la file d’attente de l’ordonnanceur). |
+| **Prérequis** | la notion de **programme** et de **langage machine** (Première), l’**arborescence** des fichiers (Première), pour la relation père/fils entre processus, un peu de **files** (la file d’attente de l’ordonnanceur). (→ fiches de révision : ch. 3) |
 | **Objectifs** | *distinguer* un programme d’un processus ; *décrire* les trois états d’un processus et les transitions entre eux ; *comprendre* le rôle d’ordonnanceur du système ; *dérouler* un ordonnancement et le représenter par un chronogramme ; *reconnaître* et *expliquer* une situation d’interblocage. |
+
+!!! situation "Situation de départ"
+
+    1.  Votre ordinateur semble faire tourner des dizaines de programmes à la fois, avec un seul cœur de processeur. Comment est-ce possible ?
+
+    2.  Quand plusieurs programmes réclament le processeur en même temps, lequel doit passer en premier : le premier arrivé, le plus court, ou chacun un peu, à tour de rôle ?
+
+    3.  Comment deux programmes peuvent-ils rester figés pour toujours, chacun attendant l’autre ?
 
 ## Le problème : un seul processeur, mille programmes
 
@@ -25,7 +33,7 @@ Parmi les grandes fonctions d’un OS : gérer les processus (notre sujet), la m
 ![](../img/04_Intel_4004.jpg){ .photo loading=lazy style="width:100%" }  
 La ressource à partager : **le processeur** (ici l’Intel 4004, 1971, l’un des tout premiers).
 
-![](../figures/a9517bd1613733c8.svg){ .tikz loading=lazy }
+![](../figures/80630161bdae8d41.svg){ .tikz loading=lazy }
 
 ## Programme et processus : ne pas confondre
 
@@ -53,9 +61,11 @@ La ressource à partager : **le processeur** (ici l’Intel 4004, 1971, l’un d
 
     - **Bloqué** : le processus attend une **ressource** (une donnée du disque, une saisie clavier, la fin d’un calcul…) ; il ne peut pas avancer, même si le processeur se libérait.
 
+<span class="retouract">↺ Retour sur l'activité.</span> Les deux attentes de la dernière question de l’activité sont ces deux états : une carte qui attendait *le processeur* était **prête** ; une tâche qui attendait l’imprimante ou le scanner était **bloquée**, et lui donner le processeur n’aurait servi à rien.
+
 Les passages d’un état à l’autre portent des noms précis :
 
-![](../figures/6140923a98d48952.svg){ .tikz loading=lazy }
+![](../figures/40aa916e33cc095d.svg){ .tikz loading=lazy }
 
 - **Élection** (prêt $\to$ élu) : le système choisit ce processus et lui donne le processeur.
 
@@ -79,7 +89,7 @@ Un processus peut en créer un autre par un appel système (`fork` sous les syst
 
 Chaque processus porte un identifiant unique, le **PID** (*Process IDentifier*), et connaît le PID de son père, le **PPID**. Au démarrage, le système crée un premier processus « venu de rien » (PID $0$), qui engendre le processus `init` (PID $1$), racine de tous les autres.
 
-![](../figures/4ef74e786272891d.svg){ .tikz loading=lazy }
+![](../figures/1add2ed524bb3027.svg){ .tikz loading=lazy }
 
 Lorsqu’un processus se termine (ou est tué) avant ses fils, ceux-ci ne disparaissent pas : chacun devient **orphelin** et est **adopté par `init`**, son PPID devient alors $1$.
 
@@ -125,7 +135,7 @@ En rapprochant les colonnes **PID** et **PPID**, on reconstitue l’arbre des pr
 | `jobs` | les tâches lancées depuis ce terminal | `jobs` |
 | `nice` / `renice` | règle la **priorité** d’un processus | `nice -n 10 gros_calcul` |
 
-!!! remarque "Remarque"
+!!! encadre "Au bac — lire une sortie de ps"
 
     Ces noms ne sont pas à réciter par cœur, mais savoir **lire une sortie de `ps`** pour en tirer un arbre de PID, et connaître `top` et `kill`, sont des capacités attendues. Le « kill » de `kill -9` est trompeur : la commande *envoie un signal* au processus ; `-9` est le signal qu’on ne peut pas ignorer, d’où l’arrêt forcé. Ces commandes se pratiquent dans la partie A du TP proposé en fin de chapitre.
 
@@ -152,7 +162,7 @@ On mesure la qualité d’un ordonnancement par le **temps d’attente** de chaq
 
 La stratégie la plus simple : on sert les processus dans leur **ordre d’arrivée**, chacun jusqu’au bout, sans jamais l’interrompre.
 
-![](../figures/85f1fc9d8d864ac2.svg){ .tikz loading=lazy }
+![](../figures/3ec86019e80987f9.svg){ .tikz loading=lazy }
 
 Temps d’attente : A$=0$, B$=3$, C$=5$, D$=5$. **Moyenne $= 3{,}25$**. Défaut criant : le petit C (durée $1$) poireaute $5$ unités derrière les gros — comme une caisse express bloquée par un caddie plein.
 
@@ -160,11 +170,11 @@ Temps d’attente : A$=0$, B$=3$, C$=5$, D$=5$. **Moyenne $= 3{,}25$**. Défaut 
 
 À chaque fois que le processeur se libère, on élit le processus prêt dont la **durée est la plus courte**.
 
-![](../figures/7c932e344138a22e.svg){ .tikz loading=lazy }
+![](../figures/57ce309365659e23.svg){ .tikz loading=lazy }
 
 Temps d’attente : A$=0$, C$=2$, D$=2$, B$=6$. **Moyenne $= 2{,}50$**. En faisant passer les courts devant, on **réduit le temps d’attente moyen**. Quand tous les processus sont présents dès le départ, on peut démontrer que c’est même le meilleur choix possible <span class="horsprog">au-delà du programme</span> ; avec des arrivées échelonnées, comme ici, ce n’est plus garanti. Rançon : un processus long (ici B) peut attendre longtemps — c’est le risque de « famine ».
 
-!!! remarque "Remarque — Variante préemptive : le plus court temps restant d’abord"
+!!! encadre "Au bac — variante préemptive : le plus court temps restant d’abord"
 
     Ci-dessus, un processus élu s’exécute jusqu’au bout. Dans la variante **préemptive** (en anglais *SRTF*, *shortest remaining time first*), on refait le choix **à chaque unité de temps** : on élit le processus prêt dont la **durée restante** est la plus courte, quitte à **interrompre** celui qui s’exécute quand un processus plus court arrive. Une règle de départage est nécessaire en cas d’égalité (souvent : le premier arrivé). Cette variante figure dans des sujets de bac ; l’énoncé en rappelle alors les règles.
 
@@ -174,13 +184,23 @@ Pour que *personne* ne monopolise le processeur, on fixe un **quantum** (ici $1$
 
 **Convention :** un processus qui arrive à l’instant où un quantum se termine entre dans la file **avant** le processus qui vient d’être interrompu.
 
-![](../figures/7243a1680236ca44.svg){ .tikz loading=lazy }
+![](../figures/3bfbdf0a65d5dbf7.svg){ .tikz loading=lazy }
 
 Temps d’attente : A$=6$, B$=4$, C$=1$, D$=4$. **Moyenne $= 3{,}75$**. En moyenne, c’est *moins* bon que le plus court d’abord ; mais chaque processus reçoit **très vite** un peu de processeur — l’ordinateur reste **réactif** (votre souris ne « gèle » pas pendant qu’un gros calcul tourne). C’est la stratégie des systèmes interactifs.
 
+### Par priorités
+
+Chaque processus reçoit une **valeur de priorité**. Dans les sujets de bac, la valeur la plus **petite** est la plus **urgente** (vérifiez toujours la convention de l’énoncé). Chaque fois que le processeur se libère, on élit, parmi les processus prêts, celui dont la valeur est la plus petite ; à valeur égale, le **premier arrivé**. Sans préemption, l’élu s’exécute jusqu’au bout. Reprenons les quatre processus, avec les valeurs A$=3$, B$=1$, C$=2$ et D$=1$ :
+
+![](../figures/7558a77360468937.svg){ .tikz loading=lazy }
+
+À $t=0$, A est seul : il est élu malgré sa valeur $3$. À $t=4$, B, C et D sont prêts ; B et D ont la valeur $1$, et B est arrivé le premier. Temps d’attente : A$=0$, B$=3$, D$=4$, C$=7$. **Moyenne $= 3{,}50$**. Le petit C, peu prioritaire, passe en dernier : si des processus urgents arrivaient sans cesse, il pourrait attendre indéfiniment (**famine**). Pour l’éviter, on peut faire **remonter la priorité** d’un processus qui attend depuis trop longtemps. Dans la variante **préemptive**, un processus plus urgent qui arrive interrompt l’élu ; comme pour le plus court d’abord, l’énoncé en rappelle alors les règles.
+
 !!! propriete "Propriété 1 — Il n’y a pas d’ordonnancement parfait"
 
-    Aucune stratégie n’est la meilleure sur tous les critères : le *plus court d’abord* optimise le temps d’attente moyen mais peut affamer les longs ; le *tourniquet* garantit la réactivité mais multiplie les commutations (qui coûtent du temps) ; le *premier arrivé* est simple mais pénalise les petits. Choisir un ordonnancement, c’est choisir un **compromis**.
+    Aucune stratégie n’est la meilleure sur tous les critères : le *plus court d’abord* optimise le temps d’attente moyen mais peut affamer les longs ; le *tourniquet* garantit la réactivité mais multiplie les commutations (qui coûtent du temps) ; le *premier arrivé* est simple mais pénalise les petits ; les *priorités* servent d’abord l’urgent, au risque d’affamer les autres. Choisir un ordonnancement, c’est choisir un **compromis**.
+
+<span class="retouract">↺ Retour sur l'activité.</span> En jouant l’ordonnanceur, vous l’avez constaté : avec « premier arrivé, premier servi », le clic de souris C attendait $5$ tics derrière l’encodage vidéo et l’écran semblait figé ; avec le tourniquet, il n’attendait plus qu’un tic, au prix de nombreuses commutations.
 
 !!! regle "Règle 2 — En quel langage écrit-on un vrai ordonnanceur ?"
 
@@ -192,7 +212,7 @@ Temps d’attente : A$=6$, B$=4$, C$=1$, D$=4$. **Moyenne $= 3{,}75$**. En moyen
 
 <span id="cours-04-8" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[8](exercices.md#ex-04-8)** (ordonnancer à la main : trois stratégies)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[8](exercices.md#ex-04-8) et [18](exercices.md#ex-04-18)** (ordonnancer à la main : trois stratégies ; chronogrammes en série, priorités comprises)
 
 ## L’interblocage : quand tout le monde s’attend
 
@@ -210,7 +230,9 @@ Chacun retient une ressource que l’autre attend, et aucun ne peut la libérer 
 
 On le visualise avec un **graphe d’attente** : une flèche « $P \to R$ » signifie « $P$ attend $R$ », une flèche « $R \to P$ » signifie « $R$ est détenue par $P$ ». Un **cycle** dans ce graphe est la signature d’un interblocage (on apprendra à détecter un cycle au chapitre 8, *Graphes*).
 
-![](../figures/994518e6b8173a8a.svg){ .tikz loading=lazy }
+![](../figures/2821a5138ffb3888.svg){ .tikz loading=lazy }
+
+<span class="retouract">↺ Retour sur l'activité.</span> Les scripts de P et Q jouaient exactement ce scénario, et le schéma « qui tient, qui attend » du cahier était ce graphe d’attente, avec son cycle. La situation ne pouvait pas se débloquer seule ; faire prendre les deux objets dans le même ordre aux deux scripts l’empêche (voir la remarque ci-dessous).
 
 !!! propriete "Propriété 2 — Les quatre conditions de Coffman au-delà du programme"
 
@@ -240,7 +262,7 @@ Depuis le début de ce chapitre, nous avons supposé **un seul cœur** : un seul
 
 Un **cœur** (*core*) est un processeur complet à lui seul, capable d’exécuter *son* processus. Un processeur « quadricœur » en contient quatre : il peut donc élire **jusqu’à quatre processus *vraiment* en même temps** — ce n’est plus une illusion, c’est du **vrai parallélisme**.
 
-![](../figures/406a73e0fae2202f.svg){ .tikz loading=lazy }  
+![](../figures/d66207bf4c928062.svg){ .tikz loading=lazy }  
 Quatre cœurs exécutent quatre processus simultanément, en partageant la mémoire.
 
 Pourquoi ce virage ? Pendant des décennies, on accélérait un cœur unique en augmentant sa **fréquence** (les gigahertz). Mais on a heurté un mur : plus de fréquence, c’est plus de **chaleur** et de **consommation**. Plutôt que de faire courir un cœur toujours plus vite, on a choisi d’en **multiplier** le nombre.
@@ -249,15 +271,17 @@ Cela change peu ce que nous avons appris : sur *chaque* cœur, les états, le qu
 
 Conséquence pour qui programme : pour tirer parti de $N$ cœurs, un programme doit être **découpé pour s’exécuter en parallèle** (en plusieurs *fils d’exécution*, ou *threads*) ; sinon un seul cœur travaille pendant que les autres se tournent les pouces. C’est pourquoi « savoir paralléliser » est devenu essentiel. Aujourd’hui, un simple téléphone compte couramment $6$ à $8$ cœurs, un ordinateur portable de $8$ à $16$.
 
-## Ouverture : le système d’exploitation, chef d’orchestre
+## Ouverture et liens avec les autres chapitres
 
 Les processus ne sont pas un monde à part : ce chapitre réutilise les outils des chapitres précédents et en annonce d’autres.
 
-- l’ordonnanceur range les processus prêts dans une **file** (chapitre 3) : le tourniquet n’est rien d’autre qu’un enfiler/défiler répété ;
+- **Ce qu’il réutilise** : l’ordonnanceur range les processus prêts dans une **file** (chapitre 3) ; le tourniquet n’est rien d’autre qu’un enfiler/défiler répété.
 
-- le graphe d’attente entre processus et ressources est un premier **graphe orienté** : chercher un interblocage, c’est chercher un **cycle**, ce qu’on apprendra à programmer au chapitre *Graphes* ;
+- **Ce qui servira ailleurs** : la relation père/fils créée par `fork` forme un **arbre** (chapitre 5) ; le graphe d’attente est un premier **graphe orienté**, et chercher un interblocage, c’est chercher un **cycle**, ce qu’on apprendra à programmer au chapitre 8 (*Graphes*).
 
-- au **bac**, on vous demandera surtout de **dérouler** un ordonnancement (chronogramme, temps d’attente), de suivre les **états** d’un processus, de lire une sortie de `ps`, et de **repérer** un interblocage dans une situation décrite.
+- **Ouverture.** On verra au chapitre 14 (*systèmes sur puce*) que le système d’un téléphone ordonnance ses processus sur les cœurs d’une seule puce, alors qu’un microcontrôleur, en général sans système d’exploitation complet, n’exécute qu’un seul programme.
+
+- Au **bac**, on vous demandera surtout de **dérouler** un ordonnancement (chronogramme, temps d’attente), de suivre les **états** d’un processus, de lire une sortie de `ps`, et de **repérer** un interblocage dans une situation décrite.
 
 ## Un peu d’histoire : du traitement par lots au multitâche
 
@@ -273,10 +297,6 @@ Côté théorie, le Néerlandais **Edsger Dijkstra** (déjà croisé avec l’al
 ![](../img/04_hist_dijkstra.jpg){ .photo loading=lazy style="width:114px" }  
 Edsger W. Dijkstra
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
-
-    Les processus prêts attendent dans une **file** (FIFO) : le tourniquet en est une application directe (chapitre « structures linéaires »). La relation père/fils créée par `fork` forme un **arbre** (chapitre suivant), et l’interblocage se lit dans un **graphe** orienté : le détecter, c’est **repérer un cycle** (les graphes seront étudiés plus tard dans l’année). Enfin, on verra au chapitre « systèmes sur puce » que le système d’exploitation d’un téléphone ordonnance ses processus sur les cœurs d’une seule puce, alors qu’un microcontrôleur, en général sans OS complet, n’exécute qu’un seul programme.
-
 ## Bilan — la carte mémoire
 
 | **Notion** | **À retenir** |
@@ -288,9 +308,17 @@ Edsger W. Dijkstra
 | Création | `fork` : père/fils $\Rightarrow$ **arbre** de processus ; identifiants **PID** / **PPID** |
 | Observer / gérer | `ps -ef` (PID/PPID), `pstree`, `top` ; `kill <PID>` pour arrêter |
 | Ordonnancement | choisir le prochain élu ; **quantum**, commutation de contexte |
-| Stratégies | premier arrivé / plus court d’abord (attente min.) / tourniquet (réactif) |
+| Stratégies | premier arrivé / plus court d’abord (attente min.) / tourniquet (réactif) / priorités (l’urgent d’abord) |
 | Interblocage | cycle d’attente mutuelle ; **graphe d’attente** ; conditions de Coffman |
 | En vrai | les vrais ordonnanceurs sont en **C** (+ assembleur) ; en Python on *simule* |
+
+!!! situation "Retour à la situation de départ"
+
+    1.  Le système d’exploitation donne le processeur à chaque **processus** pendant un **quantum**, puis le lui reprend, des milliers de fois par seconde : un seul processus est **élu** à la fois, les autres sont **prêts** ou **bloqués** (§ I, III et VI).
+
+    2.  C’est le rôle de l’**ordonnanceur**, et aucune stratégie n’est parfaite : le plus court d’abord réduit le temps d’attente moyen mais peut affamer les longs, le tourniquet garde l’ordinateur réactif (§ VI).
+
+    3.  C’est un **interblocage** : chacun détient une ressource que l’autre attend. On le repère par un **cycle** dans le graphe d’attente (§ VII).
 
 ## Erreurs fréquentes
 
@@ -314,7 +342,7 @@ Edsger W. Dijkstra
 
 - **lire** une sortie de `ps`, en déduire un arbre de processus et des PID / PPID, et connaître `top` / `kill` $\to$ ex. [5](exercices.md#ex-04-5), [6](exercices.md#ex-04-6), [7](exercices.md#ex-04-7) ;
 
-- **dérouler** un ordonnancement (premier arrivé, plus court d’abord, tourniquet) sous forme de **chronogramme** et en calculer les temps d’attente $\to$ ex. [8](exercices.md#ex-04-8), [12](exercices.md#ex-04-12) ;
+- **dérouler** un ordonnancement (premier arrivé, plus court d’abord, tourniquet, par priorités) sous forme de **chronogramme** et en calculer les temps d’attente $\to$ ex. [8](exercices.md#ex-04-8), [12](exercices.md#ex-04-12), [18](exercices.md#ex-04-18) ;
 
 - **reconnaître** un interblocage, le représenter par un **graphe d’attente** et proposer un moyen de l’éviter $\to$ ex. [10](exercices.md#ex-04-10), [11](exercices.md#ex-04-11).
 

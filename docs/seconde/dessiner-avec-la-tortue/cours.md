@@ -11,15 +11,17 @@
 | **Objectifs** | Piloter la tortue (avancer, tourner, lever et baisser le stylo) ; **répéter** un motif avec une boucle `for` ; calculer l’angle d’un **polygone régulier** ($360/n$) ; définir et appeler une **fonction** avec paramètres ; **colorier** une forme ; composer une **rosace**. |
 | **Prérequis** | La boucle `for` et les fonctions (revoyez le cours « Les bases de Python » si besoin). |
 
-!!! remarque "Remarque"
+!!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
 
-    **Un peu d’histoire.** La « tortue » vient du langage **Logo**, créé en 1967 par **Seymour Papert** et Wally Feurzeig. À l’origine, c’était un vrai petit robot en forme de tortue qui traçait au sol ! L’idée de Papert : on apprend le mieux en **fabriquant** des choses. Python a hérité de cette tortue.
+    La « tortue » vient du langage **Logo**, créé en 1967 par **Seymour Papert** et Wally Feurzeig. À l’origine, c’était un vrai petit robot en forme de tortue qui traçait au sol ! L’idée de Papert : on apprend le mieux en **fabriquant** des choses. Python a hérité de cette tortue.
 
     ![](../img/T_hist_tortue_logo.jpg){ .photo loading=lazy style="width:100%" }  
     Une tortue robot Logo qui trace au sol
 
     ![](../img/T_hist_papert.jpg){ .photo loading=lazy style="width:100%" }  
     Seymour Papert présente Logo (1987)
+
+    [$\to$ frise chronologique](../methode-debattre.md#frise)
 
 ## Prendre la tortue en main
 
@@ -59,11 +61,11 @@ t.done()
 | `pensize(n)` | choisir l’épaisseur du trait |
 | `circle(r)` | tracer un cercle de rayon `r` |
 
-!!! remarque "Remarque"
+!!! encadre "À retenir — Position et cap de la tortue"
 
     La tortue a une **position** et une **direction** (son « cap »). `left` et `right` ne font que changer le cap : le trait n’apparaît qu’avec `forward` (ou `backward`). Les angles sont en degrés.
 
-![](../figures/1518e5be143a8cd8.svg){ .tikz loading=lazy }
+![](../figures/d80afb3a21c09a0d.svg){ .tikz loading=lazy }
 
 <span id="cours-T-1" class="ancre"></span>
 
@@ -96,7 +98,7 @@ for cote in range(4):
 t.done()
 ```
 
-![](../figures/ac4534fcb3e32c9c.svg){ .tikz loading=lazy }
+![](../figures/727b43c54c0c1b2c.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 1 — Le secret des polygones réguliers"
 
@@ -112,7 +114,7 @@ for cote in range(6):     # hexagone
 t.done()
 ```
 
-![](../figures/3c5df2e4dce7fdfc.svg){ .tikz loading=lazy }
+![](../figures/1fa97e462dc51982.svg){ .tikz loading=lazy }
 
 <span id="cours-T-3" class="ancre"></span>
 
@@ -188,21 +190,23 @@ for k in range(12):     # 12 carres...
 t.done()
 ```
 
-![](../figures/94268682a591991c.svg){ .tikz loading=lazy }
+![](../figures/ff3f271941fc0cc7.svg){ .tikz loading=lazy }
 
 <span id="cours-T-9" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-T-9) et [10](exercices.md#ex-T-10)** (les rosaces), défis **[11](exercices.md#ex-T-11) à [13](exercices.md#ex-T-13)**, exercice **[14](exercices.md#ex-T-14)** (critiquer une réponse d’IA)
 
-!!! remarque "Remarque"
+!!! encadre "À retenir — Motif, boucle et rotation"
 
     On tient là toute la puissance du chapitre : une **fonction** (le motif), une **boucle** (la répétition) et un petit **tour** à chaque étape suffisent à produire des figures très riches. À vous de jouer sur la feuille d’exercices !
 
-!!! remarque "Remarque — Liens avec d’autres chapitres"
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
     Ce complément réinvestit directement le chapitre *Les bases de Python* : la **boucle** `for` y répète un motif, et une **fonction** avec **paramètres** le rend réutilisable. À l’origine, la tortue de Logo était un vrai **robot** piloté par programme, dont les moteurs sont des **actionneurs**, comme ceux que l’on rencontrera au chapitre *Informatique embarquée et objets connectés*. Enfin, la fenêtre où elle dessine est un quadrillage de **pixels** : au chapitre *Photographie numérique*, on coloriera directement ces pixels, en codant chaque couleur en **RVB**.
 
 ## Bilan — la carte mémoire
+
+Les mots importants du thème sont définis dans le lexique.
 
 | **Notion** | **À retenir** |
 |:---|:---|
