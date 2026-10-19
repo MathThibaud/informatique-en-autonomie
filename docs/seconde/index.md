@@ -16,7 +16,7 @@ hide:
 
 !!! livre "Le manuel complet en PDF"
 
-    Tout le cours, les exercices et les corrigés de l'année, dans la version distribuée en classe (version du 18 octobre 2026).
+    Tout le cours, les exercices et les corrigés de l'année, dans la version distribuée en classe (version du 19 octobre 2026).
 
     [:material-download: Télécharger le manuel (5,1 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-seconde.pdf){ .md-button .md-button--primary }
 
