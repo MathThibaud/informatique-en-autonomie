@@ -353,9 +353,39 @@ print(compte.solde())                   # affiche 120
 
     En Python, on **préfixe d’un tiret bas** (`_solde`) un attribut qui n’est pas censé être utilisé de l’extérieur. C’est une **convention** entre programmeurs : Python ne l’interdit pas techniquement, mais tout le monde comprend « ceci est interne, manipule-le par les méthodes ». Une méthode qui *lit* un attribut s’appelle un **accesseur** (ici `solde`) ; une méthode qui le *modifie*, un **mutateur**.
 
-!!! encadre "Au bac — passer par les méthodes"
+!!! encadre "Au bac — où utiliser accesseurs et mutateurs ?"
 
-    On retrouve cette pratique dans les sujets de bac : la classe fournit des méthodes `get_…` (accesseurs) et `set_…` (mutateurs), et l’énoncé demande explicitement de « ne pas accéder directement aux attributs » depuis une autre classe (*ex.* Asie 2024, jour 1 : la méthode `couvre` d’une antenne doit passer par `get_pos_maison()`).
+    Les sujets de bac fournissent souvent des méthodes `get_…` (accesseurs) et `set_…` (mutateurs). Faut-il s’en servir partout ?
+
+    - **Depuis l’extérieur de la classe** (une autre classe, le programme principal) : **toujours** par les méthodes. C’est même obligatoire quand l’énoncé demande de « ne pas accéder directement aux attributs » (*ex.* Asie 2024, jour 1 : la méthode `couvre` de la classe `Antenne` reçoit une `Maison`, elle doit donc lire sa position par `get_pos_maison()`).
+
+    - **À l’intérieur de la classe** : écrire `self.attribut` est **correct**, et c’est l’usage le plus courant (`deposer` et `retirer` ci-dessus écrivent `self._solde`). L’encapsulation sépare la classe de l’*extérieur*, pas une méthode de son propre objet : ce sont justement les méthodes de la classe qui garantissent que l’état reste cohérent. Cela vaut aussi pour un autre objet *de la même classe* (`autre.x` dans `Point.distance`).
+
+    Les sujets eux-mêmes ne sont pas homogènes : dans Asie 2025, jour 2 (classe `Date`), la méthode `nb_jours_passes` lit `self.jour` et `self.mois` directement, tandis que `nb_jours_depuis` écrit `self.get_annee()` et `other.get_annee()`. Les deux écritures sont justes : c’est une habitude de style, pas une règle.
+
+    **Quand passer par le mutateur, même à l’intérieur ?** Quand il contient une **vérification** : en l’appelant partout, le contrôle n’est écrit qu’une fois et s’applique à toutes les modifications.
+
+    ```python
+    class Personnage:
+        def __init__(self, nom, nb_vies):
+            self.nom = nom
+            self._vie = nb_vies
+
+        def set_vie(self, v):           # mutateur : le seul endroit qui verifie
+            if v < 0:
+                v = 0                   # jamais de vie negative
+            self._vie = v
+
+        def perd_vie(self, degats):
+            self.set_vie(self._vie - degats)
+
+        def soigne(self, soin):
+            self.set_vie(self._vie + soin)
+    ```
+
+    Si le mutateur se contente de `self.x = v`, passer par lui à l’intérieur n’apporte rien. Dans `__init__`, on affecte directement les attributs. En Python, les programmeurs écrivent d’ailleurs rarement des `get_`/`set_` (ils utilisent des « propriétés », `@property`) <span class="horsprog">au-delà du programme</span> : les sujets s’en servent surtout pour faire pratiquer le vocabulaire, commun à tous les langages objet.
+
+    **Ce qu’on attend de vous.** Hors de la classe : les méthodes. Dans la classe : `self.attribut` est accepté, mais si le code à compléter utilise déjà les accesseurs, **imitez son style**, et si un mutateur vérifie quelque chose, passez par lui. Un correcteur ne pénalise pas `self.annee` dans une méthode de `Date`, sauf consigne contraire de l’énoncé.
 
 ### Signaler une erreur : `raise`
 
@@ -568,7 +598,7 @@ La programmation objet n’est pas une curiosité isolée : elle servira à **im
 
 - **Ne pas initialiser un attribut dans `__init__`.** Y accéder ensuite lève `AttributeError`. *Le réflexe :* tous les attributs sont créés dans le constructeur.
 
-- **Court-circuiter l’encapsulation.** Modifier directement `c._solde` au lieu de passer par une méthode : on risque de **rompre un invariant**. *Le réflexe :* accesseur / mutateur.
+- **Court-circuiter l’encapsulation.** Modifier directement `c._solde` depuis l’extérieur au lieu de passer par une méthode : on risque de **rompre un invariant**. *Le réflexe :* accesseur / mutateur.
 
 - **Oublier le `return` d’une méthode** qui doit renvoyer une valeur (elle renvoie `None`), ou confondre `__repr__` (représentation, dans la console) et `__str__` (affichage).
 
