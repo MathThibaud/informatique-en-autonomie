@@ -340,16 +340,6 @@ On obtient exactement l’ABR dessiné plus haut.
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-05-10), [11](exercices.md#ex-05-11) et [23](exercices.md#ex-05-23)** (insérer à la main ; programmer l’insertion ; insertions en série).
 
-## Ouverture et liens avec les autres chapitres
-
-- **Ce qu’il réutilise** : la **récursivité** (chapitre 1 : taille, hauteur et parcours en profondeur), les **classes** (chapitre 2 : la classe `Noeud`), la **file** et la **pile** (chapitre 3 : parcours en largeur et en profondeur), et la **recherche dichotomique** de 1<sup>re</sup>, que l’ABR incarne dans une structure de données.
-
-- **Déjà croisé** : l’**arbre des processus**, créé par `fork` (chapitre 4).
-
-- **Ce qui servira ailleurs** : les arbres organisent les **index** des bases de données (chapitre 6), et la recherche dans un ABR sera relue comme un exemple de « diviser pour régner » (chapitre 7).
-
-- **Ouverture.** Le chapitre 8 (*Graphes*) généralisera l’arbre (un arbre est un graphe particulier, sans cycle), et l’on y retrouvera les parcours en **largeur** (file) et en **profondeur** (pile).
-
 !!! curieux "Pour les curieux (facultatif) — Un peu d’histoire… et de botanique"
 
     En informatique, l’arbre est le seul à **pousser la tête en bas** : racine en haut, feuilles en bas — un botaniste s’en évanouirait. La structure est ancienne : le mot « arbre » entre en mathématiques en **1857** avec le Britannique **Arthur Cayley**, qui s’en sert ensuite, en **1874–1875**, pour *compter* les molécules chimiques possibles (vues comme des arbres d’atomes). Mais l’**arbre binaire de recherche** est formalisé autour de **1960** par plusieurs chercheurs indépendamment (dont **P. F. Windley**, **A. D. Booth**, **T. N. Hibbard**). En **1952**, un étudiant du MIT, **David Huffman**, invente pour un devoir noté un codage par arbre qui reste, soixante-dix ans plus tard, au cœur des formats de compression (ZIP, JPEG…) : le plus rentable des devoirs maison. Enfin, les **B-arbres** (Bayer et McCreight, **1970**) organisent aujourd’hui les données de la quasi-totalité des bases de données et systèmes de fichiers de la planète.
@@ -360,6 +350,14 @@ Arthur Cayley (1821–1895), qui a donné son nom mathématique à l’arbre
 ![](../img/05_baia_figuier_renverse.jpg){ .photo loading=lazy style="width:210px" }
 
 Et la nature s’y met aussi : à **Baïes** (Italie), un figuier sauvage pousse **la tête en bas** depuis la voûte d’une salle romaine, sa racine au plafond et ses branches feuillues vers le sol — un véritable arbre informatique !
+
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
+
+    - **Ce qu’il réutilise :** la *Récursivité* (taille, hauteur, parcours), la classe `Noeud` (*Programmation orientée objet et paradigmes*), la file et la pile (*Structures linéaires : piles, files, listes chaînées*) ; l’ABR incarne *La recherche dichotomique* (Première).
+
+    - **Déjà croisé :** l’arbre des processus créé par `fork` (*Processus et ordonnancement*).
+
+    - **Pour aller plus loin :** les arbres organiseront les index des *Bases de données et SQL* ; en *Graphes*, vous verrez qu’un arbre est un graphe connexe sans cycle.
 
 ## Bilan — la carte mémoire
 

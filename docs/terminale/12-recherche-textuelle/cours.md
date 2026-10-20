@@ -273,13 +273,17 @@ C’est le **prodige** de Boyer-Moore : il peut trouver un mot **sans lire tout 
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[8](exercices.md#ex-12-8) et [9](exercices.md#ex-12-9)** (le coût sous-linéaire ; chercher un gène dans l’ADN)
 
-## Ouverture et liens avec les autres chapitres
+## Ouverture
 
 - **La recherche textuelle est partout** : le `Ctrl+F` des éditeurs et `grep`, la bio-informatique (localiser un gène dans un génome de milliards de bases), les antivirus (repérer la « signature » d’un logiciel malveillant), la détection de plagiat, les moteurs de recherche, les filtres anti-spam…
 
-- **Ce qu’il réutilise** : la table de prétraitement est un **dictionnaire** ; comme la mémoïsation (chapitre 11), on dépense un peu de **mémoire** pour gagner beaucoup de **temps**. La même recherche de motif existe en SQL avec `LIKE` (chapitre 6), et *comparer* deux textes ou deux brins d’ADN (plus longue sous-séquence commune) relève de la programmation dynamique (chapitre 11).
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-- **Ouverture.** Un antivirus cherche des signatures connues, mais le chapitre 13 (*calculabilité*) montrera qu’aucun outil ne peut détecter *tous* les virus.
+    - **Ce qu’il réutilise :** la table de prétraitement est un dictionnaire ; comme la mémoïsation (*Programmation dynamique*), on dépense de la mémoire pour gagner du temps.
+
+    - **Déjà croisé :** `LIKE` cherche un motif en SQL (*Bases de données et SQL*) ; la plus longue sous-séquence commune (*Programmation dynamique*) compare deux textes.
+
+    - **Pour aller plus loin :** vous verrez en *Calculabilité et décidabilité* qu’aucun antivirus ne peut détecter *tous* les virus.
 
 ## Bilan — la carte mémoire
 

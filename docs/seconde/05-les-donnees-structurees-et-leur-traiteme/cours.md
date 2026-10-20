@@ -282,9 +282,9 @@ Chaque site, chaque application **collecte** des données sur vous. La loi encad
 
 !!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    - **Déjà vu :** les **métadonnées EXIF** d’une photo (chapitre *Photographie numérique*) forment une petite fiche de descripteurs ; un critère combiné s’écrit avec `and` et `or` en Python (chapitre *Les bases de Python*).
+    - **Déjà vu :** les **métadonnées EXIF** d’une photo (chapitre *Photographie numérique*) forment une petite fiche de descripteurs ; un critère combiné s’écrit avec `and` et `or` en Python (chapitre *Les bases de la programmation Python*).
 
-    - **À venir :** au chapitre *Localisation*, une **trame NMEA** se lira comme une ligne de **CSV** ; au dernier chapitre, les mesures des **capteurs** d’objets connectés viendront grossir le **nuage** et le *big data*.
+    - **À venir :** au chapitre *Localisation, cartographie et mobilité*, une **trame NMEA** se lira comme une ligne de **CSV** ; au dernier chapitre, les mesures des **capteurs** d’objets connectés viendront grossir le **nuage** et le *big data*.
 
     - **Plus loin :** en spécialité NSI de Première, on lit des fichiers CSV en Python et on filtre une table avec une boucle `for` et un test `if`.
 

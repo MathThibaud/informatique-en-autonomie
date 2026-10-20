@@ -381,15 +381,9 @@ Insérer un maillon ne demande que de **rebrancher deux liens**, sans déplacer 
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[21](exercices.md#ex-03-21) à [26](exercices.md#ex-03-26)** (listes chaînées)
 
-## Ouverture et liens avec les autres chapitres
+## Ouverture
 
 Piles et files ne sont pas des curiosités isolées : ce sont les **outils de base** de la fin de l’année.
-
-- **Ce qu’il réutilise** : les **classes** du chapitre 2 (piles, files et cellules s’écrivent comme des classes dont les méthodes forment l’interface) ; et la **pile d’appels** de la récursivité (chapitre 1) est une pile.
-
-- Les **arbres** et les **graphes** (chapitres 5 et 8) se parcourront avec une **file** (en largeur) ou une **pile** (en profondeur).
-
-- **Ouverture.** Le système d’exploitation rangera les **processus** prêts dans une file (chapitre 4) ; en **réseaux** (chapitre 9), une file modélisera les paquets en attente dans un routeur.
 
 - Au **bac**, on vous donne l’**interface** d’une pile ou d’une file et l’on demande de **tracer** une suite d’opérations, de **choisir** la bonne structure pour un problème, ou d’**écrire un court algorithme** qui n’utilise que ces méthodes — rarement de reprogrammer la structure elle-même.
 
@@ -399,6 +393,14 @@ Piles et files ne sont pas des curiosités isolées : ce sont les **outils de ba
 
     ![](../img/03_hist_bauer.jpg){ .photo loading=lazy style="width:131px" }  
     Friedrich L. Bauer, co-inventeur de la pile
+
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
+
+    - **Ce qu’il réutilise :** les classes (*Programmation orientée objet et paradigmes*) et la pile d’appels de la *Récursivité*, qui est une pile.
+
+    - **Ce qui en découle :** les *Arbres* et les *Graphes* se parcourront avec une **file** (en largeur) ou une **pile** (en profondeur).
+
+    - **Pour aller plus loin :** le système rangera les processus prêts dans une file (*Processus et ordonnancement*) ; en *Réseaux*, une file modélisera les paquets en attente dans un routeur.
 
 ## Bilan — la carte mémoire
 

@@ -314,27 +314,15 @@ $GPGGA,142012,4342.054,N,00716.098,E,1,06,1.2,10.0,M,,,,*20
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Sur une vraie carte <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-12 }
 
-<span class="tag">sur machine</span>  Ouvrir une carte en ligne (Géoportail ou `openstreetmap.org`).
-
-1.  Retrouver le **Musée océanographique** et le **stade Louis-II**, à Monaco, et **lire leurs coordonnées** (latitude, longitude). Lequel est le plus au nord ? le plus à l’est ?
-
-2.  Calculer l’**itinéraire** entre ces deux lieux **à pied**, puis **en voiture** : relever chaque fois la **distance** et la **durée** proposées. Pourquoi les deux trajets ne sont-ils pas les mêmes ?
-
-3.  Comparer avec la distance « à vol d’oiseau ». Pourquoi les deux trajets sont-ils plus longs ?
+<span class="tag">sur machine</span>  Ouvrir une carte en ligne (Géoportail ou `openstreetmap.org`). Calculer l’**itinéraire** entre le **Musée océanographique** et le **stade Louis-II**, à Monaco, **à pied**, puis **en voiture** : relever chaque fois la **distance** et la **durée** proposées. Pourquoi les deux trajets ne sont-ils pas les mêmes ?
 
 ??? pouce "Coup de pouce"
 
-    Sur OpenStreetMap, un clic droit sur la carte permet d’afficher l’adresse et les coordonnées d’un point ; le bouton d’itinéraire (les flèches) calcule le trajet, et le mode de déplacement se choisit dans sa fenêtre. Pour comparer deux positions, relisez la définition de la latitude et de la longitude.
+    Sur OpenStreetMap, le bouton d’itinéraire (les flèches) calcule le trajet, et le mode de déplacement se choisit dans sa fenêtre. Demandez-vous quels passages un piéton peut emprunter et pas une voiture.
 
 ??? corrige "Corrigé"
 
-    Relevés sur machine : les valeurs varient un peu selon le point cliqué et l’application.
-
-    1.  Environ $(43{,}731\,;\ 7{,}425)$ pour le Musée océanographique, sur le Rocher, et $(43{,}727\,;\ 7{,}415)$ pour le stade Louis-II, à Fontvieille. Le musée a la plus grande latitude *et* la plus grande longitude : il est à la fois un peu plus au **nord** et plus à l’**est**.
-
-    2.  L’application calcule un plus court chemin dans un **graphe** qui dépend du mode de déplacement : à pied, elle peut emprunter escaliers, ascenseurs publics et rues piétonnes, interdits aux voitures ; en voiture, elle doit suivre les rues ouvertes à la circulation et respecter les sens interdits. Les deux trajets, leurs longueurs et surtout leurs durées (la vitesse n’est pas la même) diffèrent donc.
-
-    3.  À vol d’oiseau, les deux lieux sont à un peu moins d’un kilomètre. C’est la ligne droite, alors que les deux trajets suivent les rues, leurs lacets et les escaliers : ils sont forcément plus longs.
+    Relevés sur machine : les valeurs varient selon l’application. L’application calcule un plus court chemin dans un **graphe** qui dépend du mode de déplacement : à pied, elle peut emprunter escaliers, ascenseurs publics et rues piétonnes, interdits aux voitures ; en voiture, elle doit suivre les rues ouvertes à la circulation et respecter les sens interdits. Les deux trajets, leurs longueurs et surtout leurs durées (la vitesse n’est pas la même) diffèrent donc.
 
 ### GNSS et vie privée
 

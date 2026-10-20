@@ -150,17 +150,21 @@ Pourquoi tout intégrer sur une puce plutôt que garder une carte mère modulair
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[7](exercices.md#ex-14-7) et [8](exercices.md#ex-14-8)** (le prix de l’intégration ; un microcontrôleur dans la voiture)
 
-## Ouverture et liens avec les autres chapitres
+## Ouverture
 
 - **L’informatique invisible.** SoC et microcontrôleurs ont fait naître l’**Internet des objets** (*Internet of Things*, IoT) : montres, ampoules, thermostats, voitures, capteurs agricoles… **des dizaines de milliards** d’objets à puce, souvent connectés. Cette révolution silencieuse pose des questions de **sécurité** (chaque objet est une porte d’entrée) et de **vie privée** (chaque objet est un capteur).
-
-- **Ce qu’il réutilise** : le modèle de von Neumann de 1<sup>re</sup> ; et les **processus** (chapitre 4) : un SoC fait tourner un système d’exploitation complet, qui ordonnance ses processus sur plusieurs cœurs, alors que le microcontrôleur exécute en général un seul programme, sans OS complet.
-
-- **Déjà croisé** : les modules Wi-Fi, Bluetooth et modem relient chaque objet aux **réseaux** (chapitre 9) ; chaque objet connecté devient une machine d’Internet à protéger, d’où le module de **chiffrement** AES intégré à la puce (chapitre 10).
 
 <span id="cours-14-14" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercice **[14](exercices.md#ex-14-14)** (l’informatique invisible)
+
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
+
+    - **Ce qu’il réutilise :** le modèle de von Neumann, vu dans *Architecture des ordinateurs et systèmes d’exploitation* (Première), et les processus (*Processus et ordonnancement*), ordonnancés ici sur plusieurs cœurs.
+
+    - **Déjà croisé :** les modules Wi-Fi, Bluetooth et modem relient chaque objet aux *Réseaux*.
+
+    - **Pour aller plus loin :** chaque objet connecté est une porte d’entrée, d’où le module AES de la puce (*Cryptographie*).
 
 ## Bilan — la carte mémoire
 

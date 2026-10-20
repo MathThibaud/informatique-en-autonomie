@@ -347,15 +347,9 @@ Tous ces exemples partagent la même ossature. C’est elle qu’il faut savoir 
 
     **Gloutons, diviser-pour-régner, programmation dynamique : ne pas confondre.** Le *glouton* fait un choix définitif à chaque étape (rapide, mais parfois faux). *Diviser pour régner* découpe en sous-problèmes **indépendants** (comme le tri fusion : les deux moitiés n’ont rien en commun). La *programmation dynamique* s’attaque au cas où les sous-problèmes **se chevauchent** : c’est précisément ce chevauchement qui rend la mémoire payante.
 
-## Ouverture et liens avec les autres chapitres
+## Ouverture
 
 La programmation dynamique découpe toujours en sous-problèmes, mais quand ils se répètent, elle **mémorise** leurs résultats : elle échange du **temps** contre de la **mémoire**.
-
-- **Ce qu’il réutilise** : la **récursivité** (chapitre 1, où Fibonacci naïf était déjà exponentiel) et **diviser pour régner** (chapitre 7), prolongé lorsque les sous-problèmes se recouvrent ; le **rendu de monnaie**, résolu de façon gloutonne en 1<sup>re</sup>, trouve ici sa version toujours optimale.
-
-- **Déjà croisé** : l’algorithme de Bellman-Ford, sur lequel repose le protocole RIP (chapitre 9), est lui-même un algorithme de programmation dynamique.
-
-- **Ouverture.** Le chapitre suivant, *Recherche textuelle*, retrouvera l’idée « dépenser de la mémoire pour gagner du temps » avec une table de prétraitement ; il y cherchera un motif *exact*, quand la plus longue sous-séquence commune cherche une ressemblance.
 
 - Au **bac**, on vous demandera surtout d’écrire une **relation de récurrence**, de compléter une version **mémoïsée** ou une version **tabulée** (remplissage d’un tableau), et de comparer avec un algorithme **glouton**.
 
@@ -366,6 +360,14 @@ La programmation dynamique est née dans les années 1950 sous la plume du math�
 Et le mot « dynamique » ? Bellman a raconté l’avoir choisi… par ruse. Son financeur, le secrétaire à la Défense Charles Wilson, « avait une peur et une haine viscérales du mot *recherche* ». Pour faire accepter ses travaux de mathématiques, Bellman cherchait un nom qui sonne concret, impossible à critiquer : « dynamique » avait une allure décidée, positive, et « il était impossible d’employer ce mot dans un sens péjoratif ». La discipline la plus élégante de l’algorithmique doit donc son nom à une opération de camouflage administratif !
 
 Derrière l’anecdote, une idée profonde : le **principe d’optimalité** de Bellman — *une politique optimale est faite de sous-décisions elles-mêmes optimales* — est exactement la « sous-structure optimale » de notre recette. On la retrouve aujourd’hui partout : dans les GPS, la reconnaissance vocale, l’alignement de séquences d’ADN, et jusque dans l’apprentissage par renforcement des IA qui jouent aux échecs ou au go.
+
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
+
+    - **Ce qu’il réutilise :** la *Récursivité* (Fibonacci naïf, exponentiel) et *Diviser pour régner*, prolongé quand les sous-problèmes se recouvrent : la **mémoïsation** échange du temps contre de la mémoire.
+
+    - **Un écho :** le rendu de monnaie, résolu en glouton dans *Les algorithmes gloutons* (Première), trouve ici sa version toujours optimale.
+
+    - **Pour aller plus loin :** la *Recherche textuelle* reprendra l’idée « mémoire contre temps » pour chercher un motif exact.
 
 ## Bilan — la carte mémoire
 

@@ -622,19 +622,19 @@ False
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-08-9) à [12](exercices.md#ex-08-12)** (parcours ; chemins, connexité) et **[20](exercices.md#ex-08-20)** (parcours à la main en série) ; pour les cycles orientés, voir aussi l’exercice type bac 14 (questions 4 et 5)
 
-## Ouverture et liens avec les autres chapitres
-
-- **Ce qu’il réutilise** : les **files** et les **piles** (chapitre 3) font les deux parcours, la **récursivité** (chapitre 1) écrit le parcours en profondeur, la classe `Graphe` vient de la **programmation objet** (chapitre 2) ; un **arbre** (chapitre 5) est un graphe connexe sans cycle, parcouru avec les mêmes outils.
-
-- **Déjà croisé** : le graphe d’attente des **processus** (chapitre 4) est un graphe orienté, où un cycle signale un interblocage ; le critère du sommet « en cours » permet enfin de le détecter.
-
-- **Ouverture.** Le plus court chemin pondéré (l’algorithme de Dijkstra du projet) sera au cœur du **routage** des paquets dans les **réseaux** (protocole OSPF, chapitre 9).
-
 !!! curieux "Pour les curieux (facultatif) — Un peu d’histoire… et beaucoup de génie"
 
     La théorie des graphes naît avec Euler et les ponts de Königsberg, en 1736 (§ I). Deux siècles plus tard, en **1956**, le Néerlandais **Edsger Dijkstra** cherche un joli exemple pour montrer les capacités d’un nouvel ordinateur. Assis à la **terrasse d’un café d’Amsterdam** avec sa fiancée, **sans papier ni crayon**, il conçoit *en vingt minutes* son fameux algorithme du plus court chemin — publié en 1959 dans un article de **trois pages**. « L’une des raisons pour lesquelles il est si élégant, dira-t-il, c’est que je l’ai conçu sans stylo. » Aujourd’hui, cet algorithme guide chacun de vos trajets GPS.
 
     Et l’histoire continue : en **1967**, le psychologue **Stanley Milgram** met en évidence le phénomène du « petit monde » — les fameux **six degrés de séparation** qui relieraient deux humains quelconques. En **1998**, deux étudiants, **Larry Page** et **Sergueï Brin**, modélisent le Web comme un gigantesque graphe orienté : leur algorithme **PageRank** deviendra… **Google**. Des ponts de Königsberg à votre moteur de recherche, c’est la même idée qui travaille : *ce qui compte, ce sont les relations*.
+
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
+
+    - **Ce qu’il réutilise :** la **file** (parcours en largeur) et la **pile** (parcours en profondeur) de *Structures linéaires : piles, files, listes chaînées* ; la *Récursivité* pour le parcours en profondeur ; la classe `Graphe` (*Programmation orientée objet et paradigmes*).
+
+    - **Déjà croisé :** un arbre est un graphe connexe sans cycle (*Arbres*) ; un cycle dans le graphe d’attente signale un interblocage (*Processus et ordonnancement*).
+
+    - **Pour aller plus loin :** l’algorithme de Dijkstra sera au cœur du routage OSPF (*Réseaux*).
 
 ## Bilan — la carte mémoire
 

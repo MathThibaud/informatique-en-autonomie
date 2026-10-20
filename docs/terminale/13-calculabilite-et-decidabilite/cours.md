@@ -304,15 +304,9 @@ Conséquence spectaculaire : si l’on trouvait un jour un algorithme polynomia
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-13-10) à [12](exercices.md#ex-13-12)** (P versus NP)
 
-## Ouverture et liens avec les autres chapitres
+## Ouverture
 
 Ce chapitre prend du recul sur toute l’année : chaque programme écrit depuis le chapitre 1 est une donnée qu’un autre programme peut lire, et certaines questions sur ces programmes n’auront jamais de réponse automatique.
-
-- **Ce qu’il réutilise** : la **terminaison** étudiée dès la récursivité (chapitre 1 : condition d’arrêt, variant) se prouve programme par programme ; le problème de l’arrêt dit qu’aucun programme ne peut le faire pour tous. Traiter un programme comme une donnée, c’est le quotidien de l’**interpréteur** et du **système d’exploitation**, qui charge et lance les programmes (chapitre 4).
-
-- **Déjà croisé** : un antivirus cherche des signatures connues (recherche textuelle, chapitre 12) ; le théorème de Rice explique pourquoi il ne pourra jamais garantir de tout détecter.
-
-- La question P versus NP <span class="horsprog">au-delà du programme</span> prolonge la notion de **coût** : le plus court chemin dans un **graphe** (chapitre 8) se calcule vite, le voyageur de commerce semble ne pas le pouvoir, et la sécurité de **RSA** (chapitre 10) parie que factoriser reste difficile.
 
 - Au **bac**, on vous demandera surtout d’expliquer qu’un programme est une **donnée**, de **dérouler** le raisonnement par l’absurde du problème de l’arrêt et de dire si une question sur des programmes est **décidable**.
 
@@ -331,6 +325,14 @@ Ce chapitre prend du recul sur toute l’année : chaque programme écrit depuis
 - **1971** — Stephen **Cook** (et, indépendamment, Leonid **Levin**) fondent la théorie de la **NP-complétude** : la question **P versus NP** est posée. Elle est toujours ouverte.
 
 *Épilogue : Turing, persécuté pour son homosexualité, meurt en 1954 ; il sera réhabilité, et son nom donné à la plus haute récompense de l’informatique, le **prix Turing** — le « Nobel » de la discipline.*
+
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
+
+    - **Ce qu’il réutilise :** la condition d’arrêt et le variant de la *Récursivité* ; le système qui charge et lance les programmes (*Processus et ordonnancement*).
+
+    - **Déjà croisé :** l’antivirus de la *Recherche textuelle* : le théorème de Rice explique pourquoi il ne peut tout détecter.
+
+    - **Pour aller plus loin :** P versus NP : le plus court chemin (*Graphes*) se calcule vite, factoriser semble difficile, et la sécurité de RSA (*Cryptographie*) en dépend.
 
 ## Bilan — la carte mémoire
 

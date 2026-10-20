@@ -77,23 +77,9 @@
     **c. Vrai.** Sans filtre coloré, chaque photosite ne mesurerait qu’une intensité lumineuse : on obtiendrait une image en **niveaux de gris**.  
     **d. Vrai.** Plus un photosite reçoit de lumière, plus la valeur numérique produite est **grande** (proche de $255$).
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Expliquer à un camarade <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-2 }
-
-<span class="tag">sur papier</span>  Un camarade photographie une affiche entièrement **rouge**. En trois ou quatre lignes, lui expliquer ce que mesurent les photosites placés derrière un filtre rouge, puis ceux placés derrière un filtre vert ou bleu, et quels nombres ils produisent. Employer les mots : *photosite*, *lumière*, *nombre*, *filtre de Bayer*.
-
-??? pouce "Coup de pouce"
-
-    Suivez le trajet de la lumière rouge : quels petits filtres la laissent passer jusqu’au photosite, et lesquels l’arrêtent ? Relisez ensuite la définition du photosite : quel lien entre la quantité de lumière reçue et le nombre produit ?
-
-??? corrige "Corrigé"
-
-    *Exemple.* Devant les **photosites**, le **filtre de Bayer** place de petits filtres rouges, verts ou bleus. L’affiche renvoie de la **lumière** rouge : elle traverse les filtres rouges, donc les photosites placés derrière en reçoivent beaucoup et produisent un **grand nombre**. Les filtres verts et bleus arrêtent cette lumière rouge : leurs photosites n’en reçoivent presque pas et produisent un **nombre proche de zéro**. L’appareil en déduit que chaque pixel est rouge, avec un code proche de $(255, 0, 0)$.
-
-    <span class="erreurfreq">▷ Erreur fréquente.</span> Croire qu’un photosite « voit » les couleurs : il ne mesure qu’une quantité de lumière, celle que laisse passer *son* petit filtre. C’est la couleur de ce filtre, connue d’avance, qui permet ensuite à l’appareil de savoir à quelle couleur correspond chaque nombre.
-
 ### Le pixel et le codage RVB
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Nommer la couleur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-3 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Nommer la couleur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-2 }
 
 <span class="essentiel">• essentiel</span>
 
@@ -109,7 +95,7 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
 
     $(255,0,0)$ : **rouge** ; $(0,0,0)$ : **noir** ; $(255,255,255)$ : **blanc** ; $(0,255,0)$ : **vert** ; $(255,255,0)$ : **jaune** (rouge $+$ vert) ; $(40,40,40)$ : un **gris foncé** (les trois canaux égaux et faibles).
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Coder une couleur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-4 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Coder une couleur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-3 }
 
 <span class="tag">sur papier</span>  Donner un code RVB plausible pour : un **gris clair**, du **cyan** (vert + bleu), un **bleu très sombre**, un **vert moyen** (le vert seul, à moitié de sa force), de l’**orange** (beaucoup de rouge, un peu moins de vert), un **rose pâle** (du rouge éclairci par du blanc).
 
@@ -121,7 +107,7 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
 
     *Exemples plausibles.* Gris clair $(200,200,200)$ (trois canaux égaux et assez grands) ; cyan $(0,255,255)$ (vert $+$ bleu) ; bleu très sombre $(0,0,60)$ ; vert moyen $(0,128,0)$ ; orange $(255,140,0)$ ; rose pâle $(255,200,200)$ : le rouge reste au maximum, et le vert et le bleu, égaux, sont montés pour « blanchir » la couleur (avec $255$ partout, on obtiendrait du blanc).
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Combien de couleurs ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-5 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Combien de couleurs ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-4 }
 
 <span class="essentiel">• essentiel</span>
 
@@ -144,7 +130,7 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
 
 ### Définition, résolution et poids
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Compter les pixels <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-6 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Compter les pixels <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-5 }
 
 <span class="essentiel">• essentiel</span>
 
@@ -163,7 +149,7 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
     **1.** $1920 \times 1080 = \mathbf{2\,073\,600}$ pixels, soit environ **2 millions** (2 mégapixels).  
     **2.** Poids brut $= 3 \text{ octets} \times 2\,073\,600 = 6\,220\,800$ octets $\approx \mathbf{6{,}2}$ **Mo**.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Doubler la définition <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-7 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Doubler la définition <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-6 }
 
 <span class="tag">sur papier</span>  L’image A a pour définition $800 \times 600$ ; l’image B, la même scène photographiée en « double définition », mesure $1600 \times 1200$.
 
@@ -185,7 +171,7 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Répondre « deux fois plus de pixels » parce que la définition « double » : la largeur double *et* la hauteur double, donc le nombre de pixels est multiplié par $2 \times 2 = 4$.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Résolution d’une impression <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-8 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Résolution d’une impression <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-7 }
 
 <span class="essentiel">• essentiel</span>
 
@@ -206,7 +192,7 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Diviser les pixels par la largeur en *centimètres* : $1500 \div 12{,}7 \approx 118$. On obtient des pixels par centimètre, pas des pixels par pouce ; il faut d’abord convertir en pouces.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 9</span> — Imprimer en grand <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-9 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 8</span> — Imprimer en grand <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-8 }
 
 <span class="duree">≈ 15 min</span>
 
@@ -229,7 +215,7 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
     **1.** À $300$ ppp, chaque pouce imprimé utilise $300$ pixels. Largeur : $4000 \div 300 \approx 13{,}3$ pouces, soit $13{,}3 \times 2{,}54 \approx \mathbf{34}$ **cm**. Hauteur : $3000 \div 300 = 10$ pouces, soit $\mathbf{25{,}4}$ **cm**. La plus grande « belle » impression mesure donc environ $\mathbf{34 \times 25}$ **cm**.  
     **2.** $60$ cm $= 60 \div 2{,}54 \approx 23{,}6$ pouces, et $4000 \div 23{,}6 \approx \mathbf{170}$ **ppp**. C’est nettement moins que $300$ ppp : ce n’est pas une « belle » impression au sens strict. Mais une affiche se regarde **de loin** : à quelques mètres, l’œil ne distingue plus les pixels, et $170$ ppp suffisent largement.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Compression <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-10 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Compression <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-9 }
 
 <span class="tag">sur papier</span>  Une photo $4000 \times 3000$ pèse, en réalité, $4$ Mo sur la carte mémoire, alors que son poids « brut » est bien plus grand. Calculer le poids brut, puis expliquer d’où vient la différence.
 
@@ -243,7 +229,7 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
 
 ### Modifier une image par programme (PIL)
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Lire un pixel <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-11 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Lire un pixel <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-10 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  À l’aide de l’image `terre.jpg` du cours (« The Blue Marble »), écrire un programme qui affiche les trois canaux R, V, B du pixel de coordonnées $(120, 200)$.
 
@@ -262,7 +248,7 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
 
     *`getpixel((x, y))` renvoie le triplet RVB du pixel ; on l’affiche.*
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Que fait ce programme ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-12 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Que fait ce programme ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-11 }
 
 <span class="tag">sur papier</span>  On considère le programme suivant, appliqué à une image de $500 \times 500$ :
 
@@ -289,7 +275,7 @@ img.show()
     **1.** Pour chaque pixel, il lit ses valeurs $(r, v, b)$ puis les réécrit en **mettant le rouge à $0$** : $(0, v, b)$. Il **supprime la composante rouge** de toute l’image.  
     **2.** L’image perd tout son rouge : elle **tire vers le cyan** (bleu-vert). Sur `terre.jpg`, les tons chauds disparaissent et l’image paraît plus froide et bleutée.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Le négatif <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-13 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Le négatif <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-12 }
 
 <span class="essentiel">• essentiel</span>
 
@@ -318,7 +304,7 @@ img.show()
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `range(largeur / 2)` : la division `/` donne un nombre à virgule (`250.0`), que `range` refuse (`TypeError`). Il faut la division entière `//`.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Éclaircir l’image <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-14 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Éclaircir l’image <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-13 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui **éclaircit** `terre.jpg` en ajoutant $60$ à chacun des trois canaux de chaque pixel. Attention, un canal ne peut pas dépasser $255$ : on écrira par exemple `min(255, r + 60)`, qui vaut le plus petit des deux nombres. Que deviennent les zones déjà très claires ?
 
@@ -343,7 +329,7 @@ img.show()
 
     *Les zones déjà très claires (canaux proches de $255$) sont bloquées à $255$ : elles deviennent blanches et leurs détails disparaissent (on dit que l’image est « brûlée »). Le fond noir de l’espace, lui, devient gris foncé (par exemple $(5, 3, 6)$ devient $(65, 63, 66)$).*
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 15</span> — Niveaux de gris <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-15 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Niveaux de gris <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-14 }
 
 <span class="duree">≈ 15 min</span>
 
@@ -380,7 +366,7 @@ img.show()
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Oublier les parenthèses : `m = 3 * r + 6 * v + b // 10` ne divise que `b` par $10$ (la division passe avant l’addition). Un test sur un pixel connu, par exemple $(90, 90, 90)$, montre l’erreur : on trouve $819$ au lieu de $90$, une valeur impossible pour un canal, qui ne dépasse jamais $255$.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 16</span> — Le miroir <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-16 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 15</span> — Le miroir <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-15 }
 
 <span class="duree">≈ 20 min</span>
 
@@ -418,7 +404,7 @@ img.show()
 
 ### Métadonnées et vie privée
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 17</span> — Les données cachées <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-17 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 16</span> — Les données cachées <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-16 }
 
 <span class="essentiel">• essentiel</span>
 
@@ -440,7 +426,7 @@ img.show()
     **2.** Si une photo publiée contient les **coordonnées GPS**, n’importe qui peut savoir **où** (et quand) elle a été prise : domicile, école, lieux fréquentés. C’est une atteinte à la **vie privée** et à la sécurité.  
     **3.** Précaution : **désactiver la géolocalisation** de l’appareil photo, ou **supprimer les métadonnées** (EXIF) de la photo avant de la partager.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 18</span> — Une photo est-elle une preuve ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-18 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 17</span> — Une photo est-elle une preuve ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-17 }
 
 <span class="tag">sur papier</span>  « Puisque c’est une photo, c’est forcément vrai. » Discuter cette affirmation en une ou deux phrases (on pourra parler de retouche, de filtres et d’images générées par IA).
 
@@ -454,7 +440,7 @@ img.show()
 
 ### Critiquer une réponse d’IA
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Poids et résolution selon un assistant <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-03-19 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Poids et résolution selon un assistant <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-03-18 }
 
 <span class="tag">sur papier</span>  Un élève a demandé à un assistant d’IA : « Mon téléphone prend des photos de $6000 \times 4000$ pixels. Combien pèsent-elles, et puis-je les imprimer en $30 \times 20$ cm ? » Voici la réponse obtenue :
 

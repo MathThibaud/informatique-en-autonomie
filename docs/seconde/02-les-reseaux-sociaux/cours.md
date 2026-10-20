@@ -350,7 +350,7 @@ Un fil infini, des vidéos qui s’enchaînent toutes seules… Tout cela circu
 
     - **Juste après :** une photo publiée peut trahir, par des informations cachées dans son fichier, le lieu où elle a été prise (chapitre *Photographie numérique*).
 
-    - **Plus tard :** le même **graphe** servira à calculer un itinéraire (chapitre *Localisation*), et vos publications, des **données personnelles**, seront rangées dans d’immenses **tables** (chapitre *Les données structurées et leur traitement*).
+    - **Plus tard :** le même **graphe** servira à calculer un itinéraire (chapitre *Localisation, cartographie et mobilité*), et vos publications, des **données personnelles**, seront rangées dans d’immenses **tables** (chapitre *Les données structurées et leur traitement*).
 
     - **Plus loin :** en spécialité NSI de Terminale, on parcourt des graphes et on y calcule des distances par programme.
 

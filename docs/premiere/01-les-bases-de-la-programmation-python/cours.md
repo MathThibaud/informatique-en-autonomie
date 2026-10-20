@@ -239,7 +239,20 @@ True
 '***'
 ```
 
-Si `mot` a `n` caractères, les positions vont de `0` à `n - 1` : `mot[n]` provoque une erreur. On verra avec la boucle `for` comment parcourir une chaîne caractère par caractère.
+Si `mot` a `n` caractères, les positions vont de `0` à `n - 1` : `mot[n]` provoque une erreur.
+
+!!! remarque "Remarque — Compter depuis la fin : les positions négatives"
+
+    Python accepte aussi des positions **négatives**, qui se comptent **à partir de la fin** : `mot[-1]` est le dernier caractère, `mot[-2]` l’avant-dernier, etc. Ainsi `mot[-1]` est un raccourci pour `mot[len(mot) - 1]`.
+
+    | caractère         | `r`  | `a`  | `d`  | `a`  | `r`  |
+    |:------------------|:----:|:----:|:----:|:----:|:----:|
+    | position          | `0`  | `1`  | `2`  | `3`  | `4`  |
+    | position négative | `-5` | `-4` | `-3` | `-2` | `-1` |
+
+    Sur un mot vide (`""`), `mot[-1]` provoque une erreur, comme `mot[0]` : il n’y a pas de dernier caractère.
+
+On verra avec la boucle `for` comment parcourir une chaîne caractère par caractère.
 
 ### Bien nommer ses variables
 

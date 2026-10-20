@@ -308,17 +308,21 @@ Aujourd’hui, le petit cadenas de votre navigateur signifie **HTTPS** : le traf
 
 <span class="afaire">▶ Exercices d'application :</span> exercice **[11](exercices.md#ex-10-11)** (le cadenas HTTPS du navigateur)
 
-## Ouverture et liens avec les autres chapitres
+## Ouverture
 
 La cryptographie avance avec ses attaquants : chaque progrès du calcul oblige à revoir les tailles de clés et les algorithmes.
 
-- **Ce qu’il réutilise** : les **réseaux** (chapitre 9), où un paquet traverse des routeurs inconnus et peut être intercepté. HTTPS chiffre le message de la couche application (HTTP) avant qu’il ne descende les couches TCP/IP : les routeurs acheminent les paquets sans pouvoir en lire le contenu.
-
 - **Une course sans fin.** Les clés grandissent avec la puissance de calcul : un $n$ de $512$ bits a été factorisé en 1999, et l’on recommande aujourd’hui au moins $2\,048$ bits pour RSA ; contre l’ordinateur quantique, des algorithmes dits **post-quantiques** sont déjà normalisés <span class="horsprog">au-delà du programme</span>.
 
-- **Ouverture.** La sécurité de RSA est une question de **coût** : factoriser semble demander un temps exponentiel, ce qui la relie à la question « P versus NP », que l’on évoquera au chapitre 13 ; et les puces de nos téléphones intègrent un module dédié au chiffrement AES (chapitre 14, *systèmes sur puce*).
-
 - Au **bac**, on vous demandera surtout de **programmer** ou **dérouler** un chiffrement simple (César, Vigenère, `XOR`), de distinguer chiffrement **symétrique** et **asymétrique**, et d’expliquer le rôle de chacun dans **HTTPS**.
+
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
+
+    - **Ce qu’il réutilise :** les *Réseaux* : un paquet traverse des routeurs inconnus ; HTTPS chiffre le message avant qu’il ne descende les couches TCP/IP.
+
+    - **Une question de coût :** la sécurité de RSA parie que factoriser reste difficile ; vous relierez cela à « P versus NP » en *Calculabilité et décidabilité*.
+
+    - **Pour aller plus loin :** vous retrouverez le module AES intégré aux puces en *Systèmes sur puce et informatique embarquée*.
 
 ## Bilan — la carte mémoire
 

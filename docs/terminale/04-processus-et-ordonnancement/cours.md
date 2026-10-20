@@ -271,15 +271,9 @@ Cela change peu ce que nous avons appris : sur *chaque* cœur, les états, le qu
 
 Conséquence pour qui programme : pour tirer parti de $N$ cœurs, un programme doit être **découpé pour s’exécuter en parallèle** (en plusieurs *fils d’exécution*, ou *threads*) ; sinon un seul cœur travaille pendant que les autres se tournent les pouces. C’est pourquoi « savoir paralléliser » est devenu essentiel. Aujourd’hui, un simple téléphone compte couramment $6$ à $8$ cœurs, un ordinateur portable de $8$ à $16$.
 
-## Ouverture et liens avec les autres chapitres
+## Ouverture
 
 Les processus ne sont pas un monde à part : ce chapitre réutilise les outils des chapitres précédents et en annonce d’autres.
-
-- **Ce qu’il réutilise** : l’ordonnanceur range les processus prêts dans une **file** (chapitre 3) ; le tourniquet n’est rien d’autre qu’un enfiler/défiler répété.
-
-- **Ce qui servira ailleurs** : la relation père/fils créée par `fork` forme un **arbre** (chapitre 5) ; le graphe d’attente est un premier **graphe orienté**, et chercher un interblocage, c’est chercher un **cycle**, ce qu’on apprendra à programmer au chapitre 8 (*Graphes*).
-
-- **Ouverture.** On verra au chapitre 14 (*systèmes sur puce*) que le système d’un téléphone ordonnance ses processus sur les cœurs d’une seule puce, alors qu’un microcontrôleur, en général sans système d’exploitation complet, n’exécute qu’un seul programme.
 
 - Au **bac**, on vous demandera surtout de **dérouler** un ordonnancement (chronogramme, temps d’attente), de suivre les **états** d’un processus, de lire une sortie de `ps`, et de **repérer** un interblocage dans une situation décrite.
 
@@ -296,6 +290,14 @@ Côté théorie, le Néerlandais **Edsger Dijkstra** (déjà croisé avec l’al
 
 ![](../img/04_hist_dijkstra.jpg){ .photo loading=lazy style="width:114px" }  
 Edsger W. Dijkstra
+
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
+
+    - **Ce qu’il réutilise :** la **file** (*Structures linéaires : piles, files, listes chaînées*) : le tourniquet n’est qu’un enfiler/défiler répété.
+
+    - **Ce qui en découle :** la relation père/fils de `fork` formera un arbre (*Arbres*) ; détecter un interblocage, c’est chercher un cycle, ce que vous programmerez en *Graphes*.
+
+    - **Pour aller plus loin :** vous verrez en *Systèmes sur puce et informatique embarquée* un téléphone ordonnancer ses processus sur les cœurs d’une seule puce.
 
 ## Bilan — la carte mémoire
 

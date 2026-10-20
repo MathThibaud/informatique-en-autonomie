@@ -250,7 +250,7 @@ Un objet connecté consomme un peu d’électricité… mais c’est surtout sa
 
 !!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    - **Déjà vu :** la boucle de commande s’écrit avec les `while` et `if` du chapitre *Les bases de Python*, et les données de l’objet voyagent en **paquets** sur **Internet**, grâce à une **adresse IP**.
+    - **Déjà vu :** la boucle de commande s’écrit avec les `while` et `if` du chapitre *Les bases de la programmation Python*, et les données de l’objet voyagent en **paquets** sur **Internet**, grâce à une **adresse IP**.
 
     - **Tout se rejoint :** le capteur d’image d’un appareil photo et le récepteur **GPS** sont aussi des **capteurs**, et les mesures envoyées dans le **nuage** sont souvent des **données personnelles** (chapitre *Les données structurées et leur traitement*).
 

@@ -231,7 +231,7 @@ Rappel des unités : 1 **ko** $=10^3$ o, 1 **Mo** $=10^6$, 1 **Go** $=10^9$, 1 
 
     - **Déjà vu :** le **Web** n’est qu’un des services d’Internet (une requête HTTP part en paquets, après une question au **DNS**) ; un réseau de routeurs se représente par un **graphe**, comme les amitiés d’un **réseau social**.
 
-    - **À venir :** au chapitre *Localisation*, le réseau routier sera lui aussi un graphe ; les **objets connectés** du dernier chapitre reçoivent une adresse IP, d’où le besoin d’**IPv6**.
+    - **À venir :** au chapitre *Localisation, cartographie et mobilité*, le réseau routier sera lui aussi un graphe ; les **objets connectés** du dernier chapitre reçoivent une adresse IP, d’où le besoin d’**IPv6**.
 
     - **Plus loin :** en spécialité NSI de Première, on étudie de plus près les protocoles qui fiabilisent la transmission, comme le **protocole du bit alterné**.
 

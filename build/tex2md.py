@@ -649,6 +649,8 @@ class Converter:
         s = sub_macro(s, 'retouractivite', 1, 0, lambda o, a, st:
                       '\n\n' + I('<span class="retouract">↺ Retour sur l\'activité.</span>') + ' ' + a[0] + '\n\n')
         s = sub_macro(s, 'renvoipage', 2, 0, lambda o, a, st: self.link(a[0].strip(), a[1]))
+        s = sub_macro(s, 'lienchapitre', 2, 0, lambda o, a, st: '\\emph{%s}' % a[1])
+        s = sub_macro(s, 'lienchap', 1, 0, lambda o, a, st: '\\emph{%s}' % a[0])
         s = sub_macro(s, 'fichesprerequis', 1, 0, lambda o, a, st:
                       ' (→ fiches de révision : %s)' % ', '.join(
                           'ch. %d' % int(x) for x in a[0].split(',') if x.strip().isdigit()))

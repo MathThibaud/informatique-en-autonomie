@@ -301,13 +301,9 @@ Le programme officiel est clair : au bac, **les tables de routage sont données*
 
 Juste au-dessus d’IP, la couche **Transport** offre deux services au choix. **TCP** garantit que *tout* arrive, *dans l’ordre*, sans perte (il numérote les paquets, les réordonne, redemande ceux qui manquent) : idéal pour un fichier ou une page web. **UDP** envoie sans garantie ni accusé de réception, mais **sans attendre** : idéal quand la vitesse prime sur la perfection (appel vidéo, jeu en ligne, où un paquet en retard est inutile de toute façon).
 
-## Ouverture et liens avec les autres chapitres
+## Ouverture
 
 Ce chapitre est l’application la plus directe du chapitre *Graphes* : un réseau de routeurs *est* un graphe, et le routage est une recherche de plus court chemin.
-
-- **Ce qu’il réutilise** : les **graphes** (chapitre 8) — RIP compte les arêtes d’un chemin, OSPF additionne leurs poids : deux métriques pour le même problème de **plus court chemin** ; de la 1<sup>re</sup>, les adresses IP et l’écriture binaire, et le **bit alterné** (chapitre « Le Web »), que prolongent les accusés de réception de TCP.
-
-- **Ouverture.** Un paquet traverse des routeurs inconnus et peut être lu en chemin : le chapitre suivant, *Cryptographie*, montrera comment HTTPS le protège. RIP s’appuie sur l’algorithme de Bellman-Ford, qui relève de la **programmation dynamique** (chapitre 11).
 
 - Au **bac**, on vous demandera surtout de manipuler des **adresses IP** (notation CIDR, appartenance à un réseau), de **lire** ou **compléter** une table de routage, de calculer des **coûts OSPF** et de **déterminer** la route suivie par un paquet selon RIP ou selon OSPF.
 
@@ -322,6 +318,14 @@ En France, **Louis Pouzin** conçoit à partir de 1971 le réseau **Cyclades**, 
 
 ![](../img/09_hist_pouzin.jpg){ .photo loading=lazy style="width:166px" }  
 Louis Pouzin, père de Cyclades
+
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
+
+    - **Ce qu’il réutilise :** les *Graphes* : RIP compte les sauts, OSPF additionne les coûts des liens (Dijkstra) pour trouver un plus court chemin.
+
+    - **De la Première :** les adresses IP, le binaire et le bit alterné, vu dans *Le Web : réseaux et interactions homme-machine* (Première), que prolongent les accusés de réception de TCP.
+
+    - **Pour aller plus loin :** un paquet peut être lu en chemin : vous verrez en *Cryptographie* comment HTTPS le protège.
 
 ## Bilan — la carte mémoire
 

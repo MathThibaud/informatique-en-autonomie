@@ -400,20 +400,20 @@ WHERE annee < 2005;
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[15](exercices.md#ex-06-15) et [16](exercices.md#ex-06-16)** (insérer, modifier, supprimer ; transactions et ACID)
 
-## Ouverture et liens avec les autres chapitres
-
-- **Ce qu’il réutilise** : un enregistrement ressemble à un **objet** (chapitre 2), ses colonnes jouant le rôle d’attributs, et une table rassemble des entités de même structure, comme les instances d’une classe. SQL est **déclaratif** : on décrit *ce que* l’on veut, pas *comment* l’obtenir — un autre **paradigme** que l’impératif.
-
-- **Déjà croisé** : les **index** qui font retrouver vite une ligne sont souvent des **arbres** de recherche (chapitre 5) ; les **transactions** règlent un problème de ressource partagée, comme entre les processus (chapitre 4).
-
-- **Ouverture.** Pour un réseau social, un **modèle de graphe** (chapitre 8) est parfois plus adapté que des tables ; et `LIKE` est une forme simple de la **recherche textuelle** (trouver un motif dans un texte), étudiée au chapitre 12.
-
 !!! curieux "Pour les curieux (facultatif) — Un peu d’histoire… et d’humour"
 
     Avant de ranger les données, il a fallu pouvoir les **retrouver vite**. Jusque dans les années 1950, elles dorment sur des cartes perforées ou des bandes magnétiques, qu’il faut dérouler du début. En **1956**, IBM commercialise le **premier disque dur**, l’**IBM 350** du système *RAMAC* : cinquante plateaux de 61 cm de diamètre pour… 5 millions de caractères (moins de 4 Mo), loués plus de $3\,000$ dollars par mois. Pour la première fois, on accède **directement** à n’importe quel enregistrement. Le modèle relationnel naît ensuite en **1970** sous la plume d’**Edgar F. Codd**, chez IBM — une idée si féconde qu’elle lui vaudra le prix **Turing** en 1981. Dans la foulée, **Donald Chamberlin** et **Raymond Boyce** conçoivent un langage pour l’interroger : *SEQUEL*, vite rebaptisé **SQL**. D’où l’éternelle querelle : faut-il prononcer « *ess-cue-elle* » ou « *sequel* » ? Un demi-siècle plus tard, personne n’a tranché — c’est la seule dispute plus vieille que celle des accolades. Codd et ses collègues cherchaient alors à gérer les **grandes masses de données** des entreprises (le prototype d’IBM s’appelait *System R*) ; depuis, SQL règne sans partage : les données de la planète, de votre banque à votre application de messagerie, s’expriment dans ce langage vieux d’un demi-siècle et jamais détrôné.
 
     ![](../img/06_hist_ibm_ramac.jpg){ .photo loading=lazy style="width:140px" }  
     Le mécanisme du disque IBM 350 (1956)
+
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
+
+    - **Ce qu’il réutilise :** un enregistrement ressemble à un objet, ses colonnes à des attributs (*Programmation orientée objet et paradigmes*) ; on prolonge *Les données en tables* (Première).
+
+    - **Déjà croisé :** les index sont souvent des arbres de recherche (*Arbres*) ; les transactions règlent un partage de ressource, comme en *Processus et ordonnancement*.
+
+    - **Pour aller plus loin :** un réseau social se modélisera parfois mieux par des *Graphes* ; `LIKE` annonce la *Recherche textuelle*.
 
 ## Bilan — la carte mémoire
 

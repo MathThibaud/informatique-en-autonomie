@@ -409,18 +409,6 @@ La récursivité produit naturellement les **fractales** : des figures qui se r�
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[25](exercices.md#ex-01-25) à [28](exercices.md#ex-01-28)** (dessins récursifs en Turtle)
 
-## Ouverture et liens avec les autres chapitres
-
-Ce chapitre est une **clé** pour toute la fin de l’année : on retrouve la récursivité dès qu’une structure ou une méthode est « faite de copies plus petites d’elle-même ».
-
-- **Ce qu’il réutilise** : les fonctions, les listes et les chaînes de 1<sup>re</sup>, et le raisonnement par récurrence des mathématiques.
-
-- **La pile d’exécution** sera étudiée pour elle-même au chapitre 3 (*structures linéaires*) : ce sera la structure de **pile**.
-
-- **Les arbres** (chapitre 5) sont des structures récursives : presque tout algorithme sur un arbre sera récursif (*ex.* bac Polynésie 2023, jour 2 : `maximum(abr)`). Le tri fusion de **diviser pour régner** (chapitre 7, *ex.* bac Liban 2023, jour 2) et le parcours en profondeur des **graphes** (chapitre 8) le seront aussi.
-
-- **Ouverture.** Les appels répétés de Fibonacci seront évités par la **programmation dynamique** (chapitre 11) ; le **retour sur trace** (on essaie, on revient en arrière au premier échec) se pratique dans le projet Sudoku ; enfin, savoir si *n’importe quel* programme atteint sa condition d’arrêt est impossible : ce sera le **problème de l’arrêt** (chapitre 13).
-
 !!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
 
     En **1883**, le mathématicien français **Édouard Lucas** publie, sous le pseudonyme de « N. Claus de Siam » (anagramme de « Lucas d’Amiens »), le casse-tête des **tours de Hanoï** : déplacer une pile de disques d’un piquet à un autre, un disque à la fois, sans jamais poser un disque sur un plus petit. La solution est récursive par nature : pour déplacer $n$ disques, on déplace les $n-1$ du dessus sur le piquet intermédiaire, puis le grand disque, puis à nouveau les $n-1$ disques par-dessus — soit $2^n-1$ déplacements. La récursivité n’entre dans les langages de programmation qu’en **1958–1960**, avec **Lisp**, créé par **John McCarthy** (qui a aussi forgé l’expression « intelligence artificielle ») : en Lisp, presque tout s’écrit par des fonctions récursives. Algol 60 l’adopte aussitôt, puis presque tous les langages, dont Python.
@@ -440,6 +428,14 @@ Ce chapitre est une **clé** pour toute la fin de l’année : on retrouve la r�
     - **compléter** l’appel récursif dans une fonction donnée ;
 
     - comparer une version **récursive** et une version **itérative**.
+
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
+
+    - **Ce qu’il réutilise :** les fonctions, les listes et les chaînes, vues dans *Les types construits* (Première), et le raisonnement par récurrence des mathématiques.
+
+    - **Ce qui en découle :** la pile d’exécution deviendra la structure de **pile** (*Structures linéaires : piles, files, listes chaînées*) ; vous écrirez récursivement les algorithmes sur les *Arbres*, le tri fusion de *Diviser pour régner* et le parcours en profondeur des *Graphes*.
+
+    - **Pour aller plus loin :** la *Programmation dynamique* évitera les appels répétés de Fibonacci ; et vous verrez en *Calculabilité et décidabilité* qu’aucun programme ne peut décider si *tout* programme s’arrête.
 
 ## Bilan — la carte mémoire
 

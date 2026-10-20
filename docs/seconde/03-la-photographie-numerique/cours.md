@@ -58,7 +58,7 @@ Filtre de Bayer : 1 photosite rouge, 1 bleu et *2 verts* par groupe de quatre.
 
 <span id="cours-03-1" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-03-1) et [2](exercices.md#ex-03-2)** (le capteur et la formation de l’image)
+<span class="afaire">▶ Exercices d'application :</span> exercice **[1](exercices.md#ex-03-1)** (le capteur et la formation de l’image)
 
 ## Le pixel et le codage des couleurs (RVB)
 
@@ -90,9 +90,9 @@ La synthèse additive : rouge + vert $=$ jaune, les trois ensemble $=$ blanc.
     Maintenant que vous savez coder une couleur, vous allez **fabriquer** des images de zéro : des drapeaux (Monaco, France, puis d’autres), en respectant les **proportions** et les **couleurs officielles**.  
     $\to$ voir le projet *« Dessiner des drapeaux avec Python »*, en fin de chapitre.
 
-<span id="cours-03-3" class="ancre"></span>
+<span id="cours-03-2" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-03-3) à [5](exercices.md#ex-03-5)** (le pixel et le codage RVB)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[2](exercices.md#ex-03-2) à [4](exercices.md#ex-03-4)** (le pixel et le codage RVB)
 
 ## Définition, résolution et poids d’une image
 
@@ -113,9 +113,9 @@ La synthèse additive : rouge + vert $=$ jaune, les trois ensemble $=$ blanc.
 
     3.  Calculer le poids « brut » d’une photo de définition $4000 \times 3000$ (en méga-octets ; $1$ Mo $\approx 10^{6}$ octets).
 
-<span id="cours-03-6" class="ancre"></span>
+<span id="cours-03-5" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-03-6) à [10](exercices.md#ex-03-10)** (définition, résolution, poids)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-03-5) à [9](exercices.md#ex-03-9)** (définition, résolution, poids)
 
 ## Modifier une image par programme (Python + PIL)
 
@@ -175,9 +175,9 @@ Avec un `if`, on peut ne modifier *que certains* pixels (par exemple selon leur 
     Vous appliquerez ces techniques à de vraies œuvres d’art (du domaine public) : changer la couleur du ciel de *La Nuit étoilée* de Van Gogh, ou celle d’un vêtement dans un portrait.  
     $\to$ voir le projet *« Retoucher un tableau célèbre en RVB »*, en fin de chapitre.
 
-<span id="cours-03-11" class="ancre"></span>
+<span id="cours-03-10" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[11](exercices.md#ex-03-11) à [16](exercices.md#ex-03-16)** (modifier une image en Python)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-03-10) à [15](exercices.md#ex-03-15)** (modifier une image en Python)
 
 ## Les métadonnées (EXIF) et la vie privée
 
@@ -225,9 +225,9 @@ Extrait de métadonnées EXIF (valeurs fictives). En rouge : les coordonnées GP
 
     2.  Expliquer en quoi la présence de coordonnées GPS dans une photo peut poser un **problème de vie privée**.
 
-<span id="cours-03-17" class="ancre"></span>
+<span id="cours-03-16" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[17](exercices.md#ex-03-17) et [18](exercices.md#ex-03-18)** (métadonnées EXIF et vie privée), exercice **[19](exercices.md#ex-03-19)** (critiquer une réponse d’IA)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[16](exercices.md#ex-03-16) et [17](exercices.md#ex-03-17)** (métadonnées EXIF et vie privée), exercice **[18](exercices.md#ex-03-18)** (critiquer une réponse d’IA)
 
 ## Les algorithmes dans nos appareils
 
@@ -247,9 +247,9 @@ La photo « parfaite » du smartphone n’est pas seulement captée : elle est *
 
 !!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    - **Déjà vu :** une photo est un tableau de nombres, que l’on parcourt et modifie avec les **boucles** et les **conditions** du chapitre *Les bases de Python*.
+    - **Déjà vu :** une photo est un tableau de nombres, que l’on parcourt et modifie avec les **boucles** et les **conditions** du chapitre *Les bases de la programmation Python*.
 
-    - **À venir :** les coordonnées des métadonnées viennent du récepteur **GPS** (chapitre *Localisation*), et le capteur d’image rejoindra les autres **capteurs** au chapitre *Informatique embarquée et objets connectés*.
+    - **À venir :** les coordonnées des métadonnées viennent du récepteur **GPS** (chapitre *Localisation, cartographie et mobilité*), et le capteur d’image rejoindra les autres **capteurs** au chapitre *Informatique embarquée et objets connectés*.
 
     - **Plus loin :** chaque valeur de 0 à 255 tient sur un octet, soit 8 **bits** (des 0 et des 1) ; l’écriture binaire s’étudie en spécialité NSI de Première.
 

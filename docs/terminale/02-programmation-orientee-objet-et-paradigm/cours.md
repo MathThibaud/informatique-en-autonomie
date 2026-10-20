@@ -556,17 +556,19 @@ On interroge alors : `?- fact(4, X).` et Prolog trouve `X = 24`.
 
 <span class="afaire">▶ Exercices d'application :</span> exercice **[15](exercices.md#ex-02-15)** (choisir le bon paradigme)
 
-## Ouverture et liens avec les autres chapitres
+## Ouverture
 
 La programmation objet n’est pas une curiosité isolée : elle servira à **implémenter les structures de données** de toute la fin de l’année.
 
-- **Ce qu’il réutilise** : les fonctions de 1<sup>re</sup> et la **récursivité** du chapitre 1 (la factorielle en OCaml, de style fonctionnel, est une définition récursive).
-
-- **Structures de données.** `Pile`, `File` et la `Cellule` d’une liste chaînée (chapitre 3) s’écriront comme des classes offrant des méthodes, l’implémentation restant cachée ; de même le `Noeud` d’un **arbre** (chapitre 5 ; le BO le dit : « l’exemple des arbres permet d’illustrer la programmation par classe ») et les **graphes** (chapitre 8).
-
 - **Au bac**, on vous demandera surtout de **lire** une classe donnée, d’en **lister les attributs** et leur type, de **compléter** ou **écrire** une méthode, de **créer des instances**, et de **respecter l’encapsulation**.
 
-- **Ouverture.** Une table de **base de données** (chapitre 6) ressemblera à une collection d’objets, chaque colonne jouant le rôle d’un attribut ; SQL sera **déclaratif** : comme en Prolog, on y décrira le résultat voulu plutôt que la façon de l’obtenir.
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
+
+    - **Ce qu’il réutilise :** les fonctions de Première et la *Récursivité* (la factorielle en OCaml est une définition récursive).
+
+    - **Ce qui en découle :** `Pile`, `File` et `Cellule` (*Structures linéaires : piles, files, listes chaînées*), le `Noeud` des *Arbres* et la classe des *Graphes* s’écriront comme des classes.
+
+    - **Pour aller plus loin :** une table de *Bases de données et SQL* ressemblera à une collection d’objets ; SQL sera **déclaratif**, comme Prolog.
 
 ## Bilan — la carte mémoire
 

@@ -306,16 +306,6 @@ Le BO cite la **rotation d’un quart de tour d’une image** carrée. On décou
 
 ![](../figures/78eec9de9f0bc863.svg){ .tikz loading=lazy }
 
-## Ouverture et liens avec les autres chapitres
-
-« Diviser pour régner » est une **clé** de la fin d’année et un grand classique de l’épreuve.
-
-- **Ce qu’il réutilise** : la **récursivité** (chapitre 1 : condition d’arrêt, variant, arbre des appels), les tris par insertion et par sélection de 1<sup>re</sup>, de coût $n^2$, et la recherche dans un **arbre binaire de recherche** (chapitre 5), qui suit la même idée que la dichotomie.
-
-- Face à un problème d’optimisation, diviser pour régner est une stratégie parmi d’autres, à comparer aux **algorithmes gloutons** de 1<sup>re</sup>.
-
-- **Ouverture.** Quand les sous-problèmes se **répètent**, on ne recoupera plus : on **mémorisera** — ce sera la **programmation dynamique** (chapitre 11).
-
 !!! encadre "Au bac — on vous demandera surtout de…"
 
     - **identifier** les trois temps (diviser / régner / combiner) sur un algorithme donné ;
@@ -327,6 +317,14 @@ Le BO cite la **rotation d’un quart de tour d’une image** carrée. On décou
     - **justifier** la terminaison (variant = taille du tableau) et **comparer** les coûts $n^2$, $n\log_2 n$, $\log_2 n$.
 
     Exemples de sujets : *tri fusion* (Liban 2023, jour 2), *recherche dichotomique* récurrente sur de nombreux sujets.
+
+!!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
+
+    - **Ce qu’il réutilise :** la *Récursivité* (condition d’arrêt, arbre des appels) et les tris de coût $n^2$ vus dans *Les algorithmes de tri* (Première).
+
+    - **Un écho :** la dichotomie, vue dans *La recherche dichotomique* (Première), et la recherche dans un ABR (*Arbres*) suivent déjà cette idée ; comparez-la à la stratégie gloutonne vue dans *Les algorithmes gloutons* (Première).
+
+    - **Pour aller plus loin :** quand les sous-problèmes se répéteront, on mémorisera : ce sera la *Programmation dynamique*.
 
 ## Bilan — la carte mémoire
 
