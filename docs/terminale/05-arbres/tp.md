@@ -730,7 +730,7 @@ On part maintenant de la grille **vide**.
 
     - si c’est à MIN de jouer, c’est le **minimum** des valeurs de ses fils.
 
-    On écrit aussi « min-max », comme dans l’exercice 19 du chapitre (Puissance 4). La valeur de la racine est ce que MAX est **sûr** d’obtenir, quoi que fasse l’adversaire ; le bon coup est celui qui mène au fils de meilleure valeur. On suppose ainsi que l’adversaire joue parfaitement : c’est le pire cas, donc le plus prudent.
+    On écrit aussi « min-max », comme dans l’exercice 21 du chapitre (Puissance 4). La valeur de la racine est ce que MAX est **sûr** d’obtenir, quoi que fasse l’adversaire ; le bon coup est celui qui mène au fils de meilleure valeur. On suppose ainsi que l’adversaire joue parfaitement : c’est le pire cas, donc le plus prudent.
 
     ![](../figures/d605a26ba00d3c3a.svg){ .tikz loading=lazy }
 

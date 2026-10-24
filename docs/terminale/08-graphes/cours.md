@@ -620,7 +620,7 @@ False
 
 <span id="cours-08-9" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-08-9) à [12](exercices.md#ex-08-12)** (parcours ; chemins, connexité) et **[20](exercices.md#ex-08-20)** (parcours à la main en série) ; pour les cycles orientés, voir aussi l’exercice type bac 14 (questions 4 et 5)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-08-9) à [14](exercices.md#ex-08-14)** (parcours à la main et programmés ; l’ordre des voisins ; vrai ou faux parcours, arbre du parcours en largeur ; chemins, connexité) et **[22](exercices.md#ex-08-22)** (parcours à la main en série) ; pour les cycles orientés, voir aussi l’exercice type bac 16 (questions 4 et 5)
 
 !!! curieux "Pour les curieux (facultatif) — Un peu d’histoire… et beaucoup de génie"
 

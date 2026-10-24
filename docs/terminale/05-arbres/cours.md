@@ -211,7 +211,7 @@ def largeur(a):
 
 <span id="cours-05-3" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-05-3) à [5](exercices.md#ex-05-5) et [22](exercices.md#ex-05-22)** (les quatre parcours, en profondeur et en largeur ; parcours en série).
+<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-05-3) à [7](exercices.md#ex-05-7) et [24](exercices.md#ex-05-24)** (les quatre parcours ; un arbre irrégulier ; retrouver le parcours, retrouver l’arbre ; programmer les parcours en profondeur et en largeur ; parcours en série).
 
 ## Calculer sur un arbre : taille et hauteur
 
@@ -241,9 +241,9 @@ def hauteur(a):
 
     Chaque appel se ramène à des sous-arbres *strictement plus petits* : le cas de base (l’arbre vide) finit toujours par être atteint. La terminaison est garantie — comme pour toute belle récursion sur un arbre.
 
-<span id="cours-05-6" class="ancre"></span>
+<span id="cours-05-8" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-05-6) à [8](exercices.md#ex-05-8)** (taille, hauteur et nombre de feuilles, en récursif).
+<span class="afaire">▶ Exercices d'application :</span> exercices **[8](exercices.md#ex-05-8) à [10](exercices.md#ex-05-10)** (taille, hauteur et nombre de feuilles, en récursif).
 
 ## L’arbre binaire de recherche (ABR) : chercher et insérer vite
 
@@ -283,9 +283,9 @@ def recherche(a, x):
 
     La recherche coûte au plus **la hauteur** de l’arbre. Pour un ABR équilibré de $n$ valeurs, cela fait environ $\log_2(n)$ comparaisons : chercher parmi un **million** de valeurs ne demande qu’une **vingtaine** d’étapes ! C’est cette efficacité qui fait des arbres le cœur des **index de bases de données**. Petit bonus : un **parcours infixe** d’un ABR affiche ses valeurs **déjà triées**.
 
-<span id="cours-05-9" class="ancre"></span>
+<span id="cours-05-11" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[9](exercices.md#ex-05-9)** (rechercher dans un ABR).
+<span class="afaire">▶ Exercices d'application :</span> exercice **[11](exercices.md#ex-05-11)** (rechercher dans un ABR).
 
 ### Insérer une valeur dans un ABR
 
@@ -336,9 +336,9 @@ On obtient exactement l’ABR dessiné plus haut.
 
     Ce cours range une valeur **égale** au nœud dans le sous-arbre **droit**. Ce n’est qu’une convention : certains sujets de bac interdisent les doublons (on n’insère pas une valeur déjà présente, comme dans le TP proposé en fin de chapitre), d’autres les placent à gauche. Dans tous les cas, la recherche et l’insertion suivent le même principe ; il suffit de **lire la définition donnée** et de l’appliquer de façon cohérente.
 
-<span id="cours-05-10" class="ancre"></span>
+<span id="cours-05-12" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-05-10), [11](exercices.md#ex-05-11) et [23](exercices.md#ex-05-23)** (insérer à la main ; programmer l’insertion ; insertions en série).
+<span class="afaire">▶ Exercices d'application :</span> exercices **[12](exercices.md#ex-05-12), [13](exercices.md#ex-05-13) et [25](exercices.md#ex-05-25)** (insérer à la main ; programmer l’insertion ; insertions en série).
 
 !!! curieux "Pour les curieux (facultatif) — Un peu d’histoire… et de botanique"
 

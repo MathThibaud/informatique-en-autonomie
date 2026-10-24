@@ -97,7 +97,94 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire en préfixe `4, 2, 6, …`, niveau par niveau : c’est le parcours en largeur. En profondeur, on termine tout le sous-arbre gauche (`2, 1, 3`) avant de passer au droit.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Programmer les parcours en profondeur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-4 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Parcours d’un arbre irrégulier <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-4 }
+
+<span class="essentiel">• essentiel</span>
+
+L’arbre de l’exercice précédent était **complet** : tous ses niveaux étaient remplis. Celui-ci ne l’est pas : certains nœuds n’ont qu’un fils (à gauche ou à droite), et les branches n’ont pas toutes la même longueur.
+
+![](../figures/b257cf4fff5d697a.svg){ .tikz loading=lazy }
+
+1.  Donner l’ordre de visite des nœuds pour les parcours **préfixe**, **infixe**, **suffixe** et **en largeur**.
+
+2.  Le premier nœud visité par le parcours infixe est-il une feuille ? Et le dernier ?
+
+3.  Sur un arbre non vide **quelconque**, pour chacun des trois parcours en profondeur, le premier nœud visité est-il toujours une feuille ? Et le dernier ? Justifier.
+
+??? pouce "Coup de pouce"
+
+    Q1 : un nœud sans fils gauche (comme `K`) a un sous-arbre gauche **vide** : en infixe, on le visite donc tout de suite, puis on parcourt son sous-arbre droit. Avancer lentement, nœud par nœud, sans se fier à la position sur le dessin. Q3 : en préfixe, un nœud est-il visité avant ou après ses fils ? Et en suffixe ?
+
+??? corrige "Corrigé"
+
+    **1.**
+
+    - préfixe : `M, K, R, E, P, T, S, A, N`
+
+    - infixe : `K, E, R, P, M, S, N, A, T`
+
+    - suffixe : `E, P, R, K, N, A, S, T, M`
+
+    - largeur : `M, K, T, R, S, E, P, A, N`
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Commencer le parcours infixe par `E`, la première feuille rencontrée : `K` n’a pas de fils gauche, son sous-arbre gauche est vide, on le visite donc **tout de suite**, avant son sous-arbre droit. De même, `T` n’a pas de fils droit : il est visité juste après son sous-arbre gauche, en dernier.
+
+    **2.** Ni l’un ni l’autre. Le premier nœud visité en infixe est `K`, qui a un fils droit ; le dernier est `T`, qui a un fils gauche. En infixe, le premier nœud visité est celui que l’on atteint en descendant à gauche tant que c’est possible : il n’a pas de fils gauche, mais il peut avoir un fils droit.
+
+    **3.**
+
+    - **Préfixe.** Le premier nœud visité est la racine : ce n’est une feuille que si l’arbre est réduit à sa racine. Le dernier est **toujours** une feuille : un nœud qui a un fils est visité *avant* ce fils, il ne peut donc pas être le dernier.
+
+    - **Infixe.** Ni le premier ni le dernier ne sont forcément des feuilles (question 2).
+
+    - **Suffixe.** Le premier nœud visité est **toujours** une feuille : un nœud est visité *après* ses fils, donc le premier visité n’en a pas. Le dernier est la racine.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Retrouver le parcours, retrouver l’arbre <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-5 }
+
+1.  On considère l’arbre ci-dessous.
+
+    ![](../figures/49f0c1bffb49cd27.svg){ .tikz loading=lazy }
+
+    Parmi les cinq suites suivantes, quatre sont ses parcours préfixe, infixe, suffixe et en largeur ; la cinquième n’est **aucun** d’eux. Associer chaque suite à son parcours, puis expliquer pourquoi la suite restante n’est pas un parcours, sans recalculer les quatre parcours en entier.
+
+    **a)** `4 7 1 9 3 6 2 5` **b)** `5 9 2 4 1 6 7 3` **c)** `5 9 1 4 7 2 6 3`  
+    **d)** `4 9 7 1 5 2 3 6` **e)** `5 9 4 1 7 2 6 3`
+
+2.  On ne dispose plus du dessin. Un arbre binaire, dont les nœuds portent des lettres toutes différentes, a pour parcours **préfixe** `S T U V W X Y Z` et pour parcours **infixe** `U T V S X Z Y W`. Dessiner cet arbre, puis donner son parcours **suffixe**.
+
+3.  Montrer, à l’aide d’un exemple, que le parcours préfixe **seul** ne suffit pas à retrouver un arbre.
+
+??? pouce "Coup de pouce"
+
+    Q1 : où la racine `5` apparaît-elle dans chacun des quatre parcours ? Cela sépare déjà les suites en groupes. Q2 : la première lettre du préfixe est la racine ; dans l’infixe, elle sépare les nœuds du sous-arbre gauche (à sa gauche) de ceux du sous-arbre droit (à sa droite). On recommence ensuite sur chaque sous-arbre.
+
+??? corrige "Corrigé"
+
+    **1.** On repère d’abord la place de la racine `5`. Elle est en **dernier** dans la suite a) : c’est le **suffixe**. Elle est **au milieu** dans la suite d), après les quatre nœuds du sous-arbre gauche (`4 9 7 1`) : c’est l’**infixe**. Elle est en **premier** dans b), c) et e) : il reste à départager le préfixe et la largeur.
+
+    - En largeur, les deux fils de la racine, `9` et `2`, viennent juste après elle : c’est b).
+
+    - En préfixe, on entre dans le sous-arbre gauche : `9`, puis **son** fils gauche `4` : c’est e).
+
+    - La suite c) donne `1` juste après `9` : ce n’est pas le préfixe (le fils gauche `4` de `9` doit passer avant `1`), ni la largeur (`2` doit suivre `9`). Elle n’est **aucun** des quatre parcours.
+
+    **2.** La racine est `S` (première lettre du préfixe). Dans l’infixe, `U T V` est à sa gauche et `X Z Y W` à sa droite.
+
+    - À gauche : préfixe `T U V`, infixe `U T V` : racine `T`, fils gauche `U`, fils droit `V`.
+
+    - À droite : préfixe `W X Y Z`, infixe `X Z Y W` : racine `W`, tout le reste à sa gauche (rien à droite). Puis préfixe `X Y Z`, infixe `X Z Y` : racine `X`, rien à gauche ; enfin préfixe `Y Z`, infixe `Z Y` : racine `Y`, fils gauche `Z`.
+
+    ![](../figures/16daa8d92e9798fb.svg){ .tikz loading=lazy }
+
+    Parcours suffixe : `U, V, T, Z, Y, X, W, S`.
+
+    **3.** Les deux arbres ci-dessous ont le même parcours préfixe `1, 2, 3` (à gauche, `3` est le fils gauche de `2` ; à droite, `2` et `3` sont les deux fils de `1`). Leurs parcours infixes, `3, 2, 1` et `2, 1, 3`, sont différents : c’est le **couple** préfixe et infixe (avec des valeurs toutes différentes) qui permet de reconstruire l’arbre.
+
+    ![](../figures/c72d7223669126c7.svg){ .tikz loading=lazy }
+
+    ![](../figures/93e7939ed619d730.svg){ .tikz loading=lazy }
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Programmer les parcours en profondeur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-6 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `prefixe(a)` qui **affiche** les valeurs de `a` dans l’ordre préfixe. Indiquer ensuite la (seule) ligne à déplacer pour obtenir le parcours **infixe**, puis le parcours **suffixe**.
 
@@ -121,7 +208,7 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `print(a.valeur)` sans avoir testé `a is not None` : sur un sous-arbre vide, Python lève `AttributeError` (`None` n’a pas d’attribut `valeur`).
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 5</span> — Défi — parcours en largeur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-5 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Défi — parcours en largeur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-7 }
 
 <span class="duree">≈ 20 min</span>
 
@@ -159,7 +246,7 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
 
 ### Mesurer un arbre
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — Taille <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-6 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Taille <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-8 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction récursive `taille(a)` qui renvoie le nombre de nœuds de l’arbre `a`. *(Rappel : l’arbre vide `None` a pour taille `0`.)*
 
@@ -178,7 +265,7 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
         return 1 + taille(a.gauche) + taille(a.droite)
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Hauteur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-7 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Hauteur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-9 }
 
 <span class="essentiel">• essentiel</span>
 
@@ -212,7 +299,7 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
         return 1 + max(hauteur_aretes(a.gauche), hauteur_aretes(a.droite))
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Nombre de feuilles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-8 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Nombre de feuilles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-10 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `nb_feuilles(a)` qui renvoie le nombre de feuilles de `a`. *(Un nœud est une feuille si ses deux fils sont `None`.)*
 
@@ -235,7 +322,7 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
 
 ### Arbres binaires de recherche
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Rechercher dans un ABR <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-9 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Rechercher dans un ABR <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-11 }
 
 <span class="essentiel">• essentiel</span>
 
@@ -277,7 +364,7 @@ Donner l’ordre de visite des nœuds pour les parcours : **préfixe**, **infixe
 
     Au plus **`h` comparaisons** (une par niveau), où `h` est la hauteur de l’arbre.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Insérer dans un ABR <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-10 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Insérer dans un ABR <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-12 }
 
 <span class="essentiel">• essentiel</span>
 
@@ -303,7 +390,7 @@ On part de l’arbre binaire de recherche suivant.
 
     **2.** Le parcours **infixe** (gauche, racine, droite) affiche les valeurs par ordre croissant.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Programmer l’insertion dans un ABR <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-11 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Programmer l’insertion dans un ABR <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-13 }
 
 On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale** à celle du nœud va **à droite**.
 
@@ -376,7 +463,7 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
 
 ### Pour aller plus loin
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 12</span> — Défi — l’arbre miroir <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-12 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Défi — l’arbre miroir <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-14 }
 
 <span class="duree">≈ 15 min</span>
 
@@ -404,7 +491,7 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
         return Noeud(a.valeur, miroir(a.droite), miroir(a.gauche))  # on echange g et d
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Défi — maximum d’un arbre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-13 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 15</span> — Défi — maximum d’un arbre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-15 }
 
 <span class="duree">≈ 15 min</span>
 
@@ -435,7 +522,7 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
 
 ### Vers le bac
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — ABR : mesures, insertion, recherche (d’après Métropole 2023, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-14 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — ABR : mesures, insertion, recherche (d’après Métropole 2023, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-16 }
 
 <span class="essentiel">• essentiel</span> <span class="duree">≈ 20 min</span>
 
@@ -482,7 +569,7 @@ On considère l’arbre binaire de recherche suivant.
     **3.** **(C)** parcours infixe.  
     **4.** ligne 5 : `True` ; ligne 7 : `self.sd().present(x)` ; ligne 9 : `self.sg().present(x)`.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Un arbre binaire par une classe (d’après Sujet zéro 2023, sujet B) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-15 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Un arbre binaire par une classe (d’après Sujet zéro 2023, sujet B) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-17 }
 
 <span class="duree">≈ 20 min</span>
 
@@ -557,7 +644,7 @@ class ArbreBinaire:
         return 1 + taille(arbre.get_gauche()) + taille(arbre.get_droit())
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Un arbre de décision (d’après Amérique du Nord 2025, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-16 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Un arbre de décision (d’après Amérique du Nord 2025, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-18 }
 
 <span class="duree">≈ 30 min</span>
 
@@ -633,7 +720,7 @@ class Feuille:
         return arbre.resultat
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Un arbre représenté par des listes (d’après Amérique du Sud 2023, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-17 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Un arbre représenté par des listes (d’après Amérique du Sud 2023, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-19 }
 
 <span class="duree">≈ 30 min</span>
 
@@ -701,7 +788,7 @@ a  = [4, [n1, n8]]
         return True
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 18</span> — La plus grande somme racine-feuille (d’après Amérique du Sud 2022, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-18 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 20</span> — La plus grande somme racine-feuille (d’après Amérique du Sud 2022, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-20 }
 
 <span class="duree">≈ 20 min</span>
 
@@ -744,7 +831,7 @@ Dans un arbre binaire étiqueté par des entiers, un **chemin racine-feuille** p
         return a.valeur + max(somme_max(a.gauche), somme_max(a.droite))
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 19</span> — Puissance 4 : l’arbre de coups et l’algorithme min-max (d’après Amérique du Nord 2026, jour 1, parties B et C) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-19 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 21</span> — Puissance 4 : l’arbre de coups et l’algorithme min-max (d’après Amérique du Nord 2026, jour 1, parties B et C) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-21 }
 
 <span class="duree">≈ 45 min</span>
 
@@ -905,7 +992,7 @@ On suppose écrite de même une méthode `colonne_score_max` (fils de score le p
 
 ### Critiquer une réponse d’IA
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Un test d’ABR proposé par un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-05-20 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 22</span> — Un test d’ABR proposé par un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-05-22 }
 
 Un élève demande à un assistant d’IA : « Écris une fonction Python `est_abr(a)` qui renvoie `True` si l’arbre binaire `a` (classe `Noeud` du cours, attributs `valeur`, `gauche`, `droite`) est un arbre binaire de recherche. » Voici la réponse obtenue :
 
@@ -955,7 +1042,7 @@ def est_abr(a):
 
 ### S’entraîner à l’oral
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-21 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-23 }
 
 Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans lire ses notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 
@@ -1043,7 +1130,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
 Des séries courtes pour rendre une méthode automatique : même consigne, données différentes. Les réponses sont brèves dans le corrigé.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 22</span> — Parcours en série <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-22 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 24</span> — Parcours en série <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-24 }
 
 <span class="essentiel">• essentiel</span>
 
@@ -1051,7 +1138,7 @@ Pour chacun des trois arbres ci-dessous, donner l’ordre de visite des nœuds p
 
 ??? pouce "Coup de pouce"
 
-    Même méthode qu’à l’exercice 3. En profondeur, la racine est visitée avant, entre ou après ses deux sous-arbres, et cette règle s’applique à **chaque** sous-arbre : terminer tout le sous-arbre gauche avant de passer au droit. En largeur, lire l’arbre niveau par niveau, de gauche à droite.
+    Même méthode qu’aux exercices 3 et 4. En profondeur, la racine est visitée avant, entre ou après ses deux sous-arbres, et cette règle s’applique à **chaque** sous-arbre : terminer tout le sous-arbre gauche avant de passer au droit. En largeur, lire l’arbre niveau par niveau, de gauche à droite.
 
 |           |           |           |
 |:---------:|:---------:|:---------:|
@@ -1068,7 +1155,7 @@ Pour chacun des trois arbres ci-dessous, donner l’ordre de visite des nœuds p
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> En b), commencer le parcours infixe par `2, 9` : `9` n’a pas de fils gauche ; on le visite donc *avant* son fils droit `2` (sous-arbre gauche vide, racine, sous-arbre droit).
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 23</span> — Insertions en série dans un ABR <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-23 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 25</span> — Insertions en série dans un ABR <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-25 }
 
 <span class="essentiel">• essentiel</span>
 

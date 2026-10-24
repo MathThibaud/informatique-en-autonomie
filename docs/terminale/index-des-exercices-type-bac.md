@@ -40,17 +40,17 @@ Les extraits de sujets de bac (et les sujets « façon bac ») des feuilles d’
 
 ### Chapitre 5 — Arbres
 
-- [Ex. 14](05-arbres/exercices.md#ex-05-14) — ABR : mesures, insertion, recherche (d’après Métropole 2023, jour 2) <span class="duree">≈ 20 min</span>
+- [Ex. 16](05-arbres/exercices.md#ex-05-16) — ABR : mesures, insertion, recherche (d’après Métropole 2023, jour 2) <span class="duree">≈ 20 min</span>
 
-- [Ex. 15](05-arbres/exercices.md#ex-05-15) — Un arbre binaire par une classe (d’après Sujet zéro 2023, sujet B) <span class="duree">≈ 20 min</span>
+- [Ex. 17](05-arbres/exercices.md#ex-05-17) — Un arbre binaire par une classe (d’après Sujet zéro 2023, sujet B) <span class="duree">≈ 20 min</span>
 
-- [Ex. 16](05-arbres/exercices.md#ex-05-16) — Un arbre de décision (d’après Amérique du Nord 2025, jour 1) <span class="duree">≈ 30 min</span>
+- [Ex. 18](05-arbres/exercices.md#ex-05-18) — Un arbre de décision (d’après Amérique du Nord 2025, jour 1) <span class="duree">≈ 30 min</span>
 
-- [Ex. 17](05-arbres/exercices.md#ex-05-17) — Un arbre représenté par des listes (d’après Amérique du Sud 2023, jour 1) <span class="duree">≈ 30 min</span>
+- [Ex. 19](05-arbres/exercices.md#ex-05-19) — Un arbre représenté par des listes (d’après Amérique du Sud 2023, jour 1) <span class="duree">≈ 30 min</span>
 
-- [Ex. 18](05-arbres/exercices.md#ex-05-18) — La plus grande somme racine-feuille (d’après Amérique du Sud 2022, jour 2) <span class="duree">≈ 20 min</span>
+- [Ex. 20](05-arbres/exercices.md#ex-05-20) — La plus grande somme racine-feuille (d’après Amérique du Sud 2022, jour 2) <span class="duree">≈ 20 min</span>
 
-- [Ex. 19](05-arbres/exercices.md#ex-05-19) — Puissance 4 : l’arbre de coups et l’algorithme min-max (d’après Amérique du Nord 2026, jour 1, parties B et C) <span class="duree">≈ 45 min</span>
+- [Ex. 21](05-arbres/exercices.md#ex-05-21) — Puissance 4 : l’arbre de coups et l’algorithme min-max (d’après Amérique du Nord 2026, jour 1, parties B et C) <span class="duree">≈ 45 min</span>
 
 ### Chapitre 6 — Bases de données et SQL
 
@@ -78,15 +78,15 @@ Les extraits de sujets de bac (et les sujets « façon bac ») des feuilles d’
 
 ### Chapitre 8 — Graphes
 
-- [Ex. 13](08-graphes/exercices.md#ex-08-13) — *d’après Amérique du Nord 2024, jour 1, ex. 2* <span class="duree">≈ 45 min</span>
+- [Ex. 15](08-graphes/exercices.md#ex-08-15) — *d’après Amérique du Nord 2024, jour 1, ex. 2* <span class="duree">≈ 45 min</span>
 
-- [Ex. 14](08-graphes/exercices.md#ex-08-14) — *d’après Asie 2024, jour 1, ex. 2* <span class="duree">≈ 30 min</span>
+- [Ex. 16](08-graphes/exercices.md#ex-08-16) — *d’après Asie 2024, jour 1, ex. 2* <span class="duree">≈ 30 min</span>
 
-- [Ex. 15](08-graphes/exercices.md#ex-08-15) — *d’après Pays étrangers 2025, sujet PE2, ex. 3 (partie A)* <span class="duree">≈ 30 min</span>
+- [Ex. 17](08-graphes/exercices.md#ex-08-17) — *d’après Pays étrangers 2025, sujet PE2, ex. 3 (partie A)* <span class="duree">≈ 30 min</span>
 
-- [Ex. 16](08-graphes/exercices.md#ex-08-16) — *d’après Centres étrangers 2024, groupe 1, jour 1, ex. 1* <span class="duree">≈ 30 min</span>
+- [Ex. 18](08-graphes/exercices.md#ex-08-18) — *d’après Centres étrangers 2024, groupe 1, jour 1, ex. 1* <span class="duree">≈ 30 min</span>
 
-- [Ex. 17](08-graphes/exercices.md#ex-08-17) — *d’après Polynésie 2024, jour 2, ex. 1* <span class="duree">≈ 45 min</span>
+- [Ex. 19](08-graphes/exercices.md#ex-08-19) — *d’après Polynésie 2024, jour 2, ex. 1* <span class="duree">≈ 45 min</span>
 
 ### Chapitre 9 — Réseaux
 

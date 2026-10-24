@@ -327,9 +327,102 @@ On considère le graphe **pondéré** suivant (les poids sont des distances en k
 
     Voir le cours pour `BFS`, `DFS` (récursif) et `DFS_iteratif`. Pour la file, la classe `File` du chapitre *Structures linéaires* (avec `pop(0)`) convient ici : c’est un choix de **simplicité**, acceptable sur de petits graphes, mais chaque `defiler` coûte alors $O(n)$ ; sur un grand graphe, on changerait d’implémentation (liste chaînée, deux piles…) sans toucher au BFS. Sur ce graphe, le DFS itératif renvoie par exemple `[A, C, D, F, E, B]` : la **pile** traite en dernier le premier voisin empilé, d’où un ordre différent du DFS récursif — mais c’est bien un parcours en profondeur valide.
 
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-11 }
+
+<span class="essentiel">• essentiel</span> On a construit un graphe non orienté `g` avec la classe `Graphe`, en ajoutant les arêtes dans un ordre quelconque. Voici son attribut `g.adj` : c’est **dans cet ordre** que `g.voisins(s)` renvoie les voisins (ils ne sont donc plus rangés par ordre alphabétique).
+
+```python
+g.adj = {'A': ['D', 'B'], 'B': ['E', 'A', 'C'], 'C': ['B', 'F'],
+         'D': ['A', 'E'], 'E': ['D', 'G', 'B'], 'F': ['C', 'G'],
+         'G': ['F', 'E']}
+```
+
+1.  Dessiner le graphe. Combien a-t-il d’arêtes ?
+
+2.  Donner à la main le résultat de `BFS(g, ’A’)` (fonction du cours), en écrivant le contenu de la file après chaque sommet défilé.
+
+3.  Donner à la main le résultat de `DFS(g, ’A’)` (version récursive du cours).
+
+4.  Donner à la main le résultat de `DFS_iteratif(g, ’A’)`, en écrivant le contenu de la pile après chaque sommet dépilé (sommet de la pile à droite, comme dans le cours). Pourquoi certains sommets sont-ils dépilés sans être traités ?
+
+5.  On range maintenant chaque liste de voisins par ordre alphabétique. Les ordres de visite changent-ils ? Qu’est-ce qui, en revanche, ne change pas dans le parcours en largeur ?
+
+6.  <span class="run" title="À programmer et tester sur machine">▶</span> Vérifier les réponses avec les fonctions de l’exercice précédent (on peut affecter directement `g.adj`).
+
+??? pouce "Coup de pouce"
+
+    Les fonctions du cours ne trient rien : elles parcourent `g.voisins(s)` dans l’ordre de la liste. Pour le DFS itératif, les voisins sont empilés dans l’ordre de la liste : le dernier de la liste ressort donc le premier. Q5 : à quelle distance de `A` se trouve chaque sommet ?
+
+??? corrige "Corrigé"
+
+    **1.** Arêtes : `A--B`, `A--D`, `B--C`, `B--E`, `C--F`, `D--E`, `E--G`, `F--G`, soit $8$ arêtes (les listes contiennent $16$ voisins en tout, et chaque arête est écrite deux fois).
+
+    ![](../figures/ee4f2845f1e46ad0.svg){ .tikz loading=lazy }
+
+    **2.** La file est écrite dans l’ordre de sortie. `A` (file `D, B`) ; `D` (`B, E`) ; `B` (`E, C`) ; `E` (`C, G`) ; `C` (`G, F`) ; `G` (`F`) ; `F` (vide). Résultat : `[’A’, ’D’, ’B’, ’E’, ’C’, ’G’, ’F’]`.
+
+    **3.** `A` $\to$ `D` (premier voisin de `A`) $\to$ `E` (`A` est déjà visité) $\to$ `G` (`D` est déjà visité) $\to$ `F` $\to$ `C` $\to$ `B`, puis on remonte sans plus rien trouver. Résultat : `[’A’, ’D’, ’E’, ’G’, ’F’, ’C’, ’B’]`.
+
+    **4.** Pile écrite en ligne, sommet à droite : `A` (pile `D B`) ; `B` (`D E C`) ; `C` (`D E F`) ; `F` (`D E G`) ; `G` (`D E E`) ; `E` (`D E D`) ; `D` (`D E`) ; puis `E` et `D` sont dépilés mais déjà traités, donc ignorés. Résultat : `[’A’, ’B’, ’C’, ’F’, ’G’, ’E’, ’D’]`. Un sommet peut être empilé **plusieurs fois** (`E` par `B` puis par `G` ; `D` par `A` puis par `E`) : on ne le marque qu’au dépilement, et les exemplaires suivants sont ignorés (règle du cours).
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Dépiler `D` juste après `A` parce que `D` est le premier voisin de `A` : les voisins sont empilés dans l’ordre `D`, `B`, et c’est le **dernier** empilé, `B`, qui ressort le premier.
+
+    **5.** Oui : avec les listes triées, `BFS` donne `A, B, D, C, E, F, G` et `DFS` donne `A, B, C, F, G, E, D`. En revanche, les **couches** du parcours en largeur ne changent pas : `B` et `D` (distance $1$), puis `C` et `E` (distance $2$), puis `F` et `G` (distance $3$). Seul l’ordre *à l’intérieur* d’une couche dépend de l’ordre des voisins.
+
+    **6.**
+
+    ```python
+    g = Graphe(['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+    g.adj = {'A': ['D', 'B'], 'B': ['E', 'A', 'C'], 'C': ['B', 'F'],
+             'D': ['A', 'E'], 'E': ['D', 'G', 'B'], 'F': ['C', 'G'],
+             'G': ['F', 'E']}
+    print(BFS(g, 'A'))           # ['A', 'D', 'B', 'E', 'C', 'G', 'F']
+    print(DFS(g, 'A'))           # ['A', 'D', 'E', 'G', 'F', 'C', 'B']
+    print(DFS_iteratif(g, 'A'))  # ['A', 'B', 'C', 'F', 'G', 'E', 'D']
+    ```
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-12 }
+
+On considère le graphe non orienté ci-dessous. On ne précise pas dans quel ordre la méthode `voisins` renvoie les voisins d’un sommet : selon cet ordre, un même parcours lancé depuis `A` peut donner des résultats différents.
+
+![](../figures/3fb8af6462f13762.svg){ .tikz loading=lazy }
+
+1.  Pour chacune des suites suivantes, dire si elle peut être le résultat de `BFS(g, ’A’)`, de `DFS(g, ’A’)` (récursif), ou d’aucun des deux, pour un ordre des voisins bien choisi. Justifier.
+
+    **a)** `A C B D E F G` **b)** `A B E C D F G` **c)** `A D F G E C B`  
+    **d)** `A B C D F E G` **e)** `A B E G F C D`
+
+2.  Les voisins sont maintenant pris par ordre alphabétique. Dérouler `BFS(g, ’A’)` en notant, pour chaque sommet découvert, le sommet depuis lequel il a été découvert (son **parent**). Dessiner les seules arêtes « sommet – parent » : on obtient un arbre, l’**arbre du parcours en largeur**. Que représente la profondeur d’un sommet dans cet arbre ? En déduire un plus court chemin de `A` à `G`. Est-ce le seul ?
+
+??? pouce "Coup de pouce"
+
+    En largeur, les sommets sortent de la file par distance croissante au départ, couche par couche ; et, dans une couche, l’ordre suit celui des parents dans la couche précédente. En profondeur, après un sommet, on visite forcément l’un de **ses** voisins non encore visités, s’il en reste : on ne revient en arrière qu’à l’impasse.
+
+??? corrige "Corrigé"
+
+    **1.** Distances depuis `A` : `B`, `C`, `D` à $1$ ; `E`, `F` à $2$ ; `G` à $3$.
+
+    - **a)** **BFS** possible (voisins de `A` pris dans l’ordre `C, B, D`) : les couches sont respectées, et `E`, découvert par `C`, passe bien avant `F`, découvert par `D`. Pas un DFS : après `C`, un DFS irait vers un voisin non visité de `C` (`D` ou `E`), pas vers `B`.
+
+    - **b)** **DFS** possible : `A`$\to$`B`$\to$`E`$\to$`C`$\to$`D`$\to$`F`$\to$`G`, chaque sommet étant un voisin du précédent. Pas un BFS : `E` (distance $2$) sort avant `C` (distance $1$).
+
+    - **c)** **DFS** possible : `A`$\to$`D`$\to$`F`$\to$`G`$\to$`E`$\to$`C` ; `C` n’a plus de voisin non visité, on remonte en `E`, d’où l’on atteint `B`. Pas un BFS (`F` avant `B`).
+
+    - **d)** **Aucun.** Les couches sont respectées, mais cela ne suffit pas : `E` est découvert par `B` et `F` par `D` ; comme `B` sort de la file avant `D`, `E` est enfilé avant `F` et doit sortir avant lui. Pas un DFS : après `B`, il faut aller en `E`, seul voisin non visité de `B`.
+
+    - **e)** **Aucun.** Pas un BFS (`E` avant `C`). Le début `A, B, E, G, F` est un DFS, mais `F` a encore un voisin non visité, `D` : le DFS doit y aller avant de revenir en arrière, alors que la suite passe à `C`.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Croire qu’il suffit de respecter les distances pour obtenir un parcours en largeur (suite d) : dans une couche, l’ordre est imposé par l’ordre de sortie des parents dans la couche précédente.
+
+    **2.** `A` (file `B, C, D`) ; `B` (`C, D, E`) ; `C` (`D, E`) ; `D` (`E, F`) ; `E` (`F, G`) ; `F` (`G`) ; `G` (vide). Parents : `B`, `C`, `D` $\leftarrow$ `A` ; `E` $\leftarrow$ `B` ; `F` $\leftarrow$ `D` ; `G` $\leftarrow$ `E`.
+
+    ![](../figures/62628cd02e1b47a9.svg){ .tikz loading=lazy }
+
+    La profondeur d’un sommet dans cet arbre (en arêtes) est sa **distance** à `A`, et le chemin de l’arbre qui descend de `A` à un sommet est un **plus court chemin** : c’est exactement ce que fait `plus_court_chemin` du cours avec son dictionnaire `parent`. Ici : `A--B--E--G`, de longueur $3$. Ce n’est pas le seul : `A--C--E--G` et `A--D--F--G` ont aussi $3$ arêtes ; le BFS en fournit un, qui dépend de l’ordre des voisins.
+
 ### Chemins, cycles, connexité
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-11 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-13 }
 
 <span class="essentiel">• essentiel</span> À l’aide d’un parcours, écrire :
 
@@ -358,7 +451,7 @@ On considère le graphe **pondéré** suivant (les poids sont des distances en k
         return len(BFS(g, depart)) == len(g.sommets)
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 12</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-12 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-14 }
 
 <span class="duree">≈ 30 min</span> On veut le **plus court chemin** en nombre d’arêtes.
 
@@ -424,7 +517,7 @@ On considère le graphe **pondéré** suivant (les poids sont des distances en k
 
 ### Vers le bac
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — *d’après Amérique du Nord 2024, jour 1, ex. 2* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-13 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — *d’après Amérique du Nord 2024, jour 1, ex. 2* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-15 }
 
 <span class="duree">≈ 45 min</span>
 
@@ -586,7 +679,7 @@ Le « cercle d’amis » d’une personne est l’ensemble des personnes atteign
         return visites
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — *d’après Asie 2024, jour 1, ex. 2* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-14 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — *d’après Asie 2024, jour 1, ex. 2* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-16 }
 
 <span class="duree">≈ 30 min</span>
 
@@ -652,7 +745,7 @@ M = [ [0, 1, 0, 0, 0],
 
     **7.** **Impossible** : le graphe contient le cycle `1`$\to$`2`$\to$`3`$\to$`1`. On ne peut donc pas ordonner ces tâches (aucun tri topologique n’existe quand il y a un cycle).
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — *d’après Pays étrangers 2025, sujet PE2, ex. 3 (partie A)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-15 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — *d’après Pays étrangers 2025, sujet PE2, ex. 3 (partie A)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-17 }
 
 <span class="duree">≈ 30 min</span>
 
@@ -749,7 +842,7 @@ Une **balade** est un chemin du graphe ; sa durée est la somme des durées de s
         return y in voisines
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — *d’après Centres étrangers 2024, groupe 1, jour 1, ex. 1* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-16 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — *d’après Centres étrangers 2024, groupe 1, jour 1, ex. 1* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-18 }
 
 <span class="duree">≈ 30 min</span>
 
@@ -830,7 +923,7 @@ Au début, un virus n’est présent que sur un ordinateur. À chaque étape, il
 
     Depuis le sommet $4$ (réseau initial), la contamination prend **2 étapes**.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 17</span> — *d’après Polynésie 2024, jour 2, ex. 1* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-17 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 19</span> — *d’après Polynésie 2024, jour 2, ex. 1* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-19 }
 
 <span class="duree">≈ 45 min</span>
 
@@ -956,7 +1049,7 @@ def parcours(graphe, sommet):
 
 ### Critiquer une réponse d’IA
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Un parcours en largeur écrit par un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-08-18 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Un parcours en largeur écrit par un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-08-20 }
 
 Un élève demande à un assistant d’IA : « Écris en Python un parcours en largeur d’un graphe `g` (dictionnaire des listes d’adjacence) depuis un sommet `depart`, qui renvoie la liste des sommets dans l’ordre où ils sont traités. » Voici la réponse obtenue :
 
@@ -1003,7 +1096,7 @@ def parcours_largeur(g, depart):
 
 ### S’entraîner à l’oral
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-19 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Expliquer en deux minutes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-21 }
 
 Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut savoir **expliquer** une notion clairement, sans lire ses notes. Choisir l’un des sujets suivants (ou le tirer au sort) :
 
@@ -1091,7 +1184,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
 Des séries courtes pour rendre une méthode automatique : même consigne, données différentes. Les réponses sont brèves dans le corrigé.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 20</span> — Parcours à la main en série <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-20 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 22</span> — Parcours à la main en série <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-22 }
 
 <span class="essentiel">• essentiel</span> Pour chacun des trois graphes ci-dessous, donner l’ordre de visite du **parcours en largeur** depuis `A`, en écrivant le contenu de la file après chaque sommet défilé, puis l’ordre de visite du **parcours en profondeur** récursif (fonction `DFS` du cours) depuis `A`. Les voisins sont toujours pris par **ordre alphabétique**. Répondre enfin à la question propre à chaque graphe.
 
