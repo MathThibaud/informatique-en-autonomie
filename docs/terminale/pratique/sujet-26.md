@@ -141,6 +141,10 @@ Une case est repérée par le couple `(ligne, colonne)`, les numéros commençan
 
 Le labyrinthe est vu comme un **graphe** : les sommets sont les cases qui ne sont pas des murs, et deux sommets sont reliés s’ils sont voisins. Dans le fichier `labyrinthe.py`, la fonction `lire_labyrinthe` renvoie la grille (liste de chaînes de caractères, une par ligne) et la fonction `construire_graphe` renvoie le graphe sous forme d’un **dictionnaire** qui associe à chaque case la liste de ses cases voisines.
 
+![](../figures/d49a592f93e81553.svg){ .tikz loading=lazy }
+
+**Figure 2.** Le graphe associé à `petit.txt` : un sommet par case libre, une arête entre deux cases voisines. Les numéros de ligne sont à gauche, ceux de colonne en haut.
+
 Question 1
 
 Écrire le corps de la fonction `cases_voisines(grille, case)` qui renvoie la liste des cases qui ne sont pas des murs parmi les quatre cases voisines de `case`, dans l’ordre : haut, bas, gauche, droite. Par exemple, avec la grille de `petit.txt`, `cases_voisines(grille, (1, 1))` renvoie `[(2, 1), (1, 2)]`. Tester avec la fonction `test_voisines`.

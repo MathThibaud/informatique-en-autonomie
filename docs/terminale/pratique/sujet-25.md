@@ -156,6 +156,10 @@
 
 Un **arbre binaire de recherche** (ABR) est un arbre binaire dont les nœuds portent des valeurs comparables et tel que, pour **chaque** nœud, toutes les valeurs de son sous-arbre gauche sont **strictement plus petites** que sa valeur, et toutes celles de son sous-arbre droit **strictement plus grandes**. Un ABR ne contient donc pas deux fois la même valeur.
 
+![](../figures/d8641e78bedabe22.svg){ .tikz loading=lazy }
+
+**Figure 1.** Un ABR : à gauche de `12`, les valeurs `5`, `2` et `9`, toutes plus petites ; à droite, `18`, `15` et `19`, toutes plus grandes. La règle vaut aussi pour `5` et pour `18`.
+
 Dans le fichier `abr.py`, un nœud est un objet de la classe `Noeud` (attributs `valeur`, `gauche` et `droite`) et l’arbre vide est représenté par `None`. Le fichier fournit :
 
 - la fonction récursive `inserer(a, x)` qui insère la valeur `x` à sa place dans l’ABR `a` et renvoie l’arbre obtenu (si `x` est déjà présente, rien ne change) ;
