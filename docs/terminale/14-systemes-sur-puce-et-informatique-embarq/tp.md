@@ -14,7 +14,7 @@
 
 !!! consignes "Consignes"
 
-    - Parties A et B : éditeur Python officiel du micro:bit , `python.microbit.org`, avec son **simulateur** (curseurs des capteurs sous la carte ; la sortie de `print` s’affiche dans la console série, sous l’éditeur). Si des cartes réelles sont disponibles, transférer le programme sur la carte avec le bouton « Send to micro:bit ».
+    - Parties A et B : éditeur Python officiel du micro:bit , `python.microbit.org`, avec son **simulateur** (curseurs des capteurs sous la carte ; la sortie de `print` s’affiche dans la console série, sous l’éditeur). **Aucune carte n’est nécessaire** : tout le TP se fait dans le simulateur (parties A et B) et en Python sur l’ordinateur (parties C et D).
 
     - Parties C et D : Python habituel sur l’ordinateur, avec le fichier à télécharger `tp_soc_depart.py`.
 
@@ -63,7 +63,7 @@ while True:
 
 2.  Ce programme a-t-il un capteur ? un actionneur ? Que fait-il de « utile » ?
 
-3.  *(Si une carte réelle est disponible.)* Refaire la mesure sur la carte. Pourquoi la valeur peut-elle être différente de celle du simulateur ?
+3.  Le simulateur tourne dans le navigateur, sur le processeur de l’ordinateur. Une vraie carte donnerait-elle la même valeur ? Pourquoi ?
 
 ??? corrige "Corrigé"
 
@@ -77,7 +77,7 @@ while True:
 
     **2.** Aucun capteur au sens du cours (seulement l’horloge interne `running_time()`), aucun actionneur ; il ne fait rien d’utile : il mesure seulement la vitesse de la boucle.
 
-    **3.** Le simulateur ne reproduit pas la vitesse réelle du processeur : il émule la carte dans le navigateur, avec la puissance de l’ordinateur. Sur la carte, la valeur dépend du processeur à $64$ MHz et de l’interpréteur MicroPython.
+    **3.** Non : le simulateur ne reproduit pas la vitesse réelle du processeur ; il émule la carte dans le navigateur, avec la puissance de l’ordinateur. Sur une vraie carte, la valeur dépendrait du processeur à $64$ MHz et de l’interpréteur MicroPython.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 2</span> — Ce qui ralentit la boucle <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-systemes-sur-puce-et-informatique-embarq-tp-1-2 }
 
@@ -237,7 +237,7 @@ Quand on marche, la carte (à la ceinture) est secouée à chaque pas. On mesure
 
         La boucle contient deux tests sur la norme : `if not en_haut and a > 1250:` (on vient de franchir le seuil haut : on compte un pas et on passe `en_haut` à `True`), et `elif en_haut and a < 1050:` (on est redescendu : `en_haut` repasse à `False`).
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Tester dans le simulateur en faisant varier le curseur de l’axe `z` (ou avec le geste « secouer »), puis, si possible, en marchant avec une vraie carte.
+3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Tester dans le simulateur en faisant varier le curseur de l’axe `z` (ou avec le geste « secouer »).
 
 ??? corrige "Corrigé"
 
