@@ -185,7 +185,7 @@ Pour chacune des trois stratégies ci-dessous, tracer le **chronogramme** (de $t
 
 2.  **Plus court d’abord** (à chaque libération, on élit le processus prêt le plus court).
 
-3.  **Tourniquet** de quantum $1$ (chacun un cycle, puis en fin de file s’il n’a pas fini).
+3.  **Tourniquet** de quantum $1$ (chacun un cycle, puis en fin de file s’il n’a pas fini). On applique la convention du cours : un processus qui arrive à l’instant où un quantum se termine entre dans la file **avant** le processus qui vient d’être interrompu.
 
 4.  Comparer les trois moyennes. Laquelle minimise l’attente ? Laquelle rend le système le plus *réactif* ?
 
@@ -506,7 +506,7 @@ depart_proc = {0: p1, 1: p3, 2: p2, 3: p4}
 
     ![](../figures/ce24a0c2daf46121.svg){ .tikz loading=lazy }
 
-L’ordonnancement est mis en place par les classes `File` et `Ordonnanceur` déjà écrites dans l’exercice « Ordonnancer des processus avec une file » du chapitre Piles et files (même sujet de bac). On les reprend telles que vous les avez complétées, avec deux précisions : `defile` renvoie `None` si la file est vide, et `tourniquet` renvoie le nom du processus élu (ou `None` si la file est vide) ; ici, la méthode qui exécute un processus pendant un cycle s’appelle `execute_un_cycle`. Rappel de l’interface utile :
+L’ordonnancement est mis en place par les classes `File` et `Ordonnanceur` déjà écrites dans l’exercice « Ordonnancer des processus avec une file » du chapitre *Structures linéaires* (exercice 13, même sujet de bac). On les reprend telles que vous les avez complétées, avec deux précisions : `defile` renvoie `None` si la file est vide, et `tourniquet` renvoie le nom du processus élu (ou `None` si la file est vide) ; ici, la méthode qui exécute un processus pendant un cycle s’appelle `execute_un_cycle`. Rappel de l’interface utile :
 
 ```python
 ordo = Ordonnanceur()               # ordo.temps vaut 0, file vide

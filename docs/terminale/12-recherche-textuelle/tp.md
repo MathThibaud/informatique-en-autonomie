@@ -32,7 +32,7 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — La méthode naïve, avec compteur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-tp-1-1 }
 
-1.  À la main : combien de comparaisons la méthode naïve fait-elle pour chercher `ACG` dans `CAAGACG` ? (Reprendre le schéma du cours : $5$ alignements.)
+1.  À la main : combien de comparaisons la méthode naïve fait-elle pour chercher `ACG` dans `CAAGACG` ? (Reprendre le schéma du cours : $5$ alignements. Faire ce calcul *avant* de lancer les tests du fichier de départ.)
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `naive_compte(motif, texte)`, qui renvoie le couple `(positions, comparaisons)`. Pour compter aussi la comparaison qui échoue, on peut écrire la boucle intérieure ainsi :
 
@@ -45,7 +45,7 @@
                 comp += 1                   # la comparaison qui a echoue
     ```
 
-    Vérifier : `naive_compte("ACG", "CAAGACG")` vaut `([4], 9)`.
+    Lancer les tests et comparer le nombre de comparaisons renvoyé par `naive_compte("ACG", "CAAGACG")` avec votre calcul de la question 1.
 
 ??? corrige "Corrigé"
 
@@ -81,7 +81,7 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Horspool, avec compteur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-tp-1-2 }
 
-1.  À la main : dérouler Horspool pour `ACG` dans `CAAGACG` (table : `A`$\to 2$, `C`$\to 1$, autres $\to 3$). Combien d’alignements ? Combien de comparaisons ?
+1.  À la main : dérouler Horspool pour `ACG` dans `CAAGACG` (table : `A`$\to 2$, `C`$\to 1$, autres $\to 3$). Combien d’alignements ? Combien de comparaisons ? *(Avant de lancer les tests.)*
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `horspool_compte(motif, texte)` (même principe, comparaison de **droite à gauche** ; la fonction `table_decalage` est fournie). Vérifier les tests, dont l’exemple `MOTIF` du cours : combien de comparaisons pour Horspool ? et pour la méthode naïve ?
 
@@ -396,13 +396,13 @@ La fonction fournie `chrono(f, a, b)` exécute `f(a, b)` et renvoie le couple (r
 
     **2.** Notre Horspool est **interprété** : chaque tour de boucle Python coûte des dizaines d’instructions machine (et nous incrémentons en plus un compteur). L’opérateur `in` est compilé en langage machine, avec un algorithme du même type. Le nombre de comparaisons mesure le travail **de l’algorithme**, indépendamment de la machine et du langage ; la durée mesure aussi le coût de **l’implémentation**. Les deux mesures se complètent.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 9</span> — Défi : le vrai Boyer-Moore (mauvais caractère) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-tp-1-9 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 9</span> — Défi : Boyer-Moore réduit au mauvais caractère <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-tp-1-9 }
 
 Dans le Boyer-Moore du cours, on regarde le caractère `c = texte[i + j]` qui a **provoqué l’échec** (position `j` du motif), et on décale de `max(1, j - k)`, où `k` est la **dernière** position de `c` dans le motif (lue dans un dictionnaire `dernier`), ou $-1$ si `c` n’apparaît pas dans le motif. Après une occurrence trouvée, on décale de $1$.
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire `table_dernier(motif)` et `boyer_moore_compte(motif, texte)`, et les ajouter aux $1\,000$ tests de l’exercice 3.
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Ajouter une ligne « Boyer-Moore » au tableau de l’exercice 6. Le vrai Boyer-Moore (réduit au mauvais caractère) fait-il mieux que Horspool ? Sur quel texte l’écart est-il le plus visible ?
+2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Ajouter une ligne « Boyer-Moore » au tableau de l’exercice 6. Ce Boyer-Moore (réduit au mauvais caractère) fait-il mieux que Horspool ? Sur quel texte l’écart est-il le plus visible ?
 
 ??? corrige "Corrigé"
 

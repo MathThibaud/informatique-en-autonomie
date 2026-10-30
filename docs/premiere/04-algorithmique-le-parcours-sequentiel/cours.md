@@ -109,6 +109,10 @@ def indice(t, x):
     return -1
 ```
 
+!!! remarque "Remarque — Absent : -1 ou None"
+
+    Pour signaler un élément absent, `indice` renvoie `-1`, qui ne peut pas être un indice obtenu par le parcours. Beaucoup d’énoncés, au bac notamment, préfèrent renvoyer `None` (« rien ») : les deux conventions existent, on applique **celle de l’énoncé**.
+
 !!! remarque "Remarque — « Sortir tôt » : un réflexe utile"
 
     Renvoyer dès qu’on a trouvé évite de parcourir inutilement la fin du tableau. C’est correct *et* souvent plus rapide — on y revient au § V (meilleur/pire cas).
@@ -175,9 +179,9 @@ Dire qu’une propriété est un invariant, cela ne se devine pas : cela se **d�
 
 !!! exemple "Exemple — Preuve pour le champion du maximum"
 
-    Propriété $P$ : « `m` contient le maximum des éléments **déjà visités** ».
+    Propriété $P$ : « `m` contient le maximum de `t[0]` et des éléments **déjà visités** par la boucle ».
 
-    - **Initialisation** : après `m = t[0]`, le seul élément visité est `t[0]`, et `m` en est bien le maximum. $P$ est vraie.
+    - **Initialisation** : avant le premier tour, la boucle n’a encore visité aucun élément et `m = t[0]` : `m` est bien le maximum de `t[0]` seul. $P$ est vraie.
 
     - **Hérédité** : supposons $P$ vraie. À la visite de `x`, soit `x <= m` et `m` ne change pas, soit `x > m` et `m` devient `x`. Dans les deux cas, `m` est le maximum des éléments visités *avec* `x` : $P$ reste vraie.
 
@@ -225,7 +229,7 @@ Toutes les fonctions vues jusqu’ici (`somme`, `moyenne`, `maximum`, `est_prese
 
 ### Le piège quadratique : moyenne *vs* variance
 
-Voici le cœur du chapitre. On note $x_0, x_1, \ldots, x_{n-1}$ les $n$ valeurs du tableau. Leur **moyenne** est $$m = \frac{1}{n}\sum_{i} x_i = \frac{x_0 + x_1 + \cdots + x_{n-1}}{n}.$$ La **variance** mesure ensuite leur dispersion autour de cette moyenne : $$V = \frac{1}{n}\sum_{i} (x_i - m)^2.$$
+Voici le cœur du chapitre. On note $x_0, x_1, \ldots, x_{n-1}$ les $n$ valeurs du tableau. Leur **moyenne** est $$m = \frac{x_0 + x_1 + \cdots + x_{n-1}}{n}.$$ La **variance** <span class="horsprog">au-delà du programme</span> mesure ensuite leur dispersion autour de cette moyenne : c’est la moyenne des carrés des écarts à $m$, $$V = \frac{(x_0 - m)^2 + (x_1 - m)^2 + \cdots + (x_{n-1} - m)^2}{n}.$$
 
 **Version naïve** — on traduit la formule mot à mot :
 
@@ -272,7 +276,7 @@ Ces ordres de grandeur se vérifient au chronomètre (TP proposé en fin de chap
 
 !!! curieux "Pour les curieux (facultatif) — Reconnaître le quadratique"
 
-    Deux boucles **imbriquées** sur le même tableau (ou un appel de parcours *dans* une boucle) sont le signe d’un coût quadratique. En notation savante, on écrit un coût linéaire $O(n)$ et un coût quadratique $O(n^2)$ (notation « grand O », que vous formaliserez en terminale).
+    Deux boucles **imbriquées** sur le même tableau (ou un appel de parcours *dans* une boucle) sont le signe d’un coût quadratique. En notation savante, on écrit un coût linéaire $O(n)$ et un coût quadratique $O(n^2)$ (notation « grand O », que vous retrouverez en terminale).
 
 <span id="cours-04-17" class="ancre"></span>
 

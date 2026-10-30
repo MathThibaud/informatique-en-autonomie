@@ -554,7 +554,7 @@ Sur le graphe précédent, `DFS_iteratif(g, ’A’)` renvoie `[’A’, ’C’
 
 **Graphe non orienté.** Au cours d’un parcours, si l’on retombe sur un sommet **déjà découvert** qui n’est pas le sommet d’où l’on vient d’arriver (son « parent »), c’est qu’un cycle boucle par là. On exclut le parent parce qu’une arête se lit dans les deux sens : l’arête `A -- B` fait apparaître `A` parmi les voisins de `B`, sans former de cycle pour autant.
 
-**Graphe orienté : ce critère est faux.** Reprenons le graphe orienté de la partie II (rappelé ci-dessous) et oublions un instant l’arc `C`$\to$`A`, en pointillés. Un parcours en profondeur depuis `A` découvre `B`, `C`, puis `E` (par l’arc `C`$\to$`E`) ; il revient en arrière, explore `D`, et l’arc `D`$\to$`E` le fait retomber sur `E`, déjà découvert, alors qu’il arrive de `D`. Le critère non orienté crierait au cycle… à tort : `B`$\to$`C`$\to$`E` et `B`$\to$`D`$\to$`E` sont deux chemins qui **se rejoignent**, mais aucun arc ne permet de repartir de `E` pour revenir en arrière. Même piège dans la recette de l’exercice 14 du chapitre : la tâche `(f)` est atteinte à la fois depuis `(e)` et depuis `(d)`, sans le moindre cycle.
+**Graphe orienté : ce critère est faux.** Reprenons le graphe orienté de la partie II (rappelé ci-dessous) et oublions un instant l’arc `C`$\to$`A`, en pointillés. Un parcours en profondeur depuis `A` découvre `B`, `C`, puis `E` (par l’arc `C`$\to$`E`) ; il revient en arrière, explore `D`, et l’arc `D`$\to$`E` le fait retomber sur `E`, déjà découvert, alors qu’il arrive de `D`. Le critère non orienté crierait au cycle… à tort : `B`$\to$`C`$\to$`E` et `B`$\to$`D`$\to$`E` sont deux chemins qui **se rejoignent**, mais aucun arc ne permet de repartir de `E` pour revenir en arrière. Même piège dans la recette de l’exercice 16 du chapitre : la tâche `(f)` est atteinte à la fois depuis `(e)` et depuis `(d)`, sans le moindre cycle.
 
 ![](../figures/ac617813cfb0eff3.svg){ .tikz loading=lazy }
 
@@ -687,17 +687,17 @@ False
 
 - employer le **vocabulaire** (sommet, arête/arc, voisin, degré, chaîne/chemin, cycle, connexe) $\to$ ex. [1](exercices.md#ex-08-1), [3](exercices.md#ex-08-3) ;
 
-- **modéliser** une situation concrète par un graphe orienté ou non, pondéré ou non $\to$ ex. [2](exercices.md#ex-08-2), [3](exercices.md#ex-08-3), [13](exercices.md#ex-08-13) ;
+- **modéliser** une situation concrète par un graphe orienté ou non, pondéré ou non (réseau, plan, grille ou labyrinthe) $\to$ ex. [2](exercices.md#ex-08-2), [3](exercices.md#ex-08-3), [15](exercices.md#ex-08-15), [23](exercices.md#ex-08-23) ;
 
-- écrire une **matrice d’adjacence**, une **liste d’adjacence**, et **passer** de l’une à l’autre $\to$ ex. [4](exercices.md#ex-08-4), [5](exercices.md#ex-08-5), [6](exercices.md#ex-08-6) ;
+- écrire une **matrice d’adjacence**, une **liste d’adjacence** (de successeurs, de prédécesseurs), et **passer** de l’une à l’autre $\to$ ex. [4](exercices.md#ex-08-4), [5](exercices.md#ex-08-5), [6](exercices.md#ex-08-6) ;
 
 - écrire / compléter une **classe `Graphe`** $\to$ ex. [8](exercices.md#ex-08-8), [10](exercices.md#ex-08-10) ;
 
-- dérouler et coder un **parcours en largeur** (file) et en **profondeur** (pile ou récursif) $\to$ ex. [9](exercices.md#ex-08-9), [10](exercices.md#ex-08-10) ;
+- dérouler et coder un **parcours en largeur** (file) et en **profondeur** (pile ou récursif) $\to$ ex. [9](exercices.md#ex-08-9) à [12](exercices.md#ex-08-12), [22](exercices.md#ex-08-22) ;
 
-- trouver un **chemin**, un **plus court chemin** (BFS), tester la **connexité** $\to$ ex. [11](exercices.md#ex-08-11), [12](exercices.md#ex-08-12) ;
+- trouver un **chemin**, un **plus court chemin** (BFS), tester la **connexité** $\to$ ex. [13](exercices.md#ex-08-13), [14](exercices.md#ex-08-14), [23](exercices.md#ex-08-23) ;
 
-- repérer un **cycle**, en distinguant graphe non orienté (sommet déjà découvert, autre que le parent) et orienté (sommet **en cours**) $\to$ ex. [14](exercices.md#ex-08-14).
+- repérer un **cycle**, en distinguant graphe non orienté (sommet déjà découvert, autre que le parent) et orienté (sommet **en cours**) $\to$ ex. [16](exercices.md#ex-08-16) (q. 4, 5, 7), 22 c.
 
 ## Vers le Grand Oral
 

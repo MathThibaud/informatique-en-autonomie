@@ -184,7 +184,9 @@ On rappelle : **temps de séjour** $=$ instant de fin $-$ instant d’arrivée ;
         for i in range(1, len(t)):
             j = i
             while j > 0 and t[j - 1][1] > t[j][1]:
-                t[j - 1], t[j] = t[j], t[j - 1]
+                temp = t[j - 1]                # echange des deux voisins
+                t[j - 1] = t[j]
+                t[j] = temp
                 j = j - 1
         return t
 
@@ -491,7 +493,7 @@ Variante **préemptive** du plus court d’abord (*SRTF*) : **à chaque unité d
 
     **2.** Sur `JEU_TP` : `"ABBCDCCCCAAAAAAA..EFEE"`, attente moyenne $1{,}83$, la meilleure de toutes. Mais `A` attend $8$ unités et finit en dernier parmi les quatre premiers : c’est le risque de **famine** des longs processus (si de petits processus arrivaient sans cesse, `A` ne finirait jamais).
 
-## Partie C — Provoquer, guérir et éviter un interblocage
+## Partie C — Provoquer, guérir et éviter un interblocage <span class="horsprog">au-delà du programme</span>
 
 En Python, le module `threading` permet de lancer plusieurs **fils d’exécution** (*threads*) qui avancent « en même temps », comme des processus. Un **verrou** (`threading.Lock()`) modélise une ressource qu’un seul fil peut détenir : `with verrou:` attend de l’obtenir, puis le libère automatiquement à la fin du bloc.
 

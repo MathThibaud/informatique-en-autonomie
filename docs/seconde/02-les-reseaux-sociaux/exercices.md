@@ -10,7 +10,7 @@
 
     - Vocabulaire du graphe : **sommet**, **arête**, **degré**, **distance**, **excentricité**, **diamètre**, **rayon**, **centre**.
 
-    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la charte d’usage de l’IA.
+    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
 ### Reconnaître et comparer les réseaux
 
@@ -578,3 +578,31 @@ $\blacktriangleright$  En Python (Spyder ou Basthon). Un réseau social affiche
     Chaque publicité affichée est payée par un annonceur : plus vous restez, plus le réseau affiche de publicités et plus il gagne d’argent. C’est l’**économie de l’attention** : vidéos qui s’enchaînent, défilement infini et notifications servent à allonger ce temps.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `minutes / 4` : la division `/` donne `7.5` publicités pour $30$ minutes, un nombre qui n’a pas de sens ici. La division entière `//` ne compte que les tranches de $4$ minutes *terminées*.
+
+### Compléments
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 22</span> — Reconnaître la cyberviolence <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-22 }
+
+<span class="tag">sur papier</span>  Pour chaque situation, nommer la **forme de cyberviolence** (harcèlement, discrimination ou propos haineux, diffusion d’images intimes sans accord, usurpation d’identité).
+
+1.  Un soir, une vingtaine d’élèves envoient *chacun* un seul message moqueur à Léna.
+
+2.  Un compte publie des commentaires insultants contre des personnes à cause de leur religion.
+
+3.  Théo transfère à toute sa classe une photo intime que son amie n’avait envoyée qu’à lui.
+
+4.  Quelqu’un crée un compte au nom et avec la photo de Malik, et y publie des messages blessants.
+
+5.  Dans la situation 3, les élèves qui reçoivent la photo et la font suivre sont-ils responsables ? Que devraient-ils faire ?
+
+??? pouce "Coup de pouce"
+
+    Relisez la définition de la cyberviolence dans la partie « Bien vivre avec les réseaux sociaux » du cours. Pour la situation 1, chaque élève n’écrit qu’une fois : qu’est-ce que la victime reçoit, elle ?
+
+??? corrige "Corrigé"
+
+    **1.** **Cyberharcèlement** (en meute, ou « raid ») : chacun n’écrit qu’une fois, mais Léna reçoit des dizaines de messages ; c’est l’ensemble qui fait le harcèlement.  
+    **2.** **Discrimination**, **propos haineux** : on attaque des personnes pour ce qu’elles sont (leur religion).  
+    **3.** **Diffusion d’une image intime sans accord** : la photo avait été envoyée à une seule personne, en confiance ; la partager est interdit, même si elle avait été envoyée volontairement.  
+    **4.** **Usurpation d’identité** : le faux compte utilise le nom et la photo de Malik pour lui nuire.  
+    **5.** **Oui** : faire suivre la photo, c’est participer à sa diffusion, et donc à la violence. Il faut **ne pas la partager**, la supprimer, **signaler** le contenu à la plateforme et **en parler** à un adulte de confiance (à Monaco, la ligne d’écoute **98 98 96 96**), pour que la victime soit aidée.

@@ -6,7 +6,7 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *« Algorithmes sur les tableaux »* : *recherche dichotomique* dans un tableau *trié* ; *coût logarithmique* ; *terminaison* d’une boucle (variant). |
+| **Programme (BO)** | *« Recherche dichotomique dans un tableau trié »* : *montrer la terminaison de la recherche dichotomique à l’aide d’un variant de boucle* ; des assertions peuvent être utilisées ; la preuve de la correction peut être présentée par le professeur. |
 | **Prérequis** | la boucle `while`, les tableaux (indices, `len`) ; la **recherche séquentielle** et la **notion de coût** (chapitre *Algorithmique : le parcours séquentiel*) ; le fait qu’un tableau puisse être **trié** (chapitre *Les algorithmes de tri*). (→ fiches de révision : ch. 4, ch. 6) |
 | **Objectifs** | comprendre et écrire la recherche dichotomique ; **dérouler** son exécution ; prouver qu’elle **se termine** (variant de boucle) ; établir son **coût logarithmique** et mesurer à quel point il est petit. |
 
@@ -96,11 +96,15 @@ Avec une boucle `while`, une question capitale se pose : est-on sûr de ne pas t
 
 !!! regle "Règle 2 — Un variant de boucle"
 
-    Considérons la quantité `fin - deb`, la « largeur » de la zone de recherche. À **chaque** tour, on remplace `deb` par `mil + 1`, ou `fin` par `mil - 1` : dans les deux cas, cette largeur **diminue strictement**. Une quantité entière qui décroît strictement ne peut pas le faire éternellement : tôt ou tard `deb > fin`, et la boucle s’arrête. Une telle grandeur est appelée un **variant de boucle** (notion déjà rencontrée au chapitre *Les bases de la programmation Python*).
+    Considérons la quantité `fin - deb`, la « largeur » de la zone de recherche. À **chaque** tour, on remplace `deb` par `mil + 1`, ou `fin` par `mil - 1` : dans les deux cas, cette largeur **diminue strictement**. Tant que la boucle tourne (`deb <= fin`), cette quantité entière est **positive ou nulle** ; or un entier positif qui décroît strictement ne peut pas le faire éternellement : tôt ou tard `deb > fin`, et la boucle s’arrête. Une telle grandeur est appelée un **variant de boucle** (notion déjà rencontrée au chapitre *Les bases de la programmation Python*).
 
 !!! demonstration "Démonstration — La terminaison"
 
     La largeur `fin - deb` est un entier. À chaque tour de boucle qui ne renvoie pas `True`, elle diminue d’au moins 1 (la moitié testée est *écartée*, milieu compris). Une suite d’entiers strictement décroissante finit forcément par franchir 0 : on atteint `deb > fin`, la condition de la boucle devient fausse, l’algorithme se termine en renvoyant `False`.
+
+!!! curieux "Pour les curieux (facultatif) — Pourquoi la recherche est correcte"
+
+    On peut aussi prouver que la réponse est **juste**, grâce à un **invariant** : « si `x` est dans `t`, alors il se trouve dans la zone `t[deb..fin]` ». C’est vrai au départ (la zone est le tableau entier). À chaque tour, on n’écarte que des cases qui ne peuvent pas contenir `x` : si `x > t[mil]`, toutes les cases de `deb` à `mil` contiennent des valeurs $\leqslant$ `t[mil] < x`, puisque le tableau est trié (même raisonnement à gauche). L’invariant reste donc vrai. Quand la boucle s’arrête sans avoir trouvé `x`, la zone est vide : `x` n’est pas dans `t`, et renvoyer `False` est correct.
 
 !!! remarque "Remarque — Variant / invariant : ne pas confondre"
 

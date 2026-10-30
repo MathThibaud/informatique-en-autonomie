@@ -1181,3 +1181,39 @@ Pour chaque suite de valeurs, partir d’un ABR **vide**, insérer les valeurs *
     | **a)** hauteur $3$ | **b)** hauteur $4$ | **c)** hauteur $4$ | **d)** hauteur $5$ |
 
     En c), le second `4` va à droite de la racine (égalité), puis à gauche de `6` ; `5` descend ensuite à droite des deux `4`. En d), les valeurs arrivent triées : l’arbre est un « peigne », aussi haut qu’il a de nœuds.
+
+### Encadrer la hauteur
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 26</span> — Encadrer la hauteur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-26 }
+
+On compte la hauteur en nœuds (convention du cours) sauf à la question 5.
+
+1.  Un arbre binaire a $15$ nœuds. Quelle est sa plus petite hauteur possible ? sa plus grande ? Dessiner, sur le cahier, la forme d’un arbre de $15$ nœuds dans chacun des deux cas (les valeurs n’importent pas).
+
+2.  Combien de nœuds peut contenir, au plus, un arbre binaire de hauteur $5$ ? au moins ?
+
+3.  Un ABR contient $1\,000\,000$ de valeurs. Entre quelles bornes sa hauteur est-elle comprise ? En déduire le nombre maximal de nœuds visités par une recherche si l’arbre a la plus petite hauteur possible, puis s’il a la plus grande.
+
+    ??? pouce "Coup de pouce"
+
+        Chercher la plus petite puissance de 2 qui dépasse $1\,000\,000$ : $2^{10} = 1\,024$, donc $2^{20}$ dépasse un million.
+
+4.  On insère les valeurs $1, 2, 3, \dots, 100$, dans cet ordre, dans un ABR vide. Quelle est sa hauteur ? Proposer un ordre d’insertion des valeurs $1$ à $7$ qui donne un ABR de hauteur minimale.
+
+5.  Reprendre la question 1 avec la convention qui compte les **arêtes**.
+
+??? corrige "Corrigé"
+
+    **1.** D’après l’encadrement du cours, $\log_2(16) = 4 \leqslant h \leqslant 15$. La plus petite hauteur est $4$ : l’arbre **parfait**, dont les quatre niveaux sont pleins ($1 + 2 + 4 + 8 = 15$ nœuds). La plus grande est $15$ : l’arbre **filiforme**, une chaîne où chaque nœud a un seul fils.
+
+    ![](../figures/7376207079a459f0.svg){ .tikz loading=lazy }
+
+    ![](../figures/fce7f18745a42f1e.svg){ .tikz loading=lazy }
+
+    **2.** Au plus $1 + 2 + 4 + 8 + 16 = 2^5 - 1 = 31$ nœuds (tous les niveaux pleins) ; au moins $5$ (un nœud par niveau, arbre filiforme).
+
+    **3.** $2^{19} - 1 = 524\,287 < 1\,000\,000 \leqslant 2^{20} - 1 = 1\,048\,575$ : la hauteur est comprise entre $20$ et $1\,000\,000$. Une recherche descend d’un seul côté et visite au plus un nœud par niveau, soit au plus $h$ nœuds : une **vingtaine** si l’arbre est de hauteur minimale, jusqu’à un **million** s’il est filiforme. D’où l’intérêt des arbres équilibrés (coût logarithmique).
+
+    **4.** Chaque valeur est plus grande que toutes les précédentes : elle va toujours à droite. On obtient une chaîne de $100$ nœuds, de hauteur $100$, le pire cas de l’encadrement. Pour $1$ à $7$, insérer d’abord la valeur du milieu, puis les milieux de chaque moitié : `4, 2, 6, 1, 3, 5, 7` donne l’arbre parfait de hauteur $3 = \log_2(8)$. (D’autres ordres conviennent, comme `4, 6, 2, 7, 5, 3, 1` : il suffit que chaque nœud soit inséré avant ses fils.)
+
+    **5.** Avec les arêtes, on retranche $1$ : la hauteur d’un arbre de $15$ nœuds est comprise entre $3$ et $14$.

@@ -10,7 +10,7 @@
 
     - Rappels : $1^\circ = 60'$ ; distance $= c \times$ temps, avec $c \approx 300\,000$ km/s.
 
-    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la charte d’usage de l’IA.
+    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
 ### Latitude et longitude
 
@@ -42,11 +42,15 @@
 
     **1.** et **2.** Relevés personnels (pour un lycée de Monaco, la latitude est proche de $43{,}7^\circ$ N et la longitude de $7{,}4^\circ$ E). **3.** La distance « à vol d’oiseau » est **plus courte** : c’est la ligne droite, alors que l’itinéraire suit les routes, avec leurs virages, les sens interdits et le relief (à Monaco, beaucoup de rues en lacets).
 
-    Activité 3 — Enquête sur mes traces
+    Activité 3 — Lire les couches d’une carte, signaler un oubli (sans compte)
+
+    **1.** Seulement sur le **plan** : les noms des rues et des lieux (cathédrale, mairie…), les limites, des symboles et des couleurs conventionnels. Seulement sur la **photo** : ce qui existait le jour de la prise de vue, tel quel (toits, végétation, voitures, ombres, chantiers) ; elle n’est pas forcément à jour. **2.** Une courbe de niveau relie les points de **même altitude**. Plus les courbes sont **serrées**, plus la pente est **forte** : à Beausoleil, elles sont très rapprochées. L’altitude augmente vers le **nord**, en s’éloignant de la mer (les cotes lues sur les courbes croissent). **3.** Le **cadastre** découpe le sol en **parcelles** (les propriétés), numérotées. C’est un document de l’administration française : la couche **s’arrête à la frontière** et reste vide sur Monaco, qui tient son propre cadastre (non diffusé sur Géoportail). Une couche n’existe que là où son producteur fournit des données. **4.** Une **couche** est un ensemble de données géolocalisées d’une même nature (photos, routes, relief, parcelles…), que l’on peut afficher, masquer ou rendre transparente. Superposer des couches permet de **choisir** ce que l’on veut voir, de **combiner** des données venues de producteurs différents et de mettre chacune à jour séparément. **5.** et **6.** Réponses personnelles. Exemple de note recevable : « Escalier public reliant les deux rues, absent de la carte. Vu sur place le 30/10 ; visible sur la photo aérienne. » **7.** Des **contributeurs bénévoles** (souvent des cartographes du secteur) lisent la note, vérifient l’information, corrigent la carte puis **ferment** la note. OpenStreetMap est **collaborative** : n’importe qui peut l’enrichir ou signaler une erreur, et chacun peut réutiliser librement ses données (*open data*).
+
+    Activité 4 — Enquête sur mes traces
 
     **1.** Réponse personnelle (par exemple : cartes, météo, réseau social, appareil photo). **2.** Recoupées, les positions enregistrées révèlent le **domicile**, le lycée, les trajets et les **habitudes** ; stockées chez une entreprise, elles peuvent être revendues, piratées ou servir à suivre quelqu’un. **3.** Par exemple : couper la localisation quand elle est inutile ; n’autoriser une application que « pendant l’utilisation » ; effacer l’historique des positions ; retirer les métadonnées d’une photo avant de la publier.
 
-    Activité 4 — Localisation et sobriété
+    Activité 5 — Localisation et sobriété
 
     **1.** Les trois : le **terminal** (le téléphone calcule sa position à partir des signaux des satellites et affiche la carte), les **réseaux** (données mobiles ou Wi-Fi) et les **centres de données** (fonds de carte, calcul de l’itinéraire, état du trafic). **2.** En arrière-plan, le récepteur GPS et les liaisons radio fonctionnent sans arrêt : la **batterie** se vide plus vite (et une batterie usée trop tôt pousse à changer de téléphone) ; dans le même temps, les positions sont enregistrées et envoyées en continu, ce qui grossit les **traces** sur la vie privée. **3.** Les deux gestes cités dans l’énoncé conviennent ; autres exemples : couper la localisation quand on ne s’en sert pas, désactiver l’historique des positions.
 

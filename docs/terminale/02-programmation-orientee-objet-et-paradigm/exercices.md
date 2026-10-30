@@ -558,7 +558,9 @@ Exemple :
     ```python
     def pgcd(a, b):
         while b != 0:
-            a, b = b, a % b
+            r = a % b       # variable temporaire : on garde le reste
+            a = b
+            b = r
         return a
 
     class Fraction:
@@ -1415,3 +1417,78 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
     - Exemple : dans `self.nom = nom`, `self.nom` est l’attribut de l’objet, `nom` le paramètre reçu.
 
     - Piège : oublier `self` dans la liste des paramètres, ou écrire `nom = nom` (une variable locale, perdue à la fin de la méthode).
+
+### Modularité
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — Créer et documenter un module <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-24 }
+
+1.  *Exploiter une documentation.* Dans la console, on obtient :
+
+    ```text
+    >>> from random import choice
+    >>> help(choice)
+    choice(seq) method of random.Random instance
+        Choose a random element from a non-empty sequence.
+    ```
+
+    Que peut renvoyer `choice(["pile", "face"])` ? D’après la documentation, l’appel `choice([])` respecte-t-il la spécification ? <span class="run" title="À programmer et tester sur machine">▶</span> Vérifier ce qui se passe dans la console.
+
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Créer un fichier `temps.py` qui commence par une docstring de module et contient deux fonctions documentées :
+
+    - `en_secondes(h, m, s)` renvoie la durée de `h` heures, `m` minutes et `s` secondes, convertie en secondes ;
+
+    - `en_hms(duree)` renvoie le triplet `(h, m, s)` d’une durée donnée en secondes, avec des minutes et des secondes comprises entre 0 et 59.
+
+    Ajouter, sous `if __name__ == "__main__":`, au moins deux `assert` par fonction, par exemple `en_secondes(1, 2, 3) == 3723`.
+
+    ??? pouce "Coup de pouce"
+
+        Dans `en_hms`, le nombre d’heures est le quotient `duree // 3600` ; le reste `duree % 3600` se découpe ensuite de la même façon en minutes et en secondes, avec `60`.
+
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Dans un second fichier `trajet.py`, placé dans le même dossier, importer les deux fonctions et afficher, au format `(h, m, s)`, la durée totale d’un trajet en deux étapes : 1 h 47 min 30 s, puis 2 h 25 min 45 s.
+
+4.  Dans la console, après `import temps`, que montre `help(temps)` ? Quand on lance `trajet.py`, les tests de `temps.py` s’exécutent-ils ? Pourquoi ?
+
+??? corrige "Corrigé"
+
+    **1.** `choice(["pile", "face"])` renvoie l’un des deux éléments, `"pile"` ou `"face"`, au hasard. La documentation exige une séquence **non vide** (« *non-empty sequence* ») : `choice([])` ne respecte pas la spécification. Dans la console, l’appel lève une erreur : `IndexError: Cannot choose from an empty sequence`.
+
+    **2.** Fichier `temps.py` :
+
+    ```python
+    """Module temps : conversions entre secondes et heures-minutes-secondes."""
+
+    def en_secondes(h, m, s):
+        """Renvoie la duree h heures, m minutes, s secondes, en secondes."""
+        return h * 3600 + m * 60 + s
+
+    def en_hms(duree):
+        """Renvoie le triplet (h, m, s) d'une duree en secondes (entier >= 0),
+        avec 0 <= m < 60 et 0 <= s < 60."""
+        h = duree // 3600
+        reste = duree % 3600
+        m = reste // 60
+        s = reste % 60
+        return (h, m, s)
+
+    if __name__ == "__main__":
+        assert en_secondes(1, 2, 3) == 3723
+        assert en_secondes(0, 0, 0) == 0
+        assert en_hms(3723) == (1, 2, 3)
+        assert en_hms(59) == (0, 0, 59)
+        print("Tests du module temps : OK")
+    ```
+
+    **3.** Fichier `trajet.py` :
+
+    ```python
+    from temps import en_secondes, en_hms
+
+    etape1 = en_secondes(1, 47, 30)
+    etape2 = en_secondes(2, 25, 45)
+    print(en_hms(etape1 + etape2))     # affiche (4, 13, 15)
+    ```
+
+    $6\,450 + 8\,745 = 15\,195$ secondes, soit 4 h 13 min 15 s. (`import temps` puis `temps.en_secondes(…)` convient aussi.)
+
+    **4.** `help(temps)` affiche la **documentation** du module : la docstring de tête, puis la liste des fonctions avec leurs paramètres et leurs docstrings. C’est pour cela qu’on les écrit : l’utilisateur sait se servir du module sans lire son code. Les tests ne s’exécutent **pas** : quand `temps.py` est importé, la variable `__name__` vaut `"temps"` et non `"__main__"`, donc le bloc protégé est sauté. Il ne s’exécute que si l’on lance `temps.py` lui-même.

@@ -547,49 +547,52 @@ Lui donner : (a) un **nom** explicite, (b) une **docstring**, (c) un **invariant
 
 <span class="duree">≈ 15 min</span>
 
-On somme les éléments d’un tableau.
+On compte les éléments pairs d’un tableau d’entiers.
 
 ```python
-def somme(t):
-    s = 0
+def nb_pairs(t):
+    c = 0
     for i in range(len(t)):
-        s = s + t[i]
-    return s
+        if t[i] % 2 == 0:
+            c = c + 1
+    return c
 ```
 
-\(a\) Énoncer l’invariant reliant `s` et `i`. (b) L’écrire sous forme d’un `assert` placé au bon endroit dans la boucle. (c) En quoi cela aide-t-il à la mise au point ?
+\(a\) Énoncer l’invariant reliant `c` et `i`. (b) L’écrire sous forme d’un `assert` placé au bon endroit dans la boucle. (c) En quoi cela aide-t-il à la mise au point ?
 
 ??? pouce "Coup de pouce"
 
-    Au début du tour d’indice `i`, `s` contient la somme de quels éléments ? Comment calculer cette somme *autrement*, pour la comparer à `s` ?
+    Au début du tour d’indice `i`, `c` compte les éléments pairs parmi quels éléments ? Comment calculer ce nombre *autrement*, pour le comparer à `c` ?
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    Écrire d’abord une petite fonction de vérification `somme_debut(t, i)` qui renvoie la somme des éléments d’indices `0` à `i - 1`. L’`assert` compare `s` à `somme_debut(t, i)` ; il doit être exécuté à chaque tour, *avant* la mise à jour de `s`.
+    Écrire d’abord une petite fonction de vérification `nb_pairs_debut(t, i)` qui renvoie le nombre d’éléments pairs parmi ceux d’indices `0` à `i - 1`. L’`assert` compare `c` à `nb_pairs_debut(t, i)` ; il doit être exécuté à chaque tour, *avant* la mise à jour de `c`.
 
 ??? corrige "Corrigé"
 
     ```python
-    def somme_debut(t, i):
-        """Renvoie t[0] + ... + t[i - 1] (fonction de verification)."""
+    def nb_pairs_debut(t, i):
+        """Nombre d'elements pairs parmi t[0], ..., t[i - 1] (fonction de verification)."""
         total = 0
         for k in range(i):
-            total = total + t[k]
+            if t[k] % 2 == 0:
+                total = total + 1
         return total
 
-    def somme(t):
-        s = 0
+    def nb_pairs(t):
+        c = 0
         for i in range(len(t)):
-            assert s == somme_debut(t, i)   # invariant : s = somme des i premiers
-            s = s + t[i]
-        return s
+            assert c == nb_pairs_debut(t, i)   # invariant : c = nb de pairs des i premiers
+            if t[i] % 2 == 0:
+                c = c + 1
+        return c
     ```
 
-    \(a\) Juste avant le tour d’indice `i`, `s` contient la somme des `i` premiers éléments `t[0]`, …, `t[i - 1]`.
+    \(a\) Juste avant le tour d’indice `i`, `c` est le nombre d’éléments pairs parmi les `i` premiers éléments `t[0]`, …, `t[i - 1]`.
 
-    \(b\) Pour l’écrire en `assert`, il faut savoir calculer cette somme *autrement* : c’est le rôle de la fonction de vérification `somme_debut`. (Elle refait le travail à chaque tour, ce qui ralentit le programme : on ne la garde que pendant la mise au point.)
+    \(b\) Pour l’écrire en `assert`, il faut savoir calculer ce nombre *autrement* : c’est le rôle de la fonction de vérification `nb_pairs_debut`. (Elle refait le travail à chaque tour, ce qui ralentit le programme : on ne la garde que pendant la mise au point.)
 
-    \(c\) Pendant la mise au point, Python **vérifie l’invariant à chaque tour** : si une erreur casse la logique de l’accumulation, l’`AssertionError` se déclenche *tout de suite*, au tour fautif, au lieu de laisser un résultat faux apparaître à la fin.
+    \(c\) Pendant la mise au point, Python **vérifie l’invariant à chaque tour** : si une erreur casse la logique du comptage, l’`AssertionError` se déclenche *tout de suite*, au tour fautif, au lieu de laisser un résultat faux apparaître à la fin.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 18</span> — Une division qui se trompe parfois <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-18 }
 

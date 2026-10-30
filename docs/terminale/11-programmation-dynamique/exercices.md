@@ -337,6 +337,8 @@ On dispose du système de pièces $\{1, 3, 4\}$.
 
 3.  Rappeler la relation de récurrence donnant $R(s)$, le nombre *minimal* de pièces pour rendre $s$, et le cas de base.
 
+4.  Remplir à la main la table des valeurs $R(0), R(1), \dots, R(6)$ pour le système $\{1, 3, 4\}$, de gauche à droite.
+
 ??? pouce "Coup de pouce"
 
     Question 1 : à chaque étape, prendre la plus grosse pièce qui ne dépasse pas ce qu’il reste à rendre. Question 2 : peut-on rendre $6$ avec seulement deux pièces ? Question 3 : la dernière pièce rendue est l’une des pièces du système ; que reste-t-il alors à rendre ?
@@ -350,6 +352,14 @@ On dispose du système de pièces $\{1, 3, 4\}$.
     <span class="erreurfreq">▷ Erreur fréquente.</span> Croire le glouton toujours optimal parce qu’il l’est avec les pièces en euros : c’est le système de pièces qui décide.
 
     **3.** $R(0) = 0$ et $R(s) = 1 + \min\limits_{p \leq s} R(s - p)$ (on essaie chaque première pièce $p$ et on garde la meilleure suite).
+
+    **4.**
+
+    |  $s$   |  0  |  1  |  2  |  3  |  4  |  5  |  6  |
+    |:------:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+    | $R(s)$ |  0  |  1  |  2  |  1  |  1  |  2  |  2  |
+
+    Par exemple $R(6) = 1 + \min(R(5), R(3), R(2)) = 1 + \min(2, 1, 2) = 2$ (dernière pièce $3$).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Rendre au plus juste <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-10 }
 
@@ -493,6 +503,8 @@ Un sac supporte une capacité `C`. On dispose d’objets de poids `poids[i]` et 
 
 3.  Quel serait le résultat d’un algorithme glouton qui prendrait d’abord les objets de plus grande valeur ? Est-il optimal ici ?
 
+4.  On ne garde que les trois premiers objets (poids $1, 3, 4$ ; valeurs $1, 4, 5$) et une capacité de $5$. Remplir à la main la table $T$ ($4$ lignes $i = 0$ à $3$, $6$ colonnes $c = 0$ à $5$), ligne par ligne. Quelle est la meilleure valeur, et quels objets prend-on ?
+
 ??? corrige "Corrigé"
 
     **1.** $T[i][c] = \max\big(T[i-1][c],\ \ v_i + T[i-1][c - w_i]\big)$ : on *laisse* l’objet $i$ (première branche) ou on le *prend* s’il rentre (seconde branche, avec $w_i \leq c$).
@@ -515,7 +527,18 @@ Un sac supporte une capacité `C`. On dispose d’objets de poids `poids[i]` et 
 
     `sac_a_dos([1,3,4,5], [1,4,5,7], 7) == 9` (on prend les objets de poids $3$ et $4$ : valeur $4 + 5 = 9$).
 
-    **3.** Le glouton par valeur prendrait d’abord l’objet de valeur $7$ (poids $5$), puis plus rien ne rentre (il reste $2$ de capacité) : valeur $7$, **moins bon** que $9$. Le glouton n’est pas optimal pour le sac à dos entier.
+    **3.** Le glouton par valeur prend d’abord l’objet de valeur $7$ (poids $5$) ; il reste $2$ de capacité. Il essaie ensuite les objets de valeur $5$ (poids $4$) et $4$ (poids $3$), qui ne rentrent pas, puis prend l’objet de poids $1$ (valeur $1$) : total **8**, **moins bon** que $9$. Le glouton n’est pas optimal pour le sac à dos entier.
+
+    **4.**
+
+    |           $T[i][c]$           | $c=0$ | $1$ | $2$ | $3$ | $4$ |  $5$  |
+    |:-----------------------------:|:-----:|:---:|:---:|:---:|:---:|:-----:|
+    |      $i=0$ (aucun objet)      |   0   |  0  |  0  |  0  |  0  |   0   |
+    | $i=1$ (poids $1$, valeur $1$) |   0   |  1  |  1  |  1  |  1  |   1   |
+    | $i=2$ (poids $3$, valeur $4$) |   0   |  1  |  1  |  4  |  5  |   5   |
+    | $i=3$ (poids $4$, valeur $5$) |   0   |  1  |  1  |  4  |  5  | **6** |
+
+    Par exemple $T[3][5] = \max(T[2][5],\ 5 + T[2][1]) = \max(5,\ 6) = 6$. La meilleure valeur est $\textbf{6}$ : on prend l’objet de poids $4$, puis, dans la capacité restante $1$, l’objet de poids $1$ ($T[2][1] = 1$ vient de la ligne $i=1$).
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Comparer deux mots <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-14 }
 
@@ -638,7 +661,7 @@ On considère la liste des nombres d’étages des immeubles d’une rue, en par
 
     def llsc_rec(tab):
         n = len(tab)
-        return max([llsc_fin(tab, i) for i in range(n)])
+        return max([llsc_fin(tab, i) for i in range(n)])  # plus grande valeur de la liste
     ```
 
 5.  **Version dynamique.** On construit une liste `dyn` telle que `dyn[i]` contient la longueur d’une plus longue sous-séquence strictement croissante se terminant à l’indice `i`. Recopier et compléter les lignes 7 et 8 :
@@ -1164,7 +1187,7 @@ On représente ces tarifs par la liste `prix = [0, 2, 5, 10, 13, 14]`, où `prix
 
     **2.** **Non** : entière, elle rapporte $14$ €, alors que la découpe $3 + 2$ rapporte $10 + 5 = 15$ € (de même $4 + 1$ : $13 + 2 = 15$ €).
 
-    **3.** Il y a $n - 1$ marches intérieures et, à chacune, deux choix indépendants (scier ou non) : $2 \times 2 \times \dots \times 2 = 2^{n-1}$ découpes. Pour $60$ m, cela fait $2^{59} \approx 5{,}8 \times 10^{17}$ découpes : même à un milliard de découpes par seconde, il faudrait plus de $18$ ans. Le nombre de cas croît **exponentiellement**.
+    **3.** Il y a $n - 1$ marques intérieures et, à chacune, deux choix indépendants (scier ou non) : $2 \times 2 \times \dots \times 2 = 2^{n-1}$ découpes. Pour $60$ m, cela fait $2^{59} \approx 5{,}8 \times 10^{17}$ découpes : même à un milliard de découpes par seconde, il faudrait plus de $18$ ans. Le nombre de cas croît **exponentiellement**.
 
     **4.** Une planche de $0$ m ne rapporte rien : $V(0) = 0$. Pour $n \geq 1$, une découpe commence par un premier morceau de longueur $k$, avec $1 \leq k \leq \min(n, 5)$ ; il reste alors une planche de $n - k$ mètres, qu’il faut découper au mieux, ce qui rapporte au plus $V(n - k)$. On essaie toutes les longueurs $k$ possibles et on garde la meilleure, d’où la relation.
 

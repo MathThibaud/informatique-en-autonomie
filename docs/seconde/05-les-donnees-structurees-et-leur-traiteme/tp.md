@@ -10,7 +10,7 @@
 
     [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/05-tp-tableur-1){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/seconde-05-tp-tableur-1.zip){ .md-button }
 
-Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la charte d’usage de l’IA.
+Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
 !!! encadre "Pour commencer"
 
@@ -46,9 +46,44 @@ On a relevé, dans l’ordre croissant, les notes obtenues à un contrôle de ma
     `=SOMMEPROD(C8:O8;C9:O9)/P9`.  
     **Comparer** avec la moyenne trouvée à la question **1** : que remarque-t-on ?
 
+??? corrige "Corrigé"
+
+    !!! remarque "Remarque"
+
+        Les formules sont écrites comme dans un tableur en français (séparateur `;`). Le classeur complet est `tableur1_corrige.xlsx`. Les valeurs décimales sont arrondies ; le tableur, lui, garde toutes les décimales.
+
+    1.  `B5` : `=MOYENNE(C2:O3)` affiche $\mathbf{9{,}46}$ (26 notes, de somme $246$ : $246/26 \approx 9{,}46$).
+
+    2.  Effectifs (ligne `9`), en comptant les notes de la ligne `8` dans la plage `C2:O3` :
+
+        | Note | 3 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 17 | Total |
+        |:---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+        | Effectif | 1 | 1 | 2 | 3 | 3 | 4 | 4 | 2 | 2 | 1 | 1 | 1 | 1 | **26** |
+        | Fréquence | 0,038 | 0,038 | 0,077 | 0,115 | 0,115 | 0,154 | 0,154 | 0,077 | 0,077 | 0,038 | 0,038 | 0,038 | 0,038 | **1** |
+        | Fréquence (%) | 4 % | 4 % | 8 % | 12 % | 12 % | 15 % | 15 % | 8 % | 8 % | 4 % | 4 % | 4 % | 4 % | **100 %** |
+        | E.C.C. | 1 | 2 | 4 | 7 | 10 | 14 | 18 | 20 | 22 | 23 | 24 | 25 | 26 |  |
+
+    3.  **a)** `P9` : `=SOMME(C9:O9)` donne $26$, le nombre d’élèves. **b)** et **c)** `C10` : `=C9/$P9`, recopiée jusqu’à `O10` ; en `D10`, la formule devient `=D9/$P9` : le numérateur suit la colonne, le dénominateur reste l’effectif total grâce au `$`. Sans le `$`, `D10` contiendrait `=D9/Q9`, une cellule vide : erreur `#DIV/0!`. **d)** `C11` : `=C10`, au format *Pourcentage* sans décimale ; c’est la même valeur, seulement affichée autrement. **e)** `P10` vaut $\mathbf{1}$ et `P11` vaut $\mathbf{100\,\%}$ : la somme des fréquences fait toujours $1$. *Attention : si l’on additionne de tête les pourcentages *affichés*, on trouve $102\,\%$, à cause des arrondis ; le tableur, lui, additionne les valeurs exactes.*
+
+    4.  `C12` : `=C9` ; `D12` : `=C12+D9`, recopiée jusqu’à `O12` (ligne E.C.C. du tableau ci-dessus). La dernière valeur, $26$, est l’effectif total : c’est un bon contrôle.
+
+    5.  `B14` : `=SOMMEPROD(C8:O8;C9:O9)/P9` affiche aussi $\mathbf{9{,}46}$. Les deux moyennes sont **égales** : multiplier chaque note par son effectif puis additionner revient à additionner toutes les notes une par une ($246$ dans les deux cas).
+
 ### <span class="exo-num">Exercice 2</span> — Fréquences et F.C.C. (feuille `Exercice 2`) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-les-donnees-structurees-et-leur-traiteme-tp-1-2 }
 
 La feuille `Exercice 2` donne les effectifs du lycée par **année de naissance**. Compléter, à l’aide de formules, la ligne des **fréquences** et celle des **fréquences cumulées croissantes** (F.C.C.).
+
+??? corrige "Corrigé"
+
+    `G3` : `=SOMME(B3:F3)` donne $1\,240$ élèves. `B4` : `=B3/$G3`, recopiée jusqu’à `F4` ; `B5` : `=B4`, puis `C5` : `=B5+C4`, recopiée jusqu’à `F5`.
+
+    | Année     | 2006  | 2007  | 2008  | 2009  | 2010  | Total |
+    |:----------|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+    | Effectif  |  180  |  320  |  300  |  290  |  150  | 1 240 |
+    | Fréquence | 0,145 | 0,258 | 0,242 | 0,234 | 0,121 |   1   |
+    | F.C.C.    | 0,145 | 0,403 | 0,645 | 0,879 |   1   |       |
+
+    Lecture : $64{,}5\,\%$ des élèves sont nés en 2008 ou avant. La dernière F.C.C. vaut toujours $1$ ($100\,\%$).
 
 ### <span class="exo-num">Exercice 3</span> — Graphiques (feuille `Exercice 3`) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-les-donnees-structurees-et-leur-traiteme-tp-1-3 }
 
@@ -57,6 +92,12 @@ La feuille `Exercice 3` donne les effectifs du lycée par **niveau** et par **do
 1.  Sélectionner les cellules `A1:D2`, puis *Insertion » Graphique » Secteurs* pour construire un **diagramme circulaire** des élèves de Seconde par dominante.
 
 2.  Sélectionner `A1:D4`, puis *Insertion » Graphique » Colonnes* pour construire un **histogramme** des effectifs par niveau et par dominante. Soigner le titre et la légende.
+
+??? corrige "Corrigé"
+
+    1.  Diagramme circulaire des $280$ élèves de Seconde : Sciences $120$ ($42{,}9\,\%$, soit un secteur de $154^\circ$ environ), Économie $90$ ($32{,}1\,\%$, $116^\circ$ environ), Lettres $70$ ($25\,\%$, exactement un quart du disque, $90^\circ$). Un titre du type « Élèves de Seconde par dominante » et une légende (ou des étiquettes de données) sont attendus.
+
+    2.  Graphique en colonnes **groupées** : trois groupes (Seconde, Première, Terminale), trois colonnes par groupe (Sciences, Économie, Lettres), effectifs en ordonnée. Selon que les séries sont prises en lignes ou en colonnes, les groupes sont les niveaux ou les dominantes : les deux présentations sont justes si le titre et la légende sont clairs. On y voit que, dans chaque dominante, les effectifs baissent de la Seconde à la Terminale. *Le tableur appelle « histogramme » ce graphique ; en statistique, c’est plutôt un diagramme en colonnes : l’histogramme proprement dit représente une série à classes (TP Tableur 3).*
 
 ### <span class="exo-num">Exercice 4</span> — Moyennes (feuille `Exercice 4`) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-les-donnees-structurees-et-leur-traiteme-tp-1-4 }
 
@@ -68,194 +109,15 @@ La feuille `Exercice 4` donne les salaires d’une entreprise (colonne `A`).
 
 3.  En `D4`, faire calculer le **salaire moyen** (fonction `MOYENNE`).
 
-??? corrige "Corrigé de l'activité"
+??? corrige "Corrigé"
 
-    **À lire après le débat.** Ces éléments de réponse servent à vérifier et à compléter votre trace écrite : les lire avant le débat lui ôterait son intérêt.
+    1.  `D2` : `=NB(A3:A17)` donne $\mathbf{15}$ employés (`NB` ne compte que les cellules contenant un nombre : on pouvait aussi prendre `A:A`, l’en-tête texte n’étant pas compté).
 
-    Notions du cours mobilisées
+    2.  `D3` : `=SOMME(A3:A17)` donne une masse salariale de $\mathbf{39\,900}$ €.
 
-    - **Donnée**, **donnée personnelle** (identification directe ou indirecte), **métadonnée**.
+    3.  `D4` : `=MOYENNE(A3:A17)` donne un salaire moyen de $\mathbf{2\,660}$ € ($39\,900 / 15$).
 
-    - **Table** : descripteurs (colonnes), enregistrements (lignes) ; **format CSV**, **format ouvert**.
-
-    - **Rechercher, filtrer, trier**, et surtout **croiser deux tables** : c’est le mécanisme de la réidentification (doc. 4).
-
-    - **Open data** (`data.gouv.fr`, portail de Monaco) et pouvoir citoyen, data-journalisme.
-
-    - **RGPD** (consentement, but précis, droits) ; **loi n° 1.565** et **APDP** à Monaco ; **big data**.
-
-    Arguments attendus
-
-    <table>
-    <thead>
-    <tr>
-    <th style="text-align: left;"><strong>POUR (oui) : ouvrir le plus possible</strong></th>
-    <th style="text-align: left;"><strong>CONTRE (non) : limiter fortement</strong></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td style="text-align: left;"><ul>
-    <li><p><strong>Transparence démocratique</strong> : contrôler l’usage de l’argent public (doc. 2).</p></li>
-    <li><p><strong>Utilité concrète</strong> : transports, santé, environnement, recherche (doc. 2).</p></li>
-    <li><p><strong>Données payées par les contribuables</strong> : elles appartiennent à tous (doc. 2).</p></li>
-    <li><p><strong>C’est la loi</strong> en France depuis 2016, avec retrait des données personnelles (doc. 1).</p></li>
-    <li><p><strong>On peut protéger</strong> : regrouper les cas rares (INSEE), interdire la réidentification (doc. 3 et 4).</p></li>
-    <li><p><strong>Format ouvert</strong> (CSV) : tout le monde peut vérifier et réutiliser, pas seulement les grandes entreprises (cours).</p></li>
-    </ul></td>
-    <td style="text-align: left;"><ul>
-    <li><p><strong>Réidentification</strong> : trois informations suffisent à retrouver une personne (doc. 4) ; croiser des tables est facile (cours).</p></li>
-    <li><p><strong>Curiosité mal placée</strong> : le prix payé par son voisin (doc. 3).</p></li>
-    <li><p><strong>Une fois publiée, une table est copiée</strong> : on ne peut plus la retirer (permanence, comme sur les réseaux sociaux).</p></li>
-    <li><p><strong>Une interdiction d’usage ne garantit rien</strong> : qui contrôle ceux qui téléchargent (doc. 3) ?</p></li>
-    <li><p><strong>Pas de consentement</strong> des personnes concernées : elles n’ont pas choisi d’être dans la table.</p></li>
-    <li><p><strong>Big data</strong> : plus il y a de tables publiques, plus les croisements possibles sont nombreux (cours).</p></li>
-    </ul></td>
-    </tr>
-    </tbody>
-    </table>
-
-    *Arguments de l’autre camp souvent jugés solides dans la trace écrite :* un élève POUR retient souvent « retirer le nom ne suffit pas à rendre une table anonyme » ; un élève CONTRE, « les données ouvertes ont rendu de vrais services pendant l’épidémie ».
-
-    Questions de relance (pour le modérateur)
-
-    1.  Dans la base DVF (doc. 3), quelle colonne faudrait-il retirer ou rendre moins précise pour mieux protéger les personnes ? Que perd-on alors ?
-
-    2.  Avec quelles colonnes d’une autre table pourrait-on « croiser » une table sans nom pour retrouver quelqu’un (doc. 4) ?
-
-    3.  Qui doit décider de ce qui est publié : l’administration, la loi, les personnes concernées ?
-
-    4.  Les résultats d’une élection par bureau de vote sont publics : pourquoi est-ce important ? Est-ce une donnée personnelle ?
-
-    !!! encadre "Synthèse possible"
-
-        L’**open data** met à la disposition de tous des tables publiques (souvent en CSV) : transparence, recherche, nouveaux services. En France, l’ouverture est la règle depuis 2016, à condition de retirer les données personnelles. Mais **retirer le nom ne suffit pas** : en **croisant** plusieurs tables, quelques descripteurs (code postal, date de naissance, sexe, adresse) suffisent souvent à retrouver une personne. Une donnée pseudonymisée reste une donnée personnelle (RGPD ; loi n° 1.565 à Monaco). Ouvrir les données suppose donc de choisir **quelles colonnes publier, avec quelle précision**, et d’encadrer leur réutilisation.
-
-??? corrige "Corrigé de l'activité"
-
-    **À lire après le débat.** Ces éléments de réponse servent à vérifier et à compléter votre trace écrite : les lire avant le débat lui ôterait son intérêt.
-
-    Notions du cours mobilisées
-
-    - **Donnée**, **donnée personnelle** (identification directe ou indirecte), **métadonnée**.
-
-    - **Table** : descripteurs (colonnes), enregistrements (lignes) ; **format CSV**, **format ouvert**.
-
-    - **Rechercher, filtrer, trier**, et surtout **croiser deux tables** : c’est le mécanisme de la réidentification (doc. 4).
-
-    - **Open data** (`data.gouv.fr`, portail de Monaco) et pouvoir citoyen, data-journalisme.
-
-    - **RGPD** (consentement, but précis, droits) ; **loi n° 1.565** et **APDP** à Monaco ; **big data**.
-
-    Arguments attendus
-
-    <table>
-    <thead>
-    <tr>
-    <th style="text-align: left;"><strong>POUR (oui) : ouvrir le plus possible</strong></th>
-    <th style="text-align: left;"><strong>CONTRE (non) : limiter fortement</strong></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td style="text-align: left;"><ul>
-    <li><p><strong>Transparence démocratique</strong> : contrôler l’usage de l’argent public (doc. 2).</p></li>
-    <li><p><strong>Utilité concrète</strong> : transports, santé, environnement, recherche (doc. 2).</p></li>
-    <li><p><strong>Données payées par les contribuables</strong> : elles appartiennent à tous (doc. 2).</p></li>
-    <li><p><strong>C’est la loi</strong> en France depuis 2016, avec retrait des données personnelles (doc. 1).</p></li>
-    <li><p><strong>On peut protéger</strong> : regrouper les cas rares (INSEE), interdire la réidentification (doc. 3 et 4).</p></li>
-    <li><p><strong>Format ouvert</strong> (CSV) : tout le monde peut vérifier et réutiliser, pas seulement les grandes entreprises (cours).</p></li>
-    </ul></td>
-    <td style="text-align: left;"><ul>
-    <li><p><strong>Réidentification</strong> : trois informations suffisent à retrouver une personne (doc. 4) ; croiser des tables est facile (cours).</p></li>
-    <li><p><strong>Curiosité mal placée</strong> : le prix payé par son voisin (doc. 3).</p></li>
-    <li><p><strong>Une fois publiée, une table est copiée</strong> : on ne peut plus la retirer (permanence, comme sur les réseaux sociaux).</p></li>
-    <li><p><strong>Une interdiction d’usage ne garantit rien</strong> : qui contrôle ceux qui téléchargent (doc. 3) ?</p></li>
-    <li><p><strong>Pas de consentement</strong> des personnes concernées : elles n’ont pas choisi d’être dans la table.</p></li>
-    <li><p><strong>Big data</strong> : plus il y a de tables publiques, plus les croisements possibles sont nombreux (cours).</p></li>
-    </ul></td>
-    </tr>
-    </tbody>
-    </table>
-
-    *Arguments de l’autre camp souvent jugés solides dans la trace écrite :* un élève POUR retient souvent « retirer le nom ne suffit pas à rendre une table anonyme » ; un élève CONTRE, « les données ouvertes ont rendu de vrais services pendant l’épidémie ».
-
-    Questions de relance (pour le modérateur)
-
-    1.  Dans la base DVF (doc. 3), quelle colonne faudrait-il retirer ou rendre moins précise pour mieux protéger les personnes ? Que perd-on alors ?
-
-    2.  Avec quelles colonnes d’une autre table pourrait-on « croiser » une table sans nom pour retrouver quelqu’un (doc. 4) ?
-
-    3.  Qui doit décider de ce qui est publié : l’administration, la loi, les personnes concernées ?
-
-    4.  Les résultats d’une élection par bureau de vote sont publics : pourquoi est-ce important ? Est-ce une donnée personnelle ?
-
-    !!! encadre "Synthèse possible"
-
-        L’**open data** met à la disposition de tous des tables publiques (souvent en CSV) : transparence, recherche, nouveaux services. En France, l’ouverture est la règle depuis 2016, à condition de retirer les données personnelles. Mais **retirer le nom ne suffit pas** : en **croisant** plusieurs tables, quelques descripteurs (code postal, date de naissance, sexe, adresse) suffisent souvent à retrouver une personne. Une donnée pseudonymisée reste une donnée personnelle (RGPD ; loi n° 1.565 à Monaco). Ouvrir les données suppose donc de choisir **quelles colonnes publier, avec quelle précision**, et d’encadrer leur réutilisation.
-
-??? corrige "Corrigé de l'activité"
-
-    **À lire après le débat.** Ces éléments de réponse servent à vérifier et à compléter votre trace écrite : les lire avant le débat lui ôterait son intérêt.
-
-    Notions du cours mobilisées
-
-    - **Donnée**, **donnée personnelle** (identification directe ou indirecte), **métadonnée**.
-
-    - **Table** : descripteurs (colonnes), enregistrements (lignes) ; **format CSV**, **format ouvert**.
-
-    - **Rechercher, filtrer, trier**, et surtout **croiser deux tables** : c’est le mécanisme de la réidentification (doc. 4).
-
-    - **Open data** (`data.gouv.fr`, portail de Monaco) et pouvoir citoyen, data-journalisme.
-
-    - **RGPD** (consentement, but précis, droits) ; **loi n° 1.565** et **APDP** à Monaco ; **big data**.
-
-    Arguments attendus
-
-    <table>
-    <thead>
-    <tr>
-    <th style="text-align: left;"><strong>POUR (oui) : ouvrir le plus possible</strong></th>
-    <th style="text-align: left;"><strong>CONTRE (non) : limiter fortement</strong></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td style="text-align: left;"><ul>
-    <li><p><strong>Transparence démocratique</strong> : contrôler l’usage de l’argent public (doc. 2).</p></li>
-    <li><p><strong>Utilité concrète</strong> : transports, santé, environnement, recherche (doc. 2).</p></li>
-    <li><p><strong>Données payées par les contribuables</strong> : elles appartiennent à tous (doc. 2).</p></li>
-    <li><p><strong>C’est la loi</strong> en France depuis 2016, avec retrait des données personnelles (doc. 1).</p></li>
-    <li><p><strong>On peut protéger</strong> : regrouper les cas rares (INSEE), interdire la réidentification (doc. 3 et 4).</p></li>
-    <li><p><strong>Format ouvert</strong> (CSV) : tout le monde peut vérifier et réutiliser, pas seulement les grandes entreprises (cours).</p></li>
-    </ul></td>
-    <td style="text-align: left;"><ul>
-    <li><p><strong>Réidentification</strong> : trois informations suffisent à retrouver une personne (doc. 4) ; croiser des tables est facile (cours).</p></li>
-    <li><p><strong>Curiosité mal placée</strong> : le prix payé par son voisin (doc. 3).</p></li>
-    <li><p><strong>Une fois publiée, une table est copiée</strong> : on ne peut plus la retirer (permanence, comme sur les réseaux sociaux).</p></li>
-    <li><p><strong>Une interdiction d’usage ne garantit rien</strong> : qui contrôle ceux qui téléchargent (doc. 3) ?</p></li>
-    <li><p><strong>Pas de consentement</strong> des personnes concernées : elles n’ont pas choisi d’être dans la table.</p></li>
-    <li><p><strong>Big data</strong> : plus il y a de tables publiques, plus les croisements possibles sont nombreux (cours).</p></li>
-    </ul></td>
-    </tr>
-    </tbody>
-    </table>
-
-    *Arguments de l’autre camp souvent jugés solides dans la trace écrite :* un élève POUR retient souvent « retirer le nom ne suffit pas à rendre une table anonyme » ; un élève CONTRE, « les données ouvertes ont rendu de vrais services pendant l’épidémie ».
-
-    Questions de relance (pour le modérateur)
-
-    1.  Dans la base DVF (doc. 3), quelle colonne faudrait-il retirer ou rendre moins précise pour mieux protéger les personnes ? Que perd-on alors ?
-
-    2.  Avec quelles colonnes d’une autre table pourrait-on « croiser » une table sans nom pour retrouver quelqu’un (doc. 4) ?
-
-    3.  Qui doit décider de ce qui est publié : l’administration, la loi, les personnes concernées ?
-
-    4.  Les résultats d’une élection par bureau de vote sont publics : pourquoi est-ce important ? Est-ce une donnée personnelle ?
-
-    !!! encadre "Synthèse possible"
-
-        L’**open data** met à la disposition de tous des tables publiques (souvent en CSV) : transparence, recherche, nouveaux services. En France, l’ouverture est la règle depuis 2016, à condition de retirer les données personnelles. Mais **retirer le nom ne suffit pas** : en **croisant** plusieurs tables, quelques descripteurs (code postal, date de naissance, sexe, adresse) suffisent souvent à retrouver une personne. Une donnée pseudonymisée reste une donnée personnelle (RGPD ; loi n° 1.565 à Monaco). Ouvrir les données suppose donc de choisir **quelles colonnes publier, avec quelle précision**, et d’encadrer leur réutilisation.
+    *Pour aller plus loin :* 9 employés sur 15 gagnent moins que la moyenne ; le salaire « du milieu » (médiane) n’est que de $2\,200$ €. Le seul salaire de $6\,000$ € tire la moyenne vers le haut.
 
 ## <span class="etiquette">TP 2</span> Tableur 2 : suites de nombres et conjecture
 
@@ -265,7 +127,7 @@ La feuille `Exercice 4` donne les salaires d’une entreprise (colonne `A`).
 
     [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/05-tp-tableur-2){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/seconde-05-tp-tableur-2.zip){ .md-button }
 
-Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la charte d’usage de l’IA.
+Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
 !!! encadre "Pour commencer"
 
@@ -275,9 +137,21 @@ Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title=
 
 Pour créer une suite de 30 nombres consécutifs dans la colonne `A` : la cellule `A1` contient déjà le premier nombre, `5`. En `A2`, saisir la formule `=A1+1`, puis, à l’aide de la **poignée de recopie**, créer la suite de 30 nombres dans la colonne `A`. On dit que le **pas** entre deux nombres est de `1`.
 
+??? corrige "Corrigé"
+
+    !!! remarque "Remarque"
+
+        Les formules sont écrites comme dans un tableur en français (séparateur `;`). Le classeur complet est `tableur2_corrige.xlsx`.
+
+    `A2` : `=A1+1`, recopiée jusqu’à `A30`. En `A3`, la formule est devenue `=A2+1` : lors de la recopie vers le bas, la référence `A1` se décale d’une ligne (référence **relative**). La colonne contient $5, 6, 7, \dots, 34$ : le 30<sup>e</sup> terme est $5 + 29 = \mathbf{34}$.
+
 ### <span class="exo-num">Exercice 2</span> — Un pas réglable (feuille `Exercice 2`) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-les-donnees-structurees-et-leur-traiteme-tp-2-2 }
 
 On veut compter de `8` en `8` à partir de `5`. Le **pas** est en `C1` (`8`) et le premier nombre en `A1` (`5`). En `A2`, saisir `=A1+C$1`, puis recopier vers le bas. *Le symbole `$` **fixe** la ligne `1` lors de la recopie.*
+
+??? corrige "Corrigé"
+
+    `A2` : `=A1+C$1`, recopiée jusqu’à `A30`. En `A3`, la formule est `=A2+C$1` : `A1` s’est décalée, mais pas `C$1`, car le `$` bloque la ligne `1`. Sans le `$`, `A3` contiendrait `=A2+C2`, une cellule vide : la suite resterait bloquée à $13$. On obtient $5, 13, 21, \dots$ ; le 30<sup>e</sup> terme vaut $5 + 29 \times 8 = \mathbf{237}$. Changer `C1` change toute la suite d’un coup.
 
 ### <span class="exo-num">Exercice 3</span> — Somme d’une suite : émettre une conjecture (feuille `Exercice 3`) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-les-donnees-structurees-et-leur-traiteme-tp-2-3 }
 
@@ -291,6 +165,20 @@ On compte de `3` en `3` à partir de `5` (pas en `C1`, premier terme en `A1`). E
 
 4.  **Conjecture.** En faisant varier les données, trouver la relation entre la **somme des termes**, le **nombre de termes** et les **valeurs extrêmes**. Noter votre idée.
 
+??? corrige "Corrigé"
+
+    Les 30 termes sont $5, 8, 11, \dots, 92$ (le dernier vaut $5 + 29 \times 3 = 92$).
+
+    1.  `C4` : `=NB(A1:A30)` donne $\mathbf{30}$.
+
+    2.  `C7` : `=MIN(A1:A30)` donne $\mathbf{5}$ ; `C8` : `=MAX(A1:A30)` donne $\mathbf{92}$.
+
+    3.  `C9` : `=C7+C8` donne $\mathbf{97}$ ; `C12` : `=SOMME(A1:A30)` donne $\mathbf{1\,455}$.
+
+    4.  **Conjecture :** $1\,455 = 30 \times 97 / 2$. En changeant le premier terme ou le pas, la relation se maintient : $$\text{somme des termes} = \frac{\text{nombre de termes} \times (\text{plus petite valeur} + \text{plus grande valeur})}{2}.$$ En `C13`, on peut faire vérifier le tableur : `=C4*C9/2` affiche la même valeur que `C12`.
+
+    *Pourquoi ça marche ?* En associant le premier et le dernier terme ($5 + 92$), le deuxième et l’avant-dernier ($8 + 89$), etc., on obtient 15 paires qui valent toutes $97$ : $15 \times 97 = 1\,455$.
+
 ### <span class="exo-num">Exercice 4</span> — Contrôler la conjecture : départ aléatoire (feuille `Exercice 4`) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-les-donnees-structurees-et-leur-traiteme-tp-2-4 }
 
 On fait varier automatiquement le premier terme.
@@ -300,6 +188,16 @@ On fait varier automatiquement le premier terme.
 2.  Le pas est en `E1` (`3`). En `C1`, recopier le nombre aléatoire : `=B3`. Créer dans la colonne `C` une suite de 30 termes de pas 3.
 
 3.  Compléter `E4`, `E7`, `E8`, `E9` et `E12` (comme en `Exercice 3`, mais sur la colonne `C`). **Vérifier** la conjecture. On peut appuyer sur `F9` pour retirer un nouveau nombre aléatoire.
+
+??? corrige "Corrigé"
+
+    1.  `B1` : `=ALEA()` (décimal de $[0\,;1[$) ; `B2` : `=B1*100` (décimal de $[0\,;100[$) ; `B3` : `=ENT(B2)`, un entier de $0$ à $99$.
+
+    2.  `C1` : `=B3` ; `C2` : `=C1+E$1`, recopiée jusqu’à `C30`.
+
+    3.  `E4` : `=NB(C1:C30)` ; `E7` : `=MIN(C1:C30)` ; `E8` : `=MAX(C1:C30)` ; `E9` : `=E7+E8` ; `E12` : `=SOMME(C1:C30)`.
+
+    Les valeurs changent à chaque tirage (`F9`). Exemple avec un départ de $42$ : les termes vont de $42$ à $42 + 29 \times 3 = 129$ ; `E9` vaut $171$ et `E12` vaut $2\,565 = 30 \times 171 / 2$. La conjecture est vérifiée à chaque tirage. *Des exemples, même nombreux, ne **démontrent** pas une propriété ; ils la rendent seulement très plausible. La démonstration (l’appariement ci-dessus) se fait en mathématiques.*
 
 ### <span class="exo-num">Exercice 5</span> — BONUS : départ *et* pas quelconques (feuille `Bonus`) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-les-donnees-structurees-et-leur-traiteme-tp-2-5 }
 
@@ -311,6 +209,16 @@ Faire varier automatiquement le premier terme **et** le pas.
 
 3.  Compléter `E2`, `E7`, `E8`, `E9` et `E12` en prenant pour plage la **colonne `C` entière** : `C:C`. Vérifier la conjecture.
 
+??? corrige "Corrigé"
+
+    1.  `B3` : `=ENT(ALEA()*100)` en une seule formule (ou les trois étapes de l’exercice 4). En `E1`, un pas entier au choix (par exemple $4$).
+
+    2.  `C1` : `=B3` ; `C2` : `=C1+E$1`, recopiée aussi loin que voulu (par exemple jusqu’à `C40`).
+
+    3.  `E2` : `=NB(C:C)` ; `E7` : `=MIN(C:C)` ; `E8` : `=MAX(C:C)` ; `E9` : `=E7+E8` ; `E12` : `=SOMME(C:C)`. Avec la plage `C:C`, les formules restent justes quel que soit le nombre de termes recopiés : on peut allonger la suite sans les modifier.
+
+    Exemple : départ $42$, pas $4$, 40 termes ; le dernier vaut $42 + 39 \times 4 = 198$, `E9` vaut $240$ et `E12` vaut $4\,800 = 40 \times 240 / 2$. La conjecture tient encore.
+
 ## <span class="etiquette">TP 3</span> Tableur 3 : représenter et résumer une série
 
 *Excel, le grand oublié des programmes — III*
@@ -319,7 +227,7 @@ Faire varier automatiquement le premier terme **et** le pas.
 
     [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/05-tp-tableur-3){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/seconde-05-tp-tableur-3.zip){ .md-button }
 
-Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la charte d’usage de l’IA.
+Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
 !!! encadre "Pour commencer"
 
@@ -351,6 +259,30 @@ Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title=
 
 *Pourcentages arrondis à l’unité (total des effectifs : 220).*
 
+??? corrige "Corrigé"
+
+    !!! remarque "Remarque"
+
+        Les formules sont écrites comme dans un tableur en français (séparateur `;`). Le classeur complet est `tableur3_corrige.xlsx`. Les valeurs décimales sont arrondies ; le tableur, lui, garde toutes les décimales.
+
+    0
+
+    **1<sup>er</sup> cas.** On sélectionne `A2:J3`, puis *Insertion » Graphique » Colonnes*. Le graphique attendu est celui de l’énoncé : une barre par valeur ($0$ à $8$), de hauteur l’effectif. Contrôle : la somme des effectifs vaut bien $1\,240$. Lecture : le mode est $1$ (586 élèves, soit $47\,\%$ environ).
+
+    **2<sup>e</sup> cas.** Sélection `A6:I7`. Total : $220$ interventions.
+
+    - **Histogramme** : des rectangles **accolés** (les classes se suivent sans trou), tous de largeur $15$ min, de hauteur l’effectif. Dans le tableur, on supprime l’espace entre les barres (*Mise en forme des séries » Largeur de l’intervalle : 0 %*).
+
+    - **Diagramme circulaire** : chaque secteur a un angle proportionnel à l’effectif, $\text{angle} = \dfrac{\text{effectif}}{220} \times 360^\circ$.
+
+    | Durée (min) | $0\,;15[$ | $[15\,;30[$ | $[30\,;45[$ | $[45\,;60[$ | $[60\,;75[$ | $[75\,;90[$ | $[90\,;105[$ | $[105\,;120[$ | Total |
+    |:---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+    | Effectif | 32 | 88 | 47 | 25 | 13 | 7 | 5 | 3 | 220 |
+    | Fréquence | 14,5 % | 40 % | 21,4 % | 11,4 % | 5,9 % | 3,2 % | 2,3 % | 1,4 % | 100 % |
+    | Angle (arrondi) | $52^\circ$ | $144^\circ$ | $77^\circ$ | $41^\circ$ | $21^\circ$ | $11^\circ$ | $8^\circ$ | $5^\circ$ | $360^\circ$ |
+
+    Les pourcentages de l’énoncé sont ces fréquences arrondies à l’unité.
+
 ### <span class="exo-num">Exercice 2</span> — Caractéristiques de position d’une série en liste (feuille `Exercice 2`) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-les-donnees-structurees-et-leur-traiteme-tp-3-2 }
 
 Taille (cm) de 10 nourrissons (colonne `A`) : 49 ; 50,5 ; 50 ; 48,5 ; 52 ; 50 ; 49,5 ; 51 ; 49,5 ; 50,5.
@@ -364,6 +296,20 @@ Taille (cm) de 10 nourrissons (colonne `A`) : 49 ; 50,5 ; 50 ; 48,5 ; 52
 - \(d\) En `C4` : `=MOYENNE(A1:A10)`.
 
 - \(e\) En `C5` : calculer l’**étendue** (`=MAX(A1:A10)-MIN(A1:A10)`).
+
+??? corrige "Corrigé"
+
+    - \(a\) Après le tri : $48{,}5$ ; $49$ ; $49{,}5$ ; $49{,}5$ ; $50$ ; $50$ ; $50{,}5$ ; $50{,}5$ ; $51$ ; $52$.
+
+    - \(b\) `C1` : médiane $= \mathbf{50}$ (10 valeurs : moyenne des 5<sup>e</sup> et 6<sup>e</sup>, $50$ et $50$).
+
+    - \(c\) `C2` : $Q_1 = \mathbf{49{,}5}$ ; `C3` : $Q_3 = \mathbf{50{,}5}$.
+
+    - \(d\) `C4` : moyenne $= 500{,}5 / 10 = \mathbf{50{,}05}$ cm.
+
+    - \(e\) `C5` : étendue $= 52 - 48{,}5 = \mathbf{3{,}5}$ cm.
+
+    *Remarque :* la fonction `QUARTILE` du tableur calcule ses quartiles par interpolation, d’une façon qui peut différer de la définition vue en cours (première valeur atteignant le quart de l’effectif). Ici, les deux méthodes donnent les mêmes résultats : $Q_1$ est la 3<sup>e</sup> valeur ($10/4 = 2{,}5$, arrondi à $3$) et $Q_3$ la 8<sup>e</sup> ($3 \times 10/4 = 7{,}5$, arrondi à $8$).
 
 ### <span class="exo-num">Exercice 3</span> — Caractéristiques de position dans un tableau (feuille `Exercice 3`) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-les-donnees-structurees-et-leur-traiteme-tp-3-3 }
 
@@ -383,11 +329,27 @@ Tailles de 885 nourrissons :
 
 - \(d\) Trouver médiane, premier et troisième quartile par lecture de la ligne des E.C.C. *Méthode : avec un effectif total $N$, le premier quartile est la première valeur dont l’E.C.C. atteint (ou dépasse) $N/4$ ; la médiane, la première dont l’E.C.C. atteint $N/2$ ; le troisième quartile, la première dont l’E.C.C. atteint $3N/4$.*
 
+??? corrige "Corrigé"
+
+    | Taille $t$ | 47,5 | 48 | 48,5 | 49 | 49,5 | 50 | 50,5 | 51 | 51,5 | 52 | 52,5 | 53 | TOTAL |
+    |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+    | Effectif $n$ | 55 | 77 | 105 | 115 | 132 | 154 | 66 | 77 | 55 | 25 | 13 | 11 | 885 |
+    | $t \times n$ | 2 612,5 | 3 696 | 5 092,5 | 5 635 | 6 534 | 7 700 | 3 333 | 3 927 | 2 832,5 | 1 300 | 682,5 | 583 | 43 928 |
+    | E. C. C. | 55 | 132 | 237 | 352 | 484 | 638 | 704 | 781 | 836 | 861 | 874 | 885 |  |
+
+    - \(a\) `B5` : `=B3*B4`, recopiée jusqu’à `M5` ; `N4` : `=SOMME(B4:M4)` et `N5` : `=SOMME(B5:M5)`. E.C.C. : `B6` : `=B4`, puis `C6` : `=B6+C4`, recopiée.
+
+    - \(b\) `=N5/N4` : moyenne $= 43\,928 / 885 \approx \mathbf{49{,}64}$ cm.
+
+    - \(c\) Étendue $= 53 - 47{,}5 = \mathbf{5{,}5}$ cm.
+
+    - \(d\) $N = 885$. $N/4 = 221{,}25$ : la première E.C.C. qui l’atteint est $237$, donc $Q_1 = \mathbf{48{,}5}$. $N/2 = 442{,}5$ : première E.C.C. qui l’atteint, $484$, donc médiane $= \mathbf{49{,}5}$. $3N/4 = 663{,}75$ : première E.C.C. qui l’atteint, $704$, donc $Q_3 = \mathbf{50{,}5}$.
+
 ### <span class="exo-num">Exercice 4</span> — Caractéristiques de position pour données groupées (feuille `Exercice 4`) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-les-donnees-structurees-et-leur-traiteme-tp-3-4 }
 
 Tailles de 640 nourrissons :
 
-| Taille $t$ | \45;46\[ | \[46;47\[ | \[47;48\[ | \[48;49\[ | \[49;50\[ | \[50;51\[ | \[51;52\[ | \[52;53\[ | \[53;54\[ | \[54;55\[ | TOTAL |
+| Taille $t$ | \[45;46\[ | \[46;47\[ | \[47;48\[ | \[48;49\[ | \[49;50\[ | \[50;51\[ | \[51;52\[ | \[52;53\[ | \[53;54\[ | \[54;55\[ | TOTAL |
 |:--:|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
 | Effectif $n$ | 10 | 25 | 35 | 65 | 128 | 190 | 95 | 45 | 32 | 15 |  |
 | Fréquence | 1,56% |  |  |  |  |  |  |  |  |  |  |
@@ -399,6 +361,21 @@ Tailles de 640 nourrissons :
 - \(b\) Localiser médiane, premier et troisième quartile *(même méthode, avec les F.C.C. : première classe dont la F.C.C. atteint $25\,\%$, $50\,\%$, puis $75\,\%$)*.
 
 - \(c\) Calculer la moyenne avec `=SOMMEPROD(centres;effectifs)/total`.
+
+??? corrige "Corrigé"
+
+    Total : `L4` : `=SOMME(B4:K4)` donne $640$. Fréquences : `B5` : `=B4/$L$4`, recopiée, au format pourcentage ; F.C.C. : `B6` : `=B5`, puis `C6` : `=B6+C5`, recopiée ; centres de classe : $45{,}5$, puis `C7` : `=B7+1`, recopiée (le centre de $[a\,;b[$ est $\frac{a+b}{2}$).
+
+    | Taille $t$ | \[45;46\[ | \[46;47\[ | \[47;48\[ | \[48;49\[ | \[49;50\[ | \[50;51\[ | \[51;52\[ | \[52;53\[ | \[53;54\[ | \[54;55\[ | TOTAL |
+    |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+    | Effectif $n$ | 10 | 25 | 35 | 65 | 128 | 190 | 95 | 45 | 32 | 15 | 640 |
+    | Fréquence | 1,56 % | 3,91 % | 5,47 % | 10,16 % | 20 % | 29,69 % | 14,84 % | 7,03 % | 5 % | 2,34 % | 100 % |
+    | F. C. C. | 1,56 % | 5,47 % | 10,94 % | 21,09 % | 41,09 % | 70,78 % | 85,63 % | 92,66 % | 97,66 % | 100 % |  |
+    | Centre de classe | 45,5 | 46,5 | 47,5 | 48,5 | 49,5 | 50,5 | 51,5 | 52,5 | 53,5 | 54,5 |  |
+
+    - \(b\) $Q_1$ : la F.C.C. atteint $25\,\%$ dans la classe $\mathbf{[49\,;50[}$ (elle passe de $21{,}09\,\%$ à $41{,}09\,\%$). Médiane : $50\,\%$ est atteint dans la classe $\mathbf{[50\,;51[}$ (de $41{,}09\,\%$ à $70{,}78\,\%$). $Q_3$ : $75\,\%$ est atteint dans la classe $\mathbf{[51\,;52[}$ (de $70{,}78\,\%$ à $85{,}63\,\%$). Avec des données groupées, on ne connaît que la **classe** qui contient chaque indicateur.
+
+    - \(c\) `=SOMMEPROD(B7:K7;B4:K4)/L4` : moyenne $= 32\,148 / 640 \approx \mathbf{50{,}23}$ cm. C’est une valeur approchée : on a remplacé chaque taille par le centre de sa classe.
 
 0
 
@@ -471,8 +448,128 @@ Trace écrite finale (individuelle)
 
 Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes, justifiez-la avec vos **deux meilleurs arguments**, dont **un argument de l’autre camp** que vous trouvez solide (avec le document qui l’appuie).
 
-## Corrigé
+??? corrige "Corrigé de l'activité"
 
-??? corrige "Corrigé"
+    **À lire après le débat.** Ces éléments de réponse servent à vérifier et à compléter votre trace écrite : les lire avant le débat lui ôterait son intérêt.
 
-    0
+    Notions du cours mobilisées
+
+    - **Donnée**, **donnée personnelle** (identification directe ou indirecte), **métadonnée**.
+
+    - **Table** : descripteurs (colonnes), enregistrements (lignes) ; **format CSV**, **format ouvert**.
+
+    - **Rechercher, filtrer, trier**, et surtout **croiser deux tables** : c’est le mécanisme de la réidentification (doc. 4).
+
+    - **Open data** (`data.gouv.fr`, portail de Monaco) et pouvoir citoyen, data-journalisme.
+
+    - **RGPD** (consentement, but précis, droits) ; **loi n° 1.565** et **APDP** à Monaco ; **big data**.
+
+    Arguments attendus
+
+    <table>
+    <thead>
+    <tr>
+    <th style="text-align: left;"><strong>POUR (oui) : ouvrir le plus possible</strong></th>
+    <th style="text-align: left;"><strong>CONTRE (non) : limiter fortement</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Transparence démocratique</strong> : contrôler l’usage de l’argent public (doc. 2).</p></li>
+    <li><p><strong>Utilité concrète</strong> : transports, santé, environnement, recherche (doc. 2).</p></li>
+    <li><p><strong>Données payées par les contribuables</strong> : elles appartiennent à tous (doc. 2).</p></li>
+    <li><p><strong>C’est la loi</strong> en France depuis 2016, avec retrait des données personnelles (doc. 1).</p></li>
+    <li><p><strong>On peut protéger</strong> : regrouper les cas rares (INSEE), interdire la réidentification (doc. 3 et 4).</p></li>
+    <li><p><strong>Format ouvert</strong> (CSV) : tout le monde peut vérifier et réutiliser, pas seulement les grandes entreprises (cours).</p></li>
+    </ul></td>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Réidentification</strong> : trois informations suffisent à retrouver une personne (doc. 4) ; croiser des tables est facile (cours).</p></li>
+    <li><p><strong>Curiosité mal placée</strong> : le prix payé par son voisin (doc. 3).</p></li>
+    <li><p><strong>Une fois publiée, une table est copiée</strong> : on ne peut plus la retirer (permanence, comme sur les réseaux sociaux).</p></li>
+    <li><p><strong>Une interdiction d’usage ne garantit rien</strong> : qui contrôle ceux qui téléchargent (doc. 3) ?</p></li>
+    <li><p><strong>Pas de consentement</strong> des personnes concernées : elles n’ont pas choisi d’être dans la table.</p></li>
+    <li><p><strong>Big data</strong> : plus il y a de tables publiques, plus les croisements possibles sont nombreux (cours).</p></li>
+    </ul></td>
+    </tr>
+    </tbody>
+    </table>
+
+    *Arguments de l’autre camp souvent jugés solides dans la trace écrite :* un élève POUR retient souvent « retirer le nom ne suffit pas à rendre une table anonyme » ; un élève CONTRE, « les données ouvertes ont rendu de vrais services pendant l’épidémie ».
+
+    Questions de relance (pour le modérateur)
+
+    1.  Dans la base DVF (doc. 3), quelle colonne faudrait-il retirer ou rendre moins précise pour mieux protéger les personnes ? Que perd-on alors ?
+
+    2.  Avec quelles colonnes d’une autre table pourrait-on « croiser » une table sans nom pour retrouver quelqu’un (doc. 4) ?
+
+    3.  Qui doit décider de ce qui est publié : l’administration, la loi, les personnes concernées ?
+
+    4.  Les résultats d’une élection par bureau de vote sont publics : pourquoi est-ce important ? Est-ce une donnée personnelle ?
+
+    !!! encadre "Synthèse possible"
+
+        L’**open data** met à la disposition de tous des tables publiques (souvent en CSV) : transparence, recherche, nouveaux services. En France, l’ouverture est la règle depuis 2016, à condition de retirer les données personnelles. Mais **retirer le nom ne suffit pas** : en **croisant** plusieurs tables, quelques descripteurs (code postal, date de naissance, sexe, adresse) suffisent souvent à retrouver une personne. Une donnée pseudonymisée reste une donnée personnelle (RGPD ; loi n° 1.565 à Monaco). Ouvrir les données suppose donc de choisir **quelles colonnes publier, avec quelle précision**, et d’encadrer leur réutilisation.
+
+??? corrige "Corrigé de l'activité"
+
+    **À lire après le débat.** Ces éléments de réponse servent à vérifier et à compléter votre trace écrite : les lire avant le débat lui ôterait son intérêt.
+
+    Notions du cours mobilisées
+
+    - **Donnée**, **donnée personnelle** (identification directe ou indirecte), **métadonnée**.
+
+    - **Table** : descripteurs (colonnes), enregistrements (lignes) ; **format CSV**, **format ouvert**.
+
+    - **Rechercher, filtrer, trier**, et surtout **croiser deux tables** : c’est le mécanisme de la réidentification (doc. 4).
+
+    - **Open data** (`data.gouv.fr`, portail de Monaco) et pouvoir citoyen, data-journalisme.
+
+    - **RGPD** (consentement, but précis, droits) ; **loi n° 1.565** et **APDP** à Monaco ; **big data**.
+
+    Arguments attendus
+
+    <table>
+    <thead>
+    <tr>
+    <th style="text-align: left;"><strong>POUR (oui) : ouvrir le plus possible</strong></th>
+    <th style="text-align: left;"><strong>CONTRE (non) : limiter fortement</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Transparence démocratique</strong> : contrôler l’usage de l’argent public (doc. 2).</p></li>
+    <li><p><strong>Utilité concrète</strong> : transports, santé, environnement, recherche (doc. 2).</p></li>
+    <li><p><strong>Données payées par les contribuables</strong> : elles appartiennent à tous (doc. 2).</p></li>
+    <li><p><strong>C’est la loi</strong> en France depuis 2016, avec retrait des données personnelles (doc. 1).</p></li>
+    <li><p><strong>On peut protéger</strong> : regrouper les cas rares (INSEE), interdire la réidentification (doc. 3 et 4).</p></li>
+    <li><p><strong>Format ouvert</strong> (CSV) : tout le monde peut vérifier et réutiliser, pas seulement les grandes entreprises (cours).</p></li>
+    </ul></td>
+    <td style="text-align: left;"><ul>
+    <li><p><strong>Réidentification</strong> : trois informations suffisent à retrouver une personne (doc. 4) ; croiser des tables est facile (cours).</p></li>
+    <li><p><strong>Curiosité mal placée</strong> : le prix payé par son voisin (doc. 3).</p></li>
+    <li><p><strong>Une fois publiée, une table est copiée</strong> : on ne peut plus la retirer (permanence, comme sur les réseaux sociaux).</p></li>
+    <li><p><strong>Une interdiction d’usage ne garantit rien</strong> : qui contrôle ceux qui téléchargent (doc. 3) ?</p></li>
+    <li><p><strong>Pas de consentement</strong> des personnes concernées : elles n’ont pas choisi d’être dans la table.</p></li>
+    <li><p><strong>Big data</strong> : plus il y a de tables publiques, plus les croisements possibles sont nombreux (cours).</p></li>
+    </ul></td>
+    </tr>
+    </tbody>
+    </table>
+
+    *Arguments de l’autre camp souvent jugés solides dans la trace écrite :* un élève POUR retient souvent « retirer le nom ne suffit pas à rendre une table anonyme » ; un élève CONTRE, « les données ouvertes ont rendu de vrais services pendant l’épidémie ».
+
+    Questions de relance (pour le modérateur)
+
+    1.  Dans la base DVF (doc. 3), quelle colonne faudrait-il retirer ou rendre moins précise pour mieux protéger les personnes ? Que perd-on alors ?
+
+    2.  Avec quelles colonnes d’une autre table pourrait-on « croiser » une table sans nom pour retrouver quelqu’un (doc. 4) ?
+
+    3.  Qui doit décider de ce qui est publié : l’administration, la loi, les personnes concernées ?
+
+    4.  Les résultats d’une élection par bureau de vote sont publics : pourquoi est-ce important ? Est-ce une donnée personnelle ?
+
+    !!! encadre "Synthèse possible"
+
+        L’**open data** met à la disposition de tous des tables publiques (souvent en CSV) : transparence, recherche, nouveaux services. En France, l’ouverture est la règle depuis 2016, à condition de retirer les données personnelles. Mais **retirer le nom ne suffit pas** : en **croisant** plusieurs tables, quelques descripteurs (code postal, date de naissance, sexe, adresse) suffisent souvent à retrouver une personne. Une donnée pseudonymisée reste une donnée personnelle (RGPD ; loi n° 1.565 à Monaco). Ouvrir les données suppose donc de choisir **quelles colonnes publier, avec quelle précision**, et d’encadrer leur réutilisation.

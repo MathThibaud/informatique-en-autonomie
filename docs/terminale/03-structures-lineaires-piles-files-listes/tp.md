@@ -22,7 +22,7 @@
 
     - Le fichier `tp_structures_lineaires_depart.py` est **à télécharger** (lien ci-dessus) : il contient les classes du cours, des fonctions toutes prêtes et, en fin de fichier, des **tests**. Relancer le fichier après chaque partie : chaque ligne `[A FAIRE]` doit devenir `[OK]`.
 
-    - Dans les parties 2 à 5, on n’utilise **que l’interface** des piles et des files (`empiler`, `depiler`, `sommet`, `enfiler`, `defiler`, `est_vide`, `taille`).
+    - Dans les parties 2 à 5, on n’utilise **que l’interface** des piles et des files (`empiler`, `depiler`, `sommet`, `enfiler`, `defiler`, `est_vide`, `taille`). C’est une interface **étendue** : le cours n’a pas de méthode `taille`, le TP en ajoute une, de coût constant grâce à l’attribut `_taille`.
 
     - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 

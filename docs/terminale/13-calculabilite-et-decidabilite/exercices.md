@@ -182,7 +182,7 @@ def compte(n):                 def mystere(n):
 
 <span class="essentiel">• essentiel</span>
 
-On **suppose** disposer d’une fonction `halt(prog, x)` renvoyant `True` si `prog(x)` s’arrête, `False` sinon. On écrit alors :
+On **suppose** disposer d’une fonction `halt(prog, x)` qui **s’arrête toujours** et renvoie `True` si `prog(x)` s’arrête, `False` sinon. On écrit alors :
 
 ```python
 def paradoxe(prog):
@@ -321,7 +321,7 @@ Pour chaque problème, dire si **vérifier** une solution qu’on vous propose e
 
     1.  Trier : **trouver** est facile (algorithme en $n\log n$) et **vérifier** aussi. Problème de classe **P**.
 
-    2.  Sudoku : **vérifier** une grille remplie est facile ; **trouver** le remplissage semble difficile.
+    2.  Sudoku : **vérifier** une grille remplie est facile ; **trouver** le remplissage semble difficile. (Une grille $9\times 9$ reste à la portée d’un ordinateur ; c’est le Sudoku **généralisé**, sur des grilles $n^2\times n^2$ de plus en plus grandes, qui est NP-complet.)
 
     3.  Voyageur de commerce : **vérifier** qu’une tournée proposée mesure $\le 500$ est facile (on additionne) ; **trouver** la meilleure semble très difficile.
 
@@ -339,7 +339,7 @@ On veut colorier les sommets du graphe ci-dessous avec **$3$ couleurs**, sans qu
 
         Chaque sommet a $3$ choix, indépendamment des autres : combien de choix pour $2$ sommets ? pour $3$ ?
 
-3.  À quelle classe (**P** ou **NP**) ce type de problème appartient-il, et pourquoi ?
+3.  Ce problème est-il dans **NP** ? Sait-on s’il est dans **P** ? Justifier.
 
 ??? corrige "Corrigé"
 
@@ -347,7 +347,7 @@ On veut colorier les sommets du graphe ci-dessous avec **$3$ couleurs**, sans qu
 
     2.  Chaque sommet reçoit $1$ couleur parmi $3$ : $3^5 = 243$ possibilités pour $5$ sommets, et $3^n$ pour $n$ sommets — une croissance **exponentielle**.
 
-    3.  C’est un problème de **NP** : on *vérifie* une solution proposée en temps polynomial (une passe sur les arêtes), mais *trouver* une $3$-coloration semble exiger un temps exponentiel (le problème est même NP-complet).
+    3.  **Oui**, il est dans **NP** : on *vérifie* une solution proposée en temps polynomial (une passe sur les arêtes). On **ne sait pas** s’il est dans **P** : aucun algorithme polynomial n’est connu pour *trouver* une $3$-coloration (le problème est même NP-complet : en trouver un prouverait P $=$ NP). Attention, NP ne s’oppose pas à P : tout problème de P est aussi dans NP.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Et si P $=$ NP ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-12 }
 
@@ -517,19 +517,21 @@ while x > 0:
 
     Pour chacun, dire si `exec` termine ou non, en justifiant.
 
-4.  On propose `def arret_essai1(programme): exec(programme) ; return True`. Que réalise ce code, et permet-il de décider si un programme s’arrête ?
+On cherche une fonction `arret` telle que `arret(programme)` renvoie `True` si `exec(programme)` termine et `False` sinon. Cette fonction `arret` doit donc s’arrêter dans tous les cas.
+
+1.  On propose `def arret_essai1(programme): exec(programme) ; return True`. Que réalise ce code, et permet-il de décider si un programme s’arrête ?
 
     ??? pouce "Coup de pouce"
 
         Q4 : que se passe-t-il si le programme passé ne s’arrête pas ?
 
-5.  Une autre idée : décréter qu’un programme s’arrête s’il ne contient pas le mot `"while"`. Écrire `arret_essai2(programme)` qui renvoie `True` si `"while"` **n’apparaît pas** dans `programme`, `False` sinon. Montrer, par un contre-exemple de chaque type, que cette fonction se trompe.
+2.  Une autre idée : décréter qu’un programme s’arrête s’il ne contient pas le mot `"while"`. Écrire `arret_essai2(programme)` qui renvoie `True` si `"while"` **n’apparaît pas** dans `programme`, `False` sinon. Montrer, par un contre-exemple de chaque type, que cette fonction se trompe.
 
     ??? pouce "Coup de pouce"
 
         Q5 : il faut un cas où elle répond `False` à tort et un cas où elle répond `True` à tort. Une boucle `while` est-elle le seul moyen de ne pas s’arrêter ?
 
-6.  On suppose finalement disposer d’une vraie fonction `arret(programme)` (renvoyant `True` si `exec(programme)` termine, `False` sinon). Écrire `terminaison_inverse(programme)` qui **termine** si `programme` ne termine pas, et **ne termine pas** si `programme` termine.
+3.  On suppose finalement disposer d’une vraie fonction `arret(programme)` (renvoyant `True` si `exec(programme)` termine, `False` sinon). Écrire `terminaison_inverse(programme)` qui **termine** si `programme` ne termine pas, et **ne termine pas** si `programme` termine.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -538,11 +540,11 @@ while x > 0:
         `if arret(programme):`  
         `...`
 
-7.  On pose :  
+4.  On pose :  
     `programme_paradoxal = "terminaison_inverse(programme_paradoxal)"`  
     Étudier si `exec(programme_paradoxal)` termine, et conclure sur l’existence de `arret`.
 
-8.  Cette impossibilité est-elle due à une limite du langage Python ?
+5.  Cette impossibilité est-elle due à une limite du langage Python ?
 
 ??? corrige "Corrigé"
 
@@ -560,10 +562,16 @@ while x > 0:
 
         ```python
         def arret_essai2(programme):
-            return "while" not in programme
+            m = len("while")
+            for i in range(len(programme) - m + 1):
+                if programme[i:i + m] == "while":     # fenetre glissante
+                    return False
+            return True
         ```
 
-        **Contre-exemples.** (i) `True` alors que ça ne s’arrête pas : un programme **sans** `while` mais à **récursion infinie** (`def g(): g()` puis `g()`) ; il n’y a pas `while`, donc `arret_essai2` renvoie `True`, pourtant il ne s’arrête pas. (ii) `False` alors que ça s’arrête : `while False: pass` *contient* le mot `while` (donc `arret_essai2` renvoie `False`), pourtant le programme s’arrête immédiatement. La présence du mot « while » ne dit rien de la terminaison.
+        *Autre méthode :* avec l’opérateur `in` des chaînes (`present` du TP du chapitre 12), `return "while" not in programme`.
+
+        **Contre-exemples.** (i) `True` alors que ça ne s’arrête pas : un programme **sans** `while` dont la boucle ne finit jamais, par exemple `L = [0]` puis `for x in L: L.append(x)` (la liste s’allonge à chaque tour, le parcours n’atteint jamais la fin, jusqu’à épuisement de la mémoire) ; il n’y a pas `while`, donc `arret_essai2` renvoie `True`, pourtant il ne s’arrête pas. (Une récursion infinie, `def g(): g()` puis `g()`, ne convient qu’en théorie, avec une pile illimitée : en pratique Python l’interrompt par une `RecursionError`.) (ii) `False` alors que ça s’arrête : `while False: pass` *contient* le mot `while` (donc `arret_essai2` renvoie `False`), pourtant le programme s’arrête immédiatement. La présence du mot « while » ne dit rien de la terminaison.
 
     6.
 

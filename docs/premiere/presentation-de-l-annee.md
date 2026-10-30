@@ -132,7 +132,7 @@ Nos **4 heures par semaine** se partagent entre :
 
 !!! remarque "Remarque — Une ressource pour réviser à la maison"
 
-    Deux sites tenus par des professeurs de NSI sont d’excellentes ressources, claires, complètes et conformes au programme. Ils ont été une **source d’inspiration** pour la préparation de nos cours, et je vous encourage à les consulter pour réviser ou approfondir :
+    Deux sites tenus par des professeurs de NSI sont d’excellentes ressources, claires, complètes et conformes au programme. Je vous encourage à les consulter pour réviser ou approfondir :
 
     - le site de **Gilles Lassus** : `glassus.github.io` ;
 
@@ -168,7 +168,7 @@ Les exercices ★★★, les défis et les encadrés « Pour les curieux » serv
 
 ### Lire ce livre sur un ordinateur
 
-- **Tout est cliquable** : le sommaire, le petit sommaire de chaque chapitre, « $\blacktriangleright$ corrigé p. 437 » et « $\uparrow$ énoncé », les coups de pouce, les numéros d’exercices des renvois et les mentions « chapitre 3 ». L’**onglet de couleur** au bord de la page ramène à la page de titre du chapitre ; le **numéro de page** ramène au sommaire.
+- **Tout est cliquable** : le sommaire, le petit sommaire de chaque chapitre, les liens « $\blacktriangleright$ corrigé p. …» et « $\uparrow$ énoncé », les coups de pouce, les numéros d’exercices des renvois et les mentions « chapitre 3 ». L’**onglet de couleur** au bord de la page ramène à la page de titre du chapitre ; le **numéro de page** ramène au sommaire.
 
 - **Les signets** (panneau latéral « Signets » ou « Table des matières » du lecteur PDF) donnent le plan détaillé : chapitre, rubrique, section.
 

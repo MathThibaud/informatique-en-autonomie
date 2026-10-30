@@ -62,7 +62,7 @@ Justifier en une ligne (ou par un contre-exemple).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Une fonction, plusieurs résultats <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-3 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `somme_moyenne(t)` qui renvoie le **p-uplet** (somme, moyenne) des éléments d’un tableau de nombres non vide. On récupérera le résultat par `s, m = somme_moyenne([…])`.
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `somme_moyenne(t)` qui renvoie le **p-uplet** (somme, moyenne) des éléments d’un p-uplet de nombres non vide (par exemple `(12, 15, 9)`). On récupérera le résultat par `s, m = somme_moyenne((…))`.
 
 ??? pouce "Coup de pouce"
 
@@ -78,6 +78,8 @@ Justifier en une ligne (ou par un contre-exemple).
         for x in t:
             s = s + x
         return s, s / len(t)     # renvoie le p-uplet (somme, moyenne)
+
+    s, m = somme_moyenne((12, 15, 9))   # s vaut 36, m vaut 12.0
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Conversion de durée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-4 }
@@ -107,15 +109,19 @@ Justifier en une ligne (ou par un contre-exemple).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Permutation circulaire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-5 }
 
-Soit `a, b, c = 1, 2, 3`. Écrire les instructions (avec une **variable temporaire**) qui font « tourner » les valeurs de sorte qu’ensuite `a` vaille `2`, `b` vaille `3` et `c` vaille `1`. Vérifier en console.
+Soit `a, b, c = 1, 2, 3`.
+
+1.  Écrire les instructions (avec une **variable temporaire**) qui font « tourner » les valeurs de sorte qu’ensuite `a` vaille `2`, `b` vaille `3` et `c` vaille `1`. Vérifier en console.
+
+2.  Obtenir le même résultat **en une seule ligne**, sans variable temporaire, avec l’affectation multiple. Pourquoi aucune valeur n’est-elle perdue ?
 
 ??? pouce "Coup de pouce"
 
-    Quelle valeur serait perdue si l’on écrivait d’abord `a = b` ? C’est elle qu’il faut mettre de côté.
+    Question 1 : quelle valeur serait perdue si l’on écrivait d’abord `a = b` ? C’est elle qu’il faut mettre de côté. Question 2 : relire l’échange `a, b = b, a` du cours ; que calcule Python en premier ?
 
 ??? corrige "Corrigé"
 
-    On sauvegarde `a` dans une variable temporaire, puis on décale les valeurs :
+    **1.** On sauvegarde `a` dans une variable temporaire, puis on décale les valeurs :
 
     ```python
     temp = a         # temp vaut 1 (l'ancien a)
@@ -123,6 +129,14 @@ Soit `a, b, c = 1, 2, 3`. Écrire les instructions (avec une **variable temporai
     b = c            # b vaut 3
     c = temp         # c vaut 1
     ```
+
+    **2.** En une ligne :
+
+    ```python
+    a, b, c = b, c, a    # a vaut 2, b vaut 3, c vaut 1
+    ```
+
+    Python évalue d’abord tout le membre de droite : il construit le p-uplet `(2, 3, 1)` avec les valeurs *du moment*, puis le déballe dans `a`, `b`, `c`. Aucune affectation n’a lieu avant que les trois anciennes valeurs aient été lues : rien n’est perdu.
 
 ### Tableaux (`list`) : accès, modification, parcours
 
@@ -148,7 +162,7 @@ Que valent `t`, `x` et `n` à la fin ?
 
 ??? corrige "Corrigé"
 
-    Après exécution : `t = [42, 8, 15, 16, 0]`, `x = [8, 15]` (la tranche `t[1:3]`, prise *avant* la fin), `n = 5`.
+    Après exécution : `t = [42, 8, 15, 16, 0]`, `x = [8, 15]` (la tranche `t[1:3]`, prise *après* les deux modifications : `t[1]` et `t[2]` n’ont pas changé), `n = 5`.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 7</span> — Fabriquer des tableaux <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-7 }
 

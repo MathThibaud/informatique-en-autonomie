@@ -10,7 +10,7 @@
 
     - Les tableaux de balises HTML et de propriétés CSS du cours (§ IV et V) peuvent être consultés pour tous les exercices.
 
-    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la charte d’usage de l’IA.
+    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
 ### Le Web et Internet
 
@@ -681,7 +681,7 @@ p { font-family: Verdana; }
 
     `def balise(nom, contenu):`  
     `return "<" + nom + ">" + contenu + …`  
-    (il reste la balise fermante.) Pour `url`, n’oubliez ni `"://"` ni la barre `"/"` entre le serveur et le chemin.
+    (il reste la balise fermante.) Pour `url`, n’oubliez pas `"://"` entre le protocole et le serveur ; le chemin trouvé commence déjà par la barre `"/"`.
 
 ??? corrige "Corrigé"
 
@@ -710,9 +710,9 @@ p { font-family: Verdana; }
 
     ```python
     def url(protocole, serveur, chemin):
-        return protocole + "://" + serveur + "/" + chemin
+        return protocole + "://" + serveur + chemin
 
-    print(url("https", "www.lycee.mc", "cours/snt/web.html"))
+    print(url("https", "www.lycee.mc", "/cours/snt/web.html"))
     # https://www.lycee.mc/cours/snt/web.html
     ```
 

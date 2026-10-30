@@ -169,6 +169,18 @@ De A à E : le trajet A–C–D–E mesure $2+3+4 = 9$ km, plus court que A–B�
 
 Source : OpenStreetMap, page « Stats » du wiki, 2<sup>e</sup> trimestre 2025 (10 millions d’inscrits, 2,25 millions de contributeurs), [wiki.openstreetmap.org](https://wiki.openstreetmap.org/wiki/Stats).
 
+!!! activite "Activité — Lire les couches d’une carte, signaler un oubli (sans compte)"
+
+    *Aucun compte personnel n’est nécessaire : Géoportail se consulte librement, et OpenStreetMap accepte les notes anonymes.*
+
+    **A. Les couches de Géoportail** (`geoportail.gouv.fr`, le site de l’IGN, l’institut français de l’information géographique). Géoportail est conçu pour la France : à Monaco, on dispose des *photographies aériennes* et du *Plan IGN*, mais **pas du cadastre**. Pour le relief et le cadastre, on travaille donc à **Beausoleil**, la commune française voisine, juste au-dessus de Monaco.  
+    **1.** Centrer la carte sur le lycée. Dans le catalogue des cartes, afficher la couche « Photographies aériennes », puis la couche « Plan IGN » par-dessus. En jouant sur l’**opacité** du plan, ou en le masquant puis en l’affichant à nouveau, dire quelles informations figurent seulement sur le plan, et lesquelles seulement sur la photo. **2.** Se déplacer à Beausoleil et ajouter la couche « Courbes de niveau ». Que représente une courbe de niveau ? Où la pente est-elle la plus forte ? Dans quelle direction l’altitude augmente-t-elle ? **3.** Toujours à Beausoleil, ajouter la couche « Parcelles cadastrales ». Que représente-t-elle ? Faire glisser la carte vers Monaco : que devient cette couche ? Pourquoi ? **4.** Conclure : qu’est-ce qu’une **couche** ? Pourquoi une carte numérique superpose-t-elle des couches plutôt que de tout dessiner sur une seule image ?
+
+    **B. Contribuer à OpenStreetMap** (`openstreetmap.org`).  
+    **5.** Autour du lycée, chercher une information **absente ou fausse** sur la carte (un escalier public, un banc, une fontaine, un passage piéton, un commerce…) et la comparer avec la photographie aérienne de Géoportail. **6.** Avec le bouton « Ajouter une note » (la bulle, à droite de la carte), placer le marqueur au bon endroit et rédiger une note **courte et factuelle** : ce qui manque, où, et comment on le sait. Sans compte, la note est **anonyme**. Elle est aussi **publique** : la faire relire par le professeur avant de l’envoyer, n’y mettre **aucune donnée personnelle**, et ne signaler qu’une information réelle (pas de note « pour essayer »). **7.** Qui va lire et traiter cette note ? Pourquoi dit-on qu’OpenStreetMap est une carte **collaborative** ?
+
+Source : IGN, Géoportail, couches « Photographies aériennes », « Plan IGN », « Courbes de niveau » et « Parcelles cadastrales » (couverture contrôlée le 30 octobre 2026), `geoportail.gouv.fr` ; OpenStreetMap, page « Notes » du wiki (une note peut être déposée sans être connecté), [wiki.openstreetmap.org](https://wiki.openstreetmap.org/wiki/Notes).
+
 <span id="cours-07-10" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-07-10) à [12](exercices.md#ex-07-12)** (cartes numériques et itinéraires)
@@ -290,7 +302,9 @@ Les mots importants du thème sont définis dans le lexique.
 
     - lire une **trame NMEA** et y retrouver l’heure et les coordonnées ;
 
-    - utiliser une **carte numérique** et comprendre le calcul d’un **itinéraire** ;
+    - utiliser une **carte numérique** (afficher ou masquer ses **couches**) et comprendre le calcul d’un **itinéraire** ;
+
+    - contribuer à **OpenStreetMap** en signalant une information manquante par une note ;
 
     - distinguer **GPS**, **GNSS** et localisation **assistée** ;
 

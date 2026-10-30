@@ -462,7 +462,7 @@ On peut calculer $x^n$ bien plus vite en remarquant que $x^n = \left(x^{n/2}\rig
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Palindrome (contexte ADN) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-16 }
 
-Un brin d’ADN est un *palindrome* s’il se lit pareil dans les deux sens.
+Dans cet exercice, une chaîne (par exemple un brin d’ADN écrit avec les lettres A, C, G, T) est un *palindrome* si elle se lit pareil dans les deux sens. *(En biologie, le mot a un sens un peu différent : une séquence « palindromique » est égale à son brin complémentaire lu à l’envers.)*
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `palindrome(s)` qui renvoie `True` si la chaîne `s` est un palindrome. Exemples : `palindrome("GATTACATTAG")`... à vous de tester ; `palindrome("kayak")` renvoie `True`.
 
@@ -873,9 +873,11 @@ Le triangle de Sierpiński, aux ordres $n = 0, 1, 2, 3, 4$.
         t.penup()
         t.goto(a)
         t.pendown()
+        t.begin_fill()      # triangle plein
         t.goto(b)
         t.goto(c)
         t.goto(a)
+        t.end_fill()
 
     def sierpinski(a, b, c, n):
         if n == 0:

@@ -30,6 +30,8 @@ C’est toute la question de ce chapitre. **Internet** n’est pas une machine g
 
 ## Les acteurs : machines, switchs, routeurs
 
+*Rappel de Première (chapitre *Le Web*) : cette partie reprend le vocabulaire déjà vu, pour le fixer avant d’aller plus loin.*
+
 !!! definition "Définition 1 — Réseau local, switch, routeur"
 
     Un **réseau local** (LAN) regroupe des machines proches partageant la même **adresse réseau**. Un **switch** (commutateur) relie les machines *à l’intérieur* d’un même réseau local. Un **routeur** relie *plusieurs réseaux locaux entre eux* : il possède plusieurs **interfaces** (cartes réseau), une par réseau auquel il est raccordé. **Internet $=$ l’interconnexion de tous ces réseaux par des routeurs.**
@@ -87,6 +89,8 @@ Ce chapitre se concentre sur la couche **Réseau (IP)** : c’est là que se jou
 
 ## La commutation de paquets
 
+*Rappel de Première (chapitre *Le Web*) : le découpage en paquets a déjà été rencontré ; on en tire ici les conséquences pour le routage.*
+
 Plutôt que de réserver une ligne entière pour toute la durée d’un échange (*commutation de circuits*, comme l’ancien téléphone), Internet **découpe** les messages en **paquets** indépendants qui empruntent le réseau chacun de leur côté (**commutation de paquets**).
 
 !!! propriete "Propriété 1 — Pourquoi des paquets ?"
@@ -97,7 +101,7 @@ Plutôt que de réserver une ligne entière pour toute la durée d’un échange
 
 ## Le routage : la table de routage
 
-Un routeur qui reçoit un paquet consulte sa **table de routage** : pour chaque réseau de destination, elle indique **par où sortir** (quelle interface, ou quel routeur voisin) et une **métrique** (le « coût » de la route ; plus elle est petite, mieux c’est). Un réseau directement raccordé a une métrique **nulle**.
+Un routeur qui reçoit un paquet consulte sa **table de routage** : pour chaque réseau de destination, elle indique **par où sortir** (quelle interface, ou quel routeur voisin) et une **métrique** (le « coût » de la route ; plus elle est petite, mieux c’est). Un réseau directement raccordé a une métrique **nulle**. *Au bac, selon les énoncés, cette métrique est notée $0$, $1$ ou « – » : suivez l’énoncé.*
 
 !!! exemple "Exemple"
 
@@ -143,10 +147,10 @@ Le protocole **RIP** (*Routing Information Protocol*) mesure une route par son *
     |:-----------:|:-----------:|:-----:|
     | réseau de B |      B      |   1   |
     | réseau de C |      C      |   1   |
-    | réseau de D |      B      |   2   |
+    | réseau de D |  B (ou C)   |   2   |
     | réseau de E |      C      |   2   |
 
-    Pour atteindre C, RIP choisit le lien **direct** A–C ($1$ saut). Pour D, le plus court est A–B–D ($2$ sauts) ; pour E, A–C–E ($2$ sauts).
+    Pour atteindre C, RIP choisit le lien **direct** A–C ($1$ saut). Pour D, deux routes ont $2$ sauts, A–B–D et A–C–D : elles sont **à égalité**, l’une ou l’autre convient (un énoncé de bac précise alors laquelle retenir, ou accepte les deux) ; pour E, A–C–E ($2$ sauts).
 
 !!! exemple "Exemple — un réseau plus grand"
 
@@ -156,13 +160,15 @@ Le protocole **RIP** (*Routing Information Protocol*) mesure une route par son *
 
     Table de routage **RIP** de A (on compte les sauts en remontant de proche en proche) :
 
-    |   Réseau    | Sortir vers |    Sauts    |
-    |:-----------:|:-----------:|:-----------:|
-    | réseau de B |      B      |      1      |
-    | réseau de C |      C      |      1      |
-    | réseau de D |      B      |  2 (A–B–D)  |
-    | réseau de E |      C      |  2 (A–C–E)  |
-    | réseau de F |      B      | 3 (A–B–D–F) |
+    |   Réseau    | Sortir vers |         Sauts          |
+    |:-----------:|:-----------:|:----------------------:|
+    | réseau de B |      B      |           1            |
+    | réseau de C |      C      |           1            |
+    | réseau de D |      B      |       2 (A–B–D)        |
+    | réseau de E |      C      |       2 (A–C–E)        |
+    | réseau de F |  B (ou C)   | 3 (A–B–D–F ou A–C–E–F) |
+
+    Pour F, deux routes de $3$ sauts sont à égalité : l’une ou l’autre convient.
 
 !!! encadre "À retenir — les limites de RIP"
 
@@ -194,26 +200,28 @@ Le protocole **RIP** (*Routing Information Protocol*) mesure une route par son *
 
     Les liens à $100$ Mbps coûtent donc $1$, le lien A–C (à seulement $1$ Mbps) coûte $100$, et C–D (à $10$ Mbps) coûte $10$. Table de routage de **A** par OSPF :
 
-    |   Réseau    | Sortir vers |    Coût     |
-    |:-----------:|:-----------:|:-----------:|
-    | réseau de B |      B      |      1      |
-    | réseau de C |      B      |  2 (A–B–C)  |
-    | réseau de D |      B      |  2 (A–B–D)  |
-    | réseau de E |      B      | 3 (A–B–C–E) |
+    |   Réseau    | Sortir vers |          Coût          |
+    |:-----------:|:-----------:|:----------------------:|
+    | réseau de B |      B      |           1            |
+    | réseau de C |      B      |       2 (A–B–C)        |
+    | réseau de D |      B      |       2 (A–B–D)        |
+    | réseau de E |      B      | 3 (A–B–C–E ou A–B–D–E) |
+
+    Pour E, deux routes coûtent $3$ ; elles partent toutes deux vers B, la table est donc la même.
 
 !!! exemple "Exemple — le réseau à six routeurs, en OSPF"
 
     Reprenons le réseau à six routeurs ci-dessus. Les liens à $100$ Mbps coûtent $1$ ; le lien A–C ($1$ Mbps) coûte $100$ ; le lien E–F ($10$ Mbps) coûte $10$. Table **OSPF** de A :
 
-    |   Réseau    | Sortir vers |    Coût     |
-    |:-----------:|:-----------:|:-----------:|
-    | réseau de B |      B      |   1 (A–B)   |
-    | réseau de C |      B      |  2 (A–B–C)  |
-    | réseau de D |      B      |  2 (A–B–D)  |
-    | réseau de E |      B      | 3 (A–B–C–E) |
-    | réseau de F |      B      | 3 (A–B–D–F) |
+    |   Réseau    | Sortir vers |          Coût          |
+    |:-----------:|:-----------:|:----------------------:|
+    | réseau de B |      B      |        1 (A–B)         |
+    | réseau de C |      B      |       2 (A–B–C)        |
+    | réseau de D |      B      |       2 (A–B–D)        |
+    | réseau de E |      B      | 3 (A–B–C–E ou A–B–D–E) |
+    | réseau de F |      B      |      3 (A–B–D–F)       |
 
-    On retrouve le **désaccord** avec RIP : pour C et E, RIP passait par le lien direct A–C (lent), OSPF fait le détour rapide par B. Pour F ($3$ sauts *et* coût $3$), les deux protocoles s’accordent, via A–B–D–F.
+    On retrouve le **désaccord** avec RIP : pour C et E, RIP passait par le lien direct A–C (lent), OSPF fait le détour rapide par B. Pour F, OSPF passe par A–B–D–F (coût $3$) ; RIP hésitait entre deux routes de $3$ sauts : s’il retient A–B–D–F, les deux protocoles s’accordent.
 
 !!! exemple "Exemple — un réseau à sept routeurs, entièrement en OSPF"
 
@@ -223,16 +231,16 @@ Le protocole **RIP** (*Routing Information Protocol*) mesure une route par son *
 
     Coûts : les liens à $100$ Mbps valent $1$, les liens A–C et D–F ($10$ Mbps) valent $10$. Table **OSPF** de A :
 
-    |   Réseau    | Sortir vers |     Coût      |
-    |:-----------:|:-----------:|:-------------:|
-    | réseau de B |      B      |    1 (A–B)    |
-    | réseau de C |      B      |   2 (A–B–C)   |
-    | réseau de D |      B      |   2 (A–B–D)   |
-    | réseau de E |      B      |  3 (A–B–C–E)  |
-    | réseau de F |      B      | 4 (A–B–C–E–F) |
-    | réseau de G |      B      | 4 (A–B–C–E–G) |
+    |   Réseau    | Sortir vers |            Coût            |
+    |:-----------:|:-----------:|:--------------------------:|
+    | réseau de B |      B      |          1 (A–B)           |
+    | réseau de C |      B      |         2 (A–B–C)          |
+    | réseau de D |      B      |         2 (A–B–D)          |
+    | réseau de E |      B      |   3 (A–B–C–E ou A–B–D–E)   |
+    | réseau de F |      B      | 4 (A–B–C–E–F ou A–B–D–E–F) |
+    | réseau de G |      B      | 4 (A–B–C–E–G ou A–B–D–E–G) |
 
-    On voit bien OSPF **additionner les coûts** le long de chaque route et retenir la moins chère : jamais il n’emprunte les liens à $10$ (A–C, D–F), toujours il reste sur la fibre à $100$, quitte à traverser plus de routeurs.
+    Plusieurs routes sont à égalité, mais elles partent toutes vers B : la table de A n’en dépend pas. On voit bien OSPF **additionner les coûts** le long de chaque route et retenir la moins chère : jamais il n’emprunte les liens à $10$ (A–C, D–F), toujours il reste sur la fibre à $100$, quitte à traverser plus de routeurs.
 
 <span id="cours-09-8" class="ancre"></span>
 
@@ -297,9 +305,9 @@ Le programme officiel est clair : au bac, **les tables de routage sont données*
 
 <span class="afaire">▶ Exercices d'application :</span> exercice **[10](exercices.md#ex-09-10)** (au-delà du programme : dérouler Dijkstra pour obtenir une table OSPF)
 
-## TCP et UDP : deux façons de transporter <span class="horsprog">au-delà du programme</span>
+## TCP et UDP : deux façons de transporter
 
-Juste au-dessus d’IP, la couche **Transport** offre deux services au choix. **TCP** garantit que *tout* arrive, *dans l’ordre*, sans perte (il numérote les paquets, les réordonne, redemande ceux qui manquent) : idéal pour un fichier ou une page web. **UDP** envoie sans garantie ni accusé de réception, mais **sans attendre** : idéal quand la vitesse prime sur la perfection (appel vidéo, jeu en ligne, où un paquet en retard est inutile de toute façon).
+Juste au-dessus d’IP, la couche **Transport** offre deux services au choix. **TCP** garantit que *tout* arrive, *dans l’ordre*, sans perte (il numérote les paquets, les réordonne, redemande ceux qui manquent grâce à des **accusés de réception**) : idéal pour un fichier ou une page web. <span class="horsprog">au-delà du programme</span> **UDP** envoie sans garantie ni accusé de réception, mais **sans attendre** : idéal quand la vitesse prime sur la perfection (appel vidéo, jeu en ligne, où un paquet en retard est inutile de toute façon).
 
 ## Ouverture
 

@@ -6,7 +6,7 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *« Bases de données relationnelles et langage SQL. Vocabulaire : relation (table), attribut (colonne), enregistrement (ligne), domaine, clé primaire, clé étrangère, schéma. Systèmes de gestion de bases de données (SGBD) : rôle et fonctionnalités. Requêtes d’interrogation (`SELECT`… `FROM`… `WHERE`, jointure) et de mise à jour (`INSERT`, `UPDATE`, `DELETE`). »* |
+| **Programme (BO)** | *« Identifier les concepts définissant le modèle relationnel » (relation, attribut, domaine, clef primaire, clef étrangère, schéma relationnel ; contraintes d’intégrité de domaine, de relation et de référence). « Savoir distinguer la structure d’une base de données de son contenu. Repérer des anomalies dans le schéma d’une base de données » (redondances, anomalies d’insertion, de suppression, de mise à jour). « Identifier les services rendus par un système de gestion de bases de données relationnelles : persistance des données, gestion des accès concurrents, efficacité de traitement des requêtes, sécurisation des accès. Identifier les composants d’une requête. Construire des requêtes d’interrogation à l’aide des clauses du langage SQL : `SELECT`, `FROM`, `WHERE`, `JOIN`. Construire des requêtes d’insertion et de mise à jour à l’aide de : `UPDATE`, `INSERT`, `DELETE`. »* |
 | **Prérequis** | la notion de **type** (domaine) ; les tableaux et dictionnaires (comme analogies) ; un peu de logique (**et**, **ou**, **non**). |
 | **Objectifs** | *comprendre* pourquoi une base de données s’impose ; *modéliser* des données en relationnel (relations, clés) ; *connaître* le rôle d’un SGBD ; *écrire* des requêtes SQL d’interrogation **et** de mise à jour. |
 
@@ -52,6 +52,10 @@ Prenons une base de données de **films**. Voici la relation `film` :
 
     Le **schéma** d’une relation donne le nom de la relation et, pour chaque attribut, son nom et son domaine. On le note ainsi (la clé primaire est soulignée) : $$\texttt{film}\,(\ \underline{\texttt{id}}:\text{entier},\ \texttt{titre}:\text{texte},\ \texttt{id\_real}:\text{entier},\ \texttt{annee}:\text{entier},\ \texttt{note}:\text{entier}\ )$$ Le **schéma d’une base** est l’ensemble des schémas de ses relations.
 
+!!! regle "Règle 2 — Structure et contenu d’une base"
+
+    La **structure** d’une base, c’est son schéma : les relations, leurs attributs, leurs domaines et leurs clés. Elle est fixée à la création des tables (on verra `CREATE TABLE` au § V) et change rarement. Le **contenu**, ce sont les enregistrements (les lignes) présents à un instant donné : il change sans cesse, à chaque ajout, modification ou suppression. Ajouter un film change le contenu ; ajouter un attribut `duree` à la relation `film` change la structure.
+
 !!! remarque "Remarque"
 
     Une relation est un **ensemble** d’enregistrements : l’ordre des lignes n’a aucune importance, et il ne peut pas y avoir deux lignes totalement identiques.
@@ -66,7 +70,7 @@ Le modèle relationnel impose des **règles** qui empêchent les incohérences. 
 
 ### Contrainte de domaine
 
-!!! regle "Règle 2"
+!!! regle "Règle 3"
 
     Chaque valeur d’un attribut doit appartenir à son **domaine**, c’est-à-dire à son **type**. Un attribut `annee` de type *entier* doit refuser la valeur `"hier"`. Bien choisir les domaines, c’est déjà interdire une foule d’erreurs.
 
@@ -86,7 +90,7 @@ Le modèle relationnel impose des **règles** qui empêchent les incohérences. 
 
 Dans `film`, deux films peuvent partager le même titre ou la même année : c’est pourquoi on ajoute un attribut `id` (un numéro unique) qui sert de clé primaire.
 
-!!! regle "Règle 3 — Question de bac : « tel attribut peut-il être clé primaire ? »"
+!!! regle "Règle 4 — Question de bac : « tel attribut peut-il être clé primaire ? »"
 
     Un attribut ne peut être clé primaire que si ses valeurs sont **toujours différentes** d’une ligne à l’autre (et jamais vides). C’est pourquoi le `nom`, le `titre` ou un numéro de `téléphone` font en général de **mauvaises** clés (homonymes, valeurs partagées ou manquantes) : on leur préfère un **identifiant** dédié. Plusieurs attributs peuvent convenir (les *clés candidates*) ; on en choisit **une**.
 
@@ -110,17 +114,29 @@ On représente souvent le schéma de la base par un dessin : une boîte par rela
 
 ![](../figures/d92e26bd38c31f6a.svg){ .tikz loading=lazy }
 
-!!! regle "Règle 4 — Contrainte de référence"
+!!! regle "Règle 5 — Contrainte de référence"
 
     Une clé étrangère ne peut désigner qu’une valeur **existante**. Impossible d’ajouter un film dont le `id_real` vaut `7` si aucun réalisateur n’a l’`id` `7`. Impossible, aussi, de supprimer le réalisateur `1` tant que des films le référencent. La base reste **cohérente**.
 
-!!! regle "Règle 5 — Question de bac : différence entre clé primaire et clé étrangère"
+!!! regle "Règle 6 — Question de bac : différence entre clé primaire et clé étrangère"
 
     La **clé primaire** *identifie* de façon unique les lignes de **sa** table (unicité garantie). La **clé étrangère** *pointe* vers la clé primaire d’une **autre** table pour les relier (elle, peut se répéter : un même réalisateur a plusieurs films). En résumé : la primaire *distingue*, l’étrangère *relie*.
 
-!!! encadre "À retenir — pourquoi deux tables plutôt qu’une ?"
+!!! encadre "À retenir — pourquoi deux tables plutôt qu’une ? Les anomalies d’un mauvais schéma"
 
-    On aurait pu écrire le nom du réalisateur en toutes lettres dans chaque film. Mais alors « Nolan » serait recopié 3 fois : une faute de frappe (« Nollan ») créerait un second réalisateur fantôme, et corriger son pays obligerait à modifier partout. En **séparant** en deux tables reliées par une clé étrangère, chaque information n’est écrite **qu’une fois** : c’est plus sûr et plus léger. Relier des tables ainsi, c’est tout l’art du modèle relationnel.
+    On aurait pu écrire le nom et le pays du réalisateur en toutes lettres dans chaque film. Mais alors « Nolan, Royaume-Uni » serait recopié 3 fois : c’est une **redondance**. Elle entraîne trois **anomalies** :
+
+    - **anomalie de mise à jour** : corriger le pays de Nolan oblige à modifier toutes ses lignes ; en oublier une rend la base incohérente (une faute de frappe, « Nollan », crée même un réalisateur fantôme) ;
+
+    - **anomalie d’insertion** : impossible d’enregistrer un réalisateur qui n’a encore aucun film, sans inventer un film ;
+
+    - **anomalie de suppression** : supprimer le seul film de Bong Joon-ho efface du même coup tout ce que la base savait de lui.
+
+    En **séparant** en deux tables reliées par une clé étrangère, chaque information n’est écrite **qu’une fois** : les trois anomalies disparaissent. Repérer ces anomalies dans un schéma, puis le découper, c’est tout l’art du modèle relationnel.
+
+<span id="cours-06-24" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercice **[24](exercices.md#ex-06-24)** (un schéma mal conçu : anomalies, structure et contenu)
 
 ### D’autres contraintes utiles
 
@@ -132,7 +148,7 @@ Au-delà des trois grandes contraintes (domaine, entité, référence), on peut 
 
 - une **contrainte utilisateur** (ou « métier ») : une règle propre au contexte, par exemple « une `note` est comprise entre `0` et `20` » ou « un `age` est positif ».
 
-!!! regle "Règle 6 — Récapitulatif : les contraintes d’intégrité"
+!!! regle "Règle 7 — Récapitulatif : les contraintes d’intégrité"
 
     **de domaine** (bon type) ; **d’entité** (clé primaire unique) ; **de référence** (clé étrangère existante) ; et les contraintes complémentaires (`NOT NULL`, `UNIQUE`, règles métier). Toutes servent le même but : garder des données **cohérentes**.
 
@@ -150,7 +166,7 @@ On ne manipule jamais les fichiers d’une base « à la main » : on passe par 
 
     Un **SGBD** est le logiciel qui **stocke**, **protège** et **interroge** une base de données. On ne lui parle pas dans un langage de programmation classique, mais avec un langage dédié : **SQL**.
 
-!!! regle "Règle 7 — Les grandes fonctions d’un SGBD"
+!!! regle "Règle 8 — Les grandes fonctions d’un SGBD"
 
     - **Persistance** : les données survivent à l’extinction de la machine.
 
@@ -158,7 +174,7 @@ On ne manipule jamais les fichiers d’une base « à la main » : on passe par 
 
     - **Efficacité** : il recherche vite, même dans des milliards de lignes (grâce à des *index* — souvent des arbres, cf. chapitre *Arbres* !).
 
-    - **Sécurité** : droits d’accès par utilisateur, sauvegardes.
+    - **Sécurité** : droits d’accès par utilisateur, sauvegardes. Quand la base contient des **données personnelles**, protéger les accès est aussi une obligation légale : on ne collecte que ce qui est nécessaire et l’on en garde le contrôle (le RGPD dans l’Union européenne ; à Monaco, la loi n° 1.565 du 3 décembre 2024, contrôlée par l’Autorité de protection des données personnelles, APDP).
 
     - **Accès concurrents** : plusieurs utilisateurs en même temps, sans conflit, grâce aux **transactions** (un problème de ressource partagée, comme entre les processus du chapitre 4).
 
@@ -197,13 +213,17 @@ INSERT INTO film (id, titre, id_real, annee, note)
 VALUES (1, 'Inception', 1, 2010, 9);
 ```
 
+!!! remarque "Remarque — Déclarer une clé étrangère"
+
+    Dans `CREATE TABLE`, on déclare la clé étrangère avec `REFERENCES` : `id_real INTEGER REFERENCES realisateur(id)`. Le SGBD fait alors respecter la contrainte de référence. Attention, **SQLite** ne vérifie les clés étrangères que si on le lui demande, au début de chaque session, par `PRAGMA foreign_keys = ON;` : sans cette ligne, il accepte un `id_real` qui ne désigne aucun réalisateur.
+
 !!! remarque "Remarque"
 
     En SQL, les mots-clés (`SELECT`, `FROM`…) s’écrivent traditionnellement en **majuscules** (ce n’est pas obligatoire) et les chaînes de caractères entre **apostrophes simples** : `’Inception’`.
 
 ### `SELECT` … `FROM` : choisir des colonnes
 
-!!! regle "Règle 8 — La requête de base"
+!!! regle "Règle 9 — La requête de base"
 
     `SELECT` liste les **colonnes** à récupérer ; `FROM` indique la **table**. L’étoile `*` signifie « toutes les colonnes ».
 
@@ -224,7 +244,7 @@ donne :
 
 ### `WHERE` : filtrer les lignes
 
-!!! regle "Règle 9"
+!!! regle "Règle 10"
 
     `WHERE` garde uniquement les lignes qui **satisfont une condition**. On combine les conditions avec `AND`, `OR`, `NOT`, et on compare avec `=`, `<>` (différent), `<`, `>`, `<=`, `>=`.
 
@@ -343,7 +363,7 @@ ne garde que les réalisateurs ayant **au moins 2** films.
 
 Notre requête `GROUP BY` affiche des `id_real` (`1`, `2`…), pas des noms. Pour afficher le **nom** du réalisateur, il faut **recoller** les deux tables : c’est une **jointure**.
 
-!!! regle "Règle 10 — JOIN … ON"
+!!! regle "Règle 11 — JOIN … ON"
 
     `FROM A JOIN B ON A.cle_etrangere = B.cle_primaire` fusionne chaque ligne de `A` avec la ligne de `B` qui lui correspond, selon l’égalité indiquée après `ON`.
 
@@ -375,7 +395,7 @@ associe à chaque film le nom de son réalisateur :
 
 Au-delà de la lecture, SQL sait aussi **écrire**. Trois instructions, à manier avec prudence.
 
-!!! regle "Règle 11 — Les trois commandes de mise à jour"
+!!! regle "Règle 12 — Les trois commandes de mise à jour"
 
     - `INSERT INTO … VALUES …` : **ajouter** une ligne ;
 
@@ -392,7 +412,7 @@ DELETE FROM film
 WHERE annee < 2005;
 ```
 
-!!! regle "Règle 12 — Le WHERE qui sauve des vies"
+!!! regle "Règle 13 — Le WHERE qui sauve des vies"
 
     **N’oubliez jamais le `WHERE`** dans un `UPDATE` ou un `DELETE` ! `DELETE FROM film;` (sans condition) efface **tous** les films d’un coup. C’est la requête la plus redoutée des informaticiens.
 
@@ -458,6 +478,8 @@ WHERE annee < 2005;
 *À la fin du chapitre, je sais…*
 
 - lire un **schéma relationnel** (clés primaire et étrangère) $\to$ ex. [1](exercices.md#ex-06-1), [2](exercices.md#ex-06-2), [3](exercices.md#ex-06-3) ;
+
+- distinguer la **structure** d’une base de son **contenu**, et repérer les **anomalies** d’un schéma (redondance ; insertion, suppression, mise à jour) $\to$ ex. [3](exercices.md#ex-06-3), [24](exercices.md#ex-06-24) ;
 
 - écrire `SELECT` / `FROM` / `WHERE` (`AND`, `OR`, `NOT`), `ORDER BY`, `DISTINCT` $\to$ ex. [4](exercices.md#ex-06-4), [5](exercices.md#ex-06-5), [6](exercices.md#ex-06-6) ;
 

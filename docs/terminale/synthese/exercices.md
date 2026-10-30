@@ -12,11 +12,11 @@
 
     - <span class="run" title="À programmer et tester sur machine">▶</span> *À programmer et tester* en Python. Les classes `Pile`, `File`, `Cellule` et `Noeud` sont celles du cours.
 
-    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
+    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md). Dans cette feuille : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> pour les exercices qui entraînent des méthodes du cours, <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> pour les problèmes plus ouverts.
 
 ### Après les chapitres 1 à 3 (récursivité, programmation objet, structures linéaires)
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 1</span> — Dérécursiver avec une pile <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-1 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 1</span> — Dérécursiver avec une pile <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-S-1 }
 
 <span class="duree">≈ 30 min</span> Chapitres croisés : *Récursivité ; Piles*
 
@@ -71,7 +71,7 @@ def afficher_binaire(n):
 
     **4.** Avec une file, les chiffres ressortent dans l’ordre où ils ont été calculés (FIFO), du poids faible au poids fort : on obtient `"1011"`, l’écriture binaire **à l’envers**. C’est précisément le caractère LIFO de la pile qui remet les chiffres dans l’ordre.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 2</span> — Annuler et rétablir <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-2 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 2</span> — Annuler et rétablir <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-S-2 }
 
 <span class="duree">≈ 45 min</span> Chapitres croisés : *Programmation objet ; Piles*
 
@@ -279,7 +279,7 @@ class Editeur:
 
     **4.** Après `ecrire("soir")`, le texte annulé (`"Bonjour"`) appartient à une « histoire » abandonnée : le rétablir effacerait sans prévenir ce qu’on vient d’écrire. Tous les éditeurs se comportent ainsi. C’est la ligne `self.retablissements = Pile()` de `ecrire` qui vide la pile des rétablissements à chaque nouvelle saisie.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 3</span> — Listes chaînées récursives <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-3 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 3</span> — Listes chaînées récursives <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-S-3 }
 
 <span class="duree">≈ 45 min</span> Chapitres croisés : *Programmation objet ; Listes chaînées ; Récursivité*
 
@@ -368,7 +368,7 @@ lst = Cellule(3, Cellule(1, Cellule(4, None)))
 
 ### Après le chapitre 5 (arbres)
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 4</span> — Trier avec un arbre binaire de recherche <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-4 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 4</span> — Trier avec un arbre binaire de recherche <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-S-4 }
 
 <span class="duree">≈ 45 min</span> Chapitres croisés : *Arbres ; Récursivité ; coût des algorithmes*
 
@@ -434,15 +434,15 @@ def inserer(a, x):
 
     **4.** `tri_abr([3, 1, 3])` renvoie `[1, 3, 3]` : les doublons sont conservés. Le premier `3` est la racine, `1` va à sa gauche ; le second `3` n’est pas plus petit que la racine, il va donc à **droite** (convention du cours : égal à droite) et devient le fils droit de la racine. Le parcours infixe visite la racine, puis son sous-arbre droit : les deux `3` sortent côte à côte. Pour un tri **sans doublon**, il suffit de ne rien faire quand `x == a.valeur` : on remplace `else:` par `elif x > a.valeur:`, et `tri_abr([3, 1, 3])` renvoie alors `[1, 3]`. C’est une autre convention, que l’on rencontre dans certains sujets (ABR « sans doublon ») : toujours lire celle de l’énoncé.
 
-    **5.** Chaque valeur est plus grande que toutes les précédentes : elle va toujours à droite. L’arbre est un « peigne » de hauteur $100$, en réalité une liste chaînée. L’insertion du dernier élément compare $100$ à $99$ valeurs. Au total, $0 + 1 + \dots + 99 = 4\,950$ comparaisons, soit environ $n^2/2$ : coût **quadratique**, comme un tri par insertion. Pour un tableau mélangé, chaque insertion coûte au plus une douzaine de comparaisons ici, de l’ordre de $\log_2(n)$ : environ $n\log_2(n)$ au total, comme le tri fusion (chapitre *Diviser pour régner*).
+    **5.** Chaque valeur est plus grande que toutes les précédentes : elle va toujours à droite. L’arbre est un « peigne » de hauteur $100$, en réalité une liste chaînée. L’insertion du dernier élément compare $100$ à $99$ valeurs. Au total, $0 + 1 + \dots + 99 = 4\,950$ comparaisons, soit environ $n^2/2$ : coût **quadratique**, comme un tri par insertion. Pour un tableau mélangé, chaque insertion coûte au plus une douzaine de comparaisons ici, de l’ordre de $\log_2(n)$ : environ $n\log_2(n)$ au total. On retrouvera ce coût au chapitre 7, avec le tri fusion.
 
     **6.** `inserer` s’appelle récursivement une fois par niveau traversé : avec $10\,000$ valeurs triées, l’arbre a une hauteur de $10\,000$, donc il faut $10\,000$ appels emboîtés. Cela dépasse la limite de la pile d’appels de Python (environ $1\,000$ par défaut) : `RecursionError`. La forme de l’arbre a donc un coût en temps *et* en mémoire.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — La largeur d’un arbre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-5 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — La largeur d’un arbre <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-S-5 }
 
 <span class="duree">≈ 30 min</span> Chapitres croisés : *Arbres ; Files ; dictionnaires*
 
-On appelle **niveau** d’un nœud le nombre de nœuds sur le chemin qui va de la racine jusqu’à lui (la racine est au niveau $1$). La **largeur** d’un arbre est le plus grand nombre de nœuds situés sur un même niveau.
+On appelle **niveau** d’un nœud le nombre de nœuds sur le chemin qui va de la racine jusqu’à lui (la racine est au niveau $1$ ; attention, ce n’est pas la convention du cours, où l’on parle de **profondeur** et où la racine est à la profondeur $0$ : suivez l’énoncé). La **largeur** d’un arbre est le plus grand nombre de nœuds situés sur un même niveau.
 
 ![](../figures/fd4c8c294a2664ea.svg){ .tikz loading=lazy }
 
@@ -502,7 +502,7 @@ On appelle **niveau** d’un nœud le nombre de nœuds sur le chemin qui va de l
 
 ### Après les chapitres 6 à 8 (bases de données, diviser pour régner, graphes)
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Une médiathèque, de la table à l’objet <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-6 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Une médiathèque, de la table à l’objet <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-S-6 }
 
 <span class="duree">≈ 45 min</span> Chapitres croisés : *Bases de données ; Programmation objet*
 
@@ -814,7 +814,7 @@ reseau = {"R1": {"R2": 10, "R3": 100},
 
     La route RIP ne change pas (R1–R2–R5, $2$ sauts). Pour OSPF, les candidats qui passent par R3–R4 ne sont plus des chemins ; il reste R1–R2–R5 (coût $11$) et R1–R2–R4–R5 (coût $13$) : le paquet passe désormais par **R1–R2–R5**, comme avec RIP.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — RSA miniature et exponentiation rapide <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-S-9 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — RSA miniature et exponentiation rapide <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-S-9 }
 
 <span class="duree">≈ 45 min</span> Chapitres croisés : *Cryptographie ; Diviser pour régner ; Récursivité*
 

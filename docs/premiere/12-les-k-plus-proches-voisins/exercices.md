@@ -94,7 +94,7 @@ On dispose des exemples suivants (longueur ; largeur de pétale $\to$ espèce) :
 |    5.5    |    2.1    | virginica  |
 |    5.8    |    2.2    | virginica  |
 
-On veut classer la fleur $x = (4.7 ; 1.4)$.
+On veut classer la fleur $x = (5.2 ; 1.9)$.
 
 1.  Calculer la distance **au carré** de $x$ à chacun des 6 exemples.
 
@@ -108,18 +108,18 @@ On veut classer la fleur $x = (4.7 ; 1.4)$.
 
 ??? corrige "Corrigé"
 
-    **a)** Distances au carré de $x=(4.7;1.4)$ :
+    **a)** Distances au carré de $x=(5.2;1.9)$ :
 
-    | **exemple** | **espèce** | **$d^2$** |
-    |:-----------:|:----------:|:---------:|
-    |  (1.4;0.2)  |   setosa   |   12.33   |
-    |  (1.5;0.2)  |   setosa   |   11.68   |
-    |  (4.5;1.5)  | versicolor | **0.05**  |
-    |  (4.9;1.5)  | versicolor | **0.05**  |
-    |  (5.5;2.1)  | virginica  | **1.13**  |
-    |  (5.8;2.2)  | virginica  |   1.85    |
+    | **exemple** | **espèce** |  **calcul**   | **$d^2$** |
+    |:-----------:|:----------:|:-------------:|:---------:|
+    |  (1.4;0.2)  |   setosa   | $3.8^2+1.7^2$ |   17.33   |
+    |  (1.5;0.2)  |   setosa   | $3.7^2+1.7^2$ |   16.58   |
+    |  (4.5;1.5)  | versicolor | $0.7^2+0.4^2$ |   0.65    |
+    |  (4.9;1.5)  | versicolor | $0.3^2+0.4^2$ | **0.25**  |
+    |  (5.5;2.1)  | virginica  | $0.3^2+0.2^2$ | **0.13**  |
+    |  (5.8;2.2)  | virginica  | $0.6^2+0.3^2$ | **0.45**  |
 
-    **b)** $1$-NN : le plus proche est une *versicolor* $\to$ **versicolor**. **c)** $3$-NN : deux versicolor (0.05 ; 0.05) et une virginica (1.13) $\to$ **versicolor**.
+    **b)** $1$-NN : le plus proche est une *virginica* ($d^2 = 0.13$) $\to$ **virginica**. **c)** $3$-NN : dans l’ordre, une virginica (0.13), une versicolor (0.25) et une virginica (0.45) $\to$ vote 2 contre 1 $\to$ **virginica**.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> calculer les racines carrées pour comparer : c’est inutile, les distances au carré sont rangées dans le même ordre que les distances.
 
@@ -401,7 +401,7 @@ L=\begin{smallmatrix}1&0&0\\1&0&0\\1&1&1\end{smallmatrix}\quad(\text{« L »})$$
 
 1.  Écrire $T$, $L$ et $N$ comme des listes de 9 nombres.
 
-2.  Avec des pixels 0/1, la distance au carré compte le **nombre de pixels différents**. Calculer $d(N,T)$ et $d(N,L)$.
+2.  Avec des pixels 0/1, la distance au carré compte le **nombre de pixels différents**. Calculer $d^2(N,T)$ et $d^2(N,L)$.
 
 3.  Que prédit le $1$-NN ? Cela vous semble-t-il correct visuellement ?
 

@@ -28,7 +28,21 @@ Les extraits de sujets de bac (et les sujets « façon bac ») des feuilles d’
 
 - [Ex. 21](02-programmation-orientee-objet-et-paradigm/exercices.md#ex-02-21) — Puissance 4 : la grille de jeu (d’après Amérique du Nord 2026, jour 1, partie A) <span class="duree">≈ 30 min</span>
 
+### Chapitre 3 — Structures linéaires : piles, files, listes chaînées
+
+- [Ex. 6](03-structures-lineaires-piles-files-listes/exercices.md#ex-03-6) — La structure de pile (d’après Asie 2024, jour 1) <span class="duree">≈ 15 min</span>
+
+- [Ex. 13](03-structures-lineaires-piles-files-listes/exercices.md#ex-03-13) — Ordonnancer des processus avec une file (d’après Amérique du Nord 2024, jour 1) <span class="duree">≈ 30 min</span>
+
+- [Ex. 14](03-structures-lineaires-piles-files-listes/exercices.md#ex-03-14) — Une file de priorité de tâches (d’après Métropole 2025, jour 1) <span class="duree">≈ 30 min</span>
+
+- [Ex. 19](03-structures-lineaires-piles-files-listes/exercices.md#ex-03-19) — Piles et files pour parcourir un graphe (d’après Polynésie 2024, jour 2) <span class="duree">≈ 20 min</span>
+
+- [Ex. 24](03-structures-lineaires-piles-files-listes/exercices.md#ex-03-24) — Le collier de bonbons : maillons chaînés (d’après Amérique du Nord 2025, jour 2) <span class="duree">≈ 45 min</span>
+
 ### Chapitre 4 — Processus et ordonnancement
+
+- [Ex. 9](04-processus-et-ordonnancement/exercices.md#ex-04-9) — Le tourniquet en Python *(d’après Polynésie 2023, jour 1)* <span class="duree">≈ 45 min</span>
 
 - [Ex. 12](04-processus-et-ordonnancement/exercices.md#ex-04-12) — Observer puis ordonnancer des processus *(d’après Amérique du Nord 2023, jour 1)* <span class="duree">≈ 30 min</span>
 
@@ -78,15 +92,17 @@ Les extraits de sujets de bac (et les sujets « façon bac ») des feuilles d’
 
 ### Chapitre 8 — Graphes
 
-- [Ex. 15](08-graphes/exercices.md#ex-08-15) — *d’après Amérique du Nord 2024, jour 1, ex. 2* <span class="duree">≈ 45 min</span>
+- [Ex. 15](08-graphes/exercices.md#ex-08-15) — Un cercle d’amis *(d’après Amérique du Nord 2024, jour 1, ex. 2)* <span class="duree">≈ 45 min</span>
 
-- [Ex. 16](08-graphes/exercices.md#ex-08-16) — *d’après Asie 2024, jour 1, ex. 2* <span class="duree">≈ 30 min</span>
+- [Ex. 16](08-graphes/exercices.md#ex-08-16) — La recette du pain : un graphe de tâches *(d’après Asie 2024, jour 1, ex. 2)* <span class="duree">≈ 30 min</span>
 
-- [Ex. 17](08-graphes/exercices.md#ex-08-17) — *d’après Pays étrangers 2025, sujet PE2, ex. 3 (partie A)* <span class="duree">≈ 30 min</span>
+- [Ex. 17](08-graphes/exercices.md#ex-08-17) — Un parc d’attractions *(d’après Pays étrangers 2025, sujet PE2, ex. 3 (partie A))* <span class="duree">≈ 30 min</span>
 
-- [Ex. 18](08-graphes/exercices.md#ex-08-18) — *d’après Centres étrangers 2024, groupe 1, jour 1, ex. 1* <span class="duree">≈ 30 min</span>
+- [Ex. 18](08-graphes/exercices.md#ex-08-18) — Un réseau d’ordinateurs *(d’après Centres étrangers 2024, groupe 1, jour 1, ex. 1)* <span class="duree">≈ 30 min</span>
 
-- [Ex. 19](08-graphes/exercices.md#ex-08-19) — *d’après Polynésie 2024, jour 2, ex. 1* <span class="duree">≈ 45 min</span>
+- [Ex. 19](08-graphes/exercices.md#ex-08-19) — Une agence de voyages *(d’après Polynésie 2024, jour 2, ex. 1)* <span class="duree">≈ 45 min</span>
+
+- [Ex. 23](08-graphes/exercices.md#ex-08-23) — Sortir d’un labyrinthe *(type bac)* <span class="duree">≈ 40 min</span>
 
 ### Chapitre 9 — Réseaux
 

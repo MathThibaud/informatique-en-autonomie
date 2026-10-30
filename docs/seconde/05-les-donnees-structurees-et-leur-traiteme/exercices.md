@@ -10,7 +10,7 @@
 
     - Plusieurs exercices utilisent la table *jeu* (ventes en millions d’exemplaires) et la table *studio* ci-dessous.
 
-    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la charte d’usage de l’IA.
+    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
 **Table *jeu* :**
 
@@ -618,3 +618,28 @@ Tom;Beausoleil;quinze
     Comme à l’exercice « Filtrer » : GTA V est sorti *en* 2013, pas après, et Animal Crossing s’est vendu à moins de $50$ millions.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `genre = "action"` avec un seul signe égal : `=` range une valeur dans une variable, il ne compare pas, et Python signale une erreur de syntaxe (`SyntaxError`). Pour comparer, il faut le double égal `==`.
+
+### Compléments
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 21</span> — Partager et synchroniser <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-21 }
+
+<span class="tag">sur papier</span>  Léa range son exposé dans un dossier **synchronisé** avec le nuage, sur son ordinateur et sur son téléphone.
+
+1.  Elle corrige une faute sur son ordinateur. Que se passe-t-il sur son téléphone ? Pourquoi ?
+
+2.  Par erreur, elle supprime le fichier sur son téléphone. Que devient-il sur l’ordinateur ? Une synchronisation est-elle une sauvegarde ?
+
+3.  Elle veut que son professeur puisse **lire** l’exposé sans pouvoir le modifier. Quel droit de partage doit-elle choisir ? Pourquoi éviter un lien ouvert « à toute personne qui le possède » ?
+
+4.  Où sont réellement rangés les fichiers « dans le nuage » ? Citer une conséquence pour l’environnement, et un geste pour la limiter.
+
+??? pouce "Coup de pouce"
+
+    Relisez la règle « Partager et synchroniser » du cours : dans un dossier synchronisé, chaque changement fait sur un appareil est recopié sur tous les autres, quel que soit ce changement.
+
+??? corrige "Corrigé"
+
+    **1.** La correction apparaît aussi sur le téléphone : le dossier est **synchronisé**, donc toute modification faite sur un appareil est envoyée au nuage, puis recopiée sur les autres appareils (dès qu’ils sont connectés).  
+    **2.** Le fichier **disparaît aussi de l’ordinateur** : la suppression est synchronisée comme une modification. Une synchronisation **n’est donc pas une sauvegarde** ; on peut en général récupérer le fichier dans la **corbeille** du nuage pendant un certain temps, mais une vraie sauvegarde est une copie séparée (clé USB, disque dur) qu’une erreur ne touche pas.  
+    **3.** Le partage en **lecture seule**, avec le professeur nommément. Un lien ouvert à toute personne qui le possède peut être **transféré** : n’importe qui pourrait alors lire l’exposé, sans qu’on le sache.  
+    **4.** Sur des **serveurs**, dans des **centres de données**, souvent loin de chez soi et en plusieurs copies. Ces serveurs fonctionnent jour et nuit et doivent être refroidis : ils consomment beaucoup d’**électricité**. Geste : trier et supprimer les fichiers inutiles (photos en double, vidéos ratées), ne synchroniser que ce qui sert.

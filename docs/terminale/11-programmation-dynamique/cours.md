@@ -6,7 +6,7 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *« Programmation dynamique. Résoudre un problème grâce à la programmation dynamique. »* |
+| **Programme (BO)** | *« Programmation dynamique. Utiliser la programmation dynamique pour écrire un algorithme. »* Commentaire du BO : *« Les exemples de l’alignement de séquences ou du rendu de monnaie peuvent être présentés. La discussion sur le coût en mémoire peut être développée. »* |
 | **Prérequis** | la **récursivité** (absolument indispensable), la notion de **coût** d’un algorithme (linéaire, quadratique, exponentiel), les **listes** et les **dictionnaires**, et le souvenir des **algorithmes gloutons** de Première. (→ fiches de révision : ch. 1) |
 | **Objectifs** | *reconnaître* un problème qui se prête à la programmation dynamique (sous-problèmes qui *se recouvrent*) ; *mémoïser* une fonction récursive (*top-down*) ; *tabuler* un problème de bas en haut (*bottom-up*) ; *comprendre* que ce sont deux faces d’une même idée ; l’*appliquer* au rendu de monnaie, au sac à dos, à la comparaison de deux mots. |
 
@@ -74,7 +74,7 @@ Avec cette seule modification, `fibo(50)` est **instantané**, et même `fibo(50
 Sur l’arbre des appels, la mémoïsation **coupe** toutes les branches redondantes : la deuxième fois qu’une valeur est demandée, on la *lit dans le carnet* au lieu de relancer tout son sous-arbre.
 
 ![](../figures/698d7bb210433965.svg){ .tikz loading=lazy }  
-Arbre de `fibo(5)` *mémoïsé* : les nœuds en pointillés gris (`3`, `2`, `1` déjà rencontrés) sont **lus dans le carnet** — leurs sous-arbres ne sont jamais recalculés. Comparez avec l’arbre complet du début !
+Arbre de `fibo(5)` *mémoïsé* : les nœuds en pointillés gris `3` et `2`, déjà calculés, sont **lus dans le carnet** — leurs sous-arbres ne sont jamais recalculés ; le `1` en pointillés est un cas de base, renvoyé directement (`n <= 1`). Comparez avec l’arbre complet du début !
 
 !!! remarque "Remarque"
 
@@ -234,6 +234,10 @@ def sac_a_dos(poids, valeurs, capacite):
 
     Ce coût est polynomial en la **valeur** de $C$, mais pas en sa **taille**. Écrite en binaire avec $b$ bits, la capacité peut valoir jusqu’à $2^b$ : la table a alors de l’ordre de $n \times 2^b$ cases. Chaque bit ajouté à $C$ double la table : le coût est **exponentiel** en la taille de $C$. On parle de coût **pseudo-polynomial** : l’algorithme est excellent pour une capacité de quelques milliers, mais inutilisable pour une capacité de $30$ chiffres. On verra au chapitre *Calculabilité* pourquoi cette nuance compte.
 
+!!! remarque "Remarque — Le coût en mémoire"
+
+    La programmation dynamique gagne du temps en **dépensant de la mémoire** : la table de `fibo` a $n+1$ cases, celle du sac à dos $(n+1)\times(C+1)$. On peut souvent réduire cette mémoire en ne gardant que ce qui sert encore. Pour `fibo`, chaque case ne lit que les deux précédentes : **deux variables** suffisent (mémoire constante, voir le corrigé de l’exercice 5). Pour le sac à dos, chaque ligne ne lit que la ligne du dessus : **deux lignes** de $C+1$ cases suffisent si l’on ne veut que la meilleure valeur — mais on ne peut plus alors « remonter » la table pour retrouver les objets choisis.
+
 <span id="cours-11-12" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[12](exercices.md#ex-11-12) et [13](exercices.md#ex-11-13)** (les chemins d’un robot, le sac à dos)
@@ -349,7 +353,7 @@ Tous ces exemples partagent la même ossature. C’est elle qu’il faut savoir 
 
 ## Ouverture
 
-La programmation dynamique découpe toujours en sous-problèmes, mais quand ils se répètent, elle **mémorise** leurs résultats : elle échange du **temps** contre de la **mémoire**.
+La programmation dynamique découpe toujours en sous-problèmes, mais quand ils se répètent, elle **mémorise** leurs résultats : elle dépense de la **mémoire** pour gagner du **temps**.
 
 - Au **bac**, on vous demandera surtout d’écrire une **relation de récurrence**, de compléter une version **mémoïsée** ou une version **tabulée** (remplissage d’un tableau), et de comparer avec un algorithme **glouton**.
 
@@ -357,13 +361,13 @@ La programmation dynamique découpe toujours en sous-problèmes, mais quand ils 
 
 La programmation dynamique est née dans les années 1950 sous la plume du mathématicien américain **Richard Bellman** (1920–1984), à la RAND Corporation. Le mot « programmation » n’a ici rien à voir avec le code : à l’époque, il signifie « planification », l’optimisation d’une suite de décisions (comme la *programmation linéaire*).
 
-Et le mot « dynamique » ? Bellman a raconté l’avoir choisi… par ruse. Son financeur, le secrétaire à la Défense Charles Wilson, « avait une peur et une haine viscérales du mot *recherche* ». Pour faire accepter ses travaux de mathématiques, Bellman cherchait un nom qui sonne concret, impossible à critiquer : « dynamique » avait une allure décidée, positive, et « il était impossible d’employer ce mot dans un sens péjoratif ». La discipline la plus élégante de l’algorithmique doit donc son nom à une opération de camouflage administratif !
+Et le mot « dynamique » ? Bellman a raconté, dans son autobiographie (1984), l’avoir choisi… par ruse. Selon son propre récit, le secrétaire à la Défense Charles Wilson, dont dépendaient les crédits de la recherche militaire, « avait une peur et une haine viscérales du mot *recherche* ». Pour faire accepter ses travaux de mathématiques, Bellman cherchait un nom qui sonne concret, impossible à critiquer : « dynamique » avait une allure décidée, positive, et « il était impossible d’employer ce mot dans un sens péjoratif ». La discipline la plus élégante de l’algorithmique devrait donc son nom à une opération de camouflage administratif ! (Les historiens relèvent que Wilson n’est en poste qu’à partir de 1953, alors que Bellman situe l’épisode vers 1950 : racontée trente ans plus tard, l’anecdote est sans doute un peu arrangée.)
 
 Derrière l’anecdote, une idée profonde : le **principe d’optimalité** de Bellman — *une politique optimale est faite de sous-décisions elles-mêmes optimales* — est exactement la « sous-structure optimale » de notre recette. On la retrouve aujourd’hui partout : dans les GPS, la reconnaissance vocale, l’alignement de séquences d’ADN, et jusque dans l’apprentissage par renforcement des IA qui jouent aux échecs ou au go.
 
 !!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
-    - **Ce qu’il réutilise :** la *Récursivité* (Fibonacci naïf, exponentiel) et *Diviser pour régner*, prolongé quand les sous-problèmes se recouvrent : la **mémoïsation** échange du temps contre de la mémoire.
+    - **Ce qu’il réutilise :** la *Récursivité* (Fibonacci naïf, exponentiel) et *Diviser pour régner*, prolongé quand les sous-problèmes se recouvrent : la **mémoïsation** dépense de la mémoire pour gagner du temps.
 
     - **Un écho :** le rendu de monnaie, résolu en glouton dans *Les algorithmes gloutons* (Première), trouve ici sa version toujours optimale.
 
@@ -416,9 +420,9 @@ Derrière l’anecdote, une idée profonde : le **principe d’optimalité** de 
 
 - **écrire une relation de récurrence** et l’implémenter des deux façons $\to$ ex. [3](exercices.md#ex-11-3), [10](exercices.md#ex-11-10), [12](exercices.md#ex-11-12) ;
 
-- **dérouler à la main** le remplissage d’une table (rendu de monnaie, pyramide, sac à dos) $\to$ ex. [4](exercices.md#ex-11-4), [7](exercices.md#ex-11-7), [10](exercices.md#ex-11-10), [13](exercices.md#ex-11-13) ;
+- **dérouler à la main** le remplissage d’une table (rendu de monnaie, pyramide, sac à dos) $\to$ ex. [4](exercices.md#ex-11-4), [7](exercices.md#ex-11-7), [9](exercices.md#ex-11-9), [13](exercices.md#ex-11-13) ;
 
-- **reconnaître** les deux ingrédients (recouvrement + sous-structure optimale) et distinguer du glouton et de diviser-pour-régner $\to$ ex. [8](exercices.md#ex-11-8), [9](exercices.md#ex-11-9).
+- **reconnaître** les deux ingrédients (recouvrement + sous-structure optimale) et distinguer du glouton et de diviser-pour-régner $\to$ ex. [9](exercices.md#ex-11-9), [19](exercices.md#ex-11-19).
 
 ## Vers le Grand Oral
 

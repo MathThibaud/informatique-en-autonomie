@@ -70,7 +70,7 @@ def cesar(message, k):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Le chiffrement affine <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-3 }
 
-Chaque lettre de rang $x$ devient $(a\,x+b)\bmod 26$. La clé est le couple $(a,b)$.
+Chaque lettre de rang $x$ devient `(a * x + b) % 26`. La clé est le couple $(a,b)$.
 
 1.  Pourquoi $a$ doit-il être **premier avec $26$** ? Donner la liste de toutes les valeurs possibles de $a$.
 
@@ -80,13 +80,13 @@ Chaque lettre de rang $x$ devient $(a\,x+b)\bmod 26$. La clé est le couple $(a,
 
 2.  Chiffrer `NSI` avec la clé $(a,b)=(3,1)$.
 
-3.  Pour déchiffrer, on a besoin de l’**inverse modulaire** de $a$. Vérifier que $9$ est l’inverse de $3$ modulo $26$ (c’est-à-dire $3\times 9\equiv 1\ [26]$).
+3.  Pour déchiffrer, on a besoin de l’**inverse modulaire** de $a$. Vérifier que $9$ est l’inverse de $3$ modulo $26$ (c’est-à-dire que `(3 * 9) % 26` vaut $1$).
 
 4.  En déduire la formule de déchiffrement, puis déchiffrer `ODZ` chiffré avec $(3,1)$.
 
     ??? pouce "Coup de pouce"
 
-        Q4 : partir de $y=(a\,x+b)\bmod 26$ et isoler $x$ : on ne divise pas par $a$ modulo $26$, on multiplie par son inverse.
+        Q4 : partir de `y = (a * x + b) % 26` et isoler $x$ : on ne divise pas par $a$ modulo $26$, on multiplie par son inverse.
 
 ??? corrige "Corrigé"
 
@@ -207,7 +207,7 @@ Alice choisit les nombres premiers $p=3$ et $q=11$.
 
 4.  Bob envoie le nombre $M=5$. Calculer le message chiffré $C=M^{e}\bmod n$.
 
-5.  Vérifier que le déchiffrement redonne bien $5$ (on admettra le calcul de $26^{7}\bmod 33$, qui vaut $5$).
+5.  Vérifier que le déchiffrement redonne bien $5$ (on admettra que, pour la valeur de $C$ trouvée, $C^{7}\bmod 33$ vaut $5$ : il suffit d’écrire le calcul à faire).
 
 ??? corrige "Corrigé"
 
@@ -329,7 +329,7 @@ Alice et Bob veulent fabriquer une clé secrète commune *en public*. Ils convie
 
     - les deux échangent ensuite leurs données chiffrées en symétrique (AES) ;
 
-    - le client vérifie le certificat auprès d’une autorité de certification.
+    - le client vérifie le certificat (signé par une autorité de certification).
 
 3.  À quoi sert le **certificat** ? Que risquerait-on sans lui ?
 
@@ -341,7 +341,7 @@ Alice et Bob veulent fabriquer une clé secrète commune *en public*. Ils convie
 
     1.  L’**asymétrique** sert à *échanger la clé* de session ; le **symétrique** (AES) chiffre ensuite *les données*. Raison : l’asymétrique résout l’échange de clé mais est lent ; le symétrique est rapide mais suppose une clé partagée — on combine leurs forces.
 
-    2.  Ordre : **(1)** le serveur envoie son certificat et sa clé publique ; **(2)** le client vérifie le certificat auprès d’une autorité de certification ; **(3)** le client fabrique une clé symétrique, la chiffre avec la clé publique du serveur et l’envoie ; **(4)** les deux échangent leurs données chiffrées en symétrique (AES).
+    2.  Ordre : **(1)** le serveur envoie son certificat et sa clé publique ; **(2)** le client vérifie le certificat, c’est-à-dire la signature de l’autorité de certification, avec la clé publique de cette autorité, déjà connue du navigateur ; **(3)** le client fabrique une clé symétrique, la chiffre avec la clé publique du serveur et l’envoie ; **(4)** les deux échangent leurs données chiffrées en symétrique (AES).
 
     3.  Le **certificat** authentifie le serveur (garantit que la clé publique est bien la sienne). Sans lui, un attaquant pourrait se placer au milieu (*man in the middle*) en présentant sa propre clé publique.
 

@@ -6,7 +6,7 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *« Recherche textuelle. Décrire un algorithme de recherche textuelle. Étudier la complexité de l’algorithme de Boyer-Moore, notamment le prétraitement du motif. »* |
+| **Programme (BO)** | *« Recherche textuelle. Étudier l’algorithme de Boyer-Moore pour la recherche d’un motif dans un texte. »* Commentaire du BO : *« L’intérêt du prétraitement du motif est mis en avant. L’étude du coût, difficile, ne peut être exigée. »* |
 | **Prérequis** | les **chaînes de caractères** et l’accès par indice ($0$ à $n-1$), la notion de **coût** (linéaire, quadratique), les **dictionnaires** (pour le prétraitement). |
 | **Objectifs** | *écrire* la recherche naïve ; *comprendre* les deux idées de **Boyer-Moore** (lire à l’envers, sauter loin) ; *construire* la table de prétraitement et *dérouler* **Boyer-Moore** et **Horspool**. |
 
@@ -86,9 +86,9 @@ En 1977, Robert **Boyer** et J Strother **Moore** ont une double idée, à la fo
 
 **La règle du mauvais caractère.** Supposons qu’en comparant de droite à gauche, on bute sur un caractère `c` du texte qui ne correspond pas. Deux cas :
 
-- `c` **n’existe pas** dans le motif : inutile d’essayer les alignements où `c` tomberait *dans* le motif — on saute d’un coup **toute la longueur** du motif !
+- `c` **n’existe pas** dans le motif : inutile d’essayer les alignements où `c` tomberait *dans* le motif — on place le motif juste **après** `c`. Si l’échec a lieu en position $j$ du motif, le saut vaut $j+1$ ; c’est **toute la longueur** $m$ du motif quand l’échec a lieu dès la dernière lettre ($j=m-1$).
 
-- `c` **existe** dans le motif : on décale juste ce qu’il faut pour aligner `c` du texte avec *sa* dernière occurrence dans le motif.
+- `c` **existe** dans le motif : on décale juste ce qu’il faut pour aligner `c` du texte avec *sa* dernière occurrence dans le motif. Si cette dernière occurrence est *à droite* de la position d’échec, ce décalage serait négatif ou nul : on avance alors d’un seul cran.
 
 Le prétraitement consiste donc à connaître, pour chaque lettre, sa **dernière position** dans le motif.
 
@@ -108,14 +108,14 @@ Le prétraitement consiste donc à connaître, pour chaque lettre, sa **dernièr
 
 ```python
 def table_dernier(motif):
-    last = {}
+    dernier = {}
     for k in range(len(motif)):
-        last[motif[k]] = k          # derniere position de chaque lettre
-    return last
+        dernier[motif[k]] = k       # derniere position de chaque lettre
+    return dernier
 
 def boyer_moore(motif, texte):
     n, m = len(texte), len(motif)
-    last = table_dernier(motif)
+    dernier = table_dernier(motif)
     positions = []
     i = 0
     while i <= n - m:
@@ -127,8 +127,8 @@ def boyer_moore(motif, texte):
             i += 1
         else:
             c = texte[i + j]                # le "mauvais caractere"
-            if c in last:
-                k = last[c]                 # derniere position de c
+            if c in dernier:
+                k = dernier[c]              # derniere position de c
             else:
                 k = -1                      # c absent du motif
             i += max(1, j - k)              # saut (au moins 1)
@@ -194,6 +194,10 @@ def horspool(motif, texte):
     return positions
 ```
 
+!!! encadre "Au bac — la table de Horspool peut être écrite autrement"
+
+    Certains sujets rangent dans le dictionnaire la **position** $k$ de chaque lettre du motif (sauf la dernière), et non le décalage : le saut $m-1-k$ est alors calculé *dans la boucle*, par une ligne du type `i += m - 1 - d[c]`. D’autres fonctions s’arrêtent à la **première** occurrence et renvoient sa position, ou $-1$ si le motif est absent. Les sauts sont les mêmes : il suffit de **lire le code de l’énoncé** et de suivre sa convention.
+
 *Visualisons Horspool sur `ACGT` cherché dans `GTACACGTAC` (table `A`$\to 3$, `C`$\to 2$, `G`$\to 1$, autres $\to 4$). La case orangée est la lettre alignée avec la **fin** de la fenêtre : c’est elle, et elle seule, qui décide du saut.*
 
 ![](../figures/67e60bf2543efa6c.svg){ .tikz loading=lazy }
@@ -252,7 +256,7 @@ def horspool(motif, texte):
 
 !!! exemple "Exemple — Un clin d’œil à l’ADN : GATTACA"
 
-    Table de `GATTACA` : `G`$\to 6$, `A`$\to 2$, `T`$\to 3$, `C`$\to 1$, autres $\to 7$. Dans le brin `ACGTGATTACAGGT`, Horspool teste $i=0$ (fin `T` $\to$ saut $3$), $i=3$ (fin `C` $\to$ saut $1$), puis $i=4$ : **`GATTACA` trouvé** ! Trois alignements au lieu de cinq pour la méthode naïve, qui essaie $i = 0, 1, 2, 3, 4$ avant de trouver.
+    Table de `GATTACA` : `G`$\to 6$, `A`$\to 2$, `T`$\to 3$, `C`$\to 1$, autres $\to 7$. Dans le brin `ACGTGATTACAGGT`, Horspool teste $i=0$ (fin `T` $\to$ saut $3$), $i=3$ (fin `C` $\to$ saut $1$), puis $i=4$ : **`GATTACA` trouvé** ! Trois alignements pour trouver le motif, au lieu de cinq pour la méthode naïve, qui essaie $i = 0, 1, 2, 3, 4$ avant de trouver. (La fonction cherche toutes les occurrences : elle teste encore $i=6$, puis s’arrête.)
 
 ![](../figures/0f7fc536d33609f9.svg){ .tikz loading=lazy }
 
@@ -262,12 +266,12 @@ def horspool(motif, texte):
 
 ## Le coût, ou le miracle du sous-linéaire
 
-!!! regle "Règle 3 — Complexité"
+!!! regle "Règle 3 — Complexité (non exigible au bac)"
 
     **Prétraitement** : construire la table coûte $O(m)$ (une seule passe sur le motif ; les lettres absentes du motif ne sont pas stockées : elles reçoivent le décalage par défaut $m$). Comme la mémoïsation du chapitre 11, on dépense un peu de mémoire pour gagner du temps.  
     **Recherche** : dans le *pire* cas, on reste en $O(n\times m)$ (comme le naïf). Mais en **pratique**, sur un texte « ordinaire », les sauts sont si grands qu’on est **sous-linéaire** : de l’ordre de $O(n/m)$ comparaisons.
 
-C’est le **prodige** de Boyer-Moore : il peut trouver un mot **sans lire tout le texte**. Et — contre-intuition merveilleuse — *plus le motif est long, plus la recherche est rapide*, car les sauts possibles sont plus grands. C’est cet algorithme (ou ses cousins) qui fait tourner `Ctrl+F`, `grep` et les moteurs de recherche.
+C’est le **prodige** de Boyer-Moore : il peut trouver un mot **sans lire tout le texte**. Et — contre-intuition merveilleuse — *plus le motif est long, plus la recherche est rapide*, car les sauts possibles sont plus grands. C’est cet algorithme (ou ses cousins) qui fait tourner `Ctrl+F` et `grep`.
 
 <span id="cours-12-8" class="ancre"></span>
 
@@ -293,7 +297,7 @@ C’est le **prodige** de Boyer-Moore : il peut trouver un mot **sans lire tout 
 | Méthode naïve | fenêtre glissante, gauche$\to$droite, décalage $1$ ; $O(n\,m)$ |
 | Boyer-Moore, idée 1 | comparer le motif **de droite à gauche** |
 | Boyer-Moore, idée 2 | **prétraiter** le motif pour **sauter loin** |
-| Mauvais caractère | lettre absente du motif $\Rightarrow$ saut $=$ longueur $m$ |
+| Mauvais caractère | lettre absente du motif $\Rightarrow$ motif placé juste après elle (saut $j+1$, soit $m$ si l’échec a lieu sur la dernière lettre) |
 | Horspool | saut selon la lettre **alignée avec la fin** ; 1 table |
 | Table (Horspool) | lettre en position $k$ $\to$ décalage $m-1-k$ ; défaut $m$ |
 | Coût | prétraitement $O(m)$ ; recherche souvent **sous-linéaire** $O(n/m)$ |
@@ -326,7 +330,7 @@ C’est le **prodige** de Boyer-Moore : il peut trouver un mot **sans lire tout 
 
 - **expliquer** les deux idées de Boyer-Moore (lire à l’envers, sauter) $\to$ ex. [3](exercices.md#ex-12-3), [11](exercices.md#ex-12-11) ;
 
-- **construire** la table de prétraitement (Boyer-Moore *et* Horspool) $\to$ ex. [4](exercices.md#ex-12-4), [5](exercices.md#ex-12-5) ;
+- **construire** la table de prétraitement (Boyer-Moore *et* Horspool) $\to$ ex. [3](exercices.md#ex-12-3), [5](exercices.md#ex-12-5) ;
 
 - **dérouler** Horspool sur un texte donné (suite des fenêtres et des sauts) $\to$ ex. [6](exercices.md#ex-12-6), [13](exercices.md#ex-12-13) ;
 

@@ -60,11 +60,11 @@ Pour chacun de ces objets, dire s’il repose plutôt sur un **microcontrôleur*
 
 ??? corrige "Corrigé"
 
-    1.  Par exemple : puissance (quelques MHz contre plusieurs GHz multi-cœurs) ; mémoire (quelques Ko contre plusieurs Go) ; consommation (minuscule contre modérée) ; prix (quelques euros contre quelques dizaines) ; **système d’exploitation** (aucun contre un OS complet).
+    1.  Par exemple : puissance (quelques dizaines de MHz contre plusieurs GHz multi-cœurs) ; mémoire (quelques Ko contre plusieurs Go) ; consommation (minuscule contre modérée) ; prix (quelques euros contre quelques dizaines) ; **système d’exploitation** (aucun contre un OS complet).
 
     2.  Un microcontrôleur est trop peu puissant et a trop peu de mémoire pour un OS ; sans OS, il exécute *directement* son programme, de façon **prévisible**. Pour un airbag, on veut une réponse *garantie à temps* : un OS pourrait interrompre le programme au mauvais moment.
 
-    3.  Tous deux **intègrent sur une seule puce** tous les composants d’un ordinateur (processeur, mémoire, périphériques).
+    3.  Tous deux **intègrent sur une seule puce** les composants d’un ordinateur (processeur, mémoire, périphériques) ; sur le SoC d’un téléphone, la mémoire vive principale est une puce empilée dans le même boîtier.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — La loi de Moore, chiffres en main <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-4 }
 
@@ -92,7 +92,7 @@ En 1971, l’Intel 4004 comptait $2\,300$ transistors. La loi de Moore affirme q
 
     3.  Non : la loi prévoit $\approx 80$ milliards, la réalité (A15, 2021) est $\approx 15$ milliards, soit environ **$5$ fois moins**. La loi de Moore donne le bon *ordre de grandeur* et la bonne *tendance*, mais elle a **ralenti** ces dernières années (elle reste une prédiction empirique, pas une loi physique).
 
-    4.  $3 \div 0{,}2 = \mathbf{15}$ atomes environ : c’est un ordre de grandeur, car « 3 nm » est un nom commercial (les motifs réels sont un peu plus larges), mais on reste à quelques dizaines d’atomes au plus. On approche des limites **physiques** : on ne peut pas graver plus fin qu’un atome. La loi de Moore ne pourra donc pas continuer éternellement.
+    4.  $3 \div 0{,}2 = \mathbf{15}$ atomes environ : c’est un ordre de grandeur, car « 3 nm » est un nom commercial (les motifs réels sont plusieurs fois plus larges, de l’ordre de la dizaine de nanomètres), mais on reste à quelques dizaines d’atomes. On approche des limites **physiques** : on ne peut pas graver plus fin qu’un atome. La loi de Moore ne pourra donc pas continuer éternellement.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Dérouler un thermostat <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-5 }
 
@@ -130,7 +130,7 @@ Un thermostat connecté maintient une pièce à la température `consigne`. Il d
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Confondre « temps réel » et « très rapide » : un système temps réel doit répondre dans un délai **garanti**, adapté à sa tâche ; pour un thermostat, ce délai peut être de plusieurs secondes.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Von Neumann ou Harvard ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-14-6 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Von Neumann ou Harvard ? <span class="horsprog">au-delà du programme</span> <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-14-6 }
 
 1.  Dans le modèle de **von Neumann**, où sont rangés le programme et les données ? Et dans l’architecture de **Harvard** ?
 
@@ -150,7 +150,7 @@ Un thermostat connecté maintient une pièce à la température `consigne`. Il d
 
     2.  Avec deux bus, le processeur peut charger **une instruction et une donnée en même temps** (au même cycle), au lieu de faire deux accès successifs : c’est plus rapide.
 
-    3.  Un microcontrôleur vise la **simplicité et la vitesse** sur une tâche fixe : Harvard (deux mémoires dédiées) y est efficace. Un SoC vise la **polyvalence** (exécuter n’importe quel programme, chargé en mémoire) : le modèle de von Neumann, plus souple, s’y prête mieux.
+    3.  Un microcontrôleur vise la **simplicité et la vitesse** sur une tâche fixe : Harvard (deux mémoires dédiées) y est efficace. Un SoC vise la **polyvalence** (exécuter n’importe quel programme, chargé en mémoire) : le modèle de von Neumann, plus souple, s’y prête mieux. *(Nuance : au plus près de chaque cœur, un SoC a des mémoires locales, des caches séparés pour les instructions et pour les données : une touche de Harvard à l’intérieur d’une architecture de von Neumann.)*
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Le prix de l’intégration <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-7 }
 
@@ -232,7 +232,7 @@ Un smartphone dispose de plusieurs ressources, dont un processeur graphique (GPU
 
     1.  Avec un seul processeur, un seul processus s’exécute à un instant donné : le parallélisme n’est qu’**apparent** (alternance). Avec plusieurs processeurs (ou plusieurs cœurs), plusieurs processus s’exécutent **réellement en même temps**, un par processeur : plus de calculs sont réalisés par seconde, les processus attendent moins leur tour et la machine reste réactive même quand l’un d’eux calcule beaucoup (par exemple décoder de la musique pendant que l’interface répond à l’utilisateur).
 
-    2.  **Avantage** (un seul suffit) : tous les composants (processeurs, GPU, mémoire, modules de communication) sont gravés sur une même puce, donc très proches : communications rapides, **faible consommation** (autonomie de la batterie) et peu de chaleur, faible encombrement, coût réduit en grande série.  
+    2.  **Avantage** (un seul suffit) : les composants (processeurs, GPU, modules de communication, et la mémoire dans le même boîtier) sont regroupés sur une même puce, donc très proches : communications rapides, **faible consommation** (autonomie de la batterie) et peu de chaleur, faible encombrement, coût réduit en grande série.  
         **Inconvénient** (un seul suffit) : le SoC n’est **ni réparable ni évolutif** : si un composant tombe en panne ou devient insuffisant (mémoire par exemple), on ne peut pas le remplacer seul, il faut changer toute la puce, voire l’appareil ; sa conception est aussi très coûteuse.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Type bac — Choisir la puce d’une montre connectée *(sujet maison, façon bac)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-10 }
@@ -289,7 +289,7 @@ On admet que l’autonomie d’un appareil, en heures, est égale à la capacit�
 
     1.  **A** et **C** sont des **microcontrôleurs** : fréquence de quelques dizaines à une centaine de MHz, mémoire de quelques centaines de Ko à $1$ Mo, **aucun système d’exploitation**, consommation et prix très faibles. **B** est un **SoC** de type smartphone : plusieurs cœurs à plus d’un GHz, $2$ Go de mémoire, un système d’exploitation.
 
-    2.  Dans les deux cas, **tous les composants d’un ordinateur** (processeur, mémoire, entrées-sorties) sont intégrés sur **un seul circuit intégré**.
+    2.  Dans les deux cas, **les composants d’un ordinateur** (processeur, mémoire, entrées-sorties) sont intégrés sur **un seul circuit intégré** (pour un SoC de téléphone, la mémoire vive principale est empilée dans le même boîtier).
 
     3.  Puce A : $300 \div 2 = \mathbf{150}$ h ; puce B : $300 \div 20 = \mathbf{15}$ h ; puce C : $300 \div 8 = \mathbf{37{,}5}$ h.
 
@@ -355,7 +355,7 @@ Le club de sciences du lycée installe sur le toit une station météo. Elle est
 
 7.  Dans le programme complet, les **trois** capteurs sont lus toutes les $10$ minutes et chaque mesure est rangée en mémoire vive sur $2$ octets. Combien de mesures la station enregistre-t-elle par jour ? Combien d’octets cela représente-t-il ? Combien de jours complets de mesures la mémoire vive peut-elle conserver au maximum ? Quel défaut de la boucle précédente cela révèle-t-il ?
 
-8.  Quel avantage l’architecture de Harvard apporte-t-elle par rapport au modèle de von Neumann ? Pourquoi ce type de système n’a-t-il pas besoin de système d’exploitation ?
+8.  <span class="horsprog">au-delà du programme</span> Quel avantage l’architecture de Harvard apporte-t-elle par rapport au modèle de von Neumann ? Pourquoi ce type de système n’a-t-il pas besoin de système d’exploitation ?
 
     ??? pouce "Coup de pouce"
 
@@ -414,11 +414,11 @@ Le lycée doit renouveler les $30$ ordinateurs d’une salle. Deux solutions son
 
 - **solution 1** : des ordinateurs « tour » classiques, construits autour d’une **carte mère** (processeur, barrettes de mémoire, carte graphique, carte Wi-Fi enfichés séparément), avec ventilateurs ; puissance moyenne $150$ W ;
 
-- **solution 2** : des mini-PC de la taille d’un livre, construits autour d’un **système sur puce**, sans ventilateur ; puissance moyenne $15$ W.
+- **solution 2** : des mini-PC de la taille d’un livre, construits autour d’un **système sur puce**, sans ventilateur, avec une mémoire vive **soudée** contre la puce ; puissance moyenne $15$ W.
 
 La salle est utilisée $8$ heures par jour, $160$ jours par an. On rappelle que l’énergie (en Wh) est égale à la puissance (en W) multipliée par la durée (en h), et que $1$ kWh $= 1\,000$ Wh.
 
-1.  Parmi les éléments suivants, indiquer ceux qui sont **intégrés sur la puce** d’un système sur puce : processeur (CPU), processeur graphique (GPU), contrôleur Wi-Fi, mémoire vive, alimentation électrique, ventilateur.
+1.  Parmi les éléments suivants, indiquer ceux qui sont **intégrés sur la puce** d’un système sur puce : processeur (CPU), mémoires caches, processeur graphique (GPU), contrôleur Wi-Fi, alimentation électrique, ventilateur.
 
 2.  Expliquer pourquoi le fait de rapprocher tous les composants sur une même puce permet à la fois de **réduire la consommation** et de **se passer de ventilateur**. Quel autre avantage cela présente-t-il dans une salle de classe ?
 
@@ -451,7 +451,7 @@ La salle est utilisée $8$ heures par jour, $160$ jours par an. On rappelle que 
 
     **Barème indicatif** (sur 6) : Q1 : 0,5 ; Q2 : 0,75 ; Q3 : 1 ; Q4 : 1,25 ; Q5 : 0,75 ; Q6 : 0,75 ; Q7 : 1
 
-    1.  Sont intégrés sur la puce : le **CPU**, le **GPU**, le **contrôleur Wi-Fi** et la **mémoire vive**. L’alimentation électrique n’est pas sur la puce, et il n’y a pas de ventilateur.
+    1.  Sont intégrés sur la puce : le **CPU**, les **mémoires caches**, le **GPU** et le **contrôleur Wi-Fi**. L’alimentation électrique n’est pas sur la puce, et il n’y a pas de ventilateur.
 
     2.  Les signaux parcourent de **très courtes distances**, sans longs fils de cuivre : il faut moins d’énergie, donc il se dégage **moins de chaleur**, et un ventilateur devient inutile. Autre avantage : la machine est **silencieuse** (et beaucoup plus petite).
 
@@ -469,7 +469,7 @@ La salle est utilisée $8$ heures par jour, $160$ jours par an. On rappelle que 
 
         `energie_salle(["mini", "tour", "mini"], puissances, 10)` : $(15 + 150 + 15) \times 10 = 1\,800$ Wh, la fonction renvoie `1.8` (kWh).
 
-    5.  Solution 1 : on **ajoute ou remplace des barrettes** de mémoire sur la carte mère (composants séparés, **évolutifs**). Solution 2 : la mémoire est intégrée à la puce, **impossible d’en ajouter** : il faudra **remplacer les mini-PC** entiers.
+    5.  Solution 1 : on **ajoute ou remplace des barrettes** de mémoire sur la carte mère (composants séparés, **évolutifs**). Solution 2 : la mémoire vive est **soudée** contre la puce, **impossible d’en ajouter** : il faudra **remplacer les mini-PC** entiers.
 
     6.  **Non** : le SoC est **non réparable**, toute la puce est perdue (et en pratique tout le mini-PC). Cela alimente la **montagne de déchets électroniques** ; la société y répond par le **droit à la réparation** et l’**indice de réparabilité**.
 
@@ -479,7 +479,7 @@ La salle est utilisée $8$ heures par jour, $160$ jours par an. On rappelle que 
 
 <span class="duree">≈ 45 min</span>
 
-Le schéma ci-dessous décrit la puce **Azur X1** (fictive) d’un smartphone sorti en 2025. Elle compte $16$ milliards de transistors.
+Le schéma ci-dessous décrit la puce **Azur X1** (fictive) d’un smartphone sorti en 2025, avec sa mémoire vive : les $8$ Go de RAM sont une autre puce, empilée sur l’Azur X1 dans le même boîtier (cadre en pointillés). L’Azur X1 compte $16$ milliards de transistors.
 
 ![](../figures/f1eda9ab6450046a.svg){ .tikz loading=lazy }
 
@@ -527,7 +527,7 @@ Le schéma ci-dessous décrit la puce **Azur X1** (fictive) d’un smartphone so
 
     **Partie A.**
 
-    1.  C’est un **ordinateur complet et puissant** sur une seule puce : processeur multi-cœur à plusieurs GHz, $8$ **Go** de mémoire (et non quelques Ko), GPU, processeurs spécialisés, modules de communication ; il fait tourner un **système d’exploitation** complet, ce qu’un microcontrôleur ne fait pas.
+    1.  C’est un **ordinateur complet et puissant** sur une seule puce : processeur multi-cœur à plusieurs GHz, $8$ **Go** de mémoire dans le boîtier (et non quelques Ko), GPU, processeurs spécialisés, modules de communication ; il fait tourner un **système d’exploitation** complet, ce qu’un microcontrôleur ne fait pas.
 
     2.  **Unité de calcul** : CPU, GPU, NPU, module cryptographique. **Mémoire** : RAM. **Entrées-sorties** : modem 5G, Wi-Fi, GPS. (Le bus relie le tout.)
 
@@ -579,7 +579,7 @@ Un élève demande à un assistant d’IA : « Qu’est-ce qu’un système sur 
 
 !!! encadre "Réponse de l’assistant"
 
-    « Un système sur puce (*SoC*, *System on a Chip*) regroupe sur un seul circuit intégré tous les composants d’un ordinateur : processeur, processeur graphique, mémoire vive, contrôleurs d’entrées-sorties et modules de communication (Wi-Fi, Bluetooth…). Ses avantages : composants très proches donc communications rapides, faible consommation et peu de chaleur (souvent sans ventilateur), encombrement et coût réduits ; son inconvénient : il n’est ni réparable ni évolutif. Cette intégration a été rendue possible par la miniaturisation des transistors, décrite par la loi de Moore : selon cette loi, la fréquence d’horloge des processeurs double environ tous les deux ans, ce qui a permis de passer des $2\,300$ transistors de l’Intel 4004 (1971) aux dizaines de milliards d’aujourd’hui. Les SoC équipent les smartphones, les tablettes, les objets connectés et de plus en plus d’ordinateurs portables. »
+    « Un système sur puce (*SoC*, *System on a Chip*) regroupe sur un seul circuit intégré presque tous les composants d’un ordinateur : processeur et mémoires caches, processeur graphique, contrôleurs d’entrées-sorties et modules de communication (Wi-Fi, Bluetooth…). Ses avantages : composants très proches donc communications rapides, faible consommation et peu de chaleur (souvent sans ventilateur), encombrement et coût réduits ; son inconvénient : il n’est ni réparable ni évolutif. Cette intégration a été rendue possible par la miniaturisation des transistors, décrite par la loi de Moore : selon cette loi, la fréquence d’horloge des processeurs double environ tous les deux ans, ce qui a permis de passer des $2\,300$ transistors de l’Intel 4004 (1971) aux dizaines de milliards d’aujourd’hui. Les SoC équipent les smartphones, les tablettes, les objets connectés et de plus en plus d’ordinateurs portables. »
 
 1.  La réponse est-elle correcte ? Pour le vérifier, faire un calcul d’ordre de grandeur : si la fréquence d’horloge avait doublé tous les deux ans depuis 1971 (le 4004 tournait à environ $0{,}7$ MHz), quelle fréquence aurait un processeur de 2021 ? Est-ce réaliste (un processeur actuel tourne entre $2$ et $5$ GHz) ?
 
@@ -655,7 +655,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
     **Sujet 1.**
 
-    - Un **SoC** regroupe sur un seul circuit intégré processeur(s), processeur graphique, mémoire, contrôleurs d’entrées-sorties et modules de communication (Wi-Fi, Bluetooth, réseau mobile).
+    - Un **SoC** regroupe sur un seul circuit intégré processeur(s) et leurs caches, processeur graphique, contrôleurs d’entrées-sorties et modules de communication (Wi-Fi, Bluetooth, réseau mobile) ; la mémoire vive est empilée dans le même boîtier.
 
     - Avantages : composants très proches donc échanges rapides, faible consommation (autonomie, souvent sans ventilateur), petite taille, coût réduit en grande série.
 
@@ -766,3 +766,65 @@ On admet la loi de Moore : le nombre de transistors d’une puce **double tous l
     **a)** $10$ ans $= 5$ doublements : $5\,000 \times 2^5 = 5\,000 \times 32 = \mathbf{160\,000}$ transistors.  
     **b)** $20$ ans $= 10$ doublements : $10^6 \times 2^{10} = 1\,024 \times 10^6$, soit environ **un milliard** de transistors.  
     **c)** $6$ ans $= 3$ doublements : $3 \times 2^3 = \mathbf{24}$ **milliards** de transistors.
+
+### Compléments
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Lire le schéma d’un SoC de téléphone <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-19 }
+
+Voici le schéma simplifié de la puce **Corail C2** (fictive), qui équipe un smartphone. Elle compte $15$ milliards de transistors. Ses $8$ Go de mémoire vive forment une autre puce, empilée sur elle dans le même boîtier.
+
+![](../figures/45eeedc1751bc4ef.svg){ .tikz loading=lazy }
+
+1.  Pour chacun des huit blocs de la puce, dire s’il sert surtout à **calculer**, à **mémoriser**, à **communiquer** avec l’extérieur (préciser : radio ou filaire), ou à **faire fonctionner** la puce elle-même.
+
+2.  Les blocs sont reliés par la ligne **R**, munie de petits carrés. Comment appelle-t-on ce dispositif ? Pourquoi est-il préférable, sur une puce de $15$ milliards de transistors, à un bus unique partagé par tous les blocs ?
+
+3.  Le cache de $4$ Mo est gravé à côté des cœurs. Pourquoi le processeur cherche-t-il d’abord ses données dans ce cache plutôt que dans la mémoire vive ?
+
+4.  Il faut au moins un transistor pour mémoriser un bit. Combien de transistors faudrait-il, au minimum, pour graver les $8$ Go de mémoire vive sur la puce ($1$ Go $= 2^{30}$ octets, $2^{30} \approx 1{,}07 \times 10^9$) ? Comparer aux $15$ milliards de transistors de la Corail C2 et conclure.
+
+5.  On écoute de la musique, écran éteint. Citer deux blocs que la gestion d’énergie peut mettre en veille. Quel est l’intérêt pour l’utilisateur ?
+
+6.  Expliquer en quoi le regroupement de tous ces blocs sur une même puce, et de la mémoire vive dans le même boîtier, est un avantage en termes de **vitesse** et de **consommation**, puis donner un inconvénient pour l’utilisateur.
+
+??? pouce "Coup de pouce"
+
+    Question 1 : un contrôleur d’affichage envoie l’image à l’écran ; un contrôleur mémoire organise les échanges avec la RAM. Question 2 : relire le paragraphe « Un réseau à l’intérieur de la puce » du cours et penser aux routeurs du chapitre 9. Question 4 : un octet vaut $8$ bits.
+
+??? corrige "Corrigé"
+
+    1.  **Calculer** : CPU, GPU, NPU. **Mémoriser** : le cache de $4$ Mo (dans le bloc CPU). **Communiquer** : modem 5G, Wi-Fi, GPS (**radio**) ; USB, liaisons caméra et capteurs (**filaire**). **Faire fonctionner la puce** : gestion d’énergie, contrôleur d’affichage (il envoie l’image à l’écran), contrôleur mémoire (il organise les échanges avec la RAM). *(On accepte le contrôleur d’affichage parmi les entrées-sorties.)*
+
+    2.  C’est un **réseau sur puce** ; les carrés sont des **routeurs**. Sur un bus unique, un seul échange a lieu à la fois : avec des milliards de transistors et des dizaines de blocs, ce bus serait un **goulot d’étranglement**. Le réseau achemine les données par paquets, comme les routeurs d’Internet (chapitre 9), et plusieurs échanges ont lieu **en même temps**.
+
+    3.  Le cache est gravé **tout près** des cœurs, sur la puce : les données y arrivent beaucoup plus vite que de la RAM, qui est une autre puce (plus loin, plus lente d’accès). Le processeur y garde les données qu’il vient d’utiliser, qu’il a de bonnes chances de réutiliser.
+
+    4.  $8 \times 2^{30} \times 8 = 2^{36} \approx 6{,}9 \times 10^{10}$ bits, donc au moins **69 milliards** de transistors : plus de **quatre fois** toute la Corail C2. Graver la RAM sur la puce la rendrait énorme et hors de prix : on la fabrique à part et on l’empile dans le même boîtier, au plus près.
+
+    5.  Par exemple le **GPU** et le **contrôleur d’affichage** (écran éteint), le **NPU**, la caméra ; le CPU peut aussi ralentir. Intérêt : la batterie dure plus longtemps (**autonomie**), et le téléphone chauffe moins.
+
+    6.  **Vitesse** : les blocs sont à quelques millimètres les uns des autres, les signaux arrivent plus tôt et les échanges sont rapides. **Consommation** : de courtes liaisons demandent moins d’énergie que les pistes d’une carte mère et ses connecteurs, et chaque bloc inutile peut être éteint. **Inconvénient** : rien n’est remplaçable ni évolutif (on ne peut pas ajouter de mémoire vive, ni réparer un seul bloc) : il faut changer tout l’appareil.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 20</span> — Logiciel ou matériel : situer dans le temps <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-14-20 }
+
+1.  Ranger ces événements dans l’ordre chronologique et donner la date de chacun : *(a)* Intel commercialise le premier microprocesseur, le 4004 ; *(b)* pour chaque nouveau calcul, on recâble l’ENIAC à la main ; *(c)* un premier programme enregistré en mémoire s’exécute à Manchester ; *(d)* la puce A13 de l’iPhone 11 intègre un processeur dédié à l’intelligence artificielle ; *(e)* Kilby et Noyce inventent le circuit intégré ; *(f)* Turing décrit une machine universelle.
+
+2.  Pour chacune des situations suivantes, dire si la fonction est assurée par du **matériel dédié** ou par du **logiciel** exécuté par un processeur généraliste : *(a)* changer le calcul que fait l’ENIAC ; *(b)* trier une liste avec un programme Python sur un PC ; *(c)* chiffrer en AES les données stockées dans un iPhone 11 ; *(d)* jouer à un autre jeu sur une console en lançant un autre programme.
+
+3.  Expliquer pourquoi l’arrivée du programme enregistré (1948) a donné l’avantage au logiciel, puis pourquoi les SoC actuels redonnent de l’importance au matériel spécialisé.
+
+4.  Sur le micro:bit, l’instruction `display.scroll("Bonjour")` fait défiler un texte sur l’écran de LED. En quoi ressemble-t-elle à l’appel d’une fonction de bibliothèque ? Qu’est-ce qui, derrière cette instruction, est du matériel ?
+
+??? pouce "Coup de pouce"
+
+    Question 1 : relire l’encadré « Repères » du cours (§ III) et l’histoire de la fin du cours ; la machine universelle est vue au chapitre 13. Question 3 : avec un programme en mémoire, que faut-il changer pour faire faire autre chose à la machine ? Que gagne-t-on à confier une tâche fréquente à un circuit spécialisé ?
+
+??? corrige "Corrigé"
+
+    1.  *(f)* Turing, machine universelle : **1936** ; *(b)* ENIAC recâblé : **1945** ; *(c)* programme enregistré à Manchester : **1948** ; *(e)* circuit intégré : **1958–1959** ; *(a)* Intel 4004 : **1971** ; *(d)* puce A13 : **2019**.
+
+    2.  *(a)* **matériel** (on change les câblages) ; *(b)* **logiciel** ; *(c)* **matériel dédié** (le module cryptographique de la puce) ; *(d)* **logiciel** (même machine, autre programme).
+
+    3.  Avec un programme **enregistré en mémoire**, une même machine fait n’importe quel calcul : il suffit de **charger un autre programme**, sans toucher au matériel ; changer de tâche devient rapide et bon marché, et c’est le logiciel qui porte les fonctions. Aujourd’hui, certaines tâches sont si fréquentes et si lourdes (graphisme, IA, chiffrement) qu’un circuit **spécialisé** les fait beaucoup **plus vite** et en **consommant moins** qu’un processeur généraliste : la loi de Moore offre assez de transistors pour les graver sur la puce.
+
+    4.  On appelle une fonction prête à l’emploi, en lui passant un paramètre, sans savoir comment elle est écrite : c’est une **API**, comme pour une bibliothèque. Derrière, du **matériel** : l’écran de $25$ LED, ses circuits de commande, et le processeur du micro:bit qui exécute le code.

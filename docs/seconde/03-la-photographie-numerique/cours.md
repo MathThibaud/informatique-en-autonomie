@@ -52,13 +52,19 @@ Un capteur vu de très près : la mosaïque du filtre coloré
 ![](../figures/3764d33196c1492a.svg){ .tikz loading=lazy }  
 Filtre de Bayer : 1 photosite rouge, 1 bleu et *2 verts* par groupe de quatre.
 
+!!! encadre "Photosites du capteur et pixels de l’image"
+
+    Un photosite ne mesure qu’**une** couleur (celle de son filtre : rouge, vert ou bleu) ; un pixel de l’image en porte **trois**. Pour fabriquer chaque pixel, l’appareil **calcule** les deux couleurs manquantes à partir des photosites voisins : c’est le **dématriçage**.
+
+    Le nombre de photosites du capteur n’est donc pas forcément le nombre de pixels de la photo : cela dépend des **réglages**. Exemple : beaucoup de smartphones ont un capteur de $48$ millions de photosites, mais enregistrent par défaut des photos de $12$ millions de pixels ($12$ Mpx) : ils regroupent les photosites par carrés de $2 \times 2$, soit $48 \div 12 = 4$ photosites par pixel, pour une image plus lumineuse et moins « bruitée ». Avec le réglage « $48$ Mpx », l’appareil calcule un pixel par photosite : la photo est plus détaillée, mais le fichier est quatre fois plus lourd.
+
 !!! activite "Activité — Expliquer le capteur"
 
     Rédiger, en quelques lignes, un résumé qui explique à un camarade comment un capteur d’appareil photo fabrique une image (mots à réutiliser : *photosite*, *lumière*, *nombre*, *filtre de Bayer*).
 
 <span id="cours-03-1" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[1](exercices.md#ex-03-1)** (le capteur et la formation de l’image)
+<span class="afaire">▶ Exercices d'application :</span> exercice **[1](exercices.md#ex-03-1)** (le capteur et la formation de l’image) ; exercice **[19](exercices.md#ex-03-19)** (photosites ou pixels ?)
 
 ## Le pixel et le codage des couleurs (RVB)
 
@@ -105,6 +111,10 @@ La synthèse additive : rouge + vert $=$ jaune, les trois ensemble $=$ blanc.
 
     Une image en couleurs « brute » stocke 3 nombres par pixel (R, V, B), chacun sur **1 octet** (un **octet** est la petite unité de mémoire qui permet de ranger un nombre entier de $0$ à $255$). <span id="lex-poids03" class="ancre"></span>Son **poids** vaut donc environ : $$\text{poids} = \text{largeur} \times \text{hauteur} \times 3 \ \text{octets}.$$ (Les formats comme le JPEG *compressent* ensuite l’image pour réduire ce poids.)
 
+!!! definition "Définition 4"
+
+    Un octet est formé de **8 bits** (8 chiffres, chacun $0$ ou $1$). La **profondeur de couleur** est le nombre de bits utilisés pour coder la couleur d’un pixel. En RVB, avec un octet par canal, elle vaut $3 \times 8 = \mathbf{24}$ **bits** : c’est elle qui fixe le nombre de couleurs possibles ($256^3$, environ $16{,}7$ millions). Une image en niveaux de gris, avec un seul nombre de $0$ à $255$ par pixel, a une profondeur de $8$ bits ($256$ nuances).
+
 !!! activite "Activité — Calculer sur les images"
 
     1.  Une photo de définition $1200 \times 900$ est tirée au format $20 \times 15$ (en cm). Calculer sa résolution en ppp (rappel : $1$ pouce $=2{,}54$ cm).
@@ -115,7 +125,7 @@ La synthèse additive : rouge + vert $=$ jaune, les trois ensemble $=$ blanc.
 
 <span id="cours-03-5" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-03-5) à [9](exercices.md#ex-03-9)** (définition, résolution, poids)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-03-5) à [9](exercices.md#ex-03-9)** (définition, résolution, poids) ; exercice **[20](exercices.md#ex-03-20)** (profondeur de couleur)
 
 ## Modifier une image par programme (Python + PIL)
 
@@ -183,7 +193,7 @@ Avec un `if`, on peut ne modifier *que certains* pixels (par exemple selon leur 
 
 Un fichier photo ne contient pas *que* l’image. Il embarque aussi des informations sur la prise de vue : ce sont les **métadonnées EXIF**.
 
-!!! definition "Définition 4"
+!!! definition "Définition 5"
 
     Les <span id="lex-exif03" class="ancre"></span>**métadonnées EXIF** sont des données *cachées* rangées dans le fichier : date et heure, marque et modèle de l’appareil, réglages, définition… et, si l’appareil possède un GPS (tous les smartphones), les **coordonnées du lieu** de la prise de vue.
 
@@ -233,6 +243,8 @@ Extrait de métadonnées EXIF (valeurs fictives). En rouge : les coordonnées GP
 
 La photo « parfaite » du smartphone n’est pas seulement captée : elle est **calculée**. Des algorithmes interviennent après la prise de vue :
 
+- **dématriçage** : calcul des trois couleurs de chaque pixel à partir des photosites voisins (§ I) ;
+
 - **mise au point** et **exposition** automatiques ;
 
 - **HDR** : combinaison de plusieurs clichés pour équilibrer ombres et lumières ;
@@ -260,11 +272,13 @@ Les mots importants du thème sont définis dans le lexique.
 | **Notion** | **À retenir** |
 |:---|:---|
 | Capteur / photosite | mesure la lumière $\to$ un nombre ; filtre de Bayer (2$\times$ plus de vert). |
+| Photosite $\neq$ pixel | un photosite $=$ 1 couleur, un pixel $=$ 3 (dématriçage) ; leur nombre dépend du réglage. |
 | Pixel | un point de l’image, codé en **RVB** : 3 nombres de 0 à 255. |
 | Synthèse additive | R + V + B $\to$ toutes les couleurs ; 3 canaux égaux $=$ gris. |
 | Définition | nombre de pixels $=$ largeur $\times$ hauteur. |
 | Résolution | pixels par pouce (ppp / dpi) ; $1$ pouce $=2{,}54$ cm. |
 | Poids brut | largeur $\times$ hauteur $\times 3$ octets (le JPEG compresse). |
+| Profondeur de couleur | nombre de bits par pixel : $24$ bits en RVB ($3 \times 8$). |
 | Coordonnées | pixel $(x,y)$ ; $(0,0)$ en haut à gauche. |
 | PIL | `getpixel` (lire), `putpixel` (écrire), 2 boucles `for` pour tout parcourir. |
 | Négatif / gris | $255-c$ pour chaque canal ; moyenne $(r+v+b)//3$ pour le gris. |
@@ -289,9 +303,9 @@ Les mots importants du thème sont définis dans le lexique.
 
 !!! autopos "Savoir-faire : je me positionne"
 
-    - expliquer comment un **capteur** transforme la lumière en image numérique ;
+    - expliquer comment un **capteur** transforme la lumière en image, et distinguer **photosites** et **pixels** ;
 
-    - décrire une image par ses **pixels** et coder une couleur en **RVB** (3 valeurs de 0 à 255) ;
+    - décrire une image par ses **pixels** et coder une couleur en **RVB** (3 valeurs de 0 à 255, **profondeur** 24 bits) ;
 
     - distinguer **définition**, **résolution** et **poids** d’une image, et estimer un poids ;
 

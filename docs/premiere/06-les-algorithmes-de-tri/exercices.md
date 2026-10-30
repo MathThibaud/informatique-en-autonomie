@@ -211,7 +211,7 @@ i_min = i
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Dans l’autre sens <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-5 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `tri_selection_decroissant(t)` qui trie `t` du plus grand au plus petit. *Un seul caractère change par rapport au tri croissant : lequel ?*
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `tri_selection_decroissant(t)` qui trie `t` du plus grand au plus petit. *Par rapport au tri par sélection du cours (où la recherche du minimum est écrite en entier), un seul caractère change : lequel ?*
 
 ??? pouce "Coup de pouce"
 
@@ -889,3 +889,33 @@ Sans machine, trier par **insertion** chacun des tableaux suivants : donner l’
 ??? corrige "Corrigé"
 
     a) `[1, 4, 3, 2]`, `[1, 3, 4, 2]`, `[1, 2, 3, 4]` : $1 + 1 + 2 = 4$ décalages. b) `[1, 2, 4, 3]`, `[1, 2, 4, 3]`, `[1, 2, 3, 4]` : 1 décalage (tableau presque trié). c) `[7, 9, 5, 3]`, `[5, 7, 9, 3]`, `[3, 5, 7, 9]` : $1 + 2 + 3 = 6$ décalages, le pire cas pour 4 éléments.
+
+### Prouver un tri
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — Invariant et terminaison <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-24 }
+
+<span class="duree">≈ 20 min</span>
+
+Sans machine. On trie le tableau `t = [6, 4, 9, 2, 7]`.
+
+1.  **Sélection.** Donner l’état du tableau au **début** des étapes `i = 1`, `2`, `3` et `4`. Vérifier, à chaque fois, l’invariant du cours : « `t[0..i-1]` est triée et contient les `i` plus petits éléments du tableau ».
+
+2.  **Insertion.** Même travail avec le tri par insertion et son invariant : « `t[0..i-1]` est formée des éléments initialement en `t[0..i-1]`, rangés dans l’ordre croissant ».
+
+3.  Au début de l’étape `i = 3` du tri par insertion, la partie `t[0..2]` contient-elle les trois plus petits éléments du tableau ? Pourquoi cela ne contredit-il pas l’invariant de l’insertion ? Lequel des deux invariants permet d’affirmer qu’un élément placé ne bougera plus ?
+
+4.  Expliquer pourquoi le tri par sélection se **termine** toujours.
+
+5.  Dans le tri par insertion, justifier à l’aide d’un **variant** que la boucle `while` se termine. Combien de tours fait-elle, au plus, à l’étape `i` ? Combien en fait-elle réellement à chaque étape sur `t` ?
+
+??? pouce "Coup de pouce"
+
+    Question 3 : comparer `t[0..2]` à la liste des trois plus petites valeurs `2`, `4`, `6`. Question 4 : quelles sortes de boucles contient le tri par sélection ? Question 5 : quelle variable diminue à chaque tour du `while`, et quelle condition l’empêche de devenir négative pendant la boucle ?
+
+??? corrige "Corrigé"
+
+    **1.** Sélection, tableau au début de chaque étape : `i = 1` : `[2, 4, 9, 6, 7]` ; `i = 2` : `[2, 4, 9, 6, 7]` ; `i = 3` : `[2, 4, 6, 9, 7]` ; `i = 4` : `[2, 4, 6, 7, 9]`. À chaque fois, `t[0..i-1]` (`[2]`, `[2, 4]`, `[2, 4, 6]`, `[2, 4, 6, 7]`) est triée et formée des `i` plus petites valeurs du tableau : l’invariant est vérifié.  
+    **2.** Insertion, tableau au début de chaque étape : `i = 1` : `[6, 4, 9, 2, 7]` ; `i = 2` : `[4, 6, 9, 2, 7]` ; `i = 3` : `[4, 6, 9, 2, 7]` ; `i = 4` : `[2, 4, 6, 9, 7]` ; à la fin : `[2, 4, 6, 7, 9]`. À chaque fois, `t[0..i-1]` contient exactement les `i` premières valeurs de départ (`6` ; `6, 4` ; `6, 4, 9` ; `6, 4, 9, 2`), rangées dans l’ordre croissant : l’invariant est vérifié.  
+    **3.** Non : `t[0..2] = [4, 6, 9]`, alors que les trois plus petits sont `2`, `4`, `6`. Ce n’est pas une contradiction : l’invariant de l’insertion ne parle que des éléments *déjà rencontrés* (les trois premiers de départ), pas des plus petits du tableau ; le `2`, encore à droite, viendra se glisser devant eux. C’est l’invariant de la **sélection** (« les `i` plus petits, à leur place définitive ») qui garantit qu’un élément placé ne bougera plus.  
+    **4.** Le tri par sélection ne contient que deux boucles `for` : elles sont **bornées** (`n` tours pour l’externe, moins de `n` pour l’interne). Il n’y a aucune boucle qui pourrait tourner indéfiniment : le tri se termine toujours.  
+    **5.** Dans la boucle `while j >= 0 and t[j] > x`, la quantité `j` est un **variant** : c’est un entier, positif ou nul tant que la boucle tourne (la condition impose `j >= 0`), et il diminue de 1 à chaque tour (`j = j - 1`). La boucle s’arrête donc. Comme `j` part de `i - 1`, elle fait au plus `i` tours à l’étape `i`. Sur `t` : 1 tour (étape 1, on décale `6`), 0 (étape 2), 3 (étape 3, le `2` recule au début), 1 (étape 4, on décale `9`). La boucle `for`, elle, est bornée : le tri par insertion se termine.

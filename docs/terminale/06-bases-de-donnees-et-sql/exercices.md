@@ -319,7 +319,7 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
     SELECT DISTINCT continent FROM pays;             -- 2.
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — `LIMIT` et `LIKE` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-7 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — `LIMIT` et `LIKE` <span class="horsprog">au-delà du programme</span> <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-7 }
 
 \[base `pays` — Basthon\]
 
@@ -421,9 +421,9 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
     SELECT SUM(streams) FROM chanson;                 -- 3.
     ```
 
-### Regrouper : `GROUP BY`
+### Regrouper : `GROUP BY` <span class="horsprog">au-delà du programme</span>
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 11</span> — Regrouper par continent <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-11 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 11</span> — Regrouper par continent <span class="horsprog">au-delà du programme</span> <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-11 }
 
 <span class="duree">≈ 15 min</span>\[base `pays` — Basthon\]
 
@@ -503,7 +503,7 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 1.  pour chaque emprunt, le `nom` et le `prenom` de l’adhérent **avec le titre** du livre emprunté ;
 
-2.  le `nom` de chaque adhérent **avec son nombre d’emprunts**.
+2.  <span class="horsprog">au-delà du programme</span> le `nom` de chaque adhérent **avec son nombre d’emprunts** (avec `GROUP BY`).
 
 ??? pouce "Coup de pouce"
 
@@ -529,7 +529,7 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
     GROUP BY adherent.id;      -- par l'identifiant : deux homonymes restent distincts
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Jointure et agrégat (musique) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-14 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — Jointure et agrégat (musique) <span class="horsprog">au-delà du programme</span> <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-14 }
 
 <span class="duree">≈ 10 min</span>\[base `musique` — Basthon\]
 
@@ -609,7 +609,7 @@ Un SGBD garantit qu’une **transaction** (un groupe d’opérations, ouvert par
 
 3.  On recommence en entourant les deux requêtes de `BEGIN TRANSACTION;` et `COMMIT;`. Que contient la base après le `COMMIT` ? Juste après, une coupure de courant survient : quelle propriété garantit que le virement n’est pas perdu ?
 
-4.  On tente maintenant de virer `80` € du compte `1` vers le compte `2`, dans une transaction. Laquelle des deux requêtes échoue, et pourquoi ? Que devient la requête qui avait réussi ? Quelle propriété est en jeu ?
+4.  On tente maintenant de virer `80` € du compte `1` vers le compte `2`, dans une transaction. Laquelle des deux requêtes échoue, et pourquoi ? Que devient l’autre requête ? Quelle propriété est en jeu ?
 
 5.  Le compte `1` contient maintenant `50` €. Léa et son père, chacun depuis son téléphone, retirent **au même moment** `20` € de ce compte. Chaque application **lit** le solde, calcule le nouveau solde, puis l’**écrit**. Quel solde final attend-on ? Montrer qu’avec l’ordre « lecture de Léa, lecture du père, écriture de Léa, écriture du père », le compte finit à `30` €. Qu’est-ce que la banque a perdu ? Quelle propriété le SGBD doit-il assurer ?
 
@@ -649,7 +649,7 @@ Un SGBD garantit qu’une **transaction** (un groupe d’opérations, ouvert par
 
 <span class="duree">≈ 30 min</span>
 
-Un site de location d’objets entre particuliers utilise le schéma relationnel suivant. La table `Possede` relie un membre aux objets qu’il propose.
+Un site de location d’objets entre particuliers utilise le schéma relationnel suivant. La table `Possede` relie un membre aux objets qu’il propose ; sa clé primaire est le **couple** (`id_membre`, `id_objet`).
 
 Membre (id_membre, nom, prenom, cp)  
 Objet (id_objet, type, tarif)  
@@ -1015,7 +1015,7 @@ WHERE adherent.nom = 'Durand';
 
 « On joint la table des emprunts à celle des adhérents, on ne garde que les lignes de l’adhérente Durand, et `COUNT(*)` compte les lignes restantes. »
 
-1.  La réponse est-elle correcte ? La vérifier sur une mini-base : `adherent` contient `(1, ’Durand’, ’Léa’)`, `(2, ’Martin’, ’Noé’)`, `(3, ’Petit’, ’Zoé’)` ; `emprunt` contient cinq lignes, dont deux d’`id_adherent` `1`, deux d’`id_adherent` `2` et une d’`id_adherent` `3`. Quel résultat attend-on ? Quel résultat renvoie la requête ? (On pourra créer ces deux tables dans Basthon et tester.)
+1.  La réponse est-elle correcte ? La vérifier sur une mini-base : `adherent` contient `(1, ’Durand’, ’Léa’)`, `(2, ’Martin’, ’Noé’)`, `(3, ’Petit’, ’Zoé’)` ; `emprunt` contient cinq lignes, dont deux d’`id_adherent` `1`, deux d’`id_adherent` `2` et une d’`id_adherent` `3`. Quel résultat attend-on ? Quel résultat renvoie la requête ? (On pourra créer ces deux tables dans une console SQL **vierge**, sans charger `bibliotheque.sql`, et tester.)
 
 2.  Localiser et corriger l’erreur.
 
@@ -1131,3 +1131,55 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
     - Le résultat est une table qui réunit des colonnes des deux tables : on lit le titre de chaque livre emprunté.
 
     - Piège : oublier la condition `ON` (on obtient toutes les combinaisons) ; préfixer par le nom de la table les attributs de même nom.
+
+### Concevoir un bon schéma
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — Un schéma mal conçu : anomalies, structure et contenu <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-24 }
+
+Le club de lecture d’un lycée enregistre ses emprunts dans une **seule** relation :
+
+emprunt_tout (id_emprunt, titre, auteur, pays_auteur, nom_adherent, ville_adherent, date)
+
+| **id_emprunt** | **titre** | **auteur** | **pays_auteur** | **nom_adherent** | **ville_adherent** | **date** |
+|:--:|:---|:---|:---|:---|:---|:--:|
+| 1 | L’Étranger | Camus | France | Durand | Monaco | 2026-09-02 |
+| 2 | La Peste | Camus | France | Martin | Menton | 2026-09-05 |
+| 3 | L’Étranger | Camus | France | Martin | Menton | 2026-09-20 |
+| 4 | 1984 | Orwell | Royaume-Uni | Petit | Nice | 2026-10-01 |
+
+1.  Quelles informations sont **recopiées** plusieurs fois dans cette table ? Comment appelle-t-on ce défaut ?
+
+2.  Martin déménage à Nice. Quelles lignes faut-il modifier ? Que se passe-t-il si l’on en oublie une ? Nommer cette anomalie.
+
+3.  Le club achète un livre que personne n’a encore emprunté. Peut-on l’enregistrer dans cette table ? Et un nouvel adhérent qui n’a encore rien emprunté ? Nommer cette anomalie.
+
+4.  On supprime l’emprunt `4`, rendu depuis longtemps. Quelles informations disparaissent en même temps ? Nommer cette anomalie.
+
+5.  Proposer un découpage en plusieurs relations (schéma relationnel, clés primaires soulignées, clés étrangères précédées de `#`) qui fait disparaître ces anomalies.
+
+    ??? pouce "Coup de pouce"
+
+        Chaque information ne doit être écrite qu’**une** fois. Un auteur a un pays, un adhérent a une ville, et un emprunt relie un livre à un adhérent, à une date.
+
+6.  **Structure ou contenu ?** Pour chaque opération sur la base découpée, dire si elle modifie la **structure** de la base ou son **contenu** : *(a)* un adhérent emprunte un livre ; *(b)* on ajoute un attribut `email` aux adhérents ; *(c)* on corrige le titre d’un livre ; *(d)* on crée une relation `editeur` ; *(e)* on supprime tous les emprunts de 2025.
+
+??? corrige "Corrigé"
+
+    **1.** Le titre, l’auteur et le pays de l’auteur sont recopiés à chaque emprunt du même livre (*L’Étranger*, Camus, France apparaît deux fois), le pays de Camus à chaque emprunt d’un de ses livres (trois fois), le nom et la ville de Martin à chacun de ses emprunts (deux fois). C’est une **redondance** de données.
+
+    **2.** Les lignes `2` et `3` (tous les emprunts de Martin). Si l’on n’en modifie qu’une, Martin habite à la fois à Menton et à Nice : la base est **incohérente**. C’est une **anomalie de mise à jour**.
+
+    **3.** Non : chaque ligne est un emprunt, il faudrait inventer un emprunt (ou laisser vides l’adhérent et la date) pour enregistrer le livre. De même pour l’adhérent sans emprunt. C’est une **anomalie d’insertion**.
+
+    **4.** Le livre *1984*, son auteur Orwell (et son pays) et l’adhérente Petit (et sa ville) n’apparaissaient que dans cette ligne : la base les « oublie » complètement. C’est une **anomalie de suppression**.
+
+    **5.** Une relation par sorte d’objet, reliées par des clés étrangères :
+
+    auteur (id, nom, pays)  
+    livre (id, titre, #id_auteur)  
+    adherent (id, nom, ville)  
+    emprunt (id, #id_livre, #id_adherent, date)
+
+    Le déménagement de Martin ne modifie plus qu’une ligne d’`adherent` ; un livre ou un adhérent s’enregistre sans emprunt ; supprimer un emprunt ne supprime ni le livre ni l’adhérent. On retrouve le schéma de la base `bibliotheque`. *(Un découpage en trois relations, avec le pays de l’auteur dans `livre`, est accepté ; mais le pays de Camus y reste recopié pour chacun de ses livres.)*
+
+    **6.** *(a)* contenu (`INSERT` d’une ligne dans `emprunt`) ; *(b)* structure (le schéma de `adherent` change) ; *(c)* contenu (`UPDATE`) ; *(d)* structure (`CREATE TABLE` : une relation de plus dans le schéma de la base) ; *(e)* contenu (`DELETE`). La **structure** est l’ensemble des schémas des relations ; le **contenu**, l’ensemble des enregistrements à un instant donné.

@@ -119,7 +119,7 @@ On compare deux façons de choisir la tâche à exécuter, toutes deux fondées 
 
 Chaque ordonnancement est résumé par la liste des couples `(nom, instant de fin)`, dans l’ordre où les tâches se terminent. Par exemple, pour les tâches `[("A", 3), ("B", 1), ("C", 4)]`, l’ordonnancement premier arrivé, premier servi donne `[("A", 3), ("B", 4), ("C", 8)]`.
 
-Le fichier `ordonnanceur.py` fournit la classe `File` vue en cours (méthodes `est_vide`, `enfiler`, `defiler`, `tete` et `taille`), la fonction `lire_taches` qui lit les tâches d’un fichier CSV et la fonction `premier_arrive`.
+Le fichier `ordonnanceur.py` fournit une classe `File` proche de celle du cours, **complétée d’une méthode `taille`** (méthodes `est_vide`, `enfiler`, `defiler`, `tete` et `taille`), la fonction `lire_taches` qui lit les tâches d’un fichier CSV et la fonction `premier_arrive`.
 
 Question 1
 

@@ -33,6 +33,8 @@
 
     *Exécuter `compter_appels` pour $10$, $20$ et $25$ marches, expliquer la croissance.*
 
+    Après l’ajout de la ligne `APPELS[0] = APPELS[0] + 1` en tête de `effort_rec` :
+
     ```console
     >>> compter_appels(10), compter_appels(20), compter_appels(25)
     (176, 21890, 242784)
@@ -125,7 +127,7 @@ Justifier la relation donnant $E(i)$ en considérant la marche d’où l’on ar
 
 Question 2
 
-La fonction `compter_appels(n)` renvoie le nombre d’appels effectués par la version récursive pour un escalier de `n` marches. L’exécuter pour `n` valant $10$, $20$ et $25$. Dessiner le début de l’arbre des appels de $E(4)$ et expliquer pourquoi le nombre d’appels augmente si vite. Peut-on utiliser cette version pour l’escalier du fichier `escalier.txt`, qui compte $100$ marches ?
+Ajouter, en **première ligne** du corps de `effort_rec`, l’instruction `APPELS[0] = APPELS[0] + 1`, qui compte les appels de la fonction. La fonction fournie `compter_appels(n)` renvoie alors le nombre d’appels effectués par la version récursive pour un escalier de `n` marches. L’exécuter pour `n` valant $10$, $20$ et $25$. Dessiner le début de l’arbre des appels de $E(4)$ et expliquer pourquoi le nombre d’appels augmente si vite. Peut-on utiliser cette version pour l’escalier du fichier `escalier.txt`, qui compte $100$ marches ?
 
 *Attention : ne pas appeler `effort_rec` sur un escalier de plus de $30$ marches, le calcul ne se terminerait pas en un temps raisonnable.*
 
@@ -179,6 +181,8 @@ Le dossier fourni au candidat comporte les éléments suivants :
     Question 2
 
     *Exécuter `compter_appels` pour $10$, $20$ et $25$ marches, expliquer la croissance.*
+
+    Après l’ajout de la ligne `APPELS[0] = APPELS[0] + 1` en tête de `effort_rec` :
 
     ```console
     >>> compter_appels(10), compter_appels(20), compter_appels(25)

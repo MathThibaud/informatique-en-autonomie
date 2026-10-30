@@ -158,7 +158,7 @@ Saisir la table à la main serait absurde pour 700 000 lignes. La bibliothèqu
 
     - `open(...)` ouvre le fichier ; `with` le **referme** tout seul à la fin ;
 
-    - `csv.DictReader` lit l’**en-tête**, puis transforme chaque ligne en dictionnaire ; si le séparateur est le point-virgule, on le précise : `csv.DictReader(f, delimiter=";")` ;
+    - `csv.DictReader` lit l’**en-tête**, puis transforme chaque ligne en dictionnaire ; si le séparateur est le point-virgule, on le précise : `csv.DictReader(f, delimiter=";")` ; pour un fichier **tabulé** (colonnes séparées par des tabulations, souvent d’extension `.tsv` ou `.txt`), on écrit `delimiter="\t"` ;
 
     - la compréhension `[ligne for ligne in lecteur]` range toutes les fiches dans une liste.
 
@@ -230,9 +230,39 @@ def chercher(table, prenom):
     return None                   # parcours fini sans succes
 ```
 
+### Nettoyer une table : doublons et cohérence
+
+Une table réelle contient presque toujours des **erreurs de saisie** : une même fiche recopiée deux fois (un **doublon**), ou une valeur impossible (un nombre d’attributions négatif, une année dans le futur). Avant de calculer, on les recherche : ce sont encore des **parcours**.
+
+!!! regle "Règle 4 — Repérer les doublons, tester la cohérence"
+
+    - Un **test de cohérence** vérifie qu’une valeur est possible : on *filtre* les fiches qui ne le respectent pas.
+
+    - Pour les **doublons**, on choisit les descripteurs qui identifient une fiche (ici prénom, sexe et année) et on mémorise au fur et à mesure les identifiants déjà rencontrés.
+
+    ```python
+    def incoherentes(table):
+        """Fiches dont le nombre n'est pas strictement positif."""
+        return [ligne for ligne in table if int(ligne["nombre"]) <= 0]
+
+    def doublons(table):
+        """Fiches dont (prenom, sexe, annee) a deja ete rencontre plus haut."""
+        deja_vus = []
+        resultat = []
+        for ligne in table:
+            cle = (ligne["prenom"], ligne["sexe"], ligne["annee"])
+            if cle in deja_vus:
+                resultat.append(ligne)
+            else:
+                deja_vus.append(cle)
+        return resultat
+    ```
+
+Que faire des fiches repérées ? Les écarter, ou les corriger si l’on connaît la bonne valeur : c’est le **nettoyage** de la table, que le TP proposé en fin de chapitre pratique sur de vrais relevés météo.
+
 <span id="cours-08-9" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-08-9) à [12](exercices.md#ex-08-12)** et **[28](exercices.md#ex-08-28)** (rechercher et filtrer)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[9](exercices.md#ex-08-9) à [12](exercices.md#ex-08-12)**, **[28](exercices.md#ex-08-28)** (rechercher et filtrer) et **[30](exercices.md#ex-08-30)** (doublons et cohérence)
 
 ## Calculer sur une colonne : moyenne, min, max, comptage
 
@@ -262,7 +292,7 @@ Une fois la table (ou un sous-ensemble filtré) en main, calculer sur une colonn
     2628.7
     ```
 
-!!! regle "Règle 4 — L’invariant du champion sur une table"
+!!! regle "Règle 5 — L’invariant du champion sur une table"
 
     Pour le **maximum** (ou le minimum) d’une colonne, on garde la **fiche championne**, initialisée à la première, et on la remplace dès qu’on rencontre mieux.
 
@@ -294,7 +324,7 @@ Une fois la table (ou un sous-ensemble filtré) en main, calculer sur une colonn
 
 Trier une table, c’est ranger ses fiches selon les valeurs d’**un** descripteur. Inutile de réécrire un tri par sélection ou par insertion (chapitre *Les algorithmes de tri*) : la fonction `sorted` le fait, à condition de lui dire **sur quoi** comparer, via le paramètre `key`.
 
-!!! regle "Règle 5 — Trier avec sorted et une clé"
+!!! regle "Règle 6 — Trier avec sorted et une clé"
 
     ```python
     def trier_par_nombre(table):
@@ -343,7 +373,7 @@ Prenons une table de communes et une table de départements, reliées par le cod
 
 ![](../figures/1f3cfd5dc78fb6d6.svg){ .tikz loading=lazy }
 
-!!! regle "Règle 6 — Le patron de la jointure"
+!!! regle "Règle 7 — Le patron de la jointure"
 
     Pour chaque fiche de gauche, on cherche dans la table de droite **celle qui a la même clé**, et on **combine** les deux dictionnaires.
 
@@ -374,6 +404,10 @@ La table obtenue réunit les colonnes des deux tables, une ligne par commune :
 
     Si une commune a un code `dep` **absent** de la table des départements (par exemple `2A`, la Corse-du-Sud, non listée ici), **aucune** ligne ne sera produite pour elle : elle *tombe* de la fusion. C’est logique — on n’a pas d’information à lui rattacher — mais il faut y penser. **Réflexe coût** : cette jointure examine chaque paire (gauche, droite) : son coût est *quadratique* <span class="horsprog">au-delà du programme</span>.
 
+!!! remarque "Remarque — Le domaine de valeurs"
+
+    Le **domaine de valeurs** d’un descripteur est l’ensemble des valeurs qu’il peut prendre (par exemple, pour `dep` : les codes de département, écrits en texte `"06"`, `"2A"`…). Pour fusionner, les deux descripteurs doivent prendre leurs valeurs dans le **même domaine** : un code `"06"` (texte) ne sera jamais égal à l’entier `6`, et un code de département ne se compare pas à un *nom* de département. Avant une jointure, on vérifie donc que les deux colonnes s’écrivent de la même façon.
+
 <span id="cours-08-20" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[20](exercices.md#ex-08-20) à [22](exercices.md#ex-08-22)** (fusionner : la jointure)
@@ -399,7 +433,7 @@ pandas.merge(communes, departements)          # fusionner
 
 !!! curieux "Pour les curieux (facultatif) — Des cartes perforées à l’open data"
 
-    En **1890**, recenser les 63 millions d’Américains à la main menaçait de prendre plus de dix ans. **Herman Hollerith** (1860–1929) invente une machine qui lit des **cartes perforées** — une carte par personne, un trou par caractéristique : c’est déjà « une fiche par individu, les mêmes rubriques pour tous », l’idée même d’une table. Grâce à elle, le total de la population est connu dès la fin de 1890, et le dépouillement complet ne prend que quelques années au lieu de la décennie redoutée. Hollerith fonde en 1896 une société qui, par fusions, deviendra en **1924** une certaine… **IBM**.
+    En **1890**, recenser les 63 millions d’Américains à la main menaçait de prendre plus de dix ans. **Herman Hollerith** (1860–1929) invente une machine qui lit des **cartes perforées** — une carte par personne, un trou par caractéristique : c’est déjà « une fiche par individu, les mêmes rubriques pour tous », l’idée même d’une table. Grâce à elle, un premier total de la population est annoncé quelques semaines seulement après le recensement, et le dépouillement complet ne prend que quelques années au lieu de la décennie redoutée. Hollerith fonde en 1896 une société qui, par fusions, deviendra en **1924** une certaine… **IBM**.
 
     ![](../img/08_hist_hollerith.jpg){ .photo loading=lazy style="width:105px" }  
     Herman Hollerith
@@ -427,9 +461,10 @@ pandas.merge(communes, departements)          # fusionner
 | Importer | `csv.DictReader` $\rightarrow$ liste de dictionnaires ; `encoding="utf-8"` |
 | Piège n<sup>o</sup> 1 | tout est `str` : `int(ligne["nombre"])` avant de **calculer** ou **trier** |
 | Rechercher | **parcourir** et `append` ceux qui vérifient le critère (ou compréhension) |
+| Nettoyer | repérer les **doublons** (identifiants déjà vus) et les valeurs **incohérentes** (filtre) |
 | Calculer | moyenne / min / max / comptage $=$ le **patron du parcours**, coût *linéaire* |
 | Trier | `sorted(table, key=lambda l: l["..."] , reverse=...)` ; ne modifie pas l’original |
-| Fusionner | jointure sur un descripteur commun ; les fiches sans correspondance *disparaissent* |
+| Fusionner | jointure sur un descripteur commun, de même **domaine de valeurs** ; les fiches sans correspondance *disparaissent* |
 
 !!! situation "Retour à la situation de départ"
 
@@ -462,6 +497,8 @@ pandas.merge(communes, departements)          # fusionner
 - **importer** un CSV en liste de dictionnaires avec `csv.DictReader` ;
 
 - **filtrer** selon un ou plusieurs critères (boucle ou compréhension) ;
+
+- repérer les **doublons** et les valeurs **incohérentes** d’une table ;
 
 - **calculer** moyenne / min / max / comptage sur une colonne, sans oublier `int(...)` ;
 

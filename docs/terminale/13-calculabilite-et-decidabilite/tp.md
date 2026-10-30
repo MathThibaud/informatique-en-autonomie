@@ -40,7 +40,7 @@ Une machine de Turing lit et écrit sur un **ruban** infini de cases. Dans le fi
 
 ??? corrige "Corrigé"
 
-    - Quelques lignes de Python simulent **n’importe quelle** machine de Turing : Python est Turing-complet. `PALINDROME` calcule la même chose que `mot == mot[::-1]`, en $\frac{(n+1)(n+2)}{2}$ étapes au lieu d’un parcours : la puissance de calcul est la même, la vitesse non.
+    - Quelques lignes de Python simulent **n’importe quelle** machine de Turing : Python est Turing-complet. Le simulateur lit la table de règles comme une **donnée** : c’est une machine **universelle** au sens de Turing (cours, § IV.A). `PALINDROME` calcule la même chose que `mot == mot[::-1]`, en $\frac{(n+1)(n+2)}{2}$ étapes au lieu d’un parcours : la puissance de calcul est la même, la vitesse non.
 
     - Vérifier : quelques centièmes de seconde pour un million de nombres ; chercher : plusieurs secondes dès $20$ nombres, doublement à chaque nombre ajouté.
 
@@ -202,11 +202,11 @@ Un **palindrome** se lit de la même façon dans les deux sens (`abba`, `aba`, `
     |:------------:|:-----:|:-----:|:--------:|:---------:|:---------:|
     |    Étapes    | $231$ | $861$ | $3\,321$ | $13\,041$ | $51\,681$ |
 
-    **1.** Quand $n$ double, le nombre d’étapes est multiplié par environ $4$ : coût **quadratique**. Pour un palindrome de longueur paire $n$, on trouve exactement $\frac{(n+1)(n+2)}{2}$ étapes : la tête fait environ $n/2$ allers-retours de longueur décroissante. **2.** Non : la thèse de Church-Turing dit que la machine de Turing calcule **exactement les mêmes** fonctions que Python (et réciproquement : notre simulateur montre que Python sait imiter n’importe quelle machine de Turing). Ce qui diffère d’un modèle à l’autre, c’est la **commodité** et la **vitesse** (ici quadratique contre linéaire), jamais ce qui est **calculable**.
+    **1.** Quand $n$ double, le nombre d’étapes est multiplié par environ $4$ : coût **quadratique**. Pour un palindrome de longueur paire $n$, on trouve exactement $\frac{(n+1)(n+2)}{2}$ étapes : la tête fait environ $n/2$ allers-retours de longueur décroissante. **2.** Non : Python et la machine de Turing calculent **exactement les mêmes** fonctions — c’est un fait démontré (Python est Turing-complet : notre simulateur montre qu’il sait imiter n’importe quelle machine de Turing). La thèse de Church-Turing ajoute que rien de « calculable » au sens intuitif n’échappe à ce modèle. Ce qui diffère d’un modèle à l’autre, c’est la **commodité** et la **vitesse** (ici quadratique contre linéaire), jamais ce qui est **calculable**.
 
 ## Partie 3 — Trouver ou vérifier ? <span class="horsprog">au-delà du programme</span>
 
-**Le problème du sous-ensemble de somme.** On donne une liste de nombres et une `cible`. Peut-on choisir certains de ces nombres (chacun au plus une fois) dont la somme vaut exactement la cible ? Avec `[8, 3, 12, 5, 7]` et la cible $15$ : oui, $3 + 12$ (ou $8 + 7$, ou $3 + 5 + 7$). Avec la cible $100$ : non. Ce problème est **NP-complet**, comme le Sudoku du cours. Un choix est représenté par la liste de ses **indices** : `[1, 2]` désigne $3$ et $12$.
+**Le problème du sous-ensemble de somme.** On donne une liste de nombres et une `cible`. Peut-on choisir certains de ces nombres (chacun au plus une fois) dont la somme vaut exactement la cible ? Avec `[8, 3, 12, 5, 7]` et la cible $15$ : oui, $3 + 12$ (ou $8 + 7$, ou $3 + 5 + 7$). Avec la cible $100$ : non. Ce problème est **NP-complet**, comme le Sudoku généralisé du cours. Un choix est représenté par la liste de ses **indices** : `[1, 2]` désigne $3$ et $12$.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Vérifier une solution proposée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-tp-1-8 }
 

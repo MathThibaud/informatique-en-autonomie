@@ -80,7 +80,7 @@ Nos **2 heures par semaine** mêlent plusieurs façons d’apprendre :
 
 !!! encadre "L’intelligence artificielle : une charte, trois pastilles"
 
-    Les assistants d’IA savent écrire des textes, des réponses et même des programmes ; le but de ce cours est que **vous** compreniez comment fonctionne le numérique et sachiez vérifier ce qu’on vous affirme. Une **charte d’usage de l’IA**, distribuée en début d’année, fixe ce qui est permis. L’usage est décidé **exercice par exercice** et signalé par une pastille à côté du titre :
+    Les assistants d’IA savent écrire des textes, des réponses et même des programmes ; le but de ce cours est que **vous** compreniez comment fonctionne le numérique et sachiez vérifier ce qu’on vous affirme. Une [**charte d’usage de l’IA**](charte.md), reproduite juste après cette présentation, fixe ce qui est permis. L’usage est décidé **exercice par exercice** et signalé par une pastille à côté du titre :
 
     - <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> **sans IA** : tests, contrôles, exercices d’automatisme (lecture de code, questions de cours) ;
 
@@ -120,7 +120,7 @@ Au lycée, on programme avec **Spyder**, un logiciel libre et gratuit (sa prise 
 
 ### Lire ce livre sur un ordinateur
 
-- **Tout est cliquable** : le sommaire, le petit sommaire de chaque chapitre, « $\blacktriangleright$ corrigé p. 209 » et « $\uparrow$ énoncé », les coups de pouce, les numéros d’exercices et les renvois de la frise. L’**onglet de couleur** au bord de la page ramène à la page de titre du chapitre ; le **numéro de page** ramène au sommaire.
+- **Tout est cliquable** : le sommaire, le petit sommaire de chaque chapitre, « $\blacktriangleright$ corrigé p. … » et « $\uparrow$ énoncé », les coups de pouce, les numéros d’exercices et les renvois de la frise. L’**onglet de couleur** au bord de la page ramène à la page de titre du chapitre ; le **numéro de page** ramène au sommaire.
 
 - **Les signets** (panneau latéral « Signets » ou « Table des matières » du lecteur PDF) donnent le plan détaillé.
 

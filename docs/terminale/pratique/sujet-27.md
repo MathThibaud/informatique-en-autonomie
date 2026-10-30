@@ -279,7 +279,7 @@ Une expression en NPI s’évalue avec une **pile**, en lisant ses éléments de
 
 À la fin, la pile contient un seul nombre : la valeur de l’expression.
 
-Dans ce sujet, les expressions sont des chaînes de caractères dont les éléments, séparés par des espaces, sont des **entiers positifs** ou l’un des opérateurs `+`, `-` et `*`. On rappelle que `"3 4 +".split()` renvoie la liste `[’3’, ’4’, ’+’]` et que `int(’3’)` renvoie l’entier `3`. Le fichier `npi.py` fournit la classe `Pile` vue en cours (méthodes `est_vide`, `empiler`, `depiler`, `sommet` et `taille`).
+Dans ce sujet, les expressions sont des chaînes de caractères dont les éléments, séparés par des espaces, sont des **entiers positifs** ou l’un des opérateurs `+`, `-` et `*`. On rappelle que `"3 4 +".split()` renvoie la liste `[’3’, ’4’, ’+’]` et que `int(’3’)` renvoie l’entier `3`. Le fichier `npi.py` fournit une classe `Pile` proche de celle du cours, **complétée d’une méthode `taille`** (méthodes `est_vide`, `empiler`, `depiler`, `sommet` et `taille`) ; attention, sa méthode `depiler` provoque une erreur si la pile est vide.
 
 Question 1
 

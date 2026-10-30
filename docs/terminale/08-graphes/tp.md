@@ -151,7 +151,7 @@ Voici un graphe pondéré à **huit** sommets. On va dérouler Dijkstra au dépa
 </tbody>
 </table>
 
-1.  En déduire la distance minimale de `A` à chaque sommet, et le plus court chemin de `A` à `H`.
+1.  En déduire la distance minimale de `A` à chaque sommet, et un plus court chemin de `A` à `H`. Est-il unique ?
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> **Vérification par l’ordinateur** (*après l’étape 3*). Dans le fichier `dijkstra_graphes.py` (fourni), le gros graphe est **déjà saisi** (variable `G_gros`). Quand vous aurez complété `dijkstra` et `chemin` dans ce fichier, exécutez-le et comparez l’affichage à votre tableau. Tout doit coïncider !
 

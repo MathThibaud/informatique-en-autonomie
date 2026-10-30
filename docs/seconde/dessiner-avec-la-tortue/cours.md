@@ -198,7 +198,7 @@ t.done()
 
 !!! encadre "À retenir — Motif, boucle et rotation"
 
-    On tient là toute la puissance du chapitre : une **fonction** (le motif), une **boucle** (la répétition) et un petit **tour** à chaque étape suffisent à produire des figures très riches. À vous de jouer sur la feuille d’exercices !
+    On tient là toute la puissance du chapitre : une **fonction** (le motif), une **boucle** (la répétition) et un petit **tour** à chaque étape suffisent à produire des figures très riches. À vous de jouer avec les exercices !
 
 !!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 

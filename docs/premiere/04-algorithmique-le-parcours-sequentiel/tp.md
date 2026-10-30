@@ -152,9 +152,9 @@ On ne veut plus seulement une valeur record, mais **la date** du record : il fau
 
     Nuit la plus froide : **2025-01-12**, 4,5 °C. Plus grande amplitude : **2025-05-14**, 8,0 °C (le bord de mer amortit les écarts, d’où des amplitudes modestes).
 
-    **Invariant** (question 3) : « à chaque tour, `i_best` est l’indice d’un jour d’amplitude maximale parmi les jours **déjà visités** ».
+    **Invariant** (question 3) : « à chaque tour, `i_best` est l’indice d’un jour d’amplitude maximale parmi le jour 0 et les jours **déjà visités** par la boucle » (même formulation que le champion du cours).
 
-    - *Initialisation* : avant le premier tour (ou après le tour `i = 0`), seul le jour 0 est visité et `i_best = 0` : vrai.
+    - *Initialisation* : avant le premier tour, aucun jour n’est encore visité par la boucle et `i_best = 0` : c’est bien le jour d’amplitude maximale parmi le seul jour 0. Vrai.
 
     - *Hérédité* : si c’est vrai avant le tour `i`, soit l’amplitude du jour `i` dépasse strictement celle du jour `i_best` et `i_best` devient `i`, soit elle ne la dépasse pas et `i_best` reste un jour d’amplitude maximale. Dans les deux cas, la propriété est vraie pour les jours `0` à `i`.
 
@@ -402,7 +402,7 @@ Passer de la fenêtre du jour `i-1` à celle du jour `i`, c’est **ajouter** `t
         return res
     ```
 
-    Vérification : sur `tmax` avec $k = 7$, les deux fonctions renvoient 359 valeurs égales à $10^{-9}$ près. Coût : $k + (n - k) = n$ opérations, **linéaire** quel que soit $k$. C’est la leçon de la variance : **ne pas recalculer** ce que l’on connaît déjà (ici, la somme de la fenêtre précédente). Sur 30 jours, la courbe lissée monte régulièrement de 13 °C (fin janvier) à un maximum de 28,3 °C (fenêtre finissant le 24 juillet) puis redescend : on lit le **cycle des saisons**, débarrassé des variations d’un jour à l’autre.
+    Vérification : sur `tmax` avec $k = 7$, les deux fonctions renvoient 359 valeurs égales à $10^{-9}$ près. Coût : $k + (n - k) = n$ opérations, **linéaire** quel que soit $k$. C’est la leçon de la variance : **ne pas recalculer** ce que l’on connaît déjà (ici, la somme de la fenêtre précédente). Sur 30 jours, la courbe lissée part de 13 °C (fin janvier), oscille autour de 13-14 °C puis passe par un minimum de 12,2 °C (fenêtre finissant le 10 mars), monte ensuite jusqu’à un maximum de 28,3 °C (fenêtre finissant le 24 juillet) puis redescend : on lit le **cycle des saisons**, débarrassé des variations d’un jour à l’autre.
 
 ## Bilan à rédiger
 

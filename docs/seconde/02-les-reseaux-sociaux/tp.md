@@ -29,7 +29,7 @@ Les documents
 
 !!! encadre "Document 1 — Ce que disent les règles"
 
-    Les grands réseaux sociaux fixent souvent un âge minimal de **13 ans**, contrôlé par une simple date de naissance déclarée. En France comme à Monaco, avant **15 ans**, un service en ligne doit avoir l’accord d’un parent pour utiliser vos données. Une loi française de 2023 impose de vérifier l’âge, mais son application a été retardée ; en 2026, une interdiction avant 15 ans a été censurée par le Conseil constitutionnel, qui l’a jugée disproportionnée.
+    Les grands réseaux sociaux fixent souvent un âge minimal de **13 ans**, contrôlé par une simple date de naissance déclarée. En France comme à Monaco, avant **15 ans**, un service en ligne doit avoir votre accord *et* celui d’un parent pour utiliser vos données. Une loi française de 2023 impose de vérifier l’âge, mais son application a été retardée ; en 2026, une interdiction avant 15 ans a été censurée par le Conseil constitutionnel : atteinte aux libertés non proportionnée, et atteinte à la vie privée de tous, puisque chacun, même majeur, aurait dû prouver son âge.
 
     **À retenir :** des règles existent, mais l’âge déclaré n’est presque jamais vérifié.
 

@@ -132,7 +132,7 @@ Depuis son ordinateur portable relié en Wi-Fi, Léa ouvre une page web : son na
 
 3.  Chaque routeur doit choisir par où renvoyer le paquet. Quel en-tête lit-il pour cela, et quelle information y trouve-t-il ? A-t-il besoin de lire la requête HTTP ?
 
-4.  D’un routeur à l’autre, le paquet change de support (Wi-Fi, puis câbles Ethernet, puis fibre). Quel en-tête est remplacé à chaque lien ? Lequel reste le même du début à la fin du trajet ?
+4.  D’un routeur à l’autre, le paquet change de support (Wi-Fi, puis câbles Ethernet, puis fibre). Quel en-tête est remplacé à chaque lien ? Quelles informations de l’en-tête IP restent les mêmes du début à la fin du trajet ?
 
 5.  À l’arrivée sur le serveur, dans quel ordre les en-têtes sont-ils retirés ? À quel programme la requête est-elle finalement remise ?
 
@@ -150,7 +150,7 @@ Depuis son ordinateur portable relié en Wi-Fi, Léa ouvre une page web : son na
     en-tête Wi-Fien-tête IPen-tête TCP**requête HTTP**
 
     **3.** Il lit l’**en-tête IP**, qui contient l’**adresse IP de destination** (et celle de la source) ; il consulte sa table de routage avec cette adresse. Il n’a **pas** besoin de la requête HTTP : il ne remonte pas au-delà de la couche Réseau.  
-    **4.** L’en-tête de la couche **Lien** est retiré puis refait à chaque lien (Wi-Fi, puis Ethernet…) : chaque routeur « ouvre » cette enveloppe et en met une nouvelle adaptée au support suivant. L’en-tête **IP** (adresses source et destination) reste le même de bout en bout.  
+    **4.** L’en-tête de la couche **Lien** est retiré puis refait à chaque lien (Wi-Fi, puis Ethernet…) : chaque routeur « ouvre » cette enveloppe et en met une nouvelle adaptée au support suivant. Dans l’en-tête **IP**, les adresses IP source et destination restent les mêmes de bout en bout ; seul le compteur TTL est diminué de $1$ par chaque routeur.  
     **5.** Dans l’ordre inverse de l’émission : en-tête Lien, puis IP, puis TCP. La requête HTTP est remise à l’application concernée : le **serveur web**.  
     **6.** Seule la couche **Lien** change (Wi-Fi $\to$ 4G) ; le navigateur (couche Application) ne s’adresse qu’à la couche Transport et ignore le support physique. Chaque couche ne dépend que de la couche voisine : on peut en remplacer une sans toucher aux autres. C’est ce qui permet à des réseaux très différents de former un seul Internet.
 
@@ -194,7 +194,7 @@ On considère le réseau ci-dessous (les nombres sont les débits en Mbps ; on l
 
 2.  En déduire la table de routage RIP de A (colonnes : réseau visé, on sort *vers* quel voisin, nombre de sauts).
 
-3.  Pourquoi RIP est-il limité à $15$ sauts, et pourquoi ses messages périodiques posent-ils problème sur un grand réseau ?
+3.  Quelle est la limite de RIP en nombre de sauts, et pourquoi ses messages périodiques posent-ils problème sur un grand réseau ?
 
     ??? pouce "Coup de pouce"
 
@@ -214,7 +214,7 @@ On considère le réseau ci-dessous (les nombres sont les débits en Mbps ; on l
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire dans la colonne « sortir vers » le routeur de destination (D) au lieu du **premier** voisin du chemin (B) : un routeur ne connaît que le prochain saut.
 
-    **3.** La métrique est plafonnée à $15$ (au-delà, réseau réputé inaccessible) ; et l’envoi périodique (toutes les 30 s) de toute la table à tous les voisins **sature** un grand réseau.
+    **3.** La métrique est plafonnée à $15$ sauts (au-delà, réseau réputé inaccessible) ; <span class="horsprog">au-delà du programme</span> ce plafond est voulu : $16$ sert d’« infini », car après une panne des routeurs peuvent se renvoyer une route de plus en plus longue, et le plafond arrête vite ce comptage ; et l’envoi périodique (toutes les 30 s) de toute la table à tous les voisins **sature** un grand réseau.
 
 ### Le protocole OSPF
 
@@ -1065,7 +1065,7 @@ Une adresse IPv4 est composée de quatre octets, soit $32$ bits. La notation `/n
 
     ??? pouce "Coup de pouce"
 
-        Question 1 : la passerelle est l’adresse du routeur sur le réseau local de l’ordinateur ; la chercher sur le schéma. Question 4 : partir du routeur de Bob et suivre, de table en table, la colonne « Pass. » vers le LAN d’Alice. Question 5 : pour chaque routeur du chemin, se demander quel serait le coût de la meilleure route sans lui.
+        Question 1 : comparer l’adresse de l’hôte, et celle de sa passerelle (le routeur de son réseau local), aux adresses des réseaux LAN1 et LAN2 indiquées sur le schéma. Question 4 : partir du routeur de Bob et suivre, de table en table, la colonne « Pass. » vers le LAN d’Alice. Question 5 : pour chaque routeur du chemin, se demander quel serait le coût de la meilleure route sans lui.
 
 ??? corrige "Corrigé"
 

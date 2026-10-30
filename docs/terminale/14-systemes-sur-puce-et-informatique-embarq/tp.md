@@ -221,7 +221,7 @@ Un local technique ne doit pas dépasser $30$ degrés. Cahier des charges :
         sleep(200)
     ```
 
-    *À noter* : sans le test `and en_alarme`, un appui sur A hors alarme couperait par avance le son de la prochaine alarme ; `display.scroll` bloque la boucle environ deux secondes (acceptable ici : la température varie lentement).
+    *À noter* : sans le test `and en_alarme`, un appui sur A hors alarme couperait par avance le son de la prochaine alarme ; `display.scroll` bloque la boucle plusieurs secondes (acceptable ici : la température varie lentement).
 
     **3.** Une liste qui grandit à chaque tour ($5$ mesures par seconde, soit $432\,000$ par jour) saturerait vite les $128$ Ko de mémoire vive, et le programme planterait au bout de quelques heures. Deux variables `mini` et `maxi` suffisent et occupent une place constante, quelle que soit la durée de fonctionnement.
 

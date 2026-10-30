@@ -68,7 +68,7 @@ Pour chaque chapitre : ce qu’il **réutilise**, et où il **resservira**. Les
 | **Chapitre** | **S’appuie sur…** | **Resservira dans…** |
 |:---|:---|:---|
 | 1 Récursivité | fonctions (1re) | arbres, diviser pour régner, parcours en profondeur, programmation dynamique |
-| 2 Programmation objet | types construits (1re) | toutes les structures : classes `Pile`, `File`, `Arbre`, `Graphe` |
+| 2 Programmation objet | types construits (1re) | toutes les structures : classes `Pile`, `File`, `Noeud`, `Graphe` |
 | 3 Piles, files, listes chaînées | programmation objet, récursivité | parcours d’arbres et de graphes ; file des processus prêts |
 | 4 Processus | files ; arborescence de fichiers, modèle de von Neumann (1re) | arbres (l’arbre des processus) ; graphes (le cycle d’un interblocage) ; systèmes sur puce |
 | 5 Arbres | récursivité, programmation objet, piles et files ; dichotomie (1re) | index des bases de données ; graphes (un arbre est un graphe particulier) |
@@ -79,19 +79,21 @@ Pour chaque chapitre : ce qu’il **réutilise**, et où il **resservira**. Les
 | 10 Cryptographie | réseaux ; coût (factorisation) | HTTPS, signature, sécurité des échanges |
 | 11 Programmation dynamique | récursivité, diviser pour régner ; glouton (1re) | problèmes d’optimisation (rendu de monnaie, sac à dos) |
 | 12 Recherche textuelle | chaînes, boucles, coût (1re) | moteurs de recherche, traitement de texte, ADN |
-| 13 Calculabilité | un programme est une donnée (1re) | limites de tout programme (un antivirus parfait est impossible) |
+| 13 Calculabilité | modèle de von Neumann : programme et données dans la même mémoire (1re) | limites de tout programme (un antivirus parfait est impossible) |
 | 14 Systèmes sur puce | modèle de von Neumann (1re) ; processus | synthèse : le téléphone, un ordinateur complet sur une puce |
 
 !!! remarque "Remarque"
 
-    Pour le **Grand Oral**, ces liens sont précieux : une bonne question en croise souvent *deux* (« Comment un message trouve-t-il son chemin sur Internet ? » $=$ **graphes**, pour le plus court chemin, $+$ **réseaux**, pour le routage). Voir les pages *Préparer les épreuves*, en fin de livre.
+    Pour le **Grand Oral**, ces liens sont précieux : une bonne question en croise souvent *deux* (« Comment un message trouve-t-il son chemin sur Internet ? » $=$ **graphes**, pour le plus court chemin, $+$ **réseaux**, pour le routage). Voir les pages *Préparer les épreuves*, dans la deuxième partie du livre.
 
 ### Une histoire de l’informatique en quelques dates
 
-Chaque date de cette frise correspond à une notion que l’on étudie cette année, dans le chapitre indiqué à droite. Certaines sont bien plus anciennes que les ordinateurs (les graphes, les tours de Hanoï) ; la plupart sont nées entre 1936 et 1980.
+Chaque date de cette frise correspond à une notion que l’on étudie cette année, dans le chapitre indiqué à droite. Certaines sont bien plus anciennes que les ordinateurs (les graphes, les tours de Hanoï) ; la plupart sont nées entre 1936 et 1980. Le programme retient trois repères : **1936** (la machine universelle), **1948** (les premiers ordinateurs à programme enregistré, dont la puissance croît ensuite de façon exponentielle) et **1969** (le réseau qui deviendra Internet).
+
+Au fil de ces dates, les rôles du **logiciel** et du **matériel** ont changé : en 1945, on recâblait la machine pour chaque calcul ; dès 1948, le programme enregistré en mémoire permet de tout changer par logiciel ; systèmes d’exploitation et langages font ensuite porter l’essentiel des fonctions au logiciel ; aujourd’hui, les systèmes sur puce regroupent à nouveau des circuits spécialisés (graphisme, IA, chiffrement), pilotés par des API (ch. 14).
 
 ![](figures/85950f30e88106b6.svg){ .tikz loading=lazy }
 
-![](figures/fe2f510e37928fa9.svg){ .tikz loading=lazy }
+![](figures/e2fa20450320b6c3.svg){ .tikz loading=lazy }
 
 mainmattertrue

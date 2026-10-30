@@ -63,7 +63,11 @@ Trier un tableau, c’est ranger ses éléments **dans l’ordre** (croissant, l
     t[j] = temp     # t[j] recoit l'ancienne valeur de t[i]
     ```
 
-    C’est l’image des deux verres, l’un d’eau, l’autre de jus : pour intervertir leurs contenus, il faut un **troisième verre vide**. Cette variable temporaire est indispensable dans *tous* les langages.
+    C’est l’image des deux verres, l’un d’eau, l’autre de jus : pour intervertir leurs contenus, il faut un **troisième verre vide**. Cette variable temporaire est nécessaire dans la plupart des langages ; c’est la version que nous garderons.
+
+!!! remarque "Remarque — En Python : l’échange en une ligne"
+
+    L’affectation multiple du chapitre *Les types construits* permet aussi d’écrire `t[i], t[j] = t[j], t[i]` : Python évalue d’abord le p-uplet de droite (les deux *anciennes* valeurs), puis le déballe dans les deux cases. Aucune valeur n’est perdue. On rencontre cette forme dans des sujets de bac (par exemple le tri par insertion d’Amérique du Nord 2026, jour 2, exercice 2) : il faut savoir la lire.
 
 ## Le tri par sélection
 
@@ -179,6 +183,20 @@ La même trace en **histogramme** : chaque barre a la hauteur de sa valeur. On v
 
     Juste avant de traiter la case `i`, la partie `t[0..i-1]` est **triée** *et* contient les `i` plus petits éléments du tableau, **à leur place définitive**. C’est cet invariant qui garantit qu’à la fin le tableau entier est trié. Il se démontre en deux étapes, comme au chapitre *Algorithmique : le parcours séquentiel*, et peut être vérifié par un `assert` pendant la mise au point, comme au chapitre *Spécifier et mettre au point ses programmes*.
 
+!!! demonstration "Démonstration — L’invariant du tri par sélection"
+
+    Notons $P$ la propriété : « `t[0..i-1]` est triée et contient les `i` plus petits éléments du tableau ».
+
+    - **Initialisation** ($\texttt{i} = 0$) : la partie `t[0..-1]` est *vide* ; une partie vide est triée et contient bien les $0$ plus petits éléments. $P$ est vraie.
+
+    - **Hérédité** : supposons $P$ vraie au début de l’étape `i`. Comme `t[0..i-1]` contient les `i` plus petits éléments, chaque élément de la partie restante `t[i..n-1]` est supérieur ou égal à chacun d’eux. La boucle interne trouve le minimum de cette partie restante (invariant du champion) : c’est donc le $(\texttt{i}+1)$<sup>e</sup> plus petit élément du tableau, et il est supérieur ou égal à `t[i-1]`. L’échange le place en case `i` et ne touche qu’aux cases `i` et `i_min`, toutes deux hors de `t[0..i-1]`. Au début de l’étape suivante, `t[0..i]` est triée et contient les $\texttt{i}+1$ plus petits éléments : $P$ reste vraie.
+
+    Après la dernière étape ($\texttt{i} = \texttt{n}-1$), $P$ porte sur `t[0..n-1]` : le tableau entier est trié.
+
+!!! regle "Règle 5 — Terminaison du tri par sélection"
+
+    Le tri par sélection ne contient que deux boucles `for`, donc **bornées** : la boucle externe fait `n` tours, la boucle interne au plus $\texttt{n}-1$ à chacun d’eux. Le tri se termine toujours ; nul besoin de variant.
+
 <span id="cours-06-1" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-06-1) à [5](exercices.md#ex-06-5)** et **[22](exercices.md#ex-06-22)** (dérouler la sélection ; programmer le tri par sélection)
@@ -187,7 +205,7 @@ La même trace en **histogramme** : chaque barre a la hauteur de sa valeur. On v
 
 **L’idée** est celle du joueur qui ramasse ses cartes *une par une* et garde sa main toujours triée : *je prends la carte suivante, et je la glisse à la bonne place parmi celles que je tiens déjà.* C’est le tri le plus « naturel » pour un humain.
 
-!!! regle "Règle 5 — Principe du tri par insertion"
+!!! regle "Règle 6 — Principe du tri par insertion"
 
     On parcourt le tableau de la gauche vers la droite. À chaque étape, la partie de gauche est *déjà triée* ; on prend l’élément suivant et on l’**insère** à sa place dans cette partie triée, en **décalant** vers la droite tous les éléments plus grands que lui.
 
@@ -291,9 +309,13 @@ En **histogramme**, après chaque insertion : la zone triée (colorée) grandit 
 
 ![](../figures/1c34be866985d587.svg){ .tikz loading=lazy }
 
-!!! regle "Règle 6 — L’invariant du tri par insertion"
+!!! regle "Règle 7 — L’invariant du tri par insertion"
 
-    Au début de l’étape `i`, la partie `t[0..i-1]` est **triée** (mais ne contient pas forcément les bons éléments : ils pourront être « poussés » plus loin par les insertions suivantes). À la fin, `i` vaut `n` et le tableau entier est trié.
+    Au début de l’étape `i`, la partie `t[0..i-1]` est formée des éléments qui étaient **initialement** en `t[0..i-1]`, rangés dans l’ordre **croissant**. Ce ne sont pas forcément les `i` plus petits du tableau : ils pourront être « poussés » plus loin par les insertions suivantes. Après le dernier tour ($\texttt{i} = \texttt{n}-1$), la propriété vaut pour `t[0..n-1]` : le tableau entier est trié.
+
+!!! regle "Règle 8 — Terminaison du tri par insertion"
+
+    La boucle `for` est bornée. La boucle `while`, elle, ne l’est pas : il faut un **variant** (chapitre *Les bases de la programmation Python*, § V.B). La quantité `j` convient : c’est un entier, positif ou nul tant que la boucle tourne (la condition impose `j >= 0`), qui diminue de $1$ à chaque tour (`j = j - 1`). La boucle `while` s’arrête donc après au plus `i` tours, et le tri se termine.
 
 !!! encadre "À retenir — Sélection ou insertion : deux philosophies"
 
@@ -301,13 +323,13 @@ En **histogramme**, après chaque insertion : la zone triée (colorée) grandit 
 
 <span id="cours-06-6" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-06-6) à [10](exercices.md#ex-06-10)** et **[23](exercices.md#ex-06-23)** (dérouler l’insertion, comparer les deux tris ; programmer le tri par insertion)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-06-6) à [10](exercices.md#ex-06-10)** et **[23](exercices.md#ex-06-23)** (dérouler l’insertion, comparer les deux tris ; programmer le tri par insertion) ; exercice **[24](exercices.md#ex-06-24)** (invariant et terminaison des deux tris)
 
 ## Combien ça coûte ?
 
 Reprenons notre réflexe : on compte les opérations en fonction de la taille `n` du tableau. Or nos deux tris ont la même forme : **une boucle dans une boucle**. Le chapitre *Algorithmique : le parcours séquentiel* nous a appris à reconnaître ce motif…
 
-!!! regle "Règle 7 — Nos deux tris (sélection, insertion) sont quadratiques"
+!!! regle "Règle 9 — Nos deux tris (sélection, insertion) sont quadratiques"
 
     La sélection comme l’insertion consistent à parcourir le tableau *à l’intérieur* d’un autre parcours. Le nombre de comparaisons est de l’ordre de $n^2$ : leur coût est **quadratique**. Si l’on double le nombre d’éléments, le temps de tri est multiplié par **quatre**.
 
@@ -315,11 +337,15 @@ Reprenons notre réflexe : on compte les opérations en fonction de la taille `n
 
     Pour placer la case $0$, on compare le minimum candidat aux $n-1$ éléments suivants. Pour la case $1$, aux $n-2$ suivants. … Pour l’avant-dernière, à $1$ seul. Le nombre total de comparaisons vaut $$(n-1) + (n-2) + \cdots + 2 + 1 = \frac{n(n-1)}{2},$$ une quantité proportionnelle à $n^2$ : c’est bien un coût **quadratique**. Et ce, *quel que soit* le tableau de départ.
 
+!!! demonstration "Démonstration — Le pire cas pour l’insertion"
+
+    Le pire cas est le tableau trié *à l’envers* : chaque élément est plus petit que tous ceux qui le précèdent. L’élément d’indice $i$ recule alors de $i$ cases : $i$ comparaisons et $i$ décalages (la boucle s’arrête quand `j` vaut $-1$). Au total, $$1 + 2 + \cdots + (n-1) = \frac{n(n-1)}{2}$$ comparaisons, et autant de décalages : là encore, un coût **quadratique**.
+
 ### Le meilleur atout de l’insertion
 
 Les deux tris sont quadratiques *dans le pire des cas*. Mais l’insertion a une qualité que la sélection n’a pas :
 
-!!! regle "Règle 8 — Le cas favorable de l’insertion"
+!!! regle "Règle 10 — Le cas favorable de l’insertion"
 
     Si le tableau est **déjà trié** (ou presque), la boucle `while` du tri par insertion ne fait *aucun* (ou très peu de) décalage : elle s’arrête tout de suite, ou presque. Le tri se réduit alors à un **seul parcours** : son coût devient **linéaire** ! Le tri par sélection, lui, refait bêtement tout son travail : il est quadratique *même sur un tableau déjà trié*.
 
@@ -350,7 +376,7 @@ Sélection et insertion ne sont que deux membres d’une grande famille.
 
 !!! curieux "Pour les curieux (facultatif) — Danser un algorithme"
 
-    Pour *voir* un tri prendre vie, cherchez les vidéos « **AlgoRythmics** » : une université hongroise y met en scène des **danses folkloriques** qui exécutent, pas à pas, le tri par sélection, par insertion, à bulles ou le tri rapide. C’est étrangement hypnotique — et bien plus parlant qu’un long discours.
+    Pour *voir* un tri prendre vie, cherchez les vidéos « **AlgoRythmics** » : l’université Sapientia de Transylvanie (à Târgu Mureş, en Roumanie) y met en scène des **danses folkloriques** qui exécutent, pas à pas, le tri par sélection, par insertion, à bulles ou le tri rapide. C’est étrangement hypnotique — et bien plus parlant qu’un long discours.
 
 !!! curieux "Pour les curieux (facultatif) — Le pire tri du monde, pour rire"
 
@@ -364,7 +390,7 @@ Sélection et insertion ne sont que deux membres d’une grande famille.
 
 !!! curieux "Pour les curieux (facultatif) — Trier, aux origines de l’informatique"
 
-    Trier des données mécaniquement est *antérieur* aux ordinateurs : dès le recensement américain de **1890**, les machines à cartes perforées de **Herman Hollerith** (dont l’entreprise deviendra IBM) triaient des millions de fiches : on plaçait un paquet de cartes dans la trieuse, qui faisait tomber chacune dans un casier selon la position d’un trou. En **1945**, dans l’un des tout premiers programmes de l’histoire, **John von Neumann** écrit un *tri fusion* pour la machine EDVAC : le tri fut ainsi l’un des premiers problèmes que l’on chercha à faire résoudre par une machine à programme enregistré. Depuis, il reste un terrain d’étude central : c’est sur des problèmes simples à énoncer comme « ranger dans l’ordre » que l’informatique a forgé sa science du **coût** des algorithmes.
+    Trier des données mécaniquement est *antérieur* aux ordinateurs : dès le recensement américain de **1890**, les machines à cartes perforées de **Herman Hollerith** (dont l’entreprise deviendra IBM) dépouillaient des millions de fiches : à chaque carte lue, le couvercle d’un casier s’ouvrait et l’opérateur y rangeait la carte. Dès **1901**, des trieuses automatiques faisaient tomber chaque carte dans un casier selon la position d’un trou. En **1945**, dans l’un des tout premiers programmes de l’histoire, **John von Neumann** écrit la routine de *fusion*, cœur du tri fusion, pour la machine EDVAC : le tri fut ainsi l’un des premiers problèmes que l’on chercha à faire résoudre par une machine à programme enregistré. Depuis, il reste un terrain d’étude central : c’est sur des problèmes simples à énoncer comme « ranger dans l’ordre » que l’informatique a forgé sa science du **coût** des algorithmes.
 
     ![](../img/06_hist_trieuse_hollerith.jpg){ .photo loading=lazy style="width:157px" }  
     Une trieuse de cartes perforées Hollerith
@@ -388,8 +414,10 @@ Sélection et insertion ne sont que deux membres d’une grande famille.
 | Pourquoi trier | chercher/comparer vite ensuite (dichotomie, médiane, doublons…) |
 | Tri par sélection | chercher le **min** du reste, le placer ; position définitive à chaque étape |
 | Tri par insertion | **insérer** chaque élément dans la partie gauche déjà triée (décalages) |
-| Invariant | la partie gauche `t[0..i-1]` est triée à chaque tour |
-| Échanger | `temp = t[i]` ; `t[i] = t[j]` ; `t[j] = temp` (variable temporaire) |
+| Invariant (sélection) | `t[0..i-1]` triée, formée des `i` plus petits (place définitive) |
+| Invariant (insertion) | `t[0..i-1]` : ses éléments de départ, rangés dans l’ordre |
+| Terminaison | boucles `for` bornées ; variant `j` pour le `while` de l’insertion |
+| Échanger | `temp = t[i]` ; `t[i] = t[j]` ; `t[j] = temp` (Python : `t[i], t[j] = t[j], t[i]`) |
 | Coût des deux tris | **quadratique** ($\approx n^2$) : une boucle dans une boucle |
 | Atout de l’insertion | **linéaire** si le tableau est déjà (presque) trié |
 | En pratique | `t.sort()` / `sorted(t)` : Python utilise Timsort ($n\log_2 n$) |
@@ -404,7 +432,7 @@ Sélection et insertion ne sont que deux membres d’une grande famille.
 
 ## Erreurs fréquentes
 
-- **Échanger deux valeurs sans variable temporaire.** `t[i] = t[j]` puis `t[j] = t[i]` **perd** la première valeur. *Le réflexe :* `temp = t[i]` ; `t[i] = t[j]` ; `t[j] = temp`.
+- **Échanger deux valeurs sans variable temporaire.** `t[i] = t[j]` puis `t[j] = t[i]` **perd** la première valeur. *Le réflexe :* `temp = t[i]` ; `t[i] = t[j]` ; `t[j] = temp` (ou, en Python, `t[i], t[j] = t[j], t[i]`).
 
 - **Se tromper de bornes.** Le dernier indice est `len(t)-1` ; attention aux `range` du tri.
 
@@ -425,6 +453,8 @@ Sélection et insertion ne sont que deux membres d’une grande famille.
 - écrire le **tri par insertion** ;
 
 - **échanger** deux valeurs avec une variable temporaire ;
+
+- énoncer l’**invariant** de chaque tri et justifier sa **terminaison** ;
 
 - justifier le **coût quadratique** ($\approx n^2$, soit $\frac{n(n-1)}{2}$ comparaisons) ;
 

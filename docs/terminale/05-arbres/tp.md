@@ -1019,7 +1019,7 @@ Pour programmer cette idée, on transmet deux bornes dans la récursion : `alpha
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 12</span> — Défi — quand l’arbre est trop grand <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-tp-2-12 }
 
-Aux échecs, une position offre en moyenne une trentaine de coups et une partie en compte souvent plus de $80$ : l’arbre de jeu a bien plus de nœuds qu’il n’y a d’atomes dans l’univers. On ne peut pas descendre jusqu’aux feuilles. On s’arrête donc à une **profondeur limite** et l’on **estime** la position atteinte avec une **fonction d’évaluation**. C’est la méthode de l’exercice 19 du chapitre (Puissance 4). Ce défi suppose faite la partie 4 (scores $\pm(10 + v)$).
+Aux échecs, une position offre en moyenne une trentaine de coups et une partie en compte souvent plus de $80$ : l’arbre de jeu a bien plus de nœuds qu’il n’y a d’atomes dans l’univers. On ne peut pas descendre jusqu’aux feuilles. On s’arrête donc à une **profondeur limite** et l’on **estime** la position atteinte avec une **fonction d’évaluation**. C’est la méthode de l’exercice 21 du chapitre (Puissance 4). Ce défi suppose faite la partie 4 (scores $\pm(10 + v)$).
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `evaluer(grille)`, qui renvoie le nombre d’alignements de `LIGNES` encore possibles pour `X` (sans aucun `O`) moins le nombre d’alignements encore possibles pour `O` (sans aucun `X`). Que vaut-elle après un premier `X` au centre ? dans un coin ? sur un bord ?
 

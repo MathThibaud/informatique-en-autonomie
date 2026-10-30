@@ -6,7 +6,7 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *« Structures de données : listes, piles, files. Interfaces et implémentations. Distinguer des structures par le jeu des méthodes qui les caractérisent. Écrire et utiliser des programmes manipulant ces structures, indépendamment de leur implémentation. »* |
+| **Programme (BO)** | *« Structures de données, interface et implémentation. Spécifier une structure de données par son interface. Distinguer interface et implémentation. Écrire plusieurs implémentations d’une même structure de données. »* *« Listes, piles, files : structures linéaires. Dictionnaires, index et clé. Distinguer des structures par le jeu des méthodes qui les caractérisent. Choisir une structure de données adaptée à la situation à modéliser. Distinguer la recherche d’une valeur dans une liste et dans un dictionnaire. »* |
 | **Prérequis** | fonctions, boucles, listes et dictionnaires Python ; notion de classe et de méthode (chapitre *Programmation objet*). (→ fiches de révision : ch. 2) |
 | **Objectifs** | *distinguer* l’interface d’une structure de son implémentation ; *connaître* le jeu de méthodes qui caractérise une pile et une file ; *utiliser* ces structures pour résoudre un problème (parenthésage, parcours…) ; *comprendre* le rôle des listes chaînées comme brique d’implémentation. |
 
@@ -298,7 +298,17 @@ class File:
 
     Cette file « fonctionne », mais elle est **sournoisement lente**. Retirer le *dernier* élément d’une `list` avec `pop()` est immédiat ; retirer le *premier* avec `pop(0)`, en revanche, oblige Python à **décaler d’une case vers la gauche tous les éléments qui restent**. Sur une file de $n$ éléments, **chaque `defiler` coûte donc $n$ opérations**, contre une seule pour `depiler` sur une pile. Autrement dit, cette implémentation est parfaite pour une pile mais médiocre pour une file. Une *vraie* file efficace s’appuie sur une autre implémentation — une liste chaînée ou deux piles. Belle illustration du chapitre : une **même interface** peut cacher des implémentations aux **coûts très différents**.
 
-!!! regle "Règle 3 — L’essentiel à retenir"
+!!! regle "Règle 3 — La notation O : un ordre de grandeur du coût"
+
+    Pour comparer des coûts sans compter chaque opération, on note :
+
+    - **O(1)** (on lit « grand O de 1 ») un coût **constant**, qui ne dépend pas de la taille $n$ des données : `depiler` sur la pile ci-dessus ;
+
+    - **O($n$)** un coût **linéaire**, au plus proportionnel à $n$ quand $n$ devient grand : `defiler` avec `pop(0)`, ou le parcours d’une liste de $n$ éléments.
+
+    On écrit donc que `depiler` est en O(1) et que ce `defiler` est en O($n$). On rencontrera dans les chapitres suivants d’autres ordres de grandeur, comme O($\log n$) (arbres) ou O($n \log n$) et O($n^2$) (tris), que le chapitre *Diviser pour régner* rassemblera.
+
+!!! regle "Règle 4 — L’essentiel à retenir"
 
     Ces implémentations ne sont **qu’un choix parmi d’autres**. Ce qui compte, et ce que le bac vérifie, c’est de savoir **utiliser** l’interface (`empiler`, `depiler`, `enfiler`, `defiler`, `est_vide`…). Dans la grande majorité des exercices, on écrit simplement `p = Pile()` ou `f = File()` en **admettant** que la classe existe.
 
@@ -381,6 +391,94 @@ Insérer un maillon ne demande que de **rebrancher deux liens**, sans déplacer 
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[21](exercices.md#ex-03-21) à [26](exercices.md#ex-03-26)** (listes chaînées)
 
+### Le type abstrait « liste » et son interface
+
+La liste chaînée est une *implémentation*. Comme pour la pile et la file, on peut décrire la **liste** par sa seule **interface**, sans dire comment elle est programmée.
+
+!!! definition "Définition 7 — Interface d’une liste"
+
+    Une **liste** est une suite finie d’éléments, que l’on manipule par cinq opérations :
+
+    - `liste_vide()` renvoie une liste vide ;
+
+    - `est_vide(L)` renvoie `True` si la liste `L` est vide ;
+
+    - `ajouter_tete(x, L)` renvoie la liste dont le premier élément est `x`, suivi des éléments de `L` ;
+
+    - `tete(L)` renvoie le premier élément d’une liste `L` non vide ;
+
+    - `queue(L)` renvoie la liste `L` privée de son premier élément (`L` non vide).
+
+Les noms changent selon les sujets (`construire`, `premier`, `reste`, `car` et `cdr` en Lisp…) : suivez l’énoncé. Ce qui caractérise la liste, c’est ce **jeu de méthodes** : on n’accède qu’au premier élément, et `ajouter_tete` **renvoie** une nouvelle liste au lieu de modifier `L`, alors que `empiler` **modifie** la pile. La classe `Cellule` en fournit une implémentation, où chaque opération ne coûte que O(1) :
+
+```python
+def liste_vide():
+    return None
+
+def est_vide(L):
+    return L is None
+
+def ajouter_tete(x, L):
+    return Cellule(x, L)     # une cellule creee, rien n'est recopie
+
+def tete(L):
+    return L.valeur
+
+def queue(L):
+    return L.suivante
+```
+
+!!! exemple "Exemple — Que vaut tete(queue(L)) pour L = ajouter_tete(4, ajouter_tete(7, ajouter_tete(2, liste_vide()))) ?"
+
+    ??? corrige "Correction"
+
+        On lit de l’intérieur vers l’extérieur : on ajoute `2`, puis `7` devant, puis `4` devant ; `L` est la liste `4, 7, 2`. `queue(L)` est la liste `7, 2`, et sa tête vaut `7`.
+
+<span id="cours-03-28" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercice **[28](exercices.md#ex-03-28)** (l’interface d’une liste)
+
+## Choisir une structure : liste ou dictionnaire ?
+
+Depuis la Première, vous connaissez deux façons de ranger des données : la **liste** Python (un tableau), dont les éléments sont repérés par un **indice** entier de `0` à $n-1$, et le **dictionnaire**, qui associe chaque **valeur** à une **clé** (`annuaire["Lina"]`). Elles ne se valent pas quand il faut **chercher**.
+
+!!! regle "Règle 5 — Rechercher dans une liste ou dans un dictionnaire"
+
+    - `x in liste` compare `x` aux éléments **un par un** : jusqu’à $n$ comparaisons si `x` est absent. Le coût est **linéaire**, en O($n$).
+
+    - `c in dico` ne parcourt pas les clés : Python calcule directement, à partir de la clé, l’endroit où elle serait rangée (on parle de *hachage* <span class="horsprog">au-delà du programme</span>). Le coût reste à peu près **constant**, en O(1), quelle que soit la taille du dictionnaire.
+
+    - Attention : ce sont les **clés** qui se cherchent vite. Chercher une **valeur** (`v in dico.values()`) parcourt toutes les valeurs : O($n$), comme pour une liste.
+
+!!! exemple "Exemple — Mesurer la différence"
+
+    ```python
+    import time
+
+    n = 1000000
+    liste = [b for b in range(n)]
+    dico = {b: True for b in range(n)}
+
+    debut = time.perf_counter()
+    trouve = -1 in liste             # -1 est absent : le pire cas
+    print(time.perf_counter() - debut)
+    debut = time.perf_counter()
+    trouve = -1 in dico
+    print(time.perf_counter() - debut)
+    ```
+
+    ??? corrige "Correction"
+
+        Sur un ordinateur ordinaire, la recherche dans la liste prend de l’ordre de 10 millisecondes, et dix fois plus si $n$ est multiplié par 10 ; la recherche dans le dictionnaire prend environ une microseconde, et ne change presque pas avec $n$. Les valeurs exactes dépendent de la machine, pas leur rapport.
+
+!!! regle "Règle 6 — Choisir la structure adaptée à la situation"
+
+    On part de ce que le programme doit faire **le plus souvent** : garder un **ordre** et accéder par la **position** $\to$ une liste ; **retrouver** une donnée par une clé (un nom, un numéro), souvent $\to$ un dictionnaire ; servir le **dernier** arrivé $\to$ une pile ; servir le **premier** arrivé $\to$ une file.
+
+<span id="cours-03-29" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercice **[29](exercices.md#ex-03-29)** (liste ou dictionnaire ?)
+
 ## Ouverture
 
 Piles et files ne sont pas des curiosités isolées : ce sont les **outils de base** de la fin de l’année.
@@ -414,6 +512,9 @@ Piles et files ne sont pas des curiosités isolées : ce sont les **outils de ba
 | Usage type file | impression, ordonnancement, tampons, parcours en largeur |
 | Tableau | cases contiguës, accès direct, taille fixe |
 | Liste chaînée | maillons `valeur + lien`, taille libre, insertion rapide |
+| Liste (interface) | `liste_vide`, `est_vide`, `ajouter_tete`, `tete`, `queue` |
+| O(1) / O($n$) | coût constant / coût proportionnel à la taille $n$ |
+| Liste ou dictionnaire | `x in liste` en O($n$) ; `cle in dico` en O(1) |
 | Réflexe d’exercice | **admettre** l’implémentation, **utiliser** l’interface |
 
 !!! situation "Retour à la situation de départ"
@@ -456,7 +557,11 @@ Piles et files ne sont pas des curiosités isolées : ce sont les **outils de ba
 
 - raisonner sur le **coût** des opérations (dont `pop(0)` en O(n)) $\to$ ex. [13](exercices.md#ex-03-13), [14](exercices.md#ex-03-14) ;
 
-- distinguer **interface** et **implémentation** $\to$ ex. [15](exercices.md#ex-03-15), [20](exercices.md#ex-03-20).
+- distinguer **interface** et **implémentation** $\to$ ex. [15](exercices.md#ex-03-15), [20](exercices.md#ex-03-20) ;
+
+- utiliser l’**interface d’une liste** (`ajouter_tete / tete / queue / est_vide`) et l’implémenter avec `Cellule` $\to$ ex. [28](exercices.md#ex-03-28) ;
+
+- distinguer la **recherche** d’une valeur dans une **liste** et dans un **dictionnaire**, et choisir la structure adaptée $\to$ ex. [17](exercices.md#ex-03-17), [29](exercices.md#ex-03-29).
 
 ## Vers le Grand Oral
 

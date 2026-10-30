@@ -6,7 +6,7 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *« Systèmes sur puce. Décrire l’architecture d’un système sur puce. »* |
+| **Programme (BO)** | *« Composants intégrés d’un système sur puce. Identifier les principaux composants sur un schéma de circuit et les avantages de leur intégration en termes de vitesse et de consommation. »* Commentaire du BO : *« Le circuit d’un téléphone peut être pris comme exemple : microprocesseurs, mémoires locales, interfaces radio et filaires, gestion d’énergie, contrôleurs vidéo, accélérateur graphique, réseaux sur puce, etc. »* |
 | **Prérequis** | le modèle de **von Neumann** (unité de calcul, mémoire, entrées-sorties, bus — vu en Première), la différence **mémoire vive / mémoire morte**, la notion de **processus**. (→ fiches de révision : ch. 4) |
 | **Objectifs** | *comprendre* pourquoi un ordinateur entier tient sur une puce ; *distinguer* microcontrôleur et SoC ; *dérouler* le fonctionnement d’un système embarqué ; *peser* les intérêts et les limites de l’intégration. |
 
@@ -31,7 +31,7 @@ Comment un ordinateur complet — processeur, mémoire, périphériques — a-t-
 ![](../img/14_Intel_C4004.jpg){ .photo loading=lazy style="width:140px" }  
 *L’Intel 4004 (1971), l’un des tout premiers microprocesseurs : $2\,300$ transistors.*
 
-Cette miniaturisation a tout changé : en rapprochant les composants, on a pu **augmenter la fréquence** (les signaux vont plus vite sur de courtes distances), **baisser le coût** (tout est fabriqué d’un coup) et **réduire la consommation** (des transistors plus petits fonctionnent sous une tension plus faible).
+Cette miniaturisation a tout changé : en rapprochant les composants, on a pu **augmenter la fréquence** (sur de courtes distances, les signaux arrivent plus tôt, et des transistors plus petits commutent plus vite), **baisser le coût** (tout est fabriqué d’un coup) et **réduire la consommation** (des transistors plus petits fonctionnent sous une tension plus faible).
 
 ## Rappel : ce qu’il y a dans un ordinateur
 
@@ -49,11 +49,17 @@ Dans un ordinateur classique, ces éléments sont des **composants séparés**, 
 
 !!! definition "Définition 1 — Système sur puce (System on Chip, SoC)"
 
-    Un **système sur puce** rassemble sur un **unique circuit intégré** tous les composants qui étaient dispersés sur la carte mère : le **processeur** (souvent multi-cœur, comme au chapitre 4), la **mémoire**, un **processeur graphique** (GPU), et une foule de **périphériques** (Wi-Fi, Bluetooth, GPS, modem, capteurs…). Un ordinateur complet, sur un seul morceau de silicium.
+    Un **système sur puce** rassemble sur un **unique circuit intégré** la plupart des composants qui étaient dispersés sur la carte mère : le **processeur** (souvent multi-cœur, comme au chapitre 4) et ses **mémoires locales** (les caches), un **processeur graphique** (GPU), un **contrôleur vidéo**, des circuits de **gestion d’énergie**, et une foule de **périphériques** : interfaces **radio** (Wi-Fi, Bluetooth, GPS, modem) et **filaires** (USB, liaisons vers l’écran, l’appareil photo, les capteurs…). Ces blocs communiquent par un **réseau sur puce**. Dans un téléphone, la **mémoire vive** principale est une autre puce, empilée sur le SoC dans le **même boîtier**. Un ordinateur complet, dans un boîtier grand comme un ongle.
 
-![](../figures/bc34a764a37ddf87.svg){ .tikz loading=lazy }
+![](../figures/f5b143e9416a8e88.svg){ .tikz loading=lazy }
 
-Un SoC est un **vrai ordinateur**, aussi puissant : plusieurs cœurs cadencés à plusieurs gigahertz, des gigaoctets de mémoire, des **processeurs spécialisés** (graphisme, intelligence artificielle, cryptographie)… le tout sur une centaine de millimètres carrés.
+**Mémoires locales et mémoire vive.** Au plus près des cœurs, la puce contient des **mémoires locales** très rapides, les **caches** (quelques Mo) : le processeur y garde les instructions et les données qu’il vient d’utiliser, à quelques dixièmes de millimètre de ses circuits de calcul. La **mémoire vive** principale (plusieurs Go) est une puce *séparée* : dans un téléphone, elle est **empilée** sur le SoC, dans le même boîtier. Elle n’est donc pas gravée sur le silicium du SoC, mais elle est soudée tout contre lui : quelques millimètres de trajet… et aucune possibilité de la changer.
+
+**Un réseau à l’intérieur de la puce.** Sur une puce de plusieurs milliards de transistors, un **bus** unique que tous les blocs se partagent deviendrait un goulot d’étranglement : un seul échange à la fois. Les SoC récents relient donc leurs blocs par un **réseau sur puce** (*Network on Chip*) : de petits **routeurs** (les carrés du schéma) acheminent les données d’un bloc à l’autre, par paquets, et plusieurs échanges ont lieu en même temps — exactement comme les routeurs d’Internet du chapitre 9.
+
+**Énergie, affichage, connexions.** Les circuits de **gestion d’énergie** règlent en permanence la tension et la fréquence de chaque bloc, et éteignent ceux qui ne servent pas (le GPU quand on écoute de la musique écran éteint, par exemple) : c’est une des clés de l’autonomie. Le **contrôleur vidéo** envoie à l’écran, des dizaines de fois par seconde, l’image calculée par le GPU. Les **interfaces filaires** (USB, liaisons vers l’écran, l’appareil photo, les capteurs) complètent les **interfaces radio**.
+
+Un SoC est un **vrai ordinateur**, aussi puissant : plusieurs cœurs cadencés à plusieurs gigahertz, des gigaoctets de mémoire dans le boîtier, des **processeurs spécialisés** (graphisme, intelligence artificielle, cryptographie)… le tout sur une centaine de millimètres carrés.
 
 !!! exemple "Exemple — La puce Apple A13 (iPhone 11, 2019)"
 
@@ -65,16 +71,28 @@ Un SoC est un **vrai ordinateur**, aussi puissant : plusieurs cœurs cadencés �
 
     - un **Neural Engine** à 8 cœurs, dédié à l’intelligence artificielle (reconnaissance faciale…) ;
 
-    - un module **cryptographique** (il chiffre et déchiffre les données très vite, par exemple en AES, vu au chapitre 10) et $4$ Go de RAM.
+    - un module **cryptographique** (il chiffre et déchiffre les données très vite, par exemple en AES, vu au chapitre 10) ;
+
+    - des **mémoires caches** sur la puce elle-même, et $4$ Go de **RAM** **empilés sur la puce**, dans le même boîtier (ces $4$ Go sont une autre puce : ils ne font pas partie des $8{,}5$ milliards de transistors).
 
     Plus de puissance, dans votre poche, que tous les ordinateurs de la mission Apollo réunis.
 
 ![](../img/14_Apple_A13_Bionic.jpg){ .photo loading=lazy style="width:114px" }  
 *La puce Apple A13 Bionic.*
 
+!!! encadre "Repères — logiciel et matériel : des rôles qui changent"
+
+    - **1945 : le matériel fait tout.** Pour changer de calcul, on **recâble** l’ENIAC à la main : des jours de travail pour chaque nouveau problème.
+
+    - **1948 : le logiciel prend le relais.** Les premiers ordinateurs à **programme enregistré** (la petite machine de Manchester, en juin 1948, puis l’EDSAC de Cambridge en 1949) rangent le programme *en mémoire*, comme une donnée : une même machine fait tout, il suffit de changer de programme. C’est le modèle de von Neumann (vu en Première) et l’idée de la machine universelle de Turing (chapitre 13).
+
+    - **Années 1960–1970 : le logiciel s’étoffe.** Systèmes d’exploitation, langages, bibliothèques : le matériel devient une plateforme générique, et c’est le logiciel qui porte l’essentiel des fonctions.
+
+    - **Aujourd’hui : le retour du matériel spécialisé.** Un SoC regroupe des blocs dédiés (GPU, Neural Engine, module AES) qui font *en matériel*, plus vite et avec moins d’énergie, ce que le CPU ferait en logiciel. Et la frontière se brouille : une puce est d’abord **décrite dans un langage**, comme un programme, puis simulée et testée avant d’être gravée ; et ses blocs se pilotent par des **API**, comme une bibliothèque (`display.scroll(...)` ou `accelerometer.get_values()` sur le micro:bit).
+
 <span id="cours-14-2" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[2](exercices.md#ex-14-2) et [3](exercices.md#ex-14-3)** (SoC ou pas ; microcontrôleur contre SoC)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[2](exercices.md#ex-14-2), [3](exercices.md#ex-14-3), [19](exercices.md#ex-14-19) et [20](exercices.md#ex-14-20)** (SoC ou pas ; microcontrôleur contre SoC ; lire le schéma d’un SoC ; logiciel ou matériel)
 
 ## Le microcontrôleur : le petit cerveau de l’embarqué
 
@@ -101,7 +119,7 @@ Un système embarqué dialogue avec le **monde physique** par ses ports d’entr
 
 <span class="retouract">↺ Retour sur l'activité.</span> Sur le micro:bit, les boutons A et B et le capteur de température étaient des capteurs ; l’écran de LED, qui jouait le « radiateur » du thermostat, était un actionneur.
 
-Beaucoup de microcontrôleurs adoptent l’**architecture de Harvard** : contrairement à von Neumann (une seule mémoire pour tout), le **programme** (en mémoire morte, Flash) et les **données** (en mémoire vive, RAM) sont dans *deux mémoires séparées*, reliées par *deux bus distincts*. Avantage : on peut lire une instruction *et* une donnée **en même temps** — un vrai gain de temps.
+<span class="horsprog">au-delà du programme</span> Beaucoup de microcontrôleurs adoptent l’**architecture de Harvard** : contrairement à von Neumann (une seule mémoire pour tout), le **programme** (en mémoire morte, Flash) et les **données** (en mémoire vive, RAM) sont dans *deux mémoires séparées*, reliées par *deux bus distincts*. Avantage : on peut lire une instruction *et* une donnée **en même temps** — un vrai gain de temps.
 
 ![](../figures/8f00ecd0623d3ce9.svg){ .tikz loading=lazy }
 
@@ -111,12 +129,12 @@ Presque tous les systèmes embarqués répètent sans fin la même **boucle** : 
 
 ```python
 while True:                          # boucle sans fin
-    v = lire_capteur_vitesse()       # ENTRÉE : capteur -> nombre
+    v = lire_capteur_vitesse()       # ENTREE : capteur -> nombre
     if v < consigne:
         accelerer()                  # SORTIE : commande un actionneur
     elif v > consigne:
         freiner()
-    attendre(0.1)                    # contrainte TEMPS RÉEL : réagir vite
+    attendre(0.1)                    # contrainte TEMPS REEL : reagir vite
 ```
 
 ![](../figures/2ff6a8f256bc6519.svg){ .tikz loading=lazy }
@@ -172,9 +190,11 @@ Pourquoi tout intégrer sur une puce plutôt que garder une carte mère modulair
 |:---|:---|
 | Loi de Moore | nb de transistors $\times 2$ tous les 2 ans (empirique) |
 | Carte mère | composants **séparés**, remplaçables, modulaires |
-| SoC | **tout sur une puce** (CPU, GPU, RAM, périphériques) |
+| SoC | **tout sur une puce** (CPU et caches, GPU, vidéo, énergie, périphériques) ; RAM dans le boîtier |
+| Réseau sur puce | des routeurs relient les blocs (plutôt qu’un bus unique) |
+| Logiciel / matériel | recâblage (1945) $\to$ programme enregistré (1948) $\to$ blocs spécialisés |
 | Microcontrôleur | mini-SoC : peu puissant, sobre, **sans OS**, embarqué |
-| von Neumann / Harvard | 1 mémoire (données+prog.) / 2 mémoires + 2 bus |
+| von Neumann / Harvard | 1 mémoire (données+prog.) / 2 mémoires + 2 bus <span class="horsprog">au-delà du programme</span> |
 | Système embarqué | capteur $\to$ CPU $\to$ actionneur, **temps réel** |
 | Intérêts SoC | énergie, taille, coût, vitesse |
 | Limites SoC | non réparable, non évolutif, déchets |
@@ -182,7 +202,7 @@ Pourquoi tout intégrer sur une puce plutôt que garder une carte mère modulair
 
 !!! situation "Retour à la situation de départ"
 
-    1.  Ils sont réunis sur une seule puce, un **système sur puce** (SoC) : processeur multi-cœur, GPU, mémoire et périphériques (Wi-Fi, modem…) sur un unique circuit intégré, grâce à la miniaturisation décrite par la **loi de Moore** (§ I et III).
+    1.  Ils sont réunis sur une seule puce, un **système sur puce** (SoC) : processeur multi-cœur et ses caches, GPU, contrôleur vidéo et périphériques (Wi-Fi, modem…) sur un unique circuit intégré, la mémoire vive étant empilée dans le même boîtier, grâce à la miniaturisation décrite par la **loi de Moore** (§ I et III).
 
     2.  C’est un **microcontrôleur** : sans système d’exploitation complet, il exécute directement son programme, une boucle sans fin « lire les **capteurs**, décider, commander les **actionneurs** », sous des contraintes de temps fortes (§ IV).
 
@@ -196,19 +216,21 @@ Pourquoi tout intégrer sur une puce plutôt que garder une carte mère modulair
 
 - **Confondre capteur et actionneur.** Le capteur *lit* (entrée) ; l’actionneur *agit* (sortie).
 
-- **Mélanger von Neumann et Harvard.** Von Neumann : *une* mémoire pour programme *et* données. Harvard : deux mémoires, deux bus.
+- **Mélanger von Neumann et Harvard** <span class="horsprog">au-delà du programme</span>. Von Neumann : *une* mémoire pour programme *et* données. Harvard : deux mémoires, deux bus.
 
 ## Savoir-faire à maîtriser
 
 *À la fin du chapitre, je sais…*
 
-- **définir** un système sur puce et **identifier** ses constituants sur un schéma $\to$ ex. [1](exercices.md#ex-14-1), [2](exercices.md#ex-14-2), [13](exercices.md#ex-14-13) ;
+- **définir** un système sur puce et **identifier** ses constituants sur un schéma $\to$ ex. [1](exercices.md#ex-14-1), [2](exercices.md#ex-14-2), [13](exercices.md#ex-14-13), [19](exercices.md#ex-14-19) ;
 
 - **distinguer** microcontrôleur et SoC, carte mère et puce $\to$ ex. [2](exercices.md#ex-14-2), [3](exercices.md#ex-14-3) ;
 
 - **dérouler** le fonctionnement d’un système embarqué (capteur $\to$ décision $\to$ actionneur) $\to$ ex. [5](exercices.md#ex-14-5), [11](exercices.md#ex-14-11) ;
 
-- **énoncer** la loi de Moore et **peser** les intérêts et les limites de l’intégration $\to$ ex. [4](exercices.md#ex-14-4), [7](exercices.md#ex-14-7).
+- **énoncer** la loi de Moore et **peser** les intérêts et les limites de l’intégration $\to$ ex. [4](exercices.md#ex-14-4), [7](exercices.md#ex-14-7) ;
+
+- **situer** dans le temps l’évolution des rôles du logiciel et du matériel $\to$ ex. [20](exercices.md#ex-14-20).
 
 ## Vers le Grand Oral
 

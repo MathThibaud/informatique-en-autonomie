@@ -306,55 +306,58 @@ t.done()
 
 <span class="essentiel">• essentiel</span>
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `polygone(n, cote)` qui dessine un polygone régulier à `n` côtés de longueur `cote`. L’utiliser pour dessiner un triangle, un carré et un octogone.0
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `polygone_perimetre(n, perimetre)` qui dessine un polygone régulier à `n` côtés dont le **périmètre** total vaut `perimetre`. L’utiliser pour dessiner, avec le même périmètre `360`, un triangle, un carré et un hexagone : quelle longueur de côté chacun a-t-il ?0
 
 ??? pouce "Coup de pouce"
 
-    Reprendre le carré et le triangle : qu’est-ce qui change d’une figure à l’autre ? Ce sont ces deux nombres qui deviennent les paramètres `n` et `cote`.
+    Partir de la fonction `polygone(n, cote)` du cours : la longueur d’un côté n’est plus donnée, il faut la calculer à partir de `perimetre` et de `n`.
 
 ??? corrige "Corrigé"
 
-    On remplace l’angle par `360 / n` : la même fonction dessine tous les polygones réguliers.
+    Le côté vaut `perimetre / n` et l’angle `360 / n` : la même fonction dessine tous les polygones réguliers.
 
     ```python
     import turtle as t
-    def polygone(n, cote):
+    def polygone_perimetre(n, perimetre):
+        cote = perimetre / n
         for i in range(n):
             t.forward(cote)
             t.left(360 / n)
 
-    polygone(3, 100)   # triangle
-    polygone(4, 100)   # carre
-    polygone(8, 60)    # octogone
+    polygone_perimetre(3, 360)   # triangle : cotes de 120
+    polygone_perimetre(4, 360)   # carre : cotes de 90
+    polygone_perimetre(6, 360)   # hexagone : cotes de 60
     t.done()
     ```
 
-    <span class="erreurfreq">▷ Erreur fréquente.</span> laisser `t.left(90)`, recopié du carré : seul l’appel `polygone(4, ...)` se referme. L’angle doit dépendre du paramètre : `360 / n`.
+    Avec le même périmètre 360, le triangle a des côtés de **120**, le carré de **90** et l’hexagone de **60**.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Rosace de carrés <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-11 }
+    <span class="erreurfreq">▷ Erreur fréquente.</span> laisser `t.left(90)`, recopié du carré : seul l’appel `polygone_perimetre(4, ...)` se referme. L’angle doit dépendre du paramètre : `360 / n`.
 
-<span class="run" title="À programmer et tester sur machine">▶</span> En réutilisant une fonction `carre(cote)`, dessiner une rosace formée de **12 carrés**, chacun pivoté de `30` degrés par rapport au précédent. *(Pourquoi 30 ? Parce que $12 \times 30 = 360$.)*0
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Rosace de triangles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-11 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `triangle(cote)` qui dessine un triangle équilatéral, puis l’utiliser pour dessiner une rosace formée de **8 triangles**, tous partant du même point. De combien de degrés faut-il pivoter entre deux triangles pour faire exactement un tour complet ?0
 
 ??? pouce "Coup de pouce"
 
-    Écrire d’abord `carre(cote)` et vérifier qu’elle ramène la tortue à son point et à son orientation de départ. La rosace n’est alors qu’une boucle : un carré, puis on tourne.
+    Écrire d’abord `triangle(cote)` et vérifier qu’elle ramène la tortue à son point et à son orientation de départ. La rosace n’est alors qu’une boucle : un triangle, puis on tourne.
 
-![](../figures/a17662bb0118a30a.svg){ .tikz loading=lazy }
+![](../figures/fccc870b257ed506.svg){ .tikz loading=lazy }
 
 ??? corrige "Corrigé"
 
-    On écrit une fonction `carre`, puis on la répète 12 fois en pivotant de `30` degrés ($12 \times 30 = 360$).
+    On écrit une fonction `triangle` (trois fois : avancer, tourner de `120`), puis on la répète 8 fois en pivotant de `45` degrés, car $8 \times 45 = 360$.
 
     ```python
     import turtle as t
-    def carre(cote):
-        for i in range(4):
+    def triangle(cote):
+        for i in range(3):
             t.forward(cote)
-            t.left(90)
+            t.left(120)
 
-    for k in range(12):
-        carre(100)
-        t.left(30)
+    for k in range(8):
+        triangle(100)
+        t.left(45)
     t.done()
     ```
 

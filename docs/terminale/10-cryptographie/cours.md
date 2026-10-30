@@ -6,7 +6,7 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *« Sécurisation des communications. Décrire les principes de chiffrement symétrique (clé partagée) et asymétrique (clé publique / clé privée). Décrire l’échange d’une clé symétrique en utilisant un protocole de chiffrement asymétrique pour sécuriser une communication. »* |
+| **Programme (BO)** | *« Sécurisation des communications. Décrire les principes de chiffrement symétrique (clef partagée) et asymétrique (avec clef privée/clef publique). Décrire l’échange d’une clef symétrique en utilisant un protocole asymétrique pour sécuriser une communication HTTPS. »* |
 | **Prérequis** | la **division euclidienne** et le **reste** (opérateur `%`), la notion de **coût** d’un algorithme (croissance exponentielle), les **réseaux** et le fait qu’un paquet peut être **intercepté**. (→ fiches de révision : ch. 9) |
 | **Objectifs** | *chiffrer* et *déchiffrer* avec un code symétrique ; *comprendre* l’idée du chiffrement asymétrique et *dérouler RSA* à la main ; *expliquer* l’échange de clé et le protocole **HTTPS**. |
 
@@ -52,11 +52,11 @@ C’est la question de la **cryptographie**, l’art de rendre un message illisi
 
 ### Le chiffre de César : le décalage
 
-Le plus vieux code connu : Jules César décalait chaque lettre de **3 rangs** dans l’alphabet. Avec une clé $k$, la lettre de rang $x$ (A${}=0$, B${}=1$, …, Z${}=25$) devient la lettre de rang $(x+k)\bmod 26$.
+Le plus vieux code connu : Jules César décalait chaque lettre de **3 rangs** dans l’alphabet. Avec une clé $k$, la lettre de rang $x$ (A${}=0$, B${}=1$, …, Z${}=25$) devient la lettre de rang `(x + k) % 26` (le reste de la division par $26$ fait « boucler » l’alphabet : après Z, on repart à A).
 
 !!! exemple "Exemple"
 
-    Avec $k=3$ : `BONJOUR` devient `ERQMRXU`. Pour déchiffrer, on décale de $3$ *en arrière* (soit $(x-3)\bmod 26$).
+    Avec $k=3$ : `BONJOUR` devient `ERQMRXU`. Pour déchiffrer, on décale de $3$ *en arrière* (soit `(x - 3) % 26`).
 
 ```python
 def cesar(message, k):
@@ -78,13 +78,13 @@ def cesar(message, k):
 
 ### Le chiffrement affine : un peu d’arithmétique
 
-On généralise César : la lettre de rang $x$ devient $(a\,x + b)\bmod 26$. La clé est le couple $(a,b)$.
+On généralise César : la lettre de rang $x$ devient `(a * x + b) % 26`. La clé est le couple $(a,b)$.
 
 !!! regle "Règle 2 — La condition sur $a$"
 
     Pour que le déchiffrement soit possible, il faut que $a$ soit **premier avec $26$** (leur PGCD vaut $1$). Sinon, deux lettres différentes pourraient se chiffrer pareil : impossible de revenir en arrière. Les valeurs possibles de $a$ sont donc : $1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25$.
 
-Pour déchiffrer, on a besoin de l’**inverse modulaire** de $a$ : le nombre $a^{-1}$ tel que $a\times a^{-1}\equiv 1\ [26]$. Par exemple $5^{-1}\equiv 21\ [26]$ (car $5\times 21 = 105 = 4\times 26 + 1$). En Python : `pow(5, -1, 26)` renvoie `21`. On retiendra ce mot *inverse modulaire* : il reviendra, central, dans RSA.
+Pour déchiffrer, on a besoin de l’**inverse modulaire** de $a$ : le nombre $a^{-1}$, entre $0$ et $25$, tel que `(a * a_inv) % 26` vaut $1$. Par exemple, l’inverse de $5$ est $21$ (car $5\times 21 = 105 = 4\times 26 + 1$). En Python : `pow(5, -1, 26)` renvoie `21`. On retiendra ce mot *inverse modulaire* : il reviendra, central, dans RSA.
 
 ### Vigenère : le « chiffre indéchiffrable »
 
@@ -116,7 +116,7 @@ def chiffre(message, masque):
 
 !!! regle "Règle 3 — Pourquoi c’est prouvé inviolable"
 
-    Supposons qu’Ève intercepte le chiffré de `LUNDI`. Comme le masque est aléatoire et aussi long que le message, *tout* clair de 5 lettres est possible : `MARDI`, `JEUDI`, `STYLO`… Il y a autant de masques que de clairs plausibles ($26^5$), et rien ne distingue le vrai des autres. Ève n’apprend **rien**. C’est la **sécurité parfaite** (ou inconditionnelle : aucune puissance de calcul n’y change rien), démontrée par **Claude Shannon** (1949).
+    Supposons qu’Ève intercepte le chiffré de `LUNDI`. Comme le masque est aléatoire et aussi long que le message, *tout* clair de 5 lettres est possible : `MARDI`, `JEUDI`, `STYLO`… Pour chacun de ces clairs, il existe exactement un masque qui donne le chiffré intercepté, et rien ne distingue le vrai des autres. Ève n’apprend **rien**. C’est la **sécurité parfaite** (ou inconditionnelle : aucune puissance de calcul n’y change rien), démontrée par **Claude Shannon** (1949).
 
 !!! remarque "Remarque"
 
@@ -159,7 +159,7 @@ Whitfield Diffie
 
     - une **clé privée**, qu’elle garde secrète et ne partage *jamais*.
 
-    Un message chiffré avec la clé publique ne peut être déchiffré que par la clé privée associée — et *réciproquement*. Surtout : **connaître la clé publique ne permet pas de retrouver la clé privée**.
+    Un message chiffré avec la clé publique ne peut être déchiffré que par la clé privée associée — et, pour les systèmes comme RSA (§ IV), *réciproquement*. Surtout : **connaître la clé publique ne permet pas de retrouver la clé privée**.
 
 ![](../figures/2755d1c13984a7de.svg){ .tikz loading=lazy }
 
@@ -171,7 +171,7 @@ Appelons les deux clés d’Alice $A$ (privée) et $B$ (publique). Elles vérifi
 
 - on ne peut pas déduire l’une de l’autre ;
 
-- ce qui est chiffré avec l’une se déchiffre avec l’*autre*, **dans les deux sens**.
+- ce qui est chiffré avec l’une se déchiffre avec l’*autre*, **dans les deux sens** (c’est le cas de RSA, étudié ci-dessous ; ce n’est pas vrai de tous les systèmes asymétriques).
 
 Cette symétrie ouvre *deux* usages selon la clé avec laquelle on *commence* :
 
@@ -190,7 +190,7 @@ Avant même RSA, Diffie et Hellman résolvent le fameux problème de l’échang
 
 !!! exemple "Exemple"
 
-    Publics : $p=23$, $g=5$. Alice choisit en secret $a=6$ et publie $A=5^{6}\bmod 23 = 8$. Bob choisit $b=15$ et publie $B=5^{15}\bmod 23 = 19$. Chacun calcule alors le secret commun : Alice fait $B^{a}=19^{6}\bmod 23 = 2$ ; Bob fait $A^{b}=8^{15}\bmod 23 = 2$. **Même résultat : $2$**, sans jamais l’avoir transmis ! Ève connaît $p,g,A,B$ mais ne peut pas retrouver $a$ ni $b$ (c’est le *problème du logarithme discret*, très difficile).
+    Publics : $p=23$, $g=5$. Alice choisit en secret $a=6$ et publie $A=5^{6}\bmod 23 = 8$ (on note $x \bmod n$ le reste de la division de $x$ par $n$, `x % n` en Python). Bob choisit $b=15$ et publie $B=5^{15}\bmod 23 = 19$. Chacun calcule alors le secret commun : Alice fait $B^{a}=19^{6}\bmod 23 = 2$ ; Bob fait $A^{b}=8^{15}\bmod 23 = 2$. **Même résultat : $2$**, sans jamais l’avoir transmis ! Ève connaît $p,g,A,B$ mais ne peut pas retrouver $a$ ni $b$ (c’est le *problème du logarithme discret*, très difficile).
 
 ![](../figures/af6e8ae127b46bbc.svg){ .tikz loading=lazy }
 
@@ -298,7 +298,7 @@ Aujourd’hui, le petit cadenas de votre navigateur signifie **HTTPS** : le traf
 
 ### La poignée de main TLS (*handshake*)
 
-![](../figures/fdd82ad22e943b7e.svg){ .tikz loading=lazy }
+![](../figures/1d7d2b85f29ac3a9.svg){ .tikz loading=lazy }
 
 !!! encadre "À retenir — le rôle du certificat"
 

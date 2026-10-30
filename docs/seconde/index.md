@@ -10,6 +10,7 @@ hide:
 <div class="liens-annee" markdown>
 
 [Présentation de l'année](presentation-de-l-annee.md){ .md-button }
+[Charte d'usage de l'intelligence artificielle](charte.md){ .md-button }
 [Méthode : débattre](methode-debattre.md){ .md-button }
 [Frise chronologique](frise-chronologique.md){ .md-button }
 
@@ -17,9 +18,9 @@ hide:
 
 !!! livre "Le manuel complet en PDF"
 
-    Tout le cours, les exercices et les corrigés de l'année, dans la version distribuée en classe (version du 20 octobre 2026).
+    Tout le cours, les exercices et les corrigés de l'année, dans la version distribuée en classe (version du 30 octobre 2026).
 
-    [:material-download: Télécharger le manuel (5,1 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-seconde.pdf){ .md-button .md-button--primary }
+    [:material-download: Télécharger le manuel (5,2 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-seconde.pdf){ .md-button .md-button--primary }
 
 ## Chapitres
 

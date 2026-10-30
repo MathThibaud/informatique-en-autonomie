@@ -6,7 +6,7 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *« Systèmes d’exploitation : identifier les principales fonctions d’un système d’exploitation. Processus : décrire les états d’un processus et l’ordonnancement des processus par le système. Mettre en évidence et décrire une situation d’interblocage. »* |
+| **Programme (BO)** | *« Gestion des processus et des ressources par un système d’exploitation. Décrire la création d’un processus, l’ordonnancement de plusieurs processus par le système. Mettre en évidence le risque de l’interblocage (*deadlock*). »* Commentaire : *« À l’aide d’outils standard, il s’agit d’observer les processus actifs ou en attente sur une machine. Une présentation débranchée de l’interblocage peut être proposée. »* |
 | **Prérequis** | la notion de **programme** et de **langage machine** (Première), l’**arborescence** des fichiers (Première), pour la relation père/fils entre processus, un peu de **files** (la file d’attente de l’ordonnanceur). (→ fiches de révision : ch. 3) |
 | **Objectifs** | *distinguer* un programme d’un processus ; *décrire* les trois états d’un processus et les transitions entre eux ; *comprendre* le rôle d’ordonnanceur du système ; *dérouler* un ordonnancement et le représenter par un chronogramme ; *reconnaître* et *expliquer* une situation d’interblocage. |
 
@@ -286,6 +286,8 @@ Grace Hopper en 1984
 
 L’idée de partager le processeur entre plusieurs tâches — le **temps partagé** (*time-sharing*) — naît au début des années 1960 (système CTSS au MIT, 1961, puis l’ambitieux Multics). En 1969, aux laboratoires Bell, **Ken Thompson** et **Dennis Ritchie** en tirent un système plus simple et élégant, **Unix**, dont descendent aujourd’hui Linux, macOS, Android et iOS. Toute la gestion des processus de ce cours vient de là.
 
+Cette histoire montre comment les rôles du **matériel** et du **logiciel** ont évolué. Tant que le processeur était la ressource la plus chère, on organisait le travail des humains autour de lui (files de cartes perforées, opérateurs). À mesure que le matériel est devenu rapide et bon marché, c’est le **logiciel**, le système d’exploitation, qui a pris en charge le partage du processeur, au service de dizaines d’utilisateurs puis de dizaines d’applications.
+
 Côté théorie, le Néerlandais **Edsger Dijkstra** (déjà croisé avec l’algorithme de la gare de triage, et qu’on retrouvera pour les plus courts chemins) pose en 1965 les outils de la synchronisation (les *sémaphores*) et illustre l’interblocage par son célèbre « dîner des philosophes » <span class="horsprog">au-delà du programme</span>. En 1971, **Edward Coffman** énonce les quatre conditions qui portent son nom. La prochaine fois que votre téléphone jongle avec vingt applications sans sourciller, vous saurez quel héritage se cache derrière cette fluidité.
 
 ![](../img/04_hist_dijkstra.jpg){ .photo loading=lazy style="width:114px" }  
@@ -342,9 +344,11 @@ Edsger W. Dijkstra
 
 - **nommer** les trois états et **compléter** le schéma des transitions $\to$ ex. [2](exercices.md#ex-04-2), [3](exercices.md#ex-04-3), [4](exercices.md#ex-04-4) ;
 
-- **lire** une sortie de `ps`, en déduire un arbre de processus et des PID / PPID, et connaître `top` / `kill` $\to$ ex. [5](exercices.md#ex-04-5), [6](exercices.md#ex-04-6), [7](exercices.md#ex-04-7) ;
+- **décrire** la création d’un processus (`fork`, père et fils) et compter les processus créés $\to$ ex. [7](exercices.md#ex-04-7) ;
 
-- **dérouler** un ordonnancement (premier arrivé, plus court d’abord, tourniquet, par priorités) sous forme de **chronogramme** et en calculer les temps d’attente $\to$ ex. [8](exercices.md#ex-04-8), [12](exercices.md#ex-04-12), [18](exercices.md#ex-04-18) ;
+- **lire** une sortie de `ps`, en déduire un arbre de processus et des PID / PPID, et connaître `top` / `kill` $\to$ ex. [5](exercices.md#ex-04-5), [6](exercices.md#ex-04-6), [12](exercices.md#ex-04-12) ;
+
+- **dérouler** un ordonnancement (premier arrivé, plus court d’abord, tourniquet, par priorités) sous forme de **chronogramme** et en calculer les temps d’attente et le **temps d’attente moyen** $\to$ ex. [8](exercices.md#ex-04-8), [12](exercices.md#ex-04-12), [18](exercices.md#ex-04-18) ;
 
 - **reconnaître** un interblocage, le représenter par un **graphe d’attente** et proposer un moyen de l’éviter $\to$ ex. [10](exercices.md#ex-04-10), [11](exercices.md#ex-04-11).
 

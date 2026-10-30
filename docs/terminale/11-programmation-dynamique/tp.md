@@ -122,7 +122,7 @@ Si l’on teste `pgcb(250, 250)` sur l’image de la section « Sur une vraie im
 
 ### <span class="exo-num">Exercice 5</span> — Écrire `pgcb_memo` { #ex-11-programmation-dynamique-tp-1-5 }
 
-Écrire la fonction `pgcb_memo` qui fait le même calcul que `pgcb`, mais **mémorise** ses résultats dans un dictionnaire `memo` pour ne jamais recalculer deux fois la même case. Comme pour `fibo` dans le cours, on passe le dictionnaire en paramètre : `def pgcb_memo(x, y, memo={})`. Vérifier que l’appel devient instantané :
+Écrire la fonction `pgcb_memo` qui fait le même calcul que `pgcb`, mais **mémorise** ses résultats dans un dictionnaire `memo` pour ne jamais recalculer deux fois la même case. Comme pour `fibo` dans le cours, on passe le dictionnaire en paramètre, dans la version sûre vue en remarque du cours : `def pgcb_memo(x, y, memo=None)`, puis, en tête de fonction, `if memo is None:` `memo = {}`. Vérifier que l’appel devient instantané :
 
 ```python
 >>> pgcb_memo(250, 250)
@@ -132,7 +132,9 @@ Si l’on teste `pgcb(250, 250)` sur l’image de la section « Sur une vraie im
 ??? corrige "Corrigé"
 
     ```python
-    def pgcb_memo(x, y, memo={}):
+    def pgcb_memo(x, y, memo=None):
+        if memo is None:
+            memo = {}                       # carnet neuf a chaque appel principal
         if (x, y) in memo:
             return memo[(x, y)]
         if est_noir(x, y):
@@ -148,7 +150,7 @@ Si l’on teste `pgcb(250, 250)` sur l’image de la section « Sur une vraie im
         return r
     ```
 
-    C’est la même construction que `fibo(n, memo={})` dans le cours. L’appel `pgcb_memo(250, 250)` devient instantané et renvoie `21` (sans mémoïsation, `pgcb(250, 250)` dépasse $30$ millions d’appels en $10$ secondes sans finir). Attention au piège du cours : le dictionnaire par défaut est **partagé** d’un appel à l’autre, d’où l’intérêt de passer un dictionnaire neuf à la question suivante.
+    C’est la construction de `fibo` dans le cours, dans sa version sûre (`memo=None` : le dictionnaire par défaut n’est pas partagé d’un appel à l’autre). L’appel `pgcb_memo(250, 250)` devient instantané et renvoie `21` (sans mémoïsation, `pgcb(250, 250)` dépasse $30$ millions d’appels en $10$ secondes sans finir). À la question suivante, on passe explicitement un même dictionnaire pour tous les pixels.
 
 ## Sur une vraie image
 
@@ -175,7 +177,7 @@ largeur, hauteur = img.size          # ici (600, 600)
 
 ### <span class="exo-num">Exercice 7</span> — Chercher le plus grand carré de l’image { #ex-11-programmation-dynamique-tp-1-7 }
 
-Écrire `total_pgcb()` qui **parcourt tous les pixels** de l’image et renvoie la taille du plus grand carré blanc, avec les coordonnées `(x, y)` de son coin inférieur droit :
+Écrire `total_pgcb()` qui **parcourt tous les pixels** de l’image, ligne par ligne (`y` puis `x`), et renvoie la taille du plus grand carré blanc, avec les coordonnées `(x, y)` de son coin inférieur droit. Plusieurs carrés peuvent avoir la même taille maximale : en cas d’égalité, on garde le **premier** coin rencontré (comparaison stricte) :
 
 ```python
 >>> total_pgcb()
@@ -196,7 +198,7 @@ largeur, hauteur = img.size          # ici (600, 600)
         for y in range(hauteur):
             for x in range(largeur):
                 taille = pgcb_memo(x, y, memo)
-                if taille > meilleur:
+                if taille > meilleur:       # > strict : on garde le premier coin
                     meilleur = taille
                     coin = (x, y)
         return meilleur, coin

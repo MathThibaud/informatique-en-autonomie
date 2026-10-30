@@ -69,7 +69,7 @@ def recherche_naive(motif, texte):
 
 2.  On considère le motif `CGGCAG`. Donner, pour chaque lettre du motif, sa **dernière position** (table du prétraitement de Boyer-Moore).
 
-3.  On compare (de droite à gauche) et la lettre du texte qui provoque l’échec est un `T`. Sachant que `T` n’apparaît pas dans `CGGCAG`, de combien de crans peut-on décaler le motif d’un seul coup ? Justifier.
+3.  On compare (de droite à gauche) et l’échec se produit **dès la première comparaison**, sur la dernière lettre du motif : la lettre du texte qui provoque l’échec est un `T`. Sachant que `T` n’apparaît pas dans `CGGCAG`, de combien de crans peut-on décaler le motif d’un seul coup ? Justifier.
 
     ??? pouce "Coup de pouce"
 
@@ -83,7 +83,9 @@ def recherche_naive(motif, texte):
 
         <span class="erreurfreq">▷ Erreur fréquente.</span> Retenir la *première* position d’une lettre répétée (`G`$\to 1$) : la table de Boyer-Moore garde la **dernière** position, ici `G`$\to 5$.
 
-    3.  `T` n’apparaît pas dans le motif : aucun alignement où `T` tomberait *dans* le motif ne peut réussir. On saute donc de **6 crans** (toute la longueur du motif) d’un seul coup.
+    3.  `T` n’apparaît pas dans le motif : aucun alignement où `T` tomberait *dans* le motif ne peut réussir. Comme ce `T` est aligné avec la dernière lettre du motif, on place le motif juste après lui : on saute de **6 crans** (toute la longueur du motif) d’un seul coup.
+
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Croire que le saut vaut toujours $m$ quand la lettre est absente : il vaut $j+1$ si l’échec a lieu en position $j$ du motif (exercice 4 : `T` absent, échec en $j=2$, décalage $3$). Il ne vaut $m$ que si l’échec a lieu dès la dernière lettre.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Dérouler Boyer-Moore <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-12-4 }
 
@@ -197,11 +199,11 @@ Conclure : le motif est-il présent, et où ?
 
 ??? corrige "Corrigé"
 
-    | **position $i$** | **fenêtre** | **lettre de fin** | **décalage** |
-    |:----------------:|:-----------:|:-----------------:|:------------:|
-    |      $i=0$       |   `GTAC`    |        `C`        |     $2$      |
-    |      $i=2$       |   `ACAC`    |        `C`        |     $2$      |
-    |      $i=4$       |   `ACGT`    |   `T` (trouvé)    |      —       |
+    | **position $i$** | **fenêtre** | **lettre de fin** |     **décalage**     |
+    |:----------------:|:-----------:|:-----------------:|:--------------------:|
+    |      $i=0$       |   `GTAC`    |        `C`        |         $2$          |
+    |      $i=2$       |   `ACAC`    |        `C`        |         $2$          |
+    |      $i=4$       |   `ACGT`    |   `T` (trouvé)    | $4$ (dépasse la fin) |
 
     Le motif `ACGT` est trouvé à la position **4**.
 
@@ -645,14 +647,14 @@ On donne les fonctions suivantes :
 
 ```python
 def table_dernier(motif):
-    last = {}
+    dernier = {}
     for k in range(len(motif)):
-        last[motif[k]] = k
-    return last
+        dernier[motif[k]] = k
+    return dernier
 
 def boyer_moore(motif, texte):
     n, m = len(texte), len(motif)
-    last = table_dernier(motif)
+    dernier = table_dernier(motif)
     positions = []
     i = 0
     while i <= n - m:
@@ -664,8 +666,8 @@ def boyer_moore(motif, texte):
             i += 1
         else:
             c = texte[i + j]
-            if c in last:
-                k = last[c]
+            if c in dernier:
+                k = dernier[c]
             else:
                 k = -1
             i += max(1, j - k)
@@ -727,7 +729,7 @@ def boyer_moore(motif, texte):
 
         La fonction renvoie `[6]` (5 alignements testés).
 
-    3.  En $i = 2$ : le caractère fautif `G` a sa dernière position ($5$) **à droite** de l’échec ($j = 2$), donc `j - last[’G’]` $= -3$. Sans le `max(1, ...)`, on ajouterait $-3$ à $i$ : le motif **reculerait** en $i = -1$. Sur cet exemple, $i$ prend ensuite les valeurs $-2$, $-3$, $-2$, $-3$… (en Python, un indice négatif lit le texte depuis la fin) : le programme **boucle sans fin**. Le `max` garantit qu’on avance toujours d’au moins un cran, donc que l’algorithme termine.
+    3.  En $i = 2$ : le caractère fautif `G` a sa dernière position ($5$) **à droite** de l’échec ($j = 2$), donc `j - dernier[’G’]` $= -3$. Sans le `max(1, ...)`, on ajouterait $-3$ à $i$ : le motif **reculerait** en $i = -1$. Sur cet exemple, $i$ prend ensuite les valeurs $-2$, $-3$, $-2$, $-3$… (en Python, un indice négatif lit le texte depuis la fin) : le programme **boucle sans fin**. Le `max` garantit qu’on avance toujours d’au moins un cran, donc que l’algorithme termine.
 
     **Partie B**
 

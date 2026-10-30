@@ -884,3 +884,99 @@ La grille détaille, critère par critère, les quatre éléments de l’évalua
 </tr>
 </tbody>
 </table>
+
+## <span class="etiquette">Activité 1</span> Simuler un réseau
+
+*du réseau local à Internet, sur le simulateur Filius*
+
+<p class="infos-activite">Durée : 55 min · Par binômes, sur le simulateur gratuit et libre Filius</p>
+
+!!! consignes "Consignes"
+
+    - Sur le simulateur gratuit et libre **Filius** (en français). Les réponses se notent sur le cahier.
+
+    - Les questions marquées <span class="run" title="À programmer et tester sur machine">▶</span>  se font sur le simulateur. Sans machine, les autres se traitent sur les schémas de l’énoncé.
+
+    - Rappels de seconde : un **commutateur** (*switch*) relie les machines d’un même réseau local ; un **routeur** relie plusieurs réseaux ; la **passerelle** d’une machine est l’adresse du routeur de son réseau, à qui elle confie les paquets destinés à un autre réseau. Filius demande aussi un **masque** : recopier `255.255.255.0`, sans chercher à l’expliquer.
+
+**Prise en main de Filius.** Le mode **construction** (le marteau) sert à poser les composants (Ordinateur, Switch, Routeur) et à les relier avec le Câble ; un double-clic sur une machine ouvre sa configuration (adresse IP, masque, passerelle). Le mode **simulation** (la flèche verte) lance les échanges : un double-clic sur une machine permet d’y installer des logiciels (Ligne de commande, Serveur web, Navigateur web) ; un clic droit, « Afficher les échanges de données », montre les messages qui passent.
+
+### <span class="exo-num">Exercice 1</span> — Deux réseaux reliés par un routeur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-3-1 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Construire le réseau suivant : deux réseaux locaux, chacun avec son switch, reliés par un routeur à deux interfaces.
+
+![](../figures/b2b2e8033bf3978d.svg){ .tikz loading=lazy }
+
+Interfaces du routeur : `192.168.0.254` côté S1, `192.168.1.254` côté S2 ; masque `255.255.255.0` partout. Pour l’instant, **ne pas remplir** les passerelles.
+
+1.  <span class="run" title="À programmer et tester sur machine">▶</span>  En simulation, installer la Ligne de commande sur PC-A et taper `ping 192.168.0.2`. Le `ping` réussit-il ? Quels composants le message traverse-t-il ? Le routeur intervient-il ?
+
+2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Taper `ping 192.168.1.10`. Que se passe-t-il ? Expliquer pourquoi, sans passerelle, PC-A ne peut pas joindre le serveur.
+
+3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Régler la passerelle de PC-A et de PC-B sur `192.168.0.254`, celle du serveur sur `192.168.1.254`, puis relancer le `ping`. Décrire le trajet complet du message.
+
+4.  <span class="run" title="À programmer et tester sur machine">▶</span>  Taper `traceroute 192.168.1.10` sur PC-A. Combien d’étapes sont affichées ? Que représente l’étape intermédiaire ?
+
+### <span class="exo-num">Exercice 2</span> — Ouvrir les enveloppes : l’encapsulation <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-3-2 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Sur le serveur, installer le logiciel **Serveur web** et le démarrer ; sur PC-A, installer le **Navigateur web** et ouvrir l’adresse `http://192.168.1.10`.
+
+1.  <span class="run" title="À programmer et tester sur machine">▶</span>  La page d’accueil du serveur s’affiche-t-elle sur PC-A ? Quel protocole, vu dans le chapitre, le navigateur a-t-il utilisé pour la demander ?
+
+2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Ouvrir « Afficher les échanges de données » sur PC-A. Pour chaque ligne, Filius indique le protocole et la couche concernée. Relever les protocoles qui apparaissent pendant le chargement de la page. Retrouver la ligne de la requête `GET` : quelles sont ses adresses IP source et destination ?
+
+3.  Un message HTTP voyage « emballé » dans plusieurs en-têtes. Recopier et compléter le schéma ci-dessous avec : *adresses IP source et destination*, *ports (80 pour le serveur web)*, *adresses MAC*, *requête `GET /`*.
+
+    ![](../figures/4b7f3298d8205b3e.svg){ .tikz loading=lazy }
+
+4.  Un routeur reçoit ce message au milieu du trajet. Jusqu’à quel en-tête a-t-il besoin de « l’ouvrir » pour faire son travail ? Et un switch, qui ne regarde que les adresses de trame ?
+
+5.  Si PC-A était relié en Wi-Fi au lieu d’un câble, quelle enveloppe changerait ? Le navigateur et le serveur devraient-ils écrire la requête autrement ? Quel est donc l’intérêt de découper le travail en couches qui s’emboîtent ?
+
+### <span class="exo-num">Exercice 3</span> — Le réseau d’un établissement <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-3-3 }
+
+Le schéma suivant représente un réseau d’établissement typique ; celui du lycée lui ressemble (on peut demander au professeur ce qui diffère).
+
+![](../figures/406bf20d4bf14de7.svg){ .tikz loading=lazy }
+
+1.  Identifier les constituants numérotés de (1) à (5) parmi : *point d’accès Wi-Fi*, *commutateur*, *pare-feu*, *routeur d’accès (box)*, *serveur de fichiers et de comptes*. Donner le rôle de chacun en une phrase.
+
+2.  Quels constituants la requête d’un poste de la salle NSI vers `fr.wikipedia.org` traverse-t-elle avant d’atteindre Internet ? Et celle de la tablette ?
+
+3.  Les postes du lycée ont des adresses comme `10.0.3.17`. Pourquoi Wikipédia ne voit-il jamais cette adresse ? Quel constituant intervient ?
+
+4.  Un élève enregistre son travail « dans son dossier du lycée » depuis un poste de la salle NSI. Ce fichier sort-il sur Internet ? Quel chemin suit-il ?
+
+## Corrigé
+
+??? corrige "Corrigé"
+
+    **1.** Oui. Le message va de PC-A au switch S1, puis de S1 à PC-B : les deux machines sont dans le **même réseau local** (`192.168.0.x`), le routeur n’intervient pas.
+
+    **2.** Échec (« destination non joignable » ou délai dépassé). Le serveur est dans un **autre réseau** (`192.168.1.x`) : PC-A doit confier le paquet au routeur, mais sans passerelle il ne sait pas à qui le remettre.
+
+    **3.** Le `ping` réussit. Trajet : PC-A $\to$ S1 $\to$ routeur (interface `192.168.0.254`, puis `192.168.1.254`) $\to$ S2 $\to$ serveur, et la réponse fait le chemin inverse (d’où la passerelle du serveur, elle aussi indispensable).
+
+    **4.** Deux étapes : le routeur (`192.168.0.254`), puis le serveur. L’étape intermédiaire est le **routeur**, seule machine qui change le paquet de réseau ; les switchs n’apparaissent pas, car ils ne lisent pas l’en-tête IP.
+
+??? corrige "Corrigé"
+
+    **5.** Oui, la page d’accueil du serveur web de Filius s’affiche. Le navigateur l’a demandée avec le protocole **HTTP** (requête `GET`).
+
+    **6.** On voit passer **ARP** (recherche de l’adresse MAC de la passerelle sur le réseau local), **TCP** (ouverture de la connexion, accusés de réception) et **HTTP** (la requête `GET` et la réponse), le tout transporté par **IP**. Pour la requête `GET` : source `192.168.0.1` (PC-A), destination `192.168.1.10` (le serveur).
+
+    **7.** De l’extérieur vers l’intérieur : en-tête de trame : **adresses MAC** (de PC-A et de la prochaine machine, ici le routeur) ; en-tête IP : **adresses IP** source `192.168.0.1` et destination `192.168.1.10` ; en-tête TCP : **ports** (80 côté serveur) ; données HTTP : la **requête** `GET /`.
+
+    **8.** Le routeur ouvre la trame jusqu’à l’**en-tête IP** : il lui faut l’adresse IP de destination pour aiguiller. Le switch s’arrête à l’**en-tête de trame** : il ne lit que l’adresse MAC pour faire suivre la trame vers le bon câble. Ni l’un ni l’autre ne lit la requête HTTP.
+
+    **9.** Seule l’enveloppe extérieure (la trame : Wi-Fi au lieu d’Ethernet) changerait. La requête HTTP, l’en-tête TCP et l’en-tête IP resteraient identiques : le navigateur et le serveur n’ont rien à changer. Chaque couche fait son travail **sans connaître les autres** : on peut changer de support (câble, Wi-Fi, fibre, 4G) sans réécrire les applications. C’est l’intérêt de l’**encapsulation**.
+
+??? corrige "Corrigé"
+
+    **10.** (1) **routeur d’accès** (box) : relie le réseau du lycée à Internet et traduit les adresses privées en adresse publique ; (2) **pare-feu** : filtre les échanges entre l’intérieur et l’extérieur ; (3) **commutateurs** (central et de salle) : relient par câble les machines du réseau local ; (4) **point d’accès Wi-Fi** : relie sans fil les tablettes et portables au réseau ; (5) **serveur** : stocke les fichiers des élèves, gère les comptes et les mots de passe.
+
+    **11.** Poste de la salle NSI : commutateur de salle $\to$ commutateur central $\to$ pare-feu $\to$ routeur d’accès $\to$ Internet. Tablette : point d’accès Wi-Fi $\to$ commutateur central $\to$ pare-feu $\to$ routeur d’accès.
+
+    **12.** `10.0.3.17` est une adresse **privée**, valable seulement à l’intérieur du lycée. Le **routeur d’accès** la remplace par l’adresse **publique** du lycée avant que le paquet ne sorte (traduction d’adresses, NAT) ; il redistribue ensuite la réponse au bon poste.
+
+    **13.** Non : il reste dans le réseau local. Chemin : poste $\to$ commutateur de salle $\to$ commutateur central $\to$ serveur. Ni le pare-feu ni le routeur d’accès ne sont traversés.

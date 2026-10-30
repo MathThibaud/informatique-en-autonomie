@@ -296,7 +296,7 @@ Le plus beau : une **image** n’est qu’un **tableau de pixels**, donc… une
 
     - **Des algorithmes déjà rencontrés.** La distance est un accumulateur et le vote garde un champion (*Algorithmique : le parcours séquentiel*) ; les voisins s’obtiennent par un tri (*Les algorithmes de tri*) ; séparer entraînement et test rejoint la leçon de *Spécifier et mettre au point ses programmes* : un résultat ne vaut que vérifié sur des cas bien choisis.
 
-    - **En Terminale.** Les *arbres* (l’arbre binaire de recherche, les arbres $k$-d) permettront de retrouver des voisins sans tout parcourir.
+    - **En Terminale.** Les *arbres* (l’arbre binaire de recherche ; au-delà du programme, les arbres $k$-d) permettront de retrouver des voisins sans tout parcourir.
 
 ## Bilan — la carte mémoire
 

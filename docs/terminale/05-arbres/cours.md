@@ -6,7 +6,7 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *« Structures arborescentes : arbres, arbres binaires. Identifier des situations où une structure arborescente s’impose. Vocabulaire (racine, nœud, feuille, sous-arbre, taille, hauteur…). Évaluer la taille et la hauteur d’un arbre. Arbres binaires de recherche. Parcours d’un arbre. »* |
+| **Programme (BO)** | *« Arbres : structures hiérarchiques. Arbres binaires : nœuds, racines, feuilles, sous-arbres gauches, sous-arbres droits. Identifier des situations nécessitant une structure de données arborescente. Évaluer quelques mesures des arbres binaires (taille, encadrement de la hauteur, etc.). »* *« Algorithmes sur les arbres binaires et sur les arbres binaires de recherche. Calculer la taille et la hauteur d’un arbre. Parcourir un arbre de différentes façons (ordres infixe, préfixe ou suffixe ; ordre en largeur d’abord). Rechercher une clé dans un arbre de recherche, insérer une clé. »* |
 | **Prérequis** | la **récursivité** (indispensable ici !), les classes et objets (chapitre *Programmation objet*), les piles et les files, la recherche par dichotomie. (→ fiches de révision : ch. 1, ch. 2, ch. 3) |
 | **Objectifs** | *reconnaître* une situation qui appelle un arbre ; *maîtriser* le vocabulaire ; *calculer* taille et hauteur ; *implémenter* un arbre binaire (de plusieurs façons) et le *parcourir* ; *comprendre* l’arbre binaire de recherche, y *rechercher* et y *insérer* une valeur. |
 
@@ -102,9 +102,21 @@ Voici un arbre. On le dessine, par tradition informatique, **la racine en haut**
 
     Cette querelle vous rappellera quelque chose. En France, on entre au **rez-de-chaussée** (l’étage « $0$ »), et le premier étage est *au-dessus* : on compte les **volées d’escalier** (les arêtes). Aux États-Unis, le rez-de-chaussée *est* le « *first floor* » : on compte les **niveaux** (les nœuds). Bref, le même bâtiment a « deux hauteurs » selon le pays — exactement comme nos arbres. Un Américain et un Français se donnent rendez-vous « au premier étage » : l’un attend l’autre un étage plus bas. Précisez toujours votre convention !
 
-!!! encadre "À retenir — la hauteur d’un arbre de $n$ nœuds"
+!!! encadre "À retenir — encadrement de la hauteur d’un arbre binaire de $n$ nœuds"
 
-    Un arbre binaire de $n$ nœuds a une hauteur comprise entre environ $\log_2(n)$ (arbre bien « équilibré ») et $n$ (arbre « filiforme », dégénéré en une sorte de liste). Cette hauteur gouverne la rapidité des recherches : plus l’arbre est équilibré, plus il est efficace.
+    Avec la convention du cours (hauteur comptée en nœuds), un arbre binaire de taille $n \geqslant 1$ et de hauteur $h$ vérifie $$\log_2(n+1) \;\leqslant\; h \;\leqslant\; n, \qquad\text{autrement dit}\qquad h \leqslant n \leqslant 2^h - 1.$$
+
+    - **Au plus $n$** : chaque niveau contient au moins un nœud. La hauteur vaut $n$ pour un arbre **filiforme** (chaque nœud a au plus un fils), dégénéré en une sorte de liste.
+
+    - **Au moins $\log_2(n+1)$** : le niveau de profondeur $k$ contient au plus $2^k$ nœuds, donc un arbre de hauteur $h$ en a au plus $1 + 2 + 4 + \dots + 2^{h-1} = 2^h - 1$. Cette borne est atteinte par l’arbre **parfait**, dont tous les niveaux sont pleins.
+
+    *Exemple :* avec $n = 15$ nœuds, la hauteur est comprise entre $4$ ($2^4 - 1 = 15$) et $15$ ; avec $n = 1\,000$, entre $10$ ($2^{10} - 1 = 1\,023 \geqslant 1\,000$, alors que $2^9 - 1 = 511$ ne suffit pas) et $1\,000$. Avec la convention des arêtes, on retranche $1$ aux deux bornes.
+
+    Cette hauteur gouverne la rapidité des recherches : plus l’arbre est équilibré, plus elle est proche de $\log_2(n)$, et plus il est efficace.
+
+<span id="cours-05-26" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercice **[26](exercices.md#ex-05-26)** (encadrer la hauteur).
 
 ## Implémenter un arbre binaire (de plusieurs façons)
 
@@ -407,15 +419,17 @@ Et la nature s’y met aussi : à **Baïes** (Italie), un figuier sauvage pousse
 
 - employer le **vocabulaire** (racine, nœud, feuille, sous-arbre, taille, hauteur) $\to$ ex. [1](exercices.md#ex-05-1), [2](exercices.md#ex-05-2) ;
 
-- calculer **taille**, **hauteur**, nombre de feuilles par une fonction **récursive** $\to$ ex. [6](exercices.md#ex-05-6), [7](exercices.md#ex-05-7), [8](exercices.md#ex-05-8) ;
+- calculer **taille**, **hauteur**, nombre de feuilles par une fonction **récursive** $\to$ ex. [8](exercices.md#ex-05-8), [9](exercices.md#ex-05-9), [10](exercices.md#ex-05-10) ;
 
-- écrire et reconnaître les **quatre parcours** (préfixe, infixe, suffixe, largeur / file) $\to$ ex. [3](exercices.md#ex-05-3), [4](exercices.md#ex-05-4), [5](exercices.md#ex-05-5) ;
+- **encadrer** la hauteur d’un arbre binaire de $n$ nœuds, de l’arbre filiforme à l’arbre parfait $\to$ ex. [26](exercices.md#ex-05-26) ;
 
-- manipuler un arbre via la classe `Noeud` ou une **interface** donnée $\to$ ex. [2](exercices.md#ex-05-2), [15](exercices.md#ex-05-15), [17](exercices.md#ex-05-17) ;
+- écrire et reconnaître les **quatre parcours** (préfixe, infixe, suffixe, largeur / file) $\to$ ex. [3](exercices.md#ex-05-3) à [7](exercices.md#ex-05-7), [24](exercices.md#ex-05-24) ;
 
-- **rechercher** et **insérer** dans un **ABR** (à la main et en Python, doublon à droite), et relier infixe $\leftrightarrow$ tri $\to$ ex. [9](exercices.md#ex-05-9), [10](exercices.md#ex-05-10), [11](exercices.md#ex-05-11), [14](exercices.md#ex-05-14) ;
+- manipuler un arbre via la classe `Noeud` ou une **interface** donnée $\to$ ex. [2](exercices.md#ex-05-2), [17](exercices.md#ex-05-17), [19](exercices.md#ex-05-19) ;
 
-- justifier le **coût** d’une recherche ou d’une insertion dans un ABR (la hauteur) $\to$ ex. [9](exercices.md#ex-05-9), [11](exercices.md#ex-05-11), [14](exercices.md#ex-05-14).
+- **rechercher** et **insérer** dans un **ABR** (à la main et en Python, doublon à droite), et relier infixe $\leftrightarrow$ tri $\to$ ex. [11](exercices.md#ex-05-11), [12](exercices.md#ex-05-12), [13](exercices.md#ex-05-13), [16](exercices.md#ex-05-16), [25](exercices.md#ex-05-25) ;
+
+- justifier le **coût** d’une recherche ou d’une insertion dans un ABR (la hauteur) $\to$ ex. [11](exercices.md#ex-05-11), [13](exercices.md#ex-05-13), [16](exercices.md#ex-05-16), [26](exercices.md#ex-05-26).
 
 ## Vers le Grand Oral
 

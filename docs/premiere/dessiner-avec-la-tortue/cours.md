@@ -67,6 +67,10 @@ t.done()
 
 ![](../figures/6684f05b9d9e2250.svg){ .tikz loading=lazy }
 
+<span id="cours-T-1" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-T-1) et [2](exercices.md#ex-T-2)** (le carré et le rectangle, d’abord ordre par ordre)
+
 ## Répéter : la boucle `for`
 
 Dessiner un carré « à la main », c’est quatre fois la même chose :
@@ -116,9 +120,9 @@ t.done()
 
 ![](../figures/06ad692029f7826c.svg){ .tikz loading=lazy }
 
-<span id="cours-T-15" class="ancre"></span>
+<span id="cours-T-3" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[15](exercices.md#ex-T-15) et [16](exercices.md#ex-T-16)** (prédire une figure ; trouver l’angle)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[3](exercices.md#ex-T-3) à [9](exercices.md#ex-T-9)** (escalier, polygones, étoile, rosace de cercles, spirale, défis) et **[15](exercices.md#ex-T-15) et [16](exercices.md#ex-T-16)** (prédire une figure ; trouver l’angle)
 
 ## Colorier une forme
 
@@ -166,6 +170,10 @@ polygone(3, 100)   # triangle
 polygone(8, 60)    # octogone
 ```
 
+<span id="cours-T-10" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercices **[10](exercices.md#ex-T-10)** (un polygone au choix) et **[12](exercices.md#ex-T-12)** (trois carrés colorés)
+
 ## Le plus beau : les rosaces
 
 Une **rosace** s’obtient en répétant une même figure tout en **tournant** un peu à chaque fois. Ici, 12 carrés, pivotés de $360/12 = 30^\circ$ :
@@ -189,6 +197,10 @@ t.done()
 !!! remarque "Remarque"
 
     On tient là toute la puissance du complément : une **fonction** (le motif), une **boucle** (la répétition) et un petit **tour** à chaque étape suffisent à produire des figures très riches. À vous de jouer dans les exercices !
+
+<span id="cours-T-11" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercices **[11](exercices.md#ex-T-11)** (rosace de triangles), **[13](exercices.md#ex-T-13)** (le damier) et **[14](exercices.md#ex-T-14)** (la cible)
 
 !!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 

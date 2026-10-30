@@ -876,3 +876,78 @@ Pourquoi les résultats de b) et d) diffèrent-ils ?
     a) `[’Ada’, ’Léo’, ’Zoé’]` (ordre alphabétique des noms) ; b) `[’Léo’, ’Zoé’, ’Ada’]` (notes 9, 12, 15) ; c) `[’Ada’, ’Zoé’, ’Léo’]` (notes décroissantes) ; d) `[’Zoé’, ’Ada’, ’Léo’]`. En d), les notes sont comparées comme des **chaînes** : `"12"` et `"15"` commencent par `’1’`, qui vient avant `’9’` : `"9"` passe en dernier, comme si c’était la meilleure note. C’est le piège n<sup>o</sup> 1 : on convertit avec `int` dans la clé.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> trier une colonne de nombres lue dans un CSV sans `int` : le tri ne signale aucune erreur, mais il range les valeurs dans l’ordre du dictionnaire, pas dans l’ordre numérique.
+
+### Nettoyer une table
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 30</span> — Doublons et notes impossibles <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-30 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> 
+
+Un professeur a saisi les notes d’un devoir dans un CSV, avec quelques erreurs :
+
+```python
+notes = [{"nom": "Ada", "classe": "1A", "note": "15"},
+         {"nom": "Léo", "classe": "1B", "note": "9"},
+         {"nom": "Ada", "classe": "1A", "note": "15"},
+         {"nom": "Zoé", "classe": "1A", "note": "23"},
+         {"nom": "Tom", "classe": "1B", "note": "-2"},
+         {"nom": "Ada", "classe": "1B", "note": "11"}]
+```
+
+On considère qu’un élève est identifié par son `nom` **et** sa `classe`.
+
+1.  Écrire `notes_impossibles(table)` qui renvoie la liste des **noms** des fiches dont la note n’est pas comprise entre 0 et 20. Que renvoie-t-elle sur `notes` ?
+
+2.  Écrire `doublons(table)` qui renvoie la liste des fiches dont le couple (`nom`, `classe`) a déjà été rencontré plus haut dans la table. Combien de doublons dans `notes` ? Pourquoi la dernière fiche n’en est-elle pas un ?
+
+3.  Écrire `nettoyer(table)` qui renvoie une **nouvelle** table sans doublon et sans note impossible. Calculer la moyenne des notes avant et après nettoyage.
+
+??? pouce "Coup de pouce"
+
+    Pour les doublons, garder une liste `deja_vus` des couples `(nom, classe)` rencontrés, comme dans le cours ; une fiche est un doublon si son couple est déjà dans cette liste.
+
+??? corrige "Corrigé"
+
+    **1.** Un test de cohérence est un filtre (sans oublier `int`) :
+
+    ```python
+    def notes_impossibles(table):
+        return [ligne["nom"] for ligne in table
+                if int(ligne["note"]) < 0 or int(ligne["note"]) > 20]
+    ```
+
+    `notes_impossibles(notes)` renvoie `[’Zoé’, ’Tom’]` (23 et $-2$).
+
+    **2.** On mémorise les identifiants déjà vus :
+
+    ```python
+    def doublons(table):
+        deja_vus = []
+        resultat = []
+        for ligne in table:
+            cle = (ligne["nom"], ligne["classe"])
+            if cle in deja_vus:
+                resultat.append(ligne)
+            else:
+                deja_vus.append(cle)
+        return resultat
+    ```
+
+    Il y a **1** doublon : la troisième fiche (Ada, 1A). La dernière fiche est une autre élève, Ada de **1B** : même nom, mais pas même identifiant (`nom`, `classe`).
+
+    **3.** On garde une fiche si elle est cohérente et si son identifiant n’a pas encore été gardé :
+
+    ```python
+    def nettoyer(table):
+        propre = []
+        deja_vus = []
+        for ligne in table:
+            cle = (ligne["nom"], ligne["classe"])
+            note = int(ligne["note"])
+            if note >= 0 and note <= 20 and cle not in deja_vus:
+                deja_vus.append(cle)
+                propre.append(ligne)
+        return propre
+    ```
+
+    Avant nettoyage : $(15 + 9 + 15 + 23 - 2 + 11) / 6 = 71 / 6 \approx 11{,}83$. Après : il reste Ada (1A), Léo et Ada (1B), soit $(15 + 9 + 11) / 3 = 35 / 3 \approx 11{,}67$.

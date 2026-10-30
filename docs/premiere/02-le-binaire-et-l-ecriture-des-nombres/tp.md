@@ -34,7 +34,7 @@
 
     - `"0" + s` vaut `"01011"` (concaténation) ; `"0" * 3` vaut `"000"` (répétition) ;
 
-    - `s[1:]` vaut `"011"` (tout sauf le premier caractère) ; plus généralement, la **tranche** `s[i:j]` est formée des caractères d’indices `i` à `j - 1` : `s[0:2]` vaut `"10"` (les tranches seront reprises au chapitre *Les types construits*) ;
+    - on construit une nouvelle chaîne **caractère par caractère** : partir de `r = ""`, puis ajouter à chaque tour de boucle un caractère à droite (`r = r + c`) ou à gauche (`r = c + r`) ;
 
     - `for c in s:` parcourt les caractères de gauche à droite ; `for i in range(len(s) - 1, -1, -1):` parcourt les *indices* de droite à gauche (utile pour les retenues) ;
 
@@ -109,7 +109,7 @@
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Du binaire vers l’hexadécimal <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-tp-1-4 }
 
-\[ sur machine \]  Écrire `binaire_vers_hexa(s)` : compléter `s` pour que sa longueur soit un multiple de 4, puis convertir chaque paquet de 4 bits (`s[i:i + 4]`) en un chiffre de `"0123456789ABCDEF"`.
+\[ sur machine \]  Écrire `binaire_vers_hexa(s)` : compléter `s` pour que sa longueur soit un multiple de 4, puis parcourir `s` caractère par caractère en formant des paquets de 4 bits : on ajoute chaque caractère à une chaîne `paquet` ; dès qu’elle compte 4 caractères, on la convertit en un chiffre de `"0123456789ABCDEF"` (avec `binaire_vers_decimal`), puis on la vide.
 
 ```text
 >>> binaire_vers_hexa("11111010")
@@ -118,7 +118,7 @@
 
 ??? corrige "Corrigé"
 
-    Chaque paquet de 4 bits est converti par `binaire_vers_decimal`, qui donne l’indice du chiffre dans `chiffres`.
+    Les caractères sont accumulés dans `paquet` ; chaque paquet complet de 4 bits est converti par `binaire_vers_decimal`, qui donne l’indice du chiffre dans `chiffres`.
 
     ```python
     def binaire_vers_hexa(s):
@@ -126,8 +126,12 @@
         while len(s) % 4 != 0:
             s = "0" + s
         h = ""
-        for i in range(0, len(s), 4):
-            h = h + chiffres[binaire_vers_decimal(s[i:i + 4])]
+        paquet = ""
+        for c in s:
+            paquet = paquet + c
+            if len(paquet) == 4:
+                h = h + chiffres[binaire_vers_decimal(paquet)]
+                paquet = ""
         return h
     ```
 
@@ -364,7 +368,14 @@ En chaînant $n$ additionneurs complets (la retenue sortante de l’un entre dan
 
 En complément à deux, $a - b = a + (-b)$, et $-b$ s’obtient en inversant les bits de $b$ puis en ajoutant 1. Le processeur n’a donc **pas besoin d’un circuit de soustraction** !
 
-\[ sur machine \]  Écrire `soustraire(s1, s2)` en une ligne, avec `additionner`, `inverser` et `incrementer`. On garde $n$ bits : la retenue finale est ignorée (`[1:]`).
+\[ sur machine \]  La somme renvoyée par `additionner` a $n+1$ bits ; pour garder $n$ bits, il faut ignorer la retenue finale, c’est-à-dire le premier caractère. Écrire d’abord `sans_premier(s)`, qui renvoie la chaîne `s` privée de son premier caractère : on recopie un à un les caractères d’indices `1` à `len(s) - 1`.
+
+```text
+>>> sans_premier("10110")
+'0110'
+```
+
+\[ sur machine \]  Écrire ensuite `soustraire(s1, s2)` en une ligne, avec `additionner`, `inverser`, `incrementer` et `sans_premier`.
 
 ```text
 >>> soustraire("0010", "0111")      # 2 - 7
@@ -376,8 +387,14 @@ En complément à deux, $a - b = a + (-b)$, et $-b$ s’obtient en inversant les
 ??? corrige "Corrigé"
 
     ```python
+    def sans_premier(s):
+        r = ""
+        for i in range(1, len(s)):
+            r = r + s[i]
+        return r
+
     def soustraire(s1, s2):
-        return additionner(s1, incrementer(inverser(s2)))[1:]
+        return sans_premier(additionner(s1, incrementer(inverser(s2))))
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 15</span> — Détecter le dépassement <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-tp-1-15 }
@@ -400,7 +417,7 @@ Sur 4 bits, le complément à deux représente les entiers de $-8$ à $7$.
 
     ```python
     def depassement(s1, s2):
-        somme = additionner(s1, s2)[1:]
+        somme = sans_premier(additionner(s1, s2))
         return s1[0] == s2[0] and somme[0] != s1[0]
     ```
 
@@ -431,7 +448,7 @@ Sur 4 bits, le complément à deux représente les entiers de $-8$ à $7$.
 
 - parcourir les bits de `s2` de droite à gauche (rang `k` = 0, 1, 2…) ;
 
-- si le bit vaut `"1"`, ajouter au résultat `decaler(s1, k)` complété à $n$ bits (garder $n$ bits avec `[1:]`).
+- si le bit vaut `"1"`, ajouter au résultat `decaler(s1, k)` complété à $n$ bits (garder $n$ bits avec `sans_premier`).
 
 ```text
 >>> multiplier("1101", "1011")      # 13 * 11
@@ -450,12 +467,12 @@ Sur 4 bits, le complément à deux représente les entiers de $-8$ à $7$.
         for i in range(len(s2) - 1, -1, -1):
             if s2[i] == "1":
                 partiel = completer(decaler(s1, k), n)
-                resultat = additionner(resultat, partiel)[1:]
+                resultat = sans_premier(additionner(resultat, partiel))
             k = k + 1
         return resultat
     ```
 
-    Le produit de deux nombres de $p$ et $q$ bits est strictement inférieur à $2^{p+q}$ : il tient toujours sur $p+q$ bits, et la retenue retirée par `[1:]` vaut toujours `0`.
+    Le produit de deux nombres de $p$ et $q$ bits est strictement inférieur à $2^{p+q}$ : il tient toujours sur $p+q$ bits, et la retenue retirée par `sans_premier` vaut toujours `0`.
 
 ## Comme la machine à billes
 
@@ -763,11 +780,11 @@ En complément à deux, $-A$ s’obtient en **inversant** tous les bits de $A$, 
 
 2.  \[ plateau ou simulateur \]  Puzzle **56** : multiplier deux nombres de 2 bits. Le livret les additionne à un registre de 3 bits *modulo 8* : pourquoi ce modulo ? Combien de bits faudrait-il pour ne jamais perdre d’information ? (Voir l’exercice *Le multiplicateur* du TP d’arithmétique binaire.)
 
-3.  Le plateau ne mesure que quelques dizaines de cases et la boîte contient un nombre limité de pièces. Pourquoi, malgré tout, dit-on que Turing Tumble est « Turing-complet » ?
+3.  \[ au-delà du programme \] Une machine est dite « Turing-complète » si, avec autant de mémoire qu’il le faut, elle peut effectuer n’importe quel calcul qu’effectue un ordinateur (la notion sera précisée en Terminale, au chapitre *Calculabilité*). Le plateau ne mesure que quelques dizaines de cases et la boîte contient un nombre limité de pièces. Pourquoi, malgré tout, peut-on dire que Turing Tumble est « Turing-complet » ?
 
 ??? corrige "Corrigé"
 
-    **1.** Idée attendue : un registre $A$ décompte ; à chaque décompte, on ajoute 3 au registre résultat. On peut par exemple envoyer une bille par le bit des unités et une autre par le bit de poids 2 ($1 + 2 = 3$). On répète jusqu’à ce que $A$ vaille 0 : c’est la multiplication vue comme une addition répétée. **2.** $3 \times 3 = 9 = \texttt{1001}$ demande 4 bits. Avec un registre de 3 bits, la retenue de poids 8 est perdue : on obtient le résultat modulo 8. Un produit de deux nombres de 2 bits tient toujours sur $2 + 2 = 4$ bits. **3.** « Turing-complet » signifie qu’avec un plateau et des pièces *illimités*, la machine pourrait effectuer n’importe quel calcul qu’effectue un ordinateur (cela a été démontré en y simulant des machines de Turing). Un vrai ordinateur est d’ailleurs lui aussi limité par sa mémoire.
+    **1.** Idée attendue : un registre $A$ décompte ; à chaque décompte, on ajoute 3 au registre résultat. On peut par exemple envoyer une bille par le bit des unités et une autre par le bit de poids 2 ($1 + 2 = 3$). On répète jusqu’à ce que $A$ vaille 0 : c’est la multiplication vue comme une addition répétée. **2.** $3 \times 3 = 9 = \texttt{1001}$ demande 4 bits. Avec un registre de 3 bits, la retenue de poids 8 est perdue : on obtient le résultat modulo 8. Un produit de deux nombres de 2 bits tient toujours sur $2 + 2 = 4$ bits. **3.** « Turing-complet » signifie qu’avec un plateau et des pièces *illimités*, la machine pourrait effectuer n’importe quel calcul qu’effectue un ordinateur : la limite vient de la taille du plateau, pas du principe (des passionnés l’ont établi en montrant qu’un plateau assez grand pourrait imiter un autre modèle de calcul universel). Un vrai ordinateur est d’ailleurs lui aussi limité par sa mémoire.
 
 ## Bilan
 

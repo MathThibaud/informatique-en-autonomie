@@ -59,28 +59,34 @@ Que réalise, au final, ce programme sur `x` et `y` ?0
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Échanger deux variables <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-2 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Deux variables `a` et `b` contiennent respectivement `1` et `2`. Écrire les instructions qui **échangent** leurs contenus (en utilisant une **variable temporaire**), de sorte qu’à la fin `a` vaut `2` et `b` vaut `1`. Pourquoi une variable temporaire est-elle nécessaire ?0
+<span class="run" title="À programmer et tester sur machine">▶</span> Dans un emploi du temps, `matin = "maths"` et `soir = "NSI"`. On veut **échanger** les deux cours.
 
-??? pouce "Coup de pouce"
+1.  Un camarade propose : `temp = matin`, puis `soir = matin`, puis `matin = temp`. Que valent `matin` et `soir` à la fin ? Où est l’erreur ?
 
-    Essayer d’abord `a = b` puis `b = a` : que valent `a` et `b` à la fin ? Quelle valeur aurait-il fallu mettre de côté avant la première affectation ?
+2.  Écrire des instructions correctes (avec une **variable temporaire**) pour qu’à la fin `matin` vaille `"NSI"` et `soir` vaille `"maths"`. Quelle valeur la variable temporaire met-elle à l’abri ?0
+
+    ??? pouce "Coup de pouce"
+
+        Dresser un tableau avec une colonne par variable (`matin`, `soir`, `temp`) et une ligne par instruction. Quelle valeur est écrasée par la *première* affectation qui modifie `matin` ou `soir` ?
 
 ??? corrige "Corrigé"
 
-    Avec une variable temporaire :
+    **1.** `temp` reçoit `"maths"`, puis `soir` reçoit `"maths"` (la valeur `"NSI"` est perdue), puis `matin` reçoit `temp`, c’est-à-dire `"maths"` : les deux variables valent `"maths"`. L’erreur : la variable temporaire a mis à l’abri `matin`, mais c’est `soir` qui est écrasée en premier ; et `matin` ne reçoit jamais l’ancienne valeur de `soir`.
+
+    **2.**
 
     ```python
-    a = 1
-    b = 2
-    temp = a         # on met a l'abri la valeur de a
-    a = b            # a recoit b
-    b = temp         # b recoit l'ancienne valeur de a
-    print(a, b)      # 2 1
+    matin = "maths"
+    soir = "NSI"
+    temp = matin     # on met a l'abri la valeur de matin
+    matin = soir     # matin recoit "NSI"
+    soir = temp      # soir recoit l'ancienne valeur de matin
+    print(matin, soir)   # NSI maths
     ```
 
-    La variable temporaire est nécessaire : sans elle, `a = b` écraserait la valeur de `a`, qui serait perdue avant d’avoir pu être rangée dans `b`.
+    La variable temporaire met à l’abri la valeur que la première affectation va écraser (ici celle de `matin`).
 
-    <span class="erreurfreq">▷ Erreur fréquente.</span> écrire seulement `a = b` puis `b = a` : après la première ligne, `a` vaut déjà `2`, et les deux variables finissent à `2`.
+    <span class="erreurfreq">▷ Erreur fréquente.</span> écrire seulement `matin = soir` puis `soir = matin` : après la première ligne, `matin` vaut déjà `"NSI"`, et les deux variables finissent à `"NSI"`.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Convertisseur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-3 }
 
@@ -1307,7 +1313,7 @@ True
     ```python
     def meme_bord(mot):
         if mot == "":
-            return True          # cas limite : mot vide
+            return False         # cas limite : pas de premiere lettre a comparer
         return mot[0] == mot[-1]
 
     def memes_bords(mot1, mot2):
@@ -1320,7 +1326,10 @@ True
     assert memes_bords("chat", "chocolat") == True
     assert memes_bords("chat", "chien") == False
     assert memes_bords("", "chat") == False
+    assert meme_bord("") == False
     ```
+
+    *Mot vide :* sans précaution, `mot[0]` provoquerait une `IndexError`. Renvoyer `False` est un **choix de spécification** (« pas de lettre, donc pas de bords égaux ») ; on le garde le même dans les deux fonctions et on l’écrit dans la docstring. Le choix inverse (`True`) se défend aussi, pourvu qu’il soit annoncé.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 34</span> — Le bug qui passe les tests <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-34 }
 

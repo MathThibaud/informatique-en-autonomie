@@ -386,7 +386,7 @@ Reprenons la méthode sur $0{,}1$ : $$0{,}1 \times 2 = \mathbf{0}{,}2 \to \mathb
 
 !!! regle "Règle 7 — Les flottants sont approchés"
 
-    Une machine ne dispose que d’un nombre **fini** de bits (souvent 64) pour stocker un nombre à virgule, appelé **flottant** (*float*). Elle doit donc **tronquer** les écritures infinies : la valeur stockée est le plus souvent une **approximation**. On ne teste **jamais** l’égalité de deux flottants.
+    Une machine ne dispose que d’un nombre **fini** de bits (souvent 64) pour stocker un nombre à virgule, appelé **flottant** (*float*). Elle doit donc **arrondir** les écritures infinies : la valeur stockée est le plus souvent une **approximation**. On ne teste **jamais** l’égalité de deux flottants.
 
 !!! remarque "Remarque — sur machine"
 
@@ -427,9 +427,17 @@ Le programme demande de savoir **estimer la taille** d’un nombre en mémoire.
 
 !!! propriete "Propriété 3 — Nombre de bits"
 
-    Un entier $N$ s’écrit sur $k$ bits dès que $2^{k} > N$, c’est-à-dire dès que $k$ dépasse $\log_2 N$. Repères utiles : $2^{10} = 1024 \approx 10^3$, donc $10$ bits couvrent $\approx$ mille valeurs, $20$ bits $\approx$ un million, $30$ bits $\approx$ un milliard.
+    Un entier $N \geqslant 1$ s’écrit en binaire sur $k$ bits, où $k$ est le **plus petit** entier tel que $2^{k} > N$ (autrement dit $2^{k-1} \leqslant N < 2^{k}$). Repères utiles : $2^{10} = 1024 \approx 10^3$, donc $10$ bits couvrent $\approx$ mille valeurs, $20$ bits $\approx$ un million, $30$ bits $\approx$ un milliard.
 
-Ordre de grandeur à retenir : additionner deux nombres de $k$ bits peut demander $k+1$ bits (à cause de la retenue) ; multiplier deux nombres de $k$ bits peut en demander jusqu’à $2k$.
+!!! exemple "Exemple"
+
+    $2^6 = 64 \leqslant 100 < 128 = 2^7$ : l’entier $100$ s’écrit sur $7$ bits ($100 = \texttt{1100100}_2$).
+
+**Somme et produit.** Si $a$ et $b$ s’écrivent sur $k$ bits au plus, alors $a < 2^k$ et $b < 2^k$. Donc $a + b < 2^k + 2^k = 2^{k+1}$ : la somme tient sur $k+1$ bits au plus (un bit de plus, à cause de la retenue). Et $a \times b < 2^k \times 2^k = 2^{2k}$ : le produit tient sur $2k$ bits au plus.
+
+<span id="cours-02-28" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercice **[28](exercices.md#ex-02-28)** (combien de bits ?)
 
 !!! curieux "Pour les curieux (facultatif) — Les tailles « rondes » de l’informatique"
 
@@ -511,7 +519,7 @@ Un fichier texte n’est qu’une suite d’octets : **rien** n’y indique de f
 
 <span id="cours-02-21" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[21](exercices.md#ex-02-21) à [25](exercices.md#ex-02-25)** (coder le texte : ASCII, Unicode)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[21](exercices.md#ex-02-21) à [25](exercices.md#ex-02-25)** et **[29](exercices.md#ex-02-29)** (coder le texte : ASCII, Unicode ; convertir d’un encodage à l’autre)
 
 !!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
@@ -578,6 +586,8 @@ Un fichier texte n’est qu’une suite d’octets : **rien** n’y indique de f
 
 - donner le nombre de valeurs codables sur `n` bits ($2^n$) ;
 
+- évaluer le **nombre de bits** d’un entier, d’une somme, d’un produit ;
+
 - **additionner** deux nombres en binaire ;
 
 - dresser la **table de vérité** d’une expression booléenne (**et**, **ou**, **non**, **xor**) et expliquer le **demi-additionneur** ;
@@ -588,4 +598,6 @@ Un fichier texte n’est qu’une suite d’octets : **rien** n’y indique de f
 
 - expliquer comment un **texte** est codé (**ASCII**, `ord`/`chr`) ;
 
-- distinguer **ASCII**, **Latin-1** et **Unicode/UTF-8**, et expliquer le **charabia**.
+- distinguer **ASCII**, **Latin-1** et **Unicode/UTF-8**, et expliquer le **charabia** ;
+
+- **convertir** un texte d’un encodage à l’autre (décoder, puis réencoder).

@@ -1,6 +1,6 @@
 # Charte d'usage de l'intelligence artificielle
 
-Les assistants d’IA écrivent du code et des explications, souvent bien, parfois faux, toujours avec assurance. Le but de ce cours n’est pas d’obtenir une réponse : c’est que **vous** sachiez la produire, la vérifier et l’expliquer. L’usage de l’IA n’est donc ni interdit partout ni permis partout : il est **décidé exercice par exercice**, et indiqué par une pastille à côté du titre.
+Les assistants d’IA écrivent du code et des explications, souvent bien, parfois faux, toujours avec assurance. Le but de ce cours n’est pas d’obtenir une réponse : c’est que **vous** sachiez la produire, la vérifier et l’expliquer. L’usage de l’IA n’est donc ni interdit partout ni permis partout : il est **décidé exercice par exercice**, et indiqué, dans les feuilles d’exercices, par une pastille à côté du titre. Les évaluations (tests, contrôles, bacs blancs) ne portent pas de pastille : elles se font **toujours sans IA**.
 
 !!! encadre "Ce qui compte comme « IA » dans cette charte"
 
@@ -25,7 +25,7 @@ Les assistants d’IA écrivent du code et des explications, souvent bien, parfo
 <tbody>
 <tr>
 <td style="text-align: left;"><p><span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span></p>
-<p><span> tests, contrôles, bacs blancs, exercices d’automatisme</span></p></td>
+<p><span> exercices d’automatisme ; règle de toutes les évaluations (tests, contrôles, bacs blancs), qui ne portent pas de pastille</span></p></td>
 <td style="text-align: left;">Utiliser le cours et vos notes quand ils sont autorisés ; vos propres essais.</td>
 <td style="text-align: left;">Utiliser un assistant ou la complétion de code, <strong>ni avant ni pendant</strong>. Pour un travail à la maison, s’en servir revient à se priver de l’entraînement que le test mesure.</td>
 </tr>

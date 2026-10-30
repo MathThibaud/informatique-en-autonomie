@@ -34,9 +34,9 @@ Le programme est dense et s’enchaîne : la **récursivité** (chapitre 1) est 
 
 **Chapitre 1 — La récursivité.** Résoudre un problème en le ramenant à une version plus petite de lui-même : une fonction qui s’appelle elle-même. Élégant, et incontournable pour toute la suite.
 
-**Chapitre 2 — La programmation orientée objet.** Concevoir vos propres « objets » (leurs données *et* leurs actions) pour organiser des programmes plus gros et plus clairs.
+**Chapitre 2 — La programmation orientée objet et les paradigmes.** Concevoir vos propres « objets » (leurs données *et* leurs actions) pour organiser des programmes plus gros et plus clairs.
 
-**Chapitre 3 — Les structures de données linéaires.** Construire vos propres boîtes à ranger l’information : listes chaînées, piles (« dernier arrivé, premier servi ») et files (comme une file d’attente).
+**Chapitre 3 — Les structures linéaires : piles, files, listes chaînées.** Construire vos propres boîtes à ranger l’information : listes chaînées, piles (« dernier arrivé, premier servi ») et files (comme une file d’attente).
 
 ### De la Toussaint à Noël
 
@@ -118,7 +118,7 @@ Les exercices ★★★, les défis et les encadrés « Pour les curieux » serv
 
 ### Lire ce livre sur un ordinateur
 
-- **Tout est cliquable** : le sommaire, le petit sommaire de chaque chapitre, « $\blacktriangleright$ corrigé p. 637 » et « $\uparrow$ énoncé », les coups de pouce, les numéros d’exercices des renvois et les mentions « chapitre 5 ». L’**onglet de couleur** au bord de la page ramène à la page de titre du chapitre ; le **numéro de page** ramène au sommaire.
+- **Tout est cliquable** : le sommaire, le petit sommaire de chaque chapitre, « $\blacktriangleright$ corrigé p. … » et « $\uparrow$ énoncé », les coups de pouce, les numéros d’exercices des renvois et les mentions « chapitre 5 ». L’**onglet de couleur** au bord de la page ramène à la page de titre du chapitre ; le **numéro de page** ramène au sommaire.
 
 - **Les signets** (panneau latéral « Signets » ou « Table des matières » du lecteur PDF) donnent le plan détaillé : chapitre, rubrique, section.
 
@@ -150,9 +150,9 @@ Comme les épreuves ont lieu **en fin d’année**, on dispose de **toute l’an
 
 !!! encadre "L’intelligence artificielle : une charte, trois pastilles"
 
-    Les assistants d’IA savent écrire du code et des explications ; le but de ce cours est que **vous** sachiez le faire, le vérifier et l’expliquer. Une [**charte d’usage de l’IA**](charte.md), reproduite juste après cette présentation, fixe ce qui est permis. L’usage est décidé **exercice par exercice** et signalé par une pastille à côté du titre :
+    Les assistants d’IA savent écrire du code et des explications ; le but de ce cours est que **vous** sachiez le faire, le vérifier et l’expliquer. Une [**charte d’usage de l’IA**](charte.md), reproduite juste après cette présentation, fixe ce qui est permis. L’usage est décidé **exercice par exercice** et signalé, dans les feuilles d’exercices, par une pastille à côté du titre ; les évaluations (tests, contrôles, sujets d’épreuve) n’en portent pas : elles se font toujours sans IA.
 
-    - <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> **sans IA** : tests, contrôles, sujets d’épreuve, exercices d’automatisme (lecture de code, questions de cours) ;
+    - <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> **sans IA** : exercices d’automatisme (lecture de code, questions de cours) ;
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> **IA en appui** : pour déboguer, reformuler ou vérifier, à condition d’écrire soi-même la réponse finale ;
 

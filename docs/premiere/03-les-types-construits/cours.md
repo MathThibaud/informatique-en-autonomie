@@ -6,7 +6,7 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *« Types construits »* : *p-uplets*, *tableaux indexés* (listes) et *tableaux de tableaux*, *dictionnaires* (tableaux associatifs). Capacités attendues : écrire une fonction renvoyant un p-uplet ; lire et *modifier* les éléments d’un tableau par leur index ; construire un tableau *par compréhension* ; *itérer* sur les éléments d’un tableau ; représenter des matrices par des tableaux de tableaux ; itérer sur les éléments d’un dictionnaire. |
+| **Programme (BO)** | *« Types construits »* : *p-uplets*, *p-uplets nommés*, *tableaux indexés* (listes) et *tableaux de tableaux*, *dictionnaires* (tableaux associatifs). Capacités attendues : écrire une fonction renvoyant un p-uplet ; lire et *modifier* les éléments d’un tableau par leur index ; construire un tableau *par compréhension* ; *itérer* sur les éléments d’un tableau ; représenter des matrices par des tableaux de tableaux ; itérer sur les éléments d’un dictionnaire. |
 | **Prérequis** | les bases de Python : variables, types simples (`int`, `float`, `bool`, `str`), boucles `for`/`while`, fonctions. (→ fiches de révision : ch. 1) |
 | **Objectifs** | savoir **regrouper** des données dans le bon type construit, y **accéder**, les **parcourir** et, quand c’est possible, les **modifier** — en comprenant *ce qui se passe en mémoire*. Ce chapitre est le socle des chapitres suivants (algorithmique, tris, données en tables…). |
 
@@ -140,6 +140,17 @@ Le p-uplet permet d’**affecter plusieurs variables en une seule fois** : on «
 >>> a, b, c = 1, 2, 3     # a vaut 1, b vaut 2, c vaut 3
 ```
 
+!!! regle "Règle 2 — Échanger deux variables en une ligne"
+
+    Au chapitre *Les bases de la programmation Python*, échanger `a` et `b` demandait une variable temporaire. L’affectation multiple le fait en une ligne :
+
+```text
+>>> a, b = 1, 2
+>>> a, b = b, a           # a vaut 2, b vaut 1
+```
+
+Python **évalue d’abord tout le membre de droite** : il construit le p-uplet `(b, a)`, c’est-à-dire `(2, 1)`, avec les valeurs *du moment* ; puis il le déballe dans `a` et `b`. Aucune valeur n’est perdue. La même écriture permet d’échanger deux cases d’un tableau (§ IV), `t[i], t[j] = t[j], t[i]` : on la retrouvera au chapitre *Les algorithmes de tri*, et on la rencontre dans des sujets de bac. Cette facilité est propre à Python : dans la plupart des langages, la variable temporaire reste nécessaire.
+
 C’est exactement ainsi qu’on récupère les différentes valeurs renvoyées par une fonction (paragraphe suivant).
 
 ### Une fonction qui renvoie un p-uplet (capacité attendue)
@@ -154,21 +165,17 @@ def division(a, b):
 q, r = division(25, 7)      # q vaut 3, r vaut 4
 ```
 
-!!! exemple "Exemple — Renvoyer le minimum et le maximum"
+!!! exemple "Exemple — Renvoyer le plus petit et le plus grand"
 
     ```python
-    def mini_maxi(t):
-        """Renvoie (plus petit, plus grand) du tableau non vide t."""
-        mini = t[0]
-        maxi = t[0]
-        for x in t:
-            if x < mini:
-                mini = x
-            if x > maxi:
-                maxi = x
-        return mini, maxi
+    def ordonner(a, b):
+        """Renvoie le couple (plus petit, plus grand) des nombres a et b."""
+        if a <= b:
+            return a, b
+        else:
+            return b, a
 
-    petit, grand = mini_maxi([7, 2, 9, 4])   # petit = 2, grand = 9
+    petit, grand = ordonner(9, 4)   # petit = 4, grand = 9
     ```
 
 <span id="cours-03-1" class="ancre"></span>
@@ -206,11 +213,11 @@ Un **tableau** ressemble à un p-uplet… mais il est **mutable**. C’est là 
 [12, 20]
 ```
 
-!!! regle "Règle 2 — Indices négatifs et tranches"
+!!! regle "Règle 3 — Indices négatifs et tranches"
 
     - **Indice négatif** : on compte depuis la fin. `t[-1]` est le dernier élément, `t[-2]` l’avant-dernier ; `t[-k]` désigne `t[len(t) - k]`.
 
-    - **Tranche** `t[a:b]` : un *nouveau* tableau, formé des éléments d’indices `a` à `b - 1` (`b` est exclu, comme dans `range`). Si `a` est omis, on part du début ; si `b` est omis, on va jusqu’à la fin.
+    - **Tranche** `t[a:b]` : un *nouveau* tableau, formé des éléments d’indices `a` à `b - 1` (`b` est exclu, comme dans `range`). Si `a` est omis, on part du début ; si `b` est omis, on va jusqu’à la fin. *(Les tranches sont très utiles, mais leur connaissance n’est pas exigible au baccalauréat.)*
 
     - Les deux se combinent : `t[:-1]` est le tableau privé de son dernier élément, c’est-à-dire `t[0:len(t) - 1]`.
 
@@ -257,7 +264,7 @@ for i in range(len(notes)):
 
 Écriture concise, à **maîtriser absolument** : elle fabrique un tableau à partir d’un itérable.
 
-!!! regle "Règle 3 — Syntaxe de la compréhension"
+!!! regle "Règle 4 — Syntaxe de la compréhension"
 
     Deux formes (une par ligne), chaque couleur repérant une partie :
 
@@ -297,7 +304,7 @@ for i in range(len(notes)):
 
 Un tableau étant mutable, il possède des **méthodes** (appel avec un point). Deux d’entre elles suffisent cette année, et reviennent dans les sujets de bac.
 
-!!! regle "Règle 4 — Ajouter et retirer en fin de tableau"
+!!! regle "Règle 5 — Ajouter et retirer en fin de tableau"
 
     Un tableau `t` dispose des méthodes suivantes :
 
@@ -316,7 +323,7 @@ Un tableau étant mutable, il possède des **méthodes** (appel avec un point). 
 3
 ```
 
-!!! regle "Règle 5 — Modifier sur place vs renvoyer une copie"
+!!! regle "Règle 6 — Modifier sur place vs renvoyer une copie"
 
     `append` modifie le tableau et renvoie `None` : n’écrivez **jamais** `t = t.append(5)` (vous perdriez tout). Pour obtenir un *nouveau* tableau sans modifier l’original, on le construit, par exemple par **concaténation** (`+`).
 
@@ -330,7 +337,7 @@ Un tableau étant mutable, il possède des **méthodes** (appel avec un point). 
     [3, 1, 2]
     ```
 
-!!! regle "Règle 6 — Méthode : tout le reste s’écrit avec une boucle"
+!!! regle "Règle 7 — Méthode : tout le reste s’écrit avec une boucle"
 
     Compter les occurrences d’une valeur, chercher sa position, retirer une valeur, inverser ou trier un tableau : on ne cherche pas une méthode toute faite, on **écrit le parcours** (exercices « Chercher et compter » et « Renverser sans `reverse` »). Ces algorithmes sont au cœur des chapitres *Algorithmique : le parcours séquentiel* et *Les tris*.
 
@@ -338,7 +345,7 @@ Un tableau étant mutable, il possède des **méthodes** (appel avec un point). 
 
 Voici le point le plus important — et le plus piégeux — du chapitre. Reprenons le dessin du § I.
 
-!!! regle "Règle 7 — Affecter un tableau ne le copie pas !"
+!!! regle "Règle 8 — Affecter un tableau ne le copie pas !"
 
     `b = a` ne crée **aucun** nouvel objet : il fait simplement pointer `b` vers **le même** tableau que `a`. On dit que `a` et `b` sont des **alias**. Modifier via l’un se voit via l’autre.
 
@@ -401,7 +408,7 @@ M = [[1, 2, 3],
      [4, 5, 6]]        # 2 lignes, 3 colonnes
 ```
 
-!!! regle "Règle 8 — Accès à une case : M[i][j]"
+!!! regle "Règle 9 — Accès à une case : M[i][j]"
 
     `M[i]` est la ligne d’indice `i` (un tableau) ; `M[i][j]` est la case ligne `i`, colonne `j`. Le nombre de lignes est `len(M)`, de colonnes `len(M[0])`.
 
@@ -479,7 +486,7 @@ Dans un tableau, l’étiquette d’accès est **imposée** : un indice $0, 1, 2
 
 !!! remarque "Remarque — Tableau associatif = enregistrement"
 
-    Le nom savant est **tableau associatif**. C’est l’outil idéal pour une *fiche* : `{"nom": "Ada", "annee": 1815, "domaine": "informatique"}`. Au chapitre *Les données en tables*, une table entière sera une liste de telles fiches.
+    Le nom savant est **tableau associatif**. C’est l’outil idéal pour une *fiche* : `{"nom": "Ada", "annee": 1815, "domaine": "informatique"}`. On parle aussi de **p-uplet nommé** : comme dans un p-uplet, on regroupe plusieurs valeurs, mais chacune est repérée par un **nom de champ** (`"nom"`, `"annee"`…) plutôt que par une position. En Python, les p-uplets nommés sont écrits avec des dictionnaires. Au chapitre *Les données en tables*, une table entière sera une liste de telles fiches.
 
 ### Ajouter, modifier, supprimer
 
@@ -494,7 +501,7 @@ Différence majeure avec le tableau : on crée une **nouvelle clé** par simple 
 2
 ```
 
-!!! regle "Règle 9 — Le test in porte sur les clés"
+!!! regle "Règle 10 — Le test in porte sur les clés"
 
     ```text
     >>> "Bob" in age    # une cle ?
@@ -509,7 +516,7 @@ Différence majeure avec le tableau : on crée une **nouvelle clé** par simple 
 
 Une boucle `for` sur un dictionnaire parcourt ses **clés**. Trois méthodes précisent le parcours.
 
-!!! regle "Règle 10 — keys, values, items"
+!!! regle "Règle 11 — keys, values, items"
 
     `d.keys()` : les clés. `d.values()` : les valeurs. `d.items()` : les couples `(clé, valeur)`.
 
@@ -566,9 +573,9 @@ moyenne = total / len(age)         # moyenne des ages
 
 ### Le fil rouge, une dernière fois : pourquoi la clé est-elle immuable ?
 
-!!! regle "Règle 11 — Une clé de dictionnaire doit être immuable"
+!!! regle "Règle 12 — Une clé de dictionnaire doit être immuable"
 
-    Un tableau ne peut pas être une clé ; un p-uplet, si. Le modèle mémoire l’explique : le dictionnaire range chaque valeur *à une place calculée à partir de la clé*. Si la clé pouvait **changer** après coup (comme un tableau mutable), cette place ne correspondrait plus à rien et la valeur serait **introuvable**. D’où l’exigence d’une clé **figée**.
+    Un tableau ne peut pas être une clé ; un p-uplet d’éléments immuables, si (`(12, "lundi")` convient, mais pas `(1, [2])`, qui contient un tableau). Le modèle mémoire l’explique : le dictionnaire range chaque valeur *à une place calculée à partir de la clé*. Si la clé pouvait **changer** après coup (comme un tableau mutable), cette place ne correspondrait plus à rien et la valeur serait **introuvable**. D’où l’exigence d’une clé **figée**.
 
 !!! curieux "Pour les curieux (facultatif) — Copier un dictionnaire"
 
@@ -619,7 +626,7 @@ moyenne = total / len(age)         # moyenne des ages
 | Fil rouge (référence) | une variable est une **flèche** vers un objet |
 | Alias vs copie | `b = a` $\to$ même objet ; `[x for x in a]` / `a[:]` $\to$ vraie copie |
 | Piège des matrices | `[[0]*p]*n` partage une seule ligne ; utiliser une **compréhension** |
-| Clé de dictionnaire | doit être **immuable** : p-uplet oui, tableau non |
+| Clé de dictionnaire | doit être **immuable** : p-uplet (d’éléments immuables) oui, tableau non |
 
 !!! situation "Retour à la situation de départ"
 
@@ -637,7 +644,7 @@ moyenne = total / len(age)         # moyenne des ages
 
 - **Vouloir modifier un p-uplet.** Un `tuple` est **immuable** ; une liste est mutable.
 
-- **Clé de dictionnaire mutable.** Une clé doit être **immuable** (un p-uplet oui, une liste non).
+- **Clé de dictionnaire mutable.** Une clé doit être **immuable** (un p-uplet d’éléments immuables oui, une liste non).
 
 - **Confondre indice et clé.** On accède à une liste par **indice** ($0, 1, 2\dots$), à un dictionnaire par **clé**.
 

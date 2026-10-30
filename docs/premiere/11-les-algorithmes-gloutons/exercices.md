@@ -62,7 +62,7 @@ Répondre et justifier en une phrase.
 
     **a) V**. \; **b) F** : un glouton ne revient *jamais* sur un choix. \; **c) F** : il n’est pas toujours optimal. \; **d) V** : il est en général très rapide (un seul choix par étape).
 
-    <span class="erreurfreq">▷ Erreur fréquente.</span> croire qu’un algorithme rapide et « raisonnable » donne forcément la meilleure solution : le système {1, 6, 10} de l’exercice 6 suffit à le contredire.
+    <span class="erreurfreq">▷ Erreur fréquente.</span> croire qu’un algorithme rapide et « raisonnable » donne forcément la meilleure solution : le système {1, 5, 8} de l’exercice 6 suffit à le contredire.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Les ingrédients <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-3 }
 
@@ -150,7 +150,7 @@ def rendre(somme):
 
 <span class="essentiel">• essentiel</span>
 
-Dans un pays imaginaire, les pièces valent **1, 6 et 10**. On rend la somme **12**.
+Dans un pays imaginaire, les pièces valent **1, 5 et 8**. On rend la somme **10**.
 
 1.  Quelle solution donne l’algorithme glouton (plus grande pièce d’abord) ? Combien de pièces ?
 
@@ -160,17 +160,17 @@ Dans un pays imaginaire, les pièces valent **1, 6 et 10**. On rend la somme **1
 
     ??? pouce "Coup de pouce"
 
-        Pour b), chercher une solution qui n’utilise pas la pièce de 10.
+        Pour b), chercher une solution qui n’utilise pas la pièce de 8.
 
 ??? corrige "Corrigé"
 
-    **a)** Glouton : $10$, puis $1$, puis $1$ $\to$ `[10, 1, 1]`, soit **3 pièces**. **b)** Oui : $6 + 6$, soit **2 pièces**. **c)** Le glouton **n’est pas optimal** pour le système {1, 6, 10} : ce système n’est **pas canonique**.
+    **a)** Glouton : $8$, puis $1$, puis $1$ $\to$ `[8, 1, 1]`, soit **3 pièces**. **b)** Oui : $5 + 5$, soit **2 pièces**. **c)** Le glouton **n’est pas optimal** pour le système {1, 5, 8} : ce système n’est **pas canonique**.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> en conclure que le glouton ne marche jamais : il est optimal pour les systèmes canoniques, comme celui des euros ; un contre-exemple montre seulement qu’il n’est pas optimal *pour ce système*.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Quand le glouton échoue carrément <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-7 }
 
-Les pièces valent **2 et 3**. On veut rendre **4**.
+Les pièces valent **4 et 5**. On veut rendre **8**.
 
 1.  Dérouler l’algorithme glouton. Que se passe-t-il ?
 
@@ -184,7 +184,7 @@ Les pièces valent **2 et 3**. On veut rendre **4**.
 
 ??? corrige "Corrigé"
 
-    **a)** Glouton : il prend $3$… il reste $1$, qu’aucune pièce (2 ou 3) ne permet de rendre : le glouton **échoue** (aucune solution trouvée). **b)** Pourtant $2 + 2 = 4$ : une solution existait. **c)** « Pas optimal » : le glouton trouve *une* solution, mais pas la meilleure (cas {1,6,10}). « Échoue » : le glouton ne trouve *aucune* solution, alors qu’il en existe une (cas {2,3}).
+    **a)** Glouton : il prend $5$… il reste $3$, qu’aucune pièce (4 ou 5) ne permet de rendre : le glouton **échoue** (aucune solution trouvée). **b)** Pourtant $4 + 4 = 8$ : une solution existait. **c)** « Pas optimal » : le glouton trouve *une* solution, mais pas la meilleure (cas {1, 5, 8} de l’exercice 6). « Échoue » : le glouton ne trouve *aucune* solution, alors qu’il en existe une (cas {4, 5}).
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Le rendu de monnaie en désordre <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-8 }
 
@@ -294,7 +294,7 @@ Sac de capacité **4 kg**. Objets : A (valeur 30, 2 kg), B (valeur 20, 2 kg), C 
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Un sac à dos où le glouton se trompe <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-11 }
 
-Sac de capacité **5 kg**. Objets : A (valeur 60, 1 kg), B (valeur 100, 2 kg), C (valeur 120, 3 kg).
+Sac de capacité **6 kg**. Objets : A (valeur 30, 1 kg), B (valeur 60, 3 kg), C (valeur 72, 4 kg).
 
 1.  Appliquer le glouton par rapport valeur/poids. Quelle valeur obtient-on ?
 
@@ -302,11 +302,11 @@ Sac de capacité **5 kg**. Objets : A (valeur 60, 1 kg), B (valeur 100, 2 kg), C
 
     ??? pouce "Coup de pouce"
 
-        Après avoir pris les objets de meilleur rapport, regarder la place qui reste : l’objet suivant y tient-il ? Pour b), comparer toutes les combinaisons qui tiennent dans 5 kg.
+        Après avoir pris les objets de meilleur rapport, regarder la place qui reste : l’objet suivant y tient-il ? Pour b), comparer toutes les combinaisons qui tiennent dans 6 kg.
 
 ??? corrige "Corrigé"
 
-    **a)** Rapports : A $=60$, B $=50$, C $=40$. Glouton : A (1 kg, reste 4, valeur 60), B (2 kg, reste 2, valeur 160), C (3 kg) ne rentre pas $\to$ **valeur 160**. **b)** La meilleure combinaison est **B $+$ C** (2$+$<!-- -->3 $=$ 5 kg, valeur **220**). Le glouton se trompe de **60**.
+    **a)** Rapports : A $=30$, B $=20$, C $=18$. Glouton : A (1 kg, reste 5, valeur 30), B (3 kg, reste 2, valeur 90), C (4 kg) ne rentre pas $\to$ **valeur 90**. **b)** Combinaisons qui tiennent dans 6 kg : A (30), B (60), C (72), A $+$ B (4 kg, 90), A $+$ C (5 kg, **102**) ; B $+$ C pèse 7 kg. La meilleure est **A $+$ C**, valeur **102**. Le glouton se trompe de **12**.
 
 ### Le plus proche voisin (voyageur)
 

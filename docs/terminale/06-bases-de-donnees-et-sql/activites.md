@@ -57,11 +57,11 @@ Le secrétariat d’un lycée note tout dans un seul tableau, partagé entre plu
 
     3.  Lignes 1 et 3 : deux classes différentes, donc *probablement* deux élèves homonymes… mais rien ne le garantit (Léa a pu changer de classe). Lignes 1 et 4 : même classe, sans doute la même élève, mais là encore on **devine**. Pour en être sûr, il faudrait un **numéro unique** par élève.
 
-    4.  $4$ cases (lignes 1, 2, 4, 5). Si l’on en oublie une, le tableau donne deux salles différentes pour la même classe : il devient **incohérent**. (Le nom savant, hors programme : *anomalie de mise à jour*.)
+    4.  $4$ cases (lignes 1, 2, 4, 5). Si l’on en oublie une, le tableau donne deux salles différentes pour la même classe : il devient **incohérent**. (Le nom savant, que le cours donnera : *anomalie de mise à jour*.)
 
-    5.  On ne peut l’inscrire qu’en laissant vides les cases Matière, Note et Date, ce qui n’a pas de sens pour une ligne « de note » — ou en inventant une fausse note. Le tableau mélange deux choses : « qui est l’élève » et « quelle note a-t-elle eue ».
+    5.  On ne peut l’inscrire qu’en laissant vides les cases Matière, Note et Date, ce qui n’a pas de sens pour une ligne « de note » — ou en inventant une fausse note. Le tableau mélange deux choses : « qui est l’élève » et « quelle note a-t-elle eue ». (C’est une *anomalie d’insertion*.)
 
-    6.  En effaçant sa seule note, on efface aussi **l’existence** d’Inès Silva et le fait qu’elle est en TNSI2 : le secrétariat ne sait plus qu’elle est inscrite.
+    6.  En effaçant sa seule note, on efface aussi **l’existence** d’Inès Silva et le fait qu’elle est en TNSI2 : le secrétariat ne sait plus qu’elle est inscrite. (C’est une *anomalie de suppression*.)
 
 ### <span class="exo-num">Exercice 2</span> — Deux secrétaires, un seul fichier <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-bases-de-donnees-et-sql-act-1-2 }
 

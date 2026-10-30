@@ -632,7 +632,7 @@ def f(t):                          def g(t):
 
 <span class="duree">≈ 30 min</span>
 
-C’est **l’exercice central** du chapitre. La variance mesure la dispersion : $V = \dfrac{1}{n}\displaystyle\sum_i (x_i - m)^2$, où $m$ est la moyenne.
+C’est **l’exercice central** du chapitre. La variance <span class="horsprog">au-delà du programme</span> mesure la dispersion : $V = \dfrac{(x_0 - m)^2 + (x_1 - m)^2 + \cdots + (x_{n-1} - m)^2}{n}$, où $m$ est la moyenne.
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `moyenne(t)` (un parcours).
 

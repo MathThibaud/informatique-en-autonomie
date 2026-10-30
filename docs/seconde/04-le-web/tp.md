@@ -134,7 +134,7 @@ Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujo
 
     !!! encadre "Synthèse possible"
 
-        Un moteur de recherche **classe** les pages de son index par un algorithme : l’ordre des résultats n’est jamais neutre, et la première page a une valeur commerciale énorme. Parce que quelques moteurs concentrent la plupart des recherches, l’Union européenne **encadre** ce classement sans le dicter : interdiction de favoriser ses propres services (DMA), option sans profilage (DSA), transparence des principaux critères (règlement de 2019), droit au déréférencement (RGPD ; loi n° 1.565 à Monaco). Le débat oppose la **liberté** de l’entreprise et l’**intérêt général** d’un accès loyal à l’information.
+        Un moteur de recherche **classe** les pages de son index par un algorithme : l’ordre des résultats n’est jamais neutre, et la première page a une valeur commerciale énorme. Parce que quelques moteurs concentrent la plupart des recherches, l’Union européenne **encadre** ce classement sans le dicter : interdiction de favoriser ses propres services (DMA), option sans profilage (DSA), transparence des principaux critères (règlement (UE) 2019/1150, art. 5), droit au déréférencement (RGPD ; loi n° 1.565 à Monaco). Le débat oppose la **liberté** de l’entreprise et l’**intérêt général** d’un accès loyal à l’information.
 
 ??? corrige "Corrigé de l'activité"
 
@@ -197,7 +197,7 @@ Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujo
 
     !!! encadre "Synthèse possible"
 
-        Un moteur de recherche **classe** les pages de son index par un algorithme : l’ordre des résultats n’est jamais neutre, et la première page a une valeur commerciale énorme. Parce que quelques moteurs concentrent la plupart des recherches, l’Union européenne **encadre** ce classement sans le dicter : interdiction de favoriser ses propres services (DMA), option sans profilage (DSA), transparence des principaux critères (règlement de 2019), droit au déréférencement (RGPD ; loi n° 1.565 à Monaco). Le débat oppose la **liberté** de l’entreprise et l’**intérêt général** d’un accès loyal à l’information.
+        Un moteur de recherche **classe** les pages de son index par un algorithme : l’ordre des résultats n’est jamais neutre, et la première page a une valeur commerciale énorme. Parce que quelques moteurs concentrent la plupart des recherches, l’Union européenne **encadre** ce classement sans le dicter : interdiction de favoriser ses propres services (DMA), option sans profilage (DSA), transparence des principaux critères (règlement (UE) 2019/1150, art. 5), droit au déréférencement (RGPD ; loi n° 1.565 à Monaco). Le débat oppose la **liberté** de l’entreprise et l’**intérêt général** d’un accès loyal à l’information.
 
 ## Corrigé
 

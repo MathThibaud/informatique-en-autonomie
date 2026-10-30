@@ -157,7 +157,7 @@ print(a, b)   # affiche : 2 1
 
 !!! remarque "Remarque"
 
-    La variable temporaire est **indispensable** : sans elle, la première affectation `a = b` écraserait la valeur de `a`, alors définitivement perdue. C’est l’image des deux verres, l’un d’eau, l’autre de jus : pour intervertir leurs contenus, il faut un **troisième verre vide**.
+    Avec ce que l’on sait pour l’instant, la variable temporaire est **indispensable** : sans elle, la première affectation `a = b` écraserait la valeur de `a`, alors définitivement perdue. C’est l’image des deux verres, l’un d’eau, l’autre de jus : pour intervertir leurs contenus, il faut un **troisième verre vide**. On verra au chapitre *Les types construits* une écriture plus courte, propre à Python.
 
 <span id="cours-01-1" class="ancre"></span>
 

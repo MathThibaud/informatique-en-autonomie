@@ -6,9 +6,9 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *« Vocabulaire de la programmation objet : classes, attributs, méthodes, objets. Écrire la définition d’une classe. Accéder aux attributs et méthodes d’une classe. »* (*on n’aborde pas ici l’héritage ni le polymorphisme*.) *« Paradigmes de programmation. Distinguer sur des exemples les paradigmes impératif, fonctionnel et objet. Choisir le paradigme de programmation selon le champ d’application d’un programme. »* |
+| **Programme (BO)** | *« Vocabulaire de la programmation objet : classes, attributs, méthodes, objets. Écrire la définition d’une classe. Accéder aux attributs et méthodes d’une classe. »* (*on n’aborde pas ici l’héritage ni le polymorphisme*.) *« Paradigmes de programmation. Distinguer sur des exemples les paradigmes impératif, fonctionnel et objet. Choisir le paradigme de programmation selon le champ d’application d’un programme. »* *« Modularité. Utiliser des API (Application Programming Interface) ou des bibliothèques. Exploiter leur documentation. Créer des modules simples et les documenter. »* |
 | **Prérequis** | fonctions et paramètres, variables, listes, dictionnaires, chaînes de caractères. |
-| **Objectifs** | *savoir écrire* une classe (attributs, méthodes, constructeur) et *savoir l’utiliser* (créer des instances, appeler des méthodes) ; *distinguer* les paradigmes impératif, objet et fonctionnel. |
+| **Objectifs** | *savoir écrire* une classe (attributs, méthodes, constructeur) et *savoir l’utiliser* (créer des instances, appeler des méthodes) ; *distinguer* les paradigmes impératif, objet et fonctionnel ; *utiliser* une bibliothèque et sa documentation, *créer* un module documenté. |
 
 !!! situation "Situation de départ"
 
@@ -357,7 +357,7 @@ print(compte.solde())                   # affiche 120
 
     Les sujets de bac fournissent souvent des méthodes `get_…` (accesseurs) et `set_…` (mutateurs). Faut-il s’en servir partout ?
 
-    - **Depuis l’extérieur de la classe** (une autre classe, le programme principal) : **toujours** par les méthodes. C’est même obligatoire quand l’énoncé demande de « ne pas accéder directement aux attributs » (*ex.* Asie 2024, jour 1 : la méthode `couvre` de la classe `Antenne` reçoit une `Maison`, elle doit donc lire sa position par `get_pos_maison()`).
+    - **Depuis l’extérieur de la classe** (une autre classe, le programme principal) : **toujours** par les méthodes. C’est même obligatoire quand l’énoncé demande de « ne pas accéder directement aux attributs » (*ex.* une méthode de la classe `Livreur` qui reçoit un objet `Adresse` muni de l’accesseur `get_ville()` écrit `adresse.get_ville()`, et non `adresse._ville`).
 
     - **À l’intérieur de la classe** : écrire `self.attribut` est **correct**, et c’est l’usage le plus courant (`deposer` et `retirer` ci-dessus écrivent `self._solde`). L’encapsulation sépare la classe de l’*extérieur*, pas une méthode de son propre objet : ce sont justement les méthodes de la classe qui garantissent que l’état reste cohérent. Cela vaut aussi pour un autre objet *de la même classe* (`autre.x` dans `Point.distance`).
 
@@ -556,6 +556,99 @@ On interroge alors : `?- fact(4, X).` et Prolog trouve `X = 24`.
 
 <span class="afaire">▶ Exercices d'application :</span> exercice **[15](exercices.md#ex-02-15)** (choisir le bon paradigme)
 
+## Modularité : utiliser et créer des modules
+
+Un vrai programme compte des milliers de lignes : on ne l’écrit pas d’un seul bloc. On le découpe en **modules**, des fichiers `.py` qui regroupent chacun les fonctions et les classes d’un même thème. Vous vous en servez déjà : `import random` ou `import math` chargent des modules écrits par d’autres.
+
+### Utiliser une bibliothèque et lire sa documentation
+
+!!! definition "Définition 8 — Module, bibliothèque, API"
+
+    Un **module** est un fichier Python que l’on peut **importer** dans un autre programme ; une **bibliothèque** est un ensemble de modules (la bibliothèque standard de Python en compte des centaines). L’**API** (*Application Programming Interface*, interface de programmation) d’une bibliothèque est la liste de ce qu’elle met à disposition (fonctions, classes, constantes) avec leur **spécification** : ce que chacune reçoit, ce qu’elle renvoie, les erreurs qu’elle peut lever.
+
+```python
+import math                   # on importe tout le module...
+print(math.sqrt(2))           # ... et on prefixe : math.sqrt
+
+from random import randint    # on importe un seul nom...
+de = randint(1, 6)            # ... utilisable sans prefixe
+```
+
+Pour utiliser une fonction, on n’a pas besoin de son code : sa **documentation** suffit. Dans la console, `help(nom)` affiche la docstring de la fonction, du module ou de la classe ; la documentation complète de Python est en ligne (`docs.python.org`).
+
+```text
+>>> help(randint)
+randint(a, b) method of random.Random instance
+    Return random integer in range [a, b], including both end points.
+```
+
+!!! exemple "Exemple — D’après l’aide ci-dessus, randint(1, 6) peut-elle renvoyer 6 ?"
+
+    ??? corrige "Correction"
+
+        Oui : la documentation dit « *including both end points* », les deux bornes sont incluses. `randint(1, 6)` renvoie un entier de 1 à 6, comme un dé, alors que `range(1, 6)` s’arrête à 5. Lire la documentation évite ce genre de piège.
+
+!!! remarque "Remarque"
+
+    Une API, c’est l’**encapsulation** à l’échelle d’une bibliothèque : on se sert des fonctions par leur spécification, sans regarder l’intérieur. Les auteurs peuvent alors améliorer leur code sans casser les programmes de ceux qui l’utilisent.
+
+### Créer et documenter son propre module
+
+Créer un module, c’est simplement écrire un fichier `.py`. Rangeons la classe `CompteBancaire` dans un fichier `banque.py` :
+
+```python
+"""Module banque : des comptes bancaires simples."""
+
+class CompteBancaire:
+    """Un compte avec un titulaire et un solde."""
+
+    def __init__(self, titulaire, solde_initial):
+        self.titulaire = titulaire
+        self._solde = solde_initial
+
+    def solde(self):
+        """Renvoie le solde du compte."""
+        return self._solde
+
+    def deposer(self, montant):
+        """Ajoute montant (> 0) au solde ; ValueError sinon."""
+        if montant <= 0:
+            raise ValueError("montant invalide")
+        self._solde = self._solde + montant
+
+if __name__ == "__main__":    # tests : seulement si on lance banque.py
+    c = CompteBancaire("Alice", 100)
+    c.deposer(50)
+    assert c.solde() == 150
+    print("Tests du module banque : OK")
+```
+
+Un autre programme, placé **dans le même dossier**, l’utilise comme n’importe quel module :
+
+```python
+from banque import CompteBancaire
+
+compte = CompteBancaire("Bob", 20)
+compte.deposer(5)
+print(compte.solde())          # affiche 25
+```
+
+!!! regle "Règle 5 — Un module simple et documenté"
+
+    - **Un thème par module**, avec un nom clair : `banque.py`, `outils.py`…
+
+    - **Une docstring** en tête du module et dans chaque fonction ou méthode : ce qu’elle reçoit, ce qu’elle renvoie, les erreurs qu’elle lève. C’est elle que `help(banque)` affichera à l’utilisateur.
+
+    - **Les tests** sous `if __name__ == "__main__":`. Ce bloc s’exécute quand on lance le fichier lui-même, mais **pas** quand on l’importe : le programme qui écrit `from banque import …` ne voit pas les tests s’exécuter.
+
+!!! encadre "Au bac"
+
+    Un sujet peut demander de « coder, dans un module que l’on nommera `outils`, quelques fonctions » (Antilles-Guyane 2026, jour 1), de dire quelle fonction d’un module importé (`time`, `csv`) un programme utilise (Amérique du Nord 2024, jour 1), ou de lire la documentation d’une fonction pour s’en servir. Dans tous les cas : lire la spécification, puis respecter les noms imposés.
+
+<span id="cours-02-24" class="ancre"></span>
+
+<span class="afaire">▶ Exercices d'application :</span> exercice **[24](exercices.md#ex-02-24)** (créer et documenter un module)
+
 ## Ouverture
 
 La programmation objet n’est pas une curiosité isolée : elle servira à **implémenter les structures de données** de toute la fin de l’année.
@@ -583,6 +676,7 @@ La programmation objet n’est pas une curiosité isolée : elle servira à **im
 | Encapsulation | cacher l’état, n’y toucher que par des méthodes (`_attribut`) |
 | Paradigmes | impératif / objet / fonctionnel : styles au choix, combinables |
 | Fonction pure | résultat dépendant des seuls paramètres, sans effet de bord |
+| Module / API | un fichier `.py` que l’on importe / ce qu’il offre, avec sa spécification |
 
 !!! situation "Retour à la situation de départ"
 
@@ -624,7 +718,9 @@ La programmation objet n’est pas une curiosité isolée : elle servira à **im
 
 - lire et **compléter** une classe donnée (type bac) $\to$ ex. [16](exercices.md#ex-02-16), [18](exercices.md#ex-02-18) ;
 
-- reconnaître les **paradigmes** (impératif, objet, fonctionnel) et ce qu’est une **fonction pure** $\to$ ex. [1](exercices.md#ex-02-1), [2](exercices.md#ex-02-2), [15](exercices.md#ex-02-15).
+- reconnaître les **paradigmes** (impératif, objet, fonctionnel) et ce qu’est une **fonction pure** $\to$ ex. [1](exercices.md#ex-02-1), [2](exercices.md#ex-02-2), [15](exercices.md#ex-02-15) ;
+
+- utiliser un **module** et sa **documentation** (`import`, `help`), créer un module **documenté** $\to$ ex. [24](exercices.md#ex-02-24).
 
 ## Vers le Grand Oral
 

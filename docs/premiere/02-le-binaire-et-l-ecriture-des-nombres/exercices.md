@@ -40,7 +40,7 @@
 
 <span class="essentiel">• essentiel</span>
 
-\[ à la main \]  Convertir en base 10 : $\texttt{1011}_2$ ; $\texttt{11001}_2$ ; $\texttt{10111001}_2$.0
+\[ à la main \]  Convertir en base 10 : $\texttt{1011}_2$ ; $\texttt{11001}_2$ ; $\texttt{10011101}_2$.0
 
 ??? pouce "Coup de pouce"
 
@@ -54,7 +54,7 @@
 
     - $\texttt{11001}_2 = 16 + 8 + 1 = 25$ ;
 
-    - $\texttt{10111001}_2 = 128 + 32 + 16 + 8 + 1 = 185$.
+    - $\texttt{10011101}_2 = 128 + 16 + 8 + 4 + 1 = 157$.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> attribuer les poids en partant de la gauche : c’est le bit de **droite** qui pèse $1$. Le bit de gauche de `11001` pèse $16$, pas $1$.
 
@@ -571,17 +571,21 @@ Un élève demande à un assistant d’IA : « Comment écrit-on $-5$ sur 8 bits
 
 1.  Convertir en binaire : $0{,}75$ et $6{,}25$.
 
-2.  Convertir en base 10 : $\texttt{101,101}_2$.0
+2.  Convertir en base 10 : $\texttt{101,101}_2$.
+
+3.  Appliquer la méthode des multiplications par 2 à $\frac{1}{3}$ (on part de $\frac{1}{3}$, puis $\frac{2}{3}$…) : écrire les premiers chiffres après la virgule. Que remarque-t-on ? Que doit faire une machine qui veut stocker $\frac{1}{3}$ ?0
 
     ??? pouce "Coup de pouce"
 
-        Traiter séparément la partie entière (méthode habituelle) et la partie après la virgule : la multiplier par 2, noter le chiffre avant la virgule, recommencer. Après la virgule, les poids sont $\frac{1}{2}$, $\frac{1}{4}$, $\frac{1}{8}$…
+        Traiter séparément la partie entière (méthode habituelle) et la partie après la virgule : la multiplier par 2, noter le chiffre avant la virgule, recommencer. Après la virgule, les poids sont $\frac{1}{2}$, $\frac{1}{4}$, $\frac{1}{8}$… Pour $\frac{1}{3}$, calculer avec des fractions plutôt qu’avec des décimaux.
 
 ??? corrige "Corrigé"
 
     **1.** $0{,}75 = \texttt{0,11}_2$ (car $0{,}75 \times 2 = 1{,}5$ puis $0{,}5 \times 2 = 1{,}0$) ; $6{,}25 = \texttt{110,01}_2$ (car $6 = \texttt{110}$ et $0{,}25 = \texttt{0,01}$).
 
     **2.** $\texttt{101,101}_2 = 4 + 1 + \tfrac{1}{2} + \tfrac{1}{8} = 5{,}625$.
+
+    **3.** $\tfrac{1}{3} \times 2 = \mathbf{0} + \tfrac{2}{3}$ ; $\tfrac{2}{3} \times 2 = \mathbf{1} + \tfrac{1}{3}$ ; puis on retrouve $\tfrac{1}{3}$ : les chiffres `0`, `1` se répètent sans fin, $\tfrac{1}{3} = \texttt{0,010101}\ldots_2$. Comme $0{,}1$ (cours), $\tfrac{1}{3}$ n’a pas d’écriture binaire finie : une machine n’en stocke qu’une valeur **arrondie** sur un nombre fini de bits.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> lire les chiffres après la virgule de bas en haut, comme les restes de la partie entière : ceux-là se lisent dans l’**ordre** où on les obtient.
 
@@ -803,3 +807,59 @@ ord("i") - ord("H")
     **3.** `bin(256 - 1)`, `bin(256 - 37)`, `bin(256 - 100)` affichent `’0b11111111’`, `’0b11011011’`, `’0b10011100’`.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> appliquer « inverser, ajouter 1 » à un nombre positif comme $77$, ou à un mot qui commence par `0` comme `01011010` : la méthode ne concerne que les négatifs.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 28</span> — Combien de bits ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-28 }
+
+<span class="essentiel">• essentiel</span>
+
+\[ à la main \] 
+
+1.  Combien de bits faut-il pour écrire en binaire l’entier $500$ ? l’entier $70\,000$ ? Justifier en encadrant chaque nombre entre deux puissances de 2.
+
+2.  Deux entiers positifs $a$ et $b$ s’écrivent chacun sur **12 bits** au plus, c’est-à-dire $a < 2^{12}$ et $b < 2^{12}$. Combien de bits faut-il, au plus, pour écrire leur **somme** $a + b$ ? leur **produit** $a \times b$ ? Justifier.
+
+3.  \[ sur machine \]  Vérifier avec $a = b = 4095$, le plus grand entier de 12 bits : calculer `a + b` et `a * b`, puis compter les bits avec `len(bin(…)) - 2` (le `- 2` retire le préfixe `0b`).0
+
+    ??? pouce "Coup de pouce"
+
+        Un entier $N$ s’écrit sur $k$ bits, où $k$ est le plus petit entier tel que $2^k > N$. Pour la somme : $a + b < 2^{12} + 2^{12}$, que l’on écrit comme une seule puissance de 2. Pour le produit : $2^{12} \times 2^{12} = 2^{?}$.
+
+??? corrige "Corrigé"
+
+    **1.** $2^8 = 256 \leqslant 500 < 512 = 2^9$ : il faut **9 bits** ($500 = \texttt{111110100}_2$). $2^{16} = 65\,536 \leqslant 70\,000 < 131\,072 = 2^{17}$ : il faut **17 bits**.
+
+    **2.** Somme : $a + b < 2^{12} + 2^{12} = 2 \times 2^{12} = 2^{13}$, donc $a + b$ s’écrit sur **13 bits** au plus (un de plus, à cause de la retenue finale). Produit : $a \times b < 2^{12} \times 2^{12} = 2^{24}$, donc **24 bits** au plus (on additionne les nombres de bits).
+
+    **3.** `4095 + 4095` vaut `8190` et `len(bin(8190)) - 2` vaut `13` ; `4095 * 4095` vaut `16769025` et `len(bin(16769025)) - 2` vaut `24` (en effet $2^{23} \leqslant 16\,769\,025 < 2^{24} = 16\,777\,216$). Les bornes de la question 2 sont donc atteintes.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> croire qu’un produit de deux nombres de 12 bits tient sur 12 ou 13 bits : multiplier les nombres revient à *additionner* les nombres de bits.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 29</span> — Convertir un texte d’un encodage à l’autre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-29 }
+
+\[ sur machine \]  Un ancien logiciel a enregistré le mot `"café"` en **Latin-1** (ISO-8859-1). On simule ce fichier en console :
+
+```python
+octets = "café".encode("latin-1")
+```
+
+1.  Afficher `octets` et `len(octets)`. Combien d’octets occupe ce mot en Latin-1 ? Quel octet (en hexadécimal) code le `é` ?
+
+2.  On veut **convertir** ce texte en UTF-8. Exécuter `texte = octets.decode("latin-1")`, puis `nouveaux = texte.encode("utf-8")`. Combien d’octets maintenant ? Pourquoi un de plus ?
+
+3.  Que se passe-t-il si l’on écrit directement `octets.decode("utf-8")` ? En déduire la méthode pour convertir un fichier texte d’un encodage à un autre.
+
+4.  *(Si votre éditeur le permet.)* Enregistrer un fichier texte contenant `Noël à Monaco` avec l’encodage *ISO-8859-1* (menu d’enregistrement ou de l’encodage), puis le rouvrir en *UTF-8*. Qu’observe-t-on ? Comment le convertir proprement ?0
+
+    ??? pouce "Coup de pouce"
+
+        `decode` transforme des octets en caractères, `encode` des caractères en octets. Pour convertir, il faut d’abord lire les octets avec **leur** encodage d’origine, puis réécrire les caractères obtenus dans le nouvel encodage. Combien d’octets UTF-8 pour une lettre accentuée ?
+
+??? corrige "Corrigé"
+
+    **1.** `octets` s’affiche `b’caf\xe9’` et `len(octets)` vaut `4` : en Latin-1, chaque caractère occupe **un octet**, et `é` est l’octet `E9` ($233$).
+
+    **2.** `texte` vaut `’café’` (les octets ont été lus avec leur bon encodage) ; `nouveaux` s’affiche `b’caf\xc3\xa9’` : **5 octets**, car en UTF-8 le `é` s’écrit sur deux octets (`C3 A9`), les trois lettres ASCII restant sur un octet.
+
+    **3.** Python lève une erreur `UnicodeDecodeError` : l’octet `E9` seul n’est pas une suite UTF-8 valide. Pour convertir un fichier, on le **décode avec son encodage d’origine** (ici Latin-1), puis on **réencode** les caractères obtenus dans le nouvel encodage (ici UTF-8). Décoder avec le mauvais encodage donne une erreur ou du charabia (exercice 24).
+
+    **4.** Le fichier rouvert en UTF-8 affiche des caractères de remplacement (souvent un losange contenant un point d’interrogation, ou un simple `?`) à la place de `ë` et `à` : leurs octets Latin-1 ne forment pas de l’UTF-8 valide. Pour le convertir, on le rouvre en précisant l’encodage *ISO-8859-1*, puis on l’enregistre en *UTF-8*.

@@ -22,11 +22,11 @@
 
 On cherche dans le tableau trié `tab = [3, 8, 12, 19, 25, 31, 40, 42, 55, 60, 71]`.
 
-1.  Donner, dans l’ordre, les valeurs comparées lors de la recherche de `40`. Combien de comparaisons ?
+1.  Donner, dans l’ordre, les valeurs du milieu examinées lors de la recherche de `40`. Combien de valeurs du milieu sont examinées ?
 
 2.  Même question pour la recherche de `7` (absent). Comment sait-on qu’il est absent ?
 
-3.  Sur un tableau trié de $1000$ valeurs, combien de comparaisons au maximum ? (donner un ordre de grandeur, en justifiant par les divisions par $2$).
+3.  Sur un tableau trié de $1000$ valeurs, combien de valeurs du milieu sont examinées au maximum ? (donner un ordre de grandeur, en justifiant par les divisions par $2$).
 
 ??? pouce "Coup de pouce"
 
@@ -48,7 +48,7 @@ On cherche dans le tableau trié `tab = [3, 8, 12, 19, 25, 31, 40, 42, 55, 60, 7
 
     - `g=6, d=7, m=6` : `tab[6]=40` : **trouvé**.
 
-    Valeurs comparées : `31`, `55`, `40` $\rightarrow$ **3 comparaisons**.
+    Valeurs du milieu examinées : `31`, `55`, `40` $\rightarrow$ **3 valeurs**.
 
     **2.** Recherche de `7` (absent) :
 
@@ -60,11 +60,11 @@ On cherche dans le tableau trié `tab = [3, 8, 12, 19, 25, 31, 40, 42, 55, 60, 7
 
     - `g=1, d=1, m=1` : `8 > 7` $\rightarrow$ `d=0`.
 
-    Maintenant `g=1 > d=0` : l’intervalle de recherche est **vide**, donc `7` est **absent**. Valeurs comparées : `31`, `12`, `3`, `8` $\rightarrow$ **4 comparaisons**.
+    Maintenant `g=1 > d=0` : l’intervalle de recherche est **vide**, donc `7` est **absent**. Valeurs du milieu examinées : `31`, `12`, `3`, `8` $\rightarrow$ **4 valeurs**.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Garder le milieu dans la zone (`g = 5` au lieu de `g = 6`) : l’élément du milieu vient d’être comparé, on l’exclut. Sinon, la zone peut cesser de rétrécir et la recherche ne s’arrête plus.
 
-    **3.** À chaque comparaison, la zone de recherche est **divisée par deux**. Partant de $1000$, on atteint $1$ en une dizaine d’étapes : $2^{10} = 1024 > 1000$, donc **au plus $\mathbf{10}$ comparaisons** (coût logarithmique $\log_2 n$).
+    **3.** À chaque valeur du milieu examinée, la zone de recherche est **divisée par deux**. Partant de $1000$, on atteint $1$ en une dizaine d’étapes : $2^{10} = 1024 > 1000$, donc **au plus $\mathbf{10}$ valeurs du milieu examinées** (coût logarithmique $\log_2 n$). *(Le code du cours peut faire jusqu’à deux tests `==` et `<` par valeur examinée : on compte les étapes, pas chaque test.)*
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Maximum d’un tableau par diviser pour régner <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-2 }
 
@@ -483,7 +483,9 @@ On montre que le coût en temps dans le pire des cas du tri de Stooge est de l�
 
     ```python
     def echange(tab, i, j):
-        tab[i], tab[j] = tab[j], tab[i]
+        temp = tab[i]          # variable temporaire
+        tab[i] = tab[j]
+        tab[j] = temp
     ```
 
     **2.** Deux premiers tiers : de `i` à `j - k` ; deux derniers tiers : de `i + k` à `j` :
@@ -507,7 +509,7 @@ On montre que le coût en temps dans le pire des cas du tri de Stooge est de l�
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Calculer `k = (5 - 0) // 3 = 1` : la formule compte les **éléments** de l’indice `i` à l’indice `j` inclus, soit `j - i + 1 = 6`, d’où `k = 2`.
 
-    **5.** Niveau 1 : $3$ appels ; niveau 2 : $3 \times 3 = 9$ appels ; niveau 3 : $9 \times 3 = 27$ appels (sur deux ou trois éléments, ces appels n’ont plus d’enfants lorsque `j - i = 1`). Total : $3 + 9 + 27 = \mathbf{39}$ appels récursifs.
+    **5.** Niveau 1 : $3$ appels ; niveau 2 : $3 \times 3 = 9$ appels ; niveau 3 : $9 \times 3 = 27$ appels ; ces $27$ appels portent tous sur deux éléments (`j - i = 1`) : ils n’ont pas d’enfants. Total : $3 + 9 + 27 = \mathbf{39}$ appels récursifs.
 
     **6.** Sur les arêtes partant de la racine, `k = 2` ; sur celles partant du niveau 1 (sous-tableaux de $4$ éléments), `k = 1`.
 
@@ -526,7 +528,7 @@ On montre que le coût en temps dans le pire des cas du tri de Stooge est de l�
     | `triStooge(A,1,3)` |   `[2, 4, 6, 5]`    |   `[2, 4, 5, 6]`    |
     | `triStooge(A,0,2)` |   `[2, 4, 5, 6]`    |   `[2, 4, 5, 6]`    |
 
-    **8.** Le **tri fusion**, de coût $n \log_2 n$ dans le pire des cas, est strictement meilleur que $n^{8/3}$ (et même les tris par insertion ou par sélection, de coût $n^2$, font mieux que le tri de Stooge).
+    **8.** Le **tri fusion**, de coût $n \log_2 n$ dans le pire des cas, est strictement meilleur que $n^{8/3}$ (l’énoncé arrondit : l’exposant exact est $\log 3 / \log 1{,}5 \approx 2{,}71$, ce qui ne change pas la conclusion ; et même les tris par insertion ou par sélection, de coût $n^2$, font mieux que le tri de Stooge).
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 8</span> — L’élément absolument majoritaire *(d’après Asie 2024, jour 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-8 }
 

@@ -86,11 +86,24 @@
 
     Question 4
 
-    *Compléter `comparaisons_horspool`, exécuter `comparer()` et commenter.*
+    *Compléter `comparaisons_naive` et `comparaisons_horspool`, exécuter `comparer()` et commenter.*
 
-    On reprend la boucle de `horspool` corrigée, en comptant chaque comparaison, y compris celle qui échoue :
+    On reprend la boucle de `recherche_naive`, puis celle de `horspool` corrigée, en comptant chaque comparaison, y compris celle qui échoue :
 
     ```python
+    def comparaisons_naive(motif, texte):
+        n = len(texte)
+        m = len(motif)
+        nb = 0
+        for i in range(n - m + 1):
+            j = 0
+            while j < m and texte[i + j] == motif[j]:
+                nb = nb + 1                # comparaison reussie
+                j = j + 1
+            if j < m:
+                nb = nb + 1                # la comparaison qui a echoue
+        return nb
+
     def comparaisons_horspool(motif, texte):
         n = len(texte)
         m = len(motif)
@@ -175,7 +188,7 @@ La fonction `horspool(motif, texte)` fournie programme cet algorithme, mais le t
 
 Question 4
 
-La fonction `comparaisons_naive` renvoie le nombre de comparaisons de caractères effectuées par la méthode naïve. Compléter de même la fonction `comparaisons_horspool` (on compte chaque comparaison entre un caractère du texte et un caractère du motif). Tester avec `test_comparaisons`, puis exécuter `comparer()`. Commenter les résultats obtenus pour chacun des trois cas.
+Compléter les fonctions `comparaisons_naive` et `comparaisons_horspool`, qui renvoient le nombre de comparaisons de caractères effectuées par chacune des deux méthodes (on compte chaque comparaison entre un caractère du texte et un caractère du motif, y compris celle qui échoue). Tester avec `test_comparaisons`, puis exécuter `comparer()`. Commenter les résultats obtenus pour chacun des trois cas.
 
 ### Description du dossier
 
@@ -267,11 +280,24 @@ Le dossier fourni au candidat comporte les éléments suivants :
 
     Question 4
 
-    *Compléter `comparaisons_horspool`, exécuter `comparer()` et commenter.*
+    *Compléter `comparaisons_naive` et `comparaisons_horspool`, exécuter `comparer()` et commenter.*
 
-    On reprend la boucle de `horspool` corrigée, en comptant chaque comparaison, y compris celle qui échoue :
+    On reprend la boucle de `recherche_naive`, puis celle de `horspool` corrigée, en comptant chaque comparaison, y compris celle qui échoue :
 
     ```python
+    def comparaisons_naive(motif, texte):
+        n = len(texte)
+        m = len(motif)
+        nb = 0
+        for i in range(n - m + 1):
+            j = 0
+            while j < m and texte[i + j] == motif[j]:
+                nb = nb + 1                # comparaison reussie
+                j = j + 1
+            if j < m:
+                nb = nb + 1                # la comparaison qui a echoue
+        return nb
+
     def comparaisons_horspool(motif, texte):
         n = len(texte)
         m = len(motif)

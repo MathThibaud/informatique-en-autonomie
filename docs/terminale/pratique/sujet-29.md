@@ -90,16 +90,16 @@
     def premiere_occurrence(tab, x):
         resultat = -1
         debut = 0
-        fin = len(tab) - 1
-        while debut <= fin:
+        fin = len(tab)          # debut inclus, fin exclu
+        while debut < fin:
             milieu = (debut + fin) // 2
-            if tab[milieu] == x:
-                resultat = milieu    # une occurrence, peut-etre pas la premiere :
-                fin = milieu - 1     # on continue a chercher a gauche
-            elif tab[milieu] < x:
+            if tab[milieu] < x:
                 debut = milieu + 1
+            elif tab[milieu] > x:
+                fin = milieu
             else:
-                fin = milieu - 1
+                resultat = milieu    # une occurrence, peut-etre pas la premiere :
+                fin = milieu         # on continue a chercher a gauche
         return resultat
     ```
 
@@ -302,16 +302,16 @@ Le dossier fourni au candidat comporte les éléments suivants :
     def premiere_occurrence(tab, x):
         resultat = -1
         debut = 0
-        fin = len(tab) - 1
-        while debut <= fin:
+        fin = len(tab)          # debut inclus, fin exclu
+        while debut < fin:
             milieu = (debut + fin) // 2
-            if tab[milieu] == x:
-                resultat = milieu    # une occurrence, peut-etre pas la premiere :
-                fin = milieu - 1     # on continue a chercher a gauche
-            elif tab[milieu] < x:
+            if tab[milieu] < x:
                 debut = milieu + 1
+            elif tab[milieu] > x:
+                fin = milieu
             else:
-                fin = milieu - 1
+                resultat = milieu    # une occurrence, peut-etre pas la premiere :
+                fin = milieu         # on continue a chercher a gauche
         return resultat
     ```
 

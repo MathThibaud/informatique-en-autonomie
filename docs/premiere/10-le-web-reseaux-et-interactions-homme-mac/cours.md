@@ -6,7 +6,7 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *Interactions homme-machine sur le Web* : décomposer une **URL** ; distinguer ce qui relève du **client** et du **serveur** ; requêtes **HTTP** `GET`/`POST` ; réaliser et analyser une page **HTML**/**CSS** simple ; rôle de **HTML**, **CSS**, **JavaScript** ; **événements** et modification du document ; **formulaires** ; distinguer ce qui est mémorisé dans le client (**cookies**) et retransmis au serveur. *Réseaux* : notion de **protocole**, **adresse IP**, acheminement par **paquets** (routeurs, commutateurs), modèles **client-serveur** et **pair-à-pair**. |
+| **Programme (BO)** | *Interactions entre l’homme et la machine sur le Web* : identifier les **composants graphiques** d’une page et les **événements** qu’ils traitent (description en HTML, comportement en JavaScript) ; analyser et modifier les méthodes exécutées lors d’un **clic** ; distinguer ce qui est exécuté sur le **client** ou sur le **serveur**, et dans quel ordre ; distinguer ce qui est **mémorisé dans le client** et retransmis au serveur ; reconnaître **quand et pourquoi la transmission est chiffrée** ; analyser un **formulaire** simple, distinguer les transmissions par `GET` et `POST`. *Architectures matérielles (réseau)* : intérêt du découpage des données en **paquets** et de leur **encapsulation** ; protocole du **bit alterné** ; **simuler ou mettre en œuvre un réseau** ; rôle des constituants du **réseau local de l’établissement**. |
 | **Prérequis** | le chapitre *Architecture des ordinateurs et systèmes d’exploitation* (client/serveur $=$ deux machines en réseau) ; savoir écrire une fonction. (→ fiches de révision : ch. 9) |
 | **Objectifs** | comprendre **ce qui se passe** entre un clic et l’affichage d’une page ; **lire une URL** ; savoir ce qu’est un **protocole**, une **adresse IP**, un **paquet** ; distinguer **client** et **serveur** ; écrire une page **HTML**/**CSS** et la rendre **interactive** en JavaScript ; envoyer des données par un **formulaire** (`GET`/`POST`). |
 
@@ -40,7 +40,11 @@ Internet transporte bien d’autres choses que le Web : le courriel, les message
 
 !!! definition "Définition 3 — Adresse IP"
 
-    Pour être jointe sur le réseau, chaque machine possède une **adresse IP** (*Internet Protocol*), son « numéro » unique. En version IPv4, c’est une suite de quatre nombres de 0 à 255, par exemple `193.51.208.14`. C’est l’équivalent d’une **adresse postale** : sans elle, impossible de livrer un message à la bonne machine.
+    Pour être jointe sur le réseau, chaque machine possède une **adresse IP** (*Internet Protocol*), son « numéro » sur ce réseau. En version IPv4, c’est une suite de quatre nombres de 0 à 255, par exemple `193.51.208.14`. C’est l’équivalent d’une **adresse postale** : sans elle, impossible de livrer un message à la bonne machine.
+
+!!! remarque "Remarque — Adresses privées et adresse publique"
+
+    Une adresse **publique** (comme `193.51.208.14`) est unique sur tout Internet. Les machines d’un réseau local (maison, lycée) reçoivent le plus souvent une adresse **privée**, du type `192.168.x.x` ou `10.x.x.x`, unique seulement dans ce réseau : des milliers de maisons utilisent `192.168.1.10` ! Quand un paquet sort vers Internet, la box (le routeur d’accès) remplace l’adresse privée par sa propre adresse publique, puis redistribue la réponse à la bonne machine : c’est la **traduction d’adresses** (NAT).
 
 !!! regle "Règle 1 — On voyage en paquets"
 
@@ -48,9 +52,41 @@ Internet transporte bien d’autres choses que le Web : le courriel, les message
 
 ![](../figures/661773685443ed6e.svg){ .tikz loading=lazy }
 
+!!! regle "Règle 2 — L’encapsulation : des enveloppes dans des enveloppes"
+
+    Pour voyager, les données traversent plusieurs **couches** de protocoles. À l’envoi, chaque couche ajoute devant ce qu’elle reçoit un **en-tête** contenant les informations dont *elle* a besoin, comme on glisse une lettre dans une enveloppe, puis cette enveloppe dans une autre : c’est l’**encapsulation**.
+
+    - **Application** (HTTP) : la requête elle-même, par exemple `GET /index.html` ;
+
+    - **Transport** (TCP) : les **numéros de port** (le service visé : 80 pour HTTP, 443 pour HTTPS) et un **numéro d’ordre** qui permet de remettre les morceaux dans l’ordre et d’en accuser réception ; on obtient un **segment** ;
+
+    - **Réseau** (IP) : les **adresses IP** source et destination ; on obtient un **paquet** ;
+
+    - **Liaison** (Ethernet, Wi-Fi) : les adresses **MAC** (adresse physique de la carte réseau) de la machine émettrice et de la prochaine machine du trajet ; on obtient une **trame**.
+
+    À l’arrivée, chaque couche retire « son » en-tête et passe le reste à la couche du dessus (*désencapsulation*). L’intérêt : chaque couche fait son travail **sans connaître les autres**. HTTP ne sait pas si le paquet passe par un câble, le Wi-Fi ou la fibre ; un routeur n’ouvre l’enveloppe que jusqu’à l’en-tête IP, dont il a besoin pour aiguiller.
+
+![](../figures/208767f89dd49c6e.svg){ .tikz loading=lazy }
+
 !!! definition "Définition 4 — Routeur et commutateur"
 
     Un **routeur** est une machine qui aiguille les paquets : il lit l’adresse IP de destination et choisit vers quel voisin renvoyer le paquet pour le rapprocher du but (comme un centre de tri postal). Un **commutateur** (*switch*) relie les machines d’un *même* réseau local (une salle, une maison). L’ensemble des routeurs interconnectés forme Internet.
+
+!!! encadre "À retenir — Le réseau du lycée"
+
+    Le réseau local d’un établissement assemble quelques constituants, chacun avec un rôle précis :
+
+    - des **commutateurs** (*switchs*), un par salle ou par étage, qui relient par câble les postes d’un même réseau local ;
+
+    - des **points d’accès Wi-Fi**, qui relient sans fil les portables et tablettes à ce même réseau ;
+
+    - des **serveurs** internes : fichiers des élèves, comptes et mots de passe, impression, logiciels ;
+
+    - un **pare-feu**, qui filtre les échanges entre le lycée et l’extérieur (il bloque ce qui n’est pas autorisé) ;
+
+    - un **routeur d’accès** (la « box » de l’établissement), qui relie le réseau local à Internet et traduit les adresses privées en adresse publique.
+
+<span class="afaire">▶ Exercices d'application :</span> activité « Simuler un réseau », à faire sur le simulateur Filius : construire deux réseaux reliés par un routeur, observer l’encapsulation, reconnaître les constituants d’un réseau d’établissement
 
 !!! encadre "À retenir — Trouver l’adresse : le DNS"
 
@@ -76,7 +112,7 @@ Un paquet perdu est *renvoyé* : encore faut-il que l’émetteur **sache** qu�
 
 Si c’est l’**accusé** qui se perd, l’émetteur renvoie un paquet déjà reçu : le récepteur doit pouvoir **reconnaître ce doublon**.
 
-!!! regle "Règle 2 — Le protocole du bit alterné"
+!!! regle "Règle 3 — Le protocole du bit alterné"
 
     On étiquette chaque paquet avec un **seul bit**, qui vaut alternativement `0`, `1`, `0`, `1`… L’accusé renvoie le numéro du paquet attendu ensuite. Les règles :
 
@@ -100,7 +136,7 @@ Le paquet `1` est perdu ; faute d’accusé, l’émetteur le renvoie à l’ide
 
 <span id="cours-10-1" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-10-1) à [5](exercices.md#ex-10-5)** (réseaux : Internet/Web, paquets, bit alterné)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-10-1) à [5](exercices.md#ex-10-5)** (réseaux : Internet/Web, paquets, bit alterné), **[29](exercices.md#ex-10-29)** (encapsulation) et **[30](exercices.md#ex-10-30)** (le réseau d’un lycée)
 
 ## Le modèle client-serveur et l’URL
 
@@ -130,7 +166,7 @@ Sur le Web, votre navigateur est un **client** : il demande des pages à des **s
 
 Une fois le serveur trouvé, client et serveur dialoguent selon le protocole **HTTP** (*HyperText Transfer Protocol*) : le client envoie une **requête**, le serveur renvoie une **réponse**.
 
-!!! regle "Règle 3 — Requête et réponse HTTP"
+!!! regle "Règle 4 — Requête et réponse HTTP"
 
     Une requête contient notamment une méthode et le chemin de la ressource :
 
@@ -158,7 +194,7 @@ Une fois le serveur trouvé, client et serveur dialoguent selon le protocole **H
 
     Le code résume ce qui s’est passé : **200** « OK, voici la ressource » ; **304** « pas modifiée, garde ta version en *cache* » (évite de re-télécharger un fichier inchangé) ; **404** « ressource introuvable » (la fameuse page d’erreur) ; **403** « accès interdit » ; **500** « erreur du serveur ». Les codes qui commencent par **2** sont des succès, par **3** des redirections ou du cache, par **4** des erreurs du client, par **5** des erreurs du serveur.
 
-!!! regle "Règle 4 — Une page $=$ souvent des dizaines de requêtes"
+!!! regle "Règle 5 — Une page $=$ souvent des dizaines de requêtes"
 
     Afficher une page « simple » ne demande presque jamais une seule ressource. Le navigateur reçoit d’abord le HTML, le lit, et y découvre des références vers d’autres fichiers (feuilles `.css`, scripts `.js`, images, polices…) : pour chacun il envoie **une nouvelle requête HTTP**. Une page riche déclenche ainsi facilement plusieurs dizaines d’échanges requête/réponse avant d’être complète.
 
@@ -231,7 +267,7 @@ La ressource renvoyée est le plus souvent un fichier **HTML** (*HyperText Marku
 
 Le **CSS** (*Cascading Style Sheets*) décrit la **présentation** : couleurs, tailles, polices, dispositions. **Principe fondamental : séparer le fond (HTML) de la forme (CSS).** Le même contenu peut ainsi changer d’apparence sans qu’on touche au HTML.
 
-!!! regle "Règle 5 — Une règle CSS"
+!!! regle "Règle 6 — Une règle CSS"
 
     Une règle vise un **sélecteur** (quelles balises) et lui applique des **propriétés**, chacune sous la forme `propriété: valeur;` :
 
@@ -262,7 +298,7 @@ Le **CSS** (*Cascading Style Sheets*) décrit la **présentation** : couleurs, t
 
     Plusieurs règles peuvent viser la même balise. En cas de **conflit**, la plus **spécifique** l’emporte (un `#id` bat une `.classe`, qui bat un nom de balise) ; à spécificité égale, la **dernière** écrite gagne. Les styles « ruissellent » ainsi du général vers le particulier — d’où le nom *Cascading Style Sheets*.
 
-### Disposer les éléments : Flexbox
+### Disposer les éléments : Flexbox <span class="horsprog">au-delà du programme</span>
 
 Par défaut, les blocs (`<div>`, `<p>`, `<li>`…) s’empilent **verticalement**, l’un sous l’autre. Pour les aligner **horizontalement** et les répartir proprement, on transforme leur **conteneur** en « boîte flexible » avec la propriété `display: flex`.
 
@@ -287,7 +323,7 @@ Appliquée à un bloc `<div class="barre">``…</div>`, cette règle aligne **to
 
 HTML structure, CSS met en forme… mais tout cela est **figé**. Le **JavaScript** (JS) est un vrai **langage de programmation**, exécuté **dans le navigateur** (côté **client**), qui rend la page **vivante** : réagir à un clic, modifier le contenu, valider un formulaire…
 
-!!! regle "Règle 6 — Les trois langages du Web"
+!!! regle "Règle 7 — Les trois langages du Web"
 
     **HTML** $=$ le *fond* (structure) ; **CSS** $=$ la *forme* (présentation) ; **JavaScript** $=$ le *comportement* (interaction). Trois rôles distincts, une seule page.
 
@@ -427,7 +463,7 @@ Voici une page **autonome** qui réunit tout : la **structure** (HTML), la **mis
 
 <span id="cours-10-17" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[17](exercices.md#ex-10-17) à [21](exercices.md#ex-10-21)** (JavaScript ; client ou serveur)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[17](exercices.md#ex-10-17) à [21](exercices.md#ex-10-21)** (JavaScript ; client ou serveur) et **[31](exercices.md#ex-10-31)** (programmer une interface d’après un cahier des charges)
 
 ## Les formulaires : envoyer des données
 
@@ -452,7 +488,7 @@ Jusqu’ici le client *recevait*. Un **formulaire** lui permet d’**envoyer** d
 
     L’attribut `type` d’un `<input>` choisit la nature du champ : `text` (texte visible), `password` (masqué), `radio` (un seul choix parmi plusieurs), `checkbox` (cases à cocher, plusieurs choix possibles), `email`, `number`, `date`… Un `<input type="submit">` (ou un `<button type="submit">`) **envoie** le formulaire vers l’`action`.
 
-!!! regle "Règle 7 — GET ou POST pour un formulaire ?"
+!!! regle "Règle 8 — GET ou POST pour un formulaire ?"
 
     - `GET` : les données apparaissent dans l’URL après un `?`, sous la forme `clef=valeur` séparées par `&` (`.../recherche?q=chat&tri=date`). Pratique pour une **recherche** qu’on peut partager ou mettre en favori ; à éviter pour un mot de passe (visible et enregistré dans l’historique).
 
@@ -470,7 +506,7 @@ Jusqu’ici le client *recevait*. Un **formulaire** lui permet d’**envoyer** d
 
 Le protocole HTTP est **sans mémoire** : chaque requête est traitée seule, et le serveur ne sait pas, a priori, que deux requêtes viennent du même visiteur. Pour s’en souvenir (rester connecté, garder un panier, retenir une langue), le serveur demande au navigateur de garder une petite information : un **cookie**.
 
-!!! regle "Règle 8 — Le cookie : mémorisé dans le client, retransmis au serveur"
+!!! regle "Règle 9 — Le cookie : mémorisé dans le client, retransmis au serveur"
 
     - Le serveur envoie le cookie dans un en-tête de sa réponse, `Set-Cookie`, sous la forme `nom=valeur`.
 
@@ -515,8 +551,10 @@ Le protocole HTTP est **sans mémoire** : chaque requête est traitée seule, et
 |:---|:---|
 | Internet vs Web | Internet $=$ le réseau ; le Web $=$ un service (pages $+$ liens) dessus |
 | Protocole | ensemble de règles pour communiquer (ex. HTTP, TCP/IP) |
-| Adresse IP | « numéro » unique d’une machine (ex. `193.51.208.14`) |
+| Adresse IP | « numéro » d’une machine sur le réseau ; publique (unique sur Internet) ou privée (`192.168.x.x`) |
 | Paquets | message découpé, routé indépendamment, réassemblé à l’arrivée |
+| Encapsulation | chaque couche ajoute son en-tête : HTTP $\subset$ TCP (ports) $\subset$ IP (adresses) $\subset$ trame (MAC) |
+| Réseau local | commutateurs, Wi-Fi, serveurs, pare-feu, routeur d’accès (box) |
 | Routeur | aiguille les paquets vers la destination ; le DNS traduit nom $\to$ IP |
 | Client / serveur | le client *demande*, le serveur *fournit* ; P2P $=$ chacun les deux |
 | Fiabilité (bit alterné) | **accusé de réception** $+$ renvoi si perte ; un bit `0`/`1` évite les **doublons** |
@@ -567,6 +605,8 @@ Le protocole HTTP est **sans mémoire** : chaque requête est traitée seule, et
 
 - dire à quoi servent une adresse IP, un paquet, un routeur, le DNS ;
 
+- expliquer l’**encapsulation** (ce que chaque couche ajoute) et le rôle des constituants d’un **réseau local** ;
+
 - **dérouler** le protocole du **bit alterné** (accusé de réception, renvoi, doublon) sur un scénario de perte ;
 
 - **décomposer** une URL et reconnaître une page sécurisée ;
@@ -577,11 +617,11 @@ Le protocole HTTP est **sans mémoire** : chaque requête est traitée seule, et
 
 - écrire et analyser une page **HTML** simple (balises, `id`/`class`) et sa mise en forme **CSS** (sélecteurs `balise`, `#id`, `.classe`) ;
 
-- **disposer** des éléments côte à côte avec **Flexbox** (`display:flex`) ;
+- **disposer** des éléments côte à côte avec **Flexbox** (`display:flex`) <span class="horsprog">au-delà du programme</span> ;
 
 - rendre une page interactive : réagir à un **événement**, **sélectionner** un élément (`querySelector`), **lire un champ** (`.value`) et **modifier le DOM** ;
 
-- assembler HTML $+$ CSS $+$ JavaScript en une **petite page interactive complète** ;
+- assembler HTML $+$ CSS $+$ JavaScript en une **petite page interactive complète**, qui répond à un **cahier des charges** donné ;
 
 - écrire un **formulaire** et choisir sa méthode d’envoi ;
 

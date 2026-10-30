@@ -10,7 +10,7 @@
 
     - **Réflexes** : une figure qui se répète $\rightarrow$ une boucle `for` ; un motif à réutiliser $\rightarrow$ une **fonction** ; un polygone à `n` côtés $\rightarrow$ on tourne de `360 / n`.
 
-    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la charte d’usage de l’IA.
+    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
 ### Premiers tracés
 
@@ -47,7 +47,7 @@
     t.done()
     ```
 
-    On verra dans le cours (§ 2) comment la boucle `for` évite de recopier quatre fois les mêmes lignes.
+    On verra dans le cours (§ II) comment la boucle `for` évite de recopier quatre fois les mêmes lignes.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Le rectangle <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-T-2 }
 
@@ -74,7 +74,7 @@
     t.done()
     ```
 
-    Avec la boucle `for` du § 2, on répétera **deux fois** le couple « long côté / court côté ».
+    Avec la boucle `for` du § II, on répétera **deux fois** le couple « long côté / court côté ».
 
 ### Répéter : la boucle `for`
 

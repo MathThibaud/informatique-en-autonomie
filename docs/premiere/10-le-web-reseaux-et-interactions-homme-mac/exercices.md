@@ -94,7 +94,7 @@ Un paquet part de votre machine (IP `192.168.1.10`) vers un serveur (IP `193.51.
 
 ??? corrige "Corrigé"
 
-    **a)** L’adresse IP de **destination** `193.51.208.14` *et* l’adresse IP **source** `192.168.1.10` (sans elle, le serveur ne saurait pas à qui répondre). **b)** Oui, deux paquets peuvent suivre des **chemins différents** ; un paquet perdu est simplement **renvoyé**.
+    **a)** L’adresse IP de **destination** `193.51.208.14` *et* l’adresse IP **source** `192.168.1.10` (sans elle, le serveur ne saurait pas à qui répondre). *Précision* : `192.168.1.10` est une adresse **privée** ; en sortant vers Internet, la box la remplace par son adresse publique, et c’est à la box que le serveur répond, qui transmet ensuite la réponse à la machine (traduction d’adresses, NAT). **b)** Oui, deux paquets peuvent suivre des **chemins différents** ; un paquet perdu est simplement **renvoyé**.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Dérouler le protocole du bit alterné <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-5 }
 
@@ -267,7 +267,7 @@ Laquelle de ces balises s’écrit **sans** balise fermante ?0
 
     **a)** Titre : `<h1>` ; paragraphe : `<p>` ; lien : `<a>`. **b)** Vers `dessert.html` ; c’est un chemin **relatif** (pas de `/` ni de domaine au début). **c)** Arbre (DOM) :
 
-    ![](../figures/a37fa545b935a51b.svg){ .tikz loading=lazy }
+    ![](../figures/0b18c85f11bf99ae.svg){ .tikz loading=lazy }
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Corriger le HTML <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-12 }
 
@@ -379,7 +379,7 @@ On donne ce fragment :
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  Aligner avec Flexbox <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-16 }
 
-Écrire une page contenant une barre de navigation : un `<div class="barre">` qui contient trois liens (`<a>`) « Accueil », « Cours », « Contact ».
+<span class="horsprog">au-delà du programme</span> Écrire une page contenant une barre de navigation : un `<div class="barre">` qui contient trois liens (`<a>`) « Accueil », « Cours », « Contact ».
 
 1.  Dans le CSS, écrire la règle `.barre` qui aligne les trois liens **horizontalement** avec un espace de `15px` entre eux.
 
@@ -849,3 +849,148 @@ Quelles étaient la méthode, l’adresse `action`, les noms des champs et les v
     a) `GET` : `https://www.site.mc/meteo?ville=Nice`, la valeur est visible dans l’URL. b) `POST` : `https://www.site.mc/connexion` ; `login` et `mdp` voyagent dans le corps de la requête, ils n’apparaissent pas dans l’URL (c’est la bonne méthode pour un mot de passe). c) `GET` : `https://www.site.mc/annonces?cat=velo&prix_max=100`, valeurs visibles. d) Méthode `get` (les valeurs sont dans l’URL), `action="/films"`, deux champs nommés `genre` et `annee`, où l’on avait saisi `comedie` et `2024`.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> croire que `POST` rend les données secrètes : elles ne sont pas dans l’URL, mais restent lisibles dans la requête ; seul `https` les chiffre pendant le transport.
+
+### Réseau : encapsulation et réseau local
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 29</span> — Des enveloppes dans des enveloppes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-29 }
+
+Le portable d’Inès (adresse IP `192.168.1.23`) demande la page `/horaires.html` au serveur web `51.75.20.30`, en `https` (port `443`). Sa carte Wi-Fi a l’adresse MAC `3C:22:FB:10:4A:01` ; la box, première étape du trajet, a l’adresse MAC `F4:CA:E5:81:02:9B`.
+
+1.  Recopier le schéma de la trame envoyée par le portable (quatre cases emboîtées) et écrire dans chaque case les informations qu’elle contient : données HTTP, en-tête TCP, en-tête IP, en-tête MAC.
+
+2.  Un routeur, au milieu du trajet, reçoit cette trame. Quelle information doit-il lire pour décider où envoyer le paquet ? Dans quel en-tête la trouve-t-il ?
+
+3.  D’un routeur à l’autre, l’en-tête MAC change, mais pas les adresses IP. Pourquoi ?
+
+4.  Inès passe du Wi-Fi au réseau 4G de son téléphone. Le navigateur et le serveur doivent-ils changer leur façon d’écrire la requête HTTP ? Quel avantage de l’encapsulation cela illustre-t-il ?
+
+??? pouce "Coup de pouce"
+
+    Chaque couche n’ajoute que ce dont elle a besoin : l’application, la requête ; le transport, les ports ; le réseau, les adresses IP ; la liaison, les adresses MAC du « saut » en cours. Revoir la règle « L’encapsulation » du cours.
+
+??? corrige "Corrigé"
+
+    **a)** De l’extérieur vers l’intérieur :
+
+    | **en-tête MAC** : source `3C:22:FB:10:4A:01`, destination `F4:CA:E5:81:02:9B` (la box) | **en-tête IP** : source `192.168.1.23`, destination `51.75.20.30` | **en-tête TCP** : port destination `443`, numéro d’ordre | **données HTTP** : `GET /horaires.html` (chiffrées, car `https`) |
+    |:---|:---|:---|:---|
+
+    **b)** L’**adresse IP de destination** (`51.75.20.30`), dans l’**en-tête IP** : le routeur ouvre la trame jusqu’à cet en-tête, sans avoir besoin de lire TCP ni HTTP. **c)** Les adresses MAC ne servent qu’à un « saut », d’une machine à la suivante sur un même réseau local : chaque routeur reconstruit une nouvelle trame vers son voisin. Les adresses IP désignent la source et la destination **finales** : elles restent les mêmes de bout en bout (sauf la traduction de l’adresse privée par la box, à la sortie du réseau local). **d)** Non : seule la couche liaison change (4G au lieu du Wi-Fi). La requête HTTP, l’en-tête TCP et l’en-tête IP s’écrivent de la même façon. Chaque couche fait son travail **sans connaître les autres** : c’est l’intérêt de l’encapsulation.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 30</span> — Le réseau d’un lycée <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-30 }
+
+Voici les constituants d’un réseau d’établissement : un **commutateur** par salle, des **points d’accès Wi-Fi**, un **serveur** de fichiers et de comptes, un **pare-feu**, un **routeur d’accès** relié à Internet.
+
+1.  Associer à chaque constituant l’un de ces rôles : (1) relier sans fil les tablettes au réseau ; (2) relier par câble les postes d’une même salle ; (3) filtrer les échanges entre le lycée et l’extérieur ; (4) relier le réseau du lycée à Internet ; (5) stocker les documents des élèves et vérifier les mots de passe.
+
+2.  Un poste de la salle NSI ouvre `fr.wikipedia.org`. Citer, dans l’ordre, les constituants du lycée traversés par la requête avant qu’elle n’atteigne Internet.
+
+3.  Les postes du lycée ont des adresses `10.0.x.x`. Le serveur de Wikipédia voit-il cette adresse ? Expliquer.
+
+4.  Un site de jeux en ligne est inaccessible depuis le lycée, alors qu’il fonctionne à la maison. Quel constituant en est très probablement la cause ?
+
+??? pouce "Coup de pouce"
+
+    Revoir l’encadré « Le réseau du lycée » et la remarque sur les adresses privées et publiques.
+
+??? corrige "Corrigé"
+
+    **a)** Point d’accès Wi-Fi : (1) ; commutateur : (2) ; pare-feu : (3) ; routeur d’accès : (4) ; serveur : (5). **b)** Le **commutateur** de la salle, (éventuellement un commutateur central), le **pare-feu**, puis le **routeur d’accès**, qui envoie la requête vers Internet. **c)** Non. `10.0.x.x` est une adresse **privée**, valable seulement dans le réseau du lycée. Le routeur d’accès la remplace par l’adresse **publique** du lycée (traduction d’adresses, NAT) : Wikipédia ne voit que cette adresse publique, commune à tous les postes du lycée. **d)** Le **pare-feu** : il bloque les échanges que l’établissement n’autorise pas.
+
+### Programmer une interface d’après un cahier des charges
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 31</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  Une inscription à l’atelier robotique <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-31 }
+
+<span class="duree">≈ 40 min</span>
+
+Le club du lycée veut une petite page pour s’inscrire à l’atelier robotique. Programmer cette **interface homme-machine** (IHM) en respectant le **cahier des charges** suivant :
+
+1.  La page affiche le titre « Inscription à l’atelier robotique ».
+
+2.  Elle contient deux champs de saisie de texte : le **prénom** (`id="prenom"`) et la **classe** (`id="classe"`), chacun avec un texte indicatif (`placeholder`).
+
+3.  Un bouton « S’inscrire » appelle, au clic, la fonction `inscrire()`.
+
+4.  Si l’un des deux champs est vide, le paragraphe `id="message"` affiche « Remplir les deux champs. » en **rouge**, et rien d’autre ne change.
+
+5.  Sinon, le message affiche, en **vert**, « Inscription enregistrée : » suivi du prénom ; une ligne « prénom (classe) », par exemple « Léa (1G2) », s’ajoute à la liste `<ul id="inscrits">` ; les deux champs sont vidés.
+
+6.  Tout se passe sans recharger la page.
+
+Rappel de syntaxe : comme en Python, mais avec des accolades, on écrit `if (condition) { … } else { … }` ; l’égalité se teste avec `===` (la différence avec `!==`, comme dans le cours) et le « ou » logique s’écrit `||`.
+
+1.  Lister les **composants graphiques** de cette interface et, pour chacun, l’**événement** qu’il traite (s’il en traite un).
+
+2.  Écrire le code HTML du corps de la page (exigences C1 à C3).
+
+3.  Écrire la fonction JavaScript `inscrire()` (exigences C4 à C6).
+
+4.  Proposer **trois essais** qui vérifient les exigences C4 et C5 (ce qu’on saisit, ce qu’on doit observer), puis les réaliser dans le navigateur.
+
+5.  On recharge la page : la liste des inscrits est de nouveau vide. Pourquoi ? Que faudrait-il ajouter pour que le professeur retrouve toutes les inscriptions ?
+
+??? pouce "Coup de pouce"
+
+    Repartir de la page « Ma liste de courses » du cours : un champ, un bouton, une liste `<ul>` que l’on complète avec `innerHTML`. Il y a ici deux champs à lire, et la couleur du message se change avec `.style.color`.
+
+??? pouce "Coup de pouce 2 (début de solution)"
+
+    `function inscrire() {`  
+    `let prenom = document.querySelector("#prenom").value;`  
+    `let classe = …`  
+    `let message = document.querySelector("#message");`  
+    `if (prenom === "" || classe === "") {`  
+    …
+
+??? corrige "Corrigé"
+
+    **a)** Le titre `<h1>`, le paragraphe `#message` et la liste `#inscrits` servent seulement à **afficher** : ils ne traitent aucun événement. Les deux **champs de saisie** reçoivent la frappe au clavier ; leur contenu est lu par `.value` (ils ne déclenchent pas de fonction ici). Le **bouton** traite l’événement `click` : il appelle `inscrire()`.
+
+    **b)**
+
+    ```html
+    <h1>Inscription à l'atelier robotique</h1>
+    <input type="text" id="prenom" placeholder="Prénom">
+    <input type="text" id="classe" placeholder="Classe (ex. 1G2)">
+    <button onclick="inscrire()">S'inscrire</button>
+    <p id="message"></p>
+    <ul id="inscrits"></ul>
+    <script src="script.js"></script>
+    ```
+
+    **c)**
+
+    ```javascript
+    function inscrire() {
+        let prenom = document.querySelector("#prenom").value;
+        let classe = document.querySelector("#classe").value;
+        let message = document.querySelector("#message");
+        if (prenom === "" || classe === "") {          // C4
+            message.textContent = "Remplir les deux champs.";
+            message.style.color = "red";
+        } else {                                       // C5
+            message.textContent = "Inscription enregistrée : " + prenom;
+            message.style.color = "green";
+            let liste = document.querySelector("#inscrits");
+            liste.innerHTML += "<li>" + prenom + " (" + classe + ")</li>";
+            document.querySelector("#prenom").value = "";
+            document.querySelector("#classe").value = "";
+        }
+    }
+    ```
+
+    C6 est respectée : aucune requête n’est envoyée, tout se passe **côté client**.
+
+    **d)** Trois essais possibles :
+
+    | **prénom** | **classe** | **ce qu’on doit observer** |
+    |:---|:---|:---|
+    | `Léa` | `1G2` | message vert « Inscription enregistrée : Léa » ; la ligne « Léa (1G2) » s’ajoute à la liste ; les deux champs sont vidés (C5) |
+    | (vide) | `1G2` | message rouge « Remplir les deux champs. » ; liste inchangée ; `1G2` reste dans son champ (C4) |
+    | `Hugo` | (vide) | message rouge ; liste inchangée ; `Hugo` reste dans son champ (C4) |
+
+    Un quatrième essai utile : deux inscriptions valides de suite, pour vérifier que la seconde s’**ajoute** à la première au lieu de la remplacer (d’où le `+=`).
+
+    **e)** La liste n’existe que dans la page affichée, dans la mémoire du **navigateur** (côté client) : rien n’a été envoyé au serveur. Recharger la page la redemande au serveur, qui renvoie la page d’origine, avec une liste vide. Pour conserver les inscriptions, il faut les **envoyer au serveur** : un formulaire `<form action="/inscription" method="post">` dont les champs ont un `name` (`prenom`, `classe`), et, côté serveur, un programme qui les enregistre (dans un fichier ou une base de données) et fabrique la page des inscrits. On choisit `POST` : on envoie des données à enregistrer, qui n’ont pas à apparaître dans l’URL.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> ne tester que le cas où les *deux* champs sont vides : la condition doit être « l’un *ou* l’autre est vide », sinon une inscription sans prénom (ou sans classe) serait acceptée.

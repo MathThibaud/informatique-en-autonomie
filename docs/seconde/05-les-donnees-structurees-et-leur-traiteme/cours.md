@@ -260,9 +260,27 @@ Chaque site, chaque application **collecte** des données sur vous. La loi encad
 
     Le nuage offre l’**accès partout** et le **partage** facile. En contrepartie : vos données sont **chez quelqu’un d’autre** (une entreprise, souvent à l’étranger), il faut une **connexion**, et la question se pose : *qui* peut les lire, et *où* sont-elles vraiment stockées ?
 
+!!! regle "Règle 6 — Partager et synchroniser"
+
+    **Partager** un fichier du nuage, c’est donner un **droit** sur ce fichier : en **lecture seule** (la personne peut lire, pas modifier) ou en **modification**. On le partage soit avec des **personnes nommées**, soit par un **lien** : tout lien « ouvert à toute personne qui le possède » peut circuler bien au-delà de ceux à qui on l’a envoyé.
+
+    Un dossier **synchronisé** existe en même temps sur le nuage et sur chacun de vos appareils : toute modification faite sur l’un (ajout, correction, **suppression**) est recopiée sur tous les autres. On peut souvent régler ce mode : synchroniser tout le dossier, ou ne télécharger un fichier qu’au moment où on l’ouvre (« fichiers à la demande »), ou seulement sur le Wi-Fi. Attention : une synchronisation **n’est pas une sauvegarde**, puisqu’un fichier effacé sur un appareil disparaît partout (il reste en général un temps dans la corbeille du nuage).
+
+Le nuage n’a rien d’immatériel : les fichiers sont rangés dans des **centres de données**, d’immenses salles de serveurs allumés jour et nuit, qu’il faut **refroidir**, et où chaque fichier est souvent recopié plusieurs fois par sécurité. Tout cela consomme beaucoup d’**électricité** : en France, les centres de données représentent près de la moitié ($46\,\%$) de l’empreinte carbone du numérique (ADEME–Arcep, mise à jour de janvier 2025, données 2022) ; on y reviendra au chapitre *Informatique embarquée et objets connectés* (§ VII), avec les gestes de sobriété (trier ses fichiers, ne pas tout synchroniser).
+
+!!! activite "Activité — Partager un fichier depuis le nuage du lycée"
+
+    Avec votre compte scolaire (ENT ou espace de stockage en ligne du lycée) :
+
+    1.  Déposer un petit fichier texte dans votre espace en ligne, puis le **partager en lecture seule** avec votre voisin. Votre voisin peut-il le modifier ?
+
+    2.  Ouvrir le même fichier depuis un autre appareil (téléphone, autre poste), le modifier, puis revenir au premier appareil : qu’observe-t-on ?
+
+    3.  Repérer, dans les réglages, les **options de synchronisation** proposées.
+
 ### Le *big data* : le déluge de données
 
-!!! regle "Règle 6 — Les « 3 V » du big data"
+!!! regle "Règle 7 — Les « 3 V » du big data"
 
     On parle de <span id="lex-bigdata05" class="ancre"></span>**big data** (mégadonnées) quand les données deviennent trop volumineuses pour les outils classiques. On les caractérise par **trois V** : le **Volume** (des quantités colossales), la **Vélocité** (elles arrivent en continu, très vite) et la **Variété** (textes, images, capteurs, clics…). Bien exploitées, elles nourrissent les recommandations, les prévisions, l’intelligence artificielle.
 
@@ -278,7 +296,7 @@ Chaque site, chaque application **collecte** des données sur vous. La loi encad
 
 <span id="cours-05-16" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[16](exercices.md#ex-05-16) et [17](exercices.md#ex-05-17)** (open data ; mes données, mes droits), défi **[18](exercices.md#ex-05-18)** (data-détective sur l’open data), exercice **[19](exercices.md#ex-05-19)** (critiquer une réponse d’IA), exercice **[20](exercices.md#ex-05-20)** (Python au service du thème)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[16](exercices.md#ex-05-16) et [17](exercices.md#ex-05-17)** (open data ; mes données, mes droits), défi **[18](exercices.md#ex-05-18)** (data-détective sur l’open data), exercice **[19](exercices.md#ex-05-19)** (critiquer une réponse d’IA), exercice **[20](exercices.md#ex-05-20)** (Python au service du thème), exercice **[21](exercices.md#ex-05-21)** (partager et synchroniser)
 
 !!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
@@ -340,5 +358,7 @@ Les mots importants du thème sont définis dans le lexique.
     - **rechercher**, **filtrer** et **trier** des enregistrements selon un ou plusieurs critères ;
 
     - réaliser un tri croissant ou décroissant sur une colonne ;
+
+    - partager un fichier **dans le nuage** (lecture seule ou modification) et comprendre la **synchronisation** ;
 
     - citer les enjeux liés aux **données personnelles**, au *cloud* et au *big data* (les 3 V).

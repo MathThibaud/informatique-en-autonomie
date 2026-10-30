@@ -248,7 +248,13 @@ On a chiffré `clair` avec une clé de $6$ lettres : `chiffre = vigenere(clair, 
 
 ## Partie C — Le masque jetable, et l’erreur fatale
 
-En Python, le type `bytes` représente une suite d’octets : `b"RDV"` est la suite `82, 68, 86`, et `bytes([3, 3])` la suite `3, 3`. On accède à l’octet `i` par `m[i]`, qui est un entier.
+!!! encadre "Outils Python de cette partie au-delà du programme"
+
+    - Le type `bytes` représente une suite d’octets : `b"RDV"` est la suite `82, 68, 86`, et `bytes([3, 3])` la suite `3, 3`. On accède à l’octet `i` par `m[i]`, qui est un entier ; `len(m)` donne le nombre d’octets.
+
+    - `import secrets` puis `secrets.token_bytes(n)` renvoie `n` octets tirés au hasard d’une façon adaptée à la cryptographie (imprévisible, contrairement au module `random`).
+
+    - `m.hex()` écrit les octets de `m` en hexadécimal (deux chiffres par octet), pour afficher un chiffré illisible.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Un masque, deux messages <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-tp-1-7 }
 
@@ -439,7 +445,7 @@ Voici six jeux de clés RSA. Pour chacun : $n = pq$, $\varphi = (p-1)(q-1)$, $d$
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Signer <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-tp-1-12 }
 
-Pour signer, on chiffre avec la clé **privée** ; tout le monde vérifie avec la clé **publique**. On ne signe pas le message lui-même mais son **empreinte** (fonction fournie `empreinte(message, n)`, un nombre entre $0$ et $n-1$ calculé par la fonction de hachage SHA-256 : changer une seule lettre du message change complètement l’empreinte).
+Pour signer, on chiffre avec la clé **privée** ; tout le monde vérifie avec la clé **publique**. On ne signe pas le message lui-même mais son **empreinte** <span class="horsprog">au-delà du programme</span> (fonction fournie `empreinte(message, n)`, un nombre entre $0$ et $n-1$ calculé par la fonction de hachage SHA-256 : changer une seule lettre du message change complètement l’empreinte).
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire `signer(message, cle_privee)`, qui renvoie $h^{d} \bmod n$ où $h$ est l’empreinte, et `verifier(message, signature, cle_publique)`, qui renvoie `True` si $s^{e} \bmod n$ est égal à l’empreinte du message.
 

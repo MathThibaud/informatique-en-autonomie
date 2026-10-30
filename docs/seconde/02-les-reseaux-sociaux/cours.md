@@ -51,14 +51,14 @@ Il en existe des dizaines, et ils ne se ressemblent pas : certains servent surt
     | Instagram | photos, vidéos courtes | $\sim 3$ milliards |
     | YouTube | vidéos | $\sim 2{,}5$ milliards$^{*}$ |
     | TikTok | vidéos courtes | $\sim 1{,}6$ milliard$^{*}$ |
-    | LinkedIn | professionnel | $\sim 1{,}3$ milliard d’*inscrits*$^{**}$ |
+    | LinkedIn | professionnel | $\sim 1{,}4$ milliard d’*inscrits*$^{**}$ |
     | Snapchat | photos éphémères | près de $1$ milliard |
     | X (Twitter) | messages courts | *centaines de millions* |
 
     $^{*}$ YouTube et TikTok ne publient pas ce chiffre : on donne le nombre de personnes que leurs publicités peuvent atteindre chaque mois (DataReportal, 2025). $^{**}$ LinkedIn annonce ses membres inscrits, pas ses utilisateurs actifs, qui sont bien moins nombreux.  
     Rappel : la population mondiale est d’environ **8,2 milliards** d’humains (ONU, 2024).
 
-    Sources : Meta (Instagram : 3 milliards d’utilisateurs actifs mensuels, septembre 2025 ; WhatsApp : plus de 3 milliards, avril 2025 ; Facebook : environ 3 milliards) ; Snap Inc., résultats du 2<sup>e</sup> trimestre 2026 (971 millions d’utilisateurs actifs mensuels) ; LinkedIn, *About us* (plus de 1,3 milliard de membres, 2026) ; DataReportal (Kepios, We Are Social, Meltwater), *Digital 2025 Global Overview Report*, février 2025 (audiences publicitaires de YouTube et TikTok) ; ONU, *World Population Prospects 2024* (8,2 milliards d’humains en 2024).
+    Sources : Meta (Instagram : 3 milliards d’utilisateurs actifs mensuels, septembre 2025 ; WhatsApp : plus de 3 milliards, avril 2025 ; Facebook : environ 3 milliards) ; Snap Inc., résultats du 2<sup>e</sup> trimestre 2026 (971 millions d’utilisateurs actifs mensuels) ; LinkedIn, *About us* (plus de 1,4 milliard de membres, 2026) ; DataReportal (Kepios, We Are Social, Meltwater), *Digital 2025 Global Overview Report*, février 2025 (audiences publicitaires de YouTube et TikTok) ; ONU, *World Population Prospects 2024* (8,2 milliards d’humains en 2024).
 
 !!! activite "Activité — Dresser le portrait des réseaux"
 
@@ -159,7 +159,7 @@ La plupart des réseaux sociaux sont **gratuits**. Pourtant, ce sont des entrepr
 
     Un grand réseau social tire l’essentiel de ses revenus de la publicité. Sur 100 € gagnés, il n’est pas rare que **plus de 95 €** viennent des annonceurs, et à peine quelques euros d’autres sources (abonnements payants, badges, boutique en ligne). Chez Meta (Facebook, Instagram, WhatsApp), la publicité a fourni environ **98 %** du chiffre d’affaires en 2023 (Meta, rapport annuel 2023).
 
-    On mesure aussi le « revenu moyen par utilisateur » (en anglais *ARPU*) : le total des revenus divisé par le nombre d’utilisateurs. Pour Facebook, fin 2023, il était d’environ 13 dollars par trimestre en moyenne mondiale, soit de l’ordre de **40 € par utilisateur et par an**, et plus de 60 dollars par trimestre aux États-Unis et au Canada (Meta, résultats du 4<sup>e</sup> trimestre 2023). Autrement dit : chaque compte « gratuit » rapporte, en réalité, de l’argent à l’entreprise.
+    On mesure aussi le « revenu moyen par utilisateur » (en anglais *ARPU*) : le total des revenus divisé par le nombre d’utilisateurs. Pour Facebook, en moyenne mondiale, il était d’environ 45 dollars sur l’ensemble de l’année 2023, soit de l’ordre de **40 € par utilisateur et par an** ; au seul 4<sup>e</sup> trimestre (celui des fêtes, le plus rentable), il atteignait 13 dollars, et plus de 60 dollars aux États-Unis et au Canada (Meta, rapport annuel et résultats du 4<sup>e</sup> trimestre 2023). Autrement dit : chaque compte « gratuit » rapporte, en réalité, de l’argent à l’entreprise.
 
     Source : Meta Platforms, rapport annuel 2023 (formulaire 10-K) et résultats du 4<sup>e</sup> trimestre 2023 (part de la publicité, revenu moyen par utilisateur).
 
@@ -296,9 +296,23 @@ Ce tri a des conséquences qu’il faut connaître :
 
 Les réseaux sont des outils formidables (s’informer, créer, garder le lien, se mobiliser). Mais, comme tout outil puissant, ils demandent quelques précautions de citoyen.
 
+!!! definition "Définition 8"
+
+    La **cyberviolence** désigne toute violence exercée à l’aide des outils numériques (réseaux, messageries, jeux en ligne). Elle prend plusieurs formes :
+
+    - le <span id="lex-cyberharcelement02" class="ancre"></span>**cyberharcèlement** : insultes, menaces, moqueries **répétées** ; il existe aussi quand **plusieurs personnes** envoient chacune un seul message à la même victime (« raid ») ;
+
+    - la **discrimination** et les **propos haineux** : attaquer quelqu’un pour son origine, sa religion, son sexe, son orientation sexuelle, son handicap, son apparence… ;
+
+    - le **sexting** subi et la **diffusion d’images intimes sans accord** : partager la photo ou la vidéo intime d’une personne, ou la menacer de le faire pour obtenir quelque chose (chantage) ;
+
+    - l’**usurpation d’identité** : créer un faux compte au nom de quelqu’un, ou utiliser son compte, pour lui nuire.
+
+    Partager, « liker » ou commenter un contenu humiliant, c’est **participer** à la violence.
+
 !!! regle "Règle 4"
 
-    <span id="lex-cyberharcelement02" class="ancre"></span>**Le cyberharcèlement** (insultes, menaces, moqueries répétées en ligne) est **interdit par la loi** et lourdement puni. Face à une situation de harcèlement : ne pas répondre, **garder les preuves** (captures d’écran), **bloquer**, **signaler**, et **en parler** à un adulte de confiance. À Monaco, la ligne d’écoute contre le harcèlement mise en place par le Gouvernement princier (**98 98 96 96**, 24 h/24, 7 j/7) aide aussi les victimes de harcèlement en ligne. Le service français **3018** répond par tchat (application *3018*) ; son numéro court n’est pas garanti depuis une ligne monégasque.
+    **La cyberviolence est interdite par la loi.** À Monaco, la loi n° 1.513 de 2021 punit le **harcèlement**, y compris par messages ou sur les réseaux (jusqu’à 3 ans de prison quand la victime est mineure), et la **diffusion d’images intimes sans accord**, même si la victime les avait envoyées elle-même (jusqu’à 10 ans quand elle est mineure) ; la loi n° 1.299 de 2005 punit les propos haineux ou discriminatoires publiés en ligne, et la loi n° 1.435 de 2016 l’**usurpation d’identité** sur un réseau. La loi française punit aussi ces faits. Face à une situation de cyberviolence : ne pas répondre, **garder les preuves** (captures d’écran), **bloquer**, **signaler**, et **en parler** à un adulte de confiance. À Monaco, la ligne d’écoute contre le harcèlement scolaire mise en place par le Gouvernement princier (**98 98 96 96**, 24 h/24, 7 j/7) aide aussi les victimes de cyberharcèlement. Le service français **3018** répond par tchat (application *3018*) ; son numéro court n’est pas garanti depuis une ligne monégasque.
 
 !!! activite "Activité — Ma charte des réseaux"
 
@@ -306,7 +320,7 @@ Les réseaux sont des outils formidables (s’informer, créer, garder le lien, 
 
 <span id="cours-02-17" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercice **[17](exercices.md#ex-02-17)** (citoyen des réseaux)
+<span class="afaire">▶ Exercices d'application :</span> exercice **[17](exercices.md#ex-02-17)** (citoyen des réseaux) ; exercice **[22](exercices.md#ex-02-22)** (reconnaître la cyberviolence)
 
 ## L’envers de l’écran : l’impact environnemental
 
@@ -409,5 +423,7 @@ Les mots importants du thème sont définis dans le lexique.
     - expliquer qu’un **algorithme** choisit et ordonne ce qui est affiché (fil, recommandations) ;
 
     - citer des ordres de grandeur de l’**impact environnemental** du numérique et des gestes de sobriété ;
+
+    - reconnaître les formes de **cyberviolence** (harcèlement, discrimination, diffusion d’images intimes, usurpation d’identité) et savoir comment réagir ;
 
     - adopter de bonnes pratiques (temps d’écran, esprit critique, lutte contre le harcèlement).

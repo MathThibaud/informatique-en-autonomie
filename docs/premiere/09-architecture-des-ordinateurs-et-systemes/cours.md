@@ -6,7 +6,7 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *Modèle d’architecture de von Neumann* : unité de traitement (UAL, registres), unité de commande, mémoire, dispositifs d’entrée-sortie. *Dérouler* l’exécution d’une séquence d’instructions simples de type langage machine. Le *transistor*, brique de base ; quelques ordres de grandeur. *Systèmes d’exploitation* : rôles et fonctions ; utiliser les commandes de base en ligne de commande ; gérer les droits et permissions d’accès aux fichiers. *Périphériques d’entrée-sortie* : identifier le rôle des *capteurs* et des *actionneurs*. |
+| **Programme (BO)** | *Modèle d’architecture séquentielle (von Neumann)* : distinguer les rôles et les caractéristiques des différents constituants d’une machine ; *dérouler* l’exécution d’une séquence d’instructions simples du type langage machine ; architectures monoprocesseur et multiprocesseur ; les circuits combinatoires réalisent des fonctions booléennes. *Systèmes d’exploitation* : identifier les fonctions d’un système d’exploitation ; utiliser les commandes de base en ligne de commande ; gérer les droits et permissions d’accès aux fichiers ; systèmes libres et propriétaires. *Périphériques d’entrée et de sortie* : identifier le rôle des *capteurs* et des *actionneurs*. (La partie « réseau » de la même rubrique est traitée au chapitre *Le Web : réseaux et interactions homme-machine*.) |
 | **Prérequis** | le **binaire** et le codage de l’information (chapitre *Le binaire et l’écriture des nombres*) ; savoir ce qu’est un **programme** et une **variable**. (→ fiches de révision : ch. 2) |
 | **Objectifs** | comprendre **comment** une machine exécute un programme ; nommer les **composants** d’un ordinateur et leur rôle ; **dérouler** un petit programme en langage machine ; savoir ce que fait un **système d’exploitation** ; **se déplacer et manipuler** des fichiers en ligne de commande sous Linux ; **lire et modifier** les droits d’un fichier. |
 
@@ -75,6 +75,10 @@ Les organes sont reliés par des **bus** : des faisceaux de fils qui transporten
 !!! regle "Règle 1 — L’idée géniale : le programme est une donnée"
 
     Dans le modèle de von Neumann, le **programme est rangé dans la même mémoire que les données**, sous forme de nombres. Un ordinateur ne « connaît » donc pas ses programmes à l’avance : il en **lit** un depuis la mémoire, exactement comme il lirait un nombre. C’est ce qui rend une machine **universelle** : changer de programme, c’est juste changer les nombres en mémoire — pas recâbler la machine.
+
+!!! remarque "Remarque — Un ou plusieurs processeurs"
+
+    Le modèle de von Neumann décrit une machine **monoprocesseur** : un seul processeur exécute les instructions *l’une après l’autre*. Les ordinateurs et les smartphones actuels sont **multiprocesseurs** : leur puce réunit plusieurs **cœurs** (4, 8 ou davantage), chacun capable d’exécuter son propre programme. Plusieurs calculs avancent alors **réellement en même temps**, au lieu de se partager à tour de rôle un processeur unique ; mais un programme n’en profite que s’il est découpé en tâches indépendantes.
 
 !!! encadre "À retenir — La hiérarchie des mémoires"
 
@@ -394,7 +398,7 @@ Linux est **multi-utilisateur** : plusieurs comptes partagent la machine, chacun
 
     - **Ce qu’il réutilise.** Les 0 et les 1 du chapitre *Le binaire et l’écriture des nombres* sont les états des transistors ; les sauts `BRZ` et `BRP` du *Little Man Computer* réalisent les `if` et les `while` des *Bases de la programmation Python* ; la traduction en langage machine distingue langages compilés et interprétés (*Spécifier et mettre au point ses programmes*).
 
-    - **Ce qu’il prépare.** Les serveurs du chapitre suivant, *Le Web : réseaux et interactions homme-machine*, seront le plus souvent des machines Linux, administrées en ligne de commande.
+    - **Ce qu’il prépare.** Les serveurs du chapitre suivant, *Le Web : réseaux et interactions homme-machine*, seront le plus souvent des machines Linux, administrées en ligne de commande ; le système d’exploitation y découpera les données en **paquets** et les **encapsulera**, couche après couche, avant de les confier à la carte réseau.
 
     - **En Terminale.** *Processus et systèmes d’exploitation* détaillera le partage du processeur entre les programmes en cours, *Systèmes sur puce* réunira processeur, mémoire et entrées-sorties sur une seule puce.
 

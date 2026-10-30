@@ -171,6 +171,8 @@ On numérote les sommets de $0$ à $n-1$. Un graphe est donné soit par sa matri
 
 3.  Tester que les deux fonctions sont bien « inverses » l’une de l’autre sur un exemple.
 
+4.  Un graphe **orienté** est donné par le dictionnaire `succ` de ses **listes de successeurs**, par exemple `succ = {’A’: [’B’, ’C’], ’B’: [’C’], ’C’: [’A’], ’D’: [’C’]}`. Écrire `predecesseurs(succ)` qui renvoie le dictionnaire des **listes de prédécesseurs** (pour l’exemple : `{’A’: [’C’], ’B’: [’A’], ’C’: [’A’, ’B’, ’D’], ’D’: []}`).
+
 ??? pouce "Coup de pouce"
 
     Question 1 : pour chaque ligne `i` de `M`, garder les indices `j` tels que `M[i][j]` vaut $1$. Question 2 : partir d’une matrice $n\times n$ remplie de $0$, puis placer les $1$.
@@ -222,6 +224,19 @@ On numérote les sommets de $0$ à $n-1$. Un graphe est donné soit par sa matri
     ```
 
     **3.** On vérifie que `listes_vers_matrice(matrice_vers_listes(M)) == M` redonne bien la matrice de départ.
+
+    **4.** On crée une liste vide pour chaque sommet, puis, pour chaque arc `s`$\to$`v`, on ajoute `s` aux prédécesseurs de `v`.
+
+    ```python
+    def predecesseurs(succ):
+        pred = {s: [] for s in succ}       # une liste vide par sommet
+        for s in succ:
+            for v in succ[s]:              # arc s -> v
+                pred[v].append(s)          # s est un predecesseur de v
+        return pred
+    ```
+
+    Sur l’exemple, on obtient `{’A’: [’C’], ’B’: [’A’], ’C’: [’A’, ’B’, ’D’], ’D’: []}` : `D` n’a aucun prédécesseur (aucun arc n’arrive sur lui). Dans un graphe non orienté, successeurs et prédécesseurs sont les mêmes : la fonction renverrait le même dictionnaire.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-7 }
 
@@ -321,7 +336,7 @@ On considère le graphe **pondéré** suivant (les poids sont des distances en k
 
     ??? pouce "Coup de pouce"
 
-        Q3 : reprendre le code du BFS en remplaçant la file par une pile. Dans quel ordre les voisins d’un sommet sortent-ils de la pile ?
+        Q3 : reprendre le code du BFS en remplaçant la file par une pile, avec la règle du cours : on ne marque un sommet comme traité qu’au moment où on le **dépile**, et l’on ignore ceux qui sont déjà traités. Dans quel ordre les voisins d’un sommet sortent-ils de la pile ?
 
 ??? corrige "Corrigé"
 
@@ -517,7 +532,7 @@ On considère le graphe non orienté ci-dessous. On ne précise pas dans quel or
 
 ### Vers le bac
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — *d’après Amérique du Nord 2024, jour 1, ex. 2* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-15 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Un cercle d’amis *(d’après Amérique du Nord 2024, jour 1, ex. 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-15 }
 
 <span class="duree">≈ 45 min</span>
 
@@ -679,7 +694,7 @@ Le « cercle d’amis » d’une personne est l’ensemble des personnes atteign
         return visites
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — *d’après Asie 2024, jour 1, ex. 2* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-16 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — La recette du pain : un graphe de tâches *(d’après Asie 2024, jour 1, ex. 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-16 }
 
 <span class="duree">≈ 30 min</span>
 
@@ -745,7 +760,7 @@ M = [ [0, 1, 0, 0, 0],
 
     **7.** **Impossible** : le graphe contient le cycle `1`$\to$`2`$\to$`3`$\to$`1`. On ne peut donc pas ordonner ces tâches (aucun tri topologique n’existe quand il y a un cycle).
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — *d’après Pays étrangers 2025, sujet PE2, ex. 3 (partie A)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-17 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Un parc d’attractions *(d’après Pays étrangers 2025, sujet PE2, ex. 3 (partie A))* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-17 }
 
 <span class="duree">≈ 30 min</span>
 
@@ -842,7 +857,7 @@ Une **balade** est un chemin du graphe ; sa durée est la somme des durées de s
         return y in voisines
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — *d’après Centres étrangers 2024, groupe 1, jour 1, ex. 1* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-18 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Un réseau d’ordinateurs *(d’après Centres étrangers 2024, groupe 1, jour 1, ex. 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-18 }
 
 <span class="duree">≈ 30 min</span>
 
@@ -923,7 +938,7 @@ Au début, un virus n’est présent que sur un ordinateur. À chaque étape, il
 
     Depuis le sommet $4$ (réseau initial), la contamination prend **2 étapes**.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 19</span> — *d’après Polynésie 2024, jour 2, ex. 1* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-19 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 19</span> — Une agence de voyages *(d’après Polynésie 2024, jour 2, ex. 1)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-19 }
 
 <span class="duree">≈ 45 min</span>
 
@@ -1200,7 +1215,7 @@ Des séries courtes pour rendre une méthode automatique : même consigne, donn�
 
     ![](../figures/e77045ceb066f09e.svg){ .tikz loading=lazy }
 
-3.  **Un graphe avec des cycles.** Pourquoi aucun des deux parcours ne tourne-t-il en rond ?
+3.  **Un graphe avec des cycles.** Pourquoi aucun des deux parcours ne tourne-t-il en rond ? En déroulant le parcours en profondeur, noter le **parent** de chaque sommet (le sommet depuis lequel il a été découvert) : à quels moments le critère du cours (un voisin déjà découvert, autre que le parent) révèle-t-il un cycle ? Quels cycles sont ainsi repérés ?
 
     ![](../figures/e6f48f17bcf3d31e.svg){ .tikz loading=lazy }
 
@@ -1214,4 +1229,104 @@ Des séries courtes pour rendre une méthode automatique : même consigne, donn�
 
     **b)** Largeur : `A` (`B, C`) ; `B` (`C, D`) ; `C` (`D`) ; `D` (vide). Ordre `A, B, C, D`. Profondeur : `A, B, D, C`. Les sommets `E`, `F`, `G` ne sont pas visités : aucune chaîne ne les relie à `A` (le graphe n’est pas connexe). Pour tout visiter, on relance un parcours depuis un sommet non visité, par exemple `E` (qui donne `E, F, G`), et ainsi de suite tant qu’il reste des sommets non visités.
 
-    **c)** Largeur : `A` (`B, D`) ; `B` (`D, C`) ; `D` (`C`) ; `C` (`E`) ; `E` (`F, G`) ; `F` (`G`) ; `G` (vide). Ordre `A, B, D, C, E, F, G`. Profondeur : `A, B, C, D, E, F, G`. Les parcours ne tournent pas en rond parce qu’un sommet déjà découvert (en largeur) ou déjà visité (en profondeur) n’est jamais repris : en traitant `D`, on ne revient ni vers `A` ni vers `C`.
+    **c)** Largeur : `A` (`B, D`) ; `B` (`D, C`) ; `D` (`C`) ; `C` (`E`) ; `E` (`F, G`) ; `F` (`G`) ; `G` (vide). Ordre `A, B, D, C, E, F, G`. Profondeur : `A, B, C, D, E, F, G`. Les parcours ne tournent pas en rond parce qu’un sommet déjà découvert (en largeur) ou déjà visité (en profondeur) n’est jamais repris : en traitant `D`, on ne revient ni vers `A` ni vers `C`. Parents dans le parcours en profondeur : `B` (parent `A`), `C` (parent `B`), `D` (parent `C`), `E` (parent `C`), `F` (parent `E`), `G` (parent `F`). En visitant `D`, son voisin `A` est déjà découvert et n’est pas son parent (`C`) : c’est le cycle `A--B--C--D--A`. En visitant `G`, son voisin `E` est déjà découvert et n’est pas son parent (`F`) : c’est le cycle `E--F--G--E`. (Le voisin `C` de `D`, lui, est son parent : il ne signale rien.)
+
+### Modéliser une grille
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Sortir d’un labyrinthe *(type bac)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-23 }
+
+<span class="duree">≈ 40 min</span> Un labyrinthe est dessiné sur une grille de $5$ lignes et $6$ colonnes. Les cases grisées sont des murs ; on se déplace d’une case libre à une case libre voisine **en haut, en bas, à gauche ou à droite** (jamais en diagonale). L’entrée `E` est la case de la ligne $0$ et de la colonne $0$, la sortie `S` celle de la ligne $4$ et de la colonne $5$. En Python, le labyrinthe est une liste de chaînes (`’#’` pour un mur, `’.’` pour une case libre) : la case de la ligne `i` et de la colonne `j` est `lab[i][j]`, et on la repère par le couple `(i, j)`.
+
+![](../figures/f0527a4d102a371e.svg){ .tikz loading=lazy }
+
+```python
+lab = ["....#.",
+       ".##.#.",
+       ".#....",
+       ".#.##.",
+       "...#.."]
+```
+
+On modélise le labyrinthe par un graphe : les **sommets** sont les cases libres, et une **arête** relie deux cases libres voisines.
+
+1.  Pourquoi peut-on choisir un graphe **non orienté** ? Combien ce graphe a-t-il de sommets ? d’arêtes ?
+
+2.  Quelles cases n’ont qu’un seul voisin ? Que représentent-elles dans le labyrinthe ? Le graphe contient-il un cycle ? Si oui, en donner un.
+
+3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `voisines(lab, i, j)` qui renvoie la liste des cases libres voisines de la case `(i, j)`, dans l’ordre **haut, bas, gauche, droite**, sans jamais sortir de la grille. Par exemple, `voisines(lab, 2, 3)` renvoie `[(1, 3), (2, 2), (2, 4)]` et `voisines(lab, 0, 0)` renvoie `[(1, 0), (0, 1)]`.
+
+4.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `construire_graphe(lab)` qui renvoie le graphe du labyrinthe, objet de la classe `Graphe` dont les sommets sont les couples `(i, j)` des cases libres. Les arêtes sont ajoutées avec `ajoute_arete`, et chacune **une seule fois**.
+
+5.  Dérouler à la main un parcours en largeur depuis l’entrée et donner la **distance** de chaque case libre à l’entrée (nombre de déplacements), en l’écrivant dans la case sur une copie de la grille. En déduire la longueur d’un plus court chemin de `E` à `S`, puis un tel chemin. Est-il unique ?
+
+6.  On suppose que `g.voisins(s)` renvoie les voisines dans l’ordre haut, bas, gauche, droite. On lance le parcours en profondeur récursif `DFS(g, (0, 0))` du cours, en notant le **parent** de chaque case (la case depuis laquelle elle a été découverte). En remontant les parents depuis `S`, quel chemin obtient-on ? Quelle est sa longueur ? Quel parcours faut-il utiliser pour obtenir à coup sûr un plus court chemin, et pourquoi ?
+
+7.  <span class="run" title="À programmer et tester sur machine">▶</span>  Vérifier les réponses aux questions 1 et 5 à l’aide des fonctions `plus_court_chemin` et `distances` de l’exercice 14.
+
+??? pouce "Coup de pouce"
+
+    Q3 : les quatre cases candidates sont `(i - 1, j)`, `(i + 1, j)`, `(i, j - 1)` et `(i, j + 1)` ; on garde celles dont les indices restent dans la grille (`0 <= a < len(lab)` et `0 <= b < len(lab[0])`) **et** qui ne sont pas un mur. Tester les indices **avant** de lire `lab[a][b]`. Q4 : pour ne pas ajouter deux fois l’arête entre deux cases voisines, tester `sont_voisins` avant `ajoute_arete`, ou ne regarder que la voisine de droite et celle du bas de chaque case.
+
+??? corrige "Corrigé"
+
+    **1.** On peut toujours passer d’une case libre à sa voisine **et revenir** : la relation « être voisines » est symétrique, d’où un graphe non orienté. Le graphe a $21$ sommets (les cases libres : $5 + 3 + 5 + 3 + 5$ ligne par ligne) et $21$ arêtes : $9$ « horizontales » (entre deux cases voisines d’une même ligne) et $12$ « verticales » (d’une même colonne).
+
+    **2.** Les cases `(0, 5)` et `(4, 4)` n’ont qu’un voisin (degré $1$) : ce sont des **culs-de-sac**. Le graphe contient un cycle, qui fait le tour des murs de gauche : `(0,0) -- (0,1) -- (0,2) -- (0,3) -- (1,3) -- (2,3) -- (2,2) -- (3,2) -- (4,2) -- (4,1) -- (4,0) -- (3,0) -- (2,0) -- (1,0) -- (0,0)`. C’est le seul ; il explique qu’il y ait deux façons très différentes de rejoindre la case `(2, 3)`.
+
+    **3. et 4.**
+
+    ```python
+    def voisines(lab, i, j):
+        """Cases libres voisines de (i, j), dans l'ordre haut, bas, gauche, droite."""
+        res = []
+        for (a, b) in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
+            if 0 <= a < len(lab) and 0 <= b < len(lab[0]) and lab[a][b] == ".":
+                res.append((a, b))
+        return res
+
+    def construire_graphe(lab):
+        """Graphe non oriente du labyrinthe : sommets = cases libres (i, j)."""
+        libres = [(i, j) for i in range(len(lab)) for j in range(len(lab[0]))
+                  if lab[i][j] == "."]
+        g = Graphe(libres)
+        for (i, j) in libres:
+            for v in voisines(lab, i, j):
+                if not g.sont_voisins((i, j), v):      # arete pas encore ajoutee
+                    g.ajoute_arete((i, j), v)
+        return g
+    ```
+
+    Dans `voisines`, l’ordre des tests compte : si `a` vaut `-1`, `lab[a]` ne provoque pas d’erreur mais désigne la **dernière** ligne (indice négatif) ; si `a` vaut `len(lab)`, `lab[a]` lève `IndexError`. Comme `and` s’arrête au premier test faux, on vérifie les indices **avant** de lire la case.
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Ajouter l’arête à chaque fois qu’on rencontre une voisine : chaque arête est alors ajoutée deux fois (une fois depuis chacune de ses extrémités), et chaque voisine apparaît en double dans les listes d’adjacence.
+
+    *Autre méthode :* ne regarder, pour chaque case libre, que sa voisine de **droite** et celle du **bas** ; chaque arête n’est alors rencontrée qu’une fois.
+
+    ```python
+        for (i, j) in libres:
+            if j + 1 < len(lab[0]) and lab[i][j + 1] == ".":    # voisine de droite
+                g.ajoute_arete((i, j), (i, j + 1))
+            if i + 1 < len(lab) and lab[i + 1][j] == ".":       # voisine du bas
+                g.ajoute_arete((i, j), (i + 1, j))
+    ```
+
+    **5.** Le parcours en largeur découvre les cases par distance croissante ; chaque case reçoit la distance de la case qui l’a découverte, plus $1$ :
+
+    ![](../figures/66c6a3dd0eb8a34a.svg){ .tikz loading=lazy }
+
+    La sortie est à distance $9$ : un plus court chemin compte $9$ déplacements. En remontant depuis `S` vers une voisine de distance inférieure d’une unité, on obtient (cases colorées) `(0,0), (0,1), (0,2), (0,3), (1,3), (2,3), (2,4), (2,5), (3,5), (4,5)`. Il est **unique** : à chaque étape de la remontée, une seule voisine a la distance qui convient (par exemple, depuis `(2, 3)` à distance $5$, seule `(1, 3)` est à distance $4$ ; `(2, 2)` est à distance $6$).
+
+    **6.** Le parcours en profondeur part vers le **bas** (première voisine de `(0, 0)`), longe le mur de gauche, remonte par `(3, 2)` et `(2, 2)`, atteint `(2, 3)`, explore d’abord le couloir du haut jusqu’à `(0, 1)` (impasse : `(0, 0)` est déjà visitée), revient à `(2, 3)`, puis file vers la droite. En remontant les parents depuis `S` : `(0,0), (1,0), (2,0), (3,0), (4,0), (4,1), (4,2), (3,2), (2,2), (2,3), (2,4), (2,5), (3,5), (4,5)`, soit $13$ déplacements au lieu de $9$. Le parcours en profondeur trouve **un** chemin, pas forcément le plus court : il s’enfonce dans la première direction venue. Seul le parcours en **largeur** garantit un plus court chemin (en nombre de déplacements), car il atteint toutes les cases à distance $k$ avant celles à distance $k + 1$ (cours, « Pourquoi c’est le plus court »).
+
+    **7.**
+
+    ```python
+    lab = ["....#.", ".##.#.", ".#....", ".#.##.", "...#.."]
+    g = construire_graphe(lab)
+    nb = 0
+    for s in g.sommets:
+        nb = nb + len(g.voisins(s))
+    print(len(g.sommets), nb // 2)            # 21 21 : chaque arete compte deux fois
+    print(plus_court_chemin(g, (0, 0), (4, 5)))
+    print(distances(g, (0, 0))[(4, 5)])       # 9
+    ```

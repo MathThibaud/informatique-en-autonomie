@@ -85,7 +85,7 @@ Pour chaque question : la *problématique*, les *notions du programme* à mobil
   *Angle :* le paradoxe du cadenas (clé publique/privée) ; pourquoi je peux payer en ligne en confiance.
 
 - **« Un mot de passe est-il vraiment secret dans une base de données ? »**  
-  *Notions :* SGBD, fonctions de hachage, sécurisation des accès (*ch. 6 Bases de données*, *ch. 10 Cryptographie*).  
+  *Notions :* SGBD, fonctions de hachage <span class="horsprog">au-delà du programme</span>, sécurisation des accès (*ch. 6 Bases de données*, *ch. 10 Cryptographie*).  
   *Angle :* pourquoi un site sérieux ne *connaît* pas votre mot de passe (il n’en stocke que l’empreinte).
 
 ##### Intelligence artificielle & données
@@ -123,7 +123,7 @@ Pour chaque question : la *problématique*, les *notions du programme* à mobil
   *Angle :* l’idée de Turing (1936) ; sans formalisme, l’argument « si un tel programme existait…».
 
 - **« Y a-t-il des problèmes que l’on sait résoudre mais pas assez vite ? »**  
-  *Notions :* coût exponentiel, explosion combinatoire, P vs NP <span class="horsprog">au-delà du programme</span> (*Gloutons 1re*, *ch. 8 Graphes*).  
+  *Notions :* coût exponentiel, explosion combinatoire, P vs NP <span class="horsprog">au-delà du programme</span> (*Gloutons 1re*, *ch. 8 Graphes*, *ch. 13 Calculabilité*).  
   *Angle :* le voyageur de commerce ; pourquoi « vérifier » est facile mais « trouver » est dur.
 
 ##### Machines & réseaux

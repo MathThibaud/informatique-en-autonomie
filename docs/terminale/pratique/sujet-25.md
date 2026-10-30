@@ -107,7 +107,7 @@
     insertion dans un ordre aléatoire : 15
     ```
 
-    La première hauteur vaut toujours `200` ; la seconde change à chaque exécution mais reste petite (de l’ordre de 13 à 20).
+    La première hauteur vaut toujours `200` ; la seconde change à chaque exécution mais reste petite (une quinzaine en moyenne, entre 13 et 25 environ).
 
     - Dans l’ordre croissant, chaque nouvelle valeur est plus grande que toutes les précédentes : elle va toujours à droite. L’arbre est un **peigne** (une « liste » de 200 nœuds, sans aucun fils gauche), de hauteur $n$.
 
@@ -299,7 +299,7 @@ Le dossier fourni au candidat comporte les éléments suivants :
     insertion dans un ordre aléatoire : 15
     ```
 
-    La première hauteur vaut toujours `200` ; la seconde change à chaque exécution mais reste petite (de l’ordre de 13 à 20).
+    La première hauteur vaut toujours `200` ; la seconde change à chaque exécution mais reste petite (une quinzaine en moyenne, entre 13 et 25 environ).
 
     - Dans l’ordre croissant, chaque nouvelle valeur est plus grande que toutes les précédentes : elle va toujours à droite. L’arbre est un **peigne** (une « liste » de 200 nœuds, sans aucun fils gauche), de hauteur $n$.
 

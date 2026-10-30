@@ -265,8 +265,12 @@ Le tri rapide applique « diviser pour régner », mais divise **autrement** que
         for j in range(bas, haut):
             if tab[j] <= pivot:
                 i = i + 1
-                tab[i], tab[j] = tab[j], tab[i]     # echange
-        tab[i + 1], tab[haut] = tab[haut], tab[i + 1]   # pivot a sa place
+                temp = tab[i]               # echange de tab[i] et tab[j]
+                tab[i] = tab[j]
+                tab[j] = temp
+        temp = tab[i + 1]           # pivot a sa place : echange
+        tab[i + 1] = tab[haut]      # de tab[i + 1] et tab[haut]
+        tab[haut] = temp
         return i + 1                # indice definitif du pivot
     ```
 
@@ -296,20 +300,7 @@ print("Tableau trie :", tab)   # Doit afficher [1, 5, 7, 8, 9, 10]
 
     La **condition d’arrêt** est `bas >= haut` : le sous-tableau a $0$ ou $1$ élément, il n’y a rien à faire. Les deux appels portent sur les éléments à gauche et à droite du pivot, **sans** le pivot, qui est déjà à sa place définitive : la taille diminue donc d’au moins $1$ à chaque appel (variant). Le test affiche `Tableau trie : [1, 5, 7, 8, 9, 10]`.
 
-    *Autre méthode* (pour voir l’idée, hors trame : elle **renvoie une nouvelle liste** au lieu de trier `tab` en place) : la partition s’écrit avec deux listes construites **par compréhension**, les éléments `<=` pivot d’un côté, les éléments `>` pivot de l’autre.
-
-    ```python
-    def tri_rapide_liste(t):
-        if len(t) <= 1:                     # condition d'arret
-            return t
-        pivot = t[len(t) - 1]               # le pivot est le dernier element
-        reste = t[:len(t) - 1]
-        petits = [x for x in reste if x <= pivot]
-        grands = [x for x in reste if x > pivot]
-        return tri_rapide_liste(petits) + [pivot] + tri_rapide_liste(grands)
-    ```
-
-    Plus lisible, mais chaque appel recopie des listes : on perd l’avantage « en place » du tri rapide.
+    *Autre méthode*, qui renvoie une nouvelle liste au lieu de trier `tab` en place : voir l’exercice 8.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Rappel : le tri fusion <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-tp-2-3 }
 
@@ -453,7 +444,9 @@ Testez différentes stratégies de choix du pivot (premier élément, dernier é
                 k = random.randint(bas, haut)
             else:                                   # "dernier"
                 k = haut
-            tab[k], tab[haut] = tab[haut], tab[k]   # le pivot choisi va a la fin
+            temp = tab[k]                           # le pivot choisi va a la fin :
+            tab[k] = tab[haut]                      # echange de tab[k] et tab[haut]
+            tab[haut] = temp
             p = partition(tab, bas, haut)
             tri_rapide_pivot(tab, bas, p - 1, choix)
             tri_rapide_pivot(tab, p + 1, haut, choix)
@@ -485,6 +478,31 @@ Testez différentes stratégies de choix du pivot (premier élément, dernier é
     - On préfère le tri fusion quand il faut une **garantie** au pire cas ($n \log_2 n$ toujours), par exemple sur des données qui peuvent être déjà triées ou fournies par un adversaire, ou quand on veut un tri **stable** (deux éléments égaux gardent leur ordre) : le tri fusion l’est car, en cas d’égalité, la fusion prend l’élément de *gauche* (test `gauche[i] <= droite[j]`) ; le tri rapide ne l’est pas.
 
     - Le tri rapide trie **sur place** : il ne recopie pas de sous-tableaux et n’alloue pas de mémoire supplémentaire, il fait moins d’opérations par élément (« constantes cachées » plus petites) et parcourt le tableau de manière contiguë, ce que la mémoire cache du processeur favorise. Avec un bon pivot, le pire cas devient très improbable.
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 8</span> — Pour aller plus loin : un tri rapide qui renvoie une nouvelle liste <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-tp-2-8 }
+
+1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction récursive `tri_rapide_liste(t)` qui renvoie une **nouvelle** liste triée, sans modifier `t` et sans fonction `partition` : on prend pour pivot le dernier élément, on construit **par compréhension** la liste `petits` des autres éléments `<=` pivot et la liste `grands` des éléments `>` pivot, puis on combine.
+
+2.  Comparer avec `tri_rapide` : quelle version est la plus facile à lire ? Laquelle utilise le plus de mémoire, et pourquoi ?
+
+??? corrige "Corrigé"
+
+    **1.** La partition s’écrit avec deux listes construites **par compréhension**, les éléments `<=` pivot d’un côté, les éléments `>` pivot de l’autre.
+
+    ```python
+    def tri_rapide_liste(t):
+        if len(t) <= 1:                     # condition d'arret
+            return t
+        pivot = t[len(t) - 1]               # le pivot est le dernier element
+        reste = t[:len(t) - 1]
+        petits = [x for x in reste if x <= pivot]
+        grands = [x for x in reste if x > pivot]
+        return tri_rapide_liste(petits) + [pivot] + tri_rapide_liste(grands)
+    ```
+
+    `tri_rapide_liste([10, 7, 8, 9, 1, 5])` renvoie `[1, 5, 7, 8, 9, 10]`, et la liste de départ n’est pas modifiée. Variant : la longueur de `t`, car `petits` et `grands` ne contiennent pas le pivot.
+
+    **2.** Cette version est plus **lisible** : elle dit directement « les petits, le pivot, les grands ». Mais chaque appel **construit de nouvelles listes** (`reste`, `petits`, `grands` et le résultat concaténé) : à chaque niveau de récursion, on recopie à nouveau tous les éléments, et l’on utilise une mémoire proportionnelle à $n$ en plus du tableau. `tri_rapide` échange les valeurs dans `tab` lui-même : il ne recopie rien, c’est l’avantage « en place » du tri rapide.
 
 ## Jeu de tests — à faire passer
 
@@ -854,7 +872,7 @@ Pour tourner l’image d’un quart de tour (sens des aiguilles d’une montre) 
 
 La **condition d’arrêt** : un quadrant de **1 pixel** n’a rien à faire (il est déjà « tourné »).
 
-![](../figures/0caa848b7d037eaf.svg){ .tikz loading=lazy }
+![](../figures/4ce3f8d9a05cefad.svg){ .tikz loading=lazy }
 
 Permutation des blocs (rotation horaire), *après* que chaque bloc a été tourné sur lui-même.
 
@@ -1032,15 +1050,31 @@ sortie.save("joconde_tournee.png")
 
     - *Bonus* : à chaque niveau de récursion, chaque pixel est déplacé une fois ; il y a $\log_2 n$ niveaux, d’où $n^2 \log_2 n$ écritures de pixels (pour $n = 256$ : $256^2 \times 8 = 524\,288$). Une simple recopie dans une nouvelle image coûterait $n^2$ écritures, mais une deuxième image en mémoire. **Compromis** : on accepte un peu plus de *temps* pour économiser la *mémoire*.
 
-      *Autre méthode* (la « simple recopie », sans diviser pour régner) : le pixel ligne `i`, colonne `j` de l’image tournée est le pixel ligne `n - 1 - j`, colonne `i` de l’image de départ. On construit la nouvelle image **par compréhension**, ligne par ligne :
+      *Autre méthode* (la « simple recopie », sans diviser pour régner) : voir l’exercice 6.
 
-      ```python
-      def rotation_copie(image):
-          n = len(image)
-          return [[image[n - 1 - j][i] for j in range(n)] for i in range(n)]
-      ```
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — La simple recopie <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-tp-4-6 }
 
-      Une seule passe ($n^2$ écritures), mais une **deuxième image** de $n^2$ pixels en mémoire.
+1.  Sur l’image $4\times4$ de l’exercice 1, de quelle case de l’image de départ vient le pixel ligne `0`, colonne `0` de l’image tournée ? et celui ligne `1`, colonne `3` ? En déduire, pour une image $n\times n$, la ligne et la colonne de départ du pixel ligne `i`, colonne `j` de l’image tournée.
+
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `rotation_copie(image)` qui **renvoie** une nouvelle image tournée d’un quart de tour horaire, construite **par compréhension**, sans modifier `image`. Vérifier sur l’image $4\times4$ qu’on obtient le même résultat qu’avec la fonction récursive.
+
+3.  Comparer les deux méthodes : nombre d’écritures de pixels, mémoire utilisée.
+
+??? corrige "Corrigé"
+
+    **1.** Le pixel ligne `0`, colonne `0` de l’image tournée est `13` : il vient de la ligne `3`, colonne `0`. Le pixel ligne `1`, colonne `3` est `2` : il vient de la ligne `0`, colonne `1`. En général, le pixel ligne `i`, colonne `j` de l’image tournée est le pixel ligne `n - 1 - j`, colonne `i` de l’image de départ (la colonne `i` de départ, lue de bas en haut, devient la ligne `i`).
+
+    **2.** On construit la nouvelle image **par compréhension**, ligne par ligne :
+
+    ```python
+    def rotation_copie(image):
+        n = len(image)
+        return [[image[n - 1 - j][i] for j in range(n)] for i in range(n)]
+    ```
+
+    Sur l’image $4\times4$, on obtient `[[13, 9, 5, 1], [14, 10, 6, 2], [15, 11, 7, 3], [16, 12, 8, 4]]`, comme avec la fonction récursive (exercice 1).
+
+    **3.** La recopie fait une seule passe : $n^2$ écritures, contre $n^2 \log_2 n$ pour la version récursive. Mais elle crée une **deuxième image** de $n^2$ pixels en mémoire, alors que la version récursive n’utilise qu’une mémoire constante en plus de l’image (les 4 pixels de l’échange). C’est le compromis temps / mémoire de l’exercice 5.
 
 ## Jeu de tests — à faire passer
 

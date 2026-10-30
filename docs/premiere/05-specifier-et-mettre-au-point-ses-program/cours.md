@@ -281,6 +281,10 @@ while r >= b:
     r -= b
 ```
 
+!!! remarque "Remarque — Et la terminaison ?"
+
+    L’invariant prouve que le résultat est juste *si* la boucle s’arrête. Pour une boucle `while`, il faut aussi un **variant** (chapitre *Les bases de la programmation Python*, § V.B) : ici `r` est un entier, positif ou nul (premier invariant), qui diminue strictement à chaque tour (on lui retranche `b > 0`). La boucle se termine donc.
+
 <span id="cours-05-14" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[14](exercices.md#ex-05-14) à [18](exercices.md#ex-05-18)** (docstring de `division_euclidienne` ; invariant de boucle ; un meilleur nom : docstring, invariant et tests)

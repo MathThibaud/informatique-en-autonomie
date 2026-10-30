@@ -6,7 +6,7 @@
 
 |  |  |
 |:---|:---|
-| **Programme (BO)** | *« Notion de calculabilité, de décidabilité. Montrer, par un exemple, qu’un programme peut prendre un autre programme pour argument. Comprendre l’impossibilité de construire un programme qui déciderait si un programme quelconque termine. »* |
+| **Programme (BO)** | *« Notion de programme en tant que donnée. Calculabilité, décidabilité. Comprendre que tout programme est aussi une donnée. Comprendre que la calculabilité ne dépend pas du langage de programmation utilisé. Montrer, sans formalisme théorique, que le problème de l’arrêt est indécidable. »* |
 | **Prérequis** | la notion de **fonction** et de **paramètre** ; les **boucles** et la **terminaison** (variant de boucle) ; la notion de **coût** d’un algorithme (linéaire, quadratique, exponentiel, vue en Première) ; les **paradigmes** de programmation (voir le chapitre *Programmation objet et paradigmes*). (→ fiches de révision : ch. 2) |
 | **Objectifs** | *comprendre* qu’un programme est une **donnée** comme une autre ; *connaître* la distinction **décidable / indécidable** ; *savoir refaire* le raisonnement du **problème de l’arrêt** ; *situer* la **thèse de Church-Turing** et la **Turing-complétude** ; *découvrir* la question **P versus NP** <span class="horsprog">au-delà du programme</span>. |
 
@@ -87,7 +87,7 @@ Rêvons donc d’un programme `halt` qui prendrait en entrée :
 
 - `x` : une entrée pour ce programme ;
 
-et qui renverrait `True` si `prog(x)` s’arrête, `False` sinon — **sans jamais l’exécuter** (il l’*analyse*, comme nous l’avons fait à l’œil).
+et qui renverrait `True` si `prog(x)` s’arrête, `False` sinon — en **s’arrêtant toujours**, en un temps fini, quel que soit `prog` (qu’il l’*analyse*, comme nous l’avons fait à l’œil, ou qu’il le simule en partie, peu importe : il doit finir par répondre, et répondre juste).
 
 ![](../figures/de3267ce5f23e9a4.svg){ .tikz loading=lazy }
 
@@ -114,7 +114,7 @@ Maintenant, la question fatale. Puisque `paradoxe` est un programme, donnons-le 
 
 ![](../figures/94e47e66b52b197f.svg){ .tikz loading=lazy }
 
-**Dans les deux cas**, la réponse de `halt` est **démentie** par `paradoxe` lui-même. Il n’y a pas d’échappatoire : `halt` ne peut donner *aucune* réponse correcte sur cette entrée. La seule hypothèse qu’on avait faite — *`halt` existe* — est donc **intenable**.
+**Dans les deux cas**, la réponse de `halt` est **démentie** par `paradoxe` lui-même. Il n’y a pas d’échappatoire : `halt` ne peut donner *aucune* réponse correcte sur cette entrée. La seule hypothèse qu’on avait faite — *`halt` existe, s’arrête toujours et répond juste* — est donc **intenable**.
 
 !!! theoreme "Théorème 1 — Indécidabilité du problème de l’arrêt — Turing, 1936"
 
@@ -143,7 +143,7 @@ Ce raisonnement porte un nom : la **diagonale**. Son moteur secret est l’**au
 
     Rassurez-vous : on peut très bien, **au cas par cas**, prouver qu’*un* programme donné s’arrête (avec un **variant de boucle**, vu en Première). Ce qui est impossible, c’est une **unique méthode automatique et universelle** qui marcherait sur **tous** les programmes. La différence est capitale : on n’a pas prouvé que « c’est trop dur », on a prouvé que « ça ne peut pas exister ».
 
-### Une contagion : le théorème de Rice
+### Une contagion : le théorème de Rice <span class="horsprog">au-delà du programme</span>
 
 Le problème de l’arrêt n’est pas un cas isolé. En le « ramenant » (on dit **réduisant**) à d’autres questions, on montre qu’une foule de questions sur le *comportement* d’un programme sont, elles aussi, indécidables :
 
@@ -188,6 +188,10 @@ Un **ruban infini** découpé en cases ; une **tête** qui lit et écrit un sym
     **Tout** ce qui est « calculable » au sens intuitif peut être calculé par une machine de Turing. Autrement dit, la machine de Turing capture **exactement** la notion de calcul.
 
 Cette affirmation n’est pas un théorème (on ne peut pas *prouver* une définition de l’intuition), mais **aucun** modèle de calcul proposé depuis 90 ans n’a jamais su calculer davantage. Fait remarquable : à la même époque, Alonzo **Church** définissait le calcul d’une tout autre façon (le **$\lambda$-calcul**, purement mathématique)… et l’on a démontré que les deux modèles calculent **exactement les mêmes fonctions**. Deux chemins, un même sommet.
+
+!!! encadre "La machine universelle (Turing, 1936)"
+
+    Dans le même article, Turing décrit une machine **universelle** : on écrit sur son ruban la **table de règles** d’une autre machine, suivie de l’entrée de celle-ci, et la machine universelle **simule** pas à pas cette autre machine. Une seule machine suffit donc à exécuter **tous** les algorithmes : il suffit de lui fournir le bon programme *comme donnée*. C’est l’idée de l’ordinateur à **programme enregistré** (modèle de von Neumann, vu en Première), où programme et données partagent la même mémoire ; c’est aussi ce que fait l’interpréteur `python3` avec votre code. Le simulateur du TP proposé en fin de chapitre, qui lit une table de règles comme une donnée, est lui aussi une machine universelle.
 
 ### Turing-complétude : tous les langages se valent
 
@@ -250,7 +254,7 @@ Voici la distinction sur laquelle tout repose. Il y a un monde entre **trouver**
 
 !!! exemple "Exemple — Le Sudoku"
 
-    Remplir une grille de Sudoku vide peut être **très long**. Mais si je vous **tends** une grille remplie, vérifier qu’elle est correcte (chaque ligne, colonne et bloc contient $1$ à $9$ ; $1$ à $4$ dans la grille réduite ci-dessous) est **immédiat**. **Vérifier** est facile ; **trouver** paraît dur.
+    Compléter une grille de Sudoku partiellement remplie peut être **très long**, et de plus en plus long quand la grille grandit : on parle du Sudoku **généralisé**, sur une grille $n^2\times n^2$ ($4\times 4$, $9\times 9$, $16\times 16$…). Mais si je vous **tends** une grille remplie, vérifier qu’elle est correcte (chaque ligne, colonne et bloc contient $1$ à $9$ ; $1$ à $4$ dans la grille réduite ci-dessous) est **immédiat**. **Vérifier** est facile ; **trouver** paraît dur.
 
 ![](../figures/9c86b384d1580c76.svg){ .tikz loading=lazy }
 
@@ -278,7 +282,7 @@ D’abord, une évidence : si on sait **résoudre** vite (P), alors on sait **v
 
 !!! definition "Définition 7 — Problème NP-complet"
 
-    Un problème est **NP-complet** s’il est « parmi les plus durs » de NP : **tout** problème de NP peut s’y **ramener** (réduction en temps polynomial). **SAT** (Cook, 1971), le Sudoku, le voyageur de commerce, la coloration à $3$ couleurs sont NP-complets.
+    Un problème est **NP-complet** s’il est « parmi les plus durs » de NP : **tout** problème de NP peut s’y **ramener** (réduction en temps polynomial). **SAT** (Cook, 1971), le Sudoku généralisé ($n^2\times n^2$), le voyageur de commerce, la coloration à $3$ couleurs sont NP-complets.
 
 !!! curieux "Pour les curieux (facultatif) — Le sac à dos : NP-complet, et pourtant résolu au chapitre 11 ?"
 
@@ -290,7 +294,7 @@ Conséquence spectaculaire : si l’on trouvait un jour un algorithme polynomia
 
     Si **P $=$ NP** :
 
-    - la **cryptographie** s’effondre — casser RSA revient à **factoriser** un grand nombre, ce qui deviendrait rapide ;
+    - la **cryptographie** s’effondre — on sait casser RSA si l’on sait **factoriser** un grand nombre, ce qui deviendrait rapide ;
 
     - d’innombrables problèmes de **logistique**, d’**emploi du temps**, de **repliement de protéines** se résoudraient d’un coup ;
 
@@ -298,7 +302,7 @@ Conséquence spectaculaire : si l’on trouvait un jour un algorithme polynomia
 
 !!! remarque "Remarque — Ne pas confondre !"
 
-    **Indécidable** (problème de l’arrêt) = « aucun algorithme, **jamais** ». **NP-complet** (Sudoku) = « un algorithme existe, mais peut-être **lent** ». Le premier parle du **possible**, le second du **rapide**. Et « non déterministe » (une machine imaginaire qui essaierait toutes les pistes *à la fois*) n’a **rien** à voir avec l’ordinateur **quantique**.
+    **Indécidable** (problème de l’arrêt) = « aucun algorithme, **jamais** ». **NP-complet** (Sudoku généralisé $n^2\times n^2$) = « un algorithme existe, mais peut-être **lent** ». Le premier parle du **possible**, le second du **rapide**. Et « non déterministe » (une machine imaginaire qui essaierait toutes les pistes *à la fois*) n’a **rien** à voir avec l’ordinateur **quantique**.
 
 <span id="cours-13-10" class="ancre"></span>
 
@@ -316,7 +320,7 @@ Ce chapitre prend du recul sur toute l’année : chaque programme écrit depuis
 
 - **1931** — Kurt **Gödel** (25 ans) démontre ses **théorèmes d’incomplétude** : non, les mathématiques ne peuvent être à la fois complètes et cohérentes.
 
-- **1936** — Alan **Turing** (24 ans) invente sa **machine** et tranche l’*Entscheidungsproblem* par le **problème de l’arrêt**. La même année, Alonzo **Church** obtient le même résultat par le **$\lambda$-calcul**. L’**informatique théorique** est née… avant le premier ordinateur.
+- **1936** — Alan **Turing** (24 ans) invente sa **machine**, et la machine **universelle** capable d’exécuter tous les algorithmes, et tranche l’*Entscheidungsproblem* par le **problème de l’arrêt**. La même année, Alonzo **Church** obtient le même résultat par le **$\lambda$-calcul**. L’**informatique théorique** est née… avant le premier ordinateur.
 
 - **1939–45** — Turing casse le code **Enigma** à Bletchley Park : la théorie sert la guerre.
 
@@ -324,7 +328,7 @@ Ce chapitre prend du recul sur toute l’année : chaque programme écrit depuis
 
 - **1971** — Stephen **Cook** (et, indépendamment, Leonid **Levin**) fondent la théorie de la **NP-complétude** : la question **P versus NP** est posée. Elle est toujours ouverte.
 
-*Épilogue : Turing, persécuté pour son homosexualité, meurt en 1954 ; il sera réhabilité, et son nom donné à la plus haute récompense de l’informatique, le **prix Turing** — le « Nobel » de la discipline.*
+*Épilogue : Turing, persécuté pour son homosexualité, meurt en 1954. Dès 1966, son nom est donné à la plus haute récompense de l’informatique, le **prix Turing** — le « Nobel » de la discipline ; il n’est réhabilité que bien plus tard (excuses officielles du gouvernement britannique en 2009, grâce posthume en 2013).*
 
 !!! curieux "Pour les curieux (facultatif) — Liens avec d’autres chapitres"
 
@@ -344,7 +348,7 @@ Ce chapitre prend du recul sur toute l’année : chaque programme écrit depuis
 | Indécidable | *aucun* algorithme ne peut répondre à coup sûr, pour toute entrée |
 | Problème de l’arrêt | **indécidable** (Turing, 1936) : pas de `halt` universel |
 | Preuve | la machine `paradoxe` se contredit dans les deux cas (auto-référence) |
-| Théorème de Rice | toute question non triviale sur le *comportement* est indécidable |
+| Théorème de Rice <span class="horsprog">au-delà du programme</span> | toute question non triviale sur le *comportement* est indécidable |
 | Calculable | calculable par une machine de Turing (thèse de Church-Turing) |
 | Turing-complet | un langage qui calcule tout le calculable ; tous équivalents |
 | Classe P <span class="horsprog">au-delà du programme</span> | résoluble en temps polynomial (« raisonnable ») |

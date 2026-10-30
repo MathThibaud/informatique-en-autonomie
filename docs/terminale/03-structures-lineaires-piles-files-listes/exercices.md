@@ -671,7 +671,7 @@ class File:
 
 « Les éléments entrent par la queue avec `append` et sortent par la tête avec `pop` : le premier entré est le premier sorti. »
 
-1.  La réponse est-elle correcte ? Dérouler à la main la séquence `f = File()`, `f.enfiler(7)`, `f.enfiler(19)`, `f.enfiler(22)`, puis `f.tete()` et `f.defiler()` (dessiner la file horizontalement, tête à droite, comme dans cette feuille).
+1.  La réponse est-elle correcte ? Dérouler à la main la séquence `f = File()`, `f.enfiler(7)`, `f.enfiler(19)`, `f.enfiler(22)`, puis `f.tete()` et `f.defiler()` (dessiner la file horizontalement, tête à droite, comme dans tout le chapitre).
 
 2.  Localiser et corriger l’erreur.
 
@@ -1228,7 +1228,7 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
     - Exemple : on fait entrer $1, 2, 3$ ; la pile rend $3$ d’abord, la file rend $1$.
 
-    - Piège : la représentation dessinée (pile verticale, sommet en haut ; file horizontale) n’est qu’une convention : suivre celle de l’énoncé.
+    - Piège : se tromper de bout. La pile se dessine verticalement, sommet en haut ; la file se dessine horizontalement, mais le côté de la tête n’est pas fixé : suivre celui de l’énoncé.
 
     **Sujet 2.**
 
@@ -1249,3 +1249,138 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
     - Accès au $k$-ième élément : il faut suivre $k$ liens depuis la tête ; le coût est proportionnel à $k$.
 
     - Comparaison avec un tableau : accès direct par l’indice, mais insertion au début coûteuse (il faut décaler tous les éléments).
+
+### Interface d’une liste, liste ou dictionnaire
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 28</span> — L’interface d’une liste <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-28 }
+
+On dispose de l’interface du cours : `liste_vide()`, `est_vide(L)`, `ajouter_tete(x, L)`, `tete(L)` et `queue(L)`.
+
+1.  On pose `L = ajouter_tete(3, ajouter_tete(8, ajouter_tete(1, liste_vide())))`. Écrire les éléments de `L` dans l’ordre, puis donner `tete(L)`, `tete(queue(L))` et `est_vide(queue(queue(queue(L))))`.
+
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> En n’utilisant **que** l’interface, écrire une fonction récursive `appartient(x, L)` qui renvoie `True` si `x` est un élément de `L`, `False` sinon.
+
+    ??? pouce "Coup de pouce"
+
+        Condition d’arrêt : la liste vide ne contient rien. Sinon, soit la tête est `x`, soit il faut chercher dans la queue.
+
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Toujours avec la seule interface, écrire `renverser(L)` qui renvoie une **nouvelle** liste contenant les éléments de `L` dans l’ordre inverse.
+
+    ??? pouce "Coup de pouce"
+
+        Partir d’une liste vide `r` et, en parcourant `L` du début à la fin, ajouter chaque élément en tête de `r` : le premier élément lu finit en dernier.
+
+4.  <span class="run" title="À programmer et tester sur machine">▶</span> Implémenter les cinq opérations de l’interface avec la classe `Cellule` du rappel, puis tester les questions 1 à 3.
+
+5.  Après `M = ajouter_tete(9, L)`, la liste `L` a-t-elle changé ? Comparer avec `p.empiler(9)` sur une pile `p`.
+
+??? corrige "Corrigé"
+
+    **1.** On lit de l’intérieur vers l’extérieur : `1`, puis `8` devant, puis `3` devant. `L` est la liste `3, 8, 1`. `tete(L)` $\to$ `3` ; `tete(queue(L))` $\to$ `8` ; après trois `queue`, il ne reste rien : `est_vide(…)` $\to$ `True`.
+
+    **2.**
+
+    ```python
+    def appartient(x, L):
+        """Renvoie True si x est un element de la liste L."""
+        if est_vide(L):                  # condition d'arret : liste vide
+            return False
+        if tete(L) == x:
+            return True
+        return appartient(x, queue(L))   # on cherche dans la queue
+    ```
+
+    `appartient(8, L)` $\to$ `True` ; `appartient(5, L)` $\to$ `False`. Variant : la longueur de `L`, qui diminue de 1 à chaque appel.
+
+    **3.**
+
+    ```python
+    def renverser(L):
+        """Renvoie une nouvelle liste : les elements de L dans l'ordre inverse."""
+        r = liste_vide()
+        while not est_vide(L):
+            r = ajouter_tete(tete(L), r)   # l'element lu passe devant r
+            L = queue(L)
+        return r
+    ```
+
+    Sur `3, 8, 1`, `r` vaut successivement `3`, puis `8, 3`, puis `1, 8, 3`. La variable locale `L` avance dans la liste, mais la liste reçue n’est pas modifiée.
+
+    **4.**
+
+    ```python
+    def liste_vide():
+        return None
+
+    def est_vide(L):
+        return L is None
+
+    def ajouter_tete(x, L):
+        return Cellule(x, L)
+
+    def tete(L):
+        return L.valeur
+
+    def queue(L):
+        return L.suivante
+    ```
+
+    Les fonctions des questions 2 et 3 marchent sans changement avec cette implémentation : elles n’utilisent que l’interface.
+
+    **5.** Non : `ajouter_tete` **renvoie** une nouvelle liste `9, 3, 8, 1`, dont la suite est `L` ; `L` vaut toujours `3, 8, 1`. Au contraire, `p.empiler(9)` ne renvoie rien et **modifie** la pile `p`. Les deux structures ne se distinguent pas par leur contenu, mais par leur **jeu de méthodes**.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 29</span> — Liste ou dictionnaire ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-29 }
+
+Le portique d’un lycée doit vérifier, à chaque passage, que le numéro de badge présenté est autorisé. Il y a $n$ badges autorisés.
+
+1.  On range les numéros autorisés dans une liste `autorises`. Combien de comparaisons fait, au pire, le test `b in autorises` ? Quand ce pire cas se produit-il ?
+
+2.  On range plutôt les badges dans un dictionnaire `badges` dont les **clés** sont les numéros (et les valeurs, le nom de l’élève). Que dire du coût du test `b in badges` ?
+
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Recopier et compléter la fonction suivante, qui mesure le temps d’un test pour un badge absent (le pire cas), puis l’appeler pour $n = 10\,000$, $100\,000$ et $1\,000\,000$. Que constate-t-on quand $n$ est multiplié par 10 ?
+
+    ```python
+    import time
+
+    def mesurer(n):
+        """Renvoie le couple (temps liste, temps dictionnaire), en secondes."""
+        autorises = [b for b in range(n)]
+        badges = {b: "inconnu" for b in range(n)}
+        debut = time.perf_counter()
+        trouve = -1 in autorises
+        t_liste = time.perf_counter() - debut
+        ...                              # a completer pour le dictionnaire
+        return (t_liste, t_dico)
+    ```
+
+4.  Le surveillant veut aussi savoir si une élève nommée `"Lina"` a un badge. Le test `"Lina" in badges.values()` est-il aussi rapide que `b in badges` ? Pourquoi ?
+
+5.  Le portique doit en plus afficher, à la fin de la journée, les passages **dans l’ordre** où ils ont eu lieu. Quelle structure choisir pour mémoriser les passages ? Et pour les badges autorisés ?
+
+??? corrige "Corrigé"
+
+    **1.** `b in autorises` compare `b` aux éléments un par un : au pire $n$ comparaisons, quand `b` est absent (ou est le dernier élément). Coût linéaire, en O($n$).
+
+    **2.** Python ne parcourt pas les clés : il calcule, à partir de `b`, l’endroit où cette clé serait rangée. Le coût est à peu près constant, en O(1), quel que soit $n$.
+
+    **3.**
+
+    ```python
+        debut = time.perf_counter()
+        trouve = -1 in badges
+        t_dico = time.perf_counter() - debut
+    ```
+
+    Ordres de grandeur obtenus (ils dépendent de la machine) :
+
+    |      $n$      |     **liste**      |       **dictionnaire**        |
+    |:-------------:|:------------------:|:-----------------------------:|
+    |   $10\,000$   | environ $0{,}1$ ms |   moins d’une microseconde    |
+    |  $100\,000$   |   environ $1$ ms   |   moins d’une microseconde    |
+    | $1\,000\,000$ |  environ $10$ ms   | de l’ordre d’une microseconde |
+
+    Quand $n$ est multiplié par 10, le temps de la liste est multiplié par 10 environ (coût linéaire) ; celui du dictionnaire ne change presque pas (les petites variations sont dues à la mesure elle-même).
+
+    **4.** Non. Ce sont les **clés** qui se trouvent en temps constant. `badges.values()` est parcouru valeur par valeur : O($n$), comme une liste. Si l’on cherche souvent par nom, il faut un second dictionnaire dont les clés sont les noms.
+
+    **5.** Pour les passages, une **liste** (ou une **file**) : on ajoute chaque passage à la fin, et l’ordre est conservé. Pour les badges autorisés, le **dictionnaire**, puisque l’opération la plus fréquente est « ce badge est-il autorisé ? ». Un même programme peut utiliser les deux structures, chacune pour ce qu’elle fait bien.

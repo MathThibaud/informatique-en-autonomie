@@ -32,7 +32,7 @@ Pour chercher un mot dans un dictionnaire de $2\,000$ pages, on ouvre *au milieu
 
     - **Combiner** : recoller les solutions des sous-problèmes en une solution du problème de départ.
 
-![](../figures/69cb92003d664a5e.svg){ .tikz loading=lazy }
+![](../figures/9e563b4b4f5ae5c5.svg){ .tikz loading=lazy }
 
 !!! remarque "Remarque"
 
@@ -67,7 +67,7 @@ Reprenons le dictionnaire. On dispose d’un tableau **déjà trié** et on veut
 
         On doit l’appeler sur un tableau **trié** dans l’ordre croissant : sinon, comparer `cible` au milieu ne dit pas de quel côté chercher. Le premier appel porte sur **tout** le tableau : pour chercher `17` dans `t`, on écrit `recherche(t, 17, 0, len(t) - 1)`. À chaque appel, l’**intervalle de recherche est coupé en deux**.
 
-![](../figures/1c580ab93898aafe.svg){ .tikz loading=lazy }
+![](../figures/43d999724d3a5b26.svg){ .tikz loading=lazy }
 
 !!! propriete "Propriété 1 — Coût de la recherche dichotomique"
 
@@ -216,17 +216,17 @@ def tri_fusion(tab):
 
 Suivons l’algorithme sur `[5, 2, 8, 1, 9, 3, 7, 4]`. On **descend** en coupant en deux (diviser), jusqu’aux singletons ; puis on **remonte** en fusionnant (combiner).
 
-![](../figures/c84aafedf4f8fea9.svg){ .tikz loading=lazy }
+![](../figures/ed606dfeafff2e5a.svg){ .tikz loading=lazy }
 
 Descente (diviser) : on coupe en deux jusqu’aux singletons.
 
-![](../figures/f341f7172af157b5.svg){ .tikz loading=lazy }
+![](../figures/b85b589b4fc0fe22.svg){ .tikz loading=lazy }
 
 Remontée (combiner) : on fusionne deux à deux les moitiés triées.
 
 !!! curieux "Pour les curieux (facultatif)"
 
-    Cette version renvoie une **nouvelle liste** (claire, mais elle recopie les données). On peut aussi écrire des versions « en place », qui rangent les valeurs directement dans le tableau donné au lieu de renvoyer une nouvelle liste : c’est le cas du *tri rapide* et du *Tim sort* des TP proposés en fin de chapitre.
+    Cette version renvoie une **nouvelle liste** (claire, mais elle recopie les données). On peut aussi écrire des versions qui rangent les valeurs directement dans le tableau donné au lieu de renvoyer une nouvelle liste : c’est le cas du *tri rapide*, vraiment « en place » (il n’utilise presque aucune mémoire en plus), et du *Tim sort* des TP proposés en fin de chapitre (qui modifie le tableau donné, mais recopie des morceaux pendant ses fusions).
 
 ### Terminaison
 
@@ -252,7 +252,7 @@ C’est le point que le programme demande d’« exhiber ». Reprenons l’arbre
 
 En multipliant, *« $\log_2 n$ niveaux, chacun coûtant $n$ »*, on obtient un coût total de l’ordre de $\boxed{n\log_2 n}$, et cela **même dans le pire des cas** — contrairement au tri rapide que l’on verra plus loin.
 
-![](../figures/d66ff983deb81fae.svg){ .tikz loading=lazy }
+![](../figures/850913c6115ffda8.svg){ .tikz loading=lazy }
 
 <span class="retouract">↺ Retour sur l'activité.</span> Le tri en équipe de l’activité était un tri fusion, la consigne jouant le rôle de la fonction récursive : $3$ étages de coupes pour $8$ cartes, au plus $8$ comparaisons par étage de fusions, soit environ $8 \times 3 = 24$ contre $28$ pour le tri par sélection ; avec $1\,024$ cartes, $10\,240$ contre $523\,776$.
 
@@ -266,11 +266,27 @@ Le gain n’a l’air de rien sur un petit tableau ; il devient énorme quand $n
 | $1\,000$ |     $1\,000\,000$ |      $\approx 10\,000$ |     $100\times$ |
 |   $10^6$ |         $10^{12}$ | $\approx 2\times 10^7$ | $50\,000\times$ |
 
-![](../figures/4bb642e30550754a.svg){ .tikz loading=lazy }
+![](../figures/4071af4605080b08.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 2 — À retenir sur le coût"
 
     Diviser pour régner transforme souvent un coût **quadratique** ($n^2$) en coût **quasi-linéaire** ($n\log_2 n$), ou un coût **linéaire** ($n$) en coût **logarithmique** ($\log_2 n$). C’est la raison d’être de la méthode.
+
+!!! regle "Règle 3 — Les classes de coût et la notation O"
+
+    On note **O($f(n)$)** (« grand O de $f(n)$ ») un coût **au plus proportionnel** à $f(n)$ quand la taille $n$ des données devient grande : les constantes et les termes plus petits ne comptent pas. Le chapitre *Structures linéaires* a introduit O(1) et O($n$) ; voici la liste complète, avec les mots qu’emploient les sujets de bac.
+
+    | **Coût** | **Notation** | **Exemple** |
+    |:---|:---|:---|
+    | constant | O(1) | dépiler ; accéder à `t[i]` |
+    | logarithmique | O($\log_2 n$) | recherche dichotomique ; recherche dans un ABR équilibré |
+    | linéaire | O($n$) | parcours d’une liste ; `x in liste` |
+    | quasi-linéaire | O($n \log_2 n$) | tri fusion |
+    | quadratique | O($n^2$) | tri par insertion ou par sélection (pire cas) |
+    | cubique | O($n^3$) | trois boucles imbriquées de $n$ tours |
+    | exponentiel | O($2^n$) | tours de Hanoï ($2^n - 1$ déplacements) |
+
+    Le tri fusion est donc en O($n \log_2 n$) dans tous les cas, le tri par insertion en O($n^2$) dans le pire des cas.
 
 ## D’autres visages de « diviser pour régner »
 
@@ -290,7 +306,7 @@ def tri_rapide(tab, bas, haut):
 
 La **partition** range les éléments autour du pivot ; celui-ci se retrouve à sa **place définitive**, les petits à gauche, les grands à droite. On trie ensuite *récursivement* chaque zone.
 
-![](../figures/86b0c815650585f3.svg){ .tikz loading=lazy }
+![](../figures/24d1db0d3d2b25ab.svg){ .tikz loading=lazy }
 
 !!! remarque "Remarque"
 
@@ -304,7 +320,7 @@ L’algorithme utilisé par `sorted()` et `list.sort()` en Python s’appelle **
 
 Le BO cite la **rotation d’un quart de tour d’une image** carrée. On découpe l’image en **quatre quadrants**, on fait tourner récursivement chacun, puis on les **repositionne** en tournant (le quadrant haut-gauche va en haut-droite, etc.). En permutant directement les pixels, cette approche atteint un **coût mémoire constant** — la précision demandée par le programme.
 
-![](../figures/78eec9de9f0bc863.svg){ .tikz loading=lazy }
+![](../figures/1417dea5ee765409.svg){ .tikz loading=lazy }
 
 !!! encadre "Au bac — on vous demandera surtout de…"
 

@@ -10,7 +10,7 @@
 
     - Rappel utile : une couleur $=$ trois nombres **RVB** entre $0$ et $255$ ; le pixel $(0,0)$ est en **haut à gauche**.
 
-    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la charte d’usage de l’IA.
+    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
 ### Le capteur et la formation de l’image
 
@@ -461,3 +461,51 @@ img.show()
     **1.** Le début est juste : $6000 \times 4000 = 24\,000\,000$ pixels (24 Mpx), $3$ octets par pixel, donc $72\,000\,000$ octets $\approx 72$ Mo brut, réduits par la compression JPEG. En revanche, $30$ cm $= 30 / 2{,}54 \approx 11{,}8$ pouces, et $6000 / 11{,}8 \approx \mathbf{508}$ ppp, pas $6000$.  
     **2.** L’assistant a confondu la **définition** (le nombre de pixels : $6000$ en largeur) et la **résolution** (le nombre de pixels *par pouce*) ; le cours précise : « la résolution est le nombre de pixels par unité de longueur ». La valeur juste est environ $508$ ppp — la conclusion (impression de bonne qualité) reste vraie, mais le nombre est faux.  
     **3.** Un ordre de grandeur suffisait : $6000$ ppp sur $11{,}8$ pouces exigerait $6000 \times 11{,}8 \approx 71\,000$ pixels de large, près de **douze fois** plus que la photo n’en possède ($71\,000 / 6000 \approx 11{,}8$). Dès qu’une réponse annonce une résolution, vérifier l’unité (pixels *par pouce*) et refaire la division.
+
+### Compléments
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Photosites ou pixels ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-19 }
+
+<span class="tag">sur papier</span>  Le capteur d’un smartphone porte $48$ millions de photosites. Avec le réglage par défaut, il enregistre des photos de $4000 \times 3000$ pixels ; avec le réglage « haute résolution », des photos de $8000 \times 6000$ pixels.
+
+1.  Combien de pixels contient une photo prise avec chaque réglage ?
+
+2.  Avec le réglage par défaut, combien de photosites servent à fabriquer un pixel ? Et avec le réglage « haute résolution » ?
+
+3.  Un photosite ne mesure qu’une couleur. Comment l’appareil obtient-il les trois valeurs R, V, B de chaque pixel ?
+
+4.  Calculer le poids brut de chaque photo (3 octets par pixel), en Mo. Pourquoi le réglage par défaut n’est-il pas le plus détaillé ?
+
+??? pouce "Coup de pouce"
+
+    Nombre de pixels $=$ largeur $\times$ hauteur ; comparez-le aux $48\,000\,000$ photosites en divisant. Relisez l’encadré « Photosites du capteur et pixels de l’image » du cours.
+
+??? corrige "Corrigé"
+
+    **1.** Réglage par défaut : $4000 \times 3000 = \mathbf{12\,000\,000}$ pixels ($12$ Mpx) ; « haute résolution » : $8000 \times 6000 = \mathbf{48\,000\,000}$ pixels ($48$ Mpx).  
+    **2.** Par défaut : $48\,000\,000 \div 12\,000\,000 = \mathbf{4}$ photosites par pixel (un carré de $2 \times 2$ photosites est regroupé). En « haute résolution » : $48\,000\,000 \div 48\,000\,000 = \mathbf{1}$ photosite par pixel. Le nombre de photosites du capteur ne change pas : seul le nombre de pixels de l’image dépend du réglage.  
+    **3.** Par le **calcul** : l’appareil estime les deux couleurs manquantes de chaque pixel à partir des photosites voisins, qui ont des filtres d’autres couleurs (filtre de Bayer). C’est le **dématriçage**, un algorithme exécuté par l’appareil.  
+    **4.** Par défaut : $12\,000\,000 \times 3 = 36\,000\,000$ octets $\approx \mathbf{36}$ Mo ; « haute résolution » : $48\,000\,000 \times 3 = 144\,000\,000$ octets $\approx \mathbf{144}$ Mo, quatre fois plus. Le réglage par défaut perd des détails, mais il donne des fichiers quatre fois plus légers et une image moins bruitée (chaque pixel profite de la lumière de quatre photosites).
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Profondeur de couleur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-20 }
+
+<span class="tag">sur papier</span>  On rappelle qu’un octet est formé de $8$ bits.
+
+1.  Une image RVB code chaque canal sur un octet. Quelle est sa **profondeur de couleur**, en bits par pixel ?
+
+2.  Dans l’ancien format de l’exercice « Combien de couleurs ? », chaque canal ne prenait que $16$ valeurs, ce qui demande $4$ bits. Quelle était la profondeur de couleur ?
+
+3.  Une image en **niveaux de gris** code chaque pixel par un seul nombre de $0$ à $255$. Quelle est sa profondeur de couleur ? Combien de nuances de gris peut-elle afficher ?
+
+4.  Calculer le poids brut d’une image $1000 \times 800$ en niveaux de gris, puis de la même image en RVB. Que remarque-t-on ?
+
+??? pouce "Coup de pouce"
+
+    La profondeur de couleur, c’est le nombre total de bits pour *un* pixel : additionnez les bits de chaque canal. En niveaux de gris, il n’y a qu’un canal, donc un seul octet par pixel.
+
+??? corrige "Corrigé"
+
+    **1.** $3$ canaux $\times$ $8$ bits $= \mathbf{24}$ **bits** par pixel.  
+    **2.** $3 \times 4 = \mathbf{12}$ **bits** par pixel (et $16^3 = 4096$ couleurs, comme trouvé à l’exercice « Combien de couleurs ? »).  
+    **3.** Un seul nombre sur un octet : $\mathbf{8}$ **bits** par pixel, soit $\mathbf{256}$ nuances de gris (de $0$, noir, à $255$, blanc).  
+    **4.** Niveaux de gris : $1000 \times 800 \times 1 = 800\,000$ octets $= \mathbf{0{,}8}$ Mo ; RVB : $1000 \times 800 \times 3 = 2\,400\,000$ octets $= \mathbf{2{,}4}$ Mo. Plus la profondeur de couleur est grande, plus l’image est lourde : ici trois fois plus ($24$ bits contre $8$).
