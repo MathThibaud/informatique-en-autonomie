@@ -46,6 +46,7 @@ extra_css:
 extra_javascript:
 - javascripts/mathjax.js
 - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+- javascripts/executer.js
 markdown_extensions:
 - abbr
 - attr_list
@@ -62,6 +63,7 @@ markdown_extensions:
 - pymdownx.highlight:
     anchor_linenums: false
     use_pygments: true
+    pygments_lang_class: true
 - pymdownx.inlinehilite
 - pymdownx.arithmatex:
     generic: true

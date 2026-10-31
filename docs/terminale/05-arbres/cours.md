@@ -4,11 +4,18 @@
 
 <span id="chap-05" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Arbres : structures hiérarchiques. Arbres binaires : nœuds, racines, feuilles, sous-arbres gauches, sous-arbres droits. Identifier des situations nécessitant une structure de données arborescente. Évaluer quelques mesures des arbres binaires (taille, encadrement de la hauteur, etc.). »* *« Algorithmes sur les arbres binaires et sur les arbres binaires de recherche. Calculer la taille et la hauteur d’un arbre. Parcourir un arbre de différentes façons (ordres infixe, préfixe ou suffixe ; ordre en largeur d’abord). Rechercher une clé dans un arbre de recherche, insérer une clé. »* |
-| **Prérequis** | la **récursivité** (indispensable ici !), les classes et objets (chapitre *Programmation objet*), les piles et les files, la recherche par dichotomie. (→ fiches de révision : ch. 1, ch. 2, ch. 3) |
-| **Objectifs** | *reconnaître* une situation qui appelle un arbre ; *maîtriser* le vocabulaire ; *calculer* taille et hauteur ; *implémenter* un arbre binaire (de plusieurs façons) et le *parcourir* ; *comprendre* l’arbre binaire de recherche, y *rechercher* et y *insérer* une valeur. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Arbres : structures hiérarchiques. Arbres binaires : nœuds, racines, feuilles, sous-arbres gauches, sous-arbres droits. Identifier des situations nécessitant une structure de données arborescente. Évaluer quelques mesures des arbres binaires (taille, encadrement de la hauteur, etc.). »* *« Algorithmes sur les arbres binaires et sur les arbres binaires de recherche. Calculer la taille et la hauteur d’un arbre. Parcourir un arbre de différentes façons (ordres infixe, préfixe ou suffixe ; ordre en largeur d’abord). Rechercher une clé dans un arbre de recherche, insérer une clé. »*
+
+Prérequis
+:   la **récursivité** (indispensable ici !), les classes et objets (chapitre *Programmation objet*), les piles et les files, la recherche par dichotomie. (→ fiches de révision : ch. 1, ch. 2, ch. 3)
+
+Objectifs
+:   *reconnaître* une situation qui appelle un arbre ; *maîtriser* le vocabulaire ; *calculer* taille et hauteur ; *implémenter* un arbre binaire (de plusieurs façons) et le *parcourir* ; *comprendre* l’arbre binaire de recherche, y *rechercher* et y *insérer* une valeur.
+
+</div>
 
 !!! situation "Situation de départ"
 
@@ -104,7 +111,9 @@ Voici un arbre. On le dessine, par tradition informatique, **la racine en haut**
 
 !!! encadre "À retenir — encadrement de la hauteur d’un arbre binaire de $n$ nœuds"
 
-    Avec la convention du cours (hauteur comptée en nœuds), un arbre binaire de taille $n \geqslant 1$ et de hauteur $h$ vérifie $$\log_2(n+1) \;\leqslant\; h \;\leqslant\; n, \qquad\text{autrement dit}\qquad h \leqslant n \leqslant 2^h - 1.$$
+    Avec la convention du cours (hauteur comptée en nœuds), un arbre binaire de taille $n \geqslant 1$ et de hauteur $h$ vérifie
+
+    $$\log_2(n+1) \;\leqslant\; h \;\leqslant\; n, \qquad\text{autrement dit}\qquad h \leqslant n \leqslant 2^h - 1.$$
 
     - **Au plus $n$** : chaque niveau contient au moins un nœud. La hauteur vaut $n$ pour un arbre **filiforme** (chaque nœud a au plus un fils), dégénéré en une sorte de liste.
 
@@ -231,7 +240,13 @@ Les formules récursives découlent directement de la définition « racine $+$ 
 
 !!! propriete "Propriété 1 — Taille et hauteur, récursivement"
 
-    Pour un arbre `a` de sous-arbres gauche `g` et droit `d`, on définit la **taille** par : $$\texttt{taille}(a) = \begin{cases} 0 & \text{si } a \text{ est vide,} \\ 1 + \texttt{taille}(g) + \texttt{taille}(d) & \text{sinon,} \end{cases}$$ et la **hauteur** par : $$\texttt{hauteur}(a) = \begin{cases} 0 & \text{si } a \text{ est vide,} \\ 1 + \max\big(\texttt{hauteur}(g),\, \texttt{hauteur}(d)\big) & \text{sinon.} \end{cases}$$
+    Pour un arbre `a` de sous-arbres gauche `g` et droit `d`, on définit la **taille** par :
+
+    $$\texttt{taille}(a) = \begin{cases} 0 & \text{si } a \text{ est vide,} \\ 1 + \texttt{taille}(g) + \texttt{taille}(d) & \text{sinon,} \end{cases}$$
+
+    et la **hauteur** par :
+
+    $$\texttt{hauteur}(a) = \begin{cases} 0 & \text{si } a \text{ est vide,} \\ 1 + \max\big(\texttt{hauteur}(g),\, \texttt{hauteur}(d)\big) & \text{sinon.} \end{cases}$$
 
 ```python
 def taille(a):

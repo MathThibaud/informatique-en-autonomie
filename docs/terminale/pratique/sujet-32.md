@@ -4,7 +4,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-32-grand-escalier){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-32-grand-escalier.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/tpratique-32-grand-escalier\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-32-grand-escalierhttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-32-grand-escalier.zip
 
 ??? corrige "Corrigé"
 

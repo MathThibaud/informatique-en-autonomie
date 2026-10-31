@@ -10,7 +10,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/10-defi-aoc-2022-06){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-10-defi-aoc-2022-06.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/p10-defi-aoc-2022-06\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/10-defi-aoc-2022-06https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-10-defi-aoc-2022-06.zip
 
 !!! consignes "Consignes"
 

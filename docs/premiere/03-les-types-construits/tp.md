@@ -6,16 +6,27 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/03-projet-sudoku){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-03-projet-sudoku.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/p03-projet-sudoku\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/03-projet-sudokuhttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-03-projet-sudoku.zip
 
 *Un projet de l’année : une vraie application des *types construits*.*
 
-|  |  |
-|:---|:---|
-| **Prérequis** | boucles `for`, `if`, fonctions, tableaux (type `list`), matrices (`grille[i][j]`). |
-| **Fichiers** | `sudoku_grilles.py` (les grilles de test, à télécharger) et `sudoku.py` (à compléter — vous y écrivez tout votre code). |
-| **Ce que vous allez faire** | représenter et manipuler une **matrice** (la grille $9\times 9$) à l’aide d’un **tableau de tableaux** et de l’accès `grille[i][j]` ; parcourir une ligne, une colonne, un bloc ; écrire des fonctions avec une **spécification** claire et les **tester** avec des `assert`. |
-| **IA** | Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md). L’exercice 1 (lire dans la grille), geste de base des matrices, se fait sans IA. |
+<div class="tete-chapitre" markdown>
+
+Prérequis
+:   boucles `for`, `if`, fonctions, tableaux (type `list`), matrices (`grille[i][j]`).
+
+Fichiers
+:   `sudoku_grilles.py` (les grilles de test, à télécharger) et `sudoku.py` (à compléter — vous y écrivez tout votre code).
+
+Ce que vous allez faire
+:   représenter et manipuler une **matrice** (la grille $9\times 9$) à l’aide d’un **tableau de tableaux** et de l’accès `grille[i][j]` ; parcourir une ligne, une colonne, un bloc ; écrire des fonctions avec une **spécification** claire et les **tester** avec des `assert`.
+
+IA
+:   Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md). L’exercice 1 (lire dans la grille), geste de base des matrices, se fait sans IA.
+
+</div>
 
 ## Le jeu et sa représentation
 

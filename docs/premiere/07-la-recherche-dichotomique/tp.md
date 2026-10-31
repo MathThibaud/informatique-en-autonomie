@@ -8,13 +8,22 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/07-tp-annuaire-devin){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-07-tp-annuaire-devin.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
 
-|  |  |
-|:---|:---|
-| **Durée** | 2 h à 2 h 30 (une à deux séances), en binôme, sur machine. |
-| **Prérequis** | le cours *La recherche dichotomique* (algorithme, variant, coût logarithmique) ; la recherche séquentielle et la notion de coût (chapitre *Algorithmique : le parcours séquentiel*). |
-| **Fichiers** | `tp_dichotomie_annuaire.py` (fabrique l’annuaire, fourni, à ne pas modifier) et `tp_dichotomie_depart.py` (à compléter). Les deux fichiers doivent être dans le **même dossier**. |
+aththibaud.github.io/informatique-en-autonomie/f/p07-tp-annuaire-devin\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/07-tp-annuaire-devinhttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-07-tp-annuaire-devin.zip
+
+<div class="tete-chapitre" markdown>
+
+Durée
+:   2 h à 2 h 30 (une à deux séances), en binôme, sur machine.
+
+Prérequis
+:   le cours *La recherche dichotomique* (algorithme, variant, coût logarithmique) ; la recherche séquentielle et la notion de coût (chapitre *Algorithmique : le parcours séquentiel*).
+
+Fichiers
+:   `tp_dichotomie_annuaire.py` (fabrique l’annuaire, fourni, à ne pas modifier) et `tp_dichotomie_depart.py` (à compléter). Les deux fichiers doivent être dans le **même dossier**.
+
+</div>
 
 !!! encadre "But du TP"
 

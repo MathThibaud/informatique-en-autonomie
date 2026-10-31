@@ -8,7 +8,7 @@
 
     - Écrire chaque requête SQL **sur plusieurs lignes** (`SELECT`… / `FROM`… / `WHERE`…).
 
-    - **Tester ses requêtes** dans la console SQL de **Basthon** : `console.basthon.fr/?kernel=sql`. Trois bases sont fournies (`musique.sql`, `pays.sql`, `bibliotheque.sql`), à télécharger sur `github.com/MathThibaud/nsi-fichiers-eleves`, dossier `terminale/06-exercices-bdd-sql` : copier-coller le script de la base voulue, l’exécuter, puis interroger. Chaque exercice indique la base à charger.
+    - **Tester ses requêtes** dans la console SQL de **Basthon** : `console.basthon.fr/?kernel=sql`. Trois bases sont fournies (`musique.sql`, `pays.sql`, `bibliotheque.sql`), à télécharger sur [`maththibaud.github.io/informatique-en-autonomie/f/t06-exercices-bdd-sql`](https://maththibaud.github.io/informatique-en-autonomie/f/t06-exercices-bdd-sql) : copier-coller le script de la base voulue, l’exécuter, puis interroger. Chaque exercice indique la base à charger.
 
     - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 

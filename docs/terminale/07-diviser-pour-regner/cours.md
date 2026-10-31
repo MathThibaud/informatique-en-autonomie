@@ -4,11 +4,18 @@
 
 <span id="chap-07" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Écrire un algorithme utilisant la méthode "diviser pour régner". »* Le BO cite deux exemples : *« la rotation d’une image bitmap d’un quart de tour avec un coût en mémoire constant »* et *« le tri fusion, qui permet d’exploiter la récursivité et d’exhiber un algorithme de coût en $n\log_2 n$ dans le pire des cas »*. |
-| **Prérequis** | récursivité (condition d’arrêt, variant, coût), listes et tableaux, tris déjà vus (insertion, sélection), notion de coût et de logarithme base 2. (→ fiches de révision : ch. 1) |
-| **Objectifs** | *reconnaître* un problème qui se prête à « diviser pour régner », *écrire* l’algorithme récursif correspondant, et *analyser* son coût (passage de $n^2$ à $n\log_2 n$, de $n$ à $\log_2 n$). |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Écrire un algorithme utilisant la méthode "diviser pour régner". »* Le BO cite deux exemples : *« la rotation d’une image bitmap d’un quart de tour avec un coût en mémoire constant »* et *« le tri fusion, qui permet d’exploiter la récursivité et d’exhiber un algorithme de coût en $n\log_2 n$ dans le pire des cas »*.
+
+Prérequis
+:   récursivité (condition d’arrêt, variant, coût), listes et tableaux, tris déjà vus (insertion, sélection), notion de coût et de logarithme base 2. (→ fiches de révision : ch. 1)
+
+Objectifs
+:   *reconnaître* un problème qui se prête à « diviser pour régner », *écrire* l’algorithme récursif correspondant, et *analyser* son coût (passage de $n^2$ à $n\log_2 n$, de $n$ à $\log_2 n$).
+
+</div>
 
 !!! situation "Situation de départ"
 

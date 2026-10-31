@@ -4,11 +4,18 @@
 
 <span id="chap-02" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Écriture d’un entier positif dans une base $b \geqslant 2$ ; passer de la représentation d’une base dans une autre (bases 2, 10 et 16 privilégiées). Représentation binaire d’un entier relatif (complément à 2). Valeurs booléennes : 0, 1. Opérateurs booléens : `and`, `or`, `not`. Expressions booléennes. Représentation approximative des réels : notion de nombre flottant. Représentation d’un texte en machine : encodages ASCII, ISO-8859-1, Unicode. »* |
-| **Prérequis** | les bases de Python (opérateurs `//` et `%`, boucles, opérateurs `and`, `or`, `not`). (→ fiches de révision : ch. 1) |
-| **Objectifs** | comprendre *comment* une machine stocke un nombre ; *convertir* entre bases 2, 10 et 16 ; dresser une *table de vérité* et comprendre comment des *portes logiques* additionnent ; coder un entier *relatif* (complément à 2) ; comprendre *pourquoi* les nombres à virgule sont *approchés* ; comprendre comment un *texte* est codé (ASCII, Unicode) et *pourquoi* un même fichier peut s’afficher en charabia. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Écriture d’un entier positif dans une base $b \geqslant 2$ ; passer de la représentation d’une base dans une autre (bases 2, 10 et 16 privilégiées). Représentation binaire d’un entier relatif (complément à 2). Valeurs booléennes : 0, 1. Opérateurs booléens : `and`, `or`, `not`. Expressions booléennes. Représentation approximative des réels : notion de nombre flottant. Représentation d’un texte en machine : encodages ASCII, ISO-8859-1, Unicode. »*
+
+Prérequis
+:   les bases de Python (opérateurs `//` et `%`, boucles, opérateurs `and`, `or`, `not`). (→ fiches de révision : ch. 1)
+
+Objectifs
+:   comprendre *comment* une machine stocke un nombre ; *convertir* entre bases 2, 10 et 16 ; dresser une *table de vérité* et comprendre comment des *portes logiques* additionnent ; coder un entier *relatif* (complément à 2) ; comprendre *pourquoi* les nombres à virgule sont *approchés* ; comprendre comment un *texte* est codé (ASCII, Unicode) et *pourquoi* un même fichier peut s’afficher en charabia.
+
+</div>
 
 !!! situation "Situation de départ"
 
@@ -58,13 +65,19 @@ Une fois qu’on sait coder des *nombres* avec des `0` et des `1`, on sait tout 
 
 ### Le décimal, qu’on croit connaître
 
-Nous comptons en **base 10** : dix chiffres (`0` à `9`), et dès qu’un rang est « plein », on passe au rang suivant. La position d’un chiffre lui donne un **poids**, qui est une puissance de 10 : $$185 = 1 \times 10^2 + 8 \times 10^1 + 5 \times 10^0.$$ Le chiffre le plus à droite est au rang `0`. **Décomposer un nombre en puissances de sa base**, voilà toute l’affaire.
+Nous comptons en **base 10** : dix chiffres (`0` à `9`), et dès qu’un rang est « plein », on passe au rang suivant. La position d’un chiffre lui donne un **poids**, qui est une puissance de 10 :
+
+$$185 = 1 \times 10^2 + 8 \times 10^1 + 5 \times 10^0.$$
+
+Le chiffre le plus à droite est au rang `0`. **Décomposer un nombre en puissances de sa base**, voilà toute l’affaire.
 
 ### Une base quelconque
 
 !!! definition "Définition 2 — Écriture en base $b$"
 
-    En base $b$, on dispose de $b$ chiffres (de `0` à $b-1$) et chaque rang pèse une puissance de $b$. Un nombre écrit $c_{n-1}\,c_{n-2}\,\cdots\,c_1\,c_0$ en base $b$ vaut $$c_{n-1}\,b^{\,n-1} + c_{n-2}\,b^{\,n-2} + \cdots + c_1\,b^{\,1} + c_0\,b^{\,0}.$$
+    En base $b$, on dispose de $b$ chiffres (de `0` à $b-1$) et chaque rang pèse une puissance de $b$. Un nombre écrit $c_{n-1}\,c_{n-2}\,\cdots\,c_1\,c_0$ en base $b$ vaut
+
+    $$c_{n-1}\,b^{\,n-1} + c_{n-2}\,b^{\,n-2} + \cdots + c_1\,b^{\,1} + c_0\,b^{\,0}.$$
 
 La **base 2** (binaire) n’utilise que deux chiffres, `0` et `1`, et chaque rang pèse une puissance de 2. Pour lever toute ambiguïté, on note la base en indice : $185_{10}$, $\texttt{10111001}_2$.
 
@@ -107,7 +120,9 @@ On applique directement la définition : on additionne les poids des rangs qui p
       5 &=& 2 \times\phantom{0}2 + \mathbf{1} & \\
       2 &=& 2 \times\phantom{0}1 + \mathbf{0} & \\
       1 &=& 2 \times\phantom{0}0 + \mathbf{1} & \text{(dernier reste, lu en premier : bit de poids fort)}
-    \end{array}$$ En lisant les restes de bas en haut : $185_{10} = \texttt{10111001}_2$. *(On retrouve bien l’octet du début du cours.)*
+    \end{array}$$
+
+    En lisant les restes de bas en haut : $185_{10} = \texttt{10111001}_2$. *(On retrouve bien l’octet du début du cours.)*
 
 !!! remarque "Remarque — sur machine"
 
@@ -137,7 +152,9 @@ On pose l’addition comme en base 10, rang par rang **de droite à gauche**, en
     \hline
      & \texttt{1} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0}
     \end{array}
-    \qquad\qquad \texttt{11000}_2 = 16 + 8 = 24 = 13 + 11.$$ Une retenue qui sort à gauche ajoute un rang : la somme de deux nombres de 4 bits peut demander 5 bits. Cette addition, que le processeur effectue sans cesse, resservira plus loin pour coder les entiers négatifs (complément à deux).
+    \qquad\qquad \texttt{11000}_2 = 16 + 8 = 24 = 13 + 11.$$
+
+    Une retenue qui sort à gauche ajoute un rang : la somme de deux nombres de 4 bits peut demander 5 bits. Cette addition, que le processeur effectue sans cesse, resservira plus loin pour coder les entiers négatifs (complément à deux).
 
 <span class="retouract">↺ Retour sur l'activité.</span> En comptant de 7 à 8 avec les cartes, les trois cartes de droite se cachaient et la carte « 8 points » se montrait : c’est l’addition $\texttt{00111}_2 + 1 = \texttt{01000}_2$, dont la retenue se propage de rang en rang.
 
@@ -232,7 +249,9 @@ Une **expression booléenne** combine des variables à l’aide de ces opérateu
     \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{1} \\
     \texttt{1} & \texttt{1} & \texttt{1} & \texttt{1} & \texttt{0} & \texttt{0} \\
     \hline
-    \end{array}$$ La dernière colonne vaut `0`, `1`, `1`, `0` : c’est exactement la table du **xor**. Deux expressions qui ont la même table de vérité sont dites **équivalentes** : on vient de fabriquer un ou exclusif avec seulement des portes et, ou, non.
+    \end{array}$$
+
+    La dernière colonne vaut `0`, `1`, `1`, `0` : c’est exactement la table du **xor**. Deux expressions qui ont la même table de vérité sont dites **équivalentes** : on vient de fabriquer un ou exclusif avec seulement des portes et, ou, non.
 
 ### Du calcul logique à l’addition : le demi-additionneur
 
@@ -247,7 +266,11 @@ Revenons à l’addition posée plus haut (« Additionner en binaire »). Dans l
 
 !!! propriete "Propriété 2 — Le demi-additionneur"
 
-    La colonne de la somme est la table du **xor**, celle de la retenue est la table du **et** : $$s = a \text{ xor } b \qquad\qquad r = a \text{ et } b.$$ Le circuit formé d’une porte **xor** et d’une porte **et** s’appelle un **demi-additionneur** : il additionne deux bits.
+    La colonne de la somme est la table du **xor**, celle de la retenue est la table du **et** :
+
+    $$s = a \text{ xor } b \qquad\qquad r = a \text{ et } b.$$
+
+    Le circuit formé d’une porte **xor** et d’une porte **et** s’appelle un **demi-additionneur** : il additionne deux bits.
 
 ![](../figures/2e442c3c9f5592ad.svg){ .tikz loading=lazy }
 
@@ -280,7 +303,9 @@ Il faut 16 chiffres : après `0`…`9`, on emprunte des lettres.
 
     $$\texttt{11011001}_2 = \underbrace{\texttt{1101}}_{\texttt{D}}\ \underbrace{\texttt{1001}}_{\texttt{9}} = \texttt{D9}_{16}, \qquad \texttt{7F}_{16} = \underbrace{\texttt{0111}}_{\texttt{7}}\ \underbrace{\texttt{1111}}_{\texttt{F}} = \texttt{01111111}_2.$$
 
-Pour passer du **décimal** à l’hexadécimal, on divise par 16 (au lieu de 2) ; pour revenir, on multiplie par les puissances de 16 : $$\texttt{3E8}_{16} = 3{\cdot}16^2 + 14{\cdot}16^1 + 8{\cdot}16^0 = 768 + 224 + 8 = 1000_{10} \quad (\texttt{E} \text{ vaut } 14).$$
+Pour passer du **décimal** à l’hexadécimal, on divise par 16 (au lieu de 2) ; pour revenir, on multiplie par les puissances de 16 :
+
+$$\texttt{3E8}_{16} = 3{\cdot}16^2 + 14{\cdot}16^1 + 8{\cdot}16^0 = 768 + 224 + 8 = 1000_{10} \quad (\texttt{E} \text{ vaut } 14).$$
 
 !!! remarque "Remarque — sur machine"
 
@@ -323,7 +348,9 @@ On pourrait réserver le bit de poids fort au signe (`0` pour $+$, `1` pour $-$)
 
     $$12 = \texttt{00001100}
     \ \xrightarrow{\text{on inverse}}\ \texttt{11110011}
-    \ \xrightarrow{+1}\ \texttt{11110100}.$$ Donc $-12$ s’écrit `11110100` sur 8 bits.
+    \ \xrightarrow{+1}\ \texttt{11110100}.$$
+
+    Donc $-12$ s’écrit `11110100` sur 8 bits.
 
 Pourquoi ça marche ? Parce qu’avec cette convention, l’addition binaire ordinaire donne le bon résultat, **sans traitement spécial** : $12 + (-12)$ doit valoir $0$.
 
@@ -349,9 +376,13 @@ La retenue finale « déborde » au-delà des 8 bits : il reste `00000000`, soit
 
 !!! exemple "Exemple — Décoder 11111010 sur 8 bits"
 
-    Le bit de poids fort vaut `1` : le nombre est négatif. $$\texttt{11111010}
+    Le bit de poids fort vaut `1` : le nombre est négatif.
+
+    $$\texttt{11111010}
     \ \xrightarrow{\text{on inverse}}\ \texttt{00000101}
-    \ \xrightarrow{+1}\ \texttt{00000110} = 6.$$ Donc `11111010` code $-6$. À l’inverse, `00101101` commence par `0` : il code directement $32 + 8 + 4 + 1 = 45$.
+    \ \xrightarrow{+1}\ \texttt{00000110} = 6.$$
+
+    Donc `11111010` code $-6$. À l’inverse, `00101101` commence par `0` : il code directement $32 + 8 + 4 + 1 = 45$.
 
 **Le cadran du complément à deux sur 4 bits.** On range les 16 mots de 4 bits en cercle, comme les heures d’une horloge. Ajouter 1, c’est avancer d’un cran dans le sens des aiguilles d’une montre : de `1111` ($-1$) on passe à `0000` ($0$), la retenue « déborde » comme plus haut. Les mots qui commencent par `0` (à droite) sont les positifs $0$ à $7$ ; ceux qui commencent par `1` (à gauche) sont les négatifs $-8$ à $-1$. Seul piège : en bas, de `0111` ($+7$) à `1000` ($-8$), on passe brutalement du plus grand au plus petit : c’est le **dépassement de capacité**.
 
@@ -378,11 +409,17 @@ Après la virgule, les rangs pèsent des puissances **négatives** de 2 : $2^{-1
     0{,}375 \times 2 &=& \mathbf{0}{,}75 & \\
     0{,}75 \times 2 &=& \mathbf{1}{,}5 & \text{(on garde } 0{,}5)\\
     0{,}5 \times 2 &=& \mathbf{1}{,}0 & \text{(reste } 0 : \text{ on s'arrête)}
-    \end{array}$$ On lit les parties entières **de haut en bas** : $0{,}1875_{10} = \texttt{0,0011}_2$. Donc $5{,}1875_{10} = \texttt{101,0011}_2$.
+    \end{array}$$
+
+    On lit les parties entières **de haut en bas** : $0{,}1875_{10} = \texttt{0,0011}_2$. Donc $5{,}1875_{10} = \texttt{101,0011}_2$.
 
 ### Le piège fondamental : $0{,}1$ n’est pas exact
 
-Reprenons la méthode sur $0{,}1$ : $$0{,}1 \times 2 = \mathbf{0}{,}2 \to \mathbf{0}{,}4 \to \mathbf{0}{,}8 \to \mathbf{1}{,}6 \to \mathbf{1}{,}2 \to \mathbf{0}{,}4 \to \cdots$$ Le motif se **répète sans fin** : $0{,}1_{10} = \texttt{0,0001100110011}\ldots_2$. Autrement dit, $0{,}1$ **n’a pas d’écriture binaire finie**, exactement comme $\frac{1}{3} = 0{,}333\ldots$ n’a pas d’écriture décimale finie.
+Reprenons la méthode sur $0{,}1$ :
+
+$$0{,}1 \times 2 = \mathbf{0}{,}2 \to \mathbf{0}{,}4 \to \mathbf{0}{,}8 \to \mathbf{1}{,}6 \to \mathbf{1}{,}2 \to \mathbf{0}{,}4 \to \cdots$$
+
+Le motif se **répète sans fin** : $0{,}1_{10} = \texttt{0,0001100110011}\ldots_2$. Autrement dit, $0{,}1$ **n’a pas d’écriture binaire finie**, exactement comme $\frac{1}{3} = 0{,}333\ldots$ n’a pas d’écriture décimale finie.
 
 !!! regle "Règle 7 — Les flottants sont approchés"
 

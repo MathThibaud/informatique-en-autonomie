@@ -6,9 +6,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/11-tp-carre-blanc){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-11-tp-carre-blanc.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
 
-*Ce TP guidé réinvestit tout le chapitre : on découvre une **récurrence** en remplissant une grille à la main, puis on la programme en **récursif**, on l’accélère par **mémoïsation**, et enfin on la déroule en **tabulation** sur une vraie image. Fil rouge du chapitre : « ne jamais recalculer deux fois la même chose ».*
+aththibaud.github.io/informatique-en-autonomie/f/t11-tp-carre-blanc\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/11-tp-carre-blanchttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-11-tp-carre-blanc.zip *Ce TP guidé réinvestit tout le chapitre : on découvre une **récurrence** en remplissant une grille à la main, puis on la programme en **récursif**, on l’accélère par **mémoïsation**, et enfin on la déroule en **tabulation** sur une vraie image. Fil rouge du chapitre : « ne jamais recalculer deux fois la même chose ».*
 
 **Fichier à télécharger** (lien ci-dessus) : `carre_blanc.py` (chargement de l’image, **trame** des fonctions à écrire et **tests** — `python3 carre_blanc.py` affiche `OK` ou `A FAIRE ou ECHEC` pour chaque fonction). Il nécessite la bibliothèque `PIL` (Pillow) et les images fournies.
 
@@ -64,7 +64,7 @@ Recopier la grille ci-dessous et **écrire dans chaque case blanche** la valeur 
 
 !!! definition "Définition 4 — Récurrence du plus grand carré blanc"
 
-    $$$\displaystyle\texttt{pgcb}(x, y) = \begin{cases} 0 & \text{si le pixel } (x,y) \text{ est \textbf{noir},}\\  1 & \text{si le pixel est \textbf{blanc} et } x = 0 \text{ ou } y = 0,\\  1 + \min\big(\texttt{pgcb}(x{-}1, y),\ \texttt{pgcb}(x, y{-}1),\ \texttt{pgcb}(x{-}1, y{-}1)\big) & \text{sinon.} \end{cases}$$$
+    $$\displaystyle\texttt{pgcb}(x, y) = \begin{cases} 0 & \text{si le pixel } (x,y) \text{ est \textbf{noir},}\\  1 & \text{si le pixel est \textbf{blanc} et } x = 0 \text{ ou } y = 0,\\  1 + \min\big(\texttt{pgcb}(x{-}1, y),\ \texttt{pgcb}(x, y{-}1),\ \texttt{pgcb}(x{-}1, y{-}1)\big) & \text{sinon.} \end{cases}$$
 
 Les deux premières lignes sont les **cas de base** ; la troisième relie un sous-problème à **trois sous-problèmes plus petits** (à gauche, au-dessus, en diagonale). C’est exactement la structure d’un problème de **programmation dynamique**.
 

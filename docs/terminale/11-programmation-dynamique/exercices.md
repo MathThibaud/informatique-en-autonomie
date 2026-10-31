@@ -264,7 +264,11 @@ Partant du sommet, on descend à chaque étage vers le voisin de gauche ou de dr
 
     **1.** Le meilleur chemin est $3 \to 7 \to 4 \to 9$, de score $3 + 7 + 4 + 9 = \textbf{23}$.
 
-    **2.** Depuis la case $(i, j)$, on descend vers $(i+1, j)$ ou $(i+1, j+1)$, et on garde le meilleur : $$S(i, j) = t[i][j] + \max\big(S(i+1, j),\ S(i+1, j+1)\big),$$ avec le cas de base $S(\text{dernier niveau}, j) = t[\text{dernier}][j]$.
+    **2.** Depuis la case $(i, j)$, on descend vers $(i+1, j)$ ou $(i+1, j+1)$, et on garde le meilleur :
+
+    $$S(i, j) = t[i][j] + \max\big(S(i+1, j),\ S(i+1, j+1)\big),$$
+
+    avec le cas de base $S(\text{dernier niveau}, j) = t[\text{dernier}][j]$.
 
     **3.** **Démarche :** la table a la forme du triangle ; son dernier niveau est connu (cas de base) ; on remonte niveau par niveau avec la relation de la question 2.
 
@@ -820,7 +824,11 @@ Le **coût inesthétique** d’une ligne est le *carré* du nombre d’espaces s
 
     **2.** Après chacun des $n-1$ premiers mots on peut couper ou non : cela fait $2^{n-1}$ découpages possibles. Ce nombre **explose** (exponentiel) : impossible de tous les tester dès que $n$ dépasse quelques dizaines.
 
-    **3.** La fonction remplit `cout_mini` **de la fin vers le début** : quand on calcule `cout_mini[i]`, toutes les cases `cout_mini[j]` avec $j > i$ sont **déjà connues**. La relation est $$\texttt{cout\_mini[i]} = \min_{i < j \leqslant n}\ \big(\ \texttt{cout(i, j)} + \texttt{cout\_mini[j]}\ \big),$$ c’est-à-dire : coût de la première ligne (mots $i$ à $j-1$) plus le coût optimal du reste. Pour $j = n$, on adopte la convention $\texttt{cout\_mini[n]} = 0$ (il ne reste plus aucun mot à justifier) : ce cas, où tous les mots restants tiennent sur une seule ligne, correspond à la valeur initiale `cout(i, n, ...)` du code, puisque la liste `cout_mini` n’a que $n$ cases (indices $0$ à $n-1$). Comme on résout les sous-problèmes du plus petit (la fin) au plus grand (le début) en rangeant les résultats dans un tableau, c’est bien de la **tabulation**.
+    **3.** La fonction remplit `cout_mini` **de la fin vers le début** : quand on calcule `cout_mini[i]`, toutes les cases `cout_mini[j]` avec $j > i$ sont **déjà connues**. La relation est
+
+    $$\texttt{cout\_mini[i]} = \min_{i < j \leqslant n}\ \big(\ \texttt{cout(i, j)} + \texttt{cout\_mini[j]}\ \big),$$
+
+    c’est-à-dire : coût de la première ligne (mots $i$ à $j-1$) plus le coût optimal du reste. Pour $j = n$, on adopte la convention $\texttt{cout\_mini[n]} = 0$ (il ne reste plus aucun mot à justifier) : ce cas, où tous les mots restants tiennent sur une seule ligne, correspond à la valeur initiale `cout(i, n, ...)` du code, puisque la liste `cout_mini` n’a que $n$ cases (indices $0$ à $n-1$). Comme on résout les sous-problèmes du plus petit (la fin) au plus grand (le début) en rangeant les résultats dans un tableau, c’est bien de la **tabulation**.
 
     **4.** Il suffit de renvoyer aussi `cout_mini[0]`, qui contient déjà le coût inesthétique total du meilleur découpage :
 
@@ -1112,7 +1120,9 @@ On représente ces tarifs par la liste `prix = [0, 2, 5, 10, 13, 14]`, où `prix
 
 **Partie B — Une relation de récurrence**
 
-1.  En considérant la longueur $k$ du **premier morceau**, justifier que $V(0) = 0$ et, pour $n \geq 1$ : $$V(n) = \max_{1 \leq k \leq \min(n,\, 5)} \big(\texttt{prix[k]} + V(n - k)\big).$$
+1.  En considérant la longueur $k$ du **premier morceau**, justifier que $V(0) = 0$ et, pour $n \geq 1$ :
+
+    $$V(n) = \max_{1 \leq k \leq \min(n,\, 5)} \big(\texttt{prix[k]} + V(n - k)\big).$$
 
 2.  Recopier et compléter la fonction récursive suivante, qui renvoie $V(n)$ :
 

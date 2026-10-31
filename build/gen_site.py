@@ -203,13 +203,14 @@ def mkdocs_yml():
         },
         'extra_css': ['stylesheets/v3.css'],
         'extra_javascript': ['javascripts/mathjax.js',
-                             'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'],
+                             'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js',
+                             'javascripts/executer.js'],
         'markdown_extensions': [
             'abbr', 'attr_list', 'md_in_html', 'tables', 'def_list', 'footnotes', 'admonition',
             {'toc': {'permalink': '#', 'toc_depth': 3}},
             'pymdownx.details',
             {'pymdownx.superfences': {}},
-            {'pymdownx.highlight': {'anchor_linenums': False, 'use_pygments': True}},
+            {'pymdownx.highlight': {'anchor_linenums': False, 'use_pygments': True, 'pygments_lang_class': True}},
             'pymdownx.inlinehilite',
             {'pymdownx.arithmatex': {'generic': True, 'inline_syntax': ['dollar'], 'block_syntax': ['dollar']}},
             {'pymdownx.emoji': {'emoji_index': '!!python/name:material.extensions.emoji.twemoji',
@@ -263,11 +264,63 @@ def redirections():
             (dossier / 'index.html').write_text(REDIRECT_HTML.format(cible=cible), encoding='utf-8')
 
 
+FICHIERS = Path.home() / 'nsi-fichiers-eleves'
+DEPOT_FICHIERS = 'https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/'
+LETTRES = {'terminale': 't', 'premiere': 'p', 'seconde': 's'}
+
+
+def adresses_courtes():
+    """f/<lettre><dossier>/ -> dossier du dépôt nsi-fichiers-eleves : adresse courte imprimée
+    dans les livres (publier_fichiers_eleves.url_courte). On ajoute, on ne retire jamais."""
+    if not FICHIERS.is_dir():
+        print('  ! %s absent : adresses courtes non régénérées' % FICHIERS)
+        return
+    for niv, lettre in LETTRES.items():
+        for d in sorted((FICHIERS / niv).iterdir()):
+            if d.is_dir() and not d.name.startswith('.'):
+                dossier = DOCS / 'f' / (lettre + d.name)
+                dossier.mkdir(parents=True, exist_ok=True)
+                (dossier / 'index.html').write_text(
+                    REDIRECT_HTML.format(cible=DEPOT_FICHIERS + niv + '/' + d.name)
+                    .replace('Page déplacée', 'Fichiers à télécharger')
+                    .replace('Cette page a déménagé', 'Fichiers à télécharger'), encoding='utf-8')
+
+
+DEBUT_PDF, FIN_PDF = '<!-- pdf-chapitre -->', '<!-- /pdf-chapitre -->'
+
+
+def pdf_chapitres(key):
+    """Bouton « PDF du chapitre » (extrait du manuel, build/extraits_chapitres.py) sur la page
+    d'accueil de chaque chapitre ; bloc remplacé à chaque passage."""
+    chap = LIVRES.get(key, {}).get('chapitres', {})
+    for t, sub in NAV[key]['chapters']:
+        page = DOCS / sub[0][1]
+        if not page.exists():
+            continue
+        md = page.read_text(encoding='utf-8')
+        if DEBUT_PDF in md:
+            md = md[:md.index(DEBUT_PDF)].rstrip() + '\n' + md[md.index(FIN_PDF) + len(FIN_PDF):].lstrip('\n')
+        c = chap.get(t)
+        if c:
+            md = md.rstrip() + '\n\n' + '\n'.join([
+                DEBUT_PDF,
+                '!!! livre "Le chapitre en PDF"\n',
+                '    Les pages du manuel pour ce chapitre — activités, cours, exercices, TP, fiche de '
+                'révision — suivies de leurs corrigés, avec les numéros de page du manuel '
+                '(%d pages, version du %s).\n' % (c['pages'], c['date']),
+                '    [:material-download: Télécharger le chapitre (%s Mo)](%s){ .md-button .md-button--primary }'
+                % (str(c['mo']).replace('.', ','), c['url']),
+                FIN_PDF]) + '\n'
+        page.write_text(md, encoding='utf-8')
+
+
 if __name__ == '__main__':
     home()
     a_propos()
     for lv in LEVELS:
         if lv[0] in NAV:
             level_index(*lv)
+            pdf_chapitres(lv[0])
     mkdocs_yml()
     redirections()
+    adresses_courtes()

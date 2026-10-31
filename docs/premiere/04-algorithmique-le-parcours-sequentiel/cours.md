@@ -4,11 +4,18 @@
 
 <span id="chap-04" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Algorithmes sur les tableaux »* : *parcours séquentiel* d’un tableau ; *recherche* d’un élément ; calcul de la *moyenne*, du *minimum*, du *maximum* ; *notion de coût* d’un algorithme (coût *linéaire*). |
-| **Prérequis** | les boucles `for`/`while`, les fonctions, et les **tableaux** (chapitre *Les types construits* : indices, `len`, parcours). (→ fiches de révision : ch. 1, ch. 3) |
-| **Objectifs** | reconnaître et écrire le **patron** du parcours séquentiel ; le décliner (somme, moyenne, comptage, recherche, min/max) ; **évaluer et comparer** le coût d’un algorithme. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Algorithmes sur les tableaux »* : *parcours séquentiel* d’un tableau ; *recherche* d’un élément ; calcul de la *moyenne*, du *minimum*, du *maximum* ; *notion de coût* d’un algorithme (coût *linéaire*).
+
+Prérequis
+:   les boucles `for`/`while`, les fonctions, et les **tableaux** (chapitre *Les types construits* : indices, `len`, parcours). (→ fiches de révision : ch. 1, ch. 3)
+
+Objectifs
+:   reconnaître et écrire le **patron** du parcours séquentiel ; le décliner (somme, moyenne, comptage, recherche, min/max) ; **évaluer et comparer** le coût d’un algorithme.
+
+</div>
 
 !!! situation "Situation de départ"
 
@@ -229,7 +236,13 @@ Toutes les fonctions vues jusqu’ici (`somme`, `moyenne`, `maximum`, `est_prese
 
 ### Le piège quadratique : moyenne *vs* variance
 
-Voici le cœur du chapitre. On note $x_0, x_1, \ldots, x_{n-1}$ les $n$ valeurs du tableau. Leur **moyenne** est $$m = \frac{x_0 + x_1 + \cdots + x_{n-1}}{n}.$$ La **variance** <span class="horsprog">au-delà du programme</span> mesure ensuite leur dispersion autour de cette moyenne : c’est la moyenne des carrés des écarts à $m$, $$V = \frac{(x_0 - m)^2 + (x_1 - m)^2 + \cdots + (x_{n-1} - m)^2}{n}.$$
+Voici le cœur du chapitre. On note $x_0, x_1, \ldots, x_{n-1}$ les $n$ valeurs du tableau. Leur **moyenne** est
+
+$$m = \frac{x_0 + x_1 + \cdots + x_{n-1}}{n}.$$
+
+La **variance** <span class="horsprog">au-delà du programme</span> mesure ensuite leur dispersion autour de cette moyenne : c’est la moyenne des carrés des écarts à $m$,
+
+$$V = \frac{(x_0 - m)^2 + (x_1 - m)^2 + \cdots + (x_{n-1} - m)^2}{n}.$$
 
 **Version naïve** — on traduit la formule mot à mot :
 

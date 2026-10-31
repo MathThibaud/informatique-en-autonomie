@@ -4,11 +4,18 @@
 
 <span id="chap-12" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *Algorithmique* : écrire un algorithme de **classification** par la méthode des **$k$ plus proches voisins** ($k$-NN). |
-| **Prérequis** | **listes** et **dictionnaires** ; **patron de parcours** et **invariant du champion** ; **tri** (`sorted` et clé) ; **données en tables** (un individu $=$ une fiche de descripteurs). (→ fiches de révision : ch. 3, ch. 4, ch. 6, ch. 8) |
-| **Objectifs** | comprendre la **classification supervisée** ; définir une **distance** entre deux individus ; écrire l’algorithme des **$k$ plus proches voisins** ; comprendre la **frontière de décision** et **choisir $k$** ; **évaluer** un classifieur (entraînement / test) ; connaître ses **forces et limites** ; l’appliquer à la **reconnaissance d’images**. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *Algorithmique* : écrire un algorithme de **classification** par la méthode des **$k$ plus proches voisins** ($k$-NN).
+
+Prérequis
+:   **listes** et **dictionnaires** ; **patron de parcours** et **invariant du champion** ; **tri** (`sorted` et clé) ; **données en tables** (un individu $=$ une fiche de descripteurs). (→ fiches de révision : ch. 3, ch. 4, ch. 6, ch. 8)
+
+Objectifs
+:   comprendre la **classification supervisée** ; définir une **distance** entre deux individus ; écrire l’algorithme des **$k$ plus proches voisins** ; comprendre la **frontière de décision** et **choisir $k$** ; **évaluer** un classifieur (entraînement / test) ; connaître ses **forces et limites** ; l’appliquer à la **reconnaissance d’images**.
+
+</div>
 
 !!! situation "Situation de départ"
 
@@ -73,7 +80,11 @@ Pour dire qui « ressemble » à qui, il faut mesurer une **distance**. En 2D, c
 
 !!! definition "Définition 2 — Distance euclidienne"
 
-    Entre deux individus $A=(a_1, \dots, a_p)$ et $B=(b_1, \dots, b_p)$ décrits par $p$ descripteurs, $$d(A,B) = \sqrt{(a_1-b_1)^2 + (a_2-b_2)^2 + \dots + (a_p-b_p)^2}\,.$$ C’est la généralisation de Pythagore : la racine de la **somme des carrés des écarts**, descripteur par descripteur.
+    Entre deux individus $A=(a_1, \dots, a_p)$ et $B=(b_1, \dots, b_p)$ décrits par $p$ descripteurs,
+
+    $$d(A,B) = \sqrt{(a_1-b_1)^2 + (a_2-b_2)^2 + \dots + (a_p-b_p)^2}\,.$$
+
+    C’est la généralisation de Pythagore : la racine de la **somme des carrés des écarts**, descripteur par descripteur.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Pour le fruit C de l’activité, la mandarine $(5\,;\,5{,}5)$ et l’orange $(8\,;\,7{,}5)$ donnaient les mêmes écarts, 1,5 cm et 1 cm, donc la même distance $\sqrt{1{,}5^2 + 1^2} \approx 1{,}80$ cm : le plus proche voisin ne pouvait pas trancher.
 

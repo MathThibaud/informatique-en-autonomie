@@ -10,7 +10,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/06-defi-aoc-2020-04){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-06-defi-aoc-2020-04.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t06-defi-aoc-2020-04\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/06-defi-aoc-2020-04https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-06-defi-aoc-2020-04.zip
 
 !!! consignes "Consignes"
 
@@ -219,7 +221,9 @@ Plusieurs règles décrivent la *forme* d’une chaîne, caractère par caractè
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/06-defi-aoc-2020-16){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-06-defi-aoc-2020-16.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t06-defi-aoc-2020-16\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/06-defi-aoc-2020-16https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-06-defi-aoc-2020-16.zip
 
 !!! consignes "Consignes"
 

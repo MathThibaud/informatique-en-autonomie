@@ -493,7 +493,11 @@ On reprend la fonction `produit(t)` (initialisation `p = 1`, puis `p = p * x` à
 
 <span class="duree">≈ 15 min</span>
 
-On considère `nb_positifs(t)`, qui compte les éléments strictement positifs (initialisation `c = 0` ; à chaque tour, `c = c + 1` si `x > 0`). Soit la propriété $$P : \text{«~\texttt{c} contient le nombre d'éléments strictement positifs \textbf{déjà visités}~».}$$ En suivant la méthode du cours, **démontrer** que $P$ est un invariant :
+On considère `nb_positifs(t)`, qui compte les éléments strictement positifs (initialisation `c = 0` ; à chaque tour, `c = c + 1` si `x > 0`). Soit la propriété
+
+$$P : \text{«~\texttt{c} contient le nombre d'éléments strictement positifs \textbf{déjà visités}~».}$$
+
+En suivant la méthode du cours, **démontrer** que $P$ est un invariant :
 
 1.  **Initialisation** : montrer que $P$ est vraie avant le premier tour.
 

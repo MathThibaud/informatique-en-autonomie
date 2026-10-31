@@ -4,11 +4,18 @@
 
 <span id="chap-04" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Gestion des processus et des ressources par un système d’exploitation. Décrire la création d’un processus, l’ordonnancement de plusieurs processus par le système. Mettre en évidence le risque de l’interblocage (*deadlock*). »* Commentaire : *« À l’aide d’outils standard, il s’agit d’observer les processus actifs ou en attente sur une machine. Une présentation débranchée de l’interblocage peut être proposée. »* |
-| **Prérequis** | la notion de **programme** et de **langage machine** (Première), l’**arborescence** des fichiers (Première), pour la relation père/fils entre processus, un peu de **files** (la file d’attente de l’ordonnanceur). (→ fiches de révision : ch. 3) |
-| **Objectifs** | *distinguer* un programme d’un processus ; *décrire* les trois états d’un processus et les transitions entre eux ; *comprendre* le rôle d’ordonnanceur du système ; *dérouler* un ordonnancement et le représenter par un chronogramme ; *reconnaître* et *expliquer* une situation d’interblocage. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Gestion des processus et des ressources par un système d’exploitation. Décrire la création d’un processus, l’ordonnancement de plusieurs processus par le système. Mettre en évidence le risque de l’interblocage (*deadlock*). »* Commentaire : *« À l’aide d’outils standard, il s’agit d’observer les processus actifs ou en attente sur une machine. Une présentation débranchée de l’interblocage peut être proposée. »*
+
+Prérequis
+:   la notion de **programme** et de **langage machine** (Première), l’**arborescence** des fichiers (Première), pour la relation père/fils entre processus, un peu de **files** (la file d’attente de l’ordonnanceur). (→ fiches de révision : ch. 3)
+
+Objectifs
+:   *distinguer* un programme d’un processus ; *décrire* les trois états d’un processus et les transitions entre eux ; *comprendre* le rôle d’ordonnanceur du système ; *dérouler* un ordonnancement et le représenter par un chronogramme ; *reconnaître* et *expliquer* une situation d’interblocage.
+
+</div>
 
 !!! situation "Situation de départ"
 

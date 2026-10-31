@@ -123,7 +123,11 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
 
 ??? corrige "Corrigé"
 
-    **1.** Chaque canal a $16$ valeurs, et il y a trois canaux indépendants : $$16 \times 16 \times 16 = 16^3 = \mathbf{4\,096} \text{ couleurs},$$ bien moins que les $256^3 = 16\,777\,216$ couleurs du codage de $0$ à $255$ (activité 2 du cours) : $4\,096$ fois moins.  
+    **1.** Chaque canal a $16$ valeurs, et il y a trois canaux indépendants :
+
+    $$16 \times 16 \times 16 = 16^3 = \mathbf{4\,096} \text{ couleurs},$$
+
+    bien moins que les $256^3 = 16\,777\,216$ couleurs du codage de $0$ à $255$ (activité 2 du cours) : $4\,096$ fois moins.  
     **2.** Un gris a ses trois canaux **égaux** : il y a donc autant de gris que de valeurs communes possibles, soit **16** nuances (du noir au blanc).
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Additionner au lieu de multiplier : $16 + 16 + 16 = 48$. Or chaque valeur du rouge peut s’associer à *chacune* des $16$ valeurs du vert, et chaque couple à chacune des $16$ valeurs du bleu : les possibilités se multiplient.

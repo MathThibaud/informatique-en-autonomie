@@ -4,11 +4,18 @@
 
 <span id="chap-06" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Identifier les concepts définissant le modèle relationnel » (relation, attribut, domaine, clef primaire, clef étrangère, schéma relationnel ; contraintes d’intégrité de domaine, de relation et de référence). « Savoir distinguer la structure d’une base de données de son contenu. Repérer des anomalies dans le schéma d’une base de données » (redondances, anomalies d’insertion, de suppression, de mise à jour). « Identifier les services rendus par un système de gestion de bases de données relationnelles : persistance des données, gestion des accès concurrents, efficacité de traitement des requêtes, sécurisation des accès. Identifier les composants d’une requête. Construire des requêtes d’interrogation à l’aide des clauses du langage SQL : `SELECT`, `FROM`, `WHERE`, `JOIN`. Construire des requêtes d’insertion et de mise à jour à l’aide de : `UPDATE`, `INSERT`, `DELETE`. »* |
-| **Prérequis** | la notion de **type** (domaine) ; les tableaux et dictionnaires (comme analogies) ; un peu de logique (**et**, **ou**, **non**). |
-| **Objectifs** | *comprendre* pourquoi une base de données s’impose ; *modéliser* des données en relationnel (relations, clés) ; *connaître* le rôle d’un SGBD ; *écrire* des requêtes SQL d’interrogation **et** de mise à jour. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Identifier les concepts définissant le modèle relationnel » (relation, attribut, domaine, clef primaire, clef étrangère, schéma relationnel ; contraintes d’intégrité de domaine, de relation et de référence). « Savoir distinguer la structure d’une base de données de son contenu. Repérer des anomalies dans le schéma d’une base de données » (redondances, anomalies d’insertion, de suppression, de mise à jour). « Identifier les services rendus par un système de gestion de bases de données relationnelles : persistance des données, gestion des accès concurrents, efficacité de traitement des requêtes, sécurisation des accès. Identifier les composants d’une requête. Construire des requêtes d’interrogation à l’aide des clauses du langage SQL : `SELECT`, `FROM`, `WHERE`, `JOIN`. Construire des requêtes d’insertion et de mise à jour à l’aide de : `UPDATE`, `INSERT`, `DELETE`. »*
+
+Prérequis
+:   la notion de **type** (domaine) ; les tableaux et dictionnaires (comme analogies) ; un peu de logique (**et**, **ou**, **non**).
+
+Objectifs
+:   *comprendre* pourquoi une base de données s’impose ; *modéliser* des données en relationnel (relations, clés) ; *connaître* le rôle d’un SGBD ; *écrire* des requêtes SQL d’interrogation **et** de mise à jour.
+
+</div>
 
 !!! situation "Situation de départ"
 
@@ -50,7 +57,11 @@ Prenons une base de données de **films**. Voici la relation `film` :
 
 !!! definition "Définition 2 — Schéma"
 
-    Le **schéma** d’une relation donne le nom de la relation et, pour chaque attribut, son nom et son domaine. On le note ainsi (la clé primaire est soulignée) : $$\texttt{film}\,(\ \underline{\texttt{id}}:\text{entier},\ \texttt{titre}:\text{texte},\ \texttt{id\_real}:\text{entier},\ \texttt{annee}:\text{entier},\ \texttt{note}:\text{entier}\ )$$ Le **schéma d’une base** est l’ensemble des schémas de ses relations.
+    Le **schéma** d’une relation donne le nom de la relation et, pour chaque attribut, son nom et son domaine. On le note ainsi (la clé primaire est soulignée) :
+
+    $$\texttt{film}\,(\ \underline{\texttt{id}}:\text{entier},\ \texttt{titre}:\text{texte},\ \texttt{id\_real}:\text{entier},\ \texttt{annee}:\text{entier},\ \texttt{note}:\text{entier}\ )$$
+
+    Le **schéma d’une base** est l’ensemble des schémas de ses relations.
 
 !!! regle "Règle 2 — Structure et contenu d’une base"
 

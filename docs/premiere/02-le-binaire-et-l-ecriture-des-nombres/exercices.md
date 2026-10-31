@@ -70,7 +70,9 @@
 
 ??? corrige "Corrigé"
 
-    Divisions successives par 2 jusqu’à un quotient nul, restes lus **de bas en haut** : $$\begin{array}{rcl}
+    Divisions successives par 2 jusqu’à un quotient nul, restes lus **de bas en haut** :
+
+    $$\begin{array}{rcl}
     13 &=& 2 \times 6 + \mathbf{1}\\
      6 &=& 2 \times 3 + \mathbf{0}\\
      3 &=& 2 \times 1 + \mathbf{1}\\
@@ -95,7 +97,9 @@
       6 &=& 2 \times\phantom{00}3 + \mathbf{0}\\
       3 &=& 2 \times\phantom{00}1 + \mathbf{1}\\
       1 &=& 2 \times\phantom{00}0 + \mathbf{1}
-    \end{array}$$ D’où $13 = \texttt{1101}_2$, $42 = \texttt{101010}_2$ et $200 = \texttt{11001000}_2$. On peut contrôler en sens inverse : $32 + 8 + 2 = 42$ et $128 + 64 + 8 = 200$.
+    \end{array}$$
+
+    D’où $13 = \texttt{1101}_2$, $42 = \texttt{101010}_2$ et $200 = \texttt{11001000}_2$. On peut contrôler en sens inverse : $32 + 8 + 2 = 42$ et $128 + 64 + 8 = 200$.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> lire les restes de haut en bas : on obtient l’écriture à l’envers ($13$ donnerait `1011`, qui vaut $11$). Le premier reste obtenu est le bit de poids faible, écrit à droite.
 
@@ -265,7 +269,9 @@
 
 ??? corrige "Corrigé"
 
-    **1.** Une ligne par combinaison de $a$ et $b$ (4 lignes), une colonne par étape : $$\begin{array}{|c|c||c|c||c|c|c|}
+    **1.** Une ligne par combinaison de $a$ et $b$ (4 lignes), une colonne par étape :
+
+    $$\begin{array}{|c|c||c|c||c|c|c|}
     \hline
     a & b & a \text{ et } b & \text{non}(a \text{ et } b) & \text{non } a & \text{non } b & (\text{non } a) \text{ ou } (\text{non } b) \\
     \hline
@@ -274,9 +280,13 @@
     \texttt{1} & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{1} \\
     \texttt{1} & \texttt{1} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0} & \texttt{0} \\
     \hline
-    \end{array}$$ Les colonnes de non$(a$ et $b)$ et de (non $a)$ ou (non $b)$ sont identiques (`1`, `1`, `1`, `0`) : les deux expressions ont la même table de vérité, elles sont **équivalentes**. « Il est faux que $a$ et $b$ soient tous deux vrais » revient à dire « l’un des deux au moins est faux ».
+    \end{array}$$
 
-    **2.** Trois variables : $2^3 = 8$ lignes. $$\begin{array}{|c|c|c||c||c|}
+    Les colonnes de non$(a$ et $b)$ et de (non $a)$ ou (non $b)$ sont identiques (`1`, `1`, `1`, `0`) : les deux expressions ont la même table de vérité, elles sont **équivalentes**. « Il est faux que $a$ et $b$ soient tous deux vrais » revient à dire « l’un des deux au moins est faux ».
+
+    **2.** Trois variables : $2^3 = 8$ lignes.
+
+    $$\begin{array}{|c|c|c||c||c|}
     \hline
     a & b & c & a \text{ et } b & (a \text{ et } b) \text{ ou } c \\
     \hline
@@ -289,7 +299,9 @@
     \texttt{1} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{1} \\
     \texttt{1} & \texttt{1} & \texttt{1} & \texttt{1} & \texttt{1} \\
     \hline
-    \end{array}$$ L’expression vaut `1` pour **5** lignes sur 8 : les quatre où $c = 1$, plus la ligne $a = b = 1$, $c = 0$.
+    \end{array}$$
+
+    L’expression vaut `1` pour **5** lignes sur 8 : les quatre où $c = 1$, plus la ligne $a = b = 1$, $c = 0$.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> oublier des combinaisons : avec 3 variables, il faut $2^3 = 8$ lignes. Les énumérer en comptant en binaire (`000`, `001`… `111`) garantit de n’en oublier aucune.
 
@@ -316,7 +328,9 @@
 
 ??? corrige "Corrigé"
 
-    **1.** $0 + 0 = \texttt{00}_2$, $0 + 1 = 1 + 0 = \texttt{01}_2$, $1 + 1 = \texttt{10}_2$ : $$\begin{array}{|c|c||c|c|}
+    **1.** $0 + 0 = \texttt{00}_2$, $0 + 1 = 1 + 0 = \texttt{01}_2$, $1 + 1 = \texttt{10}_2$ :
+
+    $$\begin{array}{|c|c||c|c|}
     \hline
     a & b & r & s \\
     \hline
@@ -345,7 +359,9 @@
 
 ??? corrige "Corrigé"
 
-    On regroupe par 4 bits : $$\texttt{11011010}_2 = \underbrace{\texttt{1101}}_{\texttt{D}}\,\underbrace{\texttt{1010}}_{\texttt{A}} = \texttt{DA}_{16}, \qquad \texttt{3F}_{16} = \underbrace{\texttt{0011}}_{\texttt{3}}\,\underbrace{\texttt{1111}}_{\texttt{F}} = \texttt{00111111}_2.$$
+    On regroupe par 4 bits :
+
+    $$\texttt{11011010}_2 = \underbrace{\texttt{1101}}_{\texttt{D}}\,\underbrace{\texttt{1010}}_{\texttt{A}} = \texttt{DA}_{16}, \qquad \texttt{3F}_{16} = \underbrace{\texttt{0011}}_{\texttt{3}}\,\underbrace{\texttt{1111}}_{\texttt{F}} = \texttt{00111111}_2.$$
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> faire les paquets en partant de la gauche quand le nombre de bits n’est pas un multiple de 4 : `1111001` se découpe en `(0)111 1001`, soit `79`, et non `1111 001`.
 
@@ -359,7 +375,9 @@
 
 ??? corrige "Corrigé"
 
-    Du décimal vers l’hexadécimal : divisions successives par 16, restes lus de bas en haut (un reste de 10 à 15 s’écrit `A` à `F`). $$\begin{array}{rcl}
+    Du décimal vers l’hexadécimal : divisions successives par 16, restes lus de bas en haut (un reste de 10 à 15 s’écrit `A` à `F`).
+
+    $$\begin{array}{rcl}
     255 &=& 16 \times 15 + \mathbf{15}\ (\texttt{F})\\
      15 &=& 16 \times\phantom{0}0 + \mathbf{15}\ (\texttt{F})
     \end{array}
@@ -368,7 +386,9 @@
     3000 &=& 16 \times 187 + \mathbf{8}\\
      187 &=& 16 \times\phantom{0}11 + \mathbf{11}\ (\texttt{B})\\
       11 &=& 16 \times\phantom{00}0 + \mathbf{11}\ (\texttt{B})
-    \end{array}$$ D’où $255 = \texttt{FF}_{16}$ et $3000 = \texttt{BB8}_{16}$ (contrôle : $11{\cdot}256 + 11{\cdot}16 + 8 = 2816 + 176 + 8 = 3000$).
+    \end{array}$$
+
+    D’où $255 = \texttt{FF}_{16}$ et $3000 = \texttt{BB8}_{16}$ (contrôle : $11{\cdot}256 + 11{\cdot}16 + 8 = 2816 + 176 + 8 = 3000$).
 
     De l’hexadécimal vers le décimal, on additionne les chiffres multipliés par leur poids : $\texttt{2A}_{16} = 2{\cdot}16 + 10 = 42$ ; $\texttt{FF}_{16} = 15{\cdot}16 + 15 = 255$.
 

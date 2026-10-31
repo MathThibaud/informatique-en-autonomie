@@ -718,7 +718,9 @@ Bob et Alice communiquent au travers du réseau ci-dessous, dont le protocole de
 
 ![](../figures/8cb3ecc27cfc97a5.svg){ .tikz loading=lazy }
 
-Une adresse IPv4 est composée de quatre octets, soit $32$ bits. La notation `/n` signifie que les $n$ premiers bits de l’adresse forment la partie « réseau » et les suivants la partie « machine ». L’adresse dont tous les bits machine sont à $0$ est l’adresse du réseau, celle dont ils sont tous à $1$ l’adresse de diffusion : ces deux adresses ne peuvent pas être attribuées à des machines. Le choix des routes est uniquement basé sur OSPF, avec un débit de référence de $10\,000$ Mbit/s : $$\text{coût} = \frac{\text{débit de référence}}{\text{débit du réseau concerné}}.$$
+Une adresse IPv4 est composée de quatre octets, soit $32$ bits. La notation `/n` signifie que les $n$ premiers bits de l’adresse forment la partie « réseau » et les suivants la partie « machine ». L’adresse dont tous les bits machine sont à $0$ est l’adresse du réseau, celle dont ils sont tous à $1$ l’adresse de diffusion : ces deux adresses ne peuvent pas être attribuées à des machines. Le choix des routes est uniquement basé sur OSPF, avec un débit de référence de $10\,000$ Mbit/s :
+
+$$\text{coût} = \frac{\text{débit de référence}}{\text{débit du réseau concerné}}.$$
 
 1.  La configuration IP partielle suivante a été affichée sur l’un des ordinateurs : IP hôte `172.16.2.3`, IP passerelle `172.16.2.253`. Indiquer, en justifiant, si cette configuration appartient à l’ordinateur de Bob ou à celui d’Alice.
 

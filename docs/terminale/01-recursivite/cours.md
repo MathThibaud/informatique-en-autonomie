@@ -4,11 +4,18 @@
 
 <span id="chap-01" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Écrire un programme récursif. Analyser le fonctionnement d’un programme récursif. Des exemples relevant de domaines variés sont à privilégier. »* La récursivité irrigue toute la fin de l’année : arbres, « diviser pour régner », retour sur trace. |
-| **Prérequis** | fonctions et paramètres, listes, chaînes de caractères, notion de coût. |
-| **Objectifs** | *savoir écrire* une fonction récursive (méthode) et *savoir l’analyser* (trace, pile, terminaison, coût). |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Écrire un programme récursif. Analyser le fonctionnement d’un programme récursif. Des exemples relevant de domaines variés sont à privilégier. »* La récursivité irrigue toute la fin de l’année : arbres, « diviser pour régner », retour sur trace.
+
+Prérequis
+:   fonctions et paramètres, listes, chaînes de caractères, notion de coût.
+
+Objectifs
+:   *savoir écrire* une fonction récursive (méthode) et *savoir l’analyser* (trace, pile, terminaison, coût).
+
+</div>
 
 !!! situation "Situation de départ"
 

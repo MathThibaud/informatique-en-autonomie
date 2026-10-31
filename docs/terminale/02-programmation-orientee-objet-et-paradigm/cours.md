@@ -4,11 +4,18 @@
 
 <span id="chap-02" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Vocabulaire de la programmation objet : classes, attributs, méthodes, objets. Écrire la définition d’une classe. Accéder aux attributs et méthodes d’une classe. »* (*on n’aborde pas ici l’héritage ni le polymorphisme*.) *« Paradigmes de programmation. Distinguer sur des exemples les paradigmes impératif, fonctionnel et objet. Choisir le paradigme de programmation selon le champ d’application d’un programme. »* *« Modularité. Utiliser des API (Application Programming Interface) ou des bibliothèques. Exploiter leur documentation. Créer des modules simples et les documenter. »* |
-| **Prérequis** | fonctions et paramètres, variables, listes, dictionnaires, chaînes de caractères. |
-| **Objectifs** | *savoir écrire* une classe (attributs, méthodes, constructeur) et *savoir l’utiliser* (créer des instances, appeler des méthodes) ; *distinguer* les paradigmes impératif, objet et fonctionnel ; *utiliser* une bibliothèque et sa documentation, *créer* un module documenté. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Vocabulaire de la programmation objet : classes, attributs, méthodes, objets. Écrire la définition d’une classe. Accéder aux attributs et méthodes d’une classe. »* (*on n’aborde pas ici l’héritage ni le polymorphisme*.) *« Paradigmes de programmation. Distinguer sur des exemples les paradigmes impératif, fonctionnel et objet. Choisir le paradigme de programmation selon le champ d’application d’un programme. »* *« Modularité. Utiliser des API (Application Programming Interface) ou des bibliothèques. Exploiter leur documentation. Créer des modules simples et les documenter. »*
+
+Prérequis
+:   fonctions et paramètres, variables, listes, dictionnaires, chaînes de caractères.
+
+Objectifs
+:   *savoir écrire* une classe (attributs, méthodes, constructeur) et *savoir l’utiliser* (créer des instances, appeler des méthodes) ; *distinguer* les paradigmes impératif, objet et fonctionnel ; *utiliser* une bibliothèque et sa documentation, *créer* un module documenté.
+
+</div>
 
 !!! situation "Situation de départ"
 

@@ -4,11 +4,18 @@
 
 <span id="chap-T" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Idée** | une « tortue » se déplace sur l’écran en traçant un trait derrière elle. En lui donnant des ordres simples (avance, tourne), on dessine des figures. |
-| **Prérequis** | le chapitre *Les bases de la programmation Python* (boucles et fonctions). Le complément est ouvert par l’activité débranchée qui précède. La **partie 1** utilise des instructions en séquence puis la boucle `for` ; la **partie 2**, les fonctions. |
-| **Pourquoi** | `turtle` rend **visibles** les boucles et les fonctions : on *voit* la répétition et la factorisation. C’est un formidable terrain d’entraînement. |
+<div class="tete-chapitre" markdown>
+
+Idée
+:   une « tortue » se déplace sur l’écran en traçant un trait derrière elle. En lui donnant des ordres simples (avance, tourne), on dessine des figures.
+
+Prérequis
+:   le chapitre *Les bases de la programmation Python* (boucles et fonctions). Le complément est ouvert par l’activité débranchée qui précède. La **partie 1** utilise des instructions en séquence puis la boucle `for` ; la **partie 2**, les fonctions.
+
+Pourquoi
+:   `turtle` rend **visibles** les boucles et les fonctions : on *voit* la répétition et la factorisation. C’est un formidable terrain d’entraînement.
+
+</div>
 
 !!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
 

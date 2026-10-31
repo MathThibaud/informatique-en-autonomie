@@ -10,7 +10,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-defi-aoc-2020-01){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-07-defi-aoc-2020-01.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t07-defi-aoc-2020-01\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-defi-aoc-2020-01https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-07-defi-aoc-2020-01.zip
 
 !!! consignes "Consignes"
 
@@ -168,7 +170,9 @@ Une autre idée, sans ensemble, réinvestit le **tri** : avec le tri fusion de c
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-defi-aoc-2020-09){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-07-defi-aoc-2020-09.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t07-defi-aoc-2020-09\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-defi-aoc-2020-09https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-07-defi-aoc-2020-09.zip
 
 !!! consignes "Consignes"
 

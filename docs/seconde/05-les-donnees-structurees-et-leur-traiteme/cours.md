@@ -4,11 +4,18 @@
 
 <span id="chap-05" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme** | Donnée et **donnée personnelle** ; **métadonnées** ; principaux **formats** et représentations (formats ouverts, **CSV**) ; **table** de données (descripteur, enregistrement) ; opérations de **recherche**, **filtre** et **tri** sur une ou plusieurs tables ; données **ouvertes** (*open data*) et **dans le nuage**. |
-| **Idée** | Le monde est noyé sous les **données**. Bien rangées dans une **table** (lignes et colonnes), elles deviennent une mine que l’on peut *fouiller* : chercher, filtrer, trier, croiser. Ce chapitre vous transforme en **data-détective**. |
-| **Objectifs** | Distinguer donnée, donnée personnelle et métadonnée ; lire une table (descripteur, enregistrement) ; comprendre le format **CSV** ; **rechercher**, **filtrer**, **trier** et **croiser** des tables ; utiliser un site d’*open data* ; mesurer les enjeux (vie privée, nuage, *big data*). |
+<div class="tete-chapitre" markdown>
+
+Programme
+:   Donnée et **donnée personnelle** ; **métadonnées** ; principaux **formats** et représentations (formats ouverts, **CSV**) ; **table** de données (descripteur, enregistrement) ; opérations de **recherche**, **filtre** et **tri** sur une ou plusieurs tables ; données **ouvertes** (*open data*) et **dans le nuage**.
+
+Idée
+:   Le monde est noyé sous les **données**. Bien rangées dans une **table** (lignes et colonnes), elles deviennent une mine que l’on peut *fouiller* : chercher, filtrer, trier, croiser. Ce chapitre vous transforme en **data-détective**.
+
+Objectifs
+:   Distinguer donnée, donnée personnelle et métadonnée ; lire une table (descripteur, enregistrement) ; comprendre le format **CSV** ; **rechercher**, **filtrer**, **trier** et **croiser** des tables ; utiliser un site d’*open data* ; mesurer les enjeux (vie privée, nuage, *big data*).
+
+</div>
 
 !!! situation "Situation de départ"
 

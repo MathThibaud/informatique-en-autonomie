@@ -4,11 +4,18 @@
 
 <span id="chap-01" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Mettre en évidence un corpus de constructions élémentaires. »* Ces constructions sont : *« séquences, affectation, conditionnelles, boucles bornées, boucles non bornées, appels de fonction »*. On y ajoute la *spécification* d’une fonction (prototype, préconditions, postconditions) et l’usage de *jeux de tests*. |
-| **Prérequis** | aucun. Il suffit de savoir ouvrir une console ou un éditeur Python en ligne. |
-| **Objectifs** | *lire*, *écrire* et *exécuter* un programme simple ; maîtriser les six constructions élémentaires ; *spécifier* et *tester* une fonction. C’est le socle de toute l’année (et de toute la suite). |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Mettre en évidence un corpus de constructions élémentaires. »* Ces constructions sont : *« séquences, affectation, conditionnelles, boucles bornées, boucles non bornées, appels de fonction »*. On y ajoute la *spécification* d’une fonction (prototype, préconditions, postconditions) et l’usage de *jeux de tests*.
+
+Prérequis
+:   aucun. Il suffit de savoir ouvrir une console ou un éditeur Python en ligne.
+
+Objectifs
+:   *lire*, *écrire* et *exécuter* un programme simple ; maîtriser les six constructions élémentaires ; *spécifier* et *tester* une fonction. C’est le socle de toute l’année (et de toute la suite).
+
+</div>
 
 !!! situation "Situation de départ"
 

@@ -335,7 +335,11 @@ Le club de sciences du lycée installe sur le toit une station météo. Elle est
 
 3.  Le capteur de température délivre une tension, transformée par un **convertisseur analogique-numérique** en un entier codé sur $10$ bits. Combien de valeurs différentes ce convertisseur peut-il produire ? Quelles sont la plus petite et la plus grande ?
 
-4.  La documentation du capteur indique la formule de conversion suivante : $$\text{température (en ° C)} = \text{valeur} \times 0{,}1 - 40.$$ Écrire une fonction `convertir(valeur)` qui renvoie la température correspondant à une valeur lue. Que renvoie `convertir(512)` ? Quelle est la plus haute température mesurable ?
+4.  La documentation du capteur indique la formule de conversion suivante :
+
+    $$\text{température (en ° C)} = \text{valeur} \times 0{,}1 - 40.$$
+
+    Écrire une fonction `convertir(valeur)` qui renvoie la température correspondant à une valeur lue. Que renvoie `convertir(512)` ? Quelle est la plus haute température mesurable ?
 
 5.  Écrire une fonction `alerte_gel(mesures)` qui prend en paramètre une liste (non vide) de valeurs brutes lues sur le convertisseur et qui renvoie `True` si l’une d’elles correspond à une température strictement négative, `False` sinon. Que renvoie `alerte_gel([412, 405, 398, 401, 420])` ?
 

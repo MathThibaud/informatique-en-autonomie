@@ -4,11 +4,18 @@
 
 <span id="chap-11" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *Algorithmique* : résoudre un **problème d’optimisation** à l’aide d’un **algorithme glouton** (exemple emblématique : le *rendu de monnaie*). |
-| **Prérequis** | les boucles `for`/`while`, les listes, écrire une fonction ; la **notion de coût** (chapitre *Algorithmique : le parcours séquentiel*) ; l’**invariant du champion** (garder le meilleur vu jusque-là). (→ fiches de révision : ch. 4) |
-| **Objectifs** | reconnaître un **problème d’optimisation** ; comprendre et appliquer la **stratégie gloutonne** ; la **programmer** sur le rendu de monnaie ; savoir qu’un algorithme glouton est **rapide mais pas toujours optimal** (voire pas toujours une solution). |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *Algorithmique* : résoudre un **problème d’optimisation** à l’aide d’un **algorithme glouton** (exemple emblématique : le *rendu de monnaie*).
+
+Prérequis
+:   les boucles `for`/`while`, les listes, écrire une fonction ; la **notion de coût** (chapitre *Algorithmique : le parcours séquentiel*) ; l’**invariant du champion** (garder le meilleur vu jusque-là). (→ fiches de révision : ch. 4)
+
+Objectifs
+:   reconnaître un **problème d’optimisation** ; comprendre et appliquer la **stratégie gloutonne** ; la **programmer** sur le rendu de monnaie ; savoir qu’un algorithme glouton est **rapide mais pas toujours optimal** (voire pas toujours une solution).
+
+</div>
 
 !!! situation "Situation de départ"
 

@@ -4,12 +4,21 @@
 
 ## <span class="etiquette">Projet 1</span> Dessiner des drapeaux avec Python
 
-|  |  |
-|:---|:---|
-| **Idée** | Jusqu’ici, on *modifiait* des images. Ici, on va en **fabriquer** à partir de rien : des drapeaux. |
-| **Objectif** | Réinvestir le codage **RVB** en respectant les **proportions** et les **couleurs officielles** de chaque drapeau. |
-| **Outil** | la bibliothèque `PIL` (`Image.new`), les **boucles** du cours, et le codage **RVB** des couleurs. |
-| **IA** | <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> **Autorisé** : demander une explication (le rôle d’une fonction de `PIL`, le sens d’un message d’erreur). **Interdit** : faire écrire le programme par une IA. Vous devez pouvoir expliquer chaque ligne de votre code. |
+<div class="tete-chapitre" markdown>
+
+Idée
+:   Jusqu’ici, on *modifiait* des images. Ici, on va en **fabriquer** à partir de rien : des drapeaux.
+
+Objectif
+:   Réinvestir le codage **RVB** en respectant les **proportions** et les **couleurs officielles** de chaque drapeau.
+
+Outil
+:   la bibliothèque `PIL` (`Image.new`), les **boucles** du cours, et le codage **RVB** des couleurs.
+
+IA
+:   <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> **Autorisé** : demander une explication (le rôle d’une fonction de `PIL`, le sens d’un message d’erreur). **Interdit** : faire écrire le programme par une IA. Vous devez pouvoir expliquer chaque ligne de votre code.
+
+</div>
 
 ## Créer une image et la remplir
 
@@ -114,7 +123,11 @@ img.show()
 
 ### Défi 1 : le disque du Japon (à compléter)
 
-Pour le Japon, **pas question** d’utiliser une fonction toute faite comme `ellipse` : ce serait tricher ! On va dessiner le disque **nous-mêmes**, avec l’**équation du cercle**. Un pixel $(x, y)$ se trouve **à l’intérieur** du disque de centre $(x_c, y_c)$ et de rayon $r$ lorsque : $$(x - x_c)^2 + (y - y_c)^2 \ \leqslant\ r^2.$$ Le drapeau du Japon a des proportions $2:3$, un fond blanc et un disque rouge **centré** dont le diamètre vaut $3/5$ de la hauteur. **Compléter** la ligne du `if` en traduisant l’équation ci-dessus en Python.
+Pour le Japon, **pas question** d’utiliser une fonction toute faite comme `ellipse` : ce serait tricher ! On va dessiner le disque **nous-mêmes**, avec l’**équation du cercle**. Un pixel $(x, y)$ se trouve **à l’intérieur** du disque de centre $(x_c, y_c)$ et de rayon $r$ lorsque :
+
+$$(x - x_c)^2 + (y - y_c)^2 \ \leqslant\ r^2.$$
+
+Le drapeau du Japon a des proportions $2:3$, un fond blanc et un disque rouge **centré** dont le diamètre vaut $3/5$ de la hauteur. **Compléter** la ligne du `if` en traduisant l’équation ci-dessus en Python.
 
 ```python
 from PIL import Image
@@ -152,7 +165,11 @@ Le résultat attendu.
 
 ### Défi 2 : une diagonale (à compléter)
 
-Passons du cercle à une **droite**. On coupe le drapeau en deux triangles par la **diagonale** qui va du coin $(0,0)$ (haut-gauche) au coin $(\text{largeur}, \text{hauteur})$ (bas-droit). L’équation de cette droite est : $$y = \frac{\text{hauteur}}{\text{largeur}} \times x.$$ Un pixel est **en dessous** de la diagonale (donc dans le triangle du bas) lorsque son $y$ est *plus grand* que celui de la droite, c’est-à-dire lorsque $y > \dfrac{\text{hauteur}}{\text{largeur}} \times x$ (attention à l’axe des $y$ !). **Compléter** la condition.
+Passons du cercle à une **droite**. On coupe le drapeau en deux triangles par la **diagonale** qui va du coin $(0,0)$ (haut-gauche) au coin $(\text{largeur}, \text{hauteur})$ (bas-droit). L’équation de cette droite est :
+
+$$y = \frac{\text{hauteur}}{\text{largeur}} \times x.$$
+
+Un pixel est **en dessous** de la diagonale (donc dans le triangle du bas) lorsque son $y$ est *plus grand* que celui de la droite, c’est-à-dire lorsque $y > \dfrac{\text{hauteur}}{\text{largeur}} \times x$ (attention à l’axe des $y$ !). **Compléter** la condition.
 
 ```python
 from PIL import Image
@@ -398,14 +415,25 @@ Vous avez maintenant les deux outils : le **cercle** et la **droite**. On peut a
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/03-projet-tableaux-rgb){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/seconde-03-projet-tableaux-rgb.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
 
-|  |  |
-|:---|:---|
-| **Idée** | Appliquer vos programmes de traitement d’image à de **vraies œuvres d’art**, pour les transformer comme un artiste numérique. |
-| **Objectif** | Parcourir tous les pixels, **modifier les canaux** R, V, B, et recolorer une **zone choisie** avec une condition. |
-| **Fichiers** | `nuit_etoilee.jpg` et `blue_boy.jpg` sont fournis (œuvres du **domaine public**). À placer dans le même dossier que vos programmes. |
-| **IA** | <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> **Autorisé** : demander une explication (le rôle d’une fonction de `PIL`, le sens d’un message d’erreur). **Interdit** : faire écrire le programme par une IA. Vous devez pouvoir expliquer chaque ligne de votre code. |
+aththibaud.github.io/informatique-en-autonomie/f/s03-projet-tableaux-rgb\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/03-projet-tableaux-rgbhttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/seconde-03-projet-tableaux-rgb.zip
+
+<div class="tete-chapitre" markdown>
+
+Idée
+:   Appliquer vos programmes de traitement d’image à de **vraies œuvres d’art**, pour les transformer comme un artiste numérique.
+
+Objectif
+:   Parcourir tous les pixels, **modifier les canaux** R, V, B, et recolorer une **zone choisie** avec une condition.
+
+Fichiers
+:   `nuit_etoilee.jpg` et `blue_boy.jpg` sont fournis (œuvres du **domaine public**). À placer dans le même dossier que vos programmes.
+
+IA
+:   <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> **Autorisé** : demander une explication (le rôle d’une fonction de `PIL`, le sens d’un message d’erreur). **Interdit** : faire écrire le programme par une IA. Vous devez pouvoir expliquer chaque ligne de votre code.
+
+</div>
 
 !!! remarque "Remarque"
 

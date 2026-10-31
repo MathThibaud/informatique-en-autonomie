@@ -4,11 +4,18 @@
 
 <span id="chap-05" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *Langages et programmation.* **Spécification** : prototyper une fonction, décrire les **préconditions** sur les arguments et les **postconditions** sur les résultats (des assertions peuvent les garantir). **Mise au point** : utiliser des **jeux de tests** (le succès d’un jeu de tests ne garantit pas la correction). **Diversité des langages** : repérer traits communs et particuliers d’un langage. **Bibliothèques** : utiliser une documentation. |
-| **Prérequis** | écrire des **fonctions**, avec la première approche de la docstring, de `assert` et des jeux de tests (chapitre *Les bases de la programmation Python*) ; **boucles** `for`/`while` et **conditions** ; **tableaux** (listes) ; la notion d’**invariant de boucle** (vue au chapitre *Algorithmique : le parcours séquentiel*). (→ fiches de révision : ch. 1) |
-| **Objectifs** | **spécifier** une fonction (rôle, pré/postconditions, docstring) ; la **documenter** sans excès ; adopter une **programmation défensive** (`assert`, valeur sentinelle) ; écrire un **bon jeu de tests** et comprendre ses limites ; **déboguer** par la trace et l’affichage ; formaliser un **invariant de boucle** ; situer Python parmi la **diversité des langages** (compilé ou interprété, typage statique ou dynamique). |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *Langages et programmation.* **Spécification** : prototyper une fonction, décrire les **préconditions** sur les arguments et les **postconditions** sur les résultats (des assertions peuvent les garantir). **Mise au point** : utiliser des **jeux de tests** (le succès d’un jeu de tests ne garantit pas la correction). **Diversité des langages** : repérer traits communs et particuliers d’un langage. **Bibliothèques** : utiliser une documentation.
+
+Prérequis
+:   écrire des **fonctions**, avec la première approche de la docstring, de `assert` et des jeux de tests (chapitre *Les bases de la programmation Python*) ; **boucles** `for`/`while` et **conditions** ; **tableaux** (listes) ; la notion d’**invariant de boucle** (vue au chapitre *Algorithmique : le parcours séquentiel*). (→ fiches de révision : ch. 1)
+
+Objectifs
+:   **spécifier** une fonction (rôle, pré/postconditions, docstring) ; la **documenter** sans excès ; adopter une **programmation défensive** (`assert`, valeur sentinelle) ; écrire un **bon jeu de tests** et comprendre ses limites ; **déboguer** par la trace et l’affichage ; formaliser un **invariant de boucle** ; situer Python parmi la **diversité des langages** (compilé ou interprété, typage statique ou dynamique).
+
+</div>
 
 !!! situation "Situation de départ"
 

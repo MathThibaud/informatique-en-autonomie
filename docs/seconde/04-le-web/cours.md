@@ -4,11 +4,18 @@
 
 <span id="chap-04" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme** | Repères historiques du Web ; distinguer *Web* et *Internet* ; le modèle **client/serveur** et le protocole **HTTP** ; les **URL** et les hyperliens ; le couple **HTML**/**CSS** ; moteurs de recherche et **indexation** ; sécurité et traces (HTTPS, cookies). |
-| **Idée** | Une page web est un simple **fichier texte** : du **HTML** pour le *contenu*, du **CSS** pour l’*apparence*. En comprenant ces deux langages, vous passez de *consommateur* à *auteur* du Web. |
-| **Objectifs** | Situer l’invention du Web ; ne plus confondre Web et Internet ; lire une URL et un échange client/serveur ; écrire une page en HTML ; la mettre en forme en CSS ; comprendre comment un moteur de recherche classe ses réponses. |
+<div class="tete-chapitre" markdown>
+
+Programme
+:   Repères historiques du Web ; distinguer *Web* et *Internet* ; le modèle **client/serveur** et le protocole **HTTP** ; les **URL** et les hyperliens ; le couple **HTML**/**CSS** ; moteurs de recherche et **indexation** ; sécurité et traces (HTTPS, cookies).
+
+Idée
+:   Une page web est un simple **fichier texte** : du **HTML** pour le *contenu*, du **CSS** pour l’*apparence*. En comprenant ces deux langages, vous passez de *consommateur* à *auteur* du Web.
+
+Objectifs
+:   Situer l’invention du Web ; ne plus confondre Web et Internet ; lire une URL et un échange client/serveur ; écrire une page en HTML ; la mettre en forme en CSS ; comprendre comment un moteur de recherche classe ses réponses.
+
+</div>
 
 !!! situation "Situation de départ"
 

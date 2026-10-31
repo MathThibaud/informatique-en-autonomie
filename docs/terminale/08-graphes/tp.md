@@ -6,7 +6,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/08-projet-dijkstra){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-08-projet-dijkstra.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t08-projet-dijkstra\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/08-projet-dijkstrahttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-08-projet-dijkstra.zip
 
 !!! encadre "But du projet"
 
@@ -260,7 +262,11 @@ L’algorithme repose sur une affirmation forte : *quand on fixe le sommet `u` d
 
 !!! demonstration "Démonstration"
 
-    Supposons le contraire : soit `u` le **premier** sommet fixé dont la distance provisoire $d[u]$ dépasserait la vraie distance minimale $\delta(u)$. Considérons un *vrai* plus court chemin du départ à `u`, et notons `y` le premier sommet de ce chemin **pas encore fixé**, et `x` son prédécesseur (déjà fixé, donc de distance correcte). Quand on a fixé `x`, on a relâché l’arête `x`$\to$`y`, donc $$d[y] \le d[x] + \text{poids}(x,y) = \delta(x) + \text{poids}(x,y) = \delta(y) \le \delta(u).$$ (La dernière inégalité vient de ce que `y` est *sur* un plus court chemin vers `u` et que les poids sont positifs : aller jusqu’à `y` coûte au plus ce que coûte aller jusqu’à `u`.) Mais on a choisi `u` comme sommet de plus petite distance provisoire, donc $d[u] \le d[y] \le \delta(u)$. On aurait donc $d[u] \le \delta(u)$, ce qui **contredit** $d[u] > \delta(u)$. L’hypothèse est absurde : la distance de `u` est bien correcte au moment où on le fixe.
+    Supposons le contraire : soit `u` le **premier** sommet fixé dont la distance provisoire $d[u]$ dépasserait la vraie distance minimale $\delta(u)$. Considérons un *vrai* plus court chemin du départ à `u`, et notons `y` le premier sommet de ce chemin **pas encore fixé**, et `x` son prédécesseur (déjà fixé, donc de distance correcte). Quand on a fixé `x`, on a relâché l’arête `x`$\to$`y`, donc
+
+    $$d[y] \le d[x] + \text{poids}(x,y) = \delta(x) + \text{poids}(x,y) = \delta(y) \le \delta(u).$$
+
+    (La dernière inégalité vient de ce que `y` est *sur* un plus court chemin vers `u` et que les poids sont positifs : aller jusqu’à `y` coûte au plus ce que coûte aller jusqu’à `u`.) Mais on a choisi `u` comme sommet de plus petite distance provisoire, donc $d[u] \le d[y] \le \delta(u)$. On aurait donc $d[u] \le \delta(u)$, ce qui **contredit** $d[u] > \delta(u)$. L’hypothèse est absurde : la distance de `u` est bien correcte au moment où on le fixe.
 
 !!! remarque "Remarque"
 

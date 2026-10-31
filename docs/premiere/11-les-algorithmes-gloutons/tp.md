@@ -10,7 +10,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/11-tp-glouton-epreuve){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-11-tp-glouton-epreuve.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/p11-tp-glouton-epreuve\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/11-tp-glouton-epreuvehttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-11-tp-glouton-epreuve.zip
 
 !!! encadre "But du TP"
 

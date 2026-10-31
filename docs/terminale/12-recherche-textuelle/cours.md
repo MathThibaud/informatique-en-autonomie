@@ -4,11 +4,18 @@
 
 <span id="chap-12" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Recherche textuelle. Étudier l’algorithme de Boyer-Moore pour la recherche d’un motif dans un texte. »* Commentaire du BO : *« L’intérêt du prétraitement du motif est mis en avant. L’étude du coût, difficile, ne peut être exigée. »* |
-| **Prérequis** | les **chaînes de caractères** et l’accès par indice ($0$ à $n-1$), la notion de **coût** (linéaire, quadratique), les **dictionnaires** (pour le prétraitement). |
-| **Objectifs** | *écrire* la recherche naïve ; *comprendre* les deux idées de **Boyer-Moore** (lire à l’envers, sauter loin) ; *construire* la table de prétraitement et *dérouler* **Boyer-Moore** et **Horspool**. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Recherche textuelle. Étudier l’algorithme de Boyer-Moore pour la recherche d’un motif dans un texte. »* Commentaire du BO : *« L’intérêt du prétraitement du motif est mis en avant. L’étude du coût, difficile, ne peut être exigée. »*
+
+Prérequis
+:   les **chaînes de caractères** et l’accès par indice ($0$ à $n-1$), la notion de **coût** (linéaire, quadratique), les **dictionnaires** (pour le prétraitement).
+
+Objectifs
+:   *écrire* la recherche naïve ; *comprendre* les deux idées de **Boyer-Moore** (lire à l’envers, sauter loin) ; *construire* la table de prétraitement et *dérouler* **Boyer-Moore** et **Horspool**.
+
+</div>
 
 !!! situation "Situation de départ"
 

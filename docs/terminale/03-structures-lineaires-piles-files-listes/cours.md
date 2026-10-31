@@ -4,11 +4,18 @@
 
 <span id="chap-03" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Structures de données, interface et implémentation. Spécifier une structure de données par son interface. Distinguer interface et implémentation. Écrire plusieurs implémentations d’une même structure de données. »* *« Listes, piles, files : structures linéaires. Dictionnaires, index et clé. Distinguer des structures par le jeu des méthodes qui les caractérisent. Choisir une structure de données adaptée à la situation à modéliser. Distinguer la recherche d’une valeur dans une liste et dans un dictionnaire. »* |
-| **Prérequis** | fonctions, boucles, listes et dictionnaires Python ; notion de classe et de méthode (chapitre *Programmation objet*). (→ fiches de révision : ch. 2) |
-| **Objectifs** | *distinguer* l’interface d’une structure de son implémentation ; *connaître* le jeu de méthodes qui caractérise une pile et une file ; *utiliser* ces structures pour résoudre un problème (parenthésage, parcours…) ; *comprendre* le rôle des listes chaînées comme brique d’implémentation. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Structures de données, interface et implémentation. Spécifier une structure de données par son interface. Distinguer interface et implémentation. Écrire plusieurs implémentations d’une même structure de données. »* *« Listes, piles, files : structures linéaires. Dictionnaires, index et clé. Distinguer des structures par le jeu des méthodes qui les caractérisent. Choisir une structure de données adaptée à la situation à modéliser. Distinguer la recherche d’une valeur dans une liste et dans un dictionnaire. »*
+
+Prérequis
+:   fonctions, boucles, listes et dictionnaires Python ; notion de classe et de méthode (chapitre *Programmation objet*). (→ fiches de révision : ch. 2)
+
+Objectifs
+:   *distinguer* l’interface d’une structure de son implémentation ; *connaître* le jeu de méthodes qui caractérise une pile et une file ; *utiliser* ces structures pour résoudre un problème (parenthésage, parcours…) ; *comprendre* le rôle des listes chaînées comme brique d’implémentation.
+
+</div>
 
 !!! situation "Situation de départ"
 

@@ -10,7 +10,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/08-tp-meteo-riviera){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-08-tp-meteo-riviera.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/p08-tp-meteo-riviera\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/08-tp-meteo-rivierahttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-08-tp-meteo-riviera.zip
 
 !!! encadre "But du TP"
 
@@ -568,7 +570,9 @@ Rédiger, en quelques lignes, un compte rendu (dans un fichier texte placé à c
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/08-projet-prenoms-insee){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-08-projet-prenoms-insee.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/p08-projet-prenoms-insee\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/08-projet-prenoms-inseehttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-08-projet-prenoms-insee.zip
 
 !!! encadre "But du projet"
 

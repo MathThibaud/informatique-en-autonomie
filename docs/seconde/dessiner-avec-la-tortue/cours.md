@@ -4,12 +4,21 @@
 
 <span id="chap-T" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme** | Notions transversales de programmation : **séquence** d’instructions, **boucle bornée** (`for`), définition et appel de **fonctions** avec **paramètres** ; ici mises en œuvre en dessinant avec le module `turtle`. |
-| **Idée** | Une « tortue » se déplace sur l’écran en traçant un trait derrière elle. En lui donnant des ordres simples (avance, tourne), on dessine des figures. `turtle` rend **visibles** les boucles et les fonctions : on *voit* la répétition à l’écran. |
-| **Objectifs** | Piloter la tortue (avancer, tourner, lever et baisser le stylo) ; **répéter** un motif avec une boucle `for` ; calculer l’angle d’un **polygone régulier** ($360/n$) ; définir et appeler une **fonction** avec paramètres ; **colorier** une forme ; composer une **rosace**. |
-| **Prérequis** | La boucle `for` et les fonctions (revoyez le cours « Les bases de Python » si besoin). |
+<div class="tete-chapitre" markdown>
+
+Programme
+:   Notions transversales de programmation : **séquence** d’instructions, **boucle bornée** (`for`), définition et appel de **fonctions** avec **paramètres** ; ici mises en œuvre en dessinant avec le module `turtle`.
+
+Idée
+:   Une « tortue » se déplace sur l’écran en traçant un trait derrière elle. En lui donnant des ordres simples (avance, tourne), on dessine des figures. `turtle` rend **visibles** les boucles et les fonctions : on *voit* la répétition à l’écran.
+
+Objectifs
+:   Piloter la tortue (avancer, tourner, lever et baisser le stylo) ; **répéter** un motif avec une boucle `for` ; calculer l’angle d’un **polygone régulier** ($360/n$) ; définir et appeler une **fonction** avec paramètres ; **colorier** une forme ; composer une **rosace**.
+
+Prérequis
+:   La boucle `for` et les fonctions (revoyez le cours « Les bases de Python » si besoin).
+
+</div>
 
 !!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
 

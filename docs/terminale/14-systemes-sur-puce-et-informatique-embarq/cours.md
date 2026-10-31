@@ -4,11 +4,18 @@
 
 <span id="chap-14" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Composants intégrés d’un système sur puce. Identifier les principaux composants sur un schéma de circuit et les avantages de leur intégration en termes de vitesse et de consommation. »* Commentaire du BO : *« Le circuit d’un téléphone peut être pris comme exemple : microprocesseurs, mémoires locales, interfaces radio et filaires, gestion d’énergie, contrôleurs vidéo, accélérateur graphique, réseaux sur puce, etc. »* |
-| **Prérequis** | le modèle de **von Neumann** (unité de calcul, mémoire, entrées-sorties, bus — vu en Première), la différence **mémoire vive / mémoire morte**, la notion de **processus**. (→ fiches de révision : ch. 4) |
-| **Objectifs** | *comprendre* pourquoi un ordinateur entier tient sur une puce ; *distinguer* microcontrôleur et SoC ; *dérouler* le fonctionnement d’un système embarqué ; *peser* les intérêts et les limites de l’intégration. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Composants intégrés d’un système sur puce. Identifier les principaux composants sur un schéma de circuit et les avantages de leur intégration en termes de vitesse et de consommation. »* Commentaire du BO : *« Le circuit d’un téléphone peut être pris comme exemple : microprocesseurs, mémoires locales, interfaces radio et filaires, gestion d’énergie, contrôleurs vidéo, accélérateur graphique, réseaux sur puce, etc. »*
+
+Prérequis
+:   le modèle de **von Neumann** (unité de calcul, mémoire, entrées-sorties, bus — vu en Première), la différence **mémoire vive / mémoire morte**, la notion de **processus**. (→ fiches de révision : ch. 4)
+
+Objectifs
+:   *comprendre* pourquoi un ordinateur entier tient sur une puce ; *distinguer* microcontrôleur et SoC ; *dérouler* le fonctionnement d’un système embarqué ; *peser* les intérêts et les limites de l’intégration.
+
+</div>
 
 !!! situation "Situation de départ"
 

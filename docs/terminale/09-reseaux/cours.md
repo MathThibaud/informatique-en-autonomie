@@ -4,11 +4,18 @@
 
 <span id="chap-09" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Protocoles de routage. Identifier, suivant le protocole de routage utilisé, la route empruntée par un paquet. »* Commentaire du programme : *« En mode débranché, les tables de routage étant données, on se réfère au nombre de sauts (protocole RIP) ou au coût des routes (protocole OSPF). Le lien avec les algorithmes de recherche de chemin sur un graphe est mis en évidence. »* |
-| **Prérequis** | la notion de **réseau** et d’**adresse IP** (Première), les **graphes** (chemins, plus court chemin), la notion de **coût**. L’algorithme de **Dijkstra** (projet du chapitre *Graphes*) éclaire OSPF, mais n’est **pas exigé** (voir la section dédiée, au-delà du programme). (→ fiches de révision : ch. 8) |
-| **Objectifs** | *distinguer* machine, switch et routeur ; *comprendre* le voyage d’un paquet à travers les *couches* ; *lire* et *utiliser* une table de routage **donnée** ; *identifier* la route empruntée par un paquet selon le protocole (sauts pour RIP, coûts pour OSPF), et *compléter* la table d’un petit réseau ; *comparer* les choix de RIP et d’OSPF. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Protocoles de routage. Identifier, suivant le protocole de routage utilisé, la route empruntée par un paquet. »* Commentaire du programme : *« En mode débranché, les tables de routage étant données, on se réfère au nombre de sauts (protocole RIP) ou au coût des routes (protocole OSPF). Le lien avec les algorithmes de recherche de chemin sur un graphe est mis en évidence. »*
+
+Prérequis
+:   la notion de **réseau** et d’**adresse IP** (Première), les **graphes** (chemins, plus court chemin), la notion de **coût**. L’algorithme de **Dijkstra** (projet du chapitre *Graphes*) éclaire OSPF, mais n’est **pas exigé** (voir la section dédiée, au-delà du programme). (→ fiches de révision : ch. 8)
+
+Objectifs
+:   *distinguer* machine, switch et routeur ; *comprendre* le voyage d’un paquet à travers les *couches* ; *lire* et *utiliser* une table de routage **donnée** ; *identifier* la route empruntée par un paquet selon le protocole (sauts pour RIP, coûts pour OSPF), et *compléter* la table d’un petit réseau ; *comparer* les choix de RIP et d’OSPF.
+
+</div>
 
 !!! situation "Situation de départ"
 
@@ -184,7 +191,11 @@ Le protocole **RIP** (*Routing Information Protocol*) mesure une route par son *
 
 !!! definition "Définition 4 — Métrique d’OSPF"
 
-    Le **coût** d’une liaison se calcule à partir de son débit : $$\text{coût} = \frac{10^8}{\text{débit (en bits/s)}}.$$ La **métrique d’une route** est la **somme des coûts** des liaisons traversées. Chaque routeur connaît la carte complète du réseau (*état de liens*) et en déduit les routes de coût minimal (en coulisses, par l’algorithme de **Dijkstra** : voir la dernière section sur le routage, au-delà du programme). Sur les petits réseaux du bac, on trouve ces routes en comparant les coûts totaux de quelques chemins.
+    Le **coût** d’une liaison se calcule à partir de son débit :
+
+    $$\text{coût} = \frac{10^8}{\text{débit (en bits/s)}}.$$
+
+    La **métrique d’une route** est la **somme des coûts** des liaisons traversées. Chaque routeur connaît la carte complète du réseau (*état de liens*) et en déduit les routes de coût minimal (en coulisses, par l’algorithme de **Dijkstra** : voir la dernière section sur le routage, au-delà du programme). Sur les petits réseaux du bac, on trouve ces routes en comparant les coûts totaux de quelques chemins.
 
 !!! encadre "Au bac — lire la formule de coût donnée par l’énoncé"
 

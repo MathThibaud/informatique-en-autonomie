@@ -4,11 +4,18 @@
 
 <span id="chap-06" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme** | Repères historiques ; protocole **TCP/IP** (paquets, routage) ; adresses symboliques et serveurs **DNS** ; réseaux **pair-à-pair** ; indépendance d’Internet vis-à-vis du réseau physique ; ordres de grandeur du trafic. |
-| **Idée** | Internet, c’est le **réseau** : des millions de machines qui s’échangent des **paquets** de données, de proche en proche, sans chef d’orchestre central. Une idée simple, robuste… et devenue vitale. |
-| **Objectifs** | Situer la naissance d’Internet ; distinguer les rôles d’**IP** et de **TCP** ; comprendre le **routage** des paquets et ses limites ; passer d’une adresse symbolique à une adresse **IP** (DNS) ; connaître les grands types de réseaux physiques et l’ordre de grandeur du trafic. |
+<div class="tete-chapitre" markdown>
+
+Programme
+:   Repères historiques ; protocole **TCP/IP** (paquets, routage) ; adresses symboliques et serveurs **DNS** ; réseaux **pair-à-pair** ; indépendance d’Internet vis-à-vis du réseau physique ; ordres de grandeur du trafic.
+
+Idée
+:   Internet, c’est le **réseau** : des millions de machines qui s’échangent des **paquets** de données, de proche en proche, sans chef d’orchestre central. Une idée simple, robuste… et devenue vitale.
+
+Objectifs
+:   Situer la naissance d’Internet ; distinguer les rôles d’**IP** et de **TCP** ; comprendre le **routage** des paquets et ses limites ; passer d’une adresse symbolique à une adresse **IP** (DNS) ; connaître les grands types de réseaux physiques et l’ordre de grandeur du trafic.
+
+</div>
 
 !!! situation "Situation de départ"
 

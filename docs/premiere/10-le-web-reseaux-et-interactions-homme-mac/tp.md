@@ -10,7 +10,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/10-tp-site-web-guide){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-10-tp-site-web-guide.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/p10-tp-site-web-guide\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/10-tp-site-web-guidehttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-10-tp-site-web-guide.zip
 
 !!! encadre "But du TP"
 
@@ -58,10 +60,15 @@ Environ 40 minutes. On écrit le **fond** de la page : les titres, les textes, l
 
 ??? corrige "Corrigé"
 
-    |  |  |
-    |:---|:---|
-    | **Ancrage BO (1re)** | réaliser et analyser une page HTML/CSS simple ; rôles de HTML, CSS et JavaScript ; événements et modification du document ; distinguer ce qui relève du client et du serveur. |
-    | **Code** | une version possible parmi d’autres : les textes, les couleurs et la disposition sont libres, pourvu que les balises, les sélecteurs et les fonctions demandés y soient. |
+    <div class="tete-chapitre" markdown>
+
+    Ancrage BO (1re)
+    :   réaliser et analyser une page HTML/CSS simple ; rôles de HTML, CSS et JavaScript ; événements et modification du document ; distinguer ce qui relève du client et du serveur.
+
+    Code
+    :   une version possible parmi d’autres : les textes, les couleurs et la disposition sont libres, pourvu que les balises, les sélecteurs et les fonctions demandés y soient.
+
+    </div>
 
     Le fichier `script.js` terminé, bonus compris :
 

@@ -10,7 +10,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/13-defi-aoc-2020-08){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-13-defi-aoc-2020-08.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t13-defi-aoc-2020-08\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/13-defi-aoc-2020-08https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-13-defi-aoc-2020-08.zip
 
 !!! consignes "Consignes"
 
@@ -188,7 +190,9 @@ On note $n$ le nombre de lignes et $\mathrm{succ}(k)$ la ligne exécutée juste 
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/13-defi-aoc-2020-17){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-13-defi-aoc-2020-17.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t13-defi-aoc-2020-17\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/13-defi-aoc-2020-17https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-13-defi-aoc-2020-17.zip
 
 !!! consignes "Consignes"
 

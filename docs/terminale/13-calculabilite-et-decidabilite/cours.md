@@ -4,11 +4,18 @@
 
 <span id="chap-13" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Notion de programme en tant que donnée. Calculabilité, décidabilité. Comprendre que tout programme est aussi une donnée. Comprendre que la calculabilité ne dépend pas du langage de programmation utilisé. Montrer, sans formalisme théorique, que le problème de l’arrêt est indécidable. »* |
-| **Prérequis** | la notion de **fonction** et de **paramètre** ; les **boucles** et la **terminaison** (variant de boucle) ; la notion de **coût** d’un algorithme (linéaire, quadratique, exponentiel, vue en Première) ; les **paradigmes** de programmation (voir le chapitre *Programmation objet et paradigmes*). (→ fiches de révision : ch. 2) |
-| **Objectifs** | *comprendre* qu’un programme est une **donnée** comme une autre ; *connaître* la distinction **décidable / indécidable** ; *savoir refaire* le raisonnement du **problème de l’arrêt** ; *situer* la **thèse de Church-Turing** et la **Turing-complétude** ; *découvrir* la question **P versus NP** <span class="horsprog">au-delà du programme</span>. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Notion de programme en tant que donnée. Calculabilité, décidabilité. Comprendre que tout programme est aussi une donnée. Comprendre que la calculabilité ne dépend pas du langage de programmation utilisé. Montrer, sans formalisme théorique, que le problème de l’arrêt est indécidable. »*
+
+Prérequis
+:   la notion de **fonction** et de **paramètre** ; les **boucles** et la **terminaison** (variant de boucle) ; la notion de **coût** d’un algorithme (linéaire, quadratique, exponentiel, vue en Première) ; les **paradigmes** de programmation (voir le chapitre *Programmation objet et paradigmes*). (→ fiches de révision : ch. 2)
+
+Objectifs
+:   *comprendre* qu’un programme est une **donnée** comme une autre ; *connaître* la distinction **décidable / indécidable** ; *savoir refaire* le raisonnement du **problème de l’arrêt** ; *situer* la **thèse de Church-Turing** et la **Turing-complétude** ; *découvrir* la question **P versus NP** <span class="horsprog">au-delà du programme</span>.
+
+</div>
 
 *Ce chapitre ne demande presque pas de code : c’est un chapitre d’**idées**. Nous allons prouver, avec quelques lignes de Python et un raisonnement d’une élégance redoutable, qu’il existe des questions parfaitement claires… auxquelles **aucun** programme ne pourra **jamais** répondre. Non pas parce que nos ordinateurs sont trop lents ou nos programmeurs trop paresseux : parce que c’est **impossible**. Bienvenue à la frontière de l’informatique.*
 
@@ -276,7 +283,11 @@ Beaucoup de problèmes « cauchemardesques » de l’informatique sont dans NP
 
 ### La question à un million de dollars
 
-D’abord, une évidence : si on sait **résoudre** vite (P), alors on sait **vérifier** vite (il suffit de résoudre et de comparer). Donc : $$\textbf{P} \subseteq \textbf{NP}.$$ La vraie question, ouverte depuis 1971 et toujours **sans réponse**, est la réciproque :
+D’abord, une évidence : si on sait **résoudre** vite (P), alors on sait **vérifier** vite (il suffit de résoudre et de comparer). Donc :
+
+$$\textbf{P} \subseteq \textbf{NP}.$$
+
+La vraie question, ouverte depuis 1971 et toujours **sans réponse**, est la réciproque :
 
 **P = NP ?** *Vérifier vite implique-t-il pouvoir trouver vite ?*
 

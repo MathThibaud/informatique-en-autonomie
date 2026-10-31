@@ -302,7 +302,9 @@ def separe(tab):
     return tab[:k + 1], tab[k + 1:]
 ```
 
-On considère le texte dont les effectifs sont : $$\texttt{tab = [("A", 15), ("B", 7), ("C", 6), ("D", 6), ("E", 5)]}.$$
+On considère le texte dont les effectifs sont :
+
+$$\texttt{tab = [("A", 15), ("B", 7), ("C", 6), ("D", 6), ("E", 5)]}.$$
 
 1.  Que renvoie `separe(tab)` ? (donner les deux groupes) Quel bit (`"1"` ou `"0"`) commence alors le code de `"A"` ? celui de `"C"` ?
 
@@ -353,7 +355,11 @@ On considère le texte dont les effectifs sont : $$\texttt{tab = [("A", 15), ("B
 
     **Barème indicatif** (sur 6) : Q1 : 0,75 ; Q2 : 1,25 ; Q3 : 1 ; Q4 : 0,75 ; Q5 : 0,75 ; Q6 : 1 ; Q7 : 0,5
 
-    **1.** L’effectif total est $15+7+6+6+5 = 39$, et $39/2 = 19{,}5$. Le cumul atteint $19{,}5$ dès `"B"` ($15+7 = 22$). Donc $$\texttt{separe(tab)} = \big(\,[("A",15),("B",7)]\ ,\ [("C",6),("D",6),("E",5)]\,\big).$$ `"A"` est dans le premier groupe $\rightarrow$ son code commence par `"1"` ; `"C"` est dans le second $\rightarrow$ son code commence par `"0"`.
+    **1.** L’effectif total est $15+7+6+6+5 = 39$, et $39/2 = 19{,}5$. Le cumul atteint $19{,}5$ dès `"B"` ($15+7 = 22$). Donc
+
+    $$\texttt{separe(tab)} = \big(\,[("A",15),("B",7)]\ ,\ [("C",6),("D",6),("E",5)]\,\big).$$
+
+    `"A"` est dans le premier groupe $\rightarrow$ son code commence par `"1"` ; `"C"` est dans le second $\rightarrow$ son code commence par `"0"`.
 
     **2.** On préfixe le bit puis on recommence sur le *bon* groupe :
 
@@ -706,7 +712,11 @@ On suppose que l’on a partagé `lst` en deux listes : `lst1 = lst[:n//2]` (les
 
 <span class="duree">≈ 60 min</span>
 
-L’objectif est de trouver les deux points les plus proches dans un nuage de points dont on connaît les coordonnées dans un repère orthogonal. On rappelle que la distance entre deux points $A(x_A ; y_A)$ et $B(x_B ; y_B)$ est donnée par la formule : $$AB = \sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}.$$ Les coordonnées d’un point sont stockées dans un tuple de deux nombres réels. Le nuage de points est représenté en Python par une liste de tuples de taille $n$, $n$ étant le nombre total de points. On suppose qu’il n’y a pas de points confondus et qu’il y a au moins deux points dans le nuage. Pour calculer la racine carrée, on utilise la fonction `sqrt` du module `math` :
+L’objectif est de trouver les deux points les plus proches dans un nuage de points dont on connaît les coordonnées dans un repère orthogonal. On rappelle que la distance entre deux points $A(x_A ; y_A)$ et $B(x_B ; y_B)$ est donnée par la formule :
+
+$$AB = \sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}.$$
+
+Les coordonnées d’un point sont stockées dans un tuple de deux nombres réels. Le nuage de points est représenté en Python par une liste de tuples de taille $n$, $n$ étant le nombre total de points. On suppose qu’il n’y a pas de points confondus et qu’il y a au moins deux points dans le nuage. Pour calculer la racine carrée, on utilise la fonction `sqrt` du module `math` :
 
 ```text
 >>> from math import sqrt

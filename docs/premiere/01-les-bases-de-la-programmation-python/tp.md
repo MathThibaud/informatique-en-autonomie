@@ -44,11 +44,18 @@ Pourquoi est-il préférable de *renvoyer* la réponse plutôt que de l’*affic
 
 ??? corrige "Corrigé"
 
-    |  |  |
-    |:---|:---|
-    | **Ancrage BO (1re)** | constructions élémentaires (séquence, affectation, conditionnelles, boucles bornées et non bornées, appels de fonction) ; spécification (docstring, précondition par `assert`) ; jeux de tests ; terminaison par un variant. |
-    | **Code** | tout le code ci-dessous forme **un seul fichier** `nombre_mystere.py`. |
-    | **Contrainte** | aucune liste ni aucun tuple (non vus à ce stade) : les affichages multiples sont des `print` successifs, et chaque fonction renvoie **une seule** valeur (d’où `borne_max` et `essais_autorises` séparées). |
+    <div class="tete-chapitre" markdown>
+
+    Ancrage BO (1re)
+    :   constructions élémentaires (séquence, affectation, conditionnelles, boucles bornées et non bornées, appels de fonction) ; spécification (docstring, précondition par `assert`) ; jeux de tests ; terminaison par un variant.
+
+    Code
+    :   tout le code ci-dessous forme **un seul fichier** `nombre_mystere.py`.
+
+    Contrainte
+    :   aucune liste ni aucun tuple (non vus à ce stade) : les affichages multiples sont des `print` successifs, et chaque fonction renvoie **une seule** valeur (d’où `borne_max` et `essais_autorises` séparées).
+
+    </div>
 
     - Testées par `assert` : `comparer`, `est_dans_intervalle`, `ecart`, `indice`, `points`, `borne_max`, `essais_autorises`, `essais_ordinateur`, `pire_cas`, `nb_moities`. Non testables ainsi : `partie`, `afficher_menu`, `demander_niveau`, `ordinateur_devine`, `jouer` (elles lisent le clavier ou affichent) : on les essaie à la main.
 

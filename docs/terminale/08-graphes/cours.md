@@ -4,11 +4,18 @@
 
 <span id="chap-08" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Graphes : structures relationnelles. Sommets, arcs, arêtes, graphe orienté ou non orienté. Modéliser des situations sous forme de graphes. Écrire les implémentations correspondantes d’un graphe : matrice d’adjacence, liste de successeurs / de prédécesseurs. Passer d’une représentation à une autre. Parcourir un graphe en largeur, en profondeur. Repérer la présence d’un cycle. Chercher un chemin dans un graphe. »* |
-| **Prérequis** | les **piles** et les **files** (indispensables pour les parcours !), les **dictionnaires** et les listes de listes, la **récursivité**, les **classes**, la notion de **coût** d’un algorithme. Les **arbres** (un arbre est un graphe particulier). (→ fiches de révision : ch. 1, ch. 2, ch. 3, ch. 5) |
-| **Objectifs** | *reconnaître* une situation qui appelle un graphe et la *modéliser* ; *maîtriser* le vocabulaire ; *implémenter* un graphe de trois façons et *passer* de l’une à l’autre ; *parcourir* un graphe en largeur (file) et en profondeur (pile) ; *trouver* un chemin, le plus court chemin, détecter un cycle. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Graphes : structures relationnelles. Sommets, arcs, arêtes, graphe orienté ou non orienté. Modéliser des situations sous forme de graphes. Écrire les implémentations correspondantes d’un graphe : matrice d’adjacence, liste de successeurs / de prédécesseurs. Passer d’une représentation à une autre. Parcourir un graphe en largeur, en profondeur. Repérer la présence d’un cycle. Chercher un chemin dans un graphe. »*
+
+Prérequis
+:   les **piles** et les **files** (indispensables pour les parcours !), les **dictionnaires** et les listes de listes, la **récursivité**, les **classes**, la notion de **coût** d’un algorithme. Les **arbres** (un arbre est un graphe particulier). (→ fiches de révision : ch. 1, ch. 2, ch. 3, ch. 5)
+
+Objectifs
+:   *reconnaître* une situation qui appelle un graphe et la *modéliser* ; *maîtriser* le vocabulaire ; *implémenter* un graphe de trois façons et *passer* de l’une à l’autre ; *parcourir* un graphe en largeur (file) et en profondeur (pile) ; *trouver* un chemin, le plus court chemin, détecter un cycle.
+
+</div>
 
 !!! situation "Situation de départ"
 
@@ -89,7 +96,11 @@ Les sommets `B` et `C` sont **adjacents** à `A` : ce sont ses **voisins**. Le *
 
 !!! propriete "Propriété 1 — Lemme des poignées de main"
 
-    Dans un graphe non orienté, la **somme des degrés** de tous les sommets est égale au **double** du nombre d’arêtes : $$\sum_{s \in S} \deg(s) = 2\,m.$$ En conséquence, le nombre de sommets de degré **impair** est toujours **pair**.
+    Dans un graphe non orienté, la **somme des degrés** de tous les sommets est égale au **double** du nombre d’arêtes :
+
+    $$\sum_{s \in S} \deg(s) = 2\,m.$$
+
+    En conséquence, le nombre de sommets de degré **impair** est toujours **pair**.
 
 !!! demonstration "Démonstration"
 

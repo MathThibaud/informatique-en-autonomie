@@ -514,7 +514,9 @@ print(f"Bonjour {prenom} !")
 
 Quand un programme grandit, on a besoin de l’organiser en **morceaux réutilisables** : les **fonctions**. Une fonction, c’est un mini-programme qui a un nom, à qui on peut donner des valeurs d’entrée, et qui (souvent) renvoie un résultat.
 
-L’idée est très proche de la fonction mathématique : $$\begin{matrix} \text{valeur d'entrée} \\ \text{(le « paramètre »)} \end{matrix}
+L’idée est très proche de la fonction mathématique :
+
+$$\begin{matrix} \text{valeur d'entrée} \\ \text{(le « paramètre »)} \end{matrix}
 \;\longrightarrow\; \boxed{\ \text{fonction}\ } \;\longrightarrow\;
 \begin{matrix} \text{valeur de sortie} \\ \text{(renvoyée par « return »)} \end{matrix}$$
 

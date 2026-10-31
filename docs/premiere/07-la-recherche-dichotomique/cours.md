@@ -4,11 +4,18 @@
 
 <span id="chap-07" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Recherche dichotomique dans un tableau trié »* : *montrer la terminaison de la recherche dichotomique à l’aide d’un variant de boucle* ; des assertions peuvent être utilisées ; la preuve de la correction peut être présentée par le professeur. |
-| **Prérequis** | la boucle `while`, les tableaux (indices, `len`) ; la **recherche séquentielle** et la **notion de coût** (chapitre *Algorithmique : le parcours séquentiel*) ; le fait qu’un tableau puisse être **trié** (chapitre *Les algorithmes de tri*). (→ fiches de révision : ch. 4, ch. 6) |
-| **Objectifs** | comprendre et écrire la recherche dichotomique ; **dérouler** son exécution ; prouver qu’elle **se termine** (variant de boucle) ; établir son **coût logarithmique** et mesurer à quel point il est petit. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Recherche dichotomique dans un tableau trié »* : *montrer la terminaison de la recherche dichotomique à l’aide d’un variant de boucle* ; des assertions peuvent être utilisées ; la preuve de la correction peut être présentée par le professeur.
+
+Prérequis
+:   la boucle `while`, les tableaux (indices, `len`) ; la **recherche séquentielle** et la **notion de coût** (chapitre *Algorithmique : le parcours séquentiel*) ; le fait qu’un tableau puisse être **trié** (chapitre *Les algorithmes de tri*). (→ fiches de révision : ch. 4, ch. 6)
+
+Objectifs
+:   comprendre et écrire la recherche dichotomique ; **dérouler** son exécution ; prouver qu’elle **se termine** (variant de boucle) ; établir son **coût logarithmique** et mesurer à quel point il est petit.
+
+</div>
 
 !!! situation "Situation de départ"
 

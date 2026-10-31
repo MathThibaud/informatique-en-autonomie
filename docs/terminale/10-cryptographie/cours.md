@@ -4,11 +4,18 @@
 
 <span id="chap-10" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Sécurisation des communications. Décrire les principes de chiffrement symétrique (clef partagée) et asymétrique (avec clef privée/clef publique). Décrire l’échange d’une clef symétrique en utilisant un protocole asymétrique pour sécuriser une communication HTTPS. »* |
-| **Prérequis** | la **division euclidienne** et le **reste** (opérateur `%`), la notion de **coût** d’un algorithme (croissance exponentielle), les **réseaux** et le fait qu’un paquet peut être **intercepté**. (→ fiches de révision : ch. 9) |
-| **Objectifs** | *chiffrer* et *déchiffrer* avec un code symétrique ; *comprendre* l’idée du chiffrement asymétrique et *dérouler RSA* à la main ; *expliquer* l’échange de clé et le protocole **HTTPS**. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Sécurisation des communications. Décrire les principes de chiffrement symétrique (clef partagée) et asymétrique (avec clef privée/clef publique). Décrire l’échange d’une clef symétrique en utilisant un protocole asymétrique pour sécuriser une communication HTTPS. »*
+
+Prérequis
+:   la **division euclidienne** et le **reste** (opérateur `%`), la notion de **coût** d’un algorithme (croissance exponentielle), les **réseaux** et le fait qu’un paquet peut être **intercepté**. (→ fiches de révision : ch. 9)
+
+Objectifs
+:   *chiffrer* et *déchiffrer* avec un code symétrique ; *comprendre* l’idée du chiffrement asymétrique et *dérouler RSA* à la main ; *expliquer* l’échange de clé et le protocole **HTTPS**.
+
+</div>
 
 !!! situation "Situation de départ"
 
@@ -248,11 +255,21 @@ Faire des calculs **modulo $n$**, c’est ne garder que le **reste** de la divis
 
 !!! regle "Règle 7 — Les deux opérations RSA"
 
-    Pour un message-nombre $M$ (avec $0\le M < n$) : $$\text{chiffrer :}\quad C = M^{e}\bmod n \qquad\qquad \text{déchiffrer :}\quad M = C^{d}\bmod n$$
+    Pour un message-nombre $M$ (avec $0\le M < n$) :
+
+    $$\text{chiffrer :}\quad C = M^{e}\bmod n \qquad\qquad \text{déchiffrer :}\quad M = C^{d}\bmod n$$
 
 !!! exemple "Exemple — Bob écrit à Alice"
 
-    Bob veut envoyer le nombre $M=4$. Il a la clé publique d’Alice $(3,33)$ : $$C = 4^{3}\bmod 33 = 64 \bmod 33 = 31.$$ Il transmet **31**. Alice reçoit $31$ et applique sa clé privée $(7,33)$ : $$M = 31^{7}\bmod 33 = 27\,512\,614\,111 \bmod 33 = 4.$$ Elle retrouve $4$, le message de Bob. Ève, qui a vu passer $31$ et connaît $(3,33)$, ne peut pas résoudre $x^{3}\equiv 31\ [33]$ efficacement.
+    Bob veut envoyer le nombre $M=4$. Il a la clé publique d’Alice $(3,33)$ :
+
+    $$C = 4^{3}\bmod 33 = 64 \bmod 33 = 31.$$
+
+    Il transmet **31**. Alice reçoit $31$ et applique sa clé privée $(7,33)$ :
+
+    $$M = 31^{7}\bmod 33 = 27\,512\,614\,111 \bmod 33 = 4.$$
+
+    Elle retrouve $4$, le message de Bob. Ève, qui a vu passer $31$ et connaît $(3,33)$, ne peut pas résoudre $x^{3}\equiv 31\ [33]$ efficacement.
 
 *Le principe est toujours le même, quels que soient $p$, $q$ et $e$ : d’autres jeux de clés sont fabriqués et vérifiés en Python dans le TP proposé en fin de chapitre.*
 

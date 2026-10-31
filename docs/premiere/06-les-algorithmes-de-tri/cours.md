@@ -4,11 +4,18 @@
 
 <span id="chap-06" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Algorithmes sur les tableaux »* : *tri par insertion*, *tri par sélection* ; *coût* d’un tri (coût *quadratique*). |
-| **Prérequis** | les boucles `for`/`while`, les tableaux (indices, `len`), et surtout le chapitre **« Algorithmique : le parcours séquentiel »** : patron du parcours, invariant de boucle, coûts linéaire et quadratique. (→ fiches de révision : ch. 4) |
-| **Objectifs** | comprendre *pourquoi* on trie ; connaître et savoir écrire **deux** algorithmes de tri (sélection, insertion) ; **tracer** leur exécution ; **évaluer leur coût** et les comparer. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Algorithmes sur les tableaux »* : *tri par insertion*, *tri par sélection* ; *coût* d’un tri (coût *quadratique*).
+
+Prérequis
+:   les boucles `for`/`while`, les tableaux (indices, `len`), et surtout le chapitre **« Algorithmique : le parcours séquentiel »** : patron du parcours, invariant de boucle, coûts linéaire et quadratique. (→ fiches de révision : ch. 4)
+
+Objectifs
+:   comprendre *pourquoi* on trie ; connaître et savoir écrire **deux** algorithmes de tri (sélection, insertion) ; **tracer** leur exécution ; **évaluer leur coût** et les comparer.
+
+</div>
 
 !!! situation "Situation de départ"
 
@@ -40,7 +47,11 @@ Trier un tableau, c’est ranger ses éléments **dans l’ordre** (croissant, l
 
 !!! definition "Définition 1 — Le problème du tri"
 
-    **Trier** un tableau `t`, c’est réorganiser ses éléments de sorte que $$\texttt{t[0]} \leq \texttt{t[1]} \leq \texttt{t[2]} \leq \cdots \leq \texttt{t[n-1]}.$$ On travaillera **en place** : on réarrange le tableau donné, sans en créer un nouveau. Les seules opérations autorisées sont **comparer** deux éléments et les **échanger** (ou les déplacer).
+    **Trier** un tableau `t`, c’est réorganiser ses éléments de sorte que
+
+    $$\texttt{t[0]} \leq \texttt{t[1]} \leq \texttt{t[2]} \leq \cdots \leq \texttt{t[n-1]}.$$
+
+    On travaillera **en place** : on réarrange le tableau donné, sans en créer un nouveau. Les seules opérations autorisées sont **comparer** deux éléments et les **échanger** (ou les déplacer).
 
 !!! encadre "À retenir — Deux opérations à compter"
 
@@ -335,11 +346,19 @@ Reprenons notre réflexe : on compte les opérations en fonction de la taille `n
 
 !!! demonstration "Démonstration — Le compte exact pour la sélection"
 
-    Pour placer la case $0$, on compare le minimum candidat aux $n-1$ éléments suivants. Pour la case $1$, aux $n-2$ suivants. … Pour l’avant-dernière, à $1$ seul. Le nombre total de comparaisons vaut $$(n-1) + (n-2) + \cdots + 2 + 1 = \frac{n(n-1)}{2},$$ une quantité proportionnelle à $n^2$ : c’est bien un coût **quadratique**. Et ce, *quel que soit* le tableau de départ.
+    Pour placer la case $0$, on compare le minimum candidat aux $n-1$ éléments suivants. Pour la case $1$, aux $n-2$ suivants. … Pour l’avant-dernière, à $1$ seul. Le nombre total de comparaisons vaut
+
+    $$(n-1) + (n-2) + \cdots + 2 + 1 = \frac{n(n-1)}{2},$$
+
+    une quantité proportionnelle à $n^2$ : c’est bien un coût **quadratique**. Et ce, *quel que soit* le tableau de départ.
 
 !!! demonstration "Démonstration — Le pire cas pour l’insertion"
 
-    Le pire cas est le tableau trié *à l’envers* : chaque élément est plus petit que tous ceux qui le précèdent. L’élément d’indice $i$ recule alors de $i$ cases : $i$ comparaisons et $i$ décalages (la boucle s’arrête quand `j` vaut $-1$). Au total, $$1 + 2 + \cdots + (n-1) = \frac{n(n-1)}{2}$$ comparaisons, et autant de décalages : là encore, un coût **quadratique**.
+    Le pire cas est le tableau trié *à l’envers* : chaque élément est plus petit que tous ceux qui le précèdent. L’élément d’indice $i$ recule alors de $i$ cases : $i$ comparaisons et $i$ décalages (la boucle s’arrête quand `j` vaut $-1$). Au total,
+
+    $$1 + 2 + \cdots + (n-1) = \frac{n(n-1)}{2}$$
+
+    comparaisons, et autant de décalages : là encore, un coût **quadratique**.
 
 ### Le meilleur atout de l’insertion
 

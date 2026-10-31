@@ -11,3 +11,11 @@
 -   [:material-star-shooting-outline: Défis Advent of Code](defis.md)
 
 </div>
+
+<!-- pdf-chapitre -->
+!!! livre "Le chapitre en PDF"
+
+    Les pages du manuel pour ce chapitre — activités, cours, exercices, TP, fiche de révision — suivies de leurs corrigés, avec les numéros de page du manuel (61 pages, version du 31 octobre 2026).
+
+    [:material-download: Télécharger le chapitre (1,5 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-premiere-02-le-binaire-et-l-ecriture-des-nombres.pdf){ .md-button .md-button--primary }
+<!-- /pdf-chapitre -->

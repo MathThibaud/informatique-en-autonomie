@@ -4,11 +4,18 @@
 
 <span id="chap-08" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Données en table »* : *indexation* d’une table ; *recherche* de lignes répondant à un critère ; *tri* d’une table selon les valeurs d’un descripteur ; *fusion* de deux tables ayant un descripteur commun. *Importer* une table depuis un fichier au format **CSV**. |
-| **Prérequis** | les **listes** et les **dictionnaires** (chapitre *Les types construits*) ; le **patron du parcours** et la **notion de coût** (chapitre *Algorithmique : le parcours séquentiel*) ; les boucles `for` et les fonctions. (→ fiches de révision : ch. 3, ch. 4) |
-| **Objectifs** | représenter une table par une **liste de dictionnaires** ; l’**importer** depuis un CSV ; **rechercher / filtrer** selon un critère ; **calculer** sur une colonne (moyenne, min, max, comptage) ; **trier** selon un descripteur ; **fusionner** deux tables. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Données en table »* : *indexation* d’une table ; *recherche* de lignes répondant à un critère ; *tri* d’une table selon les valeurs d’un descripteur ; *fusion* de deux tables ayant un descripteur commun. *Importer* une table depuis un fichier au format **CSV**.
+
+Prérequis
+:   les **listes** et les **dictionnaires** (chapitre *Les types construits*) ; le **patron du parcours** et la **notion de coût** (chapitre *Algorithmique : le parcours séquentiel*) ; les boucles `for` et les fonctions. (→ fiches de révision : ch. 3, ch. 4)
+
+Objectifs
+:   représenter une table par une **liste de dictionnaires** ; l’**importer** depuis un CSV ; **rechercher / filtrer** selon un critère ; **calculer** sur une colonne (moyenne, min, max, comptage) ; **trier** selon un descripteur ; **fusionner** deux tables.
+
+</div>
 
 !!! situation "Situation de départ"
 

@@ -8,13 +8,22 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/06-tp-banc-essai-tris){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-06-tp-banc-essai-tris.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
 
-|  |  |
-|:---|:---|
-| **Durée** | 2 h à 2 h 30 (une à deux séances), en binôme, sur machine. |
-| **Prérequis** | le cours *Les algorithmes de tri* (sélection, insertion, invariants, coût) et la notion de coût du chapitre *Algorithmique : le parcours séquentiel*. |
-| **Fichier** | `tp_tris_depart.py` (à compléter : tout votre code s’y écrit). |
+aththibaud.github.io/informatique-en-autonomie/f/p06-tp-banc-essai-tris\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/06-tp-banc-essai-trishttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-06-tp-banc-essai-tris.zip
+
+<div class="tete-chapitre" markdown>
+
+Durée
+:   2 h à 2 h 30 (une à deux séances), en binôme, sur machine.
+
+Prérequis
+:   le cours *Les algorithmes de tri* (sélection, insertion, invariants, coût) et la notion de coût du chapitre *Algorithmique : le parcours séquentiel*.
+
+Fichier
+:   `tp_tris_depart.py` (à compléter : tout votre code s’y écrit).
+
+</div>
 
 !!! encadre "But du TP"
 

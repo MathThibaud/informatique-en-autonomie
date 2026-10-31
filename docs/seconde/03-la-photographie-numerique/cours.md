@@ -4,11 +4,18 @@
 
 <span id="chap-03" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme** | Du capteur au pixel ; codage des couleurs (RVB) ; définition, résolution et taille d’un fichier ; traitement d’image *par programme* ; métadonnées EXIF ; rôle des algorithmes dans les appareils. |
-| **Idée** | Une photo numérique n’est qu’un immense tableau de **nombres**. Comprendre ces nombres, c’est pouvoir *lire*, *fabriquer* et *transformer* une image **soi-même**, avec quelques lignes de Python. |
-| **Objectifs** | Expliquer comment un capteur forme une image ; coder une couleur en RVB ; calculer définition, résolution et poids ; modifier une image pixel par pixel ; lire les métadonnées et en mesurer l’enjeu pour la vie privée. |
+<div class="tete-chapitre" markdown>
+
+Programme
+:   Du capteur au pixel ; codage des couleurs (RVB) ; définition, résolution et taille d’un fichier ; traitement d’image *par programme* ; métadonnées EXIF ; rôle des algorithmes dans les appareils.
+
+Idée
+:   Une photo numérique n’est qu’un immense tableau de **nombres**. Comprendre ces nombres, c’est pouvoir *lire*, *fabriquer* et *transformer* une image **soi-même**, avec quelques lignes de Python.
+
+Objectifs
+:   Expliquer comment un capteur forme une image ; coder une couleur en RVB ; calculer définition, résolution et poids ; modifier une image pixel par pixel ; lire les métadonnées et en mesurer l’enjeu pour la vie privée.
+
+</div>
 
 !!! situation "Situation de départ"
 
@@ -109,7 +116,11 @@ La synthèse additive : rouge + vert $=$ jaune, les trois ensemble $=$ blanc.
 
 !!! regle "Règle 1"
 
-    Une image en couleurs « brute » stocke 3 nombres par pixel (R, V, B), chacun sur **1 octet** (un **octet** est la petite unité de mémoire qui permet de ranger un nombre entier de $0$ à $255$). <span id="lex-poids03" class="ancre"></span>Son **poids** vaut donc environ : $$\text{poids} = \text{largeur} \times \text{hauteur} \times 3 \ \text{octets}.$$ (Les formats comme le JPEG *compressent* ensuite l’image pour réduire ce poids.)
+    Une image en couleurs « brute » stocke 3 nombres par pixel (R, V, B), chacun sur **1 octet** (un **octet** est la petite unité de mémoire qui permet de ranger un nombre entier de $0$ à $255$). <span id="lex-poids03" class="ancre"></span>Son **poids** vaut donc environ :
+
+    $$\text{poids} = \text{largeur} \times \text{hauteur} \times 3 \ \text{octets}.$$
+
+    (Les formats comme le JPEG *compressent* ensuite l’image pour réduire ce poids.)
 
 !!! definition "Définition 4"
 
@@ -134,7 +145,7 @@ Une image étant un tableau de nombres, on peut la **transformer** avec un progr
 ![](../figures/44921f2c19c5fc9e.svg){ .tikz loading=lazy }  
 Le pixel $(0,0)$ est en haut à gauche ; $x$ va vers la droite, $y$ vers le bas.
 
-Les programmes de ce chapitre utilisent l’image `terre.jpg` ($500 \times 500$ pixels) : c’est la célèbre photo de la Terre « *The Blue Marble* » prise par l’équipage d’Apollo 17 en 1972, dans le domaine public. Elle est à télécharger ici : <https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/03-photo-image-terre> ; à défaut, n’importe quelle photo `.jpg` renommée `terre.jpg` convient. Elle doit être rangée dans le même dossier que le programme.
+Les programmes de ce chapitre utilisent l’image `terre.jpg` ($500 \times 500$ pixels) : c’est la célèbre photo de la Terre « *The Blue Marble* » prise par l’équipage d’Apollo 17 en 1972, dans le domaine public. Elle est à télécharger ici : [`maththibaud.github.io/informatique-en-autonomie/f/s03-photo-image-terre`](https://maththibaud.github.io/informatique-en-autonomie/f/s03-photo-image-terre) ; à défaut, n’importe quelle photo `.jpg` renommée `terre.jpg` convient. Elle doit être rangée dans le même dossier que le programme.
 
 La ligne `from PIL import Image` charge l’outil `Image` de la bibliothèque **PIL**, un peu comme `import turtle as t` chargeait la tortue ; on écrit ensuite `Image.open(...)` pour ouvrir une image.
 

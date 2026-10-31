@@ -69,7 +69,11 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
 
 !!! remarque "Remarque — Aller plus loin — hors programme"
 
-    On peut résumer tout le raisonnement par une **relation de récurrence** sur le coût $T(n)$ : $$T(n) = \underbrace{2\,T(n/2)}_{\text{trier les deux moitiés}} + \underbrace{c\,n}_{\text{la fusion}}.$$ « Dérouler » cette relation revient exactement à parcourir l’arbre des appels de l’étape 2, et redonne $T(n)$ de l’ordre de $n\log_2 n$.
+    On peut résumer tout le raisonnement par une **relation de récurrence** sur le coût $T(n)$ :
+
+    $$T(n) = \underbrace{2\,T(n/2)}_{\text{trier les deux moitiés}} + \underbrace{c\,n}_{\text{la fusion}}.$$
+
+    « Dérouler » cette relation revient exactement à parcourir l’arbre des appels de l’étape 2, et redonne $T(n)$ de l’ordre de $n\log_2 n$.
 
 ??? corrige "Corrigé de l'activité"
 
@@ -94,11 +98,21 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
     |    $2$     |            $4$            |         $n/4$         |
     |    $i$     |          $2^{i}$          |       $n/2^{i}$       |
 
-    **2.** Au niveau `i`, il y a $2^{i}$ sous-listes, chacune de taille $n/2^{i}$. Les fusions de ce niveau reconstruisent ces sous-listes ; d’après l’étape 1, chaque fusion coûte proportionnellement à la taille de son résultat. Le coût total du niveau est donc $$2^{i} \times \frac{n}{2^{i}} = n.$$ **Ce coût vaut `n` à chaque niveau**, indépendamment de `i` : le $2^i$ (de plus en plus de fusions) et le $n/2^i$ (des fusions de plus en plus petites) se compensent exactement.
+    **2.** Au niveau `i`, il y a $2^{i}$ sous-listes, chacune de taille $n/2^{i}$. Les fusions de ce niveau reconstruisent ces sous-listes ; d’après l’étape 1, chaque fusion coûte proportionnellement à la taille de son résultat. Le coût total du niveau est donc
 
-    **3.** On s’arrête quand les sous-listes ont une taille de 1, c’est-à-dire quand $$\frac{n}{2^{i}} = 1 \iff 2^{i} = n \iff i = \log_2 n.$$ Il y a donc $\log_2 n$ niveaux de fusion (on avait posé $n = 2^k$, soit $k = \log_2 n$ niveaux).
+    $$2^{i} \times \frac{n}{2^{i}} = n.$$
 
-    **4.** Le coût total est la somme des coûts de tous les niveaux : $$\text{coût total} = \underbrace{n}_{\text{par niveau}} \times \underbrace{\log_2 n}_{\text{nombre de niveaux}} = \boxed{n\log_2 n}.$$
+    **Ce coût vaut `n` à chaque niveau**, indépendamment de `i` : le $2^i$ (de plus en plus de fusions) et le $n/2^i$ (des fusions de plus en plus petites) se compensent exactement.
+
+    **3.** On s’arrête quand les sous-listes ont une taille de 1, c’est-à-dire quand
+
+    $$\frac{n}{2^{i}} = 1 \iff 2^{i} = n \iff i = \log_2 n.$$
+
+    Il y a donc $\log_2 n$ niveaux de fusion (on avait posé $n = 2^k$, soit $k = \log_2 n$ niveaux).
+
+    **4.** Le coût total est la somme des coûts de tous les niveaux :
+
+    $$\text{coût total} = \underbrace{n}_{\text{par niveau}} \times \underbrace{\log_2 n}_{\text{nombre de niveaux}} = \boxed{n\log_2 n}.$$
 
     Visuellement, chaque *ligne* de l’arbre ci-dessous coûte `n`, et il y a $\log_2 n$ lignes :
 
@@ -114,7 +128,11 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
 
     !!! remarque "Remarque — La récurrence, hors programme"
 
-        En notant $T(n)$ le coût, l’algorithme donne $T(n) = 2\,T(n/2) + c\,n$. En développant : $$T(n) = 2T(n/2) + cn = 4T(n/4) + 2cn = 8T(n/8) + 3cn = \dots = 2^{i}\,T(n/2^{i}) + i\,cn.$$ Pour $i = \log_2 n$, on a $n/2^{i} = 1$ (coût constant), d’où $T(n) = n\cdot T(1) + cn\log_2 n$, soit un coût de l’ordre de $n\log_2 n$. On retrouve exactement le comptage par niveaux.
+        En notant $T(n)$ le coût, l’algorithme donne $T(n) = 2\,T(n/2) + c\,n$. En développant :
+
+        $$T(n) = 2T(n/2) + cn = 4T(n/4) + 2cn = 8T(n/8) + 3cn = \dots = 2^{i}\,T(n/2^{i}) + i\,cn.$$
+
+        Pour $i = \log_2 n$, on a $n/2^{i} = 1$ (coût constant), d’où $T(n) = n\cdot T(1) + cn\log_2 n$, soit un coût de l’ordre de $n\log_2 n$. On retrouve exactement le comptage par niveaux.
 
 ??? corrige "Corrigé de l'activité"
 
@@ -139,11 +157,21 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
     |    $2$     |            $4$            |         $n/4$         |
     |    $i$     |          $2^{i}$          |       $n/2^{i}$       |
 
-    **2.** Au niveau `i`, il y a $2^{i}$ sous-listes, chacune de taille $n/2^{i}$. Les fusions de ce niveau reconstruisent ces sous-listes ; d’après l’étape 1, chaque fusion coûte proportionnellement à la taille de son résultat. Le coût total du niveau est donc $$2^{i} \times \frac{n}{2^{i}} = n.$$ **Ce coût vaut `n` à chaque niveau**, indépendamment de `i` : le $2^i$ (de plus en plus de fusions) et le $n/2^i$ (des fusions de plus en plus petites) se compensent exactement.
+    **2.** Au niveau `i`, il y a $2^{i}$ sous-listes, chacune de taille $n/2^{i}$. Les fusions de ce niveau reconstruisent ces sous-listes ; d’après l’étape 1, chaque fusion coûte proportionnellement à la taille de son résultat. Le coût total du niveau est donc
 
-    **3.** On s’arrête quand les sous-listes ont une taille de 1, c’est-à-dire quand $$\frac{n}{2^{i}} = 1 \iff 2^{i} = n \iff i = \log_2 n.$$ Il y a donc $\log_2 n$ niveaux de fusion (on avait posé $n = 2^k$, soit $k = \log_2 n$ niveaux).
+    $$2^{i} \times \frac{n}{2^{i}} = n.$$
 
-    **4.** Le coût total est la somme des coûts de tous les niveaux : $$\text{coût total} = \underbrace{n}_{\text{par niveau}} \times \underbrace{\log_2 n}_{\text{nombre de niveaux}} = \boxed{n\log_2 n}.$$
+    **Ce coût vaut `n` à chaque niveau**, indépendamment de `i` : le $2^i$ (de plus en plus de fusions) et le $n/2^i$ (des fusions de plus en plus petites) se compensent exactement.
+
+    **3.** On s’arrête quand les sous-listes ont une taille de 1, c’est-à-dire quand
+
+    $$\frac{n}{2^{i}} = 1 \iff 2^{i} = n \iff i = \log_2 n.$$
+
+    Il y a donc $\log_2 n$ niveaux de fusion (on avait posé $n = 2^k$, soit $k = \log_2 n$ niveaux).
+
+    **4.** Le coût total est la somme des coûts de tous les niveaux :
+
+    $$\text{coût total} = \underbrace{n}_{\text{par niveau}} \times \underbrace{\log_2 n}_{\text{nombre de niveaux}} = \boxed{n\log_2 n}.$$
 
     Visuellement, chaque *ligne* de l’arbre ci-dessous coûte `n`, et il y a $\log_2 n$ lignes :
 
@@ -159,7 +187,11 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
 
     !!! remarque "Remarque — La récurrence, hors programme"
 
-        En notant $T(n)$ le coût, l’algorithme donne $T(n) = 2\,T(n/2) + c\,n$. En développant : $$T(n) = 2T(n/2) + cn = 4T(n/4) + 2cn = 8T(n/8) + 3cn = \dots = 2^{i}\,T(n/2^{i}) + i\,cn.$$ Pour $i = \log_2 n$, on a $n/2^{i} = 1$ (coût constant), d’où $T(n) = n\cdot T(1) + cn\log_2 n$, soit un coût de l’ordre de $n\log_2 n$. On retrouve exactement le comptage par niveaux.
+        En notant $T(n)$ le coût, l’algorithme donne $T(n) = 2\,T(n/2) + c\,n$. En développant :
+
+        $$T(n) = 2T(n/2) + cn = 4T(n/4) + 2cn = 8T(n/8) + 3cn = \dots = 2^{i}\,T(n/2^{i}) + i\,cn.$$
+
+        Pour $i = \log_2 n$, on a $n/2^{i} = 1$ (coût constant), d’où $T(n) = n\cdot T(1) + cn\log_2 n$, soit un coût de l’ordre de $n\log_2 n$. On retrouve exactement le comptage par niveaux.
 
 ??? corrige "Corrigé de l'activité"
 
@@ -184,11 +216,21 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
     |    $2$     |            $4$            |         $n/4$         |
     |    $i$     |          $2^{i}$          |       $n/2^{i}$       |
 
-    **2.** Au niveau `i`, il y a $2^{i}$ sous-listes, chacune de taille $n/2^{i}$. Les fusions de ce niveau reconstruisent ces sous-listes ; d’après l’étape 1, chaque fusion coûte proportionnellement à la taille de son résultat. Le coût total du niveau est donc $$2^{i} \times \frac{n}{2^{i}} = n.$$ **Ce coût vaut `n` à chaque niveau**, indépendamment de `i` : le $2^i$ (de plus en plus de fusions) et le $n/2^i$ (des fusions de plus en plus petites) se compensent exactement.
+    **2.** Au niveau `i`, il y a $2^{i}$ sous-listes, chacune de taille $n/2^{i}$. Les fusions de ce niveau reconstruisent ces sous-listes ; d’après l’étape 1, chaque fusion coûte proportionnellement à la taille de son résultat. Le coût total du niveau est donc
 
-    **3.** On s’arrête quand les sous-listes ont une taille de 1, c’est-à-dire quand $$\frac{n}{2^{i}} = 1 \iff 2^{i} = n \iff i = \log_2 n.$$ Il y a donc $\log_2 n$ niveaux de fusion (on avait posé $n = 2^k$, soit $k = \log_2 n$ niveaux).
+    $$2^{i} \times \frac{n}{2^{i}} = n.$$
 
-    **4.** Le coût total est la somme des coûts de tous les niveaux : $$\text{coût total} = \underbrace{n}_{\text{par niveau}} \times \underbrace{\log_2 n}_{\text{nombre de niveaux}} = \boxed{n\log_2 n}.$$
+    **Ce coût vaut `n` à chaque niveau**, indépendamment de `i` : le $2^i$ (de plus en plus de fusions) et le $n/2^i$ (des fusions de plus en plus petites) se compensent exactement.
+
+    **3.** On s’arrête quand les sous-listes ont une taille de 1, c’est-à-dire quand
+
+    $$\frac{n}{2^{i}} = 1 \iff 2^{i} = n \iff i = \log_2 n.$$
+
+    Il y a donc $\log_2 n$ niveaux de fusion (on avait posé $n = 2^k$, soit $k = \log_2 n$ niveaux).
+
+    **4.** Le coût total est la somme des coûts de tous les niveaux :
+
+    $$\text{coût total} = \underbrace{n}_{\text{par niveau}} \times \underbrace{\log_2 n}_{\text{nombre de niveaux}} = \boxed{n\log_2 n}.$$
 
     Visuellement, chaque *ligne* de l’arbre ci-dessous coûte `n`, et il y a $\log_2 n$ lignes :
 
@@ -204,13 +246,19 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
 
     !!! remarque "Remarque — La récurrence, hors programme"
 
-        En notant $T(n)$ le coût, l’algorithme donne $T(n) = 2\,T(n/2) + c\,n$. En développant : $$T(n) = 2T(n/2) + cn = 4T(n/4) + 2cn = 8T(n/8) + 3cn = \dots = 2^{i}\,T(n/2^{i}) + i\,cn.$$ Pour $i = \log_2 n$, on a $n/2^{i} = 1$ (coût constant), d’où $T(n) = n\cdot T(1) + cn\log_2 n$, soit un coût de l’ordre de $n\log_2 n$. On retrouve exactement le comptage par niveaux.
+        En notant $T(n)$ le coût, l’algorithme donne $T(n) = 2\,T(n/2) + c\,n$. En développant :
+
+        $$T(n) = 2T(n/2) + cn = 4T(n/4) + 2cn = 8T(n/8) + 3cn = \dots = 2^{i}\,T(n/2^{i}) + i\,cn.$$
+
+        Pour $i = \log_2 n$, on a $n/2^{i} = 1$ (coût constant), d’où $T(n) = n\cdot T(1) + cn\log_2 n$, soit un coût de l’ordre de $n\log_2 n$. On retrouve exactement le comptage par niveaux.
 
 ## <span class="etiquette">TP 2</span> Tri rapide (*Quicksort*)
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-tp-tri-rapide){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-07-tp-tri-rapide.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t07-tp-tri-rapide\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-tp-tri-rapidehttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-07-tp-tri-rapide.zip
 
 !!! consignes "Mode d’emploi"
 
@@ -526,7 +574,9 @@ Le script teste aussi les cas limites (tableau vide, un seul élément) et compa
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-tp-tim-sort){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-07-tp-tim-sort.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t07-tp-tim-sort\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-tp-tim-sorthttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-07-tp-tim-sort.zip
 
 !!! consignes "Mode d’emploi"
 
@@ -829,7 +879,9 @@ Le script compare aussi `tim_sort` à `sorted()` sur **200 tableaux aléatoires*
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-tp-rotation-image){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-07-tp-rotation-image.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t07-tp-rotation-image\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-tp-rotation-imagehttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-07-tp-rotation-image.zip
 
 !!! consignes "Mode d’emploi"
 

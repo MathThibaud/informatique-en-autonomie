@@ -10,7 +10,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/10-tp-crypto){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-10-tp-crypto.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t10-tp-crypto\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/10-tp-cryptohttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-10-tp-crypto.zip
 
 !!! consignes "Consignes"
 
@@ -209,7 +211,9 @@ On a chiffré `clair` avec une clé de $6$ lettres : `chiffre = vigenere(clair, 
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : trouver la longueur de la clé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-tp-1-6 }
 
-<span class="horsprog">au-delà du programme</span> L’**indice de coïncidence** d’un texte est la probabilité que deux lettres tirées au hasard soient identiques : si $n_A, n_B, \dots$ sont les nombres d’apparitions des lettres et $N$ le nombre total de lettres, $$IC = \frac{n_A(n_A-1) + n_B(n_B-1) + \dots + n_Z(n_Z-1)}{N(N-1)}.$$
+<span class="horsprog">au-delà du programme</span> L’**indice de coïncidence** d’un texte est la probabilité que deux lettres tirées au hasard soient identiques : si $n_A, n_B, \dots$ sont les nombres d’apparitions des lettres et $N$ le nombre total de lettres,
+
+$$IC = \frac{n_A(n_A-1) + n_B(n_B-1) + \dots + n_Z(n_Z-1)}{N(N-1)}.$$
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire `indice_coincidence(texte)`. Calculer l’indice de `clair`, puis d’un texte de $2\,000$ lettres tirées au hasard. Qu’est-ce qui les distingue ?
 

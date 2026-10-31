@@ -4,7 +4,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-24-arbre-expression){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-24-arbre-expression.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/tpratique-24-arbre-expression\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-24-arbre-expressionhttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-24-arbre-expression.zip
 
 ??? corrige "Corrigé"
 

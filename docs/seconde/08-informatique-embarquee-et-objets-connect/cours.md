@@ -4,11 +4,18 @@
 
 <span id="chap-08" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme** | Systèmes informatiques **embarqués** ; **capteurs** et **actionneurs** ; **interface homme-machine** (IHM) ; **objets connectés** et réseaux d’objets (IoT) ; algorithme de **commande** d’un système physique ; enjeux de **sécurité** et de **vie privée**. |
-| **Idée** | Des ordinateurs minuscules se cachent dans nos objets et pilotent le monde physique : ils *mesurent* (capteurs), *décident* (un programme), *agissent* (actionneurs). Reliés au réseau, ils deviennent **connectés** — pratiques, mais pas sans risques. |
-| **Objectifs** | Reconnaître un système embarqué ; distinguer **capteur** et **actionneur** ; lire et écrire une **boucle de commande** simple ; décrire une **IHM** ; comprendre l’**Internet des objets** ; mesurer les enjeux de sécurité, de vie privée et d’environnement. |
+<div class="tete-chapitre" markdown>
+
+Programme
+:   Systèmes informatiques **embarqués** ; **capteurs** et **actionneurs** ; **interface homme-machine** (IHM) ; **objets connectés** et réseaux d’objets (IoT) ; algorithme de **commande** d’un système physique ; enjeux de **sécurité** et de **vie privée**.
+
+Idée
+:   Des ordinateurs minuscules se cachent dans nos objets et pilotent le monde physique : ils *mesurent* (capteurs), *décident* (un programme), *agissent* (actionneurs). Reliés au réseau, ils deviennent **connectés** — pratiques, mais pas sans risques.
+
+Objectifs
+:   Reconnaître un système embarqué ; distinguer **capteur** et **actionneur** ; lire et écrire une **boucle de commande** simple ; décrire une **IHM** ; comprendre l’**Internet des objets** ; mesurer les enjeux de sécurité, de vie privée et d’environnement.
+
+</div>
 
 !!! situation "Situation de départ"
 

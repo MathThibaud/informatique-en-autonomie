@@ -4,11 +4,18 @@
 
 <span id="chap-03" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Types construits »* : *p-uplets*, *p-uplets nommés*, *tableaux indexés* (listes) et *tableaux de tableaux*, *dictionnaires* (tableaux associatifs). Capacités attendues : écrire une fonction renvoyant un p-uplet ; lire et *modifier* les éléments d’un tableau par leur index ; construire un tableau *par compréhension* ; *itérer* sur les éléments d’un tableau ; représenter des matrices par des tableaux de tableaux ; itérer sur les éléments d’un dictionnaire. |
-| **Prérequis** | les bases de Python : variables, types simples (`int`, `float`, `bool`, `str`), boucles `for`/`while`, fonctions. (→ fiches de révision : ch. 1) |
-| **Objectifs** | savoir **regrouper** des données dans le bon type construit, y **accéder**, les **parcourir** et, quand c’est possible, les **modifier** — en comprenant *ce qui se passe en mémoire*. Ce chapitre est le socle des chapitres suivants (algorithmique, tris, données en tables…). |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Types construits »* : *p-uplets*, *p-uplets nommés*, *tableaux indexés* (listes) et *tableaux de tableaux*, *dictionnaires* (tableaux associatifs). Capacités attendues : écrire une fonction renvoyant un p-uplet ; lire et *modifier* les éléments d’un tableau par leur index ; construire un tableau *par compréhension* ; *itérer* sur les éléments d’un tableau ; représenter des matrices par des tableaux de tableaux ; itérer sur les éléments d’un dictionnaire.
+
+Prérequis
+:   les bases de Python : variables, types simples (`int`, `float`, `bool`, `str`), boucles `for`/`while`, fonctions. (→ fiches de révision : ch. 1)
+
+Objectifs
+:   savoir **regrouper** des données dans le bon type construit, y **accéder**, les **parcourir** et, quand c’est possible, les **modifier** — en comprenant *ce qui se passe en mémoire*. Ce chapitre est le socle des chapitres suivants (algorithmique, tris, données en tables…).
+
+</div>
 
 !!! situation "Situation de départ"
 
@@ -64,10 +71,15 @@ De cette image découle une distinction **fondamentale** : peut-on modifier l’
 
 Plutôt que d’apprendre trois types par cœur, apprenons à **choisir**. Devant une collection de données, on se pose **deux questions** :
 
-|  |  |
-|---:|:---|
-| **Q1.** | Comment vais-je **retrouver** un élément : par sa *position* (un indice $0,1,2\ldots$) ou par une *étiquette* que je choisis (une *clé*) ? |
-| **Q2.** | Cette collection va-t-elle **changer** après sa création (*mutable*), ou est-elle **figée** (*immuable*) ? |
+<div class="tete-chapitre" markdown>
+
+Q1.
+:   Comment vais-je **retrouver** un élément : par sa *position* (un indice $0,1,2\ldots$) ou par une *étiquette* que je choisis (une *clé*) ?
+
+Q2.
+:   Cette collection va-t-elle **changer** après sa création (*mutable*), ou est-elle **figée** (*immuable*) ?
+
+</div>
 
 Les réponses désignent le type à utiliser — c’est la **carte de décision** du chapitre :
 

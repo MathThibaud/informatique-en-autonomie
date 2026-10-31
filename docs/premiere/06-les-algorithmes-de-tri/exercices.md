@@ -359,7 +359,11 @@ def tri_insertion(t):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Qui a fait quoi ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-8 }
 
-On a photographié un tableau *en cours* de tri, juste après une étape : $$\texttt{[1, 2, 3, 8, 5, 9, 4, 7]}$$ On sait que le tri est soit une sélection, soit une insertion, et qu’on trie de gauche à droite. En observant la partie `[1, 2, 3]`, peut-on être sûr de laquelle il s’agit ? Justifier.
+On a photographié un tableau *en cours* de tri, juste après une étape :
+
+$$\texttt{[1, 2, 3, 8, 5, 9, 4, 7]}$$
+
+On sait que le tri est soit une sélection, soit une insertion, et qu’on trie de gauche à droite. En observant la partie `[1, 2, 3]`, peut-on être sûr de laquelle il s’agit ? Justifier.
 
 ??? pouce "Coup de pouce"
 

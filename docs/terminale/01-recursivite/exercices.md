@@ -314,7 +314,9 @@ On rappelle que $\text{pgcd}(a, b) = \text{pgcd}(b,\ a \,\%\, b)$ et que $\text{
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 11</span> — Une suite récurrente double <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-11 }
 
-Soit la suite $\left(u_n\right)$ définie par $$u_n = \left\lbrace \begin{array}{ll} a & \text{si } n = 0\\ b & \text{si } n = 1\\ 3\,u_{n-1} + 2\,u_{n-2} + 5 & \text{pour tout } n \geqslant 2 \end{array}\right.$$
+Soit la suite $\left(u_n\right)$ définie par
+
+$$u_n = \left\lbrace \begin{array}{ll} a & \text{si } n = 0\\ b & \text{si } n = 1\\ 3\,u_{n-1} + 2\,u_{n-2} + 5 & \text{pour tout } n \geqslant 2 \end{array}\right.$$
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `serie(n, a, b)` qui renvoie le terme $u_n$, pour des premiers termes `a` et `b` donnés en paramètres.
 
@@ -637,7 +639,9 @@ On dispose d’un tableau `t` **trié** par ordre croissant.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 22</span> — Triangle de Pascal <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-22 }
 
-Le triangle de Pascal donne les coefficients binomiaux, définis récursivement par $$\binom{n}{p} = \left\lbrace \begin{array}{ll} 1 & \text{si } p = 0 \text{ ou } n = p,\\  \binom{n-1}{p-1} + \binom{n-1}{p} & \text{sinon.} \end{array}\right.$$
+Le triangle de Pascal donne les coefficients binomiaux, définis récursivement par
+
+$$\binom{n}{p} = \left\lbrace \begin{array}{ll} 1 & \text{si } p = 0 \text{ ou } n = p,\\  \binom{n-1}{p-1} + \binom{n-1}{p} & \text{sinon.} \end{array}\right.$$
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `pascal(n, p)` qui renvoie $\binom{n}{p}$. *(Défi : afficher les premières lignes du triangle avec une boucle.)*
 
@@ -1037,7 +1041,11 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
 
 1.  Écrire une fonction `possible_avec_penalites_seules(score)` qui renvoie `True` si le score peut être obtenu uniquement avec des pénalités (des « coups » à $3$). Exemples : `...(15)` renvoie `True`, `...(10)` renvoie `False`.
 
-2.  On note $f(n)$ le nombre de façons d’obtenir le score $n$. On admet que pour $n > 6$ : $$f(n) = f(n-3) + f(n-5) + f(n-7).$$ On donne $f(8) = 2$, $f(9) = 1$, $f(10) = 3$. **Déterminer les cas de base**, c’est-à-dire la valeur de $f(n)$ pour chaque entier `n` de $0$ à $6$.
+2.  On note $f(n)$ le nombre de façons d’obtenir le score $n$. On admet que pour $n > 6$ :
+
+    $$f(n) = f(n-3) + f(n-5) + f(n-7).$$
+
+    On donne $f(8) = 2$, $f(9) = 1$, $f(10) = 3$. **Déterminer les cas de base**, c’est-à-dire la valeur de $f(n)$ pour chaque entier `n` de $0$ à $6$.
 
     ??? pouce "Coup de pouce"
 
@@ -1082,7 +1090,9 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
             return possible_avec_penalites_seules(score - 3)
         ```
 
-    2.  Cas de base (et $f(n)=0$ pour $n<0$) : $$f(0)=1,\quad f(1)=0,\quad f(2)=0,\quad f(3)=1,\quad f(4)=0,\quad f(5)=1,\quad f(6)=1.$$
+    2.  Cas de base (et $f(n)=0$ pour $n<0$) :
+
+        $$f(0)=1,\quad f(1)=0,\quad f(2)=0,\quad f(3)=1,\quad f(4)=0,\quad f(5)=1,\quad f(6)=1.$$
 
         <span class="erreurfreq">▷ Erreur fréquente.</span> Poser $f(0) = 0$ : il y a bien *une* façon d’obtenir $0$ point, ne rien marquer. Avec $f(0) = 0$, tous les appels renverraient $0$.
 

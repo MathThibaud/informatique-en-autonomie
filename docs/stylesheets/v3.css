@@ -171,6 +171,47 @@ body { background: var(--fond-image) center / cover fixed, var(--md-default-bg-c
 .carte-nb { font-family: var(--font-mono); font-size: .75rem; color: var(--c-blue); margin-top: auto; padding-top: .4rem; }
 .accueil-infos { text-align: center; color: var(--text-dim); max-width: 40rem; margin: 1rem auto; }
 
+/* --- En-tête de chapitre (Programme, Prérequis, Objectifs) --- */
+.md-typeset .tete-chapitre { background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 6px; padding: .4rem 1rem; margin: 1em 0; font-size: .78rem; }
+.md-typeset .tete-chapitre dl { margin: 0; }
+.md-typeset .tete-chapitre dt { font-weight: 700; color: var(--c-blue); margin-top: .6em; }
+.md-typeset .tete-chapitre dd { margin: .1em 0 .4em 0; }
+@media (min-width: 60em) {
+  .md-typeset .tete-chapitre dl { display: grid; grid-template-columns: 9.5em 1fr; column-gap: 1em; }
+  .md-typeset .tete-chapitre dt, .md-typeset .tete-chapitre dd { margin: .45em 0; }
+}
+
+/* --- Exécuter le Python (Pyodide) --- */
+.md-typeset .barre-python { display: flex; gap: .4em; margin: -.6em 0 .8em; }
+.md-typeset .barre-python button, #editeur-python button { font-family: var(--font-mono); font-size: .68rem;
+  border: 1px solid var(--border); border-radius: 0 0 6px 6px; background: var(--bg-card); color: var(--text);
+  padding: .25em .8em; cursor: pointer; }
+.md-typeset .barre-python button:first-child, #editeur-python .ep-run { color: var(--c-green); font-weight: 700; }
+.md-typeset .barre-python button:hover, #editeur-python button:hover { border-color: var(--c-green); }
+.sortie-python { font-family: var(--font-mono); font-size: .7rem; white-space: pre-wrap; word-break: break-word;
+  background: var(--bg); color: var(--text); border: 1px dashed var(--c-green); border-radius: 6px;
+  padding: .5em .8em; margin: 0 0 1em; max-height: 22em; overflow: auto; }
+.sortie-python.erreur { border-color: var(--c-red); }
+#ouvrir-editeur { position: fixed; right: 1rem; bottom: 1rem; z-index: 4; font-family: var(--font-mono);
+  font-weight: 700; font-size: .75rem; color: var(--bg); background: var(--c-green); border: 0;
+  border-radius: 99px; padding: .55em 1.1em; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.35); }
+#editeur-python { position: fixed; right: 1rem; bottom: 3.6rem; z-index: 4; width: min(36rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 6rem); display: flex; flex-direction: column; gap: .4rem; padding: .7rem;
+  background: var(--bg-card); color: var(--text); border: 1px solid var(--c-green); border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.4); font-size: .75rem; }
+#editeur-python[hidden] { display: none; }
+#editeur-python .ep-tete { display: flex; align-items: baseline; gap: .6em; }
+#editeur-python .ep-info { color: var(--text-dim); font-size: .9em; flex: 1; }
+#editeur-python .ep-fermer { border-radius: 6px; }
+#editeur-python textarea { font-family: var(--font-mono); font-size: .75rem; min-height: 12em; resize: vertical;
+  background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 6px;
+  padding: .5em; tab-size: 4; }
+#editeur-python .ep-actions { display: flex; gap: .4em; }
+#editeur-python .ep-actions button { border-radius: 6px; }
+#editeur-python .sortie-python { margin: 0; }
+@media print { .barre-python, .sortie-python, #ouvrir-editeur, #editeur-python { display: none !important; } }
+
 /* --- Admonitions --- */
 .md-typeset .admonition, .md-typeset details { border-width: 0 0 0 4px; border-radius: 6px;
   background: var(--bg-card); box-shadow: none; font-size: .78rem; }

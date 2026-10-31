@@ -4,11 +4,18 @@
 
 <span id="chap-10" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *Interactions entre l’homme et la machine sur le Web* : identifier les **composants graphiques** d’une page et les **événements** qu’ils traitent (description en HTML, comportement en JavaScript) ; analyser et modifier les méthodes exécutées lors d’un **clic** ; distinguer ce qui est exécuté sur le **client** ou sur le **serveur**, et dans quel ordre ; distinguer ce qui est **mémorisé dans le client** et retransmis au serveur ; reconnaître **quand et pourquoi la transmission est chiffrée** ; analyser un **formulaire** simple, distinguer les transmissions par `GET` et `POST`. *Architectures matérielles (réseau)* : intérêt du découpage des données en **paquets** et de leur **encapsulation** ; protocole du **bit alterné** ; **simuler ou mettre en œuvre un réseau** ; rôle des constituants du **réseau local de l’établissement**. |
-| **Prérequis** | le chapitre *Architecture des ordinateurs et systèmes d’exploitation* (client/serveur $=$ deux machines en réseau) ; savoir écrire une fonction. (→ fiches de révision : ch. 9) |
-| **Objectifs** | comprendre **ce qui se passe** entre un clic et l’affichage d’une page ; **lire une URL** ; savoir ce qu’est un **protocole**, une **adresse IP**, un **paquet** ; distinguer **client** et **serveur** ; écrire une page **HTML**/**CSS** et la rendre **interactive** en JavaScript ; envoyer des données par un **formulaire** (`GET`/`POST`). |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *Interactions entre l’homme et la machine sur le Web* : identifier les **composants graphiques** d’une page et les **événements** qu’ils traitent (description en HTML, comportement en JavaScript) ; analyser et modifier les méthodes exécutées lors d’un **clic** ; distinguer ce qui est exécuté sur le **client** ou sur le **serveur**, et dans quel ordre ; distinguer ce qui est **mémorisé dans le client** et retransmis au serveur ; reconnaître **quand et pourquoi la transmission est chiffrée** ; analyser un **formulaire** simple, distinguer les transmissions par `GET` et `POST`. *Architectures matérielles (réseau)* : intérêt du découpage des données en **paquets** et de leur **encapsulation** ; protocole du **bit alterné** ; **simuler ou mettre en œuvre un réseau** ; rôle des constituants du **réseau local de l’établissement**.
+
+Prérequis
+:   le chapitre *Architecture des ordinateurs et systèmes d’exploitation* (client/serveur $=$ deux machines en réseau) ; savoir écrire une fonction. (→ fiches de révision : ch. 9)
+
+Objectifs
+:   comprendre **ce qui se passe** entre un clic et l’affichage d’une page ; **lire une URL** ; savoir ce qu’est un **protocole**, une **adresse IP**, un **paquet** ; distinguer **client** et **serveur** ; écrire une page **HTML**/**CSS** et la rendre **interactive** en JavaScript ; envoyer des données par un **formulaire** (`GET`/`POST`).
+
+</div>
 
 !!! situation "Situation de départ"
 

@@ -130,9 +130,13 @@ Dans une classe, on relève les binômes de travail : Alice travaille avec Bilal
 
 ??? corrige "Corrigé"
 
-    **1.** Sommets `A`,`B`,`C`,`D`,`E`,`F` ; arêtes `A-B, A-C, B-C, B-D, C-E, D-E, D-F, E-F` : $$M=\begin{pmatrix}
+    **1.** Sommets `A`,`B`,`C`,`D`,`E`,`F` ; arêtes `A-B, A-C, B-C, B-D, C-E, D-E, D-F, E-F` :
+
+    $$M=\begin{pmatrix}
     0&1&1&0&0&0\\ 1&0&1&1&0&0\\ 1&1&0&0&1&0\\ 0&1&0&0&1&1\\ 0&0&1&1&0&1\\ 0&0&0&1&1&0
-    \end{pmatrix}$$ Elle est bien symétrique.
+    \end{pmatrix}$$
+
+    Elle est bien symétrique.
 
     **2.** **Démarche :** à chaque sommet (une clé), on associe la liste de ses voisins, par ordre alphabétique.
 
@@ -254,9 +258,13 @@ On considère le graphe **pondéré** suivant (les poids sont des distances en k
 
 ??? corrige "Corrigé"
 
-    **1.** (poids sur la diagonale $=0$, et $0$ en l’absence d’arête) $$P=\begin{pmatrix}
+    **1.** (poids sur la diagonale $=0$, et $0$ en l’absence d’arête)
+
+    $$P=\begin{pmatrix}
     0&4&7&0\\ 4&0&2&5\\ 7&2&0&3\\ 0&5&3&0
-    \end{pmatrix}\quad(\text{ordre }\texttt{A},\texttt{B},\texttt{C},\texttt{D})$$ **2.** `A-B-C-D` $=4+2+3=9$ ; `A-B-D`$=4+5=9$ ; `A-C-D`$=7+3=10$ ; `A-C-B-D`$=7+2+5=14$. Le plus court fait **9 km**, longueur atteinte par deux trajets : `A-B-D` et `A-B-C-D`.
+    \end{pmatrix}\quad(\text{ordre }\texttt{A},\texttt{B},\texttt{C},\texttt{D})$$
+
+    **2.** `A-B-C-D` $=4+2+3=9$ ; `A-B-D`$=4+5=9$ ; `A-C-D`$=7+3=10$ ; `A-C-B-D`$=7+2+5=14$. Le plus court fait **9 km**, longueur atteinte par deux trajets : `A-B-D` et `A-B-C-D`.
 
 ### La classe `Graphe`
 

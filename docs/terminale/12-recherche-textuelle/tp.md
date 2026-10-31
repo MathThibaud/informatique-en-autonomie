@@ -10,7 +10,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/12-tp-recherche-textuelle){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-12-tp-recherche-textuelle.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t12-tp-recherche-textuelle\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/12-tp-recherche-textuellehttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-12-tp-recherche-textuelle.zip
 
 !!! consignes "Consignes"
 

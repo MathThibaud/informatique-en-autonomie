@@ -10,7 +10,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/05-tp-arbres){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-05-tp-arbres.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t05-tp-arbres\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/05-tp-arbreshttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-05-tp-arbres.zip
 
 !!! encadre "But du TP"
 
@@ -527,7 +529,9 @@ Rédiger, en une dizaine de lignes, un bilan qui répond aux questions suivantes
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/05-tp-morpion-minimax){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-05-tp-morpion-minimax.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t05-tp-morpion-minimax\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/05-tp-morpion-minimaxhttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-05-tp-morpion-minimax.zip
 
 !!! encadre "But du TP"
 

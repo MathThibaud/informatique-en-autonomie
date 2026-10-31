@@ -4,11 +4,18 @@
 
 <span id="chap-09" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *Modèle d’architecture séquentielle (von Neumann)* : distinguer les rôles et les caractéristiques des différents constituants d’une machine ; *dérouler* l’exécution d’une séquence d’instructions simples du type langage machine ; architectures monoprocesseur et multiprocesseur ; les circuits combinatoires réalisent des fonctions booléennes. *Systèmes d’exploitation* : identifier les fonctions d’un système d’exploitation ; utiliser les commandes de base en ligne de commande ; gérer les droits et permissions d’accès aux fichiers ; systèmes libres et propriétaires. *Périphériques d’entrée et de sortie* : identifier le rôle des *capteurs* et des *actionneurs*. (La partie « réseau » de la même rubrique est traitée au chapitre *Le Web : réseaux et interactions homme-machine*.) |
-| **Prérequis** | le **binaire** et le codage de l’information (chapitre *Le binaire et l’écriture des nombres*) ; savoir ce qu’est un **programme** et une **variable**. (→ fiches de révision : ch. 2) |
-| **Objectifs** | comprendre **comment** une machine exécute un programme ; nommer les **composants** d’un ordinateur et leur rôle ; **dérouler** un petit programme en langage machine ; savoir ce que fait un **système d’exploitation** ; **se déplacer et manipuler** des fichiers en ligne de commande sous Linux ; **lire et modifier** les droits d’un fichier. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *Modèle d’architecture séquentielle (von Neumann)* : distinguer les rôles et les caractéristiques des différents constituants d’une machine ; *dérouler* l’exécution d’une séquence d’instructions simples du type langage machine ; architectures monoprocesseur et multiprocesseur ; les circuits combinatoires réalisent des fonctions booléennes. *Systèmes d’exploitation* : identifier les fonctions d’un système d’exploitation ; utiliser les commandes de base en ligne de commande ; gérer les droits et permissions d’accès aux fichiers ; systèmes libres et propriétaires. *Périphériques d’entrée et de sortie* : identifier le rôle des *capteurs* et des *actionneurs*. (La partie « réseau » de la même rubrique est traitée au chapitre *Le Web : réseaux et interactions homme-machine*.)
+
+Prérequis
+:   le **binaire** et le codage de l’information (chapitre *Le binaire et l’écriture des nombres*) ; savoir ce qu’est un **programme** et une **variable**. (→ fiches de révision : ch. 2)
+
+Objectifs
+:   comprendre **comment** une machine exécute un programme ; nommer les **composants** d’un ordinateur et leur rôle ; **dérouler** un petit programme en langage machine ; savoir ce que fait un **système d’exploitation** ; **se déplacer et manipuler** des fichiers en ligne de commande sous Linux ; **lire et modifier** les droits d’un fichier.
+
+</div>
 
 !!! situation "Situation de départ"
 
@@ -134,7 +141,11 @@ Le processeur ne fait qu’**une** chose, mais des milliards de fois par seconde
 
 !!! remarque "Remarque — La grande pyramide des langages"
 
-    Notre `a = b + c` en Python ne « tourne » pas tel quel : un autre programme le **traduit** en une suite d’instructions machine. Plus on descend, plus c’est proche de la machine et loin de l’humain : $$\text{Python (très lisible)}\ \longrightarrow\ \text{assembleur}\ \longrightarrow\ \text{langage machine (des 0 et des 1)}.$$ C’est encore le mille-feuille : chaque niveau cache la complexité du niveau du dessous.
+    Notre `a = b + c` en Python ne « tourne » pas tel quel : un autre programme le **traduit** en une suite d’instructions machine. Plus on descend, plus c’est proche de la machine et loin de l’humain :
+
+    $$\text{Python (très lisible)}\ \longrightarrow\ \text{assembleur}\ \longrightarrow\ \text{langage machine (des 0 et des 1)}.$$
+
+    C’est encore le mille-feuille : chaque niveau cache la complexité du niveau du dessous.
 
 ### Une machine-modèle : le *Little Man Computer*
 
@@ -322,7 +333,13 @@ Linux est **multi-utilisateur** : plusieurs comptes partagent la machine, chacun
 
 !!! regle "Règle 3 — Trois droits, trois catégories"
 
-    Chaque fichier ou répertoire porte **trois droits** : $$\texttt{r}=\text{lecture (\emph{read})},\quad \texttt{w}=\text{écriture (\emph{write})},\quad \texttt{x}=\text{exécution (\emph{execute})},$$ accordés séparément à **trois catégories** d’utilisateurs : $$\texttt{u}=\text{le propriétaire (\emph{user})},\quad \texttt{g}=\text{le groupe},\quad \texttt{o}=\text{les autres (\emph{others})}.$$
+    Chaque fichier ou répertoire porte **trois droits** :
+
+    $$\texttt{r}=\text{lecture (\emph{read})},\quad \texttt{w}=\text{écriture (\emph{write})},\quad \texttt{x}=\text{exécution (\emph{execute})},$$
+
+    accordés séparément à **trois catégories** d’utilisateurs :
+
+    $$\texttt{u}=\text{le propriétaire (\emph{user})},\quad \texttt{g}=\text{le groupe},\quad \texttt{o}=\text{les autres (\emph{others})}.$$
 
 !!! exemple "Exemple — Lire une ligne de ls -l"
 

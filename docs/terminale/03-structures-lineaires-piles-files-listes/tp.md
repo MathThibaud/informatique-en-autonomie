@@ -10,7 +10,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/03-tp-structures-lineaires){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-03-tp-structures-lineaires.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t03-tp-structures-lineaires\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/03-tp-structures-lineaireshttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-03-tp-structures-lineaires.zip
 
 !!! encadre "But du TP"
 

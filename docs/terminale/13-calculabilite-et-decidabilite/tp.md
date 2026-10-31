@@ -10,7 +10,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/13-tp-calculabilite){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-13-tp-calculabilite.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t13-tp-calculabilite\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/13-tp-calculabilitehttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-13-tp-calculabilite.zip
 
 !!! consignes "Consignes"
 
@@ -28,7 +30,13 @@
 
 ## Partie 1 — Un simulateur de machine de Turing
 
-Une machine de Turing lit et écrit sur un **ruban** infini de cases. Dans le fichier, le ruban est un **dictionnaire** `position -> symbole` (une case absente contient le blanc `"_"`) et la machine est un dictionnaire de **règles** : $$\texttt{(etat, symbole\_lu) -> (symbole\_ecrit, deplacement, nouvel\_etat)}$$$$\text{avec } \texttt{deplacement} \in \{\texttt{"G"}, \texttt{"D"}\}.$$ La machine démarre dans l’état `"q0"`, la tête sur la case $0$ (premier symbole du mot) ; elle s’arrête dès qu’elle entre dans un **état final** (`"fin"`, `"oui"` ou `"non"`).
+Une machine de Turing lit et écrit sur un **ruban** infini de cases. Dans le fichier, le ruban est un **dictionnaire** `position -> symbole` (une case absente contient le blanc `"_"`) et la machine est un dictionnaire de **règles** :
+
+$$\texttt{(etat, symbole\_lu) -> (symbole\_ecrit, deplacement, nouvel\_etat)}$$
+
+$$\text{avec } \texttt{deplacement} \in \{\texttt{"G"}, \texttt{"D"}\}.$$
+
+La machine démarre dans l’état `"q0"`, la tête sur la case $0$ (premier symbole du mot) ; elle s’arrête dès qu’elle entre dans un **état final** (`"fin"`, `"oui"` ou `"non"`).
 
 ![](../figures/4884ff8c3ce67073.svg){ .tikz loading=lazy }
 

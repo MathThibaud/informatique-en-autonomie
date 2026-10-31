@@ -10,7 +10,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/09-defi-aoc-2020-24){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-09-defi-aoc-2020-24.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t09-defi-aoc-2020-24\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/09-defi-aoc-2020-24https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-09-defi-aoc-2020-24.zip
 
 !!! consignes "Consignes"
 

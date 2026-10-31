@@ -10,7 +10,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/05-tp-bulletin-bogue){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-05-tp-bulletin-bogue.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/p05-tp-bulletin-bogue\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/05-tp-bulletin-boguehttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-05-tp-bulletin-bogue.zip
 
 !!! encadre "But du TP"
 

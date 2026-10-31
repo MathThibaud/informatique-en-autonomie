@@ -10,7 +10,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/10-defi-aoc-2020-25){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-10-defi-aoc-2020-25.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t10-defi-aoc-2020-25\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/10-defi-aoc-2020-25https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-10-defi-aoc-2020-25.zip
 
 !!! consignes "Consignes"
 
@@ -180,7 +182,9 @@ On admet que, $p$ étant premier, $g^{p-1} \bmod p = 1$ (petit théorème de Fer
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/10-defi-aoc-2020-13){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-10-defi-aoc-2020-13.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t10-defi-aoc-2020-13\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/10-defi-aoc-2020-13https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-10-defi-aoc-2020-13.zip
 
 !!! consignes "Consignes"
 
@@ -342,7 +346,9 @@ L’énoncé prévient que la réponse dépasse $10^{14}$ : tester tous les inst
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : la formule des restes chinois <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-7 }
 
-La section précédente cite le théorème des restes chinois. Il donne aussi une **formule** : pour le système $t \,\%\, n_m = r_m$ ($m = 1, \dots, k$), avec des $n_m$ premiers entre eux deux à deux, on pose $N = n_1 \times \dots \times n_k$, $N_m = N / n_m$ et $y_m$ l’inverse de $N_m$ modulo $n_m$. Alors $$t = \Big(\sum_{m} r_m \, N_m \, y_m\Big) \bmod N.$$
+La section précédente cite le théorème des restes chinois. Il donne aussi une **formule** : pour le système $t \,\%\, n_m = r_m$ ($m = 1, \dots, k$), avec des $n_m$ premiers entre eux deux à deux, on pose $N = n_1 \times \dots \times n_k$, $N_m = N / n_m$ et $y_m$ l’inverse de $N_m$ modulo $n_m$. Alors
+
+$$t = \Big(\sum_{m} r_m \, N_m \, y_m\Big) \bmod N.$$
 
 1.  Recopier et exécuter le code de l’encadré. Que renvoie `inverse_mod(4, 6)` ? Pourquoi ?
 

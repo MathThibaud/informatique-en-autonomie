@@ -4,11 +4,18 @@
 
 <span id="chap-11" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme (BO)** | *« Programmation dynamique. Utiliser la programmation dynamique pour écrire un algorithme. »* Commentaire du BO : *« Les exemples de l’alignement de séquences ou du rendu de monnaie peuvent être présentés. La discussion sur le coût en mémoire peut être développée. »* |
-| **Prérequis** | la **récursivité** (absolument indispensable), la notion de **coût** d’un algorithme (linéaire, quadratique, exponentiel), les **listes** et les **dictionnaires**, et le souvenir des **algorithmes gloutons** de Première. (→ fiches de révision : ch. 1) |
-| **Objectifs** | *reconnaître* un problème qui se prête à la programmation dynamique (sous-problèmes qui *se recouvrent*) ; *mémoïser* une fonction récursive (*top-down*) ; *tabuler* un problème de bas en haut (*bottom-up*) ; *comprendre* que ce sont deux faces d’une même idée ; l’*appliquer* au rendu de monnaie, au sac à dos, à la comparaison de deux mots. |
+<div class="tete-chapitre" markdown>
+
+Programme (BO)
+:   *« Programmation dynamique. Utiliser la programmation dynamique pour écrire un algorithme. »* Commentaire du BO : *« Les exemples de l’alignement de séquences ou du rendu de monnaie peuvent être présentés. La discussion sur le coût en mémoire peut être développée. »*
+
+Prérequis
+:   la **récursivité** (absolument indispensable), la notion de **coût** d’un algorithme (linéaire, quadratique, exponentiel), les **listes** et les **dictionnaires**, et le souvenir des **algorithmes gloutons** de Première. (→ fiches de révision : ch. 1)
+
+Objectifs
+:   *reconnaître* un problème qui se prête à la programmation dynamique (sous-problèmes qui *se recouvrent*) ; *mémoïser* une fonction récursive (*top-down*) ; *tabuler* un problème de bas en haut (*bottom-up*) ; *comprendre* que ce sont deux faces d’une même idée ; l’*appliquer* au rendu de monnaie, au sac à dos, à la comparaison de deux mots.
+
+</div>
 
 !!! situation "Situation de départ"
 
@@ -148,7 +155,11 @@ Vous devez rendre une somme avec le **moins de pièces possible**, en piochant d
 
     Avec le système $\{1, 3, 4\}$, pour rendre $6$, le glouton prend $4$, puis $1$, puis $1$ : **trois** pièces. Or $3 + 3$ suffit : **deux** pièces. Le glouton n’est **pas toujours optimal**. Pour être *sûr* d’avoir le minimum, il faut explorer toutes les possibilités… intelligemment.
 
-Posons la **relation de récurrence**. Notons $R(s)$ le nombre minimal de pièces pour rendre la somme $s$. Pour rendre $s$, on choisit une première pièce $p$ (avec $p \leq s$), et il reste alors à rendre $s - p$ de façon optimale. On essaie *toutes* les premières pièces et on garde la meilleure : $$R(0) = 0, \qquad R(s) = 1 + \min_{p \leq s}\ R(s - p).$$ Les sous-problèmes $R(s - p)$ **se recouvrent** massivement (rendre $4$ intervient pour rendre $5$, $6$, $8$…) : c’est le signal de la programmation dynamique.
+Posons la **relation de récurrence**. Notons $R(s)$ le nombre minimal de pièces pour rendre la somme $s$. Pour rendre $s$, on choisit une première pièce $p$ (avec $p \leq s$), et il reste alors à rendre $s - p$ de façon optimale. On essaie *toutes* les premières pièces et on garde la meilleure :
+
+$$R(0) = 0, \qquad R(s) = 1 + \min_{p \leq s}\ R(s - p).$$
+
+Les sous-problèmes $R(s - p)$ **se recouvrent** massivement (rendre $4$ intervient pour rendre $5$, $6$, $8$…) : c’est le signal de la programmation dynamique.
 
 **Version mémoïsée (top-down).**
 
@@ -206,7 +217,9 @@ L’idée : on considère les objets un par un. Notons $T[i][c]$ la meilleure va
 
 - **le prendre** (si $w_i \leq c$) : on gagne $v_i$ et il reste $c - w_i$, soit $v_i + T[i-1][c - w_i]$.
 
-On garde le meilleur des deux : $$T[i][c] = \max\big(\ T[i-1][c],\ \ v_i + T[i-1][c - w_i]\ \big).$$
+On garde le meilleur des deux :
+
+$$T[i][c] = \max\big(\ T[i-1][c],\ \ v_i + T[i-1][c - w_i]\ \big).$$
 
 ![](../figures/bd40791665eb4620.svg){ .tikz loading=lazy }  
 **Table 2D :** chaque case de la ligne $i$ se calcule à partir de **deux cases de la ligne $i-1$** (celle juste au-dessus, et celle décalée de $w_i$ vers la gauche).
@@ -246,7 +259,9 @@ def sac_a_dos(poids, valeurs, capacite):
 
 Dernier grand classique, très présent au bac et utilisé en vrai (correcteurs orthographiques, `diff` de deux fichiers, comparaison d’ADN). Une **sous-séquence** d’un mot, c’est ce qu’il reste en *effaçant* des lettres sans changer l’ordre des autres. On cherche la plus longue sous-séquence commune (PLSC) à deux mots.
 
-Notons $L[i][j]$ la longueur de la PLSC entre les $i$ premières lettres de $A$ et les $j$ premières de $B$. La récurrence compare les dernières lettres : $$L[i][j] =
+Notons $L[i][j]$ la longueur de la PLSC entre les $i$ premières lettres de $A$ et les $j$ premières de $B$. La récurrence compare les dernières lettres :
+
+$$L[i][j] =
 \begin{cases}
 L[i-1][j-1] + 1 & \text{si } A[i-1] = B[j-1] \quad (\text{on garde la lettre})\\ 
 \max\big(L[i-1][j],\ L[i][j-1]\big) & \text{sinon}.
@@ -291,7 +306,9 @@ Le raisonnement est le même que pour la plus longue sous-séquence commune : on
 
 - Si les dernières lettres sont **égales** ($A[i-1] = B[j-1]$), rien à payer sur ce caractère : $D[i][j] = D[i-1][j-1]$.
 
-- Sinon, on choisit la **moins chère** des trois opérations, chacune ramenant à un sous-problème plus petit : $$D[i][j] = 1 + \min\big(\underbrace{D[i-1][j]}_{\text{supprimer}},\ \underbrace{D[i][j-1]}_{\text{insérer}},\ \underbrace{D[i-1][j-1]}_{\text{substituer}}\big).$$
+- Sinon, on choisit la **moins chère** des trois opérations, chacune ramenant à un sous-problème plus petit :
+
+    $$D[i][j] = 1 + \min\big(\underbrace{D[i-1][j]}_{\text{supprimer}},\ \underbrace{D[i][j-1]}_{\text{insérer}},\ \underbrace{D[i-1][j-1]}_{\text{substituer}}\big).$$
 
 ```python
 def distance(a, b):

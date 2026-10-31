@@ -4,11 +4,18 @@
 
 <span id="chap-02" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme** | Identité numérique, e-réputation, identification, authentification ; réseaux sociaux existants ; modèle économique ; représentation par un graphe (degré, distance, rayon, diamètre, centre) ; petit monde et six degrés de séparation ; algorithmes de recommandation. |
-| **Idée** | Un réseau social, ce n’est pas seulement une application : c’est un immense **graphe** de relations entre des personnes, exploité par une **entreprise** qui a un modèle économique. Comprendre les deux, c’est reprendre la main. |
-| **Objectifs** | Distinguer les grands réseaux et leurs ordres de grandeur ; protéger sa vie privée ; comprendre *comment ils gagnent de l’argent* ; représenter et mesurer un réseau par un graphe ; comprendre *qui choisit ce que vous voyez*. |
+<div class="tete-chapitre" markdown>
+
+Programme
+:   Identité numérique, e-réputation, identification, authentification ; réseaux sociaux existants ; modèle économique ; représentation par un graphe (degré, distance, rayon, diamètre, centre) ; petit monde et six degrés de séparation ; algorithmes de recommandation.
+
+Idée
+:   Un réseau social, ce n’est pas seulement une application : c’est un immense **graphe** de relations entre des personnes, exploité par une **entreprise** qui a un modèle économique. Comprendre les deux, c’est reprendre la main.
+
+Objectifs
+:   Distinguer les grands réseaux et leurs ordres de grandeur ; protéger sa vie privée ; comprendre *comment ils gagnent de l’argent* ; représenter et mesurer un réseau par un graphe ; comprendre *qui choisit ce que vous voyez*.
+
+</div>
 
 !!! situation "Situation de départ"
 

@@ -8,13 +8,15 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/05-tp-tableur-1){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/seconde-05-tp-tableur-1.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/s05-tp-tableur-1\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/05-tp-tableur-1https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/seconde-05-tp-tableur-1.zip
 
 Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
 !!! encadre "Pour commencer"
 
-    Récupérer le fichier `tableur1.xlsx` (à télécharger : <https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/05-tp-tableur-1>). Il contient **quatre feuilles** nommées « `Exercice 1` », « `Exercice 2` », « `Exercice 3` » et « `Exercice 4` » (onglets en bas de la fenêtre). Les **données de départ** y sont déjà saisies ; les cellules sur **fond jaune** sont **à compléter**.
+    Récupérer le fichier `tableur1.xlsx` (à télécharger : [`maththibaud.github.io/informatique-en-autonomie/f/s05-tp-tableur-1`](https://maththibaud.github.io/informatique-en-autonomie/f/s05-tp-tableur-1)). Il contient **quatre feuilles** nommées « `Exercice 1` », « `Exercice 2` », « `Exercice 3` » et « `Exercice 4` » (onglets en bas de la fenêtre). Les **données de départ** y sont déjà saisies ; les cellules sur **fond jaune** sont **à compléter**.
 
 ### <span class="exo-num">Exercice 1</span> — Notes d’un contrôle (feuille `Exercice 1`) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-les-donnees-structurees-et-leur-traiteme-tp-1-1 }
 
@@ -125,13 +127,15 @@ La feuille `Exercice 4` donne les salaires d’une entreprise (colonne `A`).
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/05-tp-tableur-2){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/seconde-05-tp-tableur-2.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/s05-tp-tableur-2\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/05-tp-tableur-2https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/seconde-05-tp-tableur-2.zip
 
 Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
 !!! encadre "Pour commencer"
 
-    Récupérer le fichier `tableur2.xlsx` (à télécharger : <https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/05-tp-tableur-2>). Il contient les feuilles « `Exercice 1` » à « `Exercice 4` » et un « `Bonus` ». Les valeurs de départ y sont déjà en place (cellules sur fond jaune à compléter).
+    Récupérer le fichier `tableur2.xlsx` (à télécharger : [`maththibaud.github.io/informatique-en-autonomie/f/s05-tp-tableur-2`](https://maththibaud.github.io/informatique-en-autonomie/f/s05-tp-tableur-2)). Il contient les feuilles « `Exercice 1` » à « `Exercice 4` » et un « `Bonus` ». Les valeurs de départ y sont déjà en place (cellules sur fond jaune à compléter).
 
 ### <span class="exo-num">Exercice 1</span> — Une suite de nombres, pas de 1 (feuille `Exercice 1`) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-les-donnees-structurees-et-leur-traiteme-tp-2-1 }
 
@@ -175,7 +179,11 @@ On compte de `3` en `3` à partir de `5` (pas en `C1`, premier terme en `A1`). E
 
     3.  `C9` : `=C7+C8` donne $\mathbf{97}$ ; `C12` : `=SOMME(A1:A30)` donne $\mathbf{1\,455}$.
 
-    4.  **Conjecture :** $1\,455 = 30 \times 97 / 2$. En changeant le premier terme ou le pas, la relation se maintient : $$\text{somme des termes} = \frac{\text{nombre de termes} \times (\text{plus petite valeur} + \text{plus grande valeur})}{2}.$$ En `C13`, on peut faire vérifier le tableur : `=C4*C9/2` affiche la même valeur que `C12`.
+    4.  **Conjecture :** $1\,455 = 30 \times 97 / 2$. En changeant le premier terme ou le pas, la relation se maintient :
+
+        $$\text{somme des termes} = \frac{\text{nombre de termes} \times (\text{plus petite valeur} + \text{plus grande valeur})}{2}.$$
+
+        En `C13`, on peut faire vérifier le tableur : `=C4*C9/2` affiche la même valeur que `C12`.
 
     *Pourquoi ça marche ?* En associant le premier et le dernier terme ($5 + 92$), le deuxième et l’avant-dernier ($8 + 89$), etc., on obtient 15 paires qui valent toutes $97$ : $15 \times 97 = 1\,455$.
 
@@ -225,13 +233,15 @@ Faire varier automatiquement le premier terme **et** le pas.
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/05-tp-tableur-3){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/seconde-05-tp-tableur-3.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/s05-tp-tableur-3\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/05-tp-tableur-3https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/seconde-05-tp-tableur-3.zip
 
 Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
 !!! encadre "Pour commencer"
 
-    Récupérer le fichier `tableur3.xlsx` (à télécharger : <https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/05-tp-tableur-3>). Il contient quatre feuilles (« `Exercice 1` » à « `Exercice 4` ») dont les données sont déjà saisies.
+    Récupérer le fichier `tableur3.xlsx` (à télécharger : [`maththibaud.github.io/informatique-en-autonomie/f/s05-tp-tableur-3`](https://maththibaud.github.io/informatique-en-autonomie/f/s05-tp-tableur-3)). Il contient quatre feuilles (« `Exercice 1` » à « `Exercice 4` ») dont les données sont déjà saisies.
 
 ### <span class="exo-num">Exercice 1</span> — Représentation de séries statistiques (feuille `Exercice 1`) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-les-donnees-structurees-et-leur-traiteme-tp-3-1 }
 

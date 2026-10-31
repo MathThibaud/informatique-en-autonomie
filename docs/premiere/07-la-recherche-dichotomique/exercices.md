@@ -14,7 +14,9 @@
 
 ### Dérouler la recherche à la main
 
-On utilise le tableau trié $$\texttt{t = [3, 8, 11, 16, 19, 24, 30, 33, 38, 47, 52]} \quad \text{(indices 0 à 10).}$$
+On utilise le tableau trié
+
+$$\texttt{t = [3, 8, 11, 16, 19, 24, 30, 33, 38, 47, 52]} \quad \text{(indices 0 à 10).}$$
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Un élément présent <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-1 }
 

@@ -4,11 +4,18 @@
 
 <span id="chap-07" class="ancre"></span>
 
-|  |  |
-|:---|:---|
-| **Programme** | Principe de la **géolocalisation** (GPS, satellites, trilatération) ; **coordonnées** (latitude, longitude) ; décoder une **trame NMEA** ; **cartes numériques** et calcul d’**itinéraire** ; enjeux de **confidentialité** des traces de localisation. |
-| **Idée** | Votre téléphone sait, à quelques mètres près, *où* vous êtes. Derrière cette magie : des **satellites**, un peu de **géométrie** et beaucoup de **calcul**. Comprendre le GPS, c’est aussi reprendre la main sur ses **traces**. |
-| **Objectifs** | Se repérer par **latitude/longitude** ; expliquer le principe du GPS (temps de trajet du signal, **trilatération**) ; **décoder** une trame NMEA ; utiliser une carte numérique (itinéraire, distance) ; mesurer les enjeux de **vie privée**. |
+<div class="tete-chapitre" markdown>
+
+Programme
+:   Principe de la **géolocalisation** (GPS, satellites, trilatération) ; **coordonnées** (latitude, longitude) ; décoder une **trame NMEA** ; **cartes numériques** et calcul d’**itinéraire** ; enjeux de **confidentialité** des traces de localisation.
+
+Idée
+:   Votre téléphone sait, à quelques mètres près, *où* vous êtes. Derrière cette magie : des **satellites**, un peu de **géométrie** et beaucoup de **calcul**. Comprendre le GPS, c’est aussi reprendre la main sur ses **traces**.
+
+Objectifs
+:   Se repérer par **latitude/longitude** ; expliquer le principe du GPS (temps de trajet du signal, **trilatération**) ; **décoder** une trame NMEA ; utiliser une carte numérique (itinéraire, distance) ; mesurer les enjeux de **vie privée**.
+
+</div>
 
 !!! situation "Situation de départ"
 
@@ -63,7 +70,9 @@ Un satellite GPS en orbite (vue d’artiste)
 
 !!! regle "Règle 1 — Du temps à la distance"
 
-    Le signal voyage à la **vitesse de la lumière** ($c \approx 300\,000$ km/s). Le récepteur (votre téléphone) compare l’heure d’**envoi** (dans le message) à l’heure de **réception** : la différence est le **temps de trajet**. Il en déduit sa **distance** au satellite : $$\text{distance} = c \times \text{temps de trajet}.$$
+    Le signal voyage à la **vitesse de la lumière** ($c \approx 300\,000$ km/s). Le récepteur (votre téléphone) compare l’heure d’**envoi** (dans le message) à l’heure de **réception** : la différence est le **temps de trajet**. Il en déduit sa **distance** au satellite :
+
+    $$\text{distance} = c \times \text{temps de trajet}.$$
 
 !!! exemple "Exemple"
 
@@ -142,7 +151,11 @@ Une fois la position calculée, le récepteur GPS la transmet sous forme de cour
 
 !!! exemple "Exemple"
 
-    Dans la trame ci-dessus, la latitude `4344.304` se lit $43^\circ$ et $44{,}304'$, soit $$43 + \frac{44{,}304}{60} \approx 43{,}7384^\circ \text{ N},$$ et la longitude `00725.476` donne $7 + \dfrac{25{,}476}{60} \approx 7{,}4246^\circ$ E. Cette trame indique donc… **Monaco** !
+    Dans la trame ci-dessus, la latitude `4344.304` se lit $43^\circ$ et $44{,}304'$, soit
+
+    $$43 + \frac{44{,}304}{60} \approx 43{,}7384^\circ \text{ N},$$
+
+    et la longitude `00725.476` donne $7 + \dfrac{25{,}476}{60} \approx 7{,}4246^\circ$ E. Cette trame indique donc… **Monaco** !
 
 <span id="cours-07-9" class="ancre"></span>
 

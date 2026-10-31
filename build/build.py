@@ -484,6 +484,7 @@ class Site:
         reste = re.search(r'QQ(?:SLOT|I\d|B\d|W\d|AB|AE|H\d|HE|LK|CS|CE|CA\d|FIG|LST|TIKZ|MATH|PCT|IMG|NOTITLE)\S*', md)
         if reste:
             raise SystemExit('Marqueur interne non résolu dans %s : %s' % (page, reste.group(0)))
+        md = self.conv.display_math_blocks(md)
         md = re.sub(r'\n{3,}', '\n\n', md)
         return md.strip() + '\n'
 

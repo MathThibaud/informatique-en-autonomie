@@ -1122,9 +1122,84 @@ class Converter:
                 return tick + code + tick
             return '`' + code.replace('\n', ' ') + '`'
         md = re.sub(r'QQLST(\d+)QQ', verb_inline, md)
+        md = self.label_tables(md)
         # 5. admonitions (indentation)
         md = self.admonitions(md)
         return md
+
+    @staticmethod
+    def label_tables(md):
+        """Tableau « étiquette | texte » sans en-tête (Programme (BO), Prérequis…) : en liste
+        de définitions, lisible sur téléphone et sans ligne d'en-tête vide."""
+        row = re.compile(r'^([ \t]*)\|\s*\*\*(.+?)\*\*\s*\|(.*)\|[ \t]*$')
+        lines = md.split('\n')
+        out = []
+        i = 0
+        while i < len(lines):
+            m = re.match(r'^([ \t]*)\|\s*\|\s*\|[ \t]*$', lines[i])
+            if m and i + 2 < len(lines) and re.match(r'^[ \t]*\|[\s:|-]+\|[ \t]*$', lines[i + 1]):
+                ind = m.group(1)
+                j = i + 2
+                items = []
+                while j < len(lines) and row.match(lines[j]):
+                    r = row.match(lines[j])
+                    items.append((r.group(2).strip(), r.group(3).strip()))
+                    j += 1
+                if items and (j == len(lines) or not lines[j].lstrip().startswith('|')):
+                    out.append(ind + '<div class="tete-chapitre" markdown>')
+                    out.append('')
+                    for lab, txt in items:
+                        out += [ind + lab, ind + ':   ' + txt, '']
+                    out.append(ind + '</div>')
+                    i = j
+                    continue
+            out.append(lines[i])
+            i += 1
+        return '\n'.join(out)
+
+    @staticmethod
+    def display_math_blocks(md):
+        """Isole chaque $$…$$ (même sur plusieurs lignes) collé à du texte : arithmatex ne lit
+        une formule centrée que si elle forme son propre bloc (sinon « $ … $ » brut à l'écran)."""
+        disp = re.compile(r'(?<![^\s])\$\$(.+?)\$\$(?![^\s.,;:)])', re.S)
+        # les blocs de code et le code en ligne (`echo $$`) ne sont pas touchés
+        masque = []
+
+        def cacher(m):
+            masque.append(m.group(0))
+            return '\x00%d\x00' % (len(masque) - 1)
+        md = re.sub(r'^([ \t]*)(```|~~~).*?^\1\2[ \t]*$', cacher, md, flags=re.S | re.M)
+        md = re.sub(r'`[^`\n]*`', cacher, md)
+        # « $$$…$$$ » (formule en ligne dans une formule centrée) et « $$a$$$$b$$ » (deux collées)
+        md = re.sub(r'\$\$\$(.+?)\$\$\$', r'$$\1$$', md, flags=re.S)
+        md = md.replace('$$$$', '$$ $$')
+        out, pos = [], 0
+        for m in disp.finditer(md):
+            debut = md.rfind('\n', 0, m.start()) + 1
+            ligne = md[debut:m.start()]
+            if ligne.lstrip().startswith('|'):
+                continue
+            tete = re.match(r'([ \t]*)((?:[-*+]|\d+\.)[ \t]+)?', ligne)
+            # suite d'un élément de liste : 4 espaces (Python-Markdown), pas la largeur de « - »
+            ind = ' ' * (len(tete.group(1).expandtabs(4))
+                         + (max(4, len(tete.group(2).expandtabs(4))) if tete.group(2) else 0))
+            fin = md.find('\n', m.end())
+            fin = len(md) if fin < 0 else fin
+            avant = md[pos:m.start()]
+            out.append(avant.rstrip(' \t') + '\n\n' + ind if ligne.strip() else avant)
+            # la ponctuation collée à la formule passe dedans (sinon « . » seul en tête de ligne)
+            ponct = re.match(r'[.,;:]+', md[m.end():fin])
+            ponct = ponct.group(0) if ponct else ''
+            out.append('$$' + m.group(1).strip() + ponct + '$$')
+            # le texte qui suit (éventuellement une autre formule) repart en paragraphe
+            pos = m.end() + len(ponct)
+            while pos < fin and md[pos] in ' \t':
+                pos += 1
+            if pos < fin:
+                out.append('\n\n' + ind)
+        out.append(md[pos:])
+        md = ''.join(out)
+        return re.sub(r'\x00(\d+)\x00', lambda m: masque[int(m.group(1))], md)
 
     def render_inline(self, v):
         if isinstance(v, str) and v.startswith('QQFIG:'):

@@ -395,9 +395,13 @@ Un nouveau joueur mesure $176$ cm pour $70$ kg.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Reconnaître une image $3\times3$ (sans machine) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-13 }
 
-Une image $3\times3$ est une liste de 9 pixels (0 blanc, 1 encre), lus ligne par ligne. On a deux **modèles** étiquetés : $$T=\begin{smallmatrix}1&1&1\\0&1&0\\0&1&0\end{smallmatrix}\quad(\text{« T »})
+Une image $3\times3$ est une liste de 9 pixels (0 blanc, 1 encre), lus ligne par ligne. On a deux **modèles** étiquetés :
+
+$$T=\begin{smallmatrix}1&1&1\\0&1&0\\0&1&0\end{smallmatrix}\quad(\text{« T »})
 \qquad\qquad
-L=\begin{smallmatrix}1&0&0\\1&0&0\\1&1&1\end{smallmatrix}\quad(\text{« L »})$$ On reçoit l’image inconnue \; $N=\begin{smallmatrix}1&1&1\\0&1&0\\0&1&1\end{smallmatrix}$.
+L=\begin{smallmatrix}1&0&0\\1&0&0\\1&1&1\end{smallmatrix}\quad(\text{« L »})$$
+
+On reçoit l’image inconnue \; $N=\begin{smallmatrix}1&1&1\\0&1&0\\0&1&1\end{smallmatrix}$.
 
 1.  Écrire $T$, $L$ et $N$ comme des listes de 9 nombres.
 

@@ -10,7 +10,9 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/05-defi-aoc-2020-05){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-05-defi-aoc-2020-05.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t05-defi-aoc-2020-05\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/05-defi-aoc-2020-05https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-05-defi-aoc-2020-05.zip
 
 !!! consignes "Consignes"
 
@@ -179,7 +181,9 @@ Trouver la place libre en temps linéaire sans trier ni utiliser d’ensemble, e
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/05-defi-aoc-2020-06){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-05-defi-aoc-2020-06.zip){ .md-button }
+    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
+
+aththibaud.github.io/informatique-en-autonomie/f/t05-defi-aoc-2020-06\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/05-defi-aoc-2020-06https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-05-defi-aoc-2020-06.zip
 
 !!! consignes "Consignes"
 
