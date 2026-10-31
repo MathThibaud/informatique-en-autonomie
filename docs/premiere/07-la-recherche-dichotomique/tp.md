@@ -8,9 +8,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/p07-tp-annuaire-devin\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/07-tp-annuaire-devinhttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-07-tp-annuaire-devin.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/07-tp-annuaire-devin){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-07-tp-annuaire-devin.zip){ .md-button }
 
 <div class="tete-chapitre" markdown>
 

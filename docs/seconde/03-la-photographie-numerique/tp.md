@@ -415,9 +415,7 @@ Vous avez maintenant les deux outils : le **cercle** et la **droite**. On peut a
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/s03-projet-tableaux-rgb\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/03-projet-tableaux-rgbhttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/seconde-03-projet-tableaux-rgb.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/seconde/03-projet-tableaux-rgb){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/seconde-03-projet-tableaux-rgb.zip){ .md-button }
 
 <div class="tete-chapitre" markdown>
 

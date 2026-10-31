@@ -10,9 +10,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t10-defi-aoc-2020-25\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/10-defi-aoc-2020-25https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-10-defi-aoc-2020-25.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/10-defi-aoc-2020-25){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-10-defi-aoc-2020-25.zip){ .md-button }
 
 !!! consignes "Consignes"
 
@@ -182,9 +180,7 @@ On admet que, $p$ étant premier, $g^{p-1} \bmod p = 1$ (petit théorème de Fer
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t10-defi-aoc-2020-13\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/10-defi-aoc-2020-13https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-10-defi-aoc-2020-13.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/10-defi-aoc-2020-13){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-10-defi-aoc-2020-13.zip){ .md-button }
 
 !!! consignes "Consignes"
 

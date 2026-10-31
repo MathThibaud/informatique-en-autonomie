@@ -10,9 +10,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t03-defi-aoc-2020-18\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/03-defi-aoc-2020-18https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-03-defi-aoc-2020-18.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/03-defi-aoc-2020-18){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-03-defi-aoc-2020-18.zip){ .md-button }
 
 !!! consignes "Consignes"
 
@@ -202,9 +200,7 @@ En **notation postfixe** (ou « polonaise inverse »), on écrit chaque opérate
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t03-defi-aoc-2020-23\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/03-defi-aoc-2020-23https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-03-defi-aoc-2020-23.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/03-defi-aoc-2020-23){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-03-defi-aoc-2020-23.zip){ .md-button }
 
 !!! consignes "Consignes"
 

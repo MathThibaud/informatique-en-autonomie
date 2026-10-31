@@ -256,9 +256,7 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t07-tp-tri-rapide\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-tp-tri-rapidehttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-07-tp-tri-rapide.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-tp-tri-rapide){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-07-tp-tri-rapide.zip){ .md-button }
 
 !!! consignes "Mode d’emploi"
 
@@ -574,9 +572,7 @@ Le script teste aussi les cas limites (tableau vide, un seul élément) et compa
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t07-tp-tim-sort\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-tp-tim-sorthttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-07-tp-tim-sort.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-tp-tim-sort){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-07-tp-tim-sort.zip){ .md-button }
 
 !!! consignes "Mode d’emploi"
 
@@ -879,9 +875,7 @@ Le script compare aussi `tim_sort` à `sorted()` sur **200 tableaux aléatoires*
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t07-tp-rotation-image\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-tp-rotation-imagehttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-07-tp-rotation-image.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/07-tp-rotation-image){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-07-tp-rotation-image.zip){ .md-button }
 
 !!! consignes "Mode d’emploi"
 

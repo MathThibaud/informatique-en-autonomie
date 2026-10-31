@@ -10,9 +10,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t13-tp-calculabilite\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/13-tp-calculabilitehttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-13-tp-calculabilite.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/13-tp-calculabilite){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-13-tp-calculabilite.zip){ .md-button }
 
 !!! consignes "Consignes"
 

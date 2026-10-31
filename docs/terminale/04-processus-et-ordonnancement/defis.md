@@ -10,9 +10,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t04-defi-aoc-2020-11\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/04-defi-aoc-2020-11https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-04-defi-aoc-2020-11.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/04-defi-aoc-2020-11){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-04-defi-aoc-2020-11.zip){ .md-button }
 
 !!! consignes "Consignes"
 
@@ -198,9 +196,7 @@ Les voisins visibles d’un siège ne dépendent pas de l’état des sièges, s
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t04-defi-aoc-2020-22\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/04-defi-aoc-2020-22https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-04-defi-aoc-2020-22.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/04-defi-aoc-2020-22){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-04-defi-aoc-2020-22.zip){ .md-button }
 
 !!! consignes "Consignes"
 

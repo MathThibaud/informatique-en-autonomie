@@ -10,9 +10,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t06-tp-bdd-sql\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/06-tp-bdd-sqlhttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-06-tp-bdd-sql.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/06-tp-bdd-sql){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-06-tp-bdd-sql.zip){ .md-button }
 
 !!! consignes "Consignes"
 

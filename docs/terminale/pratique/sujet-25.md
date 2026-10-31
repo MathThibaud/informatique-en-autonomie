@@ -4,9 +4,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/tpratique-25-abr\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-25-abrhttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-25-abr.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-25-abr){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-25-abr.zip){ .md-button }
 
 ??? corrige "Corrigé"
 

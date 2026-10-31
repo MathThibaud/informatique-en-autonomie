@@ -10,9 +10,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t11-defi-aoc-2020-10\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/11-defi-aoc-2020-10https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-11-defi-aoc-2020-10.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/11-defi-aoc-2020-10){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-11-defi-aoc-2020-10.zip){ .md-button }
 
 !!! consignes "Consignes"
 
@@ -207,9 +205,7 @@ Dans les données (et dans l’exemple du défi), les écarts entre adaptateurs 
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t11-defi-aoc-2020-15\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/11-defi-aoc-2020-15https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-11-defi-aoc-2020-15.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/11-defi-aoc-2020-15){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-11-defi-aoc-2020-15.zip){ .md-button }
 
 !!! consignes "Consignes"
 

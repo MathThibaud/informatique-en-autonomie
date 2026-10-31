@@ -4,9 +4,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/tpratique-30-messages-secrets\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-30-messages-secretshttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-30-messages-secrets.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/pratique-30-messages-secrets){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-pratique-30-messages-secrets.zip){ .md-button }
 
 ??? corrige "Corrigé"
 

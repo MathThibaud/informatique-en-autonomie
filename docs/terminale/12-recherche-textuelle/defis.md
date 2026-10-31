@@ -10,9 +10,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t12-defi-aoc-2020-02\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/12-defi-aoc-2020-02https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-12-defi-aoc-2020-02.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/12-defi-aoc-2020-02){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-12-defi-aoc-2020-02.zip){ .md-button }
 
 !!! consignes "Consignes"
 
@@ -186,9 +184,7 @@ Dresser la table de vérité du ou exclusif. Vérifier que `p != q`, `p ^ q` et 
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t12-defi-aoc-2020-19\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/12-defi-aoc-2020-19https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-12-defi-aoc-2020-19.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/12-defi-aoc-2020-19){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-12-defi-aoc-2020-19.zip){ .md-button }
 
 !!! consignes "Consignes"
 

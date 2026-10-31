@@ -10,9 +10,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t08-defi-aoc-2020-20\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/08-defi-aoc-2020-20https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-08-defi-aoc-2020-20.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/08-defi-aoc-2020-20){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-08-defi-aoc-2020-20.zip){ .md-button }
 
 !!! consignes "Consignes"
 
@@ -244,9 +242,7 @@ La stratégie du défi part d’un coin et remplit l’image ligne par ligne. On
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t08-defi-aoc-2020-21\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/08-defi-aoc-2020-21https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-08-defi-aoc-2020-21.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/08-defi-aoc-2020-21){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-08-defi-aoc-2020-21.zip){ .md-button }
 
 !!! consignes "Consignes"
 

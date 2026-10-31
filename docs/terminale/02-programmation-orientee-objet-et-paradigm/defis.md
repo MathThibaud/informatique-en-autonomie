@@ -10,9 +10,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t02-defi-aoc-2020-03\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/02-defi-aoc-2020-03https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-02-defi-aoc-2020-03.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/02-defi-aoc-2020-03){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-02-defi-aoc-2020-03.zip){ .md-button }
 
 !!! consignes "Consignes"
 
@@ -162,9 +160,7 @@ Utiliser la fonction précédente pour toutes les pentes demandées et calculer 
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t02-defi-aoc-2020-12\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/02-defi-aoc-2020-12https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-02-defi-aoc-2020-12.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/02-defi-aoc-2020-12){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-02-defi-aoc-2020-12.zip){ .md-button }
 
 !!! consignes "Consignes"
 

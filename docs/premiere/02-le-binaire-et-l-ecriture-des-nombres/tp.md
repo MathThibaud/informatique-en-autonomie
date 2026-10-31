@@ -8,9 +8,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/p02-tp-arithmetique-binaire\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/02-tp-arithmetique-binairehttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-02-tp-arithmetique-binaire.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/02-tp-arithmetique-binaire){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-02-tp-arithmetique-binaire.zip){ .md-button }
 
 !!! consignes "Mode d’emploi"
 

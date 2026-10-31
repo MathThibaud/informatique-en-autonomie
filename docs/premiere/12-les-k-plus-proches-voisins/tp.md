@@ -6,9 +6,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/p12-tp-ocr\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/12-tp-ocrhttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-12-tp-ocr.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/12-tp-ocr){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-12-tp-ocr.zip){ .md-button }
 
 *Un projet de l’année : une vraie application de ce qu’on apprend en cours.*
 
@@ -682,9 +680,7 @@ En une poignée de fonctions, sans aucune bibliothèque d’« intelligence arti
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/p12-projet-plaque\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/12-projet-plaquehttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-12-projet-plaque.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/12-projet-plaque){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-12-projet-plaque.zip){ .md-button }
 
 !!! remarque "Remarque — Le but"
 

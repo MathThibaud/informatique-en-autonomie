@@ -8,9 +8,7 @@ backtracking
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t01-projet-sudoku\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/01-projet-sudokuhttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-01-projet-sudoku.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/01-projet-sudoku){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-01-projet-sudoku.zip){ .md-button }
 
 **Prérequis :** fonctions, listes de listes, la fonction `placement_valide` (vue en Première, à réécrire ici). **Fichiers :** `grilles_test.py`, `demo_backtracking_4x4.py` (à lancer), `terminale_squelette.py` et `generateur_squelette.py` (à compléter).
 

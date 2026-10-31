@@ -10,9 +10,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t10-tp-crypto\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/10-tp-cryptohttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-10-tp-crypto.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/10-tp-crypto){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-10-tp-crypto.zip){ .md-button }
 
 !!! consignes "Consignes"
 

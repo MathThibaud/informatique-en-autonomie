@@ -10,9 +10,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t02-projet-poo\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/02-projet-poohttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-02-projet-poo.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/02-projet-poo){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-02-projet-poo.zip){ .md-button }
 
 !!! encadre "But du projet"
 

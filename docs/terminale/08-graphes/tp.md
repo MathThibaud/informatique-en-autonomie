@@ -6,9 +6,7 @@
 
 !!! fichiers "Fichiers à télécharger"
 
-    [:material-folder-open: dossier en ligne]([){ .md-button } [:material-zip-box: archive .zip](m){ .md-button }
-
-aththibaud.github.io/informatique-en-autonomie/f/t08-projet-dijkstra\]https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/08-projet-dijkstrahttps://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-08-projet-dijkstra.zip
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/08-projet-dijkstra){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-08-projet-dijkstra.zip){ .md-button }
 
 !!! encadre "But du projet"
 

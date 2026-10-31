@@ -592,7 +592,7 @@ class Converter:
                       '\n\n' + I('<span class="afaire">▶ Exercices d\'application :</span>') +
                       ' ' + a[0] + '\n\n')
         s = sub_macro(s, 'qrcode', 1, 1, lambda o, a, st: '')
-        s = sub_macro(s, 'fichierseleves', 2, 0, lambda o, a, st: self.fichiers(a[0], a[1]))
+        s = sub_macro(s, 'fichierseleves', 2, 1, lambda o, a, st: self.fichiers(a[0], a[1]))
         s = sub_macro(s, 'autoposcases', 0, 0, lambda o, a, st: '')
         s = sub_macro(s, 'checkmark', 0, 0, lambda o, a, st: '✓')
         s = sub_macro(s, 'euro', 0, 0, lambda o, a, st: '€')
