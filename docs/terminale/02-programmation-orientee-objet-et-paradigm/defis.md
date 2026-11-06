@@ -22,7 +22,23 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi se prête à l’encapsulation vue dans ce chapitre : une classe `Foret` peut cacher le modulo derrière une méthode `est_arbre(x, y)`. L’utilisateur croit manipuler une forêt infinie, alors que l’objet ne stocke que le motif de la carte.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Une luge descend une pente boisée en ligne droite, et l’on veut savoir combien d’arbres elle va percuter. La carte de la forêt compte plusieurs centaines de lignes et, en théorie, elle se prolonge sans fin vers la droite : impossible de suivre la trajectoire à la main, et impossible de stocker une carte infinie. Le programme doit donc retrouver, pour chaque case atteinte, la case correspondante de la carte réelle.
+
+    **Ce qu’on réinvestit.** L’**encapsulation** vue dans ce chapitre. Le calcul qui ramène une colonne quelconque dans la carte réelle (un modulo) peut être caché dans une classe `Foret`, derrière une méthode `est_arbre(x, y)`. L’utilisateur de la classe croit manipuler une forêt infinie, alors que l’objet ne stocke que le motif de la carte : c’est exactement le rôle d’une interface, qui sépare ce qu’on fait de la façon dont c’est fait.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre le déplacement et la répétition de la carte, puis suivre la luge à la main sur une petite carte.
+
+    2.  Lire la carte dans une liste de chaînes.
+
+    3.  Écrire une fonction qui compte les arbres pour une pente quelconque : elle donne la partie 1.
+
+    4.  Partie 2 : appeler cette fonction pour cinq pentes et multiplier les résultats.
+
+    5.  En approfondissement, dessiner le trajet sur la carte.
 
 ## Lire l’énoncé
 
@@ -38,19 +54,29 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Toujours en route vers l’aéroport, le héros dévale une pente boisée en luge, sans pouvoir vraiment la diriger. Il dispose d’une carte de la forêt vue de dessus : chaque ligne du fichier représente une rangée de la pente, chaque caractère une case, libre ou occupée par un arbre. Il veut savoir combien d’arbres il va percuter en suivant une trajectoire fixée.
+    **Contexte.** Toujours en route vers l’aéroport, le héros dévale une pente boisée en luge, sans pouvoir vraiment la diriger. Il dispose d’une carte de la forêt vue de dessus et veut savoir combien d’arbres il va percuter en suivant une trajectoire fixée.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Le fichier est cette carte. Chaque ligne du fichier représente une rangée de la pente (la première ligne est en haut), et chaque caractère une case : `.` désigne une case libre et `#` un arbre. Toutes les lignes ont la même longueur.
 
-    - Dans la carte, `.` désigne une case libre et `#` un arbre ; toutes les lignes ont la même longueur.
+    **La règle.**
 
     - La forêt est bien plus large que la carte : le même motif se répète indéfiniment vers la **droite** (mais pas vers le bas). Autrement dit, après la dernière colonne, on retrouve la première.
 
-    - On part de la case en haut à gauche (ligne 0, colonne 0). À chaque pas, on se déplace de 3 colonnes vers la droite et de 1 ligne vers le bas, et l’on s’arrête quand on dépasse la dernière ligne de la carte.
+    - On part de la case en haut à gauche (ligne 0, colonne 0).
 
-    - Il faut renvoyer le nombre d’arbres sur les cases atteintes à chaque pas.
+    - À chaque pas, on se déplace de 3 colonnes vers la droite et de 1 ligne vers le bas. Par exemple, sur une carte large de 5 cases, le 2e pas mène à la colonne 6 de la forêt, qui correspond à la colonne 1 de la carte.
+
+    - On regarde la case atteinte à chaque pas ; la case de départ ne compte pas.
+
+    - On s’arrête quand on dépasse la dernière ligne de la carte.
+
+    **La réponse attendue.** Le nombre d’arbres sur les cases atteintes. Par exemple, si les cases atteintes contiennent, dans l’ordre, `.`, `#`, `#`, `.`, `#`, la réponse serait 3.
 
 ### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-1-1 }
+
+**But.** Vérifier qu’on sait suivre la luge, en particulier quand elle sort de la carte par la droite.
+
+**À quoi ça sert ?** La première question fait découvrir le calcul de colonne (le modulo) qu’utilisera le programme ; la deuxième fixe le nombre de tours de la boucle ; la troisième explique pourquoi on ne recopie pas la carte.
 
 Après lecture de l’énoncé et du résumé, vérifier sa compréhension :
 
@@ -61,6 +87,10 @@ Après lecture de l’énoncé et du résumé, vérifier sa compréhension :
 3.  Pourquoi est-il maladroit de recopier la carte vers la droite avant de commencer ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-1-2 }
+
+**But.** Suivre la trajectoire à la main sur une carte de neuf lignes.
+
+**À quoi ça sert ?** On obtient un exemple dont on **connaît la réponse** (`2`) pour tester la fonction de comptage ; dessiner la carte prolongée aide aussi à voir que la colonne réelle se calcule par un reste.
 
 On considère la carte (inventée) suivante, large de $7$ cases :
 
@@ -82,6 +112,10 @@ Recopier la carte sur le cahier, prolongée vers la droite, et marquer les cases
 
 ### <span class="exo-num">Exercice 3</span> — Lire la carte <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-1-3 }
 
+**But.** Ranger la carte dans une liste de chaînes `carte`, une chaîne par ligne.
+
+**À quoi ça sert ?** Avec cette liste, la case de la ligne `y` et de la colonne `x` s’obtient directement par `carte[y][x]`. Afficher hauteur et largeur vérifie la lecture et donne la largeur, indispensable pour le modulo.
+
 Construire la liste `carte` des lignes de `input.txt` (des chaînes, sans le retour à la ligne final). Afficher la hauteur et la largeur de la carte.
 
 ??? pouce "Coup de pouce"
@@ -89,6 +123,10 @@ Construire la liste `carte` des lignes de `input.txt` (des chaînes, sans le ret
     `f.read().split()` donne directement la liste des lignes sans les `\n`.
 
 ### <span class="exo-num">Exercice 4</span> — Compter les arbres <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-1-4 }
+
+**But.** Écrire une fonction qui compte les arbres rencontrés pour une pente quelconque `(dx, dy)`.
+
+**À quoi ça sert ?** Appelée avec la pente `(3, 1)`, elle donne la réponse de la partie 1. Avoir mis la pente en paramètres, plutôt que d’écrire 3 et 1 en dur, permettra de la réutiliser telle quelle dans la partie 2.
 
 Écrire une fonction `compter_arbres(carte, dx, dy)` qui renvoie le nombre d’arbres rencontrés en se déplaçant de `dx` cases vers la droite et `dy` vers le bas à chaque pas. Tester sur l’exemple du défi, puis sur vos données.
 
@@ -98,7 +136,7 @@ Construire la liste `carte` des lignes de `input.txt` (des chaînes, sans le ret
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    Une boucle `for y in range(0, len(carte), dy)` donne les lignes visitées ; la colonne `x` augmente de `dx` à chaque tour.
+    Une boucle `for y in range(dy, len(carte), dy)` donne les lignes visitées (la case de départ, en ligne 0, n’est pas comptée) ; la colonne `x` augmente de `dx` à chaque tour.
 
 ## Partie 2
 
@@ -106,13 +144,21 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    Le héros veut comparer plusieurs trajectoires avant de choisir la moins dangereuse.
+    **Ce qui change.** Le héros veut comparer plusieurs trajectoires avant de choisir la moins dangereuse. La carte et la façon de compter les arbres ne changent pas ; seule la pente (le déplacement à chaque pas) varie.
 
-    - Refaire le comptage pour cinq pentes : (1 à droite, 1 en bas), (3, 1), (5, 1), (7, 1) et (1 à droite, **2** en bas). Pour cette dernière, on saute donc une ligne sur deux.
+    **La nouvelle règle.**
 
-    - Il faut renvoyer le **produit** des cinq nombres d’arbres obtenus.
+    - Refaire le comptage pour cinq pentes : (1 à droite, 1 en bas), (3, 1), (5, 1), (7, 1) et (1 à droite, **2** en bas).
+
+    - Pour la dernière pente, on descend de deux lignes à chaque pas : on saute donc une ligne sur deux.
+
+    **La réponse attendue.** Le **produit** des cinq nombres d’arbres obtenus. Par exemple, si les cinq pentes rencontraient 2, 3, 1, 4 et 2 arbres, la réponse serait 48.
 
 ### <span class="exo-num">Exercice 5</span> — Plusieurs pentes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-1-5 }
+
+**But.** Appeler la fonction de comptage pour les cinq pentes et multiplier les résultats.
+
+**À quoi ça sert ?** C’est la réponse de la partie 2. On mesure l’intérêt d’une fonction bien paramétrée : la partie 2 ne demande que quelques lignes de plus.
 
 Utiliser la fonction précédente pour toutes les pentes demandées et calculer la réponse. Sur l’exemple du défi, on doit trouver `72`.
 
@@ -146,6 +192,10 @@ Utiliser la fonction précédente pour toutes les pentes demandées et calculer 
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : visualiser le trajet <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-1-6 }
 
+**But.** Afficher la carte avec le trajet de la luge, en marquant les cases visitées.
+
+**À quoi ça sert ?** Voir le trajet permet de repérer d’un coup d’œil une erreur de déplacement (une ligne sautée, un modulo oublié). C’est aussi l’occasion de contourner le fait qu’une chaîne n’est pas modifiable.
+
 Écrire une fonction qui affiche la carte en remplaçant chaque case visitée par `O` (case libre) ou `X` (arbre). Les chaînes n’étant pas modifiables, comment s’y prendre ?
 
 ??? pouce "Coup de pouce"
@@ -172,7 +222,21 @@ Utiliser la fonction précédente pour toutes les pentes demandées et calculer 
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi réinvestit la programmation orientée objet vue dans ce chapitre : une classe, ses attributs et ses méthodes modélisent le navire.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Un navire reçoit plus de sept cents ordres de navigation : se décaler, pivoter, avancer. Il faut savoir où il se trouve à la fin, mesuré par sa distance au point de départ. Chaque ordre est simple, mais leur enchaînement est impossible à suivre de tête ; la partie 2 change en plus le sens de la plupart des ordres.
+
+    **Ce qu’on réinvestit.** La **programmation orientée objet** vue dans ce chapitre. Le navire a un *état* (sa position, son orientation) que chaque ordre modifie : une classe regroupe cet état dans des attributs, et les actions possibles dans des méthodes (tourner, exécuter un ordre, calculer la distance). Le programme principal se réduit alors à « créer un navire, lui donner les ordres un par un ».
+
+    **La démarche de la fiche.**
+
+    1.  Vérifier sa compréhension des ordres, puis suivre le navire à la main sur un quadrillage.
+
+    2.  Écrire la classe `Navire`, puis une méthode pour pivoter par quarts de tour.
+
+    3.  Écrire la méthode qui exécute un ordre et l’appliquer à tout le fichier : réponse de la partie 1.
+
+    4.  Pour la partie 2, ajouter un point de repère qui reprend le rôle de l’orientation, puis réorganiser le code par héritage.
 
 ## Lire l’énoncé
 
@@ -188,19 +252,27 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Le ferry est pris dans une tempête et son ordinateur de navigation a produit une liste d’ordres très tortueuse. Vous aidez le capitaine à savoir où ces ordres mènent le bateau. Chaque ligne du fichier est un ordre : une lettre (l’action) suivie d’un entier (la quantité), par exemple `N4`.
+    **Contexte.** Le ferry est pris dans une tempête et son ordinateur de navigation a produit une liste d’ordres très tortueuse. Vous aidez le capitaine à savoir où ces ordres mènent le bateau, pour estimer l’écart avec la route prévue.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Chaque ligne du fichier est un ordre : **une lettre** (l’action) immédiatement suivie d’**un entier** (la quantité), par exemple `N4` ou `R90`. Les ordres s’exécutent dans l’ordre des lignes.
+
+    **La règle.**
+
+    - Au départ, le navire est à l’origine et pointe vers l’est.
 
     - `N`, `S`, `E`, `W` déplacent le navire de la quantité indiquée vers le nord, le sud, l’est ou l’ouest, **sans** changer la direction vers laquelle il pointe : il se décale comme un crabe.
 
-    - `L` et `R` le font pivoter sur place vers la gauche ou la droite du nombre de degrés indiqué (toujours un multiple de 90 dans les données).
+    - `L` et `R` le font pivoter sur place vers la gauche ou la droite du nombre de degrés indiqué (toujours un multiple de 90 dans les données). Il ne se déplace pas.
 
-    - `F` le fait avancer de la quantité indiquée, droit devant lui.
+    - `F` le fait avancer de la quantité indiquée, droit devant lui, dans la direction vers laquelle il pointe.
 
-    - Au départ, le navire est à l’origine et pointe vers l’est. La réponse est la distance de Manhattan entre l’arrivée et le départ, c’est-à-dire $|x| + |y|$ (comme dans une ville quadrillée, on ne coupe pas en diagonale).
+    **La réponse attendue.** La distance de Manhattan entre l’arrivée et le départ, c’est-à-dire $|x| + |y|$ (comme dans une ville quadrillée, on ne coupe pas en diagonale). Par exemple, avec les ordres `F2`, `R90`, `F3`, le navire avance de 2 vers l’est, pivote vers le sud, avance de 3 : il finit en $(2, -3)$ et la réponse serait $2 + 3 = 5$.
 
 ### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-2-1 }
+
+**But.** Vérifier sur trois questions courtes qu’on distingue bien se décaler, pivoter et avancer.
+
+**À quoi ça sert ?** La confusion entre `N` (se décaler vers le nord) et « avancer en pointant vers le nord » est l’erreur la plus fréquente ; le sens des rotations en est une autre.
 
 Questions de vérification, à traiter sur le cahier :
 
@@ -211,6 +283,10 @@ Questions de vérification, à traiter sur le cahier :
 3.  Un navire termine à 3 unités à l’ouest et 5 au sud : quelle réponse ? Pourquoi des valeurs absolues ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-2-2 }
+
+**But.** Suivre le navire ordre par ordre sur un quadrillage.
+
+**À quoi ça sert ?** On obtient un exemple dont on **connaît la réponse** (6) et une position intermédiaire : si le programme se trompe, on pourra afficher la position après chaque ordre et repérer le premier écart.
 
 On considère les instructions (inventées) suivantes, une par ligne dans le fichier :
 
@@ -224,9 +300,17 @@ Suivre le navire sur un quadrillage (est vers la droite, nord vers le haut). Vé
 
 ### <span class="exo-num">Exercice 3</span> — La classe `Navire` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-2-3 }
 
+**But.** Écrire la classe qui représente le navire : sa position, son orientation et le calcul de la distance.
+
+**À quoi ça sert ?** Toute la suite manipule cet objet. Représenter l’orientation par un vecteur `(dx, dy)` plutôt que par une lettre rend l’ordre `F` immédiat : on ajoute $k$ fois ce vecteur à la position.
+
 Écrire une classe `Navire` dont le constructeur initialise la position `x`, `y` (est et nord) et l’orientation sous forme d’un vecteur `dx`, `dy` (vers l’est : `(1, 0)`). Ajouter une méthode `distance(self)` qui renvoie la distance de Manhattan à l’origine.
 
 ### <span class="exo-num">Exercice 4</span> — Tourner par quarts de tour <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-2-4 }
+
+**But.** Faire pivoter le vecteur d’orientation par quarts de tour, dans les deux sens.
+
+**À quoi ça sert ?** C’est la partie délicate des ordres `L` et `R`. Une seule formule (le quart de tour à gauche) suffit pour tous les angles ; elle resservira telle quelle pour faire tourner le waypoint en partie 2.
 
 Écrire une méthode `tourner_gauche(self)` qui fait tourner l’orientation d’un quart de tour vers la gauche. Vérifier sur papier : est $\to$ nord $\to$ ouest $\to$ sud $\to$ est. En déduire `tourner(self, sens, angle)` pour les angles 90, 180 et 270.
 
@@ -239,6 +323,10 @@ Suivre le navire sur un quadrillage (est vers la droite, nord vers le haut). Vé
     Un quart de tour à gauche transforme `(dx, dy)` en `(-dy, dx)`. Tourner à droite de 90° revient à tourner à gauche de 270°, et `angle // 90` donne le nombre de quarts de tour.
 
 ### <span class="exo-num">Exercice 5</span> — Exécuter le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-2-5 }
+
+**But.** Traduire une ligne du fichier en action sur le navire, puis exécuter tout le fichier.
+
+**À quoi ça sert ?** Cette méthode réunit les briques précédentes et donne la réponse de la partie 1. Le programme principal se réduit à une boucle sur les lignes.
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
@@ -264,13 +352,25 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    En relisant le manuel, on découvre que la plupart des ordres ne concernent pas le navire lui-même, mais un point de repère (*waypoint*) qu’il poursuit.
+    **Ce qui change.** En relisant le manuel, on découvre que la plupart des ordres ne concernent pas le navire lui-même, mais un point de repère (*waypoint*) qu’il poursuit.
+
+    **La nouvelle règle.**
 
     - Le waypoint est repéré **par rapport au navire** ; au départ, il est à 10 unités à l’est et 1 au nord du navire.
 
-    - `N`, `S`, `E`, `W` déplacent le waypoint ; `L`, `R` le font tourner autour du navire ; `F` $k$ déplace le navire $k$ fois du vecteur navire $\to$ waypoint (le waypoint suit le navire et garde sa position relative). La réponse demandée est la même.
+    - `N`, `S`, `E`, `W` déplacent le waypoint (pas le navire).
+
+    - `L`, `R` font tourner le waypoint autour du navire, du nombre de degrés indiqué.
+
+    - `F` $k$ déplace le navire $k$ fois du vecteur navire $\to$ waypoint ; le waypoint suit le navire et garde sa position relative.
+
+    **La réponse attendue.** La même qu’en partie 1 : la distance de Manhattan entre l’arrivée du navire et son départ. Avec les ordres `F2`, `R90`, `F3`, le navire va en $(20, 2)$, le waypoint pivote en $(1, -10)$, puis le navire finit en $(23, -28)$ : la réponse serait 51.
 
 ### <span class="exo-num">Exercice 6</span> — Le waypoint <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-2-6 }
+
+**But.** Adapter le navire pour qu’il suive un waypoint, et exécuter les ordres avec leur nouveau sens.
+
+**À quoi ça sert ?** Le waypoint joue exactement le rôle du vecteur d’orientation de la partie 1 : en le voyant, on réutilise la rotation déjà écrite et l’on obtient la réponse de la partie 2 avec peu de code nouveau.
 
 Écrire une classe `NavireRepere` (ou ajouter les attributs `wx`, `wy`) et une méthode `executer2`. Sur l’exemple du défi, on doit trouver `70`.
 
@@ -317,6 +417,10 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Défi : héritage <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-2-7 }
 
+**But.** Écrire la classe de la partie 2 comme une classe fille de `Navire`.
+
+**À quoi ça sert ?** L’héritage évite de recopier ce qui est commun aux deux navires (position, distance, rotation) : on n’écrit que ce qui change, et une correction faite une fois profite aux deux classes.
+
 Écrire `NavireRepere` comme une classe fille de `Navire` qui ne redéfinit que ce qui change. Quelles méthodes peut-on hériter sans les réécrire ?
 
 ??? pouce "Coup de pouce"
@@ -341,6 +445,10 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
     **Intérêt.** Multiplier par `1j` fait tourner un vecteur d’un quart de tour vers la gauche : $(x + yi) \times i = -y + xi$, c’est exactement la formule $(d_x, d_y) \mapsto (-d_y, d_x)$. Position et direction deviennent chacune un seul nombre.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 1 : naviguer avec des nombres complexes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-2-8 }
+
+**But.** Refaire les deux parties en représentant position et direction par des nombres complexes.
+
+**À quoi ça sert ?** Une représentation bien choisie simplifie le code : une rotation devient une multiplication. Comparer avec la version objet montre qu’il n’y a pas une seule bonne modélisation.
 
 1.  Recopier et exécuter le code de l’encadré. Calculer à la main $1 \times i$, puis $i \times i$, $(-1) \times i$ et $(-i) \times i$ : quelles orientations successives retrouve-t-on ? Par quel nombre faut-il multiplier pour un quart de tour vers la droite ?
 

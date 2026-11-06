@@ -22,7 +22,7 @@
 
     - Le fichier `tp_structures_lineaires_depart.py` est **à télécharger** (lien ci-dessus) : il contient les classes du cours, des fonctions toutes prêtes et, en fin de fichier, des **tests**. Relancer le fichier après chaque partie : chaque ligne `[A FAIRE]` doit devenir `[OK]`.
 
-    - Dans les parties 2 à 5, on n’utilise **que l’interface** des piles et des files (`empiler`, `depiler`, `sommet`, `enfiler`, `defiler`, `est_vide`, `taille`). C’est une interface **étendue** : le cours n’a pas de méthode `taille`, le TP en ajoute une, de coût constant grâce à l’attribut `_taille`.
+    - Dans les parties 2 à 5, on n’utilise **que l’interface** des piles et des files (`empiler`, `depiler`, `sommet`, `enfiler`, `defiler`, `tete`, `est_vide`, `taille`). C’est une interface **étendue** : le cours n’a pas de méthode `taille`, le TP en ajoute une, de coût constant grâce à l’attribut `_taille`.
 
     - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
@@ -103,7 +103,7 @@ Pour une file, on retire en tête et l’on ajoute en queue. On garde donc **deu
 
 2.  Deux cas particuliers demandent de l’attention : enfiler dans une file **vide**, et défiler le **dernier** élément. Que doivent valoir `_tete` et `_queue` dans chacun de ces cas ?
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span> Compléter `FileChainee` et vérifier `tester_file(FileChainee)`. Ce test enfile de nouveau après avoir vidé la file : quel oubli détecte-t-il ?
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Compléter les cinq méthodes de `FileChainee` (`tete` renvoie l’élément de tête sans le retirer ; `defiler` et `tete` lèvent `IndexError("file vide")` sur une file vide) et vérifier que `tester_file(FileChainee)` renvoie `"OK"`. Ce test enfile de nouveau après avoir vidé la file : quel oubli détecte-t-il ?
 
     ??? pouce "Coup de pouce"
 
@@ -194,7 +194,9 @@ ligne 1, colonne 5 : '(' jamais ferme
 ligne 1, colonne 6 : ')' ne ferme rien
 ```
 
-Deux difficultés nouvelles : un symbole écrit **dans une chaîne** (`print("(")`) ou **dans un commentaire** (`# voir (2)`) ne compte pas ; et, pour signaler où se trouve un symbole ouvrant jamais refermé, il faut se souvenir de **sa** position.
+Les lignes et les colonnes sont numérotées **à partir de 1**. On renvoie le message de la **première** erreur rencontrée ; si plusieurs symboles restent ouverts à la fin du code, on signale le **dernier** ouvert (celui du sommet de la pile).
+
+Deux difficultés nouvelles : un symbole écrit **dans une chaîne** (`print("(")`) ou **dans un commentaire** (`# voir (2)`) ne compte pas ; et, pour signaler où se trouve un symbole ouvrant jamais refermé, il faut se souvenir de **sa** position. Attention : un `#` écrit dans une chaîne ne commence pas un commentaire, et un guillemet écrit dans un commentaire n’ouvre pas de chaîne. On ne gère ni les chaînes triples `"""..."""` ni les guillemets précédés d’un `\`.
 
 1.  Que faut-il empiler, au lieu du seul symbole ouvrant, pour pouvoir écrire ces messages ? Proposer un **tuple**.
 
@@ -283,22 +285,48 @@ En notation polonaise inverse (NPI), on écrit l’opérateur *après* ses deux 
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Une évaluation qui ne plante pas <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-structures-lineaires-piles-files-listes-tp-1-6 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `evaluer_npi(expr)` pour les quatre opérations (on utilisera la fonction fournie `calculer(a, op, b)` ; les nombres sont convertis avec `float`). L’expression peut être **mal formée** : la fonction lève alors `ValueError` avec un message explicite, au lieu de planter sur une pile vide.
+**Rappel (défi de la feuille d’exercices).** L’expression est une chaîne dont les jetons sont séparés par des espaces : `expr.split()` en donne la liste. On parcourt les jetons avec une pile de nombres : un **nombre** est empilé ; un **opérateur** dépile deux nombres, fait le calcul et empile le résultat ; à la fin, le résultat est le nombre resté dans la pile.
 
-??? pouce "Coup de pouce"
+**Ce qui change par rapport à la feuille.** On traite les **quatre** opérations `+`, `-`, `*`, `/` ; les nombres sont convertis avec `float`, donc le résultat est un flottant (`17.0`) ; surtout, une expression **mal formée** ne doit plus provoquer une erreur obscure de pile vide, mais un message qui dit ce qui ne va pas.
 
-    Avant de dépiler les deux opérandes d’un opérateur, vérifier `p.taille()`. À la fin, une expression correcte laisse exactement **un** nombre dans la pile. Le premier nombre dépilé est l’opérande de **droite**.
+1.  À la main, écrire l’état de la pile (sommet à droite) après chaque jeton de `"7 2 - 3 *"`. Quel est le résultat ?
 
-```text
->>> evaluer_npi("10 4 /")
-2.5
->>> evaluer_npi("3 +")
-ValueError: il manque un operande pour '+'
->>> evaluer_npi("3 4 5 +")
-ValueError: expression incomplete : il reste 2 nombres
-```
+2.  Faire le même travail pour `"3 +"`, puis pour `"3 4 5 +"`. Pour chacune, à quel moment précis voit-on que l’expression est mal formée, et que contient alors la pile ? En déduire les **deux vérifications** que la fonction doit faire, et l’endroit du programme où placer chacune.
+
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `evaluer_npi(expr)`, qui :
+
+    - renvoie la valeur d’une expression correcte, en utilisant pour chaque opérateur la fonction fournie `calculer(a, op, b)`, où `a` est l’opérande de **gauche** et `b` celui de **droite** ;
+
+    - lève `ValueError` avec le message `"il manque un operande pour ’+’"` (en y écrivant l’opérateur concerné) si un opérateur arrive alors que la pile contient moins de deux nombres ;
+
+    - lève `ValueError` avec le message `"expression incomplete : il reste 2 nombres"` (en y écrivant le nombre d’éléments restants) si, à la fin, la pile ne contient pas exactement **un** nombre.
+
+    Exemples attendus :
+
+    ```text
+    >>> evaluer_npi("10 4 /")
+    2.5
+    >>> evaluer_npi("3 +")
+    ValueError: il manque un operande pour '+'
+    >>> evaluer_npi("3 4 5 +")
+    ValueError: expression incomplete : il reste 2 nombres
+    ```
+
+    Les autres erreurs ne sont pas à traiter : un jeton qui n’est pas un nombre (`"3 x +"`) fait déjà échouer `float` avec une `ValueError`, et `calculer` lève elle-même `ZeroDivisionError` pour une division par zéro. Les tests `Partie 3 : evaluer_npi` du fichier fourni doivent passer.
+
+    ??? pouce "Coup de pouce"
+
+        La vérification de `p.taille()` se fait *avant* de dépiler les deux opérandes. Le premier nombre dépilé est l’opérande de **droite** : c’est important pour `-` et `/`. Pour lever l’erreur : `raise ValueError("...")`.
+
+4.  Que se passe-t-il si l’on appelle `evaluer_npi("")` (chaîne vide) ? Le message obtenu est-il adapté ?
 
 ??? corrige "Corrigé"
+
+    **1.** Pile après chaque jeton de `"7 2 - 3 *"` : `7` ; `7 2` ; `5` (on dépile $2$ puis $7$, et l’on calcule $7-2$) ; `5 3` ; `15`. Le résultat est $15$.
+
+    **2.** Pour `"3 +"`, la pile ne contient que `3` quand arrive `+` : il manque un opérande, le second `depiler` échouerait. Pour `"3 4 5 +"`, tout se passe bien jusqu’au bout, mais la pile finale contient `3 9` : deux nombres, on ne sait pas lequel est « le » résultat. D’où deux vérifications : `p.taille() < 2` **dans la boucle**, juste avant de dépiler pour un opérateur ; `p.taille() != 1` **après la boucle**, avant de renvoyer le résultat.
+
+    **3.**
 
     ```python
     def evaluer_npi(expr):
@@ -320,6 +348,8 @@ ValueError: expression incomplete : il reste 2 nombres
 
     `"10 4 /"` donne `2.5` ; `"1 0 /"` lève `ZeroDivisionError` (levée par `calculer`).
 
+    **4.** La boucle ne fait rien et la pile reste vide : la seconde vérification lève `ValueError("expression incomplete : il reste 0 nombres")`. L’erreur est bien détectée, mais le message est maladroit ; on peut tester `p.est_vide()` à part et écrire « expression vide ».
+
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — De l’écriture usuelle à la NPI <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-structures-lineaires-piles-files-listes-tp-1-7 }
 
 Pour traduire une expression usuelle (dite *infixe*), on la lit de gauche à droite, jeton par jeton (la fonction fournie `decouper` produit la liste des jetons), avec une **liste de sortie** et une **pile d’opérateurs** :
@@ -330,7 +360,7 @@ Pour traduire une expression usuelle (dite *infixe*), on la lit de gauche à dro
 
 - une parenthèse `)` : on dépile les opérateurs vers la sortie jusqu’à trouver la `(`, que l’on dépile et que l’on jette ;
 
-- un **opérateur** `op` : tant que le sommet de la pile est un opérateur de priorité **supérieure ou égale** à celle de `op` (`*` et `/` valent $2$, `+` et `-` valent $1$, dictionnaire `PRIORITE`), on le dépile vers la sortie ; puis on empile `op` ;
+- un **opérateur** `op` : tant que le sommet de la pile est un opérateur de priorité **supérieure ou égale** à celle de `op` (`*` et `/` valent $2$, `+` et `-` valent $1$, dictionnaire `PRIORITE`), on le dépile vers la sortie (une `(` au sommet arrête la boucle : elle reste dans la pile) ; puis on empile `op` ;
 
 - à la fin, on vide la pile dans la sortie.
 
@@ -349,9 +379,9 @@ Pour traduire une expression usuelle (dite *infixe*), on la lit de gauche à dro
     | `5` |  |  |
     | fin |  |  |
 
-2.  Pourquoi la règle dit-elle « supérieure **ou égale** » ? Comparer la traduction de `10 - 4 - 3` avec cette règle et avec une règle « strictement supérieure », et évaluer les deux résultats.
+2.  Pourquoi la règle dit-elle « supérieure **ou égale** » ? Traduire `10 - 4 - 3` deux fois : avec la règle ci-dessus, puis en remplaçant « supérieure ou égale » par « strictement supérieure ». Évaluer les deux expressions NPI obtenues : laquelle donne le bon résultat, et pourquoi ?
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `infixe_vers_npi(expr)` qui renvoie la chaîne NPI (jetons séparés par des espaces). La fonction `calculatrice` fournie enchaîne alors traduction et évaluation : vérifier que `calculatrice("12*(3+4)-(5+5)*2")` vaut bien $64$.
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `infixe_vers_npi(expr)` qui renvoie la chaîne NPI, jetons séparés par un espace : `infixe_vers_npi("(3 + 4) * 2")` renvoie `"3 4 + 2 *"`. Les jetons produits par `decouper` sont des chaînes ; un jeton qui n’est ni un opérateur ni une parenthèse est un nombre. La fonction `calculatrice` fournie enchaîne alors traduction et évaluation : vérifier que `calculatrice("12*(3+4)-(5+5)*2")` vaut bien $64$.
 
 !!! remarque "Remarque"
 
@@ -508,7 +538,7 @@ On utilise les dix clients de la liste `CLIENTS` du fichier fourni : `(0, 4), (
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Programmer la simulation <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-structures-lineaires-piles-files-listes-tp-1-10 }
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `simuler(clients)` pour **un** guichet ; elle renvoie le triplet `(attente moyenne, attente maximale, longueur maximale de la file)`. Vérifier qu’on obtient `(7.9, 12, 6)` sur `CLIENTS`, et que vos cinq premières attentes calculées à la main sont bien celles du programme.
+1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `simuler(clients)` pour **un** guichet ; elle renvoie le triplet `(attente moyenne, attente maximale, longueur maximale de la file)`. La longueur de la file se mesure à la **fin** de chaque minute, après le service ; la simulation commence à `t = 0`. Vérifier qu’on obtient `(7.9, 12, 6)` sur `CLIENTS`, et que vos cinq premières attentes calculées à la main sont bien celles du programme.
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Ajouter un paramètre `nb_guichets` (valeur par défaut `1`) : on garde **une seule file** commune, et une **liste** `libre_a` d’une case par guichet. Avec deux guichets, on doit obtenir `(0.9, 3, 2)`.
 

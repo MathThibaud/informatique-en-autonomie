@@ -22,7 +22,21 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi réinvestit les graphes de ce chapitre : les tuiles en sont les sommets, et deux tuiles qui partagent un bord sont reliées par une arête. L’approfondissement assemble l’image par un parcours de ce graphe.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Une image a été découpée en une centaine de petits carrés, mélangés, tournés et retournés au hasard. Pour la reconstituer, il faut trouver quelles tuiles se touchent, en comparant leurs bords dans toutes les orientations possibles : des dizaines de milliers de comparaisons, impossibles à faire à la main.
+
+    **Ce qu’on réinvestit.** Les **graphes** de ce chapitre : les tuiles en sont les sommets, et deux tuiles qui partagent un bord sont reliées par une arête. Le degré d’un sommet dit alors où est la tuile : 2 voisines pour un coin, 3 pour un bord, 4 à l’intérieur. La partie 1 se résout ainsi sans reconstituer l’image ; l’approfondissement assemble l’image par un **parcours** de ce graphe.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre comment deux tuiles se raccordent, et le vérifier à la main sur deux petites tuiles.
+
+    2.  Lire les tuiles dans un dictionnaire, puis extraire les quatre bords de chacune.
+
+    3.  Compter, pour chaque bord, les autres tuiles qui le possèdent : les tuiles à deux bords libres sont les coins (partie 1).
+
+    4.  Pour la partie 2, orienter et assembler les tuiles, puis chercher un motif dans l’image obtenue.
 
 ## Lire l’énoncé
 
@@ -38,19 +52,27 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Les messages du satellite contiennent en fait une photo, mais l’appareil l’a envoyée découpée en petits carrés (des « tuiles »), mélangés et, pire, tournés ou retournés au hasard. Il faut reconstituer ce puzzle. Chaque bloc du fichier est une tuile en noir et blanc, avec son numéro.
+    **Contexte.** Les messages du satellite contiennent en fait une photo, mais l’appareil l’a envoyée découpée en petits carrés (des « tuiles »), mélangés et, pire, tournés ou retournés au hasard. Il faut reconstituer ce puzzle. Pour commencer, il suffit de trouver les quatre tuiles des coins.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Le fichier est une suite de blocs séparés par une ligne vide. Chaque bloc est une tuile : une ligne `Tile <numéro>:` qui donne son numéro, suivie d’une grille carrée de $10 \times 10$ caractères, `.` (blanc) ou `#` (noir). Le nombre de tuiles est un carré parfait : l’image complète est un carré de tuiles.
 
-    - Un bloc est une ligne `Tile <numéro>:` suivie d’une grille carrée de $10 \times 10$ caractères `.` ou `#` ; les blocs sont séparés par une ligne vide.
+    **La règle.**
 
-    - Remises dans le bon sens, les tuiles forment une image carrée. Chaque tuile a pu être tournée d’un nombre quelconque de quarts de tour et/ou retournée en miroir.
+    - Chaque tuile a pu être tournée d’un nombre quelconque de quarts de tour et/ou retournée en miroir.
 
-    - Deux tuiles voisines dans l’image ont, une fois bien orientées, des bords identiques : c’est ce qui permet de les raccorder. Les bords extérieurs de l’image ne correspondent à aucune autre tuile (en pratique, deux tuiles non voisines n’ont jamais de bord commun).
+    - Deux tuiles voisines dans l’image ont, une fois bien orientées, des bords identiques : c’est ce qui permet de les raccorder.
 
-    - Réponse : le produit des numéros des quatre tuiles placées aux coins de l’image.
+    - Les bords extérieurs de l’image ne correspondent à aucune autre tuile.
+
+    - En pratique, deux tuiles non voisines n’ont jamais de bord commun : un bord partagé désigne donc sans ambiguïté deux voisines.
+
+    **La réponse attendue.** Le produit des numéros des quatre tuiles placées aux coins de l’image. Par exemple, si les coins portaient les numéros 2, 3, 5 et 7, la réponse serait $2 \times 3 \times 5 \times 7 = 210$.
 
 ### <span class="exo-num">Exercice 1</span> — Vérifier sa compréhension <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-1-1 }
+
+**But.** Comprendre comment se comparent deux bords et ce que révèle le nombre de bords libres d’une tuile.
+
+**À quoi ça sert ?** La deuxième question donne la clé de la partie 1 : on reconnaît un coin à son nombre de bords sans correspondant, ce qui évite d’assembler l’image.
 
 1.  Deux bords qui se correspondent peuvent apparaître « à l’envers » l’un par rapport à l’autre : pourquoi ?
 
@@ -59,6 +81,10 @@ Vocabulaire utile pour lire le texte original :
 3.  Faut-il reconstituer toute l’image pour la partie 1 ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-1-2 }
+
+**But.** Écrire les bords de deux petites tuiles et trouver celui qu’elles partagent.
+
+**À quoi ça sert ?** On fait à la main exactement ce que fera le programme : extraire quatre bords, et les comparer à l’endroit et à l’envers. Le résultat connu (bord droit de A, bord gauche de B) servira de test.
 
 Voici deux tuiles inventées de taille $5\times 5$ :
 
@@ -102,6 +128,10 @@ Tuile B
 
 ### <span class="exo-num">Exercice 3</span> — Lire les tuiles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-1-3 }
 
+**But.** Ranger chaque tuile, sous forme de liste de chaînes, dans un dictionnaire indexé par son numéro.
+
+**À quoi ça sert ?** Toute la suite manipule les tuiles par leur numéro (la réponse est un produit de numéros) ; vérifier que leur nombre est un carré parfait permet aussi de contrôler la lecture.
+
 Construire un dictionnaire `tuiles` qui associe à chaque numéro (un entier) la tuile sous forme de liste de chaînes. Vérifier le nombre de tuiles : est-ce un carré parfait ?
 
 ??? pouce "Coup de pouce"
@@ -127,6 +157,10 @@ Construire un dictionnaire `tuiles` qui associe à chaque numéro (un entier) la
 
 ### <span class="exo-num">Exercice 4</span> — Les bords <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-1-4 }
 
+**But.** Extraire les quatre bords d’une tuile, puis compter pour chacun les autres tuiles qui le possèdent.
+
+**À quoi ça sert ?** Ce comptage construit en fait les arêtes du graphe des tuiles : un bord possédé par une autre tuile est une liaison avec une voisine, un bord possédé par aucune autre est un bord de l’image.
+
 Écrire une fonction `bords(tuile)` qui renvoie la liste des quatre bords. Puis compter, pour chaque bord de chaque tuile, combien d’*autres* tuiles possèdent ce bord, à l’endroit ou à l’envers.
 
 ??? pouce "Coup de pouce"
@@ -134,6 +168,10 @@ Construire un dictionnaire `tuiles` qui associe à chaque numéro (un entier) la
     Une boucle qui ajoute `ligne[0]` à une chaîne, vide au départ, donne le bord gauche ; `chaine[::-1]` lit une chaîne à l’envers.
 
 ### <span class="exo-num">Exercice 5</span> — Les coins <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-1-5 }
+
+**But.** Repérer les tuiles qui ont exactement deux bords libres et multiplier leurs numéros.
+
+**À quoi ça sert ?** C’est la réponse de la partie 1. Ces quatre coins seront aussi le point de départ de l’assemblage de la partie 2.
 
 Une tuile de coin a exactement deux bords qui ne correspondent à aucune autre tuile. Repérer les quatre coins et calculer la réponse.
 
@@ -147,15 +185,25 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site. Cette 
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    Une fois l’image reconstituée, on y cherche des monstres marins.
+    **Ce qui change.** Il faut maintenant reconstituer vraiment l’image, puis y chercher des monstres marins, dont le dessin (un motif de `#`) est donné sur le site.
 
-    - Assembler l’image, retirer le bord (première et dernière lignes et colonnes) de chaque tuile, puis recoller les tuiles : chacune devient un carré $8 \times 8$.
+    **La nouvelle règle.**
 
-    - Chercher un motif (le « monstre », dessiné sur le site) dans l’une des 8 orientations de l’image : chaque `#` du motif doit tomber sur un `#` de l’image, les autres cases sont quelconques.
+    - Assembler l’image en orientant chaque tuile pour que ses bords coïncident avec ceux de ses voisines.
 
-    - Réponse : le nombre de `#` de l’image qui n’appartiennent à aucun monstre.
+    - Retirer le bord (première et dernière lignes et colonnes) de chaque tuile, puis recoller les tuiles : chacune devient un carré $8 \times 8$.
+
+    - Chercher le motif dans l’une des 8 orientations de l’image : chaque `#` du motif doit tomber sur un `#` de l’image, les autres cases du motif sont quelconques.
+
+    - Une seule orientation de l’image contient des monstres.
+
+    **La réponse attendue.** Le nombre de `#` de l’image qui n’appartiennent à aucun monstre. Par exemple, si l’image contenait 100 `#` dont 30 couverts par des monstres, la réponse serait 70.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Assembler l’image <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-1-6 }
+
+**But.** Écrire les fonctions qui tournent et retournent une tuile, puis placer toutes les tuiles dans la bonne orientation.
+
+**À quoi ça sert ?** Sans image assemblée, impossible de chercher le monstre. C’est l’étape la plus longue : les huit orientations, obtenues avec seulement deux fonctions, servent aussi bien pour les tuiles que pour l’image entière.
 
 Écrire `rotation(tuile)` (quart de tour) et `symetrie(tuile)` (miroir), puis `orientations(tuile)` qui renvoie les huit positions possibles (lire l’encadré). Assembler ensuite toute l’image en suivant la stratégie de l’encadré.
 
@@ -190,6 +238,10 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site. Cette 
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Chercher le motif <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-1-7 }
 
+**But.** Recoller l’image sans les bords des tuiles, y repérer toutes les positions du monstre, et compter les `#` restants.
+
+**À quoi ça sert ?** C’est la réponse de la partie 2. Ranger les cases couvertes dans un ensemble garantit qu’une case commune à deux monstres n’est retirée qu’une fois.
+
 Retirer les bords de chaque tuile, recoller l’image, puis chercher le motif dans chacune de ses huit orientations. Calculer la réponse demandée.
 
 ??? pouce "Coup de pouce"
@@ -215,6 +267,10 @@ Retirer les bords de chaque tuile, recoller l’image, puis chercher le motif da
 ## Approfondissement
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 1 : assembler par un parcours <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-1-8 }
+
+**But.** Assembler l’image en partant de n’importe quelle tuile et en propageant le placement de voisine en voisine.
+
+**À quoi ça sert ?** C’est un parcours du graphe des tuiles, avec une pile comme dans le cours : la méthode n’a plus besoin de commencer par un coin, et l’on reconnaît un algorithme général derrière un problème de puzzle.
 
 La stratégie du défi part d’un coin et remplit l’image ligne par ligne. On peut aussi partir de **n’importe quelle** tuile, laissée telle quelle à la position $(0, 0)$, et propager : pour chaque tuile placée, on cherche ses voisines par ses quatre bords, on les oriente et on les place à côté. Les positions peuvent devenir négatives ; on « recadre » à la fin.
 
@@ -254,7 +310,21 @@ La stratégie du défi part d’un coin et remplit l’image ligne par ligne. On
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi peut se lire avec les graphes de ce chapitre : relier chaque allergène aux ingrédients qui peuvent le contenir donne un graphe, et l’élimination retire des arêtes jusqu’à ce qu’il n’en reste qu’une par allergène.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** On dispose d’une liste d’aliments : pour chacun, ses ingrédients (dans une langue inconnue) et quelques-uns des allergènes qu’il contient. On veut en déduire quels ingrédients sont sans danger, puis quel ingrédient contient chaque allergène. Le raisonnement est celui d’une enquête par recoupements, mais avec des dizaines de lignes et des centaines d’ingrédients : il faut un programme.
+
+    **Ce qu’on réinvestit.** Les **graphes** de ce chapitre : relier chaque allergène aux ingrédients qui peuvent le contenir donne un graphe, et l’élimination de la partie 2 retire des arêtes jusqu’à ce qu’il n’en reste qu’une par allergène. Pour trouver ces arêtes, on utilise les opérations sur les **ensembles** : l’intersection garde ce qui est commun à plusieurs lignes, la réunion rassemble les suspects.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre ce qu’une ligne permet de déduire (et ce qu’elle ne permet pas), puis mener l’enquête à la main sur un petit fichier.
+
+    2.  Lire chaque aliment comme deux ensembles : ses ingrédients et ses allergènes.
+
+    3.  Calculer les candidats de chaque allergène, puis compter les ingrédients sans danger (partie 1).
+
+    4.  Éliminer pas à pas pour attribuer chaque allergène à un ingrédient (partie 2).
 
 ## Lire l’énoncé
 
@@ -270,19 +340,27 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Pour rejoindre votre île, vous construisez un radeau et devez emporter des provisions. Problème : les étiquettes des aliments sont écrites dans une langue inconnue, seuls certains allergènes sont indiqués dans une langue que vous comprenez. Chaque ligne du fichier décrit un aliment : sa liste d’ingrédients (illisibles) et quelques-uns des allergènes qu’il contient.
+    **Contexte.** Pour rejoindre votre île, vous construisez un radeau et devez emporter des provisions. Problème : les étiquettes des aliments sont écrites dans une langue inconnue ; seuls certains allergènes sont indiqués dans une langue que vous comprenez. Avant de choisir vos provisions, vous voulez repérer les ingrédients qui sont certainement sans danger.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Chaque ligne du fichier décrit un aliment. Elle commence par sa liste d’ingrédients (des mots illisibles), séparés par des espaces, puis vient `(contains` suivi de quelques allergènes séparés par des virgules, et une parenthèse fermante. Par exemple, `kesa zuli brak (contains milk)` : trois ingrédients et un allergène indiqué.
 
-    - Une ligne contient des ingrédients séparés par des espaces, puis `(contains` suivi d’allergènes séparés par des virgules, et `)`.
+    **La règle.**
 
     - Chaque allergène se trouve dans exactement un ingrédient ; un ingrédient contient zéro ou un allergène.
 
-    - Si un allergène est indiqué sur une ligne, l’ingrédient qui le contient figure sur cette ligne. Mais un allergène peut être présent dans un aliment sans y être indiqué : l’absence de mention ne prouve rien.
+    - Si un allergène est indiqué sur une ligne, l’ingrédient qui le contient figure forcément sur cette ligne.
 
-    - Trouver les ingrédients qui ne peuvent contenir aucun allergène. Réponse : le nombre total de leurs apparitions (un ingrédient présent sur trois lignes compte trois fois).
+    - Mais un allergène peut être présent dans un aliment sans y être indiqué : l’absence de mention ne prouve rien.
+
+    - Un ingrédient est sans danger s’il ne peut contenir aucun des allergènes, compte tenu de toutes les lignes.
+
+    **La réponse attendue.** Le nombre total d’apparitions des ingrédients sans danger : un ingrédient présent sur trois lignes compte trois fois. Par exemple, avec les deux lignes `rel mux tap (contains soy)` et `mux dov (contains soy)`, seul `mux` peut contenir `soy` ; `rel`, `tap` et `dov` sont sans danger et apparaissent une fois chacun : la réponse serait 3.
 
 ### <span class="exo-num">Exercice 1</span> — Vérifier sa compréhension <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-2-1 }
+
+**But.** Distinguer ce qu’une ligne prouve et ce qu’elle ne prouve pas.
+
+**À quoi ça sert ?** Ces trois questions contiennent toute la logique du défi : la première conduit à l’intersection des lignes, les deux suivantes évitent d’éliminer un ingrédient à tort.
 
 1.  Un allergène est indiqué sur deux lignes : où peut se trouver l’ingrédient qui le contient ?
 
@@ -291,6 +369,10 @@ Vocabulaire utile pour lire le texte original :
 3.  Un ingrédient présent sur une ligne qui n’indique pas `milk` peut-il contenir `milk` ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-2-2 }
+
+**But.** Mener l’enquête à la main sur cinq aliments.
+
+**À quoi ça sert ?** On découvre la méthode (garder les ingrédients communs à toutes les lignes d’un allergène) avant de la programmer, et l’on obtient une réponse connue, `7`, pour tester le programme.
 
 On considère le fichier (inventé) suivant :
 
@@ -330,6 +412,10 @@ kesa zuli brak (contains milk)
 
 ### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-2-3 }
 
+**But.** Transformer chaque ligne en un couple de deux ensembles : ingrédients et allergènes.
+
+**À quoi ça sert ?** Les ensembles rendent les recoupements immédiats (une intersection avec `&`) et toutes les questions suivantes partent de cette liste `aliments`.
+
 Construire la liste `aliments` : chaque aliment est un couple `(ingredients, allergenes)` de deux ensembles de chaînes.
 
 ??? pouce "Coup de pouce"
@@ -338,6 +424,10 @@ Construire la liste `aliments` : chaque aliment est un couple `(ingredients, all
 
 ### <span class="exo-num">Exercice 4</span> — Les candidats <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-2-4 }
 
+**But.** Associer à chaque allergène l’ensemble des ingrédients qui peuvent le contenir.
+
+**À quoi ça sert ?** Ce dictionnaire est le graphe allergènes–ingrédients du défi : il donne les suspects de la partie 1 et sert de point de départ à l’élimination de la partie 2.
+
 Écrire une fonction `candidats(aliments)` qui renvoie un dictionnaire associant à chaque allergène l’ensemble des ingrédients qui peuvent le contenir. Tester sur l’exemple.
 
 ??? pouce "Coup de pouce"
@@ -345,6 +435,10 @@ Construire la liste `aliments` : chaque aliment est un couple `(ingredients, all
     L’ingrédient qui contient un allergène est présent sur chaque ligne où cet allergène est indiqué : il est donc dans l’**intersection** (opérateur `&`) des ensembles d’ingrédients de ces lignes.
 
 ### <span class="exo-num">Exercice 5</span> — Compter <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-2-5 }
+
+**But.** Rassembler tous les suspects, puis compter les apparitions des autres ingrédients.
+
+**À quoi ça sert ?** C’est la réponse de la partie 1. Le piège est de compter chaque ingrédient une seule fois au lieu de compter chacune de ses apparitions.
 
 Calculer l’ensemble des ingrédients « suspects » (réunion des candidats), puis compter les apparitions des autres ingrédients dans le fichier.
 
@@ -358,7 +452,15 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    Il reste à identifier les ingrédients dangereux pour pouvoir les éviter. Déterminer, pour chaque allergène, l’ingrédient qui le contient (la solution est unique). Réponse : la liste de ces ingrédients, rangés dans l’ordre alphabétique de leur **allergène** (et non de leur nom), séparés par des virgules sans espace.
+    **Ce qui change.** Il reste à identifier précisément les ingrédients dangereux, pour pouvoir les éviter.
+
+    **La nouvelle règle.**
+
+    - Déterminer, pour chaque allergène, l’ingrédient qui le contient ; avec les données fournies, la solution est unique.
+
+    - Ranger ces ingrédients dans l’ordre alphabétique de leur **allergène** (et non de leur propre nom).
+
+    **La réponse attendue.** La liste de ces ingrédients, séparés par des virgules sans espace. Par exemple, si `soy` était dans `mux` et `fish` dans `dov`, la réponse serait `dov,mux`, car `fish` vient avant `soy`.
 
 !!! encadre "Méthode : trier puis assembler des chaînes"
 
@@ -378,6 +480,10 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="exo-num">Exercice 6</span> — Attribuer chaque allergène <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-2-6 }
 
+**But.** Réduire les candidats par élimination jusqu’à un seul ingrédient par allergène, puis écrire la réponse dans le bon ordre.
+
+**À quoi ça sert ?** C’est la réponse de la partie 2 : en termes de graphe, on retire des arêtes jusqu’à ce que chaque allergène ne soit plus relié qu’à un ingrédient.
+
 Déterminer quel ingrédient contient chaque allergène, puis construire la chaîne demandée. Sur l’exemple du défi, on doit obtenir `tolu,zuli,brak`.
 
 ??? pouce "Coup de pouce"
@@ -390,6 +496,10 @@ Déterminer quel ingrédient contient chaque allergène, puis construire la cha�
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Défi : et si ça bloquait ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-graphes-aoc-2-7 }
 
+**But.** Chercher un cas où la méthode d’élimination ne permet plus d’avancer.
+
+**À quoi ça sert ?** Le programme marche sur les données du défi, mais rien ne garantit qu’il marche toujours : construire un contre-exemple permet de connaître les limites d’un algorithme et d’imaginer une méthode plus générale.
+
 Inventer un petit fichier pour lequel la méthode d’élimination ne suffit pas : à un moment, aucun allergène n’a un seul candidat. Que faudrait-il faire alors ?
 
 ??? pouce "Coup de pouce"
@@ -400,7 +510,7 @@ Inventer un petit fichier pour lequel la méthode d’élimination ne suffit pas
 
     **Le graphe du défi.** Dessinons les allergènes d’un côté, les ingrédients de l’autre, et relions chaque allergène à ses candidats. Toutes les arêtes vont d’un groupe à l’autre : c’est un graphe **biparti**. Choisir un ingrédient par allergène, deux allergènes n’ayant jamais le même ingrédient, revient à garder des arêtes **sans sommet commun** : on appelle cela un **couplage**. Sur le petit exemple de la fiche :
 
-    ![](../figures/cfa73b64ab81c8de.svg){ .tikz loading=lazy }
+    ![](../figures/7a54e889605acc6f.svg){ .tikz loading=lazy }
 
     **Le théorème.** En 1935, le mathématicien anglais **Philip Hall** (1904–1982), spécialiste d’algèbre à Cambridge, publie un article de cinq pages, *On Representatives of Subsets*. Il y répond à une question simple : à quelle condition peut-on choisir, dans chaque ensemble d’une liste, un élément différent pour chacun ? Réponse : il faut et il suffit que **tout groupe de $k$ ensembles contienne, à eux tous, au moins $k$ éléments différents**. La condition est évidemment nécessaire (trois allergènes qui n’ont que deux candidats à eux trois ne peuvent pas être servis) ; le tour de force de Hall est de prouver qu’elle suffit. En 1950, Paul Halmos et Herbert Vaughan le reformulent avec des jeunes filles qui veulent chacune épouser un garçon qu’elle connaît : depuis, on l’appelle le **théorème des mariages**.
 

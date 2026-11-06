@@ -22,7 +22,23 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi réinvestit les arbres binaires vus dans ce chapitre : un code de place décrit un chemin depuis la racine d’un arbre binaire complet, chaque lettre choisissant le fils gauche ou le fils droit.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Chaque carte d’embarquement porte un code de dix lettres qui désigne un siège de l’avion. Il faut décoder plusieurs centaines de ces codes pour trouver le plus grand numéro de siège, puis le seul siège libre : le vôtre. Décoder un code à la main prend une minute ; en décoder des centaines demande un programme.
+
+    **Ce qu’on réinvestit.** Les **arbres binaires** vus dans ce chapitre. Un code de place décrit un chemin depuis la racine d’un arbre binaire complet : chaque lettre choisit le fils gauche ou le fils droit, c’est-à-dire la moitié basse ou la moitié haute des places restantes, et la feuille atteinte est le siège. On découvrira que ce chemin n’est autre que l’écriture binaire du numéro, et qu’il s’agit d’une dichotomie.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre le découpage en moitiés, puis décoder un code à la main.
+
+    2.  Reconnaître que le code est un nombre écrit en binaire.
+
+    3.  Écrire la fonction de décodage et chercher le plus grand numéro : c’est la partie 1 ; la réécrire par dichotomie.
+
+    4.  Partie 2 : trier les numéros et trouver le trou.
+
+    5.  En approfondissement, trouver le trou sans trier.
 
 ## Lire l’énoncé
 
@@ -37,19 +53,27 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Le héros est enfin dans l’avion… mais il a perdu sa carte d’embarquement. Il photographie celles des autres passagers pour retrouver sa place par élimination. Chaque ligne du fichier est le code de place imprimé sur une carte ; ce code désigne un rang et une colonne de l’avion, avec un système de découpages successifs en deux.
+    **Contexte.** Le héros est enfin dans l’avion… mais il a perdu sa carte d’embarquement. Il photographie celles des autres passagers pour retrouver sa place par élimination. La première étape est de savoir lire ces cartes.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Chaque ligne du fichier est le code de place imprimé sur une carte : 10 lettres. Les 7 premières (`F` ou `B`) donnent le rang, numéroté de 0 à 127 ; les 3 dernières (`L` ou `R`) donnent la colonne, de 0 à 7.
 
-    - Un code compte 10 lettres. Les 7 premières (`F` ou `B`) donnent le rang, numéroté de 0 à 127 ; les 3 dernières (`L` ou `R`) donnent la colonne, de 0 à 7.
+    **La règle.**
 
-    - Pour décoder, on part de l’intervalle complet des rangs. `F` garde la moitié basse et `B` la moitié haute ; après la septième lettre il ne reste qu’un rang. On procède de même pour la colonne avec `L` (moitié basse) et `R` (moitié haute).
+    - Pour le rang, on part de l’intervalle complet des rangs, de 0 à 127.
+
+    - Chaque lettre coupe l’intervalle restant en deux moitiés égales : `F` garde la moitié basse, `B` la moitié haute. Après la septième lettre, il ne reste qu’un rang.
+
+    - On procède de même pour la colonne, de 0 à 7, avec `L` (moitié basse) et `R` (moitié haute) : après trois lettres, il ne reste qu’une colonne.
 
     - Chaque siège a un numéro : rang $\times 8$ + colonne.
 
-    - Il faut renvoyer le plus grand numéro de siège présent dans le fichier.
+    **La réponse attendue.** Le plus grand numéro de siège présent dans le fichier. Par exemple, le code `FFFFFFBRLL` désigne le rang 1 et la colonne 4, donc le siège numéro $1 \times 8 + 4 = 12$.
 
 ### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-1 }
+
+**But.** Vérifier qu’on sait interpréter un code dans les cas extrêmes.
+
+**À quoi ça sert ?** Les cas extrêmes donnent les bornes des rangs et des numéros ; la dernière question prépare l’idée qu’un code et un numéro se correspondent un à un, ce qui justifiera la lecture en binaire.
 
 Après lecture de l’énoncé et du résumé, vérifier sa compréhension :
 
@@ -61,6 +85,10 @@ Après lecture de l’énoncé et du résumé, vérifier sa compréhension :
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-2 }
 
+**But.** Décoder deux codes à la main en suivant la méthode de l’énoncé, puis comparer avec l’écriture binaire.
+
+**À quoi ça sert ?** On obtient des valeurs connues (`75`, `2`, `602`) pour tester le programme, et l’on soupçonne déjà un raccourci : le rang et la colonne se lisent peut-être directement en binaire.
+
 Décoder à la main le code `BFFBFBBLRL` en suivant la méthode de l’énoncé (diviser l’intervalle par deux à chaque lettre). On doit trouver le rang `75`, la colonne `2` et le numéro `602`.
 
 Faire de même avec `FFBBFBFRLR`, puis comparer : écrire `75` et `2` en binaire. Que remarque-t-on ?
@@ -68,6 +96,10 @@ Faire de même avec `FFBBFBFRLR`, puis comparer : écrire `75` et `2` en binaire
 ## Programmer la partie 1
 
 ### <span class="exo-num">Exercice 3</span> — Reconnaître le binaire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-3 }
+
+**But.** Montrer que le code de place est l’écriture binaire du numéro de siège.
+
+**À quoi ça sert ?** Ce constat remplace sept puis trois découpages par une simple conversion de base : la fonction de décodage tiendra en quelques lignes.
 
 1.  Remplacer dans `BFFBFBBLRL` chaque `F` et chaque `L` par `0`, chaque `B` et chaque `R` par `1`. Que vaut le nombre binaire obtenu ? Le comparer au numéro de siège.
 
@@ -99,6 +131,10 @@ Faire de même avec `FFBBFBFRLR`, puis comparer : écrire `75` et `2` en binaire
 
 ### <span class="exo-num">Exercice 4</span> — Décoder et chercher le maximum <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-4 }
 
+**But.** Écrire la fonction qui décode un code, puis parcourir le fichier pour trouver le plus grand numéro.
+
+**À quoi ça sert ?** C’est la réponse de la partie 1. La liste des numéros obtenus resservira telle quelle pour chercher la place libre en partie 2.
+
 Écrire une fonction `numero_siege(code)` qui renvoie le numéro de siège, puis le programme qui donne la réponse sur `input.txt`. Vérifier `numero_siege("BFFBFBBLRL") == 602`. Sur la liste (inventée) `BFFBFBBLRL`, `FBBFFFBRRR`, `BBFBFFFLLR`, `FFBBFBFRLR`, `BFBBBFFLRR`, on doit trouver `833`.
 
 ??? pouce "Coup de pouce"
@@ -106,6 +142,10 @@ Faire de même avec `FFBBFBFRLR`, puis comparer : écrire `75` et `2` en binaire
     `int("1011", 2)` convertit une chaîne écrite en binaire en entier. Pour traduire les lettres, parcourir le code avec un dictionnaire `{"F": "0", "B": "1", "L": "0", "R": "1"}` (voir l’encadré). Pour le maximum, une variable qui garde le plus grand numéro vu jusqu’ici.
 
 ### <span class="exo-num">Exercice 5</span> — Le lien avec la dichotomie <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-5 }
+
+**But.** Réécrire le décodage en suivant littéralement l’énoncé : deux bornes et un intervalle divisé par deux à chaque lettre.
+
+**À quoi ça sert ?** Comparer les deux versions montre que chaque lettre est un choix gauche ou droite dans un arbre binaire, comme dans une recherche dichotomique. Le nombre de lettres nécessaire est le nombre de divisions par deux, d’où le lien avec le logarithme en base 2.
 
 Écrire une seconde version `numero_siege_dicho(code)` qui suit littéralement l’énoncé : deux bornes `bas` et `haut`, et chaque lettre garde une moitié. Vérifier qu’elle donne les mêmes résultats que la première. Combien de lettres faudrait-il pour un avion de $1024$ rangs ?
 
@@ -119,13 +159,21 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    Il reste à trouver la place du héros, puisque c’est la seule dont la carte manque.
+    **Ce qui change.** Il reste à trouver la place du héros, puisque c’est la seule dont la carte manque. On utilise les mêmes numéros de siège que dans la partie 1.
 
-    - L’avion est plein, sauf quelques sièges tout à l’avant et tout à l’arrière qui n’existent pas. Votre siège est absent de la liste, mais les numéros juste avant et juste après le vôtre y figurent.
+    **La nouvelle règle.**
 
-    - Il faut renvoyer le numéro de votre siège.
+    - L’avion est plein, sauf quelques sièges tout à l’avant et tout à l’arrière qui n’existent pas : ces numéros-là manquent aussi dans la liste, mais ce ne sont pas des places.
+
+    - Votre siège est absent de la liste, mais les numéros juste avant et juste après le vôtre y figurent.
+
+    **La réponse attendue.** Le numéro de votre siège. Par exemple, si les numéros présents étaient 40, 41, 43 et 44, votre place serait la 42.
 
 ### <span class="exo-num">Exercice 6</span> — La place libre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-6 }
+
+**But.** Trouver le seul numéro manquant entre deux numéros présents.
+
+**À quoi ça sert ?** C’est la réponse de la partie 2. Une fois les numéros triés, le trou se voit en comparant chaque numéro au suivant.
 
 Trouver votre place en suivant les indications de la partie 2.
 
@@ -141,6 +189,10 @@ Trouver votre place en suivant les indications de la partie 2.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Défi : sans tri <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-7 }
 
+**But.** Trouver la place libre en un seul parcours, sans trier, à l’aide d’un calcul de somme.
+
+**À quoi ça sert ?** Le tri coûte plus qu’un parcours : un raisonnement mathématique permet ici de descendre à un coût linéaire, avec très peu de mémoire.
+
 Trouver la place libre en temps linéaire sans trier ni utiliser d’ensemble, en comparant la somme des numéros présents à une somme connue.
 
 ??? pouce "Coup de pouce"
@@ -154,6 +206,10 @@ Trouver la place libre en temps linéaire sans trier ni utiliser d’ensemble, e
     **À essayer.** Construire l’ensemble des numéros de la liste du défi (en partant de `set()` et en ajoutant chaque numéro avec `add`), puis tester si `602` et `603` en font partie.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 1 : la place libre avec un ensemble <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-8 }
+
+**But.** Trouver la place libre sans trier, en testant l’appartenance de chaque candidat à un ensemble.
+
+**À quoi ça sert ?** C’est une autre méthode sans tri, qui ne demande aucune astuce de calcul : on teste chaque candidat, et chaque test coûte un temps constant. Comparer les complexités des méthodes, c’est choisir en connaissance de cause.
 
 1.  Répondre à la question « À essayer » de l’encadré (le code complet est dans le défi *Crab Combat*, chapitre 4).
 
@@ -191,7 +247,23 @@ Trouver la place libre en temps linéaire sans trier ni utiliser d’ensemble, e
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi manipule des ensembles (union, intersection). Un ensemble peut se représenter par un arbre binaire de recherche, vu dans ce chapitre : tester l’appartenance d’une valeur coûte alors la hauteur de l’arbre. Le type `set` de Python, lui, utilise une table de hachage, comme les dictionnaires.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Des passagers, répartis en groupes de voyage, ont rempli un formulaire de 26 questions fermées. Pour chaque groupe, il faut compter les questions auxquelles quelqu’un a répondu oui (partie 1), puis celles auxquelles tout le monde a répondu oui (partie 2), et faire la somme sur plusieurs centaines de groupes. Compter à la main sans doublon ni oubli est fastidieux ; avec la bonne structure de données, le programme est très court.
+
+    **Ce qu’on réinvestit.** Les **ensembles** et leurs opérations : « au moins une personne » correspond à la réunion, « toutes les personnes » à l’intersection. Un ensemble peut se représenter par un arbre binaire de recherche, vu dans ce chapitre : tester l’appartenance d’une valeur coûte alors la hauteur de l’arbre. Le type `set` de Python, lui, utilise une table de hachage, comme les dictionnaires.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre ce qu’on compte dans un groupe, puis le calculer à la main sur un petit fichier.
+
+    2.  Découper le fichier en groupes, puis en personnes.
+
+    3.  Réunir les réponses de chaque groupe et sommer : c’est la partie 1.
+
+    4.  Partie 2 : remplacer la réunion par l’intersection.
+
+    5.  En approfondissement, résoudre les deux parties avec un dictionnaire de compteurs.
 
 ## Lire l’énoncé
 
@@ -206,19 +278,29 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Pendant le vol, on distribue des formulaires de douane comportant 26 questions fermées, repérées par les lettres de `a` à `z`. Le héros aide les autres passagers, regroupés par groupes de voyage, à les remplir. Le fichier recense les réponses : chaque ligne correspond à une personne et contient les lettres des questions auxquelles elle a répondu « oui ».
+    **Contexte.** Pendant le vol, on distribue des formulaires de douane comportant 26 questions fermées, repérées par les lettres de `a` à `z`. Le héros aide les autres passagers, regroupés par groupes de voyage, à les remplir. On veut résumer leurs réponses groupe par groupe.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Le fichier recense les réponses.
 
     - Les groupes sont séparés par une **ligne vide** ; à l’intérieur d’un groupe, il y a une ligne par personne.
 
-    - Une ligne contient, sans doublon, les lettres des questions où la personne a répondu oui. Une question absente de la ligne correspond donc à un non.
+    - Une ligne contient, sans doublon et dans un ordre quelconque, les lettres des questions où la personne a répondu oui. Une question absente de la ligne correspond donc à un non.
 
-    - Pour chaque groupe, on compte les lettres différentes cochées par **au moins une** personne du groupe. Une même lettre cochée par plusieurs personnes ne compte qu’une fois.
+    **La règle.**
 
-    - Il faut renvoyer la somme de ces nombres sur tous les groupes.
+    - Pour chaque groupe, on compte les lettres différentes cochées par **au moins une** personne du groupe.
+
+    - Une même lettre cochée par plusieurs personnes du groupe ne compte qu’une fois.
+
+    - On fait ce calcul pour chaque groupe séparément, puis on additionne.
+
+    **La réponse attendue.** La somme de ces nombres sur tous les groupes. Par exemple, pour un groupe formé des lignes `ab` et `bc`, les lettres cochées sont `a`, `b`, `c` : ce groupe compte pour 3.
 
 ### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-2-1 }
+
+**But.** Vérifier qu’on a compris ce qu’on compte dans un groupe et comment le fichier délimite les groupes.
+
+**À quoi ça sert ?** La première question montre que les doublons ne comptent pas, la deuxième que l’ordre est sans importance (deux propriétés exactes d’un ensemble) ; la troisième prépare le découpage du fichier en groupes.
 
 Après lecture de l’énoncé et du résumé, vérifier sa compréhension :
 
@@ -229,6 +311,10 @@ Après lecture de l’énoncé et du résumé, vérifier sa compréhension :
 3.  Peut-on traiter le fichier ligne par ligne sans perdre l’information « fin de groupe » ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-2-2 }
+
+**But.** Découper un petit fichier en groupes et calculer, pour chacun, l’ensemble des lettres cochées.
+
+**À quoi ça sert ?** On obtient un exemple dont on **connaît la réponse** (`15`) pour tester le programme ; écrire les ensembles à la main fait apparaître l’opération à programmer.
 
 ```console
 xyz
@@ -261,6 +347,10 @@ Vérification : la somme doit valoir `15`.
 
 ### <span class="exo-num">Exercice 3</span> — Découper en groupes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-2-3 }
 
+**But.** Transformer le fichier en une liste de groupes, chaque groupe étant la liste des réponses de ses membres.
+
+**À quoi ça sert ?** Les deux parties posent leur question groupe par groupe : avec cette liste, il suffira d’écrire une fonction qui traite un groupe, puis de l’appliquer à chacun.
+
 Lire tout le fichier en une chaîne et construire une liste de groupes, chaque groupe étant la liste des lignes de ses membres. Afficher le nombre de groupes.
 
 ??? pouce "Coup de pouce"
@@ -274,6 +364,10 @@ Lire tout le fichier en une chaîne et construire une liste de groupes, chaque g
     **À essayer.** Que renvoie `len(set("banane"))` ? Après `e = set("abc")`, puis `e.add("d")`, `e.add("a")` et `e.remove("b")`, que contient `e` ? Que valent `set("abc") | set("bcd")` et `set("abc") & set("bcd")` ?
 
 ### <span class="exo-num">Exercice 4</span> — Réunir les réponses <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-2-4 }
+
+**But.** Calculer, pour un groupe, le nombre de lettres cochées par au moins une personne, puis faire la somme sur tous les groupes.
+
+**À quoi ça sert ?** C’est la réponse de la partie 1. La réunion d’ensembles élimine d’elle-même les doublons, sans aucun test à écrire.
 
 Écrire une fonction `nb_oui_quelquun(groupe)` qui renvoie le nombre de lettres présentes chez au moins un membre, puis faire la somme sur tout le fichier. Tester sur l’exemple du défi, puis sur vos données.
 
@@ -291,13 +385,21 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    Le héros a mal lu la consigne : ce qui compte n’est pas ce que quelqu’un a coché, mais ce que tout le groupe a coché.
+    **Ce qui change.** Le héros a mal lu la consigne : ce qui compte n’est pas ce que quelqu’un a coché, mais ce que tout le groupe a coché. Le fichier et le découpage en groupes restent les mêmes.
 
-    - Le découpage reste le même, mais pour chaque groupe on compte les lettres cochées par **toutes** les personnes du groupe.
+    **La nouvelle règle.**
 
-    - Il faut renvoyer la somme de ces nombres sur tous les groupes.
+    - Pour chaque groupe, on compte les lettres cochées par **toutes** les personnes du groupe.
+
+    - Une lettre oubliée par une seule personne du groupe ne compte plus.
+
+    **La réponse attendue.** La somme de ces nombres sur tous les groupes. Par exemple, le groupe formé des lignes `ab` et `bc` ne compte plus que pour 1 : seule la lettre `b` est cochée par les deux personnes.
 
 ### <span class="exo-num">Exercice 5</span> — Changer d’opération <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-2-5 }
+
+**But.** Reconnaître l’opération sur les ensembles qui traduit « toutes les personnes », puis adapter la fonction.
+
+**À quoi ça sert ?** C’est la réponse de la partie 2, obtenue en changeant une seule opération. Attention au point de départ du calcul, qui ne peut plus être l’ensemble vide.
 
 1.  Quelle opération sur les ensembles correspond à la nouvelle question ?
 
@@ -314,6 +416,10 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 ## Approfondissement
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : sans ensembles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-2-6 }
+
+**But.** Résoudre les deux parties avec un dictionnaire de compteurs au lieu d’ensembles.
+
+**À quoi ça sert ?** Un même dictionnaire répond aux deux questions à la fois : on voit qu’une structure qui garde un peu plus d’information (combien de personnes, et pas seulement « oui ou non ») peut servir à plusieurs usages.
 
 Résoudre les deux parties sans ensemble, avec un dictionnaire qui compte, pour chaque lettre, le nombre de membres du groupe qui l’ont cochée. Comment lit-on alors les deux réponses dans ce dictionnaire ?
 

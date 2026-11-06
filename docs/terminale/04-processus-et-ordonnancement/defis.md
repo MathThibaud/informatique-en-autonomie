@@ -22,7 +22,21 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi mobilise la notion d’effet de bord vue au chapitre 2 : la fonction `tour` doit renvoyer une nouvelle grille sans modifier l’ancienne. Il fait aussi écho à ce chapitre : toutes les cases changent « en même temps », et lire un état pendant qu’on le modifie donne des résultats incohérents, comme deux processus qui accèdent sans précaution à une même ressource.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** On connaît le plan d’une salle d’attente (environ 90 lignes de 95 cases) et une règle qui dit, pour chaque siège, s’il va se remplir ou se vider au tour suivant. Il faut simuler les tours jusqu’à ce que plus rien ne bouge, puis compter les sièges occupés. Chaque tour examine des milliers de cases, et il faut souvent une bonne centaine de tours avant la stabilité : seul un programme peut le faire.
+
+    **Ce qu’on réinvestit.** La notion d’**effet de bord** vue au chapitre 2 : la fonction `tour` doit renvoyer une nouvelle grille sans modifier l’ancienne. Le défi fait aussi écho à ce chapitre : toutes les cases changent « en même temps », et lire un état pendant qu’on le modifie donne des résultats incohérents, comme deux processus qui accèdent sans précaution à une même ressource.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre la règle (voisins, seuils, changement simultané), puis simuler deux tours à la main sur une petite grille.
+
+    2.  Lire la grille, puis compter les voisins occupés d’une case.
+
+    3.  Écrire une fonction `tour` sans effet de bord et la répéter jusqu’à stabilité : réponse de la partie 1.
+
+    4.  Pour la partie 2, changer seulement la façon de compter les voisins et le seuil, en passant une fonction en paramètre.
 
 ## Lire l’énoncé
 
@@ -37,19 +51,31 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Vous attendez un ferry dans une salle encore vide et vous voulez prévoir où les voyageurs vont s’asseoir, pour choisir la meilleure place. Leur comportement est très prévisible : on le simule comme un *automate cellulaire*. Le fichier est le plan de la salle : chaque caractère est une case du sol ou un siège.
+    **Contexte.** Vous attendez un ferry dans une salle encore vide et vous voulez prévoir où les voyageurs vont s’asseoir, pour choisir la meilleure place. Leur comportement est très prévisible : on le simule comme un *automate cellulaire*, où l’état de chaque case au tour suivant ne dépend que de son état et de celui de ses voisines.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Le fichier est le plan de la salle : toutes les lignes ont la même longueur, et chaque caractère est une case. `.` représente le sol, `L` un siège libre, `#` un siège occupé. Au départ, tous les sièges sont libres.
 
-    - `.` représente le sol, `L` un siège libre, `#` un siège occupé.
+    **La règle.**
 
-    - Les voisins d’une case sont les 8 cases qui l’entourent (même ligne, même colonne et diagonales), sans sortir du plan.
+    - Les voisins d’une case sont les 8 cases qui l’entourent (même ligne, même colonne et diagonales), sans sortir du plan : une case du bord en a donc moins.
 
-    - À chaque tour, **toutes** les cases changent en même temps, d’après l’état du tour précédent. Un siège libre dont aucun voisin n’est occupé devient occupé (on aime être tranquille). Un siège occupé qui a au moins 4 voisins occupés se libère (trop de monde). Dans les autres cas, rien ne change ; le sol ne change jamais.
+    - À chaque tour, **toutes** les cases changent en même temps, d’après l’état du tour précédent.
 
-    - On répète les tours jusqu’à ce que plus rien ne bouge. La réponse est le nombre de sièges occupés à ce moment-là.
+    - Un siège libre dont aucun voisin n’est occupé devient occupé (on aime être tranquille).
+
+    - Un siège occupé qui a au moins 4 voisins occupés se libère (trop de monde).
+
+    - Dans les autres cas, rien ne change ; le sol ne change jamais.
+
+    - On répète les tours jusqu’à ce qu’un tour ne modifie plus aucune case.
+
+    **La réponse attendue.** Le nombre de sièges occupés quand plus rien ne bouge. Par exemple, une salle de $3 \times 3$ sièges tous libres se remplit entièrement au premier tour ; au deuxième, seuls les 4 coins restent occupés, puis plus rien ne change : la réponse serait 4.
 
 ### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-1-1 }
+
+**But.** Vérifier sur trois questions courtes qu’on a compris la notion de voisin et les seuils de la règle.
+
+**À quoi ça sert ?** La troisième question annonce le piège principal du défi : une grille modifiée pendant qu’on la parcourt ne donne pas le bon résultat.
 
 Questions de vérification, à traiter sur le cahier :
 
@@ -60,6 +86,10 @@ Questions de vérification, à traiter sur le cahier :
 3.  Pourquoi ne peut-on pas modifier la grille au fur et à mesure qu’on la parcourt ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-1-2 }
+
+**But.** Simuler à la main trois tours sur une grille de $5 \times 5$.
+
+**À quoi ça sert ?** On obtient un exemple dont on **connaît la réponse** (11), et surtout les grilles intermédiaires : si le programme se trompe, on pourra comparer tour par tour pour trouver l’erreur.
 
 On considère la grille (inventée) suivante :
 
@@ -77,6 +107,10 @@ Dessiner la grille après un tour, puis après deux tours. Vérification : la gr
 
 ### <span class="exo-num">Exercice 3</span> — Lire la grille <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-1-3 }
 
+**But.** Transformer le fichier en une liste de listes de caractères.
+
+**À quoi ça sert ?** Toute la simulation travaille sur cette structure : `grille[i][j]` donne la case de la ligne `i` et de la colonne `j`. Contrairement à une chaîne, une liste peut être modifiée case par case.
+
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
     Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
@@ -92,6 +126,10 @@ Dessiner la grille après un tour, puis après deux tours. Vérification : la gr
 Écrire une fonction `lire_grille(nom_fichier)` qui renvoie une liste de listes de caractères (une liste par ligne). Afficher le nombre de lignes et de colonnes.
 
 ### <span class="exo-num">Exercice 4</span> — Compter les voisins occupés <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-1-4 }
+
+**But.** Compter les sièges occupés autour d’une case, sans sortir de la grille.
+
+**À quoi ça sert ?** C’est la seule information dont la règle a besoin pour décider du sort d’un siège. En faire une fonction à part permettra, en partie 2, de la remplacer par une autre façon de compter sans toucher au reste.
 
 Écrire une fonction `voisins_occupes(grille, i, j)` qui renvoie le nombre de sièges occupés autour de la case $(i, j)$. La tester sur une case du bord et sur une case du centre.
 
@@ -127,6 +165,10 @@ Dessiner la grille après un tour, puis après deux tours. Vérification : la gr
 
 ### <span class="exo-num">Exercice 5</span> — Un tour, puis jusqu’à stabilité <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-1-5 }
 
+**But.** Calculer l’état de toute la grille au tour suivant, puis répéter jusqu’à stabilité.
+
+**À quoi ça sert ?** C’est le cœur de la partie 1 : le nombre de sièges occupés dans la grille finale est la réponse. Écrire `tour` sans effet de bord garantit que toutes les cases changent bien en même temps.
+
 Écrire une fonction `tour(grille)` qui renvoie la **nouvelle** grille sans modifier l’ancienne, puis répéter les tours tant que la grille change. Tester sur l’exemple du défi, puis sur vos données.
 
 ??? pouce "Coup de pouce"
@@ -143,13 +185,25 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    En observant mieux, on comprend que les voyageurs ne regardent pas seulement les places juste à côté : ils regardent aussi plus loin.
+    **Ce qui change.** En observant mieux, on comprend que les voyageurs ne regardent pas seulement les places juste à côté : ils regardent aussi plus loin, à travers les cases de sol.
 
-    - Dans chacune des 8 directions, on compte le **premier siège visible** (libre ou occupé) en sautant les cases de sol ; s’il n’y a que du sol jusqu’au bord, la direction ne compte pas.
+    **La nouvelle règle.**
 
-    - Un siège occupé se libère s’il voit au moins 5 sièges occupés. La règle pour s’asseoir et la réponse demandée ne changent pas.
+    - Dans chacune des 8 directions, on prend en compte le **premier siège visible** (libre ou occupé), en sautant les cases de sol.
+
+    - S’il n’y a que du sol jusqu’au bord dans une direction, cette direction ne compte pas.
+
+    - Un siège occupé se libère désormais s’il voit au moins **5** sièges occupés.
+
+    - La règle pour s’asseoir (aucun siège occupé visible) et le déroulement des tours ne changent pas.
+
+    **La réponse attendue.** Comme en partie 1 : le nombre de sièges occupés quand plus rien ne bouge.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Ce que l’on voit <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-1-6 }
+
+**But.** Compter les sièges visibles dans les 8 directions, puis rendre `tour` indépendante de la façon de compter.
+
+**À quoi ça sert ?** En passant la fonction de comptage et le seuil en paramètres, une seule fonction `tour` sert aux deux parties : on ne réécrit que ce qui change vraiment.
 
 Écrire une fonction `visibles_occupes` (mêmes paramètres que `voisins_occupes`), puis adapter `tour` pour qu’elle reçoive en paramètres la fonction de comptage et le seuil. Sur l’exemple du défi, on doit trouver `9`.
 
@@ -182,6 +236,10 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Défi : précalculer <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-1-7 }
 
+**But.** Calculer une fois pour toutes, au début, quels sièges chaque siège peut voir, puis mesurer le gain.
+
+**À quoi ça sert ?** Une recherche refaite à l’identique à chaque tour est du temps perdu : la précalculer est une optimisation classique, et la mesure avec `time` montre si elle en vaut la peine.
+
 Les voisins visibles d’un siège ne dépendent pas de l’état des sièges, seulement de la position du sol. Les calculer une seule fois au début (dictionnaire case $\to$ liste de cases) et mesurer le gain de temps avec le module `time`.
 
 ??? pouce "Coup de pouce"
@@ -208,7 +266,21 @@ Les voisins visibles d’un siège ne dépendent pas de l’état des sièges, s
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi mobilise les files vues au chapitre 3 : chaque paquet de cartes est une file, comme celle des processus prêts dans l’ordonnancement en tourniquet de ce chapitre. La partie 2 réinvestit la récursivité du chapitre 1 : chaque sous-partie est un appel récursif, avec sa propre mémoire des situations déjà vues.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Deux joueurs s’affrontent à un jeu de cartes proche de la bataille, jusqu’à ce que l’un des deux ait toutes les cartes. On veut le score du gagnant. Une partie dure des centaines de manches, et en partie 2 chaque manche peut déclencher une sous-partie complète : seule une simulation par programme permet d’aller au bout.
+
+    **Ce qu’on réinvestit.** Les **files** vues au chapitre 3 : chaque paquet de cartes est une file (on prend dessus, on remet dessous), comme celle des processus prêts dans l’ordonnancement en tourniquet de ce chapitre. La partie 2 réinvestit la **récursivité** du chapitre 1 : chaque sous-partie est un appel récursif, avec sa propre mémoire des situations déjà vues.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre les règles d’une manche et du score, puis jouer quelques manches à la main.
+
+    2.  Lire les deux paquets dans deux files.
+
+    3.  Simuler la partie et calculer le score du gagnant (partie 1).
+
+    4.  Écrire la version récursive du jeu, avec une mémoire des situations déjà vues par partie (partie 2).
 
 ## Lire l’énoncé
 
@@ -224,19 +296,27 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Sur le radeau, l’ennui guette ; heureusement, un petit crabe est monté à bord et accepte de jouer aux cartes avec vous, à un jeu proche de la bataille. Le fichier donne la main de départ de chaque joueur.
+    **Contexte.** Sur le radeau, l’ennui guette ; heureusement, un petit crabe est monté à bord et accepte de jouer aux cartes avec vous, à un jeu proche de la bataille. Avant de jouer, vous voulez prévoir l’issue de la partie à partir des paquets distribués.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Le fichier contient deux blocs séparés par une ligne vide : le paquet du joueur 1 (vous), puis celui du joueur 2 (le crabe). Chaque bloc commence par une ligne d’en-tête, puis donne une carte par ligne, la carte du **dessus** en premier. Les cartes sont des entiers, tous différents.
 
-    - Le fichier contient deux blocs (joueur 1, puis joueur 2) : une carte par ligne, la carte du dessus en premier. Toutes les valeurs sont différentes.
+    **La règle.**
 
-    - À chaque manche, chaque joueur retire sa carte du dessus ; la plus forte gagne. Le gagnant place les deux cartes sous son paquet : la sienne d’abord, puis celle de l’adversaire.
+    - À chaque manche, chaque joueur retire sa carte du dessus ; la plus forte gagne la manche (il ne peut pas y avoir d’égalité).
+
+    - Le gagnant place les deux cartes sous son paquet : la sienne d’abord, puis celle de l’adversaire.
 
     - La partie s’arrête quand un joueur a toutes les cartes.
 
-    - Score du gagnant : la carte du dessous est multipliée par $1$, celle juste au-dessus par $2$, etc., jusqu’à la carte du dessus multipliée par le nombre de cartes ; on additionne. Autrement dit, plus une carte est haut dans le paquet, plus elle compte. Réponse : ce score.
+    - Score du gagnant : la carte du dessous est multipliée par $1$, celle juste au-dessus par $2$, etc., jusqu’à la carte du dessus, multipliée par le nombre de cartes ; on additionne ces produits. Plus une carte est haut dans le paquet, plus elle compte.
+
+    **La réponse attendue.** Le score du gagnant. Par exemple, un paquet gagnant 5, 3, 9 (dessus en premier) vaudrait $5 \times 3 + 3 \times 2 + 9 \times 1 = 30$.
 
 ### <span class="exo-num">Exercice 1</span> — Vérifier sa compréhension <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-2-1 }
+
+**But.** Vérifier sa lecture des règles d’une manche et du calcul du score.
+
+**À quoi ça sert ?** La deuxième question évite l’erreur la plus fréquente (multiplier la carte du dessus par 1 au lieu du nombre de cartes) ; la troisième fournit un contrôle simple du programme : le nombre total de cartes ne doit jamais changer.
 
 1.  Une manche peut-elle se terminer par une égalité ?
 
@@ -245,6 +325,10 @@ Vocabulaire utile pour lire le texte original :
 3.  Le nombre total de cartes change-t-il au cours de la partie ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-2-2 }
+
+**But.** Jouer les premières manches d’une petite partie en écrivant les paquets.
+
+**À quoi ça sert ?** On voit concrètement où vont les cartes (sous le paquet, dans quel ordre) ; les valeurs données (18 manches, score 198) serviront à tester le programme.
 
 On considère les paquets (inventés) suivants, le dessus étant écrit en premier :
 
@@ -289,6 +373,10 @@ Jouer les trois premières manches à la main en écrivant les deux paquets apr�
 
 ### <span class="exo-num">Exercice 3</span> — Une file pour chaque joueur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-2-3 }
 
+**But.** Lire les deux paquets et les ranger chacun dans une file, dessus en premier.
+
+**À quoi ça sert ?** Les deux opérations du jeu (prendre dessus, remettre dessous) sont exactement celles d’une file : avec la bonne structure, la simulation s’écrit en quelques lignes.
+
 Lire le fichier et ranger les cartes de chaque joueur dans une **file** : on retire au début (dessus du paquet), on ajoute à la fin (dessous). Utiliser une liste Python (encadré ci-dessus), ou une classe `File` du cours.
 
 ??? pouce "Coup de pouce"
@@ -309,6 +397,10 @@ Lire le fichier et ranger les cartes de chaque joueur dans une **file** : on ret
 
 ### <span class="exo-num">Exercice 4</span> — Jouer et compter <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-2-4 }
 
+**But.** Simuler la partie jusqu’au bout, puis calculer le score du paquet gagnant.
+
+**À quoi ça sert ?** C’est la réponse de la partie 1. Séparer le jeu (`combat`) du calcul du score (`score`) permettra de réutiliser `score` telle quelle en partie 2.
+
 Écrire une fonction `combat(p1, p2)` qui joue la partie et renvoie le paquet du gagnant, puis une fonction `score(paquet)`. Tester sur l’exemple, puis sur vos données.
 
 ??? pouce "Coup de pouce"
@@ -321,13 +413,21 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    Le crabe a perdu et propose une revanche à une version « récursive » du jeu.
+    **Ce qui change.** Le crabe a perdu et propose une revanche, à une version « récursive » du jeu : certaines manches se décident en jouant une partie plus petite.
 
-    - Avant chaque manche : si la même configuration des deux paquets est déjà apparue **dans cette partie**, le joueur 1 gagne aussitôt la partie.
+    **La nouvelle règle.**
 
-    - Sinon, chacun tire sa carte. Si chaque joueur a encore au moins autant de cartes que la valeur qu’il vient de tirer, le gagnant de la manche est celui d’une sous-partie jouée avec des copies de ses $n$ cartes suivantes ($n$ = valeur tirée). Sinon, la plus forte carte gagne. Le gagnant range les cartes comme avant.
+    - Avant chaque manche : si la même configuration des deux paquets est déjà apparue **dans cette partie**, le joueur 1 gagne aussitôt la partie. Cela empêche une partie de durer indéfiniment.
 
-    - Réponse : le score du gagnant de la partie principale.
+    - Sinon, chacun tire sa carte du dessus.
+
+    - Si chaque joueur a encore au moins autant de cartes que la valeur qu’il vient de tirer, le gagnant de la manche est celui d’une sous-partie, jouée avec les mêmes règles et des copies de ses $n$ cartes suivantes ($n$ = valeur qu’il a tirée). Par exemple, un joueur qui tire un 3 et a encore au moins 3 cartes entre dans la sous-partie avec une copie de ses 3 cartes du dessus.
+
+    - Sinon, la plus forte carte gagne, comme en partie 1.
+
+    - Le gagnant de la manche range les deux cartes sous son paquet comme avant : la sienne d’abord, même si elle est la plus faible.
+
+    **La réponse attendue.** Le score du gagnant de la partie principale, calculé comme en partie 1.
 
 !!! encadre "Outil Python : les ensembles (set)"
 
@@ -375,6 +475,10 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Le combat récursif <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-2-5 }
 
+**But.** Écrire la version récursive du jeu, où une sous-partie est un appel de la même fonction.
+
+**À quoi ça sert ?** C’est la réponse de la partie 2 : la règle « une manche se décide par une partie plus petite » se traduit directement par un appel récursif. Le point délicat est de donner à chaque partie sa propre mémoire des situations déjà vues.
+
 Écrire une fonction récursive `combat_recursif(p1, p2)` qui renvoie le numéro du gagnant et son paquet. Sur l’exemple du défi, le joueur 1 gagne avec un score de `151`. Bien relire la règle qui empêche une partie de durer indéfiniment : elle s’applique à **chaque** partie et sous-partie séparément.
 
 ??? pouce "Coup de pouce"
@@ -386,6 +490,10 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
     Pour une sous-partie, on construit de **nouveaux** paquets (copies) : la tranche `p1[:n]` est une nouvelle liste qui contient les `n` cartes du dessus, sans modifier `p1`. La fonction renvoie un couple `(gagnant, paquet)` ; dans la sous-partie, seul le gagnant compte pour décider de la manche en cours.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : mesurer <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-aoc-2-6 }
+
+**But.** Mesurer le nombre d’appels récursifs et la profondeur de récursion atteinte.
+
+**À quoi ça sert ?** Ces mesures montrent le coût réel de la partie 2 et expliquent pourquoi Python n’atteint jamais sa limite de récursion ici : c’est le même raisonnement que pour prouver qu’une fonction récursive se termine.
 
 Compter le nombre total d’appels de `combat_recursif` et la profondeur maximale de récursion atteinte sur vos données. Pourquoi la profondeur reste-t-elle faible ?
 

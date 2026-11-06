@@ -22,7 +22,21 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi met en scène l’ordinateur embarqué d’un ferry, un système comme ceux de ce chapitre : il initialise sa mémoire adresse par adresse. Le masque, appliqué bit par bit, rappelle le masque de sous-réseau vu au chapitre 9 ; l’approfondissement 1 réinvestit la récursivité du chapitre 1.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** L’ordinateur d’un ferry exécute un petit programme de près de cinq cents lignes qui écrit des valeurs en mémoire, en les retouchant au passage avec un masque de 36 bits. Il faut savoir ce que contient la mémoire à la fin. Les calculs en binaire sur 36 bits sont trop longs à la main, et en partie 2 une seule ligne peut écrire dans des centaines d’adresses.
+
+    **Ce qu’on réinvestit.** Le défi met en scène l’ordinateur embarqué d’un ferry, un système comme ceux de ce chapitre : il initialise sa mémoire adresse par adresse. On y manipule l’**écriture binaire** des entiers et des opérations bit à bit ; le masque, appliqué bit par bit, rappelle le masque de sous-réseau vu au chapitre 9. Un **dictionnaire** représente une mémoire immense dont seules quelques cases sont utilisées, et l’approfondissement 1 réinvestit la récursivité du chapitre 1.
+
+    **La démarche de la fiche.**
+
+    1.  Vérifier sa compréhension de la règle, puis appliquer un masque à la main sur un petit programme.
+
+    2.  Analyser une ligne du fichier, puis appliquer le masque à une valeur avec deux opérations bit à bit.
+
+    3.  Simuler la mémoire avec un dictionnaire : réponse de la partie 1.
+
+    4.  Pour la partie 2, énumérer toutes les adresses obtenues en remplaçant les bits flottants, puis le faire par récursivité en approfondissement.
 
 ## Lire l’énoncé
 
@@ -38,19 +52,29 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** À l’approche du port, l’ordinateur du ferry doit initialiser sa mémoire, mais il ne comprend pas le système de masques de bits utilisé par le port. Vous allez émuler ce système. Le fichier est un petit programme : chaque ligne change le masque courant ou écrit une valeur en mémoire.
+    **Contexte.** À l’approche du port, l’ordinateur du ferry doit initialiser sa mémoire, mais il ne comprend pas le système de masques de bits utilisé par le port. Vous allez émuler ce système, c’est-à-dire le reproduire par un programme.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Le fichier est un petit programme ; chaque ligne est de l’une des deux formes suivantes.
 
-    - Une ligne `mask = ` est suivie de 36 caractères parmi `0`, `1`, `X` ; une ligne `mem[a] = v` écrit la valeur $v$ à l’adresse $a$. Adresses et valeurs sont des entiers positifs sur 36 bits.
+    - `mask = ` suivi de 36 caractères parmi `0`, `1`, `X` : elle change le masque courant. Le masque s’écrit bit de poids fort à gauche ($2^{35}$) et reste en vigueur jusqu’au `mask` suivant.
 
-    - Le masque s’écrit bit de poids fort à gauche ($2^{35}$) et reste en vigueur jusqu’au `mask` suivant.
+    - `mem[a] = v` : elle écrit la valeur $v$ à l’adresse $a$. Adresses et valeurs sont des entiers positifs sur 36 bits, écrits en décimal.
 
-    - Juste avant chaque écriture, on applique le masque à la valeur : un `0` ou un `1` du masque impose ce bit, un `X` laisse le bit de $v$ tel quel. Autrement dit, le masque ne retouche que certains bits.
+    **La règle.**
 
-    - Toutes les cases valent 0 au départ ; écrire à nouveau à la même adresse remplace l’ancienne valeur. La réponse est la somme de toutes les valeurs présentes en mémoire à la fin.
+    - Juste avant chaque écriture, on applique le masque à la **valeur** : un `0` ou un `1` du masque impose ce bit, un `X` laisse le bit de $v$ tel quel. Autrement dit, le masque ne retouche que certains bits.
+
+    - Toutes les cases de la mémoire valent 0 au départ.
+
+    - Écrire à nouveau à la même adresse remplace l’ancienne valeur.
+
+    **La réponse attendue.** La somme de toutes les valeurs présentes en mémoire à la fin du programme. Par exemple, si le masque se termine par `10XX` (et ne contient que des `X` avant), écrire 7 (`0111`) donne `1011`, soit 11, et écrire 1 (`0001`) donne `1001`, soit 9 ; à deux adresses différentes, la réponse serait $11 + 9 = 20$.
 
 ### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-systemes-sur-puce-et-informatique-embarq-aoc-1-1 }
+
+**But.** Vérifier sur trois questions courtes qu’on a compris le rôle du masque et de la mémoire.
+
+**À quoi ça sert ?** La dernière question prépare un choix essentiel du programme : la mémoire doit être un dictionnaire, pas une liste.
 
 Questions de vérification, à traiter sur le cahier :
 
@@ -61,6 +85,10 @@ Questions de vérification, à traiter sur le cahier :
 3.  Pourquoi ne peut-on pas représenter la mémoire par une liste de $2^{36}$ cases ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-systemes-sur-puce-et-informatique-embarq-aoc-1-2 }
+
+**But.** Appliquer à la main le masque à trois valeurs écrites en binaire.
+
+**À quoi ça sert ?** On obtient un exemple dont on **connaît la réponse** (40) et des valeurs intermédiaires pour tester `appliquer` ; on voit aussi l’effet d’une écriture qui en écrase une autre.
 
 On considère le programme (inventé) suivant :
 
@@ -76,6 +104,10 @@ mem[3] = 13
 ## Programmer la partie 1
 
 ### <span class="exo-num">Exercice 3</span> — Lire une ligne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-systemes-sur-puce-et-informatique-embarq-aoc-1-3 }
+
+**But.** Transformer une ligne du fichier en une donnée facile à utiliser : le nouveau masque, ou le couple adresse–valeur.
+
+**À quoi ça sert ?** Le reste du programme n’a plus à se soucier du texte : il distingue les deux sortes de lignes par le premier élément renvoyé. Cette fonction servira telle quelle en partie 2.
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
@@ -157,6 +189,10 @@ mem[3] = 13
 
 ### <span class="exo-num">Exercice 4</span> — Appliquer le masque avec deux opérations bit à bit <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-systemes-sur-puce-et-informatique-embarq-aoc-1-4 }
 
+**But.** Calculer la valeur réellement écrite, avec deux opérations bit à bit au lieu d’une boucle sur les 36 bits.
+
+**À quoi ça sert ?** C’est le cœur de la partie 1 : chaque écriture du programme passe par cette fonction.
+
 Écrire une fonction `appliquer(masque, valeur)`. On construira deux entiers à partir du masque : l’un pour forcer des bits à `1`, l’autre pour forcer des bits à `0`. Vérifier : `appliquer(m, 6)` vaut `18` avec le masque de l’exemple.
 
 ??? pouce "Coup de pouce"
@@ -169,6 +205,10 @@ mem[3] = 13
 
 ### <span class="exo-num">Exercice 5</span> — La mémoire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-systemes-sur-puce-et-informatique-embarq-aoc-1-5 }
 
+**But.** Exécuter tout le programme en stockant la mémoire dans un dictionnaire.
+
+**À quoi ça sert ?** On obtient la réponse de la partie 1. Le dictionnaire ne contient que les adresses réellement écrites : quelques centaines au lieu de $2^{36}$ cases.
+
 La mémoire a $2^{36}$ cases : une liste est impossible. Utiliser un dictionnaire `memoire` (adresse $\to$ valeur), exécuter le programme et afficher la somme des valeurs. Tester sur l’exemple du défi, puis sur vos données.
 
 ## Partie 2
@@ -177,13 +217,23 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    Le programme ne fonctionne toujours pas : la version du système utilisée par le port est en fait un « décodeur d’adresses ».
+    **Ce qui change.** Le programme ne fonctionne toujours pas : la version du système utilisée par le port est en fait un « décodeur d’adresses ». Le masque agit maintenant sur l’**adresse**, et la valeur est écrite telle quelle.
 
-    - Le masque agit maintenant sur l’**adresse**, et la valeur est écrite telle quelle : un `0` laisse le bit de l’adresse inchangé, un `1` le force à 1, un `X` est *flottant* et prend les deux valeurs.
+    **La nouvelle règle.**
 
-    - Avec $k$ bits flottants, la valeur est donc écrite dans $2^k$ adresses. La réponse demandée est la même.
+    - Un `0` du masque laisse le bit de l’adresse inchangé (attention : ce n’est plus comme en partie 1).
+
+    - Un `1` force le bit de l’adresse à 1.
+
+    - Un `X` est *flottant* : il prend les deux valeurs 0 et 1. Avec $k$ bits flottants, la valeur est donc écrite dans $2^k$ adresses.
+
+    **La réponse attendue.** La même qu’en partie 1 : la somme des valeurs en mémoire à la fin. Par exemple, si le masque se termine par `0X1` (que des `0` avant), écrire 7 à l’adresse 4 (`100`) donne le modèle `1X1` : la valeur 7 est écrite aux adresses 5 et 7, ce qui apporte 14 à la somme.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Un masque sur les adresses <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-systemes-sur-puce-et-informatique-embarq-aoc-1-6 }
+
+**But.** Calculer la liste de toutes les adresses désignées par une adresse et un masque contenant des bits flottants.
+
+**À quoi ça sert ?** C’est la seule vraie nouveauté de la partie 2 : avec cette fonction, il suffit d’écrire la valeur à chacune de ces adresses dans le dictionnaire pour obtenir la réponse.
 
 Écrire une fonction `adresses(masque, adresse)` qui renvoie la liste de toutes ces adresses.
 
@@ -208,11 +258,19 @@ Vérification : `mem[5] = 4` écrit dans 8 adresses, de `16` à `53` ; la répon
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Défi : combien de `X` au maximum ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-systemes-sur-puce-et-informatique-embarq-aoc-1-7 }
 
+**But.** Mesurer, sur vos données, combien d’adresses la partie 2 écrit réellement.
+
+**À quoi ça sert ?** On vérifie par l’expérience que le nombre de bits flottants reste petit, ce qui explique pourquoi la méthode termine rapidement alors que la mémoire est immense.
+
 Afficher le plus grand nombre de `X` parmi les masques de vos données, et le nombre total d’adresses écrites. Pourquoi le dictionnaire reste-t-il de taille raisonnable alors que la mémoire a $2^{36}$ cases ?
 
 ## Approfondissement
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 1 : énumérer les adresses par récursivité <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-systemes-sur-puce-et-informatique-embarq-aoc-1-8 }
+
+**But.** Énumérer les $2^k$ adresses par une fonction récursive qui remplace un `X` à la fois.
+
+**À quoi ça sert ?** La récursivité donne une solution courte et naturelle à ce problème d’énumération ; compter les appels relie cette solution à sa complexité.
 
 1.  À la main, pour le modèle `X1X` : remplacer le premier `X` par `0`, puis par `1`, et recommencer sur chacune des deux chaînes obtenues. Dessiner l’arbre de ces remplacements et lister les chaînes finales dans l’ordre.
 

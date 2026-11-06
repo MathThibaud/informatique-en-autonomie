@@ -22,7 +22,21 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi réinvestit l’échange de clés de Diffie-Hellman et l’exponentiation modulaire vus dans ce chapitre : la carte et la porte appliquent exactement ce protocole, et l’on joue ici le rôle de l’espion.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Une carte de chambre et une porte se mettent d’accord sur une clé secrète en s’échangeant deux nombres en public. On a intercepté ces deux nombres et l’on veut retrouver la clé secrète. Pour cela, il faut retrouver un nombre de tours de boucle qui peut atteindre plusieurs millions : c’est une recherche par essais successifs, que seul un programme peut mener.
+
+    **Ce qu’on réinvestit.** L’échange de clés de **Diffie-Hellman** et l’**exponentiation modulaire** vus dans ce chapitre : la carte et la porte appliquent exactement ce protocole, et l’on joue ici le rôle de l’espion. Le défi fait toucher du doigt pourquoi ce protocole est sûr : calculer une puissance modulaire est rapide, mais retrouver l’exposant à partir du résultat (le logarithme discret) est très lent quand le modulo est grand.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre la transformation et le rôle de chaque nombre, puis faire quelques calculs à la main et à la calculatrice.
+
+    2.  Programmer la transformation d’un nombre.
+
+    3.  Retrouver le secret d’un des deux appareils par essais successifs, puis en déduire la clé de chiffrement.
+
+    4.  Mesurer la vitesse de cette recherche et expliquer pourquoi, avec de vrais modulos, l’espion est battu.
 
 ## Lire l’énoncé
 
@@ -38,19 +52,27 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Dernier jour : votre carte de chambre ne fonctionne pas, et l’accueil est fermé. La carte et la porte s’authentifient par un petit protocole cryptographique ; en écoutant ce qu’elles s’échangent, vous allez retrouver leur clé secrète. Le fichier contient les deux nombres que vous avez interceptés.
+    **Contexte.** Dernier jour : votre carte de chambre ne fonctionne pas, et l’accueil est fermé. La carte et la porte s’authentifient par un petit protocole cryptographique : chacune envoie un nombre à l’autre, puis toutes deux calculent la même clé secrète. En écoutant ce qu’elles s’échangent, vous allez retrouver cette clé.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Le fichier contient deux lignes, chacune un entier : les deux nombres que vous avez interceptés. Le premier est la clé publique de la carte, le second celle de la porte.
 
-    - Transformer un nombre $s$ avec $n$ tours : partir de $1$ puis, $n$ fois, multiplier par $s$ et prendre le reste de la division par $20201227$. Autrement dit, calculer $s^n \bmod 20201227$.
+    **La règle.**
 
-    - La carte et la porte ont chacune un nombre de tours secret. Chacune publie la transformée de $7$ avec son secret : sa clé publique. Le fichier contient les deux clés publiques (carte, puis porte).
+    - Transformer un nombre $s$ (le « sujet ») avec $n$ tours : partir de $1$ puis, $n$ fois, multiplier par $s$ et prendre le reste de la division par $20201227$. Autrement dit, calculer $s^n \bmod 20201227$. Par exemple, transformer $5$ avec $2$ tours donne $25$.
+
+    - La carte et la porte ont chacune un nombre de tours secret, qu’elles ne communiquent jamais.
+
+    - Chacune publie la transformée de $7$ avec son secret : c’est sa clé publique.
 
     - La clé de chiffrement est la transformée de la clé publique de la porte avec le secret de la carte ; c’est aussi la transformée de la clé publique de la carte avec le secret de la porte.
 
-    - Réponse : la clé de chiffrement.
+    **La réponse attendue.** La clé de chiffrement. Par exemple, si le secret de la carte était $2$ et la clé publique de la porte $1000$, la clé de chiffrement serait $1000^2 \bmod 20201227 = 1000000$.
 
 ### <span class="exo-num">Exercice 1</span> — Vérifier sa compréhension <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-1-1 }
+
+**But.** Vérifier sa compréhension de la transformation et de ce qu’il faut retrouver.
+
+**À quoi ça sert ?** La deuxième question évite un travail inutile (un seul secret suffit) ; la troisième garantit que la recherche par essais successifs du programme se termine.
 
 1.  Que vaut la transformée de $7$ avec $0$ tour ? avec $1$ tour ?
 
@@ -60,6 +82,10 @@ Vocabulaire utile pour lire le texte original :
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-1-2 }
 
+**But.** Calculer quelques transformées, puis vérifier sur un exemple complet que la carte et la porte trouvent la même clé.
+
+**À quoi ça sert ?** On voit à partir de quand le modulo intervient, et l’on dispose de valeurs sûres (`10` tours, `19859298`, `1455220`) pour tester chacune des fonctions suivantes.
+
 Transformer à la main le nombre `7` avec 1, 2 puis 3 tours de boucle (le modulo ne sert pas encore). À partir de combien de tours le reste de la division modifie-t-il le résultat ?
 
 Dans un exemple inventé, la carte utilise `10` tours et la porte `17` tours. Avec la calculatrice ou Python, vérifier que les clés publiques sont `19859298` (carte) et `11869933` (porte), puis que la clé de chiffrement vaut `1455220`, qu’on la calcule du côté de la carte ou de la porte.
@@ -68,6 +94,10 @@ Dans un exemple inventé, la carte utilise `10` tours et la porte `17` tours. Av
 
 ### <span class="exo-num">Exercice 3</span> — Transformer <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-1-3 }
 
+**But.** Programmer la transformation de l’énoncé.
+
+**À quoi ça sert ?** Cette fonction sert deux fois : pour vérifier l’exemple et, une fois le secret trouvé, pour calculer la clé de chiffrement à partir de la clé publique de l’autre appareil.
+
 Écrire une fonction `transformer(sujet, nb_tours)` qui applique la transformation de l’énoncé. Vérifier les valeurs de l’exemple précédent.
 
 ??? pouce "Coup de pouce"
@@ -75,6 +105,10 @@ Dans un exemple inventé, la carte utilise `10` tours et la porte `17` tours. Av
     Une boucle `for` de `nb_tours` tours, avec `valeur = valeur * sujet % 20201227`. Une méthode beaucoup plus rapide, l’exponentiation rapide, est programmée dans l’approfondissement 1.
 
 ### <span class="exo-num">Exercice 4</span> — Retrouver un secret <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-1-4 }
+
+**But.** Retrouver le nombre de tours secret à partir d’une clé publique, puis calculer la clé de chiffrement.
+
+**À quoi ça sert ?** C’est le travail de l’espion et la réponse du défi. La façon d’écrire la boucle compte : relancer la transformation depuis le début à chaque essai rendrait la recherche beaucoup trop lente.
 
 Écrire une fonction `nb_tours(cle_publique)` qui retrouve le nombre de tours secret à partir d’une clé publique. Tester : `nb_tours(19859298)` doit renvoyer `10`. Calculer ensuite la clé de chiffrement de vos données.
 
@@ -106,6 +140,10 @@ Il n’y a pas de deuxième énigme ce jour-là : la seconde étoile est offerte
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 5</span> — Défi : pourquoi est-ce sûr ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-1-5 }
 
+**But.** Mesurer la vitesse de la recherche, puis estimer sa durée pour des modulos beaucoup plus grands.
+
+**À quoi ça sert ?** Le défi n’a été résolu que parce que le modulo est petit ; ce calcul d’ordre de grandeur explique pourquoi le même protocole, avec des modulos de centaines de chiffres, protège réellement nos communications.
+
 Les vrais protocoles utilisent un modulo de plus de 600 chiffres. Mesurer la vitesse de votre recherche du nombre de tours (encadré ci-dessus). Pour un modulo d’environ $2\times 10^7$, la recherche essaie au pire $2 \times 10^7$ valeurs ; estimer le temps qu’elle prendrait pour un modulo de l’ordre de $10^{20}$, puis $10^{600}$. Expliquer pourquoi l’espion est battu alors que la carte et la porte calculent vite.
 
 ??? pouce "Coup de pouce"
@@ -132,6 +170,10 @@ Les vrais protocoles utilisent un modulo de plus de 600 chiffres. Mesurer la vit
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Approfondissement 1 : programmer l’exponentiation rapide <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-1-6 }
 
+**But.** Calculer $a^b \bmod m$ avec un nombre de multiplications proportionnel au nombre de chiffres de $b$.
+
+**À quoi ça sert ?** C’est ce qui permet à la carte et à la porte de calculer vite même avec d’énormes exposants : c’est l’autre moitié de l’argument de sécurité, et un bel exemple de récursivité qui divise le problème par deux.
+
 Pour calculer $a^b \bmod m$, il n’est pas nécessaire d’effectuer $b$ multiplications : l’**exponentiation rapide** est fondée sur $a^{b} = \left(a^{b/2}\right)^2$ si $b$ est pair et $a^{b} = \left(a^{(b-1)/2}\right)^2 \times a$ si $b$ est impair.
 
 1.  À la main : calculer $2^{11} \bmod 29$ en n’utilisant que des carrés et des multiplications par $2$ (partir de $2^{11} = (2^{5})^{2} \times 2$). Combien de multiplications a-t-on faites ? Combien en fallait-il avec la méthode « une multiplication par tour » ?
@@ -149,6 +191,10 @@ Pour calculer $a^b \bmod m$, il n’est pas nécessaire d’effectuer $b$ multip
 3.  Combien d’appels récursifs pour $b = 10^{600}$ ? Quelle est la complexité en fonction de $b$ ?
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 2 : le logarithme discret plus vite (pas de bébé, pas de géant) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-1-7 }
+
+**But.** Retrouver un nombre de tours en environ $\sqrt{p}$ opérations au lieu de $p$, grâce à un dictionnaire.
+
+**À quoi ça sert ?** On échange du temps de calcul contre de la mémoire : la recherche devient bien plus rapide sur le défi, et l’on peut se demander si cela suffit à menacer le protocole avec de vrais modulos.
 
 On cherche $n$ tel que $g^n \bmod p = c$, avec $0 \leq n < p$. On pose $m$ un entier tel que $m^2 > p$ et on écrit $n = i \times m + j$ avec $0 \leq i, j < m$.
 
@@ -192,7 +238,21 @@ On admet que, $p$ étant premier, $g^{p-1} \bmod p = 1$ (petit théorème de Fer
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi réinvestit l’arithmétique modulaire de ce chapitre : le reste `%` dans la partie 1, puis, en approfondissement, l’inverse modulaire rencontré avec le chiffrement affine et RSA.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Des navettes partent du port à intervalles réguliers, chacune avec sa propre période. La partie 1 demande laquelle prendre pour attendre le moins possible : un simple calcul par navette. La partie 2 demande le premier instant où les navettes partent les unes après les autres, minute après minute : la réponse dépasse $10^{14}$, si bien que tester les instants un par un prendrait des années, même pour un ordinateur. Il faut une idée.
+
+    **Ce qu’on réinvestit.** L’**arithmétique modulaire** de ce chapitre. Le reste `%` répond à la question « depuis combien de minutes la dernière navette est-elle partie ? », ce qui donne l’attente sans aucune boucle. En partie 2, on raisonne sur des conditions de la forme « $t + i$ est un multiple de $b$ », et l’approfondissement réutilise l’inverse modulaire rencontré avec le chiffrement affine et RSA.
+
+    **La démarche de la fiche.**
+
+    1.  Vérifier sa compréhension de la règle, puis calculer à la main les attentes sur un petit exemple.
+
+    2.  Lire le fichier, puis calculer l’attente de chaque navette avec un modulo : réponse de la partie 1.
+
+    3.  Traduire la condition de la partie 2 avec `%`, puis la résoudre par une recherche à pas croissant (section dédiée).
+
+    4.  En approfondissement, retrouver le même résultat par la formule des restes chinois.
 
 ## Lire l’énoncé
 
@@ -207,17 +267,25 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Arrivé au port, vous devez rejoindre l’aéroport en navette. Chaque navette fait une boucle de durée fixe et repasse donc régulièrement au port ; son numéro est justement la durée de sa boucle, en minutes. Le fichier contient vos notes : l’heure à laquelle vous serez prêt, et la liste des navettes de la compagnie.
+    **Contexte.** Arrivé au port, vous devez rejoindre l’aéroport en navette. Chaque navette fait une boucle de durée fixe et repasse donc régulièrement au port ; son numéro est justement la durée de sa boucle, en minutes. Vous voulez savoir laquelle prendre pour attendre le moins.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Le fichier contient deux lignes. Ligne 1 : l’instant $a$ (en minutes) à partir duquel vous pouvez partir. Ligne 2 : les numéros des navettes séparés par des virgules ; un `x` désigne une navette hors service, à ignorer dans la partie 1.
 
-    - Ligne 1 : l’instant $a$ (en minutes) à partir duquel vous pouvez partir. Ligne 2 : les numéros des navettes séparés par des virgules ; un `x` désigne une navette hors service, à ignorer.
+    **La règle.**
 
     - Toutes les navettes sont parties ensemble à l’instant 0 : la navette numéro $b$ part donc aux instants $0$, $b$, $2b$, $3b$… autrement dit aux multiples de $b$.
 
-    - Il faut trouver la navette qui part le plus tôt à partir de l’instant $a$ (un départ à l’instant $a$ lui-même convient). La réponse est son numéro multiplié par le nombre de minutes d’attente.
+    - Pour chaque navette, on cherche son premier départ à partir de l’instant $a$ ; un départ à l’instant $a$ lui-même convient (attente nulle).
+
+    - L’attente est la différence entre ce départ et $a$. On retient la navette dont l’attente est la plus courte.
+
+    **La réponse attendue.** Le numéro de cette navette multiplié par le nombre de minutes d’attente. Par exemple, avec $a = 10$ et les navettes 3 et 7, la navette 3 part à 12 (attente 2) et la navette 7 à 14 (attente 4) : la réponse serait $3 \times 2 = 6$.
 
 ### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-1 }
+
+**But.** Vérifier sur trois questions courtes qu’on a compris comment se calcule l’attente.
+
+**À quoi ça sert ?** Le cas où $a$ est un multiple du numéro (attente nulle, et non égale au numéro) est le piège principal de la partie 1.
 
 Questions de vérification, à traiter sur le cahier :
 
@@ -228,6 +296,10 @@ Questions de vérification, à traiter sur le cahier :
 3.  Les `x` jouent-ils un rôle dans la partie 1 ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-2 }
+
+**But.** Calculer à la main le prochain départ et l’attente de chaque navette.
+
+**À quoi ça sert ?** On obtient un exemple dont on **connaît la réponse** (14) ; le même fichier servira d’exemple pour la partie 2.
 
 On considère le fichier (inventé) suivant :
 
@@ -241,6 +313,10 @@ Pour chaque navette, calculer le premier départ à partir de l’instant 96 et 
 ## Programmer la partie 1
 
 ### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-3 }
+
+**But.** Extraire du fichier l’instant d’arrivée et la liste des numéros des navettes en service.
+
+**À quoi ça sert ?** Ce sont les seules données utiles à la partie 1. Les `x` sont écartés ici, mais leur position comptera en partie 2 : il faudra alors relire la ligne autrement.
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
@@ -262,6 +338,10 @@ Pour chaque navette, calculer le premier départ à partir de l’instant 96 et 
 
 ### <span class="exo-num">Exercice 4</span> — L’attente, avec un modulo <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-4 }
 
+**But.** Calculer l’attente d’une navette par un seul calcul de reste, puis choisir la meilleure.
+
+**À quoi ça sert ?** Le modulo évite de faire défiler les minutes une à une ; c’est le réflexe qui rendra possible la partie 2, où les instants sont gigantesques.
+
 Écrire une fonction `attente(arrivee, numero)` qui renvoie le nombre de minutes à attendre la navette `numero`, **sans boucle**. En déduire la réponse. Tester sur l’exemple du défi, puis sur vos données.
 
 ??? pouce "Coup de pouce"
@@ -274,17 +354,31 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    La compagnie propose un concours : trouver le moment où les navettes partent les unes après les autres, minute après minute, dans l’ordre de la liste.
+    **Ce qui change.** La compagnie propose un concours : trouver le moment où les navettes partent les unes après les autres, minute après minute, dans l’ordre de la liste. La première ligne du fichier ne sert plus.
 
-    - La première ligne ne sert plus. Les positions dans la liste sont numérotées à partir de 0, `x` compris ; un `x` n’impose aucune condition.
+    **La nouvelle règle.**
 
-    - Trouver le plus petit instant $t$ tel que la navette en position $i$ parte exactement à l’instant $t + i$, pour toutes les navettes en service.
+    - Les positions dans la liste sont numérotées à partir de 0, `x` compris : les `x` ne sont plus ignorés, ils occupent une position.
+
+    - Un `x` n’impose aucune condition.
+
+    - La navette en position $i$ doit partir exactement à l’instant $t + i$, et cela pour toutes les navettes en service.
+
+    **La réponse attendue.** Le plus petit instant $t$ qui convient. Par exemple, avec la liste `3,x,5`, il faut que 3 parte à $t$ et 5 à $t + 2$ : $t = 3$ convient (3 est multiple de 3, 5 de 5) et la réponse serait 3.
 
 ### <span class="exo-num">Exercice 5</span> — Comprendre la condition <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-5 }
+
+**But.** Écrire la condition de la partie 2 avec `%` et la vérifier sur l’exemple.
+
+**À quoi ça sert ?** Une condition écrite avec `%` se programme directement ; c’est elle que testera la recherche de l’exercice suivant pour chaque navette.
 
 Traduire la condition sur une navette de numéro $b$ placée en position $i$ par une égalité avec `%`. Sur l’exemple du défi, on doit trouver $t = 215$ : le vérifier pour chacune des trois navettes.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : la partie 2 sur vos données <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-6 }
+
+**But.** Trouver le premier instant qui convient, en augmentant le pas à chaque navette satisfaite.
+
+**À quoi ça sert ?** La force brute est impossible ici : cette méthode, expliquée dans la section suivante, ne fait que quelques centaines d’essais au lieu de $10^{14}$. Elle donne la réponse de la partie 2.
 
 L’énoncé prévient que la réponse dépasse $10^{14}$ : tester tous les instants un par un prendrait des années. Lire la section suivante, puis écrire une fonction `premier_instant(navettes)` qui suit cette méthode. Vérifier sur l’exemple du défi et sur ceux de l’énoncé avant vos données.
 
@@ -341,6 +435,10 @@ L’énoncé prévient que la réponse dépasse $10^{14}$ : tester tous les inst
     **Intérêt.** Au plus $m - 1$ essais : c’est instantané pour les numéros de navettes (quelques centaines). Pour les très grands nombres de RSA, on utilise plutôt l’algorithme d’Euclide étendu du cours, dont le nombre d’étapes est proportionnel au nombre de chiffres.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : la formule des restes chinois <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-7 }
+
+**But.** Calculer directement l’instant cherché par la formule des restes chinois, avec l’inverse modulaire.
+
+**À quoi ça sert ?** On relie le défi au cours (inverse modulaire du chiffrement affine et de RSA) et l’on dispose d’une seconde méthode pour contrôler la réponse de la partie 2.
 
 La section précédente cite le théorème des restes chinois. Il donne aussi une **formule** : pour le système $t \,\%\, n_m = r_m$ ($m = 1, \dots, k$), avec des $n_m$ premiers entre eux deux à deux, on pose $N = n_1 \times \dots \times n_k$, $N_m = N / n_m$ et $y_m$ l’inverse de $N_m$ modulo $n_m$. Alors
 

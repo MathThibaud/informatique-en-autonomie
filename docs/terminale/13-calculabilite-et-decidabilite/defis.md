@@ -22,7 +22,23 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi illustre le problème de l’arrêt vu dans ce chapitre : on y détecte une boucle infinie, ce qui n’est possible ici que parce que la machine a un nombre fini d’états.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Une console de jeu exécute un petit programme de plusieurs centaines d’instructions, qui tourne en rond. Il faut d’abord détecter la boucle infinie et dire où en est la machine à ce moment, puis trouver l’unique instruction à corriger pour que le programme se termine. Suivre des centaines de sauts à la main est impossible : on va écrire un **interpréteur**, c’est-à-dire un programme Python qui exécute ce programme.
+
+    **Ce qu’on réinvestit.** Le **problème de l’arrêt** vu dans ce chapitre. On sait qu’aucun programme ne peut décider, pour tout programme, s’il s’arrête. Pourtant, on va ici détecter une boucle infinie à coup sûr : c’est possible seulement parce que cette machine a un nombre fini d’états. Le défi permet de comprendre précisément où passe la frontière entre ce qui est décidable et ce qui ne l’est pas.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre les trois instructions, puis exécuter un petit programme à la main.
+
+    2.  Lire le programme du fichier dans une liste de tuples.
+
+    3.  Écrire un interpréteur qui s’arrête dès qu’une instruction revient : c’est la partie 1.
+
+    4.  Partie 2 : essayer chaque réparation possible avec ce même interpréteur.
+
+    5.  En approfondissement, réduire le nombre d’essais, jusqu’à une réparation en temps linéaire.
 
 ## Lire l’énoncé
 
@@ -37,11 +53,11 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** En plein vol, un enfant assis à côté du héros n’arrive plus à démarrer sa console de jeu portable : son programme de démarrage tourne en rond. Le fichier contient ce programme, écrit dans un langage très simple, avec une instruction par ligne. La machine ne possède qu’une seule mémoire, l’*accumulateur*, qui vaut 0 au départ.
+    **Contexte.** En plein vol, un enfant assis à côté du héros n’arrive plus à démarrer sa console de jeu portable : son programme de démarrage tourne en rond. On veut comprendre où il se bloque.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Le fichier contient ce programme, écrit dans un langage très simple, avec une instruction par ligne. Une instruction est formée d’une opération (`acc`, `jmp` ou `nop`), d’un espace, puis d’un entier toujours écrit avec son signe (`+4`, `-20`). La machine ne possède qu’une seule mémoire, l’*accumulateur*, qui vaut 0 au départ.
 
-    - Une instruction est formée d’une opération (`acc`, `jmp` ou `nop`) et d’un entier signé (`+4`, `-20`).
+    **La règle.**
 
     - `acc n` ajoute `n` à l’accumulateur, puis passe à la ligne suivante.
 
@@ -49,9 +65,17 @@ Vocabulaire utile pour lire le texte original :
 
     - `nop n` ne fait rien (l’argument est ignoré) et passe à la ligne suivante.
 
-    - On commence à la première ligne. Le programme finit par boucler : dès qu’une instruction est sur le point d’être exécutée une deuxième fois, on s’arrête **avant** de l’exécuter. Il faut renvoyer la valeur de l’accumulateur à ce moment.
+    - On commence à la première ligne, et l’on exécute les instructions une à une.
+
+    - Le programme finit par boucler : dès qu’une instruction est sur le point d’être exécutée une deuxième fois, on s’arrête **avant** de l’exécuter.
+
+    **La réponse attendue.** La valeur de l’accumulateur à ce moment. Par exemple, pour le programme de trois lignes `acc +3`, `acc -1`, `jmp -2`, l’accumulateur vaut 3 puis 2, puis le saut ramène à la première ligne, déjà exécutée : la réponse serait 2.
 
 ### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-1-1 }
+
+**But.** Vérifier qu’on sait exécuter les instructions dans les cas particuliers.
+
+**À quoi ça sert ?** La première question montre qu’un saut nul boucle sur place et qu’un `nop` ignore son argument ; la seconde précise le moment exact de l’arrêt, donc la valeur de l’accumulateur à renvoyer.
 
 Après lecture de l’énoncé et du résumé, vérifier sa compréhension :
 
@@ -60,6 +84,10 @@ Après lecture de l’énoncé et du résumé, vérifier sa compréhension :
 2.  Si l’instruction qui revient est un `acc`, son ajout est-il compté une seconde fois ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-1-2 }
+
+**But.** Exécuter un programme de huit lignes à la main, en notant l’accumulateur après chaque instruction.
+
+**À quoi ça sert ?** Le tableau obtenu est exactement ce que l’interpréteur devra calculer ; il donne un exemple dont on **connaît la réponse** (`8`), et il servira à retrouver une erreur pas à pas en cas de résultat faux.
 
 ```console
 acc +2
@@ -80,6 +108,10 @@ Exécuter le programme à la main dans un tableau à trois colonnes : numéro de
 
 ### <span class="exo-num">Exercice 3</span> — Lire le programme <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-1-3 }
 
+**But.** Transformer chaque ligne du fichier en un tuple (opération, argument entier).
+
+**À quoi ça sert ?** L’interpréteur travaille sur cette liste : la ligne numéro `ip` du programme est simplement `programme[ip]`. Les arguments doivent être des entiers pour pouvoir être ajoutés à l’accumulateur ou au numéro de ligne.
+
 Construire la liste `programme` de tuples `(operation, argument)`, l’argument étant un entier. Par exemple la ligne `jmp -4` donne `("jmp", -4)`.
 
 ??? pouce "Coup de pouce"
@@ -93,6 +125,10 @@ Construire la liste `programme` de tuples `(operation, argument)`, l’argument 
     **À essayer.** Que vaut `len(vus)` après `vus = {1, 2}` puis `vus.add(2)` ?
 
 ### <span class="exo-num">Exercice 4</span> — Un interpréteur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-1-4 }
+
+**But.** Simuler la machine, une instruction par tour de boucle, et s’arrêter dès qu’une instruction revient.
+
+**À quoi ça sert ?** C’est la réponse de la partie 1. Cet interpréteur est l’outil central du défi : la partie 2 le réutilise pour tester chaque réparation possible.
 
 Écrire une fonction `executer(programme)` qui simule la machine : une variable `acc`, une variable `ip` (numéro de l’instruction courante), et une boucle qui exécute une instruction par tour. La fonction s’arrête dès qu’une instruction s’apprête à être exécutée pour la deuxième fois et renvoie `acc`. Tester sur l’exemple du défi, puis sur vos données.
 
@@ -112,11 +148,15 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    Il faut maintenant réparer la console pour que le programme aille jusqu’au bout.
+    **Ce qui change.** Il faut maintenant réparer la console pour que le programme aille jusqu’au bout. Les instructions s’exécutent toujours de la même façon ; on cherche quelle ligne modifier.
 
-    - Exactement une instruction est fautive : un `jmp` devrait être un `nop`, ou un `nop` un `jmp`. Les `acc` sont corrects.
+    **La nouvelle règle.**
 
-    - Le programme réparé se termine, c’est-à-dire qu’il cherche à exécuter la ligne qui suit immédiatement la dernière. Il faut renvoyer la valeur de l’accumulateur à ce moment.
+    - Exactement une instruction est fautive : un `jmp` devrait être un `nop`, ou un `nop` un `jmp`. L’argument ne change pas, et les `acc` sont corrects.
+
+    - Le programme réparé se termine, c’est-à-dire qu’il cherche à exécuter la ligne qui suit immédiatement la dernière.
+
+    **La réponse attendue.** La valeur de l’accumulateur quand le programme réparé se termine. Par exemple, le programme `acc +4`, `jmp -1` boucle ; en remplaçant `jmp -1` par `nop -1`, il se termine avec un accumulateur égal à 4.
 
 !!! encadre "Méthode : copier une liste avec une tranche (a[:])"
 
@@ -138,6 +178,10 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="exo-num">Exercice 5</span> — Réparer le programme <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-1-5 }
 
+**But.** Essayer une à une les réparations autorisées et repérer celle qui fait terminer le programme.
+
+**À quoi ça sert ?** C’est la réponse de la partie 2. Il faut pour cela que l’interpréteur distingue une fin normale d’une boucle, et que chaque essai parte du programme d’origine.
+
 1.  Modifier `executer` pour qu’elle renvoie aussi un booléen indiquant si le programme s’est terminé normalement. Quelle condition sur `ip` signale une fin normale ?
 
 2.  Essayer toutes les modifications autorisées par l’énoncé, une à une, jusqu’à trouver celle qui fait terminer le programme. Sur l’exemple du défi, on doit obtenir `5`.
@@ -154,6 +198,10 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : combien d’exécutions ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-1-6 }
 
+**But.** Évaluer le coût de la méthode par essais successifs, puis réduire le nombre d’essais.
+
+**À quoi ça sert ?** La méthode précédente relance tout le programme à chaque essai : estimer son coût au pire montre ce qu’on peut gagner en éliminant les essais inutiles.
+
 Pour un programme de $n$ instructions, combien d’instructions la méthode précédente exécute-t-elle au pire ? Proposer et tester une idée pour réduire le nombre d’essais.
 
 ??? pouce "Coup de pouce"
@@ -161,6 +209,10 @@ Pour un programme de $n$ instructions, combien d’instructions la méthode pré
     Modifier une instruction jamais atteinte par l’exécution de la partie 1 ne change rien.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : une réparation en temps linéaire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-1-7 }
+
+**But.** Trouver la ligne à réparer sans essais, en voyant le programme comme un graphe de lignes.
+
+**À quoi ça sert ?** En remontant les flèches depuis la fin du programme, on sait d’avance quelles lignes y mènent : une seule exécution réparée suffit. Le problème de réparation, qui semblait demander de nombreux essais, se résout en temps linéaire.
 
 On note $n$ le nombre de lignes et $\mathrm{succ}(k)$ la ligne exécutée juste après la ligne $k$ ; la valeur $n$ représente la fin du programme.
 
@@ -200,7 +252,21 @@ On note $n$ le nombre de lignes et $\mathrm{succ}(k)$ la ligne exécutée juste 
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi est une variante en trois dimensions du jeu de la vie de Conway, dont la version plane est un exemple célèbre de système Turing-complet, notion vue dans ce chapitre.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** On part d’une petite grille plate de cases allumées ou éteintes, plongée dans un espace infini. À chaque étape, chaque case s’allume ou s’éteint selon le nombre de ses voisines allumées. On veut savoir combien de cases sont allumées après six étapes. La zone allumée grandit dans toutes les directions et chaque case a 26 voisines (80 en dimension 4) : impossible de suivre cela à la main.
+
+    **Ce qu’on réinvestit.** Ce défi est une variante en trois dimensions du *jeu de la vie* de Conway, dont la version plane est un exemple célèbre de système Turing-complet, notion vue dans ce chapitre : des règles locales très simples suffisent à produire des comportements aussi riches qu’un programme. Côté programmation, on représente l’espace infini par l’**ensemble** des seules cases allumées, et on construit les voisins d’un point de façon à ce que la dimension soit un simple paramètre.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre les règles (voisinage, allumage, extinction) et les appliquer à la main sur un petit exemple.
+
+    2.  Lire le fichier dans un ensemble de coordonnées.
+
+    3.  Écrire la fonction des voisins, puis celle qui calcule un cycle : six cycles donnent la réponse de la partie 1.
+
+    4.  Passer en dimension 4 en modifiant le moins de code possible, puis écrire un code valable pour toute dimension.
 
 ## Lire l’énoncé
 
@@ -216,19 +282,29 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Les elfes vous demandent de l’aide pour une source d’énergie expérimentale : une grille infinie de cubes, chacun actif ou inactif, qui évolue par cycles selon l’état de ses voisins. C’est une version en trois dimensions du célèbre *jeu de la vie* de Conway. Le fichier donne l’état d’une petite zone plate au départ.
+    **Contexte.** Les elfes vous demandent de l’aide pour une source d’énergie expérimentale : une grille infinie de cubes, chacun actif ou inactif, qui évolue par cycles selon l’état de ses voisins. C’est une version en trois dimensions du célèbre *jeu de la vie* de Conway. Avant de démarrer la source, il faut prévoir son état après la phase de démarrage, qui dure six cycles.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Le fichier est une petite grille de `#` (actif) et de `.` (inactif), toutes les lignes ayant la même longueur. C’est la tranche $z = 0$ de l’espace : le caractère de la ligne $y$, colonne $x$ (en numérotant à partir de 0), donne l’état du cube $(x, y, 0)$. Tous les autres cubes de l’espace, en nombre infini, sont inactifs au départ.
 
-    - Le fichier est une grille de `#` (actif) et de `.` (inactif). C’est la tranche $z = 0$ de l’espace : le caractère de la ligne $y$, colonne $x$, donne l’état du cube $(x, y, 0)$. Tous les autres cubes de l’espace sont inactifs.
+    **La règle.**
 
-    - Les voisins d’un cube sont les 26 cubes dont chaque coordonnée diffère d’au plus 1 de la sienne : les cubes qui le touchent par une face, une arête ou un coin.
+    - Les voisins d’un cube sont les 26 cubes dont chaque coordonnée diffère d’au plus 1 de la sienne : les cubes qui le touchent par une face, une arête ou un coin. Un cube n’est pas son propre voisin.
 
-    - À chaque cycle, tous les cubes changent en même temps. Un cube actif reste actif s’il a exactement 2 ou 3 voisins actifs, sinon il s’éteint. Un cube inactif s’allume s’il a exactement 3 voisins actifs.
+    - À chaque cycle, on compte les voisins actifs de chaque cube **dans l’état d’avant le cycle**, puis tous les cubes changent **en même temps**.
 
-    - La réponse est le nombre de cubes actifs après 6 cycles.
+    - Un cube actif reste actif s’il a exactement 2 ou 3 voisins actifs ; sinon, il devient inactif.
+
+    - Un cube inactif devient actif s’il a exactement 3 voisins actifs ; sinon, il reste inactif.
+
+    - Des cubes situés hors de la grille de départ (y compris hors du plan $z = 0$) peuvent donc s’allumer : la zone active grandit.
+
+    **La réponse attendue.** Le nombre de cubes actifs après 6 cycles. Par exemple, avec trois cubes actifs alignés au départ, le cube du milieu reste seul actif parmi eux (2 voisins actifs), les deux bouts s’éteignent (1 seul voisin actif) et 8 cubes qui entourent le milieu s’allument : après un cycle, il y a 9 cubes actifs.
 
 ### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-2-1 }
+
+**But.** Vérifier sa compréhension du voisinage et des deux règles d’évolution.
+
+**À quoi ça sert ?** Ce sont exactement les tests que fera la fonction `cycle` ; la dernière question explique pourquoi on ne pourra pas se contenter de parcourir la grille de départ.
 
 Questions de vérification, à traiter sur le cahier :
 
@@ -239,6 +315,10 @@ Questions de vérification, à traiter sur le cahier :
 3.  Un cube situé en dehors de la grille de départ peut-il devenir actif ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-2-2 }
+
+**But.** Appliquer les règles à la main sur une grille de 3 lignes.
+
+**À quoi ça sert ?** On obtient des valeurs de référence (5 cubes au départ, 12 après un cycle) qui serviront à tester chaque fonction avant de lancer la simulation sur les vraies données.
 
 On considère l’état initial (inventé) suivant, dans le plan $z = 0$ :
 
@@ -272,6 +352,10 @@ Combien de cubes actifs au départ ? Compter les voisins actifs du cube central 
 
 ### <span class="exo-num">Exercice 3</span> — Un ensemble de tuples <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-2-3 }
 
+**But.** Lire le fichier et ne garder que les coordonnées des cubes actifs, dans un ensemble.
+
+**À quoi ça sert ?** Un tableau ne peut pas représenter un espace infini qui grandit à chaque cycle ; l’ensemble des cubes actifs, lui, ne stocke que l’utile et permet de savoir en temps constant si un cube est actif. Toute la simulation travaillera sur cet ensemble.
+
 L’espace est infini : pas de liste de listes. Écrire une fonction `lire_actifs(nom_fichier)` qui renvoie l’**ensemble** des coordonnées `(x, y, 0)` des cubes actifs. Vérifier qu’on obtient 5 éléments sur l’exemple.
 
 ??? pouce "Coup de pouce"
@@ -296,6 +380,10 @@ L’espace est infini : pas de liste de listes. Écrire une fonction `lire_actif
 
 ### <span class="exo-num">Exercice 4</span> — Les voisins <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-2-4 }
 
+**But.** Obtenir la liste des 26 voisins d’un cube.
+
+**À quoi ça sert ?** Compter les voisins actifs d’un cube, c’est parcourir cette liste et tester l’appartenance à l’ensemble des actifs : cette fonction est appelée des milliers de fois par cycle, et c’est la seule qui changera vraiment en dimension 4.
+
 Écrire une fonction `voisins(cube)` qui renvoie la liste des 26 voisins d’un cube. La tester sur `(0, 0, 0)`.
 
 ??? pouce "Coup de pouce"
@@ -303,6 +391,10 @@ L’espace est infini : pas de liste de listes. Écrire une fonction `lire_actif
     Trois boucles imbriquées sur les décalages dans `[-1, 0, 1]`, en excluant le décalage nul.
 
 ### <span class="exo-num">Exercice 5</span> — Un cycle <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-2-5 }
+
+**But.** Calculer l’ensemble des cubes actifs après un cycle, puis répéter six fois.
+
+**À quoi ça sert ?** C’est la simulation elle-même : six appels successifs donnent la réponse de la partie 1. La difficulté est de choisir les cubes à examiner, puisqu’on ne peut pas parcourir un espace infini.
 
 Écrire une fonction `cycle(actifs)` qui renvoie le **nouvel** ensemble des cubes actifs. Quels cubes faut-il examiner ? Pas seulement les cubes actifs : la zone active grandit à chaque cycle. Simuler six cycles sur l’exemple du défi, puis sur vos données.
 
@@ -320,13 +412,23 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    Mauvaise surprise : la source d’énergie fonctionne en réalité dans un espace à quatre dimensions.
+    **Ce qui change.** Mauvaise surprise : la source d’énergie fonctionne en réalité dans un espace à quatre dimensions. Chaque cube a donc une quatrième coordonnée $w$, et beaucoup plus de voisins.
 
-    - Même simulation avec des points $(x, y, z, w)$ : l’état initial est dans le plan $z = w = 0$, et les voisins sont définis de la même façon (chaque coordonnée diffère d’au plus 1).
+    **La nouvelle règle.**
 
-    - La réponse est le nombre de cubes actifs après 6 cycles.
+    - Les points sont des quadruplets $(x, y, z, w)$ ; la grille du fichier donne l’état des points $(x, y, 0, 0)$, tous les autres sont inactifs.
+
+    - Les voisins sont définis de la même façon : chaque coordonnée diffère d’au plus 1, le point lui-même exclu.
+
+    - Les règles d’allumage et d’extinction sont exactement les mêmes qu’en partie 1.
+
+    **La réponse attendue.** Le nombre de cubes actifs après 6 cycles, en dimension 4.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Une dimension de plus <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-2-6 }
+
+**But.** Adapter la lecture et les voisins à la dimension 4, sans toucher à la logique du cycle.
+
+**À quoi ça sert ?** Si les fonctions ont été bien découpées, la règle d’évolution ne dépend pas de la dimension : seules les fonctions qui fabriquent les points changent, et la réponse de la partie 2 s’obtient presque gratuitement.
 
 Combien de voisins un point a-t-il en dimension 4 ? Si votre code est bien écrit, peu de choses changent : adapter `lire_actifs` et `voisins`. Sur l’exemple du défi, on doit trouver `36` cubes actifs après un cycle et `680` après six cycles.
 
@@ -335,6 +437,10 @@ Combien de voisins un point a-t-il en dimension 4 ? Si votre code est bien écri
     En dimension $d$, un point a $3^d - 1$ voisins.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Défi : un code pour toutes les dimensions <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-2-7 }
+
+**But.** Écrire une seule fonction de simulation où la dimension est un paramètre.
+
+**À quoi ça sert ?** Plutôt que deux programmes presque identiques, un seul code résout les deux parties : c’est la généralisation, et elle permet aussi de mesurer comment le temps de calcul explose quand la dimension augmente.
 
 Écrire `voisins(point)` pour un tuple de longueur quelconque, sans écrire une boucle par dimension, et une fonction `simuler(grille, dimension, nb_cycles)` qui sert aux deux parties. Que donne la dimension 2 ? Et la dimension 5 sur l’exemple (mesurer le temps) ?
 
@@ -345,6 +451,10 @@ Combien de voisins un point a-t-il en dimension 4 ? Si votre code est bien écri
 ## Approfondissement
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 1 : les décalages par récursivité <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-aoc-2-8 }
+
+**But.** Construire les décalages vers les voisins avec une fonction récursive.
+
+**À quoi ça sert ?** La liste des décalages en dimension $d$ se déduit de celle en dimension $d - 1$ : c’est une définition récursive naturelle, qui donne un code court valable pour toute dimension, et une autre manière de répondre au défi précédent.
 
 On veut construire la liste des décalages par une fonction récursive, plutôt qu’avec la boucle de l’encadré « Méthode ».
 
