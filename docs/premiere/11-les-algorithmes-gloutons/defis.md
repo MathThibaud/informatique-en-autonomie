@@ -22,7 +22,21 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi est une application directe de ce chapitre : un algorithme glouton, dont il faudra justifier qu’il donne bien la meilleure solution.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Chaque ligne du fichier est une suite de chiffres. Il faut y choisir quelques chiffres, sans changer leur ordre, pour former le plus grand nombre possible : deux chiffres dans la partie 1, douze dans la partie 2, sur deux cents lignes de cent chiffres. Essayer tous les choix est envisageable pour deux chiffres, mais totalement impossible pour douze : il faut une méthode plus intelligente.
+
+    **Ce qu’on réinvestit.** Les **algorithmes gloutons** de ce chapitre : on construit le nombre chiffre après chiffre, de gauche à droite, en prenant à chaque fois le meilleur chiffre possible, sans revenir en arrière. Comme un glouton ne donne pas toujours la meilleure solution, il faudra aussi **justifier** qu’il est correct ici, et le vérifier en le comparant à une recherche exhaustive.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre la règle avec des questions courtes, puis chercher à la main le meilleur nombre sur quatre lignes.
+
+    2.  Résoudre la partie 1 en essayant tous les couples de chiffres : une méthode lente mais sûre.
+
+    3.  Écrire une version gloutonne et vérifier qu’elle donne les mêmes résultats.
+
+    4.  Pour la partie 2, constater que l’essai de tous les choix est impossible, puis généraliser le glouton à $k$ chiffres.
 
 ## Lire l’énoncé
 
@@ -37,17 +51,25 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Dans le hall d’un immeuble, les ascenseurs sont en panne, et même l’escalier mécanique est à l’arrêt faute de courant. Des batteries de secours peuvent l’alimenter. Elles sont rangées en groupes, et chaque batterie porte une tension de 1 à 9. Chaque ligne du fichier décrit un groupe : la suite des tensions de ses batteries, dans l’ordre où elles sont rangées.
+    **Contexte.** Dans le hall d’un immeuble, les ascenseurs sont en panne, et même l’escalier mécanique est à l’arrêt faute de courant. Des batteries de secours peuvent l’alimenter. Elles sont rangées en groupes, et chaque batterie porte une tension de 1 à 9. Il faut tirer le maximum de chaque groupe.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Chaque ligne du fichier décrit un groupe de batteries : c’est une suite de chiffres de 1 à 9, sans espace, par exemple `4815`. Chaque chiffre est la tension d’une batterie, et les chiffres sont dans l’ordre où les batteries sont rangées.
 
-    - Dans chaque groupe, on allume **exactement deux** batteries. Le groupe produit le nombre à deux chiffres formé par leurs tensions, **dans l’ordre de la ligne** : on ne peut pas réordonner les batteries.
+    **La règle.**
 
-    - On veut, pour chaque groupe, le plus grand nombre possible.
+    - Dans chaque groupe, on allume **exactement deux** batteries.
 
-    - Réponse : la somme de ces maxima sur toutes les lignes.
+    - Le groupe produit le nombre à deux chiffres formé par leurs tensions, **dans l’ordre de la ligne** : la batterie la plus à gauche donne le chiffre des dizaines. On ne peut pas réordonner les batteries.
+
+    - Pour chaque groupe, on cherche le plus grand nombre que l’on peut produire ainsi.
+
+    **La réponse attendue.** La somme de ces maxima sur toutes les lignes. Par exemple, dans le groupe `4815`, on peut former 48, 41, 45, 81, 85 ou 15 : le maximum est 85.
 
 ### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-les-algorithmes-gloutons-aoc-1-1 }
+
+**But.** Vérifier sur des cas particuliers qu’on a bien compris la contrainte d’ordre et la façon de choisir les deux chiffres.
+
+**À quoi ça sert ?** Ces trois cas contiennent déjà l’idée de la méthode gloutonne : le chiffre des dizaines ne peut pas être le dernier de la ligne, et en cas d’égalité il faut bien choisir lequel prendre.
 
 Après lecture du résumé (et de l’énoncé), vérifier sa compréhension sur ces cas particuliers :
 
@@ -58,6 +80,10 @@ Après lecture du résumé (et de l’énoncé), vérifier sa compréhension sur
 3.  Dans `9399`, quels chiffres faut-il choisir ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-les-algorithmes-gloutons-aoc-1-2 }
+
+**But.** Trouver à la main le meilleur nombre de deux chiffres pour quatre lignes, et leur somme.
+
+**À quoi ça sert ?** On obtient un exemple dont on **connaît la réponse** (394), qui servira à tester les deux méthodes de la partie 1. En cherchant, on découvre aussi comment on procède naturellement : c’est souvent un glouton.
 
 On considère le fichier (inventé) suivant :
 
@@ -73,6 +99,10 @@ Pour chaque ligne, trouver le plus grand nombre de deux chiffres possible. Véri
 ## Programmer la partie 1
 
 ### <span class="exo-num">Exercice 3</span> — Lire et tester toutes les paires <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-les-algorithmes-gloutons-aoc-1-3 }
+
+**But.** Lire le fichier et résoudre la partie 1 en essayant tous les couples de chiffres possibles.
+
+**À quoi ça sert ?** Cette méthode exhaustive est simple et sûre : elle donne la réponse de la partie 1 et servira de référence pour vérifier la méthode gloutonne, plus rapide, de la question suivante.
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
@@ -126,6 +156,10 @@ fichier.close()
 
 ### <span class="exo-num">Exercice 4</span> — Une idée gloutonne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-les-algorithmes-gloutons-aoc-1-4 }
 
+**But.** Écrire une version qui choisit d’abord le meilleur chiffre des dizaines, puis le meilleur chiffre des unités après lui.
+
+**À quoi ça sert ?** Deux parcours au lieu de tous les couples : c’est cette idée, et non la recherche exhaustive, qui pourra être généralisée à douze chiffres dans la partie 2.
+
 Écrire une seconde fonction `meilleur_glouton(ligne)` qui ne fait que deux parcours : choisir d’abord le meilleur chiffre des dizaines, puis le meilleur chiffre des unités *après* lui. Vérifier qu’elle donne les mêmes résultats que la précédente.
 
 ??? pouce "Coup de pouce"
@@ -146,13 +180,31 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    Deux batteries par groupe ne suffisent pas à faire repartir l’escalier. On allume maintenant **exactement 12** batteries dans chaque groupe, toujours sans changer leur ordre, pour former le plus grand nombre de 12 chiffres possible. Réponse : la somme de ces maxima sur toutes les lignes.
+    **Ce qui change.** Deux batteries par groupe ne suffisent pas à faire repartir l’escalier : il faut en allumer beaucoup plus.
+
+    **La nouvelle règle.**
+
+    - Dans chaque groupe, on allume maintenant **exactement 12** batteries.
+
+    - Elles forment un nombre de 12 chiffres, toujours dans l’ordre de la ligne, sans réordonner les batteries.
+
+    - Pour chaque groupe, on cherche le plus grand nombre de 12 chiffres que l’on peut produire ainsi.
+
+    **La réponse attendue.** La somme de ces maxima sur toutes les lignes. Par exemple, pour un groupe de 13 batteries, cela revient à en laisser une seule éteinte : avec `1234567891234`, on éteint le premier `1` et l’on obtient 234567891234.
 
 ### <span class="exo-num">Exercice 5</span> — Combien de possibilités ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-les-algorithmes-gloutons-aoc-1-5 }
+
+**But.** Estimer le nombre de choix possibles dans la partie 2.
+
+**À quoi ça sert ?** On constate que la méthode exhaustive de la partie 1 est ici inutilisable : c’est ce qui justifie de généraliser la méthode gloutonne.
 
 Dans la partie 2, on ne choisit plus deux chiffres. Regarder la longueur des lignes de vos données. Pour une ligne de 100 chiffres, essayer toutes les possibilités est-il raisonnable ? (Pour 12 chiffres choisis parmi 100, il y a plus de $10^{15}$ possibilités.)
 
 ### <span class="exo-num">Exercice 6</span> — Le glouton généralisé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-les-algorithmes-gloutons-aoc-1-6 }
+
+**But.** Écrire une fonction qui choisit `k` chiffres de gauche à droite, avec le même principe glouton qu’en partie 1.
+
+**À quoi ça sert ?** Avec `k = 12`, elle donne la réponse de la partie 2 ; avec `k = 2`, elle doit redonner celle de la partie 1, ce qui permet de la tester.
 
 Écrire une fonction `meilleur(ligne, k)` qui choisit `k` chiffres, de gauche à droite, avec le même principe glouton. La partie 1 correspond à `k = 2`. Sur l’exemple du défi, avec `k = 12`, la première ligne donne `819465123987` et le total vaut `2676756647502`.
 
@@ -181,6 +233,10 @@ Dans la partie 2, on ne choisit plus deux chiffres. Regarder la longueur des lig
     *À essayer.* Écrire une boucle qui construit une chaîne de 15 chiffres, chacun tiré au hasard entre 1 et 9.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : convaincre et tester <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-les-algorithmes-gloutons-aoc-1-7 }
+
+**But.** Vérifier sur de nombreux exemples tirés au hasard que le glouton donne toujours le même résultat qu’une recherche exhaustive, puis justifier pourquoi.
+
+**À quoi ça sert ?** Un algorithme glouton n’est pas toujours correct : on apprend ici à s’en convaincre de deux façons complémentaires, par des tests automatiques et par un raisonnement.
 
 1.  Écrire une fonction `exhaustif(ligne, k)` qui essaie tous les choix de `k` chiffres pris dans l’ordre de la ligne et renvoie le plus grand nombre obtenu.
 

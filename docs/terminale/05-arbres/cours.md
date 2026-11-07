@@ -10,7 +10,7 @@ Programme (BO)
 :   *« Arbres : structures hiérarchiques. Arbres binaires : nœuds, racines, feuilles, sous-arbres gauches, sous-arbres droits. Identifier des situations nécessitant une structure de données arborescente. Évaluer quelques mesures des arbres binaires (taille, encadrement de la hauteur, etc.). »* *« Algorithmes sur les arbres binaires et sur les arbres binaires de recherche. Calculer la taille et la hauteur d’un arbre. Parcourir un arbre de différentes façons (ordres infixe, préfixe ou suffixe ; ordre en largeur d’abord). Rechercher une clé dans un arbre de recherche, insérer une clé. »*
 
 Prérequis
-:   la **récursivité** (indispensable ici !), les classes et objets (chapitre *Programmation objet*), les piles et les files, la recherche par dichotomie. (→ fiches de révision : ch. 1, ch. 2, ch. 3)
+:   la **récursivité** (indispensable ici !), les classes et objets (chapitre *Programmation objet*), les piles et les files, la recherche par dichotomie. (→ fiches de révision : ch. 1, ch. 2, ch. 3) $\to$ rappels de 1re : dichotomie
 
 Objectifs
 :   *reconnaître* une situation qui appelle un arbre ; *maîtriser* le vocabulaire ; *calculer* taille et hauteur ; *implémenter* un arbre binaire (de plusieurs façons) et le *parcourir* ; *comprendre* l’arbre binaire de recherche, y *rechercher* et y *insérer* une valeur.
@@ -45,29 +45,29 @@ Depuis le début de l’année, vos structures étaient **linéaires** : listes,
 
 ## Vocabulaire : de la racine aux feuilles
 
-Voici un arbre. On le dessine, par tradition informatique, **la racine en haut** et les feuilles en bas.
+<span id="lex-arbre05" class="ancre"></span> Voici un arbre. On le dessine, par tradition informatique, **la racine en haut** et les feuilles en bas.
 
 ![](../figures/f68630cf0d0b20c5.svg){ .tikz loading=lazy }
 
 !!! definition "Définition 1 — Le vocabulaire de l’arbre"
 
-    - chaque élément est un **nœud** (ici `A`, `B`, …, `H`) ;
+    - chaque élément est un <span id="lex-noeud05" class="ancre"></span>**nœud** (ici `A`, `B`, …, `H`) ;
 
-    - le nœud du sommet, sans père, est la **racine** (`A`) ;
+    - le nœud du sommet, sans père, est la <span id="lex-racine05" class="ancre"></span>**racine** (`A`) ;
 
-    - `B` et `C` sont les **fils** de `A` ; `A` est leur **père** ;
+    - `B` et `C` sont les <span id="lex-filspere05" class="ancre"></span>**fils** de `A` ; `A` est leur **père** ;
 
-    - un nœud sans fils est une **feuille** (`D`, `E`, `F`, `H`) ;
+    - un nœud sans fils est une <span id="lex-feuille05" class="ancre"></span>**feuille** (`D`, `E`, `F`, `H`) ;
 
-    - le lien entre deux nœuds est une **arête** (ou *branche*) ;
+    - le lien entre deux nœuds est une <span id="lex-arete05" class="ancre"></span>**arête** (ou *branche*) ;
 
-    - tout nœud est la racine d’un **sous-arbre** (celui de `C` contient `C`, `F`, `G`, `H`).
+    - tout nœud est la racine d’un <span id="lex-sousarbre05" class="ancre"></span>**sous-arbre** (celui de `C` contient `C`, `F`, `G`, `H`).
 
 <span class="retouract">↺ Retour sur l'activité.</span> Les mots inventés dans l’activité ont maintenant leur nom officiel : l’élément du haut (`Documents`, le vainqueur du tournoi) est la **racine**, ceux du bas (les fichiers, les joueurs du premier tour) sont des **feuilles**, et « un élément avec tout ce qui est en dessous de lui » est un **sous-arbre**.
 
 !!! definition "Définition 2 — Arbre binaire"
 
-    Un arbre est **binaire** si chaque nœud possède **au plus deux** fils, appelés **fils gauche** et **fils droit** (l’un des deux, ou les deux, peuvent manquer). L’arbre ci-dessus est binaire. Dans la suite, sauf mention contraire, « arbre » signifiera « arbre binaire ».
+    Un arbre est <span id="lex-arbrebinaire05" class="ancre"></span>**binaire** si chaque nœud possède **au plus deux** fils, appelés **fils gauche** et **fils droit** (l’un des deux, ou les deux, peuvent manquer). L’arbre ci-dessus est binaire. Dans la suite, sauf mention contraire, « arbre » signifiera « arbre binaire ».
 
 <span class="retouract">↺ Retour sur l'activité.</span> Le tournoi et la famille de l’activité étaient des arbres binaires (au plus deux traits vers le bas à chaque élément) ; l’arborescence des dossiers ne l’était pas, puisque `Documents` a trois fils.
 
@@ -83,15 +83,15 @@ Voici un arbre. On le dessine, par tradition informatique, **la racine en haut**
 
 !!! definition "Définition 3 — Taille"
 
-    La **taille** d’un arbre est son **nombre de nœuds**. L’arbre ci-dessus a pour taille $8$. L’arbre vide a pour taille $0$.
+    La <span id="lex-taillearbre05" class="ancre"></span>**taille** d’un arbre est son **nombre de nœuds**. L’arbre ci-dessus a pour taille $8$. L’arbre vide a pour taille $0$.
 
 !!! definition "Définition 4 — Profondeur d’un nœud"
 
-    La **profondeur** d’un nœud est le nombre d’**arêtes** du chemin qui va de la racine jusqu’à lui. La racine est à la profondeur $0$, ses fils à $1$, etc. (Dans notre exemple, `H` est à la profondeur $3$.) C’est la convention de Knuth (le « niveau » d’un nœud) et celle des sujets de bac ; on rencontre parfois l’autre, qui compte les nœuds (racine à la profondeur $1$) : **suivez l’énoncé**.
+    La <span id="lex-profondeur05" class="ancre"></span>**profondeur** d’un nœud est le nombre d’**arêtes** du chemin qui va de la racine jusqu’à lui. La racine est à la profondeur $0$, ses fils à $1$, etc. (Dans notre exemple, `H` est à la profondeur $3$.) C’est la convention de Knuth (le « niveau » d’un nœud) et celle des sujets de bac ; on rencontre parfois l’autre, qui compte les nœuds (racine à la profondeur $1$) : **suivez l’énoncé**.
 
 !!! definition "Définition 5 — Hauteur"
 
-    La **hauteur** d’un arbre est le **nombre de nœuds** du plus long chemin de la racine à une feuille — autrement dit la profondeur maximale de ses nœuds, **plus 1**. Dans notre exemple, le chemin `A--C--G--H` donne une hauteur de $4$.
+    La <span id="lex-hauteur05" class="ancre"></span>**hauteur** d’un arbre est le **nombre de nœuds** du plus long chemin de la racine à une feuille — autrement dit la profondeur maximale de ses nœuds, **plus 1**. Dans notre exemple, le chemin `A--C--G--H` donne une hauteur de $4$.
 
 !!! regle "Règle 1 — Attention : deux conventions pour la hauteur !"
 
@@ -175,13 +175,13 @@ a = (1, (2, None, None), (3, None, (4, None, None)))
 
 ### Les parcours en profondeur
 
-On plonge dans un sous-arbre avant d’explorer l’autre. Selon le moment où l’on « visite » la racine, on distingue trois parcours.
+<span id="lex-parcoursprofondeur05" class="ancre"></span> On plonge dans un sous-arbre avant d’explorer l’autre. Selon le moment où l’on « visite » la racine, on distingue trois parcours.
 
 | **Parcours** | **Ordre** | **Utile pour…** |
 |:---|:---|:---|
-| **préfixe** | racine, puis gauche, puis droite | copier/recréer l’arbre |
-| **infixe** | gauche, puis racine, puis droite | **trier** (dans un ABR, voir plus bas) |
-| **suffixe** | gauche, puis droite, puis racine | évaluer, supprimer l’arbre |
+| <span id="lex-prefixe05" class="ancre"></span>**préfixe** | racine, puis gauche, puis droite | copier/recréer l’arbre |
+| <span id="lex-infixe05" class="ancre"></span>**infixe** | gauche, puis racine, puis droite | **trier** (dans un ABR, voir plus bas) |
+| <span id="lex-suffixe05" class="ancre"></span>**suffixe** | gauche, puis droite, puis racine | évaluer, supprimer l’arbre |
 
 ```python
 def prefixe(a):
@@ -209,7 +209,7 @@ Une astuce pour retrouver ces trois ordres sans se tromper : on fait le **tour d
 
 ### Le parcours en largeur
 
-Ici, on visite l’arbre **niveau par niveau**, de gauche à droite (la racine, puis ses fils, puis les petits-fils…). Ce parcours n’est *pas* récursif : il s’appuie sur une **file** (voir le chapitre *Structures linéaires*). On enfile la racine, puis, tant que la file n’est pas vide, on défile un nœud, on le visite et on enfile ses fils.
+<span id="lex-parcourslargeur05" class="ancre"></span> Ici, on visite l’arbre **niveau par niveau**, de gauche à droite (la racine, puis ses fils, puis les petits-fils…). Ce parcours n’est *pas* récursif : il s’appuie sur une **file** (voir le chapitre *Structures linéaires*). On enfile la racine, puis, tant que la file n’est pas vide, on défile un nœud, on le visite et on enfile ses fils.
 
 ```python
 def largeur(a):
@@ -278,7 +278,7 @@ Un arbre quelconque ne facilite pas la recherche. Mais si l’on **range** les v
 
 !!! definition "Définition 6 — Arbre binaire de recherche"
 
-    Un **arbre binaire de recherche** (ABR) est un arbre binaire où, pour **chaque** nœud :
+    Un <span id="lex-abr05" class="ancre"></span>**arbre binaire de recherche** (ABR) est un arbre binaire où, pour **chaque** nœud :
 
     - toutes les valeurs de son sous-arbre **gauche** sont **strictement plus petites** que sa valeur ;
 

@@ -37,11 +37,11 @@ Objectifs
 
 !!! definition "Définition 1 — Table, descripteur, enregistrement"
 
-    Une **table de données** organise l’information en lignes et colonnes.
+    Une <span id="lex-table08" class="ancre"></span>**table de données** organise l’information en lignes et colonnes.
 
-    - un **descripteur** (ou *attribut*) est le nom d’une colonne : ce qu’on renseigne pour chacun ;
+    - un <span id="lex-descripteur08" class="ancre"></span>**descripteur** (ou *attribut*) est le nom d’une colonne : ce qu’on renseigne pour chacun ;
 
-    - un **enregistrement** (une *fiche*, une *ligne*) donne **une valeur pour chaque descripteur**.
+    - un <span id="lex-enregistrement08" class="ancre"></span>**enregistrement** (une *fiche*, une *ligne*) donne **une valeur pour chaque descripteur**.
 
     Un enregistrement est donc un **$p$-uplet nommé** : une collection de couples `descripteur : valeur`.
 
@@ -58,7 +58,7 @@ Ici les **descripteurs** sont `prenom`, `sexe`, `annee`, `nombre`. La ligne de L
 
 !!! definition "Définition 2 — Le format CSV"
 
-    Un fichier **CSV** (*Comma-Separated Values*, « valeurs séparées par des virgules ») est un simple fichier **texte** qui représente une table :
+    Un fichier <span id="lex-csv08" class="ancre"></span>**CSV** (*Comma-Separated Values*, « valeurs séparées par des virgules ») est un simple fichier **texte** qui représente une table :
 
     - la **première ligne** donne les descripteurs (l’*en-tête*) ;
 
@@ -92,7 +92,7 @@ Alba,F,2023,3088
 !!! remarque "Remarque — Deux pièges très concrets : le séparateur et l’encodage"
 
     **(1) Virgule ou point-virgule ?** En France, la virgule sert déjà de séparateur *décimal* (`3,14`). Pour éviter la confusion, les fichiers « à la française » utilisent le **point-virgule** `;` comme séparateur de colonnes. Il faut donc **toujours vérifier** quel séparateur est utilisé avant de traiter un fichier.  
-    **(2) L’encodage.** Un fichier texte range chaque caractère selon un **encodage**. Le standard aujourd’hui est **UTF-8** (il connaît les accents, les emojis…). Si on ouvre un fichier avec le mauvais encodage, `é` peut devenir `Ã©`. On précisera donc `encoding="utf-8"` à l’ouverture.
+    **(2) L’encodage.** Un fichier texte range chaque caractère selon un <span id="lex-encodage08" class="ancre"></span>**encodage**. Le standard aujourd’hui est **UTF-8** (il connaît les accents, les emojis…). Si on ouvre un fichier avec le mauvais encodage, `é` peut devenir `Ã©`. On précisera donc `encoding="utf-8"` à l’ouverture.
 
 !!! exemple "Exemple — Une vraie table publique : le fichier des prénoms de l’INSEE"
 
@@ -110,7 +110,7 @@ Alba,F,2023,3088
 
 ## Représenter une table : la liste de dictionnaires
 
-Puisqu’un enregistrement associe une valeur à chaque descripteur, l’objet Python qui lui ressemble le plus est le **dictionnaire** (chapitre *Les types construits*). Toute la table devient alors une **liste de dictionnaires**.
+Puisqu’un enregistrement associe une valeur à chaque descripteur, l’objet Python qui lui ressemble le plus est le **dictionnaire** (chapitre *Les types construits*). Toute la table devient alors une <span id="lex-listedict08" class="ancre"></span>**liste de dictionnaires**.
 
 !!! regle "Règle 1 — Table $=$ liste de dictionnaires"
 
@@ -149,7 +149,7 @@ On accède alors à une valeur en deux temps : d’abord la fiche (par son **ind
 
 ## Importer une table depuis un CSV
 
-Saisir la table à la main serait absurde pour 700 000 lignes. La bibliothèque standard `csv` sait lire un fichier et en faire **directement** une liste de dictionnaires, grâce à `csv.DictReader` qui utilise la ligne d’en-tête comme clés.
+Saisir la table à la main serait absurde pour 700 000 lignes. La bibliothèque standard `csv` sait lire un fichier et en faire **directement** une liste de dictionnaires, grâce à <span id="lex-dictreader08" class="ancre"></span>`csv.DictReader` qui utilise la ligne d’en-tête comme clés.
 
 !!! regle "Règle 2 — Le patron d’importation d’un CSV"
 
@@ -163,7 +163,7 @@ Saisir la table à la main serait absurde pour 700 000 lignes. La bibliothèqu
         return table
     ```
 
-    - `open(...)` ouvre le fichier ; `with` le **referme** tout seul à la fin ;
+    - <span id="lex-open08" class="ancre"></span>`open(...)` ouvre le fichier ; `with` le **referme** tout seul à la fin ;
 
     - `csv.DictReader` lit l’**en-tête**, puis transforme chaque ligne en dictionnaire ; si le séparateur est le point-virgule, on le précise : `csv.DictReader(f, delimiter=";")` ; pour un fichier **tabulé** (colonnes séparées par des tabulations, souvent d’extension `.tsv` ou `.txt`), on écrit `delimiter="\t"` ;
 
@@ -199,6 +199,8 @@ Saisir la table à la main serait absurde pour 700 000 lignes. La bibliothèqu
 Sélectionner les lignes qui vérifient un critère, c’est **parcourir** la table et **garder** celles qui conviennent dans une nouvelle liste. C’est le patron du parcours, avec un accumulateur qui est… une liste.
 
 !!! regle "Règle 3 — Filtrer selon un critère"
+
+    <span id="lex-filtrer08" class="ancre"></span>
 
     ```python
     def selection(table, sexe, annee):
@@ -239,7 +241,7 @@ def chercher(table, prenom):
 
 ### Nettoyer une table : doublons et cohérence
 
-Une table réelle contient presque toujours des **erreurs de saisie** : une même fiche recopiée deux fois (un **doublon**), ou une valeur impossible (un nombre d’attributions négatif, une année dans le futur). Avant de calculer, on les recherche : ce sont encore des **parcours**.
+Une table réelle contient presque toujours des **erreurs de saisie** : une même fiche recopiée deux fois (un <span id="lex-doublon08" class="ancre"></span>**doublon**), ou une valeur impossible (un nombre d’attributions négatif, une année dans le futur). Avant de calculer, on les recherche : ce sont encore des **parcours**.
 
 !!! regle "Règle 4 — Repérer les doublons, tester la cohérence"
 
@@ -333,13 +335,15 @@ Trier une table, c’est ranger ses fiches selon les valeurs d’**un** descript
 
 !!! regle "Règle 6 — Trier avec sorted et une clé"
 
+    <span id="lex-key08" class="ancre"></span>
+
     ```python
     def trier_par_nombre(table):
         return sorted(table, key=lambda ligne: int(ligne["nombre"]),
                       reverse=True)
     ```
 
-    - `key` indique la valeur à comparer pour chaque fiche. La petite expression `lambda ligne: …` est une fonction anonyme qui, à une fiche, associe sa clé de tri ;
+    - `key` indique la valeur à comparer pour chaque fiche. La petite expression <span id="lex-lambda08" class="ancre"></span>`lambda ligne: …` est une fonction anonyme qui, à une fiche, associe sa clé de tri ;
 
     - `reverse=True` trie du plus grand au plus petit ;
 
@@ -368,7 +372,7 @@ Trier une table, c’est ranger ses fiches selon les valeurs d’**un** descript
 
 ## Fusionner deux tables : la jointure
 
-L’information est souvent **répartie** sur plusieurs tables reliées par un descripteur commun. Les rassembler s’appelle une **fusion** (ou *jointure*).
+L’information est souvent **répartie** sur plusieurs tables reliées par un descripteur commun. Les rassembler s’appelle une <span id="lex-jointure08" class="ancre"></span>**fusion** (ou *jointure*).
 
 !!! definition "Définition 3 — Fusion sur un descripteur commun"
 
@@ -413,7 +417,7 @@ La table obtenue réunit les colonnes des deux tables, une ligne par commune :
 
 !!! remarque "Remarque — Le domaine de valeurs"
 
-    Le **domaine de valeurs** d’un descripteur est l’ensemble des valeurs qu’il peut prendre (par exemple, pour `dep` : les codes de département, écrits en texte `"06"`, `"2A"`…). Pour fusionner, les deux descripteurs doivent prendre leurs valeurs dans le **même domaine** : un code `"06"` (texte) ne sera jamais égal à l’entier `6`, et un code de département ne se compare pas à un *nom* de département. Avant une jointure, on vérifie donc que les deux colonnes s’écrivent de la même façon.
+    Le <span id="lex-domaine08" class="ancre"></span>**domaine de valeurs** d’un descripteur est l’ensemble des valeurs qu’il peut prendre (par exemple, pour `dep` : les codes de département, écrits en texte `"06"`, `"2A"`…). Pour fusionner, les deux descripteurs doivent prendre leurs valeurs dans le **même domaine** : un code `"06"` (texte) ne sera jamais égal à l’entier `6`, et un code de département ne se compare pas à un *nom* de département. Avant une jointure, on vérifie donc que les deux colonnes s’écrivent de la même façon.
 
 <span id="cours-08-20" class="ancre"></span>
 

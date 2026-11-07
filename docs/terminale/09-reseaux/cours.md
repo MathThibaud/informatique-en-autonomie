@@ -10,7 +10,7 @@ Programme (BO)
 :   *« Protocoles de routage. Identifier, suivant le protocole de routage utilisé, la route empruntée par un paquet. »* Commentaire du programme : *« En mode débranché, les tables de routage étant données, on se réfère au nombre de sauts (protocole RIP) ou au coût des routes (protocole OSPF). Le lien avec les algorithmes de recherche de chemin sur un graphe est mis en évidence. »*
 
 Prérequis
-:   la notion de **réseau** et d’**adresse IP** (Première), les **graphes** (chemins, plus court chemin), la notion de **coût**. L’algorithme de **Dijkstra** (projet du chapitre *Graphes*) éclaire OSPF, mais n’est **pas exigé** (voir la section dédiée, au-delà du programme). (→ fiches de révision : ch. 8)
+:   la notion de **réseau** et d’**adresse IP** (Première), les **graphes** (chemins, plus court chemin), la notion de **coût**. L’algorithme de **Dijkstra** (projet du chapitre *Graphes*) éclaire OSPF, mais n’est **pas exigé** (voir la section dédiée, au-delà du programme). (→ fiches de révision : ch. 8) $\to$ rappels de 1re : Web et réseau
 
 Objectifs
 :   *distinguer* machine, switch et routeur ; *comprendre* le voyage d’un paquet à travers les *couches* ; *lire* et *utiliser* une table de routage **donnée** ; *identifier* la route empruntée par un paquet selon le protocole (sauts pour RIP, coûts pour OSPF), et *compléter* la table d’un petit réseau ; *comparer* les choix de RIP et d’OSPF.
@@ -41,7 +41,7 @@ C’est toute la question de ce chapitre. **Internet** n’est pas une machine g
 
 !!! definition "Définition 1 — Réseau local, switch, routeur"
 
-    Un **réseau local** (LAN) regroupe des machines proches partageant la même **adresse réseau**. Un **switch** (commutateur) relie les machines *à l’intérieur* d’un même réseau local. Un **routeur** relie *plusieurs réseaux locaux entre eux* : il possède plusieurs **interfaces** (cartes réseau), une par réseau auquel il est raccordé. **Internet $=$ l’interconnexion de tous ces réseaux par des routeurs.**
+    Un <span id="lex-reseaulocal09" class="ancre"></span>**réseau local** (LAN) regroupe des machines proches partageant la même **adresse réseau**. Un <span id="lex-switch09" class="ancre"></span>**switch** (commutateur) relie les machines *à l’intérieur* d’un même réseau local. Un <span id="lex-routeur09" class="ancre"></span>**routeur** relie *plusieurs réseaux locaux entre eux* : il possède plusieurs **interfaces** (cartes réseau), une par réseau auquel il est raccordé. **Internet $=$ l’interconnexion de tous ces réseaux par des routeurs.**
 
 ![](../figures/2d71d3dd0e29f129.svg){ .tikz loading=lazy }
 
@@ -53,11 +53,11 @@ Dans un réseau local, un paquet destiné à une machine *du même réseau* y va
 
 ## Les adresses IP : reconnaître son réseau
 
-Chaque interface possède une **adresse IP** (en IPv4 : quatre octets, soit quatre nombres de $0$ à $255$, par exemple `172.16.5.3` — donc $32$ bits en tout, d’où l’intérêt de l’écriture binaire vue en Première). Cette adresse se découpe en deux parties : une partie **réseau** (commune à toutes les machines du réseau local) et une partie **hôte** (qui identifie la machine dans ce réseau). Où se situe la frontière ? C’est le rôle du **masque**.
+Chaque interface possède une <span id="lex-adresseip09" class="ancre"></span>**adresse IP** (en IPv4 : quatre octets, soit quatre nombres de $0$ à $255$, par exemple `172.16.5.3` — donc $32$ bits en tout, d’où l’intérêt de l’écriture binaire vue en Première). Cette adresse se découpe en deux parties : une partie **réseau** (commune à toutes les machines du réseau local) et une partie **hôte** (qui identifie la machine dans ce réseau). Où se situe la frontière ? C’est le rôle du **masque**.
 
 !!! definition "Définition 2 — Notation CIDR (le /n)"
 
-    La notation **CIDR** (*Classless Inter-Domain Routing*) écrit le masque sous la forme `/n` : les **`n` premiers bits** de l’adresse forment la partie **réseau** (ils sont à $1$ dans le masque), les $32-n$ suivants forment la partie **hôte** (à $0$). Deux machines sont dans **le même réseau local** si et seulement si leurs `n` premiers bits coïncident. Dans ce réseau :
+    La notation <span id="lex-cidr09" class="ancre"></span>**CIDR** (*Classless Inter-Domain Routing*) écrit le masque sous la forme `/n` : les **`n` premiers bits** de l’adresse forment la partie **réseau** (ils sont à $1$ dans le masque), les $32-n$ suivants forment la partie **hôte** (à $0$). Deux machines sont dans **le même réseau local** si et seulement si leurs `n` premiers bits coïncident. Dans ce réseau :
 
     - l’adresse dont **tous** les bits d’hôte valent $0$ est l’**adresse du réseau** ;
 
@@ -77,11 +77,11 @@ L’intérêt de CIDR, c’est que `n` peut prendre **n’importe quelle valeur*
 
 ## Le voyage d’un paquet : le modèle en couches
 
-Comment une même donnée peut-elle à la fois s’adresser à *une application* précise, être acheminée d’un *bout à l’autre* d’Internet, et circuler sur *un câble* local ? En empilant plusieurs **couches**, chacune ne s’occupant que d’une chose. C’est le modèle **TCP/IP**.
+Comment une même donnée peut-elle à la fois s’adresser à *une application* précise, être acheminée d’un *bout à l’autre* d’Internet, et circuler sur *un câble* local ? En empilant plusieurs <span id="lex-couches09" class="ancre"></span>**couches**, chacune ne s’occupant que d’une chose. C’est le modèle **TCP/IP**.
 
 ![](../figures/ec495e54aeb8975d.svg){ .tikz loading=lazy }
 
-À l’émission, la donnée **descend** les couches : chacune ajoute son **en-tête** (son étiquette) — c’est l’**encapsulation**, comme des enveloppes emboîtées. À l’arrivée, la donnée **remonte** : chaque couche retire son en-tête et transmet le reste au-dessus.
+À l’émission, la donnée **descend** les couches : chacune ajoute son **en-tête** (son étiquette) — c’est l’<span id="lex-encapsulationreseau09" class="ancre"></span>**encapsulation**, comme des enveloppes emboîtées. À l’arrivée, la donnée **remonte** : chaque couche retire son en-tête et transmet le reste au-dessus.
 
 <span class="retouract">↺ Retour sur l'activité.</span> L’étiquette collée sur chaque paquet de l’activité (expéditeur, destinataire, numéro, compteur) était un **en-tête**. Celui de la couche Réseau (IP) porte bien les adresses, et le compteur qui faisait jeter le paquet tournant en rond entre A et B y existe vraiment.
 
@@ -98,7 +98,7 @@ Ce chapitre se concentre sur la couche **Réseau (IP)** : c’est là que se jou
 
 *Rappel de Première (chapitre *Le Web*) : le découpage en paquets a déjà été rencontré ; on en tire ici les conséquences pour le routage.*
 
-Plutôt que de réserver une ligne entière pour toute la durée d’un échange (*commutation de circuits*, comme l’ancien téléphone), Internet **découpe** les messages en **paquets** indépendants qui empruntent le réseau chacun de leur côté (**commutation de paquets**).
+Plutôt que de réserver une ligne entière pour toute la durée d’un échange (*commutation de circuits*, comme l’ancien téléphone), Internet **découpe** les messages en **paquets** indépendants qui empruntent le réseau chacun de leur côté (<span id="lex-commutationpaquets09" class="ancre"></span>**commutation de paquets**).
 
 !!! propriete "Propriété 1 — Pourquoi des paquets ?"
 
@@ -108,7 +108,7 @@ Plutôt que de réserver une ligne entière pour toute la durée d’un échange
 
 ## Le routage : la table de routage
 
-Un routeur qui reçoit un paquet consulte sa **table de routage** : pour chaque réseau de destination, elle indique **par où sortir** (quelle interface, ou quel routeur voisin) et une **métrique** (le « coût » de la route ; plus elle est petite, mieux c’est). Un réseau directement raccordé a une métrique **nulle**. *Au bac, selon les énoncés, cette métrique est notée $0$, $1$ ou « – » : suivez l’énoncé.*
+Un routeur qui reçoit un paquet <span id="lex-tableroutage09" class="ancre"></span>consulte sa **table de routage** : pour chaque réseau de destination, elle indique **par où sortir** (quelle interface, ou quel routeur voisin) et une <span id="lex-metrique09" class="ancre"></span>**métrique** (le « coût » de la route ; plus elle est petite, mieux c’est). Un réseau directement raccordé a une métrique **nulle**. *Au bac, selon les énoncés, cette métrique est notée $0$, $1$ ou « – » : suivez l’énoncé.*
 
 !!! exemple "Exemple"
 
@@ -122,7 +122,7 @@ Un routeur qui reçoit un paquet consulte sa **table de routage** : pour chaque 
 
     Lecture de la dernière ligne : « pour atteindre R2, envoie le paquet au routeur G, qui saura continuer ».
 
-Comment remplir ces tables ? Deux façons : le **routage statique** (chaque ligne écrite à la main — possible seulement pour de tout petits réseaux) et le **routage dynamique**, où des **protocoles** découvrent les routes automatiquement. C’est ce dernier qui nous intéresse.
+Comment remplir ces tables ? Deux façons : le <span id="lex-routagestatique09" class="ancre"></span>**routage statique** (chaque ligne écrite à la main — possible seulement pour de tout petits réseaux) et le **routage dynamique**, où des **protocoles** découvrent les routes automatiquement. C’est ce dernier qui nous intéresse.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Chaque élève-routeur tenait une table de routage : B ne connaissait pas le chemin jusqu’à Hugo, seulement le voisin à qui transmettre (D). Après la panne, corriger les tables à la main était faisable pour six routeurs, impossible pour des millions : c’est le travail des protocoles de routage dynamique.
 
@@ -140,7 +140,7 @@ Prenons ce réseau pour toute la suite (les nombres sur les liens seront expliqu
 
 ## RIP : compter les sauts
 
-Le protocole **RIP** (*Routing Information Protocol*) mesure une route par son **nombre de sauts** : le nombre de routeurs à traverser. Chaque routeur envoie **périodiquement** (toutes les 30 s) à ses voisins la liste des réseaux qu’il connaît et à quelle distance ; de proche en proche, chacun complète sa table en gardant, pour chaque destination, la route au **plus petit nombre de sauts**.
+Le protocole <span id="lex-rip09" class="ancre"></span>**RIP** (*Routing Information Protocol*) mesure une route par son **nombre de sauts** : le nombre de routeurs à traverser. Chaque routeur envoie **périodiquement** (toutes les 30 s) à ses voisins la liste des réseaux qu’il connaît et à quelle distance ; de proche en proche, chacun complète sa table en gardant, pour chaque destination, la route au **plus petit nombre de sauts**.
 
 !!! definition "Définition 3 — Métrique de RIP"
 
@@ -187,7 +187,7 @@ Le protocole **RIP** (*Routing Information Protocol*) mesure une route par son *
 
 ## OSPF : le coût des liens
 
-**OSPF** (*Open Shortest Path First*) ne compte pas les sauts : il additionne le **coût** des liaisons traversées. Le coût d’une liaison dépend de son **débit** (le nombre de bits par seconde qu’elle peut transporter) : plus c’est rapide, moins c’est cher.
+<span id="lex-ospf09" class="ancre"></span>**OSPF** (*Open Shortest Path First*) ne compte pas les sauts : il additionne le **coût** des liaisons traversées. Le coût d’une liaison dépend de son **débit** (le nombre de bits par seconde qu’elle peut transporter) : plus c’est rapide, moins c’est cher.
 
 !!! definition "Définition 4 — Métrique d’OSPF"
 
@@ -276,7 +276,7 @@ RIP fonce sur le lien **direct** A–C … sans voir que c’est une liaison **
 
 ## Dans les coulisses d’OSPF : l’algorithme de Dijkstra <span class="horsprog">au-delà du programme</span>
 
-Le programme officiel est clair : au bac, **les tables de routage sont données**, ou se lisent « à l’œil » sur un petit réseau, en comparant le nombre de sauts (RIP) ou le coût total (OSPF) de quelques routes. C’est exactement ce que nous avons fait plus haut. Mais un vrai routeur OSPF, devant un réseau de plusieurs centaines de routeurs, ne peut pas « regarder » : il calcule. Et ce calcul, c’est l’**algorithme de Dijkstra**, que vous avez programmé dans le projet proposé en fin de chapitre *Graphes*. Ce paragraphe, **au-delà du programme**, le rappelle pour comprendre ce que fait vraiment OSPF.
+<span id="lex-dijkstra09" class="ancre"></span> Le programme officiel est clair : au bac, **les tables de routage sont données**, ou se lisent « à l’œil » sur un petit réseau, en comparant le nombre de sauts (RIP) ou le coût total (OSPF) de quelques routes. C’est exactement ce que nous avons fait plus haut. Mais un vrai routeur OSPF, devant un réseau de plusieurs centaines de routeurs, ne peut pas « regarder » : il calcule. Et ce calcul, c’est l’**algorithme de Dijkstra**, que vous avez programmé dans le projet proposé en fin de chapitre *Graphes*. Ce paragraphe, **au-delà du programme**, le rappelle pour comprendre ce que fait vraiment OSPF.
 
 !!! encadre "Le principe de Dijkstra (rappel du projet Graphes)"
 
@@ -318,7 +318,7 @@ Le programme officiel est clair : au bac, **les tables de routage sont données*
 
 ## TCP et UDP : deux façons de transporter
 
-Juste au-dessus d’IP, la couche **Transport** offre deux services au choix. **TCP** garantit que *tout* arrive, *dans l’ordre*, sans perte (il numérote les paquets, les réordonne, redemande ceux qui manquent grâce à des **accusés de réception**) : idéal pour un fichier ou une page web. <span class="horsprog">au-delà du programme</span> **UDP** envoie sans garantie ni accusé de réception, mais **sans attendre** : idéal quand la vitesse prime sur la perfection (appel vidéo, jeu en ligne, où un paquet en retard est inutile de toute façon).
+Juste au-dessus d’IP, la couche **Transport** offre deux services au choix. <span id="lex-tcp09" class="ancre"></span>**TCP** garantit que *tout* arrive, *dans l’ordre*, sans perte (il numérote les paquets, les réordonne, redemande ceux qui manquent grâce à des **accusés de réception**) : idéal pour un fichier ou une page web. <span class="horsprog">au-delà du programme</span> **UDP** envoie sans garantie ni accusé de réception, mais **sans attendre** : idéal quand la vitesse prime sur la perfection (appel vidéo, jeu en ligne, où un paquet en retard est inutile de toute façon).
 
 ## Ouverture
 

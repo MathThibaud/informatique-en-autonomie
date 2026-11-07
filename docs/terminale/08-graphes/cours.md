@@ -10,7 +10,7 @@ Programme (BO)
 :   *« Graphes : structures relationnelles. Sommets, arcs, arêtes, graphe orienté ou non orienté. Modéliser des situations sous forme de graphes. Écrire les implémentations correspondantes d’un graphe : matrice d’adjacence, liste de successeurs / de prédécesseurs. Passer d’une représentation à une autre. Parcourir un graphe en largeur, en profondeur. Repérer la présence d’un cycle. Chercher un chemin dans un graphe. »*
 
 Prérequis
-:   les **piles** et les **files** (indispensables pour les parcours !), les **dictionnaires** et les listes de listes, la **récursivité**, les **classes**, la notion de **coût** d’un algorithme. Les **arbres** (un arbre est un graphe particulier). (→ fiches de révision : ch. 1, ch. 2, ch. 3, ch. 5)
+:   les **piles** et les **files** (indispensables pour les parcours !), les **dictionnaires** et les listes de listes, la **récursivité**, les **classes**, la notion de **coût** d’un algorithme. Les **arbres** (un arbre est un graphe particulier). (→ fiches de révision : ch. 1, ch. 2, ch. 3, ch. 5) $\to$ rappels de 1re : listes, dictionnaires, parcours et coût
 
 Objectifs
 :   *reconnaître* une situation qui appelle un graphe et la *modéliser* ; *maîtriser* le vocabulaire ; *implémenter* un graphe de trois façons et *passer* de l’une à l’autre ; *parcourir* un graphe en largeur (file) et en profondeur (pile) ; *trouver* un chemin, le plus court chemin, détecter un cycle.
@@ -74,21 +74,23 @@ Un graphe est un ensemble de **sommets** (*vertices* ou *nodes* en anglais) reli
 
 !!! definition "Définition 1 — Graphe, ordre, taille"
 
-    Un **graphe** $G=(S,A)$ est la donnée d’un ensemble fini $S$ de **sommets** et d’un ensemble $A$ d’**arêtes** (des paires de sommets, en non orienté) ou d’**arcs** (des couples ordonnés, en orienté).
+    Un <span id="lex-graphe08" class="ancre"></span>**graphe** $G=(S,A)$ est la donnée d’un ensemble fini $S$ de <span id="lex-sommetgraphe08" class="ancre"></span>**sommets** et d’un ensemble $A$ d’<span id="lex-arete08" class="ancre"></span>**arêtes** (des paires de sommets, en non orienté) ou d’<span id="lex-arc08" class="ancre"></span>**arcs** (des couples ordonnés, en orienté).
 
     - l’**ordre** du graphe est son nombre de sommets, souvent noté $n = |S|$ ;
 
     - la **taille** du graphe est son nombre d’arêtes, souvent noté $m = |A|$.
 
-    Deux sommets reliés par une arête sont dits **adjacents** (ou **voisins**).
+    Deux sommets reliés par une arête sont dits <span id="lex-adjacents08" class="ancre"></span>**adjacents** (ou **voisins**).
 
 ### Graphe non orienté
 
+<span id="lex-nonoriente08" class="ancre"></span>
+
 ![](../figures/e7894468f7391ac6.svg){ .tikz loading=lazy }
 
-Dans un graphe **non orienté**, une arête se parcourt **dans les deux sens**. Une **chaîne** est une suite de sommets reliés de proche en proche, par exemple `A -- C -- E -- D` ; sa **longueur** est le nombre d’arêtes, ici $3$.
+Dans un graphe **non orienté**, une arête se parcourt **dans les deux sens**. Une <span id="lex-chaine08" class="ancre"></span>**chaîne** est une suite de sommets reliés de proche en proche, par exemple `A -- C -- E -- D` ; sa **longueur** est le nombre d’arêtes, ici $3$.
 
-Les sommets `B` et `C` sont **adjacents** à `A` : ce sont ses **voisins**. Le **degré** d’un sommet est son nombre de voisins ($\deg(\texttt{A})=2$, $\deg(\texttt{B})=3$).
+Les sommets `B` et `C` sont **adjacents** à `A` : ce sont ses **voisins**. Le <span id="lex-degre08" class="ancre"></span>**degré** d’un sommet est son nombre de voisins ($\deg(\texttt{A})=2$, $\deg(\texttt{B})=3$).
 
 <span class="retouract">↺ Retour sur l'activité.</span> Les points et les traits de l’activité étaient des **sommets** et des **arêtes**, et le « nombre de traits en un point » était le **degré**. Remplacer la carte de Königsberg par quatre points et sept traits, c’était **modéliser**.
 
@@ -114,9 +116,11 @@ Les sommets `B` et `C` sont **adjacents** à `A` : ce sont ses **voisins**. Le *
 
 ### Graphe orienté
 
+<span id="lex-oriente08" class="ancre"></span>
+
 ![](../figures/8409234ad30f96b3.svg){ .tikz loading=lazy }
 
-Dans un graphe **orienté**, un **arc** ne se parcourt que dans le sens de la flèche. Un **chemin** est une suite de sommets reliés par des arcs *dans le bon sens*, par exemple `A `$\to$` B `$\to$` D `$\to$` E`. Les voisins (ou **successeurs**) de `B` sont `C` et `D` (mais pas `A` !).
+Dans un graphe **orienté**, un **arc** ne se parcourt que dans le sens de la flèche. Un <span id="lex-chemin08" class="ancre"></span>**chemin** est une suite de sommets reliés par des arcs *dans le bon sens*, par exemple `A `$\to$` B `$\to$` D `$\to$` E`. Les voisins (ou **successeurs**) de `B` sont `C` et `D` (mais pas `A` !).
 
 *Exemple concret :* le graphe des abonnements sur X (Twitter) ou Instagram est **orienté** : on peut « suivre » quelqu’un sans être suivi en retour.
 
@@ -124,13 +128,13 @@ Dans un graphe **orienté**, un **arc** ne se parcourt que dans le sens de la fl
 
 ![](../figures/1107076f3b18b6fe.svg){ .tikz loading=lazy }
 
-Un graphe est **pondéré** (ou valué) si chaque arête porte une valeur numérique — son **poids** (coût, distance, temps, débit…). Exemples : les **distances** entre villes sur une carte routière, le **coût** d’une liaison entre routeurs (on le retrouvera au chapitre *Réseaux*, avec le protocole OSPF).
+Un graphe est <span id="lex-pondere08" class="ancre"></span>**pondéré** (ou valué) si chaque arête porte une valeur numérique — son **poids** (coût, distance, temps, débit…). Exemples : les **distances** entre villes sur une carte routière, le **coût** d’une liaison entre routeurs (on le retrouvera au chapitre *Réseaux*, avec le protocole OSPF).
 
 ### Connexité, cycle
 
 !!! definition "Définition 2 — Connexité"
 
-    Un graphe est **connexe** s’il est « d’un seul tenant » : n’importe quelle paire de sommets peut être reliée par une chaîne. Sinon, il se décompose en plusieurs **composantes connexes** (ses « morceaux »).
+    Un graphe est <span id="lex-connexe08" class="ancre"></span>**connexe** s’il est « d’un seul tenant » : n’importe quelle paire de sommets peut être reliée par une chaîne. Sinon, il se décompose en plusieurs **composantes connexes** (ses « morceaux »).
 
 ![](../figures/0cc599e7bdcc7709.svg){ .tikz loading=lazy }
 
@@ -138,7 +142,7 @@ Ce graphe n’est **pas** connexe : aucune chaîne ne relie `A` à `F`. Il a **d
 
 !!! definition "Définition 3 — Cycle"
 
-    Un **cycle** est une chaîne (non orientée) ou un chemin (orienté) qui **revient à son point de départ** sans réemprunter deux fois la même arête. Un graphe connexe **sans** cycle est exactement un… **arbre** : voilà le lien avec le chapitre *Arbres*.
+    Un <span id="lex-cycle08" class="ancre"></span>**cycle** est une chaîne (non orientée) ou un chemin (orienté) qui **revient à son point de départ** sans réemprunter deux fois la même arête. Un graphe connexe **sans** cycle est exactement un… <span id="lex-arbre08" class="ancre"></span>**arbre** : voilà le lien avec le chapitre *Arbres*.
 
 ### Quelques graphes particuliers
 
@@ -196,7 +200,7 @@ Dans toute cette partie, on illustre avec ce petit graphe non orienté, appelé 
 
 ### Représentation par matrice d’adjacence
 
-**Principe.** On **numérote** les sommets (ici par ordre alphabétique : A$=0$, B$=1$…). On construit un tableau carré $M$ où $M[i][j]=1$ si les sommets de rangs $i$ et $j$ sont **voisins**, et $0$ sinon. Ce tableau est la **matrice d’adjacence**.
+**Principe.** On **numérote** les sommets (ici par ordre alphabétique : A$=0$, B$=1$…). On construit un tableau carré $M$ où $M[i][j]=1$ si les sommets de rangs $i$ et $j$ sont **voisins**, et $0$ sinon. Ce tableau est la <span id="lex-matriceadj08" class="ancre"></span>**matrice d’adjacence**.
 
 $$\begin{array}{c}
 \phantom{0}\ \texttt{A}\ \ \texttt{B}\ \ \texttt{C}\ \ \texttt{D}\ \ \texttt{E}\\ 
@@ -237,7 +241,7 @@ M = [ [0, 1, 1, 0, 0],   # A
 
 ### Représentation par liste d’adjacence
 
-**Principe.** À chaque sommet, on associe la **liste de ses voisins**. On utilise un **dictionnaire** : les clés sont les sommets, les valeurs sont les listes de voisins. (Pour un graphe orienté, on stocke la liste des *successeurs*, ou celle des *prédécesseurs*.)
+<span id="lex-listeadj08" class="ancre"></span> **Principe.** À chaque sommet, on associe la **liste de ses voisins**. On utilise un **dictionnaire** : les clés sont les sommets, les valeurs sont les listes de voisins. (Pour un graphe orienté, on stocke la liste des *successeurs*, ou celle des *prédécesseurs*.)
 
 ```python
 G = {'A': ['B', 'C'],
@@ -355,9 +359,9 @@ Et voici la clé de tout le chapitre : **le choix de la structure `S` change la 
 
 !!! regle "Règle 6 — File ou pile : les deux parcours"
 
-    - `S` est une **file** (FIFO) $\Rightarrow$ on visite d’abord les sommets **les plus proches** du départ $\Rightarrow$ **parcours en largeur** (*BFS*, Breadth First Search).
+    - `S` est une **file** (FIFO) $\Rightarrow$ on visite d’abord les sommets **les plus proches** du départ $\Rightarrow$ <span id="lex-parcourslargeur08" class="ancre"></span>**parcours en largeur** (*BFS*, Breadth First Search).
 
-    - `S` est une **pile** (LIFO) $\Rightarrow$ on file « le plus loin possible » avant de revenir en arrière $\Rightarrow$ **parcours en profondeur** (*DFS*, Depth First Search).
+    - `S` est une **pile** (LIFO) $\Rightarrow$ on file « le plus loin possible » avant de revenir en arrière $\Rightarrow$ <span id="lex-parcoursprofondeur08" class="ancre"></span>**parcours en profondeur** (*DFS*, Depth First Search).
 
 Pour la suite, on utilise ce graphe à 8 sommets (les voisins sont toujours donnés par ordre alphabétique) :
 
@@ -407,7 +411,7 @@ Voici l’état de la file `en_attente` après chaque tour de boucle (à gauche,
 
 #### Application vedette : le plus court chemin
 
-Le BFS découvre les sommets par distance croissante. Donc, si l’on **mémorise le « parent »** de chaque sommet (celui qui l’a fait découvrir), on peut ensuite **remonter** de l’arrivée jusqu’au départ : on obtient un chemin, et — miracle du BFS — c’est le **plus court** (en nombre d’arêtes).
+<span id="lex-pluscourt08" class="ancre"></span> Le BFS découvre les sommets par distance croissante. Donc, si l’on **mémorise le « parent »** de chaque sommet (celui qui l’a fait découvrir), on peut ensuite **remonter** de l’arrivée jusqu’au départ : on obtient un chemin, et — miracle du BFS — c’est le **plus court** (en nombre d’arêtes).
 
 ```python
 def plus_court_chemin(g, depart, arrivee):
@@ -627,7 +631,7 @@ False
 
     Ce critère « sommet en cours » permet enfin de programmer la détection d’interblocage vue au chapitre *Processus* : le **graphe d’attente** des processus y est un graphe **orienté**, et un cycle y signale un **interblocage**.
 
-<span class="horsprog">au-delà du programme</span> **Et pour un graphe pondéré ?** Le BFS trouve le plus court chemin en *nombre d’arêtes*, mais ignore les poids. Pour le plus court chemin en *distance* (un vrai GPS), on utilise l’**algorithme de Dijkstra** (1959), qui visite les sommets par coût total croissant à l’aide d’une file de priorité. C’est l’objet du projet proposé en fin de chapitre — mais vous en connaissez déjà l’idée directrice. On le retrouvera au chapitre 9, derrière le protocole de routage OSPF.
+<span class="horsprog">au-delà du programme</span> **Et pour un graphe pondéré ?** Le BFS trouve le plus court chemin en *nombre d’arêtes*, mais ignore les poids. Pour le plus court chemin en *distance* (un vrai GPS), on utilise l’<span id="lex-dijkstra08" class="ancre"></span>**algorithme de Dijkstra** (1959), qui visite les sommets par coût total croissant à l’aide d’une file de priorité. C’est l’objet du projet proposé en fin de chapitre — mais vous en connaissez déjà l’idée directrice. On le retrouvera au chapitre 9, derrière le protocole de routage OSPF.
 
 <span id="cours-08-9" class="ancre"></span>
 

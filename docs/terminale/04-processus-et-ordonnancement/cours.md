@@ -10,7 +10,7 @@ Programme (BO)
 :   *« Gestion des processus et des ressources par un système d’exploitation. Décrire la création d’un processus, l’ordonnancement de plusieurs processus par le système. Mettre en évidence le risque de l’interblocage (*deadlock*). »* Commentaire : *« À l’aide d’outils standard, il s’agit d’observer les processus actifs ou en attente sur une machine. Une présentation débranchée de l’interblocage peut être proposée. »*
 
 Prérequis
-:   la notion de **programme** et de **langage machine** (Première), l’**arborescence** des fichiers (Première), pour la relation père/fils entre processus, un peu de **files** (la file d’attente de l’ordonnanceur). (→ fiches de révision : ch. 3)
+:   la notion de **programme** et de **langage machine** (Première), l’**arborescence** des fichiers (Première), pour la relation père/fils entre processus, un peu de **files** (la file d’attente de l’ordonnanceur). (→ fiches de révision : ch. 3) $\to$ rappels de 1re : architecture et OS
 
 Objectifs
 :   *distinguer* un programme d’un processus ; *décrire* les trois états d’un processus et les transitions entre eux ; *comprendre* le rôle d’ordonnanceur du système ; *dérouler* un ordonnancement et le représenter par un chronogramme ; *reconnaître* et *expliquer* une situation d’interblocage.
@@ -29,7 +29,7 @@ Objectifs
 
 En cet instant précis, votre ordinateur « fait tourner » des dizaines de programmes : le navigateur, la messagerie, l’horloge, l’antivirus, le système lui-même… Pourtant, un cœur de processeur ne sait faire qu’**une seule chose à la fois**. Comment l’illusion tient-elle ?
 
-La réponse tient en un mot : la **vitesse**. Le système donne le processeur à un programme pour une fraction de milliseconde, le retire, le donne à un autre, et recommence — des milliers de fois par seconde. L’œil humain n’y voit que du feu : tout *semble* simultané. Ce tour de passe-passe a un chef d’orchestre : le **système d’exploitation** (*operating system*, OS).
+La réponse tient en un mot : la **vitesse**. Le système donne le processeur à un programme pour une fraction de milliseconde, le retire, le donne à un autre, et recommence — des milliers de fois par seconde. L’œil humain n’y voit que du feu : tout *semble* simultané. Ce tour de passe-passe a un chef d’orchestre : le <span id="lex-os04" class="ancre"></span>**système d’exploitation** (*operating system*, OS).
 
 !!! regle "Règle 1 — Le fil rouge de ce chapitre"
 
@@ -46,7 +46,7 @@ La ressource à partager : **le processeur** (ici l’Intel 4004, 1971, l’un d
 
 !!! definition "Définition 1 — Processus"
 
-    Un **processus** est un **programme en cours d’exécution**. Il ne faut pas le confondre avec le programme lui-même : le programme est un *texte* inerte (le « code source » ou le fichier exécutable), rangé sur le disque ; le processus est ce texte *en train de vivre* dans la mémoire, avec ses données, sa position courante, ses ressources.
+    Un <span id="lex-processus04" class="ancre"></span>**processus** est un **programme en cours d’exécution**. Il ne faut pas le confondre avec le programme lui-même : le programme est un *texte* inerte (le « code source » ou le fichier exécutable), rangé sur le disque ; le processus est ce texte *en train de vivre* dans la mémoire, avec ses données, sa position courante, ses ressources.
 
 !!! exemple "Exemple"
 
@@ -61,6 +61,8 @@ La ressource à partager : **le processeur** (ici l’Intel 4004, 1971, l’un d
 À un instant donné, un processus se trouve dans l’un de **trois états**. C’est le cœur du chapitre — apprenez ce schéma par cœur.
 
 !!! definition "Définition 2 — Les trois états d’un processus"
+
+    <span id="lex-etatsprocessus04" class="ancre"></span>
 
     - **Élu** : le processus *utilise le processeur*, il s’exécute. Il n’y en a **qu’un seul** dans cet état à la fois (par cœur de processeur).
 
@@ -92,9 +94,9 @@ Les passages d’un état à l’autre portent des noms précis :
 
 ## Créer des processus : une histoire de famille
 
-Un processus peut en créer un autre par un appel système (`fork` sous les systèmes de type Unix). Le créateur est le **père**, le créé est le **fils**. Comme chaque processus a un père (sauf le tout premier), la structure obtenue est un **arbre**, comme l’arborescence des fichiers vue en Première (les arbres seront étudiés en détail au chapitre suivant).
+Un processus peut en créer un autre par un appel système (`fork` sous les systèmes de type Unix). Le créateur est le <span id="lex-perefils04" class="ancre"></span>**père**, le créé est le **fils**. Comme chaque processus a un père (sauf le tout premier), la structure obtenue est un **arbre**, comme l’arborescence des fichiers vue en Première (les arbres seront étudiés en détail au chapitre suivant).
 
-Chaque processus porte un identifiant unique, le **PID** (*Process IDentifier*), et connaît le PID de son père, le **PPID**. Au démarrage, le système crée un premier processus « venu de rien » (PID $0$), qui engendre le processus `init` (PID $1$), racine de tous les autres.
+Chaque processus porte un identifiant unique, le <span id="lex-pid04" class="ancre"></span>**PID** (*Process IDentifier*), et connaît le PID de son père, le **PPID**. Au démarrage, le système crée un premier processus « venu de rien » (PID $0$), qui engendre le processus `init` (PID $1$), racine de tous les autres.
 
 ![](../figures/1add2ed524bb3027.svg){ .tikz loading=lazy }
 
@@ -117,7 +119,7 @@ Lorsqu’un processus se termine (ou est tué) avant ses fils, ceux-ci ne dispar
 
 ## Observer et gérer les processus : le terminal
 
-Le système garde la trace de tous les processus. On peut les **observer** et **agir** sur eux avec quelques commandes tapées dans un **terminal** (sous Linux ou macOS). La commande reine est `ps` (*process status*) : avec les options `-ef`, elle liste *tous* les processus, un par ligne, avec leur **PID** et leur **PPID**.
+Le système garde la trace de tous les processus. On peut les **observer** et **agir** sur eux avec quelques commandes tapées dans un **terminal** (sous Linux ou macOS). La commande reine est <span id="lex-commandesprocessus04" class="ancre"></span>`ps` (*process status*) : avec les options `-ef`, elle liste *tous* les processus, un par ligne, avec leur **PID** et leur **PPID**.
 
 ```console
 $ ps -ef
@@ -148,11 +150,11 @@ En rapprochant les colonnes **PID** et **PPID**, on reconstitue l’arbre des pr
 
 ## L’ordonnancement : le chef d’orchestre à l’œuvre
 
-Quand plusieurs processus sont « prêts », lequel élire ? C’est la mission de l’**ordonnanceur** (*scheduler*), un rouage du système.
+Quand plusieurs processus sont « prêts », lequel élire ? C’est la mission de l’<span id="lex-ordonnanceur04" class="ancre"></span>**ordonnanceur** (*scheduler*), un rouage du système.
 
 !!! definition "Définition 3 — Ordonnancement"
 
-    L’**ordonnancement** est la stratégie par laquelle le système choisit, parmi les processus prêts, celui qui obtient le processeur, et pour combien de temps. Le petit intervalle de temps accordé à un processus s’appelle un **quantum**. Passer d’un processus à un autre s’appelle une **commutation de contexte**.
+    L’<span id="lex-ordonnancement04" class="ancre"></span>**ordonnancement** est la stratégie par laquelle le système choisit, parmi les processus prêts, celui qui obtient le processeur, et pour combien de temps. Le petit intervalle de temps accordé à un processus s’appelle un <span id="lex-quantum04" class="ancre"></span>**quantum**. Passer d’un processus à un autre s’appelle une <span id="lex-commutation04" class="ancre"></span>**commutation de contexte**.
 
 Pour comparer les stratégies, prenons quatre processus qui arrivent à des instants différents et demandent des durées de calcul différentes :
 
@@ -163,11 +165,11 @@ Pour comparer les stratégies, prenons quatre processus qui arrivent à des inst
 |     C     |         2         |        1        |
 |     D     |         3         |        2        |
 
-On mesure la qualité d’un ordonnancement par le **temps d’attente** de chaque processus (le temps passé à ne *pas* s’exécuter alors qu’il était arrivé), et on en prend la moyenne. On utilise aussi le **temps de séjour** d’un processus, égal à son instant de fin moins son instant d’arrivée (certains sujets l’appellent *temps de rotation* ou *temps d’exécution*). Les deux sont liés : temps d’attente $=$ temps de séjour $-$ durée de calcul.
+On mesure la qualité d’un ordonnancement par le <span id="lex-tempsattente04" class="ancre"></span>**temps d’attente** de chaque processus (le temps passé à ne *pas* s’exécuter alors qu’il était arrivé), et on en prend la moyenne. On utilise aussi le <span id="lex-tempssejour04" class="ancre"></span>**temps de séjour** d’un processus, égal à son instant de fin moins son instant d’arrivée (certains sujets l’appellent *temps de rotation* ou *temps d’exécution*). Les deux sont liés : temps d’attente $=$ temps de séjour $-$ durée de calcul.
 
 ### Premier arrivé, premier servi (FCFS)
 
-La stratégie la plus simple : on sert les processus dans leur **ordre d’arrivée**, chacun jusqu’au bout, sans jamais l’interrompre.
+<span id="lex-fcfs04" class="ancre"></span> La stratégie la plus simple : on sert les processus dans leur **ordre d’arrivée**, chacun jusqu’au bout, sans jamais l’interrompre.
 
 ![](../figures/3ec86019e80987f9.svg){ .tikz loading=lazy }
 
@@ -175,7 +177,7 @@ Temps d’attente : A$=0$, B$=3$, C$=5$, D$=5$. **Moyenne $= 3{,}25$**. Défaut 
 
 ### Le plus court d’abord (SJF)
 
-À chaque fois que le processeur se libère, on élit le processus prêt dont la **durée est la plus courte**.
+<span id="lex-sjf04" class="ancre"></span> À chaque fois que le processeur se libère, on élit le processus prêt dont la **durée est la plus courte**.
 
 ![](../figures/57ce309365659e23.svg){ .tikz loading=lazy }
 
@@ -183,11 +185,11 @@ Temps d’attente : A$=0$, C$=2$, D$=2$, B$=6$. **Moyenne $= 2{,}50$**. En faisa
 
 !!! encadre "Au bac — variante préemptive : le plus court temps restant d’abord"
 
-    Ci-dessus, un processus élu s’exécute jusqu’au bout. Dans la variante **préemptive** (en anglais *SRTF*, *shortest remaining time first*), on refait le choix **à chaque unité de temps** : on élit le processus prêt dont la **durée restante** est la plus courte, quitte à **interrompre** celui qui s’exécute quand un processus plus court arrive. Une règle de départage est nécessaire en cas d’égalité (souvent : le premier arrivé). Cette variante figure dans des sujets de bac ; l’énoncé en rappelle alors les règles.
+    Ci-dessus, un processus élu s’exécute jusqu’au bout. Dans la variante <span id="lex-preemptif04" class="ancre"></span>**préemptive** (en anglais *SRTF*, *shortest remaining time first*), on refait le choix **à chaque unité de temps** : on élit le processus prêt dont la **durée restante** est la plus courte, quitte à **interrompre** celui qui s’exécute quand un processus plus court arrive. Une règle de départage est nécessaire en cas d’égalité (souvent : le premier arrivé). Cette variante figure dans des sujets de bac ; l’énoncé en rappelle alors les règles.
 
 ### Le tourniquet (round-robin)
 
-Pour que *personne* ne monopolise le processeur, on fixe un **quantum** (ici $1$ unité) et on fait **tourner** les processus prêts dans une **file** (la structure FIFO du chapitre 3) : chacun s’exécute un quantum, puis repart en fin de file s’il n’a pas fini.
+<span id="lex-tourniquet04" class="ancre"></span> Pour que *personne* ne monopolise le processeur, on fixe un **quantum** (ici $1$ unité) et on fait **tourner** les processus prêts dans une **file** (la structure FIFO du chapitre 3) : chacun s’exécute un quantum, puis repart en fin de file s’il n’a pas fini.
 
 **Convention :** un processus qui arrive à l’instant où un quantum se termine entre dans la file **avant** le processus qui vient d’être interrompu.
 
@@ -197,11 +199,11 @@ Temps d’attente : A$=6$, B$=4$, C$=1$, D$=4$. **Moyenne $= 3{,}75$**. En moyen
 
 ### Par priorités
 
-Chaque processus reçoit une **valeur de priorité**. Dans les sujets de bac, la valeur la plus **petite** est la plus **urgente** (vérifiez toujours la convention de l’énoncé). Chaque fois que le processeur se libère, on élit, parmi les processus prêts, celui dont la valeur est la plus petite ; à valeur égale, le **premier arrivé**. Sans préemption, l’élu s’exécute jusqu’au bout. Reprenons les quatre processus, avec les valeurs A$=3$, B$=1$, C$=2$ et D$=1$ :
+<span id="lex-priorites04" class="ancre"></span> Chaque processus reçoit une **valeur de priorité**. Dans les sujets de bac, la valeur la plus **petite** est la plus **urgente** (vérifiez toujours la convention de l’énoncé). Chaque fois que le processeur se libère, on élit, parmi les processus prêts, celui dont la valeur est la plus petite ; à valeur égale, le **premier arrivé**. Sans préemption, l’élu s’exécute jusqu’au bout. Reprenons les quatre processus, avec les valeurs A$=3$, B$=1$, C$=2$ et D$=1$ :
 
 ![](../figures/7558a77360468937.svg){ .tikz loading=lazy }
 
-À $t=0$, A est seul : il est élu malgré sa valeur $3$. À $t=4$, B, C et D sont prêts ; B et D ont la valeur $1$, et B est arrivé le premier. Temps d’attente : A$=0$, B$=3$, D$=4$, C$=7$. **Moyenne $= 3{,}50$**. Le petit C, peu prioritaire, passe en dernier : si des processus urgents arrivaient sans cesse, il pourrait attendre indéfiniment (**famine**). Pour l’éviter, on peut faire **remonter la priorité** d’un processus qui attend depuis trop longtemps. Dans la variante **préemptive**, un processus plus urgent qui arrive interrompt l’élu ; comme pour le plus court d’abord, l’énoncé en rappelle alors les règles.
+À $t=0$, A est seul : il est élu malgré sa valeur $3$. À $t=4$, B, C et D sont prêts ; B et D ont la valeur $1$, et B est arrivé le premier. Temps d’attente : A$=0$, B$=3$, D$=4$, C$=7$. **Moyenne $= 3{,}50$**. Le petit C, peu prioritaire, passe en dernier : si des processus urgents arrivaient sans cesse, il pourrait attendre indéfiniment (<span id="lex-famine04" class="ancre"></span>**famine**). Pour l’éviter, on peut faire **remonter la priorité** d’un processus qui attend depuis trop longtemps. Dans la variante **préemptive**, un processus plus urgent qui arrive interrompt l’élu ; comme pour le plus court d’abord, l’énoncé en rappelle alors les règles.
 
 !!! propriete "Propriété 1 — Il n’y a pas d’ordonnancement parfait"
 
@@ -233,9 +235,9 @@ Le partage des ressources peut mener à une panne subtile où des processus s’
 
 3.  $P_2$ demande alors $R_1$ … mais $R_1$ est prise par $P_1$ : $P_2$ se **bloque**.
 
-Chacun retient une ressource que l’autre attend, et aucun ne peut la libérer puisque, bloqué, il ne s’exécute plus. La situation est figée pour toujours : c’est l’**interblocage** (*deadlock*).
+Chacun retient une ressource que l’autre attend, et aucun ne peut la libérer puisque, bloqué, il ne s’exécute plus. La situation est figée pour toujours : c’est l’<span id="lex-interblocage04" class="ancre"></span>**interblocage** (*deadlock*).
 
-On le visualise avec un **graphe d’attente** : une flèche « $P \to R$ » signifie « $P$ attend $R$ », une flèche « $R \to P$ » signifie « $R$ est détenue par $P$ ». Un **cycle** dans ce graphe est la signature d’un interblocage (on apprendra à détecter un cycle au chapitre 8, *Graphes*).
+On le visualise avec un <span id="lex-grapheattente04" class="ancre"></span>**graphe d’attente** : une flèche « $P \to R$ » signifie « $P$ attend $R$ », une flèche « $R \to P$ » signifie « $R$ est détenue par $P$ ». Un **cycle** dans ce graphe est la signature d’un interblocage (on apprendra à détecter un cycle au chapitre 8, *Graphes*).
 
 ![](../figures/2821a5138ffb3888.svg){ .tikz loading=lazy }
 
@@ -243,7 +245,7 @@ On le visualise avec un **graphe d’attente** : une flèche « $P \to R$ » sig
 
 !!! propriete "Propriété 2 — Les quatre conditions de Coffman au-delà du programme"
 
-    Un interblocage ne peut survenir que si les **quatre** conditions suivantes sont réunies *en même temps* :
+    <span id="lex-coffman04" class="ancre"></span>Un interblocage ne peut survenir que si les **quatre** conditions suivantes sont réunies *en même temps* :
 
     1.  **exclusion mutuelle** : une ressource ne sert qu’un processus à la fois ;
 

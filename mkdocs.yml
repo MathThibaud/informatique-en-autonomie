@@ -240,6 +240,7 @@ nav:
   - Problèmes de synthèse:
     - premiere/synthese/index.md
     - Exercices: premiere/synthese/exercices.md
+  - Lexique: premiere/lexique.md
   - Crédits iconographiques: premiere/credits.md
 - Terminale:
   - Accueil Terminale: terminale/index.md
@@ -344,6 +345,12 @@ nav:
     - Exercices: terminale/14-systemes-sur-puce-et-informatique-embarq/exercices.md
     - TP et projets: terminale/14-systemes-sur-puce-et-informatique-embarq/tp.md
     - Défis Advent of Code: terminale/14-systemes-sur-puce-et-informatique-embarq/defis.md
+  - Les indispensables de Première:
+    - terminale/les-indispensables-de-premiere/index.md
+  - Lexique:
+    - terminale/lexique/index.md
+  - Crédits iconographiques:
+    - terminale/credits-iconographiques/index.md
   - Problèmes de synthèse et exercices type bac:
     - terminale/synthese/index.md
     - Exercices: terminale/synthese/exercices.md
@@ -362,5 +369,4 @@ nav:
   - Index des exercices type bac: terminale/index-des-exercices-type-bac.md
   - Réussir l'épreuve pratique: terminale/reussir-l-epreuve-pratique.md
   - Préparer le Grand Oral: terminale/preparer-le-grand-oral.md
-  - Crédits iconographiques: terminale/credits.md
 - À propos: a-propos.md

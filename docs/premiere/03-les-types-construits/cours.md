@@ -27,7 +27,7 @@ Objectifs
 
 !!! remarque "Remarque — Deux fils conducteurs, à garder en tête tout le chapitre"
 
-    **(1) Le fil rouge.** Une variable n’est pas une boîte qui *contient* une valeur : c’est une **étiquette** (un nom) qui **pointe vers un objet** rangé en mémoire. Ce seul dessin — des noms, des flèches, des objets — expliquera *tout* le chapitre : la copie, le partage accidentel de données, le piège des matrices, et jusqu’aux clés de dictionnaire. On le rappellera par un encadré **« Fil rouge »**.
+    **(1) Le fil rouge.** Une variable n’est pas une boîte qui *contient* une valeur : <span id="lex-variable03" class="ancre"></span>c’est une **étiquette** (un nom) qui **pointe vers un objet** rangé en mémoire. Ce seul dessin — des noms, des flèches, des objets — expliquera *tout* le chapitre : la copie, le partage accidentel de données, le piège des matrices, et jusqu’aux clés de dictionnaire. On le rappellera par un encadré **« Fil rouge »**.
 
     **(2) Le programme est restreint**, mais ces types sont **partout** : on va donc souvent plus loin. Chaque dépassement est signalé par le badge <span class="horsprog">au-delà du programme</span> — utile, fréquent, mais non exigible au **baccalauréat**.
 
@@ -37,13 +37,13 @@ Jusqu’ici, une variable rangeait **une** valeur simple : un nombre, un boolée
 
 !!! definition "Définition 1 — Type construit"
 
-    Un **type construit** (ou *composé*) est un type dont chaque valeur **regroupe plusieurs valeurs** en un seul objet. Par opposition, `int`, `float`, `bool` et `str` sont considérés ici comme des types **simples**.
+    Un <span id="lex-typeconstruit03" class="ancre"></span>**type construit** (ou *composé*) est un type dont chaque valeur **regroupe plusieurs valeurs** en un seul objet. Par opposition, `int`, `float`, `bool` et `str` sont considérés ici comme des types **simples**.
 
 Avant tout, installons le modèle mental qui va tout éclairer.
 
 !!! regle "Règle 1 — Le modèle mémoire : nom $longrightarrow$ objet"
 
-    En Python, l’instruction `notes = [12, 8, 15]` fait *deux* choses : elle crée l’objet `[12, 8, 15]` quelque part en mémoire, puis fait **pointer** le nom `notes` vers cet objet. La variable **ne contient pas** l’objet : elle le **désigne**.
+    <span id="lex-reference03" class="ancre"></span>En Python, l’instruction `notes = [12, 8, 15]` fait *deux* choses : elle crée l’objet `[12, 8, 15]` quelque part en mémoire, puis fait **pointer** le nom `notes` vers cet objet. La variable **ne contient pas** l’objet : elle le **désigne**.
 
 ![](../figures/b7922f83db334be1.svg){ .tikz loading=lazy }
 
@@ -51,7 +51,7 @@ De cette image découle une distinction **fondamentale** : peut-on modifier l’
 
 !!! definition "Définition 2 — Mutable / immuable"
 
-    Un objet est **mutable** (modifiable) si l’on peut changer son contenu *sans en créer un nouveau* : c’est le cas des tableaux (`list`) et des dictionnaires (`dict`). Il est **immuable** sinon : c’est le cas des nombres, des chaînes (`str`) et des **p-uplets** (`tuple`).
+    Un objet est <span id="lex-mutable03" class="ancre"></span>**mutable** (modifiable) si l’on peut changer son contenu *sans en créer un nouveau* : c’est le cas des tableaux (`list`) et des dictionnaires (`dict`). Il est **immuable** sinon : c’est le cas des nombres, des chaînes (`str`) et des **p-uplets** (`tuple`).
 
 !!! remarque "Remarque — La chaîne : une collection que vous connaissez déjà"
 
@@ -74,7 +74,7 @@ Plutôt que d’apprendre trois types par cœur, apprenons à **choisir**. Devan
 <div class="tete-chapitre" markdown>
 
 Q1.
-:   Comment vais-je **retrouver** un élément : par sa *position* (un indice $0,1,2\ldots$) ou par une *étiquette* que je choisis (une *clé*) ?
+:   Comment vais-je **retrouver** un élément : <span id="lex-indice03" class="ancre"></span>par sa *position* (un indice $0,1,2\ldots$) ou par une *étiquette* que je choisis (une *clé*) ?
 
 Q2.
 :   Cette collection va-t-elle **changer** après sa création (*mutable*), ou est-elle **figée** (*immuable*) ?
@@ -97,7 +97,7 @@ On étudie maintenant les trois, dans cet ordre : le plus simple (figé) d’abo
 
 !!! definition "Définition 3 — p-uplet"
 
-    Un **p-uplet** (type `tuple`) est une suite **ordonnée** de $p$ éléments, de types éventuellement différents, que l’on **ne peut pas modifier** après création (immuable).
+    Un <span id="lex-puplet03" class="ancre"></span>**p-uplet** (type `tuple`) est une suite **ordonnée** de $p$ éléments, de types éventuellement différents, que l’on **ne peut pas modifier** après création (immuable).
 
 ### Création : c’est la virgule qui compte
 
@@ -116,7 +116,7 @@ On sépare les éléments par des **virgules** ; les parenthèses sont facultati
 
 ### Accès : indice, tranche, `len`, `in`
 
-Comme pour les chaînes : indices à partir de $0$, indices négatifs depuis la fin, tranches.
+<span id="lex-len03" class="ancre"></span> Comme pour les chaînes : indices à partir de $0$, indices négatifs depuis la fin, tranches.
 
 ```text
 >>> t = (10, 20, 30, 40, 50)
@@ -146,7 +146,7 @@ TypeError: 'tuple' object does not support item assignment
 
 ### Affectation multiple : déballer un p-uplet
 
-Le p-uplet permet d’**affecter plusieurs variables en une seule fois** : on « déballe » ses composantes dans autant de variables.
+<span id="lex-affmult03" class="ancre"></span> Le p-uplet permet d’**affecter plusieurs variables en une seule fois** : on « déballe » ses composantes dans autant de variables.
 
 ```text
 >>> a, b, c = 1, 2, 3     # a vaut 1, b vaut 2, c vaut 3
@@ -167,7 +167,7 @@ C’est exactement ainsi qu’on récupère les différentes valeurs renvoyées 
 
 ### Une fonction qui renvoie un p-uplet (capacité attendue)
 
-L’usage numéro un : renvoyer **plusieurs résultats** d’un coup, récupérés par affectation multiple.
+<span id="lex-renvoiplusieurs03" class="ancre"></span> L’usage numéro un : renvoyer **plusieurs résultats** d’un coup, récupérés par affectation multiple.
 
 ```python
 def division(a, b):
@@ -202,7 +202,7 @@ Un **tableau** ressemble à un p-uplet… mais il est **mutable**. C’est là 
 
 !!! definition "Définition 4 — Tableau"
 
-    Un **tableau** (type `list`) est une suite **ordonnée** et **modifiable** d’éléments, entre **crochets**.
+    Un <span id="lex-tableau03" class="ancre"></span>**tableau** (type `list`) est une suite **ordonnée** et **modifiable** d’éléments, entre **crochets**.
 
 ```text
 >>> notes = [12, 8, 15, 9]
@@ -213,6 +213,8 @@ Un **tableau** ressemble à un p-uplet… mais il est **mutable**. C’est là 
 ```
 
 ### Lire et modifier par indice (capacité attendue)
+
+<span id="lex-crochets03" class="ancre"></span>
 
 ```text
 >>> notes = [12, 8, 15, 9]
@@ -227,9 +229,9 @@ Un **tableau** ressemble à un p-uplet… mais il est **mutable**. C’est là 
 
 !!! regle "Règle 3 — Indices négatifs et tranches"
 
-    - **Indice négatif** : on compte depuis la fin. `t[-1]` est le dernier élément, `t[-2]` l’avant-dernier ; `t[-k]` désigne `t[len(t) - k]`.
+    - <span id="lex-negatif03" class="ancre"></span>**Indice négatif** : on compte depuis la fin. `t[-1]` est le dernier élément, `t[-2]` l’avant-dernier ; `t[-k]` désigne `t[len(t) - k]`.
 
-    - **Tranche** `t[a:b]` : un *nouveau* tableau, formé des éléments d’indices `a` à `b - 1` (`b` est exclu, comme dans `range`). Si `a` est omis, on part du début ; si `b` est omis, on va jusqu’à la fin. *(Les tranches sont très utiles, mais leur connaissance n’est pas exigible au baccalauréat.)*
+    - <span id="lex-tranche03" class="ancre"></span>**Tranche** `t[a:b]` : un *nouveau* tableau, formé des éléments d’indices `a` à `b - 1` (`b` est exclu, comme dans `range`). Si `a` est omis, on part du début ; si `b` est omis, on va jusqu’à la fin. *(Les tranches sont très utiles, mais leur connaissance n’est pas exigible au baccalauréat.)*
 
     - Les deux se combinent : `t[:-1]` est le tableau privé de son dernier élément, c’est-à-dire `t[0:len(t) - 1]`.
 
@@ -253,7 +255,7 @@ Un **tableau** ressemble à un p-uplet… mais il est **mutable**. C’est là 
 
 ### Parcourir un tableau (capacité attendue)
 
-**(1) Par élément**, quand seules les valeurs comptent :
+<span id="lex-forin03" class="ancre"></span> **(1) Par élément**, quand seules les valeurs comptent :
 
 ```python
 somme = 0
@@ -274,7 +276,7 @@ for i in range(len(notes)):
 
 ### Construction par compréhension (capacité attendue)
 
-Écriture concise, à **maîtriser absolument** : elle fabrique un tableau à partir d’un itérable.
+<span id="lex-comprehension03" class="ancre"></span> Écriture concise, à **maîtriser absolument** : elle fabrique un tableau à partir d’un itérable.
 
 !!! regle "Règle 4 — Syntaxe de la compréhension"
 
@@ -318,13 +320,13 @@ Un tableau étant mutable, il possède des **méthodes** (appel avec un point). 
 
 !!! regle "Règle 5 — Ajouter et retirer en fin de tableau"
 
-    Un tableau `t` dispose des méthodes suivantes :
+    <span id="lex-append03" class="ancre"></span>Un tableau `t` dispose des méthodes suivantes :
 
-    | **Appel**   | **Effet**                                |
-    |:------------|:-----------------------------------------|
-    | t.append(x) | ajoute `x` à la **fin**                  |
-    | t.pop()     | retire et **renvoie** le dernier élément |
-    | t.pop(i)    | retire et renvoie l’élément d’indice `i` |
+    | **Appel**        | **Effet**                                |
+    |:-----------------|:-----------------------------------------|
+    | t.append(x)      | ajoute `x` à la **fin**                  |
+    | <span id="lex-pop03" class="ancre"></span>t.pop() | retire et **renvoie** le dernier élément |
+    | t.pop(i)         | retire et renvoie l’élément d’indice `i` |
 
 ```text
 >>> t = [3, 1, 2]
@@ -337,7 +339,7 @@ Un tableau étant mutable, il possède des **méthodes** (appel avec un point). 
 
 !!! regle "Règle 6 — Modifier sur place vs renvoyer une copie"
 
-    `append` modifie le tableau et renvoie `None` : n’écrivez **jamais** `t = t.append(5)` (vous perdriez tout). Pour obtenir un *nouveau* tableau sans modifier l’original, on le construit, par exemple par **concaténation** (`+`).
+    `append` modifie le tableau et renvoie `None` : n’écrivez **jamais** `t = t.append(5)` (vous perdriez tout). Pour obtenir un *nouveau* tableau sans modifier l’original, on le construit, par exemple par <span id="lex-concatenation03" class="ancre"></span>**concaténation** (`+`).
 
     ```text
     >>> t = [3, 1, 2]
@@ -359,7 +361,7 @@ Voici le point le plus important — et le plus piégeux — du chapitre. Repren
 
 !!! regle "Règle 8 — Affecter un tableau ne le copie pas !"
 
-    `b = a` ne crée **aucun** nouvel objet : il fait simplement pointer `b` vers **le même** tableau que `a`. On dit que `a` et `b` sont des **alias**. Modifier via l’un se voit via l’autre.
+    `b = a` ne crée **aucun** nouvel objet : il fait simplement pointer `b` vers **le même** tableau que `a`. On dit que `a` et `b` sont des <span id="lex-alias03" class="ancre"></span>**alias**. Modifier via l’un se voit via l’autre.
 
 <span class="retouract">↺ Retour sur l'activité.</span> C’est la liste de courses de l’activité : Papa et Maman avaient collé deux étiquettes sur la même feuille, et `print(maman)` affichait `[’brioche’, ’lait’, ’pommes’]`. Pour que Papa ait sa propre liste, il fallait recopier la feuille : c’est la vraie copie présentée ci-dessous.
 
@@ -373,7 +375,7 @@ Voici le point le plus important — et le plus piégeux — du chapitre. Repren
 
 ![](../figures/dfd32eb0603893ea.svg){ .tikz loading=lazy }
 
-Pour une **vraie copie** (objet indépendant), on *reconstruit* un tableau :
+Pour une <span id="lex-copie03" class="ancre"></span>**vraie copie** (objet indépendant), on *reconstruit* un tableau :
 
 ```text
 >>> a = [1, 2, 3]
@@ -413,7 +415,7 @@ Pour une **vraie copie** (objet indépendant), on *reconstruit* un tableau :
 
 ## Tableaux de tableaux : les matrices (capacité attendue)
 
-Un tableau dont les éléments sont des tableaux **de même longueur** représente une **matrice** : un quadrillage de $n$ lignes et $p$ colonnes.
+Un tableau dont les éléments sont des tableaux **de même longueur** représente une <span id="lex-matrice03" class="ancre"></span>**matrice** : un quadrillage de $n$ lignes et $p$ colonnes.
 
 ```python
 M = [[1, 2, 3],
@@ -422,7 +424,7 @@ M = [[1, 2, 3],
 
 !!! regle "Règle 9 — Accès à une case : M[i][j]"
 
-    `M[i]` est la ligne d’indice `i` (un tableau) ; `M[i][j]` est la case ligne `i`, colonne `j`. Le nombre de lignes est `len(M)`, de colonnes `len(M[0])`.
+    <span id="lex-mij03" class="ancre"></span>`M[i]` est la ligne d’indice `i` (un tableau) ; `M[i][j]` est la case ligne `i`, colonne `j`. Le nombre de lignes est `len(M)`, de colonnes `len(M[0])`.
 
     ```text
     >>> M[0]        # premiere ligne
@@ -442,7 +444,7 @@ for i in range(len(M)):
 
 ### Le fil rouge tranche le débat : `[[0]*p]*n` est un piège
 
-Comment créer une grille de zéros ? On serait tenté d’écrire `[[0] * p] * n`, par exemple `[[0] * 3] * 2`. **Erreur.** Le modèle mémoire l’explique d’un coup : l’opérateur `*` ne *copie pas* la ligne, il **répète la même référence**. Les deux lignes sont alors **un seul et même tableau** — exactement l’alias du § IV.
+<span id="lex-repetition03" class="ancre"></span> Comment créer une grille de zéros ? On serait tenté d’écrire `[[0] * p] * n`, par exemple `[[0] * 3] * 2`. **Erreur.** Le modèle mémoire l’explique d’un coup : l’opérateur `*` ne *copie pas* la ligne, il **répète la même référence**. Les deux lignes sont alors **un seul et même tableau** — exactement l’alias du § IV.
 
 ```text
 >>> grille = [[0] * 3] * 2    # PIEGE
@@ -481,11 +483,11 @@ grille = [[0 for j in range(p)] for i in range(n)]   # 2 lignes INDEPENDANTES
 
 ## Le dictionnaire (`dict`) : l’accès par clé
 
-Dans un tableau, l’étiquette d’accès est **imposée** : un indice $0, 1, 2, \ldots$. Dans un dictionnaire, on la **choisit** : c’est la **clé**.
+Dans un tableau, l’étiquette d’accès est **imposée** : un indice $0, 1, 2, \ldots$. Dans un dictionnaire, on la **choisit** : <span id="lex-cle03" class="ancre"></span>c’est la **clé**.
 
 !!! definition "Définition 5 — Dictionnaire"
 
-    Un **dictionnaire** (type `dict`) est un ensemble de couples **clé $\to$ valeur**. Les clés sont **uniques** et **immuables** (souvent `str`, `int` ou `tuple`). On l’écrit entre **accolades**, chaque couple sous la forme `clé: valeur`.
+    Un <span id="lex-dictionnaire03" class="ancre"></span>**dictionnaire** (type `dict`) est un ensemble de couples **clé $\to$ valeur**. Les clés sont **uniques** et **immuables** (souvent `str`, `int` ou `tuple`). On l’écrit entre **accolades**, chaque couple sous la forme `clé: valeur`.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Les tiroirs étiquetés de l’activité formaient un dictionnaire : le prénom est la clé, le numéro de casier la valeur. Deux tiroirs « Hugo » étaient impossibles, comme deux clés égales dans un dictionnaire.
 
@@ -498,11 +500,11 @@ Dans un tableau, l’étiquette d’accès est **imposée** : un indice $0, 1, 2
 
 !!! remarque "Remarque — Tableau associatif = enregistrement"
 
-    Le nom savant est **tableau associatif**. C’est l’outil idéal pour une *fiche* : `{"nom": "Ada", "annee": 1815, "domaine": "informatique"}`. On parle aussi de **p-uplet nommé** : comme dans un p-uplet, on regroupe plusieurs valeurs, mais chacune est repérée par un **nom de champ** (`"nom"`, `"annee"`…) plutôt que par une position. En Python, les p-uplets nommés sont écrits avec des dictionnaires. Au chapitre *Les données en tables*, une table entière sera une liste de telles fiches.
+    Le nom savant est <span id="lex-pupletnomme03" class="ancre"></span>**tableau associatif**. C’est l’outil idéal pour une *fiche* : `{"nom": "Ada", "annee": 1815, "domaine": "informatique"}`. On parle aussi de **p-uplet nommé** : comme dans un p-uplet, on regroupe plusieurs valeurs, mais chacune est repérée par un **nom de champ** (`"nom"`, `"annee"`…) plutôt que par une position. En Python, les p-uplets nommés sont écrits avec des dictionnaires. Au chapitre *Les données en tables*, une table entière sera une liste de telles fiches.
 
 ### Ajouter, modifier, supprimer
 
-Différence majeure avec le tableau : on crée une **nouvelle clé** par simple affectation (impossible avec un indice de tableau, qui doit déjà exister).
+<span id="lex-dcle03" class="ancre"></span> Différence majeure avec le tableau : on crée une **nouvelle clé** par simple affectation (impossible avec un indice de tableau, qui doit déjà exister).
 
 ```text
 >>> age = {"Alice": 17, "Bob": 16}
@@ -515,6 +517,8 @@ Différence majeure avec le tableau : on crée une **nouvelle clé** par simple 
 
 !!! regle "Règle 10 — Le test in porte sur les clés"
 
+    <span id="lex-in03" class="ancre"></span>
+
     ```text
     >>> "Bob" in age    # une cle ?
     True
@@ -522,7 +526,7 @@ Différence majeure avec le tableau : on crée une **nouvelle clé** par simple 
     False
     ```
 
-    Tester `cle in d` avant `d[cle]` évite l’erreur `KeyError` sur une clé absente.
+    Tester `cle in d` avant `d[cle]` évite l’erreur <span id="lex-keyerror03" class="ancre"></span>`KeyError` sur une clé absente.
 
 ### Itérer sur un dictionnaire (capacité attendue)
 
@@ -530,7 +534,7 @@ Une boucle `for` sur un dictionnaire parcourt ses **clés**. Trois méthodes pr�
 
 !!! regle "Règle 11 — keys, values, items"
 
-    `d.keys()` : les clés. `d.values()` : les valeurs. `d.items()` : les couples `(clé, valeur)`.
+    <span id="lex-items03" class="ancre"></span>`d.keys()` : les clés. `d.values()` : les valeurs. `d.items()` : les couples `(clé, valeur)`.
 
 ```python
 age = {"Alice": 17, "Bob": 16, "Chloe": 17}

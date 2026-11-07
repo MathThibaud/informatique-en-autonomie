@@ -10,7 +10,7 @@ Programme (BO)
 :   *« Vocabulaire de la programmation objet : classes, attributs, méthodes, objets. Écrire la définition d’une classe. Accéder aux attributs et méthodes d’une classe. »* (*on n’aborde pas ici l’héritage ni le polymorphisme*.) *« Paradigmes de programmation. Distinguer sur des exemples les paradigmes impératif, fonctionnel et objet. Choisir le paradigme de programmation selon le champ d’application d’un programme. »* *« Modularité. Utiliser des API (Application Programming Interface) ou des bibliothèques. Exploiter leur documentation. Créer des modules simples et les documenter. »*
 
 Prérequis
-:   fonctions et paramètres, variables, listes, dictionnaires, chaînes de caractères.
+:   fonctions et paramètres, variables, listes, dictionnaires, chaînes de caractères. $\to$ rappels de 1re : bases de Python, listes, dictionnaires, chaînes
 
 Objectifs
 :   *savoir écrire* une classe (attributs, méthodes, constructeur) et *savoir l’utiliser* (créer des instances, appeler des méthodes) ; *distinguer* les paradigmes impératif, objet et fonctionnel ; *utiliser* une bibliothèque et sa documentation, *créer* un module documenté.
@@ -31,9 +31,9 @@ Depuis la classe de Première, vous programmez d’une seule manière : vous éc
 
 !!! definition "Définition 1 — Paradigme de programmation"
 
-    Un **paradigme de programmation** est une manière de concevoir et d’organiser un programme. Un même langage (Python, par exemple) peut en autoriser **plusieurs**, et un même programme peut les **mélanger**.
+    Un <span id="lex-paradigme02" class="ancre"></span>**paradigme de programmation** est une manière de concevoir et d’organiser un programme. Un même langage (Python, par exemple) peut en autoriser **plusieurs**, et un même programme peut les **mélanger**.
 
-Le style que vous pratiquez depuis la Première porte un nom : le paradigme **impératif**. Un programme impératif est une liste d’**ordres** donnés à la machine, qui font évoluer pas à pas l’**état** de la mémoire. Ce petit programme, qui compte les notes au-dessus de la moyenne, en réunit tous les ingrédients :
+Le style que vous pratiquez depuis la Première porte un nom : le paradigme <span id="lex-imperatif02" class="ancre"></span>**impératif**. Un programme impératif est une liste d’**ordres** donnés à la machine, qui font évoluer pas à pas l’**état** de la mémoire. Ce petit programme, qui compte les notes au-dessus de la moyenne, en réunit tous les ingrédients :
 
 ```python
 notes = [12, 8, 15, 9, 17]
@@ -50,17 +50,17 @@ Ce n’est pas le seul, et le programme de Terminale demande d’en découvrir d
 
 ## Un premier autre regard : le paradigme fonctionnel
 
-Commençons par un paradigme qui, sur la forme, ne demande rien de neuf — il n’utilise que des **fonctions** — mais propose un regard neuf : le paradigme **fonctionnel** cherche à **bannir les effets de bord**.
+<span id="lex-fonctionnel02" class="ancre"></span> Commençons par un paradigme qui, sur la forme, ne demande rien de neuf — il n’utilise que des **fonctions** — mais propose un regard neuf : le paradigme **fonctionnel** cherche à **bannir les effets de bord**.
 
 !!! definition "Définition 2 — Effet de bord"
 
-    Une fonction produit un **effet de bord** lorsqu’elle modifie quelque chose *en dehors* d’elle-même : une variable globale, une liste reçue en paramètre, un affichage, un fichier… bref, autre chose que sa seule valeur de retour.
+    Une fonction produit un <span id="lex-effetdebord02" class="ancre"></span>**effet de bord** lorsqu’elle modifie quelque chose *en dehors* d’elle-même : une variable globale, une liste reçue en paramètre, un affichage, un fichier… bref, autre chose que sa seule valeur de retour.
 
 Les effets de bord rendent les programmes difficiles à prévoir et à relire : à un instant donné, on ne sait plus quelle fonction a modifié quoi. Le paradigme fonctionnel les évite au maximum en s’appuyant sur des **fonctions pures**.
 
 !!! definition "Définition 3 — Fonction pure"
 
-    Une fonction est **pure** si :
+    Une fonction est <span id="lex-fonctionpure02" class="ancre"></span>**pure** si :
 
     - sa valeur de retour dépend **uniquement** de ses paramètres (jamais d’une variable extérieure) ;
 
@@ -101,7 +101,7 @@ Les effets de bord rendent les programmes difficiles à prévoir et à relire : 
 
 !!! remarque "Remarque — Vous en faites déjà : la création de liste par compréhension"
 
-    La **création de liste par compréhension**, vue en Première, relève de la **programmation fonctionnelle** : c’est une **expression** qui construit une **nouvelle** liste, sans modifier la liste parcourue ni aucune variable extérieure (pas d’effet de bord). Elle sait faire les deux opérations de base du style fonctionnel sur une liste : **appliquer** une fonction à chaque élément, et **garder** certains éléments.
+    La <span id="lex-pycomprehension02" class="ancre"></span>**création de liste par compréhension**, vue en Première, relève de la **programmation fonctionnelle** : c’est une **expression** qui construit une **nouvelle** liste, sans modifier la liste parcourue ni aucune variable extérieure (pas d’effet de bord). Elle sait faire les deux opérations de base du style fonctionnel sur une liste : **appliquer** une fonction à chaque élément, et **garder** certains éléments.
 
 !!! exemple "Exemple — Appliquer et garder avec une compréhension"
 
@@ -124,7 +124,7 @@ Les effets de bord rendent les programmes difficiles à prévoir et à relire : 
 
 !!! remarque "Remarque — Les fonctions anonymes : lambda"
 
-    Quand la fonction ne sert qu’une fois, on peut l’écrire directement, sans lui donner de nom, avec le mot-clé `lambda` (hérité du $\lambda$-calcul d’Alonzo Church) : `lambda x: x * x` se lit « la fonction qui, à `x`, associe `x * x` ». On l’a déjà rencontrée en Première pour **trier une table** : `sorted` reçoit, avec `key`, la fonction qui donne la valeur à comparer.
+    Quand la fonction ne sert qu’une fois, on peut l’écrire directement, sans lui donner de nom, <span id="lex-pylambda02" class="ancre"></span>avec le mot-clé `lambda` (hérité du $\lambda$-calcul d’Alonzo Church) : `lambda x: x * x` se lit « la fonction qui, à `x`, associe `x * x` ». On l’a déjà rencontrée en Première pour **trier une table** : <span id="lex-pysorted02" class="ancre"></span>`sorted` reçoit, avec `key`, la fonction qui donne la valeur à comparer.
 
     ```python
     notes = [("Ada", 15), ("Alan", 12), ("Grace", 18)]
@@ -151,9 +151,9 @@ Programmer « objet », c’est reprendre cette idée : on regroupe dans une mê
 
 !!! definition "Définition 4 — Objet"
 
-    Un **objet** est une entité informatique qui réunit :
+    Un <span id="lex-objet02" class="ancre"></span>**objet** est une entité informatique qui réunit :
 
-    - des **attributs** : des données qui décrivent son *état* (un peu comme des variables attachées à l’objet) ;
+    - des <span id="lex-attributobjet02" class="ancre"></span>**attributs** : des données qui décrivent son *état* (un peu comme des variables attachées à l’objet) ;
 
     - des **méthodes** : des fonctions attachées à l’objet, qui décrivent son *comportement*.
 
@@ -163,7 +163,7 @@ On ne décrit pas chaque objet un par un : on écrit un **plan** commun à tous 
 
 !!! definition "Définition 5 — Classe et instance"
 
-    Une **classe** est le modèle (le « plan ») qui décrit les attributs et les méthodes communs à toute une famille d’objets. Un objet construit à partir d’une classe est appelé une **instance** de cette classe.
+    Une <span id="lex-classe02" class="ancre"></span>**classe** est le modèle (le « plan ») qui décrit les attributs et les méthodes communs à toute une famille d’objets. Un objet construit à partir d’une classe est appelé une <span id="lex-instance02" class="ancre"></span>**instance** de cette classe.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Les deux colonnes des fiches, « ce qu’il sait » et « ce qu’il sait faire », étaient les attributs et les méthodes ; la fiche « modèle » commune à toutes les lampes était une classe, et la lampe bleue de Léa et la lampe rouge de Tom en sont deux instances : mêmes attributs, valeurs différentes.
 
@@ -171,11 +171,11 @@ On ne décrit pas chaque objet un par un : on écrit un **plan** commun à tous 
 
 !!! remarque "Remarque"
 
-    Vous connaissez déjà des classes ! En Python, `str`, `int`, `list` sont des classes. La chaîne `"radar"` est une *instance* de `str`, la liste `[1, 2]` une *instance* de `list`. L’instruction `type("radar")` renvoie d’ailleurs `<class ’str’>`.
+    Vous connaissez déjà des classes ! En Python, `str`, `int`, `list` sont des classes. La chaîne `"radar"` est une *instance* de `str`, la liste `[1, 2]` une *instance* de `list`. L’instruction <span id="lex-pytype02" class="ancre"></span>`type("radar")` renvoie d’ailleurs `<class ’str’>`.
 
 ### Écrire une classe (presque) vide
 
-En Python, une classe se déclare avec le mot-clé `class`, suivi d’un nom (par convention avec une **majuscule**). On crée ensuite une instance en écrivant `NomDeLaClasse()`.
+En Python, une classe se déclare avec le mot-clé <span id="lex-pyclass02" class="ancre"></span>`class`, suivi d’un nom (par convention avec une **majuscule**). On crée ensuite une instance en écrivant `NomDeLaClasse()`.
 
 !!! exemple "Exemple — Saisissez, analysez et testez ce code"
 
@@ -189,7 +189,7 @@ En Python, une classe se déclare avec le mot-clé `class`, suivi d’un nom (pa
 
     ??? corrige "Correction"
 
-        Le programme n’affiche rien. L’instruction `pass` signifie « ne rien faire » : une classe ne peut pas être totalement vide. Nous avons créé **deux** instances distinctes de `Personnage` (`print(gollum)` affiche `<__main__.Personnage object at 0x…>`).
+        Le programme n’affiche rien. L’instruction <span id="lex-pypass02" class="ancre"></span>`pass` signifie « ne rien faire » : une classe ne peut pas être totalement vide. Nous avons créé **deux** instances distinctes de `Personnage` (`print(gollum)` affiche `<__main__.Personnage object at 0x…>`).
 
 Ces instances sont pour l’instant inutiles : donnons-leur un état.
 
@@ -199,15 +199,15 @@ Ces instances sont pour l’instant inutiles : donnons-leur un état.
 
 ## Les attributs : l’état d’un objet
 
-Un **attribut** est une donnée attachée à une instance. On y accède avec la notation **pointée** : `gollum.vie` désigne l’attribut `vie` de l’instance `gollum`. Mais où et comment créer proprement cet attribut ?
+Un **attribut** est une donnée attachée à une instance. On y accède avec la notation <span id="lex-pypointee02" class="ancre"></span>**pointée** : `gollum.vie` désigne l’attribut `vie` de l’instance `gollum`. Mais où et comment créer proprement cet attribut ?
 
 ### Le constructeur `__init__` et le mot `self`
 
-Les attributs d’une instance sont mis en place par une méthode spéciale, le **constructeur**, nommée `__init__` (deux tirets bas de chaque côté). Elle est appelée **automatiquement** au moment de la création de l’instance.
+Les attributs d’une instance sont mis en place par une méthode spéciale, le <span id="lex-constructeur02" class="ancre"></span><span id="lex-pyinit02" class="ancre"></span>**constructeur**, nommée `__init__` (deux tirets bas de chaque côté). Elle est appelée **automatiquement** au moment de la création de l’instance.
 
 !!! regle "Règle 1 — Le mot self"
 
-    Dans une classe, `self` désigne **l’instance en train d’être manipulée**. C’est **toujours** le premier paramètre d’une méthode. Écrire `self.vie = 20` crée l’attribut `vie` *de cette instance*. Quand vous écrivez ensuite `gollum.vie`, Python a remplacé `self` par `gollum`.
+    <span id="lex-pyself02" class="ancre"></span>Dans une classe, `self` désigne **l’instance en train d’être manipulée**. C’est **toujours** le premier paramètre d’une méthode. Écrire `self.vie = 20` crée l’attribut `vie` *de cette instance*. Quand vous écrivez ensuite `gollum.vie`, Python a remplacé `self` par `gollum`.
 
 !!! exemple "Exemple — Saisissez, analysez et testez ce code"
 
@@ -256,7 +256,7 @@ Ici, tous les personnages naissent avec 20 points de vie. Pour que chaque instan
 
 !!! definition "Définition 6 — Méthode"
 
-    Une **méthode** est une fonction définie **à l’intérieur** d’une classe. Elle agit sur l’instance grâce à `self`. On l’appelle avec la notation pointée : `bilbo.perd_vie(4)` (`self` n’apparaît pas dans les parenthèses : seuls les autres paramètres, ici `degats`, reçoivent une valeur).
+    <span id="lex-methode02" class="ancre"></span>Une **méthode** est une fonction définie **à l’intérieur** d’une classe. Elle agit sur l’instance grâce à `self`. On l’appelle avec la notation pointée : `bilbo.perd_vie(4)` (`self` n’apparaît pas dans les parenthèses : seuls les autres paramètres, ici `degats`, reçoivent une valeur).
 
 Distinguons deux rôles très courants : une méthode qui **renvoie** une information sur l’état, et une méthode qui **modifie** l’état.
 
@@ -321,7 +321,7 @@ Techniquement, rien n’empêche d’écrire directement `bilbo.vie = -999` depu
 
 !!! definition "Définition 7 — Encapsulation"
 
-    L’**encapsulation** consiste à *cacher* l’état interne d’un objet et à ne le laisser manipuler qu’à travers ses méthodes. L’utilisateur de la classe se sert des méthodes (les « boutons ») sans toucher directement aux attributs.
+    L’<span id="lex-encapsulation02" class="ancre"></span>**encapsulation** consiste à *cacher* l’état interne d’un objet et à ne le laisser manipuler qu’à travers ses méthodes. L’utilisateur de la classe se sert des méthodes (les « boutons ») sans toucher directement aux attributs.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Le camarade qui écrivait directement « solde : $-50$ » sur la fiche de la carte de cantine court-circuitait l’objet ; n’autoriser que les actions « recharger » et « payer », qui vérifient l’opération, c’est l’encapsulation.
 
@@ -358,7 +358,7 @@ print(compte.solde())                   # affiche 120
 
 !!! regle "Règle 2 — La convention du tiret bas"
 
-    En Python, on **préfixe d’un tiret bas** (`_solde`) un attribut qui n’est pas censé être utilisé de l’extérieur. C’est une **convention** entre programmeurs : Python ne l’interdit pas techniquement, mais tout le monde comprend « ceci est interne, manipule-le par les méthodes ». Une méthode qui *lit* un attribut s’appelle un **accesseur** (ici `solde`) ; une méthode qui le *modifie*, un **mutateur**.
+    En Python, on <span id="lex-pytiretbas02" class="ancre"></span>**préfixe d’un tiret bas** (`_solde`) un attribut qui n’est pas censé être utilisé de l’extérieur. C’est une **convention** entre programmeurs : Python ne l’interdit pas techniquement, mais tout le monde comprend « ceci est interne, manipule-le par les méthodes ». Une méthode qui *lit* un attribut s’appelle un <span id="lex-accesseur02" class="ancre"></span>**accesseur** (ici `solde`) ; une méthode qui le *modifie*, un <span id="lex-mutateur02" class="ancre"></span>**mutateur**.
 
 !!! encadre "Au bac — où utiliser accesseurs et mutateurs ?"
 
@@ -396,7 +396,7 @@ print(compte.solde())                   # affiche 120
 
 ### Signaler une erreur : `raise`
 
-Dans `deposer`, un montant négatif est ignoré **en silence** : l’appelant ne sait pas que son ordre n’a pas été exécuté. Il vaut souvent mieux **lever une erreur** (on dit aussi « lever une exception ») avec le mot-clé `raise` :
+<span id="lex-pyraise02" class="ancre"></span> Dans `deposer`, un montant négatif est ignoré **en silence** : l’appelant ne sait pas que son ordre n’a pas été exécuté. Il vaut souvent mieux **lever une erreur** (on dit aussi « lever une exception ») avec le mot-clé `raise` :
 
 ```python
     def deposer(self, montant):
@@ -416,11 +416,11 @@ ValueError: montant invalide
 
     - **Syntaxe** : `raise ValueError("message")`. La fonction s’arrête **immédiatement** (les lignes suivantes ne sont pas exécutées), puis le programme s’arrête à son tour en affichant le type d’erreur et le message.
 
-    - **Types courants** : `ValueError` (valeur incorrecte : montant négatif, carte inconnue…), `IndexError` (indice hors limites, pile vide), `TypeError` (type incorrect).
+    - **Types courants** : <span id="lex-pyerreurs02" class="ancre"></span>`ValueError` (valeur incorrecte : montant négatif, carte inconnue…), `IndexError` (indice hors limites, pile vide), `TypeError` (type incorrect).
 
     - **Quand l’utiliser ?** Quand l’appelant demande quelque chose d’**impossible** : la précondition n’est pas respectée, et renvoyer une valeur « bidon » (`None`, `-1`…) risquerait de passer inaperçu.
 
-    - **Différence avec `assert`** (vu en Première) : `assert condition, "message"` sert au **programmeur** à vérifier, pendant la mise au point et dans les tests, ce qui *doit* être vrai ; il lève `AssertionError` et peut être désactivé. `raise`, lui, fait partie du **comportement prévu** de la fonction : il se documente dans la docstring, comme une sortie possible.
+    - **Différence avec <span id="lex-pyassert02" class="ancre"></span>`assert`** (vu en Première) : `assert condition, "message"` sert au **programmeur** à vérifier, pendant la mise au point et dans les tests, ce qui *doit* être vrai ; il lève `AssertionError` et peut être désactivé. `raise`, lui, fait partie du **comportement prévu** de la fonction : il se documente dans la docstring, comme une sortie possible.
 
 <span id="cours-02-12" class="ancre"></span>
 
@@ -462,7 +462,7 @@ Illisible ! Par défaut, un objet ne sait pas se décrire. On corrige cela en d�
 
 !!! regle "Règle 4 — __repr__ ou __str__ ?"
 
-    Deux méthodes gouvernent l’affichage d’un objet :
+    <span id="lex-pyrepr02" class="ancre"></span>Deux méthodes gouvernent l’affichage d’un objet :
 
     - `__repr__` est appelée quand on **tape le nom** de l’objet dans la console (et par la fonction `repr()`). C’est la représentation « officielle », sans ambiguïté : par convention, on renvoie idéalement une expression qui *recréerait* l’objet, comme `Point(3, 4)`.
 
@@ -565,13 +565,13 @@ On interroge alors : `?- fact(4, X).` et Prolog trouve `X = 24`.
 
 ## Modularité : utiliser et créer des modules
 
-Un vrai programme compte des milliers de lignes : on ne l’écrit pas d’un seul bloc. On le découpe en **modules**, des fichiers `.py` qui regroupent chacun les fonctions et les classes d’un même thème. Vous vous en servez déjà : `import random` ou `import math` chargent des modules écrits par d’autres.
+Un vrai programme compte des milliers de lignes : on ne l’écrit pas d’un seul bloc. On le découpe en **modules**, des fichiers `.py` qui regroupent chacun les fonctions et les classes d’un même thème. Vous vous en servez déjà : <span id="lex-pyimport02" class="ancre"></span>`import random` ou `import math` chargent des modules écrits par d’autres.
 
 ### Utiliser une bibliothèque et lire sa documentation
 
 !!! definition "Définition 8 — Module, bibliothèque, API"
 
-    Un **module** est un fichier Python que l’on peut **importer** dans un autre programme ; une **bibliothèque** est un ensemble de modules (la bibliothèque standard de Python en compte des centaines). L’**API** (*Application Programming Interface*, interface de programmation) d’une bibliothèque est la liste de ce qu’elle met à disposition (fonctions, classes, constantes) avec leur **spécification** : ce que chacune reçoit, ce qu’elle renvoie, les erreurs qu’elle peut lever.
+    Un <span id="lex-module02" class="ancre"></span>**module** est un fichier Python que l’on peut **importer** dans un autre programme ; une **bibliothèque** est un ensemble de modules (la bibliothèque standard de Python en compte des centaines). L’<span id="lex-api02" class="ancre"></span>**API** (*Application Programming Interface*, interface de programmation) d’une bibliothèque est la liste de ce qu’elle met à disposition (fonctions, classes, constantes) avec leur **spécification** : ce que chacune reçoit, ce qu’elle renvoie, les erreurs qu’elle peut lever.
 
 ```python
 import math                   # on importe tout le module...
@@ -581,7 +581,7 @@ from random import randint    # on importe un seul nom...
 de = randint(1, 6)            # ... utilisable sans prefixe
 ```
 
-Pour utiliser une fonction, on n’a pas besoin de son code : sa **documentation** suffit. Dans la console, `help(nom)` affiche la docstring de la fonction, du module ou de la classe ; la documentation complète de Python est en ligne (`docs.python.org`).
+Pour utiliser une fonction, on n’a pas besoin de son code : sa **documentation** suffit. Dans la console, <span id="lex-pyhelp02" class="ancre"></span>`help(nom)` affiche la docstring de la fonction, du module ou de la classe ; la documentation complète de Python est en ligne (`docs.python.org`).
 
 ```text
 >>> help(randint)
@@ -644,9 +644,9 @@ print(compte.solde())          # affiche 25
 
     - **Un thème par module**, avec un nom clair : `banque.py`, `outils.py`…
 
-    - **Une docstring** en tête du module et dans chaque fonction ou méthode : ce qu’elle reçoit, ce qu’elle renvoie, les erreurs qu’elle lève. C’est elle que `help(banque)` affichera à l’utilisateur.
+    - <span id="lex-pydocstring02" class="ancre"></span>**Une docstring** en tête du module et dans chaque fonction ou méthode : ce qu’elle reçoit, ce qu’elle renvoie, les erreurs qu’elle lève. C’est elle que `help(banque)` affichera à l’utilisateur.
 
-    - **Les tests** sous `if __name__ == "__main__":`. Ce bloc s’exécute quand on lance le fichier lui-même, mais **pas** quand on l’importe : le programme qui écrit `from banque import …` ne voit pas les tests s’exécuter.
+    - **Les tests** sous <span id="lex-pymain02" class="ancre"></span>`if __name__ == "__main__":`. Ce bloc s’exécute quand on lance le fichier lui-même, mais **pas** quand on l’importe : le programme qui écrit `from banque import …` ne voit pas les tests s’exécuter.
 
 !!! encadre "Au bac"
 

@@ -49,7 +49,7 @@ On recommence sur la moitié retenue, qui est deux fois plus petite. Et ainsi de
 
 !!! definition "Définition 1 — Recherche dichotomique"
 
-    Rechercher `x` par **dichotomie** dans un tableau **trié**, c’est restreindre la zone de recherche à un intervalle `[deb ; fin]` que l’on **divise par deux** à chaque étape, en comparant `x` à l’élément du milieu.
+    Rechercher `x` par <span id="lex-dichotomie07" class="ancre"></span>**dichotomie** dans un tableau **trié**, c’est restreindre la zone de recherche à un intervalle `[deb ; fin]` que l’on **divise par deux** à chaque étape, en comparant `x` à l’élément du milieu.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Dans l’activité « Le nombre mystère », la meilleure stratégie consistait à proposer le milieu des nombres encore possibles (50 pour commencer). Elle n’était possible que parce que le maître du jeu répondait « plus grand » ou « plus petit », et pas seulement « perdu » : dans un tableau, c’est le tri qui permet ce genre de réponse.
 
@@ -103,7 +103,7 @@ Avec une boucle `while`, une question capitale se pose : est-on sûr de ne pas t
 
 !!! regle "Règle 2 — Un variant de boucle"
 
-    Considérons la quantité `fin - deb`, la « largeur » de la zone de recherche. À **chaque** tour, on remplace `deb` par `mil + 1`, ou `fin` par `mil - 1` : dans les deux cas, cette largeur **diminue strictement**. Tant que la boucle tourne (`deb <= fin`), cette quantité entière est **positive ou nulle** ; or un entier positif qui décroît strictement ne peut pas le faire éternellement : tôt ou tard `deb > fin`, et la boucle s’arrête. Une telle grandeur est appelée un **variant de boucle** (notion déjà rencontrée au chapitre *Les bases de la programmation Python*).
+    Considérons la quantité `fin - deb`, la « largeur » de la zone de recherche. À **chaque** tour, on remplace `deb` par `mil + 1`, ou `fin` par `mil - 1` : dans les deux cas, cette largeur **diminue strictement**. Tant que la boucle tourne (`deb <= fin`), cette quantité entière est **positive ou nulle** ; or un entier positif qui décroît strictement ne peut pas le faire éternellement : tôt ou tard `deb > fin`, et la boucle s’arrête. Une telle grandeur est appelée un <span id="lex-variant07" class="ancre"></span>**variant de boucle** (notion déjà rencontrée au chapitre *Les bases de la programmation Python*).
 
 !!! demonstration "Démonstration — La terminaison"
 
@@ -129,13 +129,13 @@ $$n \to \frac{n}{2} \to \frac{n}{4} \to \frac{n}{8} \to \cdots \to 1.$$
 
 !!! regle "Règle 3 — Coût logarithmique"
 
-    La recherche dichotomique sur un tableau de taille `n` fait **au plus $\lfloor \log_2 n \rfloor + 1$ tours**, soit le nombre de divisions par 2 pour arriver à 1, **plus un** (le dernier tour examine la seule case restante). Par exemple, pour $n = 16$ : $16 \to 8 \to 4 \to 2 \to 1$ fait 4 divisions, donc au plus **5 tours**. Ce nombre est de l’ordre de $\log_2(n)$ : on dit que son coût est **logarithmique**. C’est *radicalement* plus petit que `n`.
+    <span id="lex-logarithmique07" class="ancre"></span>La recherche dichotomique sur un tableau de taille `n` fait **au plus $\lfloor \log_2 n \rfloor + 1$ tours**, soit le nombre de divisions par 2 pour arriver à 1, **plus un** (le dernier tour examine la seule case restante). Par exemple, pour $n = 16$ : $16 \to 8 \to 4 \to 2 \to 1$ fait 4 divisions, donc au plus **5 tours**. Ce nombre est de l’ordre de $\log_2(n)$ : on dit que son coût est **logarithmique**. C’est *radicalement* plus petit que `n`.
 
 <span class="retouract">↺ Retour sur l'activité.</span> La suite $100 \to 50 \to 25 \to 12 \to 6 \to 3 \to 1$ de l’activité donnait 7 coups au pire entre 1 et 100 ; même le maître du jeu malin ne pouvait pas dépasser ce nombre. Le tableau final montrait déjà l’effet du logarithme : un coup de plus quand on double les possibilités, dix de plus quand on les multiplie par 1 000.
 
 !!! curieux "Pour les curieux (facultatif) — Le logarithme en deux mots"
 
-    Diviser `n` par 2 un nombre $a$ de fois pour tomber sur 1 revient à écrire $n = 2^a$. Ce nombre $a$ d’étapes se note $a = \log_2(n)$ : c’est la **réciproque** de la puissance de 2.
+    <span id="lex-logarithme07" class="ancre"></span>Diviser `n` par 2 un nombre $a$ de fois pour tomber sur 1 revient à écrire $n = 2^a$. Ce nombre $a$ d’étapes se note $a = \log_2(n)$ : c’est la **réciproque** de la puissance de 2.
 
 Retenez surtout l’ordre de grandeur : **doubler la taille du tableau n’ajoute qu’*une seule* étape** (un tour de plus, au plus).
 

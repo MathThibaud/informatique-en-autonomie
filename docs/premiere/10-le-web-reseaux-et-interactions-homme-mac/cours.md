@@ -33,7 +33,7 @@ Objectifs
 
 !!! definition "Définition 1 — Internet et le Web"
 
-    **Internet** est le réseau mondial : l’*infrastructure* de câbles, fibres, antennes et machines qui relient les ordinateurs entre eux. **Le Web** (*World Wide Web*) est l’un des services qui circulent sur Internet : l’ensemble des pages reliées par des liens hypertextes, consultées avec un navigateur.
+    <span id="lex-internet10" class="ancre"></span>**Internet** est le réseau mondial : l’*infrastructure* de câbles, fibres, antennes et machines qui relient les ordinateurs entre eux. <span id="lex-web10" class="ancre"></span>**Le Web** (*World Wide Web*) est l’un des services qui circulent sur Internet : l’ensemble des pages reliées par des liens hypertextes, consultées avec un navigateur.
 
 Internet transporte bien d’autres choses que le Web : le courriel, les messageries, les jeux en ligne, le streaming… *Confondre les deux, c’est confondre la route (Internet) et l’un des véhicules qui roulent dessus (le Web).*
 
@@ -41,13 +41,13 @@ Internet transporte bien d’autres choses que le Web : le courriel, les message
 
 !!! definition "Définition 2 — Protocole"
 
-    Un **protocole** est un **ensemble de règles** précises que deux machines respectent pour communiquer. Comme deux personnes doivent parler la même langue et respecter des tours de parole, deux ordinateurs doivent suivre le même protocole pour se comprendre.
+    Un <span id="lex-protocole10" class="ancre"></span>**protocole** est un **ensemble de règles** précises que deux machines respectent pour communiquer. Comme deux personnes doivent parler la même langue et respecter des tours de parole, deux ordinateurs doivent suivre le même protocole pour se comprendre.
 
 <span class="retouract">↺ Retour sur l'activité.</span> La dernière question de l’activité « Le réseau qui perd des papiers » y répondait : les règles des manches 2 et 3, que l’émetteur et le récepteur devaient respecter tous les deux, formaient un protocole.
 
 !!! definition "Définition 3 — Adresse IP"
 
-    Pour être jointe sur le réseau, chaque machine possède une **adresse IP** (*Internet Protocol*), son « numéro » sur ce réseau. En version IPv4, c’est une suite de quatre nombres de 0 à 255, par exemple `193.51.208.14`. C’est l’équivalent d’une **adresse postale** : sans elle, impossible de livrer un message à la bonne machine.
+    Pour être jointe sur le réseau, chaque machine possède une <span id="lex-ip10" class="ancre"></span>**adresse IP** (*Internet Protocol*), son « numéro » sur ce réseau. En version IPv4, c’est une suite de quatre nombres de 0 à 255, par exemple `193.51.208.14`. C’est l’équivalent d’une **adresse postale** : sans elle, impossible de livrer un message à la bonne machine.
 
 !!! remarque "Remarque — Adresses privées et adresse publique"
 
@@ -55,13 +55,13 @@ Internet transporte bien d’autres choses que le Web : le courriel, les message
 
 !!! regle "Règle 1 — On voyage en paquets"
 
-    Un message (une page, un mail, une vidéo) n’est pas envoyé d’un bloc : il est découpé en petits morceaux, les **paquets**. Chaque paquet porte l’adresse IP de départ et d’arrivée, voyage indépendamment à travers le réseau, et les paquets sont réassemblés à l’arrivée. Si un paquet se perd, il est renvoyé.
+    <span id="lex-paquet10" class="ancre"></span>Un message (une page, un mail, une vidéo) n’est pas envoyé d’un bloc : il est découpé en petits morceaux, les **paquets**. Chaque paquet porte l’adresse IP de départ et d’arrivée, voyage indépendamment à travers le réseau, et les paquets sont réassemblés à l’arrivée. Si un paquet se perd, il est renvoyé.
 
 ![](../figures/661773685443ed6e.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 2 — L’encapsulation : des enveloppes dans des enveloppes"
 
-    Pour voyager, les données traversent plusieurs **couches** de protocoles. À l’envoi, chaque couche ajoute devant ce qu’elle reçoit un **en-tête** contenant les informations dont *elle* a besoin, comme on glisse une lettre dans une enveloppe, puis cette enveloppe dans une autre : c’est l’**encapsulation**.
+    Pour voyager, les données traversent plusieurs **couches** de protocoles. À l’envoi, chaque couche ajoute devant ce qu’elle reçoit un **en-tête** contenant les informations dont *elle* a besoin, comme on glisse une lettre dans une enveloppe, puis cette enveloppe dans une autre : c’est l’<span id="lex-encapsulation10" class="ancre"></span>**encapsulation**.
 
     - **Application** (HTTP) : la requête elle-même, par exemple `GET /index.html` ;
 
@@ -77,7 +77,7 @@ Internet transporte bien d’autres choses que le Web : le courriel, les message
 
 !!! definition "Définition 4 — Routeur et commutateur"
 
-    Un **routeur** est une machine qui aiguille les paquets : il lit l’adresse IP de destination et choisit vers quel voisin renvoyer le paquet pour le rapprocher du but (comme un centre de tri postal). Un **commutateur** (*switch*) relie les machines d’un *même* réseau local (une salle, une maison). L’ensemble des routeurs interconnectés forme Internet.
+    Un <span id="lex-routeur10" class="ancre"></span>**routeur** est une machine qui aiguille les paquets : il lit l’adresse IP de destination et choisit vers quel voisin renvoyer le paquet pour le rapprocher du but (comme un centre de tri postal). Un **commutateur** (*switch*) relie les machines d’un *même* réseau local (une salle, une maison). L’ensemble des routeurs interconnectés forme Internet.
 
 !!! encadre "À retenir — Le réseau du lycée"
 
@@ -97,15 +97,15 @@ Internet transporte bien d’autres choses que le Web : le courriel, les message
 
 !!! encadre "À retenir — Trouver l’adresse : le DNS"
 
-    On ne retient pas des suites de chiffres : on tape `www.lycee.mc`, pas `193.51.208.14`. Le **DNS** (*Domain Name System*) est l’**annuaire** du réseau : il **traduit un nom** de domaine en **adresse IP**. Première étape du voyage : le navigateur demande au DNS « quelle est l’IP de `www.lycee.mc` ? ».
+    On ne retient pas des suites de chiffres : on tape `www.lycee.mc`, pas `193.51.208.14`. Le <span id="lex-dns10" class="ancre"></span>**DNS** (*Domain Name System*) est l’**annuaire** du réseau : il **traduit un nom** de domaine en **adresse IP**. Première étape du voyage : le navigateur demande au DNS « quelle est l’IP de `www.lycee.mc` ? ».
 
 !!! definition "Définition 5 — Client-serveur et pair-à-pair"
 
     Deux façons d’organiser les échanges :
 
-    - **client-serveur** : des machines clientes *demandent* des ressources à une machine serveur qui les *fournit* (le modèle du Web) ;
+    - <span id="lex-clientserveur10" class="ancre"></span>**client-serveur** : des machines clientes *demandent* des ressources à une machine serveur qui les *fournit* (le modèle du Web) ;
 
-    - **pair-à-pair** (*peer-to-peer*, P2P) : chaque machine est à la fois cliente *et* serveur, et échange directement avec les autres, sans passer par un serveur central (partage de fichiers, certaines messageries).
+    - <span id="lex-p2p10" class="ancre"></span>**pair-à-pair** (*peer-to-peer*, P2P) : chaque machine est à la fois cliente *et* serveur, et échange directement avec les autres, sans passer par un serveur central (partage de fichiers, certaines messageries).
 
 ### Ne perdre aucun paquet : l’accusé de réception et le bit alterné
 
@@ -113,7 +113,7 @@ Un paquet perdu est *renvoyé* : encore faut-il que l’émetteur **sache** qu�
 
 !!! definition "Définition 6 — Accusé de réception"
 
-    Après avoir reçu un paquet, le récepteur renvoie un petit message de confirmation, l’**accusé de réception** (*ACK*, de *acknowledgement*). Tant que l’émetteur n’a pas reçu l’accusé au bout d’un certain délai, il considère le paquet perdu et le **renvoie**.
+    Après avoir reçu un paquet, le récepteur renvoie un petit message de confirmation, l’<span id="lex-ack10" class="ancre"></span>**accusé de réception** (*ACK*, de *acknowledgement*). Tant que l’émetteur n’a pas reçu l’accusé au bout d’un certain délai, il considère le paquet perdu et le **renvoie**.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Le papier « reçu » de la manche 2 était un accusé de réception, et les 10 secondes comptées par l’émetteur le délai au-delà duquel il renvoyait sa lettre.
 
@@ -121,7 +121,7 @@ Si c’est l’**accusé** qui se perd, l’émetteur renvoie un paquet déjà r
 
 !!! regle "Règle 3 — Le protocole du bit alterné"
 
-    On étiquette chaque paquet avec un **seul bit**, qui vaut alternativement `0`, `1`, `0`, `1`… L’accusé renvoie le numéro du paquet attendu ensuite. Les règles :
+    <span id="lex-bitalterne10" class="ancre"></span>On étiquette chaque paquet avec un **seul bit**, qui vaut alternativement `0`, `1`, `0`, `1`… L’accusé renvoie le numéro du paquet attendu ensuite. Les règles :
 
     - l’émetteur n’envoie le paquet suivant (avec le bit changé) que lorsqu’il a reçu l’accusé du paquet courant ;
 
@@ -139,7 +139,7 @@ Le paquet `1` est perdu ; faute d’accusé, l’émetteur le renvoie à l’ide
 
 !!! remarque "Remarque"
 
-    Ce mécanisme d’accusés et de renvois est au cœur du protocole **TCP**, qui garantit sur Internet qu’aucune donnée n’est perdue ni dupliquée ; le bit alterné en est la version la plus simple.
+    Ce mécanisme d’accusés et de renvois est au cœur du <span id="lex-tcp10" class="ancre"></span>protocole **TCP**, qui garantit sur Internet qu’aucune donnée n’est perdue ni dupliquée ; le bit alterné en est la version la plus simple.
 
 <span id="cours-10-1" class="ancre"></span>
 
@@ -151,7 +151,7 @@ Sur le Web, votre navigateur est un **client** : il demande des pages à des **s
 
 !!! definition "Définition 7 — URL — Uniform Resource Locator"
 
-    Une URL est l’**adresse d’une ressource** sur le Web. On la décompose :
+    Une URL est l’<span id="lex-url10" class="ancre"></span>**adresse d’une ressource** sur le Web. On la décompose :
 
     ![](../figures/d871083f5ca59324.svg){ .tikz loading=lazy }
 
@@ -163,7 +163,7 @@ Sur le Web, votre navigateur est un **client** : il demande des pages à des **s
 
 !!! encadre "À retenir — Reconnaître une page sécurisée"
 
-    Quand l’URL commence par `https` (et non `http`), la communication est **chiffrée** : personne ne peut lire au passage ce qui circule. **Réflexe** : avant de saisir un mot de passe ou des coordonnées bancaires, **vérifier le `https`**. Le « s » veut dire *secure*. Attention : le `https` (le cadenas) prouve que la liaison est chiffrée, **pas** que le site est honnête ; un site d’hameçonnage peut lui aussi être en `https`, il faut donc aussi vérifier le nom de domaine. On étudiera le chiffrement en Terminale.
+    Quand l’URL commence par `https` (et non `http`), la communication est <span id="lex-https10" class="ancre"></span>**chiffrée** : personne ne peut lire au passage ce qui circule. **Réflexe** : avant de saisir un mot de passe ou des coordonnées bancaires, **vérifier le `https`**. Le « s » veut dire *secure*. Attention : le `https` (le cadenas) prouve que la liaison est chiffrée, **pas** que le site est honnête ; un site d’hameçonnage peut lui aussi être en `https`, il faut donc aussi vérifier le nom de domaine. On étudiera le chiffrement en Terminale.
 
 !!! curieux "Pour les curieux (facultatif) — Le port"
 
@@ -171,7 +171,7 @@ Sur le Web, votre navigateur est un **client** : il demande des pages à des **s
 
 ## HTTP : la langue du Web
 
-Une fois le serveur trouvé, client et serveur dialoguent selon le protocole **HTTP** (*HyperText Transfer Protocol*) : le client envoie une **requête**, le serveur renvoie une **réponse**.
+Une fois le serveur trouvé, client et serveur dialoguent selon le protocole <span id="lex-http10" class="ancre"></span>**HTTP** (*HyperText Transfer Protocol*) : le client envoie une **requête**, le serveur renvoie une **réponse**.
 
 !!! regle "Règle 4 — Requête et réponse HTTP"
 
@@ -193,7 +193,7 @@ Une fois le serveur trouvé, client et serveur dialoguent selon le protocole **H
 
 !!! definition "Définition 8 — Les deux méthodes à connaître : GET et POST"
 
-    - `GET` : **demander** une ressource (le cas le plus courant : afficher une page). Les éventuels paramètres sont visibles dans l’URL.
+    - `GET` : **demander** une ressource (le cas le plus courant : afficher une page). Les éventuels paramètres sont visibles dans l’URL. <span id="lex-post10" class="ancre"></span>
 
     - `POST` : **envoyer** des données au serveur pour qu’il les traite (typiquement, les données d’un formulaire). Les données ne sont *pas* dans l’URL.
 
@@ -215,11 +215,11 @@ Une fois le serveur trouvé, client et serveur dialoguent selon le protocole **H
 
 ## HTML : structurer la page
 
-La ressource renvoyée est le plus souvent un fichier **HTML** (*HyperText Markup Language*). Ce n’est **pas** un langage de programmation : c’est un langage de **balisage** qui décrit la **structure** du contenu (titres, paragraphes, images, liens…).
+La ressource renvoyée est le plus souvent un <span id="lex-html10" class="ancre"></span>fichier **HTML** (*HyperText Markup Language*). Ce n’est **pas** un langage de programmation : c’est un langage de **balisage** qui décrit la **structure** du contenu (titres, paragraphes, images, liens…).
 
 !!! definition "Définition 9 — Balises"
 
-    Le contenu est encadré par des **balises** : une balise ouvrante `<p>` et une balise fermante `</p>`. Certaines portent des **attributs**.
+    Le contenu est encadré par des <span id="lex-balise10" class="ancre"></span>**balises** : une balise ouvrante `<p>` et une balise fermante `</p>`. Certaines portent des **attributs**.
 
 ```html
 <!doctype html>
@@ -262,7 +262,7 @@ La ressource renvoyée est le plus souvent un fichier **HTML** (*HyperText Marku
 
 !!! encadre "À retenir — Une page est un arbre : le DOM"
 
-    Les balises s’**emboîtent** sans se croiser : le document forme un **arbre**, appelé **DOM** (*Document Object Model*). C’est cet arbre que le navigateur construit en mémoire, et que le JavaScript pourra modifier.
+    Les balises s’**emboîtent** sans se croiser : le document forme un **arbre**, appelé <span id="lex-dom10" class="ancre"></span>**DOM** (*Document Object Model*). C’est cet arbre que le navigateur construit en mémoire, et que le JavaScript pourra modifier.
 
     ![](../figures/7c2c92b1d150107b.svg){ .tikz loading=lazy }
 
@@ -272,11 +272,11 @@ La ressource renvoyée est le plus souvent un fichier **HTML** (*HyperText Marku
 
 ## CSS : mettre en forme
 
-Le **CSS** (*Cascading Style Sheets*) décrit la **présentation** : couleurs, tailles, polices, dispositions. **Principe fondamental : séparer le fond (HTML) de la forme (CSS).** Le même contenu peut ainsi changer d’apparence sans qu’on touche au HTML.
+<span id="lex-css10" class="ancre"></span>Le **CSS** (*Cascading Style Sheets*) décrit la **présentation** : couleurs, tailles, polices, dispositions. **Principe fondamental : séparer le fond (HTML) de la forme (CSS).** Le même contenu peut ainsi changer d’apparence sans qu’on touche au HTML.
 
 !!! regle "Règle 6 — Une règle CSS"
 
-    Une règle vise un **sélecteur** (quelles balises) et lui applique des **propriétés**, chacune sous la forme `propriété: valeur;` :
+    Une règle vise un <span id="lex-selecteur10" class="ancre"></span>**sélecteur** (quelles balises) et lui applique des **propriétés**, chacune sous la forme `propriété: valeur;` :
 
     ```css
     h1      { color: darkblue; text-align: center; }   /* toutes les balises h1 */
@@ -328,7 +328,7 @@ Appliquée à un bloc `<div class="barre">``…</div>`, cette règle aligne **to
 
 ## JavaScript : rendre la page interactive
 
-HTML structure, CSS met en forme… mais tout cela est **figé**. Le **JavaScript** (JS) est un vrai **langage de programmation**, exécuté **dans le navigateur** (côté **client**), qui rend la page **vivante** : réagir à un clic, modifier le contenu, valider un formulaire…
+HTML structure, CSS met en forme… mais tout cela est **figé**. <span id="lex-javascript10" class="ancre"></span>Le **JavaScript** (JS) est un vrai **langage de programmation**, exécuté **dans le navigateur** (côté **client**), qui rend la page **vivante** : réagir à un clic, modifier le contenu, valider un formulaire…
 
 !!! regle "Règle 7 — Les trois langages du Web"
 
@@ -340,7 +340,7 @@ HTML structure, CSS met en forme… mais tout cela est **figé**. Le **JavaScri
 
 ### Répondre à un événement
 
-Un **événement** est quelque chose qui **se produit** dans la page, le plus souvent une action de l’utilisateur : un **clic** (`click`), le **survol** de la souris (`mouseover`), une **touche** du clavier (`keydown`), la **modification** d’un champ (`change`), l’**envoi** d’un formulaire (`submit`), le **chargement** de la page (`load`)… On y réagit en exécutant une fonction JavaScript.
+Un <span id="lex-evenement10" class="ancre"></span>**événement** est quelque chose qui **se produit** dans la page, le plus souvent une action de l’utilisateur : un **clic** (`click`), le **survol** de la souris (`mouseover`), une **touche** du clavier (`keydown`), la **modification** d’un champ (`change`), l’**envoi** d’un formulaire (`submit`), le **chargement** de la page (`load`)… On y réagit en exécutant une fonction JavaScript.
 
 ```html
 <p id="monPara">Voici une page qui ne fait pas grand-chose.</p>
@@ -417,7 +417,7 @@ function changer() {
 
 !!! encadre "À retenir — Côté client, côté serveur"
 
-    Le **JavaScript** est le langage de l’interaction **côté client** : il s’exécute **sur votre machine**, **après** réception de la page, pour les réactions immédiates (afficher/masquer, vérifier qu’un champ n’est pas vide…). D’autres traitements se font **côté serveur**, sur la machine distante, dans un **autre langage** — par exemple **PHP**, ou Python : consulter une base de données, vérifier un mot de passe, générer une page personnalisée. *Savoir qui fait quoi* est essentiel : ce qui se passe côté client est visible et modifiable par l’utilisateur, donc jamais sûr pour des vérifications sensibles.
+    Le **JavaScript** est le langage de l’interaction <span id="lex-client10" class="ancre"></span>**côté client** : il s’exécute **sur votre machine**, **après** réception de la page, pour les réactions immédiates (afficher/masquer, vérifier qu’un champ n’est pas vide…). D’autres traitements se font **côté serveur**, sur la machine distante, dans un **autre langage** — par exemple **PHP**, ou Python : consulter une base de données, vérifier un mot de passe, générer une page personnalisée. *Savoir qui fait quoi* est essentiel : ce qui se passe côté client est visible et modifiable par l’utilisateur, donc jamais sûr pour des vérifications sensibles.
 
 !!! remarque "Remarque — Faut-il apprendre PHP ? (mise au point)"
 
@@ -474,7 +474,7 @@ Voici une page **autonome** qui réunit tout : la **structure** (HTML), la **mis
 
 ## Les formulaires : envoyer des données
 
-Jusqu’ici le client *recevait*. Un **formulaire** lui permet d’**envoyer** des données au serveur (identifiants, recherche, message…).
+Jusqu’ici le client *recevait*. Un <span id="lex-formulaire10" class="ancre"></span>**formulaire** lui permet d’**envoyer** des données au serveur (identifiants, recherche, message…).
 
 ```html
 <form action="/connexion" method="post">
@@ -511,7 +511,7 @@ Jusqu’ici le client *recevait*. Un **formulaire** lui permet d’**envoyer** d
 
 ### Les cookies : ce que le navigateur retient
 
-Le protocole HTTP est **sans mémoire** : chaque requête est traitée seule, et le serveur ne sait pas, a priori, que deux requêtes viennent du même visiteur. Pour s’en souvenir (rester connecté, garder un panier, retenir une langue), le serveur demande au navigateur de garder une petite information : un **cookie**.
+Le protocole HTTP est **sans mémoire** : chaque requête est traitée seule, et le serveur ne sait pas, a priori, que deux requêtes viennent du même visiteur. Pour s’en souvenir (rester connecté, garder un panier, retenir une langue), le serveur demande au navigateur de garder une petite information : un <span id="lex-cookie10" class="ancre"></span>**cookie**.
 
 !!! regle "Règle 9 — Le cookie : mémorisé dans le client, retransmis au serveur"
 

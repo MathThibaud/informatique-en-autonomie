@@ -110,6 +110,8 @@ Nos **4 heures par semaine** se partagent entre :
 
     **Les défis n’ont volontairement pas de corrigé** dans ce livre : tout le plaisir d’une énigme est de la résoudre soi-même. Le site indique si votre réponse est juste (avec un compte gratuit) ; en cas de blocage, lisez les coups de pouce, puis venez en parler en classe.
 
+    En fin de livre, un **lexique** donne le sens des mots importants et des mots du langage Python, avec un lien vers leur définition dans le cours.
+
 !!! encadre "Comment vous êtes évalué"
 
     - à chaque chapitre, de courts **tests rapides** (/10) pour vérifier les bases, puis un **contrôle** (/20) ;
@@ -144,13 +146,17 @@ Nos **4 heures par semaine** se partagent entre :
 
 Au lycée, on programme avec **Spyder**, un logiciel libre et gratuit. Installez-le aussi chez vous : l’installateur officiel se télécharge sur `spyder-ide.org` et contient Python, il n’y a rien d’autre à installer. En dépannage (ordinateur prêté, installation impossible), **Basthon** fonctionne dans un navigateur, sans installation (`basthon.fr`) : parfait pour un exercice court, moins pratique pour un TP ou un défi qui lit des fichiers, qu’il faut alors déposer dans la page à chaque séance.
 
-![](img/00_spyder.png){ .photo loading=lazy style="width:82%" }
+![](figures/19cc92478d08d0f4.svg){ .tikz loading=lazy }
 
-Deux zones de Spyder servent tout le temps :
+Les repères de la capture :
 
-- **l’éditeur** (à gauche) : on y écrit le programme. Il est enregistré dans un fichier `.py` et s’exécute en entier avec le bouton vert $\blacktriangleright$ (ou la touche F5) ;
+- ![](figures/9ea5637cbb1a838f.svg){ .tikz .tikz-inline loading=lazy } le bouton vert $\blacktriangleright$ **Exécuter** (ou la touche F5) : il enregistre et lance tout le fichier ;
 
-- **la console** (en bas à droite, `In [1]:`) : on y lit ce que le programme affiche, et on peut y taper une instruction pour tester une idée tout de suite, ou appeler une fonction du fichier une fois celui-ci exécuté. Ce qu’on tape dans la console n’est pas enregistré.
+- ![](figures/e9f6c466d53d2a2e.svg){ .tikz .tikz-inline loading=lazy } **l’éditeur** (à gauche) : on y écrit le programme, enregistré dans un fichier `.py` ;
+
+- ![](figures/a6591f14a124a6ae.svg){ .tikz .tikz-inline loading=lazy } **la console** (en bas à droite, `In [1]:`) : on y lit ce que le programme affiche, et on peut y taper une instruction pour tester une idée tout de suite, ou appeler une fonction du fichier une fois celui-ci exécuté. Ce qu’on tape dans la console n’est pas enregistré ;
+
+- ![](figures/40147b93ea013566.svg){ .tikz .tikz-inline loading=lazy } l’onglet **Explorateur de variables** : après l’exécution, il montre la valeur de chaque variable (pratique pour comprendre un programme qui ne fait pas ce qu’on attend).
 
 ### Une méthode pour chaque chapitre
 

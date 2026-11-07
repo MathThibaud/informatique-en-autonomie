@@ -88,19 +88,25 @@ Le programme est dense et s’enchaîne : la **récursivité** (chapitre 1) est 
 
     **Les défis n’ont volontairement pas de corrigé** dans ce livre : tout le plaisir d’une énigme est de la résoudre soi-même. Le site indique si votre réponse est juste (avec un compte gratuit) ; en cas de blocage, lisez les coups de pouce, puis venez en parler en classe.
 
+    En fin de livre, **Les indispensables de Première** rappellent en quelques pages les notions de Première utiles cette année (la ligne « Prérequis » de chaque cours y renvoie), et un **lexique** donne le sens des mots importants, avec un lien vers leur définition dans le cours.
+
 ## Travailler avec ce livre
 
 ### Avec quel outil ?
 
 Au lycée, on programme avec **Spyder**, un logiciel libre et gratuit. Installez-le aussi chez vous : l’installateur officiel se télécharge sur `spyder-ide.org` et contient Python, il n’y a rien d’autre à installer. En dépannage (ordinateur prêté, installation impossible), **Basthon** fonctionne dans un navigateur, sans installation (`basthon.fr`) : parfait pour un exercice court, moins pratique pour un TP ou un défi qui lit des fichiers, qu’il faut alors déposer dans la page à chaque séance.
 
-![](img/00_spyder.png){ .photo loading=lazy style="width:82%" }
+![](figures/63359bf914182ac7.svg){ .tikz loading=lazy }
 
-Deux zones de Spyder servent tout le temps :
+Les repères de la capture :
 
-- **l’éditeur** (à gauche) : on y écrit le programme, enregistré dans un fichier `.py` et exécuté avec le bouton vert $\blacktriangleright$ (ou la touche F5) ;
+- ![](figures/9d137e9552e62a46.svg){ .tikz .tikz-inline loading=lazy } le bouton vert $\blacktriangleright$ **Exécuter** (ou la touche F5) : il enregistre et lance tout le fichier ;
 
-- **la console** (en bas à droite, `In [1]:`) : on y lit les résultats, et on y tape une instruction pour tester une idée ou appeler une fonction du fichier une fois celui-ci exécuté.
+- ![](figures/0d2175877f23dfbb.svg){ .tikz .tikz-inline loading=lazy } **l’éditeur** (à gauche) : on y écrit le programme, enregistré dans un fichier `.py` ;
+
+- ![](figures/8ae266f74084ba5c.svg){ .tikz .tikz-inline loading=lazy } **la console** (en bas à droite, `In [1]:`) : on y lit les résultats, et on y tape une instruction pour tester une idée ou appeler une fonction du fichier une fois celui-ci exécuté ;
+
+- ![](figures/ae05e3fa991c360b.svg){ .tikz .tikz-inline loading=lazy } l’onglet **Explorateur de variables** : après l’exécution, il montre la valeur de chaque variable (pratique pour comprendre un programme qui ne fait pas ce qu’on attend).
 
 ### Une méthode pour chaque chapitre
 

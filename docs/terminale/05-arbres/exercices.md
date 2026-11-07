@@ -4,15 +4,11 @@
 
 !!! consignes "Mode d’emploi"
 
-    - Niveau : ★ échauffement, ★★ classique (niveau bac), ★★★ défi ; les *coups de pouce* et les *corrigés* se déplient sous chaque exercice.
-
-    - <span class="run" title="À programmer et tester sur machine">▶</span> *À programmer et tester* en Python.
+    -  Étoiles, <span class="essentiel">• essentiel</span>, coup de pouce, $\blacktriangleright$ et pastilles IA : voir le [mode d’emploi du chapitre 1](../01-recursivite/exercices.md#modeemploi).
 
     - On **admet** l’implémentation par la classe `Noeud` ci-dessous ; l’arbre vide est `None`.
 
     - **Convention** de hauteur : on compte les **nœuds** (racine seule $\to$ hauteur $1$, arbre vide $\to$ $0$), sauf mention contraire.
-
-    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
     ```python
     class Noeud:

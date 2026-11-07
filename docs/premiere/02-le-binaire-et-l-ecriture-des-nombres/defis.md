@@ -22,7 +22,21 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*L’approfondissement 2 de ce défi réinvestit l’écriture d’un nombre en base 10, chiffre par chiffre, vue dans ce chapitre.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Un sous-marin suit un trajet programmé de mille commandes environ : avancer, plonger, remonter. On veut savoir où il se trouvera à la fin du trajet. Suivre mille commandes à la main serait long et l’erreur quasi certaine : un programme le fait en un instant.
+
+    **Ce qu’on réinvestit.** Les bases du chapitre 1 : lire une ligne et accéder à ses caractères par leurs **indices**, convertir un caractère en entier avec `int`, choisir l’action avec `if`/`elif`, et tenir à jour quelques **variables** qui décrivent l’état du sous-marin. L’approfondissement 2 réinvestit en plus l’écriture d’un nombre en base 10, chiffre par chiffre, vue dans ce chapitre.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre l’effet de chaque commande, puis suivre à la main un petit trajet dans un tableau.
+
+    2.  Apprendre à reconnaître une commande et à lire son nombre à partir d’une ligne du fichier.
+
+    3.  Écrire la fonction qui suit tout le trajet : elle donne la réponse de la partie 1.
+
+    4.  Pour la partie 2, reprendre la même fonction avec une troisième variable et de nouveaux effets pour les commandes.
 
 ## Lire l’énoncé
 
@@ -37,19 +51,27 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Vous pilotez maintenant le sous-marin. Son ordinateur de bord contient un trajet déjà programmé : une liste de commandes qui le font avancer, plonger ou remonter. On veut savoir où ce trajet va mener le sous-marin.
+    **Contexte.** Vous pilotez maintenant le sous-marin. Son ordinateur de bord contient un trajet déjà programmé : une liste de commandes qui le font avancer, plonger ou remonter. Avant de lancer le trajet, on veut savoir où il va mener le sous-marin.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Chaque ligne du fichier est une commande, exécutée dans l’ordre : un mot (`forward`, `down` ou `up`), une espace, puis un entier $X$, par exemple `down 4`.
 
-    - Chaque ligne est une commande : un mot (`forward`, `down` ou `up`), une espace, puis un entier $X$.
+    **La règle.**
 
     - On suit deux grandeurs, qui valent 0 au départ : la position horizontale et la profondeur.
 
-    - `forward X` fait avancer : la position horizontale augmente de $X$. `down X` fait plonger : la profondeur augmente de $X$. `up X` fait remonter : la profondeur *diminue* de $X$ (c’est une profondeur, donc remonter la réduit).
+    - `forward X` fait avancer : la position horizontale augmente de $X$.
 
-    - La réponse est le produit position horizontale $\times$ profondeur à la fin du trajet.
+    - `down X` fait plonger : la profondeur augmente de $X$.
+
+    - `up X` fait remonter : la profondeur *diminue* de $X$ (c’est une profondeur, donc remonter la réduit).
+
+    **La réponse attendue.** Le produit position horizontale $\times$ profondeur à la fin du trajet. Par exemple, après `forward 5`, `down 2`, `up 1`, `forward 3`, la position horizontale vaut 8 et la profondeur 1 : la réponse serait $8 \times 1 = 8$.
 
 ### <span class="exo-num">Exercice 1</span> — Vérifier sa compréhension <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-aoc-1-1 }
+
+**But.** Réfléchir à l’effet des commandes sur la réponse et à la façon de lire une ligne.
+
+**À quoi ça sert ?** La première question montre l’effet d’une variable restée à 0 sur un produit ; la deuxième prépare la partie 2, où l’ordre des commandes compte ; la troisième annonce la méthode de lecture d’une ligne utilisée dans le programme.
 
 Questions pièges, à traiter sur le cahier :
 
@@ -60,6 +82,10 @@ Questions pièges, à traiter sur le cahier :
 3.  Pour la ligne `"down 7"`, que valent `ligne[0]` et `ligne[-1]` ? De quel type est `ligne[-1]` ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-aoc-1-2 }
+
+**But.** Suivre un petit trajet inventé dans un tableau, commande après commande.
+
+**À quoi ça sert ?** Le tableau montre exactement ce que le programme devra faire : mettre à jour deux variables à chaque ligne. Sa dernière ligne donne un résultat connu, qui servira à tester la fonction `trajet`.
 
 On considère le trajet (inventé) suivant :
 
@@ -91,6 +117,10 @@ Faire un tableau avec une ligne par commande et deux colonnes : position horizon
 
 ### <span class="exo-num">Exercice 3</span> — Lire une commande <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-aoc-1-3 }
 
+**But.** Extraire d’une ligne du fichier la lettre qui identifie la commande et le nombre $X$.
+
+**À quoi ça sert ?** Ce sont les deux seules informations dont le programme a besoin pour chaque ligne : la lettre choisit l’action, le nombre dit de combien bouger. Cette lecture sera utilisée dans les deux parties.
+
 Dans les fichiers de données de ce défi, le nombre $X$ n’a qu’**un seul chiffre** (le vérifier en parcourant votre fichier). On peut donc lire une commande sans la découper : sa première lettre suffit à reconnaître la commande, et son dernier caractère est le nombre.
 
 ```python
@@ -103,6 +133,10 @@ print(int(ligne[-1]))           # 3 (un entier)
 Recopier et exécuter ce code. Pourquoi faut-il `strip()` avant de lire `ligne[-1]` ? Les trois commandes ont-elles bien des premières lettres différentes ?
 
 ### <span class="exo-num">Exercice 4</span> — Suivre le trajet <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-aoc-1-4 }
+
+**But.** Écrire la fonction qui lit tout le fichier, applique chaque commande et renvoie le produit final.
+
+**À quoi ça sert ?** Elle donne la réponse de la partie 1. Sa structure (lecture, deux variables d’état, un choix selon la lettre) sera reprise telle quelle dans la partie 2, avec une variable de plus.
 
 Écrire une fonction `trajet(nom_fichier)` qui lit le fichier ligne par ligne (`open`, boucle `for`, `strip`), met à jour deux variables `horizontal` et `profondeur`, et renvoie leur produit. Tester sur l’exemple, puis sur vos données.
 
@@ -120,9 +154,23 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    En relisant le manuel du sous-marin, on découvre que les commandes ne signifient pas tout à fait ce qu’on croyait. Une troisième grandeur entre en jeu, la *visée* (*aim*), qui vaut 0 au départ et indique l’inclinaison du sous-marin. Désormais, `down X` augmente la visée de $X$ et `up X` la diminue de $X$, sans toucher à la profondeur. `forward X` augmente la position horizontale de $X$ **et** la profondeur de visée $\times X$. La réponse est le même produit.
+    **Ce qui change.** En relisant le manuel du sous-marin, on découvre que les commandes ne signifient pas tout à fait ce qu’on croyait. Une troisième grandeur entre en jeu, la *visée* (*aim*), qui vaut 0 au départ et indique l’inclinaison du sous-marin : plus elle est grande, plus le sous-marin descend quand il avance.
+
+    **La nouvelle règle.**
+
+    - `down X` augmente la visée de $X$, sans toucher à la profondeur.
+
+    - `up X` diminue la visée de $X$, sans toucher à la profondeur.
+
+    - `forward X` augmente la position horizontale de $X$ **et** augmente la profondeur de visée $\times X$.
+
+    **La réponse attendue.** Le même produit position horizontale $\times$ profondeur à la fin du trajet. Avec le même trajet inventé `forward 5`, `down 2`, `up 1`, `forward 3` : la visée vaut 0 au premier `forward`, puis 1 au second, qui fait donc descendre de $1 \times 3 = 3$. On arrive à la position 8 et à la profondeur 3 : la réponse serait 24.
 
 ### <span class="exo-num">Exercice 5</span> — Avec une troisième variable <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-aoc-1-5 }
+
+**But.** Refaire le trajet de l’exemple avec la visée, puis adapter la fonction de la partie 1 à la nouvelle règle.
+
+**À quoi ça sert ?** Le tableau fait à la main donne un résultat connu (`440`) pour tester `trajet2`, qui donne la réponse de la partie 2. On voit qu’une nouvelle règle se traduit souvent par une variable d’état de plus.
 
 Refaire le tableau de l’exemple avec une colonne de plus : on doit arriver à `11` et `40`, soit la réponse `440`. Écrire enfin la fonction `trajet2(nom_fichier)`.
 
@@ -138,6 +186,10 @@ Refaire le tableau de l’exemple avec une colonne de plus : on doit arriver à 
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Approfondissement 1 : un trajet contrôlé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-aoc-1-6 }
 
+**But.** Ajouter une nouvelle commande et signaler clairement les commandes inconnues, avec le numéro de la ligne fautive.
+
+**À quoi ça sert ?** Un vrai programme doit réagir proprement à des données imprévues au lieu de donner un résultat faux sans prévenir. Le numéro de ligne permet de retrouver tout de suite l’erreur dans le fichier.
+
 1.  Ajouter une commande inventée `back X` (recul de `X`) dans une fonction `trajet_controle(nom_fichier)` qui reprend la partie 1.
 
 2.  Faire en sorte qu’une commande inconnue affiche un message d’erreur clair avec le numéro de la ligne fautive (la première ligne porte le numéro 1), sans arrêter le programme.
@@ -149,6 +201,10 @@ Refaire le tableau de l’exemple avec une colonne de plus : on doit arriver à 
 3.  On ajoute à la fin de l’exemple du défi les deux lignes `back 4` et `jump 3`. Prévoir à la main le message affiché et le résultat, puis vérifier avec le programme.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 2 : des nombres à plusieurs chiffres <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-aoc-1-7 }
+
+**But.** Lire un nombre de plusieurs chiffres, caractère par caractère, sans découper la ligne.
+
+**À quoi ça sert ?** La méthode de la fiche ne marche que si $X$ a un seul chiffre ; celle-ci lève cette limite. Elle reprend la reconstitution d’un nombre en base 10 vue dans ce chapitre, et s’adapte aux autres bases.
 
 Et si $X$ pouvait avoir plusieurs chiffres, comme dans `forward 125` ? On lit alors les chiffres un par un, de gauche à droite, comme lorsqu’on reconstitue la valeur d’un nombre écrit en base 10.
 

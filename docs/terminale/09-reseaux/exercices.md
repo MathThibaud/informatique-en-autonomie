@@ -6,7 +6,9 @@ Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title=
 
 !!! consignes "Mode d’emploi"
 
-    Niveau : ★ échauffement, ★★ classique (niveau bac), ★★★ défi ; les *coups de pouce* et les *corrigés* se déplient sous chaque exercice. On soigne les **tables de routage** (destination, sortie, métrique). Rappels : RIP $=$ nombre de sauts ; OSPF $=$ somme des coûts, coût $=10^8/$débit.
+    Étoiles, <span class="essentiel">• essentiel</span>, coup de pouce, $\blacktriangleright$ et pastilles IA : voir le [mode d’emploi du chapitre 1](../01-recursivite/exercices.md#modeemploi).
+
+    On soigne les **tables de routage** (destination, sortie, métrique). Rappels : RIP $=$ nombre de sauts ; OSPF $=$ somme des coûts, coût $=10^8/$débit.
 
 ### Machines, switchs, routeurs
 

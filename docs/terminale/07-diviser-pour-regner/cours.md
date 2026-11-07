@@ -10,7 +10,7 @@ Programme (BO)
 :   *« Écrire un algorithme utilisant la méthode "diviser pour régner". »* Le BO cite deux exemples : *« la rotation d’une image bitmap d’un quart de tour avec un coût en mémoire constant »* et *« le tri fusion, qui permet d’exploiter la récursivité et d’exhiber un algorithme de coût en $n\log_2 n$ dans le pire des cas »*.
 
 Prérequis
-:   récursivité (condition d’arrêt, variant, coût), listes et tableaux, tris déjà vus (insertion, sélection), notion de coût et de logarithme base 2. (→ fiches de révision : ch. 1)
+:   récursivité (condition d’arrêt, variant, coût), listes et tableaux, tris déjà vus (insertion, sélection), notion de coût et de logarithme base 2. (→ fiches de révision : ch. 1) $\to$ rappels de 1re : listes, tris, dichotomie
 
 Objectifs
 :   *reconnaître* un problème qui se prête à « diviser pour régner », *écrire* l’algorithme récursif correspondant, et *analyser* son coût (passage de $n^2$ à $n\log_2 n$, de $n$ à $\log_2 n$).
@@ -31,7 +31,7 @@ Pour chercher un mot dans un dictionnaire de $2\,000$ pages, on ouvre *au milieu
 
 !!! definition "Définition 1 — Diviser pour régner"
 
-    *Diviser pour régner* est une **méthode de conception d’algorithmes** en trois temps :
+    <span id="lex-dpr07" class="ancre"></span>*Diviser pour régner* est une **méthode de conception d’algorithmes** en trois temps :
 
     - **Diviser** : découper le problème en sous-problèmes *du même type*, mais **plus petits** ;
 
@@ -47,7 +47,7 @@ Pour chercher un mot dans un dictionnaire de $2\,000$ pages, on ouvre *au milieu
 
 ## Un premier exemple : la recherche dichotomique
 
-Reprenons le dictionnaire. On dispose d’un tableau **déjà trié** et on veut savoir si une valeur `cible` s’y trouve.
+<span id="lex-dichotomie07" class="ancre"></span> Reprenons le dictionnaire. On dispose d’un tableau **déjà trié** et on veut savoir si une valeur `cible` s’y trouve.
 
 - **Diviser** : on compare `cible` à l’élément *du milieu* ; cela désigne la moitié (gauche *ou* droite) où chercher.
 
@@ -100,7 +100,7 @@ Reprenons le dictionnaire. On dispose d’un tableau **déjà trié** et on veut
 
 ## L’exemple phare : le tri fusion
 
-On sait déjà trier (tri par insertion, tri par sélection, vus en Première), mais ces tris coûtent $n^2$ : sur un million de valeurs, c’est $10^{12}$ opérations, inutilisable. Le **tri fusion** (*merge sort*), imaginé par **John von Neumann** en **1945**, applique « diviser pour régner » et fait **bien mieux**.
+On sait déjà trier (tri par insertion, tri par sélection, vus en Première), mais ces tris coûtent $n^2$ : sur un million de valeurs, c’est $10^{12}$ opérations, inutilisable. Le <span id="lex-trifusion07" class="ancre"></span>**tri fusion** (*merge sort*), imaginé par **John von Neumann** en **1945**, applique « diviser pour régner » et fait **bien mieux**.
 
 **Un peu d’histoire.** Mathématicien d’origine hongroise, von Neumann collabore alors au laboratoire de **Los Alamos** (projet Manhattan) et participe à la conception de l’**EDVAC**, l’un des premiers ordinateurs à programme enregistré, dont il décrit l’organisation, toujours celle de nos ordinateurs (« architecture de von Neumann »). Pour montrer qu’elle sait faire autre chose que du calcul, il écrit l’un des tout premiers programmes de tri : un tri fusion.
 
@@ -119,7 +119,7 @@ John von Neumann (photo de son badge de Los Alamos)
 
 ### Le cœur du tri : fusionner deux listes triées
 
-Tout repose sur une opération simple. On dispose de **deux listes déjà triées** et on veut les réunir en une seule liste triée. On avance avec un « doigt » sur chaque liste, et on recopie à chaque fois **le plus petit des deux éléments pointés**.
+<span id="lex-fusion07" class="ancre"></span> Tout repose sur une opération simple. On dispose de **deux listes déjà triées** et on veut les réunir en une seule liste triée. On avance avec un « doigt » sur chaque liste, et on recopie à chaque fois **le plus petit des deux éléments pointés**.
 
 !!! exemple "Exemple — Fusionnez à la main [4, 12, 23, 56] et [3, 32, 35, 42, 57]"
 
@@ -277,11 +277,11 @@ Le gain n’a l’air de rien sur un petit tableau ; il devient énorme quand $n
 
 !!! regle "Règle 2 — À retenir sur le coût"
 
-    Diviser pour régner transforme souvent un coût **quadratique** ($n^2$) en coût **quasi-linéaire** ($n\log_2 n$), ou un coût **linéaire** ($n$) en coût **logarithmique** ($\log_2 n$). C’est la raison d’être de la méthode.
+    Diviser pour régner transforme souvent un coût <span id="lex-classescout07" class="ancre"></span>**quadratique** ($n^2$) en coût **quasi-linéaire** ($n\log_2 n$), ou un coût **linéaire** ($n$) en coût **logarithmique** ($\log_2 n$). C’est la raison d’être de la méthode.
 
 !!! regle "Règle 3 — Les classes de coût et la notation O"
 
-    On note **O($f(n)$)** (« grand O de $f(n)$ ») un coût **au plus proportionnel** à $f(n)$ quand la taille $n$ des données devient grande : les constantes et les termes plus petits ne comptent pas. Le chapitre *Structures linéaires* a introduit O(1) et O($n$) ; voici la liste complète, avec les mots qu’emploient les sujets de bac.
+    On note <span id="lex-grando07" class="ancre"></span>**O($f(n)$)** (« grand O de $f(n)$ ») un coût **au plus proportionnel** à $f(n)$ quand la taille $n$ des données devient grande : les constantes et les termes plus petits ne comptent pas. Le chapitre *Structures linéaires* a introduit O(1) et O($n$) ; voici la liste complète, avec les mots qu’emploient les sujets de bac.
 
     | **Coût** | **Notation** | **Exemple** |
     |:---|:---|:---|
@@ -301,7 +301,7 @@ Le paradigme dépasse largement le tri. En voici trois illustrations à connaît
 
 ### Le tri rapide (*quicksort*)
 
-Autre tri « diviser pour régner », mais qui divise **autrement** : on choisit un élément **pivot**, on **partitionne** le tableau (les plus petits que le pivot à gauche, les plus grands à droite), puis on trie récursivement chaque côté. Ici l’effort est dans le « diviser » (la partition), et le « combiner » est gratuit.
+<span id="lex-trirapide07" class="ancre"></span> Autre tri « diviser pour régner », mais qui divise **autrement** : on choisit un élément **pivot**, on **partitionne** le tableau (les plus petits que le pivot à gauche, les plus grands à droite), puis on trie récursivement chaque côté. Ici l’effort est dans le « diviser » (la partition), et le « combiner » est gratuit.
 
 ```python
 def tri_rapide(tab, bas, haut):
@@ -321,7 +321,7 @@ La **partition** range les éléments autour du pivot ; celui-ci se retrouve à 
 
 ### Le *Tim sort* : le tri de Python
 
-L’algorithme utilisé par `sorted()` et `list.sort()` en Python s’appelle **Tim sort** (Tim Peters, 2002). C’est un **mélange malin** de tri fusion et de tri par insertion : il repère les portions déjà triées (*runs*), trie les petits morceaux par insertion (rapide sur peu d’éléments), puis les fusionne comme le tri fusion. Un **TP** lui est consacré.
+L’algorithme utilisé par <span id="lex-pysorted07" class="ancre"></span>`sorted()` et `list.sort()` en Python s’appelle **Tim sort** (Tim Peters, 2002). C’est un **mélange malin** de tri fusion et de tri par insertion : il repère les portions déjà triées (*runs*), trie les petits morceaux par insertion (rapide sur peu d’éléments), puis les fusionne comme le tri fusion. Un **TP** lui est consacré.
 
 ### La rotation d’une image, exemple du BO
 

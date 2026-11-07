@@ -34,7 +34,7 @@ hide:
   <span class="carte-titre">Terminale</span>
   <span class="carte-long">Numérique et sciences informatiques — spécialité</span>
   <span class="carte-desc">Récursivité, POO, structures de données, arbres, graphes, SQL, réseaux, cryptographie.</span>
-  <span class="carte-nb">15 chapitres →</span>
+  <span class="carte-nb">18 chapitres →</span>
 </a>
 </div>
 

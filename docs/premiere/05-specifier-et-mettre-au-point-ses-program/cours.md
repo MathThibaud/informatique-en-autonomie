@@ -57,13 +57,13 @@ L’erreur ne se déclenche pas dans la fonction, mais **plus loin**, quand on u
 
 !!! definition "Définition 1 — Spécifier une fonction"
 
-    **Spécifier** une fonction, c’est décrire son **contrat**, sans dire comment elle s’y prend :
+    <span id="lex-specification05" class="ancre"></span>**Spécifier** une fonction, c’est décrire son **contrat**, sans dire comment elle s’y prend :
 
     - son **prototype** : son nom, ses paramètres, ce qu’elle renvoie ;
 
-    - ses **préconditions** : ce qui doit être vrai *sur les arguments* pour qu’on ait le droit de l’appeler ;
+    - ses <span id="lex-precondition05" class="ancre"></span>**préconditions** : ce qui doit être vrai *sur les arguments* pour qu’on ait le droit de l’appeler ;
 
-    - ses **postconditions** : ce qui est garanti *sur le résultat* si les préconditions sont respectées.
+    - ses <span id="lex-postcondition05" class="ancre"></span>**postconditions** : ce qui est garanti *sur le résultat* si les préconditions sont respectées.
 
 !!! exemple "Exemple — Une spécification de indice_maximum"
 
@@ -71,7 +71,7 @@ L’erreur ne se déclenche pas dans la fonction, mais **plus loin**, quand on u
 
 ## Documenter ses programmes
 
-Une précondition écrite en commentaire n’est visible que par qui lit le code. Python permet d’attacher à une fonction une **chaîne de documentation** (*docstring*) : une chaîne entre triples guillemets, placée juste après le `def`.
+Une précondition écrite en commentaire n’est visible que par qui lit le code. Python permet d’attacher à une fonction une <span id="lex-docstring05" class="ancre"></span>**chaîne de documentation** (*docstring*) : une chaîne entre triples guillemets, placée juste après le `def`.
 
 ```python
 def indice_maximum(t):
@@ -80,7 +80,7 @@ def indice_maximum(t):
     ...
 ```
 
-On la consulte avec `help` sans voir le code :
+On la consulte avec <span id="lex-help05" class="ancre"></span>`help` sans voir le code :
 
 ```python
 >>> help(indice_maximum)
@@ -127,7 +127,7 @@ def indice_maximum(t):
 AssertionError: le tableau est vide
 ```
 
-C’est de la **programmation défensive** : on échoue *tôt*, *clairement*, à l’endroit du vrai problème.
+C’est de la <span id="lex-defensive05" class="ancre"></span>**programmation défensive** : on échoue *tôt*, *clairement*, à l’endroit du vrai problème.
 
 !!! regle "Règle 2 — Deux stratégies défensives"
 
@@ -135,7 +135,7 @@ C’est de la **programmation défensive** : on échoue *tôt*, *clairement*, à
 
     - **échouer** avec `assert` : celui qui appelle doit garantir la précondition ;
 
-    - **renvoyer une valeur sentinelle** qui ne peut pas être confondue avec un résultat valide — en Python, `None`. Celui qui appelle teste alors le résultat avant de l’utiliser.
+    - <span id="lex-sentinelle05" class="ancre"></span>**renvoyer une valeur sentinelle** qui ne peut pas être confondue avec un résultat valide — en Python, `None`. Celui qui appelle teste alors le résultat avant de l’utiliser.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Dans l’activité « La chasse aux bugs », `mention(23)` renvoyait `"Tres bien"` et `moyenne([])` provoquait une division par zéro : les préconditions « note entre 0 et 20 » et « tableau non vide » n’étaient ni écrites, ni vérifiées.
 
@@ -145,7 +145,7 @@ if r is not None:
     print("le maximum est", t[r])
 ```
 
-Pour tester la valeur `None`, on écrit `r is None` (ou `r is not None`) plutôt que `r == None`.
+Pour tester la valeur `None`, on écrit <span id="lex-none05" class="ancre"></span>`r is None` (ou `r is not None`) plutôt que `r == None`.
 
 !!! remarque "Remarque — Deux conventions pour « absent » : None ou -1"
 
@@ -198,7 +198,7 @@ Si l’un échoue, on corrige, puis on **relance tout** : corriger une erreur en
 
 ### Tests aléatoires et oracle <span class="horsprog">au-delà du programme</span>
 
-Pour aller plus loin, on peut **générer des tests au hasard**. Encore faut-il savoir juger le résultat sans connaître la réponse : on confie ce verdict à une fonction **oracle**, en général plus simple à écrire que le programme testé. Exemple : `doublon(t)` renvoie un élément présent au moins deux fois ; l’oracle `verifie_doublon(r, t)` recompte les occurrences de `r`.
+Pour aller plus loin, on peut **générer des tests au hasard**. Encore faut-il savoir juger le résultat sans connaître la réponse : on confie ce verdict à une fonction <span id="lex-oracle05" class="ancre"></span>**oracle**, en général plus simple à écrire que le programme testé. Exemple : `doublon(t)` renvoie un élément présent au moins deux fois ; l’oracle `verifie_doublon(r, t)` recompte les occurrences de `r`.
 
 ```python
 for n in range(2, 30):
@@ -212,6 +212,8 @@ for n in range(2, 30):
 <span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-05-6) à [10](exercices.md#ex-05-10)** et **[27](exercices.md#ex-05-27)** (tester ses programmes)
 
 ## Corriger les erreurs (déboguer)
+
+<span id="lex-deboguer05" class="ancre"></span>
 
 Un test qui échoue prouve qu’il *y a* une erreur, mais ne dit pas **où**. Commence une enquête. Prenons une fonction censée tester si un tableau est croissant.
 
@@ -259,7 +261,7 @@ assert est_croissant([]) == True
 
 ## Invariant de boucle
 
-Vous avez rencontré cette notion avec l’invariant du champion (chapitre *Algorithmique : le parcours séquentiel*) ; on l’applique ici à une boucle `while`. Pour se convaincre qu’une boucle est correcte, on cherche une propriété **vraie avant la boucle et préservée à chaque tour** : un **invariant de boucle**. Vraie au départ et maintenue, elle est donc encore vraie *à la sortie* — c’est ce qui prouve le résultat. Prenons la division euclidienne par soustractions successives.
+Vous avez rencontré cette notion avec l’invariant du champion (chapitre *Algorithmique : le parcours séquentiel*) ; on l’applique ici à une boucle `while`. Pour se convaincre qu’une boucle est correcte, on cherche une propriété **vraie avant la boucle et préservée à chaque tour** : un <span id="lex-invariant05" class="ancre"></span>**invariant de boucle**. Vraie au départ et maintenue, elle est donc encore vraie *à la sortie* — c’est ce qui prouve le résultat. Prenons la division euclidienne par soustractions successives.
 
 ```python
 def division_euclidienne(a, b):   # a >= 0, b > 0
@@ -319,7 +321,7 @@ for (int i = 1; i <= 10; i++)     for (let i = 1; i <= 10; i++)
     s = s + i;                        s = s + i;
 ```
 
-Les langages diffèrent aussi par leur **style** (leur *paradigme*) : **impératif** (une suite d’ordres qui modifient des variables — c’est ainsi qu’on programme en Python cette année), mais aussi **fonctionnel** (des fonctions qui transforment des valeurs, sans modifier l’existant), **objet** (des objets qui regroupent données et fonctions), **logique** (on énonce des faits et des règles, la machine *déduit* les réponses), **événementiel** (on réagit à un clic, une touche, comme en JavaScript). Un même langage peut en mélanger plusieurs : Python est à la fois impératif, fonctionnel et objet.
+Les langages diffèrent aussi par leur <span id="lex-paradigme05" class="ancre"></span>**style** (leur *paradigme*) : **impératif** (une suite d’ordres qui modifient des variables — c’est ainsi qu’on programme en Python cette année), mais aussi **fonctionnel** (des fonctions qui transforment des valeurs, sans modifier l’existant), **objet** (des objets qui regroupent données et fonctions), **logique** (on énonce des faits et des règles, la machine *déduit* les réponses), **événementiel** (on réagit à un clic, une touche, comme en JavaScript). Un même langage peut en mélanger plusieurs : Python est à la fois impératif, fonctionnel et objet.
 
 ### Compiler ou interpréter
 
@@ -327,9 +329,9 @@ Un processeur ne comprend que le **langage machine** (des 0 et des 1 ; le chapit
 
 !!! definition "Définition 2 — Compilation et interprétation"
 
-    - Un langage **compilé** est entièrement traduit *une fois pour toutes*, avant l’exécution, par un **compilateur**. On obtient un fichier **exécutable**, que l’on lance ensuite directement.
+    - Un langage <span id="lex-compilateur05" class="ancre"></span>**compilé** est entièrement traduit *une fois pour toutes*, avant l’exécution, par un **compilateur**. On obtient un fichier **exécutable**, que l’on lance ensuite directement.
 
-    - Un langage **interprété** est traduit *au fur et à mesure*, pendant l’exécution, par un **interpréteur**. Il faut l’interpréteur à chaque exécution.
+    - Un langage <span id="lex-interpreteur05" class="ancre"></span>**interprété** est traduit *au fur et à mesure*, pendant l’exécution, par un **interpréteur**. Il faut l’interpréteur à chaque exécution.
 
 ![](../figures/a0f746e1a99210ef.svg){ .tikz loading=lazy }
 
@@ -353,9 +355,9 @@ Une valeur a une **nature** : entier, texte, booléen… C’est son **type**. 
 
 !!! definition "Définition 3 — Typage statique et dynamique"
 
-    - **Typage statique** : le type de chaque variable est fixé et vérifié *avant* l’exécution. Additionner un nombre et un texte est refusé **sans même lancer** le programme.
+    - <span id="lex-typagestatique05" class="ancre"></span>**Typage statique** : le type de chaque variable est fixé et vérifié *avant* l’exécution. Additionner un nombre et un texte est refusé **sans même lancer** le programme.
 
-    - **Typage dynamique** : le type est connu *pendant* l’exécution, quand la ligne est atteinte ; la même erreur ne se manifeste qu’à ce moment-là.
+    - <span id="lex-typagedyn05" class="ancre"></span>**Typage dynamique** : le type est connu *pendant* l’exécution, quand la ligne est atteinte ; la même erreur ne se manifeste qu’à ce moment-là.
 
 !!! exemple "Exemple"
 

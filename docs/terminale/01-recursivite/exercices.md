@@ -2,6 +2,8 @@
 
 <p class="sous-titre">Récursivité</p>
 
+<span id="modeemploi" class="ancre"></span>
+
 !!! consignes "Mode d’emploi"
 
     - Niveau : ★ échauffement, ★★ classique (niveau bac), ★★★ défi ; les *coups de pouce* et les *corrigés* se déplient sous chaque exercice.

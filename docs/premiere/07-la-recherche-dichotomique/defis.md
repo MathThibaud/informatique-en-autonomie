@@ -22,7 +22,21 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi réinvestit le tri du chapitre précédent ; l’approfondissement 1 fait le lien avec ce chapitre : une liste triée se prête à la recherche dichotomique.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Le fichier contient plusieurs centaines de « phrases de passe », des suites de mots. Il faut compter celles qui ne contiennent aucun mot en double (partie 1), puis celles qui ne contiennent aucune paire de mots formés des mêmes lettres (partie 2). Comparer chaque mot à tous les autres, ligne après ligne, est un travail long et sans intérêt à la main : c’est le rôle du programme.
+
+    **Ce qu’on réinvestit.** Le **tri** du chapitre précédent : pour savoir si deux mots sont formés des mêmes lettres, on range les lettres de chacun dans l’ordre alphabétique, et il suffit alors de comparer les résultats avec `==`. L’approfondissement 1 fait le lien avec ce chapitre : dans une liste triée, les doublons se retrouvent côte à côte, et un élément se retrouve vite par **recherche dichotomique**.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre la règle sur des cas particuliers, puis l’appliquer à la main sur cinq lignes.
+
+    2.  Lire le fichier et découper chaque ligne en liste de mots.
+
+    3.  Écrire une fonction qui dit si une liste ne contient aucun doublon : on obtient la partie 1.
+
+    4.  Pour la partie 2, calculer la « signature » triée de chaque mot, puis réutiliser la même fonction sur la liste des signatures.
 
 ## Lire l’énoncé
 
@@ -37,15 +51,25 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Un nouveau système informatique protège ses comptes par des « phrases de passe » : plusieurs mots en minuscules séparés par des espaces. Pour qu’une phrase soit assez sûre, elle doit respecter une règle de construction. Le fichier contient une liste de phrases de passe, une par ligne, et l’on veut savoir combien sont acceptables.
+    **Contexte.** Un nouveau système informatique protège ses comptes par des « phrases de passe » plutôt que par des mots de passe. Pour qu’une phrase soit assez sûre, elle doit respecter une règle de construction. On dispose d’une liste de phrases de passe et l’on veut savoir combien d’entre elles sont acceptables.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Le fichier contient une phrase de passe par ligne. Une phrase est formée de plusieurs mots en lettres minuscules, séparés par des espaces. Le nombre de mots varie d’une ligne à l’autre.
 
-    - Une phrase est valide si elle ne contient **jamais deux fois le même mot**, exactement le même (une ressemblance ne suffit pas à la rendre invalide).
+    **La règle.**
 
-    - Réponse : le nombre de lignes valides.
+    - Une phrase est valide si elle ne contient **jamais deux fois le même mot**.
+
+    - Il faut que les deux mots soient exactement identiques pour faire un doublon : une simple ressemblance (un mot contenu dans un autre, les mêmes lettres dans un autre ordre) ne rend pas la phrase invalide.
+
+    - Une phrase d’un seul mot est donc toujours valide.
+
+    **La réponse attendue.** Le nombre de lignes valides du fichier. Par exemple, la ligne `vert bleu vert` est invalide (`vert` deux fois), alors que `vert verte` est valide.
 
 ### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-la-recherche-dichotomique-aoc-1-1 }
+
+**But.** Vérifier sa compréhension de la règle sur des cas particuliers.
+
+**À quoi ça sert ?** Il faut savoir exactement ce qui est un doublon et ce qui n’en est pas avant d’écrire le test en Python. La troisième question prépare déjà la partie 2.
 
 Après lecture du résumé (et de l’énoncé), vérifier sa compréhension sur ces cas particuliers :
 
@@ -56,6 +80,10 @@ Après lecture du résumé (et de l’énoncé), vérifier sa compréhension sur
 3.  (Pour plus tard.) Les mots `ab` et `aab` utilisent les mêmes lettres : sont-ils des anagrammes ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-la-recherche-dichotomique-aoc-1-2 }
+
+**But.** Décider à la main quelles lignes d’un petit fichier sont valides.
+
+**À quoi ça sert ?** On obtient un exemple dont on connaît la réponse (`3`) pour tester le programme ; ce même fichier resservira pour la partie 2.
 
 On considère le fichier (inventé) suivant :
 
@@ -85,6 +113,10 @@ Indiquer pour chaque ligne si elle est valide. Vérification : on doit obtenir `
 
 ### <span class="exo-num">Exercice 3</span> — Lire et découper <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-la-recherche-dichotomique-aoc-1-3 }
 
+**But.** Transformer chaque ligne du fichier en une liste de mots.
+
+**À quoi ça sert ?** La règle porte sur les mots, pas sur les caractères : c’est cette liste qu’on examinera pour chercher des doublons.
+
 Rappel pour lire un fichier ligne par ligne :
 
 ```python
@@ -102,6 +134,10 @@ Pour chaque ligne, construire la liste de ses mots et l’afficher.
 
 ### <span class="exo-num">Exercice 4</span> — Tous distincts ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-la-recherche-dichotomique-aoc-1-4 }
 
+**But.** Écrire une fonction qui dit si une liste ne contient aucun doublon, puis compter les lignes valides.
+
+**À quoi ça sert ?** C’est la réponse de la partie 1. La fonction, écrite pour une liste quelconque, sera réutilisée sans modification dans la partie 2.
+
 Écrire une fonction `tous_distincts(mots)` qui renvoie `True` si la liste `mots` ne contient aucun doublon. Tester sur les lignes de l’exemple, puis compter les lignes valides de vos données.
 
 ??? pouce "Coup de pouce"
@@ -118,7 +154,17 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    Le service de sécurité durcit la règle : un mot ne doit pas pouvoir s’obtenir en mélangeant les lettres d’un autre mot de la même ligne. Une phrase est valide si aucun mot n’est une **anagramme** d’un autre (mêmes lettres, en même nombre, dans un ordre éventuellement différent). Deux mots identiques sont aussi anagrammes. Réponse : le nombre de lignes valides.
+    **Ce qui change.** Le service de sécurité durcit la règle : un mot ne doit pas pouvoir s’obtenir en mélangeant les lettres d’un autre mot de la même ligne.
+
+    **La nouvelle règle.**
+
+    - Une phrase est valide si aucun de ses mots n’est une **anagramme** d’un autre de ses mots.
+
+    - Deux mots sont anagrammes s’ils ont les mêmes lettres, chacune en même nombre, dans un ordre éventuellement différent.
+
+    - Deux mots identiques sont aussi anagrammes : une ligne invalide dans la partie 1 reste invalide.
+
+    **La réponse attendue.** Le nombre de lignes valides avec cette nouvelle règle. Par exemple, `pot top` est maintenant invalide, mais `pot pots` reste valide (un `s` de plus).
 
 !!! encadre "Méthode : ranger les lettres d’un mot dans l’ordre alphabétique"
 
@@ -150,6 +196,10 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="exo-num">Exercice 5</span> — Reconnaître deux anagrammes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-la-recherche-dichotomique-aoc-1-5 }
 
+**But.** Écrire une fonction qui range les lettres d’un mot dans l’ordre alphabétique.
+
+**À quoi ça sert ?** Deux anagrammes donnent la même chaîne triée : la question « ces mots sont-ils anagrammes ? » devient la question « ces chaînes sont-elles égales ? », à laquelle on sait déjà répondre.
+
 Écrire une fonction `signature(mot)` qui renvoie la chaîne formée des lettres du mot rangées dans l’ordre alphabétique. Par exemple, `signature("rame")` doit valoir `"aemr"`. Expliquer pourquoi deux mots sont anagrammes l’un de l’autre si et seulement s’ils ont la même signature.
 
 ??? pouce "Coup de pouce"
@@ -158,7 +208,11 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="exo-num">Exercice 6</span> — La partie 2 <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-la-recherche-dichotomique-aoc-1-6 }
 
-En réutilisant `signature` et `tous_distincts`, répondre à la nouvelle question. Sur l’exemple du défi, on doit trouver `1`.
+**But.** Répondre à la partie 2 en combinant les deux fonctions déjà écrites.
+
+**À quoi ça sert ?** En remplaçant chaque mot par sa signature, une anagramme devient un doublon : la fonction de la partie 1 s’applique alors telle quelle. C’est l’intérêt d’avoir écrit des fonctions réutilisables.
+
+En réutilisant `signature` et `tous_distincts`, répondre à la nouvelle question. Sur le petit exemple inventé de l’exercice 2, on doit trouver `1`.
 
 ??? pouce "Coup de pouce"
 
@@ -167,6 +221,10 @@ En réutilisant `signature` et `tous_distincts`, répondre à la nouvelle questi
 ## Approfondissement
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : trier pour rapprocher les doublons <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-la-recherche-dichotomique-aoc-1-7 }
+
+**But.** Détecter les doublons d’une liste en la triant d’abord, puis en ne comparant que des voisins.
+
+**À quoi ça sert ?** On compare le coût de deux méthodes pour le même problème, et l’on fait le lien avec la recherche dichotomique de ce chapitre, qui exige elle aussi une liste triée.
 
 Une autre idée pour `tous_distincts` réutilise le **tri**.
 
@@ -210,6 +268,10 @@ Une autre idée pour `tous_distincts` réutilise le **tri**.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 2 : une signature sans tri <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-la-recherche-dichotomique-aoc-1-8 }
 
+**But.** Remplacer la signature triée par le tableau des effectifs des 26 lettres.
+
+**À quoi ça sert ?** Cette signature se calcule en un seul parcours du mot, sans tri ; on vérifie qu’elle donne la même réponse à la partie 2, ce qui confirme les deux méthodes.
+
 1.  À la main : donner les effectifs des lettres `a`, `e`, `m`, `r` dans `rame` et dans `arme`. Que constate-t-on ?
 
 2.  Écrire `signature26(mot)` qui renvoie la liste des 26 effectifs (nombre de `a`, de `b`…) du mot, puis refaire la partie 2 avec cette signature. Obtient-on la même réponse ?
@@ -245,6 +307,10 @@ Une autre idée pour `tous_distincts` réutilise le **tri**.
     *À essayer.* Que vaut `len(set(["le", "chat", "le"]))` ?
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Approfondissement 3 : tous distincts en une ligne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-la-recherche-dichotomique-aoc-1-9 }
+
+**But.** Réécrire `tous_distincts` à l’aide d’un ensemble.
+
+**À quoi ça sert ?** Un ensemble supprime automatiquement les doublons : comparer les longueurs suffit. On découvre un outil qui servira dans les défis des chapitres suivants.
 
 Un ensemble ne garde qu’un exemplaire de chaque élément. En déduire une version de `tous_distincts(mots)` en une seule ligne, et la tester sur l’exemple.
 

@@ -10,7 +10,7 @@ Programme (BO)
 :   *« Structures de données, interface et implémentation. Spécifier une structure de données par son interface. Distinguer interface et implémentation. Écrire plusieurs implémentations d’une même structure de données. »* *« Listes, piles, files : structures linéaires. Dictionnaires, index et clé. Distinguer des structures par le jeu des méthodes qui les caractérisent. Choisir une structure de données adaptée à la situation à modéliser. Distinguer la recherche d’une valeur dans une liste et dans un dictionnaire. »*
 
 Prérequis
-:   fonctions, boucles, listes et dictionnaires Python ; notion de classe et de méthode (chapitre *Programmation objet*). (→ fiches de révision : ch. 2)
+:   fonctions, boucles, listes et dictionnaires Python ; notion de classe et de méthode (chapitre *Programmation objet*). (→ fiches de révision : ch. 2) $\to$ rappels de 1re : bases de Python, listes, dictionnaires
 
 Objectifs
 :   *distinguer* l’interface d’une structure de son implémentation ; *connaître* le jeu de méthodes qui caractérise une pile et une file ; *utiliser* ces structures pour résoudre un problème (parenthésage, parcours…) ; *comprendre* le rôle des listes chaînées comme brique d’implémentation.
@@ -31,11 +31,11 @@ Jusqu’ici, quand vous aviez besoin de ranger plusieurs données, vous preniez 
 
 !!! definition "Définition 1 — Type abstrait de données"
 
-    Un **type abstrait** de données décrit une structure par les **opérations** qu’on peut lui appliquer (son *quoi*), **sans dire comment** elles sont réalisées (son *comment*). La liste des opérations, avec leur nom et leur effet, s’appelle l’**interface** de la structure.
+    Un <span id="lex-typeabstrait03" class="ancre"></span>**type abstrait** de données décrit une structure par les **opérations** qu’on peut lui appliquer (son *quoi*), **sans dire comment** elles sont réalisées (son *comment*). La liste des opérations, avec leur nom et leur effet, s’appelle l’<span id="lex-interface03" class="ancre"></span>**interface** de la structure.
 
 !!! definition "Définition 2 — Implémentation"
 
-    Une **implémentation** est une réalisation concrète de la structure dans un langage donné (avec un tableau, une liste chaînée…) qui **respecte l’interface**. Une même interface admet en général **plusieurs** implémentations.
+    Une <span id="lex-implementation03" class="ancre"></span>**implémentation** est une réalisation concrète de la structure dans un langage donné (avec un tableau, une liste chaînée…) qui **respecte l’interface**. Une même interface admet en général **plusieurs** implémentations.
 
 !!! exemple "Exemple — Un distributeur automatique de boissons"
 
@@ -55,7 +55,7 @@ Les trois structures de ce chapitre sont dites **linéaires** : leurs éléments
 
 !!! definition "Définition 3 — Pile"
 
-    Une **pile** (*stack*) est une structure linéaire dans laquelle on ne peut ajouter ou retirer un élément que d’un seul côté, appelé le **sommet**. Le dernier élément entré est donc le premier à sortir : on parle de politique **LIFO** (*Last In, First Out*).
+    Une <span id="lex-pile03" class="ancre"></span>**pile** (*stack*) est une structure linéaire dans laquelle on ne peut ajouter ou retirer un élément que d’un seul côté, appelé le **sommet**. Le dernier élément entré est donc le premier à sortir : on parle de politique **LIFO** (*Last In, First Out*).
 
 <span class="retouract">↺ Retour sur l'activité.</span> La « règle du tas » de l’activité était celle d’une pile : la carte du dessus est le sommet, les cartes ressortent dans l’ordre inverse de leur arrivée (`4`, `3`, `2`, `1`), et il fallait retirer sept cartes pour atteindre le fond d’un tas de huit.
 
@@ -64,6 +64,8 @@ L’image classique est une **pile d’assiettes** : on ne peut poser ou prendre
 ![](../figures/02c80782541ded8c.svg){ .tikz loading=lazy }
 
 ### L’interface d’une pile
+
+<span id="lex-empiler03" class="ancre"></span>
 
 | **Méthode**  | **Effet**                                           |
 |:-------------|:----------------------------------------------------|
@@ -197,7 +199,7 @@ def parenthesage_correct(expr):
 
 !!! definition "Définition 4 — File"
 
-    Une **file** (*queue*) est une structure linéaire dans laquelle on **ajoute d’un côté** (la queue) et on **retire de l’autre** (la tête). Le premier élément entré est donc le premier à sortir : politique **FIFO** (*First In, First Out*).
+    Une <span id="lex-file03" class="ancre"></span>**file** (*queue*) est une structure linéaire dans laquelle on **ajoute d’un côté** (la queue) et on **retire de l’autre** (la tête). Le premier élément entré est donc le premier à sortir : politique **FIFO** (*First In, First Out*).
 
 <span class="retouract">↺ Retour sur l'activité.</span> La « règle de la rangée » (poser à gauche, prendre à droite) était celle d’une file, dessinée comme ci-dessous, tête à droite : les cartes ressortent dans leur ordre d’arrivée (`1`, `2`, `3`, `4`).
 
@@ -206,6 +208,8 @@ L’image est la **file d’attente** devant un guichet : on rejoint la file par
 ![](../figures/022295c83facfbbd.svg){ .tikz loading=lazy }
 
 ### L’interface d’une file
+
+<span id="lex-enfiler03" class="ancre"></span>
 
 | **Méthode**  | **Effet**                                           |
 |:-------------|:----------------------------------------------------|
@@ -273,7 +277,7 @@ class Pile:
             return self._contenu[-1]
 ```
 
-De la même façon, une **file** se construit en cachant une `list` : on ajoute à la queue avec `append`, et on retire la tête, c’est-à-dire le *premier* élément, avec `pop(0)`.
+De la même façon, une **file** se construit en cachant une `list` : on ajoute à la queue avec `append`, et on retire la tête, c’est-à-dire le *premier* élément, avec <span id="lex-pyappendpop03" class="ancre"></span>`pop(0)`.
 
 ```python
 class File:
@@ -321,7 +325,7 @@ class File:
 
 !!! remarque "Remarque — Un « faux ami » : la list de Python"
 
-    La `list` de Python *n’est pas* le type abstrait « liste » de ce chapitre : c’est un **tableau dynamique**. Elle permet certes de *simuler* une pile (`append`/`pop`) ou une file, mais elle offre bien plus d’opérations (accès à n’importe quel indice). Restreindre son usage aux seules méthodes de l’interface, c’est justement respecter la structure choisie.
+    La `list` de Python *n’est pas* le type abstrait « liste » de ce chapitre : c’est un <span id="lex-tableaudynamique03" class="ancre"></span>**tableau dynamique**. Elle permet certes de *simuler* une pile (`append`/`pop`) ou une file, mais elle offre bien plus d’opérations (accès à n’importe quel indice). Restreindre son usage aux seules méthodes de l’interface, c’est justement respecter la structure choisie.
 
 <span id="cours-03-15" class="ancre"></span>
 
@@ -333,11 +337,11 @@ Comment ranger des éléments *à l’intérieur* de la machine ? Il existe deux
 
 !!! definition "Définition 5 — Tableau"
 
-    Un **tableau** range ses éléments dans des cases mémoire **contiguës** (les unes à côté des autres). On accède directement à la case d’indice $i$, mais sa **taille est fixée** : insérer un élément au milieu oblige à tout décaler.
+    Un <span id="lex-tableau03" class="ancre"></span>**tableau** range ses éléments dans des cases mémoire **contiguës** (les unes à côté des autres). On accède directement à la case d’indice $i$, mais sa **taille est fixée** : insérer un élément au milieu oblige à tout décaler.
 
 !!! definition "Définition 6 — Liste chaînée"
 
-    Une **liste chaînée** range ses éléments dans des **maillons** dispersés en mémoire. Chaque maillon contient une **valeur** et un **lien** (l’adresse) vers le maillon **suivant**. Un lien spécial (`None`) marque la fin. On accède à la structure par son **premier** maillon, appelé la **tête**.
+    Une <span id="lex-listechainee03" class="ancre"></span>**liste chaînée** range ses éléments dans des <span id="lex-maillon03" class="ancre"></span>**maillons** dispersés en mémoire. Chaque maillon contient une **valeur** et un **lien** (l’adresse) vers le maillon **suivant**. Un lien spécial (<span id="lex-pynone03" class="ancre"></span>`None`) marque la fin. On accède à la structure par son **premier** maillon, appelé la **tête**.
 
 ![](../figures/0e87ce1511c7f89a.svg){ .tikz loading=lazy }
 
@@ -392,7 +396,7 @@ Insérer un maillon ne demande que de **rebrancher deux liens**, sans déplacer 
                 c = c.suivante         # on avance d'un maillon
         ```
 
-        Pour `lst = Cellule(4, Cellule(7, Cellule(2, None)))`, la boucle fait trois tours et affiche `4`, `7` puis `2`. Le même schéma (`c = lst`, `while c is not None:`, `c = c.suivante`) sert à tous les parcours : calculer la longueur, chercher une valeur, faire une somme, accéder au $n$-ième élément…
+        Pour `lst = Cellule(4, Cellule(7, Cellule(2, None)))`, la boucle fait trois tours et affiche `4`, `7` puis `2`. Le même schéma (`c = lst`, <span id="lex-pyisnone03" class="ancre"></span>`while c is not None:`, `c = c.suivante`) sert à tous les parcours : calculer la longueur, chercher une valeur, faire une somme, accéder au $n$-ième élément…
 
 <span id="cours-03-21" class="ancre"></span>
 
@@ -404,7 +408,7 @@ La liste chaînée est une *implémentation*. Comme pour la pile et la file, on 
 
 !!! definition "Définition 7 — Interface d’une liste"
 
-    Une **liste** est une suite finie d’éléments, que l’on manipule par cinq opérations :
+    Une <span id="lex-listetad03" class="ancre"></span>**liste** est une suite finie d’éléments, que l’on manipule par cinq opérations :
 
     - `liste_vide()` renvoie une liste vide ;
 
@@ -447,13 +451,13 @@ def queue(L):
 
 ## Choisir une structure : liste ou dictionnaire ?
 
-Depuis la Première, vous connaissez deux façons de ranger des données : la **liste** Python (un tableau), dont les éléments sont repérés par un **indice** entier de `0` à $n-1$, et le **dictionnaire**, qui associe chaque **valeur** à une **clé** (`annuaire["Lina"]`). Elles ne se valent pas quand il faut **chercher**.
+Depuis la Première, vous connaissez deux façons de ranger des données : la **liste** Python (un tableau), dont les éléments sont repérés par un **indice** entier de `0` à $n-1$, et le <span id="lex-dictionnaire03" class="ancre"></span>**dictionnaire**, qui associe chaque **valeur** à une **clé** (`annuaire["Lina"]`). Elles ne se valent pas quand il faut **chercher**.
 
 !!! regle "Règle 5 — Rechercher dans une liste ou dans un dictionnaire"
 
     - `x in liste` compare `x` aux éléments **un par un** : jusqu’à $n$ comparaisons si `x` est absent. Le coût est **linéaire**, en O($n$).
 
-    - `c in dico` ne parcourt pas les clés : Python calcule directement, à partir de la clé, l’endroit où elle serait rangée (on parle de *hachage* <span class="horsprog">au-delà du programme</span>). Le coût reste à peu près **constant**, en O(1), quelle que soit la taille du dictionnaire.
+    - <span id="lex-pyindict03" class="ancre"></span>`c in dico` ne parcourt pas les clés : Python calcule directement, à partir de la clé, l’endroit où elle serait rangée (on parle de *hachage* <span class="horsprog">au-delà du programme</span>). Le coût reste à peu près **constant**, en O(1), quelle que soit la taille du dictionnaire.
 
     - Attention : ce sont les **clés** qui se cherchent vite. Chercher une **valeur** (`v in dico.values()`) parcourt toutes les valeurs : O($n$), comme pour une liste.
 

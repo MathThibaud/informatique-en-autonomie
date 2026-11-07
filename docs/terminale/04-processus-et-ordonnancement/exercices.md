@@ -6,7 +6,9 @@ Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title=
 
 !!! consignes "Mode d’emploi"
 
-    Niveau : ★ échauffement, ★★ classique (niveau bac), ★★★ défi ; les *coups de pouce* et les *corrigés* se déplient sous chaque exercice. Le symbole <span class="run" title="À programmer et tester sur machine">▶</span>  signale un exercice *à programmer et tester* en Python. Pour tout ordonnancement, on soigne le **chronogramme** et on justifie les **états**.
+    Étoiles, <span class="essentiel">• essentiel</span>, coup de pouce, $\blacktriangleright$ et pastilles IA : voir le [mode d’emploi du chapitre 1](../01-recursivite/exercices.md#modeemploi).
+
+    Le symbole <span class="run" title="À programmer et tester sur machine">▶</span>  signale un exercice *à programmer et tester* en Python. Pour tout ordonnancement, on soigne le **chronogramme** et on justifie les **états**.
 
 ### Programme, processus, états
 

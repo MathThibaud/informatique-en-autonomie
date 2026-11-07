@@ -47,11 +47,11 @@ Trier un tableau, c’est ranger ses éléments **dans l’ordre** (croissant, l
 
 !!! definition "Définition 1 — Le problème du tri"
 
-    **Trier** un tableau `t`, c’est réorganiser ses éléments de sorte que
+    <span id="lex-tri06" class="ancre"></span>**Trier** un tableau `t`, c’est réorganiser ses éléments de sorte que
 
     $$\texttt{t[0]} \leq \texttt{t[1]} \leq \texttt{t[2]} \leq \cdots \leq \texttt{t[n-1]}.$$
 
-    On travaillera **en place** : on réarrange le tableau donné, sans en créer un nouveau. Les seules opérations autorisées sont **comparer** deux éléments et les **échanger** (ou les déplacer).
+    On travaillera <span id="lex-enplace06" class="ancre"></span>**en place** : on réarrange le tableau donné, sans en créer un nouveau. Les seules opérations autorisées sont **comparer** deux éléments et les **échanger** (ou les déplacer).
 
 !!! encadre "À retenir — Deux opérations à compter"
 
@@ -86,7 +86,7 @@ Trier un tableau, c’est ranger ses éléments **dans l’ordre** (croissant, l
 
 !!! regle "Règle 3 — Principe du tri par sélection"
 
-    Pour chaque position `i` de gauche à droite : on **cherche le minimum** de la partie non encore triée (les cases d’indice `i` à la fin), puis on l’**échange** avec la case `i`. À la fin de l’étape, la case `i` contient sa valeur définitive.
+    <span id="lex-triselection06" class="ancre"></span>Pour chaque position `i` de gauche à droite : on **cherche le minimum** de la partie non encore triée (les cases d’indice `i` à la fin), puis on l’**échange** avec la case `i`. À la fin de l’étape, la case `i` contient sa valeur définitive.
 
 <span class="retouract">↺ Retour sur l'activité.</span> La méthode 1 de l’activité « Trier sans tricher », « le plus petit d’abord », était déjà le tri par sélection : la carte « championne » est le minimum de la partie non encore triée.
 
@@ -218,7 +218,7 @@ La même trace en **histogramme** : chaque barre a la hauteur de sa valeur. On v
 
 !!! regle "Règle 6 — Principe du tri par insertion"
 
-    On parcourt le tableau de la gauche vers la droite. À chaque étape, la partie de gauche est *déjà triée* ; on prend l’élément suivant et on l’**insère** à sa place dans cette partie triée, en **décalant** vers la droite tous les éléments plus grands que lui.
+    <span id="lex-triinsertion06" class="ancre"></span>On parcourt le tableau de la gauche vers la droite. À chaque étape, la partie de gauche est *déjà triée* ; on prend l’élément suivant et on l’**insère** à sa place dans cette partie triée, en **décalant** vers la droite tous les éléments plus grands que lui.
 
 <span class="retouract">↺ Retour sur l'activité.</span> La méthode 2 de l’activité, « comme une main de cartes », était le tri par insertion : chaque carte, comparée à ses voisines de gauche, était glissée à sa place parmi les cartes déjà rangées.
 
@@ -342,7 +342,7 @@ Reprenons notre réflexe : on compte les opérations en fonction de la taille `n
 
 !!! regle "Règle 9 — Nos deux tris (sélection, insertion) sont quadratiques"
 
-    La sélection comme l’insertion consistent à parcourir le tableau *à l’intérieur* d’un autre parcours. Le nombre de comparaisons est de l’ordre de $n^2$ : leur coût est **quadratique**. Si l’on double le nombre d’éléments, le temps de tri est multiplié par **quatre**.
+    <span id="lex-quadratique06" class="ancre"></span>La sélection comme l’insertion consistent à parcourir le tableau *à l’intérieur* d’un autre parcours. Le nombre de comparaisons est de l’ordre de $n^2$ : leur coût est **quadratique**. Si l’on double le nombre d’éléments, le temps de tri est multiplié par **quatre**.
 
 !!! demonstration "Démonstration — Le compte exact pour la sélection"
 
@@ -391,7 +391,7 @@ Sélection et insertion ne sont que deux membres d’une grande famille.
 
 - Le **tri fusion** et le **tri rapide** atteignent un coût $n\log_2 n$, bien meilleur : ce sont eux (et leurs cousins) qui trient « pour de vrai » dans les logiciels. <span class="horsprog">au-delà du programme</span>
 
-- En Python, il suffit d’écrire `t.sort()` (tri en place) ou `sorted(t)` (nouveau tableau trié). Derrière ces mots se cache **Timsort**, un algorithme hybride très rapide inventé en 2002 par Tim Peters, aujourd’hui utilisé aussi par Java et Android. <span class="horsprog">au-delà du programme</span>
+- En Python, il suffit d’écrire <span id="lex-sort06" class="ancre"></span>`t.sort()` (tri en place) ou `sorted(t)` (nouveau tableau trié). Derrière ces mots se cache **Timsort**, un algorithme hybride très rapide inventé en 2002 par Tim Peters, aujourd’hui utilisé aussi par Java et Android. <span class="horsprog">au-delà du programme</span>
 
 !!! curieux "Pour les curieux (facultatif) — Danser un algorithme"
 

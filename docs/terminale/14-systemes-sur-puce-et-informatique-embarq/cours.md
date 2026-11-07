@@ -10,7 +10,7 @@ Programme (BO)
 :   *« Composants intégrés d’un système sur puce. Identifier les principaux composants sur un schéma de circuit et les avantages de leur intégration en termes de vitesse et de consommation. »* Commentaire du BO : *« Le circuit d’un téléphone peut être pris comme exemple : microprocesseurs, mémoires locales, interfaces radio et filaires, gestion d’énergie, contrôleurs vidéo, accélérateur graphique, réseaux sur puce, etc. »*
 
 Prérequis
-:   le modèle de **von Neumann** (unité de calcul, mémoire, entrées-sorties, bus — vu en Première), la différence **mémoire vive / mémoire morte**, la notion de **processus**. (→ fiches de révision : ch. 4)
+:   le modèle de **von Neumann** (unité de calcul, mémoire, entrées-sorties, bus — vu en Première), la notion de **processus**. (→ fiches de révision : ch. 4) $\to$ rappels de 1re : architecture et OS
 
 Objectifs
 :   *comprendre* pourquoi un ordinateur entier tient sur une puce ; *distinguer* microcontrôleur et SoC ; *dérouler* le fonctionnement d’un système embarqué ; *peser* les intérêts et les limites de l’intégration.
@@ -33,7 +33,7 @@ Comment un ordinateur complet — processeur, mémoire, périphériques — a-t-
 
 !!! regle "Règle 1 — La loi de Moore (1965, révisée en 1975)"
 
-    Gordon Moore, cofondateur d’Intel, prévoit en 1965 que le nombre de transistors sur une puce va doubler chaque année ; en 1975, il révise sa prévision : **le nombre de transistors sur une puce double environ tous les deux ans**. Ce n’est pas une loi physique, mais une prédiction économique — restée étonnamment juste pendant un demi-siècle. Le premier microprocesseur, l’**Intel 4004** (1971), comptait $2\,300$ transistors ; une puce d’aujourd’hui en compte **des dizaines de milliards**, gravés « en $3$ **nanomètres** », voire « en $2$ nm ». Ces noms sont devenus commerciaux et ne mesurent plus exactement un transistor, mais l’ordre de grandeur est là : les motifs les plus fins ne font que quelques dizaines d’atomes de large.
+    <span id="lex-moore14" class="ancre"></span>Gordon Moore, cofondateur d’Intel, prévoit en 1965 que le nombre de transistors sur une puce va doubler chaque année ; en 1975, il révise sa prévision : **le nombre de transistors sur une puce double environ tous les deux ans**. Ce n’est pas une loi physique, mais une prédiction économique — restée étonnamment juste pendant un demi-siècle. Le premier microprocesseur, l’**Intel 4004** (1971), comptait $2\,300$ transistors ; une puce d’aujourd’hui en compte **des dizaines de milliards**, gravés « en $3$ **nanomètres** », voire « en $2$ nm ». Ces noms sont devenus commerciaux et ne mesurent plus exactement un transistor, mais l’ordre de grandeur est là : les motifs les plus fins ne font que quelques dizaines d’atomes de large.
 
 ![](../img/14_Intel_C4004.jpg){ .photo loading=lazy style="width:140px" }  
 *L’Intel 4004 (1971), l’un des tout premiers microprocesseurs : $2\,300$ transistors.*
@@ -42,7 +42,7 @@ Cette miniaturisation a tout changé : en rapprochant les composants, on a pu **
 
 ## Rappel : ce qu’il y a dans un ordinateur
 
-Depuis la Première, vous connaissez le **modèle de von Neumann** : un ordinateur, c’est une **unité de calcul** (le processeur, CPU), une **mémoire** (qui contient à la fois les programmes et les données), des **entrées-sorties** (clavier, écran, réseau…), le tout relié par des **bus** de communication.
+Depuis la Première, vous connaissez le <span id="lex-vonneumann14" class="ancre"></span>**modèle de von Neumann** : un ordinateur, c’est une **unité de calcul** (le processeur, CPU), une **mémoire** (qui contient à la fois les programmes et les données), des **entrées-sorties** (clavier, écran, réseau…), le tout relié par des **bus** de communication.
 
 Dans un ordinateur classique, ces éléments sont des **composants séparés**, enfichés sur une grande **carte mère** : le processeur ici, les barrettes de mémoire là, la carte graphique dans son connecteur… On peut les **choisir**, les **remplacer**, les **faire évoluer**. C’est modulaire — mais encombrant, coûteux et gourmand en énergie (les longs fils de cuivre consomment et ralentissent).
 
@@ -56,7 +56,7 @@ Dans un ordinateur classique, ces éléments sont des **composants séparés**, 
 
 !!! definition "Définition 1 — Système sur puce (System on Chip, SoC)"
 
-    Un **système sur puce** rassemble sur un **unique circuit intégré** la plupart des composants qui étaient dispersés sur la carte mère : le **processeur** (souvent multi-cœur, comme au chapitre 4) et ses **mémoires locales** (les caches), un **processeur graphique** (GPU), un **contrôleur vidéo**, des circuits de **gestion d’énergie**, et une foule de **périphériques** : interfaces **radio** (Wi-Fi, Bluetooth, GPS, modem) et **filaires** (USB, liaisons vers l’écran, l’appareil photo, les capteurs…). Ces blocs communiquent par un **réseau sur puce**. Dans un téléphone, la **mémoire vive** principale est une autre puce, empilée sur le SoC dans le **même boîtier**. Un ordinateur complet, dans un boîtier grand comme un ongle.
+    Un <span id="lex-soc14" class="ancre"></span>**système sur puce** rassemble sur un **unique circuit intégré** la plupart des composants qui étaient dispersés sur la carte mère : le **processeur** (souvent multi-cœur, comme au chapitre 4) et ses **mémoires locales** (les caches), un **processeur graphique** (GPU), un **contrôleur vidéo**, des circuits de **gestion d’énergie**, et une foule de **périphériques** : interfaces **radio** (Wi-Fi, Bluetooth, GPS, modem) et **filaires** (USB, liaisons vers l’écran, l’appareil photo, les capteurs…). Ces blocs communiquent par un **réseau sur puce**. Dans un téléphone, la **mémoire vive** principale est une autre puce, empilée sur le SoC dans le **même boîtier**. Un ordinateur complet, dans un boîtier grand comme un ongle.
 
 ![](../figures/f5b143e9416a8e88.svg){ .tikz loading=lazy }
 
@@ -103,7 +103,7 @@ Un SoC est un **vrai ordinateur**, aussi puissant : plusieurs cœurs cadencés �
 
 ## Le microcontrôleur : le petit cerveau de l’embarqué
 
-Tous les systèmes sur puce ne sont pas des monstres de puissance. À l’autre bout du spectre, le **microcontrôleur** est un mini-ordinateur **minuscule, bon marché et sobre**, conçu pour *une* tâche précise dans un **système embarqué** : la carte à puce de votre carte bancaire, le thermostat, le drone, la manette de jeu, le régulateur de vitesse d’une voiture, l’ampoule connectée…
+Tous les systèmes sur puce ne sont pas des monstres de puissance. À l’autre bout du spectre, le <span id="lex-microcontroleur14" class="ancre"></span>**microcontrôleur** est un mini-ordinateur **minuscule, bon marché et sobre**, conçu pour *une* tâche précise dans un <span id="lex-embarque14" class="ancre"></span>**système embarqué** : la carte à puce de votre carte bancaire, le thermostat, le drone, la manette de jeu, le régulateur de vitesse d’une voiture, l’ampoule connectée…
 
 |  | **Microcontrôleur** | **SoC (téléphone, tablette)** |
 |:---|:---|:---|
@@ -116,17 +116,17 @@ Tous les systèmes sur puce ne sont pas des monstres de puissance. À l’autre 
 
 !!! remarque "Remarque"
 
-    Un microcontrôleur, en général, ne fait pas tourner de système d’exploitation complet (il existe seulement de petits systèmes dits « temps réel », très légers) : dès qu’il est sous tension, il exécute *directement* le programme gravé dans sa mémoire. C’est justement ce qu’on veut pour du **temps réel** : un airbag ne peut pas attendre que l’OS ait fini de basculer entre ses processus.
+    Un microcontrôleur, en général, ne fait pas tourner de système d’exploitation complet (il existe seulement de petits systèmes dits « temps réel », très légers) : dès qu’il est sous tension, il exécute *directement* le programme gravé dans sa mémoire. C’est justement ce qu’on veut pour du <span id="lex-tempsreel14" class="ancre"></span>**temps réel** : un airbag ne peut pas attendre que l’OS ait fini de basculer entre ses processus.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Le micro:bit de l’activité est un microcontrôleur : dès qu’elle est alimentée, la carte exécute directement le programme, sans Windows ni Android, et son processeur comme sa mémoire se trouvent dans la puce elle-même.
 
 ### Capteurs, actionneurs, et l’architecture de Harvard
 
-Un système embarqué dialogue avec le **monde physique** par ses ports d’entrée-sortie : il **lit** des grandeurs physiques grâce à des **capteurs** (température, vitesse, lumière…) et **agit** grâce à des **actionneurs** (moteur, chauffage, LED, frein…). Un **convertisseur analogique-numérique** transforme la tension d’un capteur en nombre binaire exploitable.
+Un système embarqué dialogue avec le **monde physique** par ses ports d’entrée-sortie : il **lit** des grandeurs physiques grâce à des <span id="lex-capteur14" class="ancre"></span>**capteurs** (température, vitesse, lumière…) et **agit** grâce à des <span id="lex-actionneur14" class="ancre"></span>**actionneurs** (moteur, chauffage, LED, frein…). Un **convertisseur analogique-numérique** transforme la tension d’un capteur en nombre binaire exploitable.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Sur le micro:bit, les boutons A et B et le capteur de température étaient des capteurs ; l’écran de LED, qui jouait le « radiateur » du thermostat, était un actionneur.
 
-<span class="horsprog">au-delà du programme</span> Beaucoup de microcontrôleurs adoptent l’**architecture de Harvard** : contrairement à von Neumann (une seule mémoire pour tout), le **programme** (en mémoire morte, Flash) et les **données** (en mémoire vive, RAM) sont dans *deux mémoires séparées*, reliées par *deux bus distincts*. Avantage : on peut lire une instruction *et* une donnée **en même temps** — un vrai gain de temps.
+<span class="horsprog">au-delà du programme</span> Beaucoup de microcontrôleurs adoptent l’<span id="lex-harvard14" class="ancre"></span>**architecture de Harvard** : contrairement à von Neumann (une seule mémoire pour tout), le **programme** (en **mémoire morte**, la Flash, qui garde son contenu hors tension) et les **données** (en **mémoire vive**, la RAM, effacée à l’extinction) sont dans *deux mémoires séparées*, reliées par *deux bus distincts*. Avantage : on peut lire une instruction *et* une donnée **en même temps** — un vrai gain de temps.
 
 ![](../figures/8f00ecd0623d3ce9.svg){ .tikz loading=lazy }
 
@@ -150,7 +150,7 @@ while True:                          # boucle sans fin
 
     **(1) Acquisition** de grandeurs physiques par des capteurs ; **(2) contrôle** d’un procédé par des actionneurs ; **(3) contraintes de temps** fortes (la réponse doit arriver *à temps* — pensez à un airbag ou à un frein ABS).
 
-<span class="retouract">↺ Retour sur l'activité.</span> Les trois programmes de l’activité avaient exactement cette forme : une boucle sans fin qui perçoit, décide (`if`) et agit. Sans le `while True`, la carte ne lisait le bouton qu’une fois ; et un airbag qui ne consulterait ses capteurs que toutes les dix minutes ne servirait à rien : c’est la contrainte de temps.
+<span class="retouract">↺ Retour sur l'activité.</span> Les trois programmes de l’activité avaient exactement cette forme : une boucle sans fin qui perçoit, décide (`if`) et agit. Sans le <span id="lex-pywhiletrue14" class="ancre"></span>`while True`, la carte ne lisait le bouton qu’une fois ; et un airbag qui ne consulterait ses capteurs que toutes les dix minutes ne servirait à rien : c’est la contrainte de temps.
 
 <span id="cours-14-5" class="ancre"></span>
 

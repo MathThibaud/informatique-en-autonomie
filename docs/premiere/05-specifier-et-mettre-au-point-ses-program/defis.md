@@ -22,7 +22,21 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi est l’occasion d’appliquer la démarche de ce chapitre : tester chaque fonction avec des `assert` sur des cas limites choisis exprès, car la partie 2 cache un piège.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Chaque ligne du fichier mélange des lettres et des chiffres ; il faut en extraire le premier et le dernier chiffre, former un nombre à deux chiffres, puis additionner ces nombres sur un millier de lignes. Chaque ligne est facile à traiter à la main, mais il y en a beaucoup trop, et la partie 2 ajoute des chiffres écrits en toutes lettres.
+
+    **Ce qu’on réinvestit.** La démarche de ce chapitre : **tester** chaque fonction sur des cas limites choisis exprès (une ligne à un seul chiffre, des mots qui se chevauchent…) avant de faire confiance au résultat. C’est indispensable ici, car la partie 2 cache un piège qui donne une réponse fausse sans aucun message d’erreur. On utilise aussi les chaînes, leurs tranches et la concaténation.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre la règle avec des questions courtes, puis traiter à la main un petit fichier dont on connaît la réponse.
+
+    2.  Lire le fichier et observer à quoi ressemblent les lignes.
+
+    3.  Écrire une fonction qui extrait les chiffres d’une ligne, puis une fonction qui calcule la valeur d’une ligne : la somme donne la partie 1.
+
+    4.  Pour la partie 2, modifier seulement la fonction qui extrait les chiffres, en la testant sur des lignes piégées.
 
 ## Lire l’énoncé
 
@@ -37,19 +51,25 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Les elfes s’apprêtent à vous envoyer dans le ciel avec un trébuchet, mais son document de réglage a été « décoré » par un jeune elfe : à chaque ligne, les nombres utiles sont noyés au milieu de lettres et d’autres chiffres. Il faut retrouver, pour chaque ligne, une valeur de réglage avant le lancement.
+    **Contexte.** Les elfes s’apprêtent à vous envoyer dans le ciel avec un trébuchet, mais son document de réglage a été « décoré » par un jeune elfe : à chaque ligne, les nombres utiles sont noyés au milieu de lettres et d’autres chiffres. Avant le lancement, il faut retrouver la valeur de réglage cachée dans chaque ligne.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Chaque ligne du fichier est une chaîne qui mêle des lettres minuscules et des chiffres, par exemple `x3yz7k`. Chaque ligne contient au moins un chiffre.
 
-    - Chaque ligne est une chaîne mêlant lettres et chiffres, avec au moins un chiffre.
+    **La règle.**
 
-    - La valeur d’une ligne est le nombre à deux chiffres formé par son **premier** chiffre suivi de son **dernier** chiffre. On accole les deux chiffres, on ne les additionne pas.
+    - Dans une ligne, on repère le **premier** chiffre (le plus à gauche) et le **dernier** chiffre (le plus à droite) ; les chiffres du milieu ne servent pas.
+
+    - La valeur de la ligne est le nombre à deux chiffres obtenu en écrivant le premier chiffre puis le dernier. On accole les deux chiffres, on ne les additionne pas.
 
     - S’il n’y a qu’un chiffre, il sert à la fois de premier et de dernier.
 
-    - Réponse : la somme des valeurs de toutes les lignes.
+    **La réponse attendue.** La somme des valeurs de toutes les lignes. Par exemple, la ligne `a4b7c2` vaut 42 (premier chiffre 4, dernier chiffre 2 ; le 7 ne sert pas) ; un fichier formé de cette seule ligne donnerait la réponse 42.
 
 ### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-1 }
+
+**But.** Vérifier sur des cas particuliers qu’on a bien compris comment se calcule la valeur d’une ligne.
+
+**À quoi ça sert ?** Ces cas (un seul chiffre, des chiffres à accoler et non à additionner) deviendront les premiers tests de la fonction `valeur`. La dernière question annonce la façon de former le nombre en Python.
 
 Après lecture du résumé (et de l’énoncé), vérifier sa compréhension sur ces cas particuliers :
 
@@ -60,6 +80,10 @@ Après lecture du résumé (et de l’énoncé), vérifier sa compréhension sur
 3.  Quel type de données a un caractère comme `"7"` ? Que donne `"7" + "2"` ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-2 }
+
+**But.** Calculer à la main la valeur de quatre lignes et leur somme.
+
+**À quoi ça sert ?** On obtient un exemple dont on **connaît la réponse** (205) : le programme devra la retrouver avant d’être lancé sur les vraies données.
 
 On considère le fichier (inventé) suivant :
 
@@ -75,6 +99,10 @@ Donner la valeur de chaque ligne. Vérification : on doit obtenir `205`. Attenti
 ## Programmer la partie 1
 
 ### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-3 }
+
+**But.** Lire le fichier ligne par ligne et regarder quelques lignes de vos données.
+
+**À quoi ça sert ?** Observer les vraies données avant de programmer évite les mauvaises surprises (longueur des lignes, caractères présents) et permet de vérifier que la lecture fonctionne.
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
@@ -116,6 +144,10 @@ Afficher les 5 premières lignes de vos données pour voir à quoi elles ressemb
 
 ### <span class="exo-num">Exercice 4</span> — Les chiffres d’une ligne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-4 }
 
+**But.** Écrire une fonction qui renvoie la liste des chiffres d’une ligne, dans l’ordre.
+
+**À quoi ça sert ?** Une fois cette liste obtenue, le premier et le dernier chiffre sont simplement son premier et son dernier élément. C’est aussi la seule fonction qu’il faudra modifier dans la partie 2.
+
 Écrire une fonction `chiffres(ligne)` qui renvoie la liste des chiffres de la ligne, dans l’ordre, sous forme de chaînes. Tester : `chiffres("q12w34e")` doit valoir `["1", "2", "3", "4"]`.
 
 ??? pouce "Coup de pouce"
@@ -123,6 +155,10 @@ Afficher les 5 premières lignes de vos données pour voir à quoi elles ressemb
     Le test `c in "0123456789"` vaut `True` si le caractère `c` est un chiffre.
 
 ### <span class="exo-num">Exercice 5</span> — Valeur d’une ligne et total <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-5 }
+
+**But.** Calculer la valeur d’une ligne à partir de ses chiffres, puis la somme sur tout le fichier.
+
+**À quoi ça sert ?** La somme obtenue est la réponse de la partie 1. Comme `valeur` s’appuie sur `chiffres`, il suffira d’améliorer `chiffres` pour obtenir la partie 2 sans toucher au reste.
 
 Écrire une fonction `valeur(ligne)` puis calculer la somme sur tout le fichier. Vérifier `205` sur l’exemple.
 
@@ -140,9 +176,23 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    On s’aperçoit que certains chiffres étaient écrits en toutes lettres. Les chiffres de 1 à 9 écrits en anglais (`one`, `two`, …, `nine`) comptent maintenant aussi comme des chiffres. La valeur d’une ligne se calcule comme avant, avec le premier et le dernier chiffre, qu’ils soient écrits avec un chiffre ou en lettres.
+    **Ce qui change.** On s’aperçoit que certains chiffres étaient écrits en toutes lettres, en anglais, au milieu des autres lettres : ils comptaient eux aussi.
+
+    **La nouvelle règle.**
+
+    - Les mots `one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `nine` comptent maintenant comme les chiffres 1 à 9.
+
+    - Le premier et le dernier chiffre d’une ligne peuvent donc être écrits avec un chiffre ou en lettres.
+
+    - La valeur d’une ligne se calcule comme avant, en accolant le premier et le dernier chiffre.
+
+    **La réponse attendue.** La somme des nouvelles valeurs de toutes les lignes. Par exemple, la ligne `xtwo3sevenx` vaut 27 : son premier chiffre est `two` et son dernier est `seven`.
 
 ### <span class="exo-num">Exercice 6</span> — Des chiffres en toutes lettres <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-6 }
+
+**But.** Améliorer la fonction `chiffres` pour qu’elle reconnaisse aussi les chiffres écrits en toutes lettres, puis recalculer la somme.
+
+**À quoi ça sert ?** La fonction `valeur` et le calcul du total restent inchangés : seule l’extraction des chiffres change. Les lignes de test proposées, construites exprès, permettent de détecter le piège avant de lancer le programme sur les vraies données.
 
 Modifier la fonction `chiffres(ligne)` pour qu’elle reconnaisse aussi les chiffres écrits en toutes lettres, comme le demande la partie 2. Sur le fichier (inventé) ci-dessous, on doit obtenir `215`.
 
@@ -166,6 +216,10 @@ nine87seven
 ## Approfondissement
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : chercher par les deux bouts <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-aoc-1-7 }
+
+**But.** Trouver le premier et le dernier chiffre sans construire la liste de tous les chiffres.
+
+**À quoi ça sert ?** On ne fait que le travail nécessaire : une recherche depuis le début, une depuis la fin. Cette version est plus rapide et, en prime, elle élimine complètement le problème des mots qui se chevauchent.
 
 On n’a besoin que du premier et du dernier chiffre.
 

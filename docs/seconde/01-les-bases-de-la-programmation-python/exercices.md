@@ -2,6 +2,8 @@
 
 <p class="sous-titre">Les bases de la programmation Python</p>
 
+<span id="modeemploi" class="ancre"></span>
+
 !!! consignes "Mode d’emploi"
 
     - Niveau : ★ échauffement, ★★ classique (niveau bac), ★★★ défi ; les *coups de pouce* et les *corrigés* se déplient sous chaque exercice.
@@ -445,7 +447,8 @@ Bonjour Monaco
     print(f"Un fichier de {taille} Mo se telecharge en {taille / debit} secondes.")
     ```
 
-    Avec $45$ et $2.5$, le programme affiche : `Un fichier de 45.0 Mo se telecharge en 18.0 secondes.`
+    Avec $45$ et $2.5$, le programme affiche :  
+    `Un fichier de 45.0 Mo se telecharge en 18.0 secondes.`
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — L’écho <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-20 }
 

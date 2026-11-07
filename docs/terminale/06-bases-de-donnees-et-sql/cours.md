@@ -10,7 +10,7 @@ Programme (BO)
 :   *« Identifier les concepts définissant le modèle relationnel » (relation, attribut, domaine, clef primaire, clef étrangère, schéma relationnel ; contraintes d’intégrité de domaine, de relation et de référence). « Savoir distinguer la structure d’une base de données de son contenu. Repérer des anomalies dans le schéma d’une base de données » (redondances, anomalies d’insertion, de suppression, de mise à jour). « Identifier les services rendus par un système de gestion de bases de données relationnelles : persistance des données, gestion des accès concurrents, efficacité de traitement des requêtes, sécurisation des accès. Identifier les composants d’une requête. Construire des requêtes d’interrogation à l’aide des clauses du langage SQL : `SELECT`, `FROM`, `WHERE`, `JOIN`. Construire des requêtes d’insertion et de mise à jour à l’aide de : `UPDATE`, `INSERT`, `DELETE`. »*
 
 Prérequis
-:   la notion de **type** (domaine) ; les tableaux et dictionnaires (comme analogies) ; un peu de logique (**et**, **ou**, **non**).
+:   la notion de **type** (domaine) ; les tableaux et dictionnaires (comme analogies) ; un peu de logique (**et**, **ou**, **non**). $\to$ rappels de 1re : dictionnaires, données en tables, binaire et booléens
 
 Objectifs
 :   *comprendre* pourquoi une base de données s’impose ; *modéliser* des données en relationnel (relations, clés) ; *connaître* le rôle d’un SGBD ; *écrire* des requêtes SQL d’interrogation **et** de mise à jour.
@@ -27,7 +27,7 @@ Objectifs
 
 ## Pourquoi une base de données ? Quand le tableur ne suffit plus
 
-Pour ranger quelques informations, un tableur (type Excel) ou un fichier texte peuvent suffire. Mais dès que les données deviennent **nombreuses**, **partagées** et **précieuses**, ces solutions craquent : une même information recopiée à plusieurs endroits finit par se contredire, deux personnes qui modifient le fichier en même temps écrasent le travail l’une de l’autre, la recherche devient lente. Une banque (un virement doit être fait en entier ou pas du tout : c’est une **transaction**), un site marchand (le dernier article en stock ne doit pas être vendu deux fois), un réseau social (des milliards de lignes interrogées en une fraction de seconde) ou le carnet de notes d’un lycée (pas de note pour un élève qui n’existe pas, chacun ne voit que ce qui le concerne) ne peuvent pas s’en contenter.
+Pour ranger quelques informations, un tableur (type Excel) ou un fichier texte peuvent suffire. Mais dès que les données deviennent **nombreuses**, **partagées** et **précieuses**, ces solutions craquent : une même information recopiée à plusieurs endroits finit par se contredire, deux personnes qui modifient le fichier en même temps écrasent le travail l’une de l’autre, la recherche devient lente. Une banque (un virement doit être fait en entier ou pas du tout : c’est une <span id="lex-transaction06" class="ancre"></span>**transaction**), un site marchand (le dernier article en stock ne doit pas être vendu deux fois), un réseau social (des milliards de lignes interrogées en une fraction de seconde) ou le carnet de notes d’un lycée (pas de note pour un élève qui n’existe pas, chacun ne voit que ce qui le concerne) ne peuvent pas s’en contenter.
 
 !!! regle "Règle 1 — Ce qu’un simple fichier ne sait pas faire"
 
@@ -39,11 +39,11 @@ Pour ranger quelques informations, un tableur (type Excel) ou un fichier texte p
 
 ## Le modèle relationnel
 
-En **1970**, un chercheur d’IBM, **Edgar F. Codd**, propose d’organiser les données en **tableaux** reliés entre eux : c’est le **modèle relationnel**, encore ultra-dominant aujourd’hui.
+En **1970**, un chercheur d’IBM, **Edgar F. Codd**, propose d’organiser les données en **tableaux** reliés entre eux : c’est le <span id="lex-modelerelationnel06" class="ancre"></span>**modèle relationnel**, encore ultra-dominant aujourd’hui.
 
 !!! definition "Définition 1 — Relation, attribut, enregistrement, domaine"
 
-    Une **relation** (ou **table**) est un tableau à deux dimensions. Chaque **colonne** est un **attribut**, qui porte un **nom** et un **domaine** (son type : entier, texte, date…). Chaque **ligne** est un **enregistrement** : une entité décrite par une valeur pour chaque attribut.
+    Une <span id="lex-relation06" class="ancre"></span>**relation** (ou **table**) est un tableau à deux dimensions. Chaque **colonne** est un <span id="lex-attributbdd06" class="ancre"></span>**attribut**, qui porte un **nom** et un <span id="lex-domaine06" class="ancre"></span>**domaine** (son type : entier, texte, date…). Chaque **ligne** est un <span id="lex-enregistrement06" class="ancre"></span>**enregistrement** : une entité décrite par une valeur pour chaque attribut.
 
 Prenons une base de données de **films**. Voici la relation `film` :
 
@@ -57,7 +57,7 @@ Prenons une base de données de **films**. Voici la relation `film` :
 
 !!! definition "Définition 2 — Schéma"
 
-    Le **schéma** d’une relation donne le nom de la relation et, pour chaque attribut, son nom et son domaine. On le note ainsi (la clé primaire est soulignée) :
+    Le <span id="lex-schema06" class="ancre"></span>**schéma** d’une relation donne le nom de la relation et, pour chaque attribut, son nom et son domaine. On le note ainsi (la clé primaire est soulignée) :
 
     $$\texttt{film}\,(\ \underline{\texttt{id}}:\text{entier},\ \texttt{titre}:\text{texte},\ \texttt{id\_real}:\text{entier},\ \texttt{annee}:\text{entier},\ \texttt{note}:\text{entier}\ )$$
 
@@ -77,9 +77,11 @@ Prenons une base de données de **films**. Voici la relation `film` :
 
 ## Les contraintes d’intégrité : garder des données saines
 
-Le modèle relationnel impose des **règles** qui empêchent les incohérences. Ce sont les **contraintes d’intégrité**.
+Le modèle relationnel impose des **règles** qui empêchent les incohérences. Ce sont les <span id="lex-integrite06" class="ancre"></span>**contraintes d’intégrité**.
 
 ### Contrainte de domaine
+
+<span id="lex-contraintedomaine06" class="ancre"></span>
 
 !!! regle "Règle 3"
 
@@ -97,7 +99,7 @@ Le modèle relationnel impose des **règles** qui empêchent les incohérences. 
 
 !!! definition "Définition 3 — Clé primaire"
 
-    La **clé primaire** d’une relation est un attribut (ou un groupe d’attributs) dont la valeur **identifie de façon unique** chaque enregistrement. Son **rôle** est donc de *distinguer sans ambiguïté* les lignes ; le SGBD garantit qu’**aucune** clé primaire ne se répète (et qu’elle n’est jamais vide). C’est la **contrainte d’entité**.
+    La <span id="lex-cleprimaire06" class="ancre"></span>**clé primaire** d’une relation est un attribut (ou un groupe d’attributs) dont la valeur **identifie de façon unique** chaque enregistrement. Son **rôle** est donc de *distinguer sans ambiguïté* les lignes ; le SGBD garantit qu’**aucune** clé primaire ne se répète (et qu’elle n’est jamais vide). C’est la **contrainte d’entité**.
 
 Dans `film`, deux films peuvent partager le même titre ou la même année : c’est pourquoi on ajoute un attribut `id` (un numéro unique) qui sert de clé primaire.
 
@@ -117,7 +119,7 @@ Dans `film`, l’attribut `id_real` ne contient pas le *nom* du réalisateur, ma
 
 !!! definition "Définition 4 — Clé étrangère"
 
-    Une **clé étrangère** est un attribut d’une relation dont la valeur doit être celle d’une **clé primaire** dans une autre (ou la même) relation. Son **rôle** est de *relier deux tables* et de garantir que la référence **existe** vraiment. Ici, `film.id_real` est une clé étrangère qui référence `realisateur.id`.
+    Une <span id="lex-cleetrangere06" class="ancre"></span>**clé étrangère** est un attribut d’une relation dont la valeur doit être celle d’une **clé primaire** dans une autre (ou la même) relation. Son **rôle** est de *relier deux tables* et de garantir que la référence **existe** vraiment. Ici, `film.id_real` est une clé étrangère qui référence `realisateur.id`.
 
 <span class="retouract">↺ Retour sur l'activité.</span> La colonne inventée dans l’activité pour distinguer les deux Léa Martin était une **clé primaire** de ÉLÈVE ; la colonne « Élève » de NOTE, qui renvoie vers une ligne d’ÉLÈVE plutôt que de recopier le nom, était une **clé étrangère**.
 
@@ -127,7 +129,7 @@ On représente souvent le schéma de la base par un dessin : une boîte par rela
 
 !!! regle "Règle 5 — Contrainte de référence"
 
-    Une clé étrangère ne peut désigner qu’une valeur **existante**. Impossible d’ajouter un film dont le `id_real` vaut `7` si aucun réalisateur n’a l’`id` `7`. Impossible, aussi, de supprimer le réalisateur `1` tant que des films le référencent. La base reste **cohérente**.
+    <span id="lex-contraintereference06" class="ancre"></span>Une clé étrangère ne peut désigner qu’une valeur **existante**. Impossible d’ajouter un film dont le `id_real` vaut `7` si aucun réalisateur n’a l’`id` `7`. Impossible, aussi, de supprimer le réalisateur `1` tant que des films le référencent. La base reste **cohérente**.
 
 !!! regle "Règle 6 — Question de bac : différence entre clé primaire et clé étrangère"
 
@@ -135,7 +137,7 @@ On représente souvent le schéma de la base par un dessin : une boîte par rela
 
 !!! encadre "À retenir — pourquoi deux tables plutôt qu’une ? Les anomalies d’un mauvais schéma"
 
-    On aurait pu écrire le nom et le pays du réalisateur en toutes lettres dans chaque film. Mais alors « Nolan, Royaume-Uni » serait recopié 3 fois : c’est une **redondance**. Elle entraîne trois **anomalies** :
+    On aurait pu écrire le nom et le pays du réalisateur en toutes lettres dans chaque film. Mais alors « Nolan, Royaume-Uni » serait recopié 3 fois : c’est une **redondance**. Elle entraîne trois <span id="lex-anomalies06" class="ancre"></span>**anomalies** :
 
     - **anomalie de mise à jour** : corriger le pays de Nolan oblige à modifier toutes ses lignes ; en oublier une rend la base incohérente (une faute de frappe, « Nollan », crée même un réalisateur fantôme) ;
 
@@ -175,7 +177,7 @@ On ne manipule jamais les fichiers d’une base « à la main » : on passe par 
 
 !!! definition "Définition 5 — Système de gestion de bases de données (SGBD)"
 
-    Un **SGBD** est le logiciel qui **stocke**, **protège** et **interroge** une base de données. On ne lui parle pas dans un langage de programmation classique, mais avec un langage dédié : **SQL**.
+    Un <span id="lex-sgbd06" class="ancre"></span>**SGBD** est le logiciel qui **stocke**, **protège** et **interroge** une base de données. On ne lui parle pas dans un langage de programmation classique, mais avec un langage dédié : **SQL**.
 
 !!! regle "Règle 8 — Les grandes fonctions d’un SGBD"
 
@@ -205,7 +207,7 @@ On ne manipule jamais les fichiers d’une base « à la main » : on passe par 
 
 ## SQL : interroger une base de données
 
-**SQL** (*Structured Query Language*) est le langage universel des bases relationnelles. Une instruction SQL s’appelle une **requête**. Commençons par la plus importante : **lire** des données.
+<span id="lex-sql06" class="ancre"></span>**SQL** (*Structured Query Language*) est le langage universel des bases relationnelles. Une instruction SQL s’appelle une **requête**. Commençons par la plus importante : **lire** des données.
 
 ### Créer et remplir une table
 
@@ -233,6 +235,8 @@ VALUES (1, 'Inception', 1, 2010, 9);
     En SQL, les mots-clés (`SELECT`, `FROM`…) s’écrivent traditionnellement en **majuscules** (ce n’est pas obligatoire) et les chaînes de caractères entre **apostrophes simples** : `’Inception’`.
 
 ### `SELECT` … `FROM` : choisir des colonnes
+
+<span id="lex-select06" class="ancre"></span>
 
 !!! regle "Règle 9 — La requête de base"
 
@@ -279,6 +283,8 @@ renvoie `Interstellar` et `Parasite`.
 
 ### `ORDER BY` : trier le résultat
 
+<span id="lex-orderby06" class="ancre"></span>
+
 ```sql
 SELECT titre, note
 FROM film
@@ -289,6 +295,8 @@ trie les films de la meilleure note à la moins bonne (`DESC` = décroissant ; `
 
 ### `DISTINCT` : supprimer les doublons
 
+<span id="lex-distinct06" class="ancre"></span>
+
 ```sql
 SELECT DISTINCT id_real
 FROM film;
@@ -298,7 +306,7 @@ renvoie chaque réalisateur **une seule fois**, même s’il a plusieurs films.
 
 ### Les fonctions d’agrégation
 
-Elles **résument** une colonne en *une* valeur : `COUNT` (compter), `SUM` (somme), `AVG` (moyenne), `MIN`, `MAX`.
+<span id="lex-agregation06" class="ancre"></span> Elles **résument** une colonne en *une* valeur : `COUNT` (compter), `SUM` (somme), `AVG` (moyenne), `MIN`, `MAX`.
 
 ```sql
 SELECT COUNT(*)                    -- nombre de films : 5
@@ -372,7 +380,7 @@ ne garde que les réalisateurs ayant **au moins 2** films.
 
 ### Les jointures : croiser deux tables
 
-Notre requête `GROUP BY` affiche des `id_real` (`1`, `2`…), pas des noms. Pour afficher le **nom** du réalisateur, il faut **recoller** les deux tables : c’est une **jointure**.
+Notre requête `GROUP BY` affiche des `id_real` (`1`, `2`…), pas des noms. Pour afficher le **nom** du réalisateur, il faut **recoller** les deux tables : c’est une <span id="lex-jointure06" class="ancre"></span>**jointure**.
 
 !!! regle "Règle 11 — JOIN … ON"
 
@@ -407,6 +415,8 @@ associe à chaque film le nom de son réalisateur :
 Au-delà de la lecture, SQL sait aussi **écrire**. Trois instructions, à manier avec prudence.
 
 !!! regle "Règle 12 — Les trois commandes de mise à jour"
+
+    <span id="lex-miseajour06" class="ancre"></span>
 
     - `INSERT INTO … VALUES …` : **ajouter** une ligne ;
 

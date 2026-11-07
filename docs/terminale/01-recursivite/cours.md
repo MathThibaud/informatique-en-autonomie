@@ -10,7 +10,7 @@ Programme (BO)
 :   *« Écrire un programme récursif. Analyser le fonctionnement d’un programme récursif. Des exemples relevant de domaines variés sont à privilégier. »* La récursivité irrigue toute la fin de l’année : arbres, « diviser pour régner », retour sur trace.
 
 Prérequis
-:   fonctions et paramètres, listes, chaînes de caractères, notion de coût.
+:   fonctions et paramètres, listes, chaînes de caractères, notion de coût. $\to$ rappels de 1re : bases de Python, listes, chaînes, parcours et coût
 
 Objectifs
 :   *savoir écrire* une fonction récursive (méthode) et *savoir l’analyser* (trace, pile, terminaison, coût).
@@ -43,7 +43,7 @@ La chose essentielle à observer : l’exécution de `fctB` est **interrompue** 
 
 !!! definition "Définition 1 — Pile d’exécution"
 
-    La *pile d’exécution* enregistre les fonctions en cours d’exécution. Les appels « s’empilent » les uns sur les autres. La fonction située **au sommet** est celle qui s’exécute ; toutes celles « en dessous » sont **en pause**. Quand une fonction se termine, elle est **dépilée**, et l’exécution reprend dans celle qui est désormais au sommet.
+    <span id="lex-pileexecution01" class="ancre"></span>La *pile d’exécution* enregistre les fonctions en cours d’exécution. Les appels « s’empilent » les uns sur les autres. La fonction située **au sommet** est celle qui s’exécute ; toutes celles « en dessous » sont **en pause**. Quand une fonction se termine, elle est **dépilée**, et l’exécution reprend dans celle qui est désormais au sommet.
 
 ![](../figures/b4e9b16f2a771e95.svg){ .tikz loading=lazy }
 
@@ -59,7 +59,7 @@ La pile ne retient pas seulement « quelle fonction » : elle conserve aussi **o
 
 !!! definition "Définition 2 — Fonction récursive"
 
-    Une fonction est dite **récursive** lorsqu’elle s’appelle elle-même dans son propre corps.
+    Une fonction est dite <span id="lex-recursive01" class="ancre"></span>**récursive** lorsqu’elle s’appelle elle-même dans son propre corps.
 
 Une fonction qui s’appelle elle-même *sans condition* ne s’arrête jamais : chaque appel empile un nouvel appel, **sans jamais rien dépiler**, et la pile grandit jusqu’à ce que Python s’arrête sur une erreur :
 
@@ -75,11 +75,11 @@ Pour éviter cela, il faut une **condition d’arrêt**.
 
 !!! definition "Définition 3 — Condition d’arrêt et cas récursif"
 
-    - la **condition d’arrêt** (ou **cas de base**) : le ou les cas où l’on sait répondre *directement* (`if n == 0 : return ...`) ;
+    - la <span id="lex-conditionarret01" class="ancre"></span>**condition d’arrêt** (ou **cas de base**) : le ou les cas où l’on sait répondre *directement* (`if n == 0 : return ...`) ;
 
-    - le **cas récursif** : les autres cas, où la fonction s’appelle elle-même sur un problème **plus petit**, qui se rapproche de la condition d’arrêt.
+    - le <span id="lex-casrecursif01" class="ancre"></span>**cas récursif** : les autres cas, où la fonction s’appelle elle-même sur un problème **plus petit**, qui se rapproche de la condition d’arrêt.
 
-<span class="retouract">↺ Retour sur l'activité.</span> La plus petite poupée russe, qui ne s’ouvre pas, était la condition d’arrêt de `ouvrir` (le test `if n > 1`). Sans elle, le « miroir sans fin » posait des post-it sans jamais en retirer : c’est le `RecursionError`.
+<span class="retouract">↺ Retour sur l'activité.</span> La plus petite poupée russe, qui ne s’ouvre pas, était la condition d’arrêt de `ouvrir` (le test `if n > 1`). Sans elle, le « miroir sans fin » posait des post-it sans jamais en retirer : c’est le <span id="lex-pyrecursionerror01" class="ancre"></span>`RecursionError`.
 
 !!! exemple "Exemple — Prévoyez l’affichage, puis vérifiez à la machine"
 
@@ -231,7 +231,7 @@ Le programme demande explicitement des exemples *variés*. En voici quatre, tous
 
 ### Un outil Python : le paramètre par défaut
 
-Une fonction récursive a souvent besoin d’un paramètre **de plus** que ce que l’utilisateur veut fournir : un **accumulateur**, qui transporte d’un appel à l’autre le résultat en cours de construction. Python permet de donner à ce paramètre une **valeur par défaut**, écrite dans l’en-tête avec `=` : elle est utilisée quand l’appel ne fournit pas ce paramètre.
+Une fonction récursive a souvent besoin d’un paramètre **de plus** que ce que l’utilisateur veut fournir : un <span id="lex-accumulateur01" class="ancre"></span>**accumulateur**, qui transporte d’un appel à l’autre le résultat en cours de construction. Python permet de donner à ce paramètre une <span id="lex-pydefaut01" class="ancre"></span>**valeur par défaut**, écrite dans l’en-tête avec `=` : elle est utilisée quand l’appel ne fournit pas ce paramètre.
 
 ```python
 def somme_acc(n, total=0):
@@ -284,9 +284,11 @@ Savoir écrire ne suffit pas : le programme demande de **savoir analyser**. Troi
 
 ### La terminaison
 
+<span id="lex-terminaison01" class="ancre"></span>
+
 !!! definition "Définition 4 — Variant"
 
-    Un **variant** est une quantité entière **positive** qui **décroît strictement** à chaque appel récursif. S’il en existe un, la suite d’appels ne peut pas être infinie : elle atteint forcément la condition d’arrêt.
+    Un <span id="lex-variant01" class="ancre"></span>**variant** est une quantité entière **positive** qui **décroît strictement** à chaque appel récursif. S’il en existe un, la suite d’appels ne peut pas être infinie : elle atteint forcément la condition d’arrêt.
 
 !!! propriete "Propriété 1 — Terminaison de somme"
 
@@ -310,7 +312,7 @@ Savoir écrire ne suffit pas : le programme demande de **savoir analyser**. Troi
 
 ### Le coût : l’exemple frappant de Fibonacci
 
-La fonction `fib` écrite plus haut est correcte, mais **terriblement lente**. La raison : chaque appel déclenche **deux** appels, et les mêmes calculs sont refaits un très grand nombre de fois. Dessinons l’**arbre des appels** de `fib(5)` :
+La fonction `fib` écrite plus haut est correcte, mais **terriblement lente**. La raison : chaque appel déclenche **deux** appels, et les mêmes calculs sont refaits un très grand nombre de fois. Dessinons l’<span id="lex-arbreappels01" class="ancre"></span>**arbre des appels** de `fib(5)` :
 
 ![](../figures/6898a450a569bdf0.svg){ .tikz loading=lazy }
 

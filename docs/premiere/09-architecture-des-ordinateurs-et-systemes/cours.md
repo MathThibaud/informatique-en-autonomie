@@ -39,7 +39,7 @@ Tout, dans un ordinateur, se ramène à deux états : le courant **passe** ou **
 
 !!! definition "Définition 1 — Le transistor"
 
-    Un **transistor** est un minuscule **interrupteur commandé électriquement** : une troisième borne (la « commande ») décide si le courant passe ou non entre les deux autres. C’est un interrupteur *sans pièce mécanique*, qui bascule des **milliards de fois par seconde**.
+    Un <span id="lex-transistor09" class="ancre"></span>**transistor** est un minuscule **interrupteur commandé électriquement** : une troisième borne (la « commande ») décide si le courant passe ou non entre les deux autres. C’est un interrupteur *sans pièce mécanique*, qui bascule des **milliards de fois par seconde**.
 
 En combinant quelques transistors, on fabrique des **portes logiques** qui calculent sur les 0 et les 1. Rappel du chapitre *Le binaire et l’écriture des nombres* : les portes **ET**, **OU**, **NON** (et le **OU exclusif**) réalisent les opérateurs booléens du même nom, décrits par leurs **tables de vérité**, et une porte OU exclusif associée à une porte ET forme déjà un **demi-additionneur**, qui additionne deux bits. En combinant ainsi des portes, on fabrique des circuits qui **additionnent**, **comparent**, **mémorisent**… et de proche en proche, tout un **processeur**. Le transistor est donc la **brique élémentaire** à partir de laquelle tout est construit.
 
@@ -59,21 +59,21 @@ En combinant quelques transistors, on fabrique des **portes logiques** qui calcu
 
 ## L’architecture de von Neumann
 
-Comment organiser ces milliards d’interrupteurs pour **exécuter un programme** ? La réponse, proposée en **1945**, est le **modèle de von Neumann**. **Quasiment tous** les ordinateurs, du smartphone au super-calculateur, le suivent encore.
+Comment organiser ces milliards d’interrupteurs pour **exécuter un programme** ? La réponse, proposée en **1945**, est le <span id="lex-vonneumann09" class="ancre"></span>**modèle de von Neumann**. **Quasiment tous** les ordinateurs, du smartphone au super-calculateur, le suivent encore.
 
 !!! definition "Définition 2 — Les quatre unités du modèle de von Neumann"
 
     Une machine de von Neumann est faite de quatre grands organes :
 
-    - l’**unité de commande** : elle *lit* les instructions du programme, les *décode* et *ordonne* leur exécution (le « chef ») ;
+    - l’<span id="lex-commande09" class="ancre"></span>**unité de commande** : elle *lit* les instructions du programme, les *décode* et *ordonne* leur exécution (le « chef ») ;
 
-    - l’**unité arithmétique et logique** (**UAL**) : elle *calcule* (additions, comparaisons, ET/OU logiques…) ;
+    - l’<span id="lex-ual09" class="ancre"></span>**unité arithmétique et logique** (**UAL**) : elle *calcule* (additions, comparaisons, ET/OU logiques…) ;
 
-    - la **mémoire** : elle *range* à la fois le **programme** et les **données**, dans des cases numérotées par une **adresse** ;
+    - la <span id="lex-memoire09" class="ancre"></span>**mémoire** : elle *range* à la fois le **programme** et les **données**, dans des cases numérotées par une **adresse** ;
 
-    - les **entrées-sorties** (E/S) : elles font *communiquer* la machine avec le monde (clavier, écran, disque, réseau…).
+    - les <span id="lex-es09" class="ancre"></span>**entrées-sorties** (E/S) : elles font *communiquer* la machine avec le monde (clavier, écran, disque, réseau…).
 
-    L’unité de commande et l’UAL, réunies avec quelques cases de travail ultra-rapides, forment le **processeur** (ou **CPU**, *Central Processing Unit*).
+    L’unité de commande et l’UAL, réunies avec quelques cases de travail ultra-rapides, forment le <span id="lex-processeur09" class="ancre"></span>**processeur** (ou **CPU**, *Central Processing Unit*).
 
 ![](../figures/17c2a6e3babf211d.svg){ .tikz loading=lazy }
 
@@ -93,7 +93,7 @@ Les organes sont reliés par des **bus** : des faisceaux de fils qui transporten
 
     - les **registres**, dans le processeur : minuscules (quelques dizaines de cases) mais instantanés ;
 
-    - la **mémoire vive** (**RAM**) : quelques giga-octets, rapide, mais **volatile** (tout s’efface à l’extinction) ;
+    - la <span id="lex-ram09" class="ancre"></span>**mémoire vive** (**RAM**) : quelques giga-octets, rapide, mais **volatile** (tout s’efface à l’extinction) ;
 
     - le **disque** (SSD, disque dur) : énorme et **permanent**, mais bien plus lent.
 
@@ -105,7 +105,7 @@ L’unité d’**entrées-sorties** est la porte par laquelle la machine **écha
 
 !!! definition "Définition 3 — Capteur et actionneur"
 
-    Un **capteur** *mesure* une grandeur du monde physique et la transforme en une valeur numérique *entrant* dans la machine (c’est une **entrée**). Un **actionneur** fait l’inverse : il reçoit un ordre numérique et *agit* sur le monde physique (c’est une **sortie**).
+    Un <span id="lex-capteur09" class="ancre"></span>**capteur** *mesure* une grandeur du monde physique et la transforme en une valeur numérique *entrant* dans la machine (c’est une **entrée**). Un <span id="lex-actionneur09" class="ancre"></span>**actionneur** fait l’inverse : il reçoit un ordre numérique et *agit* sur le monde physique (c’est une **sortie**).
 
 ![](../figures/c994c62fc21e9b20.svg){ .tikz loading=lazy }
 
@@ -127,17 +127,17 @@ La chaîne capteur $\to$ programme $\to$ actionneur, au cœur de tout objet conn
 
 ### Le cycle d’exécution
 
-Le processeur ne fait qu’**une** chose, mais des milliards de fois par seconde : répéter le **cycle** suivant.
+<span id="lex-cycle09" class="ancre"></span> Le processeur ne fait qu’**une** chose, mais des milliards de fois par seconde : répéter le **cycle** suivant.
 
 ![](../figures/480549c5f55e9f79.svg){ .tikz loading=lazy }
 
-À chaque tour, l’unité de commande utilise un registre spécial, le **compteur de programme** (ou *compteur ordinal*), qui contient l’**adresse de la prochaine instruction**. Normalement il avance d’un cran à chaque cycle ; une instruction de **saut** peut le forcer à une autre adresse — c’est ainsi qu’on réalise les **tests** et les **boucles**.
+À chaque tour, l’unité de commande utilise un registre spécial, le <span id="lex-compteurprog09" class="ancre"></span>**compteur de programme** (ou *compteur ordinal*), qui contient l’**adresse de la prochaine instruction**. Normalement il avance d’un cran à chaque cycle ; une instruction de **saut** peut le forcer à une autre adresse — c’est ainsi qu’on réalise les **tests** et les **boucles**.
 
 ### Langage machine et assembleur
 
 !!! definition "Définition 4 — Langage machine, assembleur"
 
-    Le processeur n’obéit qu’à un jeu réduit d’instructions très simples (charger une case, additionner, comparer, sauter…), codées en **binaire** : c’est le **langage machine**. Illisible pour un humain, on l’écrit avec des **abréviations** : c’est l’**assembleur**. Une instruction assembleur $=$ une instruction machine, juste plus lisible.
+    Le processeur n’obéit qu’à un jeu réduit d’instructions très simples (charger une case, additionner, comparer, sauter…), codées en **binaire** : c’est le <span id="lex-langagemachine09" class="ancre"></span>**langage machine**. Illisible pour un humain, on l’écrit avec des **abréviations** : c’est l’<span id="lex-assembleur09" class="ancre"></span>**assembleur**. Une instruction assembleur $=$ une instruction machine, juste plus lisible.
 
 !!! remarque "Remarque — La grande pyramide des langages"
 
@@ -149,7 +149,7 @@ Le processeur ne fait qu’**une** chose, mais des milliards de fois par seconde
 
 ### Une machine-modèle : le *Little Man Computer*
 
-Pour *dérouler* un vrai programme machine sans se noyer, on utilise une machine-modèle classique, le **Little Man Computer** (LMC). Elle est **von Neumann** en miniature :
+Pour *dérouler* un vrai programme machine sans se noyer, on utilise une machine-modèle classique, le <span id="lex-lmc09" class="ancre"></span>**Little Man Computer** (LMC). Elle est **von Neumann** en miniature :
 
 - une **mémoire** de 100 cases numérotées de `00` à `99` (qui contiennent **indistinctement** programme *et* données) ;
 
@@ -159,7 +159,7 @@ Pour *dérouler* un vrai programme machine sans se noyer, on utilise une machine
 
 | **Instr.** | **Effet** | **En français** |
 |:--:|:---|:---|
-| `INP` | lit une entrée dans ACC | « demande un nombre » |
+| <span id="lex-lmcio09" class="ancre"></span>`INP` | lit une entrée dans ACC | « demande un nombre » |
 | `OUT` | affiche ACC | « affiche le résultat » |
 | `LDA n` | ACC $\leftarrow$ contenu de la case `n` | « charge » (*LoaD*) |
 | `STA n` | case `n` $\leftarrow$ ACC | « range » (*STore*) |
@@ -220,7 +220,7 @@ Pour *dérouler* un vrai programme machine sans se noyer, on utilise une machine
 
 !!! definition "Définition 5 — Système d’exploitation (OS)"
 
-    Un **système d’exploitation** (*Operating System*, OS) est l’ensemble de programmes qui **gèrent le matériel** et le **mettent à disposition** des applications et de l’utilisateur. Il joue les **intermédiaires** entre le matériel (compliqué, varié) et les logiciels (qui veulent juste « lire un fichier » ou « afficher une fenêtre »).
+    Un <span id="lex-os09" class="ancre"></span>**système d’exploitation** (*Operating System*, OS) est l’ensemble de programmes qui **gèrent le matériel** et le **mettent à disposition** des applications et de l’utilisateur. Il joue les **intermédiaires** entre le matériel (compliqué, varié) et les logiciels (qui veulent juste « lire un fichier » ou « afficher une fenêtre »).
 
 !!! regle "Règle 2 — Les grandes fonctions d’un OS"
 
@@ -246,7 +246,7 @@ Pour *dérouler* un vrai programme machine sans se noyer, on utilise une machine
 
 ## Parler à l’OS en Linux : la ligne de commande
 
-L’interface graphique (fenêtres, souris) est confortable, mais la **ligne de commande** (le **terminal**) reste indispensable : plus rapide, automatisable, et incontournable sur les serveurs (souvent sans écran). On travaille ici sous **Linux** : pour essayer les commandes, il suffit d’un terminal Linux en ligne, comme **JSLinux** (`bellard.org/jslinux`), déjà utilisé dans l’activité de découverte (on y est l’utilisateur `root`, de répertoire personnel `/root`).
+L’interface graphique (fenêtres, souris) est confortable, mais la <span id="lex-lignecommande09" class="ancre"></span>**ligne de commande** (le **terminal**) reste indispensable : plus rapide, automatisable, et incontournable sur les serveurs (souvent sans écran). On travaille ici sous **Linux** : pour essayer les commandes, il suffit d’un terminal Linux en ligne, comme **JSLinux** (`bellard.org/jslinux`), déjà utilisé dans l’activité de découverte (on y est l’utilisateur `root`, de répertoire personnel `/root`).
 
 !!! encadre "À retenir — L’invite de commande"
 
@@ -262,7 +262,7 @@ L’interface graphique (fenêtres, souris) est confortable, mais la **ligne de 
 
 ### L’arborescence des fichiers
 
-Sous Linux, les fichiers sont organisés en **arbre**, dont la base est la **racine**, notée `/`.
+<span id="lex-arborescence09" class="ancre"></span> Sous Linux, les fichiers sont organisés en **arbre**, dont la base est la **racine**, notée `/`.
 
 ```text
 /                          « la racine »
@@ -279,11 +279,11 @@ Sous Linux, les fichiers sont organisés en **arbre**, dont la base est la **rac
 
 !!! definition "Définition 6 — Chemin absolu, chemin relatif"
 
-    Un **chemin** désigne l’emplacement d’un fichier.
+    Un <span id="lex-chemin09" class="ancre"></span>**chemin** désigne l’emplacement d’un fichier.
 
     - un chemin **absolu** part de la racine et commence donc par `/` : `/home/eleve/Documents/cours.txt` ;
 
-    - un chemin **relatif** part du **répertoire courant** et ne commence *pas* par `/`.
+    - un chemin **relatif** part du <span id="lex-courant09" class="ancre"></span>**répertoire courant** et ne commence *pas* par `/`.
 
     Deux raccourcis universels : `.` désigne le répertoire **courant**, et `..` le répertoire **parent** (un cran au-dessus).
 
@@ -301,20 +301,20 @@ Sous Linux, les fichiers sont organisés en **arbre**, dont la base est la **rac
 
 ### Les commandes de base (capacité attendue)
 
-| **Commande** | **Rôle**                               | **Exemple**       |
-|:-------------|:---------------------------------------|:------------------|
-| `pwd`        | afficher le répertoire courant         | `pwd`             |
-| `ls`         | lister le contenu d’un répertoire      | `ls Documents`    |
-| `ls -l`      | lister en *détail* (droits, taille…)   | `ls -l`           |
-| `cd`         | changer de répertoire                  | `cd ../Images`    |
-| `mkdir`      | créer un répertoire                    | `mkdir Projets`   |
-| `touch`      | créer un fichier vide                  | `touch note.txt`  |
-| `cat`        | afficher le contenu d’un fichier       | `cat cours.txt`   |
-| `cp`         | copier un fichier                      | `cp a.txt sauve/` |
-| `mv`         | déplacer ou renommer                   | `mv a.txt b.txt`  |
-| `rm`         | supprimer un fichier                   | `rm note.txt`     |
-| `rm -r`      | supprimer un répertoire et son contenu | `rm -r Projets`   |
-| `man`        | afficher le manuel d’une commande      | `man ls`          |
+| **Commande**     | **Rôle**                               | **Exemple**       |
+|:-----------------|:---------------------------------------|:------------------|
+| <span id="lex-pwd09" class="ancre"></span>`pwd`   | afficher le répertoire courant         | `pwd`             |
+| `ls`             | lister le contenu d’un répertoire      | `ls Documents`    |
+| `ls -l`          | lister en *détail* (droits, taille…)   | `ls -l`           |
+| `cd`             | changer de répertoire                  | `cd ../Images`    |
+| <span id="lex-mkdir09" class="ancre"></span>`mkdir` | créer un répertoire                    | `mkdir Projets`   |
+| `touch`          | créer un fichier vide                  | `touch note.txt`  |
+| `cat`            | afficher le contenu d’un fichier       | `cat cours.txt`   |
+| <span id="lex-cp09" class="ancre"></span>`cp`    | copier un fichier                      | `cp a.txt sauve/` |
+| `mv`             | déplacer ou renommer                   | `mv a.txt b.txt`  |
+| `rm`             | supprimer un fichier                   | `rm note.txt`     |
+| `rm -r`          | supprimer un répertoire et son contenu | `rm -r Projets`   |
+| `man`            | afficher le manuel d’une commande      | `man ls`          |
 
 Ces commandes se combinent : par exemple, depuis `~/Documents`, `mkdir archives` puis `cp cours.txt archives/` rangent une copie de `cours.txt` dans un nouveau dossier `archives`. Les manipulations (construire une arborescence, copier, déplacer, supprimer, tester les droits avec deux utilisateurs) se font dans la partie B du **TP** proposé en fin de chapitre.
 
@@ -333,7 +333,7 @@ Linux est **multi-utilisateur** : plusieurs comptes partagent la machine, chacun
 
 !!! regle "Règle 3 — Trois droits, trois catégories"
 
-    Chaque fichier ou répertoire porte **trois droits** :
+    <span id="lex-droits09" class="ancre"></span>Chaque fichier ou répertoire porte **trois droits** :
 
     $$\texttt{r}=\text{lecture (\emph{read})},\quad \texttt{w}=\text{écriture (\emph{write})},\quad \texttt{x}=\text{exécution (\emph{execute})},$$
 
@@ -359,7 +359,7 @@ Linux est **multi-utilisateur** : plusieurs comptes partagent la machine, chacun
 
 !!! regle "Règle 4 — Modifier les droits : chmod"
 
-    La commande `chmod` change les permissions, avec la grammaire `chmod [ugoa][+-=][rwx] fichier` :
+    <span id="lex-chmod09" class="ancre"></span>La commande `chmod` change les permissions, avec la grammaire `chmod [ugoa][+-=][rwx] fichier` :
 
     ```console
     |chmod| o-r cours.txt     « retire aux autres le droit de lecture »

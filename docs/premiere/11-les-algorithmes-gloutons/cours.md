@@ -33,21 +33,21 @@ Objectifs
 
 !!! definition "Définition 1 — Problème d’optimisation"
 
-    Un **problème d’optimisation** demande, parmi de **nombreuses** solutions valides, d’en trouver une **la meilleure possible** selon un critère. Il faut donc :
+    Un <span id="lex-optimisation11" class="ancre"></span>**problème d’optimisation** demande, parmi de **nombreuses** solutions valides, d’en trouver une **la meilleure possible** selon un critère. Il faut donc :
 
     - un ensemble de **solutions valides** (celles qui respectent les contraintes) ;
 
     - une **mesure de qualité** (une quantité à *minimiser* ou *maximiser*).
 
-    Une **solution optimale** est une meilleure solution ; une **solution approchée** est une bonne solution, pas forcément la meilleure.
+    Une <span id="lex-optimale11" class="ancre"></span>**solution optimale** est une meilleure solution ; une **solution approchée** est une bonne solution, pas forcément la meilleure.
 
 !!! exemple "Exemple — Trois problèmes d’optimisation"
 
-    - **rendu de monnaie** : rendre une somme avec le *moins de pièces possible* ;
+    - <span id="lex-monnaie11" class="ancre"></span>**rendu de monnaie** : rendre une somme avec le *moins de pièces possible* ;
 
-    - **sac à dos** : remplir un sac de capacité limitée en emportant le *plus de valeur possible* ;
+    - <span id="lex-sacados11" class="ancre"></span>**sac à dos** : remplir un sac de capacité limitée en emportant le *plus de valeur possible* ;
 
-    - **voyageur de commerce** : visiter des villes et revenir au départ en parcourant le *moins de kilomètres possible*.
+    - <span id="lex-voyageur11" class="ancre"></span>**voyageur de commerce** : visiter des villes et revenir au départ en parcourant le *moins de kilomètres possible*.
 
 !!! curieux "Pour les curieux (facultatif) — Pourquoi ne pas tout essayer ? L’explosion combinatoire"
 
@@ -70,7 +70,7 @@ Objectifs
 
 !!! regle "Règle 1 — Le principe glouton"
 
-    On construit la solution **morceau par morceau**. À chaque étape :
+    <span id="lex-glouton11" class="ancre"></span>On construit la solution **morceau par morceau**. À chaque étape :
 
     1.  parmi les choix encore **possibles** (faisables), on prend celui qui **optimise le critère localement** (le « meilleur sur le moment ») ;
 
@@ -139,7 +139,7 @@ Un commerçant doit rendre une somme avec le **moins de pièces et billets possi
 
 !!! propriete "Propriété 1 — Les euros forment un système « canonique »"
 
-    Avec le système des euros, l’algorithme glouton donne **toujours** la solution **optimale**. On dit que ce système est **canonique**. *(Ce n’est pas une évidence : cela se démontre, coupure par coupure.)*
+    Avec le système des euros, l’algorithme glouton donne **toujours** la solution **optimale**. On dit que ce système est <span id="lex-canonique11" class="ancre"></span>**canonique**. *(Ce n’est pas une évidence : cela se démontre, coupure par coupure.)*
 
 !!! remarque "Remarque — Attention : ce n’est pas toujours le cas ! Deux contre-exemples"
 

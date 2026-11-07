@@ -4,15 +4,11 @@
 
 !!! consignes "Mode d’emploi"
 
-    - Niveau : ★ échauffement, ★★ classique (niveau bac), ★★★ défi ; les *coups de pouce* et les *corrigés* se déplient sous chaque exercice.
-
-    - <span class="run" title="À programmer et tester sur machine">▶</span> *À programmer et tester* en Python (console ou éditeur en ligne).
+    -  Étoiles, <span class="essentiel">• essentiel</span>, coup de pouce, $\blacktriangleright$ et pastilles IA : voir le [mode d’emploi du chapitre 1](../01-recursivite/exercices.md#modeemploi).
 
     - **Réflexe** « diviser pour régner » : **(1)** comment **diviser** en sous-problèmes plus petits ? **(2)** quelle est la **condition d’arrêt** ? **(3)** comment **combiner** les résultats ?
 
     - Le *tri rapide*, le *Tim sort* et la *rotation d’image* sont traités dans les **TP** proposés en fin de chapitre.
-
-    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
 ### Comprendre et dérouler
 

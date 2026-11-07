@@ -4,13 +4,11 @@
 
 !!! consignes "Mode d’emploi"
 
-    - Niveau : ★ échauffement, ★★ classique (niveau bac), ★★★ défi ; les *coups de pouce* et les *corrigés* se déplient sous chaque exercice.
+    -  Étoiles, <span class="essentiel">• essentiel</span>, coup de pouce, $\blacktriangleright$ et pastilles IA : voir le [mode d’emploi du chapitre 1](../01-les-bases-de-la-programmation-python/exercices.md#modeemploi).
 
     - <span class="tag">sur papier</span> *à faire sur papier* ; <span class="run" title="À programmer et tester sur machine">▶</span> *à réaliser sur un éditeur en ligne* (`jsfiddle.net` ou `codepen.io`).
 
     - Les tableaux de balises HTML et de propriétés CSS du cours (§ IV et V) peuvent être consultés pour tous les exercices.
-
-    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
 
 ### Le Web et Internet
 
@@ -360,7 +358,7 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
     <h2>Chapitre 1</h2>
     ```
 
-    <span class="erreurfreq">▷ Erreur fréquente.</span> Refermer les balises dans le désordre, comme `<p>…<strong>…</p></strong>` : la dernière balise ouverte doit être la première refermée (les balises s’emboîtent comme des boîtes).
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Refermer les balises dans le désordre, comme `<p>…<strong>…</p>``</strong>` : la dernière balise ouverte doit être la première refermée (les balises s’emboîtent comme des boîtes).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Du rendu au code <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-13 }
 

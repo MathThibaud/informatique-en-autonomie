@@ -10,7 +10,7 @@ Programme (BO)
 :   *« Notion de programme en tant que donnée. Calculabilité, décidabilité. Comprendre que tout programme est aussi une donnée. Comprendre que la calculabilité ne dépend pas du langage de programmation utilisé. Montrer, sans formalisme théorique, que le problème de l’arrêt est indécidable. »*
 
 Prérequis
-:   la notion de **fonction** et de **paramètre** ; les **boucles** et la **terminaison** (variant de boucle) ; la notion de **coût** d’un algorithme (linéaire, quadratique, exponentiel, vue en Première) ; les **paradigmes** de programmation (voir le chapitre *Programmation objet et paradigmes*). (→ fiches de révision : ch. 2)
+:   la notion de **fonction** et de **paramètre** ; les **boucles** et la **terminaison** (variant de boucle) ; la notion de **coût** d’un algorithme (linéaire et quadratique, vus en Première ; exponentiel, vu au chapitre 1 avec la suite de Fibonacci) ; les **paradigmes** de programmation (voir le chapitre *Programmation objet et paradigmes*). (→ fiches de révision : ch. 2) $\to$ rappels de 1re : bases de Python, spécification et tests, parcours et coût
 
 Objectifs
 :   *comprendre* qu’un programme est une **donnée** comme une autre ; *connaître* la distinction **décidable / indécidable** ; *savoir refaire* le raisonnement du **problème de l’arrêt** ; *situer* la **thèse de Church-Turing** et la **Turing-complétude** ; *découvrir* la question **P versus NP** <span class="horsprog">au-delà du programme</span>.
@@ -29,7 +29,7 @@ Objectifs
 
 ## Un programme peut en manger un autre
 
-Tout part d’une remarque en apparence anodine. Une fonction comme `accueil(n)`, qui affiche `n` fois « bonjour », est une **machine** : elle reçoit une **donnée d’entrée** (l’entier `n`) et produit une **sortie**. Enregistrons-la dans un fichier `test.py` et lançons, dans un terminal, la commande `python3 test.py`. **Qui est la machine, ici ? Qui est la donnée ?** La machine, c’est `python3`. Et sa donnée d’entrée, c’est `test.py` — un **programme**, c’est-à-dire une simple suite de caractères. Le programme `accueil` est devenu une **donnée** avalée par un autre programme :
+Tout part d’une remarque en apparence anodine. Une fonction comme `accueil(n)`, qui affiche `n` fois « bonjour », est une **machine** : elle reçoit une **donnée d’entrée** (l’entier `n`) et produit une **sortie**. Enregistrons-la dans un fichier `test.py` et lançons, dans un terminal, la commande `python3 test.py`. **Qui est la machine, ici ? Qui est la donnée ?** La machine, c’est `python3`. Et sa donnée d’entrée, c’est `test.py` — un <span id="lex-programmedonnee13" class="ancre"></span>**programme**, c’est-à-dire une simple suite de caractères. Le programme `accueil` est devenu une **donnée** avalée par un autre programme :
 
 ![](../figures/6715eb06876635df.svg){ .tikz loading=lazy }
 
@@ -39,7 +39,7 @@ Et l’on peut poursuivre la poupée russe : `python3` est lui-même lancé par
 
     Le **code source** d’un programme n’est qu’une **chaîne de caractères**. Rien n’interdit donc de le donner en **paramètre** à un autre programme — ni même de le donner **à lui-même**. Cette idée, qui semble un jeu, est la clé de tout le chapitre.
 
-<span class="retouract">↺ Retour sur l'activité.</span> La recette de crêpes de l’activité était tantôt exécutée (par le cuisinier), tantôt traitée comme un simple texte (par la photocopieuse, le traducteur, le correcteur) ; de même, `compter_lignes(source)` lisait le texte d’`accueil` sans afficher un seul « bonjour », alors qu’`exec` l’exécutait. Et `compter_lignes` pouvait recevoir son propre texte : elle renverrait $6$.
+<span class="retouract">↺ Retour sur l'activité.</span> La recette de crêpes de l’activité était tantôt exécutée (par le cuisinier), tantôt traitée comme un simple texte (par la photocopieuse, le traducteur, le correcteur) ; de même, `compter_lignes(source)` lisait le texte d’`accueil` sans afficher un seul « bonjour », alors qu’<span id="lex-pyexec13" class="ancre"></span>`exec` l’exécutait. Et `compter_lignes` pouvait recevoir son propre texte : elle renverrait $6$.
 
 !!! encadre "À retenir — un programme est une donnée comme une autre"
 
@@ -55,13 +55,13 @@ Avant d’aller plus loin, précisons le genre de questions qui nous intéresse�
 
 !!! definition "Définition 1 — Problème de décision"
 
-    Un **problème de décision** est une question dont la réponse est **« oui »** ou **« non »**, posée sur une donnée d’entrée.
+    Un <span id="lex-problemedecision13" class="ancre"></span>**problème de décision** est une question dont la réponse est **« oui »** ou **« non »**, posée sur une donnée d’entrée.
 
 *Exemples :* « l’entier $n$ est-il premier ? » ; « le mot `m` est-il dans le dictionnaire ? » ; « la liste `L` est-elle triée ? » ; « ce graphe est-il connexe ? ». Pour chacun, on sait écrire un programme qui **s’arrête toujours** et renvoie la bonne réponse.
 
 !!! definition "Définition 2 — Décidable / indécidable"
 
-    Un problème de décision est **décidable** s’il existe un algorithme qui, **pour toute entrée**, **s’arrête** en un temps fini et renvoie la bonne réponse (*oui* ou *non*). Sinon, il est **indécidable**.
+    Un problème de décision est <span id="lex-decidable13" class="ancre"></span>**décidable** s’il existe un algorithme qui, **pour toute entrée**, **s’arrête** en un temps fini et renvoie la bonne réponse (*oui* ou *non*). Sinon, il est <span id="lex-indecidable13" class="ancre"></span>**indécidable**.
 
 Les quatre exemples ci-dessus sont **décidables**. On serait tenté de croire que *tout* problème clairement posé est décidable, quitte à attendre longtemps. **C’est faux**, et c’est le grand résultat du chapitre. Il existe un problème d’apparence toute simple… qui ne l’est pas.
 
@@ -125,7 +125,7 @@ Maintenant, la question fatale. Puisque `paradoxe` est un programme, donnons-le 
 
 !!! theoreme "Théorème 1 — Indécidabilité du problème de l’arrêt — Turing, 1936"
 
-    Il ne peut exister **aucun** programme qui, recevant en entrée un programme `P` et une entrée `E` quelconques, déciderait à coup sûr si `P` lancé sur `E` **s’arrête ou non**. Le **problème de l’arrêt** est **indécidable**.
+    Il ne peut exister **aucun** programme qui, recevant en entrée un programme `P` et une entrée `E` quelconques, déciderait à coup sûr si `P` lancé sur `E` **s’arrête ou non**. Le <span id="lex-arret13" class="ancre"></span>**problème de l’arrêt** est **indécidable**.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Le devin de l’activité ne pouvait jamais gagner contre le contrariant, qui lisait la prédiction puis faisait l’inverse : `halt` est ce devin, `paradoxe` ce contrariant. La question laissée ouverte à la fin de l’activité a donc sa réponse : **non**, un programme « devin » qui prédirait l’arrêt de n’importe quel programme ne peut pas exister.
 
@@ -152,7 +152,7 @@ Ce raisonnement porte un nom : la **diagonale**. Son moteur secret est l’**au
 
 ### Une contagion : le théorème de Rice <span class="horsprog">au-delà du programme</span>
 
-Le problème de l’arrêt n’est pas un cas isolé. En le « ramenant » (on dit **réduisant**) à d’autres questions, on montre qu’une foule de questions sur le *comportement* d’un programme sont, elles aussi, indécidables :
+<span id="lex-rice13" class="ancre"></span> Le problème de l’arrêt n’est pas un cas isolé. En le « ramenant » (on dit **réduisant**) à d’autres questions, on montre qu’une foule de questions sur le *comportement* d’un programme sont, elles aussi, indécidables :
 
 - « ce programme renverra-t-il un jour la valeur $42$ ? »
 
@@ -178,13 +178,13 @@ Le problème de l’arrêt est indécidable parce que la fonction qui le résoud
 
 !!! definition "Définition 3 — Fonction calculable"
 
-    Une fonction est **calculable** s’il existe un **algorithme** (une suite **finie** d’opérations élémentaires) qui, pour toute entrée $x$, produit sa sortie $f(x)$ en un temps **fini**.
+    Une fonction est <span id="lex-calculable13" class="ancre"></span>**calculable** s’il existe un **algorithme** (une suite **finie** d’opérations élémentaires) qui, pour toute entrée $x$, produit sa sortie $f(x)$ en un temps **fini**.
 
 Un problème de décision est alors **décidable** exactement quand sa fonction réponse (*oui*$=1$ / *non*$=0$) est **calculable**. « Indécidable » et « non calculable » sont les deux faces d’une même pièce.
 
 ### La machine de Turing
 
-Mais qu’est-ce, au juste, qu’une « opération élémentaire » ? En 1936, pour donner un sens **mathématique** précis au mot « calculer », Turing imagine une machine idéale, d’une simplicité extrême :
+<span id="lex-machineturing13" class="ancre"></span> Mais qu’est-ce, au juste, qu’une « opération élémentaire » ? En 1936, pour donner un sens **mathématique** précis au mot « calculer », Turing imagine une machine idéale, d’une simplicité extrême :
 
 ![](../figures/25664d827f5387d5.svg){ .tikz loading=lazy }
 
@@ -192,13 +192,13 @@ Un **ruban infini** découpé en cases ; une **tête** qui lit et écrit un sym
 
 !!! regle "Règle 2 — Thèse de Church-Turing"
 
-    **Tout** ce qui est « calculable » au sens intuitif peut être calculé par une machine de Turing. Autrement dit, la machine de Turing capture **exactement** la notion de calcul.
+    <span id="lex-churchturing13" class="ancre"></span>**Tout** ce qui est « calculable » au sens intuitif peut être calculé par une machine de Turing. Autrement dit, la machine de Turing capture **exactement** la notion de calcul.
 
 Cette affirmation n’est pas un théorème (on ne peut pas *prouver* une définition de l’intuition), mais **aucun** modèle de calcul proposé depuis 90 ans n’a jamais su calculer davantage. Fait remarquable : à la même époque, Alonzo **Church** définissait le calcul d’une tout autre façon (le **$\lambda$-calcul**, purement mathématique)… et l’on a démontré que les deux modèles calculent **exactement les mêmes fonctions**. Deux chemins, un même sommet.
 
 !!! encadre "La machine universelle (Turing, 1936)"
 
-    Dans le même article, Turing décrit une machine **universelle** : on écrit sur son ruban la **table de règles** d’une autre machine, suivie de l’entrée de celle-ci, et la machine universelle **simule** pas à pas cette autre machine. Une seule machine suffit donc à exécuter **tous** les algorithmes : il suffit de lui fournir le bon programme *comme donnée*. C’est l’idée de l’ordinateur à **programme enregistré** (modèle de von Neumann, vu en Première), où programme et données partagent la même mémoire ; c’est aussi ce que fait l’interpréteur `python3` avec votre code. Le simulateur du TP proposé en fin de chapitre, qui lit une table de règles comme une donnée, est lui aussi une machine universelle.
+    Dans le même article, Turing décrit une machine <span id="lex-universelle13" class="ancre"></span>**universelle** : on écrit sur son ruban la **table de règles** d’une autre machine, suivie de l’entrée de celle-ci, et la machine universelle **simule** pas à pas cette autre machine. Une seule machine suffit donc à exécuter **tous** les algorithmes : il suffit de lui fournir le bon programme *comme donnée*. C’est l’idée de l’ordinateur à **programme enregistré** (modèle de von Neumann, vu en Première), où programme et données partagent la même mémoire ; c’est aussi ce que fait l’interpréteur `python3` avec votre code. Le simulateur du TP proposé en fin de chapitre, qui lit une table de règles comme une donnée, est lui aussi une machine universelle.
 
 ### Turing-complétude : tous les langages se valent
 
@@ -206,7 +206,7 @@ Notre preuve du problème de l’arrêt était écrite en Python, mais elle n’
 
 !!! definition "Définition 4 — Turing-complet"
 
-    Un langage (ou un système) est **Turing-complet** s’il peut simuler une machine de Turing — donc calculer **tout** ce qui est calculable.
+    Un langage (ou un système) est <span id="lex-turingcomplet13" class="ancre"></span>**Turing-complet** s’il peut simuler une machine de Turing — donc calculer **tout** ce qui est calculable.
 
 !!! regle "Règle 3 — La calculabilité ne dépend pas du langage"
 
@@ -251,7 +251,7 @@ Sortons de l’*impossible* pour entrer dans le *difficile*. Parmi les problème
 
 !!! definition "Définition 5 — Classe P"
 
-    Un problème est dans la classe **P** s’il existe un algorithme qui le résout en temps **polynomial** (coût majoré par $n^2$, $n^3$, … où $n$ est la taille de l’entrée).
+    Un problème est dans la classe <span id="lex-classep13" class="ancre"></span>**P** s’il existe un algorithme qui le résout en temps **polynomial** (coût majoré par $n^2$, $n^3$, … où $n$ est la taille de l’entrée).
 
 En pratique, « classe P » $\approx$ « résoluble en temps **raisonnable** », même pour de grandes données. On y trouve : **trier** une liste (le tri fusion du chapitre 7), une **recherche dichotomique**, le **plus court chemin** (algorithme de Dijkstra <span class="horsprog">au-delà du programme</span>, chapitres 8 et 9), tester si un nombre est **premier** (grâce à des algorithmes bien plus fins que la division par essais, dont le coût est exponentiel en le nombre de chiffres)… Tout, sauf les coûts **exponentiels** ($2^n$), qui explosent dès que $n$ dépasse quelques dizaines.
 
@@ -267,7 +267,7 @@ Voici la distinction sur laquelle tout repose. Il y a un monde entre **trouver**
 
 !!! definition "Définition 6 — Classe NP"
 
-    Un problème de décision est dans la classe **NP** si, lorsque la réponse est « oui », on peut **vérifier** une solution proposée en temps **polynomial**. (**NP** signifie « **n**on déterministe **p**olynomial », *pas* « non polynomial » !)
+    Un problème de décision est dans la classe <span id="lex-classenp13" class="ancre"></span>**NP** si, lorsque la réponse est « oui », on peut **vérifier** une solution proposée en temps **polynomial**. (**NP** signifie « **n**on déterministe **p**olynomial », *pas* « non polynomial » !)
 
 Beaucoup de problèmes « cauchemardesques » de l’informatique sont dans NP :
 
@@ -293,7 +293,7 @@ La vraie question, ouverte depuis 1971 et toujours **sans réponse**, est la ré
 
 !!! definition "Définition 7 — Problème NP-complet"
 
-    Un problème est **NP-complet** s’il est « parmi les plus durs » de NP : **tout** problème de NP peut s’y **ramener** (réduction en temps polynomial). **SAT** (Cook, 1971), le Sudoku généralisé ($n^2\times n^2$), le voyageur de commerce, la coloration à $3$ couleurs sont NP-complets.
+    Un problème est <span id="lex-npcomplet13" class="ancre"></span>**NP-complet** s’il est « parmi les plus durs » de NP : **tout** problème de NP peut s’y **ramener** (réduction en temps polynomial). **SAT** (Cook, 1971), le Sudoku généralisé ($n^2\times n^2$), le voyageur de commerce, la coloration à $3$ couleurs sont NP-complets.
 
 !!! curieux "Pour les curieux (facultatif) — Le sac à dos : NP-complet, et pourtant résolu au chapitre 11 ?"
 

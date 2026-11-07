@@ -22,7 +22,21 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi réinvestit le tri d’un tableau vu dans ce chapitre.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Deux listes de mille numéros chacune devraient être identiques, mais ne le sont pas. On veut mesurer à quel point elles diffèrent (partie 1), puis à quel point elles se ressemblent (partie 2). Trier deux listes de mille nombres et les comparer à la main est impensable : il faut un programme.
+
+    **Ce qu’on réinvestit.** Le **tri d’un tableau** vu dans ce chapitre (par insertion ou par sélection) : une fois les deux listes triées, le plus petit nombre de gauche se trouve en face du plus petit de droite, et ainsi de suite, ce qui est exactement l’association demandée. On construit aussi des listes avec `append` et on compte des apparitions avec une boucle.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre l’association des nombres, puis calculer la réponse à la main sur un petit fichier.
+
+    2.  Lire le fichier en deux listes, une par colonne.
+
+    3.  Trier les deux listes et additionner les écarts : c’est la réponse de la partie 1.
+
+    4.  Pour la partie 2, compter les apparitions de chaque nombre de gauche dans la liste de droite.
 
 ## Lire l’énoncé
 
@@ -38,19 +52,25 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Les historiens du pôle Nord cherchent leur chef, introuvable. Dans son bureau, ils ont dressé deux listes de lieux à visiter, chaque lieu étant désigné par un numéro. Mais les deux listes ne concordent pas, et il faut mesurer à quel point elles diffèrent. Le fichier présente les deux listes côte à côte.
+    **Contexte.** Les historiens du pôle Nord cherchent leur chef, introuvable. Dans son bureau, ils ont dressé deux listes de lieux à visiter, chaque lieu étant désigné par un numéro. Mais les deux listes ne concordent pas : avant de les mettre en accord, il faut mesurer à quel point elles diffèrent.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Le fichier présente les deux listes côte à côte. Chaque ligne contient deux entiers séparés par plusieurs espaces : le premier appartient à la liste de **gauche**, le second à la liste de **droite**. Les deux nombres d’une même ligne n’ont aucun lien entre eux.
 
-    - Chaque ligne contient deux entiers séparés par plusieurs espaces : le premier appartient à la liste de gauche, le second à la liste de droite.
+    **La règle.**
 
-    - On ne compare pas les nombres d’une même ligne : on trie chaque liste, puis on associe le plus petit nombre de gauche au plus petit de droite, le deuxième au deuxième, etc.
+    - On ne compare pas les nombres d’une même ligne : on trie chaque liste dans l’ordre croissant.
 
-    - L’écart d’une paire est la distance entre ses deux nombres, c’est-à-dire la valeur absolue de leur différence.
+    - On associe le plus petit nombre de gauche au plus petit de droite, le deuxième plus petit au deuxième plus petit, etc.
 
-    - La réponse est la somme des écarts de toutes les paires.
+    - L’écart d’une paire est la distance entre ses deux nombres, c’est-à-dire la valeur absolue de leur différence (on ne se soucie pas de savoir lequel est le plus grand).
+
+    **La réponse attendue.** La somme des écarts de toutes les paires. Par exemple, avec les deux lignes `4 9` et `1 3`, la liste de gauche triée est 1, 4 et celle de droite 3, 9 ; les écarts sont 2 et 5 : la réponse serait 7.
 
 ### <span class="exo-num">Exercice 1</span> — Vérifier sa compréhension <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-1 }
+
+**But.** Vérifier qu’on a compris comment les nombres sont associés et comment se mesure un écart.
+
+**À quoi ça sert ?** La première question montre que c’est l’ordre, et non le contenu, qui change d’une liste à l’autre ; la deuxième justifie l’emploi de la valeur absolue ; la troisième assure qu’on peut associer les nombres deux à deux sans en oublier.
 
 Questions pièges, à traiter sur le cahier :
 
@@ -61,6 +81,10 @@ Questions pièges, à traiter sur le cahier :
 3.  Pourquoi les deux listes ont-elles forcément la même longueur ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-2 }
+
+**But.** Trier à la main les deux colonnes d’un petit fichier inventé et calculer la somme des écarts.
+
+**À quoi ça sert ?** On voit concrètement pourquoi il faut trier avant d’associer, et l’on obtient une valeur connue (`4`) pour tester `distance_totale`.
 
 On considère le fichier (inventé) suivant :
 
@@ -78,6 +102,10 @@ On considère le fichier (inventé) suivant :
 ## Programmer la partie 1
 
 ### <span class="exo-num">Exercice 3</span> — Lire les deux colonnes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-3 }
+
+**But.** Lire le fichier et ranger les nombres de gauche et de droite dans deux listes d’entiers.
+
+**À quoi ça sert ?** Les deux parties travaillent sur ces deux listes, chacune séparément : il faut donc d’abord séparer les colonnes, puisque les nombres d’une même ligne n’ont pas de lien.
 
 !!! encadre "Outil Python : découper une ligne (split)"
 
@@ -115,6 +143,10 @@ On considère le fichier (inventé) suivant :
 
 ### <span class="exo-num">Exercice 4</span> — La distance totale <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-4 }
 
+**But.** Trier les deux listes, associer leurs éléments rang par rang et additionner les écarts.
+
+**À quoi ça sert ?** Appliquée aux listes lues dans vos données, cette fonction donne la réponse de la partie 1. Le tri du chapitre y fait l’essentiel du travail.
+
 Écrire une fonction `distance_totale(gauche, droite)` qui renvoie la réponse de la partie 1. Tester sur l’exemple, puis sur vos données.
 
 ??? pouce "Coup de pouce"
@@ -131,9 +163,23 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    Les historiens remarquent que beaucoup de numéros se retrouvent dans les deux listes : on mesure maintenant leur ressemblance autrement. Pour chaque nombre de la liste de gauche, on compte combien de fois il apparaît dans la liste de droite, et on multiplie le nombre par ce compte. La réponse est la somme de ces produits ; un nombre présent deux fois à gauche est compté deux fois.
+    **Ce qui change.** Les historiens remarquent que beaucoup de numéros se retrouvent dans les deux listes : on ne mesure plus la différence, mais la **ressemblance** des deux listes, d’une autre façon. Le tri ne joue plus aucun rôle.
+
+    **La nouvelle règle.**
+
+    - Pour chaque nombre de la liste de gauche, on compte combien de fois il apparaît dans la liste de droite (ce compte peut valoir 0).
+
+    - On multiplie ce nombre par son compte.
+
+    - Un nombre présent deux fois à gauche est traité deux fois.
+
+    **La réponse attendue.** La somme de ces produits. Par exemple, avec à gauche 3, 5, 3 et à droite 3, 3, 1 : chaque 3 de gauche apparaît deux fois à droite et rapporte $3 \times 2 = 6$, le 5 n’y apparaît pas et rapporte 0 ; la réponse serait 12.
 
 ### <span class="exo-num">Exercice 5</span> — Compter les apparitions <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-5 }
+
+**But.** Compter combien de fois un nombre apparaît dans une liste, puis utiliser ce comptage pour la partie 2.
+
+**À quoi ça sert ?** La réponse de la partie 2 est une somme de produits « nombre $\times$ nombre d’apparitions ». Compter les comparaisons faites prépare la question de l’approfondissement : cette méthode est-elle assez rapide ?
 
 1.  Écrire une fonction `nb_apparitions(x, liste)` qui compte, avec une boucle, combien de fois `x` apparaît dans `liste`. Combien de comparaisons fait `nb_apparitions(2, [2, 5, 4, 2, 8, 2])` ?
 
@@ -150,6 +196,10 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 ## Approfondissement
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Approfondissement 1 : compter une fois pour toutes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-les-algorithmes-de-tri-aoc-1-6 }
+
+**But.** Estimer le coût de la méthode de la partie 2, puis l’accélérer avec un dictionnaire.
+
+**À quoi ça sert ?** Compter les apparitions dans un dictionnaire, en un seul parcours, évite de reparcourir mille fois la liste de droite. C’est la méthode à retenir quand les listes deviennent grandes.
 
 1.  Avec 1000 nombres par liste, combien de comparaisons fait la solution de la partie 2 qui utilise `nb_apparitions` ?
 

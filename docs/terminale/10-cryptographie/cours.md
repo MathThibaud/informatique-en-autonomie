@@ -10,7 +10,7 @@ Programme (BO)
 :   *« Sécurisation des communications. Décrire les principes de chiffrement symétrique (clef partagée) et asymétrique (avec clef privée/clef publique). Décrire l’échange d’une clef symétrique en utilisant un protocole asymétrique pour sécuriser une communication HTTPS. »*
 
 Prérequis
-:   la **division euclidienne** et le **reste** (opérateur `%`), la notion de **coût** d’un algorithme (croissance exponentielle), les **réseaux** et le fait qu’un paquet peut être **intercepté**. (→ fiches de révision : ch. 9)
+:   la **division euclidienne** et le **reste** (opérateur `%`), la notion de **coût** d’un algorithme (croissance exponentielle), les **réseaux** et le fait qu’un paquet peut être **intercepté**. (→ fiches de révision : ch. 9) $\to$ rappels de 1re : bases de Python, Web et réseau
 
 Objectifs
 :   *chiffrer* et *déchiffrer* avec un code symétrique ; *comprendre* l’idée du chiffrement asymétrique et *dérouler RSA* à la main ; *expliquer* l’échange de clé et le protocole **HTTPS**.
@@ -33,7 +33,7 @@ C’est la question de la **cryptographie**, l’art de rendre un message illisi
 
 !!! definition "Définition 1 — Le vocabulaire du secret"
 
-    **Chiffrer**, c’est transformer un message **clair** en un message **chiffré** (illisible) à l’aide d’une **clé**. **Déchiffrer**, c’est faire l’opération inverse quand on possède la clé. **Décrypter** (ou « casser »), c’est retrouver le message clair *sans* posséder la clé : c’est le travail de l’**attaquant** (la **cryptanalyse**).
+    <span id="lex-chiffrer10" class="ancre"></span>**Chiffrer**, c’est transformer un message **clair** en un message **chiffré** (illisible) à l’aide d’une <span id="lex-cle10" class="ancre"></span>**clé**. **Déchiffrer**, c’est faire l’opération inverse quand on possède la clé. **Décrypter** (ou « casser »), c’est retrouver le message clair *sans* posséder la clé : c’est le travail de l’**attaquant** (la **cryptanalyse**).
 
 <span class="retouract">↺ Retour sur l'activité.</span> Dans l’activité, vous avez **décrypté** le message intercepté, sans connaître la clé ; son destinataire, qui connaît $k$, l’aurait simplement **déchiffré**.
 
@@ -53,13 +53,13 @@ C’est la question de la **cryptographie**, l’art de rendre un message illisi
 
 !!! definition "Définition 2 — Chiffrement symétrique"
 
-    Un chiffrement est **symétrique** lorsque **la même clé** sert à chiffrer et à déchiffrer. Alice et Bob doivent donc **partager un secret commun** (la clé) avant de communiquer.
+    Un chiffrement est <span id="lex-symetrique10" class="ancre"></span>**symétrique** lorsque **la même clé** sert à chiffrer et à déchiffrer. Alice et Bob doivent donc **partager un secret commun** (la clé) avant de communiquer.
 
 ![](../figures/8b57c087d3954408.svg){ .tikz loading=lazy }
 
 ### Le chiffre de César : le décalage
 
-Le plus vieux code connu : Jules César décalait chaque lettre de **3 rangs** dans l’alphabet. Avec une clé $k$, la lettre de rang $x$ (A${}=0$, B${}=1$, …, Z${}=25$) devient la lettre de rang `(x + k) % 26` (le reste de la division par $26$ fait « boucler » l’alphabet : après Z, on repart à A).
+<span id="lex-cesar10" class="ancre"></span> Le plus vieux code connu : Jules César décalait chaque lettre de **3 rangs** dans l’alphabet. Avec une clé $k$, la lettre de rang $x$ (A${}=0$, B${}=1$, …, Z${}=25$) devient la lettre de rang <span id="lex-pymodulo10" class="ancre"></span>`(x + k) % 26` (le reste de la division par $26$ fait « boucler » l’alphabet : après Z, on repart à A).
 
 !!! exemple "Exemple"
 
@@ -79,23 +79,23 @@ def cesar(message, k):
 
 !!! propriete "Propriété 2 — Un code très faible"
 
-    La clé de César est un nombre entre $0$ et $25$ : il n’y a que **26 clés possibles**. Un attaquant les essaie *toutes* en une fraction de seconde (**attaque par force brute**). Pire : même sans force brute, une **analyse des fréquences** suffit. En français, la lettre la plus fréquente est le **E** ; la lettre la plus fréquente du texte chiffré est donc, très probablement, un E décalé — ce qui révèle la clé.
+    La clé de César est un nombre entre $0$ et $25$ : il n’y a que **26 clés possibles**. Un attaquant les essaie *toutes* en une fraction de seconde (<span id="lex-forcebrute10" class="ancre"></span>**attaque par force brute**). Pire : même sans force brute, une **analyse des fréquences** suffit. En français, la lettre la plus fréquente est le **E** ; la lettre la plus fréquente du texte chiffré est donc, très probablement, un E décalé — ce qui révèle la clé.
 
 <span class="retouract">↺ Retour sur l'activité.</span> C’est exactement l’attaque menée dans l’activité : `P`, de loin la lettre la plus fréquente du message, ne pouvait être qu’un `E` décalé, d’où $k=11$, et la deuxième, `D`, redonne bien un `S`. Le décalage déplace les fréquences sans les changer : un bon chiffrement doit les brouiller, ce que commence à faire Vigenère (ci-dessous).
 
 ### Le chiffrement affine : un peu d’arithmétique
 
-On généralise César : la lettre de rang $x$ devient `(a * x + b) % 26`. La clé est le couple $(a,b)$.
+<span id="lex-affine10" class="ancre"></span> On généralise César : la lettre de rang $x$ devient `(a * x + b) % 26`. La clé est le couple $(a,b)$.
 
 !!! regle "Règle 2 — La condition sur $a$"
 
     Pour que le déchiffrement soit possible, il faut que $a$ soit **premier avec $26$** (leur PGCD vaut $1$). Sinon, deux lettres différentes pourraient se chiffrer pareil : impossible de revenir en arrière. Les valeurs possibles de $a$ sont donc : $1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25$.
 
-Pour déchiffrer, on a besoin de l’**inverse modulaire** de $a$ : le nombre $a^{-1}$, entre $0$ et $25$, tel que `(a * a_inv) % 26` vaut $1$. Par exemple, l’inverse de $5$ est $21$ (car $5\times 21 = 105 = 4\times 26 + 1$). En Python : `pow(5, -1, 26)` renvoie `21`. On retiendra ce mot *inverse modulaire* : il reviendra, central, dans RSA.
+Pour déchiffrer, on a besoin de l’<span id="lex-inversemod10" class="ancre"></span>**inverse modulaire** de $a$ : le nombre $a^{-1}$, entre $0$ et $25$, tel que `(a * a_inv) % 26` vaut $1$. Par exemple, l’inverse de $5$ est $21$ (car $5\times 21 = 105 = 4\times 26 + 1$). En Python : <span id="lex-pypow10" class="ancre"></span>`pow(5, -1, 26)` renvoie `21`. On retiendra ce mot *inverse modulaire* : il reviendra, central, dans RSA.
 
 ### Vigenère : le « chiffre indéchiffrable »
 
-Faiblesse commune de César et affine : une lettre donnée est *toujours* chiffrée de la même façon. Blaise de Vigenère (XVI<sup>e</sup> siècle) a l’idée d’utiliser une **clé-mot** répétée : chaque lettre du message est décalée selon la lettre correspondante de la clé.
+<span id="lex-vigenere10" class="ancre"></span> Faiblesse commune de César et affine : une lettre donnée est *toujours* chiffrée de la même façon. Blaise de Vigenère (XVI<sup>e</sup> siècle) a l’idée d’utiliser une **clé-mot** répétée : chaque lettre du message est décalée selon la lettre correspondante de la clé.
 
 !!! exemple "Exemple"
 
@@ -105,7 +105,7 @@ Réputé incassable pendant trois siècles, il fut finalement percé par **Charl
 
 ### Le masque jetable : le seul code inviolable
 
-Poussons l’idée de Vigenère à l’extrême : et si la clé était **aussi longue que le message**, **totalement aléatoire**, et **utilisée une seule fois** ? On obtient le **masque jetable** (*one-time pad*). En informatique, on ne décale plus les lettres : on combine chaque caractère du message avec la clé par un **OU exclusif** (XOR, noté `^`), l’opération booléenne vue en Première, appliquée ici bit à bit.
+Poussons l’idée de Vigenère à l’extrême : et si la clé était **aussi longue que le message**, **totalement aléatoire**, et **utilisée une seule fois** ? On obtient le <span id="lex-masquejetable10" class="ancre"></span>**masque jetable** (*one-time pad*). En informatique, on ne décale plus les lettres : on combine chaque caractère du message avec la clé par un <span id="lex-xor10" class="ancre"></span>**OU exclusif** (XOR, noté <span id="lex-pyxor10" class="ancre"></span>`^`), l’opération booléenne vue en Première, appliquée ici bit à bit.
 
 !!! propriete "Propriété 3 — Le XOR est son propre inverse"
 
@@ -131,7 +131,7 @@ def chiffre(message, masque):
 
 ### AES : le standard d’aujourd’hui
 
-Les codes modernes ne travaillent plus lettre par lettre mais **bit par bit, par blocs**. Le plus utilisé est l’**AES** (*Advanced Encryption Standard*, 2001) :
+Les codes modernes ne travaillent plus lettre par lettre mais **bit par bit, par blocs**. Le plus utilisé est l’<span id="lex-aes10" class="ancre"></span>**AES** (*Advanced Encryption Standard*, 2001) :
 
 - il chiffre des **blocs de 128 bits** rangés dans une matrice $4\times 4$ d’octets ;
 
@@ -143,7 +143,7 @@ Les codes modernes ne travaillent plus lettre par lettre mais **bit par bit, par
 
 !!! regle "Règle 4 — Le talon d’Achille du symétrique"
 
-    Le chiffrement symétrique est **rapide** et **robuste** : parfait pour de gros volumes. Mais il a un défaut fatal : Alice et Bob doivent **déjà partager la clé secrète**. Comment l’échanger sur un réseau où tout est intercepté, *sans s’être jamais rencontrés* ? C’est le **problème de l’échange de clé** — et pendant des siècles, on a cru qu’il était insoluble.
+    Le chiffrement symétrique est **rapide** et **robuste** : parfait pour de gros volumes. Mais il a un défaut fatal : Alice et Bob doivent **déjà partager la clé secrète**. Comment l’échanger sur un réseau où tout est intercepté, *sans s’être jamais rencontrés* ? C’est le <span id="lex-echangecle10" class="ancre"></span>**problème de l’échange de clé** — et pendant des siècles, on a cru qu’il était insoluble.
 
 <span id="cours-10-1" class="ancre"></span>
 
@@ -160,11 +160,11 @@ Whitfield Diffie
 
 !!! definition "Définition 3 — Chiffrement asymétrique (à clé publique)"
 
-    Chaque personne possède une **paire** de clés jumelles :
+    <span id="lex-asymetrique10" class="ancre"></span>Chaque personne possède une **paire** de clés jumelles :
 
-    - une **clé publique**, qu’elle distribue à qui veut (comme un cadenas ouvert) ;
+    - une <span id="lex-clepublique10" class="ancre"></span>**clé publique**, qu’elle distribue à qui veut (comme un cadenas ouvert) ;
 
-    - une **clé privée**, qu’elle garde secrète et ne partage *jamais*.
+    - une <span id="lex-cleprivee10" class="ancre"></span>**clé privée**, qu’elle garde secrète et ne partage *jamais*.
 
     Un message chiffré avec la clé publique ne peut être déchiffré que par la clé privée associée — et, pour les systèmes comme RSA (§ IV), *réciproquement*. Surtout : **connaître la clé publique ne permet pas de retrouver la clé privée**.
 
@@ -189,11 +189,11 @@ Cette symétrie ouvre *deux* usages selon la clé avec laquelle on *commence* :
 
 ### L’échange de clé de Diffie-Hellman
 
-Avant même RSA, Diffie et Hellman résolvent le fameux problème de l’échange de clé : permettre à Alice et Bob de fabriquer une **clé secrète commune** *en public*, sans se l’être jamais transmise.
+<span id="lex-diffiehellman10" class="ancre"></span> Avant même RSA, Diffie et Hellman résolvent le fameux problème de l’échange de clé : permettre à Alice et Bob de fabriquer une **clé secrète commune** *en public*, sans se l’être jamais transmise.
 
 !!! regle "Règle 5 — L’image des pots de peinture"
 
-    Alice et Bob conviennent *publiquement* d’une couleur commune. Chacun y ajoute *en secret* sa propre couleur, et s’échange le mélange (impossible à « dé-mélanger »). Enfin, chacun rajoute sa couleur secrète au mélange reçu : ils obtiennent la **même** couleur finale, qu’Ève, elle, ne peut pas reconstituer. La « peinture » mathématique est l’**exponentiation modulaire**.
+    Alice et Bob conviennent *publiquement* d’une couleur commune. Chacun y ajoute *en secret* sa propre couleur, et s’échange le mélange (impossible à « dé-mélanger »). Enfin, chacun rajoute sa couleur secrète au mélange reçu : ils obtiennent la **même** couleur finale, qu’Ève, elle, ne peut pas reconstituer. La « peinture » mathématique est l’<span id="lex-expomod10" class="ancre"></span>**exponentiation modulaire**.
 
 !!! exemple "Exemple"
 
@@ -203,7 +203,7 @@ Avant même RSA, Diffie et Hellman résolvent le fameux problème de l’échang
 
 ### Authentification : la signature numérique
 
-Le chiffrement asymétrique ne fait pas que cacher : il **prouve l’identité**. Si Alice chiffre un message avec sa clé **privée** (que personne d’autre ne possède), alors *n’importe qui* peut le déchiffrer avec sa clé **publique** — et si ça marche, c’est la **preuve** que le message vient bien d’Alice. C’est le principe de la **signature numérique**, qui résout le problème de l’**authentification** : être sûr que l’interlocuteur est bien celui qu’il prétend être.
+Le chiffrement asymétrique ne fait pas que cacher : il **prouve l’identité**. Si Alice chiffre un message avec sa clé **privée** (que personne d’autre ne possède), alors *n’importe qui* peut le déchiffrer avec sa clé **publique** — et si ça marche, c’est la **preuve** que le message vient bien d’Alice. C’est le principe de la <span id="lex-signature10" class="ancre"></span>**signature numérique**, qui résout le problème de l’**authentification** : être sûr que l’interlocuteur est bien celui qu’il prétend être.
 
 <span id="cours-10-6" class="ancre"></span>
 
@@ -211,7 +211,7 @@ Le chiffrement asymétrique ne fait pas que cacher : il **prouve l’identité**
 
 ## RSA : le chiffrement asymétrique, en vrai
 
-Diffie et Hellman avaient l’*idée* du chiffrement à clé publique, mais pas de recette concrète. Elle vient un an plus tard.
+<span id="lex-rsa10" class="ancre"></span> Diffie et Hellman avaient l’*idée* du chiffrement à clé publique, mais pas de recette concrète. Elle vient un an plus tard.
 
 ### Une histoire à rebondissement
 
@@ -303,7 +303,7 @@ Python fait tous ces calculs grâce à la fonction `pow` « à trois arguments �
 
 ## HTTPS : le mariage des deux mondes
 
-Aujourd’hui, le petit cadenas de votre navigateur signifie **HTTPS** : le trafic est chiffré. Mais avec quoi ? Ni l’un ni l’autre seul :
+<span id="lex-https10" class="ancre"></span> Aujourd’hui, le petit cadenas de votre navigateur signifie **HTTPS** : le trafic est chiffré. Mais avec quoi ? Ni l’un ni l’autre seul :
 
 - le **symétrique** (AES) est rapide mais suppose une clé déjà partagée ;
 
@@ -314,6 +314,8 @@ Aujourd’hui, le petit cadenas de votre navigateur signifie **HTTPS** : le traf
     On utilise l’**asymétrique** *juste au début*, pour échanger en sécurité une **clé de session symétrique**. Puis, tout le reste de la communication (les vraies données, en volume) est chiffré avec cette clé **symétrique**, bien plus rapide. HTTPS $=$ **TLS** (l’échange de clé, asymétrique) $+$ HTTP chiffré (les données, symétrique).
 
 ### La poignée de main TLS (*handshake*)
+
+<span id="lex-certificat10" class="ancre"></span>
 
 ![](../figures/1d7d2b85f29ac3a9.svg){ .tikz loading=lazy }
 

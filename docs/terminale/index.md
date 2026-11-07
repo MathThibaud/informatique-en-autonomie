@@ -17,9 +17,9 @@ hide:
 
 !!! livre "Le manuel complet en PDF"
 
-    Tout le cours, les exercices et les corrigés de l'année, dans la version distribuée en classe (version du 6 novembre 2026).
+    Tout le cours, les exercices et les corrigés de l'année, dans la version distribuée en classe (version du 7 novembre 2026).
 
-    [:material-download: Télécharger le manuel (9,5 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-terminale.pdf){ .md-button .md-button--primary }
+    [:material-download: Télécharger le manuel (9,7 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-terminale.pdf){ .md-button .md-button--primary }
 
 ## Chapitres
 
@@ -80,6 +80,18 @@ hide:
 -   [**14. Systèmes sur puce et informatique embarquée**](14-systemes-sur-puce-et-informatique-embarq/index.md)
 
     <small>Activités préparatoires · Cours · Exercices · TP et projets · Défis Advent of Code</small>
+
+-   [**Les indispensables de Première**](les-indispensables-de-premiere/index.md)
+
+    <small></small>
+
+-   [**Lexique**](lexique/index.md)
+
+    <small></small>
+
+-   [**Crédits iconographiques**](credits-iconographiques/index.md)
+
+    <small></small>
 
 -   [**Problèmes de synthèse et exercices type bac**](synthese/index.md)
 

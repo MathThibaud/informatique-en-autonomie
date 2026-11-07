@@ -22,6 +22,22 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Le fichier contient un seul très long flux de lettres (plusieurs milliers). Il faut trouver le premier endroit où 4 lettres consécutives sont toutes différentes, puis (partie 2) le premier endroit où 14 lettres consécutives le sont. Sur quelques dizaines de lettres, on y arrive à l’œil ; sur plusieurs milliers, il faut un programme.
+
+    **Ce qu’on réinvestit.** Le lien avec ce chapitre sur les réseaux : un appareil qui reçoit des données doit savoir **où commence un paquet** dans le flux qui lui arrive, et les protocoles prévoient pour cela des **marqueurs**, des motifs reconnaissables. Côté programmation, on utilise une **fenêtre glissante** : une tranche de taille fixe que l’on décale d’un caractère à la fois le long de la chaîne, avec les tranches et le test `in`.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre la règle (en particulier comment on compte la position), puis la faire à la main sur deux petits flux.
+
+    2.  Lire le fichier, qui ne contient qu’une ligne.
+
+    3.  Écrire une fonction qui dit si une chaîne a tous ses caractères différents, puis faire glisser la fenêtre : on obtient la partie 1.
+
+    4.  Pour la partie 2, ajouter un paramètre `taille` à la fonction : seul l’appel change.
+
 ## Lire l’énoncé
 
 Vocabulaire utile pour lire le texte original :
@@ -35,15 +51,27 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Un elfe vous confie un petit appareil de communication, qui doit d’abord se caler sur le signal radio des elfes. Le signal arrive comme une suite de lettres reçues l’une après l’autre ; le fichier contient tout ce flux sur une seule ligne. Le début d’un paquet de données est signalé par un groupe de lettres consécutives toutes différentes, qu’il faut repérer.
+    **Contexte.** Un elfe vous confie un petit appareil de communication, qui doit d’abord se caler sur le signal radio des elfes. Le signal arrive comme une suite de lettres reçues l’une après l’autre. Pour comprendre ce signal, l’appareil doit repérer où commence un paquet de données : ce début est signalé par un groupe de lettres consécutives toutes différentes.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Le fichier contient tout le flux reçu sur **une seule ligne** : une longue suite de lettres minuscules, sans espace. Le premier caractère de la ligne est le premier reçu.
 
-    - On lit les caractères de gauche à droite. On cherche le premier endroit où les **4 derniers caractères lus** sont tous différents : c’est le marqueur de début de paquet.
+    **La règle.**
 
-    - Réponse : le nombre de caractères lus depuis le début jusqu’au dernier caractère de ce marqueur, positions comptées à partir de 1. Autrement dit, si le marqueur occupe les caractères 3 à 6, la réponse est 6.
+    - On lit les caractères de gauche à droite, un par un.
+
+    - Après chaque caractère lu, on regarde les **4 derniers caractères lus** (le caractère qu’on vient de lire et les trois précédents).
+
+    - Dès que ces 4 caractères sont tous différents, on a trouvé le marqueur de début de paquet, et l’on s’arrête.
+
+    - On ne peut pas répondre avant d’avoir lu au moins 4 caractères.
+
+    **La réponse attendue.** Le nombre de caractères lus depuis le début jusqu’au dernier caractère du marqueur inclus, positions comptées à partir de 1. Par exemple, pour le flux `xxyxzwq`, les 4 derniers caractères lus sont tous différents pour la première fois après la lecture du sixième caractère (`yxzw`) : la réponse serait 6.
 
 ### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-aoc-1-1 }
+
+**But.** Vérifier sa compréhension de la règle, surtout de la façon dont on compte la position.
+
+**À quoi ça sert ?** La difficulté de ce défi n’est pas la recherche elle-même, mais le décalage d’indices : Python compte à partir de 0, la réponse compte à partir de 1, et une tranche s’arrête juste avant sa borne de fin. Ces questions évitent une réponse fausse d’une ou trois unités.
 
 Après lecture du résumé (et de l’énoncé), vérifier sa compréhension sur ces cas particuliers :
 
@@ -54,6 +82,10 @@ Après lecture du résumé (et de l’énoncé), vérifier sa compréhension sur
 3.  Si la fenêtre `flux[i:i+4]` convient, faut-il répondre `i`, `i + 4` ou `i + 3` ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-aoc-1-2 }
+
+**But.** Trouver à la main le marqueur de deux petits flux, en écrivant les fenêtres successives.
+
+**À quoi ça sert ?** On voit concrètement la fenêtre « glisser » d’un caractère à la fois, ce que le programme fera ; et l’on obtient deux réponses connues (`7` et `10`) pour le tester.
 
 Pour chacun des flux (inventés) suivants, trouver la réponse de la partie 1 :
 
@@ -67,6 +99,10 @@ Vérification : on doit obtenir `7` pour le premier, `10` pour le second. Écrir
 ## Programmer la partie 1
 
 ### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-aoc-1-3 }
+
+**But.** Lire tout le flux dans une seule chaîne `flux`.
+
+**À quoi ça sert ?** Le fichier n’a qu’une ligne : on n’a pas besoin de boucle de lecture, mais il faut retirer le retour à la ligne final, qui serait compté comme un caractère du flux.
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
@@ -92,6 +128,10 @@ Afficher la longueur de `flux` et ses 10 premiers caractères (`flux[0:10]`).
 
 ### <span class="exo-num">Exercice 4</span> — Des caractères tous différents ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-aoc-1-4 }
 
+**But.** Écrire une fonction qui dit si une chaîne courte n’a aucun caractère en double.
+
+**À quoi ça sert ?** C’est le test appliqué à chaque fenêtre : la recherche du marqueur consiste à appeler cette fonction sur des fenêtres successives jusqu’à ce qu’elle renvoie `True`.
+
 Écrire une fonction `tous_differents(morceau)` qui renvoie `True` si la chaîne `morceau` ne contient pas deux fois le même caractère. Tester avec `"acbd"` et `"abac"`.
 
 ??? pouce "Coup de pouce"
@@ -99,6 +139,10 @@ Afficher la longueur de `flux` et ses 10 premiers caractères (`flux[0:10]`).
     Pour chaque indice `i`, regarder si `morceau[i]` apparaît dans la suite de la chaîne, `morceau[i+1:]`, avec l’opérateur `in`.
 
 ### <span class="exo-num">Exercice 5</span> — Faire glisser la fenêtre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-aoc-1-5 }
+
+**But.** Parcourir le flux avec une fenêtre de 4 caractères et renvoyer la position du premier marqueur.
+
+**À quoi ça sert ?** C’est la réponse de la partie 1. La fenêtre glissante est une technique qu’on retrouve souvent : moyennes sur plusieurs jours, recherche d’un motif dans un texte, etc.
 
 Écrire une fonction `position_marqueur(flux)` qui renvoie la réponse de la partie 1. Vérifier les deux valeurs de l’exemple, puis lancer sur vos données.
 
@@ -116,9 +160,21 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    L’appareil doit aussi repérer le début des messages, signalé par un marqueur plus long. Même question, mais avec **14** caractères consécutifs tous différents au lieu de 4. Réponse : le nombre de caractères lus jusqu’à la fin de ce premier groupe de 14.
+    **Ce qui change.** L’appareil doit aussi repérer le début des messages, signalé par un marqueur plus long que celui des paquets.
+
+    **La nouvelle règle.**
+
+    - Même lecture qu’à la partie 1, mais on regarde les **14** derniers caractères lus au lieu des 4 derniers.
+
+    - On s’arrête dès que ces 14 caractères sont tous différents.
+
+    **La réponse attendue.** Le nombre de caractères lus jusqu’au dernier caractère de ce premier groupe de 14, positions comptées à partir de 1 comme dans la partie 1.
 
 ### <span class="exo-num">Exercice 6</span> — Généraliser <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-aoc-1-6 }
+
+**But.** Rendre la taille de la fenêtre réglable par un paramètre.
+
+**À quoi ça sert ?** Une seule fonction répond alors aux deux parties : la partie 2 ne demande que de changer l’appel. C’est l’intérêt de ne pas écrire de valeur « en dur » dans une fonction.
 
 Ajouter un paramètre : `position_marqueur(flux, taille)`. La partie 1 correspond à `taille = 4`. Répondre à la partie 2. Sur le second flux de l’exemple, on doit trouver `23`.
 
@@ -141,6 +197,10 @@ Ajouter un paramètre : `position_marqueur(flux, taille)`. La partie 1 correspon
     *À essayer.* Que vaut alors `len(caracteres)` ? Comparer avec `len("abac")`.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : tous différents avec un ensemble <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-aoc-1-7 }
+
+**But.** Compter le travail fait par `tous_differents`, puis l’écrire avec un ensemble.
+
+**À quoi ça sert ?** Le nombre de comparaisons grandit vite avec la taille de la fenêtre (14 au lieu de 4) ; l’ensemble évite de comparer chaque caractère à tous les autres.
 
 1.  Pour une fenêtre de taille $k$, combien de comparaisons de caractères `tous_differents` fait-elle au pire ? Calculer pour $k = 4$ et $k = 14$.
 
@@ -171,6 +231,10 @@ Ajouter un paramètre : `position_marqueur(flux, taille)`. La partie 1 correspon
     *À essayer.* Que vaut `ord("z") - ord("a")` ? Et `chr(ord("a") + 3)` ?
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 2 : ne pas tout recompter <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-aoc-1-8 }
+
+**But.** Mettre à jour les compteurs de lettres quand la fenêtre glisse, au lieu de tout réexaminer.
+
+**À quoi ça sert ?** On obtient un programme dont la durée ne dépend presque plus de la taille de la fenêtre : c’est la version efficace de la fenêtre glissante.
 
 Quand la fenêtre glisse d’un cran, un seul caractère entre et un seul sort : les autres ne changent pas.
 

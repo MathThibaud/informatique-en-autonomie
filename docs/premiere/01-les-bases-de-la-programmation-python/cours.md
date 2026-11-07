@@ -44,7 +44,7 @@ Un **programme** est une suite d’instructions, écrites dans un **langage de p
 
 !!! definition "Définition 1 — Algorithme et programme"
 
-    Un **algorithme** est une méthode : une suite finie et non ambiguë d’étapes qui, à partir de données, produit un résultat. Un **programme** est la *traduction* d’un algorithme dans un langage que la machine peut exécuter.
+    Un <span id="lex-algorithme01" class="ancre"></span>**algorithme** est une méthode : une suite finie et non ambiguë d’étapes qui, à partir de données, produit un résultat. Un <span id="lex-programme01" class="ancre"></span>**programme** est la *traduction* d’un algorithme dans un langage que la machine peut exécuter.
 
 Nous utiliserons le langage **Python**, créé en 1991 par le Néerlandais **Guido van Rossum**. Il est aujourd’hui l’un des langages les plus enseignés et les plus utilisés au monde, pour sa lisibilité.
 
@@ -54,7 +54,7 @@ Nous utiliserons le langage **Python**, créé en 1991 par le Néerlandais **Gui
 
 ### La première construction : la séquence
 
-Quand on écrit plusieurs instructions les unes sous les autres, Python les exécute **dans l’ordre**, de haut en bas, une à la fois. C’est la construction la plus simple : la **séquence**.
+Quand on écrit plusieurs instructions les unes sous les autres, Python les exécute **dans l’ordre**, de haut en bas, une à la fois. C’est la construction la plus simple : la <span id="lex-sequence01" class="ancre"></span>**séquence**.
 
 !!! exemple "Exemple — Testez ce programme dans une console ou un éditeur en ligne"
 
@@ -80,7 +80,7 @@ Quand on écrit plusieurs instructions les unes sous les autres, Python les exé
 
 !!! remarque "Remarque"
 
-    `print(...)` est un **appel de fonction** : on demande à une fonction déjà écrite (`print`) d’*afficher* ce qu’on lui donne entre parenthèses. Nous reviendrons longuement sur les fonctions.
+    <span id="lex-print01" class="ancre"></span>`print(...)` est un **appel de fonction** : on demande à une fonction déjà écrite (`print`) d’*afficher* ce qu’on lui donne entre parenthèses. Nous reviendrons longuement sur les fonctions.
 
 ## Variables et affectation
 
@@ -96,7 +96,7 @@ prenom = "Ada"
 
 !!! definition "Définition 2 — Variable"
 
-    Une **variable** est un nom qui désigne un emplacement de la mémoire où est rangée une valeur. On peut *lire* cette valeur (l’utiliser) et l’*écrire* (la modifier).
+    Une <span id="lex-variable01" class="ancre"></span>**variable** est un nom qui désigne un emplacement de la mémoire où est rangée une valeur. On peut *lire* cette valeur (l’utiliser) et l’*écrire* (la modifier).
 
 L’image classique est celle du **casier étiqueté** : le nom de la variable est l’étiquette collée sur le casier, la valeur est ce qui se trouve à l’intérieur. On ne s’intéresse jamais à *l’adresse exacte* du casier dans la mémoire ; l’étiquette suffit.
 
@@ -108,13 +108,13 @@ Ce modèle du casier est **provisoire** : il suffit pour tout ce chapitre. Le ch
 
 ### L’affectation : une histoire en deux temps
 
-L’instruction `age = 15` s’appelle une **affectation**. Le symbole `=` ne veut **pas** dire « égal » au sens mathématique : il veut dire « **prend pour valeur** », ou « reçoit ». On lit `age = 15` comme « *age reçoit 15* ».
+L’instruction `age = 15` s’appelle une <span id="lex-affectation01" class="ancre"></span>**affectation**. Le symbole `=` ne veut **pas** dire « égal » au sens mathématique : il veut dire « **prend pour valeur** », ou « reçoit ». On lit `age = 15` comme « *age reçoit 15* ».
 
 !!! regle "Règle 2 — Le mécanisme de l’affectation"
 
     Une affectation `nom = expression` se déroule toujours en **deux temps** :
 
-    1.  Python **évalue d’abord la partie droite** (il calcule la valeur de l’expression) ;
+    1.  Python **évalue d’abord la partie droite** (il calcule <span id="lex-expression01" class="ancre"></span>la valeur de l’expression) ;
 
     2.  puis il **range cette valeur** dans la variable nommée à gauche.
 
@@ -172,16 +172,16 @@ print(a, b)   # affiche : 2 1
 
 ### Les types de données de base
 
-Chaque valeur a un **type**, qui décrit sa nature et les opérations permises. En classe de première, quatre types de base suffisent :
+Chaque valeur a un <span id="lex-type01" class="ancre"></span>**type**, qui décrit sa nature et les opérations permises. En classe de première, quatre types de base suffisent :
 
-| **Type** | **Nature**                      | **Exemples**          |
-|:---------|:--------------------------------|:----------------------|
-| `int`    | entier                          | `15`, `-3`, `0`       |
-| `float`  | nombre à virgule (« flottant ») | `12.5`, `-0.1`, `3.0` |
-| `str`    | chaîne de caractères (texte)    | `"Ada"`, `’bonjour’`  |
-| `bool`   | booléen (vrai/faux)             | `True`, `False`       |
+| **Type**       | **Nature**                      | **Exemples**          |
+|:---------------|:--------------------------------|:----------------------|
+| `int`          | entier                          | `15`, `-3`, `0`       |
+| `float`        | nombre à virgule (« flottant ») | `12.5`, `-0.1`, `3.0` |
+| `str`          | chaîne de caractères (texte)    | `"Ada"`, `’bonjour’`  |
+| <span id="lex-truefalse01" class="ancre"></span>`bool` | booléen (vrai/faux)             | `True`, `False`       |
 
-La fonction `type(...)` renvoie le type d’une valeur :
+La fonction <span id="lex-typef01" class="ancre"></span>`type(...)` renvoie le type d’une valeur :
 
 ```python
 type(15)       # <class 'int'>
@@ -190,12 +190,12 @@ type("Ada")    # <class 'str'>
 type(3 == 3)   # <class 'bool'>
 ```
 
-Sur les nombres, Python dispose des opérations usuelles, et de deux opérations propres à la division **entière** :
+<span id="lex-operations01" class="ancre"></span>Sur les nombres, Python dispose des opérations usuelles, et de deux opérations propres à la division **entière** :
 
 | `+` | `-` | `*` | `/` | `//` | `%` | `**` |
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 | addition | soustraction | multiplication | division | quotient entier | reste | puissance |
-| `7 + 2` $\to$ `9` | `7 - 2` $\to$ `5` | `7 * 2` $\to$ `14` | `7 / 2` $\to$ `3.5` | `7 // 2` $\to$ `3` | `7 % 2` $\to$ `1` | `7 ** 2` $\to$ `49` |
+| `7 + 2` $\to$ `9` | `7 - 2` $\to$ `5` | `7 * 2` $\to$ `14` | `7 / 2` $\to$ `3.5` | <span id="lex-quotient01" class="ancre"></span>`7 // 2` $\to$ `3` | `7 % 2` $\to$ `1` | `7 ** 2` $\to$ `49` |
 
 !!! curieux "Pour les curieux (facultatif) — Typage dynamique"
 
@@ -209,13 +209,13 @@ Sur les nombres, Python dispose des opérations usuelles, et de deux opérations
 
 ### Lire une entrée au clavier et convertir
 
-La fonction `input(...)` affiche un message, attend que l’utilisateur tape quelque chose au clavier puis valide, et **renvoie ce qui a été tapé**, **toujours sous forme de chaîne** (`str`), même si l’on a tapé des chiffres. Pour calculer avec, il faut donc **convertir** la valeur dans le bon type :
+La fonction <span id="lex-input01" class="ancre"></span>`input(...)` affiche un message, attend que l’utilisateur tape quelque chose au clavier puis valide, et **renvoie ce qui a été tapé**, **toujours sous forme de chaîne** (`str`), même si l’on a tapé des chiffres. Pour calculer avec, il faut donc **convertir** la valeur dans le bon type :
 
-| **Conversion** | **Rôle**         | **Exemple**                  |
-|:---------------|:-----------------|:-----------------------------|
-| `int(...)`     | vers un entier   | `int("17")` $\to$ `17`       |
-| `float(...)`   | vers un flottant | `float("12.5")` $\to$ `12.5` |
-| `str(...)`     | vers une chaîne  | `str(17)` $\to$ `"17"`       |
+| **Conversion**       | **Rôle**         | **Exemple**                  |
+|:---------------------|:-----------------|:-----------------------------|
+| <span id="lex-int01" class="ancre"></span>`int(...)`   | vers un entier   | `int("17")` $\to$ `17`       |
+| <span id="lex-float01" class="ancre"></span>`float(...)` | vers un flottant | `float("12.5")` $\to$ `12.5` |
+| <span id="lex-str01" class="ancre"></span>`str(...)`   | vers une chaîne  | `str(17)` $\to$ `"17"`       |
 
 ```python
 age = int(input("Votre age ? "))   # on tape 16 : age vaut 16
@@ -228,7 +228,7 @@ print("Dans un an, vous aurez", age + 1, "ans")
 
 ### Premier contact avec les chaînes de caractères
 
-Une chaîne est une **suite de caractères**, numérotés à partir de `0`. Voici les opérations dont on se sert dès ce chapitre ; le chapitre *Les types construits* les reprendra en détail.
+<span id="lex-chaine01" class="ancre"></span>Une chaîne est une **suite de caractères**, numérotés à partir de `0`. Voici les opérations dont on se sert dès ce chapitre ; le chapitre *Les types construits* les reprendra en détail.
 
 ```text
 >>> mot = "radar"
@@ -250,7 +250,7 @@ Si `mot` a `n` caractères, les positions vont de `0` à `n - 1` : `mot[n]` prov
 
 !!! remarque "Remarque — Compter depuis la fin : les positions négatives"
 
-    Python accepte aussi des positions **négatives**, qui se comptent **à partir de la fin** : `mot[-1]` est le dernier caractère, `mot[-2]` l’avant-dernier, etc. Ainsi `mot[-1]` est un raccourci pour `mot[len(mot) - 1]`.
+    Python accepte aussi des positions <span id="lex-negatif01" class="ancre"></span>**négatives**, qui se comptent **à partir de la fin** : `mot[-1]` est le dernier caractère, `mot[-2]` l’avant-dernier, etc. Ainsi `mot[-1]` est un raccourci pour `mot[len(mot) - 1]`.
 
     | caractère         | `r`  | `a`  | `d`  | `a`  | `r`  |
     |:------------------|:----:|:----:|:----:|:----:|:----:|
@@ -279,7 +279,7 @@ Un programme se lit bien plus souvent qu’il ne s’écrit. Le choix des noms e
 
 !!! encadre "Écrire une fonction : le gabarit"
 
-    Dès les premiers exercices, on vous demande d’« écrire une fonction ». Pour l’instant, utilisez-la comme une **boîte noire** : on lui donne des valeurs (les **paramètres**), elle **renvoie** un résultat. Il suffit de recopier ce gabarit ; la section *Les fonctions* l’approfondira.
+    <span id="lex-def01" class="ancre"></span>Dès les premiers exercices, on vous demande d’« écrire une fonction ». Pour l’instant, utilisez-la comme une **boîte noire** : on lui donne des valeurs (les **paramètres**), elle **renvoie** un résultat. Il suffit de recopier ce gabarit ; la section *Les fonctions* l’approfondira.
 
     ```python
     def nom_de_la_fonction(parametre1, parametre2):
@@ -287,7 +287,7 @@ Un programme se lit bien plus souvent qu’il ne s’écrit. Le choix des noms e
         return resultat     # la valeur renvoyee
     ```
 
-    - la ligne `def` se termine par un **deux-points** `:` ; les lignes suivantes sont **décalées** de 4 espaces ;
+    - la ligne `def` se termine par un <span id="lex-deuxpoints01" class="ancre"></span>**deux-points** `:` ; les lignes suivantes sont **décalées** de 4 espaces ;
 
     - `return` indique la valeur que la fonction renvoie ;
 
@@ -322,11 +322,11 @@ Un programme se lit bien plus souvent qu’il ne s’écrit. Le choix des noms e
 
 ## Les conditionnelles : `if`, `elif`, `else`
 
-Jusqu’ici, tout s’exécutait ligne après ligne. Or un programme doit souvent **choisir** entre plusieurs comportements selon les données. C’est le rôle de la construction **conditionnelle**.
+<span id="lex-ifelse01" class="ancre"></span> Jusqu’ici, tout s’exécutait ligne après ligne. Or un programme doit souvent **choisir** entre plusieurs comportements selon les données. C’est le rôle de la construction <span id="lex-conditionnelle01" class="ancre"></span>**conditionnelle**.
 
 ### Booléens et conditions
 
-Une **condition** est une expression dont la valeur est un booléen : `True` ou `False`. On la construit avec des **opérateurs de comparaison** :
+Une <span id="lex-condition01" class="ancre"></span>**condition** est une expression dont la valeur est un booléen : `True` ou `False`. On la construit avec des **opérateurs de comparaison** :
 
 | `==` |   `!=`    |    `<`    |     `<=`     |    `>`    |     `>=`     |
 |:----:|:---------:|:---------:|:------------:|:---------:|:------------:|
@@ -334,9 +334,9 @@ Une **condition** est une expression dont la valeur est un booléen : `True` ou 
 
 !!! regle "Règle 5 — = n’est pas =="
 
-    `=` **affecte** une valeur (« reçoit ») ; `==` **teste l’égalité** (« est-il égal à ? ») et renvoie un booléen. Les confondre est l’une des erreurs les plus fréquentes du débutant.
+    <span id="lex-egal01" class="ancre"></span>`=` **affecte** une valeur (« reçoit ») ; `==` **teste l’égalité** (« est-il égal à ? ») et renvoie un booléen. Les confondre est l’une des erreurs les plus fréquentes du débutant.
 
-On combine plusieurs conditions avec les **opérateurs booléens** `and`, `or`, `not` :
+On combine plusieurs conditions avec les <span id="lex-andor01" class="ancre"></span>**opérateurs booléens** `and`, `or`, `not` :
 
 ```python
 age = 16
@@ -360,11 +360,11 @@ else:
 print("Bonne journee.")     # toujours execute
 ```
 
-Deux points de syntaxe sont **obligatoires** en Python : le **deux-points** `:` en fin de ligne `if`/`else`, et l’**indentation** (le décalage vers la droite) des lignes qui dépendent du test.
+Deux points de syntaxe sont **obligatoires** en Python : le **deux-points** `:` en fin de ligne `if`/`else`, et l’<span id="lex-indentation01" class="ancre"></span>**indentation** (le décalage vers la droite) des lignes qui dépendent du test.
 
 !!! regle "Règle 6 — L’indentation est la structure"
 
-    Là où d’autres langages utilisent des accolades, Python utilise le **décalage** pour délimiter un bloc d’instructions. Toutes les lignes indentées d’un même cran après le `:` forment le bloc exécuté si la condition est vraie. Une indentation fautive change le sens du programme, ou provoque une `IndentationError`. Une seule règle d’or : **on ne mélange jamais espaces et tabulations** (le standard : 4 espaces).
+    Là où d’autres langages utilisent des accolades, Python utilise le **décalage** pour délimiter un bloc d’instructions. Toutes les lignes indentées d’un même cran après le `:` forment le bloc exécuté si la condition est vraie. Une indentation fautive change le sens du programme, ou provoque une <span id="lex-indenterror01" class="ancre"></span>`IndentationError`. Une seule règle d’or : **on ne mélange jamais espaces et tabulations** (le standard : 4 espaces).
 
 !!! curieux "Pour les curieux (facultatif) — Une histoire de goût… devenu règle"
 
@@ -372,7 +372,7 @@ Deux points de syntaxe sont **obligatoires** en Python : le **deux-points** `:` 
 
 ### Les cas multiples : `elif`
 
-Pour enchaîner plusieurs tests, on intercale des `elif` (contraction de *else if*). Python teste les conditions dans l’ordre et exécute le **premier** bloc dont la condition est vraie ; les autres sont ignorés.
+<span id="lex-elif01" class="ancre"></span> Pour enchaîner plusieurs tests, on intercale des `elif` (contraction de *else if*). Python teste les conditions dans l’ordre et exécute le **premier** bloc dont la condition est vraie ; les autres sont ignorés.
 
 !!! exemple "Exemple — Attribuer une mention à une note sur 20"
 
@@ -401,7 +401,7 @@ Pour enchaîner plusieurs tests, on intercale des `elif` (contraction de *else i
 
 ### Un test très utile : la divisibilité
 
-L’opérateur `%` (le *modulo*) donne le **reste** d’une division entière. Un nombre `a` est divisible par `b` exactement lorsque `a % b` vaut `0`.
+<span id="lex-modulo01" class="ancre"></span> L’opérateur `%` (le *modulo*) donne le **reste** d’une division entière. Un nombre `a` est divisible par `b` exactement lorsque `a % b` vaut `0`.
 
 ```python
 if n % 2 == 0:
@@ -416,7 +416,7 @@ else:
 
 ## Les boucles bornées : `for`
 
-Répéter une action est le cœur de la puissance d’un ordinateur. Quand on connaît **à l’avance** le nombre de répétitions, on utilise une **boucle bornée**, la boucle `for`.
+<span id="lex-for01" class="ancre"></span> Répéter une action est le cœur de la puissance d’un ordinateur. Quand on connaît **à l’avance** le nombre de répétitions, on utilise une <span id="lex-bouclebornee01" class="ancre"></span>**boucle bornée**, la boucle `for`.
 
 ### Répéter un nombre connu de fois
 
@@ -432,6 +432,8 @@ Ce programme affiche cinq fois la même ligne. `range(5)` produit la suite des e
     Le complément *Dessiner avec la tortue*, qui suit ce chapitre, fera *voir* cette boucle : un carré, c’est `for cote in range(4):` suivi de « avancer, tourner ». Il permettra de s’entraîner aux boucles en dessinant.
 
 !!! definition "Définition 3 — range"
+
+    <span id="lex-range01" class="ancre"></span>
 
     - `range(n)` : les entiers de `0` à `n-1` ;
 
@@ -481,7 +483,7 @@ Ce programme affiche cinq fois la même ligne. `range(5)` produit la suite des e
 
 ### Le motif de l’accumulateur
 
-La boucle `for` sert rarement à répéter à l’identique : le plus souvent, la variable de boucle *intervient* dans le calcul. Le motif le plus important est l’**accumulateur** : une variable que l’on met à jour à chaque tour.
+La boucle `for` sert rarement à répéter à l’identique : le plus souvent, la variable de boucle *intervient* dans le calcul. Le motif le plus important est l’<span id="lex-accumulateur01" class="ancre"></span>**accumulateur** : une variable que l’on met à jour à chaque tour.
 
 !!! exemple "Exemple — Calculer la somme des entiers de 1 à 100"
 
@@ -505,7 +507,7 @@ La boucle `for` sert rarement à répéter à l’identique : le plus souvent, l
         |   …   |  …  |           …           |
         |  100  | 100 |         5050          |
 
-        La **trace** d’exécution : suivre l’évolution des variables tour après tour est un réflexe essentiel.
+        La <span id="lex-trace01" class="ancre"></span>**trace** d’exécution : suivre l’évolution des variables tour après tour est un réflexe essentiel.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Le tableau rempli pour le programme 4 de l’activité était déjà une trace ; `total` y était un accumulateur, qui valait `10` après le tour 4, et remplacer `5` par `101` dans `range(1, 5)` donne exactement le programme ci-dessus.
 
@@ -542,7 +544,7 @@ Le corps d’une boucle peut contenir… une autre boucle. On parle de **boucle
 
 ## Les boucles non bornées : `while`
 
-Parfois, on ne sait **pas à l’avance** combien de fois répéter : on veut continuer *tant qu’*une condition reste vraie. C’est la **boucle non bornée**, la boucle `while`.
+Parfois, on ne sait **pas à l’avance** combien de fois répéter : on veut continuer *tant qu’*une condition reste vraie. C’est la <span id="lex-bouclenonbornee01" class="ancre"></span>**boucle non bornée**, la boucle `while`.
 
 ```python
 solde = 100
@@ -555,7 +557,7 @@ print(annees, "annees")
 
 !!! definition "Définition 4 — Boucle while"
 
-    `while condition:` répète le bloc indenté **tant que** la condition est vraie. La condition est testée *avant chaque tour* : si elle est fausse dès le départ, le bloc n’est jamais exécuté.
+    <span id="lex-while01" class="ancre"></span>`while condition:` répète le bloc indenté **tant que** la condition est vraie. La condition est testée *avant chaque tour* : si elle est fausse dès le départ, le bloc n’est jamais exécuté.
 
 ![](../figures/1594c28c354536d8.svg){ .tikz loading=lazy }
 
@@ -576,11 +578,11 @@ Ici `i` vaut toujours `0`, donc `i < 5` reste éternellement vrai : le programme
 
 ### Prouver qu’une boucle s’arrête : le variant
 
-Le programme demande explicitement de savoir justifier la **terminaison** d’une boucle non bornée. L’outil s’appelle le **variant de boucle**.
+Le programme demande explicitement de savoir justifier la <span id="lex-terminaison01" class="ancre"></span>**terminaison** d’une boucle non bornée. L’outil s’appelle le **variant de boucle**.
 
 !!! definition "Définition 5 — Variant de boucle"
 
-    Un **variant** est une quantité entière **positive** qui **décroît strictement** à chaque tour de boucle. S’il en existe un, la boucle ne peut pas tourner indéfiniment : une suite d’entiers positifs strictement décroissante ne peut pas se prolonger indéfiniment, donc la boucle finit par s’arrêter.
+    Un <span id="lex-variant01" class="ancre"></span>**variant** est une quantité entière **positive** qui **décroît strictement** à chaque tour de boucle. S’il en existe un, la boucle ne peut pas tourner indéfiniment : une suite d’entiers positifs strictement décroissante ne peut pas se prolonger indéfiniment, donc la boucle finit par s’arrêter.
 
 !!! exemple "Exemple — Un compte à rebours"
 
@@ -611,7 +613,7 @@ Depuis le début du chapitre, vous écrivez des fonctions en suivant un **gabari
 
 !!! definition "Définition 6 — Fonction"
 
-    Une **fonction** est un bloc d’instructions nommé, que l’on **définit une fois** (mot-clé `def`) et que l’on **appelle** ensuite autant de fois qu’on veut. Elle peut recevoir des **paramètres** (ses entrées) et **renvoyer** un résultat (mot-clé `return`).
+    Une <span id="lex-fonction01" class="ancre"></span>**fonction** est un bloc d’instructions nommé, que l’on **définit une fois** (mot-clé `def`) et que l’on **appelle** ensuite autant de fois qu’on veut. Elle peut recevoir des <span id="lex-parametre01" class="ancre"></span>**paramètres** (ses entrées) et <span id="lex-valeurrenvoyee01" class="ancre"></span>**renvoyer** un résultat (mot-clé `return`).
 
 ```python
 def aire_rectangle(largeur, hauteur):
@@ -622,19 +624,21 @@ print(aire_rectangle(3, 4))       # affiche 12
 surface = aire_rectangle(10, 2)   # surface recoit 20
 ```
 
-On voit une fonction comme une **boîte noire** : on lui fournit des valeurs en entrée (les **arguments**), elle rend une valeur en sortie. Peu importe *comment* elle travaille à l’intérieur : pour l’utiliser, il suffit de connaître ses entrées et sa sortie.
+On voit une fonction comme une **boîte noire** : on lui fournit des valeurs en entrée (les <span id="lex-argument01" class="ancre"></span>**arguments**), elle rend une valeur en sortie. Peu importe *comment* elle travaille à l’intérieur : pour l’utiliser, il suffit de connaître ses entrées et sa sortie.
 
 ![](../figures/0d7f2d46035fddfd.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 9 — return n’est pas print"
 
-    `print` **affiche** une valeur à l’écran (pour un humain) ; `return` **renvoie** une valeur au programme (pour la réutiliser dans un calcul). Une fonction qui `print` mais ne `return` rien renvoie en réalité la valeur spéciale `None`, et son résultat ne peut pas être réutilisé. Confondre les deux est une erreur très fréquente.
+    <span id="lex-return01" class="ancre"></span>`print` **affiche** une valeur à l’écran (pour un humain) ; `return` **renvoie** une valeur au programme (pour la réutiliser dans un calcul). Une fonction qui `print` mais ne `return` rien renvoie en réalité la valeur spéciale <span id="lex-none01" class="ancre"></span>`None`, et son résultat ne peut pas être réutilisé. Confondre les deux est une erreur très fréquente.
 
 !!! encadre "À retenir — return termine la fonction"
 
     Dès que Python rencontre un `return`, il **sort immédiatement** de la fonction : les lignes situées après ne sont pas exécutées.
 
 ### Portée : variables locales et globales
+
+<span id="lex-portee01" class="ancre"></span>
 
 !!! regle "Règle 10 — Variables locales"
 
@@ -653,17 +657,17 @@ Ce cloisonnement est une force : chaque fonction est un petit monde étanche, ce
 
 ### Spécifier une fonction (au programme)
 
-Écrire une fonction juste ne suffit pas : il faut dire **clairement** ce qu’elle fait, ce qu’elle attend et ce qu’elle garantit. C’est la **spécification**, exigée par le programme.
+Écrire une fonction juste ne suffit pas : il faut dire **clairement** ce qu’elle fait, ce qu’elle attend et ce qu’elle garantit. C’est la <span id="lex-specification01" class="ancre"></span>**spécification**, exigée par le programme.
 
 !!! definition "Définition 7 — Prototype, précondition, postcondition"
 
-    - le **prototype** annonce le nom de la fonction et ses paramètres : `racine(x)` ;
+    - le <span id="lex-prototype01" class="ancre"></span>**prototype** annonce le nom de la fonction et ses paramètres : `racine(x)` ;
 
-    - une **précondition** est une hypothèse sur les arguments, à la charge de l’appelant (*ex. :* `x >= 0`) ;
+    - une <span id="lex-precondition01" class="ancre"></span>**précondition** est une hypothèse sur les arguments, à la charge de l’appelant (*ex. :* `x >= 0`) ;
 
-    - une **postcondition** décrit une garantie sur le résultat (*ex. :* « renvoie un nombre positif »).
+    - une <span id="lex-postcondition01" class="ancre"></span>**postcondition** décrit une garantie sur le résultat (*ex. :* « renvoie un nombre positif »).
 
-En pratique, on documente une fonction avec une **docstring** (un texte entre triples guillemets, juste après le `def`) et on peut vérifier une précondition avec une **assertion**. On en donne ici une première idée ; le chapitre *Spécifier et mettre au point ses programmes* y reviendra en détail.
+En pratique, on documente une fonction avec une <span id="lex-docstring01" class="ancre"></span>**docstring** (un texte entre triples guillemets, juste après le `def`) et on peut vérifier une précondition avec une <span id="lex-assert01" class="ancre"></span>**assertion**. On en donne ici une première idée ; le chapitre *Spécifier et mettre au point ses programmes* y reviendra en détail.
 
 ```python
 def racine(x):
@@ -680,7 +684,7 @@ def racine(x):
 
 ### Tester une fonction (au programme)
 
-Comment être sûr qu’une fonction est correcte ? On la soumet à un **jeu de tests** : des cas dont on connaît le résultat attendu. En Python, on écrit ces tests avec des `assert` : si tout se passe bien, le programme ne dit rien ; au premier test faux, il s’arrête.
+Comment être sûr qu’une fonction est correcte ? On la soumet à un <span id="lex-jeutests01" class="ancre"></span>**jeu de tests** : des cas dont on connaît le résultat attendu. En Python, on écrit ces tests avec des `assert` : si tout se passe bien, le programme ne dit rien ; au premier test faux, il s’arrête.
 
 ```python
 def maximum(a, b):
@@ -711,7 +715,7 @@ assert maximum(4, 4) == 4    # le cas d'egalite : a ne pas oublier
 
 ### Réutiliser le travail des autres : les bibliothèques
 
-On ne réécrit pas tout soi-même : une **bibliothèque** (*module*) regroupe des fonctions déjà écrites et testées. On y accède avec `import`.
+<span id="lex-random01" class="ancre"></span> On ne réécrit pas tout soi-même : une <span id="lex-bibliotheque01" class="ancre"></span>**bibliothèque** (*module*) regroupe des fonctions déjà écrites et testées. On y accède avec <span id="lex-import01" class="ancre"></span>`import`.
 
 ```python
 import random
@@ -739,11 +743,11 @@ Personne n’écrit un programme juste du premier coup. Savoir lire un message d
 
 | **Type d’erreur** | **Quand ?** |
 |:---|:---|
-| `SyntaxError` | le code est mal formé (`:` ou `)` oublié…) |
+| <span id="lex-syntaxerror01" class="ancre"></span>`SyntaxError` | le code est mal formé (`:` ou `)` oublié…) |
 | `IndentationError` | indentation incohérente |
-| `NameError` | on utilise un nom qui n’existe pas (ou une faute de frappe) |
-| `TypeError` | opération entre types incompatibles (`"a" + 1`) |
-| `ZeroDivisionError` | division par zéro |
+| <span id="lex-nameerror01" class="ancre"></span>`NameError` | on utilise un nom qui n’existe pas (ou une faute de frappe) |
+| <span id="lex-typeerror01" class="ancre"></span>`TypeError` | opération entre types incompatibles (`"a" + 1`) |
+| <span id="lex-zerodiv01" class="ancre"></span>`ZeroDivisionError` | division par zéro |
 
 !!! curieux "Pour les curieux (facultatif) — Le premier « bug » était un vrai insecte"
 
@@ -751,7 +755,7 @@ Personne n’écrit un programme juste du premier coup. Savoir lire un message d
 
 ### Lire un message d’erreur
 
-Quand Python rencontre une erreur, il s’arrête et affiche un message. Ce message impressionne (il est en anglais), mais il est toujours construit de la même façon. Voici un programme `age.py` où l’on a oublié de convertir la saisie :
+<span id="lex-traceback01" class="ancre"></span> Quand Python rencontre une erreur, il s’arrête et affiche un message. Ce message impressionne (il est en anglais), mais il est toujours construit de la même façon. Voici un programme `age.py` où l’on a oublié de convertir la saisie :
 
 ```python
 age = input("Votre age ? ")

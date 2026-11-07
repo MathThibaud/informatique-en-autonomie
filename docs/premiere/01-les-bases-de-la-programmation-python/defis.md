@@ -22,7 +22,21 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi réinvestit les fonctions, la division entière et la boucle `while` (avec son variant) vus dans ce chapitre.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Une fusée est faite d’une centaine de modules, et chacun a besoin d’une quantité de carburant calculée à partir de sa masse. On veut le carburant total à embarquer. Le calcul pour un module est simple, mais le répéter pour cent modules (et, en partie 2, plusieurs fois pour chacun) devient vite pénible et source d’erreurs : un programme s’en charge.
+
+    **Ce qu’on réinvestit.** Les notions de ce chapitre : une **fonction** qui fait le calcul pour un module (écrite une fois, appelée cent fois), la **division entière** `//` qui arrondit à l’unité inférieure, et la boucle `while` pour répéter un calcul tant qu’il donne une quantité positive, avec son **variant** pour être sûr qu’elle s’arrête.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre la formule sur des questions courtes et l’appliquer à la main à trois modules.
+
+    2.  Choisir la bonne division en Python, puis écrire la fonction `carburant` pour un module.
+
+    3.  Lire le fichier et additionner les carburants de tous les modules : c’est la réponse de la partie 1.
+
+    4.  Pour la partie 2, réutiliser `carburant` dans une boucle `while`, puis vérifier que cette boucle s’arrête.
 
 ## Lire l’énoncé
 
@@ -37,17 +51,25 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Le Père Noël est bloqué au bord du système solaire, et les elfes préparent une fusée pour aller le chercher. La fusée est faite de modules, et chaque module a besoin de carburant pour décoller, en quantité qui dépend de sa masse. Le fichier liste les masses des modules ; il faut calculer le carburant à embarquer.
+    **Contexte.** Le Père Noël est bloqué au bord du système solaire, et les elfes préparent une fusée pour aller le chercher. La fusée est faite de modules, et chaque module a besoin de carburant pour décoller, en quantité qui dépend de sa masse. Avant le décollage, il faut savoir combien de carburant embarquer en tout.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Le fichier liste les masses des modules : chaque ligne contient **un seul entier positif**, la masse d’un module. Il y a une ligne par module, et l’ordre des lignes n’a pas d’importance.
 
-    - Le fichier contient une masse (un entier positif) par ligne, une ligne par module.
+    **La règle.**
 
-    - Le carburant d’un module s’obtient ainsi : diviser la masse par 3, **arrondir à l’entier inférieur**, puis retirer 2. Autrement dit, c’est le quotient de la division entière par 3, moins 2.
+    - Pour un module, on divise sa masse par 3 et on **arrondit à l’entier inférieur**.
 
-    - La réponse est la somme des carburants de tous les modules.
+    - On retire 2 au résultat : c’est le carburant de ce module. Autrement dit, c’est le quotient de la division entière par 3, moins 2.
+
+    - On fait ce calcul séparément pour chaque module, puis on additionne les résultats.
+
+    **La réponse attendue.** La somme des carburants de tous les modules. Par exemple, pour deux modules de masses 12 et 21, les carburants sont $12 // 3 - 2 = 2$ et $21 // 3 - 2 = 5$ : la réponse serait 7.
 
 ### <span class="exo-num">Exercice 1</span> — Vérifier sa compréhension <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-les-bases-de-la-programmation-python-aoc-1-1 }
+
+**But.** S’assurer que l’arrondi « à l’entier inférieur » est bien compris, y compris pour de petites masses.
+
+**À quoi ça sert ?** C’est le seul point délicat de la formule : un mauvais arrondi donne une réponse fausse, même si tout le reste du programme est juste. La dernière question prépare la partie 2, où l’on rencontrera des résultats nuls ou négatifs.
 
 Questions pièges, à traiter sur le cahier :
 
@@ -59,15 +81,27 @@ Questions pièges, à traiter sur le cahier :
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-les-bases-de-la-programmation-python-aoc-1-2 }
 
+**But.** Appliquer la formule à la main à trois modules inventés, puis faire le total.
+
+**À quoi ça sert ?** Ces trois valeurs serviront de tests : la fonction `carburant` devra les retrouver, et le total donne la réponse attendue du programme complet sur cet exemple.
+
 Calculer le carburant nécessaire pour des modules (inventés) de masses `30`, `90` et `2000`, puis le total. Vérification : on doit obtenir `8`, `28`, `664`, soit un total de `700`.
 
 ## Programmer la partie 1
 
 ### <span class="exo-num">Exercice 3</span> — Division entière <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-les-bases-de-la-programmation-python-aoc-1-3 }
 
+**But.** Repérer, parmi trois façons de diviser en Python, celle qui arrondit à l’unité inférieure.
+
+**À quoi ça sert ?** C’est l’opérateur à utiliser dans la fonction `carburant`. Avec la mauvaise division, on obtiendrait un nombre à virgule, et toutes les réponses seraient fausses.
+
 En Python, comparer `2000 / 3`, `2000 // 3` et `int(2000 / 3)`. Lequel correspond à « diviser puis arrondir à l’unité inférieure » pour un nombre positif ?
 
 ### <span class="exo-num">Exercice 4</span> — Une fonction pour un module <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-les-bases-de-la-programmation-python-aoc-1-4 }
+
+**But.** Écrire la fonction qui calcule le carburant d’un seul module et la tester avec des `assert`.
+
+**À quoi ça sert ?** Elle sera appelée pour chaque ligne du fichier dans la partie 1, puis réutilisée, sans modification, dans la boucle de la partie 2. Les `assert` garantissent qu’elle est juste avant qu’on s’en serve.
 
 Écrire une fonction `carburant(masse)` qui renvoie le carburant d’un module. La tester avec des `assert` sur les trois masses de l’exemple, par exemple `assert carburant(30) == 8`.
 
@@ -88,6 +122,10 @@ En Python, comparer `2000 / 3`, `2000 // 3` et `int(2000 / 3)`. Lequel correspon
     **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
 
 ### <span class="exo-num">Exercice 5</span> — Le total <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-les-bases-de-la-programmation-python-aoc-1-5 }
+
+**But.** Lire les masses dans le fichier et additionner les carburants de tous les modules.
+
+**À quoi ça sert ?** Le résultat affiché sur vos données est la réponse de la partie 1. Le motif de l’accumulateur (un total qui part de 0 et grossit à chaque tour) servira encore dans la partie 2.
 
 !!! encadre "Outil Python : lire un fichier ligne par ligne (open)"
 
@@ -114,9 +152,25 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    On avait oublié un détail : le carburant lui-même pèse, et il faut donc du carburant pour le transporter ! Pour chaque module, on calcule le carburant de ce carburant avec la même formule, puis le carburant de ce nouveau carburant, et ainsi de suite, en s’arrêtant dès qu’on obtient une valeur nulle ou négative (elle compte pour 0). Le carburant d’un module est la somme de toutes ces quantités ; ce calcul se fait **module par module**, et la réponse est la somme sur tous les modules.
+    **Ce qui change.** On avait oublié un détail : le carburant lui-même pèse, et il faut donc du carburant pour le transporter ! Et ce carburant supplémentaire pèse à son tour…
+
+    **La nouvelle règle.**
+
+    - Pour un module, on calcule son carburant avec la formule de la partie 1.
+
+    - On calcule ensuite le carburant de ce carburant, avec la même formule, puis le carburant de ce nouveau carburant, et ainsi de suite.
+
+    - On s’arrête dès qu’on obtient une valeur nulle ou négative : elle compte pour 0.
+
+    - Le carburant du module est la somme de toutes ces quantités. Ce calcul se fait **module par module**.
+
+    **La réponse attendue.** La somme, sur tous les modules, de ces carburants. Par exemple, pour un module de masse 60 : on trouve 18, puis 4 (carburant de 18), puis une valeur négative (carburant de 4) qui arrête le calcul ; le carburant de ce module est $18 + 4 = 22$.
 
 ### <span class="exo-num">Exercice 6</span> — Du carburant pour le carburant <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-les-bases-de-la-programmation-python-aoc-1-6 }
+
+**But.** Écrire la fonction qui applique la nouvelle règle à un module, en répétant le calcul tant qu’il donne une quantité positive.
+
+**À quoi ça sert ?** En remplaçant `carburant` par `carburant_total` dans le programme du total, on obtient la réponse de la partie 2. Comme on ne sait pas à l’avance combien de fois répéter le calcul, c’est le rôle de la boucle `while`.
 
 Écrire une fonction `carburant_total(masse)` qui applique la nouvelle règle à un module. Avec les masses de l’exemple, on doit trouver `8`, `35` et `980`, soit un total de `1023`. Détailler à la main le cas de la masse `90` avant de programmer.
 
@@ -130,11 +184,19 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ### <span class="exo-num">Exercice 7</span> — Vérifier la boucle <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-les-bases-de-la-programmation-python-aoc-1-7 }
 
+**But.** Suivre à la main l’exécution de la boucle sur un exemple, puis justifier qu’elle s’arrête toujours.
+
+**À quoi ça sert ?** Un tableau de valeurs permet de trouver une erreur dans une boucle. Justifier l’arrêt (la quantité diminue à chaque tour : c’est le variant) garantit que le programme ne tournera pas indéfiniment sur les vraies données.
+
 Pour la masse `90`, écrire le tableau des valeurs successives de `ajout` et `total` à chaque tour de boucle. Combien de tours fait la boucle ? Pourquoi est-on sûr qu’elle s’arrête ?
 
 ## Approfondissement
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 1 (pour aller plus loin, notion de Terminale) : une fonction qui s’appelle elle-même <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-les-bases-de-la-programmation-python-aoc-1-8 }
+
+**But.** Réécrire `carburant_total` sans boucle, avec une fonction qui s’appelle elle-même.
+
+**À quoi ça sert ?** La règle de la partie 2 se décrit naturellement « en fonction d’elle-même ». Cette découverte prépare la récursivité, étudiée en Terminale, et donne une seconde méthode pour vérifier la réponse.
 
 Une fonction peut s’appeler elle-même : on parle de fonction *récursive*. C’est une notion de Terminale, proposée ici pour les curieux.
 

@@ -440,6 +440,33 @@
     ]
    ],
    [
+    "Les indispensables de Première",
+    [
+     [
+      "Présentation",
+      "terminale/les-indispensables-de-premiere/index.md"
+     ]
+    ]
+   ],
+   [
+    "Lexique",
+    [
+     [
+      "Présentation",
+      "terminale/lexique/index.md"
+     ]
+    ]
+   ],
+   [
+    "Crédits iconographiques",
+    [
+     [
+      "Présentation",
+      "terminale/credits-iconographiques/index.md"
+     ]
+    ]
+   ],
+   [
     "Problèmes de synthèse et exercices type bac",
     [
      [
@@ -495,7 +522,7 @@
     "terminale/pratique/sujet-32.md"
    ]
   ],
-  "credits": true,
+  "credits": false,
   "synthese": true
  },
  "seconde": {
@@ -729,7 +756,12 @@
     "premiere/panorama-de-l-annee.md"
    ]
   ],
-  "annexes": [],
+  "annexes": [
+   [
+    "Lexique",
+    "premiere/lexique.md"
+   ]
+  ],
   "chapters": [
    [
     "1. Les bases de la programmation Python",

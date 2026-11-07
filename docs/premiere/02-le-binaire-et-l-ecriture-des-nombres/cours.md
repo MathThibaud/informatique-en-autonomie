@@ -35,7 +35,7 @@ Pourquoi deux et pas dix ? Parce que distinguer *deux* niveaux (« il y a du cou
 
 !!! definition "Définition 1 — Bit et octet"
 
-    Un **bit** (de l’anglais *binary digit*, « chiffre binaire ») est la plus petite information : un `0` ou un `1`. On regroupe les bits par paquets de huit : un paquet de 8 bits s’appelle un **octet** (*byte* en anglais).
+    Un <span id="lex-bit02" class="ancre"></span>**bit** (de l’anglais *binary digit*, « chiffre binaire ») est la plus petite information : un `0` ou un `1`. On regroupe les bits par paquets de huit : un paquet de 8 bits s’appelle un <span id="lex-octet02" class="ancre"></span>**octet** (*byte* en anglais).
 
 <span class="retouract">↺ Retour sur l'activité.</span> La rangée de lampes allumées ou éteintes de l’activité « Les cartes à points » transmettait déjà des bits, et la question des dix niveaux de luminosité était celle de la robustesse : deux états se distinguent sans erreur.
 
@@ -79,7 +79,7 @@ Le chiffre le plus à droite est au rang `0`. **Décomposer un nombre en puissan
 
     $$c_{n-1}\,b^{\,n-1} + c_{n-2}\,b^{\,n-2} + \cdots + c_1\,b^{\,1} + c_0\,b^{\,0}.$$
 
-La **base 2** (binaire) n’utilise que deux chiffres, `0` et `1`, et chaque rang pèse une puissance de 2. Pour lever toute ambiguïté, on note la base en indice : $185_{10}$, $\texttt{10111001}_2$.
+La <span id="lex-binaire02" class="ancre"></span>**base 2** (binaire) n’utilise que deux chiffres, `0` et `1`, et chaque rang pèse une puissance de 2. Pour lever toute ambiguïté, on note la base en indice : $185_{10}$, $\texttt{10111001}_2$.
 
 !!! propriete "Propriété 1 — Combien de valeurs sur $n$ bits ?"
 
@@ -126,7 +126,7 @@ On applique directement la définition : on additionne les poids des rangs qui p
 
 !!! remarque "Remarque — sur machine"
 
-    Python parle binaire couramment. Un littéral binaire s’écrit avec le préfixe `0b`. À tester :
+    Python parle binaire couramment. Un littéral binaire s’écrit avec le préfixe <span id="lex-binlit02" class="ancre"></span>`0b`. À tester :
 
     ```text
     >>> 0b10111001      # ecrire un nombre en binaire
@@ -164,13 +164,13 @@ On pose l’addition comme en base 10, rang par rang **de droite à gauche**, en
 
 ## Logique booléenne : des portes logiques à l’addition
 
-Un transistor ne sait que laisser passer le courant, ou non. Pour qu’une machine *calcule*, on assemble les transistors en **portes logiques** : de petits circuits qui reçoivent un ou deux bits et en produisent un. C’est l’idée de Shannon évoquée plus haut : les deux valeurs d’un bit sont aussi les deux valeurs « vrai / faux » de la logique de Boole.
+Un transistor ne sait que laisser passer le courant, ou non. Pour qu’une machine *calcule*, on assemble les transistors en <span id="lex-porte02" class="ancre"></span>**portes logiques** : de petits circuits qui reçoivent un ou deux bits et en produisent un. C’est l’idée de Shannon évoquée plus haut : les deux valeurs d’un bit sont aussi les deux valeurs « vrai / faux » de la logique de Boole.
 
 ### Les opérateurs `et`, `ou`, `non`
 
 !!! definition "Définition 3 — Valeur booléenne, opérateur booléen"
 
-    Une **valeur booléenne** ne prend que deux valeurs : `1` (vrai) ou `0` (faux). Un **opérateur booléen** combine des valeurs booléennes et renvoie une valeur booléenne :
+    Une <span id="lex-booleen02" class="ancre"></span>**valeur booléenne** ne prend que deux valeurs : `1` (vrai) ou `0` (faux). Un <span id="lex-opbooleen02" class="ancre"></span>**opérateur booléen** combine des valeurs booléennes et renvoie une valeur booléenne :
 
     - **non** $a$ vaut `1` si $a$ vaut `0`, et `0` si $a$ vaut `1` : il **inverse** ;
 
@@ -178,7 +178,7 @@ Un transistor ne sait que laisser passer le courant, ou non. Pour qu’une machi
 
     - $a$ **ou** $b$ vaut `1` dès qu’**au moins un** des deux vaut `1`.
 
-On résume le comportement d’un opérateur par sa **table de vérité** : une ligne par combinaison possible des entrées, avec la valeur obtenue en sortie.
+On résume le comportement d’un opérateur par sa <span id="lex-tableverite02" class="ancre"></span>**table de vérité** : une ligne par combinaison possible des entrées, avec la valeur obtenue en sortie.
 
 | $a$ | non $a$ |
 |:---:|:-------:|
@@ -204,7 +204,7 @@ Le **ou** de la logique est *inclusif* : $1$ ou $1$ vaut $1$. Dans la langue cou
 
 !!! definition "Définition 4 — Ou exclusif"
 
-    $a$ **xor** $b$ (*exclusive or*, « ou exclusif ») vaut `1` lorsque **exactement un** des deux bits vaut `1`, c’est-à-dire lorsque $a$ et $b$ sont **différents**.
+    $a$ <span id="lex-xor02" class="ancre"></span>**xor** $b$ (*exclusive or*, « ou exclusif ») vaut `1` lorsque **exactement un** des deux bits vaut `1`, c’est-à-dire lorsque $a$ et $b$ sont **différents**.
 
 | $a$ | $b$ | $a$ ou $b$ | $a$ xor $b$ |
 |:---:|:---:|:----------:|:-----------:|
@@ -270,7 +270,7 @@ Revenons à l’addition posée plus haut (« Additionner en binaire »). Dans l
 
     $$s = a \text{ xor } b \qquad\qquad r = a \text{ et } b.$$
 
-    Le circuit formé d’une porte **xor** et d’une porte **et** s’appelle un **demi-additionneur** : il additionne deux bits.
+    Le circuit formé d’une porte **xor** et d’une porte **et** s’appelle un <span id="lex-demiadd02" class="ancre"></span>**demi-additionneur** : il additionne deux bits.
 
 ![](../figures/2e442c3c9f5592ad.svg){ .tikz loading=lazy }
 
@@ -284,7 +284,7 @@ Revenons à l’addition posée plus haut (« Additionner en binaire »). Dans l
 
 ## L’hexadécimal : le binaire en plus court
 
-Écrire de longues suites de `0` et de `1` est pénible et source d’erreurs. On utilise donc très souvent la **base 16** (hexadécimal). Son intérêt : **un chiffre hexadécimal représente exactement 4 bits**, donc un octet tient en *deux* chiffres.
+Écrire de longues suites de `0` et de `1` est pénible et source d’erreurs. On utilise donc très souvent la <span id="lex-hexadecimal02" class="ancre"></span>**base 16** (hexadécimal). Son intérêt : **un chiffre hexadécimal représente exactement 4 bits**, donc un octet tient en *deux* chiffres.
 
 Il faut 16 chiffres : après `0`…`9`, on emprunte des lettres.
 
@@ -333,6 +333,8 @@ Jusqu’ici, tous nos nombres étaient positifs. Comment coder $-12$ avec des bi
 On pourrait réserver le bit de poids fort au signe (`0` pour $+$, `1` pour $-$). Mais cette idée a un défaut rédhibitoire : elle crée **deux zéros**, un « $+0$ » (`00000000`) et un « $-0$ » (`10000000`), ce qui complique tous les calculs. On lui préfère une méthode plus astucieuse.
 
 ### Le complément à deux
+
+<span id="lex-complement02" class="ancre"></span>
 
 !!! regle "Règle 4 — Coder un entier négatif sur $n$ bits"
 
@@ -384,7 +386,7 @@ La retenue finale « déborde » au-delà des 8 bits : il reste `00000000`, soit
 
     Donc `11111010` code $-6$. À l’inverse, `00101101` commence par `0` : il code directement $32 + 8 + 4 + 1 = 45$.
 
-**Le cadran du complément à deux sur 4 bits.** On range les 16 mots de 4 bits en cercle, comme les heures d’une horloge. Ajouter 1, c’est avancer d’un cran dans le sens des aiguilles d’une montre : de `1111` ($-1$) on passe à `0000` ($0$), la retenue « déborde » comme plus haut. Les mots qui commencent par `0` (à droite) sont les positifs $0$ à $7$ ; ceux qui commencent par `1` (à gauche) sont les négatifs $-8$ à $-1$. Seul piège : en bas, de `0111` ($+7$) à `1000` ($-8$), on passe brutalement du plus grand au plus petit : c’est le **dépassement de capacité**.
+**Le cadran du complément à deux sur 4 bits.** On range les 16 mots de 4 bits en cercle, comme les heures d’une horloge. Ajouter 1, c’est avancer d’un cran dans le sens des aiguilles d’une montre : de `1111` ($-1$) on passe à `0000` ($0$), la retenue « déborde » comme plus haut. Les mots qui commencent par `0` (à droite) sont les positifs $0$ à $7$ ; ceux qui commencent par `1` (à gauche) sont les négatifs $-8$ à $-1$. Seul piège : en bas, de `0111` ($+7$) à `1000` ($-8$), on passe brutalement du plus grand au plus petit : c’est le <span id="lex-depassement02" class="ancre"></span>**dépassement de capacité**.
 
 ![](../figures/2a5a0f4d0f4497e6.svg){ .tikz loading=lazy }
 
@@ -423,7 +425,7 @@ Le motif se **répète sans fin** : $0{,}1_{10} = \texttt{0,0001100110011}\ldots
 
 !!! regle "Règle 7 — Les flottants sont approchés"
 
-    Une machine ne dispose que d’un nombre **fini** de bits (souvent 64) pour stocker un nombre à virgule, appelé **flottant** (*float*). Elle doit donc **arrondir** les écritures infinies : la valeur stockée est le plus souvent une **approximation**. On ne teste **jamais** l’égalité de deux flottants.
+    Une machine ne dispose que d’un nombre **fini** de bits (souvent 64) pour stocker un nombre à virgule, appelé <span id="lex-flottant02" class="ancre"></span>**flottant** (*float*). Elle doit donc **arrondir** les écritures infinies : la valeur stockée est le plus souvent une **approximation**. On ne teste **jamais** l’égalité de deux flottants.
 
 !!! remarque "Remarque — sur machine"
 
@@ -436,7 +438,7 @@ Le motif se **répète sans fin** : $0{,}1_{10} = \texttt{0,0001100110011}\ldots
     False
     ```
 
-    Ce n’est **pas un bug** de Python (le résultat avait été constaté au chapitre *Les bases de la programmation Python*) : c’est la conséquence directe du fait que $0{,}1$ et $0{,}2$ ne sont pas représentables exactement en binaire. Pour comparer deux flottants, on teste si leur écart est *minuscule* : `abs(a - b) < 1e-9`, où `abs` donne la valeur absolue et `1e-9` désigne $10^{-9}$.
+    Ce n’est **pas un bug** de Python (le résultat avait été constaté au chapitre *Les bases de la programmation Python*) : c’est la conséquence directe du fait que $0{,}1$ et $0{,}2$ ne sont pas représentables exactement en binaire. Pour comparer deux flottants, on teste si leur écart est *minuscule* : <span id="lex-abs02" class="ancre"></span>`abs(a - b) < 1e-9`, où `abs` donne la valeur absolue et `1e-9` désigne $10^{-9}$.
 
 ### Pour aller plus loin : la norme IEEE 754
 
@@ -488,7 +490,7 @@ Nous savons coder des nombres. Or, comme annoncé au début du chapitre, **une m
 
 !!! definition "Définition 5 — Code ASCII"
 
-    L’**ASCII** (*American Standard Code for Information Interchange*, 1963) est une table qui associe à chaque caractère un numéro de `0` à `127`. Chaque caractère tient donc sur **7 bits** ($2^7 = 128$ valeurs).
+    L’<span id="lex-ascii02" class="ancre"></span>**ASCII** (*American Standard Code for Information Interchange*, 1963) est une table qui associe à chaque caractère un numéro de `0` à `127`. Chaque caractère tient donc sur **7 bits** ($2^7 = 128$ valeurs).
 
 |  car.  | code | car. | code | car. | code | car. | code |
 |:------:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
@@ -502,7 +504,7 @@ Deux régularités bien pratiques : les chiffres, les majuscules et les minuscul
 
 !!! encadre "À retenir — ord et chr en Python"
 
-    En Python, `ord` donne le code d’un caractère, et `chr` fait l’inverse.
+    <span id="lex-ordchr02" class="ancre"></span>En Python, `ord` donne le code d’un caractère, et `chr` fait l’inverse.
 
     ```text
     >>> ord("A")        # caractere -> code
@@ -521,13 +523,13 @@ L’ASCII a été conçu pour l’anglais : il ignore les **accents** (`é`, `à
 
 !!! definition "Définition 6 — Unicode et UTF-8"
 
-    **Unicode** est un *catalogue universel* qui attribue un numéro unique, appelé **point de code** (noté `U+`…), à *tous* les caractères de *toutes* les écritures (plus de 150 000 aujourd’hui). **UTF-8** est la façon la plus répandue d’*écrire ces points de code en octets* : il utilise **1 octet** pour les caractères ASCII, et **2 à 4 octets** pour les autres.
+    <span id="lex-unicode02" class="ancre"></span>**Unicode** est un *catalogue universel* qui attribue un numéro unique, appelé **point de code** (noté `U+`…), à *tous* les caractères de *toutes* les écritures (plus de 150 000 aujourd’hui). <span id="lex-utf802" class="ancre"></span>**UTF-8** est la façon la plus répandue d’*écrire ces points de code en octets* : il utilise **1 octet** pour les caractères ASCII, et **2 à 4 octets** pour les autres.
 
 UTF-8 a une qualité décisive : pour un caractère ASCII, il produit *exactement* l’octet ASCII. Un vieux fichier anglais reste donc valide, et c’est pourquoi UTF-8 s’est imposé partout (le Web est aujourd’hui à plus de 98 % en UTF-8).
 
 !!! remarque "Remarque — sur machine"
 
-    On **encode** un texte (caractères $\to$ octets) et on **décode** (octets $\to$ caractères).
+    <span id="lex-encode02" class="ancre"></span>On <span id="lex-encodage02" class="ancre"></span>**encode** un texte (caractères $\to$ octets) et on **décode** (octets $\to$ caractères).
 
     ```text
     >>> "e".encode("utf-8")     # ASCII : 1 octet
@@ -544,7 +546,7 @@ UTF-8 a une qualité décisive : pour un caractère ASCII, il produit *exactemen
 
 ### Le charabia (*mojibake*) : quand on se trompe d’encodage
 
-Un fichier texte n’est qu’une suite d’octets : **rien** n’y indique de façon absolue quel encodage a servi à l’écrire. Si on *écrit* un fichier en UTF-8 mais qu’un logiciel le *relit* comme du Latin-1, chaque octet est mal interprété et le texte s’affiche en charabia.
+<span id="lex-mojibake02" class="ancre"></span> Un fichier texte n’est qu’une suite d’octets : **rien** n’y indique de façon absolue quel encodage a servi à l’écrire. Si on *écrit* un fichier en UTF-8 mais qu’un logiciel le *relit* comme du Latin-1, chaque octet est mal interprété et le texte s’affiche en charabia.
 
 !!! exemple "Exemple — D’où vient le fameux « Ã© »"
 

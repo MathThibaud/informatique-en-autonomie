@@ -10,7 +10,7 @@ Programme (BO)
 :   *« Recherche textuelle. Étudier l’algorithme de Boyer-Moore pour la recherche d’un motif dans un texte. »* Commentaire du BO : *« L’intérêt du prétraitement du motif est mis en avant. L’étude du coût, difficile, ne peut être exigée. »*
 
 Prérequis
-:   les **chaînes de caractères** et l’accès par indice ($0$ à $n-1$), la notion de **coût** (linéaire, quadratique), les **dictionnaires** (pour le prétraitement).
+:   les **chaînes de caractères** et l’accès par indice ($0$ à $n-1$), la notion de **coût** (linéaire, quadratique), les **dictionnaires** (pour le prétraitement). $\to$ rappels de 1re : chaînes, dictionnaires, parcours et coût
 
 Objectifs
 :   *écrire* la recherche naïve ; *comprendre* les deux idées de **Boyer-Moore** (lire à l’envers, sauter loin) ; *construire* la table de prétraitement et *dérouler* **Boyer-Moore** et **Horspool**.
@@ -31,7 +31,7 @@ Chaque fois que vous faites `Ctrl+F` dans un document, que `grep` fouille un fic
 
 !!! definition "Définition 1 — Recherche textuelle"
 
-    On cherche les **occurrences** d’un **motif** (une petite chaîne, de longueur $m$) dans un **texte** (une grande chaîne, de longueur $n$, avec $m \le n$). Une occurrence est une position $i$ du texte à partir de laquelle le motif apparaît intégralement.
+    <span id="lex-recherchetextuelle12" class="ancre"></span>On cherche les **occurrences** d’un <span id="lex-motif12" class="ancre"></span>**motif** (une petite chaîne, de longueur $m$) dans un **texte** (une grande chaîne, de longueur $n$, avec $m \le n$). Une occurrence est une position $i$ du texte à partir de laquelle le motif apparaît intégralement.
 
 !!! exemple "Exemple"
 
@@ -47,7 +47,7 @@ Chaque fois que vous faites `Ctrl+F` dans un document, que `grep` fouille un fic
 
 ## La méthode naïve : la fenêtre glissante
 
-L’idée la plus simple : on **superpose** le motif au début du texte, on compare lettre à lettre ; en cas d’échec, on décale le motif d’**un seul cran** vers la droite, et on recommence.
+<span id="lex-naive12" class="ancre"></span> L’idée la plus simple : on **superpose** le motif au début du texte, on compare lettre à lettre ; en cas d’échec, on décale le motif d’**un seul cran** vers la droite, et on recommence.
 
 *Cherchons `ACG` dans `CAAGACG`. On compare de gauche à droite ; au premier désaccord, on glisse d’un cran.*
 
@@ -80,7 +80,7 @@ def recherche_naive(motif, texte):
 
 ## Boyer-Moore : lire à l’envers, et sauter loin (1977)
 
-En 1977, Robert **Boyer** et J Strother **Moore** ont une double idée, à la fois simple et géniale.
+<span id="lex-boyermoore12" class="ancre"></span> En 1977, Robert **Boyer** et J Strother **Moore** ont une double idée, à la fois simple et géniale.
 
 !!! regle "Règle 1 — Les deux idées de Boyer-Moore"
 
@@ -91,7 +91,7 @@ En 1977, Robert **Boyer** et J Strother **Moore** ont une double idée, à la fo
 
 ![](../figures/6d89f1cd4619dfa4.svg){ .tikz loading=lazy }
 
-**La règle du mauvais caractère.** Supposons qu’en comparant de droite à gauche, on bute sur un caractère `c` du texte qui ne correspond pas. Deux cas :
+<span id="lex-mauvaiscaractere12" class="ancre"></span>**La règle du mauvais caractère.** Supposons qu’en comparant de droite à gauche, on bute sur un caractère `c` du texte qui ne correspond pas. Deux cas :
 
 - `c` **n’existe pas** dans le motif : inutile d’essayer les alignements où `c` tomberait *dans* le motif — on place le motif juste **après** `c`. Si l’échec a lieu en position $j$ du motif, le saut vaut $j+1$ ; c’est **toute la longueur** $m$ du motif quand l’échec a lieu dès la dernière lettre ($j=m-1$).
 
@@ -148,7 +148,7 @@ def boyer_moore(motif, texte):
 
 ## Boyer-Moore-Horspool : la version simplifiée (1980)
 
-Le vrai Boyer-Moore combine *deux* règles de saut (le mauvais caractère *et* le « bon suffixe » <span class="horsprog">au-delà du programme</span>). En 1980, Nigel **Horspool** propose une simplification élégante, tout aussi rapide en pratique et bien plus simple à écrire — au point qu’**elle suffit** amplement au lycée.
+<span id="lex-horspool12" class="ancre"></span> Le vrai Boyer-Moore combine *deux* règles de saut (le mauvais caractère *et* le « bon suffixe » <span class="horsprog">au-delà du programme</span>). En 1980, Nigel **Horspool** propose une simplification élégante, tout aussi rapide en pratique et bien plus simple à écrire — au point qu’**elle suffit** amplement au lycée.
 
 !!! regle "Règle 2 — L’astuce de Horspool"
 
@@ -164,7 +164,7 @@ Le vrai Boyer-Moore combine *deux* règles de saut (le mauvais caractère *et* l
 
 Autrement dit : quand la comparaison échoue *avant* la fin (une partie du suffixe correspondait déjà), Boyer-Moore se sert de la lettre *à l’endroit précis* de l’échec, tandis que Horspool ignore cette position et se rabat *toujours* sur la lettre de fin de fenêtre. Horspool est donc **plus simple** — une seule règle, un seul point d’observation — et reste tout aussi rapide en pratique. *(Le « vrai » Boyer-Moore ajoute encore la règle du « bon suffixe » <span class="horsprog">au-delà du programme</span>, qui réutilise la portion du motif déjà reconnue avant l’échec.)*
 
-**Construire la table de décalage.** Pour un motif de longueur $m$, on parcourt ses lettres *sauf la dernière* : la lettre en position $k$ reçoit le décalage $m-1-k$. Toute lettre absente reçoit le décalage **$m$** (saut maximal).
+<span id="lex-tabledecalage12" class="ancre"></span>**Construire la table de décalage.** Pour un motif de longueur $m$, on parcourt ses lettres *sauf la dernière* : la lettre en position $k$ reçoit le décalage $m-1-k$. Toute lettre absente reçoit le décalage **$m$** (saut maximal).
 
 *Exemple — la table de `MOTIF` ($m=5$)* (la dernière lettre `F` n’est pas dans la table : elle prend le décalage par défaut $5$) :
 
@@ -275,7 +275,7 @@ def horspool(motif, texte):
 
 !!! regle "Règle 3 — Complexité (non exigible au bac)"
 
-    **Prétraitement** : construire la table coûte $O(m)$ (une seule passe sur le motif ; les lettres absentes du motif ne sont pas stockées : elles reçoivent le décalage par défaut $m$). Comme la mémoïsation du chapitre 11, on dépense un peu de mémoire pour gagner du temps.  
+    <span id="lex-pretraitement12" class="ancre"></span>**Prétraitement** : construire la table coûte $O(m)$ (une seule passe sur le motif ; les lettres absentes du motif ne sont pas stockées : elles reçoivent le décalage par défaut $m$). Comme la mémoïsation du chapitre 11, on dépense un peu de mémoire pour gagner du temps.  
     **Recherche** : dans le *pire* cas, on reste en $O(n\times m)$ (comme le naïf). Mais en **pratique**, sur un texte « ordinaire », les sauts sont si grands qu’on est **sous-linéaire** : de l’ordre de $O(n/m)$ comparaisons.
 
 C’est le **prodige** de Boyer-Moore : il peut trouver un mot **sans lire tout le texte**. Et — contre-intuition merveilleuse — *plus le motif est long, plus la recherche est rapide*, car les sauts possibles sont plus grands. C’est cet algorithme (ou ses cousins) qui fait tourner `Ctrl+F` et `grep`.

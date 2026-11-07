@@ -22,7 +22,21 @@
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
-*Ce défi réinvestit l’écriture binaire des entiers (chapitre précédent) avec les tableaux de ce chapitre.*
+!!! encadre "Le défi en bref"
+
+    **Le problème.** Le fichier contient un millier de nombres écrits en binaire, tous de même longueur. Il faut les étudier **colonne par colonne** (quel bit est le plus fréquent à chaque position ?) pour fabriquer deux nouveaux nombres binaires, puis les convertir en base 10. Compter les `1` d’une colonne sur mille lignes, et recommencer pour chaque colonne : c’est un travail pour un programme.
+
+    **Ce qu’on réinvestit.** L’**écriture binaire des entiers**, vue au chapitre précédent : lire un nombre bit par bit et le convertir en base 10 avec les puissances de 2. Les **tableaux** de ce chapitre : on garde la liste des lignes sous forme de chaînes, ce qui permet d’accéder au bit d’indice `k` de chaque nombre, et en partie 2 on construit des listes de plus en plus courtes par filtrage.
+
+    **La démarche de la fiche.**
+
+    1.  Comprendre la règle avec des questions courtes, puis la faire à la main sur sept nombres dont on connaît la réponse.
+
+    2.  Lire le fichier en gardant chaque ligne sous forme de chaîne.
+
+    3.  Écrire une fonction qui compte les `1` d’une colonne, puis construire $\gamma$ et $\varepsilon$ et les convertir : réponse de la partie 1.
+
+    4.  Pour la partie 2, réutiliser ce comptage pour filtrer la liste colonne après colonne.
 
 ## Lire l’énoncé
 
@@ -38,17 +52,25 @@ Vocabulaire utile pour lire le texte original :
 
 !!! encadre "Résumé de l’énoncé (partie 1)"
 
-    **Contexte.** Le sous-marin fait des bruits inquiétants, et l’on demande son rapport de diagnostic. Ce rapport est une liste de nombres binaires, tous de même longueur, un par ligne. On ne lit pas ces nombres un par un : on les étudie colonne par colonne pour en déduire deux nombres qui mesurent la consommation électrique du sous-marin.
+    **Contexte.** Le sous-marin fait des bruits inquiétants, et l’on demande son rapport de diagnostic. Ce rapport ne se lit pas nombre par nombre : on l’étudie colonne par colonne pour en déduire deux nombres, $\gamma$ (*gamma*) et $\varepsilon$ (*epsilon*), qui permettent de calculer la consommation électrique du sous-marin.
 
-    **Ce qu’il faut faire.**
+    **Les données.** Chaque ligne du fichier est un nombre écrit en binaire, c’est-à-dire une suite de `0` et de `1`, comme `00110`. Toutes les lignes ont la même longueur ; on peut donc les écrire les unes sous les autres et lire des **colonnes** : la colonne $k$ réunit les bits en position $k$ de tous les nombres.
 
-    - Le nombre $\gamma$ (*gamma*) se construit bit par bit : son bit en position $k$ est le bit **le plus fréquent** dans la colonne $k$ du rapport.
+    **La règle.**
 
-    - Le nombre $\varepsilon$ (*epsilon*) se construit de même avec le bit **le moins fréquent** de chaque colonne. Autrement dit, $\varepsilon$ s’écrit avec les bits contraires de ceux de $\gamma$.
+    - Le nombre $\gamma$ se construit bit par bit : son bit en position $k$ est le bit **le plus fréquent** dans la colonne $k$ du rapport.
 
-    - Réponse : le produit des valeurs **en base 10** de $\gamma$ et $\varepsilon$.
+    - Le nombre $\varepsilon$ se construit de même avec le bit **le moins fréquent** de chaque colonne. Autrement dit, $\varepsilon$ s’écrit avec les bits contraires de ceux de $\gamma$.
+
+    - On convertit ensuite $\gamma$ et $\varepsilon$ de la base 2 vers la base 10.
+
+    **La réponse attendue.** Le produit des valeurs **en base 10** de $\gamma$ et $\varepsilon$. Par exemple, pour les trois nombres `110`, `100` et `011`, les bits les plus fréquents des trois colonnes sont `1`, `1` et `0` : $\gamma$ s’écrit `110` (soit 6) et $\varepsilon$ s’écrit `001` (soit 1), donc la réponse serait $6 \times 1 = 6$.
 
 ### <span class="exo-num">Exercice 1</span> — Comprendre ce qui est demandé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-les-types-construits-aoc-1-1 }
+
+**But.** Vérifier sur des cas particuliers qu’on a bien compris la construction de $\gamma$ et $\varepsilon$, et la façon de lire les données.
+
+**À quoi ça sert ?** La deuxième question, en particulier, décide de la façon de stocker les lignes dans le programme : une mauvaise décision ici fausse tout le reste sans message d’erreur.
 
 Après lecture du résumé (et de l’énoncé), vérifier sa compréhension sur ces cas particuliers :
 
@@ -59,6 +81,10 @@ Après lecture du résumé (et de l’énoncé), vérifier sa compréhension sur
 3.  Les nombres $\gamma$ et $\varepsilon$ ont-ils toujours des bits opposés ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-les-types-construits-aoc-1-2 }
+
+**But.** Construire $\gamma$ et $\varepsilon$ à la main sur sept nombres, puis les convertir en base 10.
+
+**À quoi ça sert ?** On obtient un exemple dont on **connaît la réponse** (220), qui servira à tester chaque fonction du programme ; la conversion à la main est aussi celle que le programme devra faire.
 
 On considère le fichier (inventé) suivant :
 
@@ -77,6 +103,10 @@ Pour chaque colonne, compter les `1` et les `0`. Écrire le *gamma rate* et l’
 ## Programmer la partie 1
 
 ### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-les-types-construits-aoc-1-3 }
+
+**But.** Ranger les lignes du fichier dans une liste `nombres`, sans les convertir.
+
+**À quoi ça sert ?** Toutes les questions suivantes travaillent sur cette liste. La garder sous forme de chaînes permet de lire directement le bit d’indice `k` de chaque nombre, et de ne pas perdre les zéros de tête.
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
@@ -107,6 +137,10 @@ Construire la liste `nombres` des lignes, **gardées sous forme de chaînes** : 
 
 ### <span class="exo-num">Exercice 4</span> — Compter une colonne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-les-types-construits-aoc-1-4 }
 
+**But.** Écrire une fonction qui compte combien de nombres ont un `1` dans une colonne donnée.
+
+**À quoi ça sert ?** Connaissant le nombre de `1` d’une colonne, on en déduit le nombre de `0` et donc le bit le plus fréquent : c’est l’outil qui sert à construire $\gamma$ et $\varepsilon$, puis à chaque étape de la partie 2.
+
 Écrire une fonction `nb_uns(nombres, k)` qui renvoie le nombre de lignes dont le bit d’indice `k` vaut `"1"`. Sur l’exemple, `nb_uns(nombres, 0)` vaut `5`.
 
 ??? pouce "Coup de pouce"
@@ -130,6 +164,10 @@ Construire la liste `nombres` des lignes, **gardées sous forme de chaînes** : 
 
 ### <span class="exo-num">Exercice 5</span> — Gamma, epsilon et conversion <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-les-types-construits-aoc-1-5 }
 
+**But.** Construire les chaînes `gamma` et `epsilon` colonne par colonne, les convertir en base 10 et calculer la réponse de la partie 1.
+
+**À quoi ça sert ?** C’est l’aboutissement de la partie 1. La fonction de conversion `binaire_vers_entier` resservira telle quelle pour les deux valeurs de la partie 2.
+
 Construire les chaînes `gamma` et `epsilon` colonne par colonne, puis calculer la réponse. Pour convertir, écrire d’abord votre propre fonction `binaire_vers_entier(s)` ; vérifier ensuite avec la fonction toute faite `int(s, 2)`.
 
 ??? pouce "Coup de pouce"
@@ -146,9 +184,27 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 !!! encadre "Résumé de la partie 2 (à lire après avoir validé la partie 1)"
 
-    On vérifie ensuite le système de survie, à partir de deux valeurs obtenues par élimination. On examine les colonnes de gauche à droite ; à chaque colonne, on ne garde que les nombres dont le bit vaut le bit le plus fréquent (première valeur) ou le moins fréquent (seconde valeur), **calculé sur les nombres restants**. On s’arrête quand il n’en reste qu’un. En cas d’égalité, on garde `1` pour la première valeur et `0` pour la seconde. Réponse : le produit des deux valeurs en base 10.
+    **Ce qui change.** On vérifie maintenant le système de survie du sous-marin. Il faut encore deux valeurs, mais elles ne se construisent plus bit par bit : chacune est l’un des nombres du rapport, trouvé par **élimination**.
+
+    **La nouvelle règle.**
+
+    - On part de la liste complète et l’on examine les colonnes de gauche à droite.
+
+    - Pour la première valeur, à chaque colonne, on ne garde que les nombres dont le bit vaut le bit **le plus fréquent** de cette colonne ; en cas d’égalité, on garde ceux qui ont un `1`.
+
+    - Pour la seconde valeur, on garde au contraire ceux dont le bit vaut le bit **le moins fréquent** ; en cas d’égalité, on garde ceux qui ont un `0`.
+
+    - Le bit le plus ou le moins fréquent se calcule **sur les nombres restants**, pas sur la liste de départ.
+
+    - On s’arrête dès qu’il ne reste qu’un nombre : c’est la valeur cherchée.
+
+    **La réponse attendue.** Le produit des deux valeurs en base 10. Par exemple, avec `110`, `100` et `011` : pour la première valeur, la colonne 0 fait garder `110` et `100`, puis la colonne 1 est à égalité, on garde `110` (soit 6) ; pour la seconde, la colonne 0 ne laisse que `011` (soit 3). La réponse serait $6 \times 3 = 18$.
 
 ### <span class="exo-num">Exercice 6</span> — Filtrer la liste <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-les-types-construits-aoc-1-6 }
+
+**But.** Écrire une fonction qui ne garde que les nombres ayant un bit donné dans une colonne, puis l’appliquer colonne après colonne jusqu’à ce qu’il ne reste qu’un nombre.
+
+**À quoi ça sert ?** Le filtrage, répété, donne chacune des deux valeurs de la partie 2. On réutilise la fonction de comptage de la partie 1 (sur la liste restante) et la fonction de conversion pour obtenir la réponse.
 
 Écrire une fonction `filtrer(nombres, k, bit)` qui renvoie la nouvelle liste des seuls nombres dont le bit d’indice `k` vaut `bit`. Puis écrire une fonction qui applique le procédé de la partie 2 colonne après colonne jusqu’à ce qu’il ne reste qu’un nombre. Lire très attentivement la règle en cas d’**égalité** : elle n’est pas la même pour les deux valeurs. Sur l’exemple du défi, on doit trouver `22` et `6`, donc la réponse `132`.
 
@@ -163,6 +219,10 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 ## Approfondissement
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : sans chaînes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-les-types-construits-aoc-1-7 }
+
+**But.** Refaire la partie 1 en manipulant directement des entiers, sans passer par des chaînes de caractères.
+
+**À quoi ça sert ?** On retrouve un bit par des divisions entières et des restes : c’est le lien entre l’écriture binaire et l’arithmétique du chapitre précédent, et une autre façon, plus économe, de traiter les mêmes données.
 
 1.  À la main : avec 5 bits, quel est le bit de poids $2^2$ de $22 = \texttt{10110}_2$ ? Calculer `(22 // 4) % 2` et comparer.
 

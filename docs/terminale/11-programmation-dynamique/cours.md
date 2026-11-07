@@ -10,7 +10,7 @@ Programme (BO)
 :   *« Programmation dynamique. Utiliser la programmation dynamique pour écrire un algorithme. »* Commentaire du BO : *« Les exemples de l’alignement de séquences ou du rendu de monnaie peuvent être présentés. La discussion sur le coût en mémoire peut être développée. »*
 
 Prérequis
-:   la **récursivité** (absolument indispensable), la notion de **coût** d’un algorithme (linéaire, quadratique, exponentiel), les **listes** et les **dictionnaires**, et le souvenir des **algorithmes gloutons** de Première. (→ fiches de révision : ch. 1)
+:   la **récursivité** (absolument indispensable), la notion de **coût** d’un algorithme (linéaire, quadratique, exponentiel), les **listes** et les **dictionnaires**, et le souvenir des **algorithmes gloutons** de Première. (→ fiches de révision : ch. 1) $\to$ rappels de 1re : listes, dictionnaires, parcours et coût
 
 Objectifs
 :   *reconnaître* un problème qui se prête à la programmation dynamique (sous-problèmes qui *se recouvrent*) ; *mémoïser* une fonction récursive (*top-down*) ; *tabuler* un problème de bas en haut (*bottom-up*) ; *comprendre* que ce sont deux faces d’une même idée ; l’*appliquer* au rendu de monnaie, au sac à dos, à la comparaison de deux mots.
@@ -49,7 +49,7 @@ Ce code est *juste*, mais son temps de calcul explose : il est multiplié par en
 
 !!! regle "Règle 1 — Le constat qui lance tout le chapitre"
 
-    La récursivité naïve est parfois catastrophique parce qu’elle **recalcule sans cesse les mêmes sous-problèmes**. L’idée de toute la programmation dynamique tient en une phrase : **ne jamais calculer deux fois la même chose**. On *retient* le résultat d’un sous-problème la première fois, et on le *réutilise* ensuite.
+    La récursivité naïve est parfois catastrophique parce qu’elle **recalcule sans cesse les mêmes sous-problèmes**. <span id="lex-progdyn11" class="ancre"></span>L’idée de toute la programmation dynamique tient en une phrase : **ne jamais calculer deux fois la même chose**. On *retient* le résultat d’un sous-problème la première fois, et on le *réutilise* ensuite.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Dans l’activité, le temps de `fibo` était multiplié par environ $4$ chaque fois que $n$ augmentait de $3$ (car $1{,}6^3 \approx 4$), et l’arbre de `fibo(5)` comptait $15$ appels, dont trois calculs de `fibo(2)` : ce recalcul rend le programme inutilisable pour $n = 50$.
 
@@ -61,7 +61,7 @@ Ce fil rouge — « garder pour ne pas refaire » — va traverser tout le chapi
 
 !!! definition "Définition 1 — Mémoïsation"
 
-    La **mémoïsation** consiste à munir une fonction récursive d’un **dictionnaire** (le « carnet ») qui associe à chaque argument déjà rencontré le résultat correspondant. On dit que l’on résout le problème **de haut en bas** (*top-down*) : on garde la structure récursive descendante, mais chaque sous-problème n’est **résolu qu’une seule fois**.
+    La <span id="lex-memoisation11" class="ancre"></span>**mémoïsation** consiste à munir une fonction récursive d’un **dictionnaire** (le « carnet ») qui associe à chaque argument déjà rencontré le résultat correspondant. On dit que l’on résout le problème **de haut en bas** (*top-down*) : on garde la structure récursive descendante, mais chaque sous-problème n’est **résolu qu’une seule fois**.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Le « carnet » imaginé dans l’activité était exactement ce dictionnaire : avec lui, `fibo(6)` ne demande plus que $5$ additions au lieu de $12$, et `fibo(40)` seulement $39$.
 
@@ -85,7 +85,7 @@ Arbre de `fibo(5)` *mémoïsé* : les nœuds en pointillés gris `3` et `2`, dé
 
 !!! remarque "Remarque"
 
-    Le paramètre `memo={}` par défaut est pratique mais c’est un **piège classique** : en Python, un argument par défaut mutable est **partagé** entre tous les appels (voir le chapitre 1). Ici cela nous arrange (le carnet survit d’un appel à l’autre), mais dans un autre contexte cela cause des bugs sournois. Une version plus sûre passe le dictionnaire explicitement, ou l’initialise à `None`.
+    Le paramètre <span id="lex-pymemo11" class="ancre"></span>`memo={}` par défaut est pratique mais c’est un **piège classique** : en Python, un argument par défaut mutable est **partagé** entre tous les appels (voir le chapitre 1). Ici cela nous arrange (le carnet survit d’un appel à l’autre), mais dans un autre contexte cela cause des bugs sournois. Une version plus sûre passe le dictionnaire explicitement, ou l’initialise à `None`.
 
 <span id="cours-11-1" class="ancre"></span>
 
@@ -97,7 +97,7 @@ L’autre stratégie renverse le point de vue. Plutôt que de partir du problèm
 
 !!! definition "Définition 2 — Tabulation"
 
-    La **tabulation** consiste à résoudre les sous-problèmes **du plus petit au plus grand** en rangeant leurs résultats dans un **tableau** (une « table »). On dit que l’on résout le problème **de bas en haut** (*bottom-up*) : chaque case du tableau se calcule à partir de cases déjà remplies.
+    La <span id="lex-tabulation11" class="ancre"></span>**tabulation** consiste à résoudre les sous-problèmes **du plus petit au plus grand** en rangeant leurs résultats dans un **tableau** (une « table »). On dit que l’on résout le problème **de bas en haut** (*bottom-up*) : chaque case du tableau se calcule à partir de cases déjà remplies.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Le tableau rempli de gauche à droite à la fin de l’activité ($0, 1, 1, 2, 3, 5, 8, \dots, 55$) était une tabulation : on part des petits cas et l’on remonte, sans aucun appel récursif.
 
@@ -149,13 +149,13 @@ Mémoïsation et tabulation résolvent **le même problème** avec **la même id
 
 ## Un cas d’école : le rendu de monnaie
 
-Vous devez rendre une somme avec le **moins de pièces possible**, en piochant dans un système de valeurs, par exemple $\{1, 2, 5\}$. En Première, vous avez vu l’algorithme **glouton** : prendre à chaque fois la plus grosse pièce possible. C’est rapide, mais…
+<span id="lex-rendumonnaie11" class="ancre"></span> Vous devez rendre une somme avec le **moins de pièces possible**, en piochant dans un système de valeurs, par exemple $\{1, 2, 5\}$. En Première, vous avez vu l’algorithme <span id="lex-glouton11" class="ancre"></span>**glouton** : prendre à chaque fois la plus grosse pièce possible. C’est rapide, mais…
 
 !!! propriete "Propriété 1 — Le glouton peut se tromper"
 
     Avec le système $\{1, 3, 4\}$, pour rendre $6$, le glouton prend $4$, puis $1$, puis $1$ : **trois** pièces. Or $3 + 3$ suffit : **deux** pièces. Le glouton n’est **pas toujours optimal**. Pour être *sûr* d’avoir le minimum, il faut explorer toutes les possibilités… intelligemment.
 
-Posons la **relation de récurrence**. Notons $R(s)$ le nombre minimal de pièces pour rendre la somme $s$. Pour rendre $s$, on choisit une première pièce $p$ (avec $p \leq s$), et il reste alors à rendre $s - p$ de façon optimale. On essaie *toutes* les premières pièces et on garde la meilleure :
+Posons la <span id="lex-relationrecurrence11" class="ancre"></span>**relation de récurrence**. Notons $R(s)$ le nombre minimal de pièces pour rendre la somme $s$. Pour rendre $s$, on choisit une première pièce $p$ (avec $p \leq s$), et il reste alors à rendre $s - p$ de façon optimale. On essaie *toutes* les premières pièces et on garde la meilleure :
 
 $$R(0) = 0, \qquad R(s) = 1 + \min_{p \leq s}\ R(s - p).$$
 
@@ -179,7 +179,7 @@ def rendu(somme, pieces, memo=None):
     return meilleur
 ```
 
-`float("inf")` est l’infini de Python, plus grand que tout nombre : la première solution trouvée le remplace toujours (voir l’encadré « Outil Python : l’infini » du projet Dijkstra, chapitre 8).
+<span id="lex-pyfloatinf11" class="ancre"></span>`float("inf")` est l’infini de Python, plus grand que tout nombre : la première solution trouvée le remplace toujours (voir l’encadré « Outil Python : l’infini » du projet Dijkstra, chapitre 8).
 
 **Version tabulée (bottom-up).** On remplit un tableau `table[s]` $= R(s)$ pour $s$ allant de $0$ à la somme voulue :
 
@@ -209,7 +209,7 @@ def rendu(somme, pieces):
 
 ## Un tableau à deux dimensions : le sac à dos
 
-Certains problèmes ont besoin d’une table à **deux entrées**. Le plus célèbre est le **sac à dos** : un sac supporte un poids maximal $C$ (sa *capacité*) ; chaque objet $i$ a un poids $w_i$ et une valeur $v_i$ ; on veut **maximiser la valeur totale** emportée sans dépasser $C$.
+Certains problèmes ont besoin d’une table à **deux entrées**. Le plus célèbre est le <span id="lex-sacados11" class="ancre"></span>**sac à dos** : un sac supporte un poids maximal $C$ (sa *capacité*) ; chaque objet $i$ a un poids $w_i$ et une valeur $v_i$ ; on veut **maximiser la valeur totale** emportée sans dépasser $C$.
 
 L’idée : on considère les objets un par un. Notons $T[i][c]$ la meilleure valeur atteignable avec les $i$ premiers objets et une capacité $c$. Pour l’objet $i$, deux choix :
 
@@ -257,7 +257,7 @@ def sac_a_dos(poids, valeurs, capacite):
 
 ## Comparer deux mots : la plus longue sous-séquence commune
 
-Dernier grand classique, très présent au bac et utilisé en vrai (correcteurs orthographiques, `diff` de deux fichiers, comparaison d’ADN). Une **sous-séquence** d’un mot, c’est ce qu’il reste en *effaçant* des lettres sans changer l’ordre des autres. On cherche la plus longue sous-séquence commune (PLSC) à deux mots.
+Dernier grand classique, très présent au bac et utilisé en vrai (correcteurs orthographiques, `diff` de deux fichiers, comparaison d’ADN). Une <span id="lex-plsc11" class="ancre"></span>**sous-séquence** d’un mot, c’est ce qu’il reste en *effaçant* des lettres sans changer l’ordre des autres. On cherche la plus longue sous-séquence commune (PLSC) à deux mots.
 
 Notons $L[i][j]$ la longueur de la PLSC entre les $i$ premières lettres de $A$ et les $j$ premières de $B$. La récurrence compare les dernières lettres :
 
@@ -298,7 +298,7 @@ La plus longue sous-séquence commune mesure une *ressemblance*. Sa cousine mesu
 
 !!! definition "Définition 3 — Distance d’édition (ou de Levenshtein)"
 
-    La **distance d’édition** entre deux mots est le **nombre minimal d’opérations élémentaires** pour transformer le premier en le second, les trois opérations autorisées étant : **insérer** une lettre, **supprimer** une lettre, ou **substituer** une lettre par une autre.
+    La <span id="lex-distanceedition11" class="ancre"></span>**distance d’édition** entre deux mots est le **nombre minimal d’opérations élémentaires** pour transformer le premier en le second, les trois opérations autorisées étant : **insérer** une lettre, **supprimer** une lettre, ou **substituer** une lettre par une autre.
 
 Le raisonnement est le même que pour la plus longue sous-séquence commune : on compare les *dernières* lettres. Notons $D[i][j]$ la distance d’édition entre les $i$ premières lettres de $A$ et les $j$ premières de $B$.
 
@@ -358,9 +358,9 @@ Tous ces exemples partagent la même ossature. C’est elle qu’il faut savoir 
 
     Un problème se résout par programmation dynamique quand il réunit **deux ingrédients** :
 
-    1.  **des sous-problèmes qui se recouvrent** : la solution fait appel plusieurs fois aux mêmes sous-calculs (sinon, mémoïser ne servirait à rien) ;
+    1.  <span id="lex-recouvrement11" class="ancre"></span>**des sous-problèmes qui se recouvrent** : la solution fait appel plusieurs fois aux mêmes sous-calculs (sinon, mémoïser ne servirait à rien) ;
 
-    2.  **une sous-structure optimale** : la solution optimale du problème se construit à partir des solutions optimales de ses sous-problèmes.
+    2.  <span id="lex-sousstructure11" class="ancre"></span>**une sous-structure optimale** : la solution optimale du problème se construit à partir des solutions optimales de ses sous-problèmes.
 
     La démarche est alors toujours la même : **(a)** définir clairement ce que représente un sous-problème ; **(b)** écrire la **relation de récurrence** qui le relie à de plus petits ; **(c)** l’emballer soit en *mémoïsation*, soit en *tabulation*.
 

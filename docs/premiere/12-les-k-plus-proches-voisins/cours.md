@@ -31,11 +31,11 @@ Objectifs
 
 ## Apprendre à une machine à reconnaître
 
-Reconnaître un visage, filtrer un courriel indésirable, diagnostiquer une maladie sur une radio, suggérer une chanson : derrière ces prouesses se cache souvent la même idée, l’**apprentissage automatique** (*machine learning*). Plutôt que de *programmer* explicitement toutes les règles, on **montre des exemples** à la machine et on la laisse **généraliser**.
+Reconnaître un visage, filtrer un courriel indésirable, diagnostiquer une maladie sur une radio, suggérer une chanson : derrière ces prouesses se cache souvent la même idée, l’<span id="lex-apprentissage12" class="ancre"></span>**apprentissage automatique** (*machine learning*). Plutôt que de *programmer* explicitement toutes les règles, on **montre des exemples** à la machine et on la laisse **généraliser**.
 
 !!! definition "Définition 1 — Classification supervisée"
 
-    On dispose d’un ensemble d’**exemples déjà étiquetés** : pour chacun, on connaît ses **descripteurs** (des mesures) *et* sa **classe** (son étiquette). On reçoit ensuite un **nouvel individu** dont on connaît les descripteurs mais **pas** la classe, et on veut la **prédire**. C’est de l’**apprentissage supervisé** : la machine apprend « sous la supervision » d’exemples corrigés.
+    <span id="lex-supervise12" class="ancre"></span>On dispose d’un ensemble d’**exemples déjà étiquetés** : pour chacun, on connaît ses <span id="lex-descripteur12" class="ancre"></span>**descripteurs** (des mesures) *et* sa <span id="lex-classe12" class="ancre"></span>**classe** (son étiquette). On reçoit ensuite un **nouvel individu** dont on connaît les descripteurs mais **pas** la classe, et on veut la **prédire**. C’est de l’**apprentissage supervisé** : la machine apprend « sous la supervision » d’exemples corrigés.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Dans l’activité « Quel est ce fruit ? », le primeur disposait ainsi de 15 fruits déjà étiquetés (mandarine, orange ou citron), décrits par deux descripteurs, la largeur et la hauteur ; il fallait prédire la sorte de A, B et C.
 
@@ -80,7 +80,7 @@ Pour dire qui « ressemble » à qui, il faut mesurer une **distance**. En 2D, c
 
 !!! definition "Définition 2 — Distance euclidienne"
 
-    Entre deux individus $A=(a_1, \dots, a_p)$ et $B=(b_1, \dots, b_p)$ décrits par $p$ descripteurs,
+    <span id="lex-distance12" class="ancre"></span>Entre deux individus $A=(a_1, \dots, a_p)$ et $B=(b_1, \dots, b_p)$ décrits par $p$ descripteurs,
 
     $$d(A,B) = \sqrt{(a_1-b_1)^2 + (a_2-b_2)^2 + \dots + (a_p-b_p)^2}\,.$$
 
@@ -122,7 +122,7 @@ donc  $d = \sqrt{1.13} \approx 1.06$.
 
 !!! regle "Règle 2 — La méthode des $k$-NN"
 
-    Pour classer un nouvel individu $x$ :
+    <span id="lex-knn12" class="ancre"></span>Pour classer un nouvel individu $x$ :
 
     1.  calculer la **distance** de $x$ à **chaque** exemple connu ;
 
@@ -190,7 +190,7 @@ On assemble le tout en Python. On réutilise le **tri par clé** (chapitres *Les
 
 ## La frontière de décision et le choix de $k$
 
-Imaginons qu’on **colorie** tout le plan selon la classe que le $k$-NN prédirait en chaque point : on obtient des **régions** colorées, séparées par une **frontière de décision**. Cette frontière change avec $k$.
+Imaginons qu’on **colorie** tout le plan selon la classe que le $k$-NN prédirait en chaque point : on obtient des **régions** colorées, séparées par une <span id="lex-frontiere12" class="ancre"></span>**frontière de décision**. Cette frontière change avec $k$.
 
 ![](../img/12_frontiere_knn.png){ .photo loading=lazy style="width:100%" }
 
@@ -220,7 +220,7 @@ Un classifieur peut sembler parfait… sur les exemples qu’il connaît déjà
 
     On coupe le jeu de données en deux :
 
-    - un **jeu d’entraînement** : les exemples que le $k$-NN utilise pour voter ;
+    - un <span id="lex-entrainement12" class="ancre"></span>**jeu d’entraînement** : les exemples que le $k$-NN utilise pour voter ;
 
     - un **jeu de test** : d’autres exemples, **étiquetés** eux aussi, mais dont on *cache* l’étiquette pour vérifier la prédiction.
 
@@ -247,7 +247,7 @@ def taux_reussite(train, test, k):
 
 !!! regle "Règle 6 — Normaliser des descripteurs d’échelles différentes"
 
-    Si un descripteur va de 0 à 1 et un autre de 0 à 1000, le second **écrase** le premier dans la distance. Exemple : classer des personnes par leur **âge** (0–100) et leur **revenu** (0–5000). Un écart de 10 ans (énorme) pèse $10^2=100$, un écart de 200 € (minime) pèse $200^2 = 40\,000$ : le revenu **domine** tout. **Solution** : *normaliser*, c’est-à-dire ramener chaque descripteur à la même échelle (par exemple entre 0 et 1) pour qu’ils comptent **équitablement**.
+    <span id="lex-normaliser12" class="ancre"></span>Si un descripteur va de 0 à 1 et un autre de 0 à 1000, le second **écrase** le premier dans la distance. Exemple : classer des personnes par leur **âge** (0–100) et leur **revenu** (0–5000). Un écart de 10 ans (énorme) pèse $10^2=100$, un écart de 200 € (minime) pèse $200^2 = 40\,000$ : le revenu **domine** tout. **Solution** : *normaliser*, c’est-à-dire ramener chaque descripteur à la même échelle (par exemple entre 0 et 1) pour qu’ils comptent **équitablement**.
 
 !!! curieux "Pour les curieux (facultatif) — La malédiction de la dimension"
 

@@ -33,7 +33,7 @@ Objectifs
 
 !!! definition "Définition 1 — Parcours séquentiel"
 
-    **Parcourir** un tableau, c’est examiner ses éléments **un par un**, du premier au dernier. On dit aussi *parcours linéaire*.
+    <span id="lex-parcours04" class="ancre"></span>**Parcourir** un tableau, c’est examiner ses éléments **un par un**, du premier au dernier. On dit aussi *parcours linéaire*.
 
 La plupart des traitements suivent le même **squelette**, dit motif de l’**accumulateur** : on prépare un résultat, on le met à jour à chaque élément, on le renvoie.
 
@@ -87,7 +87,7 @@ La plupart des traitements suivent le même **squelette**, dit motif de l’**ac
 
 !!! encadre "À retenir — Le bon élément neutre"
 
-    On initialise l’accumulateur avec l’**élément neutre** de l’opération : `0` pour une somme ou un compteur, `1` pour un produit, `""` pour concaténer du texte, `[]` pour construire un tableau.
+    On initialise l’accumulateur avec l’<span id="lex-neutre04" class="ancre"></span>**élément neutre** de l’opération : `0` pour une somme ou un compteur, `1` pour un produit, `""` pour concaténer du texte, `[]` pour construire un tableau.
 
 <span id="cours-04-3" class="ancre"></span>
 
@@ -99,7 +99,7 @@ Chercher, c’est parcourir jusqu’à trouver. Deux questions distinctes : **l�
 
 !!! regle "Règle 2 — Recherche séquentielle"
 
-    On parcourt le tableau ; dès qu’on trouve, on peut **s’arrêter** (`return`). Si le parcours se termine sans succès, l’élément est absent.
+    <span id="lex-rechseq04" class="ancre"></span>On parcourt le tableau ; dès qu’on trouve, on peut **s’arrêter** (`return`). Si le parcours se termine sans succès, l’élément est absent.
 
 ```python
 def est_present(t, x):
@@ -130,6 +130,8 @@ def indice(t, x):
 
 ## Le plus grand, le plus petit : l’invariant du champion
 
+<span id="lex-champion04" class="ancre"></span>
+
 Pas de raccourci ici : pour connaître le maximum, il faut avoir **tout** regardé. On garde un « champion provisoire », mis à jour dès qu’on rencontre mieux.
 
 ```python
@@ -147,7 +149,7 @@ Déroulons `maximum([4, 9, 2, 11, 7, 3])`. Les barres sont les éléments, dans 
 
 !!! regle "Règle 3 — Un invariant de boucle"
 
-    À **chaque** tour, la variable `m` contient le maximum des éléments **déjà vus**. Cette propriété, vraie au départ et préservée à chaque tour, s’appelle un **invariant de boucle** : elle *garantit* qu’à la fin, `m` est bien le maximum de *tout* le tableau. C’est ainsi qu’on **prouve** qu’un algorithme est correct.
+    À **chaque** tour, la variable `m` contient le maximum des éléments **déjà vus**. Cette propriété, vraie au départ et préservée à chaque tour, s’appelle un <span id="lex-invariant04" class="ancre"></span>**invariant de boucle** : elle *garantit* qu’à la fin, `m` est bien le maximum de *tout* le tableau. C’est ainsi qu’on **prouve** qu’un algorithme est correct.
 
 <span class="retouract">↺ Retour sur l'activité.</span> La carte en main du chercheur, dans l’activité « La carte la plus haute », était ce champion : à tout moment, c’était la plus haute des cartes déjà retournées. Impossible de s’arrêter avant la fin de la pile : la dernière carte pouvait être plus haute.
 
@@ -182,7 +184,7 @@ Dire qu’une propriété est un invariant, cela ne se devine pas : cela se **d�
 
     2.  **Hérédité** (ou *conservation*) : *si* $P$ est vraie avant un tour quelconque, *alors* elle est encore vraie après ce tour.
 
-    Si ces deux points tiennent, $P$ est vraie à **chaque** tour. En ajoutant qu’à la fin la boucle a parcouru *tout* le tableau, on obtient la **correction** de l’algorithme.
+    Si ces deux points tiennent, $P$ est vraie à **chaque** tour. En ajoutant qu’à la fin la boucle a parcouru *tout* le tableau, on obtient la <span id="lex-correction04" class="ancre"></span>**correction** de l’algorithme.
 
 !!! exemple "Exemple — Preuve pour le champion du maximum"
 
@@ -218,7 +220,7 @@ Deux algorithmes peuvent tous deux être *corrects*, mais l’un être bien plus
 
 !!! definition "Définition 2 — Coût, coût linéaire"
 
-    Le **coût** d’un algorithme est le nombre d’opérations élémentaires qu’il effectue, exprimé en fonction de la taille `n` des données. Un parcours simple fait un nombre d’opérations **proportionnel à `n`** : on dit que son coût est **linéaire**.
+    Le <span id="lex-cout04" class="ancre"></span>**coût** d’un algorithme est le nombre d’opérations élémentaires qu’il effectue, exprimé en fonction de la taille `n` des données. Un parcours simple fait un nombre d’opérations **proportionnel à `n`** : on dit que son coût est <span id="lex-lineaire04" class="ancre"></span>**linéaire**.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Pour 10 cartes, le chercheur faisait 9 comparaisons, pour 52 cartes 51, et $n - 1$ pour $n$ cartes, quel que soit l’ordre de la pile : si le paquet double, le travail double. C’est un coût linéaire.
 
@@ -228,7 +230,7 @@ Toutes les fonctions vues jusqu’ici (`somme`, `moyenne`, `maximum`, `est_prese
 
     La recherche séquentielle ne coûte pas toujours pareil :
 
-    - **meilleur cas** : l’élément est en tête $\rightarrow$ `1` comparaison ;
+    - <span id="lex-pirecas04" class="ancre"></span>**meilleur cas** : l’élément est en tête $\rightarrow$ `1` comparaison ;
 
     - **pire cas** : l’élément est absent (ou en dernier) $\rightarrow$ `n` comparaisons.
 
@@ -255,7 +257,7 @@ def variance_naive(t):
     return s / n
 ```
 
-Cette version est **correcte**… mais lente. À chacun des `n` tours de boucle, elle rappelle `moyenne(t)`, qui fait elle-même un parcours de `n` éléments. Total : `n` $\times$ `n` $= n^2$ opérations. On dit que son coût est **quadratique**.
+Cette version est **correcte**… mais lente. À chacun des `n` tours de boucle, elle rappelle `moyenne(t)`, qui fait elle-même un parcours de `n` éléments. Total : `n` $\times$ `n` $= n^2$ opérations. On dit que son coût est <span id="lex-quadratique04" class="ancre"></span>**quadratique**.
 
 **Version efficace** — on calcule la moyenne **une seule fois**, *avant* la boucle :
 

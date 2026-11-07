@@ -28,7 +28,7 @@ Pourquoi
 
 ## Prendre la tortue en main
 
-Tout programme commence par **importer** le module, et se termine par `turtle.done()` (qui garde la fenêtre ouverte). Entre les deux, les ordres sont exécutés **dans l’ordre**, de haut en bas, un par un : c’est une **séquence** d’instructions.
+Tout programme commence par <span id="lex-turtleT" class="ancre"></span>**importer** le module, et se termine par `turtle.done()` (qui garde la fenêtre ouverte). Entre les deux, les ordres sont exécutés **dans l’ordre**, de haut en bas, un par un : c’est une **séquence** d’instructions.
 
 ```python
 import turtle
@@ -55,16 +55,16 @@ t.done()
 
 | **Ordre** | **Effet** |
 |:---|:---|
-| `forward(d)` / `fd(d)` | avance de `d` pas |
+| <span id="lex-forwardT" class="ancre"></span>`forward(d)` / `fd(d)` | avance de `d` pas |
 | `backward(d)` / `bk(d)` | recule de `d` pas |
-| `left(a)` / `lt(a)` | tourne de `a` degrés vers la gauche |
+| <span id="lex-leftT" class="ancre"></span>`left(a)` / `lt(a)` | tourne de `a` degrés vers la gauche |
 | `right(a)` / `rt(a)` | tourne de `a` degrés vers la droite |
-| `penup()` / `pendown()` | lever / baisser le stylo (se déplacer sans tracer) |
-| `goto(x, y)` | aller au point de coordonnées `(x, y)` |
+| <span id="lex-penupT" class="ancre"></span>`penup()` / `pendown()` | lever / baisser le stylo (se déplacer sans tracer) |
+| <span id="lex-gotoT" class="ancre"></span>`goto(x, y)` | aller au point de coordonnées `(x, y)` |
 | `color("red")` | couleur du trait |
 | `pensize(n)` | épaisseur du trait |
 | `speed(n)` | vitesse (`0` = très rapide, `1` = lent) |
-| `circle(r)` | trace un cercle de rayon `r` |
+| <span id="lex-circleT" class="ancre"></span>`circle(r)` | trace un cercle de rayon `r` |
 
 !!! remarque "Remarque"
 
@@ -113,7 +113,7 @@ t.done()
 
 !!! regle "Règle 2 — Le secret des polygones réguliers"
 
-    Pour fermer un polygone régulier à `n` côtés, la tortue doit avoir tourné en tout de $360^\circ$. À chaque sommet, elle tourne donc de $\dfrac{360}{n}$ degrés.
+    <span id="lex-polygoneT" class="ancre"></span>Pour fermer un polygone régulier à `n` côtés, la tortue doit avoir tourné en tout de $360^\circ$. À chaque sommet, elle tourne donc de $\dfrac{360}{n}$ degrés.
 
 Un hexagone (6 côtés, on tourne de $360/6 = 60^\circ$) devient immédiat ; l’étoile, dessinée à côté, demande deux tours complets ($720^\circ$) : ce sera un exercice.
 
@@ -133,7 +133,7 @@ t.done()
 
 ## Colorier une forme
 
-Pour remplir une figure, on encadre le tracé par `begin_fill()` et `end_fill()`.
+Pour remplir une figure, <span id="lex-fillT" class="ancre"></span>on encadre le tracé par `begin_fill()` et `end_fill()`.
 
 ```python
 import turtle as t
@@ -183,7 +183,7 @@ polygone(8, 60)    # octogone
 
 ## Le plus beau : les rosaces
 
-Une **rosace** s’obtient en répétant une même figure tout en **tournant** un peu à chaque fois. Ici, 12 carrés, pivotés de $360/12 = 30^\circ$ :
+Une <span id="lex-rosaceT" class="ancre"></span>**rosace** s’obtient en répétant une même figure tout en **tournant** un peu à chaque fois. Ici, 12 carrés, pivotés de $360/12 = 30^\circ$ :
 
 ```python
 import turtle as t
