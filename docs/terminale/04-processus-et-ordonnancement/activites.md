@@ -74,7 +74,7 @@ Nouvelle règle, le **tourniquet** : les tâches arrivées font la **queue** (un
 
 ### <span class="exo-num">Exercice 3</span> — Deux tâches, deux ressources <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-processus-et-ordonnancement-act-1-3 }
 
-Deux nouvelles cartes : **P** (« imprimer un scan ») et **Q** (« numériser puis imprimer »). Sur la table, deux objets uniques : l’**imprimante** et le **scanner** (une gomme et un taille-crayon font l’affaire). Un objet pris n’est rendu que quand la tâche est finie. Les deux joueurs jouent **une ligne chacun, en alternance**, en commençant par P.
+Deux nouvelles cartes : **P** (« imprimer un scan ») et **Q** (« numériser puis imprimer »). Sur la table, deux objets uniques : l’**imprimante** et le **scanner** (une gomme et un taille-crayon font l’affaire). Un objet pris n’est rendu que quand la tâche est finie. Deux élèves du groupe jouent chacun une tâche (l’un P, l’autre Q) : ils exécutent leur script **une ligne chacun, en alternance**, en commençant par P ; le troisième observe et note qui tient quoi.
 
 | **Script de P**            | **Script de Q**            |
 |:---------------------------|:---------------------------|
@@ -107,7 +107,7 @@ Deux nouvelles cartes : **P** (« imprimer un scan ») et **Q** (« numériser p
 
     - Avec un seul processeur, il faut un programme qui…
 
-    - Dans les parties 1 et 2, une tâche pouvait attendre **le processeur**. Dans la partie 3, elle attendait…
+    - Dans les exercices 1 et 2, une tâche pouvait attendre **le processeur**. Dans l’exercice 3, elle attendait…
 
       En quoi ces deux attentes sont-elles différentes ?
 

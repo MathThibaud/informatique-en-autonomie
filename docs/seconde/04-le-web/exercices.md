@@ -16,7 +16,7 @@
 
 <span class="essentiel">• essentiel</span>
 
-<span class="tag">sur papier</span>  Répondre et corriger les phrases fausses.
+<span class="tag">sur papier</span>  Répondre par **vrai** ou **faux**, et corriger les phrases fausses.
 
 1.  Le Web et Internet, c’est la même chose.
 
@@ -430,7 +430,13 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Un peu de style <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-15 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Reprendre la page précédente et ajouter du CSS pour : centrer le titre et lui donner un fond coloré ; mettre les paragraphes dans la police `Verdana` ; ajouter en bas de page une ligne de signature (par exemple « Page réalisée par …») et la colorer en gris, *via* un `id`.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Reprendre la page précédente et ajouter du CSS pour :
+
+1.  centrer le titre et lui donner un fond coloré ;
+
+2.  mettre les paragraphes dans la police `Verdana` ;
+
+3.  ajouter en bas de page une ligne de signature (par exemple « Page réalisée par …») et la colorer en gris, *via* un `id`.
 
 ??? pouce "Coup de pouce"
 

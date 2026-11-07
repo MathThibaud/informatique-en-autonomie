@@ -50,7 +50,7 @@
 
 2.  Jouer contre le maître du jeu malin, avec un secret entre 1 et 1000. Combien de coups a-t-il fallu ? La prédiction était-elle juste ?
 
-3.  Recopier et compléter sur le cahier le tableau suivant (sans jouer pour les deux dernières colonnes).
+3.  Recopier et compléter sur le cahier le tableau suivant, en raisonnant (sans jouer) pour 200, 2 000 et 1 000 000.
 
     | Nombres possibles | 100 | 200 | 1 000 | 2 000 | 1 000 000 |
     |:------------------|:---:|:---:|:-----:|:-----:|:---------:|

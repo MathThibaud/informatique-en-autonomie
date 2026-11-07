@@ -94,7 +94,7 @@ Que réalise, au final, ce programme sur `x` et `y` ?0
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-1.  Écrire une fonction `celsius_en_fahrenheit(c)` qui convertit une température en degrés Celsius vers des degrés Fahrenheit (formule : $F = \frac{9}{5}\,C + 32$).
+1.  Écrire une fonction `celsius_en_fahrenheit(c)` qui renvoie la température `c` (en degrés Celsius) convertie en degrés Fahrenheit (formule : $F = \frac{9}{5}\,C + 32$).
 
 2.  Écrire une fonction `prix_ttc(ht)` qui renvoie le prix TTC d’un article à partir de son prix hors taxe, avec une TVA de 20 %.0
 
@@ -640,7 +640,7 @@ for i in range(a, b + 1):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Construire une chaîne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-17 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `ligne_etoiles(n)` qui renvoie une chaîne formée de `n` étoiles, en partant d’une chaîne **vide** `""` que l’on complète à chaque tour (`chaine = chaine + "*"`). C’est le même motif d’accumulateur que ci-dessus, appliqué à du texte.0
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `ligne_etoiles(n)` qui renvoie une chaîne formée de `n` étoiles, en partant d’une chaîne **vide** `""` que l’on complète à chaque tour (`chaine = chaine + "*"`). C’est le même motif d’accumulateur que dans l’exercice « Sommes », appliqué à du texte.0
 
 ??? pouce "Coup de pouce"
 
@@ -674,7 +674,9 @@ for i in range(a, b + 1):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Factorielle <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-18 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Une course réunit `n` coureurs. Combien d’ordres d’arrivée sont possibles ? Le vainqueur peut être l’un des `n` coureurs, le deuxième l’un des `n - 1` restants, et ainsi de suite : il y a $n \times (n-1) \times \dots \times 2 \times 1$ ordres possibles. Ce produit $1 \times 2 \times \dots \times n$ s’appelle la **factorielle** de `n`, avec la convention $0! = 1$ (sans coureur, un seul classement : le classement vide). Écrire `factorielle(n)` avec un accumulateur. Tester `factorielle(0)` et `factorielle(5)`.0
+<span class="run" title="À programmer et tester sur machine">▶</span> Une course réunit `n` coureurs. Combien d’ordres d’arrivée sont possibles ? Le vainqueur peut être l’un des `n` coureurs, le deuxième l’un des `n - 1` restants, et ainsi de suite : il y a $n \times (n-1) \times \dots \times 2 \times 1$ ordres possibles. Ce produit $1 \times 2 \times \dots \times n$ s’appelle la **factorielle** de `n`, notée $n!$. Par convention, $0! = 1$ (sans coureur, un seul classement : le classement vide).
+
+Écrire `factorielle(n)` avec un accumulateur. Tester `factorielle(0)` et `factorielle(5)`.0
 
 ??? pouce "Coup de pouce"
 
@@ -711,7 +713,7 @@ for i in range(a, b + 1):
 
 <span class="essentiel">• essentiel</span>
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `compter_voyelles(mot)` qui renvoie le nombre de voyelles d’une chaîne (on comptera aussi le `y`). *Rappel :* on parcourt une chaîne caractère par caractère avec `for lettre in mot:` et on teste `if lettre in "aeiouy":`.0
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `compter_voyelles(mot)` qui renvoie le nombre de voyelles d’une chaîne (on comptera aussi le `y` ; on suppose `mot` écrit en minuscules, sans accent). *Rappel :* on parcourt une chaîne caractère par caractère avec `for lettre in mot:` et on teste `if lettre in "aeiouy":`.0
 
 ??? pouce "Coup de pouce"
 
@@ -752,7 +754,7 @@ for i in range(a, b + 1):
 
 1.  Écrire `somme_diviseurs(n)` qui renvoie la somme de tous les diviseurs de `n` (y compris `1` et `n`).
 
-2.  Un entier est **parfait** si la somme de ses diviseurs vaut `2*n`. Écrire `est_parfait(n)`.
+2.  Un entier `n` est **parfait** si la somme de ses diviseurs vaut `2 * n`. Écrire `est_parfait(n)`.
 
 3.  Afficher tous les nombres parfaits strictement inférieurs à `100`.0
 
@@ -877,7 +879,7 @@ True
 
 <span class="duree">≈ 15 min</span>
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `fizzbuzz(n)` qui **affiche**, un par ligne, les entiers de `1` à `n`, en affichant à la place `Fizz` pour chaque multiple de 3, `Buzz` pour chaque multiple de 5, et `FizzBuzz` pour chaque multiple de 3 *et* de 5.0
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `fizzbuzz(n)` qui **affiche**, un par ligne, les entiers de `1` à `n`, en affichant à la place `Fizz` pour un multiple de 3 seulement, `Buzz` pour un multiple de 5 seulement, et `FizzBuzz` pour un multiple de 3 *et* de 5.0
 
 ??? pouce "Coup de pouce"
 
@@ -1107,7 +1109,7 @@ Buzz
 
 <span class="duree">≈ 15 min</span>
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Pour calculer le PGCD de deux entiers strictement positifs, on remplace répétitivement le plus grand par sa différence avec le plus petit, jusqu’à ce que les deux soient égaux : cette valeur commune est le PGCD.
+<span class="run" title="À programmer et tester sur machine">▶</span> Pour calculer le PGCD de deux entiers strictement positifs, on remplace le plus grand par sa différence avec le plus petit, et on recommence jusqu’à ce que les deux soient égaux : cette valeur commune est le PGCD.
 
 1.  Écrire `pgcd(a, b)` avec une boucle `while a != b`.
 
@@ -1350,7 +1352,7 @@ def addition(a, b):
 
         Comparer `2 + 2` et `2 * 2`, puis `0 + 0` et `0 * 0`. Chercher deux nombres pour lesquels somme et produit diffèrent.
 
-3.  Que peut-on en conclure sur la phrase du programme : « *le succès d’un jeu de tests ne garantit pas la correction d’un programme* » ?
+3.  Que peut-on en conclure sur cette phrase du programme officiel de NSI : « *le succès d’un jeu de tests ne garantit pas la correction d’un programme* » ?
 
 ??? corrige "Corrigé"
 
@@ -1362,7 +1364,7 @@ def addition(a, b):
     assert addition(1, 3) == 4    # echoue : 1 * 3 = 3, pas 4
     ```
 
-    **3.** Réussir un jeu de tests prouve seulement que la fonction est correcte **sur les cas testés**, jamais qu’elle l’est *en général*. Un jeu de tests mal choisi peut laisser passer un programme faux : c’est exactement le sens de la phrase du programme. D’où l’importance de tester des cas **variés** (normaux, limites, particuliers).
+    **3.** Réussir un jeu de tests prouve seulement que la fonction est correcte **sur les cas testés**, jamais qu’elle l’est *en général*. Un jeu de tests mal choisi peut laisser passer un programme faux : c’est exactement le sens de la phrase du programme officiel. D’où l’importance de tester des cas **variés** (normaux, limites, particuliers).
 
 ### Exercices de synthèse
 

@@ -709,11 +709,11 @@ Votre site doit comporter :
 
 - **3 à 4 pages** reliées par une **navigation claire** (un menu présent sur chaque page) ;
 
-- des **liens hypertextes**, avec au moins un **chemin absolu** et un **chemin relatif** ;
+- des **liens hypertextes**, avec au moins un lien vers un autre site (**adresse complète**, en `https://`) et un **chemin relatif** vers une de vos pages ;
 
 - des **images** (libres de droit, sources citées) et au moins un **tableau** ;
 
-- une **feuille de style CSS séparée** : le fond (HTML) et la forme (CSS) dans des fichiers distincts ;
+- une **feuille de style CSS séparée** : le fond (HTML) et la forme (CSS) dans des fichiers distincts ; elle utilise des sélecteurs de **balise**, de **classe** et d’**identifiant**, et au moins une disposition avec **Flexbox** (vue dans le TP guidé) ;
 
 - au moins **quatre interactions JavaScript** réagissant à des **événements** (clic, survol…) et modifiant la page (le DOM) ;
 
@@ -769,7 +769,7 @@ Choisissez **un** thème dans le menu ci-dessous (ou proposez le vôtre, à fair
 
     - une IA se **trompe** souvent : à vous de repérer et corriger. Une suggestion d’IA n’est pas une vérité.
 
-    En résumé : <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> IA **en appui** pendant le projet (chercher, déboguer, vérifier ; le code final est écrit et compris par vous) ; <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> **sans IA** pour le contrôle sur machine et la soutenance. Voir la charte d’usage de l’IA.
+    En résumé : <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> IA **en appui** pendant le projet (chercher, déboguer, vérifier ; le code final est écrit et compris par vous) ; <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> **sans IA** pour le contrôle sur machine et la soutenance. Voir la [charte d’usage de l’IA](../charte.md), au début du livre.
 
     **L’essentiel de votre note vient de ce que *vous* savez faire seul** (voir plus bas). Un site parfait que vous ne savez pas expliquer vaut moins qu’un site modeste que vous maîtrisez.
 
@@ -828,7 +828,7 @@ La grille détaille, critère par critère, les quatre éléments de l’évalua
 </tr>
 <tr>
 <td style="text-align: left;">Structure et navigation (J1)</td>
-<td style="text-align: left;">3 à 4 pages aux balises bien fermées et bien emboîtées ; un menu sur chaque page ; au moins un chemin relatif et un chemin absolu ; l’arborescence imposée respectée</td>
+<td style="text-align: left;">3 à 4 pages aux balises bien fermées et bien emboîtées ; un menu sur chaque page ; au moins un chemin relatif et un lien en adresse complète (<code>https://</code>) ; l’arborescence imposée respectée</td>
 </tr>
 <tr>
 <td style="text-align: left;">Mise en forme (J2)</td>
@@ -890,7 +890,7 @@ La grille détaille, critère par critère, les quatre éléments de l’évalua
 </tbody>
 </table>
 
-## <span class="etiquette">Activité 1</span> Simuler un réseau
+## <span class="etiquette">Activité 2</span> Simuler un réseau
 
 *du réseau local à Internet, sur le simulateur Filius*
 

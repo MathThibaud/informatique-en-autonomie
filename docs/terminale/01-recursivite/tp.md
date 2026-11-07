@@ -42,18 +42,18 @@ Le Sudoku, c’est pareil :
 
 ### <span class="exo-num">Exercice 1</span> — Sur papier. { #ex-01-recursivite-tp-1-1 }
 
-Sur cette mini-grille $4\times 4$ (chiffres de 1 à 4, blocs $2\times 2$), remplir la première case vide en essayant 1, puis 2… et noter à voix haute « j’essaie », « impasse, je reviens ». Une seule solution existe. **Combien de fois** avez-vous dû revenir en arrière ?
+Sur cette mini-grille $4\times 4$ (chiffres de 1 à 4, blocs $2\times 2$), remplir les cases vides **dans l’ordre de lecture** (ligne par ligne, de gauche à droite), en essayant 1, puis 2… dans chacune, et noter à voix haute « j’essaie », « impasse, je reviens ». Une seule solution existe. **Combien de fois** avez-vous dû revenir en arrière ?
 
 ![](../figures/8a5f1824b83b944e.svg){ .tikz .tikz-inline loading=lazy }
 
 ## Voir le backtracking tourner
 
-Lancer le fichier `demo_backtracking_4x4.py` (rien à écrire). Il résout la grille ci-dessus en affichant chaque essai :
+Lancer le fichier `demo_backtracking_4x4.py` (rien à écrire). Il résout la grille ci-dessus, dans le même ordre que vous, en affichant chaque essai. Les cases sont repérées par `(ligne, colonne)`, numérotées à partir de 0 :
 
 ```text
 -> j'ecris 2 en (0,1)
     -> j'ecris 3 en (0,2)
-    X  j'efface 3 en (0,2)   (retour n1)
+    X  j'efface 3 en (0,2)   (retour numero 1)
     -> j'ecris 4 en (0,2)
         ...
 ```
@@ -129,7 +129,7 @@ Le solveur a besoin d’une seule brique : `placement_valide(grille, i, j, v)`, 
 
 2.  Écrire `grille_complete(grille)` : `True` s’il ne reste aucune case égale à `0`.
 
-3.  Écrire `grille_valide(grille)` pour une grille **remplie**. *Astuce :* pour tester la case `(i, j)` de valeur `v`, la retirer (`grille[i][j] = 0`), appeler `placement_valide`, puis la remettre.
+3.  Écrire `grille_valide(grille)` qui, pour une grille **remplie**, renvoie `True` si aucun chiffre n’est en double (ligne, colonne ou bloc), `False` sinon. *Astuce :* pour tester la case `(i, j)` de valeur `v`, la retirer (`grille[i][j] = 0`), appeler `placement_valide`, puis la remettre.
 
 4.  *Sur le cahier.* Dans l’astuce de la question 3, que se passerait-il si l’on ne retirait pas la valeur avant d’appeler `placement_valide` ?
 

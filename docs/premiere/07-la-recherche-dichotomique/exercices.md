@@ -10,6 +10,8 @@
 
     - **Rappel :** la recherche dichotomique ne s’applique qu’à un tableau **trié**. Le milieu se calcule avec `(deb + fin) // 2`.
 
+    - Dans cette feuille, on compte les **tours de boucle**, c’est-à-dire les valeurs `t[mil]` examinées : c’est ce que le cours appelle le nombre de « comparaisons ».
+
 ### Dérouler la recherche à la main
 
 On utilise le tableau trié
@@ -347,7 +349,7 @@ Sans machine, donner le nombre *maximal* de comparaisons d’une recherche dicho
 ??? corrige "Corrigé"
 
     On compte combien de fois diviser la taille par 2 pour atteindre 1, puis on ajoute la comparaison faite sur la dernière case restante.  
-    **1.** Au pire, la zone de recherche passe par $8 \to 4 \to 2 \to 1$ : **3** divisions, puis une dernière comparaison sur la case restante, soit **4** comparaisons au maximum (c’est `nb_de_tour(8)`, car $2^3 = 8 \leq 8 < 2^4$).  
+    **1.** Au pire, la zone de recherche passe par $8 \to 4 \to 2 \to 1$ : **3** divisions, puis une dernière comparaison sur la case restante, soit **4** comparaisons au maximum (c’est `nb_tours_max(8)`, car $2^3 = 8 \leq 8 < 2^4$).  
     **2.** $16 \to 8 \to 4 \to 2 \to 1$ : **4** divisions, plus la dernière comparaison, soit **5** comparaisons au maximum.  
     **3.** Pour $1\,000$ : $\log_2(1000) \approx 10$, donc **une dizaine** de comparaisons (à comparer aux 1000 d’un parcours !).
 
@@ -355,10 +357,10 @@ Sans machine, donner le nombre *maximal* de comparaisons d’une recherche dicho
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Le plus petit `k` tel que $2^k > n$ <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-11 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `nb_de_tour(n)` qui renvoie le plus petit entier `k` tel que `2**k > n` — c’est le nombre maximal de valeurs examinées par la dichotomie dans un tableau de taille `n`. *On utilisera une boucle qui double une puissance de 2 tant qu’elle ne dépasse pas `n`.*
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `nb_tours_max(n)` qui renvoie le plus petit entier `k` tel que `2**k > n` — c’est le nombre maximal de valeurs examinées par la dichotomie dans un tableau de taille `n`. *On utilisera une boucle qui double une puissance de 2 tant qu’elle ne dépasse pas `n`.*
 
 ```text
->>> nb_de_tour(100)
+>>> nb_tours_max(100)
 7
 ```
 
@@ -371,7 +373,7 @@ Sans machine, donner le nombre *maximal* de comparaisons d’une recherche dicho
     On double une puissance de 2 tant qu’elle ne dépasse pas `n`, en comptant les doublements.
 
     ```python
-    def nb_de_tour(n):
+    def nb_tours_max(n):
         k = 0
         puissance = 1          # vaut 2**k
         while puissance <= n:
@@ -380,7 +382,7 @@ Sans machine, donner le nombre *maximal* de comparaisons d’une recherche dicho
         return k
     ```
 
-    `nb_de_tour(100)` vaut `7` (car $2^6 = 64 \leq 100 < 128 = 2^7$).
+    `nb_tours_max(100)` vaut `7` (car $2^6 = 64 \leq 100 < 128 = 2^7$).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Le pire cas, en vrai <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-12 }
 
@@ -419,7 +421,7 @@ On joue à deviner un nombre entre `1` et `100` : à chaque proposition, on rép
     **1.** La meilleure première proposition est `50`, le **milieu** : quelle que soit la réponse, on élimine la moitié des possibilités (soit 1–49, soit 51–100).  
     <span class="erreurfreq">▷ Erreur fréquente.</span> proposer 1, puis 2, puis 3… : on n’élimine qu’un nombre par essai, et il faut jusqu’à 100 essais.
 
-    **2.** En proposant toujours le milieu, le nombre de possibilités restantes, au pire, passe par $100 \to 50 \to 25 \to 12 \to 6 \to 3 \to 1$ : six essais pour réduire à un seul nombre possible, et un septième pour le proposer. **7 essais** suffisent donc dans le pire des cas. C’est exactement $\texttt{nb\_de\_tour(100)} = 7$ : le jeu *est* une recherche dichotomique.
+    **2.** En proposant toujours le milieu, le nombre de possibilités restantes, au pire, passe par $100 \to 50 \to 25 \to 12 \to 6 \to 3 \to 1$ : six essais pour réduire à un seul nombre possible, et un septième pour le proposer. **7 essais** suffisent donc dans le pire des cas. C’est exactement $\texttt{nb\_tours\_max(100)} = 7$ : le jeu *est* une recherche dichotomique.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 14</span> — L’ordinateur devine : la preuve <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-14 }
 
@@ -448,7 +450,7 @@ def essais_ordinateur(secret, maxi):
 
 1.  Comparer avec `recherche_dichotomique` du cours : quel rôle jouent `mini`, `maxi` et `proposition` ? Dans quel « tableau trié » l’ordinateur cherche-t-il ?
 
-2.  **Terminaison.** Montrer que `maxi - mini` diminue strictement à chaque essai raté. En utilisant la précondition (le secret reste toujours entre `mini` et `maxi`), en déduire que la boucle s’arrête. Comment appelle-t-on la quantité `maxi - mini` ?
+2.  **Terminaison.** Montrer que `maxi - mini` diminue strictement à chaque essai raté. Grâce à la précondition, le secret reste toujours entre `mini` et `maxi` (c’est un invariant). En déduire que la boucle s’arrête. Comment appelle-t-on la quantité `maxi - mini` ?
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> Appeler `essais_ordinateur(150, 100)`, qui **ne respecte pas** la précondition (interrompre le programme au besoin). Expliquer ce qui se passe en suivant les valeurs de `mini` et `maxi`. Quelle condition de boucle, utilisée dans le cours, aurait évité ce problème ?
 
@@ -460,7 +462,7 @@ def essais_ordinateur(secret, maxi):
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    Question 4 : le nombre de candidats est au moins divisé par deux à chaque essai raté ; chercher la plus petite puissance de 2 qui dépasse `maxi` (ou utiliser `nb_de_tour`).
+    Question 4 : le nombre de candidats est au moins divisé par deux à chaque essai raté ; chercher la plus petite puissance de 2 qui dépasse `maxi` (ou utiliser `nb_tours_max`).
 
 ??? corrige "Corrigé"
 
@@ -476,7 +478,7 @@ def essais_ordinateur(secret, maxi):
 
     **3.** Le programme **ne s’arrête jamais**. Les propositions sont 50, 75, 88, 94, 97, 99, 100, toutes « trop petites » ; on arrive à `mini = 101` et `maxi = 100`. La zone est vide, mais la boucle continue car `trouve` reste `False` : `proposition` vaut `(101 + 100) // 2 = 100`, encore trop petite, `mini` reprend la valeur `101`… et rien ne change plus. Le variant ne décroît plus : la preuve de la question 2 utilisait la précondition, qui n’est pas respectée. La condition `while mini <= maxi` (le `while deb <= fin` du cours) arrête la boucle dès que la zone est vide, même si l’appel est incorrect ; on pourrait aussi vérifier la précondition par un `assert` en début de fonction.
 
-    **4.** Après chaque essai raté, le nombre de candidats restants est au moins divisé par deux. Dans le pire des cas, le nombre d’essais est donc le plus petit $k$ tel que $2^k > \texttt{maxi}$, c’est-à-dire `nb_de_tour(maxi)` : **7** essais pour $100$ ($2^6 = 64 \leqslant 100 < 128 = 2^7$), **10** pour $1000$ ($2^{10} = 1024$) et **20** pour un million ($2^{20} = 1\,048\,576$). L’ordinateur naïf, lui, peut avoir besoin de `maxi` essais : $100$, $1000$, un million. Coût **logarithmique** contre coût **linéaire**, comme dans le cours.
+    **4.** Après chaque essai raté, le nombre de candidats restants est au moins divisé par deux. Dans le pire des cas, le nombre d’essais est donc le plus petit $k$ tel que $2^k > \texttt{maxi}$, c’est-à-dire `nb_tours_max(maxi)` : **7** essais pour $100$ ($2^6 = 64 \leqslant 100 < 128 = 2^7$), **10** pour $1000$ ($2^{10} = 1024$) et **20** pour un million ($2^{20} = 1\,048\,576$). L’ordinateur naïf, lui, peut avoir besoin de `maxi` essais : $100$, $1000$, un million. Coût **logarithmique** contre coût **linéaire**, comme dans le cours.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 15</span> — La racine carrée entière <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-15 }
 
@@ -536,7 +538,7 @@ Combien de tours de boucle environ pour `n = 1000000` ? Comparer avec l’essai 
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Le mot dans le dictionnaire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-16 }
 
-Un dictionnaire est un tableau trié de mots (l’ordre alphabétique). En Python, `"chat" < "chien"` compare deux chaînes dans l’ordre du dictionnaire.
+Un dictionnaire de langue (le livre !) est une liste de mots triée par ordre alphabétique. Ici, on la représente par un **tableau** trié de chaînes (et non par un dictionnaire Python). En Python, `"chat" < "chien"` compare deux chaînes dans l’ordre du dictionnaire.
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Adapter `recherche_dichotomique` en `est_dans_dico(dico, mot)` qui cherche un **mot** dans un tableau de mots trié.
 
@@ -548,7 +550,7 @@ Un dictionnaire est un tableau trié de mots (l’ordre alphabétique). En Pytho
 
     ??? pouce "Coup de pouce"
 
-        Chercher la plus petite puissance de 2 qui dépasse $100\,000$ (ou utiliser `nb_de_tour`).
+        Chercher la plus petite puissance de 2 qui dépasse $100\,000$ (ou utiliser `nb_tours_max`).
 
 ??? corrige "Corrigé"
 

@@ -60,7 +60,7 @@
 
 1.  Revenir au point de départ. `mkdir` veut dire *make directory*. Créer un dossier `nsi`, entrer dedans, puis y créer un fichier vide avec `touch essai.txt`. Écrire les commandes tapées, dans l’ordre.
 
-2.  Dessiner sur le cahier l’arbre des dossiers et fichiers à partir de `/root` (sans les éléments cachés).
+2.  Dessiner sur le cahier l’arbre des dossiers et fichiers à partir de `/root`, tel que l’affiche `ls`.
 
 ??? corrige "Corrigé"
 

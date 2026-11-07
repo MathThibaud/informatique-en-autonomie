@@ -63,11 +63,11 @@ def fibo(n):
 
 <span class="essentiel">• essentiel</span>
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Recopier la fonction `fibo` et la transformer en une fonction **mémoïsée** `fibo_memo(n, memo)` qui utilise un dictionnaire `memo` pour ne calculer chaque $F_k$ qu’une seule fois. Vérifier que `fibo_memo(50)` vaut `12586269025` et s’obtient instantanément.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Recopier la fonction `fibo` et la transformer en une fonction **mémoïsée** `fibo_memo(n, memo=None)` qui utilise un dictionnaire `memo` (créé vide au premier appel, quand `memo` vaut `None`, comme dans la version sûre du cours) pour ne calculer chaque $F_k$ qu’une seule fois. Vérifier que `fibo_memo(50)` vaut `12586269025` et s’obtient instantanément.
 
 ??? pouce "Coup de pouce"
 
-    Avant de calculer $F_n$, regarder si `n` est déjà une clé de `memo` ; sinon, le calculer comme dans `fibo`, le ranger dans `memo[n]`, puis le renvoyer. Le dictionnaire est transmis à chaque appel récursif ; pour pouvoir écrire `fibo_memo(50)`, lui donner la valeur par défaut `None` (chapitre *Récursivité*).
+    Avant de calculer $F_n$, regarder si `n` est déjà une clé de `memo` ; sinon, le calculer comme dans `fibo`, le ranger dans `memo[n]`, puis le renvoyer. Le dictionnaire est transmis à chaque appel récursif.
 
 ??? corrige "Corrigé"
 
@@ -241,7 +241,7 @@ Partant du sommet, on descend à chaque étage vers le voisin de gauche ou de dr
 
 1.  Donner un chemin de score maximal pour ce triangle, et son score.
 
-2.  On note $S(i, j)$ le meilleur score que l’on peut encore obtenir en partant de la case $j$ du niveau $i$. Écrire la relation qui lie $S(i,j)$ à $S(i+1, j)$ et $S(i+1, j+1)$, et donner le cas de base (dernier niveau).
+2.  On numérote les niveaux à partir de $0$ (le sommet) et les cases de chaque niveau à partir de $0$ (de gauche à droite). On note $S(i, j)$ le meilleur score d’un chemin qui part de la case $j$ du niveau $i$ (valeur de cette case comprise) et descend jusqu’en bas. Écrire la relation qui lie $S(i,j)$ à $S(i+1, j)$ et $S(i+1, j+1)$, et donner le cas de base (dernier niveau).
 
     ??? pouce "Coup de pouce"
 
@@ -840,7 +840,7 @@ Le **coût inesthétique** d’une ligne est le *carré* du nombre d’espaces s
 
 <span class="duree">≈ 60 min</span>
 
-Dans cet exercice, l’entête d’une fonction précise le type de ses paramètres et de la valeur renvoyée : ainsi `puissance(x: float, n: int) -> float` prend un flottant `x` et un entier `n` et renvoie le flottant `x**n`.
+Dans cet exercice, l’en-tête d’une fonction précise le type de ses paramètres et de la valeur renvoyée : ainsi `puissance(x: float, n: int) -> float` prend un flottant `x` et un entier `n` et renvoie le flottant `x**n`.
 
 Une entreprise transporte des marchandises et souhaite maximiser son profit en optimisant le remplissage de ses moyens de transport, limités par leur **volume** (en litres). Chaque marchandise est caractérisée par son **prix** (en euros) et son **volume** indivisible (en litres). Par exemple, avec trois marchandises de couples (prix, volume) $m_1 = (100, 10)$, $m_2 = (100, 10)$ et $m_3 = (250, 20)$, s’il reste 25 litres, il vaut mieux charger $m_3$, qui rapporte 250 €, plutôt que $m_1$ et $m_2$, qui rapportent 200 € au total pour le même espace utilisé.
 
@@ -926,7 +926,7 @@ Le tri dans l’ordre décroissant des prix volumiques donne $m_3, m_2, m_1, m_4
 
 **Partie C — Rangement optimisé par récursivité**
 
-L’algorithme glouton ne renvoie pas toujours une solution optimale. On écrit donc une fonction récursive d’entête `chargeOptimale(tab: list, v_restant: int, i: int) -> list` qui calcule la charge optimale pour un volume `v_restant` en utilisant les marchandises à partir de l’indice `i` ($n$ désigne le nombre de marchandises) :
+L’algorithme glouton ne renvoie pas toujours une solution optimale. On écrit donc une fonction récursive d’en-tête `chargeOptimale(tab: list, v_restant: int, i: int) -> list` qui calcule la charge optimale pour un volume `v_restant` en utilisant les marchandises à partir de l’indice `i` ($n$ désigne le nombre de marchandises) :
 
 - si `i >= n`, toutes les marchandises ont été essayées : l’appel renvoie la liste vide ;
 

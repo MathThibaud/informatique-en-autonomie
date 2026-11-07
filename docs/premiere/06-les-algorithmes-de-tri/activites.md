@@ -26,7 +26,7 @@
 
 ### <span class="exo-num">Exercice 1</span> — Chacun sa méthode <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-les-algorithmes-de-tri-act-1-1 }
 
-1.  Premier tri. Nombre de comparaisons ? Le rangement est-il réussi ?
+1.  Le trieur range les cartes avec la méthode de son choix. Combien de comparaisons l’arbitre a-t-il comptées ? Le rangement est-il réussi ?
 
 2.  Décrire en deux ou trois phrases la méthode utilisée.
 

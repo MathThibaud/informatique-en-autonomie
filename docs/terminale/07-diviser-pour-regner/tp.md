@@ -6,7 +6,7 @@
 
 !!! remarque "Remarque"
 
-    On cherche à **établir** (et pas seulement à admettre) le coût du tri fusion. On raisonne en comptant le **nombre d’opérations élémentaires** (comparaisons, ajouts) en fonction de la taille `n` de la liste. On rappelle les deux fonctions du cours (la fin de `fusion` est écrite ici avec deux boucles, pour bien compter) :
+    On cherche à **établir** (et pas seulement à admettre) le coût du tri fusion. On raisonne en comptant le **nombre d’opérations élémentaires** (comparaisons, ajouts) en fonction de la taille $n$ de la liste. On rappelle les deux fonctions du cours (la fin de `fusion` est écrite ici avec deux boucles, pour bien compter) :
 
 ```python
 def fusion(gauche, droite):        # gauche et droite sont deja triees
@@ -40,11 +40,11 @@ def tri_fusion(tab):
 
 1.  Dans `fusion`, chaque tour de boucle (des trois boucles `while`) exécute **exactement un** `append`. Si `gauche` et `droite` ont pour tailles $p$ et $q$, combien y a-t-il d’éléments dans `resultat` à la fin ? En déduire le nombre total d’`append`.
 
-2.  Conclure : fusionner deux listes triées dont les tailles totalisent `n` éléments coûte de l’ordre de combien d’opérations ? Ce coût est-il **linéaire** ou **quadratique** ?
+2.  Conclure : fusionner deux listes triées dont les tailles totalisent $n$ éléments coûte de l’ordre de combien d’opérations ? Ce coût est-il **linéaire** ou **quadratique** ?
 
 ## Étape 2 — l’arbre des appels récursifs
 
-Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À chaque appel, `tri_fusion` coupe la liste en **deux moitiés**, jusqu’à obtenir des listes de taille 1.
+Pour simplifier, on suppose que $n$ est une **puissance de 2** : $n = 2^k$. À chaque appel, `tri_fusion` coupe la liste en **deux moitiés**, jusqu’à obtenir des listes de taille 1.
 
 1.  Recopier et compléter sur le cahier le tableau décrivant les appels, niveau par niveau (le niveau 0 est l’appel initial) :
 
@@ -55,11 +55,11 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
     |    $2$     |             …             |                …                |
     |    $i$     |             …             |                …                |
 
-2.  À un niveau `i` donné, on fusionne toutes les sous-listes de ce niveau. En utilisant l’étape 1, montrer que le **coût total des fusions d’un niveau** vaut environ `n`, *et que ce coût est le même à tous les niveaux*.
+2.  À un niveau $i$ donné, on fusionne toutes les sous-listes de ce niveau. En utilisant l’étape 1, montrer que le **coût total des fusions d’un niveau** vaut environ $n$, *et que ce coût est le même à tous les niveaux*.
 
-3.  Jusqu’à quel niveau descend-on ? (Autrement dit : pour quelle valeur de `i` les sous-listes ont-elles une taille de 1 ?) En déduire le **nombre de niveaux** en fonction de `n`.
+3.  Jusqu’à quel niveau descend-on ? (Autrement dit : pour quelle valeur de $i$ les sous-listes ont-elles une taille de 1 ?) En déduire, en fonction de $n$, le **nombre de niveaux où ont lieu des fusions** (le niveau des listes de taille 1 n’en fait aucune).
 
-4.  Rassembler : coût total $=$ (coût d’un niveau) $\times$ (nombre de niveaux). En déduire le coût du tri fusion en fonction de `n`.
+4.  Rassembler : coût total $=$ (coût d’un niveau) $\times$ (nombre de niveaux). En déduire le coût du tri fusion en fonction de $n$.
 
 ## Étape 3 — interpréter le résultat
 
@@ -83,11 +83,11 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
 
     **1.** À la fin, `resultat` contient **tous** les éléments de `gauche` et `droite`, chacun une fois : elle a donc $p + q$ éléments. Comme chaque `append` ajoute un élément et qu’il n’y a pas d’autre source d’éléments, il y a exactement $p + q$ appels à `append` (et au plus $p+q-1$ comparaisons, une par tour de la première boucle).
 
-    **2.** Si les deux listes totalisent `n` éléments ($p + q = n$), la fusion effectue de l’ordre de `n` opérations : son coût est **linéaire**.
+    **2.** Si les deux listes totalisent $n$ éléments ($p + q = n$), la fusion effectue de l’ordre de $n$ opérations : son coût est **linéaire**.
 
     !!! propriete "Propriété 1 — Coût de la fusion"
 
-        Fusionner deux listes triées totalisant `n` éléments coûte de l’ordre de `n` opérations (coût linéaire).
+        Fusionner deux listes triées totalisant $n$ éléments coûte de l’ordre de $n$ opérations (coût linéaire).
 
     **1.** À chaque descente, chaque liste se scinde en deux moitiés : le nombre de sous-listes **double** et leur taille est **divisée par deux**.
 
@@ -98,11 +98,11 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
     |    $2$     |            $4$            |         $n/4$         |
     |    $i$     |          $2^{i}$          |       $n/2^{i}$       |
 
-    **2.** Au niveau `i`, il y a $2^{i}$ sous-listes, chacune de taille $n/2^{i}$. Les fusions de ce niveau reconstruisent ces sous-listes ; d’après l’étape 1, chaque fusion coûte proportionnellement à la taille de son résultat. Le coût total du niveau est donc
+    **2.** Au niveau $i$, il y a $2^{i}$ sous-listes, chacune de taille $n/2^{i}$. Les fusions de ce niveau reconstruisent ces sous-listes ; d’après l’étape 1, chaque fusion coûte proportionnellement à la taille de son résultat. Le coût total du niveau est donc
 
     $$2^{i} \times \frac{n}{2^{i}} = n.$$
 
-    **Ce coût vaut `n` à chaque niveau**, indépendamment de `i` : le $2^i$ (de plus en plus de fusions) et le $n/2^i$ (des fusions de plus en plus petites) se compensent exactement.
+    **Ce coût vaut $n$ à chaque niveau**, indépendamment de $i$ : le $2^i$ (de plus en plus de fusions) et le $n/2^i$ (des fusions de plus en plus petites) se compensent exactement.
 
     **3.** On s’arrête quand les sous-listes ont une taille de 1, c’est-à-dire quand
 
@@ -114,15 +114,15 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
 
     $$\text{coût total} = \underbrace{n}_{\text{par niveau}} \times \underbrace{\log_2 n}_{\text{nombre de niveaux}} = \boxed{n\log_2 n}.$$
 
-    Visuellement, chaque *ligne* de l’arbre ci-dessous coûte `n`, et il y a $\log_2 n$ lignes :
+    Visuellement, chaque *ligne* de l’arbre ci-dessous coûte $n$, et il y a $\log_2 n$ lignes :
 
     ![](../figures/46c05a4be3b1f061.svg){ .tikz loading=lazy }
 
     !!! propriete "Propriété 2 — Coût du tri fusion"
 
-        Le tri fusion d’une liste de `n` éléments a un coût de l’ordre de $n\log_2 n$.
+        Le tri fusion d’une liste de $n$ éléments a un coût de l’ordre de $n\log_2 n$.
 
-    **1.** Pour $n = 1024 = 2^{10}$ : $\log_2 n = 10$, donc $n\log_2 n = 1024 \times 10 \approx 10^4$ (dix mille), tandis que $n^2 = 1024^2 \approx 10^6$ (un million). Le tri fusion fait donc environ **100 fois** moins d’opérations ici ; et l’écart grandit avec `n` (rapport $n/\log_2 n$).
+    **1.** Pour $n = 1024 = 2^{10}$ : $\log_2 n = 10$, donc $n\log_2 n = 1024 \times 10 \approx 10^4$ (dix mille), tandis que $n^2 = 1024^2 \approx 10^6$ (un million). Le tri fusion fait donc environ **100 fois** moins d’opérations ici ; et l’écart grandit avec $n$ (rapport $n/\log_2 n$).
 
     **2.** Le raisonnement n’a utilisé **aucune hypothèse sur l’ordre initial** des éléments : le découpage en deux et le coût des fusions ne dépendent que des *tailles*. Le coût $n\log_2 n$ est donc garanti **dans tous les cas**, y compris le pire. Le tri rapide, lui, est en $n\log_2 n$ *en moyenne* mais peut chuter à $n^2$ sur des entrées défavorables : le tri fusion offre une **garantie**, ce qui est précieux quand on ne maîtrise pas les données.
 
@@ -142,11 +142,11 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
 
     **1.** À la fin, `resultat` contient **tous** les éléments de `gauche` et `droite`, chacun une fois : elle a donc $p + q$ éléments. Comme chaque `append` ajoute un élément et qu’il n’y a pas d’autre source d’éléments, il y a exactement $p + q$ appels à `append` (et au plus $p+q-1$ comparaisons, une par tour de la première boucle).
 
-    **2.** Si les deux listes totalisent `n` éléments ($p + q = n$), la fusion effectue de l’ordre de `n` opérations : son coût est **linéaire**.
+    **2.** Si les deux listes totalisent $n$ éléments ($p + q = n$), la fusion effectue de l’ordre de $n$ opérations : son coût est **linéaire**.
 
     !!! propriete "Propriété 1 — Coût de la fusion"
 
-        Fusionner deux listes triées totalisant `n` éléments coûte de l’ordre de `n` opérations (coût linéaire).
+        Fusionner deux listes triées totalisant $n$ éléments coûte de l’ordre de $n$ opérations (coût linéaire).
 
     **1.** À chaque descente, chaque liste se scinde en deux moitiés : le nombre de sous-listes **double** et leur taille est **divisée par deux**.
 
@@ -157,11 +157,11 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
     |    $2$     |            $4$            |         $n/4$         |
     |    $i$     |          $2^{i}$          |       $n/2^{i}$       |
 
-    **2.** Au niveau `i`, il y a $2^{i}$ sous-listes, chacune de taille $n/2^{i}$. Les fusions de ce niveau reconstruisent ces sous-listes ; d’après l’étape 1, chaque fusion coûte proportionnellement à la taille de son résultat. Le coût total du niveau est donc
+    **2.** Au niveau $i$, il y a $2^{i}$ sous-listes, chacune de taille $n/2^{i}$. Les fusions de ce niveau reconstruisent ces sous-listes ; d’après l’étape 1, chaque fusion coûte proportionnellement à la taille de son résultat. Le coût total du niveau est donc
 
     $$2^{i} \times \frac{n}{2^{i}} = n.$$
 
-    **Ce coût vaut `n` à chaque niveau**, indépendamment de `i` : le $2^i$ (de plus en plus de fusions) et le $n/2^i$ (des fusions de plus en plus petites) se compensent exactement.
+    **Ce coût vaut $n$ à chaque niveau**, indépendamment de $i$ : le $2^i$ (de plus en plus de fusions) et le $n/2^i$ (des fusions de plus en plus petites) se compensent exactement.
 
     **3.** On s’arrête quand les sous-listes ont une taille de 1, c’est-à-dire quand
 
@@ -173,15 +173,15 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
 
     $$\text{coût total} = \underbrace{n}_{\text{par niveau}} \times \underbrace{\log_2 n}_{\text{nombre de niveaux}} = \boxed{n\log_2 n}.$$
 
-    Visuellement, chaque *ligne* de l’arbre ci-dessous coûte `n`, et il y a $\log_2 n$ lignes :
+    Visuellement, chaque *ligne* de l’arbre ci-dessous coûte $n$, et il y a $\log_2 n$ lignes :
 
     ![](../figures/46c05a4be3b1f061.svg){ .tikz loading=lazy }
 
     !!! propriete "Propriété 2 — Coût du tri fusion"
 
-        Le tri fusion d’une liste de `n` éléments a un coût de l’ordre de $n\log_2 n$.
+        Le tri fusion d’une liste de $n$ éléments a un coût de l’ordre de $n\log_2 n$.
 
-    **1.** Pour $n = 1024 = 2^{10}$ : $\log_2 n = 10$, donc $n\log_2 n = 1024 \times 10 \approx 10^4$ (dix mille), tandis que $n^2 = 1024^2 \approx 10^6$ (un million). Le tri fusion fait donc environ **100 fois** moins d’opérations ici ; et l’écart grandit avec `n` (rapport $n/\log_2 n$).
+    **1.** Pour $n = 1024 = 2^{10}$ : $\log_2 n = 10$, donc $n\log_2 n = 1024 \times 10 \approx 10^4$ (dix mille), tandis que $n^2 = 1024^2 \approx 10^6$ (un million). Le tri fusion fait donc environ **100 fois** moins d’opérations ici ; et l’écart grandit avec $n$ (rapport $n/\log_2 n$).
 
     **2.** Le raisonnement n’a utilisé **aucune hypothèse sur l’ordre initial** des éléments : le découpage en deux et le coût des fusions ne dépendent que des *tailles*. Le coût $n\log_2 n$ est donc garanti **dans tous les cas**, y compris le pire. Le tri rapide, lui, est en $n\log_2 n$ *en moyenne* mais peut chuter à $n^2$ sur des entrées défavorables : le tri fusion offre une **garantie**, ce qui est précieux quand on ne maîtrise pas les données.
 
@@ -201,11 +201,11 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
 
     **1.** À la fin, `resultat` contient **tous** les éléments de `gauche` et `droite`, chacun une fois : elle a donc $p + q$ éléments. Comme chaque `append` ajoute un élément et qu’il n’y a pas d’autre source d’éléments, il y a exactement $p + q$ appels à `append` (et au plus $p+q-1$ comparaisons, une par tour de la première boucle).
 
-    **2.** Si les deux listes totalisent `n` éléments ($p + q = n$), la fusion effectue de l’ordre de `n` opérations : son coût est **linéaire**.
+    **2.** Si les deux listes totalisent $n$ éléments ($p + q = n$), la fusion effectue de l’ordre de $n$ opérations : son coût est **linéaire**.
 
     !!! propriete "Propriété 1 — Coût de la fusion"
 
-        Fusionner deux listes triées totalisant `n` éléments coûte de l’ordre de `n` opérations (coût linéaire).
+        Fusionner deux listes triées totalisant $n$ éléments coûte de l’ordre de $n$ opérations (coût linéaire).
 
     **1.** À chaque descente, chaque liste se scinde en deux moitiés : le nombre de sous-listes **double** et leur taille est **divisée par deux**.
 
@@ -216,11 +216,11 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
     |    $2$     |            $4$            |         $n/4$         |
     |    $i$     |          $2^{i}$          |       $n/2^{i}$       |
 
-    **2.** Au niveau `i`, il y a $2^{i}$ sous-listes, chacune de taille $n/2^{i}$. Les fusions de ce niveau reconstruisent ces sous-listes ; d’après l’étape 1, chaque fusion coûte proportionnellement à la taille de son résultat. Le coût total du niveau est donc
+    **2.** Au niveau $i$, il y a $2^{i}$ sous-listes, chacune de taille $n/2^{i}$. Les fusions de ce niveau reconstruisent ces sous-listes ; d’après l’étape 1, chaque fusion coûte proportionnellement à la taille de son résultat. Le coût total du niveau est donc
 
     $$2^{i} \times \frac{n}{2^{i}} = n.$$
 
-    **Ce coût vaut `n` à chaque niveau**, indépendamment de `i` : le $2^i$ (de plus en plus de fusions) et le $n/2^i$ (des fusions de plus en plus petites) se compensent exactement.
+    **Ce coût vaut $n$ à chaque niveau**, indépendamment de $i$ : le $2^i$ (de plus en plus de fusions) et le $n/2^i$ (des fusions de plus en plus petites) se compensent exactement.
 
     **3.** On s’arrête quand les sous-listes ont une taille de 1, c’est-à-dire quand
 
@@ -232,15 +232,15 @@ Pour simplifier, on suppose que `n` est une **puissance de 2** : $n = 2^k$. À c
 
     $$\text{coût total} = \underbrace{n}_{\text{par niveau}} \times \underbrace{\log_2 n}_{\text{nombre de niveaux}} = \boxed{n\log_2 n}.$$
 
-    Visuellement, chaque *ligne* de l’arbre ci-dessous coûte `n`, et il y a $\log_2 n$ lignes :
+    Visuellement, chaque *ligne* de l’arbre ci-dessous coûte $n$, et il y a $\log_2 n$ lignes :
 
     ![](../figures/46c05a4be3b1f061.svg){ .tikz loading=lazy }
 
     !!! propriete "Propriété 2 — Coût du tri fusion"
 
-        Le tri fusion d’une liste de `n` éléments a un coût de l’ordre de $n\log_2 n$.
+        Le tri fusion d’une liste de $n$ éléments a un coût de l’ordre de $n\log_2 n$.
 
-    **1.** Pour $n = 1024 = 2^{10}$ : $\log_2 n = 10$, donc $n\log_2 n = 1024 \times 10 \approx 10^4$ (dix mille), tandis que $n^2 = 1024^2 \approx 10^6$ (un million). Le tri fusion fait donc environ **100 fois** moins d’opérations ici ; et l’écart grandit avec `n` (rapport $n/\log_2 n$).
+    **1.** Pour $n = 1024 = 2^{10}$ : $\log_2 n = 10$, donc $n\log_2 n = 1024 \times 10 \approx 10^4$ (dix mille), tandis que $n^2 = 1024^2 \approx 10^6$ (un million). Le tri fusion fait donc environ **100 fois** moins d’opérations ici ; et l’écart grandit avec $n$ (rapport $n/\log_2 n$).
 
     **2.** Le raisonnement n’a utilisé **aucune hypothèse sur l’ordre initial** des éléments : le découpage en deux et le coût des fusions ne dépendent que des *tailles*. Le coût $n\log_2 n$ est donc garanti **dans tous les cas**, y compris le pire. Le tri rapide, lui, est en $n\log_2 n$ *en moyenne* mais peut chuter à $n^2$ sur des entrées défavorables : le tri fusion offre une **garantie**, ce qui est précieux quand on ne maîtrise pas les données.
 
@@ -290,17 +290,17 @@ Le tri rapide applique « diviser pour régner », mais divise **autrement** que
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — La fonction `partition` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-tp-2-1 }
 
-Écrivez la fonction `partition(tab, bas, haut)` qui partitionne le sous-tableau `tab[bas..haut]` et renvoie l’indice final du pivot. Suivez ces étapes :
+Écrivez la fonction `partition(tab, bas, haut)` qui partitionne les éléments de `tab` d’indices `bas` à `haut` (inclus) et renvoie l’indice final du pivot. Suivez ces étapes :
 
 1.  choisir le **dernier** élément `tab[haut]` comme pivot ;
 
-2.  parcourir le sous-tableau avec un indice `j` ;
+2.  poser `i = bas - 1` : `i` sera l’indice du dernier élément $\leqslant$ pivot déjà rangé à gauche ;
 
-3.  maintenir un indice `i` qui marque la frontière des éléments $\leqslant$ pivot ;
+3.  parcourir les indices `j` de `bas` à `haut - 1` (on ne parcourt pas le pivot) ;
 
-4.  échanger `tab[i]` et `tab[j]` chaque fois que `tab[j]` $\leqslant$ pivot ;
+4.  chaque fois que `tab[j]` $\leqslant$ pivot : augmenter `i` de 1, *puis* échanger `tab[i]` et `tab[j]` ;
 
-5.  à la fin, placer le pivot juste après `i` et renvoyer sa position.
+5.  à la fin, échanger `tab[i + 1]` et `tab[haut]` (le pivot vient juste après `i`) et renvoyer `i + 1`.
 
 ??? corrige "Corrigé"
 
@@ -350,7 +350,7 @@ print("Tableau trie :", tab)   # Doit afficher [1, 5, 7, 8, 9, 10]
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Rappel : le tri fusion <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-tp-2-3 }
 
-Voici une implémentation du tri fusion qui modifie `tab` directement (au lieu de renvoyer un nouveau tableau comme dans le cours) (elle recopie toutefois les deux moitiés dans `gauche` et `droite`). Relisez-la et vérifiez qu’elle correspond bien aux trois temps du cours.
+Voici une implémentation du tri fusion qui modifie `tab` directement, au lieu de renvoyer un nouveau tableau comme dans le cours ; elle recopie toutefois les deux moitiés dans `gauche` et `droite`. Relisez-la et vérifiez qu’elle correspond bien aux trois temps du cours.
 
 ```python
 def tri_fusion(tab):
@@ -467,7 +467,7 @@ plt.show()
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — L’importance du pivot <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-tp-2-6 }
 
-Testez différentes stratégies de choix du pivot (premier élément, dernier élément, élément médian, élément **aléatoire**) et comparez. Que se passe-t-il pour le tri rapide sur un tableau **déjà trié** si le pivot est le dernier élément ?
+Testez différentes stratégies de choix du pivot et comparez : premier élément, dernier élément, élément **du milieu** (`tab[(bas + haut) // 2]`), élément **au hasard**. Astuce : échangez d’abord l’élément choisi avec `tab[haut]`, puis appelez la même `partition`. Que se passe-t-il pour le tri rapide sur un tableau **déjà trié** si le pivot est le dernier élément ? (Essayez $n = 500$ puis $n = 2\,000$ : quel message Python affiche-t-il ?)
 
 !!! encadre "Coût des deux tris"
 
@@ -527,9 +527,9 @@ Testez différentes stratégies de choix du pivot (premier élément, dernier é
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 8</span> — Pour aller plus loin : un tri rapide qui renvoie une nouvelle liste <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-tp-2-8 }
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction récursive `tri_rapide_liste(t)` qui renvoie une **nouvelle** liste triée, sans modifier `t` et sans fonction `partition` : on prend pour pivot le dernier élément, on construit **par compréhension** la liste `petits` des autres éléments `<=` pivot et la liste `grands` des éléments `>` pivot, puis on combine.
+1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrivez une fonction récursive `tri_rapide_liste(t)` qui renvoie une **nouvelle** liste triée, sans modifier `t` et sans fonction `partition` : on prend pour pivot le dernier élément, on construit **par compréhension** la liste `petits` des autres éléments `<=` pivot et la liste `grands` des éléments `>` pivot, puis on combine.
 
-2.  Comparer avec `tri_rapide` : quelle version est la plus facile à lire ? Laquelle utilise le plus de mémoire, et pourquoi ?
+2.  Comparez avec `tri_rapide` : quelle version est la plus facile à lire ? Laquelle utilise le plus de mémoire, et pourquoi ?
 
 ??? corrige "Corrigé"
 
@@ -646,7 +646,7 @@ print("Tableau trie :", tab)   # Doit afficher [5, 6, 11, 12, 13]
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 2</span> — Fusionner deux sous-tableaux triés <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-tp-3-2 }
 
-Complétez `fusion_en_place(tab, debut, milieu, fin)`, qui fusionne les deux sous-tableaux triés `tab[debut..milieu]` et `tab[milieu+1..fin]`. *C’est la « fusion » du cours, appliquée en place à un morceau du tableau.*
+Complétez `fusion_en_place(tab, debut, milieu, fin)`, qui fusionne les deux sous-tableaux triés `tab[debut..milieu]` et `tab[milieu+1..fin]`. *C’est la « fusion » du cours, dont le résultat est rangé directement dans `tab` (les deux moitiés sont tout de même recopiées dans `gauche` et `droite`).*
 
 ```python
 def fusion_en_place(tab, debut, milieu, fin):
@@ -815,7 +815,7 @@ plt.show()
 
 - Quel algorithme est le plus rapide pour les **petites** tailles ? pour les **grandes** ?
 
-- Refaites la mesure sur un tableau **déjà trié**. Que constatez-vous pour le Tim sort ?
+- Refaites la mesure sur un tableau **déjà trié** (par exemple `[k for k in range(n)]`). *Attention :* sur un tel tableau, notre `tri_rapide` (pivot = dernier élément) dépasse la profondeur de récursion autorisée par Python dès $n \approx 1\,000$ (`RecursionError`) : c’est un résultat, pas une erreur de votre code. Retirez-le de la course pour cette mesure, puis répondez : que constatez-vous pour le Tim sort ?
 
 ??? corrige "Corrigé"
 
@@ -1075,7 +1075,7 @@ sortie.save("joconde_tournee.png")
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 5</span> — Pour aller plus loin <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-tp-4-5 }
 
-- Cet algorithme suppose que `n` est une **puissance de 2** (pour couper en quadrants égaux). Pourquoi ? Que faudrait-il gérer si ce n’était pas le cas ?
+- Cet algorithme suppose que `n` est une **puissance de 2**. Pourquoi ? Que faudrait-il gérer si ce n’était pas le cas (essayez de couper une image $6\times6$) ?
 
 - Comment modifieriez-vous la permutation pour tourner dans le sens **anti-horaire** ?
 
@@ -1100,11 +1100,11 @@ sortie.save("joconde_tournee.png")
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — La simple recopie <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-tp-4-6 }
 
-1.  Sur l’image $4\times4$ de l’exercice 1, de quelle case de l’image de départ vient le pixel ligne `0`, colonne `0` de l’image tournée ? et celui ligne `1`, colonne `3` ? En déduire, pour une image $n\times n$, la ligne et la colonne de départ du pixel ligne `i`, colonne `j` de l’image tournée.
+1.  Sur l’image $4\times4$ de l’exercice 1, de quelle case de l’image de départ vient le pixel ligne `0`, colonne `0` de l’image tournée ? et celui ligne `1`, colonne `3` ? Déduisez-en, pour une image $n\times n$, la ligne et la colonne de départ du pixel ligne `i`, colonne `j` de l’image tournée.
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `rotation_copie(image)` qui **renvoie** une nouvelle image tournée d’un quart de tour horaire, construite **par compréhension**, sans modifier `image`. Vérifier sur l’image $4\times4$ qu’on obtient le même résultat qu’avec la fonction récursive.
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrivez une fonction `rotation_copie(image)` qui **renvoie** une nouvelle image tournée d’un quart de tour horaire, construite **par compréhension**, sans modifier `image`. Vérifiez sur l’image $4\times4$ qu’on obtient le même résultat qu’avec la fonction récursive.
 
-3.  Comparer les deux méthodes : nombre d’écritures de pixels, mémoire utilisée.
+3.  Comparez les deux méthodes : nombre d’écritures de pixels, mémoire utilisée.
 
 ??? corrige "Corrigé"
 

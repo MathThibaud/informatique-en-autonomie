@@ -33,7 +33,7 @@ while True:
 
 1.  Lancer le programme, puis appuyer sur le bouton A du simulateur (et le relâcher). Décrire ce qui se passe.
 
-2.  Dans ce programme, quelle ligne **perçoit** le monde extérieur ? quelle ligne **décide** ? quelles lignes **agissent** ?
+2.  Dans ce programme, quelle instruction **perçoit** le monde extérieur ? laquelle **décide** ? lesquelles **agissent** ? (Une même ligne peut contenir deux de ces rôles.)
 
 3.  Supprimer la ligne `while True:` (et décaler le reste vers la gauche), relancer, appuyer sur A. Que se passe-t-il ? Pourquoi la boucle sans fin est-elle indispensable ?
 

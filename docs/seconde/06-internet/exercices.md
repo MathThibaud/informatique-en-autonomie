@@ -88,7 +88,7 @@
 
 <span class="duree">≈ 10 min</span>
 
-<span class="tag">sur papier</span>  On envoie une photo de $3$ Mo ($3 \times 10^{6}$ octets). On suppose que chaque paquet transporte $1500$ octets de la photo, et que son étiquette ajoute $40$ octets (on simplifie : en réalité, étiquette comprise, un paquet ne dépasse pas $1500$ octets environ).
+<span class="tag">sur papier</span>  On envoie une photo de $3$ Mo ($3 \times 10^{6}$ octets). On suppose que chaque paquet transporte $1500$ octets de la photo et que son étiquette ajoute $40$ octets. (En réalité, la limite de $1500$ octets inclut l’étiquette ; on simplifie ici.)
 
 1.  En combien de paquets la photo est-elle découpée ?
 
@@ -372,7 +372,7 @@
 
 1.  Combien de **Go** y a-t-il dans 1 **To** ? dans 1 **Po** ?
 
-2.  En 2024, le trafic mondial annuel sur Internet est estimé à environ $7$ Zo (UIT, 2024). Écrire ce nombre en octets (puissance de 10), et dire à quel préfixe (Zo) cela correspond.
+2.  En 2024, le trafic mondial annuel sur Internet est estimé à environ $7$ Zo (UIT, 2024). Écrire ce nombre en octets, avec une puissance de $10$. Combien de Go cela représente-t-il ?
 
 ??? pouce "Coup de pouce"
 
@@ -382,7 +382,7 @@
 
     1.  1 To $=10^{12}$ o $=10^{3}$ Go $=\textbf{1000}$ Go. 1 Po $=10^{15}$ o $=10^{6}$ Go $=\textbf{1\,000\,000}$ Go.
 
-    2.  $7$ Zo $=7 \times 10^{21}$ octets ; le préfixe **Zo** (zetta) vaut $10^{21}$.
+    2.  $7$ Zo $=7 \times 10^{21}$ octets (le préfixe **Z**, zetta, vaut $10^{21}$). Comme 1 Go $=10^{9}$ o : $7 \times 10^{21} \div 10^{9} = 7 \times 10^{12}$ Go, soit **7 000 milliards** de Go.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 19</span> — Le temps d’un téléchargement <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-19 }
 

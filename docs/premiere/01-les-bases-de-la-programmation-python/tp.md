@@ -216,7 +216,7 @@ On transforme ce programme en une fonction `partie(secret, maxi, essais_max)`. L
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Chaud ou froid ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-les-bases-de-la-programmation-python-tp-1-5 }
 
-Pour aider le joueur, on ajoute un indice selon la distance entre la proposition et le secret : `"brulant"` si elle vaut au plus 3, `"chaud"` si elle vaut au plus 10, `"froid"` au-delà.
+Pour aider le joueur, on ajoute un indice selon la distance entre la proposition et le secret : `"brulant"` si cette distance vaut au plus 3, `"chaud"` si elle vaut au plus 10, `"froid"` au-delà.
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `ecart(a, b)` qui renvoie la distance entre `a` et `b`, toujours positive ou nulle (`ecart(3, 10)` et `ecart(10, 3)` valent `7`). Utiliser une conditionnelle.
 
@@ -532,7 +532,7 @@ Le secret est `37`, entre 1 et 100. Recopier sur le cahier le tableau suivant et
         `e = essais_ordinateur(secret, maxi)`  
         …
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `nb_moities(n)` qui compte combien de fois on peut diviser `n` par 2 (division entière `//`) avant d’arriver à `0`. Vérifier par une boucle d’`assert` que `pire_cas(m) == nb_moities(m)` pour tous les `m` de 1 à 200. Combien d’essais suffiraient pour un nombre entre 1 et un million ?
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `nb_moities(n)` qui compte combien de divisions entières par 2 (`n = n // 2`) il faut effectuer pour que `n` devienne `0` (par exemple, `nb_moities(1)` vaut `1` et `nb_moities(4)` vaut `3`). Vérifier par une boucle d’`assert` que `pire_cas(m) == nb_moities(m)` pour tous les `m` de 1 à 200. Combien d’essais suffiraient pour un nombre entre 1 et un million ?
 
 ??? corrige "Corrigé"
 

@@ -47,7 +47,7 @@
 
 2.  Sur une vraie carte, ce nombre n’est pas tapé par quelqu’un. D’où vient-il ?
 
-3.  Déplacer montrer nombre dans au démarrage, à la place de toujours, puis bouger le curseur. Que change-t-il ? À quoi sert donc toujours ?
+3.  Déplacer montrer nombre dans au démarrage, à la place de toujours, puis bouger le curseur. Qu’est-ce qui change ? À quoi sert donc toujours ?
 
 ??? corrige "Corrigé"
 

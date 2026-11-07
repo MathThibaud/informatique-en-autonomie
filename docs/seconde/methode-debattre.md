@@ -55,4 +55,4 @@ Un avis sans appui n’est qu’une opinion, pas un argument. *Exemple (question
 
 - **Pendant le débat** : compléter le tableau d’arguments de la fiche (argument et numéro du document).
 
-- **Après le débat** : noter votre position (oui, non, je ne sais toujours pas) et si vous avez changé d’avis ; la justifier en trois à cinq lignes avec vos **deux meilleurs arguments**, dont **un de l’autre camp** que vous trouvez solide (avec son document).
+- **Après le débat** : noter votre position (oui, non, je ne sais toujours pas) et si vous avez changé d’avis ; en trois à cinq lignes, la justifier avec votre **meilleur argument** (et son document), puis citer **un argument de l’autre camp** que vous trouvez solide et dire pourquoi il ne vous a pas fait changer d’avis, ou pourquoi il l’a fait.

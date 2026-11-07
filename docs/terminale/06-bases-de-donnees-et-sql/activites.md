@@ -79,7 +79,7 @@ Le fichier du tableau est rangé sur un disque partagé. À 10 h 00, Mme Leroy l
 
 ### <span class="exo-num">Exercice 3</span> — Découper le tableau <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-bases-de-donnees-et-sql-act-1-3 }
 
-On décide de ranger les informations dans **trois** tableaux plus petits, chacun ne parlant que d’une seule chose. Corriger les anomalies au passage.
+On décide de ranger les informations dans **trois** tableaux plus petits, chacun ne parlant que d’une seule chose. Corriger au passage les fautes de frappe et les écritures différentes d’une même chose ; une valeur impossible ne peut pas être corrigée sans information : écrire « ? » à sa place (à vérifier).
 
 1.  Sur le cahier, construire et remplir les trois tableaux suivants (une ligne par classe, une ligne par élève, une ligne par note) ; seules leurs colonnes sont données.
 

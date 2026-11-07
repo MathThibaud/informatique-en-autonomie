@@ -408,13 +408,13 @@ On se penche sur un algorithme pour trier un tableau appelé le **tri de Stooge*
 
 - si les éléments d’indice $i$ et $j$ sont mal placés, on les échange ;
 
-- s’il y a au moins trois éléments entre les indices $i$ et $j$ :
+- s’il y a au moins trois éléments de l’indice $i$ à l’indice $j$ inclus :
 
-  - on trie les deux premiers tiers du tableau avec cette méthode ;
+  - on trie les deux premiers tiers de cette portion avec cette méthode ;
 
-  - on trie les deux derniers tiers du tableau avec cette méthode ;
+  - on trie les deux derniers tiers de cette portion avec cette méthode ;
 
-  - on trie à nouveau les deux premiers tiers du tableau avec cette méthode.
+  - on trie à nouveau les deux premiers tiers de cette portion avec cette méthode.
 
 Pour réaliser ce découpage en tiers, on considère l’entier `k` défini par l’expression `(j - i + 1) // 3`, et on considère les indices intermédiaires `i + k` et `j - k`.
 
@@ -464,7 +464,7 @@ La figure ci-dessous présente l’arbre (incomplet) des appels récursifs effec
 
     ??? pouce "Coup de pouce"
 
-        Q7 : calculer `k` pour l’appel `triStooge(A,0,3)`, en déduire ses trois appels ; la valeur « après » d’une ligne est la valeur « avant » de la suivante.
+        Q7 : calculer `k` pour l’appel `triStooge(A,0,3)` et en déduire ses trois appels (lignes 2 à 4 du tableau). Parmi ces trois appels, la valeur « après » d’une ligne est la valeur « avant » de la suivante ; la valeur « après » de la ligne 1 est celle de `A` une fois les trois appels terminés.
 
     | **Appel** | **Valeur de A avant l’appel** | **Valeur de A après l’appel** |
     |:---|:--:|:--:|
@@ -550,11 +550,11 @@ Par exemple, la liste `[1, 4, 1, 6, 1, 7, 2, 1, 1]` admet `1` comme élément ab
 
         Q2 : un compteur initialisé à $0$ et une boucle sur les éléments de `lst`.
 
-2.  Déterminer le nombre de comparaisons effectuées par l’appel `effectif(1, [1, 4, 1, 6, 1, 7, 2, 1, 1])`.
+2.  Déterminer le nombre de comparaisons entre `val` et un élément de la liste effectuées par l’appel `effectif(1, [1, 4, 1, 6, 1, 7, 2, 1, 1])`.
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> En utilisant la fonction `effectif`, écrire une fonction `majo_abs1` qui prend en paramètre une liste `lst` et qui renvoie son élément absolument majoritaire s’il existe, `None` sinon.
 
-4.  Déterminer le nombre de comparaisons effectuées par l’appel `majo_abs1([1, 4, 1, 6, 1, 7, 2, 1, 1])`.
+4.  On suppose que `majo_abs1` renvoie son résultat dès qu’un élément convient. Déterminer le nombre de comparaisons entre éléments de la liste effectuées par l’appel `majo_abs1([1, 4, 1, 6, 1, 7, 2, 1, 1])`.
 
 **Partie B — Calcul des effectifs dans un dictionnaire.** Un autre algorithme consiste à stocker l’effectif partiel de chaque élément déjà rencontré dans un dictionnaire.
 
@@ -712,7 +712,7 @@ L’objectif est de trouver les deux points les plus proches dans un nuage de po
 
 $$AB = \sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}.$$
 
-Les coordonnées d’un point sont stockées dans un tuple de deux nombres réels. Le nuage de points est représenté en Python par une liste de tuples de taille $n$, $n$ étant le nombre total de points. On suppose qu’il n’y a pas de points confondus et qu’il y a au moins deux points dans le nuage. Pour calculer la racine carrée, on utilise la fonction `sqrt` du module `math` :
+Les coordonnées d’un point sont stockées dans un tuple de deux nombres réels. Le nuage de points est représenté en Python par une liste de $n$ tuples, $n$ étant le nombre total de points. On suppose qu’il n’y a pas de points confondus et qu’il y a au moins deux points dans le nuage. Pour calculer la racine carrée, on utilise la fonction `sqrt` du module `math` :
 
 ```text
 >>> from math import sqrt
@@ -912,11 +912,13 @@ On appelle **inversion** d’une liste `t` tout couple d’indices `(i, j)` tel 
 
 1.  On prend `t = [5, 2, 6, 1, 4, 3]`. Donner `gauche` et `droite`, puis compter les inversions de `gauche`, celles de `droite` et les inversions croisées. En déduire le nombre d’inversions de `t`.
 
-2.  Le nombre d’inversions croisées ne change pas si l’on trie chacune des deux moitiés (justifier brièvement). On suppose donc `gauche` et `droite` **triées**, et on les fusionne comme dans le tri fusion. Au moment où l’on place `droite[j]` dans le résultat parce que `droite[j] < gauche[i]`, justifier que `droite[j]` forme une inversion croisée avec exactement `len(gauche) - i` éléments de `gauche`.
+2.  1.  Justifier brièvement que le nombre d’inversions croisées ne change pas si l’on trie chacune des deux moitiés.
+
+    2.  On suppose donc `gauche` et `droite` **triées**, et on les fusionne comme dans le tri fusion. Au moment où l’on place `droite[j]` dans le résultat parce que `droite[j] < gauche[i]`, justifier que `droite[j]` forme une inversion croisée avec exactement `len(gauche) - i` éléments de `gauche`.
 
     ??? pouce "Coup de pouce"
 
-        Q5 : `gauche` est triée : comparer `droite[j]` à `gauche[i]`, `gauche[i+1]`, … D’autre part, les éléments `gauche[0]`, …, `gauche[i-1]` déjà placés sont-ils plus grands ou plus petits que `droite[j]` ?
+        Q5 b) : `gauche` est triée : comparer `droite[j]` à `gauche[i]`, `gauche[i+1]`, … D’autre part, les éléments `gauche[0]`, …, `gauche[i-1]` déjà placés sont-ils plus grands ou plus petits que `droite[j]` ?
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> Recopier et compléter la fonction `fusion_compte`, qui renvoie la liste fusionnée **et** le nombre d’inversions croisées.
 
@@ -995,7 +997,7 @@ On appelle **inversion** d’une liste `t` tout couple d’indices `(i, j)` tel 
 
     Total : $1 + 1 + 7 = \mathbf{9}$ inversions (`inversions_naif([5, 2, 6, 1, 4, 3])` renvoie bien `9`).
 
-    **5.** Une inversion croisée ne dépend que des *valeurs* présentes dans chaque moitié (un élément de `gauche` plus grand qu’un élément de `droite`), pas de leur ordre à l’intérieur de la moitié : trier `gauche` et `droite` ne change donc pas leur nombre. Si `droite[j] < gauche[i]`, comme `gauche` est triée, on a aussi `droite[j] < gauche[i] <= gauche[i+1] <= ... <= gauche[len(gauche)-1]` : `droite[j]` est plus petit que *tous* les éléments restants de `gauche`, soit `len(gauche) - i` éléments. Les éléments `gauche[0]`, …, `gauche[i-1]`, déjà placés, sont `<= droite[j]` : ils ne forment pas d’inversion avec lui.
+    **5.** **a)** Une inversion croisée ne dépend que des *valeurs* présentes dans chaque moitié (un élément de `gauche` plus grand qu’un élément de `droite`), pas de leur ordre à l’intérieur de la moitié : trier `gauche` et `droite` ne change donc pas leur nombre. **b)** Si `droite[j] < gauche[i]`, comme `gauche` est triée, on a aussi `droite[j] < gauche[i] <= gauche[i+1] <= ... <= gauche[len(gauche)-1]` : `droite[j]` est plus petit que *tous* les éléments restants de `gauche`, soit `len(gauche) - i` éléments. Les éléments `gauche[0]`, …, `gauche[i-1]`, déjà placés, sont `<= droite[j]` : ils ne forment pas d’inversion avec lui.
 
     **6.**
 

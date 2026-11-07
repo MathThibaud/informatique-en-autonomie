@@ -71,7 +71,7 @@ On a relevé, dans l’ordre croissant, les notes obtenues à un contrôle de ma
 
 ### <span class="exo-num">Exercice 2</span> — Fréquences et F.C.C. (feuille `Exercice 2`) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-les-donnees-structurees-et-leur-traiteme-tp-1-2 }
 
-La feuille `Exercice 2` donne les effectifs du lycée par **année de naissance**. Compléter, à l’aide de formules, la ligne des **fréquences** et celle des **fréquences cumulées croissantes** (F.C.C.).
+La feuille `Exercice 2` donne les effectifs du lycée par **année de naissance**. Compléter, à l’aide de formules, la ligne des **fréquences** et celle des **fréquences cumulées croissantes** (F.C.C.). Les F.C.C. se construisent comme les E.C.C. de l’exercice 1, mais en cumulant les fréquences : la dernière doit valoir $1$ (ou $100\,\%$). Pensez au `$` pour fixer l’effectif total.
 
 ??? corrige "Corrigé"
 
@@ -191,7 +191,7 @@ On fait varier automatiquement le premier terme.
 
 2.  Le pas est en `E1` (`3`). En `C1`, recopier le nombre aléatoire : `=B3`. Créer dans la colonne `C` une suite de 30 termes de pas 3.
 
-3.  Compléter `E4`, `E7`, `E8`, `E9` et `E12` (comme en `Exercice 3`, mais sur la colonne `C`). **Vérifier** la conjecture. On peut appuyer sur `F9` pour retirer un nouveau nombre aléatoire.
+3.  Compléter `E4`, `E7`, `E8`, `E9` et `E12` (comme en `Exercice 3`, mais sur la colonne `C`). **Vérifier** la conjecture. On peut appuyer sur la touche **F9** du clavier pour tirer un nouveau nombre aléatoire.
 
 ??? corrige "Corrigé"
 
@@ -249,7 +249,7 @@ Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title=
 
 ![](../figures/30aed9402f145174.svg){ .tikz loading=lazy }
 
-**2<sup>e</sup> cas : série à classes.** Durée des interventions :
+**2<sup>e</sup> cas : série à classes.** Durée (en minutes) de $220$ interventions d’un service de dépannage :
 
 | Durée (min) | $0 \leq t < 15$ | $15 \leq t < 30$ | $30 \leq t < 45$ | $45 \leq t < 60$ | $60 \leq t < 75$ | $75 \leq t < 90$ | $90 \leq t < 105$ | $105 \leq t < 120$ |
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
@@ -327,7 +327,7 @@ Tailles de 885 nourrissons :
 
 - \(a\) Compléter la ligne des produits $t \times n$ (par exemple `=B3*B4`, à recopier).
 
-- \(b\) Calculer la moyenne à l’aide de $\dfrac{\sum (t \times n)}{\sum n}$.
+- \(b\) Calculer la moyenne : somme de la ligne $t \times n$, divisée par l’effectif total.
 
 - \(c\) Calculer l’étendue.
 
@@ -364,7 +364,7 @@ Tailles de 640 nourrissons :
 
 - \(b\) Localiser médiane, premier et troisième quartile *(même méthode, avec les F.C.C. : première classe dont la F.C.C. atteint $25\,\%$, $50\,\%$, puis $75\,\%$)*.
 
-- \(c\) Calculer la moyenne avec `=SOMMEPROD(centres;effectifs)/total`.
+- \(c\) Calculer la moyenne avec `=SOMMEPROD(…;…)/…`, en remplaçant les points par la plage des centres de classe, celle des effectifs, puis la cellule de l’effectif total.
 
 ??? corrige "Corrigé"
 
@@ -450,7 +450,7 @@ Recopier ce tableau sur le cahier et le compléter pendant le débat.
 
 Trace écrite finale (individuelle)
 
-Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes, justifiez-la avec vos **deux meilleurs arguments**, dont **un argument de l’autre camp** que vous trouvez solide (avec le document qui l’appuie).
+Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes : justifiez-la avec votre **meilleur argument** (et le document qui l’appuie) ; citez ensuite **un argument de l’autre camp** que vous trouvez solide, et dites pourquoi il ne vous a pas fait changer d’avis, ou pourquoi il l’a fait.
 
 ??? corrige "Corrigé de l'activité"
 

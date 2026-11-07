@@ -71,7 +71,7 @@ Recopier ce tableau sur le cahier et le compléter pendant le débat.
 
 Trace écrite finale (individuelle)
 
-Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes, justifiez-la avec vos **deux meilleurs arguments**, dont **un argument de l’autre camp** que vous trouvez solide (avec le document qui l’appuie).
+Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes : justifiez-la avec votre **meilleur argument** (et le document qui l’appuie) ; citez ensuite **un argument de l’autre camp** que vous trouvez solide, et dites pourquoi il ne vous a pas fait changer d’avis, ou pourquoi il l’a fait.
 
 ??? corrige "Corrigé de l'activité"
 

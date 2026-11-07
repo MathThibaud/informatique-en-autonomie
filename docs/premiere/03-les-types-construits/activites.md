@@ -41,7 +41,7 @@ Recopier sur le cahier le tableau ci-dessous : il sert pour les questions 1 à 3
 
 1.  Pour retrouver une information dans chaque tas, que dit-on le plus naturellement : « la troisième » (une **position**) ou « celle de Hugo » (une **étiquette**) ? Compléter la 1<sup>re</sup> ligne du tableau.
 
-2.  Ce tas va-t-il **changer** après sa création ? Si oui, donner un exemple de changement ; si non, expliquer pourquoi il *ne doit pas* changer. Compléter la 2<sup>e</sup> ligne.
+2.  Chaque tas va-t-il **changer** après sa création ? Si oui, donner un exemple de changement ; si non, expliquer pourquoi il *ne doit pas* changer. Compléter la 2<sup>e</sup> ligne.
 
 3.  L’**ordre** des éléments compte-t-il ? (Que se passe-t-il si on échange deux éléments ?) Compléter la 3<sup>e</sup> ligne.
 
@@ -90,7 +90,7 @@ En Python, une variable est plutôt une **étiquette** (un post-it) collée sur 
 
 1.  Papa barre « pain » et écrit « brioche » à la place. Que lit Maman sur *sa* liste ?
 
-2.  **Prédire, puis vérifier.** Voici la même histoire en Python. Écrire sur le cahier ce qu’affiche la dernière ligne *avant* de l’exécuter (le professeur l’exécute ensuite au tableau), puis noter à côté le résultat obtenu.
+2.  **Prédire, puis vérifier.** Voici la même histoire en Python. Écrire sur le cahier ce qu’affiche la dernière ligne *avant* de l’exécuter (en classe, le professeur l’exécute au tableau ; seul, l’exécuter dans une console Python), puis noter à côté le résultat obtenu.
 
     ```python
     maman = ["pain", "lait", "pommes"]

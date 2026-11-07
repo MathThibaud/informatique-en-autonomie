@@ -18,6 +18,8 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -58,7 +60,7 @@ Vocabulaire utile pour lire le texte original :
 
     **La règle.**
 
-    - L’énoncé indique un contenu possible du sac : un nombre de cubes de chaque couleur.
+    - L’énoncé fixe le contenu du sac : **12 cubes rouges, 13 verts et 14 bleus**.
 
     - Une partie est **possible** avec ce sac si aucun tirage ne montre plus de cubes d’une couleur que le sac n’en contient (autant, c’est permis).
 
@@ -88,7 +90,7 @@ Après lecture du résumé (et de l’énoncé), vérifier sa compréhension sur
 
 **À quoi ça sert ?** On obtient une réponse connue (`6`) pour tester le programme ; ce petit fichier resservira pour la partie 2.
 
-On considère le fichier (inventé) suivant, avec le contenu du sac indiqué dans l’énoncé :
+On considère le fichier (inventé) suivant, avec ce même sac (12 rouges, 13 verts, 14 bleus) :
 
 ```console
 Game 1: 4 red, 2 green; 1 blue, 13 red
@@ -109,7 +111,7 @@ Quelles parties sont possibles ? Vérification : on doit obtenir `6`.
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -178,7 +180,7 @@ Pour chaque partie, calculer le plus grand nombre de cubes rouges vus dans un m�
 
 ??? pouce "Coup de pouce"
 
-    Trois variables `rouge`, `vert`, `bleu` initialisées à 0 au début de chaque partie, et mises à jour avec un `if` à chaque morceau. C’est un calcul de maximum (patron du champion), comme dans le chapitre sur les parcours de tableaux.
+    Trois variables `rouge`, `vert`, `bleu` initialisées à 0 au début de chaque partie, et mises à jour avec un `if` à chaque morceau. C’est un calcul de maximum (patron du champion), comme au chapitre *Algorithmique : le parcours séquentiel*.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 

@@ -58,7 +58,7 @@ Répondre **sans formule ni tri automatique**, en lisant les lignes une à une (
 
 1.  Quel est le prénom de garçon le plus donné en 2025, et combien de fois ? Quelles lignes avez-vous dû regarder ? Lesquelles avez-vous ignorées ?
 
-2.  Combien de filles, au total, ont reçu le prénom Louise en 2023 et en 2025 ?
+2.  Combien de filles ont reçu le prénom Louise en 2023 et en 2025 réunis (un seul total) ?
 
 3.  Dans quelle région se trouve Menton ? Quels fichiers a-t-il fallu consulter, et grâce à quelle colonne ? Peut-on répondre à la même question pour Ajaccio ?
 

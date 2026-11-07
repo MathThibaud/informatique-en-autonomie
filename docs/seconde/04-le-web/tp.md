@@ -39,7 +39,7 @@ Les documents
 
     Depuis mars 2024, le règlement européen sur les marchés numériques (*DMA*) interdit aux plus grandes plateformes de **mieux classer leurs propres services** que ceux des concurrents. Le règlement sur les services numériques (*DSA*) oblige les très grands moteurs à proposer des résultats qui **ne reposent pas sur le profil** de l’utilisateur. Un règlement de 2019 leur impose aussi de rendre publics les **principaux paramètres** de leur classement.
 
-    **À retenir :** ces règles encadrent la façon de classer, pas l’ordre des résultats.
+    **À retenir :** ces règles interdisent certains favoritismes et imposent de publier les grands critères, mais ne fixent pas quel site doit arriver premier.
 
     Source : règlements (UE) 2022/1925 (DMA), 2022/2065 (DSA, article 38) et 2019/1150 (article 5).
 
@@ -71,7 +71,7 @@ Recopier ce tableau sur le cahier et le compléter pendant le débat.
 
 Trace écrite finale (individuelle)
 
-Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes, justifiez-la avec vos **deux meilleurs arguments**, dont **un argument de l’autre camp** que vous trouvez solide (avec le document qui l’appuie).
+Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes : justifiez-la avec votre **meilleur argument** (et le document qui l’appuie) ; citez ensuite **un argument de l’autre camp** que vous trouvez solide, et dites pourquoi il ne vous a pas fait changer d’avis, ou pourquoi il l’a fait.
 
 ??? corrige "Corrigé de l'activité"
 

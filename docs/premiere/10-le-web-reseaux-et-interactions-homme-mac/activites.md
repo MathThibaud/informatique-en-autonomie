@@ -59,7 +59,7 @@ Pour reconnaître un renvoi, on écrit un **numéro** sur chaque papier. Premier
 
 Règles : les lettres sont marquées tour à tour `0`, `1`, `0`, `1`… ; un renvoi garde **le même** chiffre. Le récepteur note à chaque fois le chiffre qu’il **attend** (au début : `0`). S’il reçoit un papier portant le chiffre qu’il vient **déjà** de recevoir, il ne recopie pas la lettre, mais renvoie quand même « reçu ».
 
-1.  Recopier sur le cahier et compléter le tableau des papiers envoyés par l’émetteur pendant la manche (une case par envoi, renvois compris) :
+1.  Recopier sur le cahier et compléter le tableau des papiers envoyés par l’émetteur pendant la manche (une case par envoi, renvois compris ; il peut rester des cases vides) :
 
     | lettre  | `B` |     |     |     |     |     |     |     |     |
     |:--------|:----|:----|:----|:----|:----|:----|:----|:----|:----|

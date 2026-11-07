@@ -107,7 +107,7 @@ La commande `sleep 300` ne fait rien pendant $300$ secondes : un processus « bl
 
 3.  \lt span class="run" title="À programmer et tester sur machine">▶\lt /span>  Arrêter le premier `sleep` avec \lt code>kill &lt;PID&gt;\lt /code> (en remplaçant \lt code>&lt;PID&gt;\lt /code> par son numéro), puis le second avec `kill %2` (`%2` désigne la tâche numéro 2 de `jobs`). Vérifier avec `jobs` et `ps`.
 
-4.  Recopier et compléter le **tableau-mémo** des commandes rencontrées :
+4.  Recopier le **tableau-mémo** des commandes ; le compléter maintenant pour les quatre premières, et pour `top` à l’exercice suivant :
 
 | **Commande**          | **Rôle** | **Exemple tapé** |
 |:----------------------|:---------|:-----------------|
@@ -157,7 +157,7 @@ La commande `sleep 300` ne fait rien pendant $300$ secondes : un processus « bl
 
 ## Partie B — Programmer un simulateur d’ordonnancement
 
-Un processus est représenté par un triplet `(nom, arrivee, duree)`. Un **chronogramme** est une liste dont la case d’indice `t` contient le nom du processus élu pendant l’unité de temps $[t\,;\,t+1]$, ou `"."` si le processeur n’a rien à faire. Par exemple, pour le jeu du cours `JEU_COURS = [("A", 0, 4), ("B", 1, 3), ("C", 2, 1), ("D", 3, 2)]`, la stratégie « premier arrivé, premier servi » donne :
+Un processus est représenté par un triplet `(nom, arrivee, duree)`. Un **chronogramme** est une liste dont la case d’indice `t` contient le nom du processus élu pendant l’unité de temps $[t\,;\,t+1[$, ou `"."` si le processeur n’a rien à faire. Par exemple, pour le jeu du cours `JEU_COURS = [("A", 0, 4), ("B", 1, 3), ("C", 2, 1), ("D", 3, 2)]`, la stratégie « premier arrivé, premier servi » donne :
 
 ```python
 ["A", "A", "A", "A", "B", "B", "B", "C", "D", "D"]
@@ -454,7 +454,7 @@ On travaille maintenant sur le jeu `JEU_TP` du fichier (six processus, dont deux
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 11</span> — Défi : le plus court temps restant d’abord <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-tp-1-11 }
 
-Variante **préemptive** du plus court d’abord (*SRTF*) : **à chaque unité de temps**, on élit le processus prêt dont le temps **restant** est le plus petit — quitte à interrompre l’élu si un plus court arrive.
+Variante **préemptive** du plus court d’abord (*SRTF*) : **à chaque unité de temps**, on élit le processus prêt dont le temps **restant** est le plus petit — quitte à interrompre l’élu si un plus court arrive. **À égalité**, on élit le premier arrivé.
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire `srtf(procs)`. Sur `JEU_COURS`, on doit obtenir `"AACAADDBBB"`.
 
@@ -477,7 +477,7 @@ Variante **préemptive** du plus court d’abord (*SRTF*) : **à chaque unité d
             elu = None
             for nom in reste:           # le plus petit temps restant parmi les arrives
                 if reste[nom] > 0 and arrivee[nom] <= t:
-                    if elu is None or reste[nom] < reste[elu]:
+                    if elu is None or reste[nom] < reste[elu]:   # a egalite : premier arrive
                         elu = nom
             if elu is None:
                 chrono.append(".")

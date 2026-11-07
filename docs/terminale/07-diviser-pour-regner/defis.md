@@ -18,6 +18,8 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -26,7 +28,7 @@
 
     **Le problème.** Une note de frais contient environ deux cents dépenses ; parmi elles, deux (puis trois) ont pour somme 2020, et il faut les retrouver. Essayer toutes les paires à la main est hors de portée : il y en a près de vingt mille. Un programme les essaie toutes sans peine, mais la vraie question du défi est ailleurs : **combien d’opérations** faut-il, et peut-on faire mieux ?
 
-    **Ce qu’on réinvestit.** La **complexité** et la comparaison de plusieurs méthodes, comme dans ce chapitre. La méthode directe (deux boucles imbriquées) coûte $O(n^2)$ ; un ensemble permet de n’en garder qu’une ; enfin, trier la liste puis la parcourir par les deux bouts donne une troisième méthode. Ce tri coûte $O(n\log n)$ grâce à un algorithme « diviser pour régner » comme le tri fusion du cours : c’est lui qui rend la troisième méthode intéressante.
+    **Ce qu’on réinvestit.** La **complexité** et la comparaison de plusieurs méthodes, comme dans ce chapitre. La méthode directe (deux boucles imbriquées) coûte $O(n^2)$ ; un ensemble permet de n’utiliser qu’une seule boucle ; enfin, trier la liste puis la parcourir par les deux bouts donne une troisième méthode. Ce tri coûte $O(n\log n)$ grâce à un algorithme « diviser pour régner » comme le tri fusion du cours : c’est lui qui rend la troisième méthode intéressante.
 
     **La démarche de la fiche.**
 
@@ -108,7 +110,7 @@ Trouver à la main la réponse attendue. Vérification : on doit obtenir `980896
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -124,7 +126,7 @@ Trouver à la main la réponse attendue. Vérification : on doit obtenir `980896
 
 **À quoi ça sert ?** Elle donne la réponse de la partie 1. Elle sert aussi de **référence** : juste mais lente, elle permettra de vérifier les méthodes plus rapides des approfondissements.
 
-Écrire une fonction `paire_2020(nombres)` qui renvoie le produit des deux valeurs recherchées. Tester sur l’exemple du défi, puis sur vos données.
+Écrire une fonction `paire_2020(nombres)` qui renvoie le produit des deux valeurs recherchées. Tester sur l’exemple inventé de la fiche, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -160,7 +162,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** On obtient la réponse de la partie 2 et l’on voit le prix à payer : chaque boucle imbriquée de plus multiplie le coût par $n$, ce qui motive la recherche de méthodes plus économes.
 
-Adapter le programme pour répondre à la nouvelle question. Sur l’exemple du défi, on doit trouver `24106500`.
+Adapter le programme pour répondre à la nouvelle question. Sur l’exemple inventé de la fiche, on doit trouver `24106500`.
 
 ??? pouce "Coup de pouce"
 
@@ -220,7 +222,7 @@ Une autre idée, sans ensemble, réinvestit le **tri** : avec le tri fusion de c
 
 3.  Quelle est la complexité totale (tri compris) ? Comparer avec les deux méthodes précédentes.
 
-4.  Utiliser `paire_triee` pour résoudre la partie 2 en $O(n^2)$, sans ensemble.
+4.  Adapter la méthode pour résoudre la partie 2 en $O(n^2)$, sans ensemble : trier la liste **une seule fois**, puis, pour chaque `x`, rapprocher deux indices parmi les éléments qui suivent `x`.
 
 ## <span class="etiquette">Défi 2</span> Encoding Error
 
@@ -237,6 +239,8 @@ Une autre idée, sans ensemble, réinvestit le **tri** : avec le tri fusion de c
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/9 ](https://adventofcode.com/2020/day/9 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -335,7 +339,7 @@ Vérifier à la main les nombres situés après le préambule, en écrivant à c
 
 **À quoi ça sert ?** Cette fonction donne directement la réponse de la partie 1. Le nombre trouvé sert ensuite de cible pour toute la partie 2 ; le paramètre `p` permet de tester sur l’exemple ($p = 5$) avant les vraies données ($p = 25$).
 
-Écrire une fonction `premier_invalide(nombres, p)` où `p` est la longueur du préambule. Tester avec `p = 5` sur l’exemple du défi, puis avec la bonne longueur sur vos données.
+Écrire une fonction `premier_invalide(nombres, p)` où `p` est la longueur du préambule. Tester avec `p = 5` sur l’exemple inventé de la fiche, puis avec la bonne longueur sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -363,7 +367,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** Cette méthode simple donne une première réponse juste à la partie 2. Elle servira aussi de référence pour vérifier, et chronométrer, la méthode plus rapide de l’exercice suivant.
 
-Écrire une fonction qui cherche la suite demandée en essayant toutes les positions de début et de fin. Sur l’exemple du défi, on doit trouver `12`.
+Écrire une fonction `suite_naive(nombres, cible)` qui essaie toutes les positions de début et de fin et renvoie la somme du plus petit et du plus grand nombre de la suite trouvée. Sur l’exemple inventé de la fiche, on doit trouver `12`.
 
 ??? pouce "Coup de pouce"
 
@@ -420,7 +424,7 @@ Les nombres de vos données sont tous positifs. Expliquer pourquoi on peut alors
 
 **À quoi ça sert ?** Une complexité annoncée se vérifie par l’expérience : si l’écart entre les deux méthodes grandit avec la taille des données, l’analyse théorique est confirmée.
 
-Mesurer avec le module `time` la durée des deux méthodes de la partie 2 sur vos données, puis sur une liste aléatoire de $10\,000$ nombres. Les mesures sont-elles cohérentes avec les complexités annoncées ?
+Mesurer avec le module `time` la durée des deux méthodes de la partie 2 sur vos données, puis sur une liste aléatoire de $10\,000$ nombres positifs, en prenant pour cible la somme (calculée par une boucle) d’une tranche choisie à l’avance, par exemple des indices $3\,000$ à $3\,049$ : on est ainsi sûr qu’une suite existe. Les mesures sont-elles cohérentes avec les complexités annoncées ?
 
 ??? pouce "Coup de pouce"
 
@@ -440,7 +444,7 @@ Mesurer avec le module `time` la durée des deux méthodes de la partie 2 sur vo
 
 1.  À la main : avec la fenêtre `3 7 10 7 2` et la cible `13`, calculer pour chaque `x` la valeur `13 - x` et dire si elle est dans la fenêtre. Recommencer avec la cible `14` : pourquoi le complément `7` de `7` ne convient-il pas ?
 
-2.  Écrire `somme_de_deux_ensemble(fenetre, cible)` avec une seule boucle et un ensemble, puis l’utiliser pour retrouver `22` sur l’exemple du défi.
+2.  Écrire `somme_de_deux_ensemble(fenetre, cible)` avec une seule boucle et un ensemble, puis l’utiliser pour retrouver `22` sur l’exemple inventé de la fiche.
 
 3.  Pour $p = 25$, combien de tests environ fait chaque version pour un nombre ? En déduire les complexités totales.
 

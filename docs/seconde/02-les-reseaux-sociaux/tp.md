@@ -18,12 +18,12 @@
 
     - Avant de commencer, notez sur votre cahier votre position de départ : oui, non ou je ne sais pas.
 
-**Rappel du cours.** En France comme à Monaco, avant **15 ans**, l’accord des parents est nécessaire pour s’inscrire à un service en ligne. Les grands réseaux vivent de la **publicité ciblée** et de l’**économie de l’attention** ; leurs **algorithmes de recommandation** choisissent ce que vous voyez. Vous avez, pour la plupart, environ 15 ans : ce débat vous concerne directement. Interdire, est-ce protéger, ou priver ?
+**Rappel du cours.** En France comme à Monaco, avant **15 ans**, un service en ligne doit avoir votre accord *et* celui d’un parent pour utiliser vos données. Les grands réseaux vivent de la **publicité ciblée** et de l’**économie de l’attention** ; leurs **algorithmes de recommandation** choisissent ce que vous voyez. Vous avez, pour la plupart, environ 15 ans : ce débat vous concerne directement. Interdire, est-ce protéger, ou priver ?
 
 !!! encadre "Les deux camps"
 
     **Groupe POUR** — oui : pas de compte sur les réseaux sociaux avant 15 ans, et l’âge doit être vraiment vérifié.  
-    **Groupe CONTRE** — non : ni interdiction générale, ni vérification d’âge obligatoire.
+    **Groupe CONTRE** — non : pas d’interdiction générale avant 15 ans imposée par une vérification d’âge obligatoire (on peut défendre d’autres solutions : accord des parents, éducation, réglages…).
 
 Les documents
 
@@ -71,7 +71,7 @@ Recopier ce tableau sur le cahier et le compléter pendant le débat.
 
 Trace écrite finale (individuelle)
 
-Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes, justifiez-la avec vos **deux meilleurs arguments**, dont **un argument de l’autre camp** que vous trouvez solide (avec le document qui l’appuie).
+Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes : justifiez-la avec votre **meilleur argument** (et le document qui l’appuie) ; citez ensuite **un argument de l’autre camp** que vous trouvez solide, et dites pourquoi il ne vous a pas fait changer d’avis, ou pourquoi il l’a fait.
 
 ??? corrige "Corrigé de l'activité"
 
@@ -97,7 +97,7 @@ Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujo
     <thead>
     <tr>
     <th style="text-align: left;"><strong>POUR (oui) : interdire avant 15 ans et vérifier</strong></th>
-    <th style="text-align: left;"><strong>CONTRE (non) : ni interdiction ni vérification obligatoire</strong></th>
+    <th style="text-align: left;"><strong>CONTRE (non) : pas d’interdiction générale imposée par une vérification d’âge</strong></th>
     </tr>
     </thead>
     <tbody>
@@ -162,7 +162,7 @@ Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujo
     <thead>
     <tr>
     <th style="text-align: left;"><strong>POUR (oui) : interdire avant 15 ans et vérifier</strong></th>
-    <th style="text-align: left;"><strong>CONTRE (non) : ni interdiction ni vérification obligatoire</strong></th>
+    <th style="text-align: left;"><strong>CONTRE (non) : pas d’interdiction générale imposée par une vérification d’âge</strong></th>
     </tr>
     </thead>
     <tbody>

@@ -112,7 +112,7 @@ On chiffre en additionnant, modulo $26$, chaque lettre du message avec la lettre
 
     ??? pouce "Coup de pouce"
 
-        Avec une clé de $3$ lettres, comment sont chiffrées les lettres de rangs $1$, $4$, $7$, … du message ? Quel chiffrement déjà cassé retrouve-t-on ?
+        Avec une clé de $3$ lettres, comment sont chiffrées la 1<sup>re</sup>, la 4<sup>e</sup>, la 7<sup>e</sup>… lettre du message ? Quel chiffrement déjà cassé retrouve-t-on ?
 
 ??? corrige "Corrigé"
 
@@ -207,7 +207,7 @@ Alice choisit les nombres premiers $p=3$ et $q=11$.
 
 4.  Bob envoie le nombre $M=5$. Calculer le message chiffré $C=M^{e}\bmod n$.
 
-5.  Vérifier que le déchiffrement redonne bien $5$ (on admettra que, pour la valeur de $C$ trouvée, $C^{7}\bmod 33$ vaut $5$ : il suffit d’écrire le calcul à faire).
+5.  Écrire le calcul que fait Alice pour déchiffrer $C$ (on admettra qu’il redonne bien $5$).
 
 ??? corrige "Corrigé"
 
@@ -221,7 +221,7 @@ Alice choisit les nombres premiers $p=3$ et $q=11$.
 
     4.  $C = 5^{3}\bmod 33 = 125\bmod 33 = 125 - 3\times 33 = \mathbf{26}$.
 
-    5.  $26^{7}\bmod 33 = 5$ : on retrouve bien le message $M=5$.
+    5.  Alice calcule $C^{d}\bmod n = 26^{7}\bmod 33$, qui vaut $5$ : on retrouve bien le message $M=5$.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — RSA à la main — trouver $d$ (2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-8 }
 
@@ -229,7 +229,7 @@ Cette fois $p=7$ et $q=11$, et Alice choisit $e=7$.
 
 1.  Calculer $n$ et $\varphi$.
 
-2.  Pour trouver $d$ tel que $7d\equiv 1\ [60]$, on peut tester $d=1,2,3,\dots$ jusqu’à tomber sur un multiple de $60$ plus $1$. Montrer que $d=43$ convient (calculer $7\times 43$).
+2.  Pour trouver $d$ tel que $7d\equiv 1\ [60]$, on peut tester $d=1,2,3,\dots$ jusqu’à ce que $7d$ soit égal à un multiple de $60$ augmenté de $1$. Montrer que $d=43$ convient (calculer $7\times 43$).
 
 3.  Donner la clé publique et la clé privée.
 
@@ -353,7 +353,7 @@ Alice et Bob veulent fabriquer une clé secrète commune *en public*. Ils convie
 
 **Partie A — Le masque jetable.** On attribue à chaque lettre son rang ($0$ à $25$). Pour chiffrer, on additionne le rang de chaque lettre du message avec celui de la lettre correspondante du masque ; si le résultat dépasse $25$, on retranche $26$ (calcul « modulo $26$ »). Exemple : `HELLO` avec le masque `WMCKL` donne `DQNVZ`.
 
-1.  Chiffrer le message `LIBRE` à l’aide de la clé `EYQMT`.
+1.  Chiffrer le message `LIBRE` à l’aide du masque (la clé) `EYQMT`.
 
 On dispose de la variable `alphabet` (liste des $26$ lettres dans l’ordre) accessible partout.
 
@@ -506,7 +506,7 @@ Ainsi `N` (ligne $4$, colonne $3$) donne $(4,3)$, et `NSI` se chiffre en $(4,3)\
 
 1.  Déchiffrer, avec la grille ci-dessus, le message $(6,2)\,(3,6)\,(3,5)\,(2,2)$.
 
-Pour construire une grille, on choisit une **clé** (lettres toutes différentes), on l’écrit d’abord, puis on complète avec les lettres restantes dans l’ordre alphabétique, enfin les chiffres $0$ à $9$. Avec la clé `2048ALGORITHMES`, l’ordre d’insertion est `2048ALGORITHMESBCDFJKNPQUVWXYZ135679`.
+Pour construire une grille, on choisit une **clé** (des lettres et des chiffres, tous différents), on l’écrit d’abord, puis on complète avec les lettres restantes dans l’ordre alphabétique, enfin les chiffres $0$ à $9$. Avec la clé `2048ALGORITHMES`, l’ordre d’insertion est `2048ALGORITHMESBCDFJKNPQUVWXYZ135679`.
 
 1.  Chiffrer `BAC` avec la clé `SECURITY1024`.
 
@@ -550,7 +550,7 @@ def generer_ordre(cle):
         return grille
     ```
 
-4.  Écrire la fonction `generer_dico(cle)` renvoyant le dictionnaire associant à chaque caractère sa position (un tuple) dans la grille. Puis écrire `chiffrer(cle, message)` renvoyant la liste des couples.
+4.  Écrire la fonction `generer_dico(cle)` renvoyant le dictionnaire qui associe à chaque caractère le couple (numéro de ligne, numéro de colonne) de sa case, numérotés **à partir de $1$** comme dans l’exemple $(4,3)$ ci-dessus, et non à partir de $0$ comme les indices de `grille`. Puis écrire `chiffrer(cle, message)` renvoyant la liste des couples.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -559,8 +559,7 @@ def generer_ordre(cle):
         `grille = generer_grille(cle)`  
         `dico = {}`  
         `for i in range(6):`  
-        `for j in range(6):`  
-        Attention : les lignes et colonnes de la grille sont numérotées à partir de $1$.
+        `for j in range(6):`
 
 5.  Alice et Bob changent de clé chaque jour et souhaitent se l’échanger par un chiffrement **asymétrique**. Expliquer la différence entre chiffrement symétrique et asymétrique.
 
@@ -1006,7 +1005,7 @@ def dechiffrer(C):
 
 « La clé publique est `(e, n)`, la clé privée `(d, n)` ; `pow(e, -1, n)` calcule l’inverse modulaire de `e`, exactement comme dans le cours. »
 
-1.  La réponse est-elle correcte ? La vérifier à la main (ou en console) avec le message $M = 7$ : calculer $C =$ `chiffrer(7)`, puis `dechiffrer(C)`. Retrouve-t-on $7$ ?
+1.  La réponse est-elle correcte ? La vérifier en console avec le message $M = 7$ : calculer $C =$ `chiffrer(7)` (faisable à la main), puis `dechiffrer(C)`. Retrouve-t-on $7$ ?
 
 2.  Localiser et corriger l’erreur (on donnera la valeur correcte de $d$).
 

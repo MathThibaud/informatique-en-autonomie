@@ -396,7 +396,7 @@ Insérer ensuite deux équipes et deux joueurs de votre choix, et vérifier dans
 
 6.  Que ferait l’instruction `DELETE FROM joueur;` ? *(Ne pas l’exécuter !)*
 
-Relancer la requête de contrôle de cohérence : elle doit toujours ne rien renvoyer. Puis **écrire les modifications** (Ctrl+S) et **fermer** la base dans DB Browser avant de passer à Python (un fichier ouvert en écriture par un logiciel peut être *verrouillé* pour les autres).
+Relancer la requête de contrôle de cohérence : elle ne doit toujours rien renvoyer. Puis **écrire les modifications** (Ctrl+S) et **fermer** la base dans DB Browser avant de passer à Python (un fichier ouvert en écriture par un logiciel peut être *verrouillé* pour les autres).
 
 ??? corrige "Corrigé"
 
@@ -502,7 +502,7 @@ Un camarade construit plutôt la requête en y collant directement le nom : `req
 
 ??? pouce "Coup de pouce"
 
-    Une même rencontre compte pour **deux** équipes : pour l’équipe qui reçoit, les buts « pour » sont `bd` et les buts « contre » `be` ; pour l’autre, c’est l’inverse. On peut parcourir les deux cas avec `for (equipe, pour, contre) in ((dom, bd, be), (ext, be, bd)):`.
+    La boucle du fichier de départ, `for (dom, ext, bd, be) in connexion.execute(requete):`, donne pour chaque rencontre l’équipe qui reçoit (`dom`), l’équipe qui se déplace (`ext`) et les buts de chacune (`bd`, `be`). Une même rencontre compte pour **deux** équipes : pour l’équipe qui reçoit, les buts « pour » sont `bd` et les buts « contre » `be` ; pour l’autre, c’est l’inverse. On peut parcourir les deux cas avec `for (equipe, pour, contre) in ((dom, bd, be), (ext, be, bd)):`.
 
 Pourquoi les tests vérifient-ils que la somme des buts pour est égale à la somme des buts contre ?
 

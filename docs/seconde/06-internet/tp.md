@@ -10,7 +10,7 @@ Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title=
 
 !!! encadre "But du TP"
 
-    Avec le logiciel gratuit **Filius**, on va **construire** un petit réseau, donner une **adresse IP** à chaque machine, puis envoyer un paquet avec la commande `ping` et l’**observer voyager**. On ira du réseau local le plus simple jusqu’à **deux réseaux reliés par un routeur**.
+    Avec le logiciel gratuit **Filius** (à télécharger sur `www.lernsoftware-filius.de`, puis choisir le français au premier lancement), on va **construire** un petit réseau, donner une **adresse IP** à chaque machine, puis envoyer un paquet avec la commande `ping` et l’**observer voyager**. On ira du réseau local le plus simple jusqu’à **deux réseaux reliés par un routeur**.
 
 **Prise en main.** Filius a deux modes (en haut) : le mode **construction** (le marteau) pour poser et relier les composants avec le **Câble**, et le mode **simulation** (la flèche verte) pour lancer les échanges. Les composants (barre de gauche) sont l’**Ordinateur**, le **Switch**, le **Routeur** et le **Câble** :
 
@@ -70,11 +70,11 @@ Un **double-clic** sur une machine ouvre sa configuration (adresse IP, masque, p
 
 ### <span class="exo-num">Exercice 3</span> <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-internet-tp-1-3 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Construire **deux** réseaux locaux reliés par **un Routeur**. À la création du routeur, Filius demande le **nombre d’interfaces** : en mettre **2**.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Dans un **nouveau projet**, construire **deux** réseaux locaux reliés par **un Routeur**, avec un ordinateur par réseau, comme sur la figure. À la création du routeur, Filius demande le **nombre d’interfaces** : en mettre **2**.
 
 ![](../figures/e5dc7294aed40e53.svg){ .tikz loading=lazy }
 
-Interface du routeur côté réseau 0 : `192.168.0.254` ; côté réseau 1 : `192.168.1.254` (masque `255.255.255.0` partout).
+Double-cliquer sur le routeur : chaque interface a son onglet. Donner `192.168.0.254` à l’interface reliée au switch S1, et `192.168.1.254` à celle reliée au switch S2 (masque `255.255.255.0` partout).
 
 ??? corrige "Corrigé"
 
@@ -173,7 +173,7 @@ Recopier ce tableau sur le cahier et le compléter pendant le débat.
 
 Trace écrite finale (individuelle)
 
-Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes, justifiez-la avec vos **deux meilleurs arguments**, dont **un argument de l’autre camp** que vous trouvez solide (avec le document qui l’appuie).
+Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes : justifiez-la avec votre **meilleur argument** (et le document qui l’appuie) ; citez ensuite **un argument de l’autre camp** que vous trouvez solide, et dites pourquoi il ne vous a pas fait changer d’avis, ou pourquoi il l’a fait.
 
 ??? corrige "Corrigé de l'activité"
 

@@ -54,7 +54,7 @@ paquet G : ![](../figures/c3a01e52cd7b9ed2.svg){ .tikz .tikz-inline loading=lazy
 
 2.  Combien de **comparaisons** (« laquelle est la plus petite ? ») a-t-on faites ? Pourquoi la dernière carte ne coûte-t-elle aucune comparaison ?
 
-3.  Deux paquets triés de $50$ cartes chacun : combien de comparaisons au plus pour les fusionner ? Faut-il tout recommencer, ou chaque carte n’est-elle prise qu’une fois ?
+3.  Deux paquets triés de $50$ cartes chacun : combien de comparaisons au plus faut-il pour les fusionner ? Justifier en remarquant que chaque carte n’est prise qu’une fois.
 
 ??? corrige "Corrigé"
 
@@ -116,9 +116,9 @@ Le paquet mélangé ![](../figures/d6ffe49a15dc4039.svg){ .tikz .tikz-inline loa
 
     - recoller les deux moitiés triées en un seul paquet.
 
-2.  Dans la stratégie du dictionnaire, lequel de ces trois temps n’a presque rien à faire ? Pourquoi ?
+2.  Dans la stratégie du dictionnaire, on ne garde qu’une seule moitié. Lequel des trois temps n’a alors presque rien à faire ? Pourquoi ?
 
-3.  Recopier et compléter avec vos mots : « La consigne de l’équipe s’applique à elle-même sur des paquets plus petits, comme une fonction… ; elle s’arrête quand… »
+3.  Recopier et compléter avec ses propres mots : « La consigne de l’équipe s’applique à elle-même sur des paquets plus petits, comme une fonction… ; elle s’arrête quand… »
 
 ??? corrige "Corrigé"
 

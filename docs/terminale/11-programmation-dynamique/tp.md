@@ -70,7 +70,7 @@ Les deux premières lignes sont les **cas de base** ; la troisième relie un so
 
 ## Version récursive
 
-On suppose disposer d’une fonction `est_noir(x, y)` renvoyant `True` si le pixel est noir.
+On utilise une fonction `est_noir(x, y)` renvoyant `True` si le pixel est noir. Dans `carre_blanc.py`, ce n’est encore qu’une trame qui renvoie toujours `False` : **commencer par l’écrire** (exercice « La fonction `est_noir` », section « Sur une vraie image »), car les tests de `pgcb` et de `pgcb_memo` en dépendent.
 
 ### <span class="exo-num">Exercice 3</span> — Écrire `pgcb` en récursif { #ex-11-programmation-dynamique-tp-1-3 }
 

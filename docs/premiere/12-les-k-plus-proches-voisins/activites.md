@@ -10,7 +10,7 @@
 
 !!! consignes "Consignes"
 
-    - Matériel : le graphique ci-dessous (à l’écran ou projeté), le cahier pour les réponses, une calculatrice.
+    - Matériel : le graphique ci-dessous, le cahier pour les réponses, une calculatrice.
 
     - Un primeur a mesuré 15 fruits dont il connaît la sorte : des **mandarines** ($\circ$), des **oranges** ($\square$) et des **citrons** ($\triangle$). Pour chacun, il a noté la **largeur** et la **hauteur** (en cm), et l’a placé comme un point sur le graphique.
 
@@ -33,7 +33,7 @@
 
 1.  Règle 1 : « *un fruit inconnu est de la même sorte que le fruit connu le plus proche* ». Quel est le fruit connu le plus proche de **B** ? Quelle sorte prédit la règle 1 ?
 
-2.  Règle 3 : « *on regarde les 3 fruits connus les plus proches, et on prend la sorte majoritaire* ». Repérer ces 3 fruits autour de B (noter leurs coordonnées). Quelle sorte prédit la règle 3 ?
+2.  Règle 3 (le numéro de la règle est le nombre de voisins consultés) : « *on regarde les 3 fruits connus les plus proches, et on prend la sorte majoritaire* ». Repérer ces 3 fruits autour de B (noter leurs coordonnées). Quelle sorte prédit la règle 3 ?
 
 3.  Même question avec les **5** fruits les plus proches de B.
 

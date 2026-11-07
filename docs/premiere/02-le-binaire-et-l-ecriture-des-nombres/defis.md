@@ -18,6 +18,8 @@
 
     - Avec un compte (facultatif), le lien *get your puzzle input* donne **vos** données, à enregistrer sous `input.txt` à côté du programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -105,7 +107,7 @@ Faire un tableau avec une ligne par commande et deux colonnes : position horizon
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans le fichier (avec `for ligne in fichier:`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -172,7 +174,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** Le tableau fait à la main donne un résultat connu (`440`) pour tester `trajet2`, qui donne la réponse de la partie 2. On voit qu’une nouvelle règle se traduit souvent par une variable d’état de plus.
 
-Refaire le tableau de l’exemple avec une colonne de plus : on doit arriver à `11` et `40`, soit la réponse `440`. Écrire enfin la fonction `trajet2(nom_fichier)`.
+Refaire le tableau du trajet inventé de l’exercice « À la main » (7 commandes) avec une colonne de plus (la visée) : on doit arriver à `11` et `40`, soit la réponse `440`. Écrire enfin la fonction `trajet2(nom_fichier)`.
 
 ??? pouce "Coup de pouce"
 
@@ -190,7 +192,7 @@ Refaire le tableau de l’exemple avec une colonne de plus : on doit arriver à 
 
 **À quoi ça sert ?** Un vrai programme doit réagir proprement à des données imprévues au lieu de donner un résultat faux sans prévenir. Le numéro de ligne permet de retrouver tout de suite l’erreur dans le fichier.
 
-1.  Ajouter une commande inventée `back X` (recul de `X`) dans une fonction `trajet_controle(nom_fichier)` qui reprend la partie 1.
+1.  Ajouter une commande inventée `back X` : la position horizontale *diminue* de `X` dans une fonction `trajet_controle(nom_fichier)` qui reprend la partie 1.
 
 2.  Faire en sorte qu’une commande inconnue affiche un message d’erreur clair avec le numéro de la ligne fautive (la première ligne porte le numéro 1), sans arrêter le programme.
 
@@ -198,7 +200,7 @@ Refaire le tableau de l’exemple avec une colonne de plus : on doit arriver à 
 
         Un compteur `numero`, augmenté de 1 au début de chaque tour de boucle, et un dernier `else` pour les mots inconnus.
 
-3.  On ajoute à la fin de l’exemple du défi les deux lignes `back 4` et `jump 3`. Prévoir à la main le message affiché et le résultat, puis vérifier avec le programme.
+3.  On ajoute à la fin du trajet inventé de la fiche (7 lignes) les deux lignes `back 4` et `jump 3`. Prévoir à la main le message affiché et le résultat, puis vérifier avec le programme.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 2 : des nombres à plusieurs chiffres <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-aoc-1-7 }
 

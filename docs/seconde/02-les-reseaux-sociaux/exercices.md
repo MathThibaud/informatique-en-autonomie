@@ -471,7 +471,7 @@ Pour les exercices 10 et 11, on étudie le réseau d’amitiés suivant, différ
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Haute ou basse définition ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-19 }
 
-<span class="tag">sur papier</span>  On admet qu’une heure de vidéo en ligne échange environ $3$ Go de données en **haute définition** et environ $1$ Go en **définition standard** (ordres de grandeur, voir le document du cours). Lina regarde $2$ heures de vidéos par jour sur son téléphone.
+<span class="tag">sur papier</span>  On admet qu’une heure de vidéo en ligne échange environ $3$ Go de données en **haute définition** et environ $1$ Go en **définition standard** (ordres de grandeur, voir le Document 6 du cours). Lina regarde $2$ heures de vidéos par jour sur son téléphone.
 
 1.  Quelle quantité de données échange-t-elle en une semaine en haute définition ? En définition standard ?
 
@@ -517,7 +517,7 @@ Pour les exercices 10 et 11, on étudie le réseau d’amitiés suivant, différ
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Python au service du thème — l’économie de l’attention <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-21 }
 
-$\blacktriangleright$  En Python (Spyder ou Basthon). Un réseau social affiche une publicité toutes les $4$ minutes de visionnage : un utilisateur qui regarde $10$ minutes voit donc $2$ publicités (la troisième n’arrive qu’au bout de $12$ minutes).
+$\blacktriangleright$  En Python (Spyder ou Basthon). Cette fois, le réseau affiche une publicité toutes les $4$ minutes de visionnage (et non $5$ comme dans « Suivre l’argent ») : un utilisateur qui regarde $10$ minutes voit donc $2$ publicités (la troisième n’arrive qu’au bout de $12$ minutes).
 
 1.  Écrire une fonction `revenu(utilisateurs, revenu_par_utilisateur)` qui renvoie le revenu annuel du réseau, en euros. La tester avec les données de l’exercice « Suivre l’argent » : on doit retrouver $6$ milliards d’euros.
 
@@ -591,7 +591,7 @@ $\blacktriangleright$  En Python (Spyder ou Basthon). Un réseau social affiche
 
 4.  Quelqu’un crée un compte au nom et avec la photo de Malik, et y publie des messages blessants.
 
-5.  Dans la situation 3, les élèves qui reçoivent la photo et la font suivre sont-ils responsables ? Que devraient-ils faire ?
+**5.** Dans la situation 3, les élèves qui reçoivent la photo et la font suivre sont-ils responsables ? Que devraient-ils faire ?
 
 ??? pouce "Coup de pouce"
 

@@ -268,6 +268,8 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 <span class="essentiel">• essentiel</span>\[base `pays` — Basthon\]
 
+Écrire une requête qui affiche :
+
 1.  le `nom` des pays d’`Afrique` **ou** d’`Océanie` ;
 
 2.  la `capitale` des pays dont la population est comprise entre `50` et `150` millions ;
@@ -300,6 +302,8 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 <span class="essentiel">• essentiel</span>\[base `pays` — Basthon\]
 
+Écrire une requête qui affiche :
+
 1.  le `nom` de tous les pays, triés par population **décroissante** ;
 
 2.  la liste des `continent`s, **sans doublon**.
@@ -320,6 +324,8 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — `LIMIT` et `LIKE` <span class="horsprog">au-delà du programme</span> <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-7 }
 
 \[base `pays` — Basthon\]
+
+Écrire une requête qui affiche :
 
 1.  le `nom` et la `superficie` des **3** pays les plus vastes ;
 
@@ -352,6 +358,8 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 <span class="essentiel">• essentiel</span>\[base `pays` — Basthon\]
 
+Écrire une requête qui affiche :
+
 1.  le **nombre** de pays de la base ;
 
 2.  la population **moyenne** ;
@@ -376,6 +384,8 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 \[base `pays` — Basthon\]
 
+Écrire une requête qui affiche :
+
 1.  la population **totale** des pays d’`Asie` ;
 
 2.  la plus petite **et** la plus grande population, en **une** requête.
@@ -398,6 +408,8 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 10</span> — Agréger la base musique <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-06-10 }
 
 \[base `musique` — Basthon\]
+
+Écrire une requête qui affiche :
 
 1.  le nombre de chansons sorties en `2013` ;
 
@@ -424,6 +436,8 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 11</span> — Regrouper par continent <span class="horsprog">au-delà du programme</span> <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-11 }
 
 <span class="duree">≈ 15 min</span>\[base `pays` — Basthon\]
+
+Écrire une requête qui affiche :
 
 1.  le **nombre de pays** par continent ;
 
@@ -463,6 +477,8 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 <span class="essentiel">• essentiel</span>\[base `bibliotheque` — Basthon\]
 
+Écrire une requête qui affiche :
+
 1.  le `titre` de chaque livre **avec le nom** de son auteur ;
 
 2.  les `titre`s des livres écrits par `Camus` ;
@@ -499,9 +515,11 @@ On souhaite désormais enregistrer, pour chaque livre, sa **maison d’édition*
 
 <span class="duree">≈ 15 min</span>\[base `bibliotheque` — Basthon\]
 
+Écrire une requête qui affiche :
+
 1.  pour chaque emprunt, le `nom` et le `prenom` de l’adhérent **avec le titre** du livre emprunté ;
 
-2.  <span class="horsprog">au-delà du programme</span> le `nom` de chaque adhérent **avec son nombre d’emprunts** (avec `GROUP BY`).
+2.  <span class="horsprog">au-delà du programme</span> le `nom` de chaque adhérent **ayant emprunté au moins un livre**, avec son nombre d’emprunts (avec `GROUP BY`).
 
 ??? pouce "Coup de pouce"
 
@@ -559,7 +577,7 @@ Afficher le `nom` de chaque artiste **belge** avec son **total de streams**.
 
 <span class="essentiel">• essentiel</span>\[base `bibliotheque` — Basthon\]
 
-1.  ajouter l’auteur Victor `Hugo` (`id` `6`, pays `’France’`) ;
+1.  ajouter l’auteur de nom `’Hugo’` (`id` `6`, pays `’France’`) ;
 
 2.  remplacer le `genre` du livre d’`id` `1` par `’Dystopie’` ;
 
@@ -660,7 +678,7 @@ Possede (#id_membre, #id_objet)
 
 3.  Écrire une requête qui **ajoute** le membre Wendie Renard (`id_membre` `6`, `cp` `’69100’`).
 
-4.  On exécute `DELETE FROM Membre WHERE nom = ’Ali’ AND prenom = ’Mohamed’;`. Expliquer pourquoi cette requête **produit une erreur**.
+4.  On exécute `DELETE FROM Membre WHERE nom = ’Ali’ AND prenom = ’Mohamed’;`. Ce membre a déjà effectué des réservations et propose des objets. Expliquer pourquoi cette requête **produit une erreur**.
 
     ??? pouce "Coup de pouce"
 
@@ -695,7 +713,7 @@ Possede (#id_membre, #id_objet)
     VALUES (6, 'Renard', 'Wendie', '69100');
     ```
 
-    **4.** Mohamed Ali est référencé (clé étrangère `id_membre`) par des lignes de `Reservation` et/ou `Possede` : le supprimer violerait la **contrainte de référence** $\Rightarrow$ erreur.  
+    **4.** Mohamed Ali est référencé (clé étrangère `id_membre`) par des lignes de `Reservation` et de `Possede` : le supprimer violerait la **contrainte de référence** $\Rightarrow$ erreur.  
     **5.** On supprime d’abord les lignes qui le référencent, puis le membre :
 
     ```sql
@@ -767,7 +785,7 @@ Extrait de la relation `vehicule` :
     VALUES (1, 132, 4, '2022-05-10', '2022-05-12');
     ```
 
-6.  Louise `DUBOIS` (`id_utilisateur` `133`) habite au numéro `50`, et non `52`, de la rue de la Liberté. Écrire la requête qui **corrige** son adresse.
+6.  Louise `DUBOIS` (`id_utilisateur` `133`) habite au numéro `50`, et non `52`, de la rue de la Liberté. Écrire la requête qui **corrige** son adresse, en la remplaçant par `’50 rue de la Liberté’`.
 
 7.  *(jointure)* Écrire une requête listant le `modele` et l’`immatriculation` des véhicules dont la location a débuté le `’2022-06-21’`, ainsi que le `nom` et le `prenom` des utilisateurs correspondants.
 
@@ -837,7 +855,7 @@ La relation `emission` (id_emission, nom, radio, animateur) décrit les émiss
 
 5.  Le nom de l’animateur de l’émission « Le Temps du débat » doit devenir « Emmanuel L. ». Écrire la requête de **mise à jour**.
 
-6.  Écrire une requête **ajoutant** l’émission « Hashtag » (radio « France inter », animateur « Mathieu V. », `id_emission` `12850`).
+6.  Écrire une requête **ajoutant** l’émission « Hashtag » (radio « France Inter », animateur « Mathieu V. », `id_emission` `12850`).
 
 7.  *(jointure)* Écrire une requête listant le `theme`, le `nom` de l’émission et le `resume` des podcasts dont la `duree` est strictement inférieure à `5` minutes.
 
@@ -864,7 +882,7 @@ La relation `emission` (id_emission, nom, radio, animateur) décrit les émiss
     WHERE nom = 'Le Temps du débat';
 
     INSERT INTO emission (id_emission, nom, radio, animateur)   -- 6.
-    VALUES (12850, 'Hashtag', 'France inter', 'Mathieu V.');
+    VALUES (12850, 'Hashtag', 'France Inter', 'Mathieu V.');
 
     SELECT podcast.theme, emission.nom, description.resume      -- 7.
     FROM description
@@ -950,7 +968,7 @@ emprunt (idEmprunt, #nomJeu, #idAdherent, dateEmprunt, dateRendu)
 
 2.  Décrire ce que renvoie `SELECT nomJeu, editeur FROM jeu ORDER BY nomJeu;`.
 
-3.  Écrire une requête affichant le `nomJeu` et la `categorie` des jeux sortis **à partir de 2010** **et** d’`ageMinimum` strictement inférieur à `10`.
+3.  Écrire une requête affichant le `nomJeu` et la `categorie` des jeux sortis **à partir de 2010** **et** dont l’`ageMinimum` est strictement inférieur à `10`.
 
 4.  Écrire une requête affichant le `nomJeu` des jeux **en cours d’emprunt** (non encore rendus).
 

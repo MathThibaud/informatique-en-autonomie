@@ -18,6 +18,8 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -26,7 +28,7 @@
 
     **Le problème.** Une luge descend une pente boisée en ligne droite, et l’on veut savoir combien d’arbres elle va percuter. La carte de la forêt compte plusieurs centaines de lignes et, en théorie, elle se prolonge sans fin vers la droite : impossible de suivre la trajectoire à la main, et impossible de stocker une carte infinie. Le programme doit donc retrouver, pour chaque case atteinte, la case correspondante de la carte réelle.
 
-    **Ce qu’on réinvestit.** L’**encapsulation** vue dans ce chapitre. Le calcul qui ramène une colonne quelconque dans la carte réelle (un modulo) peut être caché dans une classe `Foret`, derrière une méthode `est_arbre(x, y)`. L’utilisateur de la classe croit manipuler une forêt infinie, alors que l’objet ne stocke que le motif de la carte : c’est exactement le rôle d’une interface, qui sépare ce qu’on fait de la façon dont c’est fait.
+    **Ce qu’on réinvestit.** L’**encapsulation** vue dans ce chapitre. Le calcul qui ramène une colonne quelconque dans la carte réelle (un modulo) sera caché dans une classe `Foret`, derrière une méthode `est_arbre(x, y)` (exercice « Cacher le modulo dans une classe »). L’utilisateur de la classe croit manipuler une forêt infinie, alors que l’objet ne stocke que le motif de la carte : c’est exactement le rôle d’une interface, qui sépare ce qu’on fait de la façon dont c’est fait.
 
     **La démarche de la fiche.**
 
@@ -36,9 +38,11 @@
 
     3.  Écrire une fonction qui compte les arbres pour une pente quelconque : elle donne la partie 1.
 
-    4.  Partie 2 : appeler cette fonction pour cinq pentes et multiplier les résultats.
+    4.  Cacher le calcul du modulo dans une classe `Foret` (encapsulation).
 
-    5.  En approfondissement, dessiner le trajet sur la carte.
+    5.  Partie 2 : appeler cette fonction pour cinq pentes et multiplier les résultats.
+
+    6.  En approfondissement, dessiner le trajet sur la carte.
 
 ## Lire l’énoncé
 
@@ -128,7 +132,7 @@ Construire la liste `carte` des lignes de `input.txt` (des chaînes, sans le ret
 
 **À quoi ça sert ?** Appelée avec la pente `(3, 1)`, elle donne la réponse de la partie 1. Avoir mis la pente en paramètres, plutôt que d’écrire 3 et 1 en dur, permettra de la réutiliser telle quelle dans la partie 2.
 
-Écrire une fonction `compter_arbres(carte, dx, dy)` qui renvoie le nombre d’arbres rencontrés en se déplaçant de `dx` cases vers la droite et `dy` vers le bas à chaque pas. Tester sur l’exemple du défi, puis sur vos données.
+Écrire une fonction `compter_arbres(carte, dx, dy)` qui renvoie le nombre d’arbres rencontrés en se déplaçant de `dx` cases vers la droite et `dy` vers le bas à chaque pas. Tester sur l’exemple inventé de la fiche, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -137,6 +141,24 @@ Construire la liste `carte` des lignes de `input.txt` (des chaînes, sans le ret
 ??? pouce "Coup de pouce 2 (début de solution)"
 
     Une boucle `for y in range(dy, len(carte), dy)` donne les lignes visitées (la case de départ, en ligne 0, n’est pas comptée) ; la colonne `x` augmente de `dx` à chaque tour.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Cacher le modulo dans une classe <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-1-5 }
+
+**But.** Écrire une classe `Foret` qui donne l’illusion d’une forêt infinie.
+
+**À quoi ça sert ?** C’est l’encapsulation du chapitre : l’utilisateur de la classe demande si une case est un arbre sans savoir que la carte est répétée par un modulo. Le comptage des arbres s’écrit alors sans aucun calcul de colonne.
+
+Écrire une classe `Foret` dont le constructeur reçoit la liste `carte`, avec deux méthodes :
+
+- `hauteur(self)` : renvoie le nombre de lignes de la forêt ;
+
+- `est_arbre(self, x, y)` : renvoie `True` si la case de la colonne `x` et de la ligne `y` de la forêt infinie est un arbre, `False` sinon.
+
+Écrire ensuite `compter_arbres_foret(foret, dx, dy)`, qui fait le même travail que `compter_arbres` à partir d’un objet `Foret`, **sans** utiliser `%` ni `len(carte[0])`. Vérifier qu’elle donne les mêmes résultats.
+
+??? pouce "Coup de pouce"
+
+    Le constructeur range la carte et sa largeur dans des attributs ; le modulo n’apparaît plus que dans `est_arbre`.
 
 ## Partie 2
 
@@ -154,13 +176,13 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     **La réponse attendue.** Le **produit** des cinq nombres d’arbres obtenus. Par exemple, si les cinq pentes rencontraient 2, 3, 1, 4 et 2 arbres, la réponse serait 48.
 
-### <span class="exo-num">Exercice 5</span> — Plusieurs pentes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-1-5 }
+### <span class="exo-num">Exercice 6</span> — Plusieurs pentes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-1-6 }
 
 **But.** Appeler la fonction de comptage pour les cinq pentes et multiplier les résultats.
 
 **À quoi ça sert ?** C’est la réponse de la partie 2. On mesure l’intérêt d’une fonction bien paramétrée : la partie 2 ne demande que quelques lignes de plus.
 
-Utiliser la fonction précédente pour toutes les pentes demandées et calculer la réponse. Sur l’exemple du défi, on doit trouver `72`.
+Utiliser la fonction précédente pour toutes les pentes demandées et calculer la réponse. Sur l’exemple inventé de la fiche, on doit trouver `72`.
 
 ??? pouce "Coup de pouce"
 
@@ -190,7 +212,7 @@ Utiliser la fonction précédente pour toutes les pentes demandées et calculer 
 
     **À essayer.** Que se passe-t-il si l’on exécute directement `ligne[2] = "X"` ? Écrire une fonction `recoller(morceaux, sep)` qui renvoie les chaînes de la liste `morceaux` mises bout à bout, séparées par `sep` : `recoller(["a", "b", "c"], "-")` doit renvoyer `"a-b-c"` (pas de séparateur à la fin).
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : visualiser le trajet <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-1-6 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Défi : visualiser le trajet <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-1-7 }
 
 **But.** Afficher la carte avec le trajet de la luge, en marquant les cases visitées.
 
@@ -217,6 +239,8 @@ Utiliser la fonction précédente pour toutes les pentes demandées et calculer 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/12 ](https://adventofcode.com/2020/day/12 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -312,7 +336,7 @@ Suivre le navire sur un quadrillage (est vers la droite, nord vers le haut). Vé
 
 **À quoi ça sert ?** C’est la partie délicate des ordres `L` et `R`. Une seule formule (le quart de tour à gauche) suffit pour tous les angles ; elle resservira telle quelle pour faire tourner le waypoint en partie 2.
 
-Écrire une méthode `tourner_gauche(self)` qui fait tourner l’orientation d’un quart de tour vers la gauche. Vérifier sur papier : est $\to$ nord $\to$ ouest $\to$ sud $\to$ est. En déduire `tourner(self, sens, angle)` pour les angles 90, 180 et 270.
+Écrire une méthode `tourner_gauche(self)` qui fait tourner l’orientation d’un quart de tour vers la gauche. Vérifier sur papier : est $\to$ nord $\to$ ouest $\to$ sud $\to$ est. En déduire `tourner(self, sens, angle)`, où `sens` vaut `"L"` (gauche) ou `"R"` (droite) et `angle` vaut 90, 180 ou 270.
 
 ??? pouce "Coup de pouce"
 
@@ -330,7 +354,7 @@ Suivre le navire sur un quadrillage (est vers la droite, nord vers le haut). Vé
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -340,7 +364,7 @@ Suivre le navire sur un quadrillage (est vers la droite, nord vers le haut). Vé
 
     **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
 
-Écrire une méthode `executer(self, instruction)` qui reçoit une chaîne comme `"F6"` et met à jour le navire. Lire le fichier, exécuter toutes les instructions et afficher la distance. Tester sur l’exemple du défi, puis sur vos données.
+Écrire une méthode `executer(self, instruction)` qui reçoit une chaîne comme `"F6"` et met à jour le navire. Lire le fichier, exécuter toutes les instructions et afficher la distance. Tester sur l’exemple inventé de la fiche, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -372,7 +396,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** Le waypoint joue exactement le rôle du vecteur d’orientation de la partie 1 : en le voyant, on réutilise la rotation déjà écrite et l’on obtient la réponse de la partie 2 avec peu de code nouveau.
 
-Écrire une classe `NavireRepere` (ou ajouter les attributs `wx`, `wy`) et une méthode `executer2`. Sur l’exemple du défi, on doit trouver `70`.
+Écrire une classe `NavireRepere` (ou ajouter les attributs `wx`, `wy`) et une méthode `executer2`. Sur l’exemple inventé de la fiche, on doit trouver `70`.
 
 ??? pouce "Coup de pouce"
 
@@ -444,7 +468,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     **Intérêt.** Multiplier par `1j` fait tourner un vecteur d’un quart de tour vers la gauche : $(x + yi) \times i = -y + xi$, c’est exactement la formule $(d_x, d_y) \mapsto (-d_y, d_x)$. Position et direction deviennent chacune un seul nombre.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 1 : naviguer avec des nombres complexes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-2-8 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement : naviguer avec des nombres complexes <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-aoc-2-8 }
 
 **But.** Refaire les deux parties en représentant position et direction par des nombres complexes.
 
@@ -452,7 +476,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 1.  Recopier et exécuter le code de l’encadré. Calculer à la main $1 \times i$, puis $i \times i$, $(-1) \times i$ et $(-i) \times i$ : quelles orientations successives retrouve-t-on ? Par quel nombre faut-il multiplier pour un quart de tour vers la droite ?
 
-2.  Sur l’exemple du défi, la position et la direction sont des complexes ; au départ `position = 0` et `direction = 1`. Que valent-elles après `N4`, `F6`, `L90` puis `F3` ?
+2.  Sur l’exemple inventé de la fiche, la position et la direction sont des complexes ; au départ `position = 0` et `direction = 1`. Que valent-elles après `N4`, `F6`, `L90` puis `F3` ?
 
 3.  Écrire une fonction `trajet_complexe(instructions, partie)` qui traite les deux parties ; vérifier qu’on obtient `6` et `70` sur l’exemple.
 

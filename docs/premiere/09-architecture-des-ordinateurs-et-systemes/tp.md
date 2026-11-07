@@ -45,7 +45,7 @@ a    DAT
 b    DAT
 ```
 
-1.  Après l’assemblage, quels nombres apparaissent dans les cases 00 à 09 de la mémoire (RAM) ? Recopier-les.
+1.  Après l’assemblage, quels nombres apparaissent dans les cases 00 à 09 de la mémoire (RAM) ? Les recopier.
 
 2.  En comparant au programme, retrouver le **code** de chaque instruction : `INP` $\to$ …, `STA` $\to$ 3 …, `LDA` $\to$ …, `ADD` $\to$ …, `OUT` $\to$ …, `HLT` $\to$ … Que signifient les deux derniers chiffres ?
 
@@ -75,7 +75,7 @@ Voici le contenu des cases 00 à 09 d’une mémoire, **sans** le programme asse
 
 On sait aussi que `SUB` a pour code 2 …, `BRA` 6 …, `BRZ` 7 … et `BRP` 8 ….
 
-1.  « Désassembler » : réécrire ce programme en assembleur, une instruction par case.
+1.  « Désassembler » : réécrire ce programme en assembleur, une instruction par case de 00 à 07 (les cases 08 et 09 sont des données, à 000 au départ).
 
 2.  Dérouler à la main pour les entrées 5 puis 3. Que calcule ce programme ?
 
@@ -104,7 +104,7 @@ On sait aussi que `SUB` a pour code 2 …, `BRA` 6 …, `BRZ` 7 … et `BR
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-Écrire un programme qui lit deux nombres $a$ et $b$ et affiche leur **écart** (la différence du plus grand moins le plus petit) : 2 et 7 donnent 5 ; 7 et 2 donnent 5 aussi. Le tester sur ces deux cas, puis avec deux nombres égaux.
+Écrire un programme qui lit deux nombres $a$ et $b$ et affiche leur **écart** (le plus grand moins le plus petit) : 2 et 7 donnent 5 ; 7 et 2 donnent 5 aussi. Le tester sur ces deux cas, puis avec deux nombres égaux.
 
 ??? pouce "Coup de pouce"
 
@@ -173,7 +173,7 @@ Le LMC ne sait pas multiplier. Mais $a \times b$, c’est $a + a + \dots + a$ ($
 
 1.  Écrire un programme qui lit $a$ puis $b$ et affiche $a \times b$, en ajoutant $a$ à un résultat `res` (initialisé à 0) et en décrémentant $b$ à chaque tour, jusqu’à ce que $b$ vaille 0. Le tester : $6 \times 7$, $5 \times 0$, $0 \times 5$.
 
-2.  Le corps de la boucle compte 8 instructions. Combien d’instructions environ la machine exécute-t-elle pour $3 \times 200$ ? Et pour $200 \times 3$ ? Comment rendre le programme plus rapide dans le premier cas ?
+2.  Dans la version suggérée par le coup de pouce, le corps de la boucle compte 8 instructions (comptez celles de la vôtre). Combien d’instructions environ la machine exécute-t-elle pour $3 \times 200$ ? Et pour $200 \times 3$ ? Comment rendre le programme plus rapide dans le premier cas ?
 
 ??? pouce "Coup de pouce"
 
@@ -306,7 +306,7 @@ L’exercice 8 (« Le plus grand des deux ») de la rubrique Exercices de ce cha
 
 ## Partie B — Piloter Linux en ligne de commande
 
-Dans JSLinux, vous êtes connecté en tant qu’administrateur : l’invite se termine par `#` (et non par `$`). Rappels pratiques : la touche **Tab** complète les noms ; la flèche **haut** rappelle les commandes précédentes ; `history` les liste toutes. La commande `man` n’est pas installée ici : `ls --help` affiche l’aide d’une commande.
+Dans JSLinux, vous êtes connecté en tant qu’administrateur : l’invite se termine par `#` (et non par `$`). Rappels pratiques : la touche **Tab** complète les noms ; la flèche **haut** rappelle les commandes précédentes ; `history` les liste toutes. La commande `man` n’est pas installée ici : *`commande`*` --help` affiche l’aide d’une commande (par exemple `ls --help`).
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Où suis-je, qui suis-je ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-09-architecture-des-ordinateurs-et-systemes-tp-1-8 }
 
@@ -340,7 +340,7 @@ club
 
 2.  Pour créer un fichier qui contient du texte, on peut **rediriger** l’affichage d’`echo` vers un fichier : `echo ’Reunion jeudi 13h’ > docs/annonce.txt`. Le faire, puis afficher le contenu du fichier.
 
-3.  Vérifier le résultat avec la commande `tree` (qui dessine l’arbre), puis avec `ls -R`.
+3.  Vérifier le résultat avec la commande `tree` (qui dessine l’arbre), puis avec `ls -R` (qui liste le contenu de chaque répertoire, l’un après l’autre). *Si le terminal répond `tree: not found`, ce n’est pas votre erreur : la commande n’est pas installée, `ls -R` suffit.*
 
 ??? corrige "Corrigé"
 
@@ -405,7 +405,7 @@ club
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-Depuis `club`, **prévoir** sur le cahier l’arbre obtenu après la suite d’actions ci-dessous, **puis** écrire et exécuter les commandes, et comparer avec `tree`.
+Depuis `club`, **prévoir** sur le cahier l’arbre obtenu après la suite d’actions ci-dessous, **puis** écrire et exécuter les commandes, et comparer avec `tree` (ou `ls -R` si `tree` n’est pas installée).
 
 1.  copier `annonce.txt` dans `archives` ;
 

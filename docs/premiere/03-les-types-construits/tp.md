@@ -42,7 +42,7 @@ Le but n’est **pas** de jouer, mais d’écrire un programme qui sait dire si 
 
 !!! definition "Définition 6 — Représentation en Python"
 
-    La grille est une **matrice** $9\times 9$. On la représente par un **tableau de tableaux** : une **liste de 9 listes**, chaque sous-liste étant une ligne ; une case vide vaut `0`.
+    La grille est une **matrice** $9\times 9$. On la représente par un **tableau de 9 tableaux** (type `list`), chaque sous-tableau étant une ligne ; une case vide vaut `0`.
 
 ![](../figures/34eb66be0790937c.svg){ .tikz .tikz-inline loading=lazy }
 
@@ -66,9 +66,9 @@ Ouvrez `sudoku.py` : tout votre travail s’y fait. Il commence par `from sudoku
 
 ### <span class="exo-num">Exercice 1</span> — Lire une ligne, une colonne et un bloc <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-03-les-types-construits-tp-1-1 }
 
-On écrit trois fonctions ; chacune **renvoie une liste de 9 valeurs**.
+On écrit trois fonctions ; chacune **renvoie un tableau de 9 valeurs**.
 
-**1.** `valeurs_ligne(grille, i)` renvoie la liste des 9 valeurs de la ligne numéro `i`. C’est très court : la ligne `i` est *exactement* `grille[i]`.
+**1.** `valeurs_ligne(grille, i)` renvoie le tableau des 9 valeurs de la ligne numéro `i`. C’est très court : la ligne `i` est *exactement* `grille[i]`.
 
 *Exemple :* sur `FACILE`, `valeurs_ligne(FACILE, 0)` renvoie `[5, 3, 0, 0, 7, 0, 0, 0, 0]`.
 
@@ -78,7 +78,7 @@ def valeurs_ligne(grille, i):
     ...
 ```
 
-**2.** `valeurs_colonne(grille, j)` renvoie la liste des 9 valeurs de la colonne d’indice `j` : il faut aller chercher `grille[0][j]`, `grille[1][j]`, …, `grille[8][j]`. C’est exactement une **compréhension de liste** (vue dans le cours) : on parcourt `i` de `0` à `8` et on collecte `grille[i][j]`.
+**2.** `valeurs_colonne(grille, j)` renvoie le tableau des 9 valeurs de la colonne d’indice `j` : il faut aller chercher `grille[0][j]`, `grille[1][j]`, …, `grille[8][j]`. C’est exactement une **compréhension** (vue dans le cours) : on parcourt `i` de `0` à `8` et on collecte `grille[i][j]`.
 
 *Exemple :* `valeurs_colonne(FACILE, 0)` renvoie `[5, 6, 0, 8, 4, 7, 0, 0, 0]`.
 
@@ -151,7 +151,7 @@ def grille_complete(grille):
     ...
 ```
 
-**2.** `grille_valide(grille)` renvoie `True` si une grille **déjà remplie** respecte les trois règles (aucun doublon dans une ligne, une colonne ou un bloc). *Astuce : pour chaque case, retirer un instant sa valeur, tester `placement_valide`, puis la remettre.*
+**2.** `grille_valide(grille)` renvoie `True` si une grille **déjà remplie** respecte les trois règles (aucun doublon dans une ligne, une colonne ou un bloc). *Astuce : pour chaque case, mettre sa valeur de côté dans une variable, remplacer la case par `0`, tester `placement_valide`, puis remettre la valeur.*
 
 ```python
 def grille_valide(grille):
@@ -186,7 +186,7 @@ Jusqu’ici on *vérifie* des grilles. On peut aussi en **fabriquer** une, déj�
 
 !!! definition "Définition 7 — La grille patron"
 
-    La formule `(3*(i%3) + i//3 + j) % 9 + 1` remplit une grille $9\times 9$ **déjà correcte**. (On l’admet ; on peut le vérifier avec son `grille_valide`.)
+    La formule `(3*(i%3) + i//3 + j) % 9 + 1` remplit une grille $9\times 9$ **déjà correcte**. (On l’admet ; on peut le vérifier avec votre `grille_valide`.)
 
 ![](../figures/a51a82dfb5df43bb.svg){ .tikz .tikz-inline loading=lazy } $\longrightarrow$ ![](../figures/75c06225e318bb32.svg){ .tikz .tikz-inline loading=lazy }
 
@@ -217,7 +217,7 @@ def renommer_chiffres(grille):
     nouveaux = [i for i in range(1, 10)]
     random.shuffle(nouveaux)          # une permutation au hasard
     # A COMPLETER : construire le dictionnaire {1:nouveaux[0], ...}
-    # puis renvoyer la grille avec chaque valeur remplacee
+    # puis renvoyer une NOUVELLE grille dans laquelle chaque valeur est remplacee
     ...
 
 def melanger_lignes(grille):

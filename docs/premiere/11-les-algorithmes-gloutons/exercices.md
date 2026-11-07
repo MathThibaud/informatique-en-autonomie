@@ -204,7 +204,7 @@ for p in systeme:
 
     ??? pouce "Coup de pouce"
 
-        C’est la fonction `rendre` de l’exercice précédent, avec le système en paramètre. Quelle ligne doit précéder la boucle, laquelle vient tout à la fin ?
+        C’est la fonction `rendre` de l’exercice 5 (« La fonction `rendre` »), avec le système en paramètre. Quelle ligne doit précéder la boucle, laquelle vient tout à la fin ?
 
 ??? corrige "Corrigé"
 
@@ -228,9 +228,9 @@ for p in systeme:
 
 Un système est **canonique** si le glouton y est toujours optimal. On ne teste ici que les sommes de 1 à 30.
 
-1.  Écrire `rendre_sys(systeme, somme)` qui applique le glouton pour un système de pièces quelconque (trié à l’envers) et renvoie le nombre de pièces (ou `None` si le glouton n’aboutit pas).
+1.  Écrire `rendre_sys(systeme, somme)` qui applique le glouton pour un système de pièces quelconque (rangé de la plus grande à la plus petite pièce) et renvoie le nombre de pièces (ou `None` si le glouton n’aboutit pas).
 
-2.  On suppose disponible une fonction `optimal(systeme, somme)` qui renvoie le *vrai* nombre minimal de pièces. Écrire un test qui compare, pour toutes les sommes de 1 à 30, `rendre_sys` et `optimal`, et affiche la première somme où le glouton se trompe.
+2.  On suppose disponible une fonction `optimal(systeme, somme)` qui renvoie le *vrai* nombre minimal de pièces (on ne l’écrit pas ici : une version pour trois pièces est programmée dans le TP du chapitre). Écrire une fonction `tester(systeme)` qui compare, pour toutes les sommes de 1 à 30, `rendre_sys` et `optimal`, et affiche la première somme où le glouton se trompe. Sans `optimal`, on ne peut pas l’exécuter : prévoir à la main ce qu’elle afficherait pour le système `[10, 6, 1]`.
 
     ??? pouce "Coup de pouce"
 
@@ -264,7 +264,7 @@ Un système est **canonique** si le glouton y est toujours optimal. On ne teste 
         print("canonique jusqu'a 30")
     ```
 
-    (Pour le système `[10, 6, 1]`, le premier écart apparaît pour la somme **12**.)
+    (Pour le système `[10, 6, 1]`, le premier écart apparaît pour la somme **12** : le glouton rend $10 + 1 + 1$, soit 3 pièces, alors que $6 + 6$ n’en utilise que 2. Pour les sommes de 1 à 11, le glouton est optimal : de 1 à 5, on n’a que des pièces de 1 ; de 6 à 9, $6$ puis des 1 ; 10 et 11 commencent par la pièce de 10.)
 
 ### Le sac à dos
 
@@ -347,7 +347,7 @@ Un distributeur ne contient que des billets de **50, 20 et 10** euros. On retire
 
 2.  Ce système {10, 20, 50} est-il canonique pour les multiples de 10 jusqu’à 100 ? (tester à la main ou en réutilisant `rendre_sys`).
 
-3.  Le distributeur n’a plus de billets de 20. Pour 80 €, le glouton avec {10, 50} donne-t-il encore la solution en le moins de billets ?
+3.  Le distributeur n’a plus de billets de 20. Pour 80 €, le glouton avec {10, 50} donne-t-il encore la solution qui utilise le moins de billets ?
 
     ??? pouce "Coup de pouce"
 

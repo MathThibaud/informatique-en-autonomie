@@ -363,7 +363,7 @@ Dans un document, les balises s’écrivent <code>&lt;b&gt;</code> (ouvrante) et
 
 En **notation polonaise inverse** (NPI), on écrit les opérateurs *après* leurs opérandes : `"3 4 +"` vaut $7$, et `"5 1 2 + 4 * +"` vaut $17$. On évalue avec une pile : chaque **nombre** est empilé ; à chaque **opérateur**, on dépile les *deux* derniers nombres, on applique l’opération et on empile le résultat.
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `evaluer_npi(expr)` où `expr` est une chaîne dont les éléments sont séparés par des espaces (on se limite à `+`, `-`, `*`).
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `evaluer_npi(expr)` qui renvoie la valeur (un entier) de l’expression `expr`, une chaîne dont les éléments sont séparés par des espaces (on se limite à `+`, `-`, `*`). Les nombres lus sont des chaînes, à convertir avec `int` avant de les empiler.
 
 ??? pouce "Coup de pouce"
 
@@ -516,7 +516,7 @@ class Processus:
                 return None
     ```
 
-4.  On crée `o = Ordonnanceur()`, puis on enfile deux processus `p1` (durée `2`) et `p2` (durée `1`), dans cet ordre. On appelle ensuite `o.tourniquet()` **trois** fois. Donner les trois noms renvoyés et l’état final de la file.
+4.  On crée `o = Ordonnanceur()`, ainsi que `p1 = Processus("p1", 2)` et `p2 = Processus("p2", 1)`, que l’on ajoute dans cet ordre avec `o.ajoute_nouveau_processus`. On appelle ensuite `o.tourniquet()` **trois** fois. Donner les trois noms renvoyés et l’état final de la file.
 
 ??? corrige "Corrigé"
 
@@ -598,7 +598,7 @@ On considère la file `f` suivante **(tête à droite)** :
 
 5.  Donner le **coût d’exécution**, dans le pire des cas, de `ajouter_file_prio` en fonction du nombre `m` d’éléments de `f`.
 
-6.  *(Pomodoro)* On admet une classe `Tache` munie de `avancer(minutes)` (fait progresser la tâche) et de `est_terminee()` (booléen). <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `planning(f)` qui : tant que `f` n’est pas vide, défile la tâche de tête, l’**avance de 25** minutes, l’ajoute à une liste résultat, puis, si elle n’est pas terminée, la **ré-insère** dans `f` (avec sa priorité, via `ajouter_file_prio`) ; la fonction renvoie la liste des tâches dans l’ordre où elles ont avancé.
+6.  *(Pomodoro)* On admet une classe `Tache` munie de `avancer(minutes)` (fait progresser la tâche) et de `est_terminee()` (booléen). <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `planning(f)` qui : tant que `f` n’est pas vide, défile le tuple de tête, **avance de 25** minutes sa tâche, ajoute cette **tâche** (l’objet `Tache`, pas le tuple) à une liste résultat, puis, si elle n’est pas terminée, la **ré-insère** avec sa priorité : `f = ajouter_file_prio(f,` `tache, priorite)` (la fonction renvoie une **nouvelle** file) ; la fonction renvoie la liste des tâches dans l’ordre où elles ont avancé.
 
 ??? corrige "Corrigé"
 
@@ -961,7 +961,7 @@ On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux p
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Le n-ième élément <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-23 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `nieme(n, lst)` qui renvoie la valeur de la cellule d’indice `n` (le premier élément a l’indice `0`). Si `n` dépasse la liste, la fonction lèvera `IndexError("indice invalide")`.
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `nieme(n, lst)` qui renvoie la valeur de la cellule d’indice `n` (le premier élément a l’indice `0`). Si `n` est supérieur ou égal à la longueur de la liste, la fonction doit lever `IndexError("indice invalide")`.
 
 ??? pouce "Coup de pouce"
 
@@ -1041,7 +1041,7 @@ zero.pred = deux ; un.pred = zero ;   deux.pred = un
 
         Q5 : que valent alors `b.succ` et `b.pred` ?
 
-6.  *(défi* ★★★*)* <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `dernier_chaine(n)` qui construit le collier de `n` bonbons (avec `creer_collier`), puis les « mange » de proche en proche — à chaque étape, le bonbon courant **mange son successeur** (on le retire du collier), puis on passe au bonbon suivant — jusqu’à ce qu’il n’en reste qu’**un**, dont on renvoie la `valeur`.
+6.  *(défi* ★★★*)* <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `dernier_chaine(n)` qui construit le collier de `n` bonbons (avec `creer_collier`), puis les « mange » de proche en proche en partant du bonbon de valeur `0` (celui que renvoie `creer_collier`) — à chaque étape, le bonbon courant **mange son successeur** (on le retire du collier), puis on passe au bonbon suivant — jusqu’à ce qu’il n’en reste qu’**un**, dont on renvoie la `valeur`.
 
     ??? pouce "Coup de pouce"
 

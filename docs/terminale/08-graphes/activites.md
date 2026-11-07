@@ -38,7 +38,7 @@ Pour chaque point, on compte le nombre de traits qui y aboutissent.
 
 1.  Recopier et compléter le tableau sur le cahier.
 
-    | **Dessin** | **nombre de traits en chaque point** | **nombre de points « impairs »** | **possible ?** | **retour au départ ?** |
+    | **Dessin** | **nombre de traits en chaque point** | **nombre de points « impairs » (où aboutit un nombre impair de traits)** | **possible ?** | **retour au départ ?** |
     |:---|:---|:---|:---|:---|
     | \(a\) la maison |  |  |  |  |
     | \(b\) l’enveloppe |  |  |  |  |
@@ -72,7 +72,7 @@ Au <span class="smallcaps">xviii</span><sup>e</sup> siècle, la ville de Königs
 
 2.  La forme des îles et la longueur des ponts n’ont aucune importance. Redessiner sur le cahier la situation avec seulement des **points** (un par terre : `N`, `S`, `O`, `E`) et des **traits** (un par pont).
 
-3.  Compter les traits en chaque point. À l’aide de votre règle, la promenade est-elle possible ?
+3.  Compter les traits en chaque point. À l’aide de la règle trouvée à l’exercice 2, la promenade est-elle possible ?
 
 4.  La ville décide de construire un huitième pont. Entre quelles terres le placer pour que la promenade devienne possible ? D’où faudra-t-il alors partir ?
 
@@ -127,7 +127,11 @@ On ne cherche plus à passer par tous les **traits**, mais par tous les **points
 
 2.  Un deuxième gardien **coche** sur le plan chaque salle où il passe, et prend toujours le couloir qui mène à la salle **non cochée** de plus petite lettre. Écrire sa tournée depuis `A`. Que se passe-t-il ?
 
-3.  **Comment visiter toutes les salles sans tourner en rond ni rester bloqué ?** Au moment où le deuxième gardien est bloqué, de quoi aurait-il dû se souvenir ? Proposer une méthode « papier-crayon » : ce que l’on note au fur et à mesure, et comment on choisit la salle suivante. L’appliquer depuis `A` : dans quel ordre les salles sont-elles visitées ? Comment sait-on que la visite est terminée ?
+3.  Au moment où le deuxième gardien est bloqué, de quoi aurait-il dû se souvenir pour repartir ?
+
+4.  **Comment visiter toutes les salles sans tourner en rond ni rester bloqué ?** Proposer une méthode « papier-crayon » : ce que l’on note au fur et à mesure, et comment on choisit la salle suivante.
+
+5.  L’appliquer depuis `A` : dans quel ordre les salles sont-elles visitées ? Comment sait-on que la visite est terminée ?
 
 ??? corrige "Corrigé"
 
@@ -135,13 +139,17 @@ On ne cherche plus à passer par tous les **traits**, mais par tous les **points
 
     2.  `A-B-C`, puis plus rien : en `C`, les deux voisines `A` et `B` sont cochées. Le gardien est **bloqué**, alors que `D`, `E`, `F` et `G` n’ont pas été visitées. Cocher évite de tourner en rond, mais ne suffit pas.
 
-    3.  En `A`, le gardien avait aperçu `C` et `D` sans y aller : il aurait dû **s’en souvenir**. Méthode attendue, avec deux choses à noter :
+    3.  En `A`, le gardien avait aperçu `C` et `D` sans y aller : il aurait dû **s’en souvenir**.
+
+    4.  Méthode attendue, avec deux choses à noter :
 
         - on **coche** les salles déjà visitées ;
 
         - on tient une **liste des salles à visiter** : celles que l’on a aperçues (voisines d’une salle visitée) mais pas encore visitées.
 
-        Au départ, la liste contient `A`. Tant que la liste n’est pas vide, on en retire une salle, on la visite et on la coche, puis on ajoute à la liste ses voisines qui ne sont ni cochées ni déjà dans la liste. La visite est **terminée quand la liste est vide**. En retirant toujours la salle la plus **ancienne** de la liste :
+        Au départ, la liste contient `A`. Tant que la liste n’est pas vide, on en retire une salle, on la visite et on la coche, puis on ajoute à la liste ses voisines qui ne sont ni cochées ni déjà dans la liste. La visite est **terminée quand la liste est vide**.
+
+    5.  En retirant toujours la salle la plus **ancienne** de la liste :
 
         |      **Salle visitée**      |   `A`   |  `B`  | `C` |  `D`  |  `E`  | `F` |  `G`   |
         |:---------------------------:|:-------:|:-----:|:---:|:-----:|:-----:|:---:|:------:|

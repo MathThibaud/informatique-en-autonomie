@@ -322,7 +322,7 @@ L’arbre de l’exercice précédent était **complet** : tous ses niveaux éta
 
 <span class="essentiel">• essentiel</span>
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction récursive `recherche(a, x)` qui renvoie `True` si la valeur `x` est présente dans l’**ABR** `a`, `False` sinon, en profitant de l’ordre de l’ABR (on ne parcourt **pas** tout l’arbre). Combien de comparaisons, au maximum, pour un ABR de hauteur `h` ?
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction récursive `recherche(a, x)` qui renvoie `True` si la valeur `x` est présente dans l’**ABR** `a`, `False` sinon, en profitant de l’ordre de l’ABR (on ne parcourt **pas** tout l’arbre). Combien de nœuds, au maximum, la recherche visite-t-elle dans un ABR de hauteur `h` ?
 
 ??? pouce "Coup de pouce"
 
@@ -358,7 +358,7 @@ L’arbre de l’exercice précédent était **complet** : tous ses niveaux éta
         return False
     ```
 
-    Au plus **`h` comparaisons** (une par niveau), où `h` est la hauteur de l’arbre.
+    Au plus **`h` nœuds visités** (un par niveau), où `h` est la hauteur de l’arbre.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Insérer dans un ABR <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-12 }
 
@@ -409,7 +409,7 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
 
         Q3 : insérer toutes les valeurs, puis écrire une variante du parcours infixe qui **renvoie une liste** : `infixe(a.gauche) + [a.valeur] + infixe(a.droite)`.
 
-4.  Dessiner l’ABR obtenu en insérant `1, 2, 3, 4, 5, 6, 7` dans cet ordre, puis celui obtenu avec `4, 2, 6, 1, 3, 5, 7`. Donner la hauteur de chacun. Combien de comparaisons faut-il, au pire, pour y chercher une valeur ?
+4.  Dessiner l’ABR obtenu en insérant `1, 2, 3, 4, 5, 6, 7` dans cet ordre, puis celui obtenu avec `4, 2, 6, 1, 3, 5, 7`. Donner la hauteur de chacun. Combien de nœuds, au pire, une recherche visite-t-elle dans chacun ?
 
 ??? corrige "Corrigé"
 
@@ -455,7 +455,7 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
 
     ![](../figures/798bb7173a3d91af.svg){ .tikz loading=lazy }
 
-    Au pire, une recherche fait autant de comparaisons que la hauteur : $7$ dans le peigne (comme dans une liste), $3$ dans l’arbre équilibré. Mêmes valeurs, même nombre de nœuds : seul l’**ordre d’insertion** a changé.
+    Au pire, une recherche visite autant de nœuds que la hauteur : $7$ dans le peigne (comme dans une liste), $3$ dans l’arbre équilibré. Mêmes valeurs, même nombre de nœuds : seul l’**ordre d’insertion** a changé.
 
 ### Pour aller plus loin
 
@@ -644,7 +644,7 @@ class ArbreBinaire:
 
 <span class="duree">≈ 30 min</span>
 
-Un arbre de décision est représenté par deux classes : les **nœuds** portent une question, les **feuilles** portent un résultat.
+*Attention : dans cet exercice, la classe `Noeud` n’est pas celle du mode d’emploi.* Un arbre de décision est représenté par deux classes : les **nœuds** portent une question, les **feuilles** portent un résultat.
 
 ```python
 class Noeud:
@@ -732,7 +732,7 @@ a  = [4, [n1, n8]]
 
 1.  Dessiner l’arbre représenté par la variable `a`.
 
-2.  Le **poids** d’un arbre est la somme des étiquettes de ses nœuds ; on le calcule par un parcours **en largeur** avec une file. <span class="run" title="À programmer et tester sur machine">▶</span> Recopier et compléter les lignes 7, 8 et 11.
+2.  Le **poids** d’un arbre est la somme des étiquettes de ses nœuds ; on le calcule par un parcours **en largeur** avec une file, manipulée par les fonctions `creer_file()`, `enfiler(file, x)`, `defiler(file)` (retire et renvoie l’élément de tête) et `est_vide(file)`. <span class="run" title="À programmer et tester sur machine">▶</span> Recopier et compléter les lignes 7, 8 et 11.
 
     ??? pouce "Coup de pouce"
 
@@ -853,7 +853,7 @@ On associe un arbre de coups à un joueur et à une grille de jeu. Il simule tou
 
 À son tour, le joueur 1 choisit donc le coup de niveau 1 de plus **petit** score, et le joueur 2 celui de plus **grand** score.
 
-Pour construire l’arbre, on utilise une classe `Noeud` à trois attributs : `colonne` (soit `-1`, soit le numéro de la colonne où le coup est joué, de 0 à 6), `score` (le score associé au coup) et `suivants` (la liste des nœuds fils). La racine ne représente pas un coup : son attribut `colonne` vaut `-1` et ses fils représentent tous les premiers coups possibles du joueur 1.
+*Attention : dans cet exercice, la classe `Noeud` n’est pas celle du mode d’emploi.* Pour construire l’arbre, on utilise une classe `Noeud` à trois attributs : `colonne` (soit `-1`, soit le numéro de la colonne où le coup est joué, de 0 à 6), `score` (le score associé au coup) et `suivants` (la liste des nœuds fils). La racine ne représente pas un coup : son attribut `colonne` vaut `-1` et ses fils représentent tous les premiers coups possibles du joueur 1.
 
 ![](../figures/b1f82297ef04cf9a.svg){ .tikz loading=lazy }
 
@@ -869,7 +869,7 @@ Figure 1. Schéma partiel de l’arbre de coups pour `niveau_max = 2` (valeur de
             ...
     ```
 
-2.  Écrire une méthode `colonne_score_min(self)` de la classe `Noeud` qui renvoie le couple `(colonne, score)` d’un des fils du nœud de score le plus petit. On suppose que le nœud a au moins un fils.
+2.  Écrire une méthode `colonne_score_min(self)` de la classe `Noeud` qui renvoie le couple `(colonne, score)` du fils de **plus petit score** (l’un d’eux en cas d’égalité). On suppose que le nœud a au moins un fils.
 
 On suppose écrite de même une méthode `colonne_score_max` (fils de score le plus grand), et ajoutées à la classe `Grille` les méthodes suivantes :
 
@@ -1188,7 +1188,7 @@ On compte la hauteur en nœuds (convention du cours) sauf à la question 5.
 
 2.  Combien de nœuds peut contenir, au plus, un arbre binaire de hauteur $5$ ? au moins ?
 
-3.  Un ABR contient $1\,000\,000$ de valeurs. Entre quelles bornes sa hauteur est-elle comprise ? En déduire le nombre maximal de nœuds visités par une recherche si l’arbre a la plus petite hauteur possible, puis s’il a la plus grande.
+3.  Un ABR contient un million de valeurs. Entre quelles bornes sa hauteur est-elle comprise ? En déduire le nombre maximal de nœuds visités par une recherche si l’arbre a la plus petite hauteur possible, puis s’il a la plus grande.
 
     ??? pouce "Coup de pouce"
 

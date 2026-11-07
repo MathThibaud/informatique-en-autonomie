@@ -75,7 +75,7 @@ def afficher_binaire(n):
 
 <span class="duree">≈ 45 min</span> Chapitres croisés : *Programmation objet ; Piles*
 
-Un éditeur de texte très simple garde le texte saisi dans un attribut `texte` (une chaîne). Il propose deux boutons : **Annuler**, qui revient au texte d’avant la dernière modification, et **Rétablir**, qui refait une modification qu’on vient d’annuler. Pour cela, l’objet possède deux piles : `annulations` contient les textes précédents, `retablissements` les textes annulés.
+Un éditeur de texte très simple garde le texte saisi dans un attribut `texte` (une chaîne). Il propose deux boutons : **Annuler**, qui revient au texte d’avant la dernière modification, et **Rétablir**, qui refait une modification qu’on vient d’annuler. Pour cela, l’objet possède deux piles : `annulations` contient les textes précédents, `retablissements` les textes annulés. Comme dans tous les éditeurs, une nouvelle saisie **efface l’historique des rétablissements** : après `ecrire`, on ne peut plus rétablir ce qui avait été annulé.
 
 ```python
 class Editeur:
@@ -83,7 +83,7 @@ class Editeur:
         ...
 
     def ecrire(self, mot):
-        """ajoute mot a la fin du texte"""
+        """ajoute mot a la fin du texte (et vide la pile des retablissements)"""
         ...
 
     def annuler(self):
@@ -115,7 +115,7 @@ class Editeur:
 
         Avant de modifier le texte, on sauvegarde l’ancien dans la pile qui permettra d’y revenir. Annuler et rétablir sont symétriques : chacune sauvegarde le texte courant dans l’autre pile.
 
-4.  Après la dernière instruction de la question 2, un appel à `e.retablir()` ne doit rien changer. Pourquoi ce choix est-il raisonnable, et quelle ligne de votre méthode `ecrire` le garantit-elle ?
+4.  Après la dernière instruction de la question 2, un appel à `e.retablir()` ne doit rien changer. Pourquoi ce choix est-il raisonnable, et quelle ligne de votre méthode `ecrire` le met-elle en œuvre ?
 
 ??? corrige "Corrigé"
 
@@ -552,7 +552,7 @@ Une médiathèque gère ses prêts avec trois relations : `adherent(id_adherent,
               (5, "Le Tour du monde en 80 jours", 40)]
     ```
 
-    <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une classe `Emprunt` dont le constructeur reçoit `numero`, `titre` et `jour`, avec une méthode `en_retard(self, aujourdhui)` qui renvoie `True` si le prêt dure depuis **plus de 21 jours** le jour numéro `aujourdhui`.
+    <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une classe `Emprunt` dont le constructeur reçoit `numero`, `titre` et `jour`, avec une méthode `en_retard(self, aujourdhui)` qui renvoie `True` si, le jour numéro `aujourdhui`, **strictement plus de 21 jours** se sont écoulés depuis le jour de l’emprunt.
 
 7.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `titres_en_retard(lignes, aujourdhui)` qui construit la liste des objets `Emprunt` puis renvoie la liste des titres en retard. Que renvoie-t-elle pour `aujourdhui = 47` ?
 
@@ -818,7 +818,9 @@ reseau = {"R1": {"R2": 10, "R3": 100},
 
 <span class="duree">≈ 45 min</span> Chapitres croisés : *Cryptographie ; Diviser pour régner ; Récursivité*
 
-Alice choisit $p = 11$ et $q = 17$ ; sa clé publique est $(e, n)$ avec $e = 7$, et sa clé privée est $d = 23$. Un nombre $m$ (avec $0 \leq m \lt  n$) se chiffre en $c = m^e \bmod n$ et se déchiffre en $m = c^d \bmod n$ (en Python, naïvement : `c = m ** e % n`, qui forme d’abord le nombre $m^e$, géant dans un vrai RSA ; la question 4 fait mieux, comme `pow(m, e, n)` vu au chapitre *Cryptographie*).
+Alice choisit $p = 11$ et $q = 17$ ; sa clé publique est $(e, n)$ avec $e = 7$, et sa clé privée est $d = 23$. Un nombre $m$ (avec $0 \leq m \lt  n$) se chiffre en $c = m^e \bmod n$ et se déchiffre en $m = c^d \bmod n$.
+
+En Python, on peut écrire naïvement `c = m ** e % n`. Mais ce calcul forme d’abord le nombre $m^e$, gigantesque dans un vrai RSA : la question 4 fait mieux, comme `pow(m, e, n)` vu au chapitre *Cryptographie*.
 
 1.  Calculer $n$ et $\varphi = (p-1)(q-1)$, puis vérifier que $e \times d \bmod \varphi = 1$.
 
@@ -883,7 +885,7 @@ Pour repérer un passage recopié, on cherche la plus longue **sous-chaîne** co
 
         Contrairement à la sous-séquence, la réponse n’est pas dans le coin en bas à droite : c’est le **maximum** de toute la table.
 
-5.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `plus_longue_dyn(a, b)` qui remplit la table de bas en haut et renvoie une plus longue sous-chaîne commune (et non seulement sa longueur). Quel est son coût pour deux textes de $n$ et $m$ caractères ?
+5.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `plus_longue_dyn(a, b)` qui remplit la table ligne par ligne, des petits indices vers les grands (méthode ascendante), et renvoie une plus longue sous-chaîne commune (et non seulement sa longueur). Quel est son coût pour deux textes de $n$ et $m$ caractères ?
 
 ??? corrige "Corrigé"
 
@@ -958,7 +960,7 @@ prog_b = [("saute_si_nul", 3), ("ajoute", -2), ("saute", 0), ("stop",)]
 
 2.  Que fait `prog_b` avec `x = 4` ? avec `x = 3` ? Justifier.
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `executer(programme, x, max_pas)` qui exécute le programme et renvoie la valeur finale de `x` s’il atteint `stop` en au plus `max_pas` instructions, et `None` sinon.
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `executer(programme, x, max_pas)` qui exécute le programme et renvoie la valeur finale de `x` s’il atteint `stop` après avoir exécuté au plus `max_pas` instructions (`stop` non comprise), et `None` sinon.
 
 4.  `executer(prog_a, 50, 100)` renvoie `None`, alors que `prog_a` s’arrête. Pourquoi ? Peut-on choisir `max_pas` assez grand pour que `executer` réponde juste pour *tout* programme ? Relier la réponse au problème de l’arrêt. En quoi la fonction `executer` illustre-t-elle qu’un programme est une **donnée** ?
 

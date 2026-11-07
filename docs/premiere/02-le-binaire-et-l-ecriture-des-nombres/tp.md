@@ -20,7 +20,7 @@
 
     - Les questions \[ à la main \]  se traitent sur le cahier ; les questions \[ sur machine \]  dans le fichier Python.
 
-    - Partez du fichier `activite_arithmetique_binaire_depart.py` : chaque partie a sa fonction de tests (`tester_A()`, `tester_B()`…) à appeler dès que la partie est terminée.
+    - Partez du fichier `activite_arithmetique_binaire_depart.py` : chaque partie a sa fonction de tests (`tester_A()` pour la partie 1, `tester_B()` pour la partie 2, et ainsi de suite jusqu’à `tester_G()`) à appeler dès que la partie est terminée.
 
     - Niveau : ★ échauffement ★★ classique ★★★ défi.
 
@@ -109,7 +109,13 @@
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Du binaire vers l’hexadécimal <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-tp-1-4 }
 
-\[ sur machine \]  Écrire `binaire_vers_hexa(s)` : compléter `s` pour que sa longueur soit un multiple de 4, puis parcourir `s` caractère par caractère en formant des paquets de 4 bits : on ajoute chaque caractère à une chaîne `paquet` ; dès qu’elle compte 4 caractères, on la convertit en un chiffre de `"0123456789ABCDEF"` (avec `binaire_vers_decimal`), puis on la vide.
+\[ sur machine \]  Écrire `binaire_vers_hexa(s)` en trois étapes :
+
+1.  ajouter des `"0"` à gauche de `s` jusqu’à ce que sa longueur soit un multiple de 4 ;
+
+2.  parcourir `s` caractère par caractère, en ajoutant chaque caractère à une chaîne `paquet` ;
+
+3.  dès que `paquet` compte 4 caractères, le convertir en un chiffre de `"0123456789ABCDEF"` (avec `binaire_vers_decimal`), ajouter ce chiffre au résultat, puis vider `paquet`.
 
 ```text
 >>> binaire_vers_hexa("11111010")
@@ -448,7 +454,7 @@ Sur 4 bits, le complément à deux représente les entiers de $-8$ à $7$.
 
 - parcourir les bits de `s2` de droite à gauche (rang `k` = 0, 1, 2…) ;
 
-- si le bit vaut `"1"`, ajouter au résultat `decaler(s1, k)` complété à $n$ bits (garder $n$ bits avec `sans_premier`).
+- si le bit vaut `"1"`, compléter `decaler(s1, k)` à $n$ bits, l’additionner au résultat avec `additionner`, puis retirer le bit de gauche de la somme avec `sans_premier` pour revenir à $n$ bits.
 
 ```text
 >>> multiplier("1101", "1011")      # 13 * 11
@@ -778,7 +784,7 @@ En complément à deux, $-A$ s’obtient en **inversant** tous les bits de $A$, 
 
 1.  \[ plateau ou simulateur \]  Puzzle **48** : multiplier un registre par 3. Proposer une idée à partir de ce qui précède (un registre qui décompte $A$ fois, et pour chaque décompte …).
 
-2.  \[ plateau ou simulateur \]  Puzzle **56** : multiplier deux nombres de 2 bits. Le livret les additionne à un registre de 3 bits *modulo 8* : pourquoi ce modulo ? Combien de bits faudrait-il pour ne jamais perdre d’information ? (Voir l’exercice *Le multiplicateur* du TP d’arithmétique binaire.)
+2.  \[ plateau ou simulateur \]  Puzzle **56** : multiplier deux nombres de 2 bits. Le livret range le produit dans un registre de 3 bits, donc *modulo 8* : pourquoi ce modulo ? Combien de bits faudrait-il pour ne jamais perdre d’information ? (Voir l’exercice *Le multiplicateur* du TP d’arithmétique binaire.)
 
 3.  \[ au-delà du programme \] Une machine est dite « Turing-complète » si, avec autant de mémoire qu’il le faut, elle peut effectuer n’importe quel calcul qu’effectue un ordinateur (la notion sera précisée en Terminale, au chapitre *Calculabilité*). Le plateau ne mesure que quelques dizaines de cases et la boîte contient un nombre limité de pièces. Pourquoi, malgré tout, peut-on dire que Turing Tumble est « Turing-complet » ?
 

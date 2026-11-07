@@ -132,7 +132,7 @@ La synthèse additive : rouge + vert $=$ jaune, les trois ensemble $=$ blanc.
 
     2.  Pour une belle impression, il faut environ $300$ ppp. Calculer la définition minimale d’une photo imprimée en $15 \times 10$ cm.
 
-    3.  Calculer le poids « brut » d’une photo de définition $4000 \times 3000$ (en méga-octets ; $1$ Mo $\approx 10^{6}$ octets).
+    3.  Calculer le poids « brut » d’une photo de définition $4000 \times 3000$ (en mégaoctets ; $1$ Mo $\approx 10^{6}$ octets).
 
 <span id="cours-03-5" class="ancre"></span>
 

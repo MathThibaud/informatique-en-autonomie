@@ -81,7 +81,7 @@ while True:
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 2</span> — Ce qui ralentit la boucle <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-systemes-sur-puce-et-informatique-embarq-tp-1-2 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Ajouter successivement, dans la boucle (juste après `n = n + 1`), chacune des lignes suivantes, et relever le nombre de tours par seconde dans le tableau, recopié sur le cahier.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Ajouter, **une à la fois**, dans la boucle (juste après `n = n + 1`), chacune des lignes suivantes : relancer, relever le nombre de tours par seconde dans le tableau (recopié sur le cahier), puis **retirer la ligne** avant d’essayer la suivante.
 
 | **Ligne ajoutée**                      | **Tours par seconde** |
 |:---------------------------------------|:---------------------:|
@@ -169,11 +169,13 @@ Un local technique ne doit pas dépasser $30$ degrés. Cahier des charges :
 
 - le bouton A **coupe le son** de l’alarme en cours (l’image reste) ; le son reviendra à la prochaine alarme ;
 
-- le bouton B fait défiler la température **minimale** et **maximale** relevées depuis le démarrage, sous la forme `"22/31"`.
+- le bouton B fait défiler la température **minimale** et **maximale** relevées depuis le démarrage, sous la forme `"22/31"` ;
+
+- hors alarme, l’écran est éteint (`display.clear()`).
 
 1.  Dresser sur le cahier un tableau donnant l’état de l’alarme (déclenchée ou non) pour la suite de températures : $26,\ 29,\ 30,\ 31,\ 29,\ 30,\ 29,\ 28,\ 27$.
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire le programme complet. On utilisera trois variables : `en_alarme`, `son_coupe` et le couple `mini`, `maxi`.
+2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire le programme complet. On utilisera les variables `en_alarme`, `son_coupe`, `mini` et `maxi`.
 
 3.  Pourquoi ne pas ranger *toutes* les températures dans une liste pour calculer le minimum et le maximum à la demande ? (Penser à la mémoire vive d’un microcontrôleur, et à une alarme qui fonctionne des mois.)
 
@@ -275,7 +277,7 @@ Tester un programme embarqué sur la carte est lent et peu reproductible (on ne 
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — Les fonctions de traitement <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-systemes-sur-puce-et-informatique-embarq-tp-1-6 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Compléter, dans l’ordre, `veilleuse`, `nb_basculements`, `nb_led`, `alarme`, `mise_a_jour`, `norme`, `compter_pas_naif` et `compter_pas` (leur rôle est décrit dans le fichier), jusqu’à ce que tous les tests affichent `OK`. Ce sont exactement les décisions prises dans vos programmes de la partie B.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Compléter, dans l’ordre, `veilleuse`, `nb_basculements`, `nb_led`, `alarme`, `mise_a_jour`, `norme`, `compter_pas_naif` et `compter_pas` (leur rôle est décrit dans le fichier), jusqu’à ce que tous les tests affichent `OK`. On y retrouve les décisions de la partie B (nombre de LED, alarme, podomètre à deux seuils), plus deux variantes : une veilleuse **tout ou rien** qui s’allume sous $40$ et ne s’éteint qu’au-dessus de $80$ (hystérésis, comme l’alarme), et un compteur de pas **naïf** à un seul seuil ($1200$).
 
 ??? corrige "Corrigé"
 
@@ -335,14 +337,18 @@ Tester un programme embarqué sur la carte est lent et peu reproductible (on ne 
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Pourquoi deux seuils ? Les mesures parlent <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-systemes-sur-puce-et-informatique-embarq-tp-1-7 }
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span>  La fonction fournie `lumiere_simulee()` renvoie $70$ niveaux de lumière relevés en fin de journée. Afficher le nombre de basculements de la veilleuse **naïve** (un seul seuil à $60$) et de la veilleuse **à hystérésis** :  
+1.  <span class="run" title="À programmer et tester sur machine">▶</span>  La fonction fournie `lumiere_simulee()` renvoie $70$ niveaux de lumière relevés en fin de journée. Afficher le nombre de basculements de la veilleuse **naïve** (allumée sous $60$, éteinte au-dessus) et de la veilleuse **à hystérésis** (seuils $40$ et $80$) :  
     `nb_basculements(simuler_veilleuse(niveaux, False))`, puis avec `True`. Pourquoi la veilleuse naïve « clignote »-t-elle ?
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span>  `marche_simulee()` simule $10$ secondes de marche à $2$ pas par seconde. Comparer les nombres de pas trouvés par `compter_pas_naif` et par `compter_pas`. Lequel a raison ?
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Recommencer avec une marche lente, d’un pas par seconde, obtenue par `marche_simulee(cadence=1,` `graine=3)`. Combien de pas devrait-on trouver ? Qu’est-ce qui, dans le signal, trompe le compteur naïf ?
 
-4.  <span class="run" title="À programmer et tester sur machine">▶</span>  Vérifier qu’au repos (une liste de $500$ valeurs tirées entre $940$ et $1060$) aucun des deux compteurs ne compte de pas.
+4.  <span class="run" title="À programmer et tester sur machine">▶</span>  Fabriquer une liste `repos` de $500$ normes mesurées au repos, tirées au hasard entre $940$ et $1060$, et vérifier qu’aucun des deux compteurs n’y compte de pas.
+
+    ??? pouce "Coup de pouce"
+
+        Le module `random` est déjà importé dans le fichier ; une liste en compréhension suffit : `[random.randint(940, 1060) for i in range(500)]`.
 
 ??? corrige "Corrigé"
 

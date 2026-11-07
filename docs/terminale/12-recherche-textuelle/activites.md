@@ -12,7 +12,7 @@
 
     - Découper la bande `SOLEIL` placée sous le texte (ou la recopier sur une bande de papier, avec des cases de même taille) : c’est la **fenêtre** que l’on fait glisser sur le texte, case par case.
 
-    - Les réponses s’écrivent sur le cahier. Une **comparaison**, c’est regarder une case de la bande et la case du texte juste en dessous (pareil ou pas ?). Les espaces (␣) sont des caractères comme les autres. <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> Travail **sans IA** : ni assistant, ni complétion de code ; vous devez pouvoir expliquer chaque réponse.
+    - Les réponses s’écrivent sur le cahier. Une **comparaison**, c’est regarder une case de la bande et la case du texte qui lui fait face (pareil ou pas ?). Les espaces (␣) sont des caractères comme les autres. <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> Travail **sans IA** : ni assistant, ni complétion de code ; vous devez pouvoir expliquer chaque réponse.
 
 ## Le texte et le motif
 
@@ -36,18 +36,18 @@ Poser la bande sous le texte, à la position $0$. Comparer les cases **de gauche
 
 On recommence à la position $0$, mais on compare maintenant en commençant par la **dernière** case de la bande.
 
-1.  À la position $0$, quelle lettre du texte se trouve sous la dernière case de la bande ? Apparaît-elle quelque part dans `SOLEIL` ?
+1.  À la position $0$, quelle lettre du texte se trouve en face de la dernière case de la bande ? Apparaît-elle quelque part dans `SOLEIL` ?
 
-2.  Si l’on décale la bande de $1$, $2$, … ou $5$ cases, cette lettre sera encore sous la bande. Une de ces positions peut-elle donner `SOLEIL` ? De combien de cases peut-on donc faire sauter la bande d’un coup ?
+2.  Si l’on décale la bande de $1$, $2$, … ou $5$ cases, cette lettre sera encore en face de la bande. Une de ces positions peut-elle donner `SOLEIL` ? De combien de cases peut-on donc faire sauter la bande d’un coup ?
 
-3.  Plus loin, la lettre sous la dernière case est un `I`, qui *existe* dans `SOLEIL`. De combien faut-il avancer la bande pour que ce `I` se retrouve sous le `I` de la bande ?
+3.  Plus loin, la lettre en face de la dernière case est un `I`, qui *existe* dans `SOLEIL`. De combien faut-il avancer la bande pour que ce `I` se retrouve en face du `I` de la bande ?
 
-4.  Refaire toute la recherche avec cette règle : on regarde la lettre sous la dernière case ; si elle n’est pas dans le motif, on saute toute la bande ; sinon, on avance pour l’aligner avec la même lettre de la bande (la plus à droite, sans compter la dernière case). Recopier sur le cahier le tableau ci-dessous et le compléter, une ligne par position essayée.
+4.  Refaire toute la recherche avec cette règle : on regarde la lettre en face de la dernière case ; si elle n’est pas dans le motif, on saute toute la bande ; sinon, on avance pour l’aligner avec la même lettre de la bande (la plus à droite, sans compter la dernière case). Recopier sur le cahier le tableau ci-dessous et le compléter, une ligne par position essayée.
 
-    | **Position** | **Lettre sous la dernière case** | **Comparaisons** | **Saut** |
-    |:------------:|:--------------------------------:|:----------------:|:--------:|
-    |     $0$      |                …                 |        …         |    …     |
-    |      …       |                …                 |        …         |    …     |
+    | **Position** | **Lettre en face de la dernière case** | **Comparaisons** | **Saut** |
+    |:--:|:--:|:--:|:--:|
+    | $0$ | … | … | … |
+    | … | … | … | … |
 
     Combien de positions a-t-on essayées ? Combien de comparaisons en tout ?
 
@@ -57,9 +57,9 @@ On recommence à la position $0$, mais on compare maintenant en commençant par 
 
 2.  Pour aller vite, il est utile de préparer **avant** la recherche, pour chaque lettre, le saut à faire. Recopier et compléter sur le cahier ce « pense-bête » pour `SOLEIL` :
 
-    | Lettre sous la dernière case | `S` | `O` | `L` | `E` | `I` | toute autre lettre |
-    |:----------------------------:|:----|:----|:----|:----|:----|:------------------:|
-    |             Saut             |     |     |     |     |     |                    |
+    | Lettre en face de la dernière case | `S` | `O` | `L` | `E` | `I` | toute autre lettre |
+    |:----------------------------------:|:----|:----|:----|:----|:----|:------------------:|
+    |                Saut                |     |     |     |     |     |                    |
 
 ??? corrige "Corrigé de l'activité"
 
@@ -77,20 +77,20 @@ On recommence à la position $0$, mais on compare maintenant en commençant par 
 
     7.  Déroulé complet :
 
-        | **Position** | **Lettre sous la dernière case** | **Comparaisons** |  **Saut**  |
-        |:------------:|:--------------------------------:|:----------------:|:----------:|
-        |     $0$      |               `T`                |       $1$        |    $6$     |
-        |     $6$      |               `D`                |       $1$        |    $6$     |
-        |     $12$     |               `I`                |       $1$        |    $1$     |
-        |     $13$     |               `S`                |       $1$        |    $5$     |
-        |     $18$     |               `D`                |       $1$        |    $6$     |
-        |     $24$     |               `A`                |       $1$        |    $6$     |
-        |     $30$     |               `U`                |       $1$        |    $6$     |
-        |     $36$     |               `I`                |       $1$        |    $1$     |
-        |     $37$     |               `L`                |       $6$        | **trouvé** |
+        | **Position** | **Lettre en face de la dernière case** | **Comparaisons** | **Saut** |
+        |:--:|:--:|:--:|:--:|
+        | $0$ | `T` | $1$ | $6$ |
+        | $6$ | `D` | $1$ | $6$ |
+        | $12$ | `I` | $1$ | $1$ |
+        | $13$ | `S` | $1$ | $5$ |
+        | $18$ | `D` | $1$ | $6$ |
+        | $24$ | `A` | $1$ | $6$ |
+        | $30$ | `U` | $1$ | $6$ |
+        | $36$ | `I` | $1$ | $1$ |
+        | $37$ | `L` | $6$ | **trouvé** |
 
         $\mathbf{9}$ positions essayées et $\mathbf{14}$ comparaisons. À la position $13$, le `S` est dans la bande (première case) : on avance de $5$ pour l’aligner.
 
-    8.  $14$ comparaisons au lieu de $45$, plus de trois fois moins. Quand la lettre sous la dernière case n’est pas dans le motif, aucune position recouvrant cette lettre ne peut convenir : les lettres sautées **n’ont jamais besoin d’être lues**. Plus le motif est long, plus les sauts sont grands.
+    8.  $14$ comparaisons au lieu de $45$, plus de trois fois moins. Quand la lettre en face de la dernière case n’est pas dans le motif, aucune position recouvrant cette lettre ne peut convenir : les lettres sautées **n’ont jamais besoin d’être lues**. Plus le motif est long, plus les sauts sont grands.
 
     9.  Pense-bête : `S`$\to 5$, `O`$\to 4$, `L`$\to 3$, `E`$\to 2$, `I`$\to 1$, toute autre lettre $\to 6$. Pour `L`, on ne compte pas la dernière case : c’est le `L` en troisième position qui compte (saut $3$). C’est exactement la **table de décalage** de Horspool, calculée une fois pour toutes avant la recherche (le **prétraitement** du motif).

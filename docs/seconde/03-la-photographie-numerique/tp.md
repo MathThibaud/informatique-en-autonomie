@@ -43,7 +43,7 @@ Toute l’idée est là : dans la boucle, on **teste la position** du pixel $(x,
 
 ## Exemple 1 : le drapeau de Monaco
 
-Le drapeau monégasque a des **proportions 4:5** (4 de haut pour 5 de large) et se compose de **deux bandes horizontales** égales : **rouge** en haut, **blanc** en bas. On choisit donc une image de $500 \times 400$ (largeur $\times$ hauteur, soit bien $5:4$). Pour chaque pixel, on regarde s’il est dans la **moitié haute** ($y < \text{hauteur}/2$) ou basse :
+Le drapeau monégasque a des **proportions 4:5** (4 de haut pour 5 de large) et se compose de **deux bandes horizontales** égales : **rouge** en haut, **blanc** en bas. On choisit donc une image de $500 \times 400$ (largeur $\times$ hauteur : la hauteur vaut bien les $4/5$ de la largeur). Pour chaque pixel, on regarde s’il est dans la **moitié haute** ($y < \text{hauteur}/2$) ou basse :
 
 ```python
 from PIL import Image
@@ -69,7 +69,7 @@ img.show()
 
 ## Exemple 2 : le drapeau de la France
 
-Le drapeau français a des **proportions 2:3** et se compose de **trois bandes verticales** égales : **bleu**, **blanc**, **rouge**. On prend une image de $600 \times 400$ (soit $3:2$). Cette fois, on teste la position `x` du pixel (trois zones) :
+Le drapeau français a des **proportions 2:3** (2 de haut pour 3 de large) et se compose de **trois bandes verticales** égales : **bleu**, **blanc**, **rouge**. On prend une image de $600 \times 400$ (largeur $\times$ hauteur : la hauteur vaut bien les $2/3$ de la largeur). Cette fois, on teste la position `x` du pixel (trois zones) :
 
 ```python
 from PIL import Image
@@ -104,7 +104,7 @@ img.show()
 
     2.  Modifier le drapeau de Monaco pour que la bande du haut soit **bleue** au lieu de rouge.
 
-    3.  Que faudrait-il changer pour obtenir un drapeau **deux fois plus grand** ?
+    3.  Que faudrait-il changer pour obtenir un drapeau deux fois plus **large et deux fois plus haut** ?
 
 ## À vous de jouer !
 
@@ -112,7 +112,7 @@ img.show()
 
     En vous inspirant du drapeau français (trois bandes **verticales**) ou en passant à des bandes **horizontales**, dessiner les drapeaux suivants en **respectant proportions et couleurs** (dimensions et codes couleur exacts sur la **version anglaise de Wikipédia**).
 
-    | **Drapeau** | **Description** | **Proportions** |
+    | **Drapeau** | **Description** | **Proportions (hauteur : largeur)** |
     |:---|:---|:---|
     | Italie | 3 bandes verticales : vert, blanc, rouge | 2:3 |
     | Belgique | 3 bandes verticales : noir, jaune, rouge | 13:15 |
@@ -157,7 +157,7 @@ Le résultat attendu.
 
     2.  Expliquer avec vos mots ce que teste votre condition.
 
-    3.  Modifier le rayon pour obtenir un disque **deux fois plus petit**.
+    3.  Modifier le programme pour obtenir un disque de **rayon deux fois plus petit**.
 
 !!! encadre "$triangle$ L’axe des $y$ est à l’envers !"
 
@@ -439,7 +439,7 @@ IA
 
 ## Exemple 1 : recolorer tout un tableau
 
-On parcourt **tous les pixels** et on **échange les canaux** rouge et bleu. Le ciel bleu de Van Gogh devient chaud, et les étoiles jaunes deviennent bleutées.
+On parcourt **tous les pixels** et on **échange les canaux** rouge et bleu. Le ciel bleu de van Gogh devient chaud, et les étoiles jaunes deviennent bleutées.
 
 ```python
 from PIL import Image
@@ -507,7 +507,7 @@ img.show()
 
     2.  Changer la couleur finale : essayer un costume **vert**, puis **violet**.
 
-    3.  En gardant la luminosité `gris`, expliquer pourquoi les **plis** du tissu restent visibles après recoloration.
+    3.  Le programme calcule la nouvelle couleur à partir de la luminosité `gris` du pixel. Expliquer pourquoi les **plis** du tissu restent visibles après recoloration.
 
 ## Le projet
 
@@ -592,7 +592,7 @@ Recopier ce tableau sur le cahier et le compléter pendant le débat.
 
 Trace écrite finale (individuelle)
 
-Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes, justifiez-la avec vos **deux meilleurs arguments**, dont **un argument de l’autre camp** que vous trouvez solide (avec le document qui l’appuie).
+Sur le cahier, notez votre position après le débat (oui, non, je ne sais toujours pas) et si vous avez changé d’avis. Puis, en trois à cinq lignes : justifiez-la avec votre **meilleur argument** (et le document qui l’appuie) ; citez ensuite **un argument de l’autre camp** que vous trouvez solide, et dites pourquoi il ne vous a pas fait changer d’avis, ou pourquoi il l’a fait.
 
 ## Corrigé
 

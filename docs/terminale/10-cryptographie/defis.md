@@ -18,6 +18,8 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -110,7 +112,7 @@ Dans un exemple inventé, la carte utilise `10` tours et la porte `17` tours. Av
 
 **À quoi ça sert ?** C’est le travail de l’espion et la réponse du défi. La façon d’écrire la boucle compte : relancer la transformation depuis le début à chaque essai rendrait la recherche beaucoup trop lente.
 
-Écrire une fonction `nb_tours(cle_publique)` qui retrouve le nombre de tours secret à partir d’une clé publique. Tester : `nb_tours(19859298)` doit renvoyer `10`. Calculer ensuite la clé de chiffrement de vos données.
+Écrire une fonction `trouver_nb_tours(cle_publique)` qui retrouve le nombre de tours secret à partir d’une clé publique. Tester : `trouver_nb_tours(19859298)` doit renvoyer `10`. Calculer ensuite la clé de chiffrement de vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -131,12 +133,12 @@ Il n’y a pas de deuxième énigme ce jour-là : la seconde étoile est offerte
     ```python
     from time import perf_counter
     debut = perf_counter()
-    n = nb_tours(19859298)                 # le calcul a chronometrer
+    n = trouver_nb_tours(19859298)         # le calcul a chronometrer
     duree = perf_counter() - debut
     print(f"{n} tours en {duree:.6f} s")   # 6 chiffres apres la virgule
     ```
 
-    **Intérêt.** En divisant le nombre de tours par la durée, on obtient une vitesse (tours par seconde) qui permet d’extrapoler. Question : chronométrer `nb_tours` sur vos deux clés publiques ; combien de tours par seconde votre programme fait-il ?
+    **Intérêt.** En divisant le nombre de tours par la durée, on obtient une vitesse (tours par seconde) qui permet d’extrapoler.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 5</span> — Défi : pourquoi est-ce sûr ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-1-5 }
 
@@ -144,7 +146,7 @@ Il n’y a pas de deuxième énigme ce jour-là : la seconde étoile est offerte
 
 **À quoi ça sert ?** Le défi n’a été résolu que parce que le modulo est petit ; ce calcul d’ordre de grandeur explique pourquoi le même protocole, avec des modulos de centaines de chiffres, protège réellement nos communications.
 
-Les vrais protocoles utilisent un modulo de plus de 600 chiffres. Mesurer la vitesse de votre recherche du nombre de tours (encadré ci-dessus). Pour un modulo d’environ $2\times 10^7$, la recherche essaie au pire $2 \times 10^7$ valeurs ; estimer le temps qu’elle prendrait pour un modulo de l’ordre de $10^{20}$, puis $10^{600}$. Expliquer pourquoi l’espion est battu alors que la carte et la porte calculent vite.
+Les vrais protocoles utilisent un modulo de plus de 600 chiffres. Chronométrer `trouver_nb_tours` sur vos deux clés publiques (encadré ci-dessus) et en déduire le nombre de tours par seconde de votre programme. Pour un modulo d’environ $2\times 10^7$, la recherche essaie au pire $2 \times 10^7$ valeurs ; estimer le temps qu’elle prendrait pour un modulo de l’ordre de $10^{20}$, puis $10^{600}$. Expliquer pourquoi l’espion est battu alors que la carte et la porte calculent vite.
 
 ??? pouce "Coup de pouce"
 
@@ -206,7 +208,7 @@ On admet que, $p$ étant premier, $g^{p-1} \bmod p = 1$ (petit théorème de Fer
 
 1.  À la main, avec $p = 29$, $g = 2$ et $m = 6$ : écrire le dictionnaire des pas de bébé. Retrouver le secret de Bob à partir de sa clé publique $18$, sachant que $2^{22} \bmod 29 = 5$.
 
-2.  Écrire `log_discret(g, cible, p)` et vérifier qu’elle retrouve les nombres de tours de l’exemple du défi, puis de vos données.
+2.  Écrire `log_discret(g, cible, p)` et vérifier qu’elle retrouve les nombres de tours de l’exemple inventé de la fiche, puis de vos données.
 
     ??? pouce "Coup de pouce"
 
@@ -233,6 +235,8 @@ On admet que, $p$ étant premier, $g^{p-1} \bmod p = 1$ (petit théorème de Fer
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/13 ](https://adventofcode.com/2020/day/13 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -314,13 +318,13 @@ Pour chaque navette, calculer le premier départ à partir de l’instant 96 et 
 
 ### <span class="exo-num">Exercice 3</span> — Lire le fichier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-3 }
 
-**But.** Extraire du fichier l’instant d’arrivée et la liste des numéros des navettes en service.
+**But.** Extraire du fichier l’instant d’arrivée et, pour chaque navette en service, son numéro et sa position dans la ligne.
 
-**À quoi ça sert ?** Ce sont les seules données utiles à la partie 1. Les `x` sont écartés ici, mais leur position comptera en partie 2 : il faudra alors relire la ligne autrement.
+**À quoi ça sert ?** La partie 1 n’utilise que les numéros ; la position comptera en partie 2, où les `x` occupent une place : en la gardant dès maintenant, on n’aura pas à relire le fichier.
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -330,11 +334,11 @@ Pour chaque navette, calculer le premier départ à partir de l’instant 96 et 
 
     **Intérêt.** Comparer ou découper une ligne sans que la fin de ligne ne gêne : `"abc\n" == "abc"` vaut `False`.
 
-Écrire une fonction `lire_notes(nom_fichier)` qui renvoie l’instant d’arrivée et la liste des numéros des navettes en service (sans les `x`).
+Écrire une fonction `lire_notes(nom_fichier)` qui renvoie l’instant d’arrivée (un entier) et la liste des couples `(position, numero)` des navettes en service (deux entiers), la position étant l’indice du numéro dans la ligne, `x` compris. Par exemple, pour la ligne `5,x,7`, on obtient `[(0, 5), (2, 7)]`.
 
 ??? pouce "Coup de pouce"
 
-    Après `strip`, `ligne.split(",")` découpe la seconde ligne ; on ne garde que les morceaux différents de `"x"`.
+    Après `strip`, `ligne.split(",")` découpe la seconde ligne ; on parcourt les morceaux par leur indice et on ne garde que ceux qui sont différents de `"x"`, convertis avec `int`.
 
 ### <span class="exo-num">Exercice 4</span> — L’attente, avec un modulo <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-4 }
 
@@ -342,7 +346,7 @@ Pour chaque navette, calculer le premier départ à partir de l’instant 96 et 
 
 **À quoi ça sert ?** Le modulo évite de faire défiler les minutes une à une ; c’est le réflexe qui rendra possible la partie 2, où les instants sont gigantesques.
 
-Écrire une fonction `attente(arrivee, numero)` qui renvoie le nombre de minutes à attendre la navette `numero`, **sans boucle**. En déduire la réponse. Tester sur l’exemple du défi, puis sur vos données.
+Écrire une fonction `attente(arrivee, numero)` qui renvoie le nombre de minutes à attendre la navette `numero`, **sans boucle**. En déduire la réponse. Tester sur l’exemple inventé de la fiche, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -372,7 +376,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** Une condition écrite avec `%` se programme directement ; c’est elle que testera la recherche de l’exercice suivant pour chaque navette.
 
-Traduire la condition sur une navette de numéro $b$ placée en position $i$ par une égalité avec `%`. Sur l’exemple du défi, on doit trouver $t = 215$ : le vérifier pour chacune des trois navettes.
+Traduire la condition sur une navette de numéro $b$ placée en position $i$ par une égalité avec `%`. Sur l’exemple inventé de la fiche, on doit trouver $t = 215$ : le vérifier pour chacune des trois navettes.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : la partie 2 sur vos données <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-6 }
 
@@ -380,7 +384,7 @@ Traduire la condition sur une navette de numéro $b$ placée en position $i$ par
 
 **À quoi ça sert ?** La force brute est impossible ici : cette méthode, expliquée dans la section suivante, ne fait que quelques centaines d’essais au lieu de $10^{14}$. Elle donne la réponse de la partie 2.
 
-L’énoncé prévient que la réponse dépasse $10^{14}$ : tester tous les instants un par un prendrait des années. Lire la section suivante, puis écrire une fonction `premier_instant(navettes)` qui suit cette méthode. Vérifier sur l’exemple du défi et sur ceux de l’énoncé avant vos données.
+L’énoncé prévient que la réponse dépasse $10^{14}$ : tester tous les instants un par un prendrait des années. Lire la section suivante, puis écrire une fonction `premier_instant(navettes)`, où `navettes` est la liste de couples renvoyée par `lire_notes`, qui suit cette méthode. Vérifier sur l’exemple inventé de la fiche ($t = 215$) et sur les exemples donnés sur le site, avant vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -394,7 +398,7 @@ L’énoncé prévient que la réponse dépasse $10^{14}$ : tester tous les inst
 
 !!! encadre "Recherche à pas croissant"
 
-    On cherche $t$ tel que $t \,\%\, 5 = 0$, $(t+2) \,\%\, 7 = 0$ et $(t+5) \,\%\, 11 = 0$ (exemple du défi).
+    On cherche $t$ tel que $t \,\%\, 5 = 0$, $(t+2) \,\%\, 7 = 0$ et $(t+5) \,\%\, 11 = 0$ (exemple inventé de la fiche).
 
     **Idée.** Si $t$ convient pour la navette 5, alors $t + 5$, $t + 10$… conviennent aussi : la condition est *périodique*. Si $t$ convient pour 5 *et* 7, alors $t + 35$, $t + 70$… conviennent encore pour les deux, puisque 35 est un multiple de 5 et de 7.
 
@@ -406,7 +410,7 @@ L’énoncé prévient que la réponse dépasse $10^{14}$ : tester tous les inst
 
     - navette 11 : on teste $5, 40, 75, 110, 145, 180, 215$ ; $215 + 5 = 220 = 11 \times 20$. Donc $t = 215$.
 
-    Il a suffi de 7 essais au lieu de 215. Pour chaque navette, on fait au plus « numéro » essais : quelques centaines en tout, même si $t$ dépasse $10^{14}$.
+    Il a suffi de $10$ essais en tout ($1 + 2 + 7$) au lieu de $215$. Pour chaque navette, on fait au plus « numéro » essais : quelques centaines en tout, même si $t$ dépasse $10^{14}$.
 
     **Pourquoi ça marche.** Les numéros des navettes sont premiers entre eux (ici ce sont même des nombres premiers) : en avançant de pas en pas, on finit toujours par satisfaire la nouvelle navette en moins de « numéro » essais. Si les numéros avaient un diviseur commun, il faudrait prendre leur PPCM.
 
@@ -432,7 +436,7 @@ L’énoncé prévient que la réponse dépasse $10^{14}$ : tester tous les inst
     print(inverse_mod(55, 7))          # 6 : 55 % 7 = 6, on se ramene au cas precedent
     ```
 
-    **Intérêt.** Au plus $m - 1$ essais : c’est instantané pour les numéros de navettes (quelques centaines). Pour les très grands nombres de RSA, on utilise plutôt l’algorithme d’Euclide étendu du cours, dont le nombre d’étapes est proportionnel au nombre de chiffres.
+    **Intérêt.** Au plus $m - 1$ essais : c’est instantané pour les numéros de navettes (quelques centaines). Pour les très grands nombres de RSA, on utilise plutôt l’algorithme d’Euclide étendu (TP du chapitre 10, partie D), dont le nombre d’étapes est proportionnel au nombre de chiffres.
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : la formule des restes chinois <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-aoc-2-7 }
 
@@ -440,13 +444,13 @@ L’énoncé prévient que la réponse dépasse $10^{14}$ : tester tous les inst
 
 **À quoi ça sert ?** On relie le défi au cours (inverse modulaire du chiffrement affine et de RSA) et l’on dispose d’une seconde méthode pour contrôler la réponse de la partie 2.
 
-La section précédente cite le théorème des restes chinois. Il donne aussi une **formule** : pour le système $t \,\%\, n_m = r_m$ ($m = 1, \dots, k$), avec des $n_m$ premiers entre eux deux à deux, on pose $N = n_1 \times \dots \times n_k$, $N_m = N / n_m$ et $y_m$ l’inverse de $N_m$ modulo $n_m$. Alors
+La section précédente cite le théorème des restes chinois. Il donne aussi une **formule** : pour le système $t \,\%\, n_j = r_j$ ($j = 1, \dots, k$), avec des $n_j$ premiers entre eux deux à deux, on pose $N = n_1 \times \dots \times n_k$, $N_j = N / n_j$ et $y_j$ l’inverse de $N_j$ modulo $n_j$. Alors
 
-$$t = \Big(\sum_{m} r_m \, N_m \, y_m\Big) \bmod N.$$
+$$t = \Big(\sum_{j} r_j \, N_j \, y_j\Big) \bmod N.$$
 
 1.  Recopier et exécuter le code de l’encadré. Que renvoie `inverse_mod(4, 6)` ? Pourquoi ?
 
-2.  Pour une navette de numéro $b$ en position $i$, quel reste $r$ doit avoir $t$ modulo $b$ ? Sur l’exemple du défi (`5,x,7,x,x,11`), calculer pour chaque navette $r_m$, $N_m$ et $y_m$, puis $t$. On doit retrouver `215`.
+2.  Pour une navette de numéro $b$ en position $i$, quel reste $r$ doit avoir $t$ modulo $b$ ? Sur l’exemple inventé de la fiche (`5,x,7,x,x,11`), calculer pour chaque navette $r_j$, $N_j$ et $y_j$, puis $t$. On doit retrouver `215`.
 
 3.  Vérifier sur l’exemple que le terme associé à la navette 7 est un multiple de 5 et de 11, et qu’il a le bon reste modulo 7. En déduire pourquoi la formule fonctionne.
 

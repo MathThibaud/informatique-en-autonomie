@@ -206,7 +206,7 @@
 
 ### Logique booléenne et portes logiques
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 7</span> — Évaluer des opérateurs booléens <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-7 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 7</span> — Évaluer des expressions booléennes <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-7 }
 
 <span class="essentiel">• essentiel</span>
 
@@ -257,7 +257,7 @@
 
 \[ à la main \] 
 
-1.  Dresser la table de vérité de non$(a$ et $b)$, puis celle de (non $a)$ ou (non $b)$. Que constate-t-on ? Comment dit-on de ces deux expressions ?
+1.  Dresser la table de vérité de non$(a$ et $b)$, puis celle de (non $a)$ ou (non $b)$. Que constate-t-on ? Comment qualifie-t-on ces deux expressions ?
 
 2.  Dresser la table de vérité de $(a$ et $b)$ ou $c$. Combien de lignes faut-il ? Pour combien d’entre elles l’expression vaut-elle `1` ?0
 
@@ -661,7 +661,7 @@ Quel résultat obtient-on ? Est-il exactement égal à `1.0` ? Relier cette obse
 
 1.  Quel est le code de `C` ? de `c` ? *(On rappelle : minuscule $=$ majuscule $+\,32$.)*
 
-2.  Quel caractère a pour code $90 - 25 = 65$ ? Quel caractère a pour code $57$ ?
+2.  Quel caractère se trouve 25 places avant `Z` dans la table ? Quel caractère a pour code $57$ ?
 
 3.  Écrire le code du caractère `A` ($65$) en binaire sur 7 bits.0
 
@@ -673,7 +673,7 @@ Quel résultat obtient-on ? Est-il exactement égal à `1.0` ? Relier cette obse
 
     1.  `C` $= 65 + 2 = 67$ ; `c` $= 67 + 32 = 99$.
 
-    2.  Le code $65$ est celui de `A` ; le code $57$ est celui de `9` (les chiffres vont de `0`${=}48$ à `9`${=}57$).
+    2.  25 places avant `Z` : code $90 - 25 = 65$, c’est celui de `A` ; le code $57$ est celui de `9` (les chiffres vont de `0`${=}48$ à `9`${=}57$).
 
     3.  $65 = 64 + 1 = \texttt{1000001}_2$ (sur 7 bits).
 

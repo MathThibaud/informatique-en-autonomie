@@ -10,7 +10,7 @@
 
 !!! consignes "Consignes"
 
-    - Pour chaque situation, on **dessine** d’abord, on répond ensuite, sur le cahier. Aucun mot de vocabulaire n’est attendu avant l’exercice 4 : c’est à vous de les inventer.
+    - Pour chaque situation, on **dessine** d’abord, on répond ensuite, sur le cahier. Aucun mot de vocabulaire n’est attendu avant l’exercice 4 : c’est à vous d’inventer ces mots.
 
 ### <span class="exo-num">Exercice 1</span> — Le tournoi <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-arbres-act-1-1 }
 
@@ -46,7 +46,7 @@ Sur l’ordinateur d’un élève : le dossier `Documents` contient les dossiers
 
 2.  Un camarade propose de tout ranger dans la liste `["Documents", "NSI", "Photos", "CV.pdf", "Cours", …]`. Quelle information perd-on ?
 
-3.  Combien de « marches » faut-il descendre pour aller de `Documents` à `jeu.py` ? Quel élément est le plus loin de `Documents` ?
+3.  Combien de « marches » faut-il descendre pour aller de `Documents` à `jeu.py` ? Quels éléments sont les plus loin de `Documents` ?
 
 4.  Quelle différence voyez-vous entre ce dessin et celui du tournoi, quant au nombre de traits qui partent d’un même élément vers le bas ?
 

@@ -18,6 +18,8 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -130,7 +132,7 @@ Construire la liste `programme` de tuples `(operation, argument)`, l’argument 
 
 **À quoi ça sert ?** C’est la réponse de la partie 1. Cet interpréteur est l’outil central du défi : la partie 2 le réutilise pour tester chaque réparation possible.
 
-Écrire une fonction `executer(programme)` qui simule la machine : une variable `acc`, une variable `ip` (numéro de l’instruction courante), et une boucle qui exécute une instruction par tour. La fonction s’arrête dès qu’une instruction s’apprête à être exécutée pour la deuxième fois et renvoie `acc`. Tester sur l’exemple du défi, puis sur vos données.
+Écrire une fonction `executer(programme)` qui simule la machine : une variable `acc`, une variable `ip` (numéro de l’instruction courante), et une boucle qui exécute une instruction par tour. La fonction s’arrête dès qu’une instruction s’apprête à être exécutée pour la deuxième fois et renvoie `acc`. Tester sur l’exemple inventé de la fiche (réponse `8`), puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -140,7 +142,7 @@ Construire la liste `programme` de tuples `(operation, argument)`, l’argument 
 
     Peut-on écrire un programme `arret(P, x)` qui dirait, pour **tout** programme `P` et toute entrée `x`, si `P` finit par s’arrêter sur `x` ? Turing a démontré en 1936 que non : ce problème est *indécidable*. On le prouve par l’absurde, en construisant un programme qui fait le contraire de ce que `arret` prédit pour lui-même.
 
-    Pourquoi la détection réussit-elle ici ? Parce que la machine de l’énigme a un état **fini** : l’état ne dépend que de `ip`, et l’accumulateur n’influence jamais la suite des instructions. Si une instruction revient, tout se répète à l’identique. Un programme quelconque peut, lui, utiliser une mémoire non bornée sans jamais repasser par le même état.
+    Pourquoi la détection réussit-elle ici ? Parce que la machine de l’énigme a un **nombre fini** d’états : l’état ne dépend que de `ip`, et l’accumulateur n’influence jamais la suite des instructions. Si une instruction revient, tout se répète à l’identique. Un programme quelconque peut, lui, utiliser une mémoire non bornée sans jamais repasser par le même état.
 
 ## Partie 2
 
@@ -184,7 +186,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 1.  Modifier `executer` pour qu’elle renvoie aussi un booléen indiquant si le programme s’est terminé normalement. Quelle condition sur `ip` signale une fin normale ?
 
-2.  Essayer toutes les modifications autorisées par l’énoncé, une à une, jusqu’à trouver celle qui fait terminer le programme. Sur l’exemple du défi, on doit obtenir `5`.
+2.  Essayer toutes les modifications autorisées par l’énoncé, une à une, jusqu’à trouver celle qui fait terminer le programme. Sur l’exemple inventé de la fiche, on doit obtenir `5`.
 
 ??? pouce "Coup de pouce"
 
@@ -216,7 +218,7 @@ Pour un programme de $n$ instructions, combien d’instructions la méthode pré
 
 On note $n$ le nombre de lignes et $\mathrm{succ}(k)$ la ligne exécutée juste après la ligne $k$ ; la valeur $n$ représente la fin du programme.
 
-1.  Sur l’exemple du défi, donner $\mathrm{succ}(k)$ pour $k$ de $0$ à $7$.
+1.  Sur l’exemple inventé de la fiche, donner $\mathrm{succ}(k)$ pour $k$ de $0$ à $7$.
 
 2.  Quelles lignes mènent, sans modification, jusqu’à la fin $8$ ? On les trouve en **remontant** les flèches depuis $8$.
 
@@ -247,6 +249,8 @@ On note $n$ le nombre de lignes et $\mathrm{succ}(k)$ la ligne exécutée juste 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/17 ](https://adventofcode.com/2020/day/17 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -340,7 +344,7 @@ Combien de cubes actifs au départ ? Compter les voisins actifs du cube central 
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -396,7 +400,7 @@ L’espace est infini : pas de liste de listes. Écrire une fonction `lire_actif
 
 **À quoi ça sert ?** C’est la simulation elle-même : six appels successifs donnent la réponse de la partie 1. La difficulté est de choisir les cubes à examiner, puisqu’on ne peut pas parcourir un espace infini.
 
-Écrire une fonction `cycle(actifs)` qui renvoie le **nouvel** ensemble des cubes actifs. Quels cubes faut-il examiner ? Pas seulement les cubes actifs : la zone active grandit à chaque cycle. Simuler six cycles sur l’exemple du défi, puis sur vos données.
+Écrire une fonction `cycle(actifs)` qui renvoie le **nouvel** ensemble des cubes actifs. Quels cubes faut-il examiner ? Pas seulement les cubes actifs : la zone active grandit à chaque cycle. Simuler six cycles sur l’exemple inventé de la fiche (on doit trouver `12` cubes actifs après un cycle et `138` après six cycles), puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -430,7 +434,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** Si les fonctions ont été bien découpées, la règle d’évolution ne dépend pas de la dimension : seules les fonctions qui fabriquent les points changent, et la réponse de la partie 2 s’obtient presque gratuitement.
 
-Combien de voisins un point a-t-il en dimension 4 ? Si votre code est bien écrit, peu de choses changent : adapter `lire_actifs` et `voisins`. Sur l’exemple du défi, on doit trouver `36` cubes actifs après un cycle et `680` après six cycles.
+Combien de voisins un point a-t-il en dimension 4 ? Si votre code est bien écrit, peu de choses changent : adapter `lire_actifs` et `voisins`. Sur l’exemple inventé de la fiche, on doit trouver `36` cubes actifs après un cycle et `680` après six cycles.
 
 ??? pouce "Coup de pouce"
 
@@ -442,7 +446,7 @@ Combien de voisins un point a-t-il en dimension 4 ? Si votre code est bien écri
 
 **À quoi ça sert ?** Plutôt que deux programmes presque identiques, un seul code résout les deux parties : c’est la généralisation, et elle permet aussi de mesurer comment le temps de calcul explose quand la dimension augmente.
 
-Écrire `voisins(point)` pour un tuple de longueur quelconque, sans écrire une boucle par dimension, et une fonction `simuler(grille, dimension, nb_cycles)` qui sert aux deux parties. Que donne la dimension 2 ? Et la dimension 5 sur l’exemple (mesurer le temps) ?
+Écrire `voisins(point)` pour un tuple de longueur quelconque, sans écrire une boucle par dimension, et une fonction `simuler(nom_fichier, dimension, nb_cycles)`, où `nom_fichier` est le nom du fichier de données, qui renvoie le nombre de cubes actifs après `nb_cycles` cycles et sert aux deux parties. Que donne la dimension 2 ? Et la dimension 5 sur l’exemple inventé de la fiche (mesurer le temps) ?
 
 ??? pouce "Coup de pouce"
 
@@ -472,4 +476,4 @@ On veut construire la liste des décalages par une fonction récursive, plutôt 
 
 3.  Vérifier qu’une fois le tuple nul retiré, on obtient les mêmes décalages qu’avec la méthode coordonnée par coordonnée en dimension 3 et 4, puis l’utiliser dans `simuler`.
 
-4.  Combien d’appels récursifs fait `decalages_rec(d)` ? Combien de voisins un point a-t-il en dimension 5 ?
+4.  Combien d’appels récursifs fait `decalages_rec(d)` si l’appel `decalages_rec(dimension - 1)` est placé dans la boucle, comme dans le coup de pouce ? Et si l’on range son résultat dans une variable avant la boucle ? Combien de voisins un point a-t-il en dimension 5 ?

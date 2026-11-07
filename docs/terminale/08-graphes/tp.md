@@ -10,7 +10,7 @@
 
 !!! encadre "But du projet"
 
-    **Projet** <span class="horsprog">au-delà du programme</span> : l’algorithme de Dijkstra n’est pas exigible au bac. Il prolonge le parcours en largeur du cours et éclaire le routage (protocole OSPF) du chapitre *Réseaux*. Comprendre, dérouler *à la main*, puis **programmer** l’algorithme de Dijkstra, qui calcule le plus court chemin dans un graphe **pondéré** (à poids positifs) — le cœur de tout GPS. <span class="run" title="À programmer et tester sur machine">▶</span>  signale ce qui est à programmer et tester. Un fichier `dijkstra_graphes.py` est **à télécharger** (lien ci-dessus) : les graphes y sont déjà saisis, avec la **trame** des fonctions à compléter (étapes 3 et 4) et des **tests** ; une fois vos fonctions écrites, il affiche les distances et les chemins pour vérifier vos calculs sans tout retaper.
+    **Projet** <span class="horsprog">au-delà du programme</span> : l’algorithme de Dijkstra n’est pas exigible au bac. Il prolonge le parcours en largeur du cours et éclaire le routage (protocole OSPF) du chapitre *Réseaux*. Comprendre, dérouler *à la main*, puis **programmer** l’algorithme de Dijkstra, qui calcule le plus court chemin dans un graphe **pondéré** (à poids positifs) — le cœur de tout GPS. <span class="run" title="À programmer et tester sur machine">▶</span>  signale ce qui est à programmer et tester. Un fichier `dijkstra_graphes.py` est **à télécharger** (lien ci-dessus) : les graphes y sont déjà saisis, avec la **trame** des fonctions à compléter (sections « Programmer l’algorithme » et « Dijkstra avec une matrice d’adjacence ») et des **tests** ; une fois vos fonctions écrites, il affiche les distances et les chemins pour vérifier vos calculs sans tout retaper.
 
 ## Le problème : et si les arêtes ont un coût ?
 
@@ -46,7 +46,7 @@ On part du sommet `depart` et on fait grandir, petit à petit, un « nuage » de
 
     Pour **retrouver le chemin** (et pas seulement sa longueur), on note au passage, pour chaque sommet, le **prédécesseur** par lequel on l’a amélioré. On remontera ensuite ces prédécesseurs de l’arrivée jusqu’au départ (exactement comme pour le plus court chemin en largeur).
 
-## Étape 1 — dérouler à la main
+## Dérouler à la main
 
 ### <span class="exo-num">Exercice 1</span> — Dérouler à la main { #ex-08-graphes-tp-1-1 }
 
@@ -95,7 +95,7 @@ On applique Dijkstra au graphe `G` ci-dessus, au départ de `A`. Recopier sur le
 
 3.  Donner le **plus court chemin** de `A` à `C`, et sa longueur. Comparer avec le trajet `A -- B -- C`.
 
-## Étape 2 — un graphe plus lourd
+## Un graphe plus lourd
 
 ### <span class="exo-num">Exercice 2</span> — Un graphe plus lourd { #ex-08-graphes-tp-1-2 }
 
@@ -153,13 +153,13 @@ Voici un graphe pondéré à **huit** sommets. On va dérouler Dijkstra au dépa
 
 1.  En déduire la distance minimale de `A` à chaque sommet, et un plus court chemin de `A` à `H`. Est-il unique ?
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span> **Vérification par l’ordinateur** (*après l’étape 3*). Dans le fichier `dijkstra_graphes.py` (fourni), le gros graphe est **déjà saisi** (variable `G_gros`). Quand vous aurez complété `dijkstra` et `chemin` dans ce fichier, exécutez-le et comparez l’affichage à votre tableau. Tout doit coïncider !
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> **Vérification par l’ordinateur** (*à faire après avoir complété `dijkstra` et `chemin`, section « Programmer l’algorithme »*). Dans le fichier `dijkstra_graphes.py` (fourni), le gros graphe est **déjà saisi** (variable `G_gros`). Quand vous aurez complété `dijkstra` et `chemin` dans ce fichier, exécutez-le et comparez l’affichage à votre tableau. Tout doit coïncider !
 
 !!! remarque "Remarque"
 
     Le graphe est saisi dans le fichier à partir de la **liste des arêtes** (`aretes`), et la fonction `construire_graphe` le transforme en dictionnaire : on évite ainsi de recopier à la main un long dictionnaire (et les erreurs qui vont avec).
 
-## Étape 3 — programmer l’algorithme
+## Programmer l’algorithme
 
 On représente le graphe pondéré par un **dictionnaire** : à chaque sommet, la liste de ses couples `(voisin, poids)`. Dans le fichier fourni, le graphe `G` du projet s’appelle `G_petit` :
 
@@ -211,7 +211,7 @@ def dijkstra(graphe, depart):
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Pour obtenir le **chemin** lui-même, écrire (dans le fichier, à la place de `# A COMPLETER`) la fonction `chemin(precedent, depart, arrivee)` qui reconstruit la liste des sommets, du départ à l’arrivée, en remontant les prédécesseurs (renvoyer `None` si l’arrivée n’a pas été atteinte). Vérifier que le chemin de `A` à `C` est bien celui trouvé à la main.
 
-## Étape 4 — Dijkstra avec une matrice d’adjacence
+## Dijkstra avec une matrice d’adjacence
 
 On peut tout aussi bien coder Dijkstra à partir d’une **matrice d’adjacence pondérée** `M` : `M[u][v]` contient le poids de l’arête `u`–`v`, et `0` s’il n’y a pas d’arête. Les sommets sont alors des **indices** $0, 1, 2, \dots$ L’algorithme est **le même** ; seule change la façon de lire les voisins : au lieu de parcourir une liste, on parcourt la **ligne `u`** de la matrice.
 
@@ -244,7 +244,7 @@ def dijkstra_matrice(M, depart):
 
 1.  Compléter les six trous `(a)` à `(f)`.
 
-2.  Repérer la seule vraie différence avec la version par listes : pour trouver les voisins de `u`, on cherche ici les indices `v` tels que `M[u][v] != 0`.
+2.  Quelle est la seule vraie différence avec la version par listes ? Montrer la ligne du code où elle apparaît.
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> Tester avec le fichier `dijkstra_graphes.py` fourni (la matrice du gros graphe y est déjà construite) et vérifier qu’on obtient **exactement** les mêmes distances que la version par listes.
 

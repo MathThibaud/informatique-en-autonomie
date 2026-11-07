@@ -32,7 +32,7 @@
 
     - Le paquet est mélangé puis distribué entièrement, une carte à chacun à tour de rôle : 16 cartes par joueur, en tas, faces cachées.
 
-    - À chaque **pli**, chaque joueur retourne la carte du dessus de son tas et la pose sur le **tapis**. La plus forte l’emporte : son propriétaire ramasse **tout le tapis** et le place **sous** son tas.
+    - À chaque **pli**, chaque joueur retourne la carte du dessus de son tas et la pose sur le **tapis**. La plus forte l’emporte : son propriétaire ramasse **tout le tapis** et le place **sous** son tas, dans l’ordre où les cartes ont été posées (à chaque tour, la carte du premier joueur avant celle du second, cartes cachées comprises).
 
     - En cas d’égalité, c’est la **bataille** : chacun pose une carte **face cachée**, puis on rejoue (une carte face visible chacun), et ainsi de suite jusqu’à départager. Le gagnant ramasse tout le tapis.
 
@@ -46,17 +46,27 @@ Avant d’écrire la moindre ligne, on fixe les classes, ce qu’elles savent (a
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Lire l’architecture <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-tp-1-1 }
 
-1.  Quelle classe crée des objets d’une autre classe dans son constructeur ? Lesquels ?
+1.  Quelles classes créent, dans leur constructeur, des objets d’une autre classe ? Lesquels ?
 
-2.  Pourquoi `nom` n’est-il pas privé, alors que `_main` l’est ? Donner une action interdite par les règles que l’encapsulation de `_main` rend plus difficile.
+2.  Pourquoi `nom` n’est-il pas privé, alors que `_main` l’est ? Donner un exemple de triche (une action contraire aux règles du jeu) que l’encapsulation de `_main` rend plus difficile.
 
-3.  Ada a pour tas `Dame de coeur, 9 de pique, Roi de trefle, 7 de coeur` (carte du dessus en premier) et Alan `8 de trefle, 9 de coeur, As de pique, 10 de carreau`. Jouer la partie **à la main** : écrire les deux tas après chaque pli. Qui gagne, et en combien de plis ?
+3.  Ada a pour tas `Dame de coeur, 9 de pique, Roi de trefle, 7 de coeur` (carte du dessus en premier) et Alan `8 de trefle, 9 de coeur, As de pique, 10 de carreau` ; Ada est le premier joueur. Jouer la partie **à la main** : écrire les deux tas après chaque pli. Qui gagne, et en combien de plis ?
 
 ## La classe `Carte`
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Une carte qui se présente <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-tp-1-2 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Dans `projet_poo_depart.py`, compléter la classe `Carte` (les listes `VALEURS`, de la plus faible à la plus forte, et `COULEURS` sont déjà définies en haut du fichier). Il faut écrire le constructeur (il lève `ValueError("carte inconnue")` avec `raise`, voir le cours, « Signaler une erreur », si la valeur n’est pas dans `VALEURS` ou la couleur pas dans `COULEURS`), les accesseurs `valeur()` et `couleur()`, la méthode `rang()` (position de la valeur dans `VALEURS` : $0$ pour un `7`, $7$ pour un `As`), et `__repr__` (le texte affiché quand on tape le nom de l’objet). On doit obtenir :
+<span class="run" title="À programmer et tester sur machine">▶</span> Dans `projet_poo_depart.py`, compléter la classe `Carte` (les listes `VALEURS`, de la plus faible à la plus forte, et `COULEURS` sont déjà définies en haut du fichier). Il faut écrire :
+
+- le constructeur, qui lève `ValueError("carte inconnue")` avec `raise` si la valeur n’est pas dans `VALEURS` ou la couleur pas dans `COULEURS` (voir le cours, « Signaler une erreur ») ;
+
+- les accesseurs `valeur()` et `couleur()` ;
+
+- la méthode `rang()`, qui renvoie la position de la valeur dans `VALEURS` : $0$ pour un `7`, $7$ pour un `As` ;
+
+- `__repr__`, qui renvoie le texte affiché quand on tape le nom de l’objet.
+
+On doit obtenir :
 
 ```text
 >>> c = Carte("Roi", "coeur")
@@ -94,7 +104,7 @@ Le cours a signalé qu’il existe d’autres méthodes spéciales, qui permette
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Le paquet <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-programmation-orientee-objet-et-paradigm-tp-1-4 }
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire le constructeur : il fabrique les 32 cartes (une par couple valeur/couleur) dans l’attribut privé `_cartes`, une liste de `Carte`, avec deux boucles `for` imbriquées (une sur les couleurs, une sur les valeurs). *Pour les plus à l’aise :* le réécrire ensuite en **une ligne**, avec une liste en compréhension à deux boucles `for`.
+1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire le constructeur : il fabrique les 32 cartes (une par couple valeur/couleur) dans l’attribut privé `_cartes`, une liste de `Carte`, avec deux boucles `for` imbriquées : la boucle **extérieure** sur les couleurs (`COULEURS`), la boucle **intérieure** sur les valeurs (`VALEURS`). Cet ordre est imposé : les tests avec graine en dépendent. *Pour les plus à l’aise :* le réécrire ensuite en **une ligne**, avec une liste en compréhension à deux boucles `for`.
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `taille()`, puis la méthode `melanger(graine=None)` (paramètre par défaut : voir le chapitre *Récursivité*). Si une graine est donnée, elle appelle d’abord `random.seed(graine)` ; dans tous les cas, elle mélange ensuite les cartes avec la fonction `random.shuffle`. (Le module `random` est déjà importé.) À quoi sert la graine quand on veut tester le programme ?
 
@@ -106,7 +116,7 @@ La main est une liste de cartes dont la carte **du dessus** est au **début**.
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire le constructeur, `nb_cartes()`, `a_perdu()`, `jouer_carte()` (retire et renvoie la carte du dessus) et `ramasser(cartes)` (ajoute les cartes reçues, dans l’ordre, **à la fin** de la main, c’est-à-dire sous le tas). Le constructeur reçoit le nom et la liste des cartes de départ.
 
-2.  Le test de la partie 3 ajoute une carte à la liste `cartes` **après** avoir créé le joueur, et vérifie que la main d’Ada n’a pas changé. Parmi les deux écritures suivantes, laquelle faut-il donc mettre dans le constructeur : `self._main = cartes`, ou bien `self._main = [c for c in cartes]` ? Expliquer ce qui différencie les deux.
+2.  Le test « Partie 3 : Joueur » du fichier `projet_poo_depart.py` ajoute une carte à la liste `cartes` **après** avoir créé le joueur, et vérifie que la main d’Ada n’a pas changé. Parmi les deux écritures suivantes, laquelle faut-il donc mettre dans le constructeur : `self._main = cartes`, ou bien `self._main = [c for c in cartes]` ? Expliquer ce qui différencie les deux.
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `nb_cartes_de(valeur)` en **une ligne**, avec une **liste en compréhension** : on garde les cartes de `self._main` dont la valeur est celle cherchée, et on compte le résultat avec `len(...)`. Pourquoi cette méthode est-elle nécessaire pour compter les As d’un joueur depuis l’extérieur de la classe ?
 
@@ -153,9 +163,9 @@ Le constructeur de `Partie` est fourni : il crée un paquet, le mélange, le dis
 
     Le programme annonce-t-il le même vainqueur et le même nombre de plis que votre trace ? Sinon, qui a tort : la trace ou le programme ?
 
-3.  Le test de la partie 4 vérifie qu’en fin de partie les deux joueurs ont **32 cartes au total**. Pourquoi cette propriété (un **invariant**, c’est-à-dire une propriété qui reste vraie tout au long du programme) doit-elle être vraie à la fin de chaque pli ? Donner une erreur de programmation dans `jouer_pli` qui la ferait échouer.
+3.  Le test « Partie 4 : jouer » du fichier vérifie qu’en fin de partie les deux joueurs ont **32 cartes au total**. Pourquoi cette propriété (un **invariant**, c’est-à-dire une propriété qui reste vraie tout au long du programme) doit-elle être vraie à la fin de chaque pli ? Donner une erreur de programmation dans `jouer_pli` qui la ferait échouer.
 
-4.  <span class="run" title="À programmer et tester sur machine">▶</span> Cette fois on joue une partie « pour de vrai » : `Partie("Ada", "Alan", 2026)` mélange le paquet de façon **reproductible** (la graine `2026` fixe le mélange : tout le monde obtient la même distribution) et distribue 16 cartes à chacun. Créer cette partie, la jouer avec `jouer()` et indiquer le vainqueur et le nombre de plis (`nb_plis`). Le test de la partie 4 attend `"Alan"` et 106 plis.
+4.  <span class="run" title="À programmer et tester sur machine">▶</span> Cette fois on joue une partie « pour de vrai » : `Partie("Ada", "Alan", 2026)` mélange le paquet de façon **reproductible** (la graine `2026` fixe le mélange : tout le monde obtient la même distribution) et distribue 16 cartes à chacun. Créer cette partie, la jouer avec `jouer()` et indiquer le vainqueur et le nombre de plis (`nb_plis`). Le test « Partie 4 : jouer » attend `"Alan"` et 106 plis.
 
 ## Mille parties : des statistiques en style fonctionnel
 
@@ -186,7 +196,11 @@ On joue mille parties (graines 0 à 999) et on garde leurs résumés : `res = [r
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Avec une liste en compréhension, extraire de `finies` la liste des nombres de plis, puis en calculer la **durée moyenne** (écrire une fonction `moyenne(tab)` qui additionne les valeurs dans un accumulateur, puis divise par `len(tab)`).
 
-3.  On veut maintenant les graines des **trois** parties finies les plus longues, et celle de la plus courte. Ici, une compréhension ne suffit plus : on ne filtre ni ne transforme `finies`, on le **classe** selon le nombre de plis de chaque partie. `sorted` accepte pour cela un paramètre `key` : une fonction qui, à partir d’un résumé `r`, renvoie la valeur à comparer. <span class="run" title="À programmer et tester sur machine">▶</span> Écrire cette fonction avec un `lambda` (`lambda r: r["plis"]` se lit « la fonction qui, à `r`, associe `r["plis"]` » ; c’est l’équivalent, pour un usage unique, de `def cle(r): return r["plis"]`), puis afficher, sous la forme (graine, nombre de plis), les trois parties les plus longues avec `sorted(finies, key=..., reverse=True)[:3]`. Pour la plus courte, parcourir `finies` en retenant le résumé qui a le moins de plis (recherche du minimum, comme en Première).
+3.  On veut maintenant les graines des **trois** parties finies les plus longues, et celle de la plus courte.
+
+    1.  Les trois plus longues. Ici, une compréhension ne suffit plus : on ne filtre ni ne transforme `finies`, on le **classe** selon le nombre de plis de chaque partie. `sorted` accepte pour cela un paramètre `key` : une fonction qui, à partir d’un résumé `r`, renvoie la valeur à comparer. Cette fonction s’écrit avec un `lambda` : `lambda r: r["plis"]` se lit « la fonction qui, à `r`, associe `r["plis"]` » ; c’est l’équivalent, pour un usage unique, de `def cle(r): return r["plis"]`. <span class="run" title="À programmer et tester sur machine">▶</span> Afficher, sous la forme (graine, nombre de plis), les trois parties les plus longues avec `sorted(finies, key=..., reverse=True)[:3]`.
+
+    2.  La plus courte. <span class="run" title="À programmer et tester sur machine">▶</span> Parcourir `finies` en retenant le résumé qui a le moins de plis (recherche du minimum, comme en Première), puis afficher sa graine et son nombre de plis.
 
 4.  <span class="run" title="À programmer et tester sur machine">▶</span> Recopier et compléter le tableau suivant : pour chaque nombre $k$ d’As d’Ada au départ (clé `"as_ada"`), le nombre de parties finies avec ce $k$ et le pourcentage d’entre elles gagnées par Ada (arrondi à l’unité à l’affichage, avec une f-string : `f"{p:.0f}"`). Pour chaque $k$, on construit par compréhension le groupe des parties finies correspondantes, puis le sous-groupe gagné par Ada. Conclure : avoir des As aide-t-il ? Peut-on se fier aux pourcentages de tous les groupes ?
 

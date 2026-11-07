@@ -323,7 +323,7 @@ for mot in mots:
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — La position du champion <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-10 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `indice_du_min(t)` qui renvoie l’indice du plus petit élément (le premier en cas d’égalité).
+<span class="run" title="À programmer et tester sur machine">▶</span> Écrire `indice_du_min(t)` qui renvoie l’indice du plus petit élément d’un tableau **non vide** (le premier en cas d’égalité).
 
 ??? pouce "Coup de pouce"
 
@@ -501,7 +501,7 @@ En suivant la méthode du cours, **démontrer** que $P$ est un invariant :
 
 2.  **Hérédité** : en supposant $P$ vraie avant un tour, montrer qu’elle l’est encore après (distinguer les cas `x > 0` et `x <= 0`).
 
-3.  **Conclusion** : expliquer pourquoi la fonction renvoie bien le nombre d’éléments positifs du tableau entier.
+3.  **Conclusion** : expliquer pourquoi la fonction renvoie bien le nombre d’éléments **strictement** positifs du tableau entier.
 
 ??? pouce "Coup de pouce"
 
@@ -692,11 +692,11 @@ C’est **l’exercice central** du chapitre. La variance <span class="horsprog"
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Un tableau `temperatures` donne la température de chaque jour du mois.
 
-1.  `jour_le_plus_chaud(temperatures)` : l’**indice** (le numéro du jour, à partir de 0) du maximum.
+1.  `jour_le_plus_chaud(temperatures)` : l’**indice** (le numéro du jour, à partir de 0) du maximum (le premier en cas d’égalité).
 
 2.  `nb_jours_gel(temperatures)` : le nombre de jours où la température a été strictement négative.
 
-3.  `plus_longue_serie_chaude(temperatures, seuil)` : la longueur de la plus longue série *consécutive* de jours au-dessus de `seuil`. <span class="horsprog">au-delà du programme</span>
+3.  `plus_longue_serie_chaude(temperatures, seuil)` : la longueur de la plus longue série *consécutive* de jours dont la température est **strictement supérieure** à `seuil`. <span class="horsprog">au-delà du programme</span>
 
 ??? pouce "Coup de pouce"
 

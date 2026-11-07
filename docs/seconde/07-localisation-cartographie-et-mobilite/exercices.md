@@ -140,7 +140,7 @@
 
 1.  À quelle **distance** (en km) le récepteur se trouve-t-il de ce satellite ?
 
-2.  Que devrait mesurer le récepteur pour calculer ce temps de trajet ?
+2.  Quelles informations le récepteur doit-il connaître pour calculer ce temps de trajet ?
 
 ??? pouce "Coup de pouce"
 
@@ -150,7 +150,7 @@
 
     1.  $d = c \times t = 300\,000 \times 0{,}06 = \mathbf{18\,000}$ km.
 
-    2.  Il doit mesurer le **temps de trajet** : comparer l’heure d’*envoi* (contenue dans le message) à l’heure de *réception* — d’où le besoin d’une horloge précise.
+    2.  Il doit connaître l’heure d’*envoi* (contenue dans le message du satellite) et l’heure de *réception* (lue sur sa propre horloge) : leur différence donne le **temps de trajet** — d’où le besoin d’une horloge précise.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — La précision des horloges <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-6 }
 
@@ -236,7 +236,7 @@ $GPGGA,142012,4342.054,N,00716.098,E,1,06,1.2,10.0,M,,,,*20
 
 ??? pouce "Coup de pouce"
 
-    Les informations sont séparées par des virgules, toujours dans le même ordre : heure, latitude, N/S, longitude, E/O, …, nombre de satellites. Relisez le tableau de la trame dans le cours.
+    Les informations sont séparées par des virgules, toujours dans le même ordre : heure, latitude, N/S, longitude, E/W (W pour *West*, ouest), …, nombre de satellites. Relisez le tableau de la trame dans le cours.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -437,7 +437,7 @@ $GPGGA,142012,4342.054,N,00716.098,E,1,06,1.2,10.0,M,,,,*20
 
 <span class="tag">sur machine</span>  En Python (Spyder ou Basthon). Un récepteur GPS donne ses positions en degrés-minutes, alors qu’une carte en ligne les attend en degrés décimaux : programmons la conversion du cours.
 
-1.  Écrire une fonction `en_decimal(degres, minutes)` qui renvoie la valeur en degrés décimaux. La tester : `en_decimal(45, 30)` doit renvoyer `45.5`, et `en_decimal(43, 44.304)` la latitude de Monaco.
+1.  Écrire une fonction `en_decimal(degres, minutes)` qui renvoie la valeur en degrés décimaux. La tester : `en_decimal(45, 30)` doit renvoyer `45.5`, et `en_decimal(43, 44.304)` la latitude de Monaco (environ `43.7384`).
 
 2.  Dans une trame, le sens est donné par une lettre : `N` ou `S` pour la latitude, `E` ou `W` (*West*, ouest) pour la longitude. Compléter la fonction suivante, qui renvoie une coordonnée **négative** au sud et à l’ouest :
 

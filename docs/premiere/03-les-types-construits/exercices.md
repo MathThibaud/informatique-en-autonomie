@@ -190,7 +190,7 @@ Que valent `t`, `x` et `n` à la fin ?
 
 <span class="essentiel">• essentiel</span>
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Écrire, **sans** utiliser les fonctions `sum`, `max`, `min`, les fonctions suivantes (tableau de nombres non vide) :
+<span class="run" title="À programmer et tester sur machine">▶</span> Pour un tableau `t` de nombres non vide, écrire les fonctions suivantes **sans** utiliser `sum`, `max` ni `min` :
 
 1.  `somme(t)` : la somme des éléments ;
 
@@ -440,7 +440,7 @@ for x in [5, -2, 7, -8, 3]:        for mot in ["le", "chat", "dort"]:
     r = [mot[0] for mot in ["le", "chat", "dort"]]   # (b) -> ['l', 'c', 'd']
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Nettoyer une phrase <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-16 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Les voyelles d’une phrase <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-16 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> À l’aide d’une compréhension, écrire `voyelles(phrase)` qui renvoie le tableau des voyelles de `phrase` (minuscules ou majuscules), dans l’ordre. Puis en déduire `nb_voyelles(phrase)`.
 
@@ -636,7 +636,7 @@ Une image en niveaux de gris est une matrice d’entiers de `0` à `255`.
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> `negatif(image)` : **modifie** l’image en remplaçant chaque pixel `p` par `255 - p`.
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span> `symetrie_horizontale(image)` : renvoie une **nouvelle** image, miroir gauche-droite (chaque ligne est renversée).
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> `miroir_gauche_droite(image)` : renvoie une **nouvelle** image, miroir gauche-droite, c’est-à-dire symétrique par rapport à un axe vertical (chaque ligne est renversée).
 
 ??? pouce "Coup de pouce"
 
@@ -656,7 +656,7 @@ Une image en niveaux de gris est une matrice d’entiers de `0` à `255`.
             for j in range(len(image[0])):
                 image[i][j] = 255 - image[i][j]
 
-    def symetrie_horizontale(image):        # renvoie une NOUVELLE image
+    def miroir_gauche_droite(image):        # renvoie une NOUVELLE image
         nouvelle = []
         for ligne in image:
             p = len(ligne)
@@ -829,7 +829,7 @@ def compter_votes(votes):
 
     Si deux clés partageaient la même valeur, cette valeur deviendrait une **clé unique** dans le résultat : la seconde écraserait la première, et une information serait perdue.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 27</span> — Un mini-annuaire à clés composées <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-27 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 27</span> — Un relevé de notes à clés composées <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-27 }
 
 <span class="duree">≈ 15 min</span>
 
@@ -843,7 +843,7 @@ releve = {("Ada", "NSI"): 18, ("Ada", "Maths"): 15, ("Léo", "NSI"): 12}
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `moyenne_eleve(releve, eleve)` qui renvoie la moyenne d’un élève sur toutes ses matières.
 
-3.  **Pourquoi** la clé est-elle un p-uplet et non un tableau ? (une phrase, fil rouge)
+3.  **Pourquoi** la clé est-elle un p-uplet et non un tableau ? Répondre en une phrase, avec le vocabulaire du fil rouge du chapitre.
 
 ??? pouce "Coup de pouce"
 
@@ -1028,7 +1028,7 @@ prix   = {"pomme": 0.5, "pain": 1.2, "lait": 0.9}
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> `ajouter(panier, produit, q)` : ajoute `q` unités (cumule si le produit y est déjà).
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span> `article_le_plus_cher(panier, prix)` : le nom du produit du panier dont le *sous-total* est le plus élevé.
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> `produit_plus_gros_sous_total(panier, prix)` : le nom du produit du panier dont le *sous-total* est le plus élevé.
 
 ??? pouce "Coup de pouce"
 
@@ -1055,7 +1055,7 @@ prix   = {"pomme": 0.5, "pain": 1.2, "lait": 0.9}
         else:
             panier[produit] = q
 
-    def article_le_plus_cher(panier, prix):
+    def produit_plus_gros_sous_total(panier, prix):
         champion = None
         meilleur_sous_total = -1
         for produit, q in panier.items():

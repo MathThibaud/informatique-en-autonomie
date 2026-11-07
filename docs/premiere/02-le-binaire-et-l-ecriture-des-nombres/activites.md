@@ -75,7 +75,7 @@ Dans un ordinateur, il n’y a pas de cartes, mais des milliards de minuscules *
 
 2.  Pourquoi est-il plus sûr de n’utiliser que **deux** états (allumé / éteint) plutôt que dix niveaux de luminosité différents ?
 
-3.  **Mettre des mots.** Recopier et compléter sur le cahier : « Chaque carte ne peut valoir que …… états. Les points des cartes sont les puissances de …… : 1, 2, 4, 8, 16… Avec $n$ cartes, on représente …… nombres différents, de 0 à ……. Écrire un nombre avec des `0` et des `1`, c’est l’écrire en ……. »
+3.  **Mettre des mots.** Recopier et compléter sur le cahier : « Chaque carte n’a que …… états possibles. Les points des cartes sont les puissances de …… : 1, 2, 4, 8, 16… Avec $n$ cartes, on représente …… nombres différents, de 0 à ……. Écrire un nombre avec des `0` et des `1`, c’est l’écrire en ……. »
 
 ??? corrige "Corrigé"
 

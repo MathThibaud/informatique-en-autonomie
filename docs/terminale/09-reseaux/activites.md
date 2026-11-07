@@ -10,7 +10,7 @@
 
 !!! consignes "Consignes"
 
-    - On suit les paquets du doigt sur le plan, on compte, on corrige des tableaux. Les réponses s’écrivent sur le cahier. Aucun mot de vocabulaire n’est attendu avant la partie 5. Variante : en jeu de rôle avec toute la classe, si le professeur le propose.
+    - On suit les paquets du doigt sur le plan, on compte, on corrige des tableaux. Les réponses s’écrivent sur le cahier. Aucun mot de vocabulaire n’est attendu avant l’exercice 5.
 
 ### <span class="exo-num">Exercice 1</span> — Découper le message <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-09-reseaux-act-1-1 }
 

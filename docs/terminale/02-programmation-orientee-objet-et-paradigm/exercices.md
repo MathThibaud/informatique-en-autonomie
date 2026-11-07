@@ -481,7 +481,11 @@ c.solde = c.solde - 500     # le solde devient negatif !
 print(c.solde)
 ```
 
-<span class="run" title="À programmer et tester sur machine">▶</span> **1.** Expliquer pourquoi manipuler `c.solde` directement est une mauvaise pratique. **2.** Réécrire la classe `Compte` en **encapsulant** le solde (attribut `_solde`) et en fournissant une méthode `retirer(self, montant)` qui **refuse** un retrait rendant le solde négatif (elle renvoie `True` si le retrait a eu lieu, `False` sinon) et une méthode `solde(self)` qui renvoie le solde.
+<span class="run" title="À programmer et tester sur machine">▶</span> **1.** Expliquer pourquoi manipuler `c.solde` directement est une mauvaise pratique. **2.** Réécrire la classe `Compte` en **encapsulant** le solde (attribut `_solde`) et en fournissant deux méthodes :
+
+- `retirer(self, montant)` : effectue le retrait seulement s’il ne rend pas le solde négatif ; renvoie `True` si le retrait a eu lieu, `False` sinon ;
+
+- `solde(self)` : renvoie le solde.
 
 ??? pouce "Coup de pouce"
 
@@ -520,11 +524,11 @@ print(c.solde)
 
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une classe `Fraction` représentant un nombre rationnel par un `numerateur` et un `denominateur`.
 
-- La fraction sera **automatiquement simplifiée** à la création (diviser numérateur et dénominateur par leur PGCD).
+- Le constructeur **simplifie automatiquement** la fraction (il divise numérateur et dénominateur par leur PGCD).
 
-- Une méthode `__repr__(self)` pour que la fraction s’affiche sous la forme `3/4` rien qu’en tapant son nom dans la console.
+- `__repr__(self)` renvoie le texte `3/4` (par exemple), pour que la fraction s’affiche rien qu’en tapant son nom dans la console.
 
-- Une méthode `fois(self, autre)` renvoie une **nouvelle** `Fraction` produit des deux (sans modifier ni `self` ni `autre` : dans l’esprit fonctionnel).
+- `fois(self, autre)` renvoie une **nouvelle** `Fraction`, produit des deux (sans modifier ni `self` ni `autre` : dans l’esprit fonctionnel).
 
   ??? pouce "Coup de pouce"
 
@@ -896,7 +900,7 @@ class Date:
 
         Additionner `nb_jours_par_mois[i]` pour les mois **précédant** `self.mois` (le mois de janvier a l’indice `0`), ajouter `self.jour`, puis `1` si l’année est bissextile **et** que la date est après février.
 
-6.  <span class="run" title="À programmer et tester sur machine">▶</span> En déduire la méthode `nb_jours_restants(self)` qui renvoie le nombre de jours restant jusqu’à la fin de l’année. *(Une année compte 365 jours, ou 366 si elle est bissextile.)*
+6.  <span class="run" title="À programmer et tester sur machine">▶</span> En déduire la méthode `nb_jours_restants(self)` qui renvoie le nombre de jours restant jusqu’à la fin de l’année, **sans compter** le jour de la date (le 31 décembre, il en reste 0). *(Une année compte 365 jours, ou 366 si elle est bissextile.)*
 
 ??? corrige "Corrigé"
 
@@ -1054,16 +1058,18 @@ L’entreprise tente d’optimiser, à l’aide d’un algorithme **glouton**, l
 def tri_decroissant(liste):
     n = len(liste)
     for i in range(n - 1):
-        min_pos = i
+        max_pos = i
         for j in range(i + 1, n):
-            if liste[j].poids > liste[min_pos].poids:
-                min_pos = j
+            if liste[j].poids > liste[max_pos].poids:
+                max_pos = j
         # Echanger les elements
         temp = liste[i]
-        liste[i] = liste[min_pos]
-        liste[min_pos] = temp
+        liste[i] = liste[max_pos]
+        liste[max_pos] = temp
     return liste
 ```
+
+*(Le sujet officiel nomme cette variable `min_pos`, nom trompeur ici : elle est renommée `max_pos`.)*
 
 1.  Donner le nom du tri utilisé dans `tri_decroissant`, ainsi que son coût dans le pire des cas.
 
@@ -1186,7 +1192,7 @@ Figure 1. Une partie gagnée par le joueur blanc (numéros des lignes à gauche,
 
 Dans cet exercice, on programme la grille de jeu et le calcul de son **score**. La suite du sujet (l’algorithme **min-max**, qui explore un **arbre** de coups) sera traitée au chapitre *Arbres*.
 
-Les deux joueurs sont notés 1 et 2. L’unique attribut d’une instance de la classe `Grille` est un tableau `grille` de 6 lignes et 7 colonnes (liste de listes) contenant des entiers : `0` pour une case vide, `1` (resp. `2`) pour un pion du joueur 1 (resp. 2). Les lignes et les colonnes sont numérotées comme sur la figure 1 (ligne 0 en haut).
+Dans la suite, les deux joueurs sont notés 1 et 2 (la couleur des pions ne sert plus). L’unique attribut d’une instance de la classe `Grille` est un tableau `grille` de 6 lignes et 7 colonnes (liste de listes) contenant des entiers : `0` pour une case vide, `1` (resp. `2`) pour un pion du joueur 1 (resp. 2). Les lignes et les colonnes sont numérotées comme sur la figure 1 (ligne 0 en haut).
 
 1.  Écrire la méthode `__init__(self)` de la classe `Grille` qui définit l’attribut `grille` comme un tableau rempli de `0`.
 
@@ -1225,7 +1231,7 @@ Figure 2. Les alignements contenant la case `(0, 1)` (marquée d’un point blan
 
 Le **score** d’une grille s’obtient en **additionnant** les valeurs de toutes les cases occupées par un pion du joueur 2 et en **soustrayant** les valeurs de toutes les cases occupées par un pion du joueur 1 (la valeur d’une case étant donnée par `valeur_case`).
 
-1.  Donner le score de la grille `jeu1` de la question 3, en expliquant le calcul.
+1.  Donner le score de la grille `jeu1` de la question 3 : déterminer à la main, comme sur la figure 2, la valeur de chacune des trois cases occupées, puis faire le calcul.
 
 2.  Écrire la méthode `score(self)` qui renvoie le score de la grille représentée par l’objet.
 

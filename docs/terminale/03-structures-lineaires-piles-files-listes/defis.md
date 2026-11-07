@@ -18,13 +18,15 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
 !!! encadre "Le défi en bref"
 
-    **Le problème.** Le fichier contient plusieurs centaines de calculs avec des additions, des multiplications et des parenthèses imbriquées, mais les règles de priorité ne sont pas les règles habituelles. On veut la somme de tous les résultats. Python ne peut pas faire le calcul à notre place (il applique ses propres priorités) : il faut écrire nous-mêmes un programme qui **évalue** une expression.
+    **Le problème.** Le fichier contient plusieurs centaines de calculs avec des additions, des multiplications et des parenthèses imbriquées, mais les règles de priorité ne sont pas les règles habituelles. On veut la somme de tous les résultats. Python ne peut pas faire le calcul à notre place (il applique ses propres priorités) : il faut écrire soi-même un programme qui **évalue** une expression.
 
     **Ce qu’on réinvestit.** Les **piles** vues dans ce chapitre. Comme pour la vérification d’un parenthésage, une pile permet de traiter les parenthèses imbriquées : à chaque parenthèse ouvrante, on met de côté le calcul en cours (on l’empile) pour calculer l’intérieur, et à la parenthèse fermante on le reprend (on le dépile). La récursivité, qui utilise en coulisse la pile des appels, offre une autre solution.
 
@@ -128,7 +130,7 @@ Calculer chaque ligne avec la règle de l’énoncé, en écrivant les étapes c
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -180,7 +182,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** Le découpage et le traitement des parenthèses restent valables ; il suffit de changer la façon de combiner les opérations. Une méthode bien choisie (gare de triage avec une table de priorités) résout même les deux parties avec le même code.
 
-Seule la priorité entre `+` et `*` change. Adapter le programme. Sur l’exemple du défi, on doit trouver les valeurs `33`, `50` et `135`, de somme `218`.
+Seule la priorité entre `+` et `*` change. Adapter le programme. Sur l’exemple inventé de la fiche, on doit trouver les valeurs `33`, `50` et `135`, de somme `218`.
 
 ??? pouce "Coup de pouce"
 
@@ -264,6 +266,8 @@ En **notation postfixe** (ou « polonaise inverse »), on écrit chaque opérate
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -340,7 +344,7 @@ On part de l’étiquetage (inventé) `527164839`. Jouer le premier coup à la m
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -381,7 +385,7 @@ On part de l’étiquetage (inventé) `527164839`. Jouer le premier coup à la m
 
 **À quoi ça sert ?** C’est la réponse de la partie 1. Cette version simple servira ensuite de référence pour vérifier la version rapide de la partie 2.
 
-Écrire une fonction `jouer(gobelets, nb_coups)` qui simule le jeu sur une liste Python d’entiers, puis une fonction qui renvoie la réponse sous forme de chaîne. Sur l’exemple du défi, on doit obtenir `53269478` après 10 coups et `98357642` après 100 coups.
+Écrire une fonction `jouer(gobelets, nb_coups)` qui simule le jeu sur une liste Python d’entiers et renvoie la liste des gobelets après `nb_coups` coups, puis une fonction `reponse(gobelets)` qui renvoie la chaîne des étiquettes lues après le gobelet 1. Sur l’exemple inventé de la fiche, on doit obtenir `53269478` après 10 coups et `98357642` après 100 coups.
 
 ??? pouce "Coup de pouce"
 
@@ -423,7 +427,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** Un coup devient une opération en temps constant : dix millions de coups deviennent faisables en quelques secondes, ce qui donne la réponse de la partie 2. Vérifier d’abord les résultats de la partie 1 garantit que la nouvelle version applique bien la même règle.
 
-Réécrire la simulation avec un **tableau des successeurs** (lire l’encadré), vérifier qu’elle redonne les résultats de la partie 1, puis répondre à la partie 2. Sur l’exemple du défi, on doit trouver `28997820592`. Le calcul peut prendre une dizaine de secondes.
+Réécrire la simulation avec un **tableau des successeurs** (lire l’encadré), vérifier qu’elle redonne les résultats de la partie 1, puis répondre à la partie 2. Sur l’exemple inventé de la fiche, on doit trouver `28997820592`. Le calcul peut prendre une dizaine de secondes.
 
 ??? pouce "Coup de pouce"
 
@@ -435,7 +439,7 @@ Réécrire la simulation avec un **tableau des successeurs** (lire l’encadré)
 
 !!! encadre "Le tableau des successeurs"
 
-    Une **liste chaînée** n’a pas besoin d’objets `Maillon` : comme les étiquettes sont les entiers de $1$ à $n$, on peut ranger dans une liste `suivant` de taille $n + 1$ l’étiquette qui suit chaque gobelet dans le cercle : `suivant[x]` est le gobelet juste après `x` (la case `0` ne sert pas). Pour le cercle `3 1 2` : `suivant[3] = 1`, `suivant[1] = 2` et `suivant[2] = 3` (le dernier pointe vers le premier : la liste est *circulaire*).
+    Une **liste chaînée** n’a pas besoin d’objets `Cellule` (la classe du cours) : comme les étiquettes sont les entiers de $1$ à $n$, on peut ranger dans une liste `suivant` de taille $n + 1$ l’étiquette qui suit chaque gobelet dans le cercle : `suivant[x]` est le gobelet juste après `x` (la case `0` ne sert pas). Pour le cercle `3 1 2` : `suivant[3] = 1`, `suivant[1] = 2` et `suivant[2] = 3` (le dernier pointe vers le premier : la liste est *circulaire*).
 
     **Avantages.** Trouver le gobelet d’étiquette `x` ne demande aucune recherche : c’est la case `x`. Retirer ou insérer un morceau de la chaîne revient à modifier quelques cases, sans décaler les autres éléments. Un coup se fait donc en temps constant, $O(1)$, quel que soit $n$.
 

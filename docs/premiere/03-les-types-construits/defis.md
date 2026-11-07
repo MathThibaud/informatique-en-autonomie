@@ -18,6 +18,8 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -98,7 +100,7 @@ On considère le fichier (inventé) suivant :
 10101
 ```
 
-Pour chaque colonne, compter les `1` et les `0`. Écrire le *gamma rate* et l’*epsilon rate* en binaire, puis les convertir en base 10 à la main (poids $16, 8, 4, 2, 1$). Vérification : on doit obtenir $20$ et $11$, et la réponse `220`.
+Pour chaque colonne, compter les `1` et les `0`. Écrire $\gamma$ et $\varepsilon$ en binaire, puis les convertir en base 10 à la main (poids $16, 8, 4, 2, 1$). Vérification : on doit obtenir $20$ et $11$, et la réponse `220`.
 
 ## Programmer la partie 1
 
@@ -110,7 +112,7 @@ Pour chaque colonne, compter les `1` et les `0`. Écrire le *gamma rate* et l’
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans le fichier (avec `for ligne in fichier:`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -141,7 +143,7 @@ Construire la liste `nombres` des lignes, **gardées sous forme de chaînes** : 
 
 **À quoi ça sert ?** Connaissant le nombre de `1` d’une colonne, on en déduit le nombre de `0` et donc le bit le plus fréquent : c’est l’outil qui sert à construire $\gamma$ et $\varepsilon$, puis à chaque étape de la partie 2.
 
-Écrire une fonction `nb_uns(nombres, k)` qui renvoie le nombre de lignes dont le bit d’indice `k` vaut `"1"`. Sur l’exemple, `nb_uns(nombres, 0)` vaut `5`.
+Écrire une fonction `nb_uns(nombres, k)` qui renvoie le nombre de lignes dont le bit d’indice `k` vaut `"1"`. Sur l’exemple inventé de la fiche, `nb_uns(nombres, 0)` vaut `5`.
 
 ??? pouce "Coup de pouce"
 
@@ -206,7 +208,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** Le filtrage, répété, donne chacune des deux valeurs de la partie 2. On réutilise la fonction de comptage de la partie 1 (sur la liste restante) et la fonction de conversion pour obtenir la réponse.
 
-Écrire une fonction `filtrer(nombres, k, bit)` qui renvoie la nouvelle liste des seuls nombres dont le bit d’indice `k` vaut `bit`. Puis écrire une fonction qui applique le procédé de la partie 2 colonne après colonne jusqu’à ce qu’il ne reste qu’un nombre. Lire très attentivement la règle en cas d’**égalité** : elle n’est pas la même pour les deux valeurs. Sur l’exemple du défi, on doit trouver `22` et `6`, donc la réponse `132`.
+Écrire une fonction `filtrer(nombres, k, bit)` qui renvoie la nouvelle liste des seuls nombres dont le bit d’indice `k` vaut `bit`. Puis écrire une fonction qui applique le procédé de la partie 2 colonne après colonne jusqu’à ce qu’il ne reste qu’un nombre. Lire très attentivement la règle en cas d’**égalité** : elle n’est pas la même pour les deux valeurs. Sur l’exemple inventé de la fiche, on doit trouver `22` et `6`, donc la réponse `132`.
 
 ??? pouce "Coup de pouce"
 

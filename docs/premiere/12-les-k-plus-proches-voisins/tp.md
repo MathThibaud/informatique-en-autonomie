@@ -28,7 +28,7 @@
 
     3.  À chaque étape, on ajoute un bout de code, puis on le **teste** tout de suite.
 
-    4.  Usage de l’IA : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune dans la partie 1 (les fonctions `distance`, `k_plus_proches`, `vote` et `classer` sont le cœur de l’algorithme : vous les écrivez seul) ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui ensuite (comprendre un message d’erreur, analyser les résultats), chaque ligne de `ocr.py` étant écrite et comprise par vous. Voir la charte.
+    4.  Usage de l’IA : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune dans la partie 1 (les fonctions `distance`, `k_plus_proches`, `vote` et `classer` sont le cœur de l’algorithme : vous les écrivez seul) ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui ensuite (comprendre un message d’erreur, analyser les résultats), chaque ligne de `ocr.py` étant écrite et comprise par vous. Voir la [charte d’usage de l’IA](../charte.md), au début du livre.
 
 !!! remarque "Remarque — Source des données"
 
@@ -148,7 +148,7 @@ def vote(classes):
 
 ### 1.6 Assembler : `classer`
 
-Dans `ocr.py`, compléter `classer` : elle tient en une ligne.
+Dans `ocr.py`, écrire `classer` : elle tient en une ligne, puisqu’elle enchaîne les deux fonctions précédentes. Essayer avant de lire la solution ci-dessous.
 
 ```python
 def classer(exemples, x, k):
@@ -251,7 +251,7 @@ etiquette : 2
 
 Reprenons *la même* fonction `distance` qu’en partie 1 : elle marche aussi bien sur des listes de 196 nombres ! Deux images se ressemblent si elles diffèrent sur **peu** de pixels.
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Récupérer les deux premières images de chiffre **« 0 »** et la première image de **« 1 »** du jeu d’entraînement (dans des variables `zero_a`, `zero_b` et `un`), puis comparer :
+1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Parcourir `train` pour ranger dans `zero_a` et `zero_b` les *pixels* des deux premières images d’étiquette `"0"`, et dans `un` ceux de la première image d’étiquette `"1"` (attention : les étiquettes sont des chaînes de caractères, `"0"` et non `0`). Puis comparer :
 
     ```text
     >>> distance(zero_a, zero_b)     # deux "0" entre eux
@@ -692,7 +692,7 @@ En une poignée de fonctions, sans aucune bibliothèque d’« intelligence arti
 
 !!! remarque "Remarque — Usage de l’IA"
 
-    <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> **Sans IA** : la binarisation à la main (0.1) et les trous **(a)**, **(b)**, **(c)** à compléter — ce sont les gestes à savoir refaire seul. <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> **En appui** pour le reste (comprendre un message d’erreur, analyser le seuil et les limites) : ce que vous écrivez, vous devez pouvoir l’expliquer. Voir la charte.
+    <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> **Sans IA** : la binarisation à la main (0.1) et les trous **(a)**, **(b)**, **(c)** à compléter — ce sont les gestes à savoir refaire seul. <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> **En appui** pour le reste (comprendre un message d’erreur, analyser le seuil et les limites) : ce que vous écrivez, vous devez pouvoir l’expliquer. Voir la [charte d’usage de l’IA](../charte.md), au début du livre.
 
 ## Étape 0 — De la photo à la grille (binarisation)
 
@@ -841,9 +841,9 @@ def redimensionner(sous_grille, N=14):
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Découper et redimensionner le **premier** caractère, puis l’afficher avec `afficher` (de `ocr.py`). Reconnaissez-vous un « A » de $14\times14$ ? Pourquoi doit-on absolument obtenir 196 pixels ? (indice : la fonction `distance` compare des listes…)
 
-## Étape 3 et 4 — Classer et assembler
+## Étapes 3 et 4 — Classer et assembler
 
-Une plaque est écrite en **police imprimée**. On l’entraîne donc sur des caractères **imprimés** (chiffres et lettres, plusieurs polices), rassemblés dans le fichier `caracteres_train.csv`.
+Une plaque est écrite en **police imprimée**. On entraîne donc le $k$-NN sur des caractères **imprimés** (chiffres et lettres, plusieurs polices), rassemblés dans le fichier `caracteres_train.csv`.
 
 ```python
 from ocr import charger, classer, afficher

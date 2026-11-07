@@ -10,7 +10,7 @@
 
 !!! consignes "Consignes"
 
-    - Matériel : de vraies pièces et de vrais billets, ou les jetons de la page 2, découpés.
+    - Matériel : de vraies pièces et de vrais billets, ou les jetons à découper en fin d’activité (ou simplement leurs valeurs écrites sur des bouts de papier).
 
     - L’un joue le **marchand** et rend la monnaie ; l’autre **vérifie** (la somme est-elle exacte ? peut-on faire avec moins ?). On échange les rôles à chaque somme.
 

@@ -18,6 +18,8 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -116,7 +118,7 @@ Tuile B
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -161,7 +163,7 @@ Construire un dictionnaire `tuiles` qui associe à chaque numéro (un entier) la
 
 **À quoi ça sert ?** Ce comptage construit en fait les arêtes du graphe des tuiles : un bord possédé par une autre tuile est une liaison avec une voisine, un bord possédé par aucune autre est un bord de l’image.
 
-Écrire une fonction `bords(tuile)` qui renvoie la liste des quatre bords. Puis compter, pour chaque bord de chaque tuile, combien d’*autres* tuiles possèdent ce bord, à l’endroit ou à l’envers.
+Écrire une fonction `bords(tuile)` qui renvoie la liste `[haut, bas, gauche, droite]` des quatre bords, lus comme dans l’exercice « À la main, sur un petit exemple ». Puis, pour chaque tuile, compter combien de ses bords ne se retrouvent, à l’endroit ou à l’envers, chez aucune *autre* tuile.
 
 ??? pouce "Coup de pouce"
 
@@ -205,7 +207,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site. Cette 
 
 **À quoi ça sert ?** Sans image assemblée, impossible de chercher le monstre. C’est l’étape la plus longue : les huit orientations, obtenues avec seulement deux fonctions, servent aussi bien pour les tuiles que pour l’image entière.
 
-Écrire `rotation(tuile)` (quart de tour) et `symetrie(tuile)` (miroir), puis `orientations(tuile)` qui renvoie les huit positions possibles (lire l’encadré). Assembler ensuite toute l’image en suivant la stratégie de l’encadré.
+Écrire `rotation(tuile)` (quart de tour) et `symetrie(tuile)` (miroir), puis `orientations(tuile)` qui renvoie les huit positions possibles (encadré « Les huit orientations d’une grille carrée », section « Pour y arriver »). Assembler ensuite toute l’image en suivant l’encadré « Stratégie d’assemblage pas à pas ».
 
 ??? pouce "Coup de pouce"
 
@@ -274,7 +276,7 @@ Retirer les bords de chaque tuile, recoller l’image, puis chercher le motif da
 
 La stratégie du défi part d’un coin et remplit l’image ligne par ligne. On peut aussi partir de **n’importe quelle** tuile, laissée telle quelle à la position $(0, 0)$, et propager : pour chaque tuile placée, on cherche ses voisines par ses quatre bords, on les oriente et on les place à côté. Les positions peuvent devenir négatives ; on « recadre » à la fin.
 
-1.  À la main, avec les tuiles A et B du défi : A est placée telle quelle en $(0, 0)$. À quelle position va B, et dans quelle orientation ? Quelle serait la position de B si l’on avait placé B en premier ?
+1.  À la main, avec les tuiles A et B de la fiche : A est placée telle quelle en $(0, 0)$. À quelle position va B, et dans quelle orientation ? Quelle serait la position de **A**, et son orientation, si l’on avait placé B en premier, telle quelle, en $(0, 0)$ ?
 
 2.  Écrire `assembler_parcours(tuiles)` qui utilise une **pile** des tuiles placées mais pas encore traitées, et un dictionnaire `place` qui associe à chaque position `(ligne, colonne)` la tuile orientée. Vérifier qu’on obtient la même réponse à la partie 2.
 
@@ -305,6 +307,8 @@ La stratégie du défi part d’un coin et remplit l’image ligne par ligne. On
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/21 ](https://adventofcode.com/2020/day/21 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -400,7 +404,7 @@ kesa zuli brak (contains milk)
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -484,7 +488,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** C’est la réponse de la partie 2 : en termes de graphe, on retire des arêtes jusqu’à ce que chaque allergène ne soit plus relié qu’à un ingrédient.
 
-Déterminer quel ingrédient contient chaque allergène, puis construire la chaîne demandée. Sur l’exemple du défi, on doit obtenir `tolu,zuli,brak`.
+Déterminer quel ingrédient contient chaque allergène, puis construire la chaîne demandée. Sur l’exemple inventé de la fiche, on doit obtenir `tolu,zuli,brak`.
 
 ??? pouce "Coup de pouce"
 

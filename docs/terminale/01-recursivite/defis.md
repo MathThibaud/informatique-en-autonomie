@@ -18,6 +18,8 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -166,15 +168,15 @@ Faire un schéma : écrire chaque couleur, et tracer une flèche de $A$ vers $B$
 
 **À quoi ça sert ?** En l’appelant pour chaque couleur et en comptant les réponses vraies, on obtient la réponse de la partie 1. C’est l’occasion de bien identifier le cas de base et l’appel récursif.
 
-Écrire une fonction récursive `peut_contenir(couleur)` qui renvoie `True` si un sac de cette couleur contient, directement ou non, un sac `shiny gold`. Compter les couleurs concernées. Tester sur l’exemple du défi, puis sur vos données.
+Écrire une fonction récursive `peut_contenir(couleur)` qui renvoie `True` si un sac de cette couleur contient, directement ou non, un sac `shiny gold`. Compter les couleurs concernées. Tester sur l’exemple inventé de la fiche, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
-    Cas de base : le contenu de `couleur` a `"shiny gold"` parmi ses clés. Sinon, il suffit qu’**un** des sacs contenus puisse lui-même le contenir.
+    Deux situations donnent la réponse sans appel récursif : le sac contient directement `"shiny gold"` (`True`), ou il est vide (`False`). Sinon, il suffit qu’**un** des sacs contenus puisse lui-même le contenir.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    Le résultat est vrai si, pour au moins un sac `x` du contenu, `x` est le sac doré **ou** `peut_contenir(x)` est vrai : c’est un « au moins un », à calculer avec un drapeau (voir l’encadré). Un sac vide donne `False` : c’est la condition d’arrêt.
+    Le résultat est vrai si, pour au moins un sac `x` du contenu, `x` est le sac doré **ou** `peut_contenir(x)` est vrai : c’est un « au moins un », à calculer avec un drapeau (voir l’encadré). Pour un sac vide, la boucle ne fait aucun tour et le drapeau reste à `False`.
 
 ## Partie 2
 
@@ -202,7 +204,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 1.  Dans la partie 1, on cherchait des sacs « au-dessus » du sac doré. Dans quel sens suit-on maintenant les règles ?
 
-2.  Écrire une fonction récursive qui répond à la question. Sur l’exemple du défi, on doit trouver `13`.
+2.  Écrire une fonction récursive `nb_sacs_dans(couleur)` qui renvoie le nombre total de sacs contenus dans un sac `couleur`. Sur l’exemple inventé de la fiche, on doit trouver `13`.
 
 ??? pouce "Coup de pouce"
 
@@ -214,7 +216,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 ## Approfondissement
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : dans l’autre sens <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-recursivite-aoc-1-6 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Défi : inverser les règles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-recursivite-aoc-1-6 }
 
 **But.** Inverser les règles (qui contient qui ?) pour résoudre la partie 1 en partant du sac doré.
 
@@ -224,23 +226,23 @@ Pour chaque couleur, construire la liste des couleurs qui la contiennent **direc
 
 ??? pouce "Coup de pouce"
 
-    Sur l’exemple du défi, `contenants["shiny gold"]` vaut `["pale cyan"]` et `contenants["pale cyan"]` vaut `["striped coral"]`.
+    Sur l’exemple inventé de la fiche, `contenants["shiny gold"]` vaut `["pale cyan"]` et `contenants["pale cyan"]` vaut `["striped coral"]`.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
     Pour chaque couleur `c` de `contenants[couleur]` qui n’est pas encore dans `trouves` : l’ajouter, puis appeler la fonction sur `c`. La réponse est la longueur de `trouves`.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement 1 : l’inventaire du sac doré <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-recursivite-aoc-1-7 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Approfondissement : l’inventaire du sac doré <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-recursivite-aoc-1-7 }
 
 **But.** Détailler le contenu du sac doré couleur par couleur, puis compter combien de fois la fonction récursive est appelée.
 
 **À quoi ça sert ?** L’inventaire vérifie le total de la partie 2 de façon plus fine. Compter les appels montre que la récursivité naïve refait plusieurs fois les mêmes calculs, ce qui prépare la programmation dynamique.
 
-1.  À la main, sur l’exemple du défi : combien de sacs de chaque couleur trouve-t-on, à tous les niveaux, dans un sac `shiny gold` ? Vérifier que le total redonne `13`.
+1.  À la main, sur l’exemple inventé de la fiche : combien de sacs de chaque couleur trouve-t-on, à tous les niveaux, dans un sac `shiny gold` ? Vérifier que le total redonne `13`.
 
 2.  Écrire une fonction récursive `inventaire(couleur)` qui renvoie un dictionnaire associant à chaque couleur le nombre de sacs de cette couleur contenus dans un sac `couleur`.
 
-3.  Combien de fois la fonction de la partie 2 est-elle appelée pour `dull lime` sur l’exemple ? Vérifier en comptant les appels dans un dictionnaire.
+3.  Combien de fois la fonction `nb_sacs_dans` de la partie 2 est-elle appelée pour `dull lime` sur l’exemple ? Vérifier en comptant les appels dans un dictionnaire.
 
 4.  On imagine des règles où chaque sac $c_i$ contient un sac $c_{i+1}$ et un sac $c_{i+2}$. Montrer que le nombre d’appels $A(i)$ pour $c_i$ vérifie $A(i) = 1 + A(i+1) + A(i+2)$. Quel exemple du cours sur la récursivité retrouve-t-on ? (Le chapitre sur la programmation dynamique montrera comment éviter ces recalculs.)
 

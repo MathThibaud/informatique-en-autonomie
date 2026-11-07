@@ -18,13 +18,15 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
 
 !!! encadre "Le défi en bref"
 
-    **Le problème.** Chaque carte d’embarquement porte un code de dix lettres qui désigne un siège de l’avion. Il faut décoder plusieurs centaines de ces codes pour trouver le plus grand numéro de siège, puis le seul siège libre : le vôtre. Décoder un code à la main prend une minute ; en décoder des centaines demande un programme.
+    **Le problème.** Chaque carte d’embarquement porte un code de dix lettres qui désigne un siège de l’avion. Il faut décoder plusieurs centaines de ces codes pour trouver le plus grand numéro de siège, puis le seul siège libre : celui du héros. Décoder un code à la main prend une minute ; en décoder des centaines demande un programme.
 
     **Ce qu’on réinvestit.** Les **arbres binaires** vus dans ce chapitre. Un code de place décrit un chemin depuis la racine d’un arbre binaire complet : chaque lettre choisit le fils gauche ou le fils droit, c’est-à-dire la moitié basse ou la moitié haute des places restantes, et la feuille atteinte est le siège. On découvrira que ce chemin n’est autre que l’écriture binaire du numéro, et qu’il s’agit d’une dichotomie.
 
@@ -165,9 +167,9 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     - L’avion est plein, sauf quelques sièges tout à l’avant et tout à l’arrière qui n’existent pas : ces numéros-là manquent aussi dans la liste, mais ce ne sont pas des places.
 
-    - Votre siège est absent de la liste, mais les numéros juste avant et juste après le vôtre y figurent.
+    - Le siège du héros est absent de la liste, mais les numéros juste avant et juste après le sien y figurent.
 
-    **La réponse attendue.** Le numéro de votre siège. Par exemple, si les numéros présents étaient 40, 41, 43 et 44, votre place serait la 42.
+    **La réponse attendue.** Le numéro du siège du héros. Par exemple, si les numéros présents étaient 40, 41, 43 et 44, sa place serait la 42.
 
 ### <span class="exo-num">Exercice 6</span> — La place libre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-6 }
 
@@ -175,7 +177,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** C’est la réponse de la partie 2. Une fois les numéros triés, le trou se voit en comparant chaque numéro au suivant.
 
-Trouver votre place en suivant les indications de la partie 2.
+Trouver la place du héros en suivant les indications de la partie 2.
 
 ??? pouce "Coup de pouce"
 
@@ -187,25 +189,13 @@ Trouver votre place en suivant les indications de la partie 2.
 
 ## Approfondissement
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Défi : sans tri <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-7 }
-
-**But.** Trouver la place libre en un seul parcours, sans trier, à l’aide d’un calcul de somme.
-
-**À quoi ça sert ?** Le tri coûte plus qu’un parcours : un raisonnement mathématique permet ici de descendre à un coût linéaire, avec très peu de mémoire.
-
-Trouver la place libre en temps linéaire sans trier ni utiliser d’ensemble, en comparant la somme des numéros présents à une somme connue.
-
-??? pouce "Coup de pouce"
-
-    La somme des entiers de $a$ à $b$ vaut $\frac{(a+b)(b-a+1)}{2}$.
-
 !!! encadre "Outil Python : les ensembles (set) — rappel"
 
     Tout est présenté dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4). On n’utilise ici que `set()` (ensemble vide), `add`, `remove` et le test `x in ensemble`, en temps constant (en moyenne). Les éléments doivent être non modifiables (nombres, chaînes, tuples).
 
-    **À essayer.** Construire l’ensemble des numéros de la liste du défi (en partant de `set()` et en ajoutant chaque numéro avec `add`), puis tester si `602` et `603` en font partie.
+    **À essayer.** Construire l’ensemble des numéros de la liste inventée de la partie 1 (les cinq codes de l’exercice « Décoder et chercher le maximum ») en partant de `set()` et en ajoutant chaque numéro avec `add`, puis tester si `602` et `603` en font partie.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Approfondissement 1 : la place libre avec un ensemble <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-8 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — La place libre avec un ensemble <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-7 }
 
 **But.** Trouver la place libre sans trier, en testant l’appartenance de chaque candidat à un ensemble.
 
@@ -227,6 +217,18 @@ Trouver la place libre en temps linéaire sans trier ni utiliser d’ensemble, e
 
     On parcourt ces entiers et l’on renvoie le premier qui n’est pas dans l’ensemble `presents` (rempli avec `add`) : chaque test coûte un temps constant.
 
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 8</span> — Défi : sans tri <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-aoc-1-8 }
+
+**But.** Trouver la place libre en un seul parcours, sans trier, à l’aide d’un calcul de somme.
+
+**À quoi ça sert ?** Le tri coûte plus qu’un parcours : un raisonnement mathématique permet ici de descendre à un coût linéaire, avec très peu de mémoire.
+
+Trouver la place libre en temps linéaire sans trier ni utiliser d’ensemble, en comparant la somme des numéros présents à une somme connue.
+
+??? pouce "Coup de pouce"
+
+    La somme des entiers de $a$ à $b$ vaut $\frac{(a+b)(b-a+1)}{2}$.
+
 ## <span class="etiquette">Défi 2</span> Custom Customs
 
 *la douane — ensembles, union et intersection*
@@ -242,6 +244,8 @@ Trouver la place libre en temps linéaire sans trier ni utiliser d’ensemble, e
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/6 ](https://adventofcode.com/2020/day/6 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -369,7 +373,7 @@ Lire tout le fichier en une chaîne et construire une liste de groupes, chaque g
 
 **À quoi ça sert ?** C’est la réponse de la partie 1. La réunion d’ensembles élimine d’elle-même les doublons, sans aucun test à écrire.
 
-Écrire une fonction `nb_oui_quelquun(groupe)` qui renvoie le nombre de lettres présentes chez au moins un membre, puis faire la somme sur tout le fichier. Tester sur l’exemple du défi, puis sur vos données.
+Écrire une fonction `nb_oui_quelquun(groupe)` qui renvoie le nombre de lettres présentes chez au moins un membre, puis faire la somme sur tout le fichier. Tester sur l’exemple inventé de la fiche, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -403,7 +407,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 1.  Quelle opération sur les ensembles correspond à la nouvelle question ?
 
-2.  Écrire la fonction correspondante et faire la somme. Sur l’exemple du défi, on doit trouver `9`.
+2.  Écrire la fonction correspondante et faire la somme. Sur l’exemple inventé de la fiche, on doit trouver `9`.
 
 ??? pouce "Coup de pouce"
 

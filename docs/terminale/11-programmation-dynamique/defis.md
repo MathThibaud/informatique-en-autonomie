@@ -18,6 +18,8 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -100,7 +102,7 @@ Ranger les valeurs dans l’ordre croissant, ajouter la prise et l’appareil, p
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -169,7 +171,7 @@ Ranger les valeurs dans l’ordre croissant, ajouter la prise et l’appareil, p
 
 **À quoi ça sert ?** Le dictionnaire obtenu donne en un seul parcours le nombre d’écarts de 1 et de 3, donc la réponse de la partie 1.
 
-Écrire une fonction `ecarts(valeurs)` qui renvoie un dictionnaire associant à chaque écart son nombre d’apparitions. En déduire la réponse ; tester sur l’exemple du défi, puis sur vos données.
+Écrire une fonction `ecarts(valeurs)` qui renvoie un dictionnaire associant à chaque écart son nombre d’apparitions. En déduire la réponse ; tester sur l’exemple inventé de la fiche, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -199,7 +201,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** C’est ce constat qui justifie de changer de méthode : il faut *compter* les chaînes sans les fabriquer, ce que permet la programmation dynamique.
 
-Sur l’exemple du défi, on trouve `28` façons. Avec une centaine d’adaptateurs, l’énoncé annonce un nombre astronomique : expliquer pourquoi un programme qui construirait chaque façon une par une ne terminerait jamais.
+Sur l’exemple inventé de la fiche, on trouve `28` façons. Avec une centaine d’adaptateurs, l’énoncé annonce un nombre astronomique : expliquer pourquoi un programme qui construirait chaque façon une par une ne terminerait jamais.
 
 ### <span class="exo-num">Exercice 6</span> — Compter sans énumérer <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-programmation-dynamique-aoc-1-6 }
 
@@ -207,7 +209,7 @@ Sur l’exemple du défi, on trouve `28` façons. Avec une centaine d’adaptate
 
 **À quoi ça sert ?** C’est le cœur de la partie 2 : en remplissant $N$ du plus petit au plus grand adaptateur, la valeur pour l’appareil est directement la réponse, obtenue en un seul parcours.
 
-On note $N(v)$ le nombre de façons d’aller de la prise jusqu’à l’adaptateur de valeur $v$. Exprimer $N(v)$ à l’aide des valeurs de $N$ pour les adaptateurs qui peuvent se brancher juste avant $v$. Écrire une fonction `nombre_facons(valeurs)` qui remplit un dictionnaire `N` en parcourant la liste triée. Vérifier : sur l’exemple, $N(4) = 7$ et $N(9) = 14$.
+On note $N(v)$ le nombre de façons d’aller de la prise jusqu’à l’adaptateur de valeur $v$. Exprimer $N(v)$ à l’aide des valeurs de $N$ pour les adaptateurs qui peuvent se brancher juste avant $v$. Écrire une fonction `nombre_facons(valeurs)` qui reçoit la liste renvoyée par `chaine` (prise et appareil compris), remplit un dictionnaire `N` en parcourant cette liste à partir du **deuxième** élément (la prise est le cas de base : `N[0] = 1`), et renvoie la valeur de `N` pour l’appareil. Vérifier : sur l’exemple, $N(4) = 7$, $N(9) = 14$ et la fonction renvoie `28`.
 
 ??? pouce "Coup de pouce"
 
@@ -215,7 +217,7 @@ On note $N(v)$ le nombre de façons d’aller de la prise jusqu’à l’adaptat
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    `N[0] = 1`, puis pour chaque valeur `v` : `N[v]` est la somme des `N[v - k]` pour `k` valant 1, 2 et 3, en comptant 0 si `v - k` n’est pas un adaptateur (tester d’abord `v - k in N`, comme dans l’encadré sur le comptage).
+    Pour chaque valeur `v` après la prise : `N[v]` est la somme des `N[v - k]` pour `k` valant 1, 2 et 3, en comptant 0 si `v - k` n’est pas un adaptateur (tester d’abord `v - k in N`, comme dans l’encadré sur le comptage).
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Défi : la version récursive <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-programmation-dynamique-aoc-1-7 }
 
@@ -223,7 +225,7 @@ On note $N(v)$ le nombre de façons d’aller de la prise jusqu’à l’adaptat
 
 **À quoi ça sert ?** On voit concrètement pourquoi la mémoïsation est indispensable : c’est elle qui transforme une récursion exponentielle en un calcul aussi rapide que la version itérative.
 
-Écrire une version récursive de `nombre_facons` (le nombre de façons de finir la chaîne à partir de l’adaptateur d’indice `i`). La tester sur vos données : que se passe-t-il ? Corriger avec la mémoïsation.
+Écrire une fonction récursive `depuis(valeurs, i)` qui renvoie le nombre de façons d’aller de `valeurs[i]` jusqu’à l’appareil (cas de base : `i` est l’indice de l’appareil, une seule façon) ; `depuis(valeurs, 0)` doit redonner la réponse de la partie 2. La tester sur vos données : que se passe-t-il ? Corriger avec la mémoïsation (ajouter un paramètre `memo`, dictionnaire partagé par tous les appels).
 
 ??? pouce "Coup de pouce"
 
@@ -237,7 +239,7 @@ On note $N(v)$ le nombre de façons d’aller de la prise jusqu’à l’adaptat
 
 **À quoi ça sert ?** Cette méthode exploite une particularité des données (pas d’écart de 2). La comparer à la programmation dynamique montre ce qu’on gagne et ce qu’on perd en s’appuyant sur une propriété particulière plutôt que sur une méthode générale.
 
-Dans les données (et dans l’exemple du défi), les écarts entre adaptateurs consécutifs valent 1 ou 3, jamais 2. On peut en profiter pour compter autrement.
+Dans les données (et dans l’exemple inventé de la fiche), les écarts entre adaptateurs consécutifs valent 1 ou 3, jamais 2. On peut en profiter pour compter autrement.
 
 1.  Sur l’exemple, découper la chaîne $0, 1, 2, 3, 4, 7, 8, 9, 12, 13, 14, 17$ en **blocs** de valeurs consécutives (écarts de 1), séparés par les écarts de 3. Expliquer pourquoi la première et la dernière valeur de chaque bloc sont forcément utilisées.
 
@@ -270,6 +272,8 @@ Dans les données (et dans l’exemple du défi), les écarts entre adaptateurs 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/15 ](https://adventofcode.com/2020/day/15 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -348,7 +352,7 @@ Le fichier ne contient qu’une ligne : on la lit avec `read()`, on la nettoie a
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -364,7 +368,7 @@ Le fichier ne contient qu’une ligne : on la lit avec `read()`, on la nettoie a
 
 **À quoi ça sert ?** C’est la traduction la plus directe de la règle : elle donne la réponse de la partie 1 et servira de référence pour vérifier la version rapide.
 
-Écrire une fonction `jeu_liste(depart, n)` qui construit la liste de tous les nombres dits et renvoie le `n`-ième. Pour savoir quand le dernier nombre a été dit auparavant, on cherche dans la liste. Tester sur l’exemple du défi : avec `n = 2020`, on doit trouver `779`.
+Écrire une fonction `jeu_liste(depart, n)` qui construit la liste de tous les nombres dits et renvoie le `n`-ième. Pour savoir quand le dernier nombre a été dit auparavant, on cherche dans la liste. Tester sur l’exemple inventé de la fiche : avec `n = 2020`, on doit trouver `779`.
 
 ??? pouce "Coup de pouce"
 

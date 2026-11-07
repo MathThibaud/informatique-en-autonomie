@@ -40,12 +40,14 @@ Une fiche porte la recette des crêpes. Recopier et compléter sur le cahier le 
 
 ### <span class="exo-num">Exercice 2</span> — Python lit du Python <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-13-calculabilite-et-decidabilite-act-1-2 }
 
-On considère la fonction suivante, enregistrée dans un fichier `test.py`, suivie de l’appel `accueil(3)` :
+On considère le fichier `test.py` suivant, qui définit une fonction puis l’appelle :
 
 ```python
 def accueil(n):
     for k in range(n):
         print("bonjour")
+
+accueil(3)
 ```
 
 1.  Dans un terminal, on tape `python3 test.py`. Qu’est-ce qui s’affiche ? Dans cette commande, quel est le programme qui travaille, et quelle est sa donnée ?
@@ -85,7 +87,7 @@ def accueil(n):
 
 1.  Combien de fois le devin a-t-il eu raison ? Existe-t-il une prédiction gagnante pour le devin ? Pourquoi ?
 
-2.  Que changerait la règle si le contrariant n’avait **pas le droit de lire** la prédiction ?
+2.  Et si le contrariant n’avait **pas le droit de lire** la prédiction : le devin pourrait-il gagner ?
 
 3.  **Le menteur.** La phrase « *Cette phrase est fausse.* » est-elle vraie ? fausse ?
 

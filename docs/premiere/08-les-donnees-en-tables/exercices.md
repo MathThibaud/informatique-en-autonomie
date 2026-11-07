@@ -8,7 +8,7 @@
 
     - <span class="run" title="À programmer et tester sur machine">▶</span> *À programmer et tester* en Python. Le symbole `>>>` figure une saisie dans la console.
 
-    - On travaille sur le fichier `prenoms.csv` (extrait du *Fichier des prénoms* de l’INSEE, `data.gouv.fr`) : descripteurs `prenom`, `sexe` (`F`/`G`), `annee` (2023 ou 2025), `nombre`. Et sur `communes.csv` / `departements.csv`.
+    - On travaille sur le fichier `prenoms.csv` (extrait du *Fichier des prénoms* de l’INSEE, `data.gouv.fr`) : le **top 10** des filles et celui des garçons en 2023 et en 2025, soit 40 fiches ; descripteurs `prenom`, `sexe` (`F`/`G`), `annee` (2023 ou 2025), `nombre`. Et sur `communes.csv` / `departements.csv`.
 
     - **Réflexe n<sup>o</sup> 1** : les valeurs lues dans un CSV sont des **chaînes**. `int(...)` avant tout *calcul* ou *tri* numérique.
 
@@ -29,7 +29,7 @@ prenoms = charger("prenoms.csv")
 
 <span class="essentiel">• essentiel</span>
 
-On donne le début d’un fichier CSV public (jeux de la médiathèque) :
+On donne les quatre premières lignes d’un fichier CSV public (jeux de la médiathèque) :
 
 ```text
 titre;editeur;duree;age_min
@@ -38,7 +38,7 @@ Dixit;Libellud;30;8
 7 Wonders;Repos Prod;30;10
 ```
 
-1.  Quel est le **séparateur** ? Combien y a-t-il de **descripteurs** ? d’**enregistrements** ?
+1.  Quel est le **séparateur** ? Combien y a-t-il de **descripteurs** ? d’**enregistrements** dans cet extrait ?
 
 2.  Citer les descripteurs. Donner la valeur du descripteur `duree` pour l’enregistrement `Dixit`.
 
@@ -137,7 +137,7 @@ Avec la variable `jeux` précédente, que renvoient ces expressions ?
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Un fichier mal formé <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-08-5 }
 
-Un camarade obtient `prenoms.csv` avec **une seule colonne** géante quand il l’ouvre. Quelle est l’erreur la plus probable ? Comment la corriger dans l’appel à `csv.DictReader` ?
+Un camarade ouvre avec `csv.DictReader` le fichier des jeux de la médiathèque (exercice « Vocabulaire ») et obtient **une seule colonne** géante. Quelle est l’erreur la plus probable ? Comment la corriger dans l’appel à `csv.DictReader` ?
 
 ??? pouce "Coup de pouce"
 
@@ -289,7 +289,7 @@ Réécrire `selection` en **une seule ligne** avec une compréhension de liste.
 ```text
 >>> chercher(prenoms, "Jade", "2025")["nombre"]
 '2925'
->>> chercher(prenoms, "Kevin", "2025")
+>>> print(chercher(prenoms, "Kevin", "2025"))
 None
 ```
 
@@ -311,7 +311,7 @@ None
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-Écrire un appel (ou une compréhension) qui donne la liste des prénoms de **garçons de 2025** attribués **plus de 3000** fois. *(Attention au piège n<sup>o</sup> 1.)*
+Écrire un appel (ou une compréhension) qui donne la liste des prénoms de **garçons de 2025** attribués **plus de 3000** fois. *(Attention au réflexe n<sup>o</sup> 1 du mode d’emploi.)*
 
 ??? pouce "Coup de pouce"
 
@@ -364,7 +364,7 @@ None
 
         Patron de l’accumulateur : un total initialisé à `0`, augmenté pour chaque fiche retenue. On peut réutiliser `selection`.
 
-2.  En déduire combien de garçons ont reçu l’un de ces 10 prénoms en 2023.
+2.  En déduire combien de garçons nés en 2023 ont reçu l’un des 10 prénoms de garçons du fichier.
 
 3.  Écrire `nombre_moyen(table)` (moyenne des `nombre`). Que vaut-elle sur `filles23` ?
 
@@ -399,7 +399,7 @@ None
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-1.  Écrire `plus_donne(table)` qui renvoie le couple (prénom, nombre) de la fiche au plus grand `nombre` (invariant du champion).
+1.  Écrire `plus_donne(table)` qui renvoie le couple (prénom, nombre), le nombre étant un **entier**, de la fiche au plus grand `nombre` (invariant du champion).
 
     ??? pouce "Coup de pouce"
 
@@ -470,7 +470,7 @@ Pourquoi le coût devient-il **quadratique** ? Comment le rendre **linéaire** ?
 
 ??? pouce "Coup de pouce"
 
-    `sorted` avec `key` (sur quoi comparer ?) et `reverse=True` ; pour la clé, penser au piège n<sup>o</sup> 1. Pour les 3 premiers : filtrer avec `selection`, trier, puis une tranche `[:3]`.
+    `sorted` avec `key` (sur quoi comparer ?) et `reverse=True` ; pour la clé, penser au réflexe n<sup>o</sup> 1. Pour les 3 premiers : filtrer avec `selection`, trier, puis une tranche `[:3]`.
 
 ??? corrige "Corrigé"
 
@@ -507,7 +507,7 @@ Trier `filles23` par **ordre alphabétique** des prénoms. Quelle est la seule l
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-Trier `filles23` avec `key=lambda l: l["nombre"]` (sans `int`) et `reverse=True`. Le résultat est-il le bon classement ? **Expliquer** précisément pourquoi, dans ce tri de chaînes avec `reverse=True`, `"900"` passerait avant `"3070"`.
+Trier `filles23` avec `key=lambda l: l["nombre"]` (sans `int`) et `reverse=True`. Le résultat est-il le bon classement ? Est-ce **garanti** ? **Expliquer** précisément pourquoi, si un prénom n’avait été donné que 900 fois, la chaîne `"900"` passerait avant `"3070"` dans ce tri avec `reverse=True`.
 
 ??? pouce "Coup de pouce"
 

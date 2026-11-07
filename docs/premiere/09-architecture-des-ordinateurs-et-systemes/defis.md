@@ -18,6 +18,8 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -115,7 +117,7 @@ Remplir un tableau à deux lignes : numéro du cycle (de 1 à 10) et valeur de `
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -210,7 +212,7 @@ Lire attentivement comment l’écran est balayé (combien de pixels par ligne, 
 
 **À quoi ça sert ?** Un vrai processeur a plusieurs registres et beaucoup d’instructions de durées différentes : on voit comment rendre la simulation facile à étendre plutôt que d’ajouter un cas particulier à chaque nouvelle instruction.
 
-On ajoute un second registre `Y`, qui vaut 0 au départ, et deux instructions inventées : `addy n` (2 cycles, ajoute `n` à `Y` à la fin) et `copy` (1 cycle, copie `X` dans `Y`).
+On ajoute un second registre `Y`, qui vaut 0 au départ, et deux instructions inventées : `addy n` (2 cycles, ajoute `n` à `Y` à la fin) et `copy` (1 cycle, copie `X` dans `Y` **à la fin** de ce cycle).
 
 1.  À la main : écrire les valeurs de `(X, Y)` pendant chaque cycle du programme `addx 4`, `copy`, `addy 3`, `noop`.
 

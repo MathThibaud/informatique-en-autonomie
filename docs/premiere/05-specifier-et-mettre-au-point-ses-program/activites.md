@@ -72,11 +72,11 @@ def moyenne(notes):
 
 1.  Le programmeur a essayé `moyenne([0, 10, 20])` et `moyenne([0, 0])`. Recopier sur le cahier le tableau suivant, exécuter ces deux appels à la main et le remplir.
 
-    | **tableau donné** | **résultat attendu** | **résultat obtenu** |
+    | **notes données** | **résultat attendu** | **résultat obtenu** |
     |:------------------|:---------------------|:--------------------|
     | …                 | …                    | …                   |
 
-2.  Trouver un tableau pour lequel la fonction se trompe, et l’ajouter au tableau. Expliquer l’erreur en une phrase.
+2.  Trouver une liste de notes pour laquelle la fonction se trompe, et l’ajouter comme nouvelle ligne du tableau de cas. Expliquer l’erreur en une phrase.
 
 3.  Pourquoi les deux essais du programmeur n’avaient-ils rien révélé ?
 

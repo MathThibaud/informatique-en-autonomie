@@ -172,13 +172,13 @@ On a intercepté : `KXGWXS-OHNL WXOTGM EX FNLXX HVXTGHZKTIABJNX T FBWB`.
 
 On a chiffré `clair` avec une clé de $6$ lettres : `chiffre = vigenere(clair, "MONACO")`. Faisons comme si l’on ignorait la clé.
 
-1.  Les lettres de rangs $0, 6, 12, \dots$ du texte sont toutes décalées avec la *même* lettre de la clé. Par quel chiffrement, déjà cassé, sont-elles donc chiffrées ?
+1.  Les lettres d’indices $0, 6, 12, \dots$ du texte (en ne comptant que les lettres) sont toutes décalées avec la *même* lettre de la clé. Par quel chiffrement, déjà cassé, sont-elles donc chiffrées ?
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `colonnes(chiffre, L)`, qui renvoie la liste des $L$ chaînes formées des lettres de rangs $0, L, 2L\dots$, puis $1, L+1, \dots$, etc. (les caractères qui ne sont pas des lettres sont ignorés). Exemple : `colonnes("AB CDE", 2)` vaut `["ACE", "BD"]`.
+2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `colonnes(chiffre, L)`, qui renvoie la liste des $L$ chaînes formées des lettres d’indices $0, L, 2L\dots$, puis $1, L+1, \dots$, etc. (les caractères qui ne sont pas des lettres sont ignorés). Exemple : `colonnes("AB CDE", 2)` vaut `["ACE", "BD"]`.
 
     ??? pouce "Coup de pouce"
 
-        Partir d’une liste de `L` chaînes vides. Parcourir le chiffré en comptant les lettres avec un compteur `i` (comme dans `vigenere`) : la lettre de rang `i` s’ajoute à la chaîne d’indice `i % L`.
+        Partir d’une liste de `L` chaînes vides. Parcourir le chiffré en comptant les lettres avec un compteur `i` (comme dans `vigenere`) : la lettre d’indice `i` s’ajoute à la chaîne d’indice `i % L`.
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span>  En déduire `casser_vigenere(chiffre, L)`, qui casse chaque colonne avec `casser_cesar_score` et renvoie la clé. Retrouve-t-on `MONACO` ? Déchiffrer.
 
@@ -449,7 +449,7 @@ Voici six jeux de clés RSA. Pour chacun : $n = pq$, $\varphi = (p-1)(q-1)$, $d$
 
 Pour signer, on chiffre avec la clé **privée** ; tout le monde vérifie avec la clé **publique**. On ne signe pas le message lui-même mais son **empreinte** <span class="horsprog">au-delà du programme</span> (fonction fournie `empreinte(message, n)`, un nombre entre $0$ et $n-1$ calculé par la fonction de hachage SHA-256 : changer une seule lettre du message change complètement l’empreinte).
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire `signer(message, cle_privee)`, qui renvoie $h^{d} \bmod n$ où $h$ est l’empreinte, et `verifier(message, signature, cle_publique)`, qui renvoie `True` si $s^{e} \bmod n$ est égal à l’empreinte du message.
+1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire `signer(message, cle_privee)`, qui renvoie $h^{d} \bmod n$ où $h$ est l’empreinte, et `verifier(message, signature, cle_publique)`, qui renvoie `True` si $s^{e} \bmod n$, où $s$ est la signature, est égal à l’empreinte du message.
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Signer `"Je dois 10 euros a Bob"`, vérifier la signature, puis vérifier la même signature avec le message `"Je dois 1000 euros a Bob"`. Qu’est-ce qu’une signature garantit ?
 
@@ -487,7 +487,7 @@ Pour signer, on chiffre avec la clé **privée** ; tout le monde vérifie avec l
 
 2.  Une clé RSA réelle de $2\,048$ bits a un $n$ de $617$ chiffres. En prolongeant vos mesures, estimer la durée de `factoriser` sur un tel nombre, et la comparer à l’âge de l’Univers (environ $4 \times 10^{17}$ secondes). *(Il existe des algorithmes de factorisation bien meilleurs, mais aucun ne casse une telle clé.)*
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span>  **Attaque** : échanger sa clé publique avec un autre binôme, puis factoriser son $n$, recalculer $\varphi$ et $d$, et déchiffrer un message qu’il vous a envoyé. Combien de temps a-t-il fallu ? Qu’en conclure sur des nombres premiers à $4$ chiffres ?
+3.  <span class="run" title="À programmer et tester sur machine">▶</span>  **Attaque** : chaque binôme publie sa clé publique et chiffre avec elle un court message secret, qu’il donne à un autre binôme (comme si celui-ci l’avait intercepté). Factoriser le $n$ de l’autre binôme, recalculer $\varphi$ et $d$, puis déchiffrer son message. Combien de temps a-t-il fallu ? Qu’en conclure sur des nombres premiers à $4$ chiffres ?
 
 ??? corrige "Corrigé"
 

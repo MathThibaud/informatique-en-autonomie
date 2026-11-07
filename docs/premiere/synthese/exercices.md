@@ -98,13 +98,13 @@ Lors d’une transmission, un bit peut être modifié par une perturbation. Pour
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `nb_uns(n)` qui renvoie le nombre de bits égaux à $1$ dans l’écriture binaire de `n` (`nb_uns(13)` renvoie `3`).
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span> En déduire une fonction `bit_parite(n)` qui renvoie `0` ou `1`.
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> En déduire une fonction `bit_parite(n)` qui renvoie le bit de parité à ajouter à `n` : `0` si `n` a un nombre pair de bits à $1$, `1` sinon.
 
 3.  Ajouter un bit $b$ à droite de l’écriture binaire de $n$ revient à calculer $2n + b$. Justifier, puis écrire une fonction `emettre(n)` qui renvoie le nombre réellement envoyé. Que vaut `emettre(13)`, en décimal et en binaire ?
 
 4.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `verifier(m)` qui renvoie `True` si le nombre reçu `m` a un nombre pair de bits à $1$, et `False` sinon.
 
-5.  Le message `11011` est envoyé. On reçoit `11111`, puis, lors d’un autre envoi, `11101`. Que répond `verifier` dans chaque cas ? Quelle est la limite de ce procédé ?
+5.  Le nombre émis (bit de parité compris) est `11011`. On reçoit `11111`, puis, lors d’un autre envoi, `11101`. Que répond `verifier` dans chaque cas ? Quelle est la limite de ce procédé ?
 
     ??? pouce "Coup de pouce"
 
@@ -761,7 +761,7 @@ soiree = [("Les Pirates du lagon", 60, 6), ("Le Dîner raté", 120, 9),
 
         Comme au TP des algorithmes gloutons, écrire une fonction `points(f)` qui renvoie `f[2]`, le nombre de points du film `f` ; l’ordre se construit alors avec `sorted(soiree, key=points, reverse=True)`. Pour le second critère, une fonction `points_par_minute(f)` renvoie `f[2] / f[1]`.
 
-4.  <span class="run" title="À programmer et tester sur machine">▶</span> Une soirée est un choix de films : chaque film est pris ou non, c’est un bit. Les $2^5 = 32$ soirées possibles correspondent donc aux entiers de $0$ à $31$ écrits en binaire. Écrire `meilleure_soiree(films, duree_max)` qui les essaie toutes et renvoie la meilleure. Les deux gloutons étaient-ils optimaux ?
+4.  <span class="run" title="À programmer et tester sur machine">▶</span> Une soirée est un choix de films : chaque film est pris ou non, c’est un bit. Les $2^5 = 32$ soirées possibles correspondent donc aux entiers de $0$ à $31$ écrits en binaire. Écrire `meilleure_soiree(duree_max, films)` qui les essaie toutes et renvoie le couple (liste des titres, total de points) de la meilleure soirée. Les deux gloutons étaient-ils optimaux ?
 
     ??? pouce "Coup de pouce"
 
@@ -804,7 +804,7 @@ soiree = [("Les Pirates du lagon", 60, 6), ("Le Dîner raté", 120, 9),
     **4.**
 
     ```python
-    def meilleure_soiree(films, duree_max):
+    def meilleure_soiree(duree_max, films):
         n = len(films)
         meilleur_choix = []
         meilleurs_points = 0

@@ -18,6 +18,8 @@
 
     - Avec un compte (facultatif), le lien *get your puzzle input* donne **vos** données, à enregistrer sous `input.txt` à côté du programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -183,7 +185,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 1.  Écrire une fonction `nb_apparitions(x, liste)` qui compte, avec une boucle, combien de fois `x` apparaît dans `liste`. Combien de comparaisons fait `nb_apparitions(2, [2, 5, 4, 2, 8, 2])` ?
 
-2.  Utiliser cette fonction pour répondre à la partie 2. Sur l’exemple du défi, on doit trouver `17`.
+2.  Utiliser cette fonction pour répondre à la partie 2. Sur l’exemple inventé de la fiche, on doit trouver `17`.
 
 ??? pouce "Coup de pouce"
 

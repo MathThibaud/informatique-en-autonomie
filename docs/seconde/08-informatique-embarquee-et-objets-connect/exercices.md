@@ -232,11 +232,11 @@ while True:
 
 <span class="duree">≈ 10 min</span>
 
-<span class="tag">sur papier</span>  Écrire une boucle de commande pour une **alarme** : tant qu’elle fonctionne, si le détecteur de mouvement renvoie `True` (`detecte()`), elle déclenche la sirène (`sonner()`) et allume une LED (`allumer_led()`) ; sinon elle éteint tout. On testera dix fois par seconde.
+<span class="tag">sur papier</span>  Écrire une boucle de commande pour une **alarme** : tant qu’elle fonctionne, si le détecteur de mouvement renvoie `True` (`detecte()`), elle déclenche la sirène (`sonner()`) et allume une LED (`allumer_led()`) ; sinon elle les éteint (`eteindre_sirene()`, `eteindre_led()`). On testera dix fois par seconde.
 
 ??? pouce "Coup de pouce"
 
-    Même structure que l’arrosage : `while True`, une lecture du capteur dans un `if`, un `else`, puis une attente. Pour « éteindre tout », on dispose de `eteindre_sirene()` et `eteindre_led()`. Dix fois par seconde : combien de secondes attendre entre deux tests ?
+    Même structure que l’arrosage : `while True`, une lecture du capteur dans un `if`, un `else`, puis une attente. Dix fois par seconde : combien de secondes attendre entre deux tests ?
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -444,7 +444,11 @@ while True:
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 16</span> — Vie privée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-16 }
 
-<span class="tag">sur papier</span>  Une enceinte connectée « écoute » pour réagir à la voix de ses utilisateurs. Expliquer, en deux phrases, en quoi cela pose une question de **vie privée**, et quel texte protège les données personnelles en France (et dans l’UE) ; et à Monaco ?
+<span class="tag">sur papier</span>  Une enceinte connectée « écoute » pour réagir à la voix de ses utilisateurs.
+
+1.  Expliquer, en deux phrases, en quoi cela pose une question de **vie privée**.
+
+2.  Quel texte protège les données personnelles en France et dans l’Union européenne ? Et à Monaco ?
 
 ??? pouce "Coup de pouce"
 

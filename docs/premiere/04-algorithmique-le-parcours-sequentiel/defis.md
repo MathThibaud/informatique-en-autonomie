@@ -18,6 +18,8 @@
 
     - Avec un compte (facultatif), le lien *get your puzzle input* donne **vos** données, à enregistrer sous `input.txt` à côté du programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -79,7 +81,7 @@ Vocabulaire utile pour lire le texte original :
 
 2.  Que vaut la réponse si toutes les mesures sont égales ? Si elles sont rangées par ordre décroissant ?
 
-3.  Une mesure plus grande que *toutes* les précédentes, mais plus petite que celle juste avant, est-elle comptée ?
+3.  Une mesure plus grande que la *toute première* mesure du fichier, mais plus petite que celle juste avant elle, est-elle comptée ?
 
 ### <span class="exo-num">Exercice 2</span> — À la main, sur un petit exemple <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-algorithmique-le-parcours-sequentiel-aoc-1-2 }
 
@@ -99,7 +101,7 @@ On considère le relevé (inventé) suivant, écrit ici sur une seule ligne pour
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans le fichier (avec `for ligne in fichier:`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -180,7 +182,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** La partie 2 pose la même question que la partie 1, mais sur une autre liste. Plutôt que de tout réécrire, on construit cette nouvelle liste et on lui applique la fonction `nb_augmentations` déjà écrite : c’est tout l’intérêt d’avoir écrit une fonction.
 
-Écrire une fonction `sommes_par_trois(mesures)` qui renvoie la liste des sommes de trois mesures consécutives, puis réutiliser `nb_augmentations` sur cette nouvelle liste. Sur l’exemple du défi, on doit trouver `7`.
+Écrire une fonction `sommes_par_trois(mesures)` qui renvoie la liste des sommes de trois mesures consécutives, puis réutiliser `nb_augmentations` sur cette nouvelle liste. Sur l’exemple inventé de la fiche, on doit trouver `7`.
 
 ??? pouce "Coup de pouce"
 
@@ -204,7 +206,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
         Les deux sommes partagent deux mesures sur trois. Il suffit de comparer les deux mesures qui ne sont pas communes.
 
-2.  Sur l’exemple du défi, faire les comparaisons trouvées à la main et retrouver `7`.
+2.  Sur l’exemple inventé de la fiche, faire les comparaisons trouvées à la main et retrouver `7`.
 
 3.  Écrire une fonction `nb_augmentations_fenetres(mesures)` qui résout la partie 2 sans calculer aucune somme.
 

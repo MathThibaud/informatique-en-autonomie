@@ -80,7 +80,7 @@
 
 <span class="essentiel">• essentiel</span>
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Dessiner un escalier de **5 marches** : une marche, c’est « avancer, tourner, avancer, tourner ». Utiliser une boucle qui répète 5 fois ce motif.
+<span class="run" title="À programmer et tester sur machine">▶</span> Dessiner un escalier de **5 marches** : une marche, c’est « avancer, tourner de $degrés à gauche, avancer, tourner de$ degrés à droite ». Utiliser une boucle qui répète 5 fois ce motif.
 
 ??? pouce "Coup de pouce"
 

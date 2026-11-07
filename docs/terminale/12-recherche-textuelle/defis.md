@@ -18,6 +18,8 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -136,7 +138,7 @@ Pour chaque ligne, dire si le mot de passe respecte la règle de la partie 1. V�
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -152,7 +154,7 @@ Pour chaque ligne, dire si le mot de passe respecte la règle de la partie 1. V�
 
 **À quoi ça sert ?** C’est le cœur de la partie 1 : la boucle de comptage de la lettre est une recherche dans un texte, et le nombre de lignes valides est la réponse à donner.
 
-Écrire une fonction `valide1(a, b, lettre, mdp)` qui renvoie un booléen, puis le programme qui lit `input.txt` et compte les mots de passe valides. Tester sur l’exemple du défi, puis sur vos données.
+Écrire une fonction `valide1(a, b, lettre, mdp)` qui renvoie un booléen, puis le programme qui lit `input.txt` et compte les mots de passe valides. Tester sur l’exemple inventé de la fiche, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -184,7 +186,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 1.  Sans programme : la ligne `1-3 a: aba` est-elle valide selon la nouvelle règle ? Et `2-3 b: abc` ?
 
-2.  Écrire `valide2(a, b, lettre, mdp)` et compter. Sur l’exemple du défi, on doit trouver `2` mots de passe valides.
+2.  Écrire `valide2(a, b, lettre, mdp)` et compter. Sur l’exemple inventé de la fiche, on doit trouver `2` mots de passe valides.
 
 ??? pouce "Coup de pouce"
 
@@ -239,6 +241,8 @@ Dresser la table de vérité du ou exclusif. Vérifier que `p != q`, `p ^ q` et 
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/19 ](https://adventofcode.com/2020/day/19 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -329,7 +333,7 @@ On considère les règles (inventées) suivantes :
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -369,7 +373,7 @@ Lire `input.txt` et construire un dictionnaire `regles` : à chaque numéro (une
 
 **À quoi ça sert ?** C’est le cœur du défi : un message est valide quand l’une de ces positions est sa longueur, et compter les messages valides donne la réponse de la partie 1. Renvoyer toutes les fins possibles évite d’avoir à deviner la bonne alternative.
 
-Écrire une fonction récursive `fins(regles, num, message, i)` qui renvoie la **liste des positions** où peut se terminer un morceau du message commençant à l’indice `i` et reconnu par la règle `num` (lire l’encadré). Un message est accepté si `len(message)` figure dans `fins(regles, ’0’, message, 0)`. Tester sur l’exemple, puis compter les messages acceptés.
+Écrire une fonction récursive `fins(regles, num, message, i)` qui renvoie la **liste des positions** où peut se terminer un morceau du message commençant à l’indice `i` et reconnu par la règle `num` (lire l’encadré « Grammaire, expression régulière et positions de fin », dans la section « Pour y arriver »). Un message est accepté si `len(message)` figure dans `fins(regles, ’0’, message, 0)`. Tester sur l’exemple, puis compter les messages acceptés.
 
 ??? pouce "Coup de pouce"
 
@@ -439,9 +443,9 @@ Avec les règles d’origine, on doit compter `2` messages ; avec les règles mo
 
     **Grammaire.** Les règles de l’énoncé forment une *grammaire* : chaque règle décrit un ensemble de mots à partir d’autres règles, comme « une phrase est un groupe nominal suivi d’un verbe ». On dit qu’un mot est *reconnu* s’il peut être obtenu en partant de la règle `0`.
 
-    **Pourquoi pas une expression régulière ?** En partie 1, on peut remplacer chaque numéro par sa définition jusqu’à n’avoir que des lettres et obtenir une expression régulière : sur l’exemple du défi, la règle `0` devient `(aa|b)(ba|a(aa|b))`. Mais si une règle contient son propre numéro, ce remplacement ne s’arrête jamais. Pire : une règle du type « `X` suivi de `Y` autant de fois que de `X` » (même nombre des deux côtés) ne peut *pas du tout* s’écrire comme une expression régulière, car celles-ci ne savent pas compter.
+    **Pourquoi pas une expression régulière ?** En partie 1, on peut remplacer chaque numéro par sa définition jusqu’à n’avoir que des lettres et obtenir une expression régulière : sur l’exemple inventé de la fiche, la règle `0` devient `(aa|b)(ba|a(aa|b))`. Mais si une règle contient son propre numéro, ce remplacement ne s’arrête jamais. Pire : une règle du type « `X` suivi de `Y` autant de fois que de `X` » (même nombre des deux côtés) ne peut *pas du tout* s’écrire comme une expression régulière, car celles-ci ne savent pas compter.
 
-    **L’idée de la fonction `fins`.** Plutôt que de deviner *où* s’arrête la partie reconnue par une règle, on renvoie *toutes* les possibilités. Sur l’exemple du défi, avec le mot `bbaa` : la règle `1` depuis l’indice `0` renvoie `[1]` (la lettre `b`) ; la règle `2` depuis l’indice `1` renvoie `[3]` (le morceau `ba`). Donc `fins(regles, ’0’, "bbaa", 0)` vaut `[3]` : le mot n’est pas reconnu en entier car $3 \neq 4$. Quand une règle a plusieurs alternatives, la liste peut contenir plusieurs positions ; une liste vide signifie « échec ».
+    **L’idée de la fonction `fins`.** Plutôt que de deviner *où* s’arrête la partie reconnue par une règle, on renvoie *toutes* les possibilités. Sur l’exemple inventé de la fiche, avec le mot `bbaa` : la règle `1` depuis l’indice `0` renvoie `[1]` (la lettre `b`) ; la règle `2` depuis l’indice `1` renvoie `[3]` (le morceau `ba`). Donc `fins(regles, ’0’, "bbaa", 0)` vaut `[3]` : le mot n’est pas reconnu en entier car $3 \neq 4$. Quand une règle a plusieurs alternatives, la liste peut contenir plusieurs positions ; une liste vide signifie « échec ».
 
 ## Approfondissement
 
@@ -451,8 +455,8 @@ Avec les règles d’origine, on doit compter `2` messages ; avec les règles mo
 
     ```python
     debuts = {"a", "b"}
-    fins = {"a", "ab"}
-    mots = {d + f for d in debuts for f in fins}   # tous les "collages"
+    suites = {"a", "ab"}
+    mots = {d + s for d in debuts for s in suites}   # tous les "collages"
     print(mots)                     # {'aa', 'aab', 'ba', 'bab'} (ordre quelconque)
     print("ba" in mots)             # True : test d'appartenance tres rapide
     mots = mots | {"bb", "aa"}     # reunion : "aa" deja present, pas de doublon
@@ -488,7 +492,7 @@ Dans les vraies données, la règle `0` est `8 11`, et les règles `42` et `31` 
 
     ??? pouce "Coup de pouce"
 
-        Compter le nombre `p` de blocs de tête qui sont dans `m42` ; tous les blocs restants doivent être dans `m31` (un booléen drapeau, comme dans le défi *Handy Haversacks*).
+        Compter le nombre `p` de blocs de tête qui sont dans `m42` ; tous les blocs restants doivent être dans `m31` (un booléen drapeau, comme dans le défi *Handy Haversacks*, chapitre 1).
 
 5.  Comparer avec la fonction `fins` : vitesse, et généralité (que se passe-t-il si l’on change la règle `0` ?).
 

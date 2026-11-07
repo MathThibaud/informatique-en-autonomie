@@ -166,7 +166,7 @@ Dans la **méthode naïve**, on place le motif sous le texte à chaque position 
 
 Question 2
 
-L’algorithme de **Boyer-Moore-Horspool** compare le motif au texte de **droite à gauche**. En cas d’échec, il regarde le caractère `c` du texte aligné avec la **dernière** case du motif et décale le motif d’autant de cases que l’indique une **table de décalage** :
+L’algorithme de **Boyer-Moore-Horspool** compare le motif au texte de **droite à gauche**. Après chaque tentative, **réussie ou non**, il regarde le caractère `c` du texte aligné avec la **dernière** case du motif et décale le motif d’autant de cases que l’indique une **table de décalage** :
 
 - chaque lettre du motif, **sauf la dernière**, est associée à sa distance à la fin du motif : la lettre d’indice `k` reçoit `m - 1 - k` (pour une lettre répétée, on garde la valeur la plus petite) ;
 

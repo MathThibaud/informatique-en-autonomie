@@ -233,7 +233,7 @@ Pour réaliser ces opérations *sans programmer*, l’outil roi est le <span id=
 
 !!! remarque "Remarque"
 
-    Le tableur reste **le** logiciel le plus utilisé au monde pour manipuler des données. Les **TP tableur** proposés en fin de chapitre en font pratiquer les gestes de base (formules, recopie, calculs sur une colonne) ; les mêmes gestes servent ensuite à trier et filtrer une vraie table, par exemple `jeux.csv` ouvert dans le tableur (menu *Données* : *Trier*, *Filtre automatique*). *(Attention toutefois au piège du § III : un tableur a des **limites** cachées que le CSV n’a pas.)*
+    Le tableur reste **le** logiciel le plus utilisé au monde pour manipuler des données. Les **TP tableur** proposés en fin de chapitre en font pratiquer les gestes de base (formules, recopie, calculs sur une colonne) ; les mêmes gestes servent ensuite à trier et filtrer une vraie table, par exemple la table *jeu* recopiée dans le tableur (exercice « Fouiller au tableur ») (menu *Données* : *Trier*, *Filtre automatique*). *(Attention toutefois au piège du § III : un tableur a des **limites** cachées que le CSV n’a pas.)*
 
 <span id="cours-05-14" class="ancre"></span>
 

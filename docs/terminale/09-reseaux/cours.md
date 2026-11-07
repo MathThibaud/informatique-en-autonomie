@@ -132,7 +132,7 @@ Comment remplir ces tables ? Deux façons : le <span id="lex-routagestatique09" 
 
 Prenons ce réseau pour toute la suite (les nombres sur les liens seront expliqués plus loin) :
 
-![](../figures/459eafbd831143ad.svg){ .tikz loading=lazy }
+![](../figures/2d1c0d26bd4ffe74.svg){ .tikz loading=lazy }
 
 <span id="cours-09-6" class="ancre"></span>
 
@@ -203,13 +203,13 @@ Le protocole <span id="lex-rip09" class="ancre"></span>**RIP** (*Routing Informa
 
 !!! exemple "Exemple"
 
-    Sur nos liens (en Mbps, soit $\times 10^6$ bits/s), le coût vaut $10^8 / \text{débit}$ :
+    Sur nos liens (en Mbit/s, soit $\times 10^6$ bits/s), le coût vaut $10^8 / \text{débit}$ :
 
-    |           Débit           | $100$ Mbps | $10$ Mbps | $1$ Mbps |
-    |:-------------------------:|:----------:|:---------:|:--------:|
-    | Coût $=10^8/\text{débit}$ |    $1$     |   $10$    |  $100$   |
+    |           Débit           | $100$ Mbit/s | $10$ Mbit/s | $1$ Mbit/s |
+    |:-------------------------:|:------------:|:-----------:|:----------:|
+    | Coût $=10^8/\text{débit}$ |     $1$      |    $10$     |   $100$    |
 
-    Les liens à $100$ Mbps coûtent donc $1$, le lien A–C (à seulement $1$ Mbps) coûte $100$, et C–D (à $10$ Mbps) coûte $10$. Table de routage de **A** par OSPF :
+    Les liens à $100$ Mbit/s coûtent donc $1$, le lien A–C (à seulement $1$ Mbit/s) coûte $100$, et C–D (à $10$ Mbit/s) coûte $10$. Table de routage de **A** par OSPF :
 
     |   Réseau    | Sortir vers |          Coût          |
     |:-----------:|:-----------:|:----------------------:|
@@ -222,7 +222,7 @@ Le protocole <span id="lex-rip09" class="ancre"></span>**RIP** (*Routing Informa
 
 !!! exemple "Exemple — le réseau à six routeurs, en OSPF"
 
-    Reprenons le réseau à six routeurs ci-dessus. Les liens à $100$ Mbps coûtent $1$ ; le lien A–C ($1$ Mbps) coûte $100$ ; le lien E–F ($10$ Mbps) coûte $10$. Table **OSPF** de A :
+    Reprenons le réseau à six routeurs ci-dessus. Les liens à $100$ Mbit/s coûtent $1$ ; le lien A–C ($1$ Mbit/s) coûte $100$ ; le lien E–F ($10$ Mbit/s) coûte $10$. Table **OSPF** de A :
 
     |   Réseau    | Sortir vers |          Coût          |
     |:-----------:|:-----------:|:----------------------:|
@@ -236,11 +236,11 @@ Le protocole <span id="lex-rip09" class="ancre"></span>**RIP** (*Routing Informa
 
 !!! exemple "Exemple — un réseau à sept routeurs, entièrement en OSPF"
 
-    Voici un réseau plus étendu ; les nombres sont les **débits** (Mbps). On applique OSPF (coût $=10^8/$débit) depuis A.
+    Voici un réseau plus étendu ; les nombres sont les **débits** (Mbit/s). On applique OSPF (coût $=10^8/$débit) depuis A.
 
     ![](../figures/8cd04838dbec425b.svg){ .tikz loading=lazy }
 
-    Coûts : les liens à $100$ Mbps valent $1$, les liens A–C et D–F ($10$ Mbps) valent $10$. Table **OSPF** de A :
+    Coûts : les liens à $100$ Mbit/s valent $1$, les liens A–C et D–F ($10$ Mbit/s) valent $10$. Table **OSPF** de A :
 
     |   Réseau    | Sortir vers |            Coût            |
     |:-----------:|:-----------:|:--------------------------:|
@@ -266,9 +266,9 @@ Comparons les deux tables de A. Elles **diffèrent** là où le lien direct A–
 | le réseau de C | **A–C** (1 saut) |  A–B–C (coût 2)  |
 | le réseau de E | A–C–E (2 sauts)  | A–B–C–E (coût 3) |
 
-RIP fonce sur le lien **direct** A–C … sans voir que c’est une liaison **poussive** à $1$ Mbps ! OSPF, lui, préfère faire **un détour par B** sur des liaisons rapides : la route est plus longue en nombre de routeurs, mais bien plus rapide en réalité.
+RIP fonce sur le lien **direct** A–C … sans voir que c’est une liaison **poussive** à $1$ Mbit/s ! OSPF, lui, préfère faire **un détour par B** sur des liaisons rapides : la route est plus longue en nombre de routeurs, mais bien plus rapide en réalité.
 
-![](../figures/30e9065e978f92b0.svg){ .tikz loading=lazy }
+![](../figures/1cbd5b136d9e5986.svg){ .tikz loading=lazy }
 
 !!! propriete "Propriété 2 — La leçon"
 

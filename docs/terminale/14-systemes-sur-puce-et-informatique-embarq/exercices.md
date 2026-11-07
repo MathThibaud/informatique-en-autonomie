@@ -20,7 +20,7 @@ Associer chaque terme à sa définition.
 |:---|:---|
 | **(1)** Système sur puce (SoC) | **(a)** composant qui *agit* sur le monde physique (moteur, LED…) |
 | **(2)** Microcontrôleur | **(b)** composant qui *mesure* une grandeur physique (température…) |
-| **(3)** Capteur | **(c)** un ordinateur complet intégré sur une seule puce |
+| **(3)** Capteur | **(c)** ordinateur complet et puissant sur une seule puce, avec OS (smartphone) |
 | **(4)** Actionneur | **(d)** plaque où sont enfichés des composants séparés et remplaçables |
 | **(5)** Carte mère | **(e)** mini-ordinateur sobre et bon marché, sans OS, pour l’embarqué |
 
@@ -72,15 +72,15 @@ En 1971, l’Intel 4004 comptait $2\,300$ transistors. La loi de Moore affirme q
 
 1.  Combien de « doublements » la loi prévoit-elle entre 1971 et 2021 (soit $50$ ans) ?
 
+    ??? pouce "Coup de pouce"
+
+        Combien de périodes de deux ans y a-t-il en $50$ ans ? Chaque doublement multiplie le nombre de transistors par $2$ : par combien est-il multiplié après tous ces doublements ?
+
 2.  En déduire une estimation du nombre de transistors d’une puce en 2021. (On rappelle $2^{25}\approx 33{,}5$ millions ; on donnera un ordre de grandeur.)
 
 3.  La puce Apple A15 (2021) compte environ $15$ **milliards** de transistors. La loi de Moore est-elle une prédiction *parfaite* ? Commenter.
 
 4.  Les puces récentes sont gravées « en $3$ nm » (une appellation commerciale, qu’on prendra ici comme ordre de grandeur de la largeur d’un transistor). Un atome de silicium mesure environ $0{,}2$ nm. Combien d’atomes, environ, dans la largeur d’un transistor ? Que suggère ce résultat sur l’**avenir** de la loi de Moore ?
-
-    ??? pouce "Coup de pouce"
-
-        Combien de périodes de deux ans y a-t-il en $50$ ans ? Chaque doublement multiplie le nombre de transistors par $2$ : par combien est-il multiplié après tous ces doublements ?
 
 ??? corrige "Corrigé"
 
@@ -216,8 +216,6 @@ Une voiture moderne embarque des dizaines de calculateurs. On s’intéresse au 
 
 Un système d’exploitation permet d’exécuter plusieurs applications à la fois en donnant l’impression qu’elles fonctionnent simultanément. En réalité, le système répartit le temps de calcul du processeur entre les différents processus, de sorte qu’ils s’exécutent chacun à leur tour très rapidement. Même si un seul processus utilise réellement le processeur à un instant donné, cette alternance rapide donne l’impression que tout s’exécute en même temps.
 
-Un smartphone dispose de plusieurs ressources, dont un processeur graphique (GPU), un microphone (MIC), une caméra (CAM) et un processeur dédié au calcul (CAL) ; chacune de ces ressources ne peut être utilisée que par un seul processus à la fois.
-
 1.  Expliquer l’intérêt d’utiliser une machine équipée de plusieurs processeurs plutôt qu’une machine équipée d’un seul processeur.
 
 2.  Décrire un avantage et un inconvénient des systèmes sur puces, tels que ceux utilisés dans les smartphones.
@@ -339,11 +337,11 @@ Le club de sciences du lycée installe sur le toit une station météo. Elle est
 
     $$\text{température (en ° C)} = \text{valeur} \times 0{,}1 - 40.$$
 
-    Écrire une fonction `convertir(valeur)` qui renvoie la température correspondant à une valeur lue. Que renvoie `convertir(512)` ? Quelle est la plus haute température mesurable ?
+    Écrire une fonction `convertir(valeur)` qui renvoie la température correspondant à une valeur lue. Que renvoie `convertir(512)` (à l’arrondi près) ? Quelle est la plus haute température mesurable ?
 
 5.  Écrire une fonction `alerte_gel(mesures)` qui prend en paramètre une liste (non vide) de valeurs brutes lues sur le convertisseur et qui renvoie `True` si l’une d’elles correspond à une température strictement négative, `False` sinon. Que renvoie `alerte_gel([412, 405, 398, 401, 420])` ?
 
-6.  Recopier et compléter la boucle principale du programme :
+6.  On dispose des fonctions `lire_capteur_temperature()`, qui renvoie la valeur brute lue sur le convertisseur, `allumer_led()` et `eteindre_led()`. L’alerte porte sur la **dernière** mesure lue. Recopier et compléter la boucle principale du programme :
 
     ```python
     mesures = []

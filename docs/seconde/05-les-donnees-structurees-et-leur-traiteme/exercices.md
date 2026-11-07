@@ -6,7 +6,7 @@
 
     -  Étoiles, <span class="essentiel">• essentiel</span>, coup de pouce, $\blacktriangleright$ et pastilles IA : voir le [mode d’emploi du chapitre 1](../01-les-bases-de-la-programmation-python/exercices.md#modeemploi).
 
-    - <span class="tag">sur papier</span> *à faire sur papier* ; \[ au tableur \]  *à réaliser au tableur* (LibreOffice Calc, Excel ou Google Sheets).
+    - <span class="tag">sur papier</span> *à faire sur papier* ; \[ au tableur \]  *à réaliser au tableur* (LibreOffice Calc, Excel ou Google Sheets) ; <span class="tag">sur machine</span> *à faire sur machine* (Python).
 
     - Plusieurs exercices utilisent la table *jeu* (ventes en millions d’exemplaires) et la table *studio* ci-dessous.
 
@@ -289,7 +289,7 @@ Tom;Beausoleil;quinze
 
 ??? pouce "Coup de pouce"
 
-    Pour le critère 3, un jeu n’est retenu que s’il vérifie les *deux* conditions à la fois : vérifiez-les l’une après l’autre, jeu par jeu.
+    Pour le critère 3, un jeu n’est retenu que s’il vérifie les *deux* conditions à la fois : vérifiez-les l’une après l’autre, jeu par jeu. Attention au mot « après » : un jeu sorti *en* 2013 est-il sorti *après* 2013 ?
 
 ??? corrige "Corrigé"
 
@@ -423,7 +423,7 @@ Tom;Beausoleil;quinze
 
 <span class="essentiel">• essentiel</span>
 
-\[ au tableur \]  On fournit le fichier `jeux.csv` (la table *jeu*, séparateur `;`, encodage UTF-8). L’ouvrir dans un tableur, puis :
+\[ au tableur \]  Ouvrir un tableur et y recopier la table *jeu* donnée en début de feuille : les en-têtes en ligne 1, puis une ligne par jeu (lignes 2 à 7), une valeur par cellule, de la colonne A (`id`) à la colonne G (`ventes`). Puis :
 
 1.  **Trier** le tableau par `ventes` décroissantes. Quel jeu apparaît en tête ?
 
@@ -561,7 +561,7 @@ Tom;Beausoleil;quinze
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Python au service du thème — filtrer avec une fonction <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-20 }
 
-<span class="tag">sur papier</span>  Un tableur filtre une table ligne par ligne : pour chaque enregistrement, le critère est vrai ou faux. En Python, un critère s’écrit donc comme une fonction qui renvoie un **booléen**. On prend celui du cours : « `action` **ET** sorti après 2015 ».
+<span class="tag">sur machine</span>  En Python (Spyder ou Basthon). Un tableur filtre une table ligne par ligne : pour chaque enregistrement, le critère est vrai ou faux. En Python, un critère s’écrit donc comme une fonction qui renvoie un **booléen**. On prend celui du cours : « `action` **ET** sorti après 2015 ».
 
 1.  Compléter la fonction suivante, qui renvoie `True` si le jeu vérifie le critère et `False` sinon.
 

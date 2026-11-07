@@ -30,7 +30,7 @@
 
     - **À l’oral**, le professeur désigne une lettre de votre programme : vous devez dire, ligne par ligne, **où est la tortue et où elle regarde**.
 
-    - Usage de l’IA : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune pour les étapes 1 et 2 (c’est là que l’on apprend à « être la tortue ») ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui ensuite (déboguer, comprendre une erreur), mais chaque lettre est dessinée et expliquée par vous. Voir la charte.
+    - Usage de l’IA : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune pour les étapes 1 et 2 (c’est là que l’on apprend à « être la tortue ») ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui ensuite (déboguer, comprendre une erreur), mais chaque lettre est dessinée et expliquée par vous. Voir la [charte d’usage de l’IA](../charte.md), au début du livre.
 
 ## Le contrat d’une lettre
 
@@ -424,7 +424,7 @@ def minuscule_p(larg):
     saut(3 * u, -u)
 ```
 
-On ajoute ces fonctions en tête de `caractere`, qui choisit : la vraie minuscule si elle existe, sinon la petite capitale.
+On ajoute en tête de `caractere` une branche par vraie minuscule, qui appelle sa fonction ; `caractere` choisit ainsi la vraie minuscule si elle existe, sinon la petite capitale.
 
 ```python
 def caractere(c, larg):

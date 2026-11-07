@@ -18,6 +18,8 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -111,7 +113,7 @@ mem[3] = 13
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -193,7 +195,7 @@ mem[3] = 13
 
 **À quoi ça sert ?** C’est le cœur de la partie 1 : chaque écriture du programme passe par cette fonction.
 
-Écrire une fonction `appliquer(masque, valeur)`. On construira deux entiers à partir du masque : l’un pour forcer des bits à `1`, l’autre pour forcer des bits à `0`. Vérifier : `appliquer(m, 6)` vaut `18` avec le masque de l’exemple.
+Écrire une fonction `appliquer(masque, valeur)`. On construira deux entiers à partir du masque : l’un pour forcer des bits à `1`, l’autre pour forcer des bits à `0`. Vérifier : avec `m` le masque de l’exemple inventé de la fiche, `appliquer(m, 6)` vaut `18`.
 
 ??? pouce "Coup de pouce"
 
@@ -209,7 +211,7 @@ mem[3] = 13
 
 **À quoi ça sert ?** On obtient la réponse de la partie 1. Le dictionnaire ne contient que les adresses réellement écrites : quelques centaines au lieu de $2^{36}$ cases.
 
-La mémoire a $2^{36}$ cases : une liste est impossible. Utiliser un dictionnaire `memoire` (adresse $\to$ valeur), exécuter le programme et afficher la somme des valeurs. Tester sur l’exemple du défi, puis sur vos données.
+La mémoire a $2^{36}$ cases : une liste est impossible. Utiliser un dictionnaire `memoire` (adresse $\to$ valeur), exécuter le programme et afficher la somme des valeurs. Tester sur l’exemple inventé de la fiche (réponse `40`), puis sur vos données.
 
 ## Partie 2
 

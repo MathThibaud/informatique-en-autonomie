@@ -181,7 +181,7 @@ Quatre processus arrivent et demandent le processeur :
 | Instant d’arrivée |  0  |  1  |  2  |  4  |
 |       Durée       |  3  |  4  |  2  |  1  |
 
-Pour chacune des trois stratégies ci-dessous, tracer le **chronogramme** (de $t=0$ à $t=10$) et calculer le **temps d’attente moyen** (rappel : temps d’attente $=$ temps de rotation $-$ durée, où le temps de rotation $=$ instant de fin $-$ instant d’arrivée).
+Pour chacune des trois stratégies ci-dessous, tracer le **chronogramme** (de $t=0$ à $t=10$) et calculer le **temps d’attente moyen** (rappel : temps d’attente $=$ temps de séjour $-$ durée, où le temps de séjour — parfois appelé temps de rotation — vaut instant de fin $-$ instant d’arrivée).
 
 1.  **Premier arrivé, premier servi** (chacun jusqu’au bout, dans l’ordre d’arrivée).
 
@@ -193,7 +193,7 @@ Pour chacune des trois stratégies ci-dessous, tracer le **chronogramme** (de $t
 
     ??? pouce "Coup de pouce"
 
-        Tracer d’abord le chronogramme, puis remplir un petit tableau par processus : instant de fin, temps de rotation, temps d’attente. Pour le plus court d’abord, ne comparer que les processus *déjà arrivés* au moment où le processeur se libère.
+        Tracer d’abord le chronogramme, puis remplir un petit tableau par processus : instant de fin, temps de séjour, temps d’attente. Pour le plus court d’abord, ne comparer que les processus *déjà arrivés* au moment où le processeur se libère.
 
 ??? corrige "Corrigé"
 
@@ -294,7 +294,9 @@ On considère trois processus, dans cet ordre d’arrivée : PID $11$ (durée $4
         return ordre_execution
     ```
 
-5.  <span class="run" title="À programmer et tester sur machine">▶</span>  Créer la liste d’attente des trois processus ci-dessus et vérifier, en appelant `tourniquet`, les suites trouvées aux questions 1 et 2.
+    Le sujet de bac nomme les états à sa façon : « En cours d’exécution » correspond à l’état *élu* du cours, « Suspendu » à l’état *prêt* (processus remis en file).
+
+5.  <span class="run" title="À programmer et tester sur machine">▶</span>  Créer la liste d’attente des trois processus ci-dessus et vérifier, avec `tourniquet(liste_attente, 1)`, la suite de la question 1. Recréer ensuite une liste de **nouveaux** processus (la fonction a vidé la liste et terminé les anciens) et vérifier, avec un quantum de $2$, la suite de la question 2.
 
 ??? corrige "Corrigé"
 
@@ -342,6 +344,9 @@ On considère trois processus, dans cet ordre d’arrivée : PID $11$ (durée $4
     ```python
     liste_attente = [Processus(11, 4), Processus(20, 2), Processus(32, 3)]
     print(tourniquet(liste_attente, 1))   # [11, 20, 32, 11, 20, 32, 11, 32, 11]
+    # nouveaux processus : les anciens sont termines et la liste est vide
+    liste_attente = [Processus(11, 4), Processus(20, 2), Processus(32, 3)]
+    print(tourniquet(liste_attente, 2))   # [11, 11, 20, 20, 32, 32, 11, 11, 32]
     ```
 
 ### Interblocage
@@ -508,7 +513,7 @@ depart_proc = {0: p1, 1: p3, 2: p2, 3: p4}
 
     ![](../figures/ce24a0c2daf46121.svg){ .tikz loading=lazy }
 
-L’ordonnancement est mis en place par les classes `File` et `Ordonnanceur` déjà écrites dans l’exercice « Ordonnancer des processus avec une file » du chapitre *Structures linéaires* (exercice 13, même sujet de bac). On les reprend telles que vous les avez complétées, avec deux précisions : `defile` renvoie `None` si la file est vide, et `tourniquet` renvoie le nom du processus élu (ou `None` si la file est vide) ; ici, la méthode qui exécute un processus pendant un cycle s’appelle `execute_un_cycle`. Rappel de l’interface utile :
+L’ordonnancement est mis en place par les classes `File` et `Ordonnanceur` déjà écrites dans l’exercice « Ordonnancer des processus avec une file » du chapitre *Structures linéaires* (exercice 13, même sujet de bac). On les reprend telles qu’elles ont été complétées, avec deux précisions : `defile` renvoie `None` si la file est vide, et `tourniquet` renvoie le nom du processus élu (ou `None` si la file est vide) ; ici, la méthode qui exécute un processus pendant un cycle s’appelle `execute_un_cycle`. Rappel de l’interface utile :
 
 ```python
 ordo = Ordonnanceur()               # ordo.temps vaut 0, file vide
@@ -517,7 +522,15 @@ nom = ordo.tourniquet()             # un cycle : temps + 1, elit, execute, remet
 ordo.file.est_vide()                # True s'il ne reste aucun processus en attente
 ```
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui utilise les variables `p1`, `p2`, `p3`, `p4` et `depart_proc` définies précédemment ; crée un ordonnanceur ; ajoute un nouveau processus à l’ordonnanceur lorsque c’est le moment ; affiche le processus choisi par l’ordonnanceur ; s’arrête lorsqu’il n’y a plus de processus à exécuter.
+1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire un programme qui, à partir des variables `p1`, `p2`, `p3`, `p4` et `depart_proc` définies précédemment :
+
+    - crée un ordonnanceur ;
+
+    - à chaque cycle, lui ajoute le processus de `depart_proc` créé à ce cycle, s’il y en a un ;
+
+    - affiche le nom du processus élu par `tourniquet` ;
+
+    - s’arrête quand il n’y a plus de processus à créer ni à exécuter.
 
     ??? pouce "Coup de pouce"
 
@@ -743,7 +756,7 @@ Chaque processus dispose d’une **valeur de priorité**. Un processus est prior
 
 - **À chaque cycle d’horloge :**
 
-  - s’il n’y a pas de processus en cours d’exécution et s’il reste des processus en attente : sélectionner un processus de priorité la plus élevée dans l’une des files non vides, et l’élire comme processus en cours d’exécution ;
+  - s’il n’y a pas de processus en cours d’exécution et s’il reste des processus en attente : sélectionner un processus le plus prioritaire (plus petite valeur de priorité) dans l’une des files non vides, et l’élire comme processus en cours d’exécution ;
 
   - sinon, si un processus est en cours d’exécution :
 
@@ -751,9 +764,9 @@ Chaque processus dispose d’une **valeur de priorité**. Un processus est prior
 
     - sinon, incrémenter son temps d’utilisation, puis :
 
-      - si des processus de priorité supérieure ou égale attendent : retirer le processus en cours du processeur, réduire sa priorité de $1$ et le mettre dans la file correspondant à sa nouvelle priorité, puis élire un processus de priorité la plus élevée parmi les files non vides ;
+      - si des processus **au moins aussi prioritaires** (valeur de priorité inférieure ou égale) attendent : retirer le processus en cours du processeur, **augmenter sa valeur de priorité de $1$** (il devient moins prioritaire) et le mettre dans la file correspondant à sa nouvelle valeur de priorité, puis élire un processus le plus prioritaire parmi les files non vides ;
 
-      - sinon, réduire sa priorité de $1$ et continuer à exécuter le processus en cours.
+      - sinon, augmenter sa valeur de priorité de $1$ et continuer à exécuter le processus en cours.
 
 1.  Parmi les structures *liste*, *file* et *pile*, donner la plus adaptée pour stocker les processus d’une même priorité.
 
@@ -792,19 +805,19 @@ Pour les questions 6 et 7, on dispose d’un processus qui nécessite un temps d
 
 1.  Expliquer pourquoi le processus long risque de ne **jamais** se terminer avec ce programme (indiquer notamment sa priorité au bout de quelque temps).
 
-Pour régler ce phénomène, on ajoute au processus l’attribut `temps_d_attente`, et on définit une constante `Max_Temps`, le temps maximal qu’un processus attend avant de voir sa priorité remonter : à chaque cycle, le `temps_d_attente` augmente, et s’il dépasse `Max_Temps`, la priorité du processus augmente.
+Pour régler ce phénomène, on ajoute au processus l’attribut `temps_d_attente`, et on définit une constante `Max_Temps`, le temps maximal qu’un processus attend avant de voir sa priorité remonter : à chaque cycle, le `temps_d_attente` augmente, et s’il dépasse `Max_Temps`, la **valeur de priorité** du processus **diminue** (il redevient plus prioritaire).
 
 1.  Expliquer pourquoi le processus long ne risque plus de ne jamais se terminer.
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `meilleur_priorite(liste_files)` qui renvoie `None` s’il n’y a plus de processus, et sinon la priorité de l’un des processus les plus prioritaires de la liste des files. Par exemple, si `p1`, `p2`, `p3` sont des instances de `Processus` et `liste_files = [[], [p2], [p3, p1]]`, l’appel `meilleur_priorite(liste_files)` renvoie `1`.
+2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `meilleur_priorite(liste_files)` qui renvoie `None` s’il n’y a plus de processus, et sinon la valeur de priorité de l’un des processus les plus prioritaires de la liste des files. Par exemple, si `p1`, `p2`, `p3` sont des instances de `Processus` et `liste_files = [[], [p2], [p3, p1]]`, l’appel `meilleur_priorite(liste_files)` renvoie `1`.
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `prioritaire(liste_files)` qui renvoie `None` si aucune file ne contient de processus, et sinon renvoie l’un des processus les plus prioritaires en le **supprimant** de la file où il se trouvait. On pourra utiliser `liste.pop(i)`, qui renvoie l’élément d’indice `i` de la liste tout en le supprimant.
+3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `prioritaire(liste_files)` qui renvoie `None` si aucune file ne contient de processus, et sinon renvoie le processus **en tête de la première file non vide** (rappel : la tête est à droite), en le **supprimant** de cette file. On pourra utiliser `liste.pop(i)`, qui renvoie l’élément d’indice `i` de la liste tout en le supprimant.
 
 4.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `gerer(p, liste_files)` qui prend le processus en cours d’exécution `p` (ou `None`) et la liste des files d’attente, qui implémente **un cycle** du programme décrit en début d’énoncé, et qui renvoie le processus en cours d’exécution à l’issue de ce cycle (ou `None`).
 
     ??? pouce "Coup de pouce"
 
-        Question 5 : appliquer la règle cycle par cycle en notant la priorité de chaque processus. Question 8 : la priorité d’un processus est l’indice de sa file. Question 9 : réutiliser `meilleur_priorite` ; dans la simulation, la tête de chaque file est à droite. Question 10 : suivre l’énoncé ligne à ligne, un `if` par cas.
+        Question 5 : appliquer la règle cycle par cycle en notant la priorité de chaque processus. Question 8 : la valeur de priorité d’un processus est l’indice de sa file. Question 9 : réutiliser `meilleur_priorite` ; dans la simulation, la tête de chaque file est à droite. Question 10 : suivre l’énoncé ligne à ligne, un `if` par cas.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -827,7 +840,7 @@ Pour régler ce phénomène, on ajoute au processus l’attribut `temps_d_attent
             self.temps_CPU = temps_CPU
     ```
 
-    **5.** Au cycle $3$, P2 (préempté par P3, de même priorité $0$) passe en priorité $1$, derrière P1. Au cycle $4$, aucun processus en attente n’a une priorité supérieure ou égale à celle de P3 ($0$) : P3 continue, et sa valeur de priorité passe à $1$. Au cycle $5$, P1 et P2 (priorité $1$) attendent : P3 est retiré, passe en priorité $2$, et P1 (tête de la file $1$) est élu.
+    **5.** Au cycle $3$, P2 (préempté par P3, de même valeur de priorité $0$) passe à la valeur de priorité $1$, derrière P1. Au cycle $4$, aucun processus en attente n’est au moins aussi prioritaire que P3 (valeur de priorité inférieure ou égale à $0$) : P3 continue, et sa valeur de priorité passe à $1$. Au cycle $5$, P1 et P2 (valeur $1$) attendent : P3 est retiré, sa valeur de priorité passe à $2$, et P1 (tête de la file $1$) est élu.
 
     ```text
     Cycle 3: CPU=P3     liste_files=[[], [P2, P1], []]
@@ -837,9 +850,9 @@ Pour régler ce phénomène, on ajoute au processus l’attribut `temps_d_attent
 
     **6.** À chaque cycle passé sur le processeur, la valeur de priorité du processus long augmente de $1$ : au bout de quelque temps, elle est très grande (il est très peu prioritaire). Or les processus courts arrivent sans cesse avec la priorité $0$ et, avec une durée de $4$, n’atteignent jamais une valeur de priorité élevée. Il y a toujours un processus plus prioritaire en attente : le processus long n’est plus jamais élu. C’est une **famine**.
 
-    **7.** Pendant qu’il attend, le `temps_d_attente` du processus long augmente ; dès qu’il dépasse `Max_Temps`, sa priorité remonte, et ainsi de suite jusqu’à ce qu’elle rejoigne celle des processus courts. Il finit donc par être élu régulièrement, et son temps d’utilisation atteint $1000$ en un temps fini.
+    **7.** Pendant qu’il attend, le `temps_d_attente` du processus long augmente ; dès qu’il dépasse `Max_Temps`, sa valeur de priorité diminue (il redevient plus prioritaire), et ainsi de suite jusqu’à ce qu’elle rejoigne celle des processus courts. Il finit donc par être élu régulièrement, et son temps d’utilisation atteint $1000$ en un temps fini.
 
-    **8.** La priorité d’un processus est l’indice de sa file : on renvoie l’indice de la première file non vide.
+    **8.** La valeur de priorité d’un processus est l’indice de sa file : on renvoie l’indice de la première file non vide.
 
     ```python
     def meilleur_priorite(liste_files):

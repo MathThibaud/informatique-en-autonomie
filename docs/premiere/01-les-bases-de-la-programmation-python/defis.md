@@ -18,6 +18,8 @@
 
     - Créer un compte sur le site est **facultatif** (connexion avec GitHub, Google…). Avec un compte, le lien *get your puzzle input* affiche **vos** données : tout sélectionner, copier, puis coller dans un fichier texte vide enregistré sous le nom `input.txt`, **dans le même dossier** que votre programme Python. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -140,7 +142,7 @@ En Python, comparer `2000 / 3`, `2000 // 3` et `int(2000 / 3)`. Lequel correspon
     fichier.close()                  # ferme le fichier
     ```
 
-Recopier ce programme et l’exécuter sur un fichier contenant l’exemple du défi. Le modifier ensuite pour calculer la somme des carburants de tous les modules, avec le motif de l’accumulateur.
+Recopier ce programme et l’exécuter sur le fichier `exemple.txt` contenant les trois masses inventées `30`, `90` et `2000` (une par ligne), en remplaçant `"input.txt"` par `"exemple.txt"`. Le modifier ensuite pour calculer la somme des carburants de tous les modules, avec le motif de l’accumulateur : sur l’exemple, on doit trouver `700`. Revenir enfin à `"input.txt"` pour obtenir la réponse.
 
 ??? pouce "Coup de pouce"
 
@@ -172,7 +174,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** En remplaçant `carburant` par `carburant_total` dans le programme du total, on obtient la réponse de la partie 2. Comme on ne sait pas à l’avance combien de fois répéter le calcul, c’est le rôle de la boucle `while`.
 
-Écrire une fonction `carburant_total(masse)` qui applique la nouvelle règle à un module. Avec les masses de l’exemple, on doit trouver `8`, `35` et `980`, soit un total de `1023`. Détailler à la main le cas de la masse `90` avant de programmer.
+Écrire une fonction `carburant_total(masse)` qui applique la nouvelle règle à un module. Avec les masses de l’exemple, on doit trouver `8`, `35` et `980`, soit un total de `1023`. (Le détail à la main du cas de la masse `90` est demandé à l’exercice suivant.)
 
 ??? pouce "Coup de pouce"
 
@@ -200,9 +202,9 @@ Pour la masse `90`, écrire le tableau des valeurs successives de `ajout` et `to
 
 Une fonction peut s’appeler elle-même : on parle de fonction *récursive*. C’est une notion de Terminale, proposée ici pour les curieux.
 
-1.  Expliquer pourquoi, pour une masse $m$ : carburant total de $m$ = carburant de $m$ + carburant total *de ce carburant*, tant que le carburant de $m$ est strictement positif.
+1.  Expliquer pourquoi, pour une masse $m$ : carburant total de $m$ = carburant de $m$ + carburant total *de ce carburant*, **lorsque** le carburant de $m$ est strictement positif (sinon le carburant total vaut 0).
 
-2.  Écrire une version de `carburant_total` sans boucle, qui s’appelle elle-même sur la quantité de carburant qu’elle vient de calculer.
+2.  Écrire une fonction `carburant_total_rec(masse)`, sans boucle, qui s’appelle elle-même sur la quantité de carburant qu’elle vient de calculer.
 
     ??? pouce "Coup de pouce"
 

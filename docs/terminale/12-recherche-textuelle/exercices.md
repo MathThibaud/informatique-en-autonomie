@@ -137,7 +137,7 @@ Donner la (les) position(s) d’occurrence.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Construire la table de décalage <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-12-5 }
 
-Pour un motif de longueur $m$, la table de Horspool donne à la lettre en position $k$ (sauf la dernière) le décalage $m-1-k$ ; toute autre lettre reçoit $m$.
+Pour un motif de longueur $m$, la table de Horspool donne à chaque lettre du motif, **sauf celle de la dernière position**, le décalage $m-1-k$, où $k$ est sa position (à partir de $0$) ; si une lettre apparaît plusieurs fois, on garde sa position la plus à droite (hors dernière position). Toute autre lettre reçoit $m$.
 
 Construire la table de décalage de chacun de ces motifs (préciser le décalage par défaut) :
 
@@ -588,7 +588,7 @@ L’antivirus utilise l’algorithme de **Boyer-Moore-Horspool**. On dispose des
 
         Q5 : parcourir la liste des signatures : que renvoie `horspool` quand la signature est absente ? Peut-on conclure dès la première trouvée ?
 
-6.  L’antivirus analyse $100\,000$ fichiers avec la même liste de $1\,000$ signatures. Combien de fois la table de décalage de chaque signature est-elle construite avec la fonction `est_infecte` ? Proposer, sans écrire tout le code, une organisation qui évite ce travail inutile.
+6.  L’antivirus analyse $100\,000$ fichiers avec la même liste de $1\,000$ signatures. Avec la fonction `est_infecte`, combien de fois, au plus, la table de décalage d’une même signature est-elle construite ? Proposer, sans écrire tout le code, une organisation qui évite ce travail inutile.
 
 7.  L’éditeur de l’antivirus affirme : « plus nos signatures sont longues, plus l’analyse est rapide ». Cette affirmation est-elle plausible ? Justifier.
 

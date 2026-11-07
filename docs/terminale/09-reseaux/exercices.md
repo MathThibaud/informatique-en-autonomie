@@ -95,7 +95,7 @@ L’entreprise **CaféNet** raccorde plusieurs sites. Pour chacun, on veut chois
 | Boutique                    |         10         |
 | Liaison entre deux routeurs |         2          |
 
-1.  Pour chaque site, donner le masque `/n` le plus adapté et le nombre d’adresses de machines alors disponibles.
+1.  Pour chaque site (sauf la liaison entre routeurs, traitée à la question 2), donner le masque `/n` le plus adapté et le nombre d’adresses de machines alors disponibles.
 
 2.  Pour la liaison entre deux routeurs, on choisit un `/30`. Combien d’adresses de machines offre-t-il ? Pourquoi est-ce exactement ce qu’il faut ?
 
@@ -164,13 +164,13 @@ Un routeur A a la table de routage suivante :
 
 | Réseau | Sortir par | Métrique |
 |:------:|:----------:|:--------:|
-|   R1   |    eth0    |    0     |
-|   R3   |    eth2    |    0     |
-|   R2   | routeur G  |    1     |
+|   N1   |    eth0    |    0     |
+|   N3   |    eth2    |    0     |
+|   N2   | routeur G  |    1     |
 
 1.  Quels réseaux sont *directement* reliés à A ? Comment le voit-on ?
 
-2.  Un paquet arrive en A, destiné au réseau R2 : que fait A ?
+2.  Un paquet arrive en A, destiné au réseau N2 : que fait A ?
 
 3.  Que signifie une métrique de $0$ ?
 
@@ -180,7 +180,7 @@ Un routeur A a la table de routage suivante :
 
 ??? corrige "Corrigé"
 
-    **1.** R1 et R3 (métrique $0$, atteints par une interface propre, eth0 et eth2). **2.** A transmet le paquet au **routeur G** (qui saura continuer). **3.** Métrique $0$ $=$ réseau **directement raccordé** au routeur.
+    **1.** N1 et N3 (métrique $0$, atteints par une interface propre, eth0 et eth2). **2.** A transmet le paquet au **routeur G** (qui saura continuer). **3.** Métrique $0$ $=$ réseau **directement raccordé** au routeur.
 
 ### Le protocole RIP
 
@@ -188,7 +188,7 @@ Un routeur A a la table de routage suivante :
 
 <span class="essentiel">• essentiel</span>
 
-On considère le réseau ci-dessous (les nombres sont les débits en Mbps ; on les **ignore** pour RIP). Chaque routeur dessert son propre réseau local.
+On considère le réseau ci-dessous (les nombres sont les débits en Mbit/s ; on les **ignore** pour RIP). Chaque routeur dessert son propre réseau local.
 
 ![](../figures/f22336cf06a8e044.svg){ .tikz .tikz-inline loading=lazy }
 
@@ -246,9 +246,9 @@ En OSPF, le coût d’une liaison vaut $10^8/\text{débit}$, le débit étant ex
 
 <span class="essentiel">• essentiel</span>
 
-On reprend **le même réseau**, mais cette fois les nombres sont les **débits** qui servent à calculer les coûts OSPF ($\text{coût}=10^8/\text{débit}$).
+On reprend **le réseau de l’exercice 7**, mais cette fois les nombres sont les **débits** qui servent à calculer les coûts OSPF ($\text{coût}=10^8/\text{débit}$).
 
-1.  Calculer le coût de chaque type de liaison : $100$ Mbps, $10$ Mbps, $1$ Mbps.
+1.  Calculer le coût de chaque type de liaison : $100$ Mbit/s, $10$ Mbit/s, $1$ Mbit/s.
 
 2.  Donner la table de routage **OSPF** de A (réseau visé, sortie, coût total).
 
@@ -260,7 +260,7 @@ On reprend **le même réseau**, mais cette fois les nombres sont les **débits*
 
 ??? corrige "Corrigé"
 
-    **1.** Coûts $=10^8/\text{débit}$ : $100$ Mbps $\to 1$ ; \; $10$ Mbps $\to 10$ ; \; $1$ Mbps $\to 100$.  
+    **1.** Coûts $=10^8/\text{débit}$ : $100$ Mbit/s $\to 1$ ; \; $10$ Mbit/s $\to 10$ ; \; $1$ Mbit/s $\to 100$.  
     **2.** Coûts des liaisons : A–B $100$ ; B–D $10$ ; toutes les autres $1$. Table OSPF de A (le lien A–B coûte $100$, on l’évite) :
 
     |   Réseau    | Sortir vers |     Coût      |
@@ -274,7 +274,7 @@ On reprend **le même réseau**, mais cette fois les nombres sont les **débits*
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Prendre pour OSPF le chemin qui a le moins de liaisons : OSPF additionne les coûts des liaisons, et ici le meilleur chemin vers D en compte quatre.
 
-    **3.** Les deux protocoles **divergent** pour B, D et E : RIP prend le lien **direct** A–B ($1$ saut vers B, puis A–B–D et A–B–E en $2$ sauts) ; OSPF passe par C (A–C–B, A–C–B–E–D, A–C–B–E). En effet A–B n’a qu’un débit de $1$ Mbps (coût $100$), et B–D seulement $10$ Mbps (coût $10$) : RIP ne « voit » pas cette lenteur, OSPF si. Seule la route vers C est la même (lien direct A–C).
+    **3.** Les deux protocoles **divergent** pour B, D et E : RIP prend le lien **direct** A–B ($1$ saut vers B, puis A–B–D et A–B–E en $2$ sauts) ; OSPF passe par C (A–C–B, A–C–B–E–D, A–C–B–E). En effet A–B n’a qu’un débit de $1$ Mbit/s (coût $100$), et B–D seulement $10$ Mbit/s (coût $10$) : RIP ne « voit » pas cette lenteur, OSPF si. Seule la route vers C est la même (lien direct A–C).
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Dijkstra derrière OSPF <span class="horsprog">au-delà du programme</span> <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-10 }
 
@@ -1211,7 +1211,7 @@ Le réseau informatique d’une société est constitué de routeurs interconnec
 | P1 | 192.168.1.10 |
 | P2, P3, P4 | non fournies |
 
-1.  En utilisant les adresses des interfaces et des portables, en déduire une adresse possible pour le portable P2.
+1.  À partir des adresses des interfaces et de celle du portable P1, donner une adresse possible pour le portable P2.
 
 2.  Donner l’adresse du réseau local L2 ainsi que le nombre d’adresses possibles pour les portables P3 et P4.
 
@@ -1226,7 +1226,7 @@ Le réseau informatique d’une société est constitué de routeurs interconnec
 
 2.  L’ordinateur P1 envoie un paquet de données à l’ordinateur P3. Donner l’un des chemins empruntés par le paquet ainsi que le nombre de sauts.
 
-**Partie C.** On utilise maintenant le protocole OSPF. Le poids de chaque arête ci-dessous est la bande passante de la liaison, en mégabits par seconde (Mb/s), et le coût d’une liaison est $C = \dfrac{10^{8}}{BP}$, où $BP$ est la bande passante en bits par seconde.
+**Partie C.** On utilise maintenant le protocole OSPF. Le poids de chaque arête ci-dessous est la bande passante de la liaison, en mégabits par seconde (Mbit/s), et le coût d’une liaison est $C = \dfrac{10^{8}}{BP}$, où $BP$ est la bande passante en bits par seconde.
 
 ![](../figures/49de6ec34a4f05e3.svg){ .tikz loading=lazy }
 
@@ -1260,7 +1260,7 @@ Le réseau informatique d’une société est constitué de routeurs interconnec
 
     **4.** Par exemple P1 $\to$ R1 $\to$ R6 $\to$ R7 $\to$ R9 $\to$ P3 : **3 sauts** entre routeurs (R1–R6–R8–R9 convient aussi).
 
-    **Partie C.** **5.** Coûts : $100$ Mb/s $\to 10^8/10^8 = 1$ ; $50$ Mb/s $\to 2$ ; $10$ Mb/s $\to 10$. La route de coût minimal est **R1–R2–R5–R6–R7–R9**, de coût $1+1+1+1+2 = \mathbf{6}$ (les routes R1–R3–R6–R7–R9 ou R1–R4–R6–R7–R9 coûtent $7$, et R1–R6 direct coûte déjà $10$).
+    **Partie C.** **5.** Coûts : $100$ Mbit/s $\to 10^8/10^8 = 1$ ; $50$ Mbit/s $\to 2$ ; $10$ Mbit/s $\to 10$. La route de coût minimal est **R1–R2–R5–R6–R7–R9**, de coût $1+1+1+1+2 = \mathbf{6}$ (les routes R1–R3–R6–R7–R9 ou R1–R4–R6–R7–R9 coûtent $7$, et R1–R6 direct coûte déjà $10$).
 
 ### Critiquer une réponse d’IA
 
@@ -1414,7 +1414,7 @@ Pour chacune des machines ci-dessous, donner l’**adresse du réseau**, l’**a
 
 <span class="essentiel">• essentiel</span>
 
-Dans chacun des réseaux ci-dessous, chaque routeur dessert son propre réseau local. Donner la **table de routage RIP** du routeur **A** : pour chaque routeur de destination, le voisin vers lequel A envoie les paquets et le nombre de sauts. En cas d’égalité, donner les deux possibilités.
+Dans chacun des réseaux ci-dessous, chaque routeur dessert son propre réseau local. Donner la **table de routage RIP** du routeur **A** (colonnes : destination, sortir vers, nombre de sauts) : pour chaque routeur de destination, le voisin vers lequel A envoie les paquets et le nombre de sauts. En cas d’égalité, donner les deux possibilités.
 
 ??? pouce "Coup de pouce"
 

@@ -496,11 +496,11 @@ La fonction `jointure` du cours est fournie dans le programme.
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-Écrire `plus_longue_serie(table, seuil)` qui renvoie le plus grand nombre de **jours consécutifs** où `tmax` $\geqslant$ `seuil`, pour une table ne contenant qu’une station. Quelle station a connu la plus longue série de jours à 30 degrés ou plus ? *Attention : la table doit être parcourue dans l’ordre des dates, et il peut manquer des jours.*
+Écrire `plus_longue_serie(table, seuil)` qui renvoie le plus grand nombre de **jours consécutifs** où `tmax` $\geqslant$ `seuil`, pour une table ne contenant qu’une station. Quelle station a connu la plus longue série de jours à 30 degrés ou plus ? *Attention : la table doit être parcourue dans l’ordre des dates, et il peut manquer des jours (relevés écartés au nettoyage). Un jour manquant **interrompt** la série, comme un jour sous le seuil.*
 
 ??? pouce "Coup de pouce"
 
-    Trier d’abord les relevés par date. Garder deux compteurs : la longueur de la série en cours (remise à 0 dès qu’un jour est sous le seuil) et la meilleure longueur vue jusque-là.
+    Trier d’abord les relevés par date ; le numéro du jour est `int(ligne["date"][8:10])`. Garder deux compteurs : la longueur de la série en cours et la meilleure longueur vue jusque-là. La série en cours repart à 0 sous le seuil, et à 1 si le jour précédent manque.
 
 ??? corrige "Corrigé"
 
@@ -576,7 +576,7 @@ Rédiger, en quelques lignes, un compte rendu (dans un fichier texte placé à c
 
 !!! consignes "Consignes"
 
-    - Plus la restitution (partie 8). Les parties 2 à 7 sont guidées, la partie 8 est libre.
+    - La restitution (partie 8) s’ajoute à ces séances. Les parties 1 à 7 sont guidées, la partie 8 est libre.
 
     - Fichiers à télécharger (lien ci-dessus), à placer **dans le même dossier** : `prenoms_insee_extrait.csv` (les données), `projet_prenoms_evenements.csv` (une petite table pour la partie 6) et `projet_prenoms_insee_depart.py` (le programme à compléter : tout votre code s’y écrit).
 
@@ -586,7 +586,7 @@ Rédiger, en quelques lignes, un compte rendu (dans un fichier texte placé à c
 
 !!! encadre "Les données"
 
-    **Source** : Insee, *Fichier des prénoms*, édition 2025 (parue en juillet 2026), fichier national : naissances en France de 1900 à 2025. Données publiées sous **licence ouverte** (Etalab 2.0) : on peut les copier, les transformer et les rediffuser librement, à condition de **citer la source**. Page de téléchargement : `www.insee.fr/fr/statistiques/8595130`.
+    **Source** : INSEE, *Fichier des prénoms*, édition 2025 (parue en juillet 2026), fichier national : naissances en France de 1900 à 2025. Données publiées sous **licence ouverte** (Etalab 2.0) : on peut les copier, les transformer et les rediffuser librement, à condition de **citer la source**. Page de téléchargement : `www.insee.fr/fr/statistiques/8595130`.
 
     Le fichier complet compte près de 725 000 lignes (16 Mo). L’extrait fourni a été fabriqué par un petit programme (`projet_prenoms_extraire.py`) qui garde le **même format** mais seulement les naissances de **1950 à 2025** et les lignes dont l’effectif atteint **au moins 100**.
 
@@ -605,7 +605,7 @@ sexe;prenom;periode;valeur;rang
 
 1.  Quels sont les descripteurs ? Quel est le séparateur ? Comment le sexe est-il codé (chercher `LOUISE`) ?
 
-2.  Comment les prénoms sont-ils écrits ? Que vaut le dernier chiffre de *toutes* les valeurs de `valeur` ? D’après la documentation de l’INSEE, les effectifs sont **arrondis au multiple de 5 le plus proche** : pourquoi, à votre avis ?
+2.  Comment les prénoms sont-ils écrits ? Observer le dernier chiffre des nombres de la colonne `valeur` : quels chiffres rencontre-t-on ? D’après la documentation de l’INSEE, les effectifs sont **arrondis au multiple de 5 le plus proche** : pourquoi, à votre avis ?
 
 3.  Le cours rappelle l’ancien en-tête `sexe;preusuel;annais;nombre`, celui des **éditions précédentes** du fichier. Quelle leçon en tirer pour un programme qui lit des données publiques ?
 
@@ -649,7 +649,7 @@ def en_minuscule(car):
 
 Les éditions précédentes du fichier contenaient des lignes qui ne décrivent pas un vrai prénom une année connue : le prénom `_PRENOMS_RARES` (le cumul des prénoms trop rares, regroupés pour qu’on ne puisse pas reconnaître les personnes) et l’année `XXXX` (année de naissance inconnue). L’extrait n’en contient pas, mais votre programme doit pouvoir lire *aussi* ces anciennes éditions.
 
-1.  Compléter `est_valide(ligne)`, qui renvoie `False` si le prénom commence par `_` ou si l’année n’est pas écrite avec des chiffres.
+1.  Compléter `est_valide(ligne)`, qui reçoit une ligne **brute** (avant conversion) et renvoie `False` si `ligne["prenom"]` commence par `_` ou si `ligne["periode"]` n’est pas écrite uniquement avec des chiffres.
 
     ??? pouce "Coup de pouce"
 
@@ -757,7 +757,7 @@ On entend souvent qu’un film, une série ou un sportif lance la mode d’un pr
 
 2.  Compléter `avant_apres(fusion, prenom)` (voir sa spécification) et dresser, pour les cinq prénoms, le tableau : événement, nombre l’année d’avant, maximum dans les années qui suivent.
 
-3.  Pour quels prénoms les données appuient-elles l’idée d’un « effet » ? Pour lequel la courbe montre-t-elle que la hausse avait commencé **bien avant** ? Un tableau de chiffres suffit-il à prouver qu’un événement est la *cause* d’une mode ?
+3.  Pour quels prénoms les données appuient-elles l’idée d’un « effet » ? Pour lequel la hausse avait-elle commencé **bien avant** l’événement ? (Regarder `evolution(table, prenom, sexe)` sur les années précédentes ; la partie 7 permettra de le voir sur une courbe.) Un tableau de chiffres suffit-il à prouver qu’un événement est la *cause* d’une mode ?
 
 ## Tracer des courbes
 

@@ -36,6 +36,8 @@ $$\text{avec } \texttt{deplacement} \in \{\texttt{"G"}, \texttt{"D"}\}.$$
 
 La machine démarre dans l’état `"q0"`, la tête sur la case $0$ (premier symbole du mot) ; elle s’arrête dès qu’elle entre dans un **état final** (`"fin"`, `"oui"` ou `"non"`).
 
+La fonction fournie `executer(regles, mot, limite=10000, trace=False)` fait tourner la machine. Elle renvoie le triplet `(etat_final, ruban_final, nombre_d_etapes)`, ou `None` si la machine ne s’est pas arrêtée après `limite` étapes (et `("bloquee", ruban, etapes)` si aucune règle ne s’applique).
+
 ![](../figures/4884ff8c3ce67073.svg){ .tikz loading=lazy }
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Faire tourner une machine à la main <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-tp-1-1 }
@@ -118,7 +120,9 @@ La machine démarre dans l’état `"q0"`, la tête sur la case $0$ (premier sym
 |   `q0`    |  `0`   |           |                 |                 |
 |   `q0`    |  `1`   |           |                 |                 |
 |   `q0`    |  `_`   |           |                 |                 |
-| `retenue` |   …    |           |                 |                 |
+| `retenue` |  `0`   |           |                 |                 |
+| `retenue` |  `1`   |           |                 |                 |
+| `retenue` |  `_`   |           |                 |                 |
 
 Combien d’étapes pour `1011` ? pour `111` ?
 
@@ -162,9 +166,9 @@ Combien d’étapes pour `1011` ? pour `111` ?
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 6</span> — Reconnaître un palindrome <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-tp-1-6 }
 
-Un **palindrome** se lit de la même façon dans les deux sens (`abba`, `aba`, `b`, le mot vide). La machine `PALINDROME` du fichier procède ainsi : elle **efface** le premier symbole en le mémorisant dans son état (`cherche_a` ou `cherche_b`), file au bout du mot, **compare** le dernier symbole avec celui qu’elle a mémorisé, l’efface s’il est égal, **revient** au début et recommence.
+Un **palindrome** (ici, un mot écrit avec les lettres `a` et `b`) se lit de la même façon dans les deux sens (`abba`, `aba`, `b`, le mot vide). La machine `PALINDROME` du fichier procède ainsi : elle **efface** le premier symbole en le mémorisant dans son état (`cherche_a` ou `cherche_b`), va jusqu’au bout du mot, **compare** le dernier symbole avec celui qu’elle a mémorisé, l’efface s’il est égal, **revient** au début et recommence.
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Les règles des états `q0`, `cherche_a` et `cherche_b` sont données. Compléter celles des états `compare_a`, `compare_b` et `retour`. Le test essaie les $511$ mots de longueur $0$ à $8$.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Les règles des états `q0`, `cherche_a` et `cherche_b` sont données. Compléter celles des états `compare_a`, `compare_b` et `retour`. Le test essaie les $511$ mots sur $\{\texttt{a}, \texttt{b}\}$ de longueur $0$ à $8$.
 
 ??? pouce "Coup de pouce"
 
@@ -220,7 +224,7 @@ Un **palindrome** se lit de la même façon dans les deux sens (`abba`, `aba`, `
 
 1.  Combien d’additions fait `verifier` pour un choix de $k$ indices ? Son coût est-il polynomial ?
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Mesurer, avec la fonction fournie `chronometrer`, la vérification d’un choix de $500\,000$ indices dans une liste d’un million de nombres.
+2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Mesurer, avec la fonction fournie `chronometrer(fonction, arg1, arg2, …)`, qui renvoie la durée en secondes de l’appel `fonction(arg1, arg2, …)`, la vérification d’un choix de $500\,000$ indices dans une liste d’un million de nombres.
 
 ??? corrige "Corrigé"
 
@@ -240,11 +244,11 @@ Un **palindrome** se lit de la même façon dans les deux sens (`abba`, `aba`, `
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Chercher par force brute <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-tp-1-9 }
 
-La fonction fournie `sous_ensemble(k, n)` fabrique le $k$-ième choix possible parmi les indices $0$ à $n-1$ : l’indice $i$ est choisi si le bit numéro $i$ de l’écriture binaire de $k$ vaut $1$.
+La fonction fournie `sous_ensemble(k, n)` fabrique le $k$-ième choix possible parmi les indices $0$ à $n-1$ : l’indice $i$ est choisi si le bit numéro $i$ de l’écriture binaire de $k$ vaut $1$, les bits étant numérotés à partir de $0$ **depuis la droite** (le bit numéro $i$ a le poids $2^i$).
 
 1.  Que renvoient `sous_ensemble(13, 4)` et `sous_ensemble(0, 4)` ? Pour $n$ nombres, combien y a-t-il de choix possibles ? Pourquoi `k` doit-il aller de $0$ à $2^n - 1$ ?
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `chercher(nombres, cible)`, qui essaie les choix dans l’ordre et renvoie le premier qui convient, avec le nombre d’essais. Que renvoie `chercher([8, 3, 12, 5, 7], 15)` ? Et avec la cible $100$ ?
+2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `chercher(nombres, cible)`, qui essaie les choix dans l’ordre ($k = 0, 1, 2, \dots$) et renvoie le couple `(choix, nombre_d_essais)`, où `choix` est le premier choix qui convient, ou `None` si aucun choix ne convient. Que renvoie `chercher([8, 3, 12, 5, 7], 15)` ? Et avec la cible $100$ ?
 
 ??? corrige "Corrigé"
 

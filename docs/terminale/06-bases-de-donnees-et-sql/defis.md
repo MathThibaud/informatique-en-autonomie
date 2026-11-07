@@ -18,6 +18,8 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -151,7 +153,7 @@ Lire tout le fichier en une chaîne et construire la liste des blocs de texte, u
 
 **À quoi ça sert ?** C’est la réponse de la partie 1. La fonction `complet` resservira en partie 2 : un passeport incomplet y est refusé avant même qu’on examine les valeurs.
 
-Écrire `complet(passeport)` qui vérifie la présence des champs obligatoires, puis compter. Tester sur l’exemple du défi, puis sur vos données.
+Écrire `complet(passeport)` qui vérifie la présence des champs obligatoires, puis compter. Tester sur l’exemple inventé de la fiche, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -233,9 +235,9 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** Une petite fonction testée par règle est bien plus facile à mettre au point qu’une seule longue condition : en cas de mauvaise réponse, les `assert` désignent la règle fautive. Leur combinaison donne la réponse de la partie 2.
 
-1.  Pour chaque champ, écrire une fonction de validation : `valide_byr(valeur)`, `valide_hgt(valeur)`, etc. Pour chacune, écrire au moins un `assert` qui doit réussir et un qui doit échouer, en visant les valeurs limites.
+1.  Pour chaque champ, écrire une fonction de validation : `valide_byr(valeur)`, `valide_hgt(valeur)`, etc. Pour chacune, écrire au moins un `assert` sur une valeur **acceptée** et un sur une valeur **refusée**, en visant les valeurs limites : par exemple `assert valide_byr("2002")` et `assert not valide_byr("2003")`.
 
-2.  Écrire `valide(passeport)` qui combine le tout, puis compter. Sur l’exemple du défi, on doit trouver `2` passeports valides.
+2.  Écrire `valide(passeport)` qui combine le tout, puis compter. Sur l’exemple inventé de la fiche, on doit trouver `2` passeports valides.
 
 ??? pouce "Coup de pouce"
 
@@ -282,6 +284,8 @@ Plusieurs règles décrivent la *forme* d’une chaîne, caractère par caractè
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/16 ](https://adventofcode.com/2020/day/16 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -385,7 +389,7 @@ Repérer les valeurs non valides. Vérification : la réponse est `46`. Que rema
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -419,7 +423,7 @@ Repérer les valeurs non valides. Vérification : la réponse est `46`. Que rema
 
 **À quoi ça sert ?** Cette somme est la réponse de la partie 1, et la fonction `valable_quelque_part` servira de nouveau en partie 2 pour trier les billets.
 
-Écrire une fonction `respecte(valeur, bornes)` puis une fonction `valable_quelque_part(valeur, regles)`. En déduire le taux d’erreur. Tester sur l’exemple du défi, puis sur vos données.
+Écrire une fonction `respecte(valeur, bornes)` puis une fonction `valable_quelque_part(valeur, regles)`. En déduire la réponse de la partie 1 : la somme des valeurs non valides (l’énoncé en ligne l’appelle « taux d’erreur »). Tester sur l’exemple inventé de la fiche, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -449,7 +453,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** Seuls ces billets sont fiables pour déduire la position des champs : un seul billet faux suffirait à fausser l’attribution.
 
-Construire la liste des billets voisins valides. Attention : un billet peut contenir une valeur non valide qui ne change pas la somme de la partie 1. Sur l’exemple du défi, il reste 4 billets valides.
+Construire la liste des billets voisins valides. Attention : un billet peut contenir une valeur non valide qui ne change pas la somme de la partie 1. Sur l’exemple inventé de la fiche, il reste 4 billets valides.
 
 !!! encadre "Outil Python : les ensembles (set) — rappel"
 

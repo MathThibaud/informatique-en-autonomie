@@ -18,6 +18,8 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -106,7 +108,7 @@ Pour chaque ligne, trouver le plus grand nombre de deux chiffres possible. Véri
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -206,7 +208,7 @@ Dans la partie 2, on ne choisit plus deux chiffres. Regarder la longueur des lig
 
 **À quoi ça sert ?** Avec `k = 12`, elle donne la réponse de la partie 2 ; avec `k = 2`, elle doit redonner celle de la partie 1, ce qui permet de la tester.
 
-Écrire une fonction `meilleur(ligne, k)` qui choisit `k` chiffres, de gauche à droite, avec le même principe glouton. La partie 1 correspond à `k = 2`. Sur l’exemple du défi, avec `k = 12`, la première ligne donne `819465123987` et le total vaut `2676756647502`.
+Écrire une fonction `meilleur(ligne, k)` qui choisit `k` chiffres, de gauche à droite, avec le même principe glouton. La partie 1 correspond à `k = 2`. Sur l’exemple inventé de la fiche, avec `k = 12`, la première ligne donne `819465123987` et le total vaut `2676756647502`.
 
 ??? pouce "Coup de pouce"
 
@@ -244,7 +246,7 @@ Dans la partie 2, on ne choisit plus deux chiffres. Regarder la longueur des lig
 
         Construire la liste de tous les débuts de choix : partir de `[""]` puis, pour chaque caractère `c` de la ligne, remplacer chaque début `s` par deux débuts, `s` (on ne prend pas `c`) et `s + c` (on le prend, si `s` a moins de `k` caractères). À la fin, garder le plus grand des choix de longueur `k`.
 
-2.  Comparer `meilleur(ligne, k)` et `exhaustif(ligne, k)` sur 300 lignes de 15 chiffres tirées au hasard, avec `k` lui aussi au hasard. Combien de désaccords ?
+2.  Comparer `meilleur(ligne, k)` et `exhaustif(ligne, k)` sur 300 lignes de 15 chiffres tirées au hasard, avec `k` lui aussi tiré au hasard entre 1 et 15 (`random.randint(1, 15)`). Combien de désaccords ?
 
 3.  Rédiger en quelques lignes la justification du glouton pour `k` quelconque.
 

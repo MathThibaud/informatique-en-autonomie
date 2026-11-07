@@ -41,7 +41,7 @@ Fichiers
 
     - **Règle du TP** : pas de `sum`, `max` ni `min` ; chaque résultat s’obtient par un **parcours** écrit par vous.
 
-    - En bas du fichier, le programme principal contient des lignes en commentaire (`#`) : on les **décommente au fur et à mesure**. Des tests `assert` sont fournis ; s’ils passent, un message s’affiche.
+    - En bas du fichier, le programme principal contient des lignes en commentaire (`#`) : on les **décommente au fur et à mesure**. Des tests `assert` sont fournis ; s’ils passent, un message s’affiche. Dans le fichier, les parties 2, 3 et 4 du TP s’appellent « Partie B », « Partie C » et « Partie D ».
 
     - Le compte rendu (réponses, tableaux complétés, bilan) se fait sur le cahier (ou dans un fichier texte).
 
@@ -59,7 +59,7 @@ date,tmin,tmax,pluie
 2025-01-02,8.2,12.8,0.0
 ```
 
-La fonction `charger_releves`, fournie, lit ce fichier et renvoie **quatre tableaux de même longueur** : `dates`, `tmin`, `tmax`, `pluie`. Le jour numéro `i` est décrit par `dates[i]`, `tmin[i]`, `tmax[i]` et `pluie[i]`.
+La fonction `charger_releves`, fournie, lit ce fichier et renvoie **quatre tableaux de même longueur** : `dates`, `tmin`, `tmax`, `pluie`. Le jour numéro `i` est décrit par `dates[i]`, `tmin[i]`, `tmax[i]` et `pluie[i]`. Le fichier fournit aussi `mois_de(date)`, qui extrait le numéro du mois d’une date.
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Exécuter le fichier de départ. Combien de jours sont chargés ?
 
@@ -133,7 +133,7 @@ On ne veut plus seulement une valeur record, mais **la date** du record : il fau
     1
     ```
 
-3.  **Sans machine.** Énoncer l’**invariant de boucle** de `indice_ecart_max` (« à chaque tour, `i_best` est… »), puis le **prouver** en deux étapes (initialisation, hérédité).
+3.  **Sans machine.** Énoncer l’**invariant de boucle** de `indice_ecart_max` (« à chaque tour, l’indice retenu, noté ici `i_best`, est… »), puis le **prouver** en deux étapes (initialisation, hérédité).
 
     ??? pouce "Coup de pouce"
 
@@ -393,7 +393,19 @@ Passer de la fenêtre du jour `i-1` à celle du jour `i`, c’est **ajouter** `t
 
 2.  Quel est son coût ? En quoi est-ce **la même leçon** que pour la variance ?
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span> Tracer sur un même graphique `tmax` et sa moyenne glissante sur 7 jours, puis sur 30 jours (on peut décaler l’axe des abscisses en traçant `range(k-1, 365)` contre la moyenne glissante). Que montre la courbe lissée sur 30 jours ?
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Pour tracer sur un même graphique `tmax` et sa moyenne glissante, recopier la fonction suivante (elle utilise, comme `tracer`, le module de tracé `matplotlib`). La moyenne glissante commence au jour `k - 1` : c’est pourquoi elle est tracée contre `range(k - 1, len(t))`.
+
+    ```python
+    def tracer_glissante(t, k):
+        """Trace t et sa moyenne glissante sur k jours."""
+        import matplotlib.pyplot as plt
+        plt.plot(range(len(t)), t, label="maximales")
+        plt.plot(range(k - 1, len(t)), glissante(t, k), label=f"moyenne sur {k} jours")
+        plt.legend()
+        plt.show()
+    ```
+
+    Appeler `tracer_glissante(tmax, 7)`, puis `tracer_glissante(tmax, 30)`. Que montre la courbe lissée sur 30 jours ?
 
 ??? corrige "Corrigé"
 

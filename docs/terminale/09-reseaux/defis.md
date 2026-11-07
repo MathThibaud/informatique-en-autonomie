@@ -18,6 +18,8 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -121,7 +123,7 @@ Découper chaque ligne en directions (par exemple `seswnee` donne `se`, `sw`, `n
 
 **À quoi ça sert ?** C’est le point clé du défi : avec de bonnes coordonnées, deux chemins qui mènent au même carreau donnent la même position, et l’on peut alors repérer chaque carreau sans dessiner la grille.
 
-**Avant de coder**, choisir un système de coordonnées (lire l’encadré) et écrire, pour chacune des six directions, le déplacement correspondant. Vérifier sur un dessin que `nw` puis `se`, ou `e`, `nw` puis `sw`, ramènent au point de départ. Écrire alors une fonction `position(ligne)` qui renvoie les coordonnées du carreau désigné.
+**Avant de coder**, choisir un système de coordonnées (lire l’encadré « Trois systèmes de coordonnées possibles », section « Pour y arriver ») et écrire, pour chacune des six directions, le déplacement correspondant. Vérifier sur un dessin que `nw` puis `se`, ou `e`, `nw` puis `sw`, ramènent au point de départ. Écrire alors une fonction `position(ligne)` qui renvoie les coordonnées du carreau désigné.
 
 ??? pouce "Coup de pouce"
 
@@ -129,7 +131,7 @@ Découper chaque ligne en directions (par exemple `seswnee` donne `se`, `sw`, `n
 
 !!! encadre "Méthode : retourner un carreau avec un ensemble (set)"
 
-    Les ensembles sont présentés dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) ; rappel : éléments non modifiables, donc une position `(q, r)` convient. On ne garde que les carreaux **noirs** : retourner un carreau, c’est l’ajouter à l’ensemble s’il n’y est pas, l’en retirer sinon.
+    Les ensembles sont présentés dans l’encadré « Outil Python : les ensembles » du défi *Crab Combat* (chapitre 4) ; rappel : éléments non modifiables, donc une position `(x, y)` convient. On ne garde que les carreaux **noirs** : retourner un carreau, c’est l’ajouter à l’ensemble s’il n’y est pas, l’en retirer sinon.
 
     ```python
     def retourner(noirs, p):
@@ -204,7 +206,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** C’est la réponse de la partie 2. Comme le pavage est infini, toute la difficulté est de n’examiner que les carreaux susceptibles de changer, et de compter leurs voisins noirs efficacement.
 
-Écrire une fonction `jour_suivant(noirs)` qui renvoie le nouvel ensemble des carreaux noirs. Sur l’exemple du défi, on doit trouver `9` carreaux noirs après un jour, `10` après deux jours et `53` après dix jours.
+Écrire une fonction `jour_suivant(noirs)` qui renvoie le nouvel ensemble des carreaux noirs. Sur l’exemple inventé de la fiche, on doit trouver `9` carreaux noirs après un jour, `10` après deux jours et `53` après dix jours.
 
 ??? pouce "Coup de pouce"
 
@@ -224,7 +226,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
     - **Coordonnées axiales.** Deux axes obliques à $60^\circ$ : chaque déplacement modifie une ou deux coordonnées de $\pm 1$.
 
-    - **Coordonnées cubiques.** Trois coordonnées $(q, r, s)$ liées par $q + r + s = 0$ : chaque déplacement augmente l’une de 1 et en diminue une autre de 1. C’est symétrique et facile à vérifier, au prix d’une coordonnée en trop.
+    - **Coordonnées cubiques.** Trois coordonnées $(x, y, z)$ liées par $x + y + z = 0$ : chaque déplacement augmente l’une de 1 et en diminue une autre de 1. C’est symétrique et facile à vérifier, au prix d’une coordonnée en trop.
 
     Dans tous les cas, deux chemins qui mènent à la même case doivent donner exactement les mêmes coordonnées : c’est ce qui permet d’utiliser un ensemble.
 
@@ -252,7 +254,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 1.  **Coordonnées cubiques.** On repère une case par $(x, y, z)$ avec $x + y + z = 0$ ; on choisit `e` $= (1, -1, 0)$ et `ne` $= (1, 0, -1)$. Trouver les quatre autres déplacements, sachant que `w` est l’opposé de `e` et que faire `e` puis `nw` revient à faire `ne`. Calculer à la main la position de `seswnee`.
 
-2.  Écrire une fonction `position_systeme(ligne, deplacements)` qui fonctionne avec n’importe quel dictionnaire de déplacements (2 ou 3 coordonnées). Vérifier qu’on trouve encore `6` carreaux noirs sur l’exemple du défi.
+2.  Écrire une fonction `position_systeme(ligne, deplacements)` qui fonctionne avec n’importe quel dictionnaire de déplacements (2 ou 3 coordonnées). Vérifier qu’on trouve encore `6` carreaux noirs sur l’exemple inventé de la fiche.
 
     ??? pouce "Coup de pouce"
 

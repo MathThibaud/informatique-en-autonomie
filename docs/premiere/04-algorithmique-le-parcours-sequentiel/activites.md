@@ -12,7 +12,7 @@
 
     - Matériel : un paquet de cartes (ou des petits papiers numérotés). Les réponses aux questions s’écrivent sur le cahier.
 
-    - Le **meneur** mélange une dizaine de cartes, les pose en pile face cachée, puis les retourne **une par une**. Une carte retournée est aussitôt défaussée : on ne peut plus la revoir.
+    - Le **meneur** mélange une dizaine de cartes, les pose en pile face cachée, puis les retourne **une par une**. Une carte retournée est aussitôt défaussée, sauf si le chercheur décide de la prendre en main (il défausse alors celle qu’il tenait) : une carte défaussée ne peut plus être revue.
 
     - Le **chercheur** n’a le droit de garder **qu’une seule carte en main**, et ne prend aucune note. Quand la pile est vide, il doit annoncer la carte la plus haute du paquet.
 
@@ -28,7 +28,7 @@
 
 3.  Écrire la règle du chercheur sous la forme : « à chaque nouvelle carte, si … alors … ; sinon … ».
 
-4.  Le meneur a vu passer 9 cartes sur 10 ; le chercheur tient un roi. Peut-il annoncer « c’est le roi » sans regarder la dernière carte ? Et s’il tient un 10 ? Peut-on, en général, s’arrêter avant la fin de la pile ?
+4.  Le meneur a retourné 9 cartes sur 10 et le chercheur tient un roi. Le chercheur peut-il annoncer « c’est le roi » sans regarder la dernière carte ? Et s’il tient un 10 ? Peut-on, en général, s’arrêter avant la fin de la pile ?
 
 ??? corrige "Corrigé"
 

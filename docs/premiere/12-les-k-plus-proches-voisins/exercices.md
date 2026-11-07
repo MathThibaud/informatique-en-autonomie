@@ -339,7 +339,7 @@ Une base contient $10\,000$ exemples, chacun décrit par $196$ pixels.
 
 1.  Pour classer **une** image, à combien d’exemples doit-on calculer la distance ?
 
-2.  Pourquoi dit-on que le $k$-NN est un algorithme « paresseux » ? Quel est le coût par prédiction (linéaire, quadratique…) en le nombre d’exemples ?0
+2.  Pourquoi dit-on que le $k$-NN est un algorithme « paresseux » ? Quel est le coût par prédiction (linéaire, quadratique…) en fonction du nombre d’exemples ?0
 
     ??? pouce "Coup de pouce"
 
@@ -427,7 +427,7 @@ On dispose d’exemples **d’entraînement** (étiquetés) et d’exemples **de
 
 2.  Pourquoi mesure-t-on la qualité sur des exemples **de test** et non sur ceux d’entraînement ?
 
-3.  On teste $k = 1, 3, 5, 7$ et on garde le meilleur taux. Comment s’appelle cette démarche de **choix** de $k$ ?
+3.  On teste $k = 1, 3, 5, 7$ et on garde le $k$ qui donne le meilleur taux sur le jeu de test. Pourquoi ne fixe-t-on pas $k$ une fois pour toutes, sans tester ? Que risque-t-on avec un $k$ trop petit ? trop grand ?
 
     ??? pouce "Coup de pouce"
 
@@ -453,7 +453,7 @@ On dispose d’exemples **d’entraînement** (étiquetés) et d’exemples **de
         return bons / len(test)
     ```
 
-    **b)** Sur les exemples d’entraînement, l’évaluation est **trompeuse** (avec $k=1$, chaque exemple est son propre voisin $\to$ 100 %). Seul un jeu de **test** (jamais vu) mesure la capacité à **généraliser**. **c)** Tester plusieurs $k$ et garder le meilleur, c’est le **réglage** (ou *choix*) de $k$.
+    **b)** Sur les exemples d’entraînement, l’évaluation est **trompeuse** (avec $k=1$, chaque exemple est son propre voisin $\to$ 100 %). Seul un jeu de **test** (jamais vu) mesure la capacité à **généraliser**. **c)** Le meilleur $k$ dépend des données : aucune valeur ne convient à tous les problèmes, d’où l’essai de plusieurs valeurs sur le jeu de test (c’est la façon habituelle de **choisir** $k$). Avec $k$ trop petit ($k=1$), on copie le plus proche voisin, même aberrant : très sensible au bruit. Avec $k$ trop grand, on interroge des voisins lointains ; à l’extrême, on répond toujours la classe la plus fréquente. Le bon $k$ est un **compromis**.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Un $k$-NN selon un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-12-15 }
 

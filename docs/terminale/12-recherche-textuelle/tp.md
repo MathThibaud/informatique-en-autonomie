@@ -272,7 +272,7 @@ La commande `grep` des systèmes Unix affiche les **lignes** d’un fichier qui 
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Plus le motif est long… <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-tp-1-6 }
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `moyenne_comparaisons(algo, texte, m, essais=5, graine=1)` : elle choisit `essais` positions `p` au hasard (`random.randint(0, len(texte) - m)`), prend comme motif `texte[p:p + m]` (il est donc présent au moins une fois), et renvoie le nombre **moyen** de comparaisons de `algo`, divisé par la longueur du texte. Un résultat de $0{,}25$ signifie : « en moyenne, une comparaison pour quatre caractères du texte ».
+1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `moyenne_comparaisons(algo, texte, m, essais=5, graine=1)` : elle choisit `essais` positions `p` au hasard (`random.randint(0, len(texte) - m)`), prend comme motif `texte[p:p + m]` (il est donc présent au moins une fois), et renvoie le nombre **moyen** de comparaisons de `algo`, divisé par la longueur du texte. Le paramètre `graine` est passé à `random.seed` (déjà écrit dans la trame) : les mêmes positions sont tirées à chaque exécution, ce qui rend les mesures reproductibles. Un résultat de $0{,}25$ signifie : « en moyenne, une comparaison pour quatre caractères du texte ».
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span>  On crée un génome par `adn = genome(1_000_000)` (un million de bases `A`, `C`, `G`, `T`). Recopier et compléter le tableau (deux chiffres après la virgule) :
 
@@ -379,7 +379,7 @@ On prend un texte de $n = 20\,000$ lettres `A` : `texte = "A" * 20000`.
 
 La fonction fournie `chrono(f, a, b)` exécute `f(a, b)` et renvoie le couple (résultat, durée en secondes).
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Sur le génome avec le motif `genome(16, 1)` (16 bases tirées au hasard, absentes du génome), puis sur le roman avec le motif `"le gentleman dit"` (16 caractères, absent du roman) — chaque méthode doit donc parcourir tout le texte —, mesurer la durée de `naive_compte`, `horspool_compte` et de la fonction fournie `present(motif, texte)`, qui renvoie simplement `motif in texte`. Combien de fois l’opérateur `in` est-il plus rapide que votre Horspool, sur chacun des deux textes ?
+1.  <span class="run" title="À programmer et tester sur machine">▶</span>  On cherche deux motifs **absents** : chaque méthode doit donc parcourir tout le texte. Sur le génome, le motif est `genome(16, 1)` ($16$ bases tirées au hasard avec la graine $1$, absentes du génome) ; sur le roman, c’est `"le gentleman dit"` ($16$ caractères, absent du roman). Pour chacun, mesurer la durée de `naive_compte`, de `horspool_compte` et de la fonction fournie `present(motif, texte)`, qui renvoie simplement `motif in texte`. Combien de fois l’opérateur `in` est-il plus rapide que votre Horspool, sur chacun des deux textes ?
 
 2.  L’opérateur `in` des chaînes est écrit en langage C et compilé, et son algorithme s’inspire justement de Boyer-Moore-Horspool. Expliquer l’écart de temps. Le nombre de comparaisons et la durée mesurent-ils la même chose ?
 

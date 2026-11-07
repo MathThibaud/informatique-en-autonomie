@@ -54,7 +54,7 @@ Un **double-clic** sur un composant ouvre sa configuration. **Pour taper des com
 
 ### <span class="exo-num">Exercice 3</span> — Relier deux réseaux <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-09-reseaux-tp-1-3 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Construire deux réseaux locaux reliés par **un Routeur**. À sa création, Filius demande « **Sélectionnez le nombre d’interfaces du routeur** » : en mettre **2**. Configurer chaque interface via l’onglet « **Gérer les connexions** ».
+<span class="run" title="À programmer et tester sur machine">▶</span>  Dans un **nouveau projet** Filius, construire deux réseaux locaux reliés par **un Routeur**, comme sur le schéma (PC-B a ici l’adresse `192.168.1.1`). À sa création, Filius demande « **Sélectionnez le nombre d’interfaces du routeur** » : en mettre **2**. Configurer chaque interface via l’onglet « **Gérer les connexions** ».
 
 ![](../figures/20eb71bbedda08a3.svg){ .tikz loading=lazy }
 
@@ -148,7 +148,7 @@ Passerelles : PC-A $\to$ `192.168.0.254`, PC-B $\to$ `192.168.1.254`, PC-C $\to$
 
 2.  Taper `route` sur PC-A, puis `traceroute 192.168.2.1` (vers PC-C). Que montrent ces commandes ?
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span>  **Expérience de reroutage.** Sur R1, **modifier** la route vers `192.168.1.0` pour qu’elle sorte non plus vers R2, mais vers **R3** (passerelle suivante `172.16.13.3`, via l’interface `172.16.13.1`). Relancer `ping 192.168.1.1` depuis PC-A : le paquet passe désormais par **R1 $\to$ R3 $\to$ R2**. Vérifier avec `traceroute`. Qu’a-t-on prouvé sur le rôle de la table de routage ?
+3.  <span class="run" title="À programmer et tester sur machine">▶</span>  **Expérience de reroutage.** Sur R1, **modifier** la route vers `192.168.1.0` pour qu’elle sorte non plus vers R2, mais vers **R3** (passerelle suivante `172.16.13.3`, via l’interface `172.16.13.1`). Relancer `ping 192.168.1.1` depuis PC-A : le paquet passe désormais par **R1 $\to$ R3 $\to$ R2**. Vérifier avec `traceroute`. Qu’a-t-on montré sur le rôle de la table de routage ?
 
 !!! encadre "Bilan du TP"
 
@@ -162,4 +162,4 @@ Passerelles : PC-A $\to$ `192.168.0.254`, PC-B $\to$ `192.168.1.254`, PC-C $\to$
 
     **2.** `route` affiche la table de routage de la machine (destinations, masques, passerelles, interfaces) ; `traceroute 192.168.2.1` liste les routeurs traversés jusqu’à PC-C, soit R1 puis R3.
 
-    **3.** **Reroutage.** En changeant, dans R1, la passerelle suivante de la route `192.168.1.0` pour `172.16.13.3` (R3), le paquet vers PC-B part maintenant vers R3, qui possède lui-même une route vers `192.168.1.0` (via R2) : le trajet devient **PC-A $\to$ R1 $\to$ R3 $\to$ R2 $\to$ PC-B**. On a prouvé que c’est **la table de routage seule** qui décide du chemin : la modifier suffit à changer la route, sans toucher au câblage.
+    **3.** **Reroutage.** En changeant, dans R1, la passerelle suivante de la route `192.168.1.0` pour `172.16.13.3` (R3), le paquet vers PC-B part maintenant vers R3, qui possède lui-même une route vers `192.168.1.0` (via R2) : le trajet devient **PC-A $\to$ R1 $\to$ R3 $\to$ R2 $\to$ PC-B**. On a montré que c’est **la table de routage seule** qui décide du chemin : la modifier suffit à changer la route, sans toucher au câblage.

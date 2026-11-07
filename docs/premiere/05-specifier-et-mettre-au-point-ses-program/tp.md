@@ -106,7 +106,15 @@ bulletin("Lina", [15, 9, 12, 10], [1, 2, 1, 2], [13.5, 11.0, 15.0, 11.0, 8.5, 9.
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Lancer le fichier. Recopier ce qu’il affiche.
 
-2.  Lina a eu `15` (coef. 1), `9` (coef. 2), `12` (coef. 1), `10` (coef. 2). Calculer **à la main** sa moyenne pondérée, puis l’arrondir au demi-point le plus proche. Combien de ses notes valent au moins 10 ? Combien de fois a-t-elle progressé d’un devoir au suivant ? Les moyennes de la classe (dont la sienne) sont `13.5, 11.0, 15.0, 11.0, 8.5, 9.5` : quel est son rang (les ex aequo partagent le même rang) ?
+2.  Lina a eu `15` (coef. 1), `9` (coef. 2), `12` (coef. 1), `10` (coef. 2). Calculer **à la main** :
+
+    1.  sa moyenne pondérée, puis cette moyenne arrondie au demi-point le plus proche ;
+
+    2.  le nombre de ses notes qui valent au moins 10 ;
+
+    3.  le nombre de fois où elle a progressé d’un devoir au suivant ;
+
+    4.  son rang, sachant que les moyennes de la classe (dont la sienne) sont `13.5, 11.0, 15.0, 11.0, 8.5, 9.5` (les ex aequo partagent le même rang).
 
 3.  Comparer avec l’affichage. Quelles lignes du bulletin sont fausses ? Quel résultat est même *impossible*, quelles que soient les notes ?
 
@@ -146,7 +154,7 @@ bulletin("Lina", [15, 9, 12, 10], [1, 2, 1, 2], [13.5, 11.0, 15.0, 11.0, 8.5, 9.
     Rang : 0 sur 6
     ```
 
-    **2.** Moyenne pondérée : $\dfrac{15 \times 1 + 9 \times 2 + 12 \times 1 + 10 \times 2}{1 + 2 + 1 + 2} = \dfrac{65}{6} \approx 10{,}83$, arrondie au demi-point le plus proche : **11**. Notes d’au moins 10 : **3** (15, 12, 10). Progressions : **1** (de 9 à 12). Rang : deux moyennes sont strictement supérieures à 11 (13,5 et 15), donc rang **3** sur 6 (ex aequo avec l’autre 11).  
+    **2.** a) Moyenne pondérée : $\dfrac{15 \times 1 + 9 \times 2 + 12 \times 1 + 10 \times 2}{1 + 2 + 1 + 2} = \dfrac{65}{6} \approx 10{,}83$, arrondie au demi-point le plus proche : **11**. b) Notes d’au moins 10 : **3** (15, 12, 10). c) Progressions : **1** (de 9 à 12). d) Rang : deux moyennes sont strictement supérieures à 11 (13,5 et 15), donc rang **3** sur 6 (ex aequo avec l’autre 11).  
     **3.** Toutes les lignes sont fausses ; un rang `0` est impossible (le meilleur rang vaut 1).  
     **4.** Elle prouve seulement que le code donne le bon résultat *sur ces sept cas* ; elle ne prouve pas qu’il est correct en général (règle de Dijkstra : les tests montrent la présence de bugs, jamais leur absence).
 
@@ -188,11 +196,11 @@ Le cahier des charges du lycée décrit ce que chaque fonction *doit* faire.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 3</span> — Un vrai jeu de tests <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-tp-1-3 }
 
-1.  Pour chaque fonction, expliquer en une phrase pourquoi le test du programmeur est **trop faible** (par exemple : quel ingrédient de la check-list du cours lui manque-t-il ?).
+1.  Pour chaque fonction, expliquer en une phrase pourquoi le test du programmeur est **trop faible** (par exemple : quel ingrédient d’un bon jeu de tests (propriété du cours) lui manque-t-il ?).
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire pour chaque fonction un jeu de tests d’au moins **trois** `assert` : un cas normal, un cas limite, un cas particulier tiré du cahier des charges. **Ne rien corriger pour l’instant** : le but est de *faire échouer* le code.
 
-3.  Commenter chaque test qui échoue (`# ECHOUE`) et continuer avec les suivants. Recopier sur le cahier (ou en commentaire dans `bulletin.py`) le tableau ci-dessous et le compléter (un bug par fonction, et un de plus : le cas du tableau vide pour `moyenne`).0
+3.  Mettre en commentaire chaque test qui échoue, en le faisant précéder de `# ECHOUE`, pour que les tests suivants s’exécutent. Recopier sur le cahier (ou en commentaire dans `bulletin.py`) le tableau ci-dessous et le compléter (un bug par fonction, et un de plus : le cas du tableau vide pour `moyenne`).0
 
     ??? pouce "Coup de pouce"
 
@@ -247,7 +255,7 @@ L’appel `nb_progressions([12, 8, 10])` renvoie `2` au lieu de `1`, **sans aucu
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Dans `premiere_sous`, ajouter `print("i =", i)` comme première ligne du corps de la boucle, puis lancer `premiere_sous([12, 14, 5], 10)`. Qu’observe-t-on ? Quelle est la cause ?
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span> Dans `moyenne_ponderee`, afficher `somme` après la boucle et la valeur par laquelle on divise, pour `[10, 16]` et `[1, 2]`. Quelle est la bonne valeur du diviseur ?
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Dans `moyenne_ponderee`, afficher `somme` après la boucle et la valeur par laquelle on divise, pour l’appel `moyenne_ponderee([10, 16], [1, 2])`. Quelle est la bonne valeur du diviseur ?
 
 3.  Dérouler à la main `rang([15, 12, 15], 15)` : valeurs successives de `x` et de `r`. Pourquoi le résultat est-il juste quand il n’y a pas d’ex aequo ?
 
@@ -526,11 +534,13 @@ float moyenne(int notes[], int n) {
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire l’**oracle** `verifie_arrondi(r, x)`, qui renvoie `True` si `r` est un arrondi acceptable de `x`. (`r` est un multiple de `0.5` si `r * 2` est un entier, c’est-à-dire si `int(r * 2) == r * 2`.)
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span> Tirer 1 000 nombres `x = random.randint(0, 2000) / 100` et vérifier `arrondi_demi(x)` avec l’oracle, par un `assert`. Faire de même avec la version d’origine (copiée sous un autre nom) : combien de tirages la démasquent ?
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Après `import random`, tirer 1 000 nombres au hasard, chacun par `x = random.randint(0, 2000) / 100`, et vérifier `arrondi_demi(x)` avec l’oracle, par un `assert`.
+
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Avec la version d’origine (copiée sous un autre nom), l’`assert` arrêterait le programme au premier échec : le remplacer par un **compteur** des tirages où l’oracle renvoie `False`. Combien de tirages sur 1 000 la démasquent ?
 
 ??? corrige "Corrigé"
 
-    <span class="horsprog">au-delà du programme</span>
+    <span class="horsprog">au-delà du programme</span> **1.** L’oracle, puis **2.** les 1 000 tirages :
 
     ```python
     import random
@@ -544,7 +554,19 @@ float moyenne(int notes[], int n) {
         assert verifie_arrondi(arrondi_demi(x), x)
     ```
 
-    La version corrigée passe les 1 000 tirages. La version d’origine échoue sur **environ la moitié** des tirages (environ 48 % des tirages : exactement 960 des 2 001 valeurs possibles `k / 100`) : tous les `x` dont la partie décimale, comptée à partir du dernier demi-point, dépasse 0,25. Un seul tirage malchanceux suffit à la démasquer ; l’oracle juge sans connaître la réponse exacte.
+    **2.** La version corrigée passe les 1 000 tirages.  
+    **3.** Pour la version d’origine, copiée sous le nom `arrondi_demi_origine`, on compte les échecs au lieu de s’arrêter au premier :
+
+    ```python
+    nb_echecs = 0
+    for i in range(1000):
+        x = random.randint(0, 2000) / 100
+        if not verifie_arrondi(arrondi_demi_origine(x), x):
+            nb_echecs = nb_echecs + 1
+    print(nb_echecs)
+    ```
+
+    Elle échoue sur **environ la moitié** des tirages (environ 480 sur 1 000, soit 48 % : exactement 960 des 2 001 valeurs possibles `k / 100`) : tous les `x` dont la partie décimale, comptée à partir du dernier demi-point, dépasse 0,25. Un seul tirage malchanceux suffit à la démasquer ; l’oracle juge sans connaître la réponse exacte.
 
 ## Bilan à rédiger
 

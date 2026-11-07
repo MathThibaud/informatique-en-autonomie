@@ -156,7 +156,7 @@ def fib(n):
 
 3.  Expliquer, en une phrase, pourquoi ce coût devient vite **inutilisable** quand $n$ grandit.
 
-4.  Nommer la méthode algorithmique qui permettrait de l’éviter.
+4.  Nommer la méthode algorithmique qui permet d’éviter ces calculs répétés.
 
 ??? corrige "Corrigé"
 
@@ -272,7 +272,7 @@ def fib(n):
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Compter les bits à 1 <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-9 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  En s’inspirant de l’exercice précédent, écrire `nombre_de_bits(n)` qui renvoie le nombre de `1` dans l’écriture binaire d’un entier `n` positif ou nul. Exemple : `nombre_de_bits(255)` renvoie `8`.
+<span class="run" title="À programmer et tester sur machine">▶</span>  En s’inspirant de l’exercice précédent, écrire `nombre_de_bits(n)` qui renvoie le nombre de `1` dans l’écriture binaire d’un entier `n` positif ou nul. Exemples : `nombre_de_bits(255)` renvoie `8` et `nombre_de_bits(10)` renvoie `2` (car $10 = 1010_2$).
 
 ??? pouce "Coup de pouce"
 
@@ -320,7 +320,7 @@ Soit la suite $\left(u_n\right)$ définie par
 
 $$u_n = \left\lbrace \begin{array}{ll} a & \text{si } n = 0\\ b & \text{si } n = 1\\ 3\,u_{n-1} + 2\,u_{n-2} + 5 & \text{pour tout } n \geqslant 2 \end{array}\right.$$
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `serie(n, a, b)` qui renvoie le terme $u_n$, pour des premiers termes `a` et `b` donnés en paramètres.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `suite(n, a, b)` qui renvoie le terme $u_n$, pour des premiers termes `a` et `b` donnés en paramètres.
 
 ??? pouce "Coup de pouce"
 
@@ -331,12 +331,12 @@ $$u_n = \left\lbrace \begin{array}{ll} a & \text{si } n = 0\\ b & \text{si } n =
     **Démarche :** deux conditions d’arrêt ($n=0$ et $n=1$) ; deux appels récursifs, sur $n-1$ et $n-2$ (les paramètres `a` et `b` sont transmis tels quels) ; on combine leurs résultats avec la formule de l’énoncé.
 
     ```python
-    def serie(n, a, b):
+    def suite(n, a, b):
         if n == 0:
             return a
         if n == 1:
             return b
-        return 3 * serie(n - 1, a, b) + 2 * serie(n - 2, a, b) + 5
+        return 3 * suite(n - 1, a, b) + 2 * suite(n - 2, a, b) + 5
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Suite de Syracuse <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-12 }
@@ -468,7 +468,7 @@ On peut calculer $x^n$ bien plus vite en remarquant que $x^n = \left(x^{n/2}\rig
 
 Dans cet exercice, une chaîne (par exemple un brin d’ADN écrit avec les lettres A, C, G, T) est un *palindrome* si elle se lit pareil dans les deux sens. *(En biologie, le mot a un sens un peu différent : une séquence « palindromique » est égale à son brin complémentaire lu à l’envers.)*
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `palindrome(s)` qui renvoie `True` si la chaîne `s` est un palindrome. Exemples : `palindrome("GATTACATTAG")`... à vous de tester ; `palindrome("kayak")` renvoie `True`.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `palindrome(s)` qui renvoie `True` si la chaîne `s` est un palindrome, `False` sinon. Exemples : `palindrome("kayak")` renvoie `True`, `palindrome("GATTACA")` renvoie `False` ; tester aussi la chaîne `"GATTACATTAG"`.
 
 ??? pouce "Coup de pouce"
 
@@ -551,11 +551,11 @@ Dans cet exercice, une chaîne (par exemple un brin d’ADN écrit avec les lett
 
 On dispose d’un tableau `t` **trié** par ordre croissant.
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `dicho(t, v, gauche, droite)` qui renvoie un indice où `v` apparaît dans `t[gauche..droite]`, ou `-1` si `v` n’y est pas. À chaque appel, on compare `v` à l’élément **du milieu** et on ne garde qu’une moitié : encore un « diviser pour régner » (coût $\log_2 n$).
+<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `dicho(t, v, gauche, droite)` qui renvoie un indice où `v` apparaît entre les indices `gauche` et `droite` **inclus**, ou `-1` si `v` n’y est pas. Appel initial : `dicho(t, v, 0, len(t) - 1)`. À chaque appel, on compare `v` à l’élément **du milieu** et on ne garde qu’une moitié : encore un « diviser pour régner » (coût $\log_2 n$).
 
 ??? pouce "Coup de pouce"
 
-    Quand la zone `t[gauche..droite]` est-elle vide (condition d’arrêt) ? Reprendre la dichotomie de Première : la boucle `while` est remplacée par un appel récursif sur la moitié conservée.
+    Quand la zone comprise entre `gauche` et `droite` est-elle vide (condition d’arrêt) ? Reprendre la dichotomie de Première : la boucle `while` est remplacée par un appel récursif sur la moitié conservée.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -611,13 +611,15 @@ On dispose d’un tableau `t` **trié** par ordre croissant.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Décompositions en 1 et 2 <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-21 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `decoupe(n)` qui affiche toutes les façons d’écrire `n` comme une somme ordonnée de `1` et de `2`. Exemple : `decoupe(3)` affiche `1 + 1 + 1`, `1 + 2`, `2 + 1`.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `decoupe(n)` qui affiche toutes les façons d’écrire `n` comme une somme ordonnée de `1` et de `2`. Exemple : `decoupe(3)` affiche, une décomposition par ligne : `1 + 1 + 1`, `1 + 2`, `2 + 1`.
 
 ??? pouce "Coup de pouce"
 
     Une décomposition de `n` commence soit par `1`, soit par `2` : que reste-t-il alors à décomposer ? Ajouter un second paramètre `debut` qui mémorise le début déjà écrit, avec la valeur par défaut `""` (voir le cours, « Un outil Python : le paramètre par défaut »), et l’afficher quand il ne reste plus rien.
 
-*Combien de décompositions pour `decoupe(n)` ? Quelle suite reconnaissez-vous ?* Pourquoi la valeur par défaut `""` est-elle sans danger ici, alors qu’une valeur par défaut `[]` serait un piège ?
+1.  Combien de décompositions `decoupe(n)` affiche-t-elle ? Quelle suite reconnaissez-vous ?
+
+2.  Pourquoi la valeur par défaut `""` est-elle sans danger ici, alors qu’une valeur par défaut `[]` serait un piège ?
 
 ??? corrige "Corrigé"
 
@@ -690,7 +692,7 @@ On veut déplacer une pile de `n` disques d’un piquet `depart` vers un piquet 
 
 ![](../figures/b10117ed8e3fb332.svg){ .tikz .tikz-inline loading=lazy } déplacer les $n-1$ disques du haut (**appel récursif**) A $\rightarrow$ B ![](../figures/c8c82be9a520c649.svg){ .tikz .tikz-inline loading=lazy } déplacer le grand disque A $\rightarrow$ C ![](../figures/f8d107876564b5a6.svg){ .tikz .tikz-inline loading=lazy } déplacer les $n-1$ disques (**appel récursif**) B $\rightarrow$ C
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `hanoi(n, depart, inter, arrivee)` qui **affiche** la suite des déplacements (par ex. `"A -> C"`). Combien de déplacements sont nécessaires pour `n` disques ? *(On montrera que c’est $2^n - 1$.)*
+<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `hanoi(n, depart, inter, arrivee)` qui **affiche** la suite des déplacements (par ex. `A -> C`). Exemple d’appel : `hanoi(3, "A", "B", "C")`. Combien de déplacements sont nécessaires pour `n` disques ? *(On montrera que c’est $2^n - 1$.)*
 
 ??? pouce "Coup de pouce"
 
@@ -726,7 +728,7 @@ On veut déplacer une pile de `n` disques d’un piquet `depart` vers un piquet 
 
     ??? pouce "Coup de pouce"
 
-        Un accumulateur initialisé avec la valeur de la condition d’arrêt (`1` pour un produit, `0` pour une somme), mis à jour à chaque tour d’une boucle `for`. Pour la question 2 : à partir du résultat sur quel tableau plus court peut-on obtenir celui de `t` ?
+        Un accumulateur initialisé avec la valeur de la condition d’arrêt (`1` pour un produit, `0` pour une somme), mis à jour à chaque tour d’une boucle `for`.
 
 2.  Réécrire de façon **récursive** la fonction itérative suivante, puis dire ce qu’elle calcule :
 
@@ -737,6 +739,10 @@ On veut déplacer une pile de `n` disques d’un piquet `depart` vers un piquet 
             r = r + x
         return r
     ```
+
+    ??? pouce "Coup de pouce"
+
+        À partir du résultat sur quel tableau plus court peut-on obtenir celui de `t` ?
 
 3.  Pour le **palindrome**, écrire la version **itérative** `est_palindrome(s)` (deux indices qui se rapprochent). Comparer sa lisibilité à la version récursive.
 
@@ -903,11 +909,11 @@ La courbe de Hilbert est une courbe qui « remplit » un carré : à chaque nive
 ![](../figures/de88d64d1fcfa612.svg){ .tikz .tikz-inline loading=lazy }![](../figures/70bd1aea77048cc5.svg){ .tikz .tikz-inline loading=lazy }![](../figures/6ac9122b3ac42f08.svg){ .tikz .tikz-inline loading=lazy }![](../figures/b09dc6efdedc9563.svg){ .tikz .tikz-inline loading=lazy }  
 La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Chercher (documentation Turtle) puis écrire une fonction récursive traçant la courbe de Hilbert d’ordre `n`. *Défi de fin de chapitre.*
+<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction récursive `hilbert(n, angle, longueur)` traçant la courbe de Hilbert d’ordre `n` (s’aider des figures : chaque ordre est fait de quatre copies de l’ordre précédent). *Défi de fin de chapitre.*
 
 ??? pouce "Coup de pouce"
 
-    Ajouter un paramètre `angle` valant `90` ou `-90` : une copie « pivotée dans l’autre sens » s’obtient par un appel avec `-angle`. La courbe d’ordre `n` enchaîne quatre courbes d’ordre `n - 1` séparées par trois `forward` et des rotations (voir la règle `L -> +RF-LFL-FR+`).
+    Ajouter un paramètre `angle` valant `90` ou `-90` : une copie « pivotée dans l’autre sens » s’obtient par un appel avec `-angle`. La courbe d’ordre `n` enchaîne quatre courbes d’ordre `n - 1` séparées par trois `forward` et des rotations : tourner, copie pivotée dans l’autre sens, avancer, tourner, copie, avancer, copie, tourner, avancer, copie pivotée dans l’autre sens, tourner.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -1041,23 +1047,23 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
 
 *Thème : la récursivité.* Au rugby, une équipe marque (pour simplifier) soit **3** points (pénalité), soit **5** (essai non transformé), soit **7** (essai transformé).
 
-1.  Écrire une fonction `possible_avec_penalites_seules(score)` qui renvoie `True` si le score peut être obtenu uniquement avec des pénalités (des « coups » à $3$). Exemples : `...(15)` renvoie `True`, `...(10)` renvoie `False`.
+1.  Écrire une fonction `possible_avec_penalites_seules(score)` qui renvoie `True` si le score peut être obtenu uniquement avec des pénalités (des « coups » à $3$). Exemples : `possible_avec_penalites_seules(15)` renvoie `True`, et la fonction renvoie `False` pour `10`.
 
 2.  On note $f(n)$ le nombre de façons d’obtenir le score $n$. On admet que pour $n > 6$ :
 
     $$f(n) = f(n-3) + f(n-5) + f(n-7).$$
 
-    On donne $f(8) = 2$, $f(9) = 1$, $f(10) = 3$. **Déterminer les cas de base**, c’est-à-dire la valeur de $f(n)$ pour chaque entier `n` de $0$ à $6$.
+    On donne $f(8) = 2$, $f(9) = 1$, $f(10) = 3$. On convient que $f(0) = 1$ (une seule façon d’obtenir $0$ : ne rien marquer) et que $f(n) = 0$ si $n < 0$. **Déterminer les autres cas de base**, c’est-à-dire la valeur de $f(n)$ pour $1 \leqslant n \leqslant 6$.
 
     ??? pouce "Coup de pouce"
 
-        On convient que $f(0) = 1$ (une seule façon : ne rien marquer) et $f(n) = 0$ si $n < 0$. Pour $1 \leqslant n \leqslant 6$, chercher à la main les combinaisons de 3, 5 et 7.
+        Pour chaque $n$ de $1$ à $6$, chercher à la main les combinaisons de 3, 5 et 7 dont la somme vaut $n$.
 
 3.  Écrire la fonction récursive `nb_solutions(score)` qui renvoie le nombre de façons d’obtenir `score`.
 
 4.  Lors de l’appel de `nb_solutions(score)`, le nombre d’appels récursifs augmente très vite quand `score` grandit. **Nommer** une méthode algorithmique qui optimise le nombre d’appels.
 
-5.  **Recopier et compléter** la fonction récursive `solutions_possibles(score)` qui renvoie la liste de toutes les façons d’obtenir `score`. Exemple : `solutions_possibles(8)` renvoie `[[0, 5, 8], [0, 3, 8]]`.
+5.  **Recopier et compléter** la fonction récursive `solutions_possibles(score)` qui renvoie la liste de toutes les façons d’obtenir `score`. Une façon d’obtenir `score` est représentée par la liste des **scores successifs** du match, de `0` jusqu’à `score` : par exemple, `[0, 5, 8]` signifie un essai non transformé ($5$), puis une pénalité ($3$). Ainsi `solutions_possibles(8)` renvoie `[[0, 5, 8], [0, 3, 8]]`.
 
     ```python
     def solutions_possibles(score):
@@ -1096,7 +1102,7 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
 
         $$f(0)=1,\quad f(1)=0,\quad f(2)=0,\quad f(3)=1,\quad f(4)=0,\quad f(5)=1,\quad f(6)=1.$$
 
-        <span class="erreurfreq">▷ Erreur fréquente.</span> Poser $f(0) = 0$ : il y a bien *une* façon d’obtenir $0$ point, ne rien marquer. Avec $f(0) = 0$, tous les appels renverraient $0$.
+        <span class="erreurfreq">▷ Erreur fréquente.</span> Remplacer la convention $f(0) = 1$ par $f(0) = 0$ : il y a bien *une* façon d’obtenir $0$ point, ne rien marquer. Avec $f(0) = 0$, tous les appels renverraient $0$.
 
     3.  Avec ces cas de base, la relation $f(n)=f(n-3)+f(n-5)+f(n-7)$ est en fait valable pour tout $n \geqslant 1$ :
 
@@ -1156,6 +1162,8 @@ On se déplace dans une grille rectangulaire, du coin en haut à gauche jusqu’
 - tant que l’on n’est ni sur la dernière ligne ni sur la dernière colonne du tableau : on tire au sort entre un déplacement à droite ou en bas ; on concatène ce déplacement à `itineraire` ; si le déplacement est vers la droite, `j` augmente de 1, s’il est vers le bas, `i` augmente de 1 ;
 
 - on termine le chemin par les déplacements permettant d’atteindre la case en bas à droite.
+
+La fonction `itineraire_aleatoire(m, n)` renvoie un itinéraire aléatoire comportant `m` lettres `B` et `n` lettres `D` (grille de $m+1$ lignes et $n+1$ colonnes) ; `i` compte les `B` déjà écrits et `j` les `D`.
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire les lignes manquantes du code ci-dessous (le nombre de lignes effacées n’est pas indicatif).
 

@@ -64,7 +64,7 @@ Le fichier fournit `aleatoire(n)` (`n` entiers au hasard entre 0 et 1000), `est_
     ([0, 1, 2, 3], [4, 3, 2, 1])
     ```
 
-3.  Pourquoi aura-t-on besoin de ces trois sortes de listes pour *tester* un tri, et pas seulement de listes au hasard ?
+3.  Pourquoi aura-t-on besoin de listes triées, inversées et presque triées pour *tester* un tri, et pas seulement de listes au hasard ?
 
 ??? corrige "Corrigé"
 
@@ -140,7 +140,7 @@ On **instrumente** les deux tris du cours : ils trient le tableau **en place** c
 
     Garder la boucle `while j >= 0 and t[j] > x` du cours et compter une comparaison à chaque tour. Attention : quand la boucle s’arrête alors que `j >= 0`, c’est que le test `t[j] > x` a été fait (et était faux) : il faut aussi le compter.
 
-Décommenter `tester_partie_A()` : les tests trient des listes de plusieurs tailles et de trois sortes, et comparent à `sorted`. Ils doivent tous passer avant de continuer.
+Décommenter `tester_partie_A()` (la « partie A » du fichier correspond à cette section) : les tests trient des listes de plusieurs tailles et de trois sortes, et comparent à `sorted`. Ils doivent tous passer avant de continuer.
 
 ??? corrige "Corrigé"
 

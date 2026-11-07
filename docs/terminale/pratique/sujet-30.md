@@ -141,7 +141,7 @@ Le fichier `message_secret.txt` contient un texte français chiffré par César,
 
 Question 3
 
-Dans le **chiffre de Vigenère**, la clé est un mot, répété autant que nécessaire : la lettre d’indice `i` du message est décalée du **rang** de la lettre d’indice `i % len(cle)` de la clé. Par exemple, avec la clé `"CLE"`, la première lettre est décalée de $2$, la deuxième de $11$, la troisième de $4$, la quatrième à nouveau de $2$, etc. Ainsi, `NSIROCKS` chiffré avec la clé `CLE` donne `PDMTZGMD`.
+Dans le **chiffre de Vigenère**, la clé est un mot, répété autant que nécessaire : la lettre d’indice `i` du message est décalée du **rang** de la lettre d’indice `i % len(cle)` de la clé. Par exemple, avec la clé `"CLE"`, la première lettre est décalée de $2$, la deuxième de $11$, la troisième de $4$, la quatrième à nouveau de $2$, etc. Ainsi, `NSIROCKS` chiffré avec la clé `CLE` donne `PDMTZGMD`. Dans les questions 3 et 4, les messages et les clés ne contiennent que des lettres majuscules, sans espace.
 
 La fonction `vigenere(message, cle)` fournie ne donne pas ce résultat : le test `test_vigenere` échoue. Trouver l’erreur et corriger la fonction.
 

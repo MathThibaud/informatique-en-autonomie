@@ -122,7 +122,13 @@ On écrit `premier_element(t)` qui renvoie le premier élément d’un tableau.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Le piège de `-1` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-5 }
 
-Une fonction `indice_de(v, t)` renvoie l’indice de `v` dans `t`, et `-1` si `v` est absente. Cette convention est courante (on la trouve dans des sujets de bac). Montrer, sur un exemple, le **piège** qu’elle tend au code appelant en Python, puis écrire ce code appelant correctement. Quelle autre convention évite ce piège ?
+Une fonction `indice_de(v, t)` renvoie l’indice de `v` dans `t`, et `-1` si `v` est absente (convention courante, présente dans des sujets de bac).
+
+1.  Sur un exemple, montrer ce qui se passe si l’appelant écrit `t[indice_de(v, t)]` sans vérifier le résultat.
+
+2.  Écrire ce code appelant correctement.
+
+3.  Quelle autre convention évite ce piège ?
 
 ??? pouce "Coup de pouce"
 
@@ -130,7 +136,7 @@ Une fonction `indice_de(v, t)` renvoie l’indice de `v` dans `t`, et `-1` si `v
 
 ??? corrige "Corrigé"
 
-    Sur `t = [10, 20, 30]`, si `v` est absente la fonction renvoie `-1`. Mais `t[-1]` vaut `30` : le code appelant qui ferait `t[indice_de(v, t)]` croirait avoir trouvé `v` alors qu’il lit le **dernier** élément. Le code appelant doit donc **tester** le résultat avant de s’en servir : `r = indice_de(v, t)` puis `if r != -1 :` `print(t[r])`. L’autre convention, `None`, évite le piège (ce n’est jamais un indice) ; les deux sont correctes, il faut suivre celle de l’énoncé.
+    a\) Sur `t = [10, 20, 30]`, si `v` est absente la fonction renvoie `-1`. Mais `t[-1]` vaut `30` : le code appelant qui ferait `t[indice_de(v, t)]` croirait avoir trouvé `v` alors qu’il lit le **dernier** élément. b) Le code appelant doit donc **tester** le résultat avant de s’en servir : `r = indice_de(v, t)` puis `if r != -1 :` `print(t[r])`. c) L’autre convention, `None`, évite le piège (ce n’est jamais un indice) ; les deux sont correctes, il faut suivre celle de l’énoncé.
 
 ### Tester ses programmes
 
@@ -244,7 +250,7 @@ Donner des tests montrant **deux** raisons distinctes pour lesquelles elle est f
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Un bon jeu de tests <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-9 }
 
-Une fonction `est_pair(n)` renvoie un booléen. En s’appuyant sur la check-list du cours, lister les **cas** qu’un bon jeu de tests doit couvrir, puis écrire les `assert` correspondants.
+Une fonction `est_pair(n)` renvoie un booléen. En s’appuyant sur la propriété « Ingrédients d’un bon jeu de tests » du cours, lister les **cas** qu’un bon jeu de tests doit couvrir, puis écrire les `assert` correspondants.
 
 ??? pouce "Coup de pouce"
 
@@ -292,7 +298,7 @@ def est_trie_3(t):
 
 1.  Sans machine, trouver pour chaque version un tableau sur lequel elle répond faux.
 
-2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire un jeu de tests **le plus court possible** (des `assert` sur `est_trie`) qu’une version correcte passe, mais qui fait échouer **chacune** des trois versions. Combien d’`assert` suffisent ?
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire un jeu de tests **le plus court possible** (des `assert` sur `est_trie`) qu’une version correcte passe. Le rejouer ensuite en remplaçant `est_trie` par chacune des trois versions : **chacune** doit échouer sur au moins un `assert`. Combien d’`assert` suffisent ?
 
 3.  Les tests `[]`, `[5]`, `[1, 2, 3]` et `[3, 1, 2]` auraient-ils détecté une de ces erreurs ? Qu’en conclure sur le choix des tests ?
 
@@ -753,7 +759,7 @@ Dire si chaque affirmation est vraie ou fausse, en corrigeant les fausses.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 23</span> — Langage de programmation ou pas ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-23 }
 
-Pour chacun, dire si c’est un **langage de programmation** : Python, HTML, SQL, C, JavaScript. Justifier en une phrase.
+Pour chacun, dire si c’est un **langage de programmation généraliste** (qui permet d’écrire n’importe quel algorithme) : Python, HTML, SQL, C, JavaScript. Justifier en une phrase. Pour les autres, dire à quoi ils servent.
 
 ??? pouce "Coup de pouce"
 
@@ -816,7 +822,7 @@ La documentation du module `random` indique : `randint(a, b)` *« renvoie un ent
 
 Chaque programme s’arrête sur une erreur ; on donne la ligne où Python s’arrête et la **dernière ligne** du message. Pour chacun : nommer le type d’erreur, expliquer sa cause, puis <span class="run" title="À programmer et tester sur machine">▶</span> corriger le programme (ou dire quelle précondition aurait dû être vérifiée).
 
-a\) Arrêt à la ligne 4 :
+a\) Arrêt sur la ligne `total = total + notes[i]` :
 
 ```python
 notes = [12, 15, 9]
@@ -830,18 +836,7 @@ print(total)
 IndexError: list index out of range
 ```
 
-c\) Arrêt à la ligne 2 :
-
-```python
-stock = {"pomme": 4, "poire": 0}
-print(stock["kiwi"])
-```
-
-```text
-KeyError: 'kiwi'
-```
-
-b\) Arrêt à la ligne 5, lors de l’appel de la ligne 7 :
+b\) Arrêt sur la ligne `return s / len(t)`, lors de l’appel `print(moyenne([]))` :
 
 ```python
 def moyenne(t):
@@ -855,6 +850,17 @@ print(moyenne([]))
 
 ```text
 ZeroDivisionError: division by zero
+```
+
+c\) Arrêt sur la ligne `print(stock["kiwi"])` :
+
+```python
+stock = {"pomme": 4, "poire": 0}
+print(stock["kiwi"])
+```
+
+```text
+KeyError: 'kiwi'
 ```
 
 ??? pouce "Coup de pouce"
@@ -875,7 +881,15 @@ Chaque fonction ne respecte pas sa spécification. Pour chacune, écrire un `ass
 
 1.  `est_majeur(age)` doit renvoyer `True` si `age >= 18` ; son corps est `return age > 18`.
 
-2.  `somme_jusqua(n)` doit renvoyer $1 + 2 + \dots + n$ ; son corps est `s = 0`, puis `for i in range(n):` `s = s + i`, puis `return s`.
+2.  `somme_jusqua(n)` doit renvoyer $1 + 2 + \dots + n$ :
+
+    ```python
+    def somme_jusqua(n):
+        s = 0
+        for i in range(n):
+            s = s + i
+        return s
+    ```
 
 3.  `est_croissant(a, b, c)` doit renvoyer `True` si $a \leqslant b \leqslant c$ ; son corps est `return a < b and b < c`.
 

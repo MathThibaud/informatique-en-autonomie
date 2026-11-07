@@ -18,6 +18,8 @@
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
 
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
+
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
     - <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> L’IA peut aider à comprendre un message d’erreur, jamais à écrire la solution.
@@ -30,7 +32,7 @@
 
     **La démarche de la fiche.**
 
-    1.  Comprendre la règle (voisins, seuils, changement simultané), puis simuler deux tours à la main sur une petite grille.
+    1.  Comprendre la règle (voisins, seuils, changement simultané), puis simuler trois tours à la main sur une petite grille.
 
     2.  Lire la grille, puis compter les voisins occupés d’une case.
 
@@ -101,7 +103,7 @@ LLLLL
 ..L.L
 ```
 
-Dessiner la grille après un tour, puis après deux tours. Vérification : la grille ne change plus après le troisième tour, et l’on compte alors `11` sièges occupés.
+Dessiner la grille après un tour, après deux tours, puis après trois tours. Vérification : le quatrième tour ne change plus rien, et l’on compte alors `11` sièges occupés.
 
 ## Programmer la partie 1
 
@@ -113,7 +115,7 @@ Dessiner la grille après un tour, puis après deux tours. Vérification : la gr
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -169,7 +171,7 @@ Dessiner la grille après un tour, puis après deux tours. Vérification : la gr
 
 **À quoi ça sert ?** C’est le cœur de la partie 1 : le nombre de sièges occupés dans la grille finale est la réponse. Écrire `tour` sans effet de bord garantit que toutes les cases changent bien en même temps.
 
-Écrire une fonction `tour(grille)` qui renvoie la **nouvelle** grille sans modifier l’ancienne, puis répéter les tours tant que la grille change. Tester sur l’exemple du défi, puis sur vos données.
+Écrire une fonction `tour(grille)` qui renvoie la **nouvelle** grille sans modifier l’ancienne, puis répéter les tours tant que la grille change. Tester sur l’exemple inventé de la fiche, puis sur vos données.
 
 ??? pouce "Coup de pouce"
 
@@ -205,7 +207,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** En passant la fonction de comptage et le seuil en paramètres, une seule fonction `tour` sert aux deux parties : on ne réécrit que ce qui change vraiment.
 
-Écrire une fonction `visibles_occupes` (mêmes paramètres que `voisins_occupes`), puis adapter `tour` pour qu’elle reçoive en paramètres la fonction de comptage et le seuil. Sur l’exemple du défi, on doit trouver `9`.
+Écrire une fonction `visibles_occupes` (mêmes paramètres que `voisins_occupes`), puis adapter `tour` pour qu’elle reçoive en paramètres la fonction de comptage et le seuil. Sur l’exemple inventé de la fiche, on doit trouver `9`.
 
 ??? pouce "Coup de pouce"
 
@@ -261,6 +263,8 @@ Les voisins visibles d’un siège ne dépendent pas de l’état des sièges, s
     - L’énoncé se lit sur le site (voir le QR code) : [https://adventofcode.com/2020/day/22 ](https://adventofcode.com/2020/day/22 ). On peut le lire en anglais ou le faire traduire par le navigateur (clic droit, *Traduire en français*).
 
     - Avec un compte (GitHub, Google…), le bouton *get your puzzle input* donne **votre** fichier de données, à enregistrer sous `input.txt` à côté de votre programme. Sans compte : le dossier du défi (lien ci-dessus) contient des **données maison** (`input.txt`) et le programme `verifier.py`, qui dit si vos réponses sont justes.
+
+    - **Attention aux exemples.** L’énoncé en ligne a son propre exemple, avec d’autres réponses. Les valeurs de test de cette fiche portent sur **l’exemple inventé de la fiche** (exercice « À la main ») : l’enregistrer dans un fichier `exemple.txt` à côté du programme, et ouvrir `"exemple.txt"` au lieu de `"input.txt"` pour tester.
 
     - La partie 2 n’apparaît qu’une fois la partie 1 validée sur le site.
 
@@ -361,7 +365,7 @@ Jouer les trois premières manches à la main en écrivant les deux paquets apr�
 
 !!! encadre "Outil Python : strip (nettoyer une ligne lue)"
 
-    Chaque ligne renvoyée par `readlines()` se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
+    Chaque ligne lue dans un fichier (avec `for ligne in fichier` ou `readlines()`) se termine par le caractère de fin de ligne `"\n"` (sauf parfois la dernière). `ligne.strip()` renvoie une copie de la ligne sans les espaces ni les fins de ligne placés au début et à la fin.
 
     ```python
     ligne = "1721\n"
@@ -479,7 +483,7 @@ Une fois la partie 1 validée, lire la suite de l’énoncé sur le site.
 
 **À quoi ça sert ?** C’est la réponse de la partie 2 : la règle « une manche se décide par une partie plus petite » se traduit directement par un appel récursif. Le point délicat est de donner à chaque partie sa propre mémoire des situations déjà vues.
 
-Écrire une fonction récursive `combat_recursif(p1, p2)` qui renvoie le numéro du gagnant et son paquet. Sur l’exemple du défi, le joueur 1 gagne avec un score de `151`. Bien relire la règle qui empêche une partie de durer indéfiniment : elle s’applique à **chaque** partie et sous-partie séparément.
+Écrire une fonction récursive `combat_recursif(p1, p2)` qui renvoie le numéro du gagnant et son paquet. Sur l’exemple inventé de la fiche, le joueur 1 gagne avec un score de `151`. Bien relire la règle qui empêche une partie de durer indéfiniment : elle s’applique à **chaque** partie et sous-partie séparément.
 
 ??? pouce "Coup de pouce"
 

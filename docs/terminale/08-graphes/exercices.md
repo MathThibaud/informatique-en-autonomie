@@ -64,7 +64,7 @@ class Graphe:
 
 Dans une classe, on relève les binômes de travail : Alice travaille avec Bilal et Chloé ; Bilal avec Alice, Chloé et Dora ; Chloé avec Alice, Bilal et Émile ; Dora avec Bilal ; Émile avec Chloé.
 
-1.  Dire si ce graphe est orienté ou non orienté, et pourquoi.
+1.  Dire si le graphe qui modélise ces binômes est orienté ou non orienté, et pourquoi.
 
 2.  Dessiner le graphe (un sommet par initiale).
 
@@ -246,7 +246,7 @@ On considère le graphe **pondéré** suivant (les poids sont des distances en k
 
 1.  Proposer une **matrice de poids** pour ce graphe (mettre $0$ sur la diagonale et là où il n’y a pas d’arête).
 
-2.  Donner, en énumérant les chemins, le trajet **le plus court** (en km) de `A` à `D`.
+2.  Donner, en énumérant les chemins, **le ou les** trajets les plus courts (en km) de `A` à `D`, et leur longueur.
 
     ??? pouce "Coup de pouce"
 
@@ -266,7 +266,7 @@ On considère le graphe **pondéré** suivant (les poids sont des distances en k
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-8 }
 
-<span class="essentiel">• essentiel</span> En utilisant **uniquement** l’interface de la classe `Graphe` (méthodes `voisins` et `sont_voisins`), écrire les fonctions suivantes.
+<span class="essentiel">• essentiel</span> En utilisant **uniquement** l’interface de la classe `Graphe` (l’attribut `sommets` et les méthodes `voisins` et `sont_voisins`), écrire les fonctions suivantes.
 
 1.  `degre(g, s)` : renvoie le degré du sommet `s`.
 
@@ -474,7 +474,7 @@ On considère le graphe non orienté ci-dessous. On ne précise pas dans quel or
 
 <span class="duree">≈ 30 min</span> On veut le **plus court chemin** en nombre d’arêtes.
 
-1.  En vous inspirant du BFS, écrire `plus_court_chemin(g, depart, arrivee)` qui renvoie la liste des sommets d’un plus court chemin (ou `None`).
+1.  En vous inspirant du BFS, écrire `plus_court_chemin(g, depart, arrivee)` qui renvoie la liste des sommets d’un plus court chemin (ou `None` s’il n’en existe aucun).
 
     ??? pouce "Coup de pouce"
 
@@ -487,7 +487,7 @@ On considère le graphe non orienté ci-dessous. On ne précise pas dans quel or
         `en_attente = File()`  
         `en_attente.enfiler(depart)`  
         `while not en_attente.est_vide():`  
-        `s = en_attente.defiler()` … À la fin, remonter avec `s = parent[s]` et retourner la liste obtenue.
+        `s = en_attente.defiler()` … À la fin, remonter avec `s = parent[s]` et renvoyer la liste obtenue, remise dans l’ordre du départ vers l’arrivée.
 
 2.  Écrire `distances(g, depart)` qui renvoie un dictionnaire donnant, pour chaque sommet, sa distance (nombre d’arêtes) au départ.
 
@@ -724,7 +724,7 @@ La fabrication d’un pain se décompose en tâches ; un **arc** `(i)`$\to$`(j)`
 
         Q5 : au moment où l’on arrive de `(d)`, l’exploration de `(f)` est-elle encore en cours, ou déjà terminée ? Peut-on revenir de `(f)` vers `(d)` en suivant les flèches ?
 
-On considère maintenant la matrice d’adjacence d’un graphe orienté (`M[i][j] = 1` s’il existe un arc de `i` vers `j`).
+On considère maintenant un autre graphe de tâches, numérotées de $0$ à $4$, donné par sa matrice d’adjacence (`M[i][j] = 1` si la tâche `i` doit être faite avant la tâche `j`).
 
 ```python
 M = [ [0, 1, 0, 0, 0],
@@ -887,9 +887,9 @@ Un réseau de $5$ ordinateurs numérotés $0$ à $4$ est représenté par des **
 
         Q3 : tirer au hasard un **indice** valide de la liste `voisins[s]`.
 
-Au début, un virus n’est présent que sur un ordinateur. À chaque étape, il contamine **tous** ses voisins non encore contaminés.
+Au début, un virus n’est présent que sur un ordinateur. À chaque étape, chaque ordinateur contaminé contamine **tous** ses voisins non encore contaminés.
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span> Proposer (et programmer) un algorithme qui, à partir d’un sommet de départ `s`, renvoie le nombre d’étapes nécessaires pour contaminer **tout** le réseau.
+1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `temps_propagation(voisins, s)` qui renvoie le nombre d’étapes nécessaires pour que le virus, parti de l’ordinateur `s`, contamine **tout** le réseau.
 
     ??? pouce "Coup de pouce"
 
@@ -1265,7 +1265,7 @@ On modélise le labyrinthe par un graphe : les **sommets** sont les cases libres
 
 6.  On suppose que `g.voisins(s)` renvoie les voisines dans l’ordre haut, bas, gauche, droite. On lance le parcours en profondeur récursif `DFS(g, (0, 0))` du cours, en notant le **parent** de chaque case (la case depuis laquelle elle a été découverte). En remontant les parents depuis `S`, quel chemin obtient-on ? Quelle est sa longueur ? Quel parcours faut-il utiliser pour obtenir à coup sûr un plus court chemin, et pourquoi ?
 
-7.  <span class="run" title="À programmer et tester sur machine">▶</span>  Vérifier les réponses aux questions 1 et 5 à l’aide des fonctions `plus_court_chemin` et `distances` de l’exercice 14.
+7.  <span class="run" title="À programmer et tester sur machine">▶</span>  Vérifier la réponse à la question 1 en comptant les sommets et les voisins du graphe renvoyé par `construire_graphe(lab)`, puis la réponse à la question 5 à l’aide des fonctions `plus_court_chemin` et `distances` de l’exercice 14.
 
 ??? pouce "Coup de pouce"
 

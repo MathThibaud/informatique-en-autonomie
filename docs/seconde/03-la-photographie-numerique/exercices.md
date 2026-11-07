@@ -140,7 +140,7 @@ $(255,0,0)$ $(0,0,0)$ $(255,255,255)$ $(0,255,0)$ $(255,255,0)$ $(40,40,40)$.
 
 1.  Combien de pixels contient-elle ? Donner un ordre de grandeur en millions.
 
-2.  Calculer son **poids brut** (3 octets par pixel), en méga-octets ($1$ Mo $\approx 10^6$ octets).
+2.  Calculer son **poids brut** (3 octets par pixel), en mégaoctets ($1$ Mo $\approx 10^6$ octets).
 
 ??? pouce "Coup de pouce"
 
@@ -335,7 +335,7 @@ img.show()
 
 <span class="duree">≈ 15 min</span>
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Notre œil est plus sensible au vert (c’est pourquoi le filtre de Bayer compte deux fois plus de filtres verts). Écrire un programme qui rend l’image **grise** en en tenant compte : remplacer R, V et B par $m = (3r + 6v + b)\ //\ 10$. Vérifier qu’une image grise a bien ses trois canaux égaux. Calculer enfin à la main $m$ pour le pixel $(100, 200, 50)$, et le comparer à la simple moyenne $(r+v+b)\ //\ 3$ vue dans le cours.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Notre œil est plus sensible au vert (c’est pourquoi le filtre de Bayer compte deux fois plus de filtres verts). Écrire un programme qui rend l’image **grise** en en tenant compte : remplacer R, V et B par $m = (3r + 6v + b)\ //\ 10$. Vérifier, avec `getpixel`, qu’un pixel de l’image obtenue a bien ses trois canaux égaux. Calculer enfin à la main $m$ pour le pixel $(100, 200, 50)$, et le comparer à la simple moyenne $(r+v+b)\ //\ 3$ vue dans le cours.
 
 ??? pouce "Coup de pouce"
 
@@ -476,7 +476,7 @@ img.show()
 
 3.  Un photosite ne mesure qu’une couleur. Comment l’appareil obtient-il les trois valeurs R, V, B de chaque pixel ?
 
-4.  Calculer le poids brut de chaque photo (3 octets par pixel), en Mo. Pourquoi le réglage par défaut n’est-il pas le plus détaillé ?
+4.  Calculer le poids brut de chaque photo (3 octets par pixel), en Mo. Pourquoi le téléphone n’utilise-t-il pas *par défaut* le réglage le plus détaillé ?
 
 ??? pouce "Coup de pouce"
 

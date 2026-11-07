@@ -262,7 +262,7 @@ Le cours affirme qu’un ABR de $n$ valeurs « bien rempli » a une hauteur proc
 
 3.  Que vaut à peu près le rapport entre la hauteur moyenne au hasard et $\log_2(n)$ ? Comment évolue la hauteur au hasard quand $n$ est multiplié par $10$ ?
 
-4.  <span class="run" title="À programmer et tester sur machine">▶</span> Tracer les deux courbes avec `matplotlib`, ainsi que $\log_2(n)$ (valeur approchée par une fonction `log2(n)` qui compte le nombre de divisions par $2$ nécessaires pour passer de $n$ à $1$ ou moins), pour $n$ parmi `10, 20, 50, 100, 200, 500, 1000, 2000` (valeurs triées) et jusqu’à `10000` (au hasard). Les échelles logarithmiques (`plt.xscale("log")` et `plt.yscale("log")`) rendent le graphique lisible.
+4.  <span class="run" title="À programmer et tester sur machine">▶</span> Tracer avec `matplotlib` trois courbes en fonction de $n$ : la hauteur avec des valeurs triées pour $n$ parmi `10, 20, 50, 100, 200, 500, 1000, 2000` ; la hauteur moyenne au hasard pour les mêmes valeurs, plus `5000` et `10000` ; enfin $\log_2(n)$, approché par une fonction `log2(n)` qui compte le nombre de divisions par $2$ nécessaires pour passer de $n$ à $1$ ou moins. Les échelles logarithmiques (`plt.xscale("log")` et `plt.yscale("log")`) rendent le graphique lisible.
 
 5.  Le fichier de départ commence par `sys.setrecursionlimit(20000)`. Sans cette ligne, quel calcul échouerait, et pourquoi ? *(Penser à la forme de l’arbre et à la fonction `hauteur`.)*
 
@@ -503,7 +503,7 @@ Le cours affirme qu’un ABR de $n$ valeurs « bien rempli » a une hauteur proc
 
 Rédiger, en une dizaine de lignes, un bilan qui répond aux questions suivantes.
 
-1.  De quoi dépend le coût d’une recherche dans un ABR ? Citer vos mesures pour $n = 1\,000$ (hauteur, nombre moyen de visites) dans les deux cas.
+1.  De quoi dépend le coût d’une recherche dans un ABR ? Citer ses mesures pour $n = 1\,000$ (hauteur, nombre moyen de visites) dans les deux cas.
 
 2.  Dans quelles situations réelles risque-t-on d’insérer des valeurs déjà triées ? Comment une base de données pourrait-elle s’en protéger ? *(Penser à la hauteur de l’arbre : quelle forme faudrait-il lui garantir, quel que soit l’ordre des insertions ?)*
 
@@ -537,7 +537,7 @@ Rédiger, en une dizaine de lignes, un bilan qui répond aux questions suivantes
 
     - Les exercices marqués « défi » sont pour aller plus loin.
 
-    - Le fichier `tp_morpion_minimax_depart.py` est **à télécharger** (lien ci-dessus) : l’affichage d’une grille, la fonction `adversaire`, une fonction `partie` pour jouer contre la machine, les squelettes des fonctions à écrire et, en fin de fichier, des **tests**. Relancer le fichier après chaque partie : chaque ligne `[A FAIRE]` doit devenir `[OK]`. Certains tests explorent tout l’arbre du jeu : ils prennent quelques secondes.
+    - Le fichier `tp_morpion_minimax_depart.py` est **à télécharger** (lien ci-dessus) : l’affichage d’une grille, la fonction `adversaire`, une fonction `partie` pour jouer contre la machine, les squelettes des fonctions à écrire et, en fin de fichier, des **tests**. Relancer le fichier après chaque **section** du TP : chaque ligne `[A FAIRE]` doit devenir `[OK]`. Certains tests explorent tout l’arbre du jeu : ils prennent quelques secondes.
 
     - **Conventions** du cours : la **profondeur** d’un nœud compte les arêtes (racine à la profondeur $0$) ; la **hauteur** d’un arbre compte les nœuds (racine seule $\to$ hauteur $1$).
 

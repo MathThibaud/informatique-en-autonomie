@@ -293,7 +293,7 @@ z = x * y
 
 1.  le nombre de semaines complètes contenues dans $100$ jours ;
 
-2.  le numéro du jour de la semaine qu’il sera dans $100$ jours.
+2.  le numéro du jour de la semaine où l’on sera dans $100$ jours (de $0$ pour lundi à $6$ pour dimanche).
 
 ??? pouce "Coup de pouce"
 
@@ -410,7 +410,7 @@ Bonjour Monaco
 
 <span class="essentiel">• essentiel</span>
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Demander à l’utilisateur combien d’heures par jour il passe devant un écran, puis afficher combien d’heures cela représente sur une année ($365$ jours), et combien de **jours entiers** cela fait. (Attention : `input` renvoie du texte, il faut le convertir avec `int` !)
+<span class="run" title="À programmer et tester sur machine">▶</span>  Demander à l’utilisateur combien d’heures **entières** par jour il passe devant un écran (convertir la réponse avec `int`, car `input` renvoie du texte), puis afficher combien d’heures cela représente sur une année ($365$ jours), et à combien de **journées complètes de $24$ h** cela correspond.
 
 ??? pouce "Coup de pouce"
 
@@ -418,20 +418,20 @@ Bonjour Monaco
 
 ??? corrige "Corrigé"
 
-    Pour $3$ h par jour : $1095$ h, soit $45$ jours entiers.
+    Pour $3$ h par jour : $1095$ h, soit $45$ journées complètes de $24$ h.
 
     ```python
     par_jour = int(input("Heures d'ecran par jour ? "))
     par_an = par_jour * 365
     print(f"{par_an} heures par an")
-    print(f"soit {par_an // 24} jours entiers")
+    print(f"soit {par_an // 24} journees completes")
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Oublier `int(...)` autour de `input`. La réponse tapée reste du texte : `"3" * 365` ne multiplie pas, il *répète* le texte $365$ fois, puis `par_an // 24` provoque une erreur (`TypeError`).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Le temps de téléchargement <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-19 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Demander la taille d’un fichier en mégaoctets (Mo), puis le débit de la connexion en mégaoctets par seconde (Mo/s : chaque seconde, on reçoit ce nombre de mégaoctets). Ce sont des nombres **à virgule**, à taper avec un point : convertir avec `float`. Afficher ensuite en une seule f-string : « Un fichier de *T* Mo se télécharge en *D* secondes. » Test : $45$ Mo à $2{,}5$ Mo/s donnent $18$ secondes.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Demander la taille d’un fichier en mégaoctets (Mo), puis le débit de la connexion en mégaoctets par seconde (Mo/s : chaque seconde, on reçoit ce nombre de mégaoctets). Ce sont des nombres **à virgule**, à taper avec un point : convertir avec `float`. Afficher ensuite en une seule f-string : « Un fichier de *T* Mo se télécharge en *D* secondes. » Test : $45$ Mo à $2{,}5$ Mo/s donnent $18$ secondes (Python affichera `18.0` : c’est normal avec des `float`).
 
 ??? pouce "Coup de pouce"
 
@@ -804,7 +804,7 @@ print(f(g(2)) + 1)
 
 <span class="essentiel">• essentiel</span>
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Un téléphone affiche une icône selon le niveau de batterie (en %). Écrire une fonction `icone(niveau)` qui renvoie `"critique"` si le niveau est inférieur à $10$, `"faible"` s’il est inférieur à $30$, `"moyenne"` s’il est inférieur à $70$, et `"pleine"` sinon. Tester avec $5$, $50$ et $100$.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Un téléphone affiche une icône selon le niveau de batterie (en %). Écrire une fonction `icone(niveau)` qui renvoie `"critique"` si le niveau est **strictement** inférieur à $10$, `"faible"` s’il est strictement inférieur à $30$, `"moyenne"` s’il est strictement inférieur à $70$, et `"pleine"` sinon. Tester avec $5$, $10$, $50$ et $100$.
 
 ??? pouce "Coup de pouce"
 
@@ -826,6 +826,7 @@ print(f(g(2)) + 1)
             return "pleine"
 
     print(icone(5))     # critique
+    print(icone(10))    # faible (10 n'est pas strictement inferieur a 10)
     print(icone(50))    # moyenne
     print(icone(100))   # pleine
     ```
@@ -867,7 +868,7 @@ print(f(g(2)) + 1)
 
 <span class="duree">≈ 15 min</span>
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `bissextile(annee)` qui renvoie `True` si l’année est bissextile. Règle : une année est bissextile si elle est divisible par $4$, *sauf* les années de siècle (divisibles par $100$) qui doivent en plus être divisibles par $400$. Tester avec $2024$ (oui), $1900$ (non) et $2000$ (oui).
+<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `bissextile(annee)` qui renvoie `True` si l’année est bissextile, et `False` sinon. Règle : une année est bissextile si elle est divisible par $4$, *sauf* les années de siècle (divisibles par $100$) qui doivent en plus être divisibles par $400$. Tester avec $2024$ (oui), $1900$ (non) et $2000$ (oui).
 
 ??? pouce "Coup de pouce"
 
@@ -1200,7 +1201,7 @@ for i in range(4):
 
 <span class="duree">≈ 30 min</span>
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Cette fois, c’est **l’utilisateur** qui pense à un nombre entre $1$ et $100$, et l’ordinateur qui cherche. Il propose toujours le milieu de l’intervalle encore possible (variables `bas` et `haut`) ; l’utilisateur répond `+` (c’est plus grand), `-` (c’est plus petit) ou `=` (trouvé), et il resserre l’intervalle. Afficher à la fin le nombre d’essais. Combien lui en faut-il au maximum ?
+<span class="run" title="À programmer et tester sur machine">▶</span>  C’est **l’utilisateur** qui pense à un nombre entre $1$ et $100$, et l’ordinateur qui le cherche. L’ordinateur propose toujours le milieu de l’intervalle encore possible (variables `bas` et `haut`). L’utilisateur répond `+` si son nombre est **plus grand** que la proposition, `-` s’il est **plus petit**, `=` si l’ordinateur a trouvé ; l’ordinateur resserre alors l’intervalle. Afficher à la fin le nombre d’essais. Combien lui en faut-il au maximum ?
 
 ??? pouce "Coup de pouce"
 
@@ -1309,7 +1310,7 @@ for i in range(4):
 
 <span class="essentiel">• essentiel</span>
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Un élève a demandé à un assistant d’IA : « Écris une fonction `puissance(x, n)` qui renvoie `x` multiplié `n` fois par lui-même, avec une boucle `for` et sans utiliser l’opérateur `**`. » Voici la réponse obtenue :
+<span class="run" title="À programmer et tester sur machine">▶</span>  Un élève a demandé à un assistant d’IA : « Écris une fonction `puissance(x, n)` qui renvoie $x^n$ (le produit de `n` facteurs tous égaux à `x`), avec une boucle `for` et sans utiliser l’opérateur `**`. » Voici la réponse obtenue :
 
 ```python
 def puissance(x, n):

@@ -100,7 +100,7 @@ La fonction `rendu_glouton(systeme, somme)` est donnée : c’est celle du cours
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-Pour un système de **trois** pièces `[p1, p2, p3]`, on peut essayer *toutes* les façons de rendre la somme : $a$ pièces `p1` ($a$ de 0 à `somme // p1`), puis $b$ pièces `p2` (autant qu’il en tient dans ce qui reste) ; le reste doit alors se faire **exactement** en pièces `p3`.
+Pour un système de **trois** pièces `[p1, p2, p3]`, on peut essayer *toutes* les façons de rendre la somme : $a$ pièces `p1` ($a$ de 0 à `somme // p1`), puis $b$ pièces `p2`, avec $b$ de 0 jusqu’au nombre maximal de pièces `p2` qui tiennent dans ce qui reste ; le reste doit alors se faire **exactement** en pièces `p3`.
 
 1.  Pour `[10, 6, 1]` et la somme 12, recopier et compléter le tableau des essais :
 
@@ -155,9 +155,9 @@ Compléter `premier_contre_exemple(systeme, smax)`, qui renvoie la plus petite s
 | système | $\{1,2,5\}$ | $\{1,6,10\}$ | $\{1,3,4\}$ | $\{1,5,7\}$ | $\{1,10,25\}$ | $\{1,10,20\}$ | $\{5,10,25\}$ |
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 | contre-exemple |  |  |  |  |  |  |  |
-| glouton / optimum |  |  |  |  |  |  |  |
+| pièces (glouton ; optimum) |  |  |  |  |  |  |  |
 
-*Attention : la fonction attend le système trié du plus grand au plus petit, par exemple `[10, 6, 1]`.*
+Pour chaque contre-exemple trouvé, noter le nombre de pièces du glouton puis celui de l’optimum, par exemple « 3 ; 2 ». S’il n’y en a pas, écrire « aucun » dans la ligne « contre-exemple ». *Attention : la fonction attend le système trié du plus grand au plus petit, par exemple `[10, 6, 1]`.*
 
 ??? corrige "Corrigé"
 
@@ -172,7 +172,7 @@ Compléter `premier_contre_exemple(systeme, smax)`, qui renvoie la plus petite s
     | système | $\{1,2,5\}$ | $\{1,6,10\}$ | $\{1,3,4\}$ | $\{1,5,7\}$ | $\{1,10,25\}$ | $\{1,10,20\}$ | $\{5,10,25\}$ |
     |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
     | contre-exemple | aucun | 12 | 6 | 10 | 30 | aucun | aucun |
-    | glouton / optimum | — | 3 / 2 | 3 / 2 | 4 / 2 | 6 / 3 | — | — |
+    | pièces (glouton ; optimum) | — | 3 ; 2 | 3 ; 2 | 4 ; 2 | 6 ; 3 | — | — |
 
     Pour $\{5,10,25\}$, les sommes qui ne sont pas multiples de 5 ne peuvent être rendues ni par le glouton ni par personne : les deux fonctions renvoient `None`, ce n’est pas un contre-exemple.
 
@@ -207,7 +207,7 @@ On examine **tous** les systèmes $\{1, a, b\}$ avec $2 \leqslant a \lt  b \leqs
 
 1.  Écrivons $b = q \times a + r$ (division euclidienne : `q, r = b // a, b % a`). En affichant `a`, `b`, `q`, `r` pour les systèmes canoniques et non canoniques, chercher une règle qui permet de prévoir, *sans rien essayer*, si $\{1, a, b\}$ est canonique. La vérifier sur les 171 systèmes.
 
-2.  Aux États-Unis, on rend la monnaie avec des pièces de 1, 5, 10 et 25 cents. Si la pièce de 5 cents disparaissait, le système $\{1, 10, 25\}$ serait-il encore canonique ? (voir l’exercice précédent)
+2.  Aux États-Unis, on rend la monnaie avec des pièces de 1, 5, 10 et 25 cents. Si la pièce de 5 cents disparaissait, le système $\{1, 10, 25\}$ serait-il encore canonique ? (Appliquer la règle de la question 1, et comparer avec le tableau de l’exercice « Chercher un contre-exemple ».)
 
 3.  Avant 1971, le Royaume-Uni comptait en *pence* avec des pièces de 1, 3, 6, 12, 24 et 30 pence. Avec `rendu_glouton`, rendre 48 pence. Trouver à la main une solution en moins de pièces. Ce système était-il canonique ?
 
@@ -387,7 +387,7 @@ Avec `time.time()` (appelé avant et après), mesurer la durée de `sac_optimal`
 
 ## Une tournée sur la Riviera
 
-Un livreur part de Monaco, doit passer une fois dans chacune des dix villes ci-dessous et **revenir** à Monaco, en parcourant le moins de kilomètres possible (distances à vol d’oiseau). Les coordonnées, en km, sont rangées dans le dictionnaire `VILLES` ; la fonction `distance(v1, v2)` est fournie.
+Un livreur part de Monaco, doit passer une fois dans chacune des neuf autres villes ci-dessous, puis **revenir** à Monaco, en parcourant le moins de kilomètres possible (distances à vol d’oiseau). Les coordonnées, en km, sont rangées dans le dictionnaire `VILLES` ; la fonction `distance(v1, v2)` est fournie.
 
 | ville                  |       $x$ |       $y$ |
 |:-----------------------|----------:|----------:|

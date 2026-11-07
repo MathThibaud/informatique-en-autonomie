@@ -18,7 +18,7 @@
 
 <span class="essentiel">• essentiel</span>
 
-Sans machine, on trie `[7, 2, 5, 3, 8, 1]` par **sélection**. Recopier et compléter le tableau : à chaque étape, indiquer le minimum sélectionné dans la partie non triée, puis l’état du tableau après échange.0
+Sans machine, on trie `[7, 2, 5, 3, 8, 1]` par **sélection**. Sur le cahier, dresser un tableau de trace avec une ligne par étape `i` : l’état du tableau **au début** de l’étape, puis le minimum sélectionné dans la partie non triée (valeur et case). Terminer par une ligne « arrivée » qui donne le tableau trié.0
 
 ??? pouce "Coup de pouce"
 
@@ -448,7 +448,7 @@ Pour chacune des affirmations, répondre par vrai ou faux et justifier.
 
 1.  Le tri par sélection fait le même nombre de comparaisons, que le tableau soit trié ou non.
 
-2.  Le tri par insertion est plus rapide sur un tableau déjà trié.
+2.  Le tri par insertion est plus rapide sur un tableau déjà trié que sur un tableau quelconque de même taille.
 
 3.  Doubler la taille d’un tableau multiplie par 2 le temps d’un tri quadratique.0
 
@@ -609,7 +609,7 @@ Le **tri à bulles** compare les éléments *voisins* et les échange s’ils so
 
 Chaque concurrent est décrit par un p-uplet `(nom, temps)` et le tableau `resultats` les contient dans le désordre.
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span> Adapter le tri par sélection en `classer(resultats)` qui trie le tableau par **temps croissant** (le plus rapide en premier). *On compare désormais les temps `resultats[j][1]`.*
+1.  <span class="run" title="À programmer et tester sur machine">▶</span> Adapter le tri par sélection en `classer(resultats)` qui trie le tableau **en place** par **temps croissant** (le plus rapide en premier), puis le renvoie (pour l’affichage ci-dessous). *On compare désormais les temps `resultats[j][1]`.*
 
     ??? pouce "Coup de pouce"
 

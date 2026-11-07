@@ -104,9 +104,9 @@ Alice envoie à Bob quatre paquets, étiquetés successivement `0`, `1`, `0`, `1
 
 2.  **Scénario 1.** Tout arrive normalement. Combien de paquets et combien d’accusés circulent en tout ?
 
-3.  **Scénario 2.** Le **2<sup>e</sup> paquet** (étiquette `1`) se perd en route. Décrire, étape par étape, ce que fait Alice, puis Bob. Combien de fois le paquet `1` est-il finalement envoyé ?
+3.  **Scénario 2.** Le **2<sup>e</sup> paquet** (étiquette `1`) se perd en route. Décrire, étape par étape, ce que fait Alice, puis Bob. Combien de fois le 2<sup>e</sup> paquet est-il finalement envoyé ?
 
-4.  **Scénario 3.** Cette fois le 2<sup>e</sup> paquet arrive bien, mais c’est son **accusé qui se perd**. Alice renvoie donc le paquet `1`. Comment Bob comprend-il que c’est un **doublon**, et que fait-il alors ?
+4.  **Scénario 3.** Cette fois le 2<sup>e</sup> paquet arrive bien, mais c’est son **accusé qui se perd**. Alice renvoie donc le 2<sup>e</sup> paquet (étiquette `1`). Comment Bob comprend-il que c’est un **doublon**, et que fait-il alors ?
 
     ??? pouce "Coup de pouce"
 
@@ -118,9 +118,9 @@ Alice envoie à Bob quatre paquets, étiquetés successivement `0`, `1`, `0`, `1
 
     **b) Scénario 1 (tout arrive).** 4 paquets partent, 4 accusés reviennent : **4 paquets et 4 accusés**, aucun renvoi.
 
-    **c) Scénario 2 (le paquet `1` se perd).** Alice envoie le paquet `1` et attend son accusé. Comme le paquet n’arrive pas à Bob, aucun accusé n’est renvoyé ; au bout du délai, Alice **renvoie le même paquet `1`**. Cette fois il arrive, Bob le traite et renvoie l’accusé. Le paquet `1` a donc été envoyé **2 fois**. Alice passe ensuite au paquet `0` suivant.
+    **c) Scénario 2 (le 2<sup>e</sup> paquet, étiquette `1`, se perd).** Alice envoie le paquet étiqueté `1` et attend son accusé. Comme le paquet n’arrive pas à Bob, aucun accusé n’est renvoyé ; au bout du délai, Alice **renvoie le même paquet `1`**. Cette fois il arrive, Bob le traite et renvoie l’accusé. Le 2<sup>e</sup> paquet a donc été envoyé **2 fois**. Alice passe ensuite au paquet `0` suivant.
 
-    **d) Scénario 3 (l’accusé du paquet `1` se perd).** Bob a bien reçu et traité le paquet `1`, mais son accusé se perd. Faute d’accusé, Alice **renvoie le paquet `1`**. Bob constate qu’il porte **le bit qu’il vient déjà de traiter** : c’est un doublon, il le **jette** (sans le traiter une deuxième fois) mais **renvoie quand même l’accusé**, pour qu’Alice puisse avancer.
+    **d) Scénario 3 (l’accusé du 2<sup>e</sup> paquet se perd).** Bob a bien reçu et traité le 2<sup>e</sup> paquet (étiquette `1`), mais son accusé se perd. Faute d’accusé, Alice **renvoie le 2<sup>e</sup> paquet (étiquette `1`)**. Bob constate qu’il porte **le bit qu’il vient déjà de traiter** : c’est un doublon, il le **jette** (sans le traiter une deuxième fois) mais **renvoie quand même l’accusé**, pour qu’Alice puisse avancer.
 
 ### URL et protocole HTTP
 
@@ -177,7 +177,7 @@ HTTP/1.1 404 Not Found
 Content-Type: text/html
 ```
 
-1.  Qui envoie la première ligne ? la deuxième partie ?
+1.  Qui envoie la première ligne ? Qui envoie les deux lignes suivantes ?
 
 2.  Quelle est la **méthode** de la requête ?
 
@@ -189,7 +189,7 @@ Content-Type: text/html
 
 ??? corrige "Corrigé"
 
-    **a)** La première ligne (`GET…`) est envoyée par le **client** ; la partie `HTTP/1.1 404…` est la **réponse du serveur**. **b)** La méthode est `GET`. **c)** **404** signifie « ressource **introuvable** » : elle n’a pas été trouvée. En cas de succès, le serveur renverrait `200 OK` suivi du code HTML de la page.
+    **a)** La première ligne (`GET…`) est envoyée par le **client** ; les deux lignes suivantes (`HTTP/1.1 404…` et `Content-Type…`) forment la **réponse du serveur**. **b)** La méthode est `GET`. **c)** **404** signifie « ressource **introuvable** » : elle n’a pas été trouvée. En cas de succès, le serveur renverrait `200 OK` suivi du code HTML de la page.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> croire qu’un code `404` signale une panne du serveur : le serveur a bien répondu ; c’est la ressource demandée qui n’existe pas (les pannes du serveur sont les codes `5..`).
 
@@ -269,7 +269,7 @@ Laquelle de ces balises s’écrit **sans** balise fermante ?0
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Corriger le HTML <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-12 }
 
-Ce fragment contient deux erreurs de balises. Les repérer et corriger.
+Ce fragment contient deux erreurs de balises. Les repérer et les corriger.
 
 ```html
 <p>Un paragraphe <strong>en gras</p></strong>
@@ -332,9 +332,9 @@ p  { font-size: 18px; }
 
 1.  Quelle sera l’apparence des titres <code>&lt;h1&gt;</code> ?
 
-2.  Quelle balise sera affichée en rouge ?
+2.  Quel élément de la page sera affiché en rouge ? (Sa balise peut-elle se déduire du CSS seul ?)
 
-3.  Quel principe fondamental illustre la séparation entre le fichier HTML et le fichier CSS ?
+3.  On écrit ces règles dans un fichier `.css` à part plutôt que dans le HTML. Quel principe cela illustre-t-il, et quel en est l’intérêt pour un site de plusieurs pages ?
 
     ??? pouce "Coup de pouce"
 
@@ -342,7 +342,7 @@ p  { font-size: 18px; }
 
 ??? corrige "Corrigé"
 
-    **a)** Les <code>&lt;h1&gt;</code> seront en **bleu foncé** et **centrés**. **b)** La balise portant `id="avertissement"` sera en **rouge**. **c)** La **séparation du fond (HTML) et de la forme (CSS)** : on change l’apparence sans toucher au contenu.
+    **a)** Les <code>&lt;h1&gt;</code> seront en **bleu foncé** et **centrés**. **b)** L’élément qui porte `id="avertissement"` sera en **rouge**, quelle que soit sa balise : le CSS seul ne permet pas de savoir s’il s’agit d’un <code>&lt;p&gt;</code>, d’un <code>&lt;div&gt;</code>… (il faut lire le HTML). **c)** La **séparation du fond (HTML) et de la forme (CSS)** : on change l’apparence sans toucher au contenu. Pour un site de plusieurs pages, toutes les pages se relient au même fichier `.css` : une seule modification change l’apparence de tout le site, et le style reste identique d’une page à l’autre.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — `id` ou `class` ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-15 }
 
@@ -854,11 +854,11 @@ Quelles étaient la méthode, l’adresse `action`, les noms des champs et les v
 
 Le portable d’Inès (adresse IP `192.168.1.23`) demande la page `/horaires.html` au serveur web `51.75.20.30`, en `https` (port `443`). Sa carte Wi-Fi a l’adresse MAC `3C:22:FB:10:4A:01` ; la box, première étape du trajet, a l’adresse MAC `F4:CA:E5:81:02:9B`.
 
-1.  Recopier le schéma de la trame envoyée par le portable (quatre cases emboîtées) et écrire dans chaque case les informations qu’elle contient : données HTTP, en-tête TCP, en-tête IP, en-tête MAC.
+1.  Dessiner la trame envoyée par le portable sous forme de quatre cases emboîtées (comme le schéma de l’encapsulation du cours) et écrire dans chaque case les informations qu’elle contient : données HTTP, en-tête TCP, en-tête IP, en-tête MAC.
 
 2.  Un routeur, au milieu du trajet, reçoit cette trame. Quelle information doit-il lire pour décider où envoyer le paquet ? Dans quel en-tête la trouve-t-il ?
 
-3.  D’un routeur à l’autre, l’en-tête MAC change, mais pas les adresses IP. Pourquoi ?
+3.  Au-delà de la box, d’un routeur à l’autre, l’en-tête MAC change à chaque saut, mais pas les adresses IP. Pourquoi ? (Qu’arrive-t-il à l’adresse source en passant par la box ?)
 
 4.  Inès passe du Wi-Fi au réseau 4G de son téléphone. Le navigateur et le serveur doivent-ils changer leur façon d’écrire la requête HTTP ? Quel avantage de l’encapsulation cela illustre-t-il ?
 
@@ -915,7 +915,7 @@ Le club du lycée veut une petite page pour s’inscrire à l’atelier robotiqu
 
 6.  Tout se passe sans recharger la page.
 
-Rappel de syntaxe : comme en Python, mais avec des accolades, on écrit `if (condition) { … } else { … }` ; l’égalité se teste avec `===` (la différence avec `!==`, comme dans le cours) et le « ou » logique s’écrit `||`.
+Rappel de syntaxe : comme en Python, mais avec des accolades, on écrit `if (condition) { … } else { … }` ; l’égalité se teste avec `===`, la différence avec `!==` (comme dans le cours), et le « ou » logique s’écrit `||`.
 
 1.  Lister les **composants graphiques** de cette interface et, pour chacun, l’**événement** qu’il traite (s’il en traite un).
 

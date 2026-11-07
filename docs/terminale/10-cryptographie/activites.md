@@ -58,7 +58,7 @@ Toutes les autres lettres sont en dessous de $4$ %.
 
 ## Ce qu’on a découvert
 
-1.  Vous avez lu le message **sans connaître la clé**. Parmi les verbes *chiffrer*, *déchiffrer* et *décrypter*, lequel décrit ce que vous venez de faire ? Lequel décrit ce que fera le destinataire, qui connaît $k$ ?
+1.  Vous avez lu le message **sans connaître la clé** au départ. Parmi les verbes *chiffrer*, *déchiffrer* et *décrypter*, lequel décrit ce que vous venez de faire ? Lequel décrit ce que fera le destinataire, qui connaît $k$ ? Lequel décrit ce qu’avait fait l’expéditeur ?
 
 2.  Le décalage change les lettres, mais que conserve-t-il du message ? Que devrait, au contraire, faire un bon chiffrement ?
 

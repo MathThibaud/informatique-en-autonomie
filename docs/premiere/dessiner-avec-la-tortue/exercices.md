@@ -166,7 +166,7 @@
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Rosace de cercles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-6 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> La tortue sait tracer un cercle avec `t.circle(rayon)`. Dessiner une jolie « fleur » en répétant **18 cercles** de rayon `80`, en tournant un peu entre chaque. De combien faut-il tourner à chaque fois ?0
+<span class="run" title="À programmer et tester sur machine">▶</span> La tortue sait tracer un cercle avec `t.circle(rayon)`. Dessiner une jolie « fleur » en répétant **18 cercles** de rayon `80`, en tournant un peu entre deux cercles. De combien faut-il tourner à chaque fois ?0
 
 ??? pouce "Coup de pouce"
 
@@ -188,17 +188,17 @@
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — La spirale carrée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-T-7 }
 
-<span class="run" title="À programmer et tester sur machine">▶</span> Dessiner une spirale : on tourne toujours de `90` degrés, mais la longueur du côté **augmente** à chaque tour (par exemple `10, 20, 30, …`). Faire une vingtaine de segments.0
+<span class="run" title="À programmer et tester sur machine">▶</span> Dessiner une spirale : on tourne toujours de `90` degrés, mais la longueur **augmente** à chaque nouveau segment (par exemple `10, 20, 30, …`). Faire une vingtaine de segments.0
 
 ??? pouce "Coup de pouce"
 
-    La longueur doit changer à chaque tour : utiliser la variable de boucle `i` dans le calcul de la longueur (que vaut `10 * i` pour `i` allant de `1` à `20` ?).
+    La longueur doit changer à chaque passage dans la boucle : utiliser la variable de boucle `i` dans le calcul de la longueur (que vaut `10 * i` pour `i` allant de `1` à `20` ?).
 
 ![](../figures/2312be89348863bb.svg){ .tikz loading=lazy }
 
 ??? corrige "Corrigé"
 
-    On garde l’angle à `90` degrés, mais on **augmente** la longueur du côté à chaque tour.
+    On garde l’angle à `90` degrés, mais on **augmente** la longueur à chaque nouveau segment (à chaque passage dans la boucle).
 
     ```python
     import turtle as t

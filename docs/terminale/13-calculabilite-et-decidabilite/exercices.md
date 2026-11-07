@@ -237,9 +237,9 @@ Expliquer en quoi les deux énoncés suivants « tournent en rond », et quel 
 
 <span class="duree">≈ 15 min</span>
 
-On admet le **théorème de l’arrêt** (indécidable). On voudrait maintenant un programme `renvoie42(prog, x)` qui dirait à coup sûr si `prog(x)` finit par renvoyer la valeur $42$.
+On admet que le **problème de l’arrêt** est indécidable. On voudrait maintenant un programme `renvoie42(prog, x)` qui dirait à coup sûr si `prog(x)` finit par renvoyer la valeur $42$.
 
-1.  Expliquer pourquoi, si un tel programme existait, il « en saurait trop » sur le comportement de `prog`.
+1.  Montrer que, si `renvoie42` existait, on pourrait s’en servir pour décider le problème de l’arrêt. En déduire que `renvoie42` ne peut pas exister.
 
     ??? pouce "Coup de pouce"
 
@@ -307,9 +307,9 @@ Répondre **vrai** ou **faux** et justifier d’un mot.
 
 Pour chaque problème, dire si **vérifier** une solution qu’on vous propose est **facile** (rapide), et si **trouver** une solution semble facile ou difficile.
 
-1.  Trier une liste de $1000$ nombres.
+1.  Trier une liste de $1000$ nombres (la solution proposée est une liste : est-elle triée et contient-elle les mêmes nombres ?).
 
-2.  Une grille de Sudoku ($9\times 9$).
+2.  Compléter une grille de Sudoku $9\times 9$.
 
 3.  « Existe-t-il une tournée passant par ces $30$ villes, de longueur $\le 500$ km ? »
 
@@ -339,7 +339,7 @@ On veut colorier les sommets du graphe ci-dessous avec **$3$ couleurs**, sans qu
 
         Chaque sommet a $3$ choix, indépendamment des autres : combien de choix pour $2$ sommets ? pour $3$ ?
 
-3.  Ce problème est-il dans **NP** ? Sait-on s’il est dans **P** ? Justifier.
+3.  On considère le problème général : « un graphe quelconque peut-il être colorié avec $3$ couleurs ? » Est-il dans **NP** ? Sait-on s’il est dans **P** ? Justifier.
 
 ??? corrige "Corrigé"
 
@@ -639,7 +639,7 @@ tests = [(0, 0), (2, 4), (3, 9)]
 
 1.  Le professeur ajoute le test `(-3, 9)` à la liste. Donner les valeurs successives de `i` lors de l’appel `carre_c(-3)`. Cet appel termine-t-il ? Que se passe-t-il alors pour l’appel `verifier(carre_c, tests)` ?
 
-2.  Modifier la condition de la boucle `while` (et, si besoin, l’instruction qui suit) pour que `carre_c` termine et renvoie le bon résultat pour **tout** entier `n`, y compris négatif. Justifier la terminaison à l’aide d’un **variant**.
+2.  Modifier la condition de la boucle `while` (et, si besoin, la première instruction du corps de la boucle) pour que `carre_c` termine et renvoie le bon résultat pour **tout** entier `n`, y compris négatif. Justifier la terminaison à l’aide d’un **variant**.
 
     ??? pouce "Coup de pouce"
 

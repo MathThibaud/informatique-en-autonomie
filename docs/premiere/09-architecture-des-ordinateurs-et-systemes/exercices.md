@@ -620,7 +620,7 @@ Léo, sur son environnement Linux, écrit un petit programme, l’enregistre, pu
 
 2.  Il enregistre dans `/home/leo/Projets/jeu.py`. Donner la commande qui, depuis `/home/leo`, affiche le contenu de ce fichier avec un **chemin relatif**.
 
-3.  Il rend le fichier exécutable par lui seul. Écrire la commande `chmod`.
+3.  Il ajoute le droit d’exécution pour lui-même (le propriétaire), sans toucher aux autres droits. Écrire la commande `chmod`.
 
 4.  Quand il lance son programme Python, celui-ci n’est pas exécuté tel quel par le processeur. Expliquer, avec les mots *traduction*, *langage machine* et *cycle chercher-décoder-exécuter*, ce qui se passe « en dessous ».
 
@@ -634,7 +634,7 @@ Léo, sur son environnement Linux, écrit un petit programme, l’enregistre, pu
 
 ??? corrige "Corrigé"
 
-    **a)** Tant qu’il n’a pas enregistré, le texte est en **RAM** (mémoire volatile) : une coupure de courant le **perd**. **b)** `cat Projets/jeu.py` (chemin relatif depuis `/home/leo`). **c)** `chmod u+x Projets/jeu.py` (pour n’autoriser que lui, on peut aussi fixer tous les droits d’un coup en chiffres : `chmod 700 Projets/jeu.py`, soit `rwx------`). **d)** Le processeur ne comprend que le **langage machine**. Le code Python est donc d’abord **traduit** par l’interpréteur Python (en simplifiant : il le traduit en un code intermédiaire, qu’il exécute ensuite instruction par instruction) ; tout en bas, ce sont des instructions en langage machine que le processeur exécute une à une, en répétant le **cycle chercher-décoder-exécuter**. Le programme « lisible » du haut du mille-feuille finit toujours en instructions élémentaires tout en bas.
+    **a)** Tant qu’il n’a pas enregistré, le texte est en **RAM** (mémoire volatile) : une coupure de courant le **perd**. **b)** `cat Projets/jeu.py` (chemin relatif depuis `/home/leo`). **c)** `chmod u+x Projets/jeu.py` : `u` (le propriétaire), `+x` (ajouter l’exécution) ; les autres droits ne bougent pas. (En chiffres, `chmod 700 Projets/jeu.py` donnerait `rwx------` : il retirerait aussi les droits du groupe et des autres, ce qui n’est pas demandé.) **d)** Le processeur ne comprend que le **langage machine**. Le code Python est donc d’abord **traduit** par l’interpréteur Python (en simplifiant : il le traduit en un code intermédiaire, qu’il exécute ensuite instruction par instruction) ; tout en bas, ce sont des instructions en langage machine que le processeur exécute une à une, en répétant le **cycle chercher-décoder-exécuter**. Le programme « lisible » du haut du mille-feuille finit toujours en instructions élémentaires tout en bas.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 25</span> — Le modèle de von Neumann selon un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-09-25 }
 
