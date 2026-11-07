@@ -34,25 +34,25 @@ Environ 40 minutes. On écrit le **fond** de la page : les titres, les textes, l
 
 !!! encadre "Outils de la partie 1 — les balises (cours, § V « HTML : structurer la page »)"
 
-    - `<head>` contient les informations *sur* la page (`<title>`, le titre de l’onglet) ; `<body>` contient ce qui s’affiche.
+    - <code>&lt;head&gt;</code> contient les informations *sur* la page (<code>&lt;title&gt;</code>, le titre de l’onglet) ; <code>&lt;body&gt;</code> contient ce qui s’affiche.
 
-    - `<h1>`, `<h2>` : titres ; `<p>` : paragraphe ; `<strong>` : texte important ; `<ul>` : liste à puces, dont chaque élément est un `<li>`.
+    - <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code> : titres ; <code>&lt;p&gt;</code> : paragraphe ; <code>&lt;strong&gt;</code> : texte important ; <code>&lt;ul&gt;</code> : liste à puces, dont chaque élément est un <code>&lt;li&gt;</code>.
 
-    - `<a href="…">texte</a>` : lien hypertexte. Pour une page du même dossier, le nom du fichier suffit (`infos.html` : c’est un chemin **relatif**, comme au chapitre précédent) ; pour un autre site, on écrit l’adresse complète, qui commence par `https://`.
+    - <code>&lt;a href="…"&gt;texte&lt;/a&gt;</code> : lien hypertexte. Pour une page du même dossier, le nom du fichier suffit (`infos.html` : c’est un chemin **relatif**, comme au chapitre précédent) ; pour un autre site, on écrit l’adresse complète, qui commence par `https://`.
 
-    - `<div>` : conteneur qui regroupe des éléments ; attributs `id="…"` (identifiant *unique* dans la page) et `class="…"` (étiquette *partagée*).
+    - <code>&lt;div&gt;</code> : conteneur qui regroupe des éléments ; attributs `id="…"` (identifiant *unique* dans la page) et `class="…"` (étiquette *partagée*).
 
-    - Tableau : `<table>` contient des lignes `<tr>` ; chaque ligne contient des cases `<th>` (case de titre) ou `<td>` (case ordinaire). Le squelette en donne un modèle.
+    - Tableau : <code>&lt;table&gt;</code> contient des lignes <code>&lt;tr&gt;</code> ; chaque ligne contient des cases <code>&lt;th&gt;</code> (case de titre) ou <code>&lt;td&gt;</code> (case ordinaire). Le squelette en donne un modèle.
 
-    - `<!-- … -->` : commentaire, ignoré par le navigateur. Les consignes `TODO` du squelette en sont.
+    - <code>&lt;!-- … --&gt;</code> : commentaire, ignoré par le navigateur. Les consignes `TODO` du squelette en sont.
 
-    Chaque balise ouverte se referme, et les balises s’emboîtent sans se croiser (sauf les balises auto-fermantes comme `<meta>`, `<link>`, `<input>`).
+    Chaque balise ouverte se referme, et les balises s’emboîtent sans se croiser (sauf les balises auto-fermantes comme <code>&lt;meta&gt;</code>, <code>&lt;link&gt;</code>, <code>&lt;input&gt;</code>).
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Découvrir le squelette <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-1-1 }
 
 1.  Ouvrir `index.html` dans le navigateur (double-clic), puis dans l’éditeur de texte. Quels textes le navigateur affiche-t-il ? Pourquoi les lignes `TODO` n’apparaissent-elles pas ?
 
-2.  Combien de blocs `<div class="carte">` la page contient-elle ? Pourquoi est-ce une `class` et pas un `id` ?
+2.  Combien de blocs <code>&lt;div class="carte"&gt;</code> la page contient-elle ? Pourquoi est-ce une `class` et pas un `id` ?
 
 3.  Repérer le tableau du planning : combien de lignes compte-t-il pour l’instant ? Combien de cases par ligne ?
 
@@ -122,7 +122,7 @@ Environ 40 minutes. On écrit le **fond** de la page : les titres, les textes, l
     }
     ```
 
-    **1.** Le navigateur affiche les cinq sous-titres (« Qui sommes-nous ? », « Ce que l’on observe », « Le planning », « Vous aimez le club ? », « S’inscrire à la nuit d’observation ») et le début du tableau, sans aucune mise en forme ; l’onglet porte le titre « Mon site ». Les lignes `TODO` sont écrites entre `<!--` et `-->` : ce sont des **commentaires**, que le navigateur ignore. **2.** Cinq blocs. C’est une `class` parce que plusieurs balises portent la même étiquette, pour recevoir le même style ; un `id` doit être unique dans la page. **3.** Deux lignes (la ligne de titres et celle du lundi), de trois cases chacune.
+    **1.** Le navigateur affiche les cinq sous-titres (« Qui sommes-nous ? », « Ce que l’on observe », « Le planning », « Vous aimez le club ? », « S’inscrire à la nuit d’observation ») et le début du tableau, sans aucune mise en forme ; l’onglet porte le titre « Mon site ». Les lignes `TODO` sont écrites entre <code>&lt;!--</code> et `-->` : ce sont des **commentaires**, que le navigateur ignore. **2.** Cinq blocs. C’est une `class` parce que plusieurs balises portent la même étiquette, pour recevoir le même style ; un `id` doit être unique dans la page. **3.** Deux lignes (la ligne de titres et celle du lundi), de trois cases chacune.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Titres, annonce et présentation <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-1-2 }
 
@@ -130,11 +130,11 @@ Environ 40 minutes. On écrit le **fond** de la page : les titres, les textes, l
 
 1.  Remplacer le titre de l’onglet `Mon site` par `Club Astro - Accueil`. Où ce titre s’affiche-t-il ?
 
-2.  Écrire le titre principal `<h1>` « Club Astro ».
+2.  Écrire le titre principal <code>&lt;h1&gt;</code> « Club Astro ».
 
 3.  Juste en dessous, écrire un paragraphe d’identifiant `annonce` qui contient : « Prochaine nuit d’observation : vendredi à 21 h, sur le toit du lycée. »
 
-4.  Dans la carte « Qui sommes-nous ? », écrire un paragraphe de deux ou trois phrases qui présente le club ; mettre quelques mots en valeur avec `<strong>`.
+4.  Dans la carte « Qui sommes-nous ? », écrire un paragraphe de deux ou trois phrases qui présente le club ; mettre quelques mots en valeur avec <code>&lt;strong&gt;</code>.
 
 5.  Dans la carte « Ce que l’on observe », écrire une liste à puces d’au moins trois objets du ciel.
 
@@ -165,13 +165,13 @@ Environ 40 minutes. On écrit le **fond** de la page : les titres, les textes, l
 
     Le titre de l’onglet s’affiche dans l’**onglet** du navigateur (et dans les favoris ou l’historique), pas dans la page.
 
-    <span class="erreurfreq">▷ Erreur fréquente.</span> écrire les éléments de la liste directement dans `<ul>`, sans `<li>` : ils s’affichent alors à la suite, sans puces.
+    <span class="erreurfreq">▷ Erreur fréquente.</span> écrire les éléments de la liste directement dans <code>&lt;ul&gt;</code>, sans <code>&lt;li&gt;</code> : ils s’affichent alors à la suite, sans puces.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Compléter le planning <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-1-3 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-Ajouter au tableau, sur le modèle de la ligne du lundi, une ligne « Mercredi, 14 h, Fabriquer une lunette » et une ligne « Vendredi, 21 h, Nuit d’observation ». Pourquoi la première ligne utilise-t-elle des `<th>` et les autres des `<td>` ?
+Ajouter au tableau, sur le modèle de la ligne du lundi, une ligne « Mercredi, 14 h, Fabriquer une lunette » et une ligne « Vendredi, 21 h, Nuit d’observation ». Pourquoi la première ligne utilise-t-elle des <code>&lt;th&gt;</code> et les autres des <code>&lt;td&gt;</code> ?
 
 ??? corrige "Corrigé"
 
@@ -188,13 +188,13 @@ Ajouter au tableau, sur le modèle de la ligne du lundi, une ligne « Mercredi, 
     </tr>
     ```
 
-    La première ligne contient les **titres des colonnes** : ses cases sont des `<th>`, que le navigateur affiche en gras et centrées. Les lignes suivantes contiennent les données, dans des cases ordinaires `<td>`.
+    La première ligne contient les **titres des colonnes** : ses cases sont des <code>&lt;th&gt;</code>, que le navigateur affiche en gras et centrées. Les lignes suivantes contiennent les données, dans des cases ordinaires <code>&lt;td&gt;</code>.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — La barre de navigation et une deuxième page <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-1-4 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-1.  À l’endroit indiqué, sous l’annonce, écrire un bloc `<div class="barre">` qui contient trois liens : « Accueil » vers `index.html`, « Infos pratiques » vers `infos.html`, « En savoir plus » vers `https://fr.wikipedia.org/ wiki/ Astronomie`.
+1.  À l’endroit indiqué, sous l’annonce, écrire un bloc <code>&lt;div class="barre"&gt;</code> qui contient trois liens : « Accueil » vers `index.html`, « Infos pratiques » vers `infos.html`, « En savoir plus » vers `https://fr.wikipedia.org/ wiki/ Astronomie`.
 
     ??? pouce "Coup de pouce"
 
@@ -202,7 +202,7 @@ Ajouter au tableau, sur le modèle de la ligne du lundi, une ligne « Mercredi, 
 
 2.  Lesquels de ces liens utilisent un chemin relatif ? Lequel une adresse complète ? Pourquoi le lien « Infos pratiques » ne mène-t-il encore nulle part ?
 
-3.  Créer la page `infos.html` : dans l’éditeur, enregistrer une copie de `index.html` sous ce nom, **dans le même dossier**. Dans cette copie, changer le titre de l’onglet en `Club Astro - Infos pratiques` ; garder le `<h1>`, la barre et la ligne `<script …>` de la fin ; remplacer l’annonce et toutes les cartes par une seule carte « Infos pratiques » (lieu du rendez-vous, matériel à apporter).
+3.  Créer la page `infos.html` : dans l’éditeur, enregistrer une copie de `index.html` sous ce nom, **dans le même dossier**. Dans cette copie, changer le titre de l’onglet en `Club Astro - Infos pratiques` ; garder le <code>&lt;h1&gt;</code>, la barre et la ligne <code>&lt;script …&gt;</code> de la fin ; remplacer l’annonce et toutes les cartes par une seule carte « Infos pratiques » (lieu du rendez-vous, matériel à apporter).
 
 4.  Vérifier qu’on passe d’une page à l’autre, dans les deux sens, avec la barre.
 
@@ -260,7 +260,7 @@ Environ 35 minutes. On écrit maintenant la **forme**, dans un fichier à part :
 
 !!! encadre "Outils de la partie 2 — les règles CSS (cours, § VI « CSS : mettre en forme »)"
 
-    - Relier la feuille de style : `<link rel="stylesheet" href="style.css">`, dans le `<head>` de **chaque** page.
+    - Relier la feuille de style : <code>&lt;link rel="stylesheet" href="style.css"&gt;</code>, dans le <code>&lt;head&gt;</code> de **chaque** page.
 
     - Une règle : `sélecteur { propriété: valeur; }`. Trois sélecteurs : par nom de balise (`h1`), par classe (`.barre`), par identifiant (`#annonce`).
 
@@ -292,7 +292,7 @@ Environ 35 minutes. On écrit maintenant la **forme**, dans un fichier à part :
 
     **1.** La règle vise toutes les balises de classe `carte` (les cinq blocs de la page d’accueil). `border` les entoure d’un trait gris continu de 2 pixels ; `padding` laisse une marge *intérieure* entre ce trait et le contenu (avec deux valeurs : 10 pixels en haut et en bas, 20 à gauche et à droite) ; `margin-bottom` laisse une marge *extérieure* de 15 pixels sous chaque carte.
 
-    **2.** Dans le `<head>`, à la place du commentaire :
+    **2.** Dans le <code>&lt;head&gt;</code>, à la place du commentaire :
 
     ```text
     <link rel="stylesheet" href="style.css">
@@ -300,7 +300,7 @@ Environ 35 minutes. On écrit maintenant la **forme**, dans un fichier à part :
 
     Après actualisation, les cartes sont encadrées et espacées : la règle `.carte` s’applique.
 
-    **3.** Même ligne dans le `<head>` de `infos.html`. Une seule feuille pour tout le site : on écrit chaque règle une fois, toutes les pages ont la même apparence, et une modification du style s’applique partout d’un coup. C’est la séparation du fond (les pages HTML) et de la forme (la feuille CSS).
+    **3.** Même ligne dans le <code>&lt;head&gt;</code> de `infos.html`. Une seule feuille pour tout le site : on écrit chaque règle une fois, toutes les pages ont la même apparence, et une modification du style s’applique partout d’un coup. C’est la séparation du fond (les pages HTML) et de la forme (la feuille CSS).
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Mettre en forme la page <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-1-6 }
 
@@ -397,7 +397,7 @@ Dans `style.css`, à la place des commentaires `TODO J2`, écrire les règles su
 
 ## Les interactions JavaScript (jalon J3)
 
-Environ 45 minutes. On écrit enfin le **comportement**, dans `script.js`. La ligne `<script src="script.js"></script>` est déjà à la fin du `<body>` : le programme est chargé après les balises qu’il utilise.
+Environ 45 minutes. On écrit enfin le **comportement**, dans `script.js`. La ligne <code>&lt;script src="script.js"&gt;&lt;/script&gt;</code> est déjà à la fin du <code>&lt;body&gt;</code> : le programme est chargé après les balises qu’il utilise.
 
 !!! encadre "Outils de la partie 3 — JavaScript (cours, § VII « JavaScript : rendre la page interactive »)"
 
@@ -405,7 +405,7 @@ Environ 45 minutes. On écrit enfin le **comportement**, dans `script.js`. La li
 
     - Réagir à un clic : attribut `onclick="aimer()"` sur le bouton, ou, depuis le JavaScript, `bouton.addEventListener("click", aimer);` (sans parenthèses après `aimer`).
 
-    - Sélectionner un élément : `document.querySelector("#nbJaime")` (ou `document. getElementById("nbJaime")`) ; le `<body>` s’obtient directement par `document.body`.
+    - Sélectionner un élément : `document.querySelector("#nbJaime")` (ou `document. getElementById("nbJaime")`) ; le <code>&lt;body&gt;</code> s’obtient directement par `document.body`.
 
     - Modifier : `.textContent` (le contenu), `.style.color` (la couleur du texte), `.classList.toggle("nuit")` (ajoute la classe si elle est absente, la retire sinon), `.value` (le texte d’un champ). `parseInt(texte)` convertit un texte en entier (exercice 18 de la feuille).
 
@@ -444,7 +444,7 @@ Environ 45 minutes. On écrit enfin le **comportement**, dans `script.js`. La li
     <p>Nombre de j'aime : <span id="nbJaime">0</span></p>
     ```
 
-2.  Dans `script.js`, écrire la fonction `aimer()` : sélectionner le `<span>`, lire le nombre affiché, lui ajouter 1, réécrire le résultat.
+2.  Dans `script.js`, écrire la fonction `aimer()` : sélectionner le <code>&lt;span&gt;</code>, lire le nombre affiché, lui ajouter 1, réécrire le résultat.
 
     ??? pouce "Coup de pouce"
 
@@ -482,7 +482,7 @@ Environ 45 minutes. On écrit enfin le **comportement**, dans `script.js`. La li
     }
     ```
 
-    **4.** Le compteur revient à 0 : actualiser recharge le fichier `index.html`, où le `<span>` contient 0. Le JavaScript n’a modifié que la page affichée, dans la mémoire du navigateur (le DOM) : rien n’a été enregistré, ni dans le fichier, ni sur un serveur.
+    **4.** Le compteur revient à 0 : actualiser recharge le fichier `index.html`, où le <code>&lt;span&gt;</code> contient 0. Le JavaScript n’a modifié que la page affichée, dans la mémoire du navigateur (le DOM) : rien n’a été enregistré, ni dans le fichier, ni sur un serveur.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> oublier `parseInt` : `zone.textContent` est une chaîne, et `"0" + 1` vaut `"01"`, puis `"011"`… Le compteur colle des 1 au lieu de compter.
 
@@ -490,7 +490,7 @@ Environ 45 minutes. On écrit enfin le **comportement**, dans `script.js`. La li
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-1.  Dans la carte « S’inscrire à la nuit d’observation », écrire, dans cet ordre : un paragraphe « Places restantes : » suivi de `<span id="places">3</span>` ; un champ de texte d’identifiant `nom` ; un bouton « S’inscrire » qui appelle `inscrire()` au clic ; un paragraphe vide d’identifiant `reponse`.
+1.  Dans la carte « S’inscrire à la nuit d’observation », écrire, dans cet ordre : un paragraphe « Places restantes : » suivi de <code>&lt;span id="places"&gt;3&lt;/span&gt;</code> ; un champ de texte d’identifiant `nom` ; un bouton « S’inscrire » qui appelle `inscrire()` au clic ; un paragraphe vide d’identifiant `reponse`.
 
     ??? pouce "Coup de pouce"
 
@@ -584,9 +584,9 @@ Les astronomes s’éclairent en rouge : cette lumière n’éblouit pas des yeu
 
 1.  Dans `style.css`, écrire une règle pour la classe `nuit` : fond noir, texte rouge (`red`, ou `tomato`, plus doux).
 
-2.  Dans la barre, **sur les deux pages**, ajouter le bouton `<button id="boutonNuit">Mode nuit</button>`, sans attribut `onclick`.
+2.  Dans la barre, **sur les deux pages**, ajouter le bouton <code>&lt;button id="boutonNuit"&gt;Mode nuit&lt;/button&gt;</code>, sans attribut `onclick`.
 
-3.  Dans `script.js`, écrire une fonction `basculerNuit()` qui ajoute la classe `nuit` au `<body>` si elle est absente, et la retire sinon. Puis, en dehors de toute fonction, brancher le bouton `boutonNuit` sur cette fonction avec `addEventListener`.
+3.  Dans `script.js`, écrire une fonction `basculerNuit()` qui ajoute la classe `nuit` au <code>&lt;body&gt;</code> si elle est absente, et la retire sinon. Puis, en dehors de toute fonction, brancher le bouton `boutonNuit` sur cette fonction avec `addEventListener`.
 
     ??? pouce "Coup de pouce"
 
@@ -643,7 +643,7 @@ Les astronomes s’éclairent en rouge : cette lumière n’éblouit pas des yeu
 
     Le sélecteur de classe `.nuit` l’emporte sur le sélecteur de balise `body`, plus général : le fond devient noir même si la règle `body` en fixe un autre.
 
-    **4.** Non : chaque page est chargée à nouveau, et la classe ajoutée au `<body>` de l’accueil n’existe pas dans `infos.html`. Pour s’en souvenir, le site pourrait faire retenir la préférence par le navigateur dans un **cookie** (cours, § VIII), comme on retient une langue.
+    **4.** Non : chaque page est chargée à nouveau, et la classe ajoutée au <code>&lt;body&gt;</code> de l’accueil n’existe pas dans `infos.html`. Pour s’en souvenir, le site pourrait faire retenir la préférence par le navigateur dans un **cookie** (cours, § VIII), comme on retient une langue.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> écrire `addEventListener("click", basculerNuit())`, avec des parenthèses : la fonction est exécutée une fois, tout de suite, au chargement (la page s’ouvre donc en mode nuit), et le clic ne fait plus rien.
 
@@ -692,7 +692,7 @@ Les astronomes s’éclairent en rouge : cette lumière n’éblouit pas des yeu
 
 - Ce site n’est qu’un exemple : dans le projet, le thème, les pages et les interactions sont les vôtres. Vous pouvez repartir de ce dossier, en le réorganisant selon l’**arborescence imposée** : la feuille de style va dans `styles/`, le programme dans `scripts/`, les autres pages dans `contenus/`. Les chemins changent alors : depuis `index.html`, on écrit `styles/style.css` ; depuis une page de `contenus/`, `../styles/style.css` (on remonte d’un cran avec `..`, comme dans le terminal).
 
-- Le projet demande aussi des images (`<img src="…" alt="…">`, cours § V), un formulaire avec un attribut `method` (cours § VIII, jalon J4) et au moins quatre interactions : ce TP en compte déjà trois.
+- Le projet demande aussi des images (<code>&lt;img src="…" alt="…"&gt;</code>, cours § V), un formulaire avec un attribut `method` (cours § VIII, jalon J4) et au moins quatre interactions : ce TP en compte déjà trois.
 
 ## <span class="etiquette">Projet</span> Créer un site web interactif
 

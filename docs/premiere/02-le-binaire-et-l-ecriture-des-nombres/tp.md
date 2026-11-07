@@ -411,7 +411,7 @@ Sur 4 bits, le complément à deux représente les entiers de $-8$ à $7$.
 
     **1.** $\texttt{0111} + \texttt{0001} = \texttt{1000}$, qui se décode en $-8$ : on a obtenu $7 + 1 = -8$. Le vrai résultat, $8$, sort de la plage $[-8 \,;\, 7]$ et « déborde » sur le bit de signe.
 
-    **2.** Si $x \geqslant 0$ et $y < 0$, alors $y \leqslant x + y < x$ : la somme est comprise entre deux nombres représentables, donc elle est représentable.
+    **2.** Si $x \geqslant 0$ et $y < 0$, alors $y \leqslant x + y \lt  x$ : la somme est comprise entre deux nombres représentables, donc elle est représentable.
 
     **3.**
 

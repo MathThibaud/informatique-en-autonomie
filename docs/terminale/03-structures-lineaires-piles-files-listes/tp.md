@@ -254,7 +254,7 @@ Deux difficultés nouvelles : un symbole écrit **dans une chaîne** (`print("("
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 5</span> — Défi — une vraie page HTML <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-structures-lineaires-piles-files-listes-tp-1-5 }
 
-Une page Web réelle contient des balises avec **attributs** (`<h1 class="titre">`) et des balises **orphelines**, qui n’ont pas de fermante (`<br>`, `<img src="a.png">`…). La fonction fournie `extraire_balises(html)` s’occupe de ces détails : elle renvoie la liste des noms de balises dans l’ordre, une fermante étant précédée de `/`.
+Une page Web réelle contient des balises avec **attributs** (<code>&lt;h1 class="titre"&gt;</code>) et des balises **orphelines**, qui n’ont pas de fermante (<code>&lt;br&gt;</code>, <code>&lt;img src="a.png"&gt;</code>…). La fonction fournie `extraire_balises(html)` s’occupe de ces détails : elle renvoie la liste des noms de balises dans l’ordre, une fermante étant précédée de `/`.
 
 ```text
 >>> extraire_balises('<p class="a">Un <b>mot</b><br></p>')
@@ -277,7 +277,7 @@ Une page Web réelle contient des balises avec **attributs** (`<h1 class="titre"
         return p.est_vide()
     ```
 
-    La page `’<p>Un <b>gras <i>italique</b></i></p>’` donne `False` (`</b>` arrive alors que `i` est au sommet) ; la page `’<ul><li>un</li><li>deux</ul>’` aussi (`li` jamais fermé). Les navigateurs, eux, *tolèrent* ces erreurs et réparent la page comme ils peuvent.
+    La page <code>’&lt;p&gt;Un &lt;b&gt;gras &lt;i&gt;italique&lt;/b&gt;&lt;/i&gt;&lt;/p&gt;’</code> donne `False` (<code>&lt;/b&gt;</code> arrive alors que `i` est au sommet) ; la page <code>’&lt;ul&gt;&lt;li&gt;un&lt;/li&gt;&lt;li&gt;deux&lt;/ul&gt;’</code> aussi (`li` jamais fermé). Les navigateurs, eux, *tolèrent* ces erreurs et réparent la page comme ils peuvent.
 
 ## Une calculatrice qui respecte les priorités
 

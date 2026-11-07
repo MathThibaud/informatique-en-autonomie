@@ -255,7 +255,7 @@ Faire des calculs **modulo $n$**, c’est ne garder que le **reste** de la divis
 
 !!! regle "Règle 7 — Les deux opérations RSA"
 
-    Pour un message-nombre $M$ (avec $0\le M < n$) :
+    Pour un message-nombre $M$ (avec $0\le M \lt  n$) :
 
     $$\text{chiffrer :}\quad C = M^{e}\bmod n \qquad\qquad \text{déchiffrer :}\quad M = C^{d}\bmod n$$
 

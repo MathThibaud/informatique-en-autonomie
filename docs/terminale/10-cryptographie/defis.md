@@ -196,7 +196,7 @@ Pour calculer $a^b \bmod m$, il n’est pas nécessaire d’effectuer $b$ multip
 
 **À quoi ça sert ?** On échange du temps de calcul contre de la mémoire : la recherche devient bien plus rapide sur le défi, et l’on peut se demander si cela suffit à menacer le protocole avec de vrais modulos.
 
-On cherche $n$ tel que $g^n \bmod p = c$, avec $0 \leq n < p$. On pose $m$ un entier tel que $m^2 > p$ et on écrit $n = i \times m + j$ avec $0 \leq i, j < m$.
+On cherche $n$ tel que $g^n \bmod p = c$, avec $0 \leq n \lt  p$. On pose $m$ un entier tel que $m^2 > p$ et on écrit $n = i \times m + j$ avec $0 \leq i, j \lt  m$.
 
 - **Pas de bébé** : on range dans un dictionnaire les $m$ valeurs $g^j \bmod p$ (clé) avec leur exposant $j$ (valeur).
 

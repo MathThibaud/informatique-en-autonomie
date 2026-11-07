@@ -818,7 +818,7 @@ reseau = {"R1": {"R2": 10, "R3": 100},
 
 <span class="duree">≈ 45 min</span> Chapitres croisés : *Cryptographie ; Diviser pour régner ; Récursivité*
 
-Alice choisit $p = 11$ et $q = 17$ ; sa clé publique est $(e, n)$ avec $e = 7$, et sa clé privée est $d = 23$. Un nombre $m$ (avec $0 \leq m < n$) se chiffre en $c = m^e \bmod n$ et se déchiffre en $m = c^d \bmod n$ (en Python, naïvement : `c = m ** e % n`, qui forme d’abord le nombre $m^e$, géant dans un vrai RSA ; la question 4 fait mieux, comme `pow(m, e, n)` vu au chapitre *Cryptographie*).
+Alice choisit $p = 11$ et $q = 17$ ; sa clé publique est $(e, n)$ avec $e = 7$, et sa clé privée est $d = 23$. Un nombre $m$ (avec $0 \leq m \lt  n$) se chiffre en $c = m^e \bmod n$ et se déchiffre en $m = c^d \bmod n$ (en Python, naïvement : `c = m ** e % n`, qui forme d’abord le nombre $m^e$, géant dans un vrai RSA ; la question 4 fait mieux, comme `pow(m, e, n)` vu au chapitre *Cryptographie*).
 
 1.  Calculer $n$ et $\varphi = (p-1)(q-1)$, puis vérifier que $e \times d \bmod \varphi = 1$.
 

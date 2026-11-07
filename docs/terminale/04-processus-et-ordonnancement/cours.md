@@ -138,9 +138,9 @@ En rapprochant les colonnes **PID** et **PPID**, on reconstitue l’arbre des pr
 | `ps -ef` *ou* `ps aux` | **tous** les processus (PID, PPID…) | `ps -ef` |
 | `pstree` | les processus sous forme d’**arbre** | `pstree` |
 | `top` *ou* `htop` | liste **rafraîchie en temps réel** (CPU, mémoire) | `top` |
-| `kill <PID>` | demande l’arrêt d’un processus | `kill 901` |
-| `kill -9 <PID>` | **force** l’arrêt (signal non ignorable) | `kill -9 901` |
-| `<commande> &` | lance en **arrière-plan** (rend la main) | `python3 tri.py &` |
+| <code>kill &lt;PID&gt;</code> | demande l’arrêt d’un processus | `kill 901` |
+| <code>kill -9 &lt;PID&gt;</code> | **force** l’arrêt (signal non ignorable) | `kill -9 901` |
+| <code>&lt;commande&gt; &amp;</code> | lance en **arrière-plan** (rend la main) | `python3 tri.py &` |
 | `jobs` | les tâches lancées depuis ce terminal | `jobs` |
 | `nice` / `renice` | règle la **priorité** d’un processus | `nice -n 10 gros_calcul` |
 
@@ -319,7 +319,7 @@ Edsger W. Dijkstra
 | Trois états | **élu** (s’exécute) / **prêt** (attend son tour) / **bloqué** (attend une ressource) |
 | Transitions | élection, fin de quantum, blocage, déblocage ; jamais bloqué $\to$ élu |
 | Création | `fork` : père/fils $\Rightarrow$ **arbre** de processus ; identifiants **PID** / **PPID** |
-| Observer / gérer | `ps -ef` (PID/PPID), `pstree`, `top` ; `kill <PID>` pour arrêter |
+| Observer / gérer | `ps -ef` (PID/PPID), `pstree`, `top` ; <code>kill &lt;PID&gt;</code> pour arrêter |
 | Ordonnancement | choisir le prochain élu ; **quantum**, commutation de contexte |
 | Stratégies | premier arrivé / plus court d’abord (attente min.) / tourniquet (réactif) / priorités (l’urgent d’abord) |
 | Interblocage | cycle d’attente mutuelle ; **graphe d’attente** ; conditions de Coffman |

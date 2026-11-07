@@ -193,9 +193,9 @@ Une fois le serveur trouvé, client et serveur dialoguent selon le protocole <sp
 
 !!! definition "Définition 8 — Les deux méthodes à connaître : GET et POST"
 
-    - `GET` : **demander** une ressource (le cas le plus courant : afficher une page). Les éventuels paramètres sont visibles dans l’URL. <span id="lex-post10" class="ancre"></span>
+    - <span id="lex-get10" class="ancre"></span>`GET` : **demander** une ressource (le cas le plus courant : afficher une page). Les éventuels paramètres sont visibles dans l’URL.
 
-    - `POST` : **envoyer** des données au serveur pour qu’il les traite (typiquement, les données d’un formulaire). Les données ne sont *pas* dans l’URL.
+    - <span id="lex-post10" class="ancre"></span>`POST` : **envoyer** des données au serveur pour qu’il les traite (typiquement, les données d’un formulaire). Les données ne sont *pas* dans l’URL.
 
 !!! encadre "À retenir — Quelques codes de statut"
 
@@ -219,7 +219,7 @@ La ressource renvoyée est le plus souvent un <span id="lex-html10" class="ancre
 
 !!! definition "Définition 9 — Balises"
 
-    Le contenu est encadré par des <span id="lex-balise10" class="ancre"></span>**balises** : une balise ouvrante `<p>` et une balise fermante `</p>`. Certaines portent des **attributs**.
+    Le contenu est encadré par des <span id="lex-balise10" class="ancre"></span>**balises** : une balise ouvrante <code>&lt;p&gt;</code> et une balise fermante <code>&lt;/p&gt;</code>. Certaines portent des **attributs**.
 
 ```html
 <!doctype html>
@@ -238,25 +238,25 @@ La ressource renvoyée est le plus souvent un <span id="lex-html10" class="ancre
 </html>
 ```
 
-- `<head>` : les informations *sur* la page (titre, encodage, feuille de style) ; `<body>` : le contenu *visible* ;
+- <code>&lt;head&gt;</code> : les informations *sur* la page (titre, encodage, feuille de style) ; <code>&lt;body&gt;</code> : le contenu *visible* ;
 
-- `<h1>` un titre, `<p>` un paragraphe, `<strong>` du texte important, `<img>` une image ;
+- <code>&lt;h1&gt;</code> un titre, <code>&lt;p&gt;</code> un paragraphe, <code>&lt;strong&gt;</code> du texte important, <code>&lt;img&gt;</code> une image ;
 
-- `<a href="...">` crée un **lien hypertexte** : c’est lui qui relie les pages entre elles et fait du Web une **toile**.
+- <code>&lt;a href="..."&gt;</code> crée un **lien hypertexte** : c’est lui qui relie les pages entre elles et fait du Web une **toile**.
 
 !!! remarque "Remarque — D’autres balises courantes"
 
-    Au-delà de l’exemple : les **titres** `<h1>` à `<h6>` (du plus au moins important) ; les **listes** `<ul>` (à puces) ou `<ol>` (numérotée), dont chaque élément est un `<li>` ; `<br>` un retour à la ligne ; `<table>` un tableau ; et les **conteneurs** `<div>` (en bloc) et `<span>` (en ligne) qui **regroupent** des éléments pour les mettre en forme ou les manipuler. Un **commentaire**, ignoré par le navigateur, s’écrit `<!-- ... -->`.
+    Au-delà de l’exemple : les **titres** <code>&lt;h1&gt;</code> à <code>&lt;h6&gt;</code> (du plus au moins important) ; les **listes** <code>&lt;ul&gt;</code> (à puces) ou <code>&lt;ol&gt;</code> (numérotée), dont chaque élément est un <code>&lt;li&gt;</code> ; <code>&lt;br&gt;</code> un retour à la ligne ; <code>&lt;table&gt;</code> un tableau ; et les **conteneurs** <code>&lt;div&gt;</code> (en bloc) et <code>&lt;span&gt;</code> (en ligne) qui **regroupent** des éléments pour les mettre en forme ou les manipuler. Un **commentaire**, ignoré par le navigateur, s’écrit <code>&lt;!-- ... --&gt;</code>.
 
 !!! remarque "Remarque — Les balises « auto-fermantes »"
 
-    Certaines balises n’entourent aucun contenu et n’ont **pas** de balise fermante : `<img>`, `<br>`, `<meta>`, `<input>`, `<link>`. On écrit `<img src="logo.png">` et jamais `<img>…</img>`.
+    Certaines balises n’entourent aucun contenu et n’ont **pas** de balise fermante : <code>&lt;img&gt;</code>, <code>&lt;br&gt;</code>, <code>&lt;meta&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;link&gt;</code>. On écrit <code>&lt;img src="logo.png"&gt;</code> et jamais <code>&lt;img&gt;…&lt;/img&gt;</code>.
 
 !!! definition "Définition 10 — Les attributs id et class"
 
     On peut « étiqueter » une balise pour la **retrouver** ensuite (en CSS ou en JavaScript) :
 
-    - `id="menu"` : un identifiant **unique** dans la page (une seule balise peut le porter) ;
+    - <span id="lex-idclass10" class="ancre"></span>`id="menu"` : un identifiant **unique** dans la page (une seule balise peut le porter) ;
 
     - `class="bouton"` : une étiquette **partagée**, que plusieurs balises peuvent avoir en commun (pour les traiter ensemble).
 
@@ -295,7 +295,7 @@ La ressource renvoyée est le plus souvent un <span id="lex-html10" class="ancre
 
 !!! remarque "Remarque — Trois façons de brancher le CSS"
 
-    Le plus propre : une **feuille externe** `style.css` reliée par `<link rel="stylesheet" href="style.css">` (réutilisable sur tout le site). On peut aussi écrire le CSS **dans** le `<head>`, entre `<style>…</style>`, ou **en ligne** sur une balise via l’attribut `style="…"` — à réserver aux petits ajustements.
+    Le plus propre : une **feuille externe** `style.css` reliée par <code>&lt;link rel="stylesheet" href="style.css"&gt;</code> (réutilisable sur tout le site). On peut aussi écrire le CSS **dans** le <code>&lt;head&gt;</code>, entre <code>&lt;style&gt;…&lt;/style&gt;</code>, ou **en ligne** sur une balise via l’attribut `style="…"` — à réserver aux petits ajustements.
 
 !!! remarque "Remarque — Quelques propriétés utiles"
 
@@ -307,7 +307,7 @@ La ressource renvoyée est le plus souvent un <span id="lex-html10" class="ancre
 
 ### Disposer les éléments : Flexbox <span class="horsprog">au-delà du programme</span>
 
-Par défaut, les blocs (`<div>`, `<p>`, `<li>`…) s’empilent **verticalement**, l’un sous l’autre. Pour les aligner **horizontalement** et les répartir proprement, on transforme leur **conteneur** en « boîte flexible » avec la propriété `display: flex`.
+Par défaut, les blocs (<code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;li&gt;</code>…) s’empilent **verticalement**, l’un sous l’autre. Pour les aligner **horizontalement** et les répartir proprement, on transforme leur **conteneur** en « boîte flexible » avec la propriété `display: flex`.
 
 ```css
 .barre {
@@ -350,7 +350,7 @@ Un <span id="lex-evenement10" class="ancre"></span>**événement** est quelque c
 
 !!! remarque "Remarque — Deux manières de brancher un événement"
 
-    Rapide : un **attribut** `on…` directement dans le HTML, comme `<button onclick="changer()">`. Plus propre (le comportement reste séparé de la structure) : depuis le JavaScript, avec `addEventListener`. Le bouton porte alors un identifiant, et plus d’attribut `onclick` :
+    Rapide : un **attribut** `on…` directement dans le HTML, comme <code>&lt;button onclick="changer()"&gt;</code>. Plus propre (le comportement reste séparé de la structure) : depuis le JavaScript, avec `addEventListener`. Le bouton porte alors un identifiant, et plus d’attribut `onclick` :
 
     ```html
     <button id="monBouton">Cliquer ici</button>
@@ -462,9 +462,9 @@ Voici une page **autonome** qui réunit tout : la **structure** (HTML), la **mis
 </html>
 ```
 
-- le `<style>` met en forme et **aligne** le champ et le bouton avec **Flexbox** ;
+- le <code>&lt;style&gt;</code> met en forme et **aligne** le champ et le bouton avec **Flexbox** ;
 
-- au clic, `ajouter()` **lit** le champ (`.value`), **teste** qu’il n’est pas vide, **ajoute** un `<li>` à la liste, puis **vide** le champ ;
+- au clic, `ajouter()` **lit** le champ (`.value`), **teste** qu’il n’est pas vide, **ajoute** un <code>&lt;li&gt;</code> à la liste, puis **vide** le champ ;
 
 - les trois langages coopèrent, et tout se déroule **côté client**.
 
@@ -489,11 +489,11 @@ Jusqu’ici le client *recevait*. Un <span id="lex-formulaire10" class="ancre"><
 
 - `method` : **comment** les envoyer — `get` (données dans l’URL) ou `post` (données dans le corps de la requête) ;
 
-- chaque `<input>` a un `name` : c’est l’**étiquette** sous laquelle sa valeur arrive au serveur.
+- chaque <code>&lt;input&gt;</code> a un `name` : c’est l’**étiquette** sous laquelle sa valeur arrive au serveur.
 
 !!! remarque "Remarque — Quelques types de champs"
 
-    L’attribut `type` d’un `<input>` choisit la nature du champ : `text` (texte visible), `password` (masqué), `radio` (un seul choix parmi plusieurs), `checkbox` (cases à cocher, plusieurs choix possibles), `email`, `number`, `date`… Un `<input type="submit">` (ou un `<button type="submit">`) **envoie** le formulaire vers l’`action`.
+    L’attribut `type` d’un <code>&lt;input&gt;</code> choisit la nature du champ : `text` (texte visible), `password` (masqué), `radio` (un seul choix parmi plusieurs), `checkbox` (cases à cocher, plusieurs choix possibles), `email`, `number`, `date`… Un <code>&lt;input type="submit"&gt;</code> (ou un <code>&lt;button type="submit"&gt;</code>) **envoie** le formulaire vers l’`action`.
 
 !!! regle "Règle 8 — GET ou POST pour un formulaire ?"
 
@@ -573,7 +573,7 @@ Le protocole HTTP est **sans mémoire** : chaque requête est traitée seule, et
 | CSS | *forme* : sélecteurs `balise` / `#id` / `.classe` $+$ `{ propriété: valeur; }` |
 | Flexbox | `display:flex` sur le *conteneur* : aligne les enfants en ligne (`gap`, `justify-content`) |
 | JavaScript | *comportement* : événement (`click`…) $\to$ `querySelector` $+$ `.value`/DOM, côté client |
-| Formulaire | `<form action method>` ; `POST` pour envoyer/du sensible |
+| Formulaire | <code>&lt;form action method&gt;</code> ; `POST` pour envoyer/du sensible |
 | Cookie | `Set-Cookie` : *mémorisé* par le client, *renvoyé* au serveur à chaque requête vers ce site |
 
 !!! situation "Retour à la situation de départ"
@@ -590,7 +590,7 @@ Le protocole HTTP est **sans mémoire** : chaque requête est traitée seule, et
 
 - **Croire que HTML est un langage de programmation** : c’est un langage de *balisage* (structure).
 
-- **Oublier de fermer une balise** (`</p>`) ou les emboîter en les croisant.
+- **Oublier de fermer une balise** (<code>&lt;/p&gt;</code>) ou les emboîter en les croisant.
 
 - **Mélanger les rôles** HTML / CSS / JS (fond / forme / comportement).
 

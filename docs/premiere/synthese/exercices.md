@@ -152,7 +152,7 @@ Sur 8 bits, on code les entiers de $-128$ à $127$ en complément à deux. Le co
 
 1.  Coder $-12$ sur 8 bits avec la méthode du cours (inverser les bits, ajouter $1$), puis donner la valeur décimale de l’octet obtenu.
 
-2.  Pour $a$ compris entre $0$ et $255$, inverser les 8 bits de $a$ donne $255 - a$. Justifier. En déduire que le code de $-x$ (avec $0 < x \leqslant 128$) est $256 - x$. Vérifier sur $-12$.
+2.  Pour $a$ compris entre $0$ et $255$, inverser les 8 bits de $a$ donne $255 - a$. Justifier. En déduire que le code de $-x$ (avec $0 \lt  x \leqslant 128$) est $256 - x$. Vérifier sur $-12$.
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `code_8bits(x)` qui renvoie le code de l’entier `x` (avec $-128 \leqslant x \leqslant 127$), et la fonction réciproque `valeur(v)` qui renvoie l’entier représenté par un octet `v`. Tester avec une boucle que `valeur(code_8bits(x))` redonne `x` pour tous les entiers de $-128$ à $127$.
 

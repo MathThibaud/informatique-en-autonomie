@@ -322,20 +322,20 @@ On veut écrire une fonction `copier_pile(p)` qui renvoie une **nouvelle** pile 
 
 <span class="duree">≈ 20 min</span>
 
-Dans un document, les balises s’écrivent `<b>` (ouvrante) et `</b>` (fermante), comme en HTML. Une liste de balises est **bien imbriquée** si chaque fermante correspond à la dernière ouvrante non encore fermée.
+Dans un document, les balises s’écrivent <code>&lt;b&gt;</code> (ouvrante) et <code>&lt;/b&gt;</code> (fermante), comme en HTML. Une liste de balises est **bien imbriquée** si chaque fermante correspond à la dernière ouvrante non encore fermée.
 
-<span class="run" title="À programmer et tester sur machine">▶</span> On donne une liste de balises, par exemple `["<b>", "<i>", "</i>", "</b>"]` (bien imbriquée) ou `["<b>", "<i>", "</b>", "</i>"]` (mal imbriquée). Écrire `balises_ok(liste)` qui renvoie un booléen, en s’inspirant du parenthésage (une balise fermante `</x>` doit correspondre à l’ouvrante `<x>` au sommet de la pile).
+<span class="run" title="À programmer et tester sur machine">▶</span> On donne une liste de balises, par exemple <code>&#91;"&lt;b&gt;", "&lt;i&gt;", "&lt;/i&gt;", "&lt;/b&gt;"&#93;</code> (bien imbriquée) ou <code>&#91;"&lt;b&gt;", "&lt;i&gt;", "&lt;/b&gt;", "&lt;/i&gt;"&#93;</code> (mal imbriquée). Écrire `balises_ok(liste)` qui renvoie un booléen, en s’inspirant du parenthésage (une balise fermante <code>&lt;/x&gt;</code> doit correspondre à l’ouvrante <code>&lt;x&gt;</code> au sommet de la pile).
 
 ??? pouce "Coup de pouce"
 
-    Une balise fermante commence par `"</"` : il suffit de comparer ses deux premiers caractères, `b[:2]`, à `"</"`. On empile les ouvrantes telles quelles ; pour une fermante `b`, l’ouvrante attendue au sommet s’obtient par concaténation : `"<" + b[2:]`. Il reste à reprendre l’algorithme du parenthésage.
+    Une balise fermante commence par <code>"&lt;/"</code> : il suffit de comparer ses deux premiers caractères, `b[:2]`, à <code>"&lt;/"</code>. On empile les ouvrantes telles quelles ; pour une fermante `b`, l’ouvrante attendue au sommet s’obtient par concaténation : `"<" + b[2:]`. Il reste à reprendre l’algorithme du parenthésage.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
     `def balises_ok(liste):`  
     `p = Pile()`  
     `for b in liste:`  
-    `if b[:2] != "</":`  
+    <code>if b&#91;:2&#93; != "&lt;/":</code>  
     `p.empiler(b)`
 
 ??? corrige "Corrigé"
@@ -355,7 +355,7 @@ Dans un document, les balises s’écrivent `<b>` (ouvrante) et `</b>` (fermante
         return p.est_vide()
     ```
 
-    `["<b>", "<i>", "</i>", "</b>"]` $\to$ `True` ; `["<b>", "<i>", "</b>", "</i>"]` $\to$ `False` (à `</b>`, on dépile `<i>` qui ne correspond pas).
+    <code>&#91;"&lt;b&gt;", "&lt;i&gt;", "&lt;/i&gt;", "&lt;/b&gt;"&#93;</code> $\to$ `True` ; <code>&#91;"&lt;b&gt;", "&lt;i&gt;", "&lt;/b&gt;", "&lt;/i&gt;"&#93;</code> $\to$ `False` (à <code>&lt;/b&gt;</code>, on dépile <code>&lt;i&gt;</code> qui ne correspond pas).
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Défi — notation polonaise inverse <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-10 }
 
@@ -571,7 +571,7 @@ Pour ordonnancer des tâches, on stocke des tuples `(tache, priorite)` dans une 
 
 On considère la file `f` suivante **(tête à droite)** :
 
-`(<t5>, 1) ; (<t4>, 1) ; (<t2>, 3) ; (<t1>, 3) ; (<t3>, 4)`
+<code>(&lt;t5&gt;, 1) ; (&lt;t4&gt;, 1) ; (&lt;t2&gt;, 3) ; (&lt;t1&gt;, 3) ; (&lt;t3&gt;, 4)</code>
 
 1.  Donner la valeur de `f.defiler()[0]`, puis représenter le contenu de `f` après cette instruction.
 
@@ -594,7 +594,7 @@ On considère la file `f` suivante **(tête à droite)** :
         return f_aux
     ```
 
-4.  En repartant de la file `f` d’origine, représenter la file obtenue par `f = ajouter_file_prio(f, <t6>, 2)` puis `f = ajouter_file_prio(f, <t7>, 4)`.
+4.  En repartant de la file `f` d’origine, représenter la file obtenue par <code>f = ajouter&#95;file&#95;prio(f, &lt;t6&gt;, 2)</code> puis <code>f = ajouter&#95;file&#95;prio(f, &lt;t7&gt;, 4)</code>.
 
 5.  Donner le **coût d’exécution**, dans le pire des cas, de `ajouter_file_prio` en fonction du nombre `m` d’éléments de `f`.
 
@@ -604,11 +604,11 @@ On considère la file `f` suivante **(tête à droite)** :
 
     **Barème indicatif** (sur 4) : Q1 : 0,5 ; Q2 : 0,5 ; Q3 : 1 ; Q4 : 0,5 ; Q5 : 0,5 ; Q6 : 1
 
-    **1.** `defiler` retire la tête, ici `(<t3>, 4)` ; `f.defiler()[0]` vaut donc `<t3>` (la tâche). Après : `(<t5>, 1) ; (<t4>, 1) ; (<t2>, 3) ; (<t1>, 3)` (tête = `(<t1>, 3)`).
+    **1.** `defiler` retire la tête, ici <code>(&lt;t3&gt;, 4)</code> ; `f.defiler()[0]` vaut donc <code>&lt;t3&gt;</code> (la tâche). Après : <code>(&lt;t5&gt;, 1) ; (&lt;t4&gt;, 1) ; (&lt;t2&gt;, 3) ; (&lt;t1&gt;, 3)</code> (tête = <code>(&lt;t1&gt;, 3)</code>).
 
-    <span class="erreurfreq">▷ Erreur fréquente.</span> Défiler `(<t5>, 1)`, l’élément écrit en premier : la tête est à **droite**, c’est `(<t3>, 4)` qui sort.
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Défiler <code>(&lt;t5&gt;, 1)</code>, l’élément écrit en premier : la tête est à **droite**, c’est <code>(&lt;t3&gt;, 4)</code> qui sort.
 
-    **2.** `examiner` renvoie la tête *sans* la retirer, ici `(<t3>, 4)` ; `f.examiner()[1]` vaut donc `4` (la priorité). La file `f` est **inchangée**.
+    **2.** `examiner` renvoie la tête *sans* la retirer, ici <code>(&lt;t3&gt;, 4)</code> ; `f.examiner()[1]` vaut donc `4` (la priorité). La file `f` est **inchangée**.
 
     **3.** **Démarche :** on défile vers `f_aux` les tâches plus prioritaires que `p`, on enfile `(t, p)`, puis on transvase le reste.
 

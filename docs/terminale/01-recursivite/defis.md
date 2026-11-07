@@ -57,7 +57,7 @@ Vocabulaire utile pour lire le texte original :
 
     **Les données.** Chaque ligne du fichier est une règle qui décrit le contenu imposé d’une couleur de sac.
 
-    - Une règle a la forme `<couleur> bags contain <n> <couleur> bag(s), ...` ou bien `<couleur> bags contain no other bags.` (sac vide).
+    - Une règle a la forme <code>&lt;couleur&gt; bags contain &lt;n&gt; &lt;couleur&gt; bag(s), ...</code> ou bien <code>&lt;couleur&gt; bags contain no other bags.</code> (sac vide).
 
     - Une couleur s’écrit en deux mots (`dull lime`) ; on lit `bag` ou `bags` selon le nombre, et la ligne se termine par un point.
 

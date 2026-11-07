@@ -826,7 +826,7 @@ Le **coût inesthétique** d’une ligne est le *carré* du nombre d’espaces s
 
     **3.** La fonction remplit `cout_mini` **de la fin vers le début** : quand on calcule `cout_mini[i]`, toutes les cases `cout_mini[j]` avec $j > i$ sont **déjà connues**. La relation est
 
-    $$\texttt{cout\_mini[i]} = \min_{i < j \leqslant n}\ \big(\ \texttt{cout(i, j)} + \texttt{cout\_mini[j]}\ \big),$$
+    $$\texttt{cout\_mini[i]} = \min_{i \lt  j \leqslant n}\ \big(\ \texttt{cout(i, j)} + \texttt{cout\_mini[j]}\ \big),$$
 
     c’est-à-dire : coût de la première ligne (mots $i$ à $j-1$) plus le coût optimal du reste. Pour $j = n$, on adopte la convention $\texttt{cout\_mini[n]} = 0$ (il ne reste plus aucun mot à justifier) : ce cas, où tous les mots restants tiennent sur une seule ligne, correspond à la valeur initiale `cout(i, n, ...)` du code, puisque la liste `cout_mini` n’a que $n$ cases (indices $0$ à $n-1$). Comme on résout les sous-problèmes du plus petit (la fin) au plus grand (le début) en rangeant les résultats dans un tableau, c’est bien de la **tabulation**.
 

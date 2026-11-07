@@ -108,7 +108,7 @@ donc  $d = \sqrt{1.13} \approx 1.06$.
 
 !!! remarque "Remarque — Comparer sans la racine carrée"
 
-    Pour **comparer** des distances, la racine est **inutile** : $\sqrt{u}<\sqrt{v}$ exactement quand $u<v$. On peut donc trier sur la **somme des carrés** (plus rapide) et ne garder `**0.5` que si l’on veut la vraie valeur. *On note $d^2$ cette « distance au carré ».*
+    Pour **comparer** des distances, la racine est **inutile** : $\sqrt{u}<\sqrt{v}$ exactement quand $u\lt v$. On peut donc trier sur la **somme des carrés** (plus rapide) et ne garder `**0.5` que si l’on veut la vraie valeur. *On note $d^2$ cette « distance au carré ».*
 
 !!! curieux "Pour les curieux (facultatif) — Il existe d’autres distances"
 

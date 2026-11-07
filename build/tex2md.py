@@ -5,6 +5,7 @@ pandoc convertit le reste, puis les jetons sont remplacés par du Markdown
 (admonitions, blocs de code, figures SVG, liens, corrigés dépliables).
 """
 import hashlib
+import html
 import os
 import re
 import subprocess
@@ -1125,7 +1126,31 @@ class Converter:
         md = self.label_tables(md)
         # 5. admonitions (indentation)
         md = self.admonitions(md)
-        return md
+        return self.proteger_html_brut(md)
+
+    @staticmethod
+    def proteger_html_brut(md):
+        """MkDocs repère les ancres en passant le markdown BRUT dans un parseur HTML : un
+        `<style>` en code en ligne (jamais refermé) ou un `$u<v$` y ouvre une fausse balise qui
+        avale la suite de la page, et les ancres placées après (lexique) sont déclarées
+        introuvables en mode strict. Hors blocs de code : code en ligne contenant une
+        balise -> <code> échappé (même rendu) ; `<` suivi d'une lettre dans les maths -> \\lt."""
+        def code(m):
+            c = m.group(2)
+            if not re.search(r'<[A-Za-z!/]', c):
+                return m.group(0)
+            c = html.escape(c, quote=False)
+            for car in '\\*_[]$':      # le markdown en ligne s'applique entre deux balises
+                c = c.replace(car, '&#%d;' % ord(car))
+            return '<code>%s</code>' % c
+
+        def maths(m):
+            return re.sub(r'<(?=\s*[A-Za-z!/])', r'\\lt ', m.group(0))
+        morceaux = re.split(r'(^[ \t]*```.*?^[ \t]*```[ \t]*$)', md, flags=re.M | re.S)
+        for i in range(0, len(morceaux), 2):
+            t = re.sub(r'(?<!`)(`)(?!`)([^`\n]+?)`(?!`)', code, morceaux[i])
+            morceaux[i] = re.sub(r'\$\$.+?\$\$|\$[^$\n]+?\$', maths, t, flags=re.S)
+        return ''.join(morceaux)
 
     @staticmethod
     def label_tables(md):

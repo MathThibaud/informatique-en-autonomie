@@ -281,7 +281,7 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
 1.  Dessiner l’arborescence de ce site.
 
-2.  Dans `index.html`, le logo s’affiche avec `<img src="images/logo.png" alt="Logo du club" />`. On copie cette ligne telle quelle dans `contact.html` : le logo ne s’affiche plus. Pourquoi ? Corriger le chemin.
+2.  Dans `index.html`, le logo s’affiche avec <code>&lt;img src="images/logo.png" alt="Logo du club" /&gt;</code>. On copie cette ligne telle quelle dans `contact.html` : le logo ne s’affiche plus. Pourquoi ? Corriger le chemin.
 
 3.  Écrire, dans `contact.html`, un lien qui ramène à `index.html`.
 
@@ -301,9 +301,9 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
         ![](../figures/a1e85c0a74a7741a.svg){ .tikz loading=lazy }
 
-    2.  Un chemin relatif part du dossier de la page qui l’utilise. Depuis `pages`, `images/logo.png` désigne `pages/images/logo.png`, qui n’existe pas. Il faut d’abord **remonter** à la racine : `<img src="../images/logo.png" alt="Logo du club" />`.
+    2.  Un chemin relatif part du dossier de la page qui l’utilise. Depuis `pages`, `images/logo.png` désigne `pages/images/logo.png`, qui n’existe pas. Il faut d’abord **remonter** à la racine : <code>&lt;img src="../images/logo.png" alt="Logo du club" /&gt;</code>.
 
-    3.  `<a href="../index.html">Retour à l’accueil</a>`.
+    3.  <code>&lt;a href="../index.html"&gt;Retour à l’accueil&lt;/a&gt;</code>.
 
     4.  Il faut modifier **les deux pages** : dans `index.html`, `images/logo.png` devient `img/logo.png` ; dans `contact.html`, `../images/logo.png` devient `../img/logo.png`. *(Tout chemin qui passe par ce dossier doit être corrigé.)*
 
@@ -326,7 +326,7 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
 ??? pouce "Coup de pouce"
 
-    Relisez dans le cours le rôle de chaque balise : `<h1>`, `<p>`, `<strong>`, `<ul>` et `<li>`.
+    Relisez dans le cours le rôle de chaque balise : <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;ul&gt;</code> et <code>&lt;li&gt;</code>.
 
 ??? corrige "Corrigé"
 
@@ -351,7 +351,7 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
 ??? corrige "Corrigé"
 
-    La balise `<strong>` est refermée trop tard (mauvaise imbrication), et le `<h2>` n’est pas fermé. Code corrigé :
+    La balise <code>&lt;strong&gt;</code> est refermée trop tard (mauvaise imbrication), et le <code>&lt;h2&gt;</code> n’est pas fermé. Code corrigé :
 
     ```html
     <p>Bonjour <strong>tout le monde</strong></p>
@@ -362,11 +362,11 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Du rendu au code <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-04-13 }
 
-<span class="tag">sur papier</span>  Écrire le code HTML (contenu du `<body>` seulement) qui produit l’affichage suivant : un grand titre « Mon club de foot » ; un paragraphe « Entraînement le mercredi. » où le mot *mercredi* est mis en valeur (en gras) ; une liste à puces de deux éléments, « gardiens » et « joueurs » ; enfin un lien « Le site du club » vers `https://www.monclub.mc`.
+<span class="tag">sur papier</span>  Écrire le code HTML (contenu du <code>&lt;body&gt;</code> seulement) qui produit l’affichage suivant : un grand titre « Mon club de foot » ; un paragraphe « Entraînement le mercredi. » où le mot *mercredi* est mis en valeur (en gras) ; une liste à puces de deux éléments, « gardiens » et « joueurs » ; enfin un lien « Le site du club » vers `https://www.monclub.mc`.
 
 ??? pouce "Coup de pouce"
 
-    Une balise par élément : `<h1>` pour le titre, `<p>` et `<strong>` pour le paragraphe, `<ul>` et `<li>` pour la liste, `<a href="...">` pour le lien.
+    Une balise par élément : <code>&lt;h1&gt;</code> pour le titre, <code>&lt;p&gt;</code> et <code>&lt;strong&gt;</code> pour le paragraphe, <code>&lt;ul&gt;</code> et <code>&lt;li&gt;</code> pour la liste, <code>&lt;a href="..."&gt;</code> pour le lien.
 
 ??? corrige "Corrigé"
 
@@ -388,21 +388,21 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
 <span class="essentiel">• essentiel</span>
 
-<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une page HTML **complète** (squelette compris) qui contient : un titre `<h1>` avec votre prénom, un paragraphe de présentation, une **liste** de trois loisirs, et un **lien** vers un site de votre choix.
+<span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une page HTML **complète** (squelette compris) qui contient : un titre <code>&lt;h1&gt;</code> avec votre prénom, un paragraphe de présentation, une **liste** de trois loisirs, et un **lien** vers un site de votre choix.
 
 ??? pouce "Coup de pouce"
 
-    Partez du squelette du cours : `<head>` pour ce qui est invisible (titre de l’onglet), `<body>` pour tout ce qui s’affiche.
+    Partez du squelette du cours : <code>&lt;head&gt;</code> pour ce qui est invisible (titre de l’onglet), <code>&lt;body&gt;</code> pour tout ce qui s’affiche.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    `<!DOCTYPE html>`  
-    `<html>`  
-    `<head>`  
-    `<meta charset="utf-8" />`  
-    `<title>Ma page</title>`  
-    `</head>`  
-    `<body>` …
+    <code>&lt;!DOCTYPE html&gt;</code>  
+    <code>&lt;html&gt;</code>  
+    <code>&lt;head&gt;</code>  
+    <code>&lt;meta charset="utf-8" /&gt;</code>  
+    <code>&lt;title&gt;Ma page&lt;/title&gt;</code>  
+    <code>&lt;/head&gt;</code>  
+    <code>&lt;body&gt;</code> …
 
 ??? corrige "Corrigé"
 
@@ -438,7 +438,7 @@ Puis : quel code le serveur aurait-il renvoyé si le fichier `cours.html` n’ex
 
 ??? corrige "Corrigé"
 
-    On ajoute en bas du `<body>` une ligne de signature munie d’un `id`, par exemple `<p id="signature">Page réalisée par Léa</p>`, puis les règles CSS :
+    On ajoute en bas du <code>&lt;body&gt;</code> une ligne de signature munie d’un `id`, par exemple <code>&lt;p id="signature"&gt;Page réalisée par Léa&lt;/p&gt;</code>, puis les règles CSS :
 
     ```css
     h1 {
@@ -483,9 +483,9 @@ p { font-family: Verdana; }
 
 ??? corrige "Corrigé"
 
-    1.  **Verdana** : les **trois paragraphes** `<p>` (pas le titre `<h1>`). **En vert** : les deux éléments de classe `info`, c’est-à-dire « Ouvert du lundi au vendredi. » et « Contact : 93 00 00 00 ». **Aligné à droite** : seulement l’élément d’identifiant `fin`, « Contact : 93 00 00 00 » (qui est donc à la fois en Verdana, en vert et à droite).
+    1.  **Verdana** : les **trois paragraphes** <code>&lt;p&gt;</code> (pas le titre <code>&lt;h1&gt;</code>). **En vert** : les deux éléments de classe `info`, c’est-à-dire « Ouvert du lundi au vendredi. » et « Contact : 93 00 00 00 ». **Aligné à droite** : seulement l’élément d’identifiant `fin`, « Contact : 93 00 00 00 » (qui est donc à la fois en Verdana, en vert et à droite).
 
-    2.  Par la balise (il n’y a qu’un `<h1>`) ou par son identifiant :
+    2.  Par la balise (il n’y a qu’un <code>&lt;h1&gt;</code>) ou par son identifiant :
 
         ```css
         h1 { color: blue; }
@@ -516,7 +516,7 @@ p { font-family: Verdana; }
 
 ??? corrige "Corrigé"
 
-    La classe `.titre` cible *à la fois* le `<h1>` et le `<p>` (ils ont tous deux `class="titre"`). Les deux seront donc **centrés** et écrits en **bleu foncé**. Le `<h1>` reste un grand titre (gras), le `<p>` un paragraphe de taille normale.
+    La classe `.titre` cible *à la fois* le <code>&lt;h1&gt;</code> et le <code>&lt;p&gt;</code> (ils ont tous deux `class="titre"`). Les deux seront donc **centrés** et écrits en **bleu foncé**. Le <code>&lt;h1&gt;</code> reste un grand titre (gras), le <code>&lt;p&gt;</code> un paragraphe de taille normale.
 
 ### Droit d’auteur
 
@@ -658,7 +658,7 @@ p { font-family: Verdana; }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  En Python (Spyder ou Basthon). Un serveur peut **fabriquer** une page sur mesure avant de l’envoyer (page *dynamique*) : c’est alors un programme qui écrit le code HTML. On le fait ici en Python, en collant des chaînes de caractères (concaténation).
 
-1.  Écrire une fonction `balise(nom, contenu)` qui renvoie le code d’un élément HTML : `balise("h1", "Mon club")` doit renvoyer `"<h1>Mon club</h1>"`. La tester aussi avec `balise("strong", "mercredi")`.
+1.  Écrire une fonction `balise(nom, contenu)` qui renvoie le code d’un élément HTML : `balise("h1", "Mon club")` doit renvoyer <code>"&lt;h1&gt;Mon club&lt;/h1&gt;"</code>. La tester aussi avec `balise("strong", "mercredi")`.
 
 2.  Sans machine, écrire ce qu’affiche le programme suivant, puis vérifier. Que montrerait un navigateur qui recevrait ce code HTML ?
 
@@ -673,7 +673,7 @@ p { font-family: Verdana; }
 
 ??? pouce "Coup de pouce"
 
-    Écrivez d’abord sur papier le résultat attendu, `<h1>Mon club</h1>`, et repérez les morceaux qui changent d’un appel à l’autre (le nom de la balise, le contenu) et ceux qui ne changent jamais (les chevrons, la barre oblique) : il reste à les coller avec `+`.
+    Écrivez d’abord sur papier le résultat attendu, <code>&lt;h1&gt;Mon club&lt;/h1&gt;</code>, et repérez les morceaux qui changent d’un appel à l’autre (le nom de la balise, le contenu) et ceux qui ne changent jamais (les chevrons, la barre oblique) : il reste à les coller avec `+`.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -714,4 +714,4 @@ p { font-family: Verdana; }
     # https://www.lycee.mc/cours/snt/web.html
     ```
 
-    <span class="erreurfreq">▷ Erreur fréquente.</span> Oublier la barre oblique de la balise fermante : `"<" + nom + ">" + contenu + "<" + nom + ">"` renvoie `<h1>Mon club<h1>`, où la balise `<h1>` est ouverte deux fois et jamais fermée. Afficher le résultat d’un appel avec `print` et le comparer à un code HTML correct montre tout de suite l’erreur.
+    <span class="erreurfreq">▷ Erreur fréquente.</span> Oublier la barre oblique de la balise fermante : `"<" + nom + ">" + contenu + "<" + nom + ">"` renvoie <code>&lt;h1&gt;Mon club&lt;h1&gt;</code>, où la balise <code>&lt;h1&gt;</code> est ouverte deux fois et jamais fermée. Afficher le résultat d’un appel avec `print` et le comparer à un code HTML correct montre tout de suite l’erreur.

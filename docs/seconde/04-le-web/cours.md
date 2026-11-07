@@ -161,7 +161,7 @@ Les **dossiers** sont encadrés, les **fichiers** sont les feuilles de l’arbre
     Un **chemin absolu** part de la **racine** `/` : `/dossier2/dossier3/fichier3.jpg`.  
     Un **chemin relatif** part du **dossier courant**, celui de la page qui fait le lien (pas de `/` au début) : depuis `dossier2`, on écrit `dossier3/fichier3.jpg`. On **remonte** d’un niveau avec `..` : depuis `dossier4`, on écrit `../dossier3/fichier5.svg`.
 
-Dans une page HTML (§ IV), ces chemins s’écrivent dans deux **attributs** : `src` pour le fichier d’une **image**, `href` pour la destination d’un **lien**. Par exemple, dans une page rangée dans `dossier4`, `<img src="../dossier3/fichier3.jpg" alt="photo" />` affiche l’image `fichier3.jpg`, et `<a href="fichier6.html">Suite</a>` crée un lien vers la page `fichier6.html`, rangée dans le même dossier.
+Dans une page HTML (§ IV), ces chemins s’écrivent dans deux **attributs** : `src` pour le fichier d’une **image**, `href` pour la destination d’un **lien**. Par exemple, dans une page rangée dans `dossier4`, <code>&lt;img src="../dossier3/fichier3.jpg" alt="photo" /&gt;</code> affiche l’image `fichier3.jpg`, et <code>&lt;a href="fichier6.html"&gt;Suite&lt;/a&gt;</code> crée un lien vers la page `fichier6.html`, rangée dans le même dossier.
 
 <span id="cours-04-8" class="ancre"></span>
 
@@ -175,7 +175,7 @@ Nous arrivons au cœur du chapitre : le couple **HTML** + **CSS**.
 
     <span id="lex-html04" class="ancre"></span>**HTML** (*HyperText Markup Language*) est le langage qui décrit le **contenu** et la **structure** d’une page : titres, paragraphes, images, liens… Ce n’est **pas** un langage de programmation (pas de boucles ni de conditions) : c’est un langage de **balisage**.
 
-En HTML, on entoure le contenu de <span id="lex-balise04" class="ancre"></span>**balises**. Une balise **ouvrante** `<p>` et une balise **fermante** `</p>` délimitent un **élément** :
+En HTML, on entoure le contenu de <span id="lex-balise04" class="ancre"></span>**balises**. Une balise **ouvrante** <code>&lt;p&gt;</code> et une balise **fermante** <code>&lt;/p&gt;</code> délimitent un **élément** :
 
 ```html
 <h1>Hello World ! Ceci est un titre</h1>
@@ -188,19 +188,19 @@ En HTML, on entoure le contenu de <span id="lex-balise04" class="ancre"></span>*
 
     Ceci est un **paragraphe**. Avez-vous bien compris ?
 
-Chaque balise a un **sens** (on parle de *sémantique*) : `<h1>` est un titre important (`<h2>`, `<h3>`… des sous-titres), `<p>` un paragraphe, `<strong>` un mot important, `<img>` une image, `<a>` un lien. Voici les balises à connaître :
+Chaque balise a un **sens** (on parle de *sémantique*) : <code>&lt;h1&gt;</code> est un titre important (<code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>… des sous-titres), <code>&lt;p&gt;</code> un paragraphe, <code>&lt;strong&gt;</code> un mot important, <code>&lt;img&gt;</code> une image, <code>&lt;a&gt;</code> un lien. Voici les balises à connaître :
 
 | **Balise** | **Rôle** | **Exemple** |
 |:---|:---|:---|
-| `<h1>` à `<h6>` | titres, du plus important au moins important | `<h2>Horaires</h2>` |
-| `<p>` | un paragraphe | `<p>Bonjour</p>` |
-| `<strong>`, `<em>` | mot important (gras), mise en valeur (italique) | `<em>vraiment</em>` |
-| `<br />` | un retour à la ligne (se ferme seule) | `ligne 1<br />ligne 2` |
-| `<ul>`, `<ol>`, `<li>` | liste à puces, liste numérotée, un élément de la liste | `<ul><li>pain</li></ul>` |
-| `<img />` | une image (se ferme seule) : `src` donne le fichier, `alt` un texte qui la décrit | `<img src="chat.jpg" alt="un chat" />` |
-| `<a>` | un lien : `href` donne la destination | `<a href="page2.html">Suite</a>` |
-| `<table>`, `<tr>`, `<th>`, `<td>` | un tableau, une ligne, une case d’en-tête, une case | voir l’exemple ci-dessous |
-| `<div>` | un bloc qui regroupe des éléments (pour les mettre en forme ensemble) | `<div>…</div>` |
+| <code>&lt;h1&gt;</code> à <code>&lt;h6&gt;</code> | titres, du plus important au moins important | <code>&lt;h2&gt;Horaires&lt;/h2&gt;</code> |
+| <code>&lt;p&gt;</code> | un paragraphe | <code>&lt;p&gt;Bonjour&lt;/p&gt;</code> |
+| <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code> | mot important (gras), mise en valeur (italique) | <code>&lt;em&gt;vraiment&lt;/em&gt;</code> |
+| <code>&lt;br /&gt;</code> | un retour à la ligne (se ferme seule) | <code>ligne 1&lt;br /&gt;ligne 2</code> |
+| <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code> | liste à puces, liste numérotée, un élément de la liste | <code>&lt;ul&gt;&lt;li&gt;pain&lt;/li&gt;&lt;/ul&gt;</code> |
+| <code>&lt;img /&gt;</code> | une image (se ferme seule) : `src` donne le fichier, `alt` un texte qui la décrit | <code>&lt;img src="chat.jpg" alt="un chat" /&gt;</code> |
+| <code>&lt;a&gt;</code> | un lien : `href` donne la destination | <code>&lt;a href="page2.html"&gt;Suite&lt;/a&gt;</code> |
+| <code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;th&gt;</code>, <code>&lt;td&gt;</code> | un tableau, une ligne, une case d’en-tête, une case | voir l’exemple ci-dessous |
+| <code>&lt;div&gt;</code> | un bloc qui regroupe des éléments (pour les mettre en forme ensemble) | <code>&lt;div&gt;…&lt;/div&gt;</code> |
 
 Le texte de l’attribut `alt` s’affiche si l’image ne se charge pas, et il est lu à voix haute aux personnes aveugles : on ne l’oublie jamais. Voici ces balises à l’œuvre :
 
@@ -240,7 +240,7 @@ Le texte de l’attribut `alt` s’affiche si l’image ne se charge pas, et il 
     1.  **Toute balise ouverte doit être refermée.**
 
     2.  **Les balises s’imbriquent proprement** (« premier ouvert, dernier fermé »).  
-        `<p><strong>…</strong></p>` est correct ; `<p><strong>…</p></strong>` est **interdit**.
+        <code>&lt;p&gt;&lt;strong&gt;…&lt;/strong&gt;&lt;/p&gt;</code> est correct ; <code>&lt;p&gt;&lt;strong&gt;…&lt;/p&gt;&lt;/strong&gt;</code> est **interdit**.
 
 Une balise peut porter des **attributs**, dans la balise ouvrante. Les deux plus utiles sont `id` (un identifiant *unique* dans la page) et `class` (une catégorie, partageable) :
 
@@ -267,7 +267,7 @@ Une vraie page web suit toujours le même squelette :
 </html>
 ```
 
-Le `<head>` contient les informations *invisibles* (titre de l’onglet, encodage) ; le `<body>` contient tout ce qui s’**affiche** dans la page.
+Le <code>&lt;head&gt;</code> contient les informations *invisibles* (titre de l’onglet, encodage) ; le <code>&lt;body&gt;</code> contient tout ce qui s’**affiche** dans la page.
 
 <span id="cours-04-11" class="ancre"></span>
 
@@ -325,7 +325,7 @@ Une couleur s’écrit par son **nom** anglais (`red`, `crimson`, `teal`) ou par
 
     | **On cible…**                      | **En HTML**      | **En CSS**     |
     |:-----------------------------------|:-----------------|:---------------|
-    | **toutes** les balises d’un type   | `<p>`            | `p { …}`       |
+    | **toutes** les balises d’un type   | <code>&lt;p&gt;</code>            | `p { …}`       |
     | un élément par son **id** (unique) | `id="intro"`     | `#intro { …}`  |
     | tous les éléments d’une **classe** | `class="alerte"` | `.alerte { …}` |
 
@@ -333,7 +333,7 @@ En CSS, l’`id` se cible avec un **dièse** `#`, la `class` avec un **point** `
 
 !!! regle "Règle 9 — Où écrire le CSS ? Une feuille de style reliée à la page"
 
-    On écrit les règles CSS dans un fichier à part, par exemple `style.css`, rangé à côté des pages. Chaque page HTML le **relie** par une balise `<link>` placée dans le `<head>` :
+    On écrit les règles CSS dans un fichier à part, par exemple `style.css`, rangé à côté des pages. Chaque page HTML le **relie** par une balise <code>&lt;link&gt;</code> placée dans le <code>&lt;head&gt;</code> :
 
 ```html
 <head>
@@ -349,7 +349,7 @@ Une seule feuille de style peut ainsi habiller **toutes** les pages d’un site 
 
     Sur un éditeur en ligne (par exemple `jsfiddle.net` ou `codepen.io`) :
 
-    1.  Recopier le squelette HTML complet, avec un `<h1>`, deux `<p>` et une image.
+    1.  Recopier le squelette HTML complet, avec un <code>&lt;h1&gt;</code>, deux <code>&lt;p&gt;</code> et une image.
 
     2.  Ajouter du CSS pour centrer le titre, le colorer, et changer la police des paragraphes.
 
@@ -361,7 +361,7 @@ Une seule feuille de style peut ainsi habiller **toutes** les pages d’un site 
 
 ## Les hyperliens : la « toile »
 
-Ce qui fait la **toile**, ce sont les liens d’une page vers une autre. On les crée avec la balise `<a>` et son attribut `href` (l’URL de destination) :
+Ce qui fait la **toile**, ce sont les liens d’une page vers une autre. On les crée avec la balise <code>&lt;a&gt;</code> et son attribut `href` (l’URL de destination) :
 
 ```html
 <a href="https://www.gouv.mc">Visiter le site du gouvernement</a>
@@ -470,11 +470,11 @@ Les mots importants du thème sont définis dans le lexique.
 | Codes de réponse | 200 (ok), 403 (interdit), 404 (introuvable), 500 (erreur serveur). |
 | Client / serveur (2) | serveur : PHP (dynamique) ; client : **JavaScript** ; clic droit $\to$ code source. |
 | URL | adresse d’une page : protocole + domaine + chemin ; absolu (`/`) ou relatif (`..`). |
-| HTML | le **contenu** : langage de *balises* (`<h1>`, `<p>`, `<a>`…). |
+| HTML | le **contenu** : langage de *balises* (<code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;a&gt;</code>…). |
 | Règles des balises | toute balise ouverte est refermée ; imbrication propre. |
 | CSS | l’**apparence** : sélecteur + propriétés (couleur, police, alignement…). |
 | Sélecteurs | `p` (balise), `#id` (unique), `.classe` (partagée). |
-| Hyperlien | `<a href="...">` ; c’est ce qui fait la « toile ». |
+| Hyperlien | <code>&lt;a href="..."&gt;</code> ; c’est ce qui fait la « toile ». |
 | Droit d’auteur | toute création a un auteur ; une **licence** fixe le droit d’usage (ex. Creative Commons). |
 | Moteur de recherche | robots + *index* ; résultats **classés** (PageRank), pubs incluses. |
 | Sécurité navigateur | régler cookies/historique/navigation privée ; se méfier de l’**hameçonnage**. |

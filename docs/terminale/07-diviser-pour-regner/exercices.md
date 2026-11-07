@@ -404,7 +404,7 @@ $$\texttt{tab = [("A", 15), ("B", 7), ("C", 6), ("D", 6), ("E", 5)]}.$$
 
 <span class="duree">≈ 45 min</span>
 
-On se penche sur un algorithme pour trier un tableau appelé le **tri de Stooge**. Pour trier les éléments situés entre les indices $i$ et $j$, où $i < j$, dans un tableau `t` par ce tri, on procède ainsi :
+On se penche sur un algorithme pour trier un tableau appelé le **tri de Stooge**. Pour trier les éléments situés entre les indices $i$ et $j$, où $i \lt  j$, dans un tableau `t` par ce tri, on procède ainsi :
 
 - si les éléments d’indice $i$ et $j$ sont mal placés, on les échange ;
 

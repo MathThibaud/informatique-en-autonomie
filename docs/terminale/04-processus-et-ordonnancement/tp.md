@@ -105,16 +105,16 @@ La commande `sleep 300` ne fait rien pendant $300$ secondes : un processus « bl
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Taper `sleep 300 &`, puis `sleep 400 &`, puis `jobs` et `ps -o pid,ppid,comm`. Que change le `&` ? Quel est le PPID des deux `sleep` ? Comparer avec `echo $$`.
 
-3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Arrêter le premier `sleep` avec `kill <PID>` (en remplaçant `<PID>` par son numéro), puis le second avec `kill %2` (`%2` désigne la tâche numéro 2 de `jobs`). Vérifier avec `jobs` et `ps`.
+3.  \lt span class="run" title="À programmer et tester sur machine">▶\lt /span>  Arrêter le premier `sleep` avec \lt code>kill &lt;PID&gt;\lt /code> (en remplaçant \lt code>&lt;PID&gt;\lt /code> par son numéro), puis le second avec `kill %2` (`%2` désigne la tâche numéro 2 de `jobs`). Vérifier avec `jobs` et `ps`.
 
 4.  Recopier et compléter le **tableau-mémo** des commandes rencontrées :
 
 | **Commande**          | **Rôle** | **Exemple tapé** |
 |:----------------------|:---------|:-----------------|
 | `ps -o pid,ppid,comm` |          |                  |
-| `<commande> &`        |          |                  |
+| \lt code>&lt;commande&gt; &amp;\lt /code>        |          |                  |
 | `jobs`                |          |                  |
-| `kill <PID>`          |          |                  |
+| \lt code>kill &lt;PID&gt;\lt /code>          |          |                  |
 | `top`                 |          |                  |
 
 ??? corrige "Corrigé"
@@ -130,14 +130,14 @@ La commande `sleep 300` ne fait rien pendant $300$ secondes : un processus « bl
     | **Commande** | **Rôle** | **Exemple** |
     |:---|:---|:---|
     | `ps -o pid,ppid,comm` | liste les processus avec PID, PPID et nom de commande | `ps -o pid,ppid,comm` |
-    | `<commande> &` | lance en arrière-plan, le shell rend la main | `sleep 300 &` |
+    | <code>&lt;commande&gt; &amp;</code> | lance en arrière-plan, le shell rend la main | `sleep 300 &` |
     | `jobs` | tâches lancées depuis ce shell, numérotées `[1]`, `[2]`… | `jobs` |
-    | `kill <PID>` | envoie au processus un signal d’arrêt (`kill %n` : tâche $n$) | `kill 1234`, `kill %2` |
+    | <code>kill &lt;PID&gt;</code> | envoie au processus un signal d’arrêt (`kill %n` : tâche $n$) | `kill 1234`, `kill %2` |
     | `top` | liste rafraîchie en temps réel (CPU, mémoire, état) ; `q` pour quitter | `top` |
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Une famille de processus, et un glouton <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-tp-1-4 }
+### \lt span class="stars" title="Niveau 2 sur 3">★★\lt /span> \lt span class="exo-num">Exercice 4\lt /span> — Une famille de processus, et un glouton \lt span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre">\lt /span> { #ex-04-processus-et-ordonnancement-tp-1-4 }
 
-1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Taper `sh` : cela lance un **nouveau** shell, fils du premier. Taper `echo $$`, puis `sleep 500 &`, puis `ps -o pid,ppid,comm`. Écrire la **chaîne** des PID depuis le premier shell jusqu’au `sleep` (père $\to$ fils $\to$ petit-fils). Taper ensuite `exit` pour revenir au premier shell. *(Si la commande `pstree` existe sur la machine, l’essayer.)*
+1.  \lt span class="run" title="À programmer et tester sur machine">▶\lt /span>  Taper `sh` : cela lance un **nouveau** shell, fils du premier. Taper `echo $$`, puis `sleep 500 &`, puis `ps -o pid,ppid,comm`. Écrire la **chaîne** des PID depuis le premier shell jusqu’au `sleep` (père $\to$ fils $\to$ petit-fils). Taper ensuite `exit` pour revenir au premier shell. *(Si la commande `pstree` existe sur la machine, l’essayer.)*
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Lancer `yes > /dev/null &` (`yes` écrit des « y » sans fin, envoyés à la poubelle `/dev/null`), puis `top`. Quel processus est en tête ? Quel pourcentage du processeur utilise-t-il ? Quitter `top` avec la touche `q`.
 

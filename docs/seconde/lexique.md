@@ -14,7 +14,7 @@
 
 ### B
 
-**Balise** — Marque HTML, ouvrante et fermante (`<p>`…`</p>`), qui délimite un élément de la page. *(ch. 4, [voir le cours](04-le-web/cours.md#lex-balise04))*
+**Balise** — Marque HTML, ouvrante et fermante (<code>&lt;p&gt;</code>…<code>&lt;/p&gt;</code>), qui délimite un élément de la page. *(ch. 4, [voir le cours](04-le-web/cours.md#lex-balise04))*
 
 **Big data** — Données trop volumineuses pour les outils classiques : les « 3 V » (Volume, Vélocité, Variété). *(ch. 5, [voir le cours](05-les-donnees-structurees-et-leur-traiteme/cours.md#lex-bigdata05))*
 

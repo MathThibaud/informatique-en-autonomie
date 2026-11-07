@@ -215,7 +215,7 @@ Pour chaque situation, choisir la méthode la plus adaptée et **justifier**.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 10</span> — À chaque balise son rôle <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-10 }
 
-Associer chaque balise à son rôle : \; `<h1>` \;/\; `<p>` \;/\; `<a>` \;/\; `<img>` \;/\; `<ul>` \;/\; `<li>`.
+Associer chaque balise à son rôle : \; <code>&lt;h1&gt;</code> \;/\; <code>&lt;p&gt;</code> \;/\; <code>&lt;a&gt;</code> \;/\; <code>&lt;img&gt;</code> \;/\; <code>&lt;ul&gt;</code> \;/\; <code>&lt;li&gt;</code>.
 
 1.  un lien hypertexte ;
 
@@ -237,7 +237,7 @@ Laquelle de ces balises s’écrit **sans** balise fermante ?0
 
 ??? corrige "Corrigé"
 
-    a\) `<a>` ; \; b) `<li>` ; \; c) `<h1>` ; \; d) `<img>` ; \; e) `<p>` ; \; f) `<ul>`. La balise `<img>` n’a pas de balise fermante : elle n’entoure aucun contenu (`<img src="logo.png" alt="logo">`).
+    a\) <code>&lt;a&gt;</code> ; \; b) <code>&lt;li&gt;</code> ; \; c) <code>&lt;h1&gt;</code> ; \; d) <code>&lt;img&gt;</code> ; \; e) <code>&lt;p&gt;</code> ; \; f) <code>&lt;ul&gt;</code>. La balise <code>&lt;img&gt;</code> n’a pas de balise fermante : elle n’entoure aucun contenu (<code>&lt;img src="logo.png" alt="logo"&gt;</code>).
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 11</span> — Lire du HTML <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-11 }
 
@@ -263,7 +263,7 @@ Laquelle de ces balises s’écrit **sans** balise fermante ?0
 
 ??? corrige "Corrigé"
 
-    **a)** Titre : `<h1>` ; paragraphe : `<p>` ; lien : `<a>`. **b)** Vers `dessert.html` ; c’est un chemin **relatif** (pas de `/` ni de domaine au début). **c)** Arbre (DOM) :
+    **a)** Titre : <code>&lt;h1&gt;</code> ; paragraphe : <code>&lt;p&gt;</code> ; lien : <code>&lt;a&gt;</code>. **b)** Vers `dessert.html` ; c’est un chemin **relatif** (pas de `/` ni de domaine au début). **c)** Arbre (DOM) :
 
     ![](../figures/0b18c85f11bf99ae.svg){ .tikz loading=lazy }
 
@@ -282,18 +282,18 @@ Ce fragment contient deux erreurs de balises. Les repérer et corriger.
 
 ??? corrige "Corrigé"
 
-    Les balises `<strong>` et `<p>` sont **mal imbriquées**, et le `<h2>` n’est pas fermé :
+    Les balises <code>&lt;strong&gt;</code> et <code>&lt;p&gt;</code> sont **mal imbriquées**, et le <code>&lt;h2&gt;</code> n’est pas fermé :
 
     ```html
     <p>Un paragraphe <strong>en gras</strong></p>
     <h2>Un sous-titre</h2>
     ```
 
-    <span class="erreurfreq">▷ Erreur fréquente.</span> fermer les balises dans l’ordre où on les a ouvertes : la dernière ouverte (`<strong>`) doit être la première fermée.
+    <span class="erreurfreq">▷ Erreur fréquente.</span> fermer les balises dans l’ordre où on les a ouvertes : la dernière ouverte (<code>&lt;strong&gt;</code>) doit être la première fermée.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  Ma première page <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-13 }
 
-Écrire une page HTML complète (avec `<!doctype html>`, `<head>` et `<body>`) affichant un titre « Mon site NSI », un paragraphe de présentation, et un lien vers `eduscol.education.fr`. L’ouvrir dans un navigateur.
+Écrire une page HTML complète (avec <code>&lt;!doctype html&gt;</code>, <code>&lt;head&gt;</code> et <code>&lt;body&gt;</code>) affichant un titre « Mon site NSI », un paragraphe de présentation, et un lien vers `eduscol.education.fr`. L’ouvrir dans un navigateur.
 
 ??? pouce "Coup de pouce"
 
@@ -301,7 +301,7 @@ Ce fragment contient deux erreurs de balises. Les repérer et corriger.
 
 ??? corrige "Corrigé"
 
-    On part du squelette du cours (`<!doctype html>`, puis `<head>` pour les informations sur la page et `<body>` pour ce qui s’affiche) ; le lien vers un autre site prend une adresse complète dans `href`.
+    On part du squelette du cours (<code>&lt;!doctype html&gt;</code>, puis <code>&lt;head&gt;</code> pour les informations sur la page et <code>&lt;body&gt;</code> pour ce qui s’affiche) ; le lien vers un autre site prend une adresse complète dans `href`.
 
     ```html
     <!doctype html>
@@ -330,7 +330,7 @@ p  { font-size: 18px; }
 #avertissement { color: red; }
 ```
 
-1.  Quelle sera l’apparence des titres `<h1>` ?
+1.  Quelle sera l’apparence des titres <code>&lt;h1&gt;</code> ?
 
 2.  Quelle balise sera affichée en rouge ?
 
@@ -342,7 +342,7 @@ p  { font-size: 18px; }
 
 ??? corrige "Corrigé"
 
-    **a)** Les `<h1>` seront en **bleu foncé** et **centrés**. **b)** La balise portant `id="avertissement"` sera en **rouge**. **c)** La **séparation du fond (HTML) et de la forme (CSS)** : on change l’apparence sans toucher au contenu.
+    **a)** Les <code>&lt;h1&gt;</code> seront en **bleu foncé** et **centrés**. **b)** La balise portant `id="avertissement"` sera en **rouge**. **c)** La **séparation du fond (HTML) et de la forme (CSS)** : on change l’apparence sans toucher au contenu.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — `id` ou `class` ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-15 }
 
@@ -377,13 +377,13 @@ On donne ce fragment :
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  Aligner avec Flexbox <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-16 }
 
-<span class="horsprog">au-delà du programme</span> Écrire une page contenant une barre de navigation : un `<div class="barre">` qui contient trois liens (`<a>`) « Accueil », « Cours », « Contact ».
+<span class="horsprog">au-delà du programme</span> Écrire une page contenant une barre de navigation : un <code>&lt;div class="barre"&gt;</code> qui contient trois liens (<code>&lt;a&gt;</code>) « Accueil », « Cours », « Contact ».
 
 1.  Dans le CSS, écrire la règle `.barre` qui aligne les trois liens **horizontalement** avec un espace de `15px` entre eux.
 
 2.  Les répartir ensuite avec `justify-content: space-between`. Que change cette valeur ?
 
-3.  *Piège :* faut-il mettre `display:flex` sur le `<div>` ou sur les `<a>` ? Pourquoi ?
+3.  *Piège :* faut-il mettre `display:flex` sur le <code>&lt;div&gt;</code> ou sur les <code>&lt;a&gt;</code> ? Pourquoi ?
 
     ??? pouce "Coup de pouce"
 
@@ -409,7 +409,7 @@ On donne ce fragment :
     }
     ```
 
-    **b)** `space-between` **répartit** les liens sur toute la largeur, le premier collé à gauche, le dernier à droite, l’espace restant distribué entre eux. **c)** Sur le **`<div>`** (le **conteneur**) : c’est lui qui devient une boîte flexible, et ce sont *ses enfants* (les `<a>`) qui s’alignent.
+    **b)** `space-between` **répartit** les liens sur toute la largeur, le premier collé à gauche, le dernier à droite, l’espace restant distribué entre eux. **c)** Sur le **<code>&lt;div&gt;</code>** (le **conteneur**) : c’est lui qui devient une boîte flexible, et ce sont *ses enfants* (les <code>&lt;a&gt;</code>) qui s’alignent.
 
 ### JavaScript : rendre la page vivante
 
@@ -447,7 +447,7 @@ function saluer() {
 
 <span class="duree">≈ 15 min</span>
 
-Sur une page contenant `<p id="score">0</p>` et un bouton, écrire une fonction JavaScript qui, à chaque clic, **augmente de 1** le nombre affiché.
+Sur une page contenant <code>&lt;p id="score"&gt;0&lt;/p&gt;</code> et un bouton, écrire une fonction JavaScript qui, à chaque clic, **augmente de 1** le nombre affiché.
 
 ??? pouce "Coup de pouce"
 
@@ -529,18 +529,18 @@ Construire une page **complète** (HTML $+$ CSS $+$ JS dans un seul fichier) ave
 
 1.  En CSS, définir une classe `.sombre` qui met le fond en noir et le texte en blanc (`background` et `color`).
 
-2.  En JavaScript, au clic sur le bouton, **ajouter ou retirer** cette classe sur le `<body>`, avec l’instruction :  
+2.  En JavaScript, au clic sur le bouton, **ajouter ou retirer** cette classe sur le <code>&lt;body&gt;</code>, avec l’instruction :  
     `document.body.classList.toggle("sombre")`
 
 3.  *Bonus :* placer le bouton et un second bouton « À propos » dans une barre `display:flex` alignée à droite (`justify-content: flex-end`).
 
     ??? pouce "Coup de pouce"
 
-        Construire dans l’ordre : la page HTML, puis la règle `.sombre` dans un `<style>` du `<head>`, puis une fonction appelée au clic.
+        Construire dans l’ordre : la page HTML, puis la règle `.sombre` dans un <code>&lt;style&gt;</code> du <code>&lt;head&gt;</code>, puis une fonction appelée au clic.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
 
-        `<button onclick="changer()">Changer de thème</button>`  
+        <code>&lt;button onclick="changer()"&gt;Changer de thème&lt;/button&gt;</code>  
         `function changer() {`  
         …
 
@@ -673,8 +673,8 @@ Le site `https://www.recettes.mc` veut un formulaire de recherche, envoyé à l�
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
-    `<form action="/recherche" method="…">`  
-    `<input type="text" name="q">`  
+    <code>&lt;form action="/recherche" method="…"&gt;</code>  
+    <code>&lt;input type="text" name="q"&gt;</code>  
     …
 
 ??? corrige "Corrigé"
@@ -911,7 +911,7 @@ Le club du lycée veut une petite page pour s’inscrire à l’atelier robotiqu
 
 4.  Si l’un des deux champs est vide, le paragraphe `id="message"` affiche « Remplir les deux champs. » en **rouge**, et rien d’autre ne change.
 
-5.  Sinon, le message affiche, en **vert**, « Inscription enregistrée : » suivi du prénom ; une ligne « prénom (classe) », par exemple « Léa (1G2) », s’ajoute à la liste `<ul id="inscrits">` ; les deux champs sont vidés.
+5.  Sinon, le message affiche, en **vert**, « Inscription enregistrée : » suivi du prénom ; une ligne « prénom (classe) », par exemple « Léa (1G2) », s’ajoute à la liste <code>&lt;ul id="inscrits"&gt;</code> ; les deux champs sont vidés.
 
 6.  Tout se passe sans recharger la page.
 
@@ -929,7 +929,7 @@ Rappel de syntaxe : comme en Python, mais avec des accolades, on écrit `if (con
 
 ??? pouce "Coup de pouce"
 
-    Repartir de la page « Ma liste de courses » du cours : un champ, un bouton, une liste `<ul>` que l’on complète avec `innerHTML`. Il y a ici deux champs à lire, et la couleur du message se change avec `.style.color`.
+    Repartir de la page « Ma liste de courses » du cours : un champ, un bouton, une liste <code>&lt;ul&gt;</code> que l’on complète avec `innerHTML`. Il y a ici deux champs à lire, et la couleur du message se change avec `.style.color`.
 
 ??? pouce "Coup de pouce 2 (début de solution)"
 
@@ -942,7 +942,7 @@ Rappel de syntaxe : comme en Python, mais avec des accolades, on écrit `if (con
 
 ??? corrige "Corrigé"
 
-    **a)** Le titre `<h1>`, le paragraphe `#message` et la liste `#inscrits` servent seulement à **afficher** : ils ne traitent aucun événement. Les deux **champs de saisie** reçoivent la frappe au clavier ; leur contenu est lu par `.value` (ils ne déclenchent pas de fonction ici). Le **bouton** traite l’événement `click` : il appelle `inscrire()`.
+    **a)** Le titre <code>&lt;h1&gt;</code>, le paragraphe `#message` et la liste `#inscrits` servent seulement à **afficher** : ils ne traitent aucun événement. Les deux **champs de saisie** reçoivent la frappe au clavier ; leur contenu est lu par `.value` (ils ne déclenchent pas de fonction ici). Le **bouton** traite l’événement `click` : il appelle `inscrire()`.
 
     **b)**
 
@@ -989,6 +989,6 @@ Rappel de syntaxe : comme en Python, mais avec des accolades, on écrit `if (con
 
     Un quatrième essai utile : deux inscriptions valides de suite, pour vérifier que la seconde s’**ajoute** à la première au lieu de la remplacer (d’où le `+=`).
 
-    **e)** La liste n’existe que dans la page affichée, dans la mémoire du **navigateur** (côté client) : rien n’a été envoyé au serveur. Recharger la page la redemande au serveur, qui renvoie la page d’origine, avec une liste vide. Pour conserver les inscriptions, il faut les **envoyer au serveur** : un formulaire `<form action="/inscription" method="post">` dont les champs ont un `name` (`prenom`, `classe`), et, côté serveur, un programme qui les enregistre (dans un fichier ou une base de données) et fabrique la page des inscrits. On choisit `POST` : on envoie des données à enregistrer, qui n’ont pas à apparaître dans l’URL.
+    **e)** La liste n’existe que dans la page affichée, dans la mémoire du **navigateur** (côté client) : rien n’a été envoyé au serveur. Recharger la page la redemande au serveur, qui renvoie la page d’origine, avec une liste vide. Pour conserver les inscriptions, il faut les **envoyer au serveur** : un formulaire <code>&lt;form action="/inscription" method="post"&gt;</code> dont les champs ont un `name` (`prenom`, `classe`), et, côté serveur, un programme qui les enregistre (dans un fichier ou une base de données) et fabrique la page des inscrits. On choisit `POST` : on envoie des données à enregistrer, qui n’ont pas à apparaître dans l’URL.
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> ne tester que le cas où les *deux* champs sont vides : la condition doit être « l’un *ou* l’autre est vide », sinon une inscription sans prénom (ou sans classe) serait acceptée.

@@ -180,7 +180,7 @@ Compléter `premier_contre_exemple(systeme, smax)`, qui renvoie la plus petite s
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-On examine **tous** les systèmes $\{1, a, b\}$ avec $2 \leqslant a < b \leqslant 20$.
+On examine **tous** les systèmes $\{1, a, b\}$ avec $2 \leqslant a \lt  b \leqslant 20$.
 
 1.  Écrire une double boucle qui compte combien de ces systèmes il y a, et combien ne sont **pas** canoniques (en testant les sommes de 1 à 100). Un système « pris au hasard » a-t-il des chances d’être canonique ?
 
@@ -503,7 +503,7 @@ Une tournée revient à son point de départ : on peut la commencer dans n’imp
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
-Sur votre croquis, la tournée gloutonne se **croise**-t-elle ? Un circuit qui se croise n’est jamais optimal : en **retournant** le morceau de tournée situé entre les deux segments qui se croisent, on raccourcit. Écrire `ameliorer(tournee)` qui, tant que c’est possible, cherche deux positions $i < j$ (avec $i \geqslant 1$ pour garder la ville de départ) telles que retourner `tournee[i:j+1]` raccourcisse la tournée, et effectue ce retournement. L’appliquer à la tournée gloutonne depuis Monaco : quelle longueur obtient-on ?
+Sur votre croquis, la tournée gloutonne se **croise**-t-elle ? Un circuit qui se croise n’est jamais optimal : en **retournant** le morceau de tournée situé entre les deux segments qui se croisent, on raccourcit. Écrire `ameliorer(tournee)` qui, tant que c’est possible, cherche deux positions $i \lt  j$ (avec $i \geqslant 1$ pour garder la ville de départ) telles que retourner `tournee[i:j+1]` raccourcisse la tournée, et effectue ce retournement. L’appliquer à la tournée gloutonne depuis Monaco : quelle longueur obtient-on ?
 
 ??? pouce "Coup de pouce"
 
@@ -522,7 +522,7 @@ Sur votre croquis, la tournée gloutonne se **croise**-t-elle ? Un circuit qui s
 
     Oui : le segment Grasse $\to$ Menton croise Vence $\to$ Antibes et Saint-Martin-Vesubie $\to$ Monaco.
 
-    L’idée : pour chaque couple de positions $i < j$, on fabrique la tournée `essai` identique à `tournee`, sauf que les villes des positions $i$ à $j$ sont parcourues **dans l’autre sens** (on les relit de $j$ à $i$, par compréhension) ; si elle est plus courte, on la garde et on refera un passage.
+    L’idée : pour chaque couple de positions $i \lt  j$, on fabrique la tournée `essai` identique à `tournee`, sauf que les villes des positions $i$ à $j$ sont parcourues **dans l’autre sens** (on les relit de $j$ à $i$, par compréhension) ; si elle est plus courte, on la garde et on refera un passage.
 
     ```python
     def ameliorer(tournee):

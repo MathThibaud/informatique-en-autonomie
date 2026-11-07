@@ -474,7 +474,7 @@ Donner une chaîne de documentation (rôle, précondition, postcondition) à la 
 
 ??? corrige "Corrigé"
 
-    La précondition interdit $b = 0$ (et un $a$ négatif) ; la postcondition reprend la définition de la division euclidienne : $a = q \times b + r$ avec $0 \leqslant r < b$.
+    La précondition interdit $b = 0$ (et un $a$ négatif) ; la postcondition reprend la définition de la division euclidienne : $a = q \times b + r$ avec $0 \leqslant r \lt  b$.
 
     ```python
     def division_euclidienne(a, b):

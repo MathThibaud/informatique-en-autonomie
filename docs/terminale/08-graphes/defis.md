@@ -54,7 +54,7 @@ Vocabulaire utile pour lire le texte original :
 
     **Contexte.** Les messages du satellite contiennent en fait une photo, mais l’appareil l’a envoyée découpée en petits carrés (des « tuiles »), mélangés et, pire, tournés ou retournés au hasard. Il faut reconstituer ce puzzle. Pour commencer, il suffit de trouver les quatre tuiles des coins.
 
-    **Les données.** Le fichier est une suite de blocs séparés par une ligne vide. Chaque bloc est une tuile : une ligne `Tile <numéro>:` qui donne son numéro, suivie d’une grille carrée de $10 \times 10$ caractères, `.` (blanc) ou `#` (noir). Le nombre de tuiles est un carré parfait : l’image complète est un carré de tuiles.
+    **Les données.** Le fichier est une suite de blocs séparés par une ligne vide. Chaque bloc est une tuile : une ligne <code>Tile &lt;numéro&gt;:</code> qui donne son numéro, suivie d’une grille carrée de $10 \times 10$ caractères, `.` (blanc) ou `#` (noir). Le nombre de tuiles est un carré parfait : l’image complète est un carré de tuiles.
 
     **La règle.**
 

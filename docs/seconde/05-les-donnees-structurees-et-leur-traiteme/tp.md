@@ -151,7 +151,7 @@ On veut compter de `8` en `8` à partir de `5`. Le **pas** est en `C1` (`8`) et 
 
 ??? corrige "Corrigé"
 
-    `A2` : `=A1+C$1`, recopiée jusqu’à `A30`. En `A3`, la formule est `=A2+C$1` : `A1` s’est décalée, mais pas `C$1`, car le `$` bloque la ligne `1`. Sans le `$`, `A3` contiendrait `=A2+C2`, une cellule vide : la suite resterait bloquée à $13$. On obtient $5, 13, 21, \dots$ ; le 30<sup>e</sup> terme vaut $5 + 29 \times 8 = \mathbf{237}$. Changer `C1` change toute la suite d’un coup.
+    `A2` : `=A1+C$1`, recopiée jusqu’à `A30`. En `A3`, la formule est `=A2+C$1` : `A1` s’est décalée, mais pas `C$1`, car le `$` bloque la ligne `1`. Sans le `$`, `A3` contiendrait `=A2+C2`, une cellule vide : la suite resterait bloquée à $13$. On obtient $5, 13, 21, \dots$ ; le 30\lt sup>e\lt /sup> terme vaut $5 + 29 \times 8 = \mathbf{237}$. Changer `C1` change toute la suite d’un coup.
 
 ### <span class="exo-num">Exercice 3</span> — Somme d’une suite : émettre une conjecture (feuille `Exercice 3`) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-les-donnees-structurees-et-leur-traiteme-tp-2-3 }
 

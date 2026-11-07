@@ -171,7 +171,7 @@ On ne décrit pas chaque objet un par un : on écrit un **plan** commun à tous 
 
 !!! remarque "Remarque"
 
-    Vous connaissez déjà des classes ! En Python, `str`, `int`, `list` sont des classes. La chaîne `"radar"` est une *instance* de `str`, la liste `[1, 2]` une *instance* de `list`. L’instruction <span id="lex-pytype02" class="ancre"></span>`type("radar")` renvoie d’ailleurs `<class ’str’>`.
+    Vous connaissez déjà des classes ! En Python, `str`, `int`, `list` sont des classes. La chaîne `"radar"` est une *instance* de `str`, la liste `[1, 2]` une *instance* de `list`. L’instruction <span id="lex-pytype02" class="ancre"></span>`type("radar")` renvoie d’ailleurs <code>&lt;class ’str’&gt;</code>.
 
 ### Écrire une classe (presque) vide
 

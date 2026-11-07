@@ -32,7 +32,7 @@
 
 ### B
 
-**Balise** — Marque qui encadre un contenu HTML : une balise ouvrante `<p>` et une balise fermante `</p>` ; certaines, comme `<img>`, n’ont pas de fermante. *(ch. 10, [voir le cours](10-le-web-reseaux-et-interactions-homme-mac/cours.md#lex-balise10))*
+**Balise** — Marque qui encadre un contenu HTML : une balise ouvrante <code>&lt;p&gt;</code> et une balise fermante <code>&lt;/p&gt;</code> ; certaines, comme <code>&lt;img&gt;</code>, n’ont pas de fermante. *(ch. 10, [voir le cours](10-le-web-reseaux-et-interactions-homme-mac/cours.md#lex-balise10))*
 
 **Bibliothèque (module)** — Ensemble de fonctions déjà écrites et testées, que l’on charge avec `import` ; on apprend à lire sa documentation plutôt qu’à la connaître par cœur. *(ch. 1, [voir le cours](01-les-bases-de-la-programmation-python/cours.md#lex-bibliotheque01))*
 
@@ -150,7 +150,7 @@
 
 **Fonction** — Bloc d’instructions nommé, défini une fois (`def`) puis appelé autant de fois qu’on veut ; il reçoit des paramètres et peut renvoyer un résultat (`return`). *(ch. 1, [voir le cours](01-les-bases-de-la-programmation-python/cours.md#lex-fonction01))*
 
-**Formulaire** — Partie d’une page (`<form>`) qui envoie des données au serveur : `action` donne l’adresse qui les reçoit, `method` la méthode (`get` ou `post`). *(ch. 10, [voir le cours](10-le-web-reseaux-et-interactions-homme-mac/cours.md#lex-formulaire10))*
+**Formulaire** — Partie d’une page (<code>&lt;form&gt;</code>) qui envoie des données au serveur : `action` donne l’adresse qui les reçoit, `method` la méthode (`get` ou `post`). *(ch. 10, [voir le cours](10-le-web-reseaux-et-interactions-homme-mac/cours.md#lex-formulaire10))*
 
 **Frontière de décision** — Ligne qui sépare les régions du plan coloriées selon la classe prédite ; elle colle aux exemples pour $k$ petit, devient plus lisse quand $k$ grandit. *(ch. 12, [voir le cours](12-les-k-plus-proches-voisins/cours.md#lex-frontiere12))*
 
@@ -502,7 +502,7 @@
 
 **`turtle`** — Module de dessin : on l’importe (`import turtle as t`), on donne des ordres à la tortue, et `turtle.done()` garde la fenêtre ouverte. *(compl., [voir le cours](dessiner-avec-la-tortue/cours.md#lex-turtleT))*
 
-**`type`** — Fonction qui renvoie le type d’une valeur : `type(12.5)` donne `<class ’float’>`. *(ch. 1, [voir le cours](01-les-bases-de-la-programmation-python/cours.md#lex-typef01))*
+**`type`** — Fonction qui renvoie le type d’une valeur : `type(12.5)` donne <code>&lt;class ’float’&gt;</code>. *(ch. 1, [voir le cours](01-les-bases-de-la-programmation-python/cours.md#lex-typef01))*
 
 **`TypeError`** — Erreur provoquée par une opération entre types incompatibles, comme `"a" + 1`. *(ch. 1, [voir le cours](01-les-bases-de-la-programmation-python/cours.md#lex-typeerror01))*
 

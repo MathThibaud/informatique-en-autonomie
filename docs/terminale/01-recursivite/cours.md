@@ -300,7 +300,7 @@ Savoir écrire ne suffit pas : le programme demande de **savoir analyser**. Troi
 
     - **Il est positif.** On appelle `somme` au départ avec $n \geqslant 0$ ; comme on ne fait un appel récursif que dans le cas $n \neq 0$ (donc $n \geqslant 1$), l’appel suivant se fait avec $n-1 \geqslant 0$. Le paramètre reste donc toujours $\geqslant 0$.
 
-    - **Il décroît strictement.** Le seul appel récursif est `somme(n-1)` : à chaque étape, le paramètre diminue exactement de $1$, donc $n-1 < n$.
+    - **Il décroît strictement.** Le seul appel récursif est `somme(n-1)` : à chaque étape, le paramètre diminue exactement de $1$, donc $n-1 \lt  n$.
 
     - **Il atteint la condition d’arrêt.** Une suite d’entiers positifs qui décroît strictement ne peut pas être infinie. Partant de $n$, après exactement $n$ appels on obtient le paramètre $0$ : c’est la **condition d’arrêt**, qui renvoie $0$ *sans* appel récursif et arrête la descente.
 
