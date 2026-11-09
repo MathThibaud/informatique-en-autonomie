@@ -265,6 +265,8 @@ En s’inspirant **du remplissage à la main** de la section « Découverte à l
 
 *redimensionner une image sans la déformer*
 
+D’après une idée de Frédéric Junier (<https://fjunier.forge.apps.education.fr/tnsi/Projets/P2_seam_carving/seam_carving/>).
+
 !!! fichiers "Fichiers à télécharger"
 
     [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/11-projet-seam-carving){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-11-projet-seam-carving.zip){ .md-button }

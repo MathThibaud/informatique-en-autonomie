@@ -982,6 +982,8 @@ Le schéma suivant représente un réseau d’établissement typique ; celui du 
 
 <p class="infos-activite">Durée : 2 h 30 à 3 h (une séance longue, ou deux séances avec une coupure après la partie 3)</p>
 
+D’après les activités Flask de David Roche (<https://pixees.fr/informatiquelycee/>) et une idée de Gilles Lassus, chapitre « Requêtes GET, POST et formulaires » (<https://glassus.github.io/premiere_nsi/>).
+
 !!! fichiers "Fichiers à télécharger"
 
     [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/10-tp-flask){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-10-tp-flask.zip){ .md-button }

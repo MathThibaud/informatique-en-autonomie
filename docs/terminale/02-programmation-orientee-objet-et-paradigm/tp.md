@@ -241,6 +241,8 @@ Rédiger, en une dizaine de lignes, un bilan qui répond aux questions suivantes
 
 <p class="infos-activite">Durée : 2 h 30 environ (deux séances) · Sur machine, par deux</p>
 
+D’après une idée de Gilles Lassus (<https://glassus.github.io/terminale_nsi/>, chapitre « Programmation orientée objet »).
+
 !!! fichiers "Fichiers à télécharger"
 
     [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/02-tp-balles){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-02-tp-balles.zip){ .md-button }

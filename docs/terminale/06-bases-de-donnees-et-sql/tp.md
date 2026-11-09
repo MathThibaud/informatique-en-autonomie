@@ -657,6 +657,8 @@ En une dizaine de lignes, sur le cahier ou dans un fichier :
 
 <p class="infos-activite">Durée : 1 séance (environ 2 h) · Par deux, sur machine</p>
 
+D’après « SQL Murder Mystery », de Joon Park et Cathy He (Knight Lab, Northwestern University) : <https://mystery.knightlab.com/>, dépôt <https://github.com/NUKnightLab/sql-mysteries> (code sous licence MIT, textes et données sous licence CC BY-SA 4.0). Fiche adaptée en français (traduction du scénario, questions, coups de pouce), diffusée sous la même licence CC BY-SA 4.0 : <https://creativecommons.org/licenses/by-sa/4.0/deed.fr>.
+
 !!! fichiers "Fichiers à télécharger"
 
     [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/06-tp-murder-mystery){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-06-tp-murder-mystery.zip){ .md-button }
@@ -722,6 +724,8 @@ WHERE type = 'table';
 3.  D’après son nom, à quoi la table vide pourrait-elle servir ? (On le vérifiera à la fin de la partie 2.)
 
 ??? corrige "Corrigé"
+
+    D’après « SQL Murder Mystery », de Joon Park et Cathy He (Knight Lab, Northwestern University) : <https://mystery.knightlab.com/>, dépôt <https://github.com/NUKnightLab/sql-mysteries> (code sous licence MIT, textes et données sous licence CC BY-SA 4.0). Fiche adaptée en français (traduction du scénario, questions, coups de pouce), diffusée sous la même licence CC BY-SA 4.0 : <https://creativecommons.org/licenses/by-sa/4.0/deed.fr>.
 
     - Au programme : `SELECT`, `FROM`, `WHERE` (avec `AND`, `OR`), `JOIN … ON`, `ORDER BY`, `DISTINCT`, `COUNT`, `MIN`, `MAX`, `INSERT`. Au-delà : `LIKE`, `LIMIT`, `GROUP BY` / `HAVING`, la table `sqlite_master`, le déclencheur.
 
