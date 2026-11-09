@@ -149,6 +149,8 @@ La fonction `charger(fichier, separateur)` est donnée : c’est celle du cours,
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 Compléter `en_nombre(texte)` qui convertit une valeur lue dans le fichier en `float` (`"23,4"` donne `23.4`) et renvoie `None` si la chaîne est vide (valeur manquante).
 
 ??? pouce "Coup de pouce"
@@ -616,6 +618,8 @@ sexe;prenom;periode;valeur;rang
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Charger la table <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-les-donnees-en-tables-tp-2-2 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span> 
+
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
 
 Écrire `charger(fichier, separateur)` : c’est la fonction du cours, avec en plus le paramètre `delimiter` de `csv.DictReader`. Charger l’extrait dans une variable `brut`. Combien de lignes contient-il ? Afficher `brut[0]` : de quel type sont les valeurs ?
 

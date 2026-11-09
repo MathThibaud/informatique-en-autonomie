@@ -290,6 +290,8 @@ Le tri rapide applique « diviser pour régner », mais divise **autrement** que
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — La fonction `partition` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-tp-2-1 }
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 Écrivez la fonction `partition(tab, bas, haut)` qui partitionne les éléments de `tab` d’indices `bas` à `haut` (inclus) et renvoie l’indice final du pivot. Suivez ces étapes :
 
 1.  choisir le **dernier** élément `tab[haut]` comme pivot ;
@@ -1099,6 +1101,8 @@ sortie.save("joconde_tournee.png")
       *Autre méthode* (la « simple recopie », sans diviser pour régner) : voir l’exercice 6.
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — La simple recopie <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-diviser-pour-regner-tp-4-6 }
+
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
 
 1.  Sur l’image $4\times4$ de l’exercice 1, de quelle case de l’image de départ vient le pixel ligne `0`, colonne `0` de l’image tournée ? et celui ligne `1`, colonne `3` ? Déduisez-en, pour une image $n\times n$, la ligne et la colonne de départ du pixel ligne `i`, colonne `j` de l’image tournée.
 

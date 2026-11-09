@@ -68,6 +68,8 @@ Ouvrez `sudoku.py` : tout votre travail s’y fait. Il commence par `from sudoku
 
 On écrit trois fonctions ; chacune **renvoie un tableau de 9 valeurs**.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 **1.** `valeurs_ligne(grille, i)` renvoie le tableau des 9 valeurs de la ligne numéro `i`. C’est très court : la ligne `i` est *exactement* `grille[i]`.
 
 *Exemple :* sur `FACILE`, `valeurs_ligne(FACILE, 0)` renvoie `[5, 3, 0, 0, 7, 0, 0, 0, 0]`.

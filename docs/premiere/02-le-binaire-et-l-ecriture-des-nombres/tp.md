@@ -44,6 +44,8 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Du binaire vers le décimal <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-02-le-binaire-et-l-ecriture-des-nombres-tp-1-1 }
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 \[ sur machine \]  Écrire `binaire_vers_decimal(s)`. Méthode de Horner : on lit les bits de gauche à droite ; à chaque bit `c`, on fait `n = 2 * n + int(c)`.
 
 \[ à la main \]  Avant de coder, dérouler cette méthode à la main sur `"1011"` (valeurs successives de `n`).

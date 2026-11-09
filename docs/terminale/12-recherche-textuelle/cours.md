@@ -58,15 +58,21 @@ Chaque fois que vous faites `Ctrl+F` dans un document, que `grep` fouille un fic
 ```python
 def recherche_naive(motif, texte):
     n, m = len(texte), len(motif)
-    positions = []
-    for i in range(n - m + 1):           # chaque position de depart
-        j = 0
-        while j < m and texte[i + j] == motif[j]:
-            j += 1                        # on compare de gauche a droite
-        if j == m:                        # tout le motif a correspondu
-            positions.append(i)
-    return positions
+    positions = []                             # INITIALISER
+    for i in range(n - m + 1):                 # PARCOURIR : chaque position de depart
+        j = 0                                  # INITIALISER
+        while j < m and texte[i + j] == motif[j]:   # TESTER
+            j += 1                             # METTRE A JOUR : on compare de gauche a droite
+        if j == m:                             # TESTER : tout le motif a correspondu
+            positions.append(i)                # METTRE A JOUR
+    return positions                           # RENVOYER
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoie `recherche_naive("ACG", "CAAGACG")` ? Combien de comparaisons de caractères effectue-t-elle ?
+
+??? verifie "Je vérifie"
+
+    `[4]`, après **9** comparaisons : $1$ en $i=0$, $2$ en $i=1$, $2$ en $i=2$, $1$ en $i=3$, $3$ en $i=4$ (les trois lettres correspondent).
 
 !!! propriete "Propriété 1 — Un coût qui peut exploser"
 
@@ -115,32 +121,38 @@ Le prétraitement consiste donc à connaître, pour chaque lettre, sa **dernièr
 
 ```python
 def table_dernier(motif):
-    dernier = {}
-    for k in range(len(motif)):
-        dernier[motif[k]] = k       # derniere position de chaque lettre
-    return dernier
+    dernier = {}                # INITIALISER
+    for k in range(len(motif)):   # PARCOURIR
+        dernier[motif[k]] = k   # METTRE A JOUR : derniere position de chaque lettre
+    return dernier              # RENVOYER
 
 def boyer_moore(motif, texte):
     n, m = len(texte), len(motif)
     dernier = table_dernier(motif)
-    positions = []
-    i = 0
-    while i <= n - m:
-        j = m - 1
-        while j >= 0 and texte[i + j] == motif[j]:
-            j -= 1                          # comparaison DROITE -> GAUCHE
-        if j < 0:
-            positions.append(i)             # motif trouve
+    positions = []                               # INITIALISER
+    i = 0                                        # INITIALISER
+    while i <= n - m:                            # PARCOURIR : les fenetres
+        j = m - 1                                # INITIALISER : fin du motif
+        while j >= 0 and texte[i + j] == motif[j]:   # TESTER
+            j -= 1                               # METTRE A JOUR : comparaison DROITE -> GAUCHE
+        if j < 0:                                # TESTER
+            positions.append(i)                  # METTRE A JOUR : motif trouve
             i += 1
         else:
-            c = texte[i + j]                # le "mauvais caractere"
+            c = texte[i + j]                     # le "mauvais caractere"
             if c in dernier:
-                k = dernier[c]              # derniere position de c
+                k = dernier[c]                   # derniere position de c
             else:
-                k = -1                      # c absent du motif
-            i += max(1, j - k)              # saut (au moins 1)
-    return positions
+                k = -1                           # c absent du motif
+            i += max(1, j - k)                   # METTRE A JOUR : saut (au moins 1)
+    return positions                             # RENVOYER
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoie `table_dernier("ELLE")` ? Pour `boyer_moore("NAS", "ANANAS")`, quels sont les sauts successifs et le résultat ?
+
+??? verifie "Je vérifie"
+
+    `{’E’: 3, ’L’: 2}` : chaque lettre garde sa *dernière* position. Puis : en $i=0$, échec sur `A` (dernière position $1$ dans `NAS`), saut $2-1=1$ ; en $i=1$, échec sur `N` (position $0$), saut $2$ ; en $i=3$, `NAS` est trouvé. Résultat `[3]`.
 
 <span id="cours-12-3" class="ancre"></span>
 
@@ -177,29 +189,35 @@ Autrement dit : quand la comparaison échoue *avant* la fin (une partie du suffi
 ```python
 def table_decalage(motif):
     m = len(motif)
-    dec = {}
-    for k in range(m - 1):           # on ignore la DERNIERE lettre
-        dec[motif[k]] = m - 1 - k
-    return dec
+    dec = {}                    # INITIALISER
+    for k in range(m - 1):      # PARCOURIR : on ignore la DERNIERE lettre
+        dec[motif[k]] = m - 1 - k   # METTRE A JOUR
+    return dec                  # RENVOYER
 
 def horspool(motif, texte):
     n, m = len(texte), len(motif)
     dec = table_decalage(motif)
-    positions = []
-    i = 0
-    while i <= n - m:
-        j = m - 1
-        while j >= 0 and texte[i + j] == motif[j]:
-            j -= 1                         # comparaison DROITE -> GAUCHE
-        if j < 0:
-            positions.append(i)            # motif trouve en i
-        c = texte[i + m - 1]              # caractere aligne avec la FIN de la fenetre
-        if c in dec:
-            i += dec[c]                   # saut lu dans la table
+    positions = []                               # INITIALISER
+    i = 0                                        # INITIALISER
+    while i <= n - m:                            # PARCOURIR : les fenetres
+        j = m - 1                                # INITIALISER : fin du motif
+        while j >= 0 and texte[i + j] == motif[j]:   # TESTER
+            j -= 1                               # METTRE A JOUR : comparaison DROITE -> GAUCHE
+        if j < 0:                                # TESTER
+            positions.append(i)                  # METTRE A JOUR : motif trouve en i
+        c = texte[i + m - 1]                     # caractere aligne avec la FIN de la fenetre
+        if c in dec:                             # TESTER
+            i += dec[c]                          # METTRE A JOUR : saut lu dans la table
         else:
-            i += m                        # lettre absente : saut de m
-    return positions
+            i += m                               # METTRE A JOUR : lettre absente, saut de m
+    return positions                             # RENVOYER
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoie `table_decalage("ELLE")` ? Puis, avant de regarder la figure ci-dessous : quels décalages successifs `horspool("ACGT", "GTACACGTAC")` effectue-t-elle, et que renvoie-t-elle ?
+
+??? verifie "Je vérifie"
+
+    `{’E’: 3, ’L’: 1}` : le `E` final est ignoré, c’est le premier `E` qui donne $3$ ; le second `L` écrase le premier ($1$ et non $2$). Puis : fin `C` $\to$ saut $2$, fin `C` $\to$ saut $2$, motif trouvé en $4$ (fin `T`, absente de la table $\to$ saut $4$, et la recherche s’arrête). Résultat `[4]`.
 
 !!! encadre "Au bac — la table de Horspool peut être écrite autrement"
 
@@ -212,6 +230,8 @@ def horspool(motif, texte):
 !!! exemple "Exemple — Dérouler Horspool : MOTIF dans UN TEXTE AVEC UN MOTIF ICI"
 
     Table : `M`$\to 4$, `O`$\to 3$, `T`$\to 2$, `I`$\to 1$, autres $\to 5$.
+
+    <span class="routine">▷ Je prédis.</span> Cacher le tableau : pour chaque fenêtre, prévoir la lettre de fin et le décalage.
 
     <table>
     <thead>

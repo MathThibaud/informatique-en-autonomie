@@ -167,6 +167,8 @@ On rappelle : **temps de séjour** $=$ instant de fin $-$ instant d’arrivée ;
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 5</span> — Premier arrivé, premier servi <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-processus-et-ordonnancement-tp-1-5 }
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `fcfs(procs)`. Les processus sont servis par ordre d’arrivée, chacun jusqu’au bout. **Attention** : si le prochain processus n’est pas encore arrivé, le processeur attend (on ajoute des `"."`). Exemple : `fcfs([("X", 2, 1)])` renvoie `[".", ".", "X"]`.
 
     ??? pouce "Coup de pouce"

@@ -2,7 +2,7 @@
 
 <p class="sous-titre">Bases de données et SQL</p>
 
-## <span class="etiquette">TP</span> La ligue de futsal des quartiers
+## <span class="etiquette">TP 1</span> La ligue de futsal des quartiers
 
 *modéliser, créer, interroger une base SQLite, puis la piloter depuis Python*
 
@@ -650,3 +650,546 @@ En une dizaine de lignes, sur le cahier ou dans un fichier :
 - expliquer pourquoi on passe les valeurs avec `?` plutôt qu’en les collant dans le texte de la requête ;
 
 - recopier le classement final et dire quel « service » du SGBD a garanti qu’aucun match n’a été à moitié saisi.
+
+## <span class="etiquette">TP 2</span> SQL Murder Mystery
+
+*une enquête à résoudre en SQL*
+
+<p class="infos-activite">Durée : 1 séance (environ 2 h) · Par deux, sur machine</p>
+
+!!! fichiers "Fichiers à télécharger"
+
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/terminale/06-tp-murder-mystery){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/terminale-06-tp-murder-mystery.zip){ .md-button }
+
+!!! consignes "Consignes"
+
+    - Trois façons de jouer, au choix :
+
+      - **en ligne**, sans rien installer : sur <https://mystery.knightlab.com/>, chaque cadre de code de la page accepte n’importe quelle requête (bouton *Run*) ; rien n’est enregistré d’une visite à l’autre ;
+
+      - avec **DB Browser for SQLite** : ouvrir la base `sql-murder-mystery.db`, puis onglet « Exécuter le SQL » ;
+
+      - avec **Python** : le fichier `tp_murder_depart.py`, placé dans le même dossier que la base, contient la connexion et une fonction `afficher(requete)` qui exécute une requête et en affiche le résultat.
+
+    - Fichiers à télécharger (lien ci-dessus) : la base `sql-murder-mystery.db`, sa licence `sql-murder-mystery_LICENCE.txt` et `tp_murder_depart.py`.
+
+    - Tenir un **carnet d’enquête** (cahier ou fichier texte) : chaque requête utile, ce qu’elle a appris, les numéros (`id`) des personnes repérées. <span class="run" title="À programmer et tester sur machine">▶</span>  signale ce qui se fait sur machine.
+
+    - La solution de l’enquête se trouve facilement sur Internet : la chercher, c’est se priver du plaisir de la trouver.
+
+    - Niveau : ★ échauffement, ★★ classique (niveau bac), ★★★ défi ; les *coups de pouce* et les *corrigés* se déplient sous chaque exercice.
+
+    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
+
+!!! encadre "But du TP"
+
+    Un meurtre a été commis à *SQL City*, une ville imaginaire. L’inspecteur vous avait confié le rapport de police… que vous avez égaré. Vous vous souvenez seulement qu’il s’agissait d’un **meurtre** (*murder*), commis le **15 janvier 2018** à **SQL City**. Tout le reste se trouve dans la base de données de la ville, et vous n’avez qu’un seul outil : **SQL**. On va d’abord **explorer** une base inconnue (ses tables, ses clés, son schéma), puis **recouper** des indices à coups de `WHERE`, d’agrégats et de jointures, et enfin **valider** sa réponse avec un `INSERT`.
+
+!!! encadre "Petit lexique — les données sont en anglais"
+
+    Les noms des tables, des attributs et les textes de la base sont en anglais.
+
+    |  |  |  |  |
+    |:---|:---|:---|:---|
+    | *crime scene report* | rapport de police (scène de crime) | *witness* | témoin |
+    | *murder*, *robbery*, *theft* | meurtre, vol avec violence, vol | *interview*, *transcript* | audition, déposition écrite |
+    | *drivers license* | permis de conduire | *plate number* | numéro d’immatriculation |
+    | *car make*, *car model* | marque, modèle de la voiture | *gender* : *male*, *female* | sexe : homme, femme |
+    | *hair color*, *eye color* | couleur des cheveux, des yeux | *height* | taille en **pouces** (1 pouce = 2,54 cm) |
+    | *income*, *annual income* | revenu, revenu annuel | *ssn* | numéro de sécurité sociale |
+    | *gym*, *membership* | salle de sport, abonnement | *check in*, *check out* | arrivée, départ |
+    | *event*, *to attend* | événement, assister à | *last*, *somewhere* | dernier, quelque part |
+    | *street*, *Dr*, *Ave* | rue, *Drive*, *Avenue* | *to hire* | engager (quelqu’un) |
+
+## Partie 1 — Explorer la base avant d’enquêter (25 min)
+
+Un enquêteur sérieux commence par savoir **où** chercher. Toute base SQLite contient une table spéciale qui la décrit, `sqlite_master` : on y trouve la liste des tables et, pour chacune, l’instruction `CREATE TABLE` qui l’a créée.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Combien de tables, combien de lignes ? <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-tp-2-1 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Exécuter la requête suivante, qui affiche le nom de chaque table de la base :
+
+```sql
+SELECT name
+FROM sqlite_master
+WHERE type = 'table';
+```
+
+1.  Combien la base compte-t-elle de tables ?
+
+2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Pour chaque table, écrire la requête qui donne son nombre de lignes, et noter les résultats dans un tableau du carnet. Quelle table contient le plus de lignes ? Laquelle est vide ?
+
+3.  D’après son nom, à quoi la table vide pourrait-elle servir ? (On le vérifiera à la fin de la partie 2.)
+
+??? corrige "Corrigé"
+
+    - Au programme : `SELECT`, `FROM`, `WHERE` (avec `AND`, `OR`), `JOIN … ON`, `ORDER BY`, `DISTINCT`, `COUNT`, `MIN`, `MAX`, `INSERT`. Au-delà : `LIKE`, `LIMIT`, `GROUP BY` / `HAVING`, la table `sqlite_master`, le déclencheur.
+
+    - Chemin, en trois étapes :
+
+      - rapport de police (par le texte : rue, prénom) $\to$ `person` $\to$ `interview` (par `person_id`) ;
+
+      - `get_fit_now_check_in` $\to$ `get_fit_now_member` (`membership_id`) $\to$ `person` (`person_id`) $\to$ `drivers_license` (`license_id`) ;
+
+      - `drivers_license` $\to$ `person` $\to$ `facebook_event_checkin` (`person_id`).
+
+    - Domaines : dates entières AAAAMMJJ (pas d’apostrophes, comparaisons possibles), taille en pouces, texte comparé caractère par caractère (`’SQL City’`, prénom et nom réunis dans `name`), identifiant d’abonnement de type texte.
+
+    - Réponse personnelle ; le plus souvent : la jointure à trois tables de l’exercice 7 ou l’oubli du préfixe de table (*ambiguous column name: id*).
+
+    **1.** La requête donne $9$ tables. **2.** Par exemple `SELECT COUNT(*) FROM person;`, puis de même pour chaque table :
+
+    | **table**                | **lignes** | **table**              | **lignes** |
+    |:-------------------------|-----------:|:-----------------------|-----------:|
+    | `crime_scene_report`     |   $1\,228$ | `get_fit_now_check_in` |   $2\,703$ |
+    | `drivers_license`        |  $10\,007$ | `solution`             |        $0$ |
+    | `facebook_event_checkin` |  $20\,011$ | `income`               |   $7\,514$ |
+    | `interview`              |   $4\,991$ | `person`               |  $10\,011$ |
+    | `get_fit_now_member`     |      $184$ |                        |            |
+
+    La plus grosse table est `facebook_event_checkin` ; la table `solution` est vide. **3.** Elle sert à proposer et vérifier la réponse (exercices 8 et 11).
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 2</span> — Lire la structure et dessiner le schéma <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-tp-2-2 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Afficher l’instruction de création d’une table, par exemple `person` :
+
+```sql
+SELECT sql
+FROM sqlite_master
+WHERE name = 'person';
+```
+
+(Dans DB Browser, l’onglet « Structure de la base » montre la même chose.) Faire de même pour les autres tables.
+
+1.  Pour chaque table, donner sa **clé primaire**, s’il y en a une. Quelles tables n’en ont pas ? Dans ces tables, deux lignes pourraient-elles être exactement identiques ? Que dit le cours d’une relation à ce sujet ?
+
+2.  Lister toutes les **clés étrangères**, sous la forme `table.attribut` $\to$ `table.attribut` référencé.
+
+3.  Dans la table `person`, l’attribut `ssn` est-il une clé primaire ou une clé étrangère ? Et dans la table `income` ?
+
+4.  Dessiner le **schéma relationnel** de la base dans la notation du cours : une boîte par relation, la clé primaire soulignée, un `#` devant chaque clé étrangère, une flèche de la clé étrangère vers la clé qu’elle référence. Quelle table est au centre du schéma ? Quelles tables ne sont reliées à aucune autre ?
+
+5.  Les dates sont stockées comme des **entiers**, par exemple `20170101`. Comment s’écrit le 15 janvier 2018 ? Pourquoi ce format permet-il de comparer deux dates avec `<` ou de chercher toutes les dates d’un mois avec `>=` et `<=` ?
+
+??? corrige "Corrigé"
+
+    **1.** Clés primaires : `drivers_license.id`, `person.id`, `income.ssn` et `get_fit_now_member.id` (un **texte**, comme `’48Z55’` : une clé primaire n’est pas forcément un entier). Cinq tables n’en ont pas : `crime_scene_report`, `interview`, `facebook_event_checkin`, `get_fit_now_check_in` et `solution`. Rien n’y empêche donc deux lignes identiques (il n’y en a d’ailleurs aucune : vérifié avec `SELECT DISTINCT`). Le cours dit qu’une relation est un **ensemble** : pas de doublon. Pour le garantir, il faudrait déclarer une clé, éventuellement formée de plusieurs attributs, par exemple (`membership_id`, `check_in_date`, `check_in_time`) pour les passages à la salle. Sans clé, aucune autre table ne peut non plus faire référence à une ligne précise.
+
+    **2.** Six clés étrangères :
+
+    - `person.license_id` $\to$ `drivers_license.id` et `person.ssn` $\to$ `income.ssn` ;
+
+    - `interview.person_id`, `facebook_event_checkin.person_id` et `get_fit_now_member.person_id` $\to$ `person.id` ;
+
+    - `get_fit_now_check_in.membership_id` $\to$ `get_fit_now_member.id`.
+
+    **3.** `ssn` est une clé **étrangère** dans `person` (`ssn CHAR REFERENCES income (ssn)`) et la clé **primaire** de `income`.
+
+    **4.** Schéma attendu (les domaines peuvent être ajoutés : entier, texte) :
+
+    ![](../figures/b55e6fee2b2dca14.svg){ .tikz loading=lazy }
+
+    `person` est au centre : cinq des six clés étrangères y aboutissent ou en partent. `crime_scene_report` et `solution` ne sont reliées à aucune table : le rapport de police ne mène aux personnes qu’à travers le **texte** de sa description (une rue, un prénom), c’est le travail de l’enquêteur de faire le lien.
+
+    **5.** `20180115`. Le format AAAAMMJJ place l’année en tête, puis le mois, puis le jour : l’ordre des nombres est celui du calendrier. Décembre 2017 s’écrit `date >= 20171201 AND date <= 20171231`.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Premiers coups de sonde <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-tp-2-3 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Avant de chercher le rapport, prendre la mesure de la table `crime_scene_report` :
+
+1.  les différents types de crimes, chacun une seule fois (combien y en a-t-il ?) ;
+
+2.  le nombre de crimes enregistrés à `SQL City` ;
+
+3.  en une seule requête, la date du plus ancien et celle du plus récent rapport.
+
+??? corrige "Corrigé"
+
+    ```sql
+    SELECT DISTINCT type
+    FROM crime_scene_report;
+
+    SELECT COUNT(*)
+    FROM crime_scene_report
+    WHERE city = 'SQL City';
+
+    SELECT MIN(date), MAX(date)
+    FROM crime_scene_report;
+    ```
+
+    **1.** $9$ types : `robbery`, `murder`, `theft`, `fraud`, `arson` (incendie criminel), `bribery` (corruption), `assault` (agression), `smuggling` (contrebande), `blackmail` (chantage). **2.** $9$ crimes à SQL City. **3.** De `20170101` (1<sup>er</sup> janvier 2017) à `20180501` (1<sup>er</sup> mai 2018).
+
+## Partie 2 — L’enquête (55 min)
+
+Les questions sont de moins en moins guidées. Noter au fur et à mesure, dans le carnet, les **indices** et les **numéros** des personnes : ils resserviront.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Le rapport perdu <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-tp-2-4 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Retrouver le rapport du meurtre du 15 janvier 2018 à SQL City. Quelle table interroger ? Sur quels attributs porte la condition ? Écrire la requête, puis traduire la description du rapport dans le carnet.
+
+??? pouce "Coup de pouce"
+
+    Trois conditions reliées par `AND`. La date est un entier : on l’écrit sans apostrophes. Le texte, lui, s’écrit entre apostrophes et en respectant les majuscules : `’SQL City’`.
+
+??? corrige "Corrigé"
+
+    ```sql
+    SELECT *
+    FROM crime_scene_report
+    WHERE date = 20180115 AND type = 'murder' AND city = 'SQL City';
+    ```
+
+    Une seule ligne (sans la condition sur le type, on obtient aussi deux agressions du même jour). Sa description :
+
+    > *Security footage shows that there were 2 witnesses. The first witness lives at the last house on “Northwestern Dr”. The second witness, named Annabel, lives somewhere on “Franklin Ave”.*
+
+    Traduction : les images de vidéosurveillance montrent deux témoins. Le premier habite la dernière maison de *Northwestern Drive*. La seconde, prénommée Annabel, habite quelque part sur *Franklin Avenue*.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Les deux témoins <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-tp-2-5 }
+
+1.  <span class="run" title="À programmer et tester sur machine">▶</span>  **Le premier témoin.** Avec les attributs de la table `person`, comment traduire « habiter la *dernière* maison d’une rue » ? Trouver ce témoin **avec une fonction d’agrégation**, en deux requêtes. Noter son nom et son `id`.
+
+    ??? pouce "Coup de pouce"
+
+        Première requête : le plus grand numéro (`address_number`) parmi les habitants de la rue. Seconde requête : la personne de cette rue qui habite à ce numéro. Autre méthode : trier les habitants de la rue par numéro décroissant (`ORDER BY … DESC`) et lire la première ligne.
+
+2.  <span class="run" title="À programmer et tester sur machine">▶</span>  **Le second témoin.** On ne connaît que son prénom et sa rue. Que renvoie la condition `name = ’Annabel’` ? Pourquoi ? Trouver ce témoin en affichant les habitants de sa rue **triés par nom**. Noter son nom et son `id`.
+
+3.  **Autre méthode** <span class="horsprog">au-delà du programme</span> : l’opérateur `LIKE` du cours, où `%` remplace n’importe quelle suite de caractères. Écrire la condition qui trouve directement les personnes dont le nom **commence** par `Annabel` et qui habitent cette rue.
+
+??? corrige "Corrigé"
+
+    **1.** « La dernière maison » : le plus grand numéro de la rue.
+
+    ```sql
+    SELECT MAX(address_number)
+    FROM person
+    WHERE address_street_name = 'Northwestern Dr';
+
+    SELECT id, name
+    FROM person
+    WHERE address_street_name = 'Northwestern Dr' AND address_number = 4919;
+    ```
+
+    Le maximum vaut $4919$ ; le premier témoin est **Morty Schapiro**, `id` $14887$. Autre méthode : `ORDER BY address_number DESC` sur les $50$ habitants de la rue, première ligne (identique). On accepte aussi `LIMIT 1`, au-delà du programme.
+
+    **2.** `name = ’Annabel’` ne renvoie **aucune** ligne : l’attribut `name` contient le prénom **et** le nom, et `=` compare la chaîne entière.
+
+    ```sql
+    SELECT id, name, address_number
+    FROM person
+    WHERE address_street_name = 'Franklin Ave'
+    ORDER BY name;
+    ```
+
+    $45$ habitants ; la deuxième ligne est `16371 | Annabel Miller | 103`. Le second témoin est **Annabel Miller**, `id` $16371$.
+
+    **3.** <span class="horsprog">au-delà du programme</span> `WHERE name LIKE ’Annabel%’ AND address_street_name = ’Franklin Ave’` donne directement la même ligne.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Les dépositions <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-tp-2-6 }
+
+1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Afficher les dépositions (`transcript`) des deux témoins à partir de leurs `id`.
+
+2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une **seule** requête, avec une jointure, qui affiche pour les deux témoins leur **nom** à côté de leur déposition.
+
+3.  Traduire les deux dépositions et dresser la **liste des indices** sur le meurtrier. Pour chaque indice, indiquer la table (et l’attribut) où il pourra être vérifié.
+
+??? pouce "Coup de pouce"
+
+    La table `interview` n’a pas de nom de personne, seulement `person_id` : c’est une clé étrangère vers `person.id`. D’où `FROM person JOIN interview ON interview.person_id = person.id`.
+
+??? corrige "Corrigé"
+
+    **1.** `SELECT * FROM interview WHERE person_id = 14887 OR person_id = 16371;` **2.** Avec une jointure :
+
+    ```sql
+    SELECT person.name, interview.transcript
+    FROM person
+    JOIN interview ON interview.person_id = person.id
+    WHERE person.id = 14887 OR person.id = 16371;
+    ```
+
+    (On peut aussi filtrer sur `person.name`.) Deux lignes :
+
+    > *Morty Schapiro : I heard a gunshot and then saw a man run out. He had a “Get Fit Now Gym” bag. The membership number on the bag started with “48Z”. Only gold members have those bags. The man got into a car with a plate that included “H42W”.*
+
+    > *Annabel Miller : I saw the murder happen, and I recognized the killer from my gym when I was working out last week on January the 9th.*
+
+    **3.** Indices et attributs où les vérifier :
+
+    - c’est un **homme** : `drivers_license.gender` ;
+
+    - il a un sac de la salle *Get Fit Now Gym*, réservé aux abonnés **gold** : `get_fit_now_member.membership_status` ;
+
+    - son numéro d’abonnement commence par **48Z** : `get_fit_now_member.id` ;
+
+    - sa plaque d’immatriculation contient **H42W** : `drivers_license.plate_number` ;
+
+    - il était à la salle le **9 janvier 2018** (Annabel s’y entraînait aussi) : `get_fit_now_check_in.check_in_date`.
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 7</span> — Le suspect <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-tp-2-7 }
+
+Recouper maintenant les indices, une table après l’autre.
+
+1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Combien de passages à la salle de sport ont été enregistrés le jour indiqué par le second témoin ?
+
+2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Parmi les personnes venues ce jour-là, afficher l’identifiant d’abonnement, le nom et le `person_id` de celles qui ont le type d’abonnement décrit par le premier témoin. En lisant le résultat, ne garder que les abonnements dont le numéro correspond à l’indice. Combien de suspects reste-t-il ?
+
+3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Pour départager les suspects, afficher leur sexe et le numéro d’immatriculation de leur voiture. Qui est le meurtrier ? Que remarque-t-on pour l’autre suspect ?
+
+4.  **Défi** <span class="horsprog">au-delà du programme</span> : écrire une **seule** requête, avec trois jointures et `LIKE`, qui renvoie directement le nom du meurtrier.
+
+??? pouce "Coup de pouce"
+
+    Le chemin dans le schéma : `get_fit_now_check_in` $\to$ `get_fit_now_member` (par `membership_id`) $\to$ `person` (par `person_id`) $\to$ `drivers_license` (par `license_id`). Quand deux tables ont un attribut de même nom (`id`), on le préfixe par le nom de sa table.
+
+??? corrige "Corrigé"
+
+    **1.** `SELECT COUNT(*) FROM get_fit_now_check_in WHERE check_in_date = 20180109;` donne $10$ passages.
+
+    **2.**
+
+    ```sql
+    SELECT get_fit_now_member.id, get_fit_now_member.name, get_fit_now_member.person_id
+    FROM get_fit_now_member
+    JOIN get_fit_now_check_in ON get_fit_now_check_in.membership_id = get_fit_now_member.id
+    WHERE get_fit_now_check_in.check_in_date = 20180109
+      AND get_fit_now_member.membership_status = 'gold'
+    ORDER BY get_fit_now_member.id;
+    ```
+
+    | **id** | **name**       | **person_id** |
+    |:-------|:---------------|--------------:|
+    | 48Z55  | Jeremy Bowers  |         67318 |
+    | 48Z7A  | Joe Germuska   |         28819 |
+    | 6LSTG  | Burton Grippe  |         83186 |
+    | 90081  | Annabel Miller |         16371 |
+    | GE5Q8  | Carmen Dimick  |         92736 |
+    | XTE42  | Sarita Bartosh |         55662 |
+
+    Le témoin Annabel Miller est bien dans la liste. Deux abonnements commencent par `48Z` : **deux suspects**, Jeremy Bowers ($67318$) et Joe Germuska ($28819$).
+
+    **3.**
+
+    ```sql
+    SELECT person.name, drivers_license.gender, drivers_license.plate_number,
+           drivers_license.car_make, drivers_license.car_model
+    FROM person
+    JOIN drivers_license ON person.license_id = drivers_license.id
+    WHERE person.id = 67318 OR person.id = 28819;
+    ```
+
+    Une seule ligne : `Jeremy Bowers | male | 0H42W2 | Chevrolet | Spark LS`. La plaque contient `H42W` : le meurtrier est **Jeremy Bowers**. Joe Germuska **disparaît** du résultat : son `license_id` ($173289$) ne correspond à aucun permis, et une jointure ne garde que les lignes qui ont un correspondant.
+
+    *Pour le professeur.* C’est une **violation de la contrainte de référence** : la base déclare la clé étrangère mais ne la respecte pas. `PRAGMA foreign_key_check;` en compte $2\,502$ ($5$ permis introuvables, $2\,497$ numéros `ssn` absents de `income`). SQLite ne vérifie les clés étrangères que sur demande (`PRAGMA foreign_keys = ON`, cf. cours) : bel exemple, à commenter en classe, de ce que le SGBD laisse passer quand on ne lui demande rien.
+
+    **4.** <span class="horsprog">au-delà du programme</span> Trois jointures et `LIKE` :
+
+    ```sql
+    SELECT person.id, person.name
+    FROM person
+    JOIN get_fit_now_member ON get_fit_now_member.person_id = person.id
+    JOIN get_fit_now_check_in ON get_fit_now_check_in.membership_id = get_fit_now_member.id
+    JOIN drivers_license ON person.license_id = drivers_license.id
+    WHERE get_fit_now_check_in.check_in_date = 20180109
+      AND get_fit_now_member.membership_status = 'gold'
+      AND get_fit_now_member.id LIKE '48Z%'
+      AND drivers_license.plate_number LIKE '%H42W%';
+    ```
+
+    Résultat : `67318 | Jeremy Bowers`.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 8</span> — Valider la réponse <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-tp-2-8 }
+
+La base vérifie elle-même la réponse. <span class="run" title="À programmer et tester sur machine">▶</span>  Exécuter, en remplaçant le texte par le prénom et le nom trouvés (majuscules comprises, entre apostrophes simples) :
+
+```sql
+INSERT INTO solution VALUES (1, 'Prénom Nom');
+
+SELECT value
+FROM solution;
+```
+
+(Sur le site, écrire les deux instructions dans le même cadre.)
+
+1.  Traduire le message obtenu.
+
+2.  Combien de lignes la table `solution` contient-elle maintenant ? Que vaut sa colonne `user` ? On a pourtant inséré la valeur $1$… L’énigme sera résolue à l’exercice 11.
+
+??? corrige "Corrigé"
+
+    `INSERT INTO solution VALUES (1, ’Jeremy Bowers’);` puis `SELECT value FROM solution;` :
+
+    > *Congrats, you found the murderer! But wait, there’s more... If you think you’re up for a challenge, try querying the interview transcript of the murderer to find the real villain behind this crime. If you feel especially confident in your SQL skills, try to complete this final step with no more than 2 queries. Use this same INSERT statement with your new suspect to check your answer.*
+
+    **1.** Bravo, vous avez trouvé le meurtrier ! Mais ce n’est pas fini… Si vous aimez les défis, lisez la déposition du meurtrier pour trouver le vrai responsable de ce crime. Si vous êtes sûr de vous en SQL, faites cette dernière étape en deux requêtes au plus. Vérifiez votre réponse avec la même instruction `INSERT`.  
+    **2.** Une seule ligne, dont la colonne `user` vaut $0$ et non $1$ : la ligne insérée a été remplacée (explication à l’exercice 11).
+
+## Partie 3 — Le vrai commanditaire (25 min)
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Ce que sait le meurtrier <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-tp-2-9 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Afficher la déposition du meurtrier, la traduire, puis dresser la liste des indices sur la personne qui l’a engagé. Pour chacun, indiquer la table et l’attribut qui permettront de le vérifier. Convertir en centimètres l’intervalle de taille donné.
+
+??? corrige "Corrigé"
+
+    `SELECT transcript FROM interview WHERE person_id = 67318;`
+
+    > *I was hired by a woman with a lot of money. I don’t know her name but I know she’s around 5’5” (65”) or 5’7” (67”). She has red hair and she drives a Tesla Model S. I know that she attended the SQL Symphony Concert 3 times in December 2017.*
+
+    J’ai été engagé par une femme très riche ; je ne connais pas son nom, mais elle mesure entre 5 pieds 5 et 5 pieds 7 (65 à 67 pouces), elle est rousse, conduit une Tesla Model S et a assisté trois fois au *SQL Symphony Concert* en décembre 2017. Indices : femme (`gender`), taille de $65$ à $67$ pouces, soit environ $165$ à $170$ cm ($65 \times 2{,}54 \approx 165{,}1$ et $67 \times 2{,}54 \approx 170{,}2$) (`height`), cheveux roux (`hair_color = ’red’`), Tesla Model S (`car_make`, `car_model`), tous dans `drivers_license` ; le concert dans `facebook_event_checkin` (`event_name`, `date`) ; la fortune dans `income` (inutile pour conclure).
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Démasquer la commanditaire <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-tp-2-10 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Sans aide cette fois : retrouver la personne qui a commandité le meurtre, puis valider la réponse comme à l’exercice 8.
+
+1.  Commencer par les indices de la table `drivers_license`. Combien de permis correspondent ?
+
+2.  Vérifier ensuite la présence au concert. Comment écrire « en décembre 2017 » avec les dates entières de la base ?
+
+3.  **Défi** (proposé par le site) : n’utiliser que **deux** requêtes en tout pour cette partie, la lecture de la déposition comprise.
+
+4.  <span class="horsprog">au-delà du programme</span> Avec `GROUP BY` et `HAVING`, combien de personnes sont allées **exactement trois fois** au concert en décembre 2017 ? Pourquoi cet indice ne suffit-il pas à lui seul ?
+
+??? pouce "Coup de pouce"
+
+    Une jointure `person` – `drivers_license` (par `license_id`), puis une seconde avec `facebook_event_checkin` (par `person_id`). Les conditions sur la taille : `height >= … AND height <= …`. On lit ensuite combien de fois chaque nom apparaît.
+
+??? corrige "Corrigé"
+
+    **1.**
+
+    ```sql
+    SELECT person.id, person.name, drivers_license.height
+    FROM person
+    JOIN drivers_license ON person.license_id = drivers_license.id
+    WHERE drivers_license.gender = 'female' AND drivers_license.hair_color = 'red'
+      AND drivers_license.car_make = 'Tesla' AND drivers_license.car_model = 'Model S'
+      AND drivers_license.height >= 65 AND drivers_license.height <= 67;
+    ```
+
+    $3$ permis, donc trois personnes : Red Korb ($78881$, 65), Regina George ($90700$, 66), Miranda Priestly ($99716$, 66).
+
+    **2 et 3.** En ajoutant une jointure avec `facebook_event_checkin` et les conditions sur le concert, on obtient la **seconde** requête du défi (la première étant la lecture de la déposition) :
+
+    ```sql
+    SELECT person.name, facebook_event_checkin.date
+    FROM person
+    JOIN drivers_license ON person.license_id = drivers_license.id
+    JOIN facebook_event_checkin ON facebook_event_checkin.person_id = person.id
+    WHERE drivers_license.gender = 'female' AND drivers_license.hair_color = 'red'
+      AND drivers_license.car_make = 'Tesla' AND drivers_license.car_model = 'Model S'
+      AND drivers_license.height >= 65 AND drivers_license.height <= 67
+      AND facebook_event_checkin.event_name = 'SQL Symphony Concert'
+      AND facebook_event_checkin.date >= 20171201 AND facebook_event_checkin.date <= 20171231
+    ORDER BY facebook_event_checkin.date;
+    ```
+
+    Trois lignes, toutes pour **Miranda Priestly** (`20171206`, `20171212`, `20171229`). Validation avec `INSERT INTO solution VALUES (1, ’Miranda Priestly’);` :
+
+    > *Congrats, you found the brains behind the murder! Everyone in SQL City hails you as the greatest SQL detective of all time. Time to break out the champagne!*
+
+    (Bravo, vous avez démasqué le cerveau du crime ! Tout SQL City vous acclame comme le plus grand détective SQL de tous les temps. Sortez le champagne !) Pour la petite histoire, son revenu annuel est de $310\,000$ dollars (jointure `person` – `income` par `ssn`).
+
+    **4.** <span class="horsprog">au-delà du programme</span>
+
+    ```sql
+    SELECT person_id, COUNT(*)
+    FROM facebook_event_checkin
+    WHERE event_name = 'SQL Symphony Concert'
+      AND date >= 20171201 AND date <= 20171231
+    GROUP BY person_id
+    HAVING COUNT(*) = 3;
+    ```
+
+    Deux personnes : $24556$ et $99716$ (Miranda Priestly). La première, Bryan Pardo, n’a aucun permis enregistré (encore une clé étrangère sans correspondant) : seul le croisement avec le portrait permet de conclure. C’est l’intérêt d’un indice **recoupé**.
+
+## Partie 4 — Comment la base vérifie-t-elle la réponse ? (10 min)
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Le déclencheur caché <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-tp-2-11 }
+
+Au-delà des tables, une base peut contenir des **déclencheurs** (*triggers*) <span class="horsprog">au-delà du programme</span> : des instructions que le SGBD exécute **automatiquement** quand un événement se produit, par exemple après chaque `INSERT` dans une table.
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Afficher le déclencheur de la base :
+
+```sql
+SELECT sql
+FROM sqlite_master
+WHERE type = 'trigger';
+```
+
+1.  Après quel événement ce déclencheur s’exécute-t-il ? Quelles sont les deux instructions qu’il exécute alors ? Expliquer le mystère de l’exercice 8 (la colonne `user`).
+
+2.  La fonction `hex` écrit un texte en **hexadécimal**, un octet (deux chiffres hexadécimaux) par caractère. Pourquoi les auteurs ont-ils écrit les noms des coupables de cette façon plutôt qu’en clair ?
+
+3.  À l’aide d’une table ASCII, décoder les quatre premiers octets du premier code. Le nom est-il vraiment *secret* ? Quelle est la différence entre **coder** et **chiffrer** ?
+
+??? corrige "Corrigé"
+
+    La requête affiche (textes des messages abrégés) :
+
+    ```sql
+    CREATE TRIGGER check_solution AFTER INSERT ON solution
+        WHEN new.user==1
+        BEGIN
+            DELETE FROM solution;
+            INSERT INTO solution VALUES (0,
+            CASE WHEN hex(new.value)=='4A6572656D7920426F77657273' THEN "Congrats, you found the murderer! ..."
+                 WHEN hex(new.value)=='4D6972616E6461205072696573746C79' THEN "Congrats, you found the brains ..."
+                 ELSE "That's not the right person. Try again!"
+            END
+            );
+        END
+    ```
+
+    **1.** Il s’exécute **après chaque insertion** dans `solution` dont la colonne `user` vaut $1$. Il **vide** la table (`DELETE`), puis y **insère** une ligne dont `user` vaut $0$ et dont `value` est le message choisi selon le nom proposé (`CASE … WHEN`, au-delà du programme). D’où la ligne unique avec `user` à $0$ de l’exercice 8 ; et comme la nouvelle ligne a `user` à $0$, elle ne redéclenche pas le déclencheur.  
+    **2.** Pour ne pas gâcher l’enquête : le schéma de la base est lisible par tous (on l’a affiché dès l’exercice 1), un nom écrit en clair y serait trouvé sans aucune requête.  
+    **3.** `4A 65 72 65` donne `J e r e` ($\mathrm{4A}_{16} = 74$, code ASCII de `J`) : c’est le début de « Jeremy Bowers », et le second code donne « Miranda Priestly ». Le nom n’est **pas secret** : il est seulement **codé**, et n’importe qui peut le décoder avec une table publique. **Chiffrer**, c’est rendre le message illisible sans une **clé** secrète (chapitre *Cryptographie*). Pour vérifier une réponse sans pouvoir la retrouver, on stockerait plutôt une **empreinte** (fonction de hachage), au-delà du programme.
+
+## Bilan à rédiger
+
+En une dizaine de lignes, dans le carnet :
+
+- la liste des clauses SQL utilisées pendant l’enquête, en séparant celles du programme de celles qui vont au-delà ;
+
+- le « chemin » suivi dans le schéma pour aller du rapport de police au meurtrier, avec les clés étrangères empruntées ;
+
+- deux attributs de la base dont le **domaine** a dû être compris pour avancer (dates entières, taille en pouces, texte sensible aux majuscules…) ;
+
+- quelle requête a coûté le plus d’essais, et pourquoi.
+
+## Pour aller plus loin
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 12</span> — L’enquête rejouée en Python, sans `LIKE` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-bases-de-donnees-et-sql-tp-2-12 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span>  Dans `tp_murder_depart.py`, la fonction `afficher(requete, parametres)` accepte des requêtes **paramétrées** : chaque `?` de la requête est remplacé par une valeur du tuple `parametres`. Pour récupérer les lignes elles-mêmes, on écrit `connexion.execute(requete, parametres).fetchall()`, qui renvoie une liste de tuples.
+
+Écrire un script qui retrouve le meurtrier **sans lire aucun résultat à la main** et **sans** `LIKE` : une requête paramétrée par la date et le type d’abonnement renvoie les candidats ; une boucle ne garde que ceux dont l’identifiant d’abonnement commence par les bons caractères (avec une **tranche**) ; une seconde requête paramétrée par l’`id` de chaque candidat vérifie sa plaque. Le script affiche le nom du coupable.
+
+??? corrige "Corrigé"
+
+    Extrait de `tp_murder_corrige.py`, où `lignes(requete, parametres)` renvoie la liste des lignes du résultat :
+
+    ```python
+    requete_gold = """SELECT get_fit_now_member.id, get_fit_now_member.person_id
+    FROM get_fit_now_member
+    JOIN get_fit_now_check_in ON get_fit_now_check_in.membership_id = get_fit_now_member.id
+    WHERE get_fit_now_check_in.check_in_date = ? AND get_fit_now_member.membership_status = ?"""
+    candidats = []                                        # INITIALISER
+    for (id_membre, id_personne) in lignes(requete_gold, (20180109, "gold")):  # PARCOURIR
+        if id_membre[:3] == "48Z":                        # TESTER
+            candidats.append(id_personne)                 # METTRE A JOUR
+
+    requete_permis = """SELECT person.name, drivers_license.plate_number
+    FROM person
+    JOIN drivers_license ON person.license_id = drivers_license.id
+    WHERE person.id = ?"""
+    coupables = []                                        # INITIALISER
+    for id_personne in candidats:                         # PARCOURIR
+        for (nom, plaque) in lignes(requete_permis, (id_personne,)):
+            if "H42W" in plaque:                          # TESTER
+                coupables.append(nom)                     # METTRE A JOUR
+    print(coupables)                                      # ['Jeremy Bowers']
+    ```
+
+    La tranche `id_membre[:3]` remplace `LIKE ’48Z%’` ; `"H42W" in plaque` remplace `LIKE ’%H42W%’`. Les valeurs passent par des `?` : jamais collées dans le texte de la requête (cf. cours, injection SQL). Le candidat Joe Germuska, sans permis, ne produit aucune ligne dans la seconde boucle.

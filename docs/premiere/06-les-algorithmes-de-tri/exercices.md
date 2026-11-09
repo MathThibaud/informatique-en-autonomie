@@ -125,11 +125,11 @@ Sans machine, on trie `[7, 2, 5, 3, 8, 1]` par **sélection**. Sur le cahier, dr
 
     ```python
     def indice_min(t, debut):
-        i_min = debut
-        for j in range(debut + 1, len(t)):
-            if t[j] < t[i_min]:
-                i_min = j
-        return i_min
+        i_min = debut                       # INITIALISER : champion provisoire
+        for j in range(debut + 1, len(t)):  # PARCOURIR : la portion t[debut:]
+            if t[j] < t[i_min]:             # TESTER
+                i_min = j                   # METTRE A JOUR
+        return i_min                        # RENVOYER
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> initialiser `i_min = 0` au lieu de `debut` : la case `0`, hors de la portion étudiée, peut être renvoyée.
@@ -162,12 +162,12 @@ i_min = i
     ```python
     def tri_selection(t):
         n = len(t)
-        for i in range(n):
-            i_min = i
-            for j in range(i + 1, n):
-                if t[j] < t[i_min]:
-                    i_min = j
-            temp = t[i]
+        for i in range(n):             # PARCOURIR : chaque position i
+            i_min = i                  # INITIALISER : champion provisoire
+            for j in range(i + 1, n):  # PARCOURIR : la partie non triee
+                if t[j] < t[i_min]:    # TESTER
+                    i_min = j          # METTRE A JOUR
+            temp = t[i]                # METTRE A JOUR : echange de t[i] et t[i_min]
             t[i] = t[i_min]
             t[i_min] = temp
     ```
@@ -191,14 +191,30 @@ i_min = i
     `i_min = indice_min(t, i)`  
     `...` (échange de `t[i]` et `t[i_min]`)
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder (le tri modifie le tableau en place) :*
+
+    ```python
+    t = [5, 3, 8, 1]
+    tri_selection(t)
+    assert t == [1, 3, 5, 8]  # cas normal
+    t = []
+    tri_selection(t)
+    assert t == []            # cas limite : tableau vide
+    t = [4, 2, 4, 1]
+    tri_selection(t)
+    assert t == [1, 2, 4, 4]  # cas piege : une valeur en double
+    ```
 
     ```python
     def tri_selection(t):
         n = len(t)
-        for i in range(n):
-            i_min = indice_min(t, i)   # reutilise l'exercice precedent
-            temp = t[i]                # echange via variable temporaire
+        for i in range(n):            # PARCOURIR : chaque position i
+            i_min = indice_min(t, i)  # reutilise l'exercice precedent
+            temp = t[i]               # METTRE A JOUR : echange via variable temporaire
             t[i] = t[i_min]
             t[i_min] = temp
     ```
@@ -215,19 +231,35 @@ i_min = i
 
     Pour ranger du plus grand au plus petit, quel élément de la partie non triée faut-il amener en position `i` à chaque étape ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder (le tri modifie le tableau en place) :*
+
+    ```python
+    t = [3, 8, 1, 5]
+    tri_selection_decroissant(t)
+    assert t == [8, 5, 3, 1]  # cas normal
+    t = [7]
+    tri_selection_decroissant(t)
+    assert t == [7]           # cas limite : un seul element
+    t = [1, 2, 3]
+    tri_selection_decroissant(t)
+    assert t == [3, 2, 1]     # cas piege : deja trie, mais dans l'autre sens
+    ```
 
     On cherche le **maximum** au lieu du minimum : le seul changement est le sens de la comparaison (`>` au lieu de `<`).
 
     ```python
     def tri_selection_decroissant(t):
         n = len(t)
-        for i in range(n):
-            i_max = i
-            for j in range(i + 1, n):
-                if t[j] > t[i_max]:    # seul changement : > au lieu de <
-                    i_max = j
-            temp = t[i]
+        for i in range(n):             # PARCOURIR
+            i_max = i                  # INITIALISER
+            for j in range(i + 1, n):  # PARCOURIR
+                if t[j] > t[i_max]:    # TESTER : seul changement, > au lieu de <
+                    i_max = j          # METTRE A JOUR
+            temp = t[i]                # METTRE A JOUR : echange
             t[i] = t[i_max]
             t[i_max] = temp
     ```
@@ -342,13 +374,13 @@ def tri_insertion(t):
     ```python
     def tri_insertion(t):
         n = len(t)
-        for i in range(1, n):
-            x = t[i]
-            j = i - 1
-            while j >= 0 and t[j] > x:
-                t[j + 1] = t[j]
-                j = j - 1
-            t[j + 1] = x
+        for i in range(1, n):           # PARCOURIR
+            x = t[i]                    # INITIALISER : l'element a inserer
+            j = i - 1                   # INITIALISER
+            while j >= 0 and t[j] > x:  # PARCOURIR vers la gauche, tant que plus grand
+                t[j + 1] = t[j]         # METTRE A JOUR : decalage a droite
+                j = j - 1               # METTRE A JOUR
+            t[j + 1] = x                # METTRE A JOUR : x pose dans le trou
     ```
 
     Sur `[4, 2, 5, 1]`, on obtient `[1, 2, 4, 5]`. On pose `x` en `t[j + 1]` car la boucle s’est arrêtée sur une case `j` qui *ne doit pas* bouger (ou sur `j = -1`).
@@ -388,20 +420,36 @@ On sait que le tri est soit une sélection, soit une insertion, et qu’on trie 
     `x = t[i]`  
     `j = i - 1`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder (le tri modifie le tableau en place) :*
+
+    ```python
+    t = [5, 3, 8, 1, 9, 2]
+    tri_insertion(t)
+    assert t == [1, 2, 3, 5, 8, 9]  # cas normal
+    t = []
+    tri_insertion(t)
+    assert t == []                  # cas limite : tableau vide
+    t = [9, 7, 5, 3]
+    tri_insertion(t)
+    assert t == [3, 5, 7, 9]        # cas piege : chaque x recule jusqu'a la case 0
+    ```
 
     Pour chaque `i` à partir de `1` : on met `t[i]` de côté dans `x`, on décale vers la droite les éléments plus grands que `x`, puis on pose `x` dans le trou laissé.
 
     ```python
     def tri_insertion(t):
         n = len(t)
-        for i in range(1, n):
-            x = t[i]
-            j = i - 1
-            while j >= 0 and t[j] > x:
-                t[j + 1] = t[j]
-                j = j - 1
-            t[j + 1] = x
+        for i in range(1, n):           # PARCOURIR
+            x = t[i]                    # INITIALISER : l'element a inserer
+            j = i - 1                   # INITIALISER
+            while j >= 0 and t[j] > x:  # PARCOURIR vers la gauche, tant que plus grand
+                t[j + 1] = t[j]         # METTRE A JOUR : decalage a droite
+                j = j - 1               # METTRE A JOUR
+            t[j + 1] = x                # METTRE A JOUR : x pose dans le trou
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Compter les décalages <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-06-10 }
@@ -412,27 +460,37 @@ Modifier `tri_insertion` en `tri_insertion_compte(t)` qui renvoie le **nombre to
 
     Un compteur initialisé à `0` avant les boucles ; où se trouve, dans le code, l’instruction qui réalise un décalage ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 1.  Combien de décalages sur `[1, 2, 3, 4, 5]` (déjà trié) ?
 
 2.  Combien sur `[5, 4, 3, 2, 1]` (trié à l’envers) ? Que remarque-t-on ?
 
 ??? corrige "Corrigé"
 
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert tri_insertion_compte([4, 1, 3, 2]) == 4  # cas normal
+    assert tri_insertion_compte([1, 2, 3]) == 0     # cas limite : deja trie
+    assert tri_insertion_compte([2, 2, 1]) == 2     # cas piege : 2 egal a 2 ne se decale pas
+    ```
+
     On ajoute un compteur incrémenté à chaque décalage.
 
     ```python
     def tri_insertion_compte(t):
         n = len(t)
-        nb = 0
-        for i in range(1, n):
-            x = t[i]
-            j = i - 1
-            while j >= 0 and t[j] > x:
-                t[j + 1] = t[j]
-                nb = nb + 1
-                j = j - 1
-            t[j + 1] = x
-        return nb
+        nb = 0                          # INITIALISER : compteur de decalages
+        for i in range(1, n):           # PARCOURIR
+            x = t[i]                    # INITIALISER
+            j = i - 1                   # INITIALISER
+            while j >= 0 and t[j] > x:  # PARCOURIR vers la gauche
+                t[j + 1] = t[j]         # METTRE A JOUR : decalage
+                nb = nb + 1             # METTRE A JOUR : on le compte
+                j = j - 1               # METTRE A JOUR
+            t[j + 1] = x                # METTRE A JOUR
+        return nb                       # RENVOYER
     ```
 
     **1.** Sur `[1, 2, 3, 4, 5]` : **0** décalage — la condition `t[j] > x` est fausse d’emblée à chaque étape. C’est le *meilleur cas*, coût linéaire.  
@@ -476,22 +534,32 @@ Pour chacune des affirmations, répondre par vrai ou faux et justifier.
 
         Repartir du tri par sélection du cours, où la recherche du minimum est écrite en entier : la comparaison à compter y apparaît une seule fois. Un compteur augmenté de 1 à chaque fois qu’elle est évaluée suffit.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert nb_comparaisons_selection([5, 3, 8, 1, 9]) == 10  # cas normal
+    assert nb_comparaisons_selection([7]) == 0               # cas limite : un seul element
+    assert nb_comparaisons_selection([1, 2, 3, 4, 5]) == 10  # cas piege : deja trie, autant
+    ```
 
     ```python
     def nb_comparaisons_selection(t):
         n = len(t)
-        c = 0
-        for i in range(n):
-            i_min = i
-            for j in range(i + 1, n):
-                c = c + 1              # une comparaison t[j] < t[i_min]
-                if t[j] < t[i_min]:
-                    i_min = j
-            temp = t[i]
+        c = 0                          # INITIALISER : compteur
+        for i in range(n):             # PARCOURIR
+            i_min = i                  # INITIALISER
+            for j in range(i + 1, n):  # PARCOURIR
+                c = c + 1              # METTRE A JOUR : une comparaison t[j] < t[i_min]
+                if t[j] < t[i_min]:    # TESTER
+                    i_min = j          # METTRE A JOUR
+            temp = t[i]                # METTRE A JOUR : echange
             t[i] = t[i_min]
             t[i_min] = temp
-        return c
+        return c                       # RENVOYER
     ```
 
     **1.** Pour $n = 5$ : $\frac{5 \times 4}{2} = 10$ comparaisons. Pour $n = 10$ : $\frac{10 \times 9}{2} = 45$.  
@@ -507,14 +575,24 @@ Pour chacune des affirmations, répondre par vrai ou faux et justifier.
 
     Comparer chaque élément à son voisin de droite : quel est le dernier indice `i` pour lequel `t[i + 1]` existe ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert est_trie([2, 5, 9]) == True  # cas normal
+    assert est_trie([]) == True         # cas limite : tableau vide
+    assert est_trie([4, 4, 6]) == True  # cas piege : deux egaux, pas une descente
+    ```
 
     ```python
     def est_trie(t):
-        for i in range(len(t) - 1):
-            if t[i] > t[i + 1]:   # une descente : pas trie
-                return False
-        return True
+        for i in range(len(t) - 1):  # PARCOURIR : jusqu'a l'avant-derniere case
+            if t[i] > t[i + 1]:      # TESTER : une descente, pas trie
+                return False         # RENVOYER
+        return True                  # RENVOYER : aucune descente
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> écrire `range(len(t))` : au dernier tour, `t[i + 1]` n’existe pas et Python lève une `IndexError`.
@@ -554,15 +632,31 @@ Le **tri à bulles** compare les éléments *voisins* et les échange s’ils so
 
         À quel moment remettre `echange` à `False` ? À quel moment la passer à `True` ? Où la tester ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus pour `tri_bulle`, écrits avant de coder :*
+
+    ```python
+    t = [5, 3, 8, 1, 9, 2]
+    tri_bulle(t)
+    assert t == [1, 2, 3, 5, 8, 9]  # cas normal
+    t = [7]
+    tri_bulle(t)
+    assert t == [7]                 # cas limite : un seul element
+    t = [9, 7, 5, 3]
+    tri_bulle(t)
+    assert t == [3, 5, 7, 9]        # cas piege : trie a l'envers
+    ```
 
     **1.** Un passage compare chaque couple de voisins et les remet en ordre :
 
     ```python
     def un_passage(t):
-        for j in range(len(t) - 1):
-            if t[j] > t[j + 1]:
-                temp = t[j]                 # echange via variable temporaire
+        for j in range(len(t) - 1):  # PARCOURIR : les couples de voisins
+            if t[j] > t[j + 1]:      # TESTER
+                temp = t[j]          # METTRE A JOUR : echange via variable temporaire
                 t[j] = t[j + 1]
                 t[j + 1] = temp
     ```
@@ -576,10 +670,10 @@ Le **tri à bulles** compare les éléments *voisins* et les échange s’ils so
     ```python
     def tri_bulle(t):
         n = len(t)
-        for i in range(n - 1):
-            for j in range(n - 1 - i):   # la fin, deja triee, est ignoree
-                if t[j] > t[j + 1]:
-                    temp = t[j]
+        for i in range(n - 1):          # PARCOURIR : n - 1 passages
+            for j in range(n - 1 - i):  # PARCOURIR : la fin, deja triee, est ignoree
+                if t[j] > t[j + 1]:     # TESTER
+                    temp = t[j]         # METTRE A JOUR : echange
                     t[j] = t[j + 1]
                     t[j + 1] = temp
     ```
@@ -589,15 +683,15 @@ Le **tri à bulles** compare les éléments *voisins* et les échange s’ils so
     ```python
     def tri_bulle_optimise(t):
         n = len(t)
-        for i in range(n - 1):
-            echange = False
-            for j in range(n - 1 - i):
-                if t[j] > t[j + 1]:
-                    temp = t[j]
+        for i in range(n - 1):          # PARCOURIR
+            echange = False             # INITIALISER : aucun echange pour l'instant
+            for j in range(n - 1 - i):  # PARCOURIR
+                if t[j] > t[j + 1]:     # TESTER
+                    temp = t[j]         # METTRE A JOUR : echange
                     t[j] = t[j + 1]
                     t[j + 1] = temp
-                    echange = True
-            if not echange:      # aucun echange : c'est deja trie
+                    echange = True      # METTRE A JOUR
+            if not echange:             # TESTER : aucun echange, c'est deja trie
                 return
     ```
 
@@ -626,22 +720,33 @@ Chaque concurrent est décrit par un p-uplet `(nom, temps)` et le tableau `resul
 [('Bob', 47), ('Ana', 53), ('Cid', 61)]
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus pour `classer`, écrits avant de coder :*
+
+    ```python
+    r = [("Ana", 53), ("Bob", 47), ("Cid", 61)]
+    assert classer(r) == [("Bob", 47), ("Ana", 53), ("Cid", 61)]              # cas normal
+    assert classer([]) == []                                                  # cas limite : aucun concurrent
+    assert classer([("Ana", 50), ("Zoe", 47)]) == [("Zoe", 47), ("Ana", 50)]  # cas piege : par temps, pas par nom
+    ```
 
     **1.** On reprend le tri par sélection en comparant les **temps**, c’est-à-dire le second élément `resultats[j][1]` de chaque p-uplet :
 
     ```python
     def classer(resultats):
         n = len(resultats)
-        for i in range(n):
-            i_min = i
-            for j in range(i + 1, n):
-                if resultats[j][1] < resultats[i_min][1]:
-                    i_min = j
-            temp = resultats[i]
+        for i in range(n):                                 # PARCOURIR
+            i_min = i                                      # INITIALISER
+            for j in range(i + 1, n):                      # PARCOURIR
+                if resultats[j][1] < resultats[i_min][1]:  # TESTER : on compare les temps
+                    i_min = j                              # METTRE A JOUR
+            temp = resultats[i]                            # METTRE A JOUR : echange
             resultats[i] = resultats[i_min]
             resultats[i_min] = temp
-        return resultats
+        return resultats                                   # RENVOYER
     ```
 
     **2.** Une fois le tableau classé, les trois plus rapides occupent les cases 0, 1 et 2 ; on garde le **nom** (indice 0) de chacun, en construisant la liste par compréhension :
@@ -662,7 +767,18 @@ Chaque concurrent est décrit par un p-uplet `(nom, temps)` et le tableau `resul
 
     Dans un tableau trié de taille impaire, à quel indice se trouve l’élément central ? Essayer avec 3, puis 5 éléments, et relier cet indice à `len(t)`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert mediane([7, 2, 9, 4, 5]) == 5       # cas normal
+    assert mediane([8]) == 8                   # cas limite : un seul element
+    t = [9, 1, 5]
+    assert mediane(t) == 5 and t == [9, 1, 5]  # cas piege : t ne doit pas etre modifie
+    ```
 
     On trie une **copie** (pour ne pas modifier l’original) et on lit l’élément central.
 
@@ -694,18 +810,28 @@ Chaque concurrent est décrit par un p-uplet `(nom, temps)` et le tableau `resul
     `for i in range(len(copie) - 1):`  
     `...`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert a_un_doublon([4, 2, 7]) == False  # cas normal
+    assert a_un_doublon([]) == False         # cas limite : tableau vide
+    assert a_un_doublon([5, 1, 5]) == True   # cas piege : doublons non voisins au depart
+    ```
 
     Après tri, deux valeurs égales sont forcément **voisines** : un seul parcours suffit à les repérer.
 
     ```python
     def a_un_doublon(t):
         copie = [x for x in t]
-        tri_selection(copie)          # cout quadratique
-        for i in range(len(copie) - 1):
-            if copie[i] == copie[i + 1]:
-                return True
-        return False                  # aucun voisin egal
+        tri_selection(copie)              # cout quadratique
+        for i in range(len(copie) - 1):   # PARCOURIR : les voisins
+            if copie[i] == copie[i + 1]:  # TESTER
+                return True               # RENVOYER
+        return False                      # RENVOYER : aucun voisin egal
     ```
 
     Une fois le tri effectué, le parcours de comparaison des voisins est **linéaire**. Le coût total est donc dominé par le tri : quadratique.
@@ -759,19 +885,29 @@ On dit qu’un tableau est *presque trié* si chaque élément est à au plus un
     `i_min = indice_min(copie, i)`  
     `...` (échange) puis renvoyer `copie[0:k]`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert k_plus_petits([53, 47, 61, 50, 49, 58], 3) == [47, 49, 50]  # cas normal
+    assert k_plus_petits([4, 1], 0) == []                              # cas limite : k = 0
+    assert k_plus_petits([5, 1, 5, 3], 3) == [1, 3, 5]                 # cas piege : une valeur en double
+    ```
 
     **1.** D’après l’invariant du tri par sélection, après `k` étapes les `k` premières cases contiennent les `k` plus petits éléments, triés et à leur place définitive : on peut s’arrêter là.
 
     ```python
     def k_plus_petits(t, k):
-        copie = [x for x in t]          # on ne modifie pas t
-        for i in range(k):              # k etapes seulement
+        copie = [x for x in t]  # INITIALISER : on ne modifie pas t
+        for i in range(k):      # PARCOURIR : k etapes seulement
             i_min = indice_min(copie, i)
-            temp = copie[i]
+            temp = copie[i]     # METTRE A JOUR : echange
             copie[i] = copie[i_min]
             copie[i_min] = temp
-        return copie[0:k]
+        return copie[0:k]       # RENVOYER
     ```
 
     **2.** Les trois étapes font $99 + 98 + 97 = 294$ comparaisons, contre $\frac{100 \times 99}{2} = 4\,950$ pour un tri complet : environ 17 fois moins. Le coût est de l’ordre de $k \times n$ : **linéaire** en $n$ quand $k$ est fixé.
@@ -803,19 +939,35 @@ On veut ranger des mots du plus court au plus long, **sans** changer l’ordre d
 
     Question 3 : essayer la sélection sur `["abc", "xyz", "a"]`, étape par étape.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder (le tri modifie le tableau en place) :*
+
+    ```python
+    mots = ["pomme", "kiwi", "figue", "noix", "ananas"]
+    tri_longueur(mots)
+    assert mots == ["kiwi", "noix", "pomme", "figue", "ananas"]  # cas normal
+    mots = []
+    tri_longueur(mots)
+    assert mots == []                                            # cas limite : aucun mot
+    mots = ["cc", "a", "bb"]
+    tri_longueur(mots)
+    assert mots == ["a", "cc", "bb"]                             # cas piege : ex aequo, ordre de depart garde
+    ```
 
     **1.** Seule la comparaison change : on compare les longueurs.
 
     ```python
     def tri_longueur(mots):
-        for i in range(1, len(mots)):
-            x = mots[i]
-            j = i - 1
-            while j >= 0 and len(mots[j]) > len(x):
-                mots[j + 1] = mots[j]
-                j = j - 1
-            mots[j + 1] = x
+        for i in range(1, len(mots)):                # PARCOURIR
+            x = mots[i]                              # INITIALISER
+            j = i - 1                                # INITIALISER
+            while j >= 0 and len(mots[j]) > len(x):  # PARCOURIR vers la gauche
+                mots[j + 1] = mots[j]                # METTRE A JOUR : decalage
+                j = j - 1                            # METTRE A JOUR
+            mots[j + 1] = x                          # METTRE A JOUR
     ```
 
     **2.** Avec `>=`, un mot recule aussi derrière les mots de **même** longueur : `"noix"` passe devant `"kiwi"`, `"figue"` devant `"pomme"`. On obtient `[’noix’, ’kiwi’, ’figue’, ’pomme’, ’ananas’]` : trié par longueur, mais l’ordre de départ des ex æquo est inversé. Avec `>` strict, on s’arrête dès qu’on rencontre un mot de même longueur : l’ordre de départ est conservé (on dit que le tri est *stable*).  

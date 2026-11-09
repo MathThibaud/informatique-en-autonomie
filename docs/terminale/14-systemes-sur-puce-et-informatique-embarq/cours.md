@@ -144,6 +144,12 @@ while True:                          # boucle sans fin
     attendre(0.1)                    # contrainte TEMPS REEL : reagir vite
 ```
 
+<span class="routine">▷ Je prédis.</span> Que fait la voiture pendant un tour de boucle où la vitesse lue vaut exactement `consigne` ?
+
+??? verifie "Je vérifie"
+
+    Rien : ni le `if` ni le `elif` ne s’applique, aucun actionneur n’est commandé ; le programme attend $0{,}1$ s, puis relit le capteur.
+
 ![](../figures/2ff6a8f256bc6519.svg){ .tikz loading=lazy }
 
 !!! regle "Règle 2 — Les trois caractéristiques d’un système embarqué"

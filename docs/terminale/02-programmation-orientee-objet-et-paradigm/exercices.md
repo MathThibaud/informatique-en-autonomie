@@ -78,7 +78,18 @@ def double_tout(tab):
 [1, 2, 3]
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert double_tout_pur([1, 2, 3]) == [2, 4, 6]          # cas normal
+    assert double_tout_pur([]) == []                        # cas limite : liste vide
+    t = [5, -1]
+    assert double_tout_pur(t) == [10, -2] and t == [5, -1]  # cas piege : t intact
+    ```
 
     On **construit une nouvelle liste** au lieu de modifier l’ancienne : on parcourt `tab` et on garde le double de chaque élément.
 
@@ -91,10 +102,10 @@ def double_tout(tab):
 
     ```python
     def double_tout_pur(tab):
-        resultat = []
-        for x in tab:
-            resultat.append(x * 2)
-        return resultat
+        resultat = []                 # INITIALISER : une nouvelle liste
+        for x in tab:                 # PARCOURIR
+            resultat.append(x * 2)    # METTRE A JOUR
+        return resultat               # RENVOYER
     ```
 
     La liste d’origine `t` reste bien `[1, 2, 3]`.
@@ -118,6 +129,8 @@ def plus_un(x):
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction **pure** `appliquer(f, tab)` qui renvoie la **nouvelle** liste des `f(x)` pour `x` dans `tab`. Exemple : `appliquer(abs, [-2, 3, -5])` renvoie `[2, 3, 5]`, et la liste passée en paramètre est inchangée.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction pure `garder(test, tab)` qui renvoie la liste des éléments `x` de `tab` pour lesquels `test(x)` vaut `True`. Exemple : `garder(est_pair, [1, 2, 3, 4])` renvoie `[2, 4]`.
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `composer(f, g)` qui **renvoie une fonction** `h` telle que `h(x)` vaut `f(g(x))`. Exemple : `composer(double, plus_un)(3)` renvoie `8`. Que renvoie `composer(plus_un, double)(3)` ?
@@ -136,6 +149,15 @@ def plus_un(x):
 4.  Sans définir de fonction, quelle construction vue en Première donne directement le résultat de `appliquer(abs, [-2, 3, -5])` ? et celui de `garder(est_pair, [1, 2, 3, 4])` ?
 
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert appliquer(abs, [-2, 3, -5]) == [2, 3, 5]         # cas normal
+    assert appliquer(double, []) == []                      # cas limite : liste vide
+    t = [1, 2]
+    assert appliquer(plus_un, t) == [2, 3] and t == [1, 2]  # cas piege : tab intact
+    ```
 
     Les paramètres `f` et `test` sont des **fonctions** : on les appelle comme les autres. On construit toujours une **nouvelle** liste, donc `tab` n’est jamais modifié : les fonctions sont pures. Une création de liste par compréhension convient parfaitement : on transforme chaque élément (`appliquer`), ou on ne garde que ceux qui passent le test (`garder`).
 
@@ -347,7 +369,23 @@ Exemple d’utilisation :
 14.0
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    e = Eleve("Zoe", "TG1")
+    e.ajouter_note(12)
+    e.ajouter_note(16)
+    assert e.moyenne() == 14.0      # cas normal
+    e2 = Eleve("Lou", "TG2")
+    e2.ajouter_note(9)
+    assert e2.moyenne() == 9        # cas limite : une seule note
+    e2.ajouter_note(10)
+    assert e2.moyenne() == 9.5      # cas piege : division decimale, pas //
+    ```
 
     **Démarche :** chaque méthode reçoit `self` en premier paramètre et agit sur l’attribut `self.notes` : `ajouter_note` le modifie (`append`), `moyenne` le parcourt avec un accumulateur, puis divise par le nombre de notes.
 
@@ -362,10 +400,10 @@ Exemple d’utilisation :
             self.notes.append(note)
 
         def moyenne(self):
-            total = 0
-            for note in self.notes:
-                total += note
-            return total / len(self.notes)
+            total = 0                           # INITIALISER
+            for note in self.notes:             # PARCOURIR
+                total += note                   # METTRE A JOUR
+            return total / len(self.notes)      # RENVOYER
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `notes.append(note)` sans `self.` : dans la méthode, `notes` n’est pas une variable, Python lève `NameError`. L’attribut de l’objet s’écrit toujours `self.notes`.
@@ -400,7 +438,17 @@ Exemple :
 False
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert Rectangle(4, 3).aire() == 12        # cas normal
+    assert Rectangle(5, 5).est_carre()         # cas limite : largeur egale a hauteur
+    assert Rectangle(4, 3).perimetre() == 14   # cas piege : 2 * (4 + 3), pas 4 + 3
+    ```
 
     **Démarche :** le constructeur range les deux dimensions dans des attributs ; chaque méthode ne fait qu’un calcul sur `self.largeur` et `self.hauteur` ; `est_carre` renvoie directement le résultat de la comparaison.
 
@@ -440,7 +488,23 @@ Exemple : après $75$ appels à `tic`, `affichage()` renvoie `"01:15"`.
 
     Le nombre de minutes et le nombre de secondes restantes s’obtiennent par division entière (`//`) et reste (`%`) de `self.secondes` par `60`. `f"{m:02d}"` affiche un entier sur deux chiffres.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    c = Chronometre()
+    for i in range(75):
+        c.tic()
+    assert c.affichage() == "01:15"     # cas normal
+    c.reset()
+    assert c.affichage() == "00:00"     # cas limite : compteur a zero
+    for i in range(60):
+        c.tic()
+    assert c.affichage() == "01:00"     # cas piege : 60 s font 1 min, pas "00:60"
+    ```
 
     Le format `"mm:ss"` s’obtient avec la division entière (`//` pour les minutes) et le reste (`%` pour les secondes).
 
@@ -491,11 +555,22 @@ print(c.solde)
 
     Que peut encore garantir la classe si n’importe qui écrit dans ses attributs ? Pour `retirer` : comparer le montant à `self._solde` **avant** de modifier quoi que ce soit.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **1.** En écrivant directement `c.solde = c.solde - 500`, on *court-circuite* la classe : aucun contrôle n’est fait, et le solde peut devenir absurde (négatif). L’objet n’a plus la garantie de rester dans un état correct.
 
-    **2.** **Démarche :** le solde devient un attribut « interne » (`_solde`) ; on n’y accède plus que par les méthodes de l’interface. `retirer` **teste d’abord** le montant, et ne modifie l’état que si le retrait est accepté.
+    **2.** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    c = Compte(100)
+    assert c.retirer(30) and c.solde() == 70        # cas normal
+    assert c.retirer(70) and c.solde() == 0         # cas limite : tout retirer
+    assert not c.retirer(-50) and c.solde() == 0    # cas piege : montant negatif refuse
+    ```
+
+    **Démarche :** le solde devient un attribut « interne » (`_solde`) ; on n’y accède plus que par les méthodes de l’interface. `retirer` **teste d’abord** le montant, et ne modifie l’état que si le retrait est accepté.
 
     ```python
     class Compte:
@@ -551,17 +626,28 @@ Exemple :
 1/2
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert repr(Fraction(6, 8)) == "3/4"     # cas normal
+    assert repr(Fraction(0, 5)) == "0/1"     # cas limite : numerateur nul
+    f = Fraction(3, 4)
+    assert repr(f.fois(Fraction(2, 3))) == "1/2" and repr(f) == "3/4"   # cas piege : f intacte
+    ```
 
     On simplifie **dans le constructeur** en divisant par le PGCD. On définit `__repr__` (et non `__str__`) : ainsi la fraction s’affiche proprement en tapant simplement son nom dans la console — et `print` en bénéficie aussi par ricochet. La méthode `fois` construit et **renvoie** une nouvelle `Fraction` (elle ne modifie rien : c’est l’esprit fonctionnel).
 
     ```python
     def pgcd(a, b):
         while b != 0:
-            r = a % b       # variable temporaire : on garde le reste
+            r = a % b       # METTRE A JOUR : on garde le reste
             a = b
             b = r
-        return a
+        return a            # RENVOYER
 
     class Fraction:
         def __init__(self, num, den):
@@ -615,7 +701,21 @@ Exemple :
 (['Chloé'], ['Dan'])
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    a, b = Personne("Ada"), Personne("Bob")
+    a.ajouter_ami(b)
+    assert a.noms_amis() == ["Bob"] and b.noms_amis() == ["Ada"]   # cas normal
+    a.ajouter_ami(a)
+    assert a.noms_amis() == ["Bob"]       # cas limite : pas son propre ami
+    b.ajouter_ami(a)
+    assert b.noms_amis() == ["Ada"]       # cas piege : deja amis, pas de doublon
+    ```
 
     L’attribut `amis` contient des **objets** : un objet en connaît d’autres, et ils **interagissent** (une méthode de `a` modifie aussi l’état de `autre`).
 
@@ -638,13 +738,13 @@ Exemple :
             return [p.nom for p in self.amis if p in autre.amis]
 
         def amis_d_amis(self):
-            resultat = []
-            for ami in self.amis:
-                for p in ami.amis:
-                    if p is not self and p not in self.amis:
-                        if p.nom not in resultat:     # pas de doublon
-                            resultat.append(p.nom)
-            return resultat
+            resultat = []                                     # INITIALISER
+            for ami in self.amis:                             # PARCOURIR
+                for p in ami.amis:                            # PARCOURIR
+                    if p is not self and p not in self.amis:  # TESTER
+                        if p.nom not in resultat:             # TESTER : pas de doublon
+                            resultat.append(p.nom)            # METTRE A JOUR
+            return resultat                                   # RENVOYER
     ```
 
     Sur l’exemple : `a.amis_d_amis()` renvoie `[’Dan’]` (ami de Chloé) ; Bob, déjà ami d’Ada, n’est pas proposé.
@@ -690,6 +790,8 @@ Pour chacune des situations suivantes, indiquer le paradigme *a priori* le plus 
     ??? pouce "Coup de pouce"
 
         Une cascade `if` / `elif` / `else` sur `self.denivele`, en partant du seuil le plus élevé : chaque test n’a alors besoin que d’une seule comparaison.
+
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
 
 3.  On exécute `lievre_blanc.get_pistes()`. Parmi les propositions, indiquer le **type** de l’élément renvoyé : *(A)* une chaîne ; *(B)* un objet `Piste` ; *(C)* une liste de chaînes ; *(D)* une liste d’objets `Piste`.
 
@@ -746,7 +848,18 @@ for piste in lievre_blanc.get_pistes():
 
     1.  Attributs de `Piste` : `nom` (`str`), `denivele` (`int`), `longueur` (`float`), `couleur` (`str`), `ouverte` (`bool`).
 
-    2.  **Démarche :** une cascade `if` / `elif` / `else`, en partant du seuil le plus élevé : le premier test vrai l’emporte.
+    2.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        p, q, r = Piste('A', 55, 1.0), Piste('B', 100, 1.0), Piste('C', 120, 1.0)
+        for piste in [p, q, r]:
+            piste.set_couleur()
+        assert p.couleur == 'bleue'     # cas normal
+        assert q.couleur == 'noire'     # cas limite : 100 pile, le seuil est inclus
+        assert r.couleur == 'noire'     # cas piege : 120 >= 40 aussi, l'ordre des tests compte
+        ```
+
+        **Démarche :** une cascade `if` / `elif` / `else`, en partant du seuil le plus élevé : le premier test vrai l’emporte.
 
         ```python
         def set_couleur(self):
@@ -767,9 +880,9 @@ for piste in lievre_blanc.get_pistes():
     4.  **Démarche :** on parcourt la liste d’objets `Piste` renvoyée par `get_pistes()` et on modifie l’attribut `ouverte` de chaque piste verte.
 
         ```python
-        for piste in lievre_blanc.get_pistes():
-            if piste.get_couleur() == 'verte':
-                piste.ouverte = False
+        for piste in lievre_blanc.get_pistes():     # PARCOURIR
+            if piste.get_couleur() == 'verte':      # TESTER
+                piste.ouverte = False               # METTRE A JOUR
         ```
 
         *(`set_couleur` a été appelée sur chaque piste à la fin de l’annexe : ici, `Les Marmottes` et `Le Jardin` sont fermées.)*
@@ -787,11 +900,11 @@ for piste in lievre_blanc.get_pistes():
 
         ```python
         def pistes_de_couleur(lst, couleur):
-            noms = []
-            for piste in lst:
-                if piste.get_couleur() == couleur:
-                    noms.append(piste.get_nom())
-            return noms
+            noms = []                               # INITIALISER
+            for piste in lst:                       # PARCOURIR
+                if piste.get_couleur() == couleur:  # TESTER
+                    noms.append(piste.get_nom())    # METTRE A JOUR
+            return noms                             # RENVOYER
         ```
 
         Par exemple `pistes_de_couleur(lievre_blanc.get_pistes(), ’noire’)` renvoie `[’Petit Bonheur’, ’Foret’, ’Duvallon’]`.
@@ -832,6 +945,8 @@ class Aliment:
 
         C’est une recherche de maximum (Première) : parcourir les clés du dictionnaire en mémorisant le nom du « champion » et comparer les attributs `energie` des objets associés.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **Barème indicatif** (sur 3) : Q1 : 0,25 ; Q2 : 0,25 ; Q3 : 0,25 ; Q4 : 0,75 ; Q5 : 0,5 ; Q6 : 1
@@ -853,15 +968,24 @@ class Aliment:
 
     5.  `aliments[’pain’].energie_reelle(220)`.
 
-    6.  **Démarche :** une recherche de maximum : on parcourt les clés du dictionnaire en mémorisant le nom du « champion », et l’on compare les attributs `energie` des objets associés.
+    6.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        lait, pain = Aliment(65.1, 3.32, 4.85, 3.63), Aliment(285, 9, 55, 1.4)
+        assert plus_calorique({'lait': lait, 'pain': pain}) == 'pain'   # cas normal
+        assert plus_calorique({'lait': lait}) == 'lait'                 # cas limite : un seul aliment
+        assert plus_calorique({'pain': pain, 'lait': lait}) == 'pain'   # cas piege : champion en tete
+        ```
+
+        **Démarche :** une recherche de maximum : on parcourt les clés du dictionnaire en mémorisant le nom du « champion », et l’on compare les attributs `energie` des objets associés.
 
         ```python
         def plus_calorique(aliments):
-            nom_max = None
-            for nom in aliments:
+            nom_max = None                          # INITIALISER : pas encore de champion
+            for nom in aliments:                    # PARCOURIR
                 if nom_max is None or aliments[nom].energie > aliments[nom_max].energie:
-                    nom_max = nom
-            return nom_max
+                    nom_max = nom                   # METTRE A JOUR
+            return nom_max                          # RENVOYER
         ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — La classe Date (d’après Asie 2025, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-02-18 }
@@ -900,6 +1024,8 @@ class Date:
 
         Additionner `nb_jours_par_mois[i]` pour les mois **précédant** `self.mois` (le mois de janvier a l’indice `0`), ajouter `self.jour`, puis `1` si l’année est bissextile **et** que la date est après février.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 6.  <span class="run" title="À programmer et tester sur machine">▶</span> En déduire la méthode `nb_jours_restants(self)` qui renvoie le nombre de jours restant jusqu’à la fin de l’année, **sans compter** le jour de la date (le 31 décembre, il en reste 0). *(Une année compte 365 jours, ou 366 si elle est bissextile.)*
 
 ??? corrige "Corrigé"
@@ -922,16 +1048,24 @@ class Date:
 
         *Ainsi 2024 et 2000 sont bissextiles, mais 1900 ne l’est pas.*
 
-    5.  **Démarche :** un accumulateur initialisé au jour de la date, auquel on ajoute les jours des mois **précédents** (indices `0` à `self.mois - 2`), puis $1$ si l’année est bissextile et que la date est après février.
+    5.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert Date(19, 6, 2023).nb_jours_passes() == 170   # cas normal
+        assert Date(1, 1, 2024).nb_jours_passes() == 1      # cas limite : 1er janvier
+        assert Date(1, 3, 2024).nb_jours_passes() == 61     # cas piege : le 29 fevrier compte
+        ```
+
+        **Démarche :** un accumulateur initialisé au jour de la date, auquel on ajoute les jours des mois **précédents** (indices `0` à `self.mois - 2`), puis $1$ si l’année est bissextile et que la date est après février.
 
         ```python
         def nb_jours_passes(self):
-            total = self.jour
-            for m in range(self.mois - 1):          # mois complets precedents
-                total = total + self.nb_jours_par_mois[m]
-            if self.mois > 2 and self.est_bissextile():
-                total = total + 1                   # 29 fevrier
-            return total
+            total = self.jour                               # INITIALISER
+            for m in range(self.mois - 1):                  # PARCOURIR : mois precedents
+                total = total + self.nb_jours_par_mois[m]   # METTRE A JOUR
+            if self.mois > 2 and self.est_bissextile():     # TESTER
+                total = total + 1                           # METTRE A JOUR : 29 fevrier
+            return total                                    # RENVOYER
         ```
 
     6.  **Démarche :** on réutilise `est_bissextile` pour connaître le nombre de jours de l’année, puis on retranche `nb_jours_passes()`.
@@ -975,6 +1109,8 @@ class Region:
 
           Chaque méthode tient en une ligne. Que vaut `couleur_attribuee` tant qu’aucune couleur n’a été choisie ?
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **Barème indicatif** (sur 2) : Q1 : 0,5 ; Q2 : 0,25 ; Q3 : 1,25
@@ -983,7 +1119,16 @@ class Region:
 
     2.  `ge = Region("Grand Est")`.
 
-    3.  **Démarche :** chaque méthode lit un attribut de `self` : le premier élément de la liste, sa longueur, ou le test « une couleur a-t-elle été attribuée ? ».
+    3.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        ge = Region("Grand Est")
+        assert ge.renvoie_premiere_couleur_disponible() == 'rouge'   # cas normal
+        assert ge.renvoie_nb_voisines() == 0          # cas limite : aucune voisine
+        assert not ge.est_coloriee()                  # cas piege : None, pas encore de couleur
+        ```
+
+        **Démarche :** chaque méthode lit un attribut de `self` : le premier élément de la liste, sa longueur, ou le test « une couleur a-t-elle été attribuée ? ».
 
         ```python
         def renvoie_premiere_couleur_disponible(self):
@@ -1109,6 +1254,8 @@ def chargement_glouton(liste, rang, capacite):
         `charge = 0`  
         `for c in liste:`
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **Barème indicatif** (sur 8) : Q1 : 0,5 ; Q2 : 0,75 ; Q3 : 0,5 ; Q4 : 0,5 ; Q5 : 1 ; Q6 : 0,75 ; Q7 : 0,5 ; Q8 : 1,25 ; Q9 : 0,75 ; Q10 : 1,5
@@ -1154,28 +1301,37 @@ def chargement_glouton(liste, rang, capacite):
 
         ```python
         def chargement_glouton(liste, rang, capacite):
-            if rang == len(liste):
+            if rang == len(liste):                                          # CAS DE BASE : plus de colis
                 return []
-            elif liste[rang].poids <= capacite:
-                return [liste[rang]] + chargement_glouton(liste, rang + 1,
+            elif liste[rang].poids <= capacite:                             # TESTER : le colis tient
+                return [liste[rang]] + chargement_glouton(liste, rang + 1,  # COMBINER
                                                           capacite - liste[rang].poids)
             else:
-                return chargement_glouton(liste, rang + 1, capacite)
+                return chargement_glouton(liste, rang + 1, capacite)        # APPEL RECURSIF
         ```
 
     9.  Chaque appel récursif augmente `rang` de 1 : pour une liste de $n$ colis, il y a $n + 1$ appels imbriqués. Python limite la profondeur de la pile d’appels (environ 1000 par défaut) : avec une liste de plusieurs milliers de colis, la limite est dépassée et Python lève `RecursionError`.
 
-    10. **Démarche :** on parcourt les colis dans l’ordre en tenant à jour la charge du camion ; on garde un colis seulement s’il tient encore.
+    10. *Appels attendus, écrits avant de coder :*
+
+        ```python
+        c1, c2, c3 = Colis('A', 10, ''), Colis('B', 6, ''), Colis('C', 3, '')
+        assert chargement_glouton2([c1, c2, c3], 14) == [c1, c3]       # cas normal : B ne tient plus
+        assert chargement_glouton2([], 20) == []                       # cas limite : aucun colis
+        assert chargement_glouton2([c1, c2, c3], 19) == [c1, c2, c3]   # cas piege : charge = capacite
+        ```
+
+        **Démarche :** on parcourt les colis dans l’ordre en tenant à jour la charge du camion ; on garde un colis seulement s’il tient encore.
 
         ```python
         def chargement_glouton2(liste, capacite):
-            colis_a_charger = []
-            charge = 0
-            for c in liste:
-                if charge + c.poids <= capacite:
-                    colis_a_charger.append(c)
-                    charge = charge + c.poids
-            return colis_a_charger
+            colis_a_charger = []                    # INITIALISER
+            charge = 0                              # INITIALISER
+            for c in liste:                         # PARCOURIR
+                if charge + c.poids <= capacite:    # TESTER
+                    colis_a_charger.append(c)       # METTRE A JOUR
+                    charge = charge + c.poids       # METTRE A JOUR
+            return colis_a_charger                  # RENVOYER
         ```
 
         Elle applique la même règle que `chargement_glouton` (on garde un colis s’il tient dans la charge restante, en parcourant la liste dans le même ordre) : elle renvoie donc la même liste que `chargement_glouton(liste, 0, capacite)`.
@@ -1239,6 +1395,8 @@ Le **score** d’une grille s’obtient en **additionnant** les valeurs de toute
 
         Deux boucles imbriquées sur les 6 lignes et les 7 colonnes de `self.grille` ; que faire de la valeur renvoyée par `valeur_case` selon que la case contient `0`, `1` ou `2` ?
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **Barème indicatif** (sur 4) : Q1 : 0,75 ; Q2 : 1 ; Q3 : 0,5 ; Q4 : 0,5 ; Q5 : 1,25
@@ -1265,18 +1423,28 @@ Le **score** d’une grille s’obtient en **additionnant** les valeurs de toute
 
     4.  Case `(5, 3)` (joueur 2) : 7 alignements (4 horizontaux, 1 vertical, 1 dans chaque diagonale). Case `(4, 3)` (joueur 1) : 10 alignements (4 horizontaux, 2 verticaux, 2 dans chaque diagonale). Case `(5, 2)` (joueur 1) : 5 alignements (3 horizontaux, 1 vertical, 1 diagonal). Score : $7 - (10 + 5) = -8$.
 
-    5.  **Démarche :** deux boucles imbriquées parcourent les cases ; on ajoute la valeur des cases du joueur 2 et l’on retranche celle des cases du joueur 1.
+    5.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert jeu1.score() == -8       # cas normal : la grille jeu1 de la question 3
+        assert Grille().score() == 0    # cas limite : grille vide
+        g = Grille()
+        g.joue(3, 2)
+        assert g.score() == 7           # cas piege : un pion du joueur 2 compte en plus
+        ```
+
+        **Démarche :** deux boucles imbriquées parcourent les cases ; on ajoute la valeur des cases du joueur 2 et l’on retranche celle des cases du joueur 1.
 
         ```python
         def score(self):
-            s = 0
-            for ligne in range(6):
-                for colonne in range(7):
-                    if self.grille[ligne][colonne] == 2:
-                        s = s + valeur_case(ligne, colonne)
-                    elif self.grille[ligne][colonne] == 1:
-                        s = s - valeur_case(ligne, colonne)
-            return s
+            s = 0                                            # INITIALISER
+            for ligne in range(6):                           # PARCOURIR
+                for colonne in range(7):                     # PARCOURIR
+                    if self.grille[ligne][colonne] == 2:     # TESTER
+                        s = s + valeur_case(ligne, colonne)  # METTRE A JOUR
+                    elif self.grille[ligne][colonne] == 1:   # TESTER
+                        s = s - valeur_case(ligne, colonne)  # METTRE A JOUR
+            return s                                         # RENVOYER
         ```
 
 ### Critiquer une réponse d’IA
@@ -1447,6 +1615,8 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
         Dans `en_hms`, le nombre d’heures est le quotient `duree // 3600` ; le reste `duree % 3600` se découpe ensuite de la même façon en minutes et en secondes, avec `60`.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> Dans un second fichier `trajet.py`, placé dans le même dossier, importer les deux fonctions et afficher, au format `(h, m, s)`, la durée totale d’un trajet en deux étapes : 1 h 47 min 30 s, puis 2 h 25 min 45 s.
 
 4.  Dans la console, après `import temps`, que montre `help(temps)` ? Quand on lance `trajet.py`, les tests de `temps.py` s’exécutent-ils ? Pourquoi ?
@@ -1455,7 +1625,15 @@ Au Grand Oral comme devant l’examinateur de l’épreuve pratique, il faut sav
 
     **1.** `choice(["pile", "face"])` renvoie l’un des deux éléments, `"pile"` ou `"face"`, au hasard. La documentation exige une séquence **non vide** (« *non-empty sequence* ») : `choice([])` ne respecte pas la spécification. Dans la console, l’appel lève une erreur : `IndexError: Cannot choose from an empty sequence`.
 
-    **2.** Fichier `temps.py` :
+    **2.** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert en_hms(3723) == (1, 2, 3)      # cas normal
+    assert en_hms(0) == (0, 0, 0)         # cas limite : duree nulle
+    assert en_hms(3600) == (1, 0, 0)      # cas piege : 60 min font 1 h, pas (0, 60, 0)
+    ```
+
+    Fichier `temps.py` :
 
     ```python
     """Module temps : conversions entre secondes et heures-minutes-secondes."""

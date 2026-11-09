@@ -32,6 +32,8 @@ Une partie se joue ainsi : l’ordinateur pense à un nombre `secret` ; le joueu
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — La réponse de l’ordinateur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-les-bases-de-la-programmation-python-tp-1-1 }
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 <span class="run" title="À programmer et tester sur machine">▶</span> Écrire la fonction `comparer(proposition, secret)` qui renvoie la chaîne `"trop petit"`, `"trop grand"` ou `"gagne"`. Elle **renvoie** la réponse (`return`), elle ne l’affiche pas.
 
 ```python

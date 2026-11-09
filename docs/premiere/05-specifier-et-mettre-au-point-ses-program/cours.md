@@ -37,14 +37,22 @@ Considérons cette fonction.
 
 ```python
 def maximum(t):
-    m = 0
-    for i in range(len(t)):
-        if t[i] > t[m]:
-            m = i
-    return m
+    m = 0                    # INITIALISER
+    for i in range(len(t)):  # PARCOURIR
+        if t[i] > t[m]:      # TESTER
+            m = i            # METTRE A JOUR
+    return m                 # RENVOYER
 ```
 
+<span class="routine">▷ Je prédis.</span> Que renvoie `maximum([4, 9, 2])` ?
+
+??? verifie "Je vérifie"
+
+    `1`, et non `9` : la fonction renvoie la *position* du plus grand élément, pas sa valeur. Le nom est trompeur.
+
 On comprend chaque instruction, mais que *calcule*-t-elle ? Le nom suggère « le maximum ». En l’essayant, on découvre qu’elle renvoie en réalité l’**indice** du maximum. On aurait gagné du temps avec un nom explicite — `indice_maximum` — et une variable `ind_max` plutôt que `m`. Et surtout : que se passe-t-il sur un tableau **vide** ? La fonction renvoie `0`, un indice qui n’existe pas.
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```python
 >>> t = []
@@ -82,6 +90,8 @@ def indice_maximum(t):
 
 On la consulte avec <span id="lex-help05" class="ancre"></span>`help` sans voir le code :
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```python
 >>> help(indice_maximum)
 indice_maximum(t)
@@ -118,9 +128,11 @@ Pour éviter qu’un mauvais argument produise un résultat incohérent, on peut
 ```python
 def indice_maximum(t):
     """Renvoie l'indice du maximum de t. t est supposé non vide."""
-    assert len(t) > 0, "le tableau est vide"
+    assert len(t) > 0, "le tableau est vide"   # VERIFIER : la precondition
     ...
 ```
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```python
 >>> indice_maximum([])
@@ -196,6 +208,59 @@ Si l’un échoue, on corrige, puis on **relance tout** : corriger une erreur en
     assert m == 0 or m == 2
     ```
 
+### Écrire les appels attendus avant le code : les doctests
+
+On peut écrire les tests **dans la docstring** elle-même, sous la forme d’une session de console : une ligne `>>>` avec l’appel, puis la ligne du résultat attendu. Ces exemples, appelés **doctests**, s’écrivent **avant le code** : ils disent, par l’exemple, ce que la fonction doit faire.
+
+```python
+def indice_maximum(t):
+    """Renvoie l'indice du maximum du tableau t (le premier en cas
+    d'egalite), ou None si t est vide.
+
+    >>> indice_maximum([2, 3, 1])
+    1
+    >>> indice_maximum([]) is None
+    True
+    >>> indice_maximum([-3, -1, -3, -1])
+    1
+    """
+    if len(t) == 0:
+        return None
+    ind_max = 0                       # INITIALISER
+    for i in range(len(t)):           # PARCOURIR
+        if t[i] > t[ind_max]:         # TESTER
+            ind_max = i               # METTRE A JOUR
+    return ind_max                    # RENVOYER
+
+import doctest
+doctest.testmod()       # rejoue tous les exemples des docstrings du fichier
+```
+
+Si tous les exemples donnent le résultat écrit, `doctest.testmod()` n’affiche **rien**.
+
+<span class="routine">▷ Je prédis.</span> Et si l’on écrit par erreur `t[i] >= t[ind_max]` ?
+
+Le troisième exemple échoue, et `testmod()` affiche l’appel, le résultat attendu (*Expected*) et le résultat obtenu (*Got*) :
+
+```text
+**********************************************************************
+File "maximum.py", line 9, in __main__.indice_maximum
+Failed example:
+    indice_maximum([-3, -1, -3, -1])
+Expected:
+    1
+Got:
+    3
+**********************************************************************
+1 items had failures:
+   1 of   3 in __main__.indice_maximum
+***Test Failed*** 1 failures.
+```
+
+!!! encadre "Méthode — Trois appels, avant le code"
+
+    Les trois exemples ci-dessus sont les **trois appels attendus** à écrire avant de coder : un cas **normal** (`[2, 3, 1]`), un cas **limite** (le tableau vide), un cas **piège** (des égalités et des nombres négatifs). Sous forme d’`assert` ou de doctests, ils servent d’abord de spécification, puis de tests. À l’**épreuve pratique** du bac, les sujets donnent souvent les exemples d’appels exactement sous cette forme (`>>>` puis le résultat attendu) : les recopier dans la docstring permet de vérifier son code en une commande.
+
 ### Tests aléatoires et oracle <span class="horsprog">au-delà du programme</span>
 
 Pour aller plus loin, on peut **générer des tests au hasard**. Encore faut-il savoir juger le résultat sans connaître la réponse : on confie ce verdict à une fonction <span id="lex-oracle05" class="ancre"></span>**oracle**, en général plus simple à écrire que le programme testé. Exemple : `doublon(t)` renvoie un élément présent au moins deux fois ; l’oracle `verifie_doublon(r, t)` recompte les occurrences de `r`.
@@ -209,7 +274,7 @@ for n in range(2, 30):
 
 <span id="cours-05-6" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-05-6) à [10](exercices.md#ex-05-10)** et **[27](exercices.md#ex-05-27)** (tester ses programmes)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-05-6) à [11](exercices.md#ex-05-11)** et **[28](exercices.md#ex-05-28)** (tester ses programmes ; exercice **[10](exercices.md#ex-05-10)** : les tests d’abord, en doctests)
 
 ## Corriger les erreurs (déboguer)
 
@@ -235,12 +300,12 @@ Sur `[1, 2, 3, 4]`, on obtient `IndexError: list index out of range`. **Idée n<
 ```python
 def est_croissant(t):
     """Renvoie True si les elements de t sont ranges par ordre croissant."""
-    i = len(t) - 1
-    while i > 0:
-        if t[i - 1] > t[i]:
-            return False
-        i -= 1
-    return True
+    i = len(t) - 1           # INITIALISER : on part de la fin
+    while i > 0:             # PARCOURIR : de droite a gauche
+        if t[i - 1] > t[i]:  # TESTER : une descente ?
+            return False     # RENVOYER : inutile d'aller plus loin
+        i -= 1               # METTRE A JOUR
+    return True              # RENVOYER : aucune descente
 
 assert est_croissant([1, 2, 3, 4]) == True
 assert est_croissant([1, 3, 2, 4]) == False
@@ -255,9 +320,9 @@ assert est_croissant([]) == True
 
     - une fois corrigé, **retirer les affichages** mais **garder les tests**.
 
-<span id="cours-05-11" class="ancre"></span>
+<span id="cours-05-12" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[11](exercices.md#ex-05-11) à [13](exercices.md#ex-05-13)** et **[26](exercices.md#ex-05-26)** (corriger, déboguer)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[12](exercices.md#ex-05-12) à [14](exercices.md#ex-05-14)** et **[27](exercices.md#ex-05-27)** (corriger, déboguer)
 
 ## Invariant de boucle
 
@@ -265,14 +330,20 @@ Vous avez rencontré cette notion avec l’invariant du champion (chapitre *Algo
 
 ```python
 def division_euclidienne(a, b):   # a >= 0, b > 0
-    q = 0
-    r = a
-    while r >= b:
+    q = 0                         # INITIALISER
+    r = a                         # INITIALISER
+    while r >= b:                 # PARCOURIR : tant qu'on peut retirer b
         # invariant : 0 <= r  et  a == q * b + r
-        q += 1
-        r -= b
-    return q, r
+        q += 1                    # METTRE A JOUR
+        r -= b                    # METTRE A JOUR
+    return q, r                   # RENVOYER
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoie `division_euclidienne(17, 5)` ? Et `division_euclidienne(3, 5)` ?
+
+??? verifie "Je vérifie"
+
+    `(3, 2)` après trois tours (`r` vaut `17`, `12`, `7`, puis `2 < 5`) ; puis `(0, 3)` sans aucun tour, car `3 >= 5` est faux dès le départ.
 
 On veut $\texttt{a} = q\times\texttt{b} + \texttt{r}$ avec $0 \leqslant \texttt{r} < \texttt{b}$. La condition de boucle donne $\texttt{r} < \texttt{b}$ à la sortie. Restent les deux invariants :
 
@@ -284,8 +355,8 @@ Le grand intérêt pratique : en cas de doute, on transforme l’invariant en `a
 
 ```python
 while r >= b:
-    assert 0 <= r
-    assert a == q * b + r
+    assert 0 <= r             # VERIFIER : invariant
+    assert a == q * b + r     # VERIFIER : invariant
     q += 1
     r -= b
 ```
@@ -294,9 +365,9 @@ while r >= b:
 
     L’invariant prouve que le résultat est juste *si* la boucle s’arrête. Pour une boucle `while`, il faut aussi un **variant** (chapitre *Les bases de la programmation Python*, § V.B) : ici `r` est un entier, positif ou nul (premier invariant), qui diminue strictement à chaque tour (on lui retranche `b > 0`). La boucle se termine donc.
 
-<span id="cours-05-14" class="ancre"></span>
+<span id="cours-05-15" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[14](exercices.md#ex-05-14) à [18](exercices.md#ex-05-18)** (docstring de `division_euclidienne` ; invariant de boucle ; un meilleur nom : docstring, invariant et tests)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[15](exercices.md#ex-05-15) à [19](exercices.md#ex-05-19)** (docstring de `division_euclidienne` ; invariant de boucle ; un meilleur nom : docstring, invariant et tests)
 
 ## Diversité et unité des langages
 
@@ -365,6 +436,8 @@ Une valeur a une **nature** : entier, texte, booléen… C’est son **type**. 
 
 C’est pourquoi, en Python, une erreur de type peut dormir longtemps dans un programme :
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```python
 def etiquette(age):
     if age >= 18:
@@ -404,9 +477,9 @@ Aucun langage n’est « le meilleur » : chacun est un **compromis** adapté à
 
 On ne réécrit pas tout à chaque fois. En regroupant des fonctions utiles dans des **modules** réutilisables, on constitue des **bibliothèques** (`math`, `random`, `turtle`…). Pour s’en servir, pas besoin de connaître leur code : il suffit de lire leur **documentation**, qui joue le rôle de la spécification vue plus haut. La boucle est bouclée : *bien spécifier ses propres fonctions, c’est déjà écrire la documentation d’une future bibliothèque.*
 
-<span id="cours-05-19" class="ancre"></span>
+<span id="cours-05-20" class="ancre"></span>
 
-<span class="afaire">▶ Exercices d'application :</span> exercices **[19](exercices.md#ex-05-19) à [25](exercices.md#ex-05-25)** (diversité des langages)
+<span class="afaire">▶ Exercices d'application :</span> exercices **[20](exercices.md#ex-05-20) à [26](exercices.md#ex-05-26)** (diversité des langages)
 
 ## Un peu d’histoire
 

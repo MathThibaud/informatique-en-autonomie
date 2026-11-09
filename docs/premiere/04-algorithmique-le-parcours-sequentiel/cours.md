@@ -41,13 +41,17 @@ La plupart des traitements suivent le même **squelette**, dit motif de l’**ac
 
     ```python
     def traitement(t):
-        resultat = ...            # 1. initialisation
-        for element in t:         # 2. on visite chaque element
-            resultat = ...        #    ... et on met a jour le resultat
-        return resultat           # 3. on renvoie
+        resultat = ...            # INITIALISER
+        for element in t:         # PARCOURIR
+            resultat = ...        # METTRE A JOUR
+        return resultat           # RENVOYER
     ```
 
     Écrire un algorithme de parcours, c’est simplement **choisir** l’initialisation et la mise à jour.
+
+!!! encadre "Méthode — Les étiquettes d’étapes"
+
+    Dans les exemples et les corrigés, un commentaire en **majuscules** nomme le **rôle** de la ligne. Ce sont toujours les mêmes mots, d’un exercice à l’autre : `INITIALISER`, `PARCOURIR`, `TESTER`, `METTRE A JOUR`, `RENVOYER` ; plus tard `VERIFIER` (une précondition) et, pour la récursivité, `CAS DE BASE`, `APPEL RECURSIF`. Devant un nouveau problème, on se demande d’abord : *que faut-il initialiser ? que met-on à jour ? que renvoie-t-on ?* Le code vient ensuite.
 
 !!! encadre "Méthode — Par élément ou par indice ?"
 
@@ -65,25 +69,37 @@ La plupart des traitements suivent le même **squelette**, dit motif de l’**ac
 
     ```python
     def somme(t):
-        s = 0                     # element neutre de l'addition
-        for x in t:
-            s = s + x
-        return s
+        s = 0                     # INITIALISER : element neutre de l'addition
+        for x in t:               # PARCOURIR
+            s = s + x             # METTRE A JOUR
+        return s                  # RENVOYER
 
     def moyenne(t):               # t suppose NON vide
         return somme(t) / len(t)
     ```
 
+    <span class="routine">▷ Je prédis.</span> Que renvoient `somme([4, -1, 2])` et `moyenne([4, -1, 2])` ?
+
+    ??? verifie "Je vérifie"
+
+        `5`, puis `5 / 3`, soit environ `1.67` (un flottant, même si les éléments sont des entiers).
+
 !!! exemple "Exemple — Compter : on accumule un compteur"
 
     ```python
     def nb_positifs(t):
-        c = 0
-        for x in t:
-            if x > 0:             # la mise a jour est conditionnelle
-                c = c + 1
-        return c
+        c = 0                     # INITIALISER
+        for x in t:               # PARCOURIR
+            if x > 0:             # TESTER : la mise a jour est conditionnelle
+                c = c + 1         # METTRE A JOUR
+        return c                  # RENVOYER
     ```
+
+    <span class="routine">▷ Je prédis.</span> Que renvoie `nb_positifs([3, 0, -2, 5])` ?
+
+    ??? verifie "Je vérifie"
+
+        `2` : `0` n’est pas strictement positif.
 
 !!! encadre "À retenir — Le bon élément neutre"
 
@@ -103,18 +119,24 @@ Chercher, c’est parcourir jusqu’à trouver. Deux questions distinctes : **l�
 
 ```python
 def est_present(t, x):
-    for element in t:
-        if element == x:
-            return True       # trouve : inutile de continuer
-    return False              # parcours fini sans succes : absent
+    for element in t:         # PARCOURIR
+        if element == x:      # TESTER
+            return True       # RENVOYER : trouve, inutile de continuer
+    return False              # RENVOYER : parcours fini sans succes
 
 def indice(t, x):
     """Indice de la premiere occurrence de x, ou -1 si absent."""
-    for i in range(len(t)):
-        if t[i] == x:
-            return i
-    return -1
+    for i in range(len(t)):   # PARCOURIR
+        if t[i] == x:         # TESTER
+            return i          # RENVOYER
+    return -1                 # RENVOYER : absent
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoient `indice([5, 8, 5], 5)` et `indice([5, 8, 5], 2)` ?
+
+??? verifie "Je vérifie"
+
+    `0` (la *première* occurrence : on sort dès qu’on trouve), puis `-1` (absent).
 
 !!! remarque "Remarque — Absent : -1 ou None"
 
@@ -136,11 +158,11 @@ Pas de raccourci ici : pour connaître le maximum, il faut avoir **tout** regard
 
 ```python
 def maximum(t):               # t suppose NON vide
-    m = t[0]                  # champion initial : le premier element
-    for x in t:
-        if x > m:
-            m = x             # nouveau champion
-    return m
+    m = t[0]                  # INITIALISER : le premier element
+    for x in t:               # PARCOURIR
+        if x > m:             # TESTER
+            m = x             # METTRE A JOUR : nouveau champion
+    return m                  # RENVOYER
 ```
 
 Déroulons `maximum([4, 9, 2, 11, 7, 3])`. Les barres sont les éléments, dans l’ordre de visite ; le trait **orange** est la valeur de `m` *après* chaque tour. Il ne fait que **monter**, et seulement quand un nouveau champion (barre colorée) apparaît.
@@ -165,12 +187,18 @@ Déroulons `maximum([4, 9, 2, 11, 7, 3])`. Les barres sont les éléments, dans 
 
     ```python
     def indice_du_max(t):
-        i_max = 0
-        for i in range(len(t)):
-            if t[i] > t[i_max]:
-                i_max = i
-        return i_max
+        i_max = 0                 # INITIALISER
+        for i in range(len(t)):   # PARCOURIR
+            if t[i] > t[i_max]:   # TESTER
+                i_max = i         # METTRE A JOUR
+        return i_max              # RENVOYER
     ```
+
+    <span class="routine">▷ Je prédis.</span> Que renvoie `indice_du_max([4, 9, 2, 9])` ?
+
+    ??? verifie "Je vérifie"
+
+        `1` : le test `>` est strict, le second `9` ne détrône pas le premier.
 
 ### Prouver qu’une propriété est un invariant
 
@@ -251,10 +279,10 @@ $$V = \frac{(x_0 - m)^2 + (x_1 - m)^2 + \cdots + (x_{n-1} - m)^2}{n}.$$
 ```python
 def variance_naive(t):
     n = len(t)
-    s = 0
-    for x in t:
-        s = s + (x - moyenne(t)) ** 2   # DANGER : moyenne(t) recalculee A CHAQUE tour
-    return s / n
+    s = 0                               # INITIALISER
+    for x in t:                         # PARCOURIR
+        s = s + (x - moyenne(t)) ** 2   # METTRE A JOUR ; DANGER : moyenne(t) A CHAQUE tour
+    return s / n                        # RENVOYER
 ```
 
 Cette version est **correcte**… mais lente. À chacun des `n` tours de boucle, elle rappelle `moyenne(t)`, qui fait elle-même un parcours de `n` éléments. Total : `n` $\times$ `n` $= n^2$ opérations. On dit que son coût est <span id="lex-quadratique04" class="ancre"></span>**quadratique**.
@@ -265,11 +293,17 @@ Cette version est **correcte**… mais lente. À chacun des `n` tours de boucle
 def variance(t):
     n = len(t)
     m = moyenne(t)                # calculee UNE fois : n operations
-    s = 0
-    for x in t:
-        s = s + (x - m) ** 2      # ici, chaque tour est immediat
-    return s / n
+    s = 0                         # INITIALISER
+    for x in t:                   # PARCOURIR
+        s = s + (x - m) ** 2      # METTRE A JOUR : chaque tour est immediat
+    return s / n                  # RENVOYER
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoie `variance([1, 3])` ? Et `variance([7, 7, 7])` ?
+
+??? verifie "Je vérifie"
+
+    `1.0` : la moyenne vaut `2`, les écarts `-1` et `1` ont pour carrés `1` et `1`, dont la moyenne est `1.0`. Puis `0.0` : des valeurs toutes égales ne sont pas dispersées.
 
 Ici, un parcours pour la moyenne, un parcours pour la somme : environ `2n` opérations, donc un coût **linéaire**. Le résultat est **identique**, mais regardons la facture :
 

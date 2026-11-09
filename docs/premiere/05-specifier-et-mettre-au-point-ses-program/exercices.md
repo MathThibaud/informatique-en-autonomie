@@ -69,11 +69,11 @@ Ajouter à la fonction `puissance(x, n)` une ligne `assert` qui garantit sa pré
 
     ```python
     def puissance(x, n):
-        assert n >= 0, "l'exposant doit etre positif ou nul"
-        r = 1
-        for i in range(n):
-            r = r * x
-        return r
+        assert n >= 0, "l'exposant doit etre positif ou nul"  # VERIFIER : la precondition
+        r = 1                                                 # INITIALISER
+        for i in range(n):                                    # PARCOURIR
+            r = r * x                                         # METTRE A JOUR
+        return r                                              # RENVOYER
     ```
 
     `puissance(2, -3)` déclenche `AssertionError: l’exposant doit etre positif ou nul` : le programme s’interrompt immédiatement, à l’endroit du vrai problème.
@@ -94,7 +94,17 @@ On écrit `premier_element(t)` qui renvoie le premier élément d’un tableau.
 
     c\) Avec la version `assert`, l’appelant doit vérifier quelque chose *avant* l’appel ; avec la version `None`, il vérifie *après* l’appel, sur le résultat.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus pour la version `None`, écrits avant de coder :*
+
+    ```python
+    assert premier_element_ou_none([4, 7]) == 4  # cas normal
+    assert premier_element_ou_none([9]) == 9     # cas limite : un seul element
+    assert premier_element_ou_none([]) is None   # cas piege : tableau vide, la sentinelle
+    ```
 
     Deux stratégies : avec `assert`, la précondition est à la charge de l’appelant, qui vérifie *avant* l’appel ; avec `None`, la fonction accepte tout et l’appelant teste le résultat *après*.
 
@@ -201,20 +211,20 @@ Donner un jeu de tests, dont un `assert` qui **échoue** et prouve que la foncti
 
     ```python
     def appartient(v, t):
-        i = 0
-        while i < len(t) and t[i] != v:
-            i = i + 1
-        return i < len(t)      # vrai seulement si on s'est arrete sur v
+        i = 0                            # INITIALISER
+        while i < len(t) and t[i] != v:  # PARCOURIR : jusqu'a v ou jusqu'au bout
+            i = i + 1                    # METTRE A JOUR
+        return i < len(t)                # RENVOYER : vrai seulement si on s'est arrete sur v
     ```
 
     *Autre méthode :* un `for` qui renvoie `True` dès qu’on trouve, et `False` seulement après le parcours complet.
 
     ```python
     def appartient(v, t):
-        for x in t:
-            if x == v:
-                return True
-        return False
+        for x in t:          # PARCOURIR
+            if x == v:       # TESTER
+                return True  # RENVOYER : trouve
+        return False         # RENVOYER : parcours fini sans succes
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Deux erreurs pour le prix d’une <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-8 }
@@ -268,7 +278,51 @@ Une fonction `est_pair(n)` renvoie un booléen. En s’appuyant sur la propriét
     assert est_pair(-3) == False   # negatif impair
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 10</span> — Des tests qui démasquent <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-10 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Les tests d’abord <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-10 }
+
+On veut une fonction `nb_occurrences(c, mot)` qui renvoie le nombre de fois que le caractère `c` apparaît dans la chaîne `mot`. On écrit les tests **avant** le code.
+
+1.  Écrire l’en-tête et la docstring de `nb_occurrences`, avec **trois doctests** (une ligne `>>>` avec l’appel, puis le résultat attendu) : un cas **normal**, un cas **limite**, un cas **piège**.
+
+2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire ensuite le corps de la fonction, sans utiliser de fonction toute faite, et vérifier les exemples avec `doctest.testmod()`.
+
+3.  <span class="run" title="À programmer et tester sur machine">▶</span> Initialiser volontairement le compteur à `1`. Que montre `testmod()` ?
+
+??? pouce "Coup de pouce"
+
+    Cas limite : la chaîne vide. Cas piège : un caractère en majuscule et en minuscule dans le même mot (`"A"` et `"a"` sont-ils le même caractère ?). Le résultat attendu s’écrit sur la ligne qui suit l’appel, sans `>>>`.
+
+??? corrige "Corrigé"
+
+    **a)** et **b)** Les trois doctests sont écrits *avant* le corps de la fonction : ce sont les trois appels attendus.
+
+    ```python
+    def nb_occurrences(c, mot):
+        """Renvoie le nombre de fois que le caractere c apparait dans la chaine mot.
+
+        >>> nb_occurrences("o", "bonbon")
+        2
+        >>> nb_occurrences("o", "")
+        0
+        >>> nb_occurrences("a", "Ananas")
+        2
+        """
+        n = 0                    # INITIALISER
+        for lettre in mot:       # PARCOURIR
+            if lettre == c:      # TESTER
+                n = n + 1        # METTRE A JOUR
+        return n                 # RENVOYER
+
+    import doctest
+    doctest.testmod()
+    ```
+
+    Le premier exemple est le cas normal, le deuxième le cas limite (chaîne vide : aucun tour de boucle), le troisième le cas piège : `"A"` et `"a"` sont deux caractères **différents**, seuls les deux `"a"` minuscules comptent. Si les trois exemples passent, `testmod()` n’affiche rien.  
+    **c)** Avec `n = 1`, les **trois** exemples échouent (`3`, `1` et `3` au lieu de `2`, `0` et `2`) : pour chacun, `testmod()` affiche l’appel, le résultat attendu (*Expected*) et le résultat obtenu (*Got*), puis le bilan `***Test Failed*** 3 failures.`
+
+    <span class="erreurfreq">▷ Erreur fréquente.</span> écrire le résultat attendu en le recopiant depuis la console *après* avoir codé : le doctest valide alors le code tel qu’il est, erreurs comprises. Le résultat attendu se calcule à la main, avant.
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 11</span> — Des tests qui démasquent <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-11 }
 
 <span class="duree">≈ 20 min</span>
 
@@ -327,7 +381,7 @@ def est_trie_3(t):
 
 ### Corriger les erreurs (déboguer)
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — La chasse au bug <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-11 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — La chasse au bug <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-12 }
 
 <span class="essentiel">• essentiel</span>
 
@@ -359,12 +413,12 @@ def minimum(t):
     ```python
     def minimum(t):
         """Renvoie le plus petit element de t. Precondition : t non vide."""
-        assert len(t) > 0, "tableau vide"
-        m = t[0]
-        for x in t:
-            if x < m:
-                m = x
-        return m
+        assert len(t) > 0, "tableau vide"  # VERIFIER : la precondition
+        m = t[0]                           # INITIALISER : un vrai element
+        for x in t:                        # PARCOURIR
+            if x < m:                      # TESTER
+                m = x                      # METTRE A JOUR
+        return m                           # RENVOYER
 
     assert minimum([3, 8, 5]) == 3
     assert minimum([-1, -4, -2]) == -4
@@ -373,7 +427,7 @@ def minimum(t):
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> « corriger » en remplaçant `0` par une autre valeur (`100`, `1000`…) : il existera toujours un tableau qui piège la fonction ; seul un élément du tableau est un bon point de départ.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Débogage guidé par l’affichage <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-12 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Débogage guidé par l’affichage <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-13 }
 
 La fonction doit renvoyer le nombre d’éléments **strictement positifs** d’un tableau.
 
@@ -398,11 +452,11 @@ Elle renvoie `1` pour `[3, 8, -2, 5]` alors qu’on attend `3`. En imaginant un 
 
     ```python
     def nb_positifs(t):
-        nb = 0
-        for x in t:
-            if x > 0:
-                nb = nb + 1
-        return nb
+        nb = 0               # INITIALISER
+        for x in t:          # PARCOURIR
+            if x > 0:        # TESTER
+                nb = nb + 1  # METTRE A JOUR : on incremente
+        return nb            # RENVOYER
 
     assert nb_positifs([3, 8, -2, 5]) == 3
     assert nb_positifs([]) == 0
@@ -411,7 +465,7 @@ Elle renvoie `1` pour `[3, 8, -2, 5]` alors qu’on attend `3`. En imaginant un 
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> placer le `print` après la boucle : on ne voit que la valeur finale, pas son évolution tour par tour, qui révèle l’erreur.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 13</span> — Une fonction spécifiée par un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-05-13 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 14</span> — Une fonction spécifiée par un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-05-14 }
 
 Un élève demande à un assistant d’IA : « Écris une fonction `nb_chiffres(n)` qui renvoie le nombre de chiffres d’un entier positif, avec sa docstring et un jeu de tests. » Voici la réponse obtenue.
 
@@ -459,18 +513,18 @@ assert nb_chiffres(0) == 1
     def nb_chiffres(n):
         """Renvoie le nombre de chiffres de l'entier n.
         Precondition : n >= 0. Par convention nb_chiffres(0) vaut 1."""
-        compteur = 1
-        while n >= 10:
-            n = n // 10
-            compteur = compteur + 1
-        return compteur
+        compteur = 1                 # INITIALISER : au moins un chiffre
+        while n >= 10:               # PARCOURIR : tant qu'il reste un autre chiffre
+            n = n // 10              # METTRE A JOUR
+            compteur = compteur + 1  # METTRE A JOUR
+        return compteur              # RENVOYER
     ```
 
     Les trois `assert` passent. (c) Exécuter le jeu de tests fourni au lieu de croire la phrase « ils passent tous » : l’assistant a écrit le bon test (le cas limite) sans le lancer. Un test qu’on n’exécute pas ne vérifie rien.
 
 ### Invariant de boucle
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 14</span> — Une docstring pour `division_euclidienne` <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-14 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 15</span> — Une docstring pour `division_euclidienne` <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-15 }
 
 Donner une chaîne de documentation (rôle, précondition, postcondition) à la fonction `division_euclidienne` vue dans le cours.
 
@@ -489,7 +543,7 @@ Donner une chaîne de documentation (rôle, précondition, postcondition) à la 
         Postcondition : a == q * b + r, 0 <= r et r < b."""
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Énoncer un invariant <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-15 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Énoncer un invariant <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-16 }
 
 <span class="essentiel">• essentiel</span>
 
@@ -511,7 +565,7 @@ def puissance(x, n):
 
     Invariant, juste avant le tour d’indice `i` : `r == x ** i` (r est `x` multiplié par lui-même `i` fois). Vrai au départ (`i = 0`, `r = 1 = x**0`). Préservé : si `r == x**i`, alors après `r = r * x` et le passage à `i+1` on a `r == x**(i+1)`. À la sortie, la boucle a fait `n` tours : l’invariant, appliqué « juste avant un tour d’indice `n` » qui n’a pas lieu, donne `r == x**n`, le résultat attendu (pour `n = 0`, aucun tour : `r = 1 = x**0`).
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Un meilleur nom <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-16 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 17</span> — Un meilleur nom <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-17 }
 
 Cette fonction « marche », mais se lit mal.
 
@@ -536,18 +590,18 @@ Lui donner : (a) un **nom** explicite, (b) une **docstring**, (c) un **invariant
     ```python
     def somme(t):
         """Renvoie la somme des elements du tableau t (0 si t est vide)."""
-        s = 0
-        for i in range(len(t)):
+        s = 0                    # INITIALISER
+        for i in range(len(t)):  # PARCOURIR
             # invariant : s == t[0] + t[1] + ... + t[i-1]
-            s = s + t[i]
-        return s
+            s = s + t[i]         # METTRE A JOUR
+        return s                 # RENVOYER
 
     assert somme([]) == 0
     assert somme([5]) == 5
     assert somme([1, 2, 3, 4]) == 10
     ```
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 17</span> — Invariant et `assert` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-17 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 18</span> — Invariant et `assert` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-18 }
 
 <span class="duree">≈ 15 min</span>
 
@@ -577,19 +631,19 @@ def nb_pairs(t):
     ```python
     def nb_pairs_debut(t, i):
         """Nombre d'elements pairs parmi t[0], ..., t[i - 1] (fonction de verification)."""
-        total = 0
-        for k in range(i):
-            if t[k] % 2 == 0:
-                total = total + 1
-        return total
+        total = 0                             # INITIALISER
+        for k in range(i):                    # PARCOURIR
+            if t[k] % 2 == 0:                 # TESTER
+                total = total + 1             # METTRE A JOUR
+        return total                          # RENVOYER
 
     def nb_pairs(t):
-        c = 0
-        for i in range(len(t)):
-            assert c == nb_pairs_debut(t, i)   # invariant : c = nb de pairs des i premiers
-            if t[i] % 2 == 0:
-                c = c + 1
-        return c
+        c = 0                                 # INITIALISER
+        for i in range(len(t)):               # PARCOURIR
+            assert c == nb_pairs_debut(t, i)  # VERIFIER : invariant, c = nb de pairs des i premiers
+            if t[i] % 2 == 0:                 # TESTER
+                c = c + 1                     # METTRE A JOUR
+        return c                              # RENVOYER
     ```
 
     \(a\) Juste avant le tour d’indice `i`, `c` est le nombre d’éléments pairs parmi les `i` premiers éléments `t[0]`, …, `t[i - 1]`.
@@ -598,7 +652,7 @@ def nb_pairs(t):
 
     \(c\) Pendant la mise au point, Python **vérifie l’invariant à chaque tour** : si une erreur casse la logique du comptage, l’`AssertionError` se déclenche *tout de suite*, au tour fautif, au lieu de laisser un résultat faux apparaître à la fin.
 
-### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 18</span> — Une division qui se trompe parfois <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-18 }
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 19</span> — Une division qui se trompe parfois <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-19 }
 
 <span class="duree">≈ 20 min</span>
 
@@ -649,15 +703,15 @@ def division(a, b):
 
     ```python
     def division(a, b):
-        assert a >= 0 and b > 0, "il faut a >= 0 et b > 0"
-        q = 0
-        r = a
-        while r >= b:
-            assert a == q * b + r      # invariant (mise au point)
-            r = r - b
-            q = q + 1
-        assert a == q * b + r and 0 <= r and r < b   # postcondition
-        return q, r
+        assert a >= 0 and b > 0, "il faut a >= 0 et b > 0"  # VERIFIER : la precondition
+        q = 0                                               # INITIALISER
+        r = a                                               # INITIALISER
+        while r >= b:                                       # PARCOURIR
+            assert a == q * b + r                           # VERIFIER : invariant (mise au point)
+            r = r - b                                       # METTRE A JOUR
+            q = q + 1                                       # METTRE A JOUR
+        assert a == q * b + r and 0 <= r and r < b          # VERIFIER : postcondition
+        return q, r                                         # RENVOYER
 
     assert division(17, 5) == (3, 2)
     assert division(6, 3) == (2, 0)
@@ -670,7 +724,7 @@ def division(a, b):
 
 ### Diversité des langages et bibliothèques
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 19</span> — Compilé ou interprété ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-19 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 20</span> — Compilé ou interprété ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-20 }
 
 <span class="essentiel">• essentiel</span>
 
@@ -692,7 +746,7 @@ Pour chacune des affirmations, indiquer si elle décrit plutôt un langage **com
 
     a\) Interprété : le même fichier tourne partout où l’interpréteur est installé, sans retraduction. b) Compilé : on produit un exécutable rapide, mais il faut recompiler à chaque modification. c) Interprété : la traduction se fait à la volée, donc l’erreur n’apparaît qu’en atteignant la ligne. d) Compilé : la traduction complète a lieu avant l’exécution, ce qui permet de signaler les erreurs en amont.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 20</span> — Statique ou dynamique ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-20 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 21</span> — Statique ou dynamique ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-21 }
 
 1.  Pour chacune de ces trois lignes, dire si le typage est **statique** ou **dynamique**, et si le type est **écrit** ou **deviné** (inféré) : (C) `int n = 5;` (Python) `n = 5` (OCaml) `let n = 5`
 
@@ -717,7 +771,7 @@ Pour chacune des affirmations, indiquer si elle décrit plutôt un langage **com
 
     b\) Non : les deux appels passent par la *même* branche (`code == "normal"`) ; la dernière ligne n’est jamais exécutée. L’appel `prix_ttc(10, "reduit")` l’atteint et déclenche `TypeError: can only concatenate str (not "float") to str` : on ne peut pas coller un texte et un nombre. Correction : `return "prix reduit : " + str(prix * 1.055)` (ou renvoyer simplement le nombre `prix * 1.055`). Un langage à typage **statique** aurait refusé ce programme *avant* l’exécution. Leçon : le jeu de tests doit passer par **toutes** les branches.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 21</span> — Le bon outil <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-21 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 22</span> — Le bon outil <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-22 }
 
 Associer chaque besoin au langage le plus naturel (une seule réponse par ligne) : **Python**, **C**, **JavaScript**, **SQL**.
 
@@ -737,7 +791,7 @@ Associer chaque besoin au langage le plus naturel (une seule réponse par ligne)
 
     a\) JavaScript (il s’exécute dans le navigateur). b) SQL (langage de requêtes sur des tables). c) C (compilé, très proche de la machine). d) Python (bibliothèques d’analyse de données, écriture rapide).
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 22</span> — Vrai ou faux, et pourquoi <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-22 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Vrai ou faux, et pourquoi <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-23 }
 
 Dire si chaque affirmation est vraie ou fausse, en corrigeant les fausses.
 
@@ -757,7 +811,7 @@ Dire si chaque affirmation est vraie ou fausse, en corrigeant les fausses.
 
     a\) Faux : aucun langage n’est le meilleur ; chacun est un compromis adapté à certaines tâches. b) Faux : un *algorithme* est indépendant du langage ; seul le *programme* qui le traduit en dépend. c) Vrai : Python est multi-paradigme (impératif, fonctionnel, objet). d) Faux : c’est l’inverse en général ; un langage compilé est traduit une fois pour toutes et s’exécute typiquement *plus vite* qu’un langage interprété.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 23</span> — Langage de programmation ou pas ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-23 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 24</span> — Langage de programmation ou pas ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-24 }
 
 Pour chacun, dire si c’est un **langage de programmation généraliste** (qui permet d’écrire n’importe quel algorithme) : Python, HTML, SQL, C, JavaScript. Justifier en une phrase. Pour les autres, dire à quoi ils servent.
 
@@ -769,7 +823,7 @@ Pour chacun, dire si c’est un **langage de programmation généraliste** (qui 
 
     **Python, C, JavaScript** : oui, on y écrit des algorithmes (variables, boucles, conditions). **HTML** : non, il *décrit* une page ; c’est un langage formalisé, mais pas un langage de programmation. **SQL** : c’est un langage de *requêtes*, qui *interroge* une base de données en décrivant le résultat voulu ; ce n’est pas un langage de programmation *généraliste*.
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — Lire un programme dans un langage inconnu <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-24 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 25</span> — Lire un programme dans un langage inconnu <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-25 }
 
 Voici une fonction dans un langage que vous ne connaissez pas.
 
@@ -794,7 +848,7 @@ Repérer : (a) la **construction élémentaire** commune avec Python (appel, val
         return x * 2
     ```
 
-### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 25</span> — Lire une documentation <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-25 }
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 26</span> — Lire une documentation <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-26 }
 
 La documentation du module `random` indique : `randint(a, b)` *« renvoie un entier aléatoire N tel que a $\leqslant$ N $\leqslant$ b »*.
 
@@ -816,7 +870,7 @@ La documentation du module `random` indique : `randint(a, b)` *« renvoie un ent
 
 *Exercices courts pour s’entraîner aux gestes de base, chacun avec plusieurs données. Ils font tous partie du parcours essentiel.*
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 26</span> — Lire un message d’erreur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-26 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 27</span> — Lire un message d’erreur <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-27 }
 
 <span class="essentiel">• essentiel</span>
 
@@ -873,7 +927,7 @@ KeyError: 'kiwi'
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> lire le message de haut en bas et s’arrêter à la première ligne : l’information utile est en bas (type et explication), juste sous la ligne fautive.
 
-### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 27</span> — Un test qui échoue <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-27 }
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 28</span> — Un test qui échoue <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-05-28 }
 
 <span class="essentiel">• essentiel</span>
 

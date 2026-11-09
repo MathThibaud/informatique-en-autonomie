@@ -99,12 +99,12 @@ def maximum(t):
 
     ```python
     def maximum(t):
-        if len(t) == 1:                 # condition d'arret
+        if len(t) == 1:                 # CAS DE BASE : un seul element
             return t[0]
-        milieu = len(t) // 2
-        m_g = maximum(t[:milieu])
-        m_d = maximum(t[milieu:])
-        if m_g > m_d:
+        milieu = len(t) // 2            # DIVISER
+        m_g = maximum(t[:milieu])       # APPEL RECURSIF : moitie gauche
+        m_d = maximum(t[milieu:])       # APPEL RECURSIF : moitie droite
+        if m_g > m_d:                   # COMBINER : garder le plus grand
             return m_g
         else:
             return m_d
@@ -116,12 +116,12 @@ def maximum(t):
 
     ```python
     def maximum_zone(t, debut, fin):
-        if debut == fin:                # condition d'arret : un seul element
+        if debut == fin:                          # CAS DE BASE : un seul element
             return t[debut]
-        milieu = (debut + fin) // 2
-        m_g = maximum_zone(t, debut, milieu)
-        m_d = maximum_zone(t, milieu + 1, fin)
-        if m_g > m_d:
+        milieu = (debut + fin) // 2               # DIVISER
+        m_g = maximum_zone(t, debut, milieu)      # APPEL RECURSIF
+        m_d = maximum_zone(t, milieu + 1, fin)    # APPEL RECURSIF
+        if m_g > m_d:                             # COMBINER
             return m_g
         else:
             return m_d
@@ -185,12 +185,12 @@ def tri_fusion(tab):
 
     ```python
     def tri_fusion(tab):
-        if len(tab) <= 1:
+        if len(tab) <= 1:                   # CAS DE BASE
             return tab
-        milieu = len(tab) // 2
-        gauche = tri_fusion(tab[:milieu])
-        droite = tri_fusion(tab[milieu:])
-        return fusion(gauche, droite)
+        milieu = len(tab) // 2              # DIVISER
+        gauche = tri_fusion(tab[:milieu])   # APPEL RECURSIF
+        droite = tri_fusion(tab[milieu:])   # APPEL RECURSIF
+        return fusion(gauche, droite)       # COMBINER
     ```
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 4</span> — Compter les appels du tri fusion <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-07-4 }
@@ -237,6 +237,8 @@ On reprend la fonction `tri_fusion` de l’exercice précédent.
         `while i < len(a) and j < len(b):`  
         `if a[i] <= b[j]:` …
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 3.  Justifier que le nombre de comparaisons effectuées par `fusion(a, b)` est au plus `len(a) + len(b) - 1`. Quel est donc le coût de la fusion ?
 
     ??? pouce "Coup de pouce"
@@ -249,18 +251,26 @@ On reprend la fonction `tri_fusion` de l’exercice précédent.
 
     **2.** **Démarche :** un indice par liste ; tant que les deux listes ont encore des éléments, on compare leurs têtes et l’on recopie la plus petite ; à la fin, on recopie le reste de la liste non épuisée.
 
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert fusion([1, 4, 9], [2, 3, 10, 12]) == [1, 2, 3, 4, 9, 10, 12]   # cas normal
+    assert fusion([], [1, 2]) == [1, 2]                                    # cas limite : une liste vide
+    assert fusion([5, 6], [1, 2, 3]) == [1, 2, 3, 5, 6]                    # cas piege : recopier le reste de a
+    ```
+
     ```python
     def fusion(a, b):
-        resultat = []
-        i, j = 0, 0
-        while i < len(a) and j < len(b):
-            if a[i] <= b[j]:
-                resultat.append(a[i])
+        resultat = []                       # INITIALISER
+        i, j = 0, 0                         # INITIALISER : un indice par liste
+        while i < len(a) and j < len(b):    # PARCOURIR
+            if a[i] <= b[j]:                # TESTER : la plus petite tete
+                resultat.append(a[i])       # METTRE A JOUR
                 i = i + 1
             else:
-                resultat.append(b[j])
+                resultat.append(b[j])       # METTRE A JOUR
                 j = j + 1
-        return resultat + a[i:] + b[j:]   # recopier le reste
+        return resultat + a[i:] + b[j:]     # RENVOYER : recopier le reste
     ```
 
     `fusion([1, 4, 9], [2, 3, 10, 12])` renvoie `[1, 2, 3, 4, 9, 10, 12]` ; `fusion([], [1, 2])` renvoie `[1, 2]` (on n’entre pas dans la boucle).
@@ -343,6 +353,8 @@ $$\texttt{tab = [("A", 15), ("B", 7), ("C", 6), ("D", 6), ("E", 5)]}.$$
 
         Q7 : partir d’une chaîne vide et la compléter en parcourant le texte caractère par caractère.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 !!! remarque "Remarque"
 
     Ce sujet (Métropole 2025, jour 2) montre que « diviser pour régner » ne sert pas qu’à **trier** : il structure aussi la **compression** des données.
@@ -361,13 +373,13 @@ $$\texttt{tab = [("A", 15), ("B", 7), ("C", 6), ("D", 6), ("E", 5)]}.$$
 
     ```python
     def shannon(symbole, tab):
-        if len(tab) == 1:
+        if len(tab) == 1:                             # CAS DE BASE
             return ""
-        groupe1, groupe2 = separe(tab)
-        if symbole in [c for (c, _) in groupe1]:
-            return "1" + shannon(symbole, groupe1)
+        groupe1, groupe2 = separe(tab)                # DIVISER
+        if symbole in [c for (c, _) in groupe1]:      # TESTER : dans quel groupe ?
+            return "1" + shannon(symbole, groupe1)    # APPEL RECURSIF ; COMBINER : bit devant
         else:
-            return "0" + shannon(symbole, groupe2)
+            return "0" + shannon(symbole, groupe2)    # APPEL RECURSIF ; COMBINER : bit devant
     ```
 
     **3.** Codes obtenus : `A = 11`, `B = 10`, `C = 011`, `D = 010`, `E = 00`. Déroulement de `shannon("C", tab)` :
@@ -390,12 +402,20 @@ $$\texttt{tab = [("A", 15), ("B", 7), ("C", 6), ("D", 6), ("E", 5)]}.$$
 
     **7.** **Démarche :** une chaîne vide que l’on complète en parcourant le texte : à chaque caractère, on ajoute son code `shannon`.
 
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert encode_shannon("CAD", tab) == "01111010"   # cas normal
+    assert encode_shannon("", tab) == ""               # cas limite : texte vide
+    assert encode_shannon("AAE", tab) == "111100"      # cas piege : chaque occurrence est codee
+    ```
+
     ```python
     def encode_shannon(texte, tab):
-        code = ""
-        for c in texte:
-            code = code + shannon(c, tab)
-        return code
+        code = ""                           # INITIALISER
+        for c in texte:                     # PARCOURIR
+            code = code + shannon(c, tab)   # METTRE A JOUR
+        return code                         # RENVOYER
     ```
 
     Ainsi `encode_shannon("CAD", tab)` vaut `"011" + "11" + "010" = "01111010"`.
@@ -494,13 +514,13 @@ On montre que le coût en temps dans le pire des cas du tri de Stooge est de l�
 
     ```python
     def triStooge(tab, i, j):
-        if tab[i] > tab[j]:
+        if tab[i] > tab[j]:             # TESTER : extremites dans le desordre ?
             echange(tab, i, j)
-        if (j - i) > 1:
-            k = (j - i + 1) // 3
-            triStooge(tab, i, j - k)
-            triStooge(tab, i + k, j)
-            triStooge(tab, i, j - k)
+        if (j - i) > 1:                 # TESTER : sinon CAS DE BASE (au plus 2 elements)
+            k = (j - i + 1) // 3        # DIVISER : en tiers
+            triStooge(tab, i, j - k)    # APPEL RECURSIF : deux premiers tiers
+            triStooge(tab, i + k, j)    # APPEL RECURSIF : deux derniers tiers
+            triStooge(tab, i, j - k)    # APPEL RECURSIF : deux premiers tiers
     ```
 
     Avec `A = [5, 6, 4, 2, 3, 1]`, `triStooge(A, 0, 5)` donne bien `[1, 2, 3, 4, 5, 6]`.
@@ -553,6 +573,8 @@ Par exemple, la liste `[1, 4, 1, 6, 1, 7, 2, 1, 1]` admet `1` comme élément ab
 2.  Déterminer le nombre de comparaisons entre `val` et un élément de la liste effectuées par l’appel `effectif(1, [1, 4, 1, 6, 1, 7, 2, 1, 1])`.
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> En utilisant la fonction `effectif`, écrire une fonction `majo_abs1` qui prend en paramètre une liste `lst` et qui renvoie son élément absolument majoritaire s’il existe, `None` sinon.
+
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
 
 4.  On suppose que `majo_abs1` renvoie son résultat dès qu’un élément convient. Déterminer le nombre de comparaisons entre éléments de la liste effectuées par l’appel `majo_abs1([1, 4, 1, 6, 1, 7, 2, 1, 1])`.
 
@@ -627,23 +649,29 @@ On suppose que l’on a partagé `lst` en deux listes : `lst1 = lst[:n//2]` (les
 
     ```python
     def effectif(val, lst):
-        n = 0
-        for x in lst:
-            if x == val:
-                n = n + 1
-        return n
+        n = 0                 # INITIALISER
+        for x in lst:         # PARCOURIR
+            if x == val:      # TESTER
+                n = n + 1     # METTRE A JOUR
+        return n              # RENVOYER
     ```
 
     **3.** Chaque élément de la liste est comparé une fois à `val` : **9 comparaisons**.
 
-    **4.**
+    **4.** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert majo_abs1([1, 4, 1, 6, 1, 7, 2, 1, 1]) == 1     # cas normal
+    assert majo_abs1([7]) == 7                             # cas limite : un seul element
+    assert majo_abs1([1, 4, 6, 1, 7, 2, 1, 1]) is None     # cas piege : 4 fois sur 8, pas plus de la moitie
+    ```
 
     ```python
     def majo_abs1(lst):
-        for val in lst:
-            if effectif(val, lst) > len(lst) / 2:
-                return val
-        return None
+        for val in lst:                             # PARCOURIR
+            if effectif(val, lst) > len(lst) / 2:   # TESTER
+                return val                          # RENVOYER : trouve
+        return None                                 # RENVOYER : aucun
     ```
 
     **5.** Le premier élément testé est `1`, dont l’effectif $5$ dépasse $9/2$ : la fonction renvoie `1` dès le premier tour. Un seul appel à `effectif`, soit **9 comparaisons** entre éléments (plus la comparaison `5 > 4.5`). Dans le pire des cas (pas d’élément majoritaire), il y aurait $n$ appels à `effectif`, soit $n^2$ comparaisons.
@@ -652,13 +680,13 @@ On suppose que l’on a partagé `lst` en deux listes : `lst1 = lst[:n//2]` (les
 
     ```python
     def eff_dico(lst):
-        dico_sortie = {}
-        for elt in lst:
-            if elt in dico_sortie:
-                dico_sortie[elt] = dico_sortie[elt] + 1
+        dico_sortie = {}                                  # INITIALISER
+        for elt in lst:                                   # PARCOURIR
+            if elt in dico_sortie:                        # TESTER
+                dico_sortie[elt] = dico_sortie[elt] + 1   # METTRE A JOUR
             else:
-                dico_sortie[elt] = 1
-        return dico_sortie
+                dico_sortie[elt] = 1                      # METTRE A JOUR : premiere apparition
+        return dico_sortie                                # RENVOYER
     ```
 
     Par exemple `eff_dico([1, 4, 1, 6, 1, 7, 2, 1, 1])` renvoie `{1: 5, 4: 1, 6: 1, 7: 1, 2: 1}`.
@@ -668,10 +696,10 @@ On suppose que l’on a partagé `lst` en deux listes : `lst1 = lst[:n//2]` (les
     ```python
     def majo_abs2(lst):
         dico = eff_dico(lst)
-        for cle in dico:
-            if dico[cle] > len(lst) / 2:
-                return cle
-        return None
+        for cle in dico:                    # PARCOURIR
+            if dico[cle] > len(lst) / 2:    # TESTER
+                return cle                  # RENVOYER
+        return None                         # RENVOYER : aucun
     ```
 
     **8.** Si $n = 1$, l’unique élément `lst[0]` apparaît $1 > 1/2$ fois : c’est l’élément absolument majoritaire. Le cas de base renvoie `lst[0]`.
@@ -685,18 +713,18 @@ On suppose que l’on a partagé `lst` en deux listes : `lst1 = lst[:n//2]` (les
     ```python
     def majo_abs3(lst):
         n = len(lst)
-        if n == 1:
+        if n == 1:                      # CAS DE BASE
             return lst[0]
         else:
-            lst_g = lst[:n//2]
-            lst_d = lst[n//2:]
-            maj_g = majo_abs3(lst_g)
-            maj_d = majo_abs3(lst_d)
-            if maj_g is not None:
+            lst_g = lst[:n//2]          # DIVISER
+            lst_d = lst[n//2:]          # DIVISER
+            maj_g = majo_abs3(lst_g)    # APPEL RECURSIF
+            maj_d = majo_abs3(lst_d)    # APPEL RECURSIF
+            if maj_g is not None:       # COMBINER : recompter dans toute la liste
                 eff = effectif(maj_g, lst)
                 if eff > n/2:
                     return maj_g
-            if maj_d is not None:
+            if maj_d is not None:       # COMBINER
                 eff = effectif(maj_d, lst)
                 if eff > n/2:
                     return maj_d
@@ -817,6 +845,8 @@ Les coordonnées d’un point sont stockées dans un tuple de deux nombres réel
         `return segments[0]`  
         `seg_g = plus_court_segment(moitie_gauche(segments))` …
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 4.  On considère les trois points $A(3 ; 4)$, $B(2 ; 3)$ et $C(-3 ; -1)$.
 
     1.  Donner l’instruction Python permettant de construire la variable `nuage_points` contenant les trois points $A$, $B$ et $C$.
@@ -844,12 +874,12 @@ Les coordonnées d’un point sont stockées dans un tuple de deux nombres réel
     ```python
     def liste_segments(liste_points):
         n = len(liste_points)
-        segments = []
-        for i in range(n - 1):
-            for j in range(i + 1, n):
+        segments = []                                         # INITIALISER
+        for i in range(n - 1):                                # PARCOURIR
+            for j in range(i + 1, n):                         # PARCOURIR : j apres i
                 seg = Segment(liste_points[i], liste_points[j])
-                segments.append(seg)
-        return segments
+                segments.append(seg)                          # METTRE A JOUR
+        return segments                                       # RENVOYER
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Faire partir `j` de `0` : on construit alors $[AB]$ et $[BA]$, et même des « segments » $[AA]$ de longueur nulle, qui fausseraient la recherche du plus court.
@@ -860,13 +890,22 @@ Les coordonnées d’un point sont stockées dans un tuple de deux nombres réel
 
     **3.** **Démarche :** condition d’arrêt : un seul segment ; sinon, deux appels récursifs sur les deux moitiés de la liste, puis on garde le segment de plus petite `longueur` (on renvoie l’objet, pas sa longueur).
 
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    segs = liste_segments([(3, 4), (2, 3), (-3, -1)])      # [AB], [AC], [BC]
+    assert plus_court_segment(segs) is segs[0]              # cas normal : [AB]
+    assert plus_court_segment([segs[2]]) is segs[2]         # cas limite : un seul segment
+    assert plus_court_segment([segs[2], segs[1], segs[0]]) is segs[0]   # cas piege : l'objet, en dernier
+    ```
+
     ```python
     def plus_court_segment(segments):
-        if len(segments) == 1:                 # condition d'arret
+        if len(segments) == 1:                                 # CAS DE BASE
             return segments[0]
-        seg_g = plus_court_segment(moitie_gauche(segments))
-        seg_d = plus_court_segment(moitie_droite(segments))
-        if seg_g.longueur <= seg_d.longueur:
+        seg_g = plus_court_segment(moitie_gauche(segments))    # DIVISER, APPEL RECURSIF
+        seg_d = plus_court_segment(moitie_droite(segments))    # DIVISER, APPEL RECURSIF
+        if seg_g.longueur <= seg_d.longueur:                   # COMBINER : garder le plus court
             return seg_g
         else:
             return seg_d
@@ -905,6 +944,8 @@ On appelle **inversion** d’une liste `t` tout couple d’indices `(i, j)` tel 
     ??? pouce "Coup de pouce"
 
         Q2 : deux boucles imbriquées, la seconde commençant juste après l’indice de la première.
+
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
 
 3.  Donner, en fonction de la longueur $n$ de la liste `t`, le nombre de comparaisons `t[i] > t[j]` effectuées par la fonction `inversions_naif`. Quel est le coût de cette fonction ? Estimer ce nombre pour une liste d’un million de chansons.
 
@@ -971,16 +1012,22 @@ On appelle **inversion** d’une liste `t` tout couple d’indices `(i, j)` tel 
 
     **1.** Dans `[2, 4, 1, 3, 5]`, les couples rangés « à l’envers » sont $(2, 1)$, $(4, 1)$ et $(4, 3)$ : **3 inversions**. Le classement `[1, 2, 3, 4, 5]` (identique au classement officiel) n’en a aucune. Le classement `[5, 4, 3, 2, 1]` a le maximum : *tous* les couples sont inversés, soit $4 + 3 + 2 + 1 = \mathbf{10}$ inversions.
 
-    **2.**
+    **2.** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert inversions_naif([2, 4, 1, 3, 5]) == 3     # cas normal
+    assert inversions_naif([]) == 0                  # cas limite : liste vide
+    assert inversions_naif([5, 4, 3, 2, 1]) == 10    # cas piege : tous les couples sont inverses
+    ```
 
     ```python
     def inversions_naif(t):
-        nb = 0
-        for i in range(len(t)):
-            for j in range(i + 1, len(t)):
-                if t[i] > t[j]:
-                    nb = nb + 1
-        return nb
+        nb = 0                                # INITIALISER
+        for i in range(len(t)):               # PARCOURIR
+            for j in range(i + 1, len(t)):    # PARCOURIR : j apres i
+                if t[i] > t[j]:               # TESTER
+                    nb = nb + 1               # METTRE A JOUR
+        return nb                             # RENVOYER
     ```
 
     `inversions_naif([2, 4, 1, 3, 5])` renvoie `3`.
@@ -1003,20 +1050,20 @@ On appelle **inversion** d’une liste `t` tout couple d’indices `(i, j)` tel 
 
     ```python
     def fusion_compte(gauche, droite):
-        resultat = []
-        croisees = 0
-        i = j = 0
-        while i < len(gauche) and j < len(droite):
-            if gauche[i] <= droite[j]:
-                resultat.append(gauche[i])
+        resultat = []                                   # INITIALISER
+        croisees = 0                                    # INITIALISER
+        i = j = 0                                       # INITIALISER
+        while i < len(gauche) and j < len(droite):      # PARCOURIR
+            if gauche[i] <= droite[j]:                  # TESTER
+                resultat.append(gauche[i])              # METTRE A JOUR
                 i = i + 1
             else:
-                resultat.append(droite[j])
-                croisees = croisees + len(gauche) - i
+                resultat.append(droite[j])              # METTRE A JOUR
+                croisees = croisees + len(gauche) - i   # METTRE A JOUR : inversions croisees
                 j = j + 1
         resultat = resultat + gauche[i:]
         resultat = resultat + droite[j:]
-        return resultat, croisees
+        return resultat, croisees                       # RENVOYER
     ```
 
     Par exemple `fusion_compte([2, 5, 6], [1, 3, 4])` renvoie `([1, 2, 3, 4, 5, 6], 7)` : on retrouve les $7$ inversions croisées de la question 4.
@@ -1025,13 +1072,13 @@ On appelle **inversion** d’une liste `t` tout couple d’indices `(i, j)` tel 
 
     ```python
     def tri_compte(t):
-        if len(t) <= 1:                         # condition d'arret
+        if len(t) <= 1:                                    # CAS DE BASE
             return t, 0
-        milieu = len(t) // 2
-        gauche, inv_g = tri_compte(t[:milieu])
-        droite, inv_d = tri_compte(t[milieu:])
-        fusionnee, inv_c = fusion_compte(gauche, droite)
-        return fusionnee, inv_g + inv_d + inv_c
+        milieu = len(t) // 2                               # DIVISER
+        gauche, inv_g = tri_compte(t[:milieu])             # APPEL RECURSIF
+        droite, inv_d = tri_compte(t[milieu:])             # APPEL RECURSIF
+        fusionnee, inv_c = fusion_compte(gauche, droite)   # COMBINER
+        return fusionnee, inv_g + inv_d + inv_c            # RENVOYER
     ```
 
     **Diviser** : couper `t` en deux moitiés (`t[:milieu]` et `t[milieu:]`) ; **régner** : les deux appels récursifs, qui trient chaque moitié et comptent ses inversions ; **combiner** : `fusion_compte`, qui fusionne et compte les inversions croisées, puis la somme des trois nombres. `tri_compte([5, 2, 6, 1, 4, 3])` renvoie `([1, 2, 3, 4, 5, 6], 9)`.

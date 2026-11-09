@@ -316,6 +316,8 @@ for (a, b) in aretes:
     g.ajoute_arete(a, b)
 ```
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```text
 >>> g.voisins('B')
 ['A', 'C', 'D']
@@ -349,6 +351,8 @@ Tous les parcours suivent le même squelette :
 
 - **tant que** `S` n’est pas vide : on en **retire** un sommet (on le « visite »), et on **ajoute** à `S` ses voisins pas encore rencontrés.
 
+Dans les codes qui suivent, des commentaires en majuscules repèrent ces étapes, toujours avec les mêmes mots : `INITIALISER` (la structure d’attente et la mémoire des sommets vus), `PARCOURIR`, `TESTER`, `METTRE A JOUR`, `RENVOYER` (et `APPEL RECURSIF` pour la version récursive).
+
 !!! regle "Règle 5 — La différence cruciale avec les arbres"
 
     Dans un arbre, on ne peut jamais revenir sur ses pas : les sous-arbres sont disjoints. Dans un graphe, un voisin peut **déjà avoir été vu** (par un cycle, un raccourci…). Il est donc **indispensable de mémoriser les sommets déjà découverts**, sinon le parcours tourne en rond **indéfiniment**.
@@ -381,21 +385,25 @@ On explore le graphe « par cercles concentriques » : d’abord le départ, pui
 def BFS(g, depart):
     """Parcours en largeur de g depuis depart ;
        renvoie la liste des sommets dans l'ordre de visite."""
-    traites = []
-    decouverts = [depart]
-    en_attente = File()             # la file (interface admise)
+    traites = []                            # INITIALISER
+    decouverts = [depart]                   # INITIALISER : sommets deja vus
+    en_attente = File()                     # INITIALISER : la file (interface admise)
     en_attente.enfiler(depart)
-    while not en_attente.est_vide():
+    while not en_attente.est_vide():        # PARCOURIR : tant que la file n'est pas vide
         sommet = en_attente.defiler()       # on defile (FIFO)
-        for voisin in g.voisins(sommet):
-            if voisin not in decouverts:    # tester AVANT d'enfiler
-                decouverts.append(voisin)
-                en_attente.enfiler(voisin)  # on enfile
-        traites.append(sommet)
-    return traites
+        for voisin in g.voisins(sommet):    # PARCOURIR : les voisins
+            if voisin not in decouverts:    # TESTER : AVANT d'enfiler
+                decouverts.append(voisin)   # METTRE A JOUR
+                en_attente.enfiler(voisin)  # METTRE A JOUR : on enfile
+        traites.append(sommet)              # METTRE A JOUR : sommet visite
+    return traites                          # RENVOYER
 ```
 
-Sur le graphe ci-dessus, `BFS(g, ’B’)` renvoie `[’B’, ’A’, ’D’, ’E’, ’C’, ’F’, ’G’, ’H’]` : on visite `B`, puis ses voisins `A, D, E`, puis les nouveaux voisins de ceux-ci, etc.
+<span class="routine">▷ Je prédis.</span> Sur le graphe ci-dessus, dans quel ordre `BFS(g, ’B’)` visite-t-il les sommets ?
+
+??? verifie "Je vérifie"
+
+    `[’B’, ’A’, ’D’, ’E’, ’C’, ’F’, ’G’, ’H’]` : on visite `B`, puis ses voisins `A, D, E`, puis les nouveaux voisins de ceux-ci, etc.
 
 Voici l’état de la file `en_attente` après chaque tour de boucle (à gauche, le sommet défilé et visité ; la tête de la file est à gauche, les sommets qui viennent d’être enfilés sont foncés) :
 
@@ -417,24 +425,30 @@ Voici l’état de la file `en_attente` après chaque tour de boucle (à gauche,
 def plus_court_chemin(g, depart, arrivee):
     """Renvoie un plus court chemin de depart a arrivee (liste de sommets),
        ou None s'il n'y en a pas."""
-    decouverts = [depart]
-    en_attente = File()
+    decouverts = [depart]                   # INITIALISER
+    en_attente = File()                     # INITIALISER
     en_attente.enfiler(depart)
-    parent = {depart: None}         # depart n'a pas de parent
-    while not en_attente.est_vide():
+    parent = {depart: None}                 # INITIALISER : depart n'a pas de parent
+    while not en_attente.est_vide():        # PARCOURIR
         sommet = en_attente.defiler()
-        if sommet == arrivee:              # arrive : on reconstruit
+        if sommet == arrivee:               # TESTER : arrive, on reconstruit
             chemin = [arrivee]
             while parent[chemin[0]] is not None:
                 chemin = [parent[chemin[0]]] + chemin
-            return chemin
-        for voisin in g.voisins(sommet):
-            if voisin not in decouverts:
-                decouverts.append(voisin)
-                en_attente.enfiler(voisin)
-                parent[voisin] = sommet    # on note qui l'a decouvert
-    return None
+            return chemin                   # RENVOYER
+        for voisin in g.voisins(sommet):    # PARCOURIR
+            if voisin not in decouverts:    # TESTER
+                decouverts.append(voisin)   # METTRE A JOUR
+                en_attente.enfiler(voisin)  # METTRE A JOUR
+                parent[voisin] = sommet     # METTRE A JOUR : qui l'a decouvert
+    return None                             # RENVOYER : arrivee inaccessible
 ```
+
+<span class="routine">▷ Je prédis.</span> Sur le graphe à 8 sommets, que renvoie `plus_court_chemin(g, ’A’, ’H’)` ?
+
+??? verifie "Je vérifie"
+
+    `[’A’, ’B’, ’E’, ’G’, ’H’]` (4 arêtes). `E` est découvert depuis `B`, défilé avant `D` : c’est `B` qui devient son parent.
 
 !!! propriete "Propriété 4 — Pourquoi c’est le plus court"
 
@@ -448,18 +462,22 @@ Ce parcours s’écrit **naturellement de façon récursive** : visiter un somme
 
 ```python
 def DFS(g, sommet, traites=None):
-    if traites is None:
+    if traites is None:                 # INITIALISER (premier appel)
         traites = []
-    traites.append(sommet)
-    for voisin in g.voisins(sommet):
-        if voisin not in traites:
-            DFS(g, voisin, traites)
-    return traites
+    traites.append(sommet)              # METTRE A JOUR : sommet visite
+    for voisin in g.voisins(sommet):    # PARCOURIR
+        if voisin not in traites:       # TESTER
+            DFS(g, voisin, traites)     # APPEL RECURSIF
+    return traites                      # RENVOYER
 ```
 
 Le paramètre `traites` a la valeur par défaut `None`, remplacée par une liste neuve au premier appel : c’est la bonne pratique vue au chapitre *Récursivité* (une valeur par défaut `[]` serait partagée d’un appel de l’utilisateur à l’autre).
 
-Sur le graphe précédent, `DFS(g, ’A’)` renvoie `[’A’, ’B’, ’D’, ’C’, ’E’, ’F’, ’G’, ’H’]` : depuis `A` on plonge par `B`, puis `D`, puis `C` (impasse), on remonte, puis `E, F, G, H`.
+<span class="routine">▷ Je prédis.</span> Sur le graphe précédent, dans quel ordre `DFS(g, ’A’)` visite-t-il les sommets ?
+
+??? verifie "Je vérifie"
+
+    `[’A’, ’B’, ’D’, ’C’, ’E’, ’F’, ’G’, ’H’]` : depuis `A` on plonge par `B`, puis `D`, puis `C` (impasse), on remonte, puis `E, F, G, H`.
 
 #### Version itérative, avec une pile
 
@@ -467,20 +485,24 @@ Le DFS s’écrit aussi **sans récursion**, en remplaçant la **file** du BFS p
 
 ```python
 def DFS_iteratif(g, depart):
-    traites = []
-    en_attente = Pile()                # la pile (interface admise)
+    traites = []                                # INITIALISER
+    en_attente = Pile()                         # INITIALISER : la pile (interface admise)
     en_attente.empiler(depart)
-    while not en_attente.est_vide():
-        sommet = en_attente.depiler()  # on depile (LIFO)
-        if sommet not in traites:      # deja traite : on l'ignore
-            traites.append(sommet)
-            for voisin in g.voisins(sommet):
-                if voisin not in traites:
-                    en_attente.empiler(voisin)  # on empile
-    return traites
+    while not en_attente.est_vide():            # PARCOURIR
+        sommet = en_attente.depiler()           # on depile (LIFO)
+        if sommet not in traites:               # TESTER : deja traite, on l'ignore
+            traites.append(sommet)              # METTRE A JOUR : sommet visite
+            for voisin in g.voisins(sommet):    # PARCOURIR : les voisins
+                if voisin not in traites:       # TESTER
+                    en_attente.empiler(voisin)  # METTRE A JOUR : on empile
+    return traites                              # RENVOYER
 ```
 
-Sur le graphe précédent, `DFS_iteratif(g, ’A’)` renvoie `[’A’, ’C’, ’D’, ’E’, ’G’, ’H’, ’F’, ’B’]` : le **dernier** voisin empilé ressort le premier, d’où un ordre différent du DFS récursif — mais c’est bien, lui aussi, un parcours en profondeur.
+<span class="routine">▷ Je prédis.</span> Sur le graphe précédent, dans quel ordre `DFS_iteratif(g, ’A’)` visite-t-il les sommets ? Est-ce l’ordre du DFS récursif ?
+
+??? verifie "Je vérifie"
+
+    `[’A’, ’C’, ’D’, ’E’, ’G’, ’H’, ’F’, ’B’]` : le **dernier** voisin empilé ressort le premier, d’où un ordre différent du DFS récursif — mais c’est bien, lui aussi, un parcours en profondeur.
 
 !!! regle "Règle 7 — Où placer le test : file ou pile, ce n’est pas pareil"
 
@@ -597,26 +619,28 @@ En Python, avec le dictionnaire `G` des successeurs et un dictionnaire `etat` (u
 def cycle_depuis(G, sommet, etat):
     """Parcours en profondeur du graphe oriente G depuis sommet ;
        renvoie True si l'on retombe sur un sommet en cours (cycle)."""
-    etat[sommet] = 'en cours'           # sommet entre dans la pile d'appels
-    for voisin in G[sommet]:
-        if voisin not in etat:          # jamais vu : on plonge
-            if cycle_depuis(G, voisin, etat):
-                return True
-        elif etat[voisin] == 'en cours':
-            return True                 # retour sur le chemin en cours : cycle
+    etat[sommet] = 'en cours'                   # METTRE A JOUR : entre dans la pile d'appels
+    for voisin in G[sommet]:                    # PARCOURIR
+        if voisin not in etat:                  # TESTER : jamais vu, on plonge
+            if cycle_depuis(G, voisin, etat):   # APPEL RECURSIF
+                return True                     # RENVOYER
+        elif etat[voisin] == 'en cours':        # TESTER
+            return True                         # RENVOYER : retour sur le chemin en cours, cycle
         # sinon voisin est 'termine' : deja explore, pas de cycle par la
-    etat[sommet] = 'termine'            # tous ses successeurs sont explores
-    return False
+    etat[sommet] = 'termine'                    # METTRE A JOUR : successeurs tous explores
+    return False                                # RENVOYER
 
 def a_un_cycle(G):
-    etat = {}
-    for s in G:                         # on relance depuis chaque sommet non vu
+    etat = {}                                   # INITIALISER
+    for s in G:                                 # PARCOURIR : relancer depuis chaque sommet non vu
         if s not in etat and cycle_depuis(G, s, etat):
-            return True
-    return False
+            return True                         # RENVOYER
+    return False                                # RENVOYER
 ```
 
 Sur le graphe orienté ci-dessus :
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```text
 >>> G = {'A': ['B'], 'B': ['C', 'D'], 'C': ['A', 'E'], 'D': ['E'], 'E': []}

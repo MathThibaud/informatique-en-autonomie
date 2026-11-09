@@ -198,6 +198,8 @@ Les lignes et les colonnes sont numérotées **à partir de 1**. On renvoie le m
 
 Deux difficultés nouvelles : un symbole écrit **dans une chaîne** (`print("(")`) ou **dans un commentaire** (`# voir (2)`) ne compte pas ; et, pour signaler où se trouve un symbole ouvrant jamais refermé, il faut se souvenir de **sa** position. Attention : un `#` écrit dans une chaîne ne commence pas un commentaire, et un guillemet écrit dans un commentaire n’ouvre pas de chaîne. On ne gère ni les chaînes triples `"""..."""` ni les guillemets précédés d’un `\`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 1.  Que faut-il empiler, au lieu du seul symbole ouvrant, pour pouvoir écrire ces messages ? Proposer un **tuple**.
 
 2.  On parcourt le code caractère par caractère en tenant à jour `ligne` et `colonne`, ainsi que deux indicateurs : `dans_chaine` (vaut `None`, ou le guillemet `"` ou `’` qui a ouvert la chaîne en cours) et `dans_commentaire` (booléen). À quel caractère chacun de ces deux indicateurs se « remet-il à zéro » ?

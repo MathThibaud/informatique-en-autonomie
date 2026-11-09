@@ -132,6 +132,8 @@ Chaque ligne devient un dictionnaire ; les en-têtes de colonnes deviennent ses 
 
 On accède alors à une valeur en deux temps : d’abord la fiche (par son **indice** dans la liste), puis la rubrique (par son **descripteur**).
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```text
 >>> prenoms[0]["prenom"]
 'Louise'
@@ -169,6 +171,8 @@ Saisir la table à la main serait absurde pour 700 000 lignes. La bibliothèqu
 
     - la compréhension `[ligne for ligne in lecteur]` range toutes les fiches dans une liste.
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```text
 >>> prenoms = charger("prenoms.csv")
 >>> len(prenoms)
@@ -180,6 +184,8 @@ Saisir la table à la main serait absurde pour 700 000 lignes. La bibliothèqu
 !!! remarque "Remarque — Le piège no 1 : tout est du texte !"
 
     `csv` lit un fichier **texte** : **toutes** les valeurs sont des **chaînes de caractères** (`str`), **même les nombres**. Ainsi `prenoms[0]``["nombre"]` vaut la chaîne `"3177"`, pas l’entier `3177`.
+
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
     ```text
     >>> prenoms[0]["nombre"] + prenoms[1]["nombre"]
@@ -204,12 +210,14 @@ Sélectionner les lignes qui vérifient un critère, c’est **parcourir** la ta
 
     ```python
     def selection(table, sexe, annee):
-        resultat = []
-        for ligne in table:
-            if ligne["sexe"] == sexe and ligne["annee"] == annee:
-                resultat.append(ligne)
-        return resultat
+        resultat = []                                              # INITIALISER : l'accumulateur est une liste
+        for ligne in table:                                        # PARCOURIR
+            if ligne["sexe"] == sexe and ligne["annee"] == annee:  # TESTER
+                resultat.append(ligne)                             # METTRE A JOUR
+        return resultat                                            # RENVOYER
     ```
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```text
 >>> filles23 = selection(prenoms, "F", "2023")
@@ -233,11 +241,17 @@ Pour trouver **un** enregistrement précis (le *premier* qui convient), on appli
 
 ```python
 def chercher(table, prenom):
-    for ligne in table:
-        if ligne["prenom"] == prenom:
-            return ligne          # trouve : on s'arrete tout de suite
-    return None                   # parcours fini sans succes
+    for ligne in table:           # PARCOURIR
+        if ligne["prenom"] == prenom:   # TESTER
+            return ligne          # RENVOYER : trouve, on s'arrete tout de suite
+    return None                   # RENVOYER : parcours fini sans succes
 ```
+
+<span class="routine">▷ Je prédis.</span> Dans l’extrait, `Louise` figure en 2023 puis en 2025. Que renvoie `chercher(prenoms, "Louise")` ?
+
+??? verifie "Je vérifie"
+
+    La fiche de **2023** (`"nombre": "3177"`) : c’est la première rencontrée, et la fonction s’arrête aussitôt ; la fiche de 2025 n’est jamais examinée. Pour un autre prénom absent de l’extrait, elle renverrait `None`.
 
 ### Nettoyer une table : doublons et cohérence
 
@@ -256,16 +270,22 @@ Une table réelle contient presque toujours des **erreurs de saisie** : une mêm
 
     def doublons(table):
         """Fiches dont (prenom, sexe, annee) a deja ete rencontre plus haut."""
-        deja_vus = []
-        resultat = []
-        for ligne in table:
+        deja_vus = []                 # INITIALISER : identifiants deja rencontres
+        resultat = []                 # INITIALISER
+        for ligne in table:           # PARCOURIR
             cle = (ligne["prenom"], ligne["sexe"], ligne["annee"])
-            if cle in deja_vus:
-                resultat.append(ligne)
+            if cle in deja_vus:       # TESTER
+                resultat.append(ligne)    # METTRE A JOUR : c'est un doublon
             else:
-                deja_vus.append(cle)
-        return resultat
+                deja_vus.append(cle)  # METTRE A JOUR : premiere rencontre
+        return resultat               # RENVOYER
     ```
+
+<span class="routine">▷ Je prédis.</span> Une table contient trois fois la même fiche, et rien d’autre. Que renvoie `doublons` ?
+
+??? verifie "Je vérifie"
+
+    Une liste de **deux** fiches : la première copie est mémorisée dans `deja_vus`, seules les deux suivantes sont des doublons.
 
 Que faire des fiches repérées ? Les écarter, ou les corriger si l’on connaît la bonne valeur : c’est le **nettoyage** de la table, que le TP proposé en fin de chapitre pratique sur de vrais relevés météo.
 
@@ -281,18 +301,20 @@ Une fois la table (ou un sous-ensemble filtré) en main, calculer sur une colonn
 
     ```python
     def compter(table, sexe):          # combien de fiches pour ce sexe ?
-        n = 0
-        for ligne in table:
-            if ligne["sexe"] == sexe:
-                n += 1
-        return n
+        n = 0                          # INITIALISER
+        for ligne in table:            # PARCOURIR
+            if ligne["sexe"] == sexe:  # TESTER
+                n += 1                 # METTRE A JOUR
+        return n                       # RENVOYER
 
     def nombre_moyen(table):           # attribution moyenne sur la table
-        total = 0
-        for ligne in table:
-            total = total + int(ligne["nombre"])
-        return total / len(table)
+        total = 0                      # INITIALISER
+        for ligne in table:            # PARCOURIR
+            total = total + int(ligne["nombre"])   # METTRE A JOUR : convertir !
+        return total / len(table)      # RENVOYER
     ```
+
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
     ```text
     >>> compter(prenoms, "G")
@@ -307,12 +329,14 @@ Une fois la table (ou un sous-ensemble filtré) en main, calculer sur une colonn
 
     ```python
     def plus_donne(table):
-        champion = table[0]
-        for ligne in table:
-            if int(ligne["nombre"]) > int(champion["nombre"]):
-                champion = ligne
-        return champion["prenom"], int(champion["nombre"])
+        champion = table[0]                                     # INITIALISER : la premiere fiche
+        for ligne in table:                                     # PARCOURIR
+            if int(ligne["nombre"]) > int(champion["nombre"]):  # TESTER
+                champion = ligne                                # METTRE A JOUR
+        return champion["prenom"], int(champion["nombre"])      # RENVOYER
     ```
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```text
 >>> plus_donne(filles23)
@@ -349,6 +373,8 @@ Trier une table, c’est ranger ses fiches selon les valeurs d’**un** descript
 
     - `sorted` renvoie une **nouvelle** liste et **ne modifie pas** l’original.
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```text
 >>> top = trier_par_nombre(selection(prenoms, "F", "2025"))
 >>> [(l["prenom"], l["nombre"]) for l in top][:3]
@@ -358,6 +384,8 @@ Trier une table, c’est ranger ses fiches selon les valeurs d’**un** descript
 !!! remarque "Remarque — Clé numérique ou clé texte"
 
     La clé change complètement le tri. `int(ligne["nombre"])` trie par **valeur numérique** ; `ligne["prenom"]` trie par **ordre alphabétique** :
+
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
     ```text
     >>> [l["prenom"] for l in sorted(filles23, key=lambda l: l["prenom"])][:3]
@@ -390,16 +418,18 @@ Prenons une table de communes et une table de départements, reliées par le cod
 
     ```python
     def jointure(gauche, droite, cle):
-        resultat = []
-        for lg in gauche:
-            for ld in droite:
-                if lg[cle] == ld[cle]:      # meme valeur de descripteur
-                    fusion = {c: lg[c] for c in lg}   # copie de la fiche de gauche
+        resultat = []                                # INITIALISER
+        for lg in gauche:                            # PARCOURIR : la table de gauche
+            for ld in droite:                        # PARCOURIR : la table de droite
+                if lg[cle] == ld[cle]:               # TESTER : meme valeur de descripteur
+                    fusion = {c: lg[c] for c in lg}  # copie de la fiche de gauche
                     for c in ld:
-                        fusion[c] = ld[c]   # on ajoute les colonnes de droite
-                    resultat.append(fusion)
-        return resultat
+                        fusion[c] = ld[c]            # on ajoute les colonnes de droite
+                    resultat.append(fusion)          # METTRE A JOUR
+        return resultat                              # RENVOYER
     ```
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```text
 >>> villes = jointure(communes, departements, "dep")

@@ -100,11 +100,17 @@ donc  $d = \sqrt{1.13} \approx 1.06$.
     ```python
     def distance(A, B):
         """distance euclidienne entre deux listes de meme longueur"""
-        somme = 0
-        for i in range(len(A)):
-            somme = somme + (A[i] - B[i]) ** 2
-        return somme ** 0.5
+        somme = 0                                  # INITIALISER
+        for i in range(len(A)):                    # PARCOURIR : descripteur par descripteur
+            somme = somme + (A[i] - B[i]) ** 2     # METTRE A JOUR : carre de l'ecart
+        return somme ** 0.5                        # RENVOYER : la racine
     ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoient `distance([1, 2], [4, 6])` et `distance([4, 6], [1, 2])` ?
+
+??? verifie "Je vérifie"
+
+    `5.0` les deux fois : $3^2 + 4^2 = 25$, dont la racine est $5$. C’est un flottant (`** 0.5` donne toujours un flottant), et l’ordre des points ne compte pas : les écarts négatifs disparaissent au carré.
 
 !!! remarque "Remarque — Comparer sans la racine carrée"
 
@@ -152,33 +158,41 @@ On assemble le tout en Python. On réutilise le **tri par clé** (chapitres *Les
     ```python
     def k_plus_proches(exemples, x, k):
         """exemples : liste de (descripteurs, classe). Renvoie les classes des k voisins."""
-        dists = []
-        for descripteurs, classe in exemples:
-            dists.append((distance(x, descripteurs), classe))
-        dists.sort(key=lambda couple: couple[0])      # tri par distance croissante
-        return [classe for (d, classe) in dists[:k]]  # les k premiers
+        dists = []                                                  # INITIALISER
+        for descripteurs, classe in exemples:                       # PARCOURIR
+            dists.append((distance(x, descripteurs), classe))       # METTRE A JOUR
+        dists.sort(key=lambda couple: couple[0])                    # tri par distance croissante
+        return [classe for (d, classe) in dists[:k]]                # RENVOYER : les k premiers
 
     def vote(classes):
-        compte = {}
-        for c in classes:
-            if c in compte:
-                compte[c] += 1          # dictionnaire d'occurrences
+        compte = {}                                                 # INITIALISER
+        for c in classes:                                           # PARCOURIR
+            if c in compte:                                         # TESTER
+                compte[c] += 1                                      # METTRE A JOUR : occurrences
             else:
-                compte[c] = 1
-        meilleure = None
-        for c in compte:
-            if meilleure is None or compte[c] > compte[meilleure]:
-                meilleure = c
-        return meilleure
+                compte[c] = 1                                       # METTRE A JOUR
+        meilleure = None                                            # INITIALISER : le champion
+        for c in compte:                                            # PARCOURIR
+            if meilleure is None or compte[c] > compte[meilleure]:  # TESTER
+                meilleure = c                                       # METTRE A JOUR
+        return meilleure                                            # RENVOYER
 
     def classer(exemples, x, k):
         return vote(k_plus_proches(exemples, x, k))
     ```
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```text
 >>> classer(iris, [4.7, 1.4], 3)
 'versicolor'
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoie `vote(["setosa", "virginica", "virginica", "setosa"])` ?
+
+??? verifie "Je vérifie"
+
+    `’setosa’` : égalité 2 contre 2, et le test `>` est strict, donc le champion reste la première classe rencontrée. Le vote ne départage pas vraiment : d’où l’intérêt d’un $k$ impair.
 
 !!! remarque "Remarque — Une méthode « paresseuse »"
 
@@ -228,12 +242,18 @@ Un classifieur peut sembler parfait… sur les exemples qu’il connaît déjà
 
 ```python
 def taux_reussite(train, test, k):
-    bons = 0
-    for descripteurs, vraie in test:
-        if classer(train, descripteurs, k) == vraie:
-            bons += 1
-    return bons / len(test)
+    bons = 0                                          # INITIALISER
+    for descripteurs, vraie in test:                  # PARCOURIR
+        if classer(train, descripteurs, k) == vraie:  # TESTER : bonne prediction ?
+            bons += 1                                 # METTRE A JOUR
+    return bons / len(test)                           # RENVOYER : une proportion
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoie `taux_reussite(iris, iris, 1)` (test sur l’entraînement lui-même) ?
+
+??? verifie "Je vérifie"
+
+    `1.0` : chaque exemple est à distance $0$ de lui-même, donc son propre plus proche voisin.
 
 !!! remarque "Remarque — Évaluer sur l’entraînement serait tricher"
 

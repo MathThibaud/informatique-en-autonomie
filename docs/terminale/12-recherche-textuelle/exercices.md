@@ -410,11 +410,11 @@ def bonjour(nom):
 
         ```python
         def occurrences_lettre(une_chaine, une_lettre):
-            nb = 0
-            for c in une_chaine:
-                if c == une_lettre:
-                    nb = nb + 1
-            return nb
+            nb = 0                  # INITIALISER
+            for c in une_chaine:    # PARCOURIR
+                if c == une_lettre:   # TESTER
+                    nb = nb + 1     # METTRE A JOUR
+            return nb               # RENVOYER
         ```
 
         Par exemple `occurrences_lettre(’Bonjour’, ’o’)` renvoie `2`.
@@ -481,6 +481,8 @@ Dans les questions 1 à 3 et 6, la variable `texte` contient la chaîne `’LE C
         `for j in range(len(motif)):`  
         `if texte[i + j] != motif[j]:`
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 6.  <span class="run" title="À programmer et tester sur machine">▶</span> Pour la commande **Remplacer tout**, on parcourt le texte de gauche à droite en construisant une nouvelle chaîne. Recopier et compléter les lignes `(a)` à `(d)`, puis donner la valeur renvoyée par `remplacer_tout(’CHAT’, ’LOUP’, texte)`.
 
     ??? pouce "Coup de pouce"
@@ -518,14 +520,22 @@ Dans les questions 1 à 3 et 6, la variable `texte` contient la chaîne `’LE C
 
     4.  Par exemple le motif `’AAAB’` dans le texte `’AAAAAAAAAAAA’` (douze `A`) : à chacune des $12 - 4 + 1 = 9$ positions, les trois `A` correspondent et l’échec n’a lieu que sur la dernière lettre, soit $4$ comparaisons. Total : $9 \times 4 = \textbf{36}$ comparaisons, c’est-à-dire $(n - m + 1) \times m$ : le maximum possible, puisqu’on ne fait jamais plus de $m$ comparaisons par position. *(Le motif `’AAAA’` convient aussi.)*
 
-    5.  On compare lettre à lettre, comme dans la méthode naïve :
+    5.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert est_occurrence('CHAT', texte, 3)          # cas normal
+        assert est_occurrence('TON', texte, 17)          # cas limite : derniere position possible
+        assert not est_occurrence('CHAR', texte, 3)      # cas piege : seule la derniere lettre differe
+        ```
+
+        On compare lettre à lettre, comme dans la méthode naïve :
 
         ```python
         def est_occurrence(motif, texte, i):
-            for j in range(len(motif)):
-                if texte[i + j] != motif[j]:
-                    return False
-            return True
+            for j in range(len(motif)):         # PARCOURIR
+                if texte[i + j] != motif[j]:    # TESTER
+                    return False                # RENVOYER : des le premier desaccord
+            return True                         # RENVOYER
         ```
 
     6.  `(a)` `resultat = resultat + nouveau` ; `(b)` `i = i + m` (on saute toute l’occurrence) ; `(c)` `resultat = resultat + texte[i]` ; `(d)` `i = i + 1`.
@@ -588,6 +598,8 @@ L’antivirus utilise l’algorithme de **Boyer-Moore-Horspool**. On dispose des
 
         Q5 : parcourir la liste des signatures : que renvoie `horspool` quand la signature est absente ? Peut-on conclure dès la première trouvée ?
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 6.  L’antivirus analyse $100\,000$ fichiers avec la même liste de $1\,000$ signatures. Avec la fonction `est_infecte`, combien de fois, au plus, la table de décalage d’une même signature est-elle construite ? Proposer, sans écrire tout le code, une organisation qui évite ce travail inutile.
 
 7.  L’éditeur de l’antivirus affirme : « plus nos signatures sont longues, plus l’analyse est rapide ». Cette affirmation est-elle plausible ? Justifier.
@@ -615,14 +627,22 @@ L’antivirus utilise l’algorithme de **Boyer-Moore-Horspool**. On dispose des
 
     4.  Horspool a testé **4** alignements, contre $22 - 6 + 1 = \textbf{17}$ pour la méthode naïve. Comparaisons : $1$ (en $i=0$) $+ 2$ (en $i=4$ : `0` correspond, puis `0` $\neq$ `9`) $+ 1$ (en $i=10$) $+ 6$ (en $i=14$) $= \textbf{10}$ comparaisons. *(La méthode naïve en effectue $26$.)*
 
-    5.  On essaie les signatures une à une :
+    5.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert est_infecte(contenu, ['E8FFFF', '4D5A90'])     # cas normal
+        assert not est_infecte(contenu, [])                   # cas limite : aucune signature
+        assert not est_infecte(contenu, ['E8FFFF'])           # cas piege : E8 et FF presents, pas a la suite
+        ```
+
+        On essaie les signatures une à une :
 
         ```python
         def est_infecte(contenu, signatures):
-            for s in signatures:
-                if len(horspool(s, contenu)) > 0:
-                    return True
-            return False
+            for s in signatures:                    # PARCOURIR
+                if len(horspool(s, contenu)) > 0:   # TESTER
+                    return True                     # RENVOYER : une signature suffit
+            return False                            # RENVOYER
         ```
 
         Par exemple, avec le contenu de la question 3 :
@@ -705,6 +725,8 @@ def boyer_moore(motif, texte):
         `resultat = {}`  
         `for amorce in amorces:`
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> En utilisant `cherche_amorces`, écrire une fonction `amorces_absentes(amorces, brin)` qui renvoie la liste des amorces qui n’apparaissent pas dans le brin.
 
 3.  Un génome humain compte environ $3$ milliards de bases et une amorce environ $20$ bases. Donner l’ordre de grandeur du nombre d’alignements testés par la méthode naïve, puis par Horspool dans un cas favorable où chaque saut vaut la longueur de l’amorce.
@@ -747,14 +769,22 @@ def boyer_moore(motif, texte):
 
     **Partie C**
 
-    1.  On range la liste des positions de chaque amorce dans le dictionnaire :
+    1.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert cherche_amorces(['TGCATG', 'GGA', 'AAAA'], brin) == {'TGCATG': [6], 'GGA': [3], 'AAAA': []}   # cas normal
+        assert cherche_amorces([], brin) == {}                         # cas limite : aucune amorce
+        assert cherche_amorces(['ATG'], brin) == {'ATG': [1, 5, 9]}    # cas piege : plusieurs positions
+        ```
+
+        On range la liste des positions de chaque amorce dans le dictionnaire :
 
         ```python
         def cherche_amorces(amorces, brin):
-            resultat = {}
-            for a in amorces:
-                resultat[a] = horspool(a, brin)
-            return resultat
+            resultat = {}                           # INITIALISER
+            for a in amorces:                       # PARCOURIR
+                resultat[a] = horspool(a, brin)     # METTRE A JOUR
+            return resultat                         # RENVOYER
         ```
 
     2.  On réutilise le dictionnaire renvoyé par `cherche_amorces`, et on construit par compréhension la liste des amorces qui n’ont aucune occurrence :
@@ -771,12 +801,12 @@ def boyer_moore(motif, texte):
 
         ```python
         def amorces_absentes(amorces, brin):
-            absentes = []
+            absentes = []                                   # INITIALISER
             occurrences = cherche_amorces(amorces, brin)
-            for a in amorces:
-                if len(occurrences[a]) == 0:
-                    absentes.append(a)
-            return absentes
+            for a in amorces:                               # PARCOURIR
+                if len(occurrences[a]) == 0:                # TESTER
+                    absentes.append(a)                      # METTRE A JOUR
+            return absentes                                 # RENVOYER
         ```
 
     3.  Méthode naïve : $n - m + 1 \approx 3 \times 10^9$ alignements (3 milliards). Horspool, si chaque saut vaut $m = 20$ : environ $n / m = 3 \times 10^9 / 20 = 1{,}5 \times 10^8$ alignements (150 millions), soit vingt fois moins.

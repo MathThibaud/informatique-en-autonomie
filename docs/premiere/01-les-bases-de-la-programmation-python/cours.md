@@ -58,6 +58,8 @@ Quand on écrit plusieurs instructions les unes sous les autres, Python les exé
 
 !!! exemple "Exemple — Testez ce programme dans une console ou un éditeur en ligne"
 
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
     ```python
     print("Bonjour")
     print("et")
@@ -135,6 +137,8 @@ La valeur de `n` passe donc de `5` à `6`. Cette écriture, très fréquente, s�
 
 !!! exemple "Exemple — Le grand classique : échanger le contenu de deux variables. Prévoyez l’affichage"
 
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
     ```python
     a = 1
     b = 2
@@ -150,6 +154,8 @@ La valeur de `n` passe donc de `5` à `6`. Cette écriture, très fréquente, s�
 !!! regle "Règle 3 — Échanger deux variables"
 
     Pour ne pas perdre une valeur, on utilise une **variable temporaire** :
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```python
 a = 1
@@ -182,6 +188,8 @@ Chaque valeur a un <span id="lex-type01" class="ancre"></span>**type**, qui déc
 | <span id="lex-truefalse01" class="ancre"></span>`bool` | booléen (vrai/faux)             | `True`, `False`       |
 
 La fonction <span id="lex-typef01" class="ancre"></span>`type(...)` renvoie le type d’une valeur :
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```python
 type(15)       # <class 'int'>
@@ -229,6 +237,8 @@ print("Dans un an, vous aurez", age + 1, "ans")
 ### Premier contact avec les chaînes de caractères
 
 <span id="lex-chaine01" class="ancre"></span>Une chaîne est une **suite de caractères**, numérotés à partir de `0`. Voici les opérations dont on se sert dès ce chapitre ; le chapitre *Les types construits* les reprendra en détail.
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```text
 >>> mot = "radar"
@@ -309,6 +319,8 @@ Un programme se lit bien plus souvent qu’il ne s’écrit. Le choix des noms e
 
         On exécute d’abord le fichier : la définition seule n’affiche **rien**. Puis on **appelle** la fonction dans la console, avec des valeurs dont on connaît le résultat, pour la **tester** :
 
+        <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
         ```text
         >>> prix_total(2.5, 4)
         10.0
@@ -338,6 +350,8 @@ Une <span id="lex-condition01" class="ancre"></span>**condition** est une expres
 
 On combine plusieurs conditions avec les <span id="lex-andor01" class="ancre"></span>**opérateurs booléens** `and`, `or`, `not` :
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```python
 age = 16
 age >= 13 and age <= 17    # True : un adolescent
@@ -359,6 +373,12 @@ else:
     print("Pas de gel.")
 print("Bonne journee.")     # toujours execute
 ```
+
+<span class="routine">▷ Je prédis.</span> Qu’affiche ce programme ? Et si la première ligne devient `temperature = -3` ?
+
+??? verifie "Je vérifie"
+
+    `Pas de gel.` puis `Bonne journee.` ; avec `-3` : `Il gele !`, `Couvre-toi.`, puis `Bonne journee.` La dernière ligne, non indentée, ne dépend pas du test : elle s’affiche toujours.
 
 Deux points de syntaxe sont **obligatoires** en Python : le **deux-points** `:` en fin de ligne `if`/`else`, et l’<span id="lex-indentation01" class="ancre"></span>**indentation** (le décalage vers la droite) des lignes qui dépendent du test.
 
@@ -395,6 +415,12 @@ Deux points de syntaxe sont **obligatoires** en Python : le **deux-points** `:` 
             mention = "Refuse"
         ```
 
+        <span class="routine">▷ Je prédis.</span> Que vaut `mention` pour `note = 16` ? pour `note = 9.5` ?
+
+        ??? verifie "Je vérifie"
+
+            `"Tres bien"` : avec `>=`, la borne 16 est *incluse* ; puis `"Refuse"` : aucune condition n’est vraie, c’est le `else` qui s’applique.
+
 !!! remarque "Remarque"
 
     L’ordre est crucial : une note de `17` vérifie *aussi* `note >= 14`, mais comme `note >= 16` est testée d’abord et acceptée, on obtient bien « Très bien ». On va donc *du cas le plus exigeant au moins exigeant*.
@@ -410,6 +436,12 @@ else:
     print("n est impair")
 ```
 
+<span class="routine">▷ Je prédis.</span> Qu’affiche ce code pour `n = 0` ? pour `n = -7` ?
+
+??? verifie "Je vérifie"
+
+    `n est pair` : `0 % 2` vaut `0`, et 0 est bien pair ; puis `n est impair` : en Python, `-7 % 2` vaut `1`.
+
 <span id="cours-01-6" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[6](exercices.md#ex-01-6) à [13](exercices.md#ex-01-13)** (les conditionnelles)
@@ -419,6 +451,8 @@ else:
 <span id="lex-for01" class="ancre"></span> Répéter une action est le cœur de la puissance d’un ordinateur. Quand on connaît **à l’avance** le nombre de répétitions, on utilise une <span id="lex-bouclebornee01" class="ancre"></span>**boucle bornée**, la boucle `for`.
 
 ### Répéter un nombre connu de fois
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```python
 for i in range(5):
@@ -442,6 +476,8 @@ Ce programme affiche cinq fois la même ligne. `range(5)` produit la suite des e
     - `range(a, b, pas)` : de `a` à `b-1` en avançant de `pas` (le pas peut être négatif).
 
 !!! exemple "Exemple — Prévoyez ce que produit chaque boucle, puis vérifiez"
+
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
     ```python
     for i in range(1, 6):
@@ -468,6 +504,8 @@ Ce programme affiche cinq fois la même ligne. `range(5)` produit la suite des e
 
     La boucle `for` peut aussi parcourir directement une chaîne : la variable prend successivement chaque caractère.
 
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
     ```python
     for lettre in "Ada":
         print(lettre)
@@ -492,11 +530,17 @@ La boucle `for` sert rarement à répéter à l’identique : le plus souvent, l
         On utilise un accumulateur `total` :
 
         ```python
-        total = 0                 # on initialise l'accumulateur
-        for i in range(1, 101):   # i prend les valeurs 1, 2, ..., 100
-            total = total + i     # on ajoute i au total courant
+        total = 0                 # INITIALISER : l'accumulateur part de 0
+        for i in range(1, 101):   # PARCOURIR : i prend les valeurs 1, 2, ..., 100
+            total = total + i     # METTRE A JOUR : on ajoute i au total courant
         print(total)              # affiche 5050
         ```
+
+        <span class="routine">▷ Je prédis.</span> Qu’afficherait ce programme avec `range(1, 1)` à la place de `range(1, 101)` ?
+
+        ??? verifie "Je vérifie"
+
+            `0` : `range(1, 1)` est vide, la boucle ne fait aucun tour et `total` garde sa valeur initiale.
 
         | tour  | `i` | `total` après le tour |
         |:-----:|:---:|:---------------------:|
@@ -511,6 +555,10 @@ La boucle `for` sert rarement à répéter à l’identique : le plus souvent, l
 
 <span class="retouract">↺ Retour sur l'activité.</span> Le tableau rempli pour le programme 4 de l’activité était déjà une trace ; `total` y était un accumulateur, qui valait `10` après le tour 4, et remplacer `5` par `101` dans `range(1, 5)` donne exactement le programme ci-dessus.
 
+!!! remarque "Remarque — Les étiquettes d’étapes"
+
+    Les commentaires en **majuscules** nomment le **rôle** de chaque ligne : `INITIALISER` (l’accumulateur, avant la boucle), `PARCOURIR` (la boucle), `METTRE A JOUR` (à chaque tour) et, dans une fonction, `RENVOYER` (le résultat, après la boucle). On les retrouvera dans les exemples et les corrigés, toujours avec les mêmes mots ; le chapitre *Algorithmique : le parcours séquentiel* en fera une méthode pour écrire n’importe quel parcours.
+
 !!! curieux "Pour les curieux (facultatif) — Un peu d’histoire"
 
     D’après la légende, le mathématicien *Carl Friedrich Gauss*, encore écolier, aurait trouvé ce résultat en une poignée de secondes en remarquant que $1+100 = 2+99 = \dots = 101$, et qu’il y a 50 telles paires : $50 \times 101 = 5050$. L’ordinateur, lui, additionne bêtement… mais très vite.
@@ -520,6 +568,8 @@ La boucle `for` sert rarement à répéter à l’identique : le plus souvent, l
 Le corps d’une boucle peut contenir… une autre boucle. On parle de **boucles imbriquées**. La boucle intérieure effectue un tour complet pour *chaque* valeur de la boucle extérieure.
 
 !!! exemple "Exemple — Prévoyez le nombre d’étoiles affichées"
+
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
     ```python
     for ligne in range(3):
@@ -554,6 +604,12 @@ while solde < 200:            # tant que le solde n'a pas double
     annees = annees + 1
 print(annees, "annees")
 ```
+
+<span class="routine">▷ Je prédis.</span> Qu’affiche ce programme ?
+
+??? verifie "Je vérifie"
+
+    `15 annees` : après 14 ans, le solde vaut environ 198 ; il ne dépasse 200 qu’au 15<sup>e</sup> tour (environ 207,89).
 
 !!! definition "Définition 4 — Boucle while"
 
@@ -593,6 +649,12 @@ Le programme demande explicitement de savoir justifier la <span id="lex-terminai
         n = n - 1
     ```
 
+    <span class="routine">▷ Je prédis.</span> Quel est le dernier nombre affiché ? Que vaut `n` après la boucle ?
+
+    ??? verifie "Je vérifie"
+
+        `1` : quand `n` vaut `0`, la condition est fausse et rien n’est affiché ; après la boucle, `n` vaut `0`.
+
     La quantité `n` est un variant : elle est positive tant qu’on entre dans la boucle, et elle diminue de `1` à chaque tour. Elle atteindra donc `0`, ce qui rend la condition `n > 0` fausse : la boucle se termine.
 
 !!! regle "Règle 8 — for ou while ?"
@@ -614,6 +676,8 @@ Depuis le début du chapitre, vous écrivez des fonctions en suivant un **gabari
 !!! definition "Définition 6 — Fonction"
 
     Une <span id="lex-fonction01" class="ancre"></span>**fonction** est un bloc d’instructions nommé, que l’on **définit une fois** (mot-clé `def`) et que l’on **appelle** ensuite autant de fois qu’on veut. Elle peut recevoir des <span id="lex-parametre01" class="ancre"></span>**paramètres** (ses entrées) et <span id="lex-valeurrenvoyee01" class="ancre"></span>**renvoyer** un résultat (mot-clé `return`).
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```python
 def aire_rectangle(largeur, hauteur):
@@ -643,6 +707,8 @@ On voit une fonction comme une **boîte noire** : on lui fournit des valeurs en 
 !!! regle "Règle 10 — Variables locales"
 
     Les paramètres et les variables créées **à l’intérieur** d’une fonction sont **locaux** : ils naissent à l’appel, meurent au `return`, et sont invisibles depuis l’extérieur. Deux fonctions peuvent donc utiliser une variable `i` sans jamais se gêner.
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```python
 def double(x):
@@ -677,6 +743,12 @@ def racine(x):
     assert x >= 0, "x doit etre positif"
     return x ** 0.5
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoie `racine(9)` ? Que se passe-t-il lors de l’appel `racine(-4)` ?
+
+??? verifie "Je vérifie"
+
+    `3.0`, un flottant (et non `3`) ; `racine(-4)` arrête le programme sur `AssertionError: x doit etre positif`.
 
 !!! remarque "Remarque"
 
@@ -756,6 +828,8 @@ Personne n’écrit un programme juste du premier coup. Savoir lire un message d
 ### Lire un message d’erreur
 
 <span id="lex-traceback01" class="ancre"></span> Quand Python rencontre une erreur, il s’arrête et affiche un message. Ce message impressionne (il est en anglais), mais il est toujours construit de la même façon. Voici un programme `age.py` où l’on a oublié de convertir la saisie :
+
+<span class="routine">▷ Je prédis.</span> Quel type d’erreur ce programme va-t-il provoquer ? Le prévoir avant de lire la suite.
 
 ```python
 age = input("Votre age ? ")

@@ -113,6 +113,12 @@ Lorsqu’un processus se termine (ou est tué) avant ses fils, ceux-ci ne dispar
     print("bonjour")  # execute par les 4 processus
     ```
 
+    <span class="routine">▷ Je prédis.</span> Combien de « bonjour » s’afficheraient si l’on ajoutait un second `print("bonjour")` *entre* les deux `fork()` ?
+
+    ??? verifie "Je vérifie"
+
+        **Six** : deux processus exécutent le `print` du milieu, puis quatre celui de la fin ($2 + 4$).
+
 <span id="cours-04-5" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[5](exercices.md#ex-04-5) à [7](exercices.md#ex-04-7)** (arbre de processus, PID/PPID, `fork`)
@@ -179,6 +185,8 @@ Temps d’attente : A$=0$, B$=3$, C$=5$, D$=5$. **Moyenne $= 3{,}25$**. Défaut 
 
 <span id="lex-sjf04" class="ancre"></span> À chaque fois que le processeur se libère, on élit le processus prêt dont la **durée est la plus courte**.
 
+<span class="routine">▷ Je prédis.</span> Avant de regarder le chronogramme : à $t=4$, A se termine ; lequel de B, C, D est élu, et dans quel ordre passent les deux autres ?
+
 ![](../figures/57ce309365659e23.svg){ .tikz loading=lazy }
 
 Temps d’attente : A$=0$, C$=2$, D$=2$, B$=6$. **Moyenne $= 2{,}50$**. En faisant passer les courts devant, on **réduit le temps d’attente moyen**. Quand tous les processus sont présents dès le départ, on peut démontrer que c’est même le meilleur choix possible <span class="horsprog">au-delà du programme</span> ; avec des arrivées échelonnées, comme ici, ce n’est plus garanti. Rançon : un processus long (ici B) peut attendre longtemps — c’est le risque de « famine ».
@@ -192,6 +200,8 @@ Temps d’attente : A$=0$, C$=2$, D$=2$, B$=6$. **Moyenne $= 2{,}50$**. En faisa
 <span id="lex-tourniquet04" class="ancre"></span> Pour que *personne* ne monopolise le processeur, on fixe un **quantum** (ici $1$ unité) et on fait **tourner** les processus prêts dans une **file** (la structure FIFO du chapitre 3) : chacun s’exécute un quantum, puis repart en fin de file s’il n’a pas fini.
 
 **Convention :** un processus qui arrive à l’instant où un quantum se termine entre dans la file **avant** le processus qui vient d’être interrompu.
+
+<span class="routine">▷ Je prédis.</span> Avant de regarder le chronogramme : quel processus est élu à $t=1$, puis à $t=2$ ? Appliquer la convention.
 
 ![](../figures/3bfbdf0a65d5dbf7.svg){ .tikz loading=lazy }
 
@@ -240,6 +250,12 @@ Chacun retient une ressource que l’autre attend, et aucun ne peut la libérer 
 On le visualise avec un <span id="lex-grapheattente04" class="ancre"></span>**graphe d’attente** : une flèche « $P \to R$ » signifie « $P$ attend $R$ », une flèche « $R \to P$ » signifie « $R$ est détenue par $P$ ». Un **cycle** dans ce graphe est la signature d’un interblocage (on apprendra à détecter un cycle au chapitre 8, *Graphes*).
 
 ![](../figures/2821a5138ffb3888.svg){ .tikz loading=lazy }
+
+<span class="routine">▷ Je prédis.</span> Et si $P_2$ demandait, lui aussi, $R_1$ *puis* $R_2$, dans le même ordre que $P_1$ : un interblocage serait-il encore possible ?
+
+??? verifie "Je vérifie"
+
+    Non : le premier qui obtient $R_1$ obtiendra aussi $R_2$ ; l’autre attend $R_1$ sans rien détenir. Pas de cycle dans le graphe d’attente, donc pas d’interblocage.
 
 <span class="retouract">↺ Retour sur l'activité.</span> Les scripts de P et Q jouaient exactement ce scénario, et le schéma « qui tient, qui attend » du cahier était ce graphe d’attente, avec son cycle. La situation ne pouvait pas se débloquer seule ; faire prendre les deux objets dans le même ordre aux deux scripts l’empêche (voir la remarque ci-dessous).
 

@@ -66,6 +66,12 @@ Trier un tableau, c’est ranger ses éléments **dans l’ordre** (croissant, l
     t[j] = t[i]     # ... donc ici, t[j] recopie la NOUVELLE valeur : rate !
     ```
 
+    <span class="routine">▷ Je prédis.</span> Avec `t = [4, 7]`, `i = 0` et `j = 1`, que contient `t` après ces deux lignes ?
+
+    ??? verifie "Je vérifie"
+
+        `[7, 7]` : la valeur `4` a disparu, écrasée dès la première ligne.
+
     Il faut d’abord **mettre de côté** l’une des deux valeurs dans une **variable temporaire** :
 
     ```text
@@ -94,17 +100,23 @@ Trier un tableau, c’est ranger ses éléments **dans l’ordre** (croissant, l
 def tri_selection(t):
     """Trie le tableau t en place, dans l'ordre croissant."""
     n = len(t)
-    for i in range(n):
+    for i in range(n):                # PARCOURIR : chaque position i
         # 1. chercher l'indice du minimum dans la portion t[i:]
-        i_min = i
-        for j in range(i + 1, n):
-            if t[j] < t[i_min]:
-                i_min = j
+        i_min = i                     # INITIALISER : champion provisoire
+        for j in range(i + 1, n):     # PARCOURIR : la partie non triee
+            if t[j] < t[i_min]:       # TESTER
+                i_min = j             # METTRE A JOUR : nouveau champion
         # 2. placer ce minimum en position i (echange via variable temporaire)
-        temp = t[i]
+        temp = t[i]                   # METTRE A JOUR : l'echange
         t[i] = t[i_min]
         t[i_min] = temp
 ```
+
+<span class="routine">▷ Je prédis.</span> Pour un tableau de 4 éléments, combien de fois le test `t[j] < t[i_min]` est-il exécuté ? Ce nombre dépend-il de l’ordre des éléments ?
+
+??? verifie "Je vérifie"
+
+    `6` fois ($3 + 2 + 1 + 0$), et toujours `6` : les deux boucles `for` vont toujours jusqu’au bout, même si le tableau est déjà trié.
 
 !!! remarque "Remarque — On reconnaît deux vieilles connaissances"
 
@@ -226,15 +238,21 @@ La même trace en **histogramme** : chaque barre a la hauteur de sa valeur. On v
 def tri_insertion(t):
     """Trie le tableau t en place, dans l'ordre croissant."""
     n = len(t)
-    for i in range(1, n):
-        x = t[i]              # l'element a inserer dans la partie triee
-        j = i - 1
+    for i in range(1, n):             # PARCOURIR
+        x = t[i]                      # INITIALISER : l'element a inserer dans la partie triee
+        j = i - 1                     # INITIALISER
         # decaler vers la droite tant que l'on rencontre plus grand que x
-        while j >= 0 and t[j] > x:
-            t[j + 1] = t[j]
-            j = j - 1
-        t[j + 1] = x          # on depose x dans le "trou" cree
+        while j >= 0 and t[j] > x:    # PARCOURIR vers la gauche, tant que plus grand que x
+            t[j + 1] = t[j]           # METTRE A JOUR : decalage a droite
+            j = j - 1                 # METTRE A JOUR
+        t[j + 1] = x                  # METTRE A JOUR : on depose x dans le "trou" cree
 ```
+
+<span class="routine">▷ Je prédis.</span> Combien de fois la ligne `t[j + 1] = t[j]` est-elle exécutée pour `[1, 2, 3, 4]` ? Et pour `[4, 3, 2, 1]` ?
+
+??? verifie "Je vérifie"
+
+    `0` fois pour le tableau déjà trié (le `while` s’arrête aussitôt à chaque étape), `6` fois ($1 + 2 + 3$) pour le tableau à l’envers : contrairement à la sélection, l’insertion profite d’un tableau déjà rangé.
 
 !!! remarque "Remarque — Le rôle du while"
 

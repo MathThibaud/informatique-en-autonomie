@@ -202,11 +202,11 @@
 
     ```python
     import turtle as t
-    cote = 10
-    for i in range(20):
+    cote = 10             # INITIALISER : avant la boucle
+    for i in range(20):   # PARCOURIR : 20 segments
         t.forward(cote)
         t.left(90)
-        cote = cote + 10    # le cote grandit
+        cote = cote + 10  # METTRE A JOUR : le cote grandit
     t.done()
     ```
 

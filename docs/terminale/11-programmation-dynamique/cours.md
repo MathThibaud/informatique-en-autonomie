@@ -33,9 +33,9 @@ La suite de Fibonacci est définie par $F_0 = 0$, $F_1 = 1$ et $F_n = F_{n-1} + 
 
 ```python
 def fibo(n):
-    if n <= 1:
+    if n <= 1:                              # CAS DE BASE
         return n
-    return fibo(n - 1) + fibo(n - 2)
+    return fibo(n - 1) + fibo(n - 2)        # APPEL RECURSIF (deux fois)
 ```
 
 ![](../img/11_hist_liber_abbaci.jpg){ .photo loading=lazy style="width:122px" }  
@@ -67,14 +67,22 @@ Ce fil rouge — « garder pour ne pas refaire » — va traverser tout le chapi
 
 ```python
 def fibo(n, memo={}):
-    if n <= 1:
+    if n <= 1:                                           # CAS DE BASE
         return n
-    if n in memo:            # deja calcule : on lit le carnet
+    if n in memo:                                        # VERIFIER : deja calcule, on lit le carnet
         return memo[n]
-    resultat = fibo(n - 1, memo) + fibo(n - 2, memo)
-    memo[n] = resultat       # on ecrit dans le carnet
-    return resultat
+    resultat = fibo(n - 1, memo) + fibo(n - 2, memo)     # APPEL RECURSIF
+    memo[n] = resultat                                   # METTRE A JOUR : on ecrit dans le carnet
+    return resultat                                      # RENVOYER
 ```
+
+Les commentaires en majuscules nomment les temps de toute fonction mémoïsée, toujours les mêmes : `CAS DE BASE` ; `VERIFIER` si le résultat est déjà dans le carnet ; sinon `APPEL RECURSIF` ; puis `METTRE A JOUR` le carnet avant de `RENVOYER`.
+
+<span class="routine">▷ Je prédis.</span> Dans une session neuve, on appelle `fibo(5)`. Que contient ensuite le carnet `memo` ?
+
+??? verifie "Je vérifie"
+
+    `{2: 1, 3: 2, 4: 3, 5: 5}`. Les cas de base `0` et `1` n’y sont jamais écrits : ils sont renvoyés avant. Le premier résultat noté est celui de `fibo(2)`, le plus profond.
 
 Avec cette seule modification, `fibo(50)` est **instantané**, et même `fibo(500)` passe sans effort. Chaque valeur $F_k$ n’est calculée qu’une fois : il y a $n$ sous-problèmes distincts, donc le coût devient **linéaire**, $O(n)$ — on passe d’un coût exponentiel (environ $1{,}6^n$, que l’on majore souvent par $2^n$) à $n$, l’un des plus beaux gains de tout le cours.
 
@@ -103,14 +111,14 @@ L’autre stratégie renverse le point de vue. Plutôt que de partir du problèm
 
 ```python
 def fibo(n):
-    if n <= 1:
+    if n <= 1:                                   # CAS DE BASE
         return n
-    table = [0] * (n + 1)    # table[k] contiendra F_k
-    table[0] = 0
-    table[1] = 1
-    for k in range(2, n + 1):
-        table[k] = table[k - 1] + table[k - 2]   # deja calcules
-    return table[n]
+    table = [0] * (n + 1)                        # INITIALISER : table[k] contiendra F_k
+    table[0] = 0                                 # INITIALISER : les cas de base
+    table[1] = 1                                 # INITIALISER
+    for k in range(2, n + 1):                    # PARCOURIR : du plus petit au plus grand
+        table[k] = table[k - 1] + table[k - 2]   # METTRE A JOUR : cases deja calculees
+    return table[n]                              # RENVOYER
 ```
 
 Ici encore le coût est **linéaire**. On construit `table[2]`, puis `table[3]`, etc. : quand on calcule `table[k]`, les deux cases dont on a besoin sont *déjà là*. On avance en terrain conquis.
@@ -165,32 +173,38 @@ Les sous-problèmes $R(s - p)$ **se recouvrent** massivement (rendre $4$ intervi
 
 ```python
 def rendu(somme, pieces, memo=None):
-    if memo is None:
+    if memo is None:                   # INITIALISER (premier appel)
         memo = {}
-    if somme == 0:
+    if somme == 0:                     # CAS DE BASE
         return 0
-    if somme in memo:
+    if somme in memo:                  # VERIFIER : deja calcule
         return memo[somme]
-    meilleur = float("inf")            # +l'infini : aucune solution trouvee
-    for p in pieces:
-        if p <= somme:
-            meilleur = min(meilleur, 1 + rendu(somme - p, pieces, memo))
-    memo[somme] = meilleur
-    return meilleur
+    meilleur = float("inf")            # INITIALISER : +infini, aucune solution
+    for p in pieces:                   # PARCOURIR : chaque premiere piece
+        if p <= somme:                 # TESTER
+            meilleur = min(meilleur, 1 + rendu(somme - p, pieces, memo))   # APPEL RECURSIF
+    memo[somme] = meilleur             # METTRE A JOUR : le carnet
+    return meilleur                    # RENVOYER
 ```
 
 <span id="lex-pyfloatinf11" class="ancre"></span>`float("inf")` est l’infini de Python, plus grand que tout nombre : la première solution trouvée le remplace toujours (voir l’encadré « Outil Python : l’infini » du projet Dijkstra, chapitre 8).
+
+<span class="routine">▷ Je prédis.</span> Que renvoient `rendu(7, [2, 5])` et `rendu(3, [2, 5])` ?
+
+??? verifie "Je vérifie"
+
+    `2` ($5 + 2$), puis `inf` : $3$ ne peut pas se rendre avec des pièces de $2$ et de $5$, `meilleur` reste l’infini (et `1 + inf` vaut encore `inf`).
 
 **Version tabulée (bottom-up).** On remplit un tableau `table[s]` $= R(s)$ pour $s$ allant de $0$ à la somme voulue :
 
 ```python
 def rendu(somme, pieces):
-    table = [0] + [float("inf")] * somme     # table[0] = 0
-    for s in range(1, somme + 1):
-        for p in pieces:
-            if p <= s and table[s - p] + 1 < table[s]:
-                table[s] = table[s - p] + 1
-    return table[somme]
+    table = [0] + [float("inf")] * somme                 # INITIALISER : table[0] = 0
+    for s in range(1, somme + 1):                        # PARCOURIR : sommes croissantes
+        for p in pieces:                                 # PARCOURIR : premieres pieces
+            if p <= s and table[s - p] + 1 < table[s]:   # TESTER : mieux avec p ?
+                table[s] = table[s - p] + 1              # METTRE A JOUR
+    return table[somme]                                  # RENVOYER
 ```
 
 !!! exemple "Exemple"
@@ -228,16 +242,22 @@ $$T[i][c] = \max\big(\ T[i-1][c],\ \ v_i + T[i-1][c - w_i]\ \big).$$
 def sac_a_dos(poids, valeurs, capacite):
     n = len(poids)
     # T[i][c] : meilleure valeur avec les i premiers objets, capacite c
-    T = [[0] * (capacite + 1) for _ in range(n + 1)]
-    for i in range(1, n + 1):
-        for c in range(capacite + 1):
-            T[i][c] = T[i - 1][c]                      # on laisse l'objet i
-            if poids[i - 1] <= c:                      # si on peut le prendre
+    T = [[0] * (capacite + 1) for _ in range(n + 1)]   # INITIALISER : ligne 0 a 0
+    for i in range(1, n + 1):                          # PARCOURIR : les objets
+        for c in range(capacite + 1):                  # PARCOURIR : les capacites
+            T[i][c] = T[i - 1][c]                      # METTRE A JOUR : on laisse l'objet i
+            if poids[i - 1] <= c:                      # TESTER : peut-on le prendre ?
                 avec = valeurs[i - 1] + T[i - 1][c - poids[i - 1]]
-                if avec > T[i][c]:
-                    T[i][c] = avec
-    return T[n][capacite]
+                if avec > T[i][c]:                     # TESTER : mieux en le prenant ?
+                    T[i][c] = avec                     # METTRE A JOUR
+    return T[n][capacite]                              # RENVOYER
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoie `sac_a_dos([2, 3, 4], [3, 4, 6], 5)` ?
+
+??? verifie "Je vérifie"
+
+    `7` : les objets de poids $2$ et $3$ ($3 + 4$). Prendre d’abord l’objet le plus précieux (valeur $6$, poids $4$) ne laisserait de place pour rien d’autre.
 
 !!! remarque "Remarque"
 
@@ -270,15 +290,21 @@ L[i-1][j-1] + 1 & \text{si } A[i-1] = B[j-1] \quad (\text{on garde la lettre})\\
 ```python
 def plsc(a, b):
     n, m = len(a), len(b)
-    L = [[0] * (m + 1) for _ in range(n + 1)]
-    for i in range(1, n + 1):
-        for j in range(1, m + 1):
-            if a[i - 1] == b[j - 1]:
-                L[i][j] = L[i - 1][j - 1] + 1
+    L = [[0] * (m + 1) for _ in range(n + 1)]             # INITIALISER : ligne et colonne 0 a 0
+    for i in range(1, n + 1):                             # PARCOURIR
+        for j in range(1, m + 1):                         # PARCOURIR
+            if a[i - 1] == b[j - 1]:                      # TESTER : dernieres lettres egales ?
+                L[i][j] = L[i - 1][j - 1] + 1             # METTRE A JOUR : on garde la lettre
             else:
-                L[i][j] = max(L[i - 1][j], L[i][j - 1])
-    return L[n][m]
+                L[i][j] = max(L[i - 1][j], L[i][j - 1])   # METTRE A JOUR
+    return L[n][m]                                        # RENVOYER
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoie `plsc("ABC", "CBA")` ?
+
+??? verifie "Je vérifie"
+
+    `1` : les trois lettres sont communes, mais dans l’ordre inverse ; on ne peut en garder qu’une en respectant l’ordre des deux mots.
 
 ![](../figures/74dbc77856ac5e76.svg){ .tikz loading=lazy }
 
@@ -313,21 +339,27 @@ Le raisonnement est le même que pour la plus longue sous-séquence commune : on
 ```python
 def distance(a, b):
     n, m = len(a), len(b)
-    D = [[0] * (m + 1) for _ in range(n + 1)]
+    D = [[0] * (m + 1) for _ in range(n + 1)]   # INITIALISER
     for i in range(n + 1):
-        D[i][0] = i                        # a -> mot vide : i suppressions
+        D[i][0] = i                             # INITIALISER : a -> mot vide, i suppressions
     for j in range(m + 1):
-        D[0][j] = j                        # mot vide -> b : j insertions
-    for i in range(1, n + 1):
-        for j in range(1, m + 1):
-            if a[i - 1] == b[j - 1]:
-                D[i][j] = D[i - 1][j - 1]   # lettres egales : rien a payer
-            else:
+        D[0][j] = j                             # INITIALISER : mot vide -> b, j insertions
+    for i in range(1, n + 1):                   # PARCOURIR
+        for j in range(1, m + 1):               # PARCOURIR
+            if a[i - 1] == b[j - 1]:            # TESTER
+                D[i][j] = D[i - 1][j - 1]       # METTRE A JOUR : lettres egales, rien a payer
+            else:                               # METTRE A JOUR : la moins chere des trois operations
                 D[i][j] = 1 + min(min(D[i - 1][j],      # suppression
                                       D[i][j - 1]),     # insertion
                                   D[i - 1][j - 1])      # substitution
-    return D[n][m]
+    return D[n][m]                              # RENVOYER
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoient `distance("ECRAN", "ECRIN")` et `distance("ABC", "CBA")` ?
+
+??? verifie "Je vérifie"
+
+    `1` (une substitution, `A`$\to$`I`), puis `2` : on substitue la première et la dernière lettre, le `B` du milieu reste en place.
 
 !!! exemple "Exemple"
 

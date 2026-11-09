@@ -116,13 +116,15 @@ Un commerçant doit rendre une somme avec le **moins de pièces et billets possi
     pieces = [200, 100, 50, 20, 10, 5, 2, 1]   # de la plus grande a la plus petite
 
     def rendre(somme):
-        rendu = []
-        for p in pieces:
-            while somme >= p:      # tant que la coupure "tient" encore
-                rendu.append(p)
-                somme = somme - p
-        return rendu
+        rendu = []                 # INITIALISER
+        for p in pieces:           # PARCOURIR : de la plus grande a la plus petite
+            while somme >= p:      # TESTER : la coupure "tient" encore
+                rendu.append(p)    # METTRE A JOUR
+                somme = somme - p  # METTRE A JOUR
+        return rendu               # RENVOYER
     ```
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```text
 >>> rendre(9)
@@ -132,6 +134,12 @@ Un commerçant doit rendre une somme avec le **moins de pièces et billets possi
 >>> len(rendre(48))
 5
 ```
+
+<span class="routine">▷ Je prédis.</span> On range par erreur les coupures dans l’ordre **croissant** : `pieces = [1, 2, 5, 10, 20, 50, 100, 200]`. Que renvoie alors `rendre(9)` ?
+
+??? verifie "Je vérifie"
+
+    `[1, 1, 1, 1, 1, 1, 1, 1, 1]` : la pièce de 1 « tient » neuf fois et vide la somme avant que les autres coupures soient essayées. Le résultat est juste (9 € rendus), mais avec 9 pièces au lieu de 3 : l’ordre des candidats fait partie de l’algorithme.
 
 !!! remarque "Remarque — Le réflexe coût"
 

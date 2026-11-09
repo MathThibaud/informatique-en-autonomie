@@ -242,6 +242,8 @@ VALUES (1, 'Inception', 1, 2010, 9);
 
     `SELECT` liste les **colonnes** à récupérer ; `FROM` indique la **table**. L’étoile `*` signifie « toutes les colonnes ».
 
+<span class="routine">▷ Je prédis.</span> Cacher la table résultat, la prévoir, puis vérifier.
+
 ```sql
 SELECT titre, annee
 FROM film;
@@ -262,6 +264,8 @@ donne :
 !!! regle "Règle 10"
 
     `WHERE` garde uniquement les lignes qui **satisfont une condition**. On combine les conditions avec `AND`, `OR`, `NOT`, et on compare avec `=`, `<>` (différent), `<`, `>`, `<=`, `>=`.
+
+<span class="routine">▷ Je prédis.</span> Cacher la table résultat, la prévoir, puis vérifier.
 
 ```sql
 SELECT titre
@@ -293,6 +297,12 @@ ORDER BY note DESC;
 
 trie les films de la meilleure note à la moins bonne (`DESC` = décroissant ; `ASC` = croissant, par défaut).
 
+<span class="routine">▷ Je prédis.</span> Quel film arrive en tête ? Lequel en dernier ?
+
+??? verifie "Je vérifie"
+
+    `Parasite` (10) en tête, `Dunkerque` (7) en dernier. `Inception` et `Interstellar` ont la même note : leur ordre entre eux n’est pas garanti.
+
 ### `DISTINCT` : supprimer les doublons
 
 <span id="lex-distinct06" class="ancre"></span>
@@ -303,6 +313,12 @@ FROM film;
 ```
 
 renvoie chaque réalisateur **une seule fois**, même s’il a plusieurs films.
+
+<span class="routine">▷ Je prédis.</span> Combien de lignes contient le résultat ? Et sans `DISTINCT` ?
+
+??? verifie "Je vérifie"
+
+    `3` lignes (`1`, `2`, `3`) ; sans `DISTINCT`, `5` lignes : le `1` de Nolan apparaît trois fois.
 
 ### Les fonctions d’agrégation
 
@@ -320,6 +336,12 @@ FROM film
 WHERE annee < 2015;
 ```
 
+<span class="routine">▷ Je prédis.</span> Que renvoient la deuxième et la troisième requête ?
+
+??? verifie "Je vérifie"
+
+    `8.6` (la somme `43` divisée par `5`), puis `9` : `Parasite` (`10`) date de 2019, il est écarté par le `WHERE` *avant* le calcul du maximum.
+
 !!! curieux "Pour les curieux (facultatif) — Au-delà du strict programme"
 
     Les clauses présentées d’ici aux jointures (`LIKE`, `LIMIT`, l’alias `AS`, `GROUP BY` et `HAVING`) ne sont pas exigées au bac, mais elles sont très courantes et rendent SQL vraiment puissant. Les fonctions d’agrégation ci-dessus, elles, sont au programme, à condition de les utiliser **sans** `GROUP BY` ni `HAVING`.
@@ -327,6 +349,8 @@ WHERE annee < 2015;
 ### `LIKE` : rechercher un motif
 
 `LIKE` compare du texte à un **motif** : `%` remplace n’importe quelle suite de caractères, `_` un seul.
+
+<span class="routine">▷ Je prédis.</span> Cacher la table résultat, la prévoir, puis vérifier.
 
 ```sql
 SELECT titre
@@ -349,9 +373,17 @@ LIMIT 3;
 
 donne les **3** meilleurs films, avec des colonnes renommées.
 
+<span class="routine">▷ Je prédis.</span> Quelle table résultat (en-têtes compris) ?
+
+??? verifie "Je vérifie"
+
+    Deux colonnes nommées `film` et `etoiles` ; trois lignes : `Parasite | 10`, puis `Inception | 9` et `Interstellar | 9`, dans un ordre non garanti entre ces deux-là.
+
 ### `GROUP BY` : regrouper puis résumer
 
 `GROUP BY` forme des **paquets** de lignes partageant une même valeur, et applique un agrégat à **chaque** paquet.
+
+<span class="routine">▷ Je prédis.</span> Cacher la table résultat, la prévoir, puis vérifier.
 
 ```sql
 SELECT id_real, COUNT(*) AS nb_films, AVG(note) AS moyenne
@@ -374,6 +406,12 @@ HAVING COUNT(*) >= 2;
 
 ne garde que les réalisateurs ayant **au moins 2** films.
 
+<span class="routine">▷ Je prédis.</span> Quelle table résultat ?
+
+??? verifie "Je vérifie"
+
+    Une seule ligne, `1 | 3` : seul le réalisateur `1` (Nolan) a au moins deux films.
+
 !!! curieux "Pour les curieux (facultatif)"
 
     Retenez la différence : `WHERE` filtre les lignes *avant* le regroupement, `HAVING` filtre les paquets *après*.
@@ -385,6 +423,8 @@ Notre requête `GROUP BY` affiche des `id_real` (`1`, `2`…), pas des noms. Pou
 !!! regle "Règle 11 — JOIN … ON"
 
     `FROM A JOIN B ON A.cle_etrangere = B.cle_primaire` fusionne chaque ligne de `A` avec la ligne de `B` qui lui correspond, selon l’égalité indiquée après `ON`.
+
+<span class="routine">▷ Je prédis.</span> Cacher la table résultat, la prévoir, puis vérifier.
 
 ```sql
 SELECT film.titre, realisateur.nom
@@ -433,6 +473,12 @@ DELETE FROM film
 WHERE annee < 2005;
 ```
 
+<span class="routine">▷ Je prédis.</span> Après ces deux requêtes, combien de lignes reste-t-il dans `film`, et quelle est la note de `Dunkerque` ?
+
+??? verifie "Je vérifie"
+
+    `4` lignes (seul `Amélie`, de 2001, est supprimé) ; `Dunkerque` a désormais la note `8`.
+
 !!! regle "Règle 13 — Le WHERE qui sauve des vies"
 
     **N’oubliez jamais le `WHERE`** dans un `UPDATE` ou un `DELETE` ! `DELETE FROM film;` (sans condition) efface **tous** les films d’un coup. C’est la requête la plus redoutée des informaticiens.
@@ -440,6 +486,62 @@ WHERE annee < 2005;
 <span id="cours-06-15" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[15](exercices.md#ex-06-15) et [16](exercices.md#ex-06-16)** (insérer, modifier, supprimer ; transactions et ACID)
+
+### Injection SQL : ne jamais coller une saisie dans une requête
+
+Dans une vraie application (un site web, le logiciel de vie scolaire…), personne ne tape les requêtes : un **programme** les fabrique à partir de ce que l’utilisateur a saisi. En Python, le module `sqlite3` envoie une requête à la base avec `connexion.execute(requete)`. La tentation est grande de coller la saisie dans le texte de la requête :
+
+```python
+titre = input("Titre du film : ")
+requete = "SELECT titre, note FROM film WHERE titre = '" + titre + "'"
+resultat = connexion.execute(requete).fetchall()
+```
+
+<span class="routine">▷ Je prédis.</span> Un utilisateur tape `x’ OR ’1’=’1`. Quelle requête est envoyée au SGBD ? Que renvoie-t-elle ?
+
+??? verifie "Je vérifie"
+
+    La requête devient `SELECT titre, note FROM film WHERE titre = ’x’ OR ’1’=’1’`. La condition `’1’=’1’` est toujours vraie : on obtient **tous** les films, alors qu’aucun ne s’appelle « x ».
+
+!!! definition "Définition 6 — Injection SQL"
+
+    Une **injection SQL** consiste à saisir un texte qui, une fois collé dans une requête, en **change le sens** : une apostrophe ferme la chaîne prévue par le programmeur, et la suite est lue comme du SQL. C’est l’une des failles les plus exploitées du Web : lire des données interdites, se connecter sans mot de passe, modifier ou détruire des tables.
+
+![](../img/06_xkcd_327_bobby_tables.png){ .photo loading=lazy style="width:95%" }  
+Randall Munroe, « Exploits of a Mom », xkcd n° 327 (2007), <https://xkcd.com/327/> — licence CC BY-NC 2.5
+
+!!! encadre "La blague expliquée — « Little Bobby Tables »"
+
+    L’école appelle une mère : elle a « des problèmes informatiques ». Son fils s’appellerait-il vraiment `Robert’); DROP TABLE Students;--` ? « Oui, on l’appelle le petit Bobby Tables. » Résultat : les fiches des élèves de l’année sont perdues. Le logiciel de l’école enregistrait chaque nouvel élève avec une requête fabriquée par collage, du type `INSERT INTO Students (nom) VALUES (’`*`nom`*`’);`. Avec le prénom de Bobby, le SGBD reçoit :
+
+    ```sql
+    INSERT INTO Students (nom) VALUES ('Robert'); DROP TABLE Students;--');
+    ```
+
+    - l’apostrophe après `Robert` **ferme la chaîne** : pour le SGBD, le nom est simplement « Robert » ;
+
+    - `);` **termine** l’`INSERT`, qui est correct et s’exécute ;
+
+    - `DROP TABLE Students;` est une **seconde requête**, qui supprime la table entière, structure et contenu <span class="horsprog">au-delà du programme</span> : pire qu’un `DELETE` sans `WHERE` ;
+
+    - `--` ouvre un **commentaire** SQL : la fin prévue par le programmeur, `’);`, est ignorée, donc aucune erreur de syntaxe ne trahit l’attaque.
+
+    La mère conclut qu’il faut « nettoyer » les saisies. Mieux encore : ne **jamais** les coller dans une requête.
+
+!!! regle "Règle 14 — Requêtes paramétrées"
+
+    On écrit un point d’interrogation `?` à la place de chaque valeur, et on passe les valeurs **à part**, dans un tuple :
+
+    ```python
+    requete = "SELECT titre, note FROM film WHERE titre = ?"
+    resultat = connexion.execute(requete, (titre,)).fetchall()
+    ```
+
+    `sqlite3` transmet la valeur comme une simple **donnée**, jamais interprétée comme du SQL. Avec la saisie `x’ OR ’1’=’1`, on cherche un film dont le titre est exactement ce texte : aucune ligne. Bobby, lui, serait enregistré sous son nom complet, apostrophe comprise, et la table survivrait. Donc : **jamais** de valeur saisie collée dans une requête (ni avec `+`, ni avec une f-string), toujours un `?` par valeur.
+
+!!! remarque "Remarque"
+
+    `connexion.execute` refuse d’exécuter deux instructions à la fois : l’attaque de Bobby échouerait telle quelle avec `sqlite3`. Mais l’injection `x’ OR ’1’=’1`, qui reste dans une seule requête, fonctionne : seul le `?` protège vraiment. C’est un aspect concret de la **sécurité** des accès, l’un des services d’un SGBD (§ IV). On le met en pratique dans la partie 6 du TP « La ligue de futsal des quartiers ».
 
 !!! curieux "Pour les curieux (facultatif) — Un peu d’histoire… et d’humour"
 
@@ -471,6 +573,7 @@ WHERE annee < 2005;
 | `GROUP BY` / `HAVING` | regrouper, filtrer les groupes (au-delà du BO) |
 | `JOIN … ON` | croiser deux tables par une clé |
 | `INSERT` / `UPDATE` / `DELETE` | ajouter / modifier / supprimer (**penser au `WHERE` !**) |
+| Requête paramétrée (`?`) | ne jamais coller une saisie dans une requête (injection SQL) |
 
 !!! situation "Retour à la situation de départ"
 

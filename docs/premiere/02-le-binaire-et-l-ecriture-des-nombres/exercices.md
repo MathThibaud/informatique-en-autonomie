@@ -149,19 +149,29 @@
 '1101'
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert decimal_vers_binaire(13) == "1101"    # cas normal
+    assert decimal_vers_binaire(0) == "0"        # cas limite : zero
+    assert decimal_vers_binaire(8) == "1000"     # cas piege : des zeros a droite
+    ```
 
     C’est la méthode des divisions par 2, avec accumulation des restes en tête de chaîne.
 
     ```python
     def decimal_vers_binaire(n):
         if n == 0:
-            return "0"
-        resultat = ""
-        while n > 0:
-            resultat = str(n % 2) + resultat   # on place le reste devant
-            n = n // 2
-        return resultat
+            return "0"                        # RENVOYER : cas particulier
+        resultat = ""                         # INITIALISER
+        while n > 0:                          # PARCOURIR : division apres division
+            resultat = str(n % 2) + resultat  # METTRE A JOUR : on place le reste devant
+            n = n // 2                        # METTRE A JOUR
+        return resultat                       # RENVOYER
 
     assert decimal_vers_binaire(13) == "1101"
     assert decimal_vers_binaire(200) == "11001000"
@@ -189,16 +199,26 @@
 185
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert binaire_vers_decimal("1011") == 11    # cas normal
+    assert binaire_vers_decimal("0") == 0        # cas limite : un seul bit nul
+    assert binaire_vers_decimal("0011") == 3     # cas piege : des zeros en tete
+    ```
 
     Le schéma d’Horner : à chaque chiffre, on double l’accumulateur et on ajoute le bit.
 
     ```python
     def binaire_vers_decimal(ch):
-        n = 0
-        for c in ch:
-            n = n * 2 + int(c)
-        return n
+        n = 0                   # INITIALISER
+        for c in ch:            # PARCOURIR : bits de gauche a droite
+            n = n * 2 + int(c)  # METTRE A JOUR
+        return n                # RENVOYER
 
     assert binaire_vers_decimal("1011") == 11
     assert binaire_vers_decimal("10111001") == 185
@@ -454,7 +474,17 @@
 
 Vérifier les résultats avec `hex`, `bin` et `int("144", 8)`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert decimal_vers_base(255, 16) == "FF"    # cas normal
+    assert decimal_vers_base(0, 2) == "0"        # cas limite : zero
+    assert decimal_vers_base(10, 16) == "A"      # cas piege : un chiffre qui est une lettre
+    ```
 
     Même algorithme que pour le binaire, en divisant par `b` au lieu de 2. Le reste `n % b`, compris entre $0$ et $b - 1$, sert d’indice dans la chaîne des chiffres.
 
@@ -462,12 +492,12 @@ Vérifier les résultats avec `hex`, `bin` et `int("144", 8)`.
     def decimal_vers_base(n, b):
         chiffres = "0123456789ABCDEF"
         if n == 0:
-            return "0"
-        resultat = ""
-        while n > 0:
-            resultat = chiffres[n % b] + resultat
-            n = n // b
-        return resultat
+            return "0"                             # RENVOYER : cas particulier
+        resultat = ""                              # INITIALISER
+        while n > 0:                               # PARCOURIR
+            resultat = chiffres[n % b] + resultat  # METTRE A JOUR
+            n = n // b                             # METTRE A JOUR
+        return resultat                            # RENVOYER
 
     assert decimal_vers_base(255, 16) == "FF"
     assert decimal_vers_base(13, 2) == "1101"

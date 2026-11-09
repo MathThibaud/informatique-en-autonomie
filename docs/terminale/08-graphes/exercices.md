@@ -184,31 +184,41 @@ On numérote les sommets de $0$ à $n-1$. Un graphe est donné soit par sa matri
     `for i in range(len(M)):`  
     `voisins_i = []` …
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **1.** Les voisins du sommet `i` sont les indices `j` de la ligne `i` où la matrice vaut $1$ : on construit cette liste **par compréhension**, ligne après ligne.
 
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert matrice_vers_listes([[0, 1, 1], [1, 0, 0], [1, 0, 0]]) == [[1, 2], [0], [0]]   # cas normal
+    assert matrice_vers_listes([]) == []                                                # cas limite : aucun sommet
+    assert matrice_vers_listes([[0, 0], [0, 0]]) == [[], []]                            # cas piege : une liste vide par sommet isole
+    ```
+
     ```python
     def matrice_vers_listes(M):
         n = len(M)
-        adj = []
-        for i in range(n):
-            adj.append([j for j in range(n) if M[i][j] == 1])   # voisins de i
-        return adj
+        adj = []                                                # INITIALISER
+        for i in range(n):                                      # PARCOURIR : les lignes
+            adj.append([j for j in range(n) if M[i][j] == 1])   # METTRE A JOUR : voisins de i
+        return adj                                              # RENVOYER
     ```
 
     *Autre méthode :* sans compréhension, avec deux boucles imbriquées.
 
     ```python
     def matrice_vers_listes(M):
-        adj = []
-        for i in range(len(M)):
-            voisins_i = []
-            for j in range(len(M)):
-                if M[i][j] == 1:
-                    voisins_i.append(j)
-            adj.append(voisins_i)
-        return adj
+        adj = []                          # INITIALISER
+        for i in range(len(M)):           # PARCOURIR : les lignes
+            voisins_i = []                # INITIALISER
+            for j in range(len(M)):       # PARCOURIR : les colonnes
+                if M[i][j] == 1:          # TESTER
+                    voisins_i.append(j)   # METTRE A JOUR
+            adj.append(voisins_i)         # METTRE A JOUR
+        return adj                        # RENVOYER
     ```
 
     **2.** On part d’une matrice $n \times n$ remplie de $0$, puis on place un $1$ pour chaque voisin `j` de chaque sommet `i`.
@@ -216,11 +226,11 @@ On numérote les sommets de $0$ à $n-1$. Un graphe est donné soit par sa matri
     ```python
     def listes_vers_matrice(adj):
         n = len(adj)
-        M = [[0] * n for i in range(n)]
-        for i in range(n):
-            for j in adj[i]:
-                M[i][j] = 1
-        return M
+        M = [[0] * n for i in range(n)]     # INITIALISER : que des 0
+        for i in range(n):                  # PARCOURIR : les sommets
+            for j in adj[i]:                # PARCOURIR : les voisins de i
+                M[i][j] = 1                 # METTRE A JOUR
+        return M                            # RENVOYER
     ```
 
     **3.** On vérifie que `listes_vers_matrice(matrice_vers_listes(M)) == M` redonne bien la matrice de départ.
@@ -229,11 +239,11 @@ On numérote les sommets de $0$ à $n-1$. Un graphe est donné soit par sa matri
 
     ```python
     def predecesseurs(succ):
-        pred = {s: [] for s in succ}       # une liste vide par sommet
-        for s in succ:
-            for v in succ[s]:              # arc s -> v
-                pred[v].append(s)          # s est un predecesseur de v
-        return pred
+        pred = {s: [] for s in succ}       # INITIALISER : une liste vide par sommet
+        for s in succ:                     # PARCOURIR : les sommets
+            for v in succ[s]:              # PARCOURIR : les arcs s -> v
+                pred[v].append(s)          # METTRE A JOUR : s precede v
+        return pred                        # RENVOYER
     ```
 
     Sur l’exemple, on obtient `{’A’: [’C’], ’B’: [’A’], ’C’: [’A’, ’B’, ’D’], ’D’: []}` : `D` n’a aucun prédécesseur (aucun arc n’arrive sur lui). Dans un graphe non orienté, successeurs et prédécesseurs sont les mêmes : la fonction renverrait le même dictionnaire.
@@ -278,9 +288,21 @@ On considère le graphe **pondéré** suivant (les poids sont des distances en k
 
         Que renvoie `g.voisins(s)`, et comment en déduire le degré ? Pour `nb_aretes`, additionner les degrés de tous les sommets (`g.sommets`) : attention, chaque arête est alors comptée deux fois.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **Démarche :** on n’utilise que l’interface : `g.voisins(s)` renvoie la liste des voisins, sa longueur est le degré ; pour le nombre d’arêtes, on additionne les degrés de tous les sommets.
+
+    *Appels attendus, écrits avant de coder* (pour `nb_aretes` ; `g` est le graphe $G$ du cours, à $6$ arêtes) :
+
+    ```python
+    h = Graphe(['A', 'B'])
+    h.ajoute_arete('A', 'B')
+    assert nb_aretes(g) == 6                  # cas normal
+    assert nb_aretes(Graphe(['A'])) == 0      # cas limite : aucune arete
+    assert nb_aretes(h) == 1                  # cas piege : une arete, comptee deux fois dans les degres
+    ```
 
     ```python
     def degre(g, s):
@@ -290,10 +312,10 @@ On considère le graphe **pondéré** suivant (les poids sont des distances en k
         return g.voisins(s) == []
 
     def nb_aretes(g):
-        total = 0
-        for s in g.sommets:
-            total = total + len(g.voisins(s))
-        return total // 2      # chaque arete est comptee deux fois
+        total = 0                               # INITIALISER
+        for s in g.sommets:                     # PARCOURIR
+            total = total + len(g.voisins(s))   # METTRE A JOUR : somme des degres
+        return total // 2                       # RENVOYER : chaque arete est comptee deux fois
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Renvoyer `total` sans le diviser par $2$ : chaque arête `a-b` est comptée deux fois, dans les voisins de `a` et dans ceux de `b`.
@@ -342,7 +364,19 @@ On considère le graphe **pondéré** suivant (les poids sont des distances en k
 
         Q3 : reprendre le code du BFS en remplaçant la file par une pile, avec la règle du cours : on ne marque un sommet comme traité qu’au moment où on le **dépile**, et l’on ignore ceux qui sont déjà traités. Dans quel ordre les voisins d’un sommet sortent-ils de la pile ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder* (pour `BFS` ; `g` est le graphe de l’exercice 9) :
+
+    ```python
+    h = Graphe(['A', 'B', 'C'])
+    h.ajoute_arete('A', 'B')
+    assert BFS(g, 'A') == ['A', 'B', 'C', 'D', 'E', 'F']   # cas normal
+    assert BFS(Graphe(['A']), 'A') == ['A']                # cas limite : un seul sommet
+    assert BFS(h, 'A') == ['A', 'B']                       # cas piege : C n'est pas atteignable
+    ```
 
     Voir le cours pour `BFS`, `DFS` (récursif) et `DFS_iteratif`. Pour la file, la classe `File` du chapitre *Structures linéaires* (avec `pop(0)`) convient ici : c’est un choix de **simplicité**, acceptable sur de petits graphes, mais chaque `defiler` coûte alors $O(n)$ ; sur un grand graphe, on changerait d’implémentation (liste chaînée, deux piles…) sans toucher au BFS. Sur ce graphe, le DFS itératif renvoie par exemple `[A, C, D, F, E, B]` : la **pile** traite en dernier le premier voisin empilé, d’où un ordre différent du DFS récursif — mais c’est bien un parcours en profondeur valide.
 
@@ -457,9 +491,21 @@ On considère le graphe non orienté ci-dessous. On ne précise pas dans quel or
 
         Q2 : un parcours depuis n’importe quel sommet doit visiter tous les sommets.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **Démarche :** un parcours lancé depuis `u` visite exactement les sommets reliés à `u` par une chaîne ; il suffit de regarder si `v` en fait partie. Le graphe est connexe si un parcours depuis un sommet quelconque visite tous les sommets.
+
+    *Appels attendus, écrits avant de coder* (pour `existe_chemin` ; `g` est le graphe de l’exercice 9) :
+
+    ```python
+    h = Graphe(['A', 'B', 'C'])
+    h.ajoute_arete('A', 'B')
+    assert existe_chemin(g, 'A', 'F')         # cas normal
+    assert existe_chemin(h, 'C', 'C')         # cas limite : un sommet est relie a lui-meme
+    assert not existe_chemin(h, 'A', 'C')     # cas piege : C est isole
+    ```
 
     ```python
     def existe_chemin(g, u, v):
@@ -497,39 +543,51 @@ On considère le graphe non orienté ci-dessous. On ne précise pas dans quel or
 
 3.  Sur un graphe de votre choix, vérifier que `len(plus_court_chemin(...)) - 1` vaut bien la distance renvoyée.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder* (pour `plus_court_chemin` ; `g` est le graphe de l’exercice 9) :
+
+    ```python
+    h = Graphe(['A', 'B', 'C'])
+    h.ajoute_arete('A', 'B')
+    assert plus_court_chemin(g, 'A', 'F') == ['A', 'B', 'D', 'F']   # cas normal
+    assert plus_court_chemin(g, 'A', 'A') == ['A']                  # cas limite : depart = arrivee
+    assert plus_court_chemin(h, 'A', 'C') is None                   # cas piege : C inaccessible
+    ```
 
     ```python
     def plus_court_chemin(g, depart, arrivee):
-        decouverts = [depart]
-        en_attente = File()
+        decouverts = [depart]                   # INITIALISER
+        en_attente = File()                     # INITIALISER
         en_attente.enfiler(depart)
-        parent = {depart: None}
-        while not en_attente.est_vide():
+        parent = {depart: None}                 # INITIALISER
+        while not en_attente.est_vide():        # PARCOURIR
             s = en_attente.defiler()
-            if s == arrivee:
+            if s == arrivee:                    # TESTER : arrive, on reconstruit
                 chemin = [arrivee]
                 while parent[chemin[0]] is not None:
                     chemin = [parent[chemin[0]]] + chemin
-                return chemin
-            for v in g.voisins(s):
-                if v not in decouverts:
-                    decouverts.append(v)
-                    en_attente.enfiler(v)
-                    parent[v] = s
-        return None
+                return chemin                   # RENVOYER
+            for v in g.voisins(s):              # PARCOURIR
+                if v not in decouverts:         # TESTER
+                    decouverts.append(v)        # METTRE A JOUR
+                    en_attente.enfiler(v)       # METTRE A JOUR
+                    parent[v] = s               # METTRE A JOUR
+        return None                             # RENVOYER : inaccessible
 
     def distances(g, depart):
-        d = {depart: 0}              # sert aussi de liste des decouverts
-        en_attente = File()
+        d = {depart: 0}                         # INITIALISER : sert aussi de liste des decouverts
+        en_attente = File()                     # INITIALISER
         en_attente.enfiler(depart)
-        while not en_attente.est_vide():
+        while not en_attente.est_vide():        # PARCOURIR
             s = en_attente.defiler()
-            for v in g.voisins(s):
-                if v not in d:
-                    d[v] = d[s] + 1
-                    en_attente.enfiler(v)
-        return d
+            for v in g.voisins(s):              # PARCOURIR
+                if v not in d:                  # TESTER
+                    d[v] = d[s] + 1             # METTRE A JOUR
+                    en_attente.enfiler(v)       # METTRE A JOUR
+        return d                                # RENVOYER
     ```
 
     **3.** Sur le graphe de l’exercice 9, `plus_court_chemin(g, ’A’, ’F’)` vaut `[’A’,’B’,’D’,’F’]` : longueur $3$, qui est bien la valeur `distances(g,’A’)[’F’]`.
@@ -658,12 +716,12 @@ Le « cercle d’amis » d’une personne est l’ensemble des personnes atteign
     ```python
     def nb_amis(L, m, s):
         pos_s = position(L, s)
-        if pos_s == None:
-            return None
-        amis = 0
-        for i in range(len(m)):
-            amis += m[pos_s][i]
-        return amis
+        if pos_s == None:               # TESTER : sommet absent
+            return None                 # RENVOYER
+        amis = 0                        # INITIALISER
+        for i in range(len(m)):         # PARCOURIR : la ligne de s
+            amis += m[pos_s][i]         # METTRE A JOUR
+        return amis                     # RENVOYER
     ```
 
     **5.** `nb_amis(sommets, matrice_adj, ’G’)` vaut `4`.
@@ -689,13 +747,13 @@ Le « cercle d’amis » d’une personne est l’ensemble des personnes atteign
 
     ```python
     def parcours_en_profondeur(d, s, visites=None):
-        if visites is None:
+        if visites is None:                             # INITIALISER (premier appel)
             visites = []
-        visites.append(s)
-        for v in d[s]:
-            if v not in visites:
-                parcours_en_profondeur(d, v, visites)
-        return visites
+        visites.append(s)                               # METTRE A JOUR : s est visite
+        for v in d[s]:                                  # PARCOURIR
+            if v not in visites:                        # TESTER
+                parcours_en_profondeur(d, v, visites)   # APPEL RECURSIF
+        return visites                                  # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — La recette du pain : un graphe de tâches *(d’après Asie 2024, jour 1, ex. 2)* <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-16 }
@@ -821,6 +879,8 @@ Une **balade** est un chemin du graphe ; sa durée est la somme des durées de s
 
         Q8 : réutiliser `sont_voisines` ; jusqu’à quel indice la boucle doit-elle aller pour que « la suivante » existe toujours ?
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **Barème indicatif** (sur 4) : Q1 : 0,25 ; Q2 : 0,5 ; Q3 : 0,5 ; Q4 : 0,25 ; Q5 : 0,5 ; Q6 : 0,5 ; Q7 : 0,5 ; Q8 : 1
@@ -839,18 +899,26 @@ Une **balade** est un chemin du graphe ; sa durée est la somme des durées de s
 
     **7–8.** On parcourt les couples `(voisine, durée)` de `x` en cherchant `y` ; pour une balade, on vérifie que chaque attraction est voisine de la **suivante**, d’où la boucle jusqu’à l’avant-dernier indice.
 
+    *Appels attendus, écrits avant de coder* (pour `est_balade`) :
+
+    ```python
+    assert est_balade([a1, a2, a3])              # cas normal
+    assert est_balade([a4])                      # cas limite : une seule attraction
+    assert not est_balade([a2, a1, a4, a3])      # cas piege : a1 et a4 ne sont pas voisines
+    ```
+
     ```python
     def sont_voisines(x, y):
-        for (v, duree) in x.voisines:
-            if v == y:
-                return True
-        return False
+        for (v, duree) in x.voisines:                 # PARCOURIR
+            if v == y:                                # TESTER
+                return True                           # RENVOYER : trouvee
+        return False                                  # RENVOYER
 
     def est_balade(tab):
-        for i in range(len(tab) - 1):
-            if not sont_voisines(tab[i], tab[i+1]):
-                return False
-        return True
+        for i in range(len(tab) - 1):                 # PARCOURIR : jusqu'a l'avant-dernier
+            if not sont_voisines(tab[i], tab[i+1]):   # TESTER
+                return False                          # RENVOYER : un maillon manque
+        return True                                   # RENVOYER
     ```
 
     *Autre méthode* pour `sont_voisines` : construire par compréhension la liste des seules attractions voisines (première composante des couples), puis tester l’appartenance.
@@ -903,6 +971,8 @@ Au début, un virus n’est présent que sur un ordinateur. À chaque étape, ch
         `etapes = 0`  
         `while len(contamines) < len(voisins):` … Construire la nouvelle frontière (la vague suivante) à partir des voisins de la frontière courante.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **Barème indicatif** (sur 4) : Q1 : 0,5 ; Q2 : 0,75 ; Q3 : 0,75 ; Q4 : 2
@@ -923,21 +993,29 @@ Au début, un virus n’est présent que sur un ordinateur. À chaque étape, ch
 
     **4.** C’est un parcours en largeur « par vagues » : à chaque étape, on contamine tous les voisins non encore contaminés, et on compte les étapes.
 
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert temps_propagation(voisins, 0) == 1       # cas normal : 0 touche tout le monde
+    assert temps_propagation([[]], 0) == 0          # cas limite : un seul ordinateur
+    assert temps_propagation(voisins, 4) == 2       # cas piege : depuis 4, il faut passer par 0
+    ```
+
     ```python
     def temps_propagation(voisins, s):
-        contamines = [s]
-        frontiere = [s]           # contamines a l'etape precedente
-        etapes = 0
-        while len(contamines) < len(voisins):
+        contamines = [s]                            # INITIALISER
+        frontiere = [s]                             # INITIALISER : contamines a l'etape precedente
+        etapes = 0                                  # INITIALISER
+        while len(contamines) < len(voisins):       # PARCOURIR : une vague par tour
             nouveaux = []
-            for x in frontiere:
-                for v in voisins[x]:
-                    if v not in contamines:
-                        contamines.append(v)
-                        nouveaux.append(v)
-            etapes = etapes + 1
-            frontiere = nouveaux
-        return etapes
+            for x in frontiere:                     # PARCOURIR
+                for v in voisins[x]:                # PARCOURIR
+                    if v not in contamines:         # TESTER
+                        contamines.append(v)        # METTRE A JOUR
+                        nouveaux.append(v)          # METTRE A JOUR
+            etapes = etapes + 1                     # METTRE A JOUR
+            frontiere = nouveaux                    # METTRE A JOUR : vague suivante
+        return etapes                               # RENVOYER
     ```
 
     Depuis le sommet $4$ (réseau initial), la contamination prend **2 étapes**.
@@ -994,6 +1072,8 @@ def parcours(graphe, sommet):
         `if not (v in dist):`  
         `dist[v] = dist[s] + 1` …
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction `parcours2(G, s)` réalisant un parcours en **profondeur** à l’aide d’une **pile**. Donner un résultat possible de `parcours2(G, ’Av’)`.
 
     ??? pouce "Coup de pouce"
@@ -1028,18 +1108,26 @@ def parcours(graphe, sommet):
 
     **6.** **Démarche :** on remplace la liste `visite` par un dictionnaire de distances : le départ est à la distance $0$, et un sommet découvert depuis `s` est à la distance de `s` plus $1$.
 
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert distance(G, 'Mp')['Nc'] == 3     # cas normal
+    assert distance(G, 'Mp')['Mp'] == 0     # cas limite : le depart lui-meme
+    assert distance(G, 'Mp')['Av'] == 2     # cas piege : Mp-Ni-Av, pas Mp-Ar-Ax-Av
+    ```
+
     ```python
     def distance(graphe, sommet):
-        dist = {sommet: 0}
-        f = creerFile()
+        dist = {sommet: 0}                  # INITIALISER
+        f = creerFile()                     # INITIALISER
         enfiler(f, sommet)
-        while not estVide(f):
+        while not estVide(f):               # PARCOURIR
             s = defiler(f)
-            for v in graphe[s]:
-                if v not in dist:
-                    dist[v] = dist[s] + 1
-                    enfiler(f, v)
-        return dist
+            for v in graphe[s]:             # PARCOURIR
+                if v not in dist:           # TESTER
+                    dist[v] = dist[s] + 1   # METTRE A JOUR
+                    enfiler(f, v)           # METTRE A JOUR
+        return dist                         # RENVOYER
     ```
 
     Ainsi `distance(G, ’Av’)` vaut :
@@ -1052,16 +1140,16 @@ def parcours(graphe, sommet):
 
     ```python
     def parcours2(G, s):
-        pile = [s]
-        visite = []
-        while pile != []:
+        pile = [s]                          # INITIALISER
+        visite = []                         # INITIALISER
+        while pile != []:                   # PARCOURIR
             x = pile.pop()
-            if x not in visite:
-                visite.append(x)
-                for v in G[x]:
-                    if v not in visite:
-                        pile.append(v)
-        return visite
+            if x not in visite:             # TESTER
+                visite.append(x)            # METTRE A JOUR
+                for v in G[x]:              # PARCOURIR
+                    if v not in visite:     # TESTER
+                        pile.append(v)      # METTRE A JOUR
+        return visite                       # RENVOYER
     ```
 
     Un résultat possible : `parcours2(G, ’Av’)` $=$ `[’Av’,’Ax’,’Di’,’Nc’,’To’,’Mr’,’Ar’,’Mp’,’Ni’]` (l’ordre dépend de l’ordre des voisins).
@@ -1271,33 +1359,41 @@ On modélise le labyrinthe par un graphe : les **sommets** sont les cases libres
 
     Q3 : les quatre cases candidates sont `(i - 1, j)`, `(i + 1, j)`, `(i, j - 1)` et `(i, j + 1)` ; on garde celles dont les indices restent dans la grille (`0 <= a < len(lab)` et `0 <= b < len(lab[0])`) **et** qui ne sont pas un mur. Tester les indices **avant** de lire `lab[a][b]`. Q4 : pour ne pas ajouter deux fois l’arête entre deux cases voisines, tester `sont_voisins` avant `ajoute_arete`, ou ne regarder que la voisine de droite et celle du bas de chaque case.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **1.** On peut toujours passer d’une case libre à sa voisine **et revenir** : la relation « être voisines » est symétrique, d’où un graphe non orienté. Le graphe a $21$ sommets (les cases libres : $5 + 3 + 5 + 3 + 5$ ligne par ligne) et $21$ arêtes : $9$ « horizontales » (entre deux cases voisines d’une même ligne) et $12$ « verticales » (d’une même colonne).
 
     **2.** Les cases `(0, 5)` et `(4, 4)` n’ont qu’un voisin (degré $1$) : ce sont des **culs-de-sac**. Le graphe contient un cycle, qui fait le tour des murs de gauche : `(0,0) -- (0,1) -- (0,2) -- (0,3) -- (1,3) -- (2,3) -- (2,2) -- (3,2) -- (4,2) -- (4,1) -- (4,0) -- (3,0) -- (2,0) -- (1,0) -- (0,0)`. C’est le seul ; il explique qu’il y ait deux façons très différentes de rejoindre la case `(2, 3)`.
 
-    **3. et 4.**
+    **3. et 4.** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert voisines(lab, 2, 3) == [(1, 3), (2, 2), (2, 4)]   # cas normal
+    assert voisines(lab, 0, 0) == [(1, 0), (0, 1)]           # cas limite : coin de la grille
+    assert voisines(lab, 0, 5) == [(1, 5)]                   # cas piege : lab[-1][5] existe, mais hors grille
+    ```
 
     ```python
     def voisines(lab, i, j):
         """Cases libres voisines de (i, j), dans l'ordre haut, bas, gauche, droite."""
-        res = []
-        for (a, b) in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
-            if 0 <= a < len(lab) and 0 <= b < len(lab[0]) and lab[a][b] == ".":
-                res.append((a, b))
-        return res
+        res = []                                                                 # INITIALISER
+        for (a, b) in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:          # PARCOURIR
+            if 0 <= a < len(lab) and 0 <= b < len(lab[0]) and lab[a][b] == ".":  # TESTER
+                res.append((a, b))                                               # METTRE A JOUR
+        return res                                                               # RENVOYER
 
     def construire_graphe(lab):
         """Graphe non oriente du labyrinthe : sommets = cases libres (i, j)."""
         libres = [(i, j) for i in range(len(lab)) for j in range(len(lab[0]))
                   if lab[i][j] == "."]
-        g = Graphe(libres)
-        for (i, j) in libres:
-            for v in voisines(lab, i, j):
-                if not g.sont_voisins((i, j), v):      # arete pas encore ajoutee
-                    g.ajoute_arete((i, j), v)
-        return g
+        g = Graphe(libres)                              # INITIALISER
+        for (i, j) in libres:                           # PARCOURIR
+            for v in voisines(lab, i, j):               # PARCOURIR
+                if not g.sont_voisins((i, j), v):       # TESTER : arete pas encore ajoutee
+                    g.ajoute_arete((i, j), v)           # METTRE A JOUR
+        return g                                        # RENVOYER
     ```
 
     Dans `voisines`, l’ordre des tests compte : si `a` vaut `-1`, `lab[a]` ne provoque pas d’erreur mais désigne la **dernière** ligne (indice négatif) ; si `a` vaut `len(lab)`, `lab[a]` lève `IndexError`. Comme `and` s’arrête au premier test faux, on vérifie les indices **avant** de lire la case.

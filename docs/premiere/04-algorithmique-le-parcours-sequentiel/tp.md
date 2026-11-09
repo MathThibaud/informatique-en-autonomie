@@ -87,6 +87,8 @@ Chaque fonction de cette partie est **un seul parcours**. Avant d’écrire, se 
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Accumuler et compter <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-algorithmique-le-parcours-sequentiel-tp-1-2 }
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `somme(t)` puis `moyenne(t)` (cette dernière en une ligne, en appelant `somme`).
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `nb_au_moins(t, seuil)` qui compte les éléments de `t` **supérieurs ou égaux** à `seuil`.

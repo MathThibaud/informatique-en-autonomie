@@ -75,14 +75,14 @@ def fibo(n):
 
     ```python
     def fibo_memo(n, memo=None):
-        if memo is None:
+        if memo is None:                                            # INITIALISER (premier appel)
             memo = {}
-        if n <= 1:
+        if n <= 1:                                                  # CAS DE BASE
             return n
-        if n in memo:
+        if n in memo:                                               # VERIFIER : deja calcule ?
             return memo[n]
-        memo[n] = fibo_memo(n - 1, memo) + fibo_memo(n - 2, memo)
-        return memo[n]
+        memo[n] = fibo_memo(n - 1, memo) + fibo_memo(n - 2, memo)   # APPEL RECURSIF, METTRE A JOUR
+        return memo[n]                                              # RENVOYER
     ```
 
     `fibo_memo(50)` renvoie bien `12586269025`, instantanément : chaque $F_k$ n’est calculé qu’une fois, le coût est linéaire.
@@ -107,24 +107,32 @@ Un escalier a $n$ marches. On peut monter les marches **une par une** ou **deux 
 
         Q3 : reprendre le schéma de `fibo_memo` ; attention, les conditions d’arrêt ne sont pas celles de Fibonacci.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **1.** $M(1) = 1$ (un pas de 1). $M(2) = 2$ : «$1{+}1$» ou «$2$». $M(3) = 3$ : «$1{+}1{+}1$», «$1{+}2$», «$2{+}1$». $M(4) = 5$.
 
     **2.** Pour arriver en haut de $n$ marches, le **dernier** pas est soit de $1$ (on venait de la marche $n-1$), soit de $2$ (on venait de $n-2$). Ces deux familles de chemins sont disjointes et couvrent tout : $M(n) = M(n-1) + M(n-2)$. On reconnaît la suite de **Fibonacci** (décalée).
 
-    **3.** **Démarche :** même schéma que `fibo_memo`, avec la relation $M(n) = M(n-1) + M(n-2)$ et les conditions d’arrêt $M(0) = M(1) = 1$.
+    **3.** **Démarche :** même schéma que `fibo_memo`, avec la relation $M(n) = M(n-1) + M(n-2)$ et les conditions d’arrêt $M(0) = M(1) = 1$. *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert monter(4) == 5     # cas normal
+    assert monter(1) == 1     # cas limite : une seule marche
+    assert monter(2) == 2     # cas piege : pas la valeur de fibo(2), qui vaut 1
+    ```
 
     ```python
     def monter(n, memo=None):
-        if memo is None:
+        if memo is None:                                      # INITIALISER (premier appel)
             memo = {}
-        if n <= 1:
+        if n <= 1:                                            # CAS DE BASE : M(0) = M(1) = 1
             return 1
-        if n in memo:
+        if n in memo:                                         # VERIFIER : deja calcule ?
             return memo[n]
-        memo[n] = monter(n - 1, memo) + monter(n - 2, memo)
-        return memo[n]
+        memo[n] = monter(n - 1, memo) + monter(n - 2, memo)   # APPEL RECURSIF, METTRE A JOUR
+        return memo[n]                                        # RENVOYER
     ```
 
     `monter(10)` renvoie `89`.
@@ -183,13 +191,13 @@ On définit la suite $u$ par $u_0 = 2$, $u_1 = 1$ et, pour $n \geq 2$, $u_n = u_
 
     ```python
     def fibo_tab(n):
-        if n <= 1:
+        if n <= 1:                                   # CAS DE BASE
             return n
-        table = [0] * (n + 1)
-        table[1] = 1
-        for k in range(2, n + 1):
-            table[k] = table[k - 1] + table[k - 2]
-        return table[n]
+        table = [0] * (n + 1)                        # INITIALISER
+        table[1] = 1                                 # INITIALISER
+        for k in range(2, n + 1):                    # PARCOURIR : petits indices d'abord
+            table[k] = table[k - 1] + table[k - 2]   # METTRE A JOUR
+        return table[n]                              # RENVOYER
     ```
 
     Les valeurs coïncident avec `fibo_memo` pour tout $n$ (c’est la même suite, calculée dans l’autre sens).
@@ -198,13 +206,13 @@ On définit la suite $u$ par $u_0 = 2$, $u_1 = 1$ et, pour $n \geq 2$, $u_n = u_
 
     ```python
     def fibo_deux_variables(n):
-        precedent = 0                      # F_0
-        courant = 1                        # F_1
-        for k in range(n):
-            suivant = precedent + courant
+        precedent = 0                       # INITIALISER : F_0
+        courant = 1                         # INITIALISER : F_1
+        for k in range(n):                  # PARCOURIR
+            suivant = precedent + courant   # METTRE A JOUR
             precedent = courant
             courant = suivant
-        return precedent                   # F_n
+        return precedent                    # RENVOYER : F_n
     ```
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — Escalier tabulé <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-6 }
@@ -221,12 +229,12 @@ On définit la suite $u$ par $u_0 = 2$, $u_1 = 1$ et, pour $n \geq 2$, $u_n = u_
 
     ```python
     def monter_tab(n):
-        if n <= 1:
+        if n <= 1:                                   # CAS DE BASE
             return 1
-        table = [1] * (n + 1)
-        for k in range(2, n + 1):
-            table[k] = table[k - 1] + table[k - 2]
-        return table[n]
+        table = [1] * (n + 1)                        # INITIALISER : M(0) = M(1) = 1
+        for k in range(2, n + 1):                    # PARCOURIR
+            table[k] = table[k - 1] + table[k - 2]   # METTRE A JOUR
+        return table[n]                              # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Le plus grand chemin dans un triangle <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-7 }
@@ -260,6 +268,8 @@ Partant du sommet, on descend à chaque étage vers le voisin de gauche ou de dr
         `for i in range(len(t) - 2, -1, -1):`  
         `for j in range(len(t[i])):` …
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **1.** Le meilleur chemin est $3 \to 7 \to 4 \to 9$, de score $3 + 7 + 4 + 9 = \textbf{23}$.
@@ -270,16 +280,22 @@ Partant du sommet, on descend à chaque étage vers le voisin de gauche ou de dr
 
     avec le cas de base $S(\text{dernier niveau}, j) = t[\text{dernier}][j]$.
 
-    **3.** **Démarche :** la table a la forme du triangle ; son dernier niveau est connu (cas de base) ; on remonte niveau par niveau avec la relation de la question 2.
+    **3.** **Démarche :** la table a la forme du triangle ; son dernier niveau est connu (cas de base) ; on remonte niveau par niveau avec la relation de la question 2. *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert meilleur_score([[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]]) == 23   # cas normal
+    assert meilleur_score([[5]]) == 5                                     # cas limite : un seul niveau
+    assert meilleur_score([[1], [9, 2], [1, 1, 50]]) == 53                # cas piege : le 9 attire, le 50 gagne
+    ```
 
     ```python
     def meilleur_score(t):
         n = len(t)
-        s = [[x for x in niveau] for niveau in t]   # copie ; le dernier niveau est deja bon
-        for i in range(n - 2, -1, -1):          # du bas vers le haut
-            for j in range(len(t[i])):
-                s[i][j] = t[i][j] + max(s[i + 1][j], s[i + 1][j + 1])
-        return s[0][0]
+        s = [[x for x in niveau] for niveau in t]   # INITIALISER : copie, dernier niveau deja bon
+        for i in range(n - 2, -1, -1):              # PARCOURIR : du bas vers le haut
+            for j in range(len(t[i])):              # PARCOURIR
+                s[i][j] = t[i][j] + max(s[i + 1][j], s[i + 1][j + 1])   # METTRE A JOUR
+        return s[0][0]                              # RENVOYER
     ```
 
     `meilleur_score([[3],[7,4],[2,4,6],[8,5,9,3]])` renvoie `23`.
@@ -381,18 +397,26 @@ On dispose du système de pièces $\{1, 3, 4\}$.
     `for p in pieces:`  
     `if p <= s:` … Attention à la valeur initiale des cases : elle doit être « pire » que toute vraie solution.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
-    **Démarche :** on tabule la relation $R(s) = 1 + \min R(s - p)$ : `table[0]` vaut $0$, les autres cases $+\infty$ au départ (« pas encore de solution ») ; pour chaque somme, de la plus petite à la plus grande, on essaie chaque pièce comme dernière pièce.
+    **Démarche :** on tabule la relation $R(s) = 1 + \min R(s - p)$ : `table[0]` vaut $0$, les autres cases $+\infty$ au départ (« pas encore de solution ») ; pour chaque somme, de la plus petite à la plus grande, on essaie chaque pièce comme dernière pièce. *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert rendu(11, [1, 2, 5]) == 3     # cas normal
+    assert rendu(0, [1, 2, 5]) == 0      # cas limite : rien a rendre
+    assert rendu(6, [1, 3, 4]) == 2      # cas piege : le glouton en donne 3
+    ```
 
     ```python
     def rendu(somme, pieces):
-        table = [0] + [float("inf")] * somme
-        for s in range(1, somme + 1):
-            for p in pieces:
-                if p <= s and table[s - p] + 1 < table[s]:
-                    table[s] = table[s - p] + 1
-        return table[somme]
+        table = [0] + [float("inf")] * somme                 # INITIALISER : table[0] = 0, le reste +infini
+        for s in range(1, somme + 1):                        # PARCOURIR : sommes croissantes
+            for p in pieces:                                 # PARCOURIR
+                if p <= s and table[s - p] + 1 < table[s]:   # TESTER : mieux avec p ?
+                    table[s] = table[s - p] + 1              # METTRE A JOUR
+        return table[somme]                                  # RENVOYER
     ```
 
     `rendu(6, [1,3,4]) == 2` et `rendu(11, [1,2,5]) == 3`.
@@ -413,25 +437,33 @@ On dispose du système de pièces $\{1, 3, 4\}$.
 
     `derniere = [None] * (somme + 1)` ; chaque fois que `table[s]` s’améliore grâce à `p`, noter `derniere[s] = p`. Puis partir de `s = somme` et, tant que `s > 0`, ajouter `derniere[s]` à la solution et le retirer de `s`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
-    On mémorise, pour chaque somme, la dernière pièce utilisée, puis on remonte :
+    On mémorise, pour chaque somme, la dernière pièce utilisée, puis on remonte : *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert rendu_pieces(6, [1, 3, 4]) == [3, 3]     # cas normal
+    assert rendu_pieces(0, [1, 3, 4]) == []         # cas limite : rien a rendre
+    assert rendu_pieces(8, [1, 4, 5]) == [4, 4]     # cas piege : le glouton donnerait [5, 1, 1, 1]
+    ```
 
     ```python
     def rendu_pieces(somme, pieces):
-        table = [0] + [float("inf")] * somme
-        derniere = [None] * (somme + 1)          # derniere piece pour atteindre s
-        for s in range(1, somme + 1):
-            for p in pieces:
-                if p <= s and table[s - p] + 1 < table[s]:
-                    table[s] = table[s - p] + 1
-                    derniere[s] = p
-        solution = []
+        table = [0] + [float("inf")] * somme                 # INITIALISER
+        derniere = [None] * (somme + 1)                      # INITIALISER : derniere piece pour atteindre s
+        for s in range(1, somme + 1):                        # PARCOURIR
+            for p in pieces:                                 # PARCOURIR
+                if p <= s and table[s - p] + 1 < table[s]:   # TESTER
+                    table[s] = table[s - p] + 1              # METTRE A JOUR
+                    derniere[s] = p                          # METTRE A JOUR
+        solution = []                                        # INITIALISER
         s = somme
-        while s > 0:
-            solution.append(derniere[s])
+        while s > 0:                                         # PARCOURIR : on remonte
+            solution.append(derniere[s])                     # METTRE A JOUR
             s = s - derniere[s]
-        return solution
+        return solution                                      # RENVOYER
     ```
 
     `rendu_pieces(6, [1,3,4])` renvoie `[3, 3]`.
@@ -454,19 +486,27 @@ Un robot part du coin supérieur gauche d’une grille de $L$ lignes et $C$ colo
 
         Q2 : créer une table de `L` lignes et `C` colonnes remplie de $1$, puis remplir les autres cases ligne par ligne.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **1.** Pour atteindre $(i, j)$, le robot arrive soit de la case du dessus $(i-1, j)$, soit de celle de gauche $(i, j-1)$ : $N(i, j) = N(i-1, j) + N(i, j-1)$. Sur la première ligne et la première colonne, il n’y a qu’un seul chemin (tout droit), donc les valeurs y valent toutes $1$.
 
-    **2.** **Démarche :** une table de `L` lignes et `C` colonnes remplie de $1$ (première ligne et première colonne) ; on remplit les autres cases ligne par ligne avec la relation de la question 1.
+    **2.** **Démarche :** une table de `L` lignes et `C` colonnes remplie de $1$ (première ligne et première colonne) ; on remplit les autres cases ligne par ligne avec la relation de la question 1. *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert nb_chemins(3, 3) == 6     # cas normal
+    assert nb_chemins(1, 5) == 1     # cas limite : une seule ligne
+    assert nb_chemins(2, 4) == 4     # cas piege : grille non carree
+    ```
 
     ```python
     def nb_chemins(L, C):
-        N = [[1] * C for _ in range(L)]         # 1re ligne et 1re colonne a 1
-        for i in range(1, L):
-            for j in range(1, C):
-                N[i][j] = N[i - 1][j] + N[i][j - 1]
-        return N[L - 1][C - 1]
+        N = [[1] * C for _ in range(L)]               # INITIALISER : 1re ligne et 1re colonne a 1
+        for i in range(1, L):                         # PARCOURIR
+            for j in range(1, C):                     # PARCOURIR
+                N[i][j] = N[i - 1][j] + N[i][j - 1]   # METTRE A JOUR
+        return N[L - 1][C - 1]                        # RENVOYER
     ```
 
     `nb_chemins(3, 3) == 6` et `nb_chemins(2, 2) == 2`.
@@ -477,11 +517,11 @@ Un robot part du coin supérieur gauche d’une grille de $L$ lignes et $C$ colo
 
     ```python
     def nb_chemins_memo(i, j, memo):
-        if i == 0 or j == 0:                    # 1re ligne ou 1re colonne
+        if i == 0 or j == 0:     # CAS DE BASE : 1re ligne ou 1re colonne
             return 1
-        if (i, j) not in memo:
+        if (i, j) not in memo:   # VERIFIER : pas encore calcule ?
             memo[(i, j)] = nb_chemins_memo(i - 1, j, memo) + nb_chemins_memo(i, j - 1, memo)
-        return memo[(i, j)]
+        return memo[(i, j)]      # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Le sac à dos <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-11-13 }
@@ -505,6 +545,8 @@ Un sac supporte une capacité `C`. On dispose d’objets de poids `poids[i]` et 
         `for c in range(capacite + 1):`  
         `T[i][c] = T[i - 1][c]` (on laisse l’objet) …
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 3.  Quel serait le résultat d’un algorithme glouton qui prendrait d’abord les objets de plus grande valeur ? Est-il optimal ici ?
 
 4.  On ne garde que les trois premiers objets (poids $1, 3, 4$ ; valeurs $1, 4, 5$) et une capacité de $5$. Remplir à la main la table $T$ ($4$ lignes $i = 0$ à $3$, $6$ colonnes $c = 0$ à $5$), ligne par ligne. Quelle est la meilleure valeur, et quels objets prend-on ?
@@ -513,20 +555,26 @@ Un sac supporte une capacité `C`. On dispose d’objets de poids `poids[i]` et 
 
     **1.** $T[i][c] = \max\big(T[i-1][c],\ \ v_i + T[i-1][c - w_i]\big)$ : on *laisse* l’objet $i$ (première branche) ou on le *prend* s’il rentre (seconde branche, avec $w_i \leq c$).
 
-    **2.**
+    **2.** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert sac_a_dos([1, 3, 4], [1, 4, 5], 5) == 6              # cas normal
+    assert sac_a_dos([2, 3], [5, 6], 1) == 0                    # cas limite : aucun objet ne rentre
+    assert sac_a_dos([1, 3, 4, 5], [1, 4, 5, 7], 7) == 9        # cas piege : le glouton par valeur donne 8
+    ```
 
     ```python
     def sac_a_dos(poids, valeurs, capacite):
         n = len(poids)
-        T = [[0] * (capacite + 1) for _ in range(n + 1)]
-        for i in range(1, n + 1):
-            for c in range(capacite + 1):
-                T[i][c] = T[i - 1][c]
-                if poids[i - 1] <= c:
+        T = [[0] * (capacite + 1) for _ in range(n + 1)]   # INITIALISER
+        for i in range(1, n + 1):                          # PARCOURIR : les objets
+            for c in range(capacite + 1):                  # PARCOURIR : les capacites
+                T[i][c] = T[i - 1][c]                      # METTRE A JOUR : on laisse l'objet
+                if poids[i - 1] <= c:                      # TESTER : peut-on le prendre ?
                     avec = valeurs[i - 1] + T[i - 1][c - poids[i - 1]]
-                    if avec > T[i][c]:
-                        T[i][c] = avec
-        return T[n][capacite]
+                    if avec > T[i][c]:                     # TESTER
+                        T[i][c] = avec                     # METTRE A JOUR
+        return T[n][capacite]                              # RENVOYER
     ```
 
     `sac_a_dos([1,3,4,5], [1,4,5,7], 7) == 9` (on prend les objets de poids $3$ et $4$ : valeur $4 + 5 = 9$).
@@ -567,23 +615,31 @@ La **plus longue sous-séquence commune** (PLSC) à deux mots est utilisée par 
         Q2 : `L = [[0] * (m + 1) for _ in range(n + 1)]` (ligne et colonne $0$ : mot vide).  
         Si `a[i-1] == b[j-1]` : `L[i][j] = L[i-1][j-1] + 1` ; sinon, garder la meilleure de deux cases voisines.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **1.** `"CHE"`, de longueur $\textbf{3}$ (on retrouve C, H, E dans cet ordre dans `CHIEN` et dans `NICHE` ; attention, `"ICE"` ne convient pas : dans `CHIEN`, le I vient après le C).
 
-    **2.**
+    **2.** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert plsc("CHIEN", "NICHE") == 3     # cas normal
+    assert plsc("", "NSI") == 0            # cas limite : un mot vide
+    assert plsc("ABC", "CBA") == 1         # cas piege : memes lettres, ordre inverse
+    ```
 
     ```python
     def plsc(a, b):
         n, m = len(a), len(b)
-        L = [[0] * (m + 1) for _ in range(n + 1)]
-        for i in range(1, n + 1):
-            for j in range(1, m + 1):
-                if a[i - 1] == b[j - 1]:
-                    L[i][j] = L[i - 1][j - 1] + 1
+        L = [[0] * (m + 1) for _ in range(n + 1)]             # INITIALISER
+        for i in range(1, n + 1):                             # PARCOURIR
+            for j in range(1, m + 1):                         # PARCOURIR
+                if a[i - 1] == b[j - 1]:                      # TESTER
+                    L[i][j] = L[i - 1][j - 1] + 1             # METTRE A JOUR
                 else:
-                    L[i][j] = max(L[i - 1][j], L[i][j - 1])
-        return L[n][m]
+                    L[i][j] = max(L[i - 1][j], L[i][j - 1])   # METTRE A JOUR
+        return L[n][m]                                        # RENVOYER
     ```
 
     `plsc("CHIEN","NICHE") == 3` et `plsc("ABCBDAB","BDCAB") == 4`.
@@ -606,29 +662,37 @@ La **distance d’édition** entre deux mots est le nombre minimal d’opératio
 
         Q3 : remplir d’abord la première colonne et la première ligne (question 2), puis les autres cases ligne par ligne avec la règle donnée ; les `i` premières lettres de `a` se terminent par `a[i-1]`.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **1.** `"NICHE"` $\to$ `"RICHE"` : distance $1$ (substituer `N` par `R`). `"CHAT"` $\to$ `"CHATON"` : distance $2$ (insérer `O` puis `N`).
 
     **2.** Pour transformer les $i$ premières lettres de `a` en le mot vide, il faut **supprimer** ces $i$ lettres, donc $D[i][0] = i$. Symétriquement, obtenir les $j$ premières lettres de `b` à partir du mot vide demande $j$ **insertions**, donc $D[0][j] = j$.
 
-    **3.** **Démarche :** on remplit d’abord la première colonne et la première ligne (question 2), puis chaque autre case, ligne par ligne, avec la règle de l’énoncé.
+    **3.** **Démarche :** on remplit d’abord la première colonne et la première ligne (question 2), puis chaque autre case, ligne par ligne, avec la règle de l’énoncé. *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert distance("CHIEN", "CHATS") == 3     # cas normal
+    assert distance("", "NSI") == 3            # cas limite : que des insertions
+    assert distance("CHAT", "CHATON") == 2     # cas piege : longueurs differentes
+    ```
 
     ```python
     def distance(a, b):
         n, m = len(a), len(b)
-        D = [[0] * (m + 1) for _ in range(n + 1)]
+        D = [[0] * (m + 1) for _ in range(n + 1)]   # INITIALISER
         for i in range(n + 1):
-            D[i][0] = i
+            D[i][0] = i                             # INITIALISER
         for j in range(m + 1):
-            D[0][j] = j
-        for i in range(1, n + 1):
-            for j in range(1, m + 1):
-                if a[i - 1] == b[j - 1]:
-                    D[i][j] = D[i - 1][j - 1]
+            D[0][j] = j                             # INITIALISER
+        for i in range(1, n + 1):                   # PARCOURIR
+            for j in range(1, m + 1):               # PARCOURIR
+                if a[i - 1] == b[j - 1]:            # TESTER
+                    D[i][j] = D[i - 1][j - 1]       # METTRE A JOUR
                 else:
-                    D[i][j] = 1 + min(min(D[i - 1][j], D[i][j - 1]), D[i - 1][j - 1])
-        return D[n][m]
+                    D[i][j] = 1 + min(min(D[i - 1][j], D[i][j - 1]), D[i - 1][j - 1])   # METTRE A JOUR
+        return D[n][m]                              # RENVOYER
     ```
 
     `distance("CHIEN", "CHATS") == 3` (trois substitutions) et `distance("CHATON", "MOUTON") == 3`.
@@ -646,6 +710,8 @@ On considère la liste des nombres d’étages des immeubles d’une rue, en par
 2.  Déterminer la plus longue sous-séquence strictement croissante de `L2` et sa longueur.
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire `est_strict_croissante(seq)` qui renvoie `True` si la liste `seq` est strictement croissante, `False` sinon.
+
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
 
 4.  **Version récursive.** On appelle `llsc_fin(tab, i)` la longueur maximale d’une sous-séquence strictement croissante se *terminant* à l’indice `i`. Recopier et compléter les lignes 2, 3 et 6 :
 
@@ -695,27 +761,33 @@ On considère la liste des nombres d’étages des immeubles d’une rue, en par
 
     **2.** La plus longue est `[1, 2, 5]`, de longueur **3**.
 
-    **3.** **Démarche :** on compare chaque élément au précédent ; dès qu’un élément n’est pas strictement plus grand, la réponse est `False`.
+    **3.** **Démarche :** on compare chaque élément au précédent ; dès qu’un élément n’est pas strictement plus grand, la réponse est `False`. *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert est_strict_croissante([1, 2, 5])            # cas normal
+    assert est_strict_croissante([7])                  # cas limite : un seul element
+    assert not est_strict_croissante([1, 3, 3, 8])     # cas piege : egalite, pas strictement croissante
+    ```
 
     ```python
     def est_strict_croissante(seq):
-        for k in range(1, len(seq)):
-            if seq[k] <= seq[k - 1]:
-                return False
-        return True
+        for k in range(1, len(seq)):   # PARCOURIR
+            if seq[k] <= seq[k - 1]:   # TESTER
+                return False           # RENVOYER : on sort des le premier defaut
+        return True                    # RENVOYER
     ```
 
     **4.** Lignes complétées :
 
     ```python
     def llsc_fin(tab, i):
-        if i == 0:                    # ligne 2
-            return 1                  # ligne 3
-        max_len = 1
-        for j in range(i):
-            if tab[j] < tab[i]:       # ligne 6
-                max_len = max(max_len, llsc_fin(tab, j) + 1)
-        return max_len
+        if i == 0:                                         # CAS DE BASE : ligne 2
+            return 1                                       # ligne 3
+        max_len = 1                                        # INITIALISER
+        for j in range(i):                                 # PARCOURIR
+            if tab[j] < tab[i]:                            # TESTER : ligne 6
+                max_len = max(max_len, llsc_fin(tab, j) + 1)   # APPEL RECURSIF, METTRE A JOUR
+        return max_len                                     # RENVOYER
     ```
 
     **5.** Lignes complétées :
@@ -723,16 +795,16 @@ On considère la liste des nombres d’étages des immeubles d’une rue, en par
     ```python
     def llsc_dyn(tab):
         n = len(tab)
-        dyn = [1] * n
-        for i in range(1, n):
-            for j in range(i):
-                if tab[j] < tab[i]:
-                    dyn[i] = max(dyn[i], dyn[j] + 1)   # ligne 7
-        meilleur = dyn[0]                               # ligne 8 : plus
-        for k in range(1, n):                           # grande valeur
-            if dyn[k] > meilleur:                       # de dyn
-                meilleur = dyn[k]
-        return meilleur
+        dyn = [1] * n                                  # INITIALISER
+        for i in range(1, n):                          # PARCOURIR
+            for j in range(i):                         # PARCOURIR
+                if tab[j] < tab[i]:                    # TESTER
+                    dyn[i] = max(dyn[i], dyn[j] + 1)   # METTRE A JOUR : ligne 7
+        meilleur = dyn[0]                              # INITIALISER : ligne 8, plus grande valeur de dyn
+        for k in range(1, n):                          # PARCOURIR
+            if dyn[k] > meilleur:                      # TESTER
+                meilleur = dyn[k]                      # METTRE A JOUR
+        return meilleur                                # RENVOYER
     ```
 
     La ligne 8 doit renvoyer la **plus grande** valeur de `dyn` (la plus longue sous-séquence ne se termine pas forcément à la dernière case) : on la cherche par un parcours.
@@ -761,6 +833,8 @@ Le **coût inesthétique** d’une ligne est le *carré* du nombre d’espaces s
         `longueur += len(liste_mots[k])`  
         `if longueur > justification:`  
         `return 1000000` …
+
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
 
 2.  Pour une liste de $n$ mots, expliquer pourquoi tester *tous* les découpages possibles n’est pas raisonnable.
 
@@ -804,20 +878,26 @@ Le **coût inesthétique** d’une ligne est le *carré* du nombre d’espaces s
 
     **Barème indicatif** (sur 6) : Q1 : 2 ; Q2 : 1 ; Q3 : 1,75 ; Q4 : 1,25
 
-    **1.**
+    **1.** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert cout(0, 2, liste_mots, 15) == 9            # cas normal
+    assert cout(1, 3, liste_mots, 14) == 0            # cas limite : la ligne tient tout juste
+    assert cout(0, 3, liste_mots, 15) == 1000000      # cas piege : 15 lettres, plus 2 espaces
+    ```
 
     ```python
     def cout(i, j, liste_mots, justification):
         mots = liste_mots[i:j]
-        nb_car = 0                                    # nombre de lettres
-        for m in mots:
-            nb_car += len(m)
+        nb_car = 0                                   # INITIALISER : nombre de lettres
+        for m in mots:                               # PARCOURIR
+            nb_car += len(m)                         # METTRE A JOUR
         nb_mots = len(mots)
-        if nb_car + (nb_mots - 1) > justification:    # la ligne ne tient pas
+        if nb_car + (nb_mots - 1) > justification:   # TESTER : la ligne ne tient pas
             return 1000000
         nb_espace_total = justification - nb_car
         supplementaires = nb_espace_total - (nb_mots - 1)
-        return supplementaires ** 2
+        return supplementaires ** 2                  # RENVOYER
     ```
 
     On vérifie `cout(0,2,liste_mots,15) == 9`, `cout(0,4,liste_mots,15) == 1000000`, `cout(5,8,liste_mots,15) == 1`.
@@ -969,6 +1049,8 @@ L’algorithme glouton ne renvoie pas toujours une solution optimale. On écrit 
         `return memo[(i, v_restant)]`  
         puis la même structure que `chargeOptimale`, en ne manipulant que des prix, et `memo[(i, v_restant)] = …` avant de renvoyer.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **Barème indicatif** (sur 8) : Q1 : 0,75 ; Q2 : 0,25 ; Q3 : 0,5 ; Q4 : 0,5 ; Q5 : 0,75 ; Q6 : 0,25 ; Q7 : 1 ; Q8 : 0,5 ; Q9 : 1 ; Q10 : 1 ; Q11 : 0,5 ; Q12 : 1
@@ -996,10 +1078,10 @@ L’algorithme glouton ne renvoie pas toujours une solution optimale. On écrit 
 
     ```python
     def prixListe(tab: list) -> int:
-        total = 0
-        for m in tab:
-            total = total + m.prix
-        return total
+        total = 0                    # INITIALISER
+        for m in tab:                # PARCOURIR
+            total = total + m.prix   # METTRE A JOUR
+        return total                 # RENVOYER
     ```
 
     **5.** Combinaisons de volume au plus 100 litres (aucune combinaison de trois marchandises ne tient : la plus légère, $m_1 + m_3 + m_4$, fait 110 litres) :
@@ -1020,13 +1102,13 @@ L’algorithme glouton ne renvoie pas toujours une solution optimale. On écrit 
     ```python
     def tri(tab: list) -> None:
         n = len(tab)
-        for i in range(1, n):
+        for i in range(1, n):                                        # PARCOURIR
             marchandise = tab[i]
             j = i - 1
-            while j >= 0 and marchandise.ratio() > tab[j].ratio():
-                tab[j+1] = tab[j]
+            while j >= 0 and marchandise.ratio() > tab[j].ratio():   # TESTER
+                tab[j+1] = tab[j]                                    # METTRE A JOUR : on decale
                 j = j - 1
-            tab[j+1] = marchandise
+            tab[j+1] = marchandise                                   # METTRE A JOUR : on insere
     ```
 
     Avec les quatre marchandises de la partie B, on obtient bien l’ordre $m_3, m_2, m_1, m_4$ (ratios $4$ ; $3$ ; $2$ ; $1$).
@@ -1038,13 +1120,13 @@ L’algorithme glouton ne renvoie pas toujours une solution optimale. On écrit 
     ```python
     def charge(tab: list, volume: int) -> list:
         tri(tab)
-        chargement = []
+        chargement = []                           # INITIALISER
         n = len(tab)
-        for i in range(n):
-            if tab[i].volume <= volume:
-                chargement.append(tab[i])
-                volume = volume - tab[i].volume
-        return chargement
+        for i in range(n):                        # PARCOURIR
+            if tab[i].volume <= volume:           # TESTER
+                chargement.append(tab[i])         # METTRE A JOUR
+                volume = volume - tab[i].volume   # METTRE A JOUR
+        return chargement                         # RENVOYER
     ```
 
     Pour 100 litres, `charge` renvoie $[m_3, m_1]$, de prix 200.
@@ -1053,15 +1135,15 @@ L’algorithme glouton ne renvoie pas toujours une solution optimale. On écrit 
 
     ```python
     def chargeOptimale(tab: list, v_restant: int, i: int) -> list:
-        if i >= len(tab):
+        if i >= len(tab):                                   # CAS DE BASE
             return []
         else:
-            if tab[i].volume > v_restant:
-                return chargeOptimale(tab, v_restant, i+1)
+            if tab[i].volume > v_restant:                   # TESTER
+                return chargeOptimale(tab, v_restant, i+1)   # APPEL RECURSIF
             else:
-                option1 = chargeOptimale(tab, v_restant, i+1)
-                option2 = [tab[i]] + chargeOptimale(tab, v_restant - tab[i].volume, i+1)
-                if prixListe(option1) > prixListe(option2):
+                option1 = chargeOptimale(tab, v_restant, i+1)   # APPEL RECURSIF
+                option2 = [tab[i]] + chargeOptimale(tab, v_restant - tab[i].volume, i+1)   # APPEL RECURSIF
+                if prixListe(option1) > prixListe(option2):   # TESTER
                     return option1
                 else:
                     return option2
@@ -1071,21 +1153,28 @@ L’algorithme glouton ne renvoie pas toujours une solution optimale. On écrit 
 
     **11.** Depuis `chargeOptimale(tab, 25, 0)`, on atteint l’indice 2 avec 15 litres restants par deux chemins : prendre la marchandise 0 puis ne pas prendre la 1 (`(25, 0)` $\to$ `(15, 1)` $\to$ `(15, 2)`), ou ne pas prendre la 0 puis prendre la 1 (`(25, 0)` $\to$ `(25, 1)` $\to$ `(15, 2)`). Le même sous-problème est donc résolu deux fois (de même que `(15, 3)` et `(5, 3)`). Comme chaque appel peut en engendrer deux, le nombre d’appels peut atteindre de l’ordre de $2^n$ pour $n$ marchandises : les sous-problèmes identiques se multiplient. C’est exactement la situation où la programmation dynamique s’impose.
 
-    **12.** Le résultat ne dépend que du couple `(i, v_restant)` : c’est la clé du dictionnaire.
+    **12.** Le résultat ne dépend que du couple `(i, v_restant)` : c’est la clé du dictionnaire. *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert prix_max(tab, 100, 0, {}) == 250     # cas normal : les quatre marchandises de la partie B
+    assert prix_max(tab, 10, 0, {}) == 0        # cas limite : rien ne rentre
+    petit = [Marchandise(100, 10), Marchandise(100, 10), Marchandise(250, 20)]
+    assert prix_max(petit, 25, 0, {}) == 250    # cas piege : m3 seule bat m1 et m2
+    ```
 
     ```python
     def prix_max(tab, v_restant, i, memo):
-        if (i, v_restant) in memo:
+        if (i, v_restant) in memo:                          # VERIFIER : deja calcule ?
             return memo[(i, v_restant)]
-        if i >= len(tab):
+        if i >= len(tab):                                   # CAS DE BASE
             res = 0
-        elif tab[i].volume > v_restant:
-            res = prix_max(tab, v_restant, i + 1, memo)
+        elif tab[i].volume > v_restant:                     # TESTER
+            res = prix_max(tab, v_restant, i + 1, memo)     # APPEL RECURSIF
         else:
-            res = max(prix_max(tab, v_restant, i + 1, memo),
+            res = max(prix_max(tab, v_restant, i + 1, memo),   # APPEL RECURSIF
                       tab[i].prix + prix_max(tab, v_restant - tab[i].volume, i + 1, memo))
-        memo[(i, v_restant)] = res
-        return res
+        memo[(i, v_restant)] = res                          # METTRE A JOUR
+        return res                                          # RENVOYER
     ```
 
     `prix_max(tab, 100, 0, {})` renvoie bien `250`. Il y a au plus $(n+1) \times (V+1)$ clés différentes (pour un volume initial $V$), chacune calculée une seule fois : c’est le **sac à dos** du cours, en $O(n \times V)$ (coût **pseudo-polynomial** : voir la remarque du cours).
@@ -1152,6 +1241,8 @@ On représente ces tarifs par la liste `prix = [0, 2, 5, 10, 13, 14]`, où `prix
         `return memo[n]`  
         en tête de fonction (après la condition d’arrêt), et `memo[n] = meilleur` juste avant le `return`.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une version **tabulée** `valeur_tab(n, prix)` (une boucle et un tableau `V`, sans récursivité), puis recopier et compléter la table ci-dessous.
 
     |  $n$   |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |
@@ -1205,35 +1296,41 @@ On représente ces tarifs par la liste `prix = [0, 2, 5, 10, 13, 14]`, où `prix
 
     ```python
     def valeur_rec(n, prix):
-        if n == 0:
+        if n == 0:                                      # CAS DE BASE
             return 0
-        meilleur = 0
-        for k in range(1, len(prix)):
-            if k <= n:
-                v = prix[k] + valeur_rec(n - k, prix)
+        meilleur = 0                                    # INITIALISER
+        for k in range(1, len(prix)):                   # PARCOURIR : longueur du premier morceau
+            if k <= n:                                  # TESTER
+                v = prix[k] + valeur_rec(n - k, prix)   # APPEL RECURSIF
                 if v > meilleur:
-                    meilleur = v
-        return meilleur
+                    meilleur = v                        # METTRE A JOUR
+        return meilleur                                 # RENVOYER
     ```
 
     **6.** Chaque appel relance jusqu’à cinq appels récursifs, et les mêmes sous-problèmes sont rencontrés par de nombreux chemins : $V(1)$ est utile pour $V(2)$, $V(3)$, $V(4)$, $V(5)$, $V(6)$…, et il est **recalculé** à chaque fois. Les sous-problèmes **se recouvrent** : le nombre d’appels croît exponentiellement avec $n$, alors qu’il n’y a que $n + 1$ valeurs différentes $V(0), \dots, V(n)$ à calculer. C’est le signal de la programmation dynamique.
 
-    **7.** **Démarche :** la fonction de la question 5, avec un dictionnaire : on regarde d’abord si `V(n)` est déjà connu, et l’on y range chaque résultat calculé.
+    **7.** **Démarche :** la fonction de la question 5, avec un dictionnaire : on regarde d’abord si `V(n)` est déjà connu, et l’on y range chaque résultat calculé. *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert valeur_memo(8, prix, {}) == 26     # cas normal
+    assert valeur_memo(0, prix, {}) == 0      # cas limite : planche vide
+    assert valeur_memo(5, prix, {}) == 15     # cas piege : entiere, elle ne rapporte que 14
+    ```
 
     ```python
     def valeur_memo(n, prix, memo):
-        if n == 0:
+        if n == 0:                                             # CAS DE BASE
             return 0
-        if n in memo:                        # deja calcule
+        if n in memo:                                          # VERIFIER : deja calcule
             return memo[n]
-        meilleur = 0
-        for k in range(1, len(prix)):
-            if k <= n:
-                v = prix[k] + valeur_memo(n - k, prix, memo)
+        meilleur = 0                                           # INITIALISER
+        for k in range(1, len(prix)):                          # PARCOURIR
+            if k <= n:                                         # TESTER
+                v = prix[k] + valeur_memo(n - k, prix, memo)   # APPEL RECURSIF
                 if v > meilleur:
-                    meilleur = v
-        memo[n] = meilleur                   # on note le resultat
-        return meilleur
+                    meilleur = v                               # METTRE A JOUR
+        memo[n] = meilleur                                     # METTRE A JOUR : on note le resultat
+        return meilleur                                        # RENVOYER
     ```
 
     On l’appelle avec un dictionnaire vide : `valeur_memo(8, prix, {})` renvoie `26`.
@@ -1242,12 +1339,12 @@ On représente ces tarifs par la liste `prix = [0, 2, 5, 10, 13, 14]`, où `prix
 
     ```python
     def valeur_tab(n, prix):
-        V = [0] * (n + 1)                    # V[0] = 0
-        for L in range(1, n + 1):            # du plus petit au plus grand
-            for k in range(1, len(prix)):
-                if k <= L and prix[k] + V[L - k] > V[L]:
-                    V[L] = prix[k] + V[L - k]
-        return V[n]
+        V = [0] * (n + 1)                                  # INITIALISER : V[0] = 0
+        for L in range(1, n + 1):                          # PARCOURIR : du plus petit au plus grand
+            for k in range(1, len(prix)):                  # PARCOURIR
+                if k <= L and prix[k] + V[L - k] > V[L]:   # TESTER
+                    V[L] = prix[k] + V[L - k]              # METTRE A JOUR
+        return V[n]                                        # RENVOYER
     ```
 
     |  $n$   |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |   8    |
@@ -1336,6 +1433,8 @@ def lettre_seule(message, i):
         `for i in range(1, n + 1):`  
         puis les deux tests de `nb_rec`, avec `D[i - 1]` et `D[i - 2]` à la place des appels récursifs.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
     |          $i$           |  0  |  1  |  2  |  3  |  4  |  5  |  6  |
     |:----------------------:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
     | chiffre `message[i-1]` |  —  |  1  |  2  |  3  |  1  |  2  |  3  |
@@ -1377,14 +1476,14 @@ def lettre_seule(message, i):
 
     ```python
     def nb_rec(message, i):
-        if i == 0:
+        if i == 0:                                   # CAS DE BASE
             return 1
-        total = 0
-        if lettre_seule(message, i):
-            total = total + nb_rec(message, i - 1)
-        if deux_chiffres(message, i):
-            total = total + nb_rec(message, i - 2)
-        return total
+        total = 0                                    # INITIALISER
+        if lettre_seule(message, i):                 # TESTER
+            total = total + nb_rec(message, i - 1)   # APPEL RECURSIF
+        if deux_chiffres(message, i):                # TESTER
+            total = total + nb_rec(message, i - 2)   # APPEL RECURSIF
+        return total                                 # RENVOYER
     ```
 
     **7.** Arbre des appels de `nb_rec(’1111’, 4)` (on note seulement la valeur de `i`) :
@@ -1397,34 +1496,40 @@ def lettre_seule(message, i):
 
     ```python
     def nb_memo(message, i, memo):
-        if i == 0:
+        if i == 0:                                          # CAS DE BASE
             return 1
-        if i in memo:
+        if i in memo:                                       # VERIFIER
             return memo[i]
-        total = 0
-        if lettre_seule(message, i):
-            total = total + nb_memo(message, i - 1, memo)
-        if deux_chiffres(message, i):
-            total = total + nb_memo(message, i - 2, memo)
-        memo[i] = total
-        return total
+        total = 0                                           # INITIALISER
+        if lettre_seule(message, i):                        # TESTER
+            total = total + nb_memo(message, i - 1, memo)   # APPEL RECURSIF
+        if deux_chiffres(message, i):                       # TESTER
+            total = total + nb_memo(message, i - 2, memo)   # APPEL RECURSIF
+        memo[i] = total                                     # METTRE A JOUR
+        return total                                        # RENVOYER
     ```
 
     Appel : `nb_memo(message, len(message), {})`.
 
-    **9.** **Démarche :** un tableau `D` rempli de $D(0)$ à $D(n)$ ; les appels récursifs de `nb_rec` sont remplacés par les cases `D[i - 1]` et `D[i - 2]`, déjà remplies.
+    **9.** **Démarche :** un tableau `D` rempli de $D(0)$ à $D(n)$ ; les appels récursifs de `nb_rec` sont remplacés par les cases `D[i - 1]` et `D[i - 2]`, déjà remplies. *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert nb_decodages('1226') == 5     # cas normal
+    assert nb_decodages('7') == 1        # cas limite : un seul chiffre
+    assert nb_decodages('100') == 0      # cas piege : un 0 qui ne peut pas etre rattache
+    ```
 
     ```python
     def nb_decodages(message):
         n = len(message)
-        D = [0] * (n + 1)
-        D[0] = 1
-        for i in range(1, n + 1):
-            if lettre_seule(message, i):
-                D[i] = D[i] + D[i - 1]
-            if deux_chiffres(message, i):
-                D[i] = D[i] + D[i - 2]
-        return D[n]
+        D = [0] * (n + 1)                   # INITIALISER
+        D[0] = 1                            # INITIALISER
+        for i in range(1, n + 1):           # PARCOURIR
+            if lettre_seule(message, i):    # TESTER
+                D[i] = D[i] + D[i - 1]      # METTRE A JOUR
+            if deux_chiffres(message, i):   # TESTER
+                D[i] = D[i] + D[i - 2]      # METTRE A JOUR
+        return D[n]                         # RENVOYER
     ```
 
     |          $i$           |  0  |  1  |  2  |  3  |  4  |  5  |   6   |

@@ -66,18 +66,28 @@ Justifier en une ligne (ou par un contre-exemple).
 
     Deux étapes : un accumulateur pour la somme, puis la moyenne à partir de la somme et de `len(t)`. Comment une fonction renvoie-t-elle deux valeurs à la fois ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert somme_moyenne((12, 15, 9)) == (36, 12.0)  # cas normal
+    assert somme_moyenne((7,)) == (7, 7.0)           # cas limite : un seul element
+    assert somme_moyenne((1, 2)) == (3, 1.5)         # cas piege : la moyenne n'est pas entiere
+    ```
 
     Un accumulateur donne la somme ; la moyenne s’en déduit. Pour renvoyer deux valeurs, on renvoie le p-uplet `s, s / len(t)`, que l’appelant déballe avec `s, m = ...`.
 
     ```python
     def somme_moyenne(t):
-        s = 0
-        for x in t:
-            s = s + x
-        return s, s / len(t)     # renvoie le p-uplet (somme, moyenne)
+        s = 0                          # INITIALISER
+        for x in t:                    # PARCOURIR
+            s = s + x                  # METTRE A JOUR
+        return s, s / len(t)           # RENVOYER : le p-uplet (somme, moyenne)
 
-    s, m = somme_moyenne((12, 15, 9))   # s vaut 36, m vaut 12.0
+    s, m = somme_moyenne((12, 15, 9))  # s vaut 36, m vaut 12.0
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — Conversion de durée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-4 }
@@ -93,7 +103,17 @@ Justifier en une ligne (ou par un contre-exemple).
 
     Combien de secondes dans une heure ? dans une minute ? Penser au quotient entier `//` et au reste `%`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert convertir(3661) == (1, 1, 1)    # cas normal
+    assert convertir(0) == (0, 0, 0)       # cas limite : aucune seconde
+    assert convertir(3599) == (0, 59, 59)  # cas piege : juste avant une heure
+    ```
 
     Une heure fait $3600$ secondes : le quotient `n // 3600` donne les heures ; dans le reste `n % 3600`, le quotient par $60$ donne les minutes, et le reste par $60$ les secondes.
 
@@ -211,33 +231,43 @@ Que valent `t`, `x` et `n` à la fin ?
     `for x in t:`  
     puis comparer `x` à `m`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert maximum([3, 9, 4]) == 9      # cas normal
+    assert maximum([5]) == 5            # cas limite : un seul element
+    assert maximum([-7, -2, -9]) == -2  # cas piege : que des negatifs
+    ```
 
     Somme et comptage : accumulateur initialisé à `0` avant la boucle. Maximum : on part d’un élément qui existe, `t[0]`, et on le remplace dès qu’on trouve plus grand. La moyenne réutilise `somme`.
 
     ```python
     def somme(t):
-        s = 0
-        for x in t:
-            s = s + x
-        return s
+        s = 0              # INITIALISER
+        for x in t:        # PARCOURIR
+            s = s + x      # METTRE A JOUR
+        return s           # RENVOYER
 
     def maximum(t):
-        m = t[0]
-        for x in t:
-            if x > m:
-                m = x
-        return m
+        m = t[0]           # INITIALISER
+        for x in t:        # PARCOURIR
+            if x > m:      # TESTER
+                m = x      # METTRE A JOUR
+        return m           # RENVOYER
 
     def moyenne(t):
         return somme(t) / len(t)
 
     def nb_positifs(t):
-        c = 0
-        for x in t:
-            if x > 0:
-                c = c + 1
-        return c
+        c = 0              # INITIALISER
+        for x in t:        # PARCOURIR
+            if x > 0:      # TESTER
+                c = c + 1  # METTRE A JOUR
+        return c           # RENVOYER
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> initialiser le maximum à `0` : pour `[-5, -2, -9]`, la fonction renverrait `0`, qui n’est même pas dans le tableau.
@@ -260,13 +290,13 @@ Que valent `t`, `x` et `n` à la fin ?
 
     ```python
     def ajouter_un(t):
-        for i in range(len(t)):
-            t[i] = t[i] + 1
+        for i in range(len(t)):  # PARCOURIR
+            t[i] = t[i] + 1      # METTRE A JOUR
 
     def plafonner(t, m):
-        for i in range(len(t)):
-            if t[i] > m:
-                t[i] = m
+        for i in range(len(t)):  # PARCOURIR
+            if t[i] > m:         # TESTER
+                t[i] = m         # METTRE A JOUR
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> écrire `for x in t:` puis `x = x + 1` : on modifie la variable `x`, pas la case du tableau, qui reste inchangé.
@@ -285,29 +315,39 @@ Que valent `t`, `x` et `n` à la fin ?
 
     Pour `premier_indice`, parcourir par indice et sortir avec `return` dès qu’on trouve `x`. Que renvoyer si la boucle se termine sans avoir rien trouvé ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert premier_indice([4, 7, 1], 7) == 1  # cas normal
+    assert premier_indice([], 3) == -1        # cas limite : tableau vide
+    assert premier_indice([2, 5, 2], 2) == 0  # cas piege : la PREMIERE occurrence
+    ```
 
     Compteur pour `occurrences` ; pour les deux recherches, on sort par `return` dès que `x` est trouvé, et l’on ne conclut à l’absence qu’*après* la boucle.
 
     ```python
     def occurrences(t, x):
-        c = 0
-        for v in t:
-            if v == x:
-                c = c + 1
-        return c
+        c = 0                    # INITIALISER
+        for v in t:              # PARCOURIR
+            if v == x:           # TESTER
+                c = c + 1        # METTRE A JOUR
+        return c                 # RENVOYER
 
     def est_present(t, x):
-        for v in t:
-            if v == x:
-                return True
-        return False
+        for v in t:              # PARCOURIR
+            if v == x:           # TESTER
+                return True      # RENVOYER
+        return False             # RENVOYER
 
     def premier_indice(t, x):
-        for i in range(len(t)):
-            if t[i] == x:
-                return i
-        return -1
+        for i in range(len(t)):  # PARCOURIR
+            if t[i] == x:        # TESTER
+                return i         # RENVOYER
+        return -1                # RENVOYER : absent
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> ajouter `else: return False` dans la boucle de `est_present` : la fonction conclut dès le premier élément examiné.
@@ -320,16 +360,26 @@ Que valent `t`, `x` et `n` à la fin ?
 
     Partir d’un tableau vide et le remplir avec `append` : dans quel ordre faut-il parcourir les indices de `t` ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert renverser([1, 2, 3]) == [3, 2, 1]          # cas normal
+    assert renverser([]) == []                        # cas limite : tableau vide
+    assert renverser([[1, 2], [3]]) == [[3], [1, 2]]  # cas piege : sous-tableaux intacts
+    ```
 
     On construit un nouveau tableau en parcourant `t` de la fin vers le début.
 
     ```python
     def renverser(t):
-        r = []
-        for i in range(len(t) - 1, -1, -1):
-            r.append(t[i])
-        return r
+        r = []                               # INITIALISER
+        for i in range(len(t) - 1, -1, -1):  # PARCOURIR : de la fin vers le debut
+            r.append(t[i])                   # METTRE A JOUR
+        return r                             # RENVOYER
     ```
 
     *Autre méthode :* une fois la compréhension vue, le même parcours des indices à l’envers s’écrit en une ligne : `return [t[i] for i in range(len(t) - 1, -1, -1)]`.
@@ -453,7 +503,17 @@ for x in [5, -2, 7, -8, 3]:        for mot in ["le", "chat", "dort"]:
 
     Le filtre porte sur chaque caractère : est-il dans `"aeiouyAEIOUY"` ? Pour `nb_voyelles`, réutiliser `voyelles`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert voyelles("chat") == ["a"]      # cas normal
+    assert voyelles("") == []             # cas limite : phrase vide
+    assert voyelles("AIR") == ["A", "I"]  # cas piege : les majuscules comptent
+    ```
 
     Compréhension avec filtre : on garde chaque caractère `c` qui est dans la chaîne des voyelles ; `nb_voyelles` n’est que la longueur de ce tableau.
 
@@ -469,11 +529,11 @@ for x in [5, -2, 7, -8, 3]:        for mot in ["le", "chat", "dort"]:
 
     ```python
     def voyelles(phrase):
-        resultat = []
-        for c in phrase:
-            if c in "aeiouyAEIOUY":
-                resultat.append(c)
-        return resultat
+        resultat = []                # INITIALISER
+        for c in phrase:             # PARCOURIR
+            if c in "aeiouyAEIOUY":  # TESTER
+                resultat.append(c)   # METTRE A JOUR
+        return resultat              # RENVOYER
     ```
 
 ### Matrices (tableaux de tableaux)
@@ -519,31 +579,41 @@ On pose `M = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`.
     `for ligne in M:`  
     `for x in ligne:`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert somme_matrice([[1, 2], [3, 4]]) == 10        # cas normal
+    assert somme_matrice([[5]]) == 5                    # cas limite : une seule case
+    assert somme_matrice([[1, 2, 3], [4, 5, 6]]) == 21  # cas piege : matrice non carree
+    ```
 
     Deux boucles imbriquées (les lignes, puis les cases de chaque ligne) avec un accumulateur ou un « meilleur jusqu’ici » initialisé avec une case existante, `M[0][0]` ; une seule boucle pour une ligne donnée.
 
     ```python
     def somme_matrice(M):
-        s = 0
-        for ligne in M:
-            for x in ligne:
-                s = s + x
-        return s
+        s = 0                # INITIALISER
+        for ligne in M:      # PARCOURIR : les lignes
+            for x in ligne:  # PARCOURIR : les cases de la ligne
+                s = s + x    # METTRE A JOUR
+        return s             # RENVOYER
 
     def maximum_matrice(M):
-        m = M[0][0]
-        for ligne in M:
-            for x in ligne:
-                if x > m:
-                    m = x
-        return m
+        m = M[0][0]          # INITIALISER : une case qui existe
+        for ligne in M:      # PARCOURIR
+            for x in ligne:  # PARCOURIR
+                if x > m:    # TESTER
+                    m = x    # METTRE A JOUR
+        return m             # RENVOYER
 
     def somme_ligne(M, i):
-        s = 0
-        for x in M[i]:
-            s = s + x
-        return s
+        s = 0                # INITIALISER
+        for x in M[i]:       # PARCOURIR
+            s = s + x        # METTRE A JOUR
+        return s             # RENVOYER
     ```
 
     *Autre méthode* pour `somme_matrice`, par indices : `for i in range(len(M)):` puis `for j in range(len(M[i])):` et `s = s + M[i][j]`. Elle est indispensable dès qu’on a besoin de la *position* de la case.
@@ -565,7 +635,17 @@ On pose `M = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`.
 
     Question 1 : `* 2` recopie-t-il la ligne, ou seulement la flèche vers la ligne ? Question 2 : chaque ligne doit être un objet neuf ; quelle construction réévalue `[0] * p` pour chaque ligne ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert grille_zeros(2, 3) == [[0, 0, 0], [0, 0, 0]]    # cas normal
+    assert grille_zeros(1, 1) == [[0]]                     # cas limite : une seule case
+    assert grille_zeros(3, 2) == [[0, 0], [0, 0], [0, 0]]  # cas piege : n lignes, p colonnes
+    ```
 
     **1.** `g` vaut `[[1, 0, 0], [1, 0, 0]]` : **pas** le résultat attendu ! Avec `*`, les deux « lignes » sont *le même* objet (deux flèches vers un seul tableau) ; modifier `g[0][0]` modifie donc aussi `g[1]`.
 
@@ -604,7 +684,17 @@ On pose `M = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`.
     `p = len(M[0])`  
     puis construire `p` lignes de `n` cases chacune, par compréhension ou avec deux boucles.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert transposee([[1, 2], [3, 4]]) == [[1, 3], [2, 4]]  # cas normal
+    assert transposee([[7]]) == [[7]]                        # cas limite : une seule case
+    assert transposee([[1, 2, 3]]) == [[1], [2], [3]]        # cas piege : non carree
+    ```
 
     La transposée a `p` lignes et `n` colonnes : la case `(j, i)` du résultat est `M[i][j]`.
 
@@ -619,13 +709,13 @@ On pose `M = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`.
 
     ```python
     def transposee(M):
-        resultat = []
-        for j in range(len(M[0])):
-            ligne = []                  # la colonne j de M
-            for i in range(len(M)):
-                ligne.append(M[i][j])
-            resultat.append(ligne)
-        return resultat
+        resultat = []                  # INITIALISER
+        for j in range(len(M[0])):     # PARCOURIR : les colonnes de M
+            ligne = []                 # INITIALISER : la colonne j de M
+            for i in range(len(M)):    # PARCOURIR
+                ligne.append(M[i][j])  # METTRE A JOUR
+            resultat.append(ligne)     # METTRE A JOUR
+        return resultat                # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 21</span> — Traitement d’image <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-21 }
@@ -648,20 +738,30 @@ Une image en niveaux de gris est une matrice d’entiers de `0` à `255`.
     `for i in range(len(image)):`  
     `for j in range(len(image[i])):`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
-    ```python
-    def negatif(image):                     # modifie sur place
-        for i in range(len(image)):
-            for j in range(len(image[0])):
-                image[i][j] = 255 - image[i][j]
+    *Appels attendus, écrits avant de coder :*
 
-    def miroir_gauche_droite(image):        # renvoie une NOUVELLE image
-        nouvelle = []
-        for ligne in image:
+    ```python
+    assert miroir_gauche_droite([[1, 2, 3]]) == [[3, 2, 1]]            # cas normal
+    assert miroir_gauche_droite([[9]]) == [[9]]                        # cas limite : un pixel
+    assert miroir_gauche_droite([[1, 2], [3, 4]]) == [[2, 1], [4, 3]]  # cas piege : lignes gardees
+    ```
+
+    ```python
+    def negatif(image):                                            # modifie sur place
+        for i in range(len(image)):                                # PARCOURIR
+            for j in range(len(image[0])):                         # PARCOURIR
+                image[i][j] = 255 - image[i][j]                    # METTRE A JOUR
+
+    def miroir_gauche_droite(image):                               # renvoie une NOUVELLE image
+        nouvelle = []                                              # INITIALISER
+        for ligne in image:                                        # PARCOURIR
             p = len(ligne)
-            nouvelle.append([ligne[p - 1 - j] for j in range(p)])
-        return nouvelle
+            nouvelle.append([ligne[p - 1 - j] for j in range(p)])  # METTRE A JOUR
+        return nouvelle                                            # RENVOYER
     ```
 
 ### Dictionnaires (`dict`)
@@ -705,26 +805,36 @@ On dispose de `notes = {"Alice": 14, "Bob": 9, "Chloe": 17}`.
 
     `for prenom in notes:` parcourt les **clés** ; la note est `notes[prenom]`. Pour `meilleur`, il faut retenir le *prénom* du meilleur jusqu’ici, pas seulement sa note.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert meilleur({"Ali": 14, "Bob": 9, "Eva": 17}) == "Eva"  # cas normal
+    assert meilleur({"Ada": 15, "Leo": 15}) == "Ada"            # cas limite : egalite, le premier
+    assert meilleur({"Ada": 0}) == "Ada"                        # cas piege : une note nulle
+    ```
 
     ```python
     def moyenne(notes):
-        total = 0
-        for note in notes.values():
-            total = total + note
-        return total / len(notes)
+        total = 0                               # INITIALISER
+        for note in notes.values():             # PARCOURIR
+            total = total + note                # METTRE A JOUR
+        return total / len(notes)               # RENVOYER
 
     def admis(notes, seuil):
         return [prenom for prenom in notes if notes[prenom] >= seuil]
 
     def meilleur(notes):
-        champion = None
-        meilleure_note = -1             # toute note est superieure a -1
-        for prenom in notes:
-            if notes[prenom] > meilleure_note:
-                meilleure_note = notes[prenom]
-                champion = prenom
-        return champion
+        champion = None                         # INITIALISER
+        meilleure_note = -1                     # INITIALISER : toute note est superieure a -1
+        for prenom in notes:                    # PARCOURIR
+            if notes[prenom] > meilleure_note:  # TESTER
+                meilleure_note = notes[prenom]  # METTRE A JOUR
+                champion = prenom               # METTRE A JOUR
+        return champion                         # RENVOYER
     ```
 
     Pour `meilleur`, c’est une recherche de maximum où l’on retient *aussi* le prénom du champion. On part ici d’une note fictive `-1` (une *sentinelle*), valable seulement parce que toutes les notes sont positives ; le chapitre *Algorithmique : le parcours séquentiel* préférera partir d’un élément existant, ce qui marche dans tous les cas.
@@ -757,13 +867,13 @@ def compter_votes(votes):
 
     ```python
     def compter_votes(votes):
-        resultat = {}
-        for prenom in votes:
-            if prenom in resultat:
-                resultat[prenom] = resultat[prenom] + 1
+        resultat = {}                                    # INITIALISER
+        for prenom in votes:                             # PARCOURIR
+            if prenom in resultat:                       # TESTER
+                resultat[prenom] = resultat[prenom] + 1  # METTRE A JOUR
             else:
-                resultat[prenom] = 1
-        return resultat
+                resultat[prenom] = 1                     # METTRE A JOUR
+        return resultat                                  # RENVOYER
     ```
 
     C’est le schéma du compteur par dictionnaire du cours : une clé absente est créée avec la valeur `1`, une clé présente voit sa valeur augmenter de `1`.
@@ -783,19 +893,29 @@ def compter_votes(votes):
 
     Même schéma que l’exercice précédent : qu’est-ce qui joue ici le rôle de clé ? Que faire quand on rencontre une lettre pour la première fois ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert compter_lettres("banane") == {"b": 1, "a": 2, "n": 2, "e": 1}  # cas normal
+    assert compter_lettres("") == {}                                      # cas limite : mot vide
+    assert compter_lettres("aA") == {"a": 1, "A": 1}                      # cas piege : la casse
+    ```
 
     Même schéma que « Compter des votes » : chaque lettre est une clé ; à la première rencontre, on la crée avec la valeur `1`, ensuite on augmente sa valeur.
 
     ```python
     def compter_lettres(mot):
-        compteur = {}
-        for lettre in mot:
-            if lettre in compteur:
-                compteur[lettre] = compteur[lettre] + 1
+        compteur = {}                                    # INITIALISER
+        for lettre in mot:                               # PARCOURIR
+            if lettre in compteur:                       # TESTER
+                compteur[lettre] = compteur[lettre] + 1  # METTRE A JOUR
             else:
-                compteur[lettre] = 1
-        return compteur
+                compteur[lettre] = 1                     # METTRE A JOUR : premiere rencontre
+        return compteur                                  # RENVOYER
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> écrire seulement `compteur[lettre] = compteur[lettre] + 1`, sans tester la présence de la clé : à la première lettre, la clé n’existe pas encore et Python lève une `KeyError`.
@@ -815,16 +935,26 @@ def compter_votes(votes):
 
     Remplir un dictionnaire neuf en parcourant les clés de `d` : que devient la clé, que devient la valeur ? Pour la question : que se passe-t-il quand on affecte deux fois la même clé ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert inverser({"a": 1, "b": 2}) == {1: "a", 2: "b"}  # cas normal
+    assert inverser({}) == {}                              # cas limite : dictionnaire vide
+    assert inverser({1: "un"}) == {"un": 1}                # cas piege : les types s'echangent aussi
+    ```
 
     On remplit un dictionnaire neuf en parcourant les couples (clé, valeur) de `d` : chaque valeur devient une clé, associée à l’ancienne clé.
 
     ```python
     def inverser(d):
-        resultat = {}
-        for cle, valeur in d.items():
-            resultat[valeur] = cle
-        return resultat
+        resultat = {}                  # INITIALISER
+        for cle, valeur in d.items():  # PARCOURIR
+            resultat[valeur] = cle     # METTRE A JOUR
+        return resultat                # RENVOYER
     ```
 
     Si deux clés partageaient la même valeur, cette valeur deviendrait une **clé unique** dans le résultat : la seconde écraserait la première, et une information serait perdue.
@@ -856,7 +986,17 @@ releve = {("Ada", "NSI"): 18, ("Ada", "Maths"): 15, ("Léo", "NSI"): 12}
     `for (nom, matiere) in releve:`  
     `if nom == eleve:`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert moyenne_eleve(releve, "Ada") == 16.5                # cas normal
+    assert moyenne_eleve({("Zoe", "NSI"): 14}, "Zoe") == 14.0  # cas limite : une seule note
+    assert moyenne_eleve(releve, "Léo") == 12.0                # cas piege : sans les notes d'Ada
+    ```
 
     **1.** `releve[("Ada", "Maths")]` vaut `15`.
 
@@ -864,13 +1004,13 @@ releve = {("Ada", "NSI"): 18, ("Ada", "Maths"): 15, ("Léo", "NSI"): 12}
 
     ```python
     def moyenne_eleve(releve, eleve):
-        total = 0
-        n = 0
-        for (nom, matiere) in releve:      # chaque cle est un couple
-            if nom == eleve:
-                total = total + releve[(nom, matiere)]
-                n = n + 1
-        return total / n
+        total = 0                                       # INITIALISER
+        n = 0                                           # INITIALISER
+        for (nom, matiere) in releve:                   # PARCOURIR : chaque cle est un couple
+            if nom == eleve:                            # TESTER
+                total = total + releve[(nom, matiere)]  # METTRE A JOUR
+                n = n + 1                               # METTRE A JOUR
+        return total / n                                # RENVOYER
     ```
 
     **3.** La clé doit être **immuable** : un p-uplet ne peut pas changer après coup, un tableau si — ce qui empêcherait de retrouver la valeur.
@@ -988,7 +1128,17 @@ carnet = {"Alice": [12, 15, 9], "Bob": [8, 14]}
     `if eleve not in carnet:`  
     `carnet[eleve] = []`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert moyenne_eleve(carnet, "Alice") == 12.0         # cas normal
+    assert moyenne_eleve({"Zoe": [17]}, "Zoe") == 17.0    # cas limite : une seule note
+    assert moyenne_eleve({"Lou": [9, 10]}, "Lou") == 9.5  # cas piege : moyenne non entiere
+    ```
 
     Pour ajouter, on crée l’élève absent avec un tableau d’une note, sinon on ajoute la note à son tableau ; la moyenne est un accumulateur sur ce tableau ; `moyennes` réutilise `moyenne_eleve` pour chaque clé.
 
@@ -1001,16 +1151,16 @@ carnet = {"Alice": [12, 15, 9], "Bob": [8, 14]}
 
     def moyenne_eleve(carnet, eleve):
         notes = carnet[eleve]
-        total = 0
-        for note in notes:
-            total = total + note
-        return total / len(notes)
+        total = 0                                           # INITIALISER
+        for note in notes:                                  # PARCOURIR
+            total = total + note                            # METTRE A JOUR
+        return total / len(notes)                           # RENVOYER
 
     def moyennes(carnet):
-        resultat = {}
-        for eleve in carnet:
-            resultat[eleve] = moyenne_eleve(carnet, eleve)
-        return resultat
+        resultat = {}                                       # INITIALISER
+        for eleve in carnet:                                # PARCOURIR
+            resultat[eleve] = moyenne_eleve(carnet, eleve)  # METTRE A JOUR
+        return resultat                                     # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 32</span> — Panier d’une boutique <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-32 }
@@ -1040,14 +1190,24 @@ prix   = {"pomme": 0.5, "pain": 1.2, "lait": 0.9}
     `s = 0`  
     `for produit in panier:`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert total({"pomme": 4}, {"pomme": 0.5}) == 2.0              # cas normal
+    assert total({}, prix) == 0                                    # cas limite : panier vide
+    assert total({"stylo": 2}, {"stylo": 1.5, "gomme": 3}) == 3.0  # cas piege : gomme hors panier
+    ```
 
     ```python
     def total(panier, prix):
-        s = 0
-        for produit, q in panier.items():
-            s = s + q * prix[produit]
-        return s
+        s = 0                                     # INITIALISER
+        for produit, q in panier.items():         # PARCOURIR
+            s = s + q * prix[produit]             # METTRE A JOUR
+        return s                                  # RENVOYER
 
     def ajouter(panier, produit, q):
         if produit in panier:
@@ -1056,14 +1216,14 @@ prix   = {"pomme": 0.5, "pain": 1.2, "lait": 0.9}
             panier[produit] = q
 
     def produit_plus_gros_sous_total(panier, prix):
-        champion = None
-        meilleur_sous_total = -1
-        for produit, q in panier.items():
+        champion = None                           # INITIALISER
+        meilleur_sous_total = -1                  # INITIALISER : sentinelle
+        for produit, q in panier.items():         # PARCOURIR
             sous_total = q * prix[produit]
-            if sous_total > meilleur_sous_total:
-                meilleur_sous_total = sous_total
-                champion = produit
-        return champion
+            if sous_total > meilleur_sous_total:  # TESTER
+                meilleur_sous_total = sous_total  # METTRE A JOUR
+                champion = produit                # METTRE A JOUR
+        return champion                           # RENVOYER
     ```
 
     Comme pour `meilleur` (exercice « Parcourir un dictionnaire »), le sous-total fictif `-1` est une sentinelle, valable parce que les sous-totaux sont positifs.
@@ -1090,7 +1250,17 @@ prix   = {"pomme": 0.5, "pain": 1.2, "lait": 0.9}
     `for dj in [-1, 0, 1]:`  
     `a, b = i + di, j + dj`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert compter_voisines(champ, 1, 1) == 3  # cas normal
+    assert compter_voisines(champ, 0, 0) == 2  # cas limite : un coin, 3 voisines seulement
+    assert compter_voisines(champ, 2, 2) == 0  # cas piege : la case elle-meme ne compte pas
+    ```
 
     On balaie les `9` cases `(a, b)` du carré $3 \times 3$ centré sur `(i, j)` ; on ne compte une case que si elle est **dans la grille** et que ce n’est **pas** la case `(i, j)` elle-même.
 
@@ -1098,15 +1268,15 @@ prix   = {"pomme": 0.5, "pain": 1.2, "lait": 0.9}
     def compter_voisines(champ, i, j):
         n = len(champ)
         p = len(champ[0])
-        total = 0
-        for di in [-1, 0, 1]:
-            for dj in [-1, 0, 1]:
+        total = 0                                              # INITIALISER
+        for di in [-1, 0, 1]:                                  # PARCOURIR
+            for dj in [-1, 0, 1]:                              # PARCOURIR
                 a = i + di
                 b = j + dj
                 dans_grille = a >= 0 and a < n and b >= 0 and b < p
-                if dans_grille and not (di == 0 and dj == 0):
-                    total = total + champ[a][b]
-        return total
+                if dans_grille and not (di == 0 and dj == 0):  # TESTER
+                    total = total + champ[a][b]                # METTRE A JOUR
+        return total                                           # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 34</span> — Une copie selon un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-03-34 }
@@ -1151,14 +1321,14 @@ print(doubles, notes)
 
     ```python
     def doubler(t):
-        copie = [x for x in t]    # NOUVEL objet, independant de t
-        for i in range(len(copie)):
-            copie[i] = copie[i] * 2
-        return copie
+        copie = [x for x in t]       # INITIALISER : NOUVEL objet, independant de t
+        for i in range(len(copie)):  # PARCOURIR
+            copie[i] = copie[i] * 2  # METTRE A JOUR
+        return copie                 # RENVOYER
 
     notes = [12, 15, 9]
     doubles = doubler(notes)
-    print(doubles, notes)         # [24, 30, 18] [12, 15, 9]
+    print(doubles, notes)            # [24, 30, 18] [12, 15, 9]
     ```
 
     **3.** Afficher le tableau d’origine **après** l’appel : c’est exactement ce que la demande promettait (« sans modifier ») et donc la première chose à tester. Un commentaire qui dit « copie » ne prouve pas qu’il y a copie.

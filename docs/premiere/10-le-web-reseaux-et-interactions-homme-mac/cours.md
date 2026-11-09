@@ -413,6 +413,12 @@ function changer() {
     }
     ```
 
+    <span class="routine">▷ Je prédis.</span> On tape `Léa` dans le champ, puis on clique **deux fois** sur le bouton. Que contient le paragraphe ?
+
+    ??? verifie "Je vérifie"
+
+        « Bonjour Léa ! », une seule fois : `textContent = …` *remplace* le contenu, il ne l’ajoute pas à la suite.
+
     Rien n’est envoyé au serveur : tout se passe **dans le navigateur**, instantanément.
 
 !!! encadre "À retenir — Côté client, côté serveur"
@@ -462,6 +468,12 @@ Voici une page **autonome** qui réunit tout : la **structure** (HTML), la **mis
 </html>
 ```
 
+<span class="routine">▷ Je prédis.</span> On tape `pain`, on clique sur *Ajouter*, puis on clique encore une fois sans rien taper. Que contient la liste ?
+
+??? verifie "Je vérifie"
+
+    Un seul article, « pain » : après le premier clic le champ a été vidé, et au second clic la saisie vide est ignorée par le test `texte !== ""`.
+
 - le <code>&lt;style&gt;</code> met en forme et **aligne** le champ et le bouton avec **Flexbox** ;
 
 - au clic, `ajouter()` **lit** le champ (`.value`), **teste** qu’il n’est pas vide, **ajoute** un <code>&lt;li&gt;</code> à la liste, puis **vide** le champ ;
@@ -484,6 +496,12 @@ Jusqu’ici le client *recevait*. Un <span id="lex-formulaire10" class="ancre"><
     <button type="submit">Se connecter</button>
 </form>
 ```
+
+<span class="routine">▷ Je prédis.</span> Si l’on remplaçait `method="post"` par `method="get"`, que montrerait la barre d’adresse après l’envoi, pour le pseudo `lea` et le mot de passe `1234` ?
+
+??? verifie "Je vérifie"
+
+    `…/connexion?pseudo=lea&mdp=1234` : le mot de passe apparaîtrait en clair dans l’URL (et resterait dans l’historique). C’est pourquoi ce formulaire utilise `post`.
 
 - `action` : l’**adresse** sur le serveur qui recevra les données ;
 

@@ -37,12 +37,18 @@ Le style que vous pratiquez depuis la Première porte un nom : le paradigme <spa
 
 ```python
 notes = [12, 8, 15, 9, 17]
-compteur = 0                 # une variable dont la valeur va changer
-for n in notes:              # on repete un bloc d'instructions...
-    if n >= 10:              # ...en choisissant selon une condition
-        compteur = compteur + 1
-print(compteur)              # les ordres sont executes du haut vers le bas
+compteur = 0                     # INITIALISER : une variable qui va changer
+for n in notes:                  # PARCOURIR : on repete un bloc...
+    if n >= 10:                  # TESTER : ...selon une condition
+        compteur = compteur + 1  # METTRE A JOUR
+print(compteur)                  # ordres executes du haut vers le bas
 ```
+
+<span class="routine">▷ Je prédis.</span> Qu’affiche ce programme ?
+
+??? verifie "Je vérifie"
+
+    `3` : seules les notes `12`, `15` et `17` sont supérieures ou égales à 10.
 
 On y retrouve des **affectations** qui modifient des variables, des **boucles**, des **tests**, et un ordre d’exécution qui compte : déplacer le `print` au début changerait le résultat.
 
@@ -95,6 +101,12 @@ Les effets de bord rendent les programmes difficiles à prévoir et à relire : 
         return tab + [element]      # cree une nouvelle liste, tab intact
     ```
 
+    <span class="routine">▷ Je prédis.</span> Avec `t = [1, 2]`, que renvoie `ajout_pur(3, t)`, et que vaut `t` ensuite ? Même question avec `ajout_impur(3, t)`.
+
+    ??? verifie "Je vérifie"
+
+        `ajout_pur(3, t)` renvoie `[1, 2, 3]` et `t` reste `[1, 2]`. `ajout_impur(3, t)` renvoie `None` (pas de `return`) mais `t` devient `[1, 2, 3]` : le changement est passé par l’effet de bord.
+
 !!! curieux "Pour les curieux (facultatif)"
 
     Certains langages sont conçus pour *favoriser* ce style (Haskell, Lisp, OCaml, Scheme ; Haskell va jusqu’à l’imposer), mais on peut programmer « fonctionnel » dans un langage généraliste comme Python. Le paradigme fonctionnel s’appuie aussi beaucoup sur des données **immuables** (tuples plutôt que listes) et sur des fonctions qui en prennent d’autres en paramètre (*ex.* une fonction qui applique une autre fonction à chaque élément d’une liste).
@@ -125,6 +137,8 @@ Les effets de bord rendent les programmes difficiles à prévoir et à relire : 
 !!! remarque "Remarque — Les fonctions anonymes : lambda"
 
     Quand la fonction ne sert qu’une fois, on peut l’écrire directement, sans lui donner de nom, <span id="lex-pylambda02" class="ancre"></span>avec le mot-clé `lambda` (hérité du $\lambda$-calcul d’Alonzo Church) : `lambda x: x * x` se lit « la fonction qui, à `x`, associe `x * x` ». On l’a déjà rencontrée en Première pour **trier une table** : <span id="lex-pysorted02" class="ancre"></span>`sorted` reçoit, avec `key`, la fonction qui donne la valeur à comparer.
+
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
     ```python
     notes = [("Ada", 15), ("Alan", 12), ("Grace", 18)]
@@ -211,6 +225,8 @@ Les attributs d’une instance sont mis en place par une méthode spéciale, le 
 
 !!! exemple "Exemple — Saisissez, analysez et testez ce code"
 
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
     ```python
     class Personnage:
         def __init__(self):
@@ -230,6 +246,8 @@ Les attributs d’une instance sont mis en place par une méthode spéciale, le 
 Ici, tous les personnages naissent avec 20 points de vie. Pour que chaque instance soit différente, on passe des **paramètres** au constructeur, exactement comme à une fonction.
 
 !!! exemple "Exemple — Saisissez, analysez et testez ce code"
+
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
     ```python
     class Personnage:
@@ -262,6 +280,8 @@ Distinguons deux rôles très courants : une méthode qui **renvoie** une inform
 
 !!! exemple "Exemple — Saisissez, analysez et testez ce code"
 
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
     ```python
     class Personnage:
         def __init__(self, nom, nb_vies):
@@ -292,6 +312,8 @@ Distinguons deux rôles très courants : une méthode qui **renvoie** une inform
 Une méthode peut recevoir en paramètre **un autre objet**. Illustrons-le avec une classe `Point` du plan.
 
 !!! exemple "Exemple — La classe Point"
+
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
     ```python
     class Point:
@@ -331,6 +353,8 @@ Techniquement, rien n’empêche d’écrire directement `bilbo.vie = -999` depu
 
 Reprenons l’exemple le plus classique : un **compte bancaire**. On ne veut surtout pas qu’un programme extérieur écrive `compte.solde = 1000000` : tout dépôt doit passer par une méthode qui contrôle l’opération.
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```python
 class CompteBancaire:
     def __init__(self, titulaire, solde_initial):
@@ -355,6 +379,12 @@ compte.deposer(50)
 compte.retirer(30)
 print(compte.solde())                   # affiche 120
 ```
+
+<span class="routine">▷ Je prédis.</span> On ajoute à la fin `compte.retirer(500)` puis `compte.deposer(-10)`. Que renvoie `retirer`, et que vaut alors `compte.solde()` ?
+
+??? verifie "Je vérifie"
+
+    `retirer(500)` renvoie `False` (le solde ne suffit pas) et `deposer(-10)` est ignoré en silence : le solde vaut toujours `120`. Les méthodes ont protégé l’état.
 
 !!! regle "Règle 2 — La convention du tiret bas"
 
@@ -390,6 +420,12 @@ print(compte.solde())                   # affiche 120
             self.set_vie(self._vie + soin)
     ```
 
+    <span class="routine">▷ Je prédis.</span> Avec `p = Personnage("Sam", 5)`, que vaut `p._vie` après `p.perd_vie(8)`, puis après `p.soigne(3)` ?
+
+    ??? verifie "Je vérifie"
+
+        `0`, puis `3` (et non `0`) : le mutateur a ramené $-3$ à `0`, et le soin repart de `0`.
+
     Si le mutateur se contente de `self.x = v`, passer par lui à l’intérieur n’apporte rien. Dans `__init__`, on affecte directement les attributs. En Python, les programmeurs écrivent d’ailleurs rarement des `get_`/`set_` (ils utilisent des « propriétés », `@property`) <span class="horsprog">au-delà du programme</span> : les sujets s’en servent surtout pour faire pratiquer le vocabulaire, commun à tous les langages objet.
 
     **Ce qu’on attend de vous.** Hors de la classe : les méthodes. Dans la classe : `self.attribut` est accepté, mais si le code à compléter utilise déjà les accesseurs, **imitez son style**, et si un mutateur vérifie quelque chose, passez par lui. Un correcteur ne pénalise pas `self.annee` dans une méthode de `Date`, sauf consigne contraire de l’énoncé.
@@ -404,6 +440,8 @@ print(compte.solde())                   # affiche 120
             raise ValueError("montant invalide")
         self._solde = self._solde + montant
 ```
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```text
 >>> compte.deposer(-5)
@@ -430,6 +468,8 @@ ValueError: montant invalide
 
 Créons un point et tapons simplement son nom dans la console pour « le voir » :
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```text
 >>> p = Point(3, 4)
 >>> p
@@ -451,6 +491,8 @@ Illisible ! Par défaut, un objet ne sait pas se décrire. On corrige cela en d�
     ```
 
     Désormais, taper le nom de l’objet suffit — et `print` en profite aussi :
+
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
     ```text
     >>> p = Point(3, 4)
@@ -523,11 +565,17 @@ Un paradigme est une **façon de penser** un programme, et chaque langage en **e
 
 ```python
 def fact(n):
-    r = 1
-    for k in range(2, n + 1):
-        r = r * k
-    return r
+    r = 1                       # INITIALISER : element neutre du produit
+    for k in range(2, n + 1):   # PARCOURIR
+        r = r * k               # METTRE A JOUR
+    return r                    # RENVOYER
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoient `fact(4)` et `fact(0)` ?
+
+??? verifie "Je vérifie"
+
+    `24`, puis `1` : `range(2, 1)` est vide, la boucle ne tourne pas et l’on renvoie la valeur initiale (par convention, $0! = 1$).
 
 **OCaml**, en style **fonctionnel** (une définition récursive, comme au chapitre 1, sans variable modifiée) :
 
@@ -631,6 +679,8 @@ if __name__ == "__main__":    # tests : seulement si on lance banque.py
 ```
 
 Un autre programme, placé **dans le même dossier**, l’utilise comme n’importe quel module :
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```python
 from banque import CompteBancaire

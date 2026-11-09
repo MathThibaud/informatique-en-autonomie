@@ -67,15 +67,21 @@ C’est la question de la **cryptographie**, l’art de rendre un message illisi
 
 ```python
 def cesar(message, k):
-    resultat = ""
-    for lettre in message:
-        rang = ord(lettre) - ord("A")     # A->0, B->1, ...
-        nouveau = (rang + k) % 26          # decalage circulaire
-        resultat = resultat + chr(nouveau + ord("A"))
-    return resultat
+    resultat = ""                                      # INITIALISER
+    for lettre in message:                             # PARCOURIR
+        rang = ord(lettre) - ord("A")                  # A->0, B->1, ...
+        nouveau = (rang + k) % 26                      # decalage circulaire
+        resultat = resultat + chr(nouveau + ord("A"))  # METTRE A JOUR
+    return resultat                                    # RENVOYER
 
 # chiffrer avec k, dechiffrer avec -k (ou 26-k)
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoient `cesar("XYZ", 3)` et `cesar("ABC", -3)` ?
+
+??? verifie "Je vérifie"
+
+    `"ABC"` : après `Z`, le `% 26` fait repartir à `A` ; puis `"XYZ"` : en Python, le reste est toujours positif (`-3 % 26` vaut `23`), le décalage négatif marche donc sans précaution.
 
 !!! propriete "Propriété 2 — Un code très faible"
 
@@ -113,13 +119,19 @@ Poussons l’idée de Vigenère à l’extrême : et si la clé était **aussi l
 
 ```python
 def chiffre(message, masque):
-    resultat = ""
-    for i in range(len(message)):
-        code = ord(message[i]) ^ ord(masque[i])   # XOR caractere par caractere
-        resultat = resultat + chr(code)
-    return resultat
+    resultat = ""                                # INITIALISER
+    for i in range(len(message)):                # PARCOURIR
+        code = ord(message[i]) ^ ord(masque[i])  # XOR caractere par caractere
+        resultat = resultat + chr(code)          # METTRE A JOUR
+    return resultat                              # RENVOYER
 # chiffre(chiffre(msg, masque), masque) == msg   (le XOR s'annule)
 ```
+
+<span class="routine">▷ Je prédis.</span> Que valent `12 ^ 10`, puis `(12 ^ 10) ^ 10` ?
+
+??? verifie "Je vérifie"
+
+    `6` : bit à bit, `1100` XOR `1010` donne `0110` (et non $12-10=2$) ; puis `12` : refaire le XOR avec la même clé annule le premier.
 
 !!! regle "Règle 3 — Pourquoi c’est prouvé inviolable"
 

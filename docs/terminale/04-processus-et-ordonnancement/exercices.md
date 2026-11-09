@@ -322,21 +322,21 @@ On considère trois processus, dans cet ordre d’arrivée : PID $11$ (durée $4
 
     ```python
     def tourniquet(liste_attente, quantum):
-        ordre_execution = []
-        while liste_attente != []:
+        ordre_execution = []                           # INITIALISER
+        while liste_attente != []:                     # PARCOURIR la file
             processus = liste_attente.pop(0)
             processus.change_etat("En cours d'exécution")
-            compteur = 0
+            compteur = 0                               # INITIALISER
             while compteur < quantum and not processus.est_termine():
-                ordre_execution.append(processus.pid)
+                ordre_execution.append(processus.pid)  # METTRE A JOUR
                 processus.execute_un_cycle()
                 compteur = compteur + 1
-            if not processus.est_termine():
+            if not processus.est_termine():            # TESTER
                 processus.change_etat("Suspendu")
                 liste_attente.append(processus)
             else:
                 processus.change_etat("Terminé")
-        return ordre_execution
+        return ordre_execution                         # RENVOYER
     ```
 
     **5.**
@@ -569,10 +569,10 @@ Dans la situation donnée en exemple (premier chronogramme), les processus utili
     **4.** On boucle tant qu’il reste un processus à créer ou un processus dans la file. `ordo.temps` est le cycle en cours (il est incrémenté par `tourniquet`) ; on calcule d’abord `dernier`, la plus grande *clé* du dictionnaire, c’est-à-dire la date de création du dernier processus (ici $3$), par une recherche de maximum :
 
     ```python
-    dernier = 0
-    for t in depart_proc:
-        if t > dernier:
-            dernier = t
+    dernier = 0            # INITIALISER
+    for t in depart_proc:  # PARCOURIR les cles
+        if t > dernier:    # TESTER
+            dernier = t    # METTRE A JOUR
     ordo = Ordonnanceur()
     while ordo.temps <= dernier or not ordo.file.est_vide():
         if ordo.temps in depart_proc:
@@ -730,10 +730,10 @@ On suppose désormais que tous les processus sont déjà arrivés (ils sont tous
 
     ```python
     def execute_tous_processus(file_d_attente):
-        t = 0
+        t = 0                                            # INITIALISER
         while not est_vide(file_d_attente):
-            t = execute_un_processus(file_d_attente, t)
-        return t
+            t = execute_un_processus(file_d_attente, t)  # METTRE A JOUR
+        return t                                         # RENVOYER
     ```
 
     Avec la file `fp`, l’appel renvoie $18$ : la somme des temps d’exécution ($6+4+5+3$), puisque le processeur n’est jamais inoccupé.
@@ -811,6 +811,8 @@ Pour régler ce phénomène, on ajoute au processus l’attribut `temps_d_attent
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `meilleur_priorite(liste_files)` qui renvoie `None` s’il n’y a plus de processus, et sinon la valeur de priorité de l’un des processus les plus prioritaires de la liste des files. Par exemple, si `p1`, `p2`, `p3` sont des instances de `Processus` et `liste_files = [[], [p2], [p3, p1]]`, l’appel `meilleur_priorite(liste_files)` renvoie `1`.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 3.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `prioritaire(liste_files)` qui renvoie `None` si aucune file ne contient de processus, et sinon renvoie le processus **en tête de la première file non vide** (rappel : la tête est à droite), en le **supprimant** de cette file. On pourra utiliser `liste.pop(i)`, qui renvoie l’élément d’indice `i` de la liste tout en le supprimant.
 
 4.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire une fonction `gerer(p, liste_files)` qui prend le processus en cours d’exécution `p` (ou `None`) et la liste des files d’attente, qui implémente **un cycle** du programme décrit en début d’énoncé, et qui renvoie le processus en cours d’exécution à l’issue de ce cycle (ou `None`).
@@ -852,14 +854,22 @@ Pour régler ce phénomène, on ajoute au processus l’attribut `temps_d_attent
 
     **7.** Pendant qu’il attend, le `temps_d_attente` du processus long augmente ; dès qu’il dépasse `Max_Temps`, sa valeur de priorité diminue (il redevient plus prioritaire), et ainsi de suite jusqu’à ce qu’elle rejoigne celle des processus courts. Il finit donc par être élu régulièrement, et son temps d’utilisation atteint $1000$ en un temps fini.
 
-    **8.** La valeur de priorité d’un processus est l’indice de sa file : on renvoie l’indice de la première file non vide.
+    **8.** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert meilleur_priorite([[], [p2], [p3, p1]]) == 1   # cas normal : exemple de l'enonce
+    assert meilleur_priorite([[], [], []]) is None         # cas limite : plus aucun processus
+    assert meilleur_priorite([[p3], [p2], [p1]]) == 0      # cas piege : 0 est une vraie reponse
+    ```
+
+    La valeur de priorité d’un processus est l’indice de sa file : on renvoie l’indice de la première file non vide.
 
     ```python
     def meilleur_priorite(liste_files):
-        for i in range(len(liste_files)):
-            if liste_files[i] != []:
-                return i
-        return None
+        for i in range(len(liste_files)):  # PARCOURIR les files
+            if liste_files[i] != []:       # TESTER
+                return i                   # RENVOYER la premiere non vide
+        return None                        # RENVOYER : toutes sont vides
     ```
 
     **9.** La tête de chaque file est à droite (dernier élément de la liste Python), comme dans la simulation de la question 5.

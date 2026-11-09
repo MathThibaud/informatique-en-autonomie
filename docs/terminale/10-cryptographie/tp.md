@@ -30,6 +30,8 @@
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — César, version complète <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-cryptographie-tp-1-1 }
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `decaler(lettre, k)` : une majuscule de rang $x$ devient la lettre de rang `(x + k) % 26` ; tout autre caractère est renvoyé inchangé. Puis compléter `cesar(texte, k)`. Exemple : `cesar("BONJOUR !", 3)` vaut `"ERQMRXU !"`.
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span>  Chiffrer `clair = normaliser(TEXTE)` avec la clé $11$, afficher le début du chiffré, puis le déchiffrer.

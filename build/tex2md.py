@@ -655,6 +655,27 @@ class Converter:
         s = sub_macro(s, 'fichesprerequis', 1, 0, lambda o, a, st:
                       ' (→ fiches de révision : %s)' % ', '.join(
                           'ch. %d' % int(x) for x in a[0].split(',') if x.strip().isdigit()))
+        # --- routines « lire avant d'écrire » (08-11-2026) : prédire, puis déplier la vérification
+        s = sub_macro(s, 'jepredis', 0, 1, lambda o, a, st:
+                      '\n\n' + I('<span class="routine">▷ Je prédis.</span>') + ' ' +
+                      (o[0] if o[0] is not None else
+                       'Cacher les réponses, prévoir chaque résultat, puis vérifier.') + '\n\n')
+        s = sub_macro(s, 'jeverifie', 1, 0, lambda o, a, st:
+                      self.adm_begin('verifie', 'Je vérifie', True) + a[0] + self.adm_end())
+        s = sub_macro(s, 'troisappels', 0, 0, lambda o, a, st:
+                      '\n\n' + I('<span class="routine">▷ Avant de coder.</span>') +
+                      " Écrire trois appels attendus sous forme d'\\texttt{assert} : un cas "
+                      "\\textbf{normal}, un cas \\textbf{limite}, un cas \\textbf{piège}.\n\n")
+        for nm, mot in (('etagetracer', 'tracer'), ('etageexpliquer', 'expliquer'), ('etageecrire', 'écrire')):
+            s = sub_macro(s, nm, 0, 0, lambda o, a, st, mot=mot:
+                          ' ' + I('<span class="etage">%s</span>' % mot))
+        s = sub_macro(s, 'unephrase', 0, 0, lambda o, a, st:
+                      "En \\textbf{une seule phrase}, dire ce que fait ce code : son \\textbf{but}, "
+                      "pas le détail ligne à ligne.")
+        s = sub_macro(s, 'baremeunephrase', 0, 1, lambda o, a, st:
+                      '\\emph{Barème : %s pour une description ligne à ligne exacte, sans le but ; 0 sinon.}' %
+                      ('1 point si la phrase donne le but ; 0,5 point' if (o[0] or '2').strip() == '1'
+                       else '2 points si la phrase donne le but ; 1 point'))
         s = sub_macro(s, 'S', 0, 0, lambda o, a, st: '§')
         # \oe (comme toute commande-mot) avale l'espace qui la suit : « c\oe ur » -> « cœur »
         s = re.sub(r'\\(oe|OE)(?![a-zA-Z@])(?:\{\}| +)?', lambda m: 'œ' if m.group(1) == 'oe' else 'Œ', s)
@@ -1299,4 +1320,6 @@ HANDLED = {'ancre', 'exref', 'coursretour', 'corrref', 'enoncref', 'titrecours',
            'legendeniveaux', 'ialegendecourte', 'ialegende', 'renvoicharte', 'testq',
            'autoposcases', 'afficherCoupsDePouce', 'arraystretch', 'aocurl_',
            'avantexercice', 'apresdefinitionslocales', 'fichedechapitre', 'reponsessetester',
-           'duree', 'essentiel', 'erreurfrequente', 'retouractivite', 'renvoipage', 'fichesprerequis'}
+           'duree', 'essentiel', 'erreurfrequente', 'retouractivite', 'renvoipage', 'fichesprerequis',
+           'jepredis', 'jeverifie', 'troisappels', 'etagetracer', 'etageexpliquer', 'etageecrire',
+           'unephrase', 'baremeunephrase'}

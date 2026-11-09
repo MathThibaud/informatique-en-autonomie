@@ -14,7 +14,7 @@
 <!-- pdf-chapitre -->
 !!! livre "Le chapitre en PDF"
 
-    Les pages du manuel pour ce chapitre — activités, cours, exercices, TP, fiche de révision — suivies de leurs corrigés, avec les numéros de page du manuel (31 pages, version du 7 novembre 2026).
+    Les pages du manuel pour ce chapitre — activités, cours, exercices, TP, fiche de révision — suivies de leurs corrigés, avec les numéros de page du manuel (31 pages, version du 8 novembre 2026).
 
     [:material-download: Télécharger le chapitre (1,1 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-premiere-dessiner-avec-la-tortue.pdf){ .md-button .md-button--primary }
 <!-- /pdf-chapitre -->

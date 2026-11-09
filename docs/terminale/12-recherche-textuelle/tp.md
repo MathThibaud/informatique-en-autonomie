@@ -215,6 +215,8 @@
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Un mini-`grep` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-12-recherche-textuelle-tp-1-5 }
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 La commande `grep` des systèmes Unix affiche les **lignes** d’un fichier qui contiennent un motif. On en écrit une version Python, fondée sur Horspool.
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span>  Écrire `grep(motif, texte)`, qui découpe le texte en lignes (`texte.split("\n")`) et renvoie la liste des couples `(numéro de ligne, ligne)` des lignes contenant le motif (la première ligne porte le numéro $1$). Afficher les cinq premières lignes du roman qui contiennent `Passepartout`.

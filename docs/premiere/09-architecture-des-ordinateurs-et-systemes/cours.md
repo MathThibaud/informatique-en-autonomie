@@ -175,6 +175,8 @@ Pour *dérouler* un vrai programme machine sans se noyer, on utilise une machine
 
     Voici un programme LMC qui lit deux nombres et affiche leur **somme**. À gauche l’**adresse** de la case, à droite l’instruction qui y est rangée. `a` et `b` sont des étiquettes désignant les cases de données `08` et `09`.
 
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
     ```console
     00   INP        « lire le 1er nombre »
     01   STA a      « le ranger dans a »
@@ -299,6 +301,12 @@ L’interface graphique (fenêtres, souris) est confortable, mais la <span id="l
 
     ![](../figures/21a991015c59fd8b.svg){ .tikz loading=lazy }
 
+<span class="routine">▷ Je prédis.</span> Depuis `/home/eleve/Documents`, on tape `cd ../..` puis `pwd`. Qu’affiche `pwd` ?
+
+??? verifie "Je vérifie"
+
+    `/home` : chaque `..` remonte d’un cran, de `Documents` à `eleve`, puis de `eleve` à `home`.
+
 ### Les commandes de base (capacité attendue)
 
 | **Commande**     | **Rôle**                               | **Exemple**       |
@@ -382,6 +390,12 @@ Linux est **multi-utilisateur** : plusieurs comptes partagent la machine, chacun
     |   droits   |        `rwx`         |     `r-x`      |     `r--`      |
 
     Après `chmod 754 fichier`, `ls -l` affiche `-rwxr-xr--`. On reconnaît l’écriture binaire du chapitre **Le binaire et l’écriture des nombres** : `r`, `w`, `x` sont les bits de poids $4$, $2$ et $1$, donc un chiffre ne dépasse jamais $\texttt{111}_2 = 7$. Codes courants : `755` (`rwxr-xr-x`, un script que tous peuvent lancer), `644` (`rw-r--r--`, un document lisible par tous), `700` (`rwx------`, privé).
+
+<span class="routine">▷ Je prédis.</span> Le fichier `cours.txt` est en `-rw-r--r--`. Qu’affiche `ls -l` pour lui après `chmod 640 cours.txt` ? Quelle commande `chmod` avec des lettres aurait le même effet ?
+
+??? verifie "Je vérifie"
+
+    `-rw-r-----` : $6 = 4 + 2$ donne `rw-`, $4$ donne `r--` et $0$ donne `---`. Seuls les autres ont perdu un droit, la lecture : c’est l’effet de `chmod o-r cours.txt`.
 
 !!! remarque "Remarque — Pourquoi c’est un enjeu de sécurité"
 

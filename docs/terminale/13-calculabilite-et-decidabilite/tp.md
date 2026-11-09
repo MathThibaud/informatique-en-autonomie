@@ -71,6 +71,8 @@ La fonction fournie `executer(regles, mot, limite=10000, trace=False)` fait tour
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Le cœur du simulateur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-13-calculabilite-et-decidabilite-tp-1-2 }
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter `une_etape(regles, ruban, tete, etat)` : lire le symbole sous la tête, trouver la règle, écrire le nouveau symbole, déplacer la tête, et renvoyer `(nouvelle_position, nouvel_etat)`. La première ligne, fournie, lit le symbole avec `lire_case` (une case absente du ruban contient un blanc). La fonction `executer`, fournie, l’appelle en boucle. Lancer le fichier (`test_une_etape` doit afficher `OK`), puis taper dans la console `executer(INVERSER, "1011", trace=True)` et comparer avec la question 1.
 
 ??? pouce "Coup de pouce"

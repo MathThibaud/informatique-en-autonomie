@@ -81,14 +81,28 @@ Pour éviter cela, il faut une **condition d’arrêt**.
 
 <span class="retouract">↺ Retour sur l'activité.</span> La plus petite poupée russe, qui ne s’ouvre pas, était la condition d’arrêt de `ouvrir` (le test `if n > 1`). Sans elle, le « miroir sans fin » posait des post-it sans jamais en retirer : c’est le <span id="lex-pyrecursionerror01" class="ancre"></span>`RecursionError`.
 
+!!! encadre "Méthode — Les étiquettes d’étapes"
+
+    Comme en 1re, un commentaire en **majuscules** nomme le **rôle** d’une ligne, avec toujours les mêmes mots : `INITIALISER`, `PARCOURIR`, `TESTER`, `METTRE A JOUR`, `RENVOYER`, `VERIFIER`. La récursivité en ajoute deux : `CAS DE BASE` (la condition d’arrêt, traitée sans appel) et `APPEL RECURSIF` (le même problème, en plus petit) ; et, quand on se sert du résultat de l’appel pour construire la réponse, `COMBINER` (dans `return n * fact(n - 1)`, l’appel et la multiplication par `n` tiennent sur la même ligne).
+
+    Avant de coder, on écrit encore, comme en 1re, **trois appels attendus**, en `assert` ou en doctest : un cas **normal**, un cas **limite** (pour une fonction récursive, c’est souvent le cas de base) et un cas **piège**. Pour la factorielle de la section suivante :
+
+    ```python
+    assert fact(4) == 24    # cas normal
+    assert fact(0) == 1     # cas limite : le cas de base
+    assert fact(1) == 1     # cas piege : 1 et non 0, par un appel recursif
+    ```
+
 !!! exemple "Exemple — Prévoyez l’affichage, puis vérifiez à la machine"
+
+    <span class="routine">▷ Je prédis.</span> Qu’affiche `compte(3)` ? Cacher la correction, prévoir, puis vérifier.
 
     ```python
     def compte(n):
-        if n > 0:          # cas recursif
-            compte(n - 1)
-            print(n)
-        # condition d'arret : n == 0, on ne fait rien
+        if n > 0:
+            compte(n - 1)      # APPEL RECURSIF
+            print(n)           # execute au retour de l'appel
+        # CAS DE BASE : n == 0, on ne fait rien
 
     compte(3)
     ```
@@ -147,11 +161,17 @@ En mathématiques, $n! = n \times (n-1) \times \dots \times 2 \times 1$, avec pa
 
 ```python
 def fact(n):
-    if n == 0:          # 1. condition d'arret
+    if n == 0:                   # CAS DE BASE (question 1)
         return 1
-    else:               # 3. on combine (x n) ...
-        return n * fact(n - 1)   # 2. ... le probleme plus petit
+    else:
+        return n * fact(n - 1)   # APPEL RECURSIF (2), COMBINER : x n (3)
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoie `fact(4)` ? Combien d’appels de `fact` s’empilent ?
+
+??? verifie "Je vérifie"
+
+    `24` ; **cinq** appels, de `fact(4)` jusqu’au cas de base `fact(0)` (schéma ci-dessous).
 
 La fonction **recopie mot pour mot** la définition mathématique : c’est la grande force de la récursivité.
 
@@ -165,13 +185,19 @@ Le programme demande explicitement des exemples *variés*. En voici quatre, tous
 
     ```python
     def somme(n):
-        if n == 0:
+        if n == 0:                   # CAS DE BASE
             return 0
         else:
-            return n + somme(n - 1)
+            return n + somme(n - 1)  # APPEL RECURSIF, COMBINER : + n
     ```
 
     Condition d’arrêt : `somme(0) = 0`. Cas récursif : `somme(n) = n + somme(n-1)`.
+
+    <span class="routine">▷ Je prédis.</span> Que renvoient `somme(4)` et `somme(-1)` ?
+
+    ??? verifie "Je vérifie"
+
+        `10` ; `somme(-1)` ne s’arrête pas : `n` vaut `-2`, `-3`… sans jamais atteindre `0`, d’où un `RecursionError`. Le cas de base doit être *atteint* (voir la terminaison, plus bas).
 
 !!! exemple "Exemple — Somme des éléments d’une liste — récursion « sur les données »"
 
@@ -179,21 +205,33 @@ Le programme demande explicitement des exemples *variés*. En voici quatre, tous
 
     ```python
     def somme_liste(tab):
-        if tab == []:
+        if tab == []:                              # CAS DE BASE : liste vide
             return 0
         else:
-            return tab[0] + somme_liste(tab[1:])
+            return tab[0] + somme_liste(tab[1:])   # APPEL RECURSIF, COMBINER
     ```
+
+    <span class="routine">▷ Je prédis.</span> Que renvoie `somme_liste([4, -1, 2])` ? Combien d’appels ?
+
+    ??? verifie "Je vérifie"
+
+        `5`, en **quatre** appels : sur `[4, -1, 2]`, `[-1, 2]`, `[2]`, puis `[]` (le cas de base).
 
 !!! exemple "Exemple — Puissance $x^n$"
 
     ```python
     def puissance(x, n):
-        if n == 0:
+        if n == 0:                          # CAS DE BASE
             return 1
         else:
-            return x * puissance(x, n - 1)
+            return x * puissance(x, n - 1)  # APPEL RECURSIF, COMBINER : fois x
     ```
+
+    <span class="routine">▷ Je prédis.</span> Que renvoient `puissance(-2, 3)` et `puissance(0, 0)` ?
+
+    ??? verifie "Je vérifie"
+
+        `-8` ; puis `1` : on tombe directement sur le cas de base, quel que soit `x`.
 
 !!! exemple "Exemple — La légende de l’échiquier"
 
@@ -201,10 +239,10 @@ Le programme demande explicitement des exemples *variés*. En voici quatre, tous
 
     ```python
     def grains(case):
-        if case == 1:
+        if case == 1:                      # CAS DE BASE : premiere case
             return 1
         else:
-            return 2 * grains(case - 1)
+            return 2 * grains(case - 1)    # APPEL RECURSIF, COMBINER : on double
     ```
 
     Un problème « de la vie courante » qui donne pourtant une croissance vertigineuse : `grains(64)` dépasse $9 \times 10^{18}$.
@@ -219,13 +257,15 @@ Le programme demande explicitement des exemples *variés*. En voici quatre, tous
 
         ```python
         def fib(n):
-            if n == 0:          # 1re condition d'arret
+            if n == 0:                          # CAS DE BASE (1er)
                 return 0
-            elif n == 1:        # 2e condition d'arret
+            elif n == 1:                        # CAS DE BASE (2e)
                 return 1
             else:
-                return fib(n - 1) + fib(n - 2)
+                return fib(n - 1) + fib(n - 2)  # APPEL RECURSIF x 2, COMBINER
         ```
+
+        <span class="routine">▷ Je prédis.</span> Que renvoie `fib(6)` ?
 
         On obtient `0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55` pour `n` allant de 0 à 10.
 
@@ -236,27 +276,35 @@ Une fonction récursive a souvent besoin d’un paramètre **de plus** que ce qu
 ```python
 def somme_acc(n, total=0):
     """Renvoie total + 1 + 2 + ... + n."""
-    if n == 0:
+    if n == 0:                               # CAS DE BASE
         return total
     else:
-        return somme_acc(n - 1, total + n)
+        return somme_acc(n - 1, total + n)   # APPEL RECURSIF
 ```
 
 L’utilisateur appelle `somme_acc(4)`, qui renvoie `10` : `total` vaut alors `0`, sans qu’il ait à le savoir. Les appels récursifs, eux, fournissent `total` : `somme_acc(3, 4)`, puis `somme_acc(2, 7)`, etc. Les paramètres qui ont une valeur par défaut s’écrivent **après** les autres.
+
+<span class="routine">▷ Je prédis.</span> Que renvoie `somme_acc(2, 10)` ?
+
+??? verifie "Je vérifie"
+
+    `13`, soit `10 + 2 + 1` : quand l’appel fournit `total`, la valeur par défaut n’est pas utilisée.
 
 !!! regle "Règle 4 — Piège : une valeur par défaut modifiable"
 
     La valeur par défaut est créée **une seule fois**, quand Python lit le `def`, et non à chaque appel. Pour un nombre ou une chaîne, qu’on ne modifie jamais, c’est sans danger. Pour une **liste**, c’est un piège : la même liste sert à tous les appels qui ne la fournissent pas.
 
     ```python
-    def a_rebours(n, vus=[]):    # A EVITER
+    def a_rebours(n, vus=[]):             # A EVITER
         """Renvoie la liste [n, n - 1, ..., 1]."""
-        if n == 0:
+        if n == 0:                        # CAS DE BASE
             return vus
         else:
-            vus.append(n)
-            return a_rebours(n - 1, vus)
+            vus.append(n)                 # METTRE A JOUR
+            return a_rebours(n - 1, vus)  # APPEL RECURSIF
     ```
+
+    <span class="routine">▷ Je prédis.</span> Que renvoient `a_rebours(3)`, puis l’appel suivant `a_rebours(2)` ?
 
     `a_rebours(3)` renvoie bien `[3, 2, 1]`, mais l’appel suivant `a_rebours(2)` renvoie `[3, 2, 1, 2, 1]` : la liste a gardé le résultat du premier appel. La bonne pratique : mettre `None` par défaut, et créer une liste neuve dans la fonction.
 
@@ -264,12 +312,12 @@ L’utilisateur appelle `somme_acc(4)`, qui renvoie `10` : `total` vaut alors `0
     def a_rebours(n, vus=None):
         """Renvoie la liste [n, n - 1, ..., 1]."""
         if vus is None:
-            vus = []             # liste neuve a chaque appel de l'utilisateur
-        if n == 0:
+            vus = []                      # INITIALISER : liste neuve a chaque appel de l'utilisateur
+        if n == 0:                        # CAS DE BASE
             return vus
         else:
-            vus.append(n)
-            return a_rebours(n - 1, vus)
+            vus.append(n)                 # METTRE A JOUR
+            return a_rebours(n - 1, vus)  # APPEL RECURSIF
     ```
 
     Cette fois, `a_rebours(2)` renvoie `[2, 1]`. On retrouvera ce schéma au chapitre *Graphes*, dans le parcours en profondeur récursif.
@@ -338,29 +386,35 @@ Toute fonction récursive peut se réécrire de façon **itérative** (avec des 
 
         ```python
         def tester_palindrome(chaine):
-            if len(chaine) < 2:              # condition d'arret : 0 ou 1 caractere
+            if len(chaine) < 2:              # CAS DE BASE : 0 ou 1 caractere
                 return True
-            elif chaine[0] != chaine[-1]:    # bords differents : pas un palindrome
-                return False
+            elif chaine[0] != chaine[-1]:    # TESTER : bords differents
+                return False                 # RENVOYER : pas un palindrome
             else:
-                return tester_palindrome(chaine[1:-1])   # on enleve les deux bords
+                return tester_palindrome(chaine[1:-1])   # APPEL RECURSIF : sans les bords
         ```
 
         **Version itérative** (deux indices qui se rapprochent) :
 
         ```python
         def est_palindrome(chaine):
-            i = 0
-            j = len(chaine) - 1
-            while i < j:
-                if chaine[i] != chaine[j]:
-                    return False
-                i = i + 1
-                j = j - 1
-            return True
+            i = 0                            # INITIALISER : indice de gauche
+            j = len(chaine) - 1              # INITIALISER : indice de droite
+            while i < j:                     # PARCOURIR
+                if chaine[i] != chaine[j]:   # TESTER
+                    return False             # RENVOYER
+                i = i + 1                    # METTRE A JOUR
+                j = j - 1                    # METTRE A JOUR
+            return True                      # RENVOYER
         ```
 
         Les deux renvoient `True` pour `"radar"` et `False` pour `"rader"`.
+
+        <span class="routine">▷ Je prédis.</span> Que renvoient-elles pour `"abca"` ? Et pour la chaîne vide `""` ?
+
+        ??? verifie "Je vérifie"
+
+            `False` : les bords `a` sont égaux, mais pas `b` et `c`. Puis `True` : la chaîne vide est le cas de base de la version récursive, et la boucle de la version itérative ne fait aucun tour.
 
 |  | **Récursif** | **Itératif** |
 |:---|:---|:---|
@@ -392,9 +446,9 @@ La récursivité produit naturellement les **fractales** : des figures qui se r�
     import turtle as t
 
     def koch(longueur, n):
-        if n == 0:                 # condition d'arret : un simple segment
+        if n == 0:                 # CAS DE BASE : un simple segment
             t.forward(longueur)
-        else:                      # cas recursif : 4 flocons plus petits
+        else:                      # APPEL RECURSIF x 4 : courbes 3 fois plus petites
             koch(longueur / 3, n - 1)
             t.left(60)
             koch(longueur / 3, n - 1)

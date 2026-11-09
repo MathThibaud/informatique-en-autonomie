@@ -57,6 +57,8 @@ De cette image découle une distinction **fondamentale** : peut-on modifier l’
 
     Le type `str` annonce déjà les séquences : ses caractères sont **ordonnés** et indexés à partir de $0$ ; on peut aussi en extraire des **tranches** (nouveau : `ch[3:7]` ci-dessous, détaillé avec les tableaux). Ces réflexes vont resservir tels quels.
 
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
     ```text
     >>> ch = "Bonjour"
     >>> ch[0]        # premier caractere (indice 0)
@@ -103,6 +105,8 @@ On étudie maintenant les trois, dans cet ordre : le plus simple (figé) d’abo
 
 On sépare les éléments par des **virgules** ; les parenthèses sont facultatives mais recommandées.
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```text
 >>> point = (3, 4)             # un couple
 >>> t = 1, 2, 3, "bonjour"     # parentheses sous-entendues
@@ -118,6 +122,8 @@ On sépare les éléments par des **virgules** ; les parenthèses sont facultati
 
 <span id="lex-len03" class="ancre"></span> Comme pour les chaînes : indices à partir de $0$, indices négatifs depuis la fin, tranches.
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```text
 >>> t = (10, 20, 30, 40, 50)
 >>> t[0], t[-1]        # premier, dernier
@@ -131,6 +137,8 @@ True
 ```
 
 ### Immuable : toute modification est refusée
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```text
 >>> t = (1, 2, 3)
@@ -169,6 +177,8 @@ C’est exactement ainsi qu’on récupère les différentes valeurs renvoyées 
 
 <span id="lex-renvoiplusieurs03" class="ancre"></span> L’usage numéro un : renvoyer **plusieurs résultats** d’un coup, récupérés par affectation multiple.
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```python
 def division(a, b):
     """Renvoie (quotient, reste) de la division entiere de a par b."""
@@ -190,6 +200,12 @@ q, r = division(25, 7)      # q vaut 3, r vaut 4
     petit, grand = ordonner(9, 4)   # petit = 4, grand = 9
     ```
 
+    <span class="routine">▷ Je prédis.</span> Que renvoient `ordonner(5, 5)` et `ordonner(-3, -8)` ?
+
+    ??? verifie "Je vérifie"
+
+        `(5, 5)` : avec `<=`, l’égalité passe par le premier cas ; puis `(-8, -3)` : `-8` est le plus petit.
+
 <span id="cours-03-1" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[1](exercices.md#ex-03-1) à [5](exercices.md#ex-03-5)** (les p-uplets)
@@ -204,6 +220,8 @@ Un **tableau** ressemble à un p-uplet… mais il est **mutable**. C’est là 
 
     Un <span id="lex-tableau03" class="ancre"></span>**tableau** (type `list`) est une suite **ordonnée** et **modifiable** d’éléments, entre **crochets**.
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```text
 >>> notes = [12, 8, 15, 9]
 >>> vide = []
@@ -215,6 +233,8 @@ Un **tableau** ressemble à un p-uplet… mais il est **mutable**. C’est là 
 ### Lire et modifier par indice (capacité attendue)
 
 <span id="lex-crochets03" class="ancre"></span>
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```text
 >>> notes = [12, 8, 15, 9]
@@ -237,6 +257,8 @@ Un **tableau** ressemble à un p-uplet… mais il est **mutable**. C’est là 
 
     Tout cela vaut aussi pour les chaînes et les p-uplets.
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```text
 >>> notes = [12, 20, 15, 9]
 >>> notes[-1]          # dernier element
@@ -258,10 +280,16 @@ Un **tableau** ressemble à un p-uplet… mais il est **mutable**. C’est là 
 <span id="lex-forin03" class="ancre"></span> **(1) Par élément**, quand seules les valeurs comptent :
 
 ```python
-somme = 0
-for note in notes:      # note prend chaque valeur
-    somme = somme + note
+somme = 0                 # INITIALISER
+for note in notes:        # PARCOURIR : note prend chaque valeur
+    somme = somme + note  # METTRE A JOUR
 ```
+
+<span class="routine">▷ Je prédis.</span> Avec `notes = [12, 20, 15, 9]`, que vaut `somme` après la boucle ?
+
+??? verifie "Je vérifie"
+
+    `56` : `somme` passe par `12`, `32`, `47`, puis `56`.
 
 **(2) Par indice**, quand on a besoin de la position ou qu’on veut *modifier* :
 
@@ -289,6 +317,8 @@ for i in range(len(notes)):
 
     expression = ce que l’on range variable = parcourt l’itérable itérable = ce que l’on parcourt condition = filtre (facultatif)
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```text
 >>> [2 * n for n in range(5)]             # les 5 premiers pairs
 [0, 2, 4, 6, 8]
@@ -307,11 +337,11 @@ for i in range(len(notes)):
     Les deux codes produisent `[1, 4, 9, 16, 25]` :
 
     ```python
-    carres = []                      # version longue
-    for k in range(1, 6):
-        carres.append(k * k)
+    carres = []                            # INITIALISER : version longue, tableau vide
+    for k in range(1, 6):                  # PARCOURIR
+        carres.append(k * k)               # METTRE A JOUR
 
-    carres = [k * k for k in range(1, 6)]   # version par comprehension
+    carres = [k * k for k in range(1, 6)]  # version par comprehension
     ```
 
 ### Méthodes des tableaux <span class="horsprog">au-delà du programme</span>
@@ -328,6 +358,8 @@ Un tableau étant mutable, il possède des **méthodes** (appel avec un point). 
     | <span id="lex-pop03" class="ancre"></span>t.pop() | retire et **renvoie** le dernier élément |
     | t.pop(i)         | retire et renvoie l’élément d’indice `i` |
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```text
 >>> t = [3, 1, 2]
 >>> t.append(5)       # -> [3, 1, 2, 5]
@@ -340,6 +372,8 @@ Un tableau étant mutable, il possède des **méthodes** (appel avec un point). 
 !!! regle "Règle 6 — Modifier sur place vs renvoyer une copie"
 
     `append` modifie le tableau et renvoie `None` : n’écrivez **jamais** `t = t.append(5)` (vous perdriez tout). Pour obtenir un *nouveau* tableau sans modifier l’original, on le construit, par exemple par <span id="lex-concatenation03" class="ancre"></span>**concaténation** (`+`).
+
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
     ```text
     >>> t = [3, 1, 2]
@@ -365,6 +399,8 @@ Voici le point le plus important — et le plus piégeux — du chapitre. Repren
 
 <span class="retouract">↺ Retour sur l'activité.</span> C’est la liste de courses de l’activité : Papa et Maman avaient collé deux étiquettes sur la même feuille, et `print(maman)` affichait `[’brioche’, ’lait’, ’pommes’]`. Pour que Papa ait sa propre liste, il fallait recopier la feuille : c’est la vraie copie présentée ci-dessous.
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```text
 >>> a = [1, 2, 3]
 >>> b = a           # b pointe vers le MEME objet
@@ -376,6 +412,8 @@ Voici le point le plus important — et le plus piégeux — du chapitre. Repren
 ![](../figures/dfd32eb0603893ea.svg){ .tikz loading=lazy }
 
 Pour une <span id="lex-copie03" class="ancre"></span>**vraie copie** (objet indépendant), on *reconstruit* un tableau :
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```text
 >>> a = [1, 2, 3]
@@ -396,6 +434,8 @@ Pour une <span id="lex-copie03" class="ancre"></span>**vraie copie** (objet ind�
     ??? corrige "Correction"
 
         La compréhension *intérieure* recrée chaque ligne, la compréhension *extérieure* crée un nouveau tableau de ces lignes : aucun tableau n’est partagé.
+
+        <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
         ```text
         >>> grille = [[1, 2], [3, 4]]
@@ -426,6 +466,8 @@ M = [[1, 2, 3],
 
     <span id="lex-mij03" class="ancre"></span>`M[i]` est la ligne d’indice `i` (un tableau) ; `M[i][j]` est la case ligne `i`, colonne `j`. Le nombre de lignes est `len(M)`, de colonnes `len(M[0])`.
 
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
     ```text
     >>> M[0]        # premiere ligne
     [1, 2, 3]
@@ -436,15 +478,23 @@ M = [[1, 2, 3],
 On parcourt une matrice avec **deux boucles imbriquées** :
 
 ```python
-total = 0
-for i in range(len(M)):
-    for j in range(len(M[0])):
-        total = total + M[i][j]     # somme de toutes les cases
+total = 0                        # INITIALISER
+for i in range(len(M)):          # PARCOURIR : les lignes
+    for j in range(len(M[0])):   # PARCOURIR : les colonnes
+        total = total + M[i][j]  # METTRE A JOUR : somme de toutes les cases
 ```
+
+<span class="routine">▷ Je prédis.</span> Que vaut `total` à la fin, pour la matrice `M` ci-dessus ?
+
+??? verifie "Je vérifie"
+
+    `21`, soit $1 + 2 + 3 + 4 + 5 + 6$ : les deux boucles passent une fois par chacune des six cases.
 
 ### Le fil rouge tranche le débat : `[[0]*p]*n` est un piège
 
 <span id="lex-repetition03" class="ancre"></span> Comment créer une grille de zéros ? On serait tenté d’écrire `[[0] * p] * n`, par exemple `[[0] * 3] * 2`. **Erreur.** Le modèle mémoire l’explique d’un coup : l’opérateur `*` ne *copie pas* la ligne, il **répète la même référence**. Les deux lignes sont alors **un seul et même tableau** — exactement l’alias du § IV.
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```text
 >>> grille = [[0] * 3] * 2    # PIEGE
@@ -470,10 +520,16 @@ grille = [[0 for j in range(p)] for i in range(n)]   # 2 lignes INDEPENDANTES
 
     ```python
     # Negatif : chaque pixel p devient 255 - p
-    for i in range(len(image)):
-        for j in range(len(image[0])):
-            image[i][j] = 255 - image[i][j]
+    for i in range(len(image)):              # PARCOURIR : les lignes
+        for j in range(len(image[0])):       # PARCOURIR : les colonnes
+            image[i][j] = 255 - image[i][j]  # METTRE A JOUR
     ```
+
+    <span class="routine">▷ Je prédis.</span> Que devient un pixel noir (`0`) ? un pixel blanc ? un pixel de valeur `100` ?
+
+    ??? verifie "Je vérifie"
+
+        `255` (blanc), `0` (noir) et `155` : le clair devient sombre et inversement.
 
     En couleurs, chaque pixel est lui-même un p-uplet `(rouge, vert, bleu)`.
 
@@ -491,6 +547,8 @@ Dans un tableau, l’étiquette d’accès est **imposée** : un indice $0, 1, 2
 
 <span class="retouract">↺ Retour sur l'activité.</span> Les tiroirs étiquetés de l’activité formaient un dictionnaire : le prénom est la clé, le numéro de casier la valeur. Deux tiroirs « Hugo » étaient impossibles, comme deux clés égales dans un dictionnaire.
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```text
 >>> age = {"Alice": 17, "Bob": 16, "Chloe": 17}
 >>> age["Alice"]       # acces par la cle, non par un indice
@@ -506,6 +564,8 @@ Dans un tableau, l’étiquette d’accès est **imposée** : un indice $0, 1, 2
 
 <span id="lex-dcle03" class="ancre"></span> Différence majeure avec le tableau : on crée une **nouvelle clé** par simple affectation (impossible avec un indice de tableau, qui doit déjà exister).
 
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
 ```text
 >>> age = {"Alice": 17, "Bob": 16}
 >>> age["David"] = 15     # nouvelle cle : creee
@@ -518,6 +578,8 @@ Dans un tableau, l’étiquette d’accès est **imposée** : un indice $0, 1, 2
 !!! regle "Règle 10 — Le test in porte sur les clés"
 
     <span id="lex-in03" class="ancre"></span>
+
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
     ```text
     >>> "Bob" in age    # une cle ?
@@ -539,36 +601,46 @@ Une boucle `for` sur un dictionnaire parcourt ses **clés**. Trois méthodes pr�
 ```python
 age = {"Alice": 17, "Bob": 16, "Chloe": 17}
 
-for prenom in age:                 # parcourt les cles (defaut)
+for prenom in age:             # parcourt les cles (defaut)
     print(prenom, "a", age[prenom], "ans")
 
-for prenom, a in age.items():      # couples : tres pratique
+for prenom, a in age.items():  # couples : tres pratique
     print(prenom, "a", a, "ans")
 
-total = 0
-for a in age.values():             # parcourt les valeurs
-    total = total + a
-moyenne = total / len(age)         # moyenne des ages
+total = 0                      # INITIALISER
+for a in age.values():         # PARCOURIR : les valeurs
+    total = total + a          # METTRE A JOUR
+moyenne = total / len(age)     # moyenne des ages
 ```
+
+<span class="routine">▷ Je prédis.</span> Que vaut `moyenne` à la fin ?
+
+??? verifie "Je vérifie"
+
+    `50 / 3`, soit environ `16.67` : `total` vaut $17 + 16 + 17 = 50$ et le dictionnaire contient 3 couples.
 
 !!! exemple "Exemple — Compter des occurrences : le cas d’école du dictionnaire"
 
     Clé = la lettre, valeur = son compteur.
 
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
     ```python
     def compter(mot):
-        compteur = {}
-        for lettre in mot:
-            if lettre in compteur:
-                compteur[lettre] = compteur[lettre] + 1
+        compteur = {}                                    # INITIALISER : dictionnaire vide
+        for lettre in mot:                               # PARCOURIR
+            if lettre in compteur:                       # TESTER : lettre deja vue ?
+                compteur[lettre] = compteur[lettre] + 1  # METTRE A JOUR
             else:
-                compteur[lettre] = 1
-        return compteur
+                compteur[lettre] = 1                     # METTRE A JOUR : premiere rencontre
+        return compteur                                  # RENVOYER
 
-    compter("abracadabra")   # {'a': 5, 'b': 2, 'r': 2, 'c': 1, 'd': 1}
+    compter("abracadabra")                               # {'a': 5, 'b': 2, 'r': 2, 'c': 1, 'd': 1}
     ```
 
 ### Construction par compréhension <span class="horsprog">au-delà du programme</span>
+
+<span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
 ```text
 >>> {n: n * n for n in range(1, 5)}
@@ -579,12 +651,14 @@ moyenne = total / len(age)         # moyenne des ages
 
     Décalage de $3$ rangs ; `ord`/`chr` convertissent lettre $\leftrightarrow$ code (`’A’` $\leftrightarrow 65$).
 
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
     ```python
     decalage = {chr(65 + i): chr(65 + (i + 3) % 26) for i in range(26)}
     # decalage['A'] = 'D' , decalage['X'] = 'A' , ...
-    code = ""
-    for c in "BONJOUR":
-        code = code + decalage[c]      # code vaut "ERQMRXU"
+    code = ""                      # INITIALISER
+    for c in "BONJOUR":            # PARCOURIR
+        code = code + decalage[c]  # METTRE A JOUR : code vaut "ERQMRXU"
     ```
 
 ### Le fil rouge, une dernière fois : pourquoi la clé est-elle immuable ?

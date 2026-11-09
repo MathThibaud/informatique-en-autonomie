@@ -185,17 +185,19 @@ a = (1, (2, None, None), (3, None, (4, None, None)))
 
 ```python
 def prefixe(a):
-    if a is not None:            # cas de base : un arbre vide, on ne fait rien
-        print(a.valeur)          #  visiter la racine
-        prefixe(a.gauche)        #  puis tout le sous-arbre gauche
-        prefixe(a.droite)        #  puis tout le sous-arbre droit
+    if a is not None:            # CAS DE BASE : arbre vide, on ne fait rien
+        print(a.valeur)          # visiter la racine
+        prefixe(a.gauche)        # APPEL RECURSIF : tout le sous-arbre gauche
+        prefixe(a.droite)        # APPEL RECURSIF : puis tout le sous-arbre droit
 ```
 
 Pour l’**infixe** et le **suffixe**, il suffit de **déplacer** la ligne `print` : au milieu (entre les deux appels) pour l’infixe, à la fin pour le suffixe.
 
 !!! exemple "Exemple — Les trois parcours de notre arbre"
 
-    Sur l’arbre `a = Noeud(1, Noeud(2), Noeud(3, None, Noeud(4)))` :
+    Sur l’arbre `a = Noeud(1, Noeud(2), Noeud(3, None, Noeud(4)))` dessiné plus haut :
+
+    <span class="routine">▷ Je prédis.</span> Cacher la liste ci-dessous. Dans quel ordre les parcours préfixe, infixe et suffixe visitent-ils les nœuds de `a` ?
 
     - préfixe : `1, 2, 3, 4` (racine d’abord) ;
 
@@ -213,18 +215,24 @@ Une astuce pour retrouver ces trois ordres sans se tromper : on fait le **tour d
 
 ```python
 def largeur(a):
-    if a is None:
+    if a is None:                # TESTER : arbre vide, rien a visiter
         return
-    f = File()                   # une file (interface enfiler/defiler/est_vide)
-    f.enfiler(a)
-    while not f.est_vide():
+    f = File()                   # INITIALISER : une file (enfiler/defiler/est_vide)
+    f.enfiler(a)                 # INITIALISER : la racine attend son tour
+    while not f.est_vide():      # PARCOURIR : tant qu'il reste des noeuds
         n = f.defiler()
         print(n.valeur)          # visiter
-        if n.gauche is not None:
-            f.enfiler(n.gauche)
-        if n.droite is not None:
-            f.enfiler(n.droite)
+        if n.gauche is not None: # TESTER
+            f.enfiler(n.gauche)  # METTRE A JOUR : le fils passe en fin de file
+        if n.droite is not None: # TESTER
+            f.enfiler(n.droite)  # METTRE A JOUR
 ```
+
+<span class="routine">▷ Je prédis.</span> Dans quel ordre `largeur(a)` affiche-t-elle les nœuds de l’arbre `a` précédent ? Et ceux de l’arbre `A`…`H` du début du chapitre, comparés au parcours préfixe ?
+
+??? verifie "Je vérifie"
+
+    `1, 2, 3, 4` : ici, le même ordre que le préfixe, par hasard. Sur l’arbre `A`…`H`, la largeur donne `A, B, C, D, E, F, G, H` (niveau par niveau) et le préfixe `A, B, D, E, C, F, G, H` : le préfixe termine le sous-arbre de `B` avant de passer à `C`.
 
 !!! encadre "À retenir — largeur et file, profondeur et pile"
 
@@ -250,15 +258,21 @@ Les formules récursives découlent directement de la définition « racine $+$ 
 
 ```python
 def taille(a):
-    if a is None:
+    if a is None:                                          # CAS DE BASE : arbre vide
         return 0
-    return 1 + taille(a.gauche) + taille(a.droite)
+    return 1 + taille(a.gauche) + taille(a.droite)         # APPEL RECURSIF x 2, COMBINER
 
 def hauteur(a):
-    if a is None:
+    if a is None:                                          # CAS DE BASE : arbre vide
         return 0
-    return 1 + max(hauteur(a.gauche), hauteur(a.droite))
+    return 1 + max(hauteur(a.gauche), hauteur(a.droite))   # APPEL RECURSIF x 2, COMBINER
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoient `taille(a)` et `hauteur(a)` pour `a = Noeud(1, Noeud(2), Noeud(3, None, Noeud(4)))` ? Et `hauteur(Noeud(5))` ?
+
+??? verifie "Je vérifie"
+
+    `4` et `3` (le plus long chemin, `1`, `3`, `4`, compte trois nœuds). Une feuille seule a une hauteur de `1` avec la convention du cours (on compte les nœuds) ; ce serait `0` en comptant les arêtes.
 
 !!! encadre "Au bac — hauteur : et avec l’autre convention ?"
 
@@ -296,15 +310,21 @@ Un arbre quelconque ne facilite pas la recherche. Mais si l’on **range** les v
 
 ```python
 def recherche(a, x):
-    if a is None:
-        return False             # on est tombe sur un sous-arbre vide : absent
-    if x == a.valeur:
+    if a is None:                       # CAS DE BASE : sous-arbre vide
+        return False                    # RENVOYER : x est absent
+    if x == a.valeur:                   # TESTER : trouve
         return True
-    if x < a.valeur:
-        return recherche(a.gauche, x)   # a gauche : les plus petits
+    if x < a.valeur:                    # TESTER : de quel cote descendre ?
+        return recherche(a.gauche, x)   # APPEL RECURSIF : a gauche, les plus petits
     else:
-        return recherche(a.droite, x)   # a droite : les plus grands (ou egaux)
+        return recherche(a.droite, x)   # APPEL RECURSIF : a droite, les plus grands (ou egaux)
 ```
+
+<span class="routine">▷ Je prédis.</span> Sur l’ABR dessiné ci-dessus, que renvoient `recherche(a, 6)` et `recherche(a, 7)` ? Quels nœuds chaque appel visite-t-il ?
+
+??? verifie "Je vérifie"
+
+    `True` en visitant `8`, `3`, `6`. `False` en visitant les **mêmes** nœuds : après `6`, on descend à droite sur un sous-arbre vide. On ne parcourt jamais tout l’arbre.
 
 !!! encadre "À retenir — le coût d’une recherche dans un ABR"
 
@@ -336,13 +356,13 @@ Le code est récursif, comme la recherche. La fonction **renvoie l’arbre** obt
 ```python
 def inserer(a, x):
     """Insere x dans l'ABR a et renvoie l'arbre obtenu."""
-    if a is None:
-        return Noeud(x)                 # place vide : x devient une feuille
-    if x < a.valeur:
-        a.gauche = inserer(a.gauche, x)     # plus petit : a gauche
+    if a is None:                           # CAS DE BASE : place vide
+        return Noeud(x)                     # x devient une feuille
+    if x < a.valeur:                        # TESTER
+        a.gauche = inserer(a.gauche, x)     # APPEL RECURSIF : plus petit, a gauche
     else:
-        a.droite = inserer(a.droite, x)     # plus grand ou egal : a droite
-    return a
+        a.droite = inserer(a.droite, x)     # APPEL RECURSIF : plus grand ou egal, a droite
+    return a                                # RENVOYER : l'arbre, a raccrocher par l'appelant
 ```
 
 On construit alors un ABR en partant de l’arbre vide :

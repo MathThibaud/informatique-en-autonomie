@@ -111,6 +111,8 @@ Pour un système de **trois** pièces `[p1, p2, p3]`, on peut essayer *toutes* l
     | 0 | 2 | … | … |
     | 1 | 0 | … | … |
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 2.  Compléter `optimal3(systeme, somme)`, qui renvoie le plus petit nombre de pièces trouvé, ou `None` si aucun essai ne tombe juste.
 
     ??? pouce "Coup de pouce"

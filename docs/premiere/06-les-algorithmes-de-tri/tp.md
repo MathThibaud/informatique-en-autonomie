@@ -55,6 +55,8 @@ Fichier
 
 Le fichier fournit `aleatoire(n)` (`n` entiers au hasard entre 0 et 1000), `est_trie(t)` et `presque_triee(n, k)` (une liste triée dans laquelle on a échangé `k` paires de voisins).
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Exécuter le fichier, puis afficher dans la console `aleatoire(10)` et `presque_triee(10, 2)`.
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `triee(n)`, qui renvoie `[0, 1, …, n-1]`, et `inversee(n)`, qui renvoie `[n, n-1, …, 1]`, chacune en une ligne, avec une compréhension sur `range(…)`.

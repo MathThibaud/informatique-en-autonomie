@@ -2,7 +2,7 @@
 
 <p class="sous-titre">Le Web : réseaux et interactions homme-machine</p>
 
-## <span class="etiquette">TP</span> Mon premier site, pas à pas
+## <span class="etiquette">TP 1</span> Mon premier site, pas à pas
 
 *le site du Club Astro : structurer, mettre en forme, rendre interactif*
 
@@ -922,6 +922,10 @@ Interfaces du routeur : `192.168.0.254` côté S1, `192.168.1.254` côté S2 ; m
 
 4.  <span class="run" title="À programmer et tester sur machine">▶</span>  Taper `traceroute 192.168.1.10` sur PC-A. Combien d’étapes sont affichées ? Que représente l’étape intermédiaire ?
 
+??? corrige "Corrigé"
+
+    **1.** Le client est le navigateur, le serveur est le programme Python (Flask) : deux logiciels sur la **même** machine, qui se parlent en HTTP comme s’ils étaient à deux bouts du monde. **2.** Non : le navigateur n’a reçu que la chaîne renvoyée par la fonction, du HTML. Le code Python reste sur le serveur. **3.** Une ligne du type `127.0.0.1 - - [08/Nov/2026 14:05:32] "GET / HTTP/1.1" 200 -` : méthode `GET`, chemin `/`, code `200` (OK). L’adresse `127.0.0.1` est celle du client… c’est-à-dire la machine elle-même. **4.** `404` : la ressource demandée n’existe pas (aucune route `/bidule`) ; erreur du client (famille 4). **5.** Le navigateur affiche une erreur de connexion (« Impossible de se connecter », « Connexion refusée ») : plus aucun programme n’attend de requête sur ce port. Il n’y a pas de code HTTP, puisqu’aucun serveur n’a répondu. **6.** Un site ordinaire utilise le port par défaut (80 en `http`, 443 en `https`), sous-entendu dans l’URL. Notre serveur écoute sur un autre port, 8080 : il faut le préciser.
+
 ### <span class="exo-num">Exercice 2</span> — Ouvrir les enveloppes : l’encapsulation <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-3-2 }
 
 <span class="run" title="À programmer et tester sur machine">▶</span>  Sur le serveur, installer le logiciel **Serveur web** et le démarrer ; sur PC-A, installer le **Navigateur web** et ouvrir l’adresse `http://192.168.1.10`.
@@ -938,6 +942,16 @@ Interfaces du routeur : `192.168.0.254` côté S1, `192.168.1.254` côté S2 ; m
 
 5.  Si PC-A était relié en Wi-Fi au lieu d’un câble, quelle enveloppe changerait ? Le navigateur et le serveur devraient-ils écrire la requête autrement ? Quel est donc l’intérêt de découper le travail en couches qui s’emboîtent ?
 
+??? corrige "Corrigé"
+
+    ```python
+    @app.route("/apropos")
+    def apropos():
+        return "<h1>À propos</h1><p>Site d'entraînement de la classe de 1re NSI.</p><p><a href='/'>Retour à l'accueil</a></p>"
+    ```
+
+    **2.** Deux requêtes `GET` : `/apropos`, puis `/` après le clic sur le lien (plus, parfois, une requête `/favicon.ico` en 404 : le navigateur cherche l’icône de l’onglet). **3.** La route n’existe pas encore pour le serveur en marche : on obtient 404. Le programme a été lu au lancement ; il faut le relancer. Erreur fréquente : deux fonctions de même nom (deux `def accueil`) : Flask refuse de démarrer (`AssertionError: View function mapping is overwriting…`).
+
 ### <span class="exo-num">Exercice 3</span> — Le réseau d’un établissement <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-3-3 }
 
 Le schéma suivant représente un réseau d’établissement typique ; celui du lycée lui ressemble (on peut demander au professeur ce qui diffère).
@@ -951,6 +965,343 @@ Le schéma suivant représente un réseau d’établissement typique ; celui du 
 3.  Les postes du lycée ont des adresses comme `10.0.3.17`. Pourquoi Wikipédia ne voit-il jamais cette adresse ? Quel constituant intervient ?
 
 4.  Un élève enregistre son travail « dans son dossier du lycée » depuis un poste de la salle NSI. Ce fichier sort-il sur Internet ? Quel chemin suit-il ?
+
+??? corrige "Corrigé"
+
+    ```python
+    @app.route("/")
+    def accueil():
+        return render_template("accueil.html")
+    ```
+
+    **3.** Erreur 404 : le lien existe dans la page, mais aucune route `/heure` n’est encore écrite côté serveur. Un lien n’est qu’une adresse ; c’est le serveur qui décide d’y répondre.
+
+## <span class="etiquette">TP 2</span> Côté serveur
+
+*un formulaire avec Flask, et ce qui circule sur le réseau*
+
+<p class="infos-activite">Durée : 2 h 30 à 3 h (une séance longue, ou deux séances avec une coupure après la partie 3)</p>
+
+!!! fichiers "Fichiers à télécharger"
+
+    [:material-folder-open: dossier en ligne](https://github.com/MathThibaud/nsi-fichiers-eleves/tree/main/premiere/10-tp-flask){ .md-button } [:material-zip-box: archive .zip](https://github.com/MathThibaud/nsi-fichiers-eleves/raw/main/zips/premiere-10-tp-flask.zip){ .md-button }
+
+!!! encadre "But du TP"
+
+    Jusqu’ici, vos pages étaient des fichiers **figés** : le navigateur les ouvrait, et tout ce qui « bougeait » était exécuté par lui, **côté client**. Vous allez maintenant passer de l’autre côté : écrire en Python, avec la bibliothèque **Flask**, le **serveur** qui fabrique les pages et reçoit les formulaires (cours, § VIII, « Le web dynamique »). Le client et le serveur seront sur la **même machine**, la vôtre. Vous traiterez un formulaire envoyé en `POST`, puis le même en `GET`, vous écrirez une page de connexion (avec des comptes **fictifs**), et vous regarderez enfin **ce qui circule réellement** entre le navigateur et le serveur quand on envoie un mot de passe.
+
+!!! consignes "Consignes"
+
+    - En binôme, sur machine. Basthon ne convient pas : il faut Spyder (ou un autre Python installé sur la machine) avec Flask, et un navigateur.
+
+    - Fichiers à télécharger (lien ci-dessus) : le dossier `tp_flask/`, qui contient `tp_flask_depart.py` (tout le code Python s’y écrit) et le dossier `templates/` (les modèles de pages HTML, à compléter). Ne renommer ni les fichiers ni le dossier `templates/`, et les laisser l’un à côté de l’autre.
+
+    - Les commentaires `A COMPLETER` et `TODO` indiquent où écrire. Chaque partie commence par le rappel des outils utiles. Les réponses aux questions (sans <span class="run" title="À programmer et tester sur machine">▶</span> ) s’écrivent sur le cahier.
+
+    - **Aucune vraie donnée** : on n’écrit dans ces pages que des prénoms, des messages et les mots de passe de test fournis, jamais un mot de passe personnel.
+
+    - <span class="run" title="À programmer et tester sur machine">▶</span> *À écrire et tester sur machine.* Niveau : ★ échauffement, ★★ classique (niveau bac), ★★★ défi ; les *coups de pouce* et les *corrigés* se déplient sous chaque exercice.
+
+    - Usage de l’IA, indiqué sur chaque exercice : <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> aucune ; <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> en appui (déboguer, reformuler, vérifier ; la réponse finale est écrite et comprise par vous) ; <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> l’exercice s’appuie sur une réponse d’IA. Voir la [charte d’usage de l’IA](../charte.md).
+
+!!! encadre "Lancer et arrêter le serveur dans Spyder"
+
+    1.  Ouvrir `tp_flask_depart.py` dans Spyder et l’exécuter (`F5`). La console affiche `Running on http://127.0.0.1:8080` et ne rend plus la main : c’est normal, le programme est devenu un serveur qui **attend des requêtes**.
+
+    2.  Dans le navigateur, ouvrir l’adresse `http://localhost:8080`.
+
+    3.  **Arrêter** le serveur : bouton carré rouge (« Interrompre le noyau ») en haut de la console, ou clic dans la console puis `Ctrl+C`.
+
+    4.  Après **chaque modification du fichier Python** : arrêter le serveur, enregistrer, relancer (`F5`). Une modification d’un modèle de `templates/` ne demande qu’une actualisation de la page.
+
+    **En cas de problème.** `Address already in use` (port déjà utilisé) : un ancien serveur tourne encore ; menu *Consoles* $\to$ *Redémarrer le noyau*, puis `F5`. `TemplateNotFound` : le dossier `templates/` n’est pas à côté du fichier `.py`, ou son nom est mal écrit. `ModuleNotFoundError: No module named ’flask’` : prévenir le professeur.
+
+## Un serveur sur ma machine
+
+Environ 25 minutes.
+
+!!! encadre "Outils de la partie 1 — le serveur Flask minimal (cours, § III et IV)"
+
+    ```python
+    from flask import Flask
+    app = Flask(__name__)            # l'application : c'est elle qui repond aux requetes
+
+    @app.route("/")                  # la "route" : le chemin demande dans l'URL
+    def accueil():                   # la fonction appelee quand ce chemin est demande
+        return "<h1>Bonjour</h1>"    # le texte renvoye : le corps de la reponse HTTP
+
+    app.run(port=8080)               # demarre le serveur, qui attend sur le port 8080
+    ```
+
+    `localhost` (ou `127.0.0.1`) désigne **la machine elle-même** : le navigateur s’adresse au serveur qui tourne sur son propre ordinateur. Le `8080` est le **port** du service (cours, § III).
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 1</span> — Premier contact <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-4-1 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> 
+
+1.  Lancer `tp_flask_depart.py`, puis ouvrir `http://localhost:8080`. Qui joue ici le rôle du client ? du serveur ? Sur quelle(s) machine(s) ?
+
+2.  Afficher le code source de la page reçue (`Ctrl+U`). Le navigateur a-t-il reçu du Python ? Qu’a-t-il reçu exactement ?
+
+3.  Regarder la console de Spyder : une ligne est apparue. Y retrouver la **méthode** de la requête, le **chemin** demandé et le **code de statut** de la réponse (cours, § IV).
+
+4.  Demander l’adresse `http://localhost:8080/bidule`. Quel code de statut lit-on dans la console ? Que signifie-t-il ?
+
+5.  Arrêter le serveur, puis actualiser la page dans le navigateur. Que se passe-t-il ? Relancer le serveur.
+
+6.  Pourquoi faut-il écrire `:8080` dans cette adresse, alors qu’on n’écrit jamais de numéro de port pour aller sur un site ordinaire ?
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Une deuxième route <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-4-2 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> 
+
+1.  À l’endroit indiqué, écrire une route `/apropos` qui renvoie un titre « À propos », une phrase qui présente le site, et un lien vers la page d’accueil.
+
+    ??? pouce "Coup de pouce"
+
+        Copier les trois lignes de la route `/` et changer trois choses : le chemin entre les guillemets de `@app.route`, le nom de la fonction, le texte renvoyé. Le lien vers l’accueil a pour destination `/`.
+
+2.  Tester `http://localhost:8080/apropos`, puis le lien. Combien de requêtes la console a-t-elle enregistrées ?
+
+3.  Que se passe-t-il si l’on oublie de relancer le serveur après avoir écrit la route ?
+
+**Point d’étape  ✓** Les deux chemins `/` et `/apropos` répondent (code 200), un chemin inconnu donne 404, et vous savez arrêter et relancer le serveur.
+
+## Des pages fabriquées par le serveur
+
+Environ 35 minutes. Écrire tout le HTML dans des chaînes Python devient vite illisible : on le range dans des **modèles** (*templates*), des fichiers HTML du dossier `templates/`, où le serveur glisse des valeurs calculées au moment de la requête.
+
+!!! encadre "Outils de la partie 2 — les modèles"
+
+    - Dans le Python : `return render_template("heure.html", heure=h)` renvoie la page `templates/heure.html`, en lui transmettant une variable `heure` qui vaut `h`. On peut en transmettre plusieurs, séparées par des virgules.
+
+    - Dans le modèle : `{{ heure }}` est **remplacé** par la valeur de la variable `heure`, sur le serveur, avant l’envoi.
+
+    - L’heure : `maintenant = datetime.now()`, puis `maintenant.strftime("%H:%M:%S")` donne une chaîne comme `"14:05:32"` et `maintenant.strftime("%d/%m/%Y")` une chaîne comme `"08/11/2026"`.
+
+### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 3</span> — Un modèle pour l’accueil <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-4-3 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> 
+
+1.  Ouvrir `templates/accueil.html` dans l’éditeur de Spyder (ou un éditeur de texte). Compléter le titre de l’onglet, puis écrire un titre <code>&lt;h1&gt;</code> et un paragraphe de présentation à l’endroit indiqué.
+
+2.  Modifier la route `/` pour qu’elle renvoie ce modèle au lieu de la chaîne. Tester.
+
+3.  Cliquer sur le lien « L’heure du serveur ». Que se passe-t-il, et pourquoi ?
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 4</span> — L’heure du serveur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-4-4 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> 
+
+1.  Écrire la route `/heure` : elle calcule la date et l’heure du moment et les transmet au modèle `heure.html`. Compléter ce modèle pour qu’il affiche une phrase comme « Nous sommes le 08/11/2026 et il est 14:05:32 ».
+
+    ??? pouce "Coup de pouce"
+
+        Deux variables à transmettre, par exemple `date` et `heure` : `render_template("heure.html", date=…, heure=…)`. Dans le modèle, chacune s’écrit entre doubles accolades, à l’endroit où sa valeur doit apparaître.
+
+2.  Actualiser la page plusieurs fois. Qu’observe-t-on ? En quoi cette page diffère-t-elle d’un fichier HTML ordinaire ?
+
+3.  Afficher le code source de la page (`Ctrl+U`). Les accolades y figurent-elles ? Qui les a remplacées, et à quel moment ?
+
+4.  Si ce serveur était installé à Tokyo et consulté depuis Monaco, quelle heure la page afficherait-elle ? Et si l’heure était calculée par un programme JavaScript de la page ? Relier la réponse à la distinction client / serveur du cours.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 5</span> — Un compteur de visites <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-4-5 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> 
+
+Le fichier contient déjà le dictionnaire `compteur = {"visites": 0}`, écrit en dehors de toute fonction : il existe tant que le serveur tourne.
+
+1.  Modifier la route `/` : à chaque appel, elle augmente de 1 le nombre de visites, puis transmet ce nombre au modèle. Compléter `accueil.html` pour qu’il affiche « Vous êtes le visiteur numéro … ».
+
+    ??? pouce "Coup de pouce"
+
+        `compteur["visites"]` se lit et se modifie comme n’importe quelle valeur de dictionnaire. La mise à jour se fait *avant* le `return`.
+
+2.  Actualiser plusieurs fois, puis ouvrir la même adresse dans un **autre navigateur** (ou une fenêtre de navigation privée). Le compteur repart-il de 1 ? Où ce nombre est-il donc stocké ?
+
+3.  Arrêter puis relancer le serveur. Que devient le compteur ? Pourquoi ?
+
+4.  Dans le TP « Mon premier site », le compteur de « j’aime » revenait à 0 à chaque actualisation. Expliquer la différence entre les deux compteurs.
+
+**Point d’étape  ✓** L’accueil vient d’un modèle et compte ses visiteurs ; la page `/heure` change à chaque actualisation. Vous avez vu que le navigateur ne reçoit que du HTML, fabriqué sur le serveur au moment de la requête.
+
+## Un formulaire, en `POST` puis en `GET`
+
+Environ 40 minutes.
+
+!!! encadre "Outils de la partie 3 — recevoir un formulaire (cours, § VIII)"
+
+    - Côté client : <code>&lt;form action="/bonjour" method="post"&gt;</code> envoie les champs vers le chemin `/bonjour` ; chaque champ <code>&lt;input type="text" name="prenom"&gt;</code> arrive au serveur sous l’étiquette donnée par son `name`.
+
+    - Côté serveur, la route doit accepter la méthode : `@app.route("/bonjour", methods=["POST"])`. Sans `methods`, une route n’accepte que `GET`.
+
+    - Lire une donnée reçue en `POST` : `request.form["prenom"]` ; reçue en `GET` : `request.args["prenom"]`. Le résultat est toujours une **chaîne**.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Envoyer en `POST` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-4-6 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> 
+
+1.  Écrire la route `/formulaire`, qui renvoie le modèle `formulaire.html`. Dans ce modèle, la balise <code>&lt;form&gt;</code> est fournie : écrire à l’intérieur un champ texte `prenom`, un champ texte `classe` (chacun précédé de son <code>&lt;label&gt;</code>) et un bouton d’envoi.
+
+2.  Écrire la route `/bonjour` : elle accepte la méthode `POST`, lit le prénom et la classe reçus et les transmet au modèle `bonjour.html`, à compléter pour qu’il affiche « Bonjour Léa ! » et la classe.
+
+    ??? pouce "Coup de pouce"
+
+        Trois lignes dans la fonction : deux pour lire les champs avec `request.form`, une pour le `return render_template(…)` avec deux variables, comme à l’exercice 4.
+
+3.  Envoyer le formulaire. Quelle adresse lit-on dans la barre d’adresse ? Y voit-on le prénom ? Où se trouvent donc les données dans la requête ?
+
+4.  Sur la page de réponse, actualiser (`F5`). Que demande le navigateur ? Pourquoi ?
+
+5.  Taper directement l’adresse `http://localhost:8080/bonjour` dans la barre d’adresse. Quel code de statut obtient-on ? Avec quelle méthode le navigateur envoie-t-il la requête quand on tape une adresse ?
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Le même en `GET` <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-4-7 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> 
+
+1.  Dans `templates/`, enregistrer une copie de `formulaire.html` sous le nom `formulaire_get.html`. Dans la copie, changer le titre, la méthode (`get`) et la destination (`/bonjour_get`).
+
+2.  Écrire la route `/formulaire_get`, qui renvoie ce nouveau modèle, et la route `/bonjour_get`, qui fait le même travail que `/bonjour` mais pour un formulaire envoyé en `GET`. Elle réutilise le modèle `bonjour.html`.
+
+3.  Envoyer ce formulaire avec le prénom `Léa` et votre classe. Recopier l’adresse obtenue. Repérer le `?`, les paires `clef=valeur` et le séparateur `&`. Comment le `é` a-t-il été écrit ? <span class="horsprog">au-delà du programme</span>
+
+4.  Modifier le prénom **directement dans la barre d’adresse**, puis valider. Le formulaire a-t-il servi ? Qu’en conclure sur les données qu’un serveur reçoit ?
+
+5.  Regarder la console de Spyder : où retrouve-t-on le prénom ? Et pour l’envoi en `POST` de l’exercice précédent ?
+
+6.  Ouvrir `http://localhost:8080/bonjour_get`, sans rien après. Que se passe-t-il ? Quelle ligne du programme est en cause ?
+
+7.  Ouvrir l’historique du navigateur (`Ctrl+H`). Lequel des deux envois y a laissé le prénom ? Pour un moteur de recherche, quelle méthode choisir ? Pour un mot de passe ?
+
+**Point d’étape  ✓** Les deux formulaires mènent à la même page « Bonjour », l’un par `POST`, l’autre par `GET` ; en `GET`, les données sont dans l’URL, dans l’historique et dans le journal du serveur.
+
+## Défi : une page de connexion
+
+Environ 30 minutes. Le fichier contient deux comptes **fictifs** :
+
+```python
+COMPTES_TEST = {"alice": "tournesol42", "bob": "pivoine7"}
+```
+
+Un dictionnaire dont les clefs sont les identifiants et les valeurs les mots de passe. (Un vrai site ne garde jamais les mots de passe en clair : il n’en conserve qu’une empreinte, dont on reparlera en Terminale.)
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 8</span> — Vérifier des identifiants <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-4-8 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> 
+
+La fonction `verifier_identifiants(comptes, identifiant, mot_de_passe)` doit renvoyer `True` si `identifiant` est une clef du dictionnaire `comptes` et que le mot de passe associé est `mot_de_passe`, et `False` dans tous les autres cas. Elle se teste sans le serveur : c’est du Python ordinaire.
+
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
+1.  Dans `tester_connexion`, sous l’`assert` fourni, écrire vos trois `assert` (le résultat attendu d’un appel qui doit renvoyer `False` s’écrit `assert not …`).
+
+2.  Écrire la fonction, décommenter `tester_connexion()` dans le programme principal et exécuter : les tests doivent passer avant le démarrage du serveur.
+
+    ??? pouce "Coup de pouce"
+
+        Que fait `comptes[identifiant]` si `identifiant` n’est pas une clef ? Tester d’abord sa présence avec `in`.
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 9</span> — La page de connexion <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-4-9 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> 
+
+1.  Compléter `templates/connexion.html` : un formulaire envoyé en `POST` vers `/verifier`, avec un champ `identifiant`, un champ `mot_de_passe` de type `password` et un bouton « Se connecter ».
+
+2.  Écrire la route `/connexion`, qui affiche ce formulaire, et la route `/verifier`, qui lit les deux champs, appelle `verifier_identifiants` et transmet au modèle `resultat.html` (à compléter) un message : « Bienvenue, alice : vous êtes connecté(e). » ou « Identifiant ou mot de passe incorrect. ».
+
+    ??? pouce "Coup de pouce 2 (début de solution)"
+
+        `identifiant = request.form["identifiant"]`  
+        `mot_de_passe = request.form["mot_de_passe"]`  
+        `if verifier_identifiants(COMPTES_TEST, identifiant, mot_de_passe):`  
+        `message = f"Bienvenue, {identifiant} : vous êtes connecté(e)."`  
+        `else:` …
+
+3.  Tester avec les deux comptes, avec un mauvais mot de passe, avec un identifiant inconnu, avec des champs vides.
+
+4.  Que change le type `password` pour la personne qui tape ? Protège-t-il le mot de passe pendant son **voyage** vers le serveur ? (Gardez votre réponse : la partie suivante va la vérifier.)
+
+**Point d’étape  ✓** La connexion accepte `alice` et `bob` avec leur mot de passe, et refuse tout le reste ; `tester_connexion` passe.
+
+## Ce qui circule sur le réseau
+
+Environ 35 minutes. Quand le formulaire de connexion part, que contient **exactement** la requête ? On va la regarder, avec l’un des deux outils ci-dessous : **Wireshark** s’il est installé sur la machine (exercice 10), sinon les **outils de développement** du navigateur (exercice 11). L’exercice 12 est commun.
+
+!!! encadre "Règle du jeu"
+
+    On n’observe que **son propre trafic**, sur **sa machine**, avec des mots de passe **de test**. Intercepter les communications des autres est **interdit par la loi** et par la charte informatique du lycée. Ici, le client et le serveur sont sur le même ordinateur : la requête passe par l’**interface de bouclage** (*loopback*), un réseau « interne » qui ne sort jamais de la machine.
+
+!!! encadre "Pour le professeur — à préparer avant la séance"
+
+    **Voie A** : installer **Wireshark** (gratuit, <https://www.wireshark.org>), ce qui demande les droits d’administrateur. Sous Windows, garder l’installation de **Npcap** proposée et cocher son option de capture du trafic de bouclage (*loopback*) ; sous macOS, accepter le composant *ChmodBPF*, qui permet de capturer sans être administrateur. Vérifier une fois que l’interface de bouclage apparaît. **Voie B** : rien à installer, tout navigateur récent convient. **Flask** est fourni avec Anaconda : vérifier dans la console de Spyder que `import flask` ne produit pas d’erreur, et que le port `8080` est libre.
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Voie A : avec Wireshark <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-4-10 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> 
+
+Wireshark est un **analyseur de réseau** : il enregistre une copie de chaque paquet qui passe par une interface réseau et en décode les couches (cours, § II, encapsulation).
+
+1.  Le serveur Flask étant lancé, ouvrir Wireshark. Dans la liste des interfaces, double-cliquer sur l’interface de bouclage : `Loopback: lo0` (macOS), `Adapter for loopback traffic capture` (Windows) ou `Loopback: lo` (Linux). La capture démarre.
+
+2.  Dans la barre de filtre, en haut, taper `http` puis `Entrée` : seuls les échanges HTTP restent affichés.
+
+3.  Dans le navigateur, se connecter avec `alice` et `tournesol42`. Revenir dans Wireshark et arrêter la capture (carré rouge).
+
+4.  Repérer la ligne `POST /verifier`. La sélectionner : le panneau du milieu détaille ses couches. Retrouver l’adresse IP source et destination, les ports, puis, tout en bas, la partie `HTML Form URL Encoded`. Qu’y lit-on ?
+
+5.  Clic droit sur la ligne, *Suivre* $\to$ *Flux TCP* (*Follow* $\to$ *TCP Stream*). Recopier la première ligne de la requête, l’en-tête `Content-Type`, la dernière ligne de la requête, et la première ligne de la réponse.
+
+6.  Refaire une capture en envoyant le formulaire de l’exercice 7 (`GET`). Où se trouvent cette fois les données dans la requête ?
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 11</span> — Voie B : sans installation, les outils de développement <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-4-11 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> 
+
+1.  Sur la page de connexion, ouvrir les outils de développement (`F12`), onglet **Réseau**, puis se connecter avec `alice` et `tournesol42`.
+
+2.  Cliquer sur la requête `verifier`. Dans l’onglet **En-têtes**, relever la méthode, l’adresse demandée, le code de statut et l’adresse du serveur (avec son port), puis l’en-tête de requête `Content-Type`.
+
+3.  Ouvrir l’onglet qui montre ce que le navigateur a envoyé : **Requête** (Firefox) ou **Charge utile** (Chrome, Edge). Qu’y lit-on ? Afficher la version brute (bouton *Brut* ou *Afficher la source*) et la recopier.
+
+4.  Refaire l’expérience avec le formulaire de l’exercice 7 (`GET`). Où se trouvent cette fois les données ?
+
+5.  Ces outils montrent ce que le navigateur *envoie*, juste avant que la requête ne parte sur le réseau : ils montreraient la même chose sur un site en `https`. Quel argument permet pourtant d’affirmer qu’ici le mot de passe a *voyagé* tel quel, lisible ?
+
+    ??? pouce "Coup de pouce"
+
+        Le programme Python a lu le prénom (exercice 6) et le mot de passe (exercice 9) directement, sans aucune clef de déchiffrement : sous quelle forme les octets lui sont-ils donc parvenus ?
+
+### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Conclure : et avec `https` ? <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-4-12 }
+
+1.  Revenir à la réponse de l’exercice 9, question 4 : était-elle juste ?
+
+2.  Si ce site était sur Internet, en `http`, par quels équipements la requête de connexion passerait-elle entre un ordinateur connecté au Wi-Fi d’un café et le serveur (cours, § II) ? Lesquels pourraient lire le mot de passe ?
+
+3.  Le cours dit qu’un routeur n’ouvre l’enveloppe « que jusqu’à l’en-tête IP ». Est-ce une protection pour le mot de passe ? Pourquoi ?
+
+4.  Avec `https`, qu’est-ce qui change dans ce que verrait Wireshark ? Qu’est-ce qui resterait visible ?
+
+5.  L’envoi en `POST` suffit-il à protéger un mot de passe ? Et `https` avec un envoi en `GET` ? Rédiger en deux ou trois phrases la règle à retenir pour un formulaire de connexion.
+
+**Point d’étape  ✓** Vous avez vu le mot de passe dans le corps de la requête `POST`, et le prénom dans l’URL de la requête `GET`. Sans `https`, l’un comme l’autre circule en clair.
+
+## Bonus : un livre d’or
+
+### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Le livre d’or <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-10-le-web-reseaux-et-interactions-homme-mac-tp-4-13 }
+
+<span class="run" title="À programmer et tester sur machine">▶</span> 
+
+La liste `livre`, en dehors de toute fonction, contient les messages publiés, chacun sous la forme d’un dictionnaire `{"pseudo": …, "texte": …}`. Le modèle `livre.html` fournit déjà la boucle qui affiche tous les messages.
+
+1.  Écrire trois `assert` dans `tester_livre`, puis la fonction `ajouter_message(livre, pseudo, texte)` décrite par sa documentation. Décommenter `tester_livre()` et exécuter.
+
+2.  Compléter `livre.html` avec un formulaire (pseudo, texte, bouton), envoyé en `POST` vers `/livre/ecrire`. Écrire la route `/livre`, qui affiche le modèle avec la liste des messages et une variable `erreur` vide, et la route `/livre/ecrire`, qui appelle `ajouter_message` puis affiche le même modèle, avec un message d’erreur si l’ajout a été refusé.
+
+3.  Publier deux messages depuis deux navigateurs différents : chacun voit-il les messages de l’autre ? Pourquoi ?
+
+4.  Juste après avoir publié, actualiser la page (`F5`) et accepter le renvoi. Que se passe-t-il ? Pourquoi ?
+
+5.  Publier le message <code>&lt;b&gt;coucou&lt;/b&gt;</code>. Comment s’affiche-t-il ? Regarder le code source de la page (`Ctrl+U`) : qu’est devenu le `<` ? Pourquoi est-il prudent que le serveur procède ainsi avec un texte écrit par un visiteur ? <span class="horsprog">au-delà du programme</span>
 
 ## Corrigé
 
@@ -985,3 +1336,226 @@ Le schéma suivant représente un réseau d’établissement typique ; celui du 
     **12.** `10.0.3.17` est une adresse **privée**, valable seulement à l’intérieur du lycée. Le **routeur d’accès** la remplace par l’adresse **publique** du lycée avant que le paquet ne sorte (traduction d’adresses, NAT) ; il redistribue ensuite la réponse au bon poste.
 
     **13.** Non : il reste dans le réseau local. Chemin : poste $\to$ commutateur de salle $\to$ commutateur central $\to$ serveur. Ni le pare-feu ni le routeur d’accès ne sont traversés.
+
+??? corrige "Corrigé"
+
+    ```python
+    @app.route("/heure")
+    def heure():
+        maintenant = datetime.now()
+        return render_template("heure.html",
+                               date=maintenant.strftime("%d/%m/%Y"),
+                               heure=maintenant.strftime("%H:%M:%S"))
+    ```
+
+    ```text
+    <p>Nous sommes le {{ date }} et il est {{ heure }} (heure du serveur).</p>
+    ```
+
+    **2.** L’heure change à chaque actualisation : chaque requête fait exécuter la fonction, qui fabrique une page **nouvelle**. Un fichier HTML ordinaire est renvoyé tel quel, identique à chaque fois (page statique) ; ici la page est **dynamique**. **3.** Non : le code source contient la date et l’heure, pas les accolades. Le serveur (le moteur de modèles de Flask) les a remplacées **avant** d’envoyer la réponse ; le navigateur ne sait même pas qu’il y avait un modèle. **4.** L’heure de Tokyo, celle du serveur, car le calcul est fait côté serveur, au moment de la requête. Un programme JavaScript s’exécuterait dans le navigateur, côté client : il afficherait l’heure de l’ordinateur de l’internaute, à Monaco. Même résultat affiché, mais pas exécuté au même endroit.
+
+??? corrige "Corrigé"
+
+    ```python
+    compteur = {"visites": 0}       # garde en memoire vive du serveur
+
+    @app.route("/")
+    def accueil():
+        # METTRE A JOUR
+        compteur["visites"] += 1
+        return render_template("accueil.html", nb_visites=compteur["visites"])
+    ```
+
+    ```text
+    <p>Vous êtes le visiteur numéro <strong>{{ nb_visites }}</strong> depuis le lancement du serveur.</p>
+    ```
+
+    **2.** Le compteur continue d’augmenter : il est stocké **sur le serveur**, dans la mémoire du programme, et partagé par tous les clients. **3.** Il repart de 0 : la variable vit en mémoire vive tant que le programme tourne. Un vrai site enregistre ce genre de donnée dans un fichier ou une base de données (Terminale). **4.** Le compteur de « j’aime » était une valeur de la page, dans le navigateur (côté client) : actualiser recharge la page d’origine et l’efface. Celui-ci est côté serveur : actualiser envoie une nouvelle requête, qui l’augmente.
+
+    !!! remarque "Remarque — Pourquoi un dictionnaire ?"
+
+        Un `compteur = 0` modifié dans la fonction déclencherait une erreur (`UnboundLocalError`) : une variable *affectée* dans une fonction est locale. Modifier une valeur *dans* un dictionnaire n’est pas une affectation de la variable `compteur` : cela évite le mot-clef `global`, non étudié.
+
+??? corrige "Corrigé"
+
+    ```text
+    <form action="/bonjour" method="post">
+      <label for="prenom">Prénom :</label>
+      <input type="text" name="prenom" id="prenom">
+      <label for="classe">Classe :</label>
+      <input type="text" name="classe" id="classe">
+      <button type="submit">Envoyer</button>
+    </form>
+    ```
+
+    ```python
+    @app.route("/formulaire")
+    def formulaire():
+        return render_template("formulaire.html")
+
+    @app.route("/bonjour", methods=["POST"])
+    def bonjour():
+        prenom = request.form["prenom"]       # donnees dans le corps de la requete
+        classe = request.form["classe"]
+        return render_template("bonjour.html", prenom=prenom, classe=classe)
+    ```
+
+    ```text
+    <h1>Bonjour {{ prenom }} !</h1>
+    <p>Le serveur a bien reçu votre classe : {{ classe }}.</p>
+    ```
+
+    **3.** `http://localhost:8080/bonjour`, sans le prénom : en `POST`, les données voyagent dans le **corps** de la requête, après les en-têtes. **4.** Il demande s’il faut **renvoyer** les données du formulaire : la page a été obtenue par un `POST`, et la redemander, c’est renvoyer ces données (un achat ou un message pourrait être enregistré deux fois). **5.** `405 Method Not Allowed` (famille 4, erreur du client) : taper une adresse envoie toujours un `GET`, et la route n’accepte que `POST`.
+
+??? corrige "Corrigé"
+
+    ```python
+    @app.route("/formulaire_get")
+    def formulaire_get():
+        return render_template("formulaire_get.html")
+
+    @app.route("/bonjour_get", methods=["GET"])
+    def bonjour_get():
+        prenom = request.args["prenom"]       # donnees dans l'URL, apres le ?
+        classe = request.args["classe"]
+        return render_template("bonjour.html", prenom=prenom, classe=classe)
+    ```
+
+    Dans `formulaire_get.html`, seule la balise d’ouverture change : <code>&lt;form action="/bonjour&#95;get" method="get"&gt;</code>. L’écriture `methods=["GET"]` est facultative (c’est la valeur par défaut) mais explicite.
+
+    **3.** Par exemple `http://localhost:8080/bonjour_get?prenom=L%C3%A9a&classe=1G3` : après le `?`, les paires `prenom=…` et `classe=…`, séparées par `&`. Le `é` est codé `%C3%A9` (ses deux octets en UTF-8, en hexadécimal ; un espace devient `+`). Le navigateur affiche parfois l’adresse décodée, avec le `é`. **4.** La page salue le nouveau prénom : le formulaire n’a pas servi. Le serveur reçoit ce qu’on lui envoie, formulaire ou pas : il ne doit jamais faire confiance aux données reçues (même idée que pour les cookies). **5.** Dans la ligne du journal : `"GET /bonjour_get?prenom=Léa&classe=1G3 HTTP/1.1" 200`. Pour le `POST`, le journal n’affiche que `"POST /bonjour HTTP/1.1" 200` : le corps n’y figure pas. Un mot de passe envoyé en `GET` se retrouverait dans les journaux du serveur. **6.** En mode `debug`, le navigateur affiche l’erreur Python (code 500) : `KeyError: ’prenom’`, sur la ligne `prenom = request.args["prenom"]` ; il n’y a aucun paramètre dans l’URL. Sans le mode `debug`, Flask répond `400 Bad Request`. **7.** L’envoi en `GET` : son URL complète, prénom compris, est dans l’historique. `GET` pour une recherche (le résultat a une adresse qu’on peut partager ou mettre en favori) ; `POST` pour un mot de passe.
+
+??? corrige "Corrigé"
+
+    Trois appels attendus possibles : un cas normal (`"alice"`, `"tournesol42"` $\to$ `True`, ou un mauvais mot de passe $\to$ `False`) ; un cas limite (identifiant et mot de passe vides $\to$ `False`, ou dictionnaire vide) ; un cas piège (identifiant **inconnu** $\to$ `False` *sans erreur* ; ou `"Alice"` avec une majuscule $\to$ `False`).
+
+    ```python
+    def verifier_identifiants(comptes, identifiant, mot_de_passe):
+        """Renvoie True si identifiant est une clef de comptes et que son
+        mot de passe est mot_de_passe, False sinon."""
+        # TESTER
+        if identifiant not in comptes:
+            # RENVOYER
+            return False
+        # RENVOYER
+        return comptes[identifiant] == mot_de_passe
+
+    def tester_connexion():
+        assert verifier_identifiants(COMPTES_TEST, "bob", "pivoine7")            # fourni
+        assert verifier_identifiants(COMPTES_TEST, "alice", "tournesol42")       # cas normal
+        assert not verifier_identifiants(COMPTES_TEST, "", "")                   # cas limite
+        assert not verifier_identifiants(COMPTES_TEST, "zoe", "tournesol42")     # piege
+        print("verifier_identifiants : tous les tests passent.")
+    ```
+
+    Le piège : `comptes[identifiant]` sans test préalable lève `KeyError` pour un identifiant inconnu ; en ligne, la page de connexion planterait (erreur 500) au lieu de dire « incorrect ». Écriture acceptée aussi : `if … and …: return True` puis `return False`.
+
+??? corrige "Corrigé"
+
+    ```text
+    <form action="/verifier" method="post">
+      <label for="identifiant">Identifiant :</label>
+      <input type="text" name="identifiant" id="identifiant">
+      <label for="mot_de_passe">Mot de passe :</label>
+      <input type="password" name="mot_de_passe" id="mot_de_passe">
+      <button type="submit">Se connecter</button>
+    </form>
+    ```
+
+    ```python
+    @app.route("/connexion")
+    def connexion():
+        return render_template("connexion.html")
+
+    @app.route("/verifier", methods=["POST"])
+    def verifier():
+        identifiant = request.form["identifiant"]
+        mot_de_passe = request.form["mot_de_passe"]
+        if verifier_identifiants(COMPTES_TEST, identifiant, mot_de_passe):
+            message = f"Bienvenue, {identifiant} : vous êtes connecté(e)."
+        else:
+            message = "Identifiant ou mot de passe incorrect."
+        return render_template("resultat.html", message=message)
+    ```
+
+    Dans `resultat.html` : <code>&lt;p&gt;{{ message }}&lt;/p&gt;</code>. **4.** Le type `password` masque les caractères **à l’écran** (contre un regard par-dessus l’épaule). Il ne change rien à ce qui est envoyé : la réponse attendue, à vérifier en partie 5, est « non ».
+
+??? corrige "Corrigé"
+
+    **4.** Source et destination : `127.0.0.1` (ou `::1` en IPv6), la même machine ; port de destination 8080, port source quelconque, choisi par le système pour le navigateur. En bas : `Form item: "identifiant" = "alice"` et `Form item: "mot_de_passe" = "tournesol42"` : le mot de passe est lisible tel quel. **5.** Le flux TCP montre la requête (en rouge) puis la réponse (en bleu), par exemple :
+
+    ```http
+    POST /verifier HTTP/1.1
+    Host: localhost:8080
+    Content-Type: application/x-www-form-urlencoded
+    Content-Length: 42
+    Referer: http://localhost:8080/connexion
+    ...                                        <- autres en-tetes du navigateur
+
+    identifiant=alice&mot_de_passe=tournesol42
+
+    HTTP/1.1 200 OK                            <- HTTP/1.0 avec Flask 2.0
+    Content-Type: text/html; charset=utf-8
+    ...
+    ```
+
+    On retrouve exactement la structure du cours : ligne de requête, en-têtes, ligne vide, corps. `Content-Length: 42` est le nombre d’octets du corps. **6.** En `GET`, il n’y a pas de corps : les données sont dans la **première ligne**, `GET /bonjour_get?prenom=…&classe=… HTTP/1.1`.
+
+??? corrige "Corrigé"
+
+    **2.** Méthode `POST`, adresse `http://localhost:8080/verifier`, statut `200 OK`, adresse distante `127.0.0.1:8080` ; l’en-tête `Content-Type` vaut `application/x-www-form-urlencoded` (données de formulaire). **3.** Les données du formulaire : `identifiant: alice` et `mot_de_passe: tournesol42` ; en brut, la ligne  
+    `identifiant=alice&mot_de_passe=tournesol42`  
+    (la même que dans le flux TCP de la voie A). **4.** En `GET`, pas de corps : les données sont dans l’URL de la requête (rubrique « paramètres de la chaîne de requête »). **5.** Les outils de développement sont *dans* le navigateur, avant le chiffrement éventuel : sur un site `https`, ils montreraient aussi le mot de passe en clair. L’argument : le programme Python a lu et affiché les données reçues sans rien déchiffrer ; les octets sont donc arrivés tels qu’ils étaient partis, lisibles, et toute machine placée sur leur chemin aurait pu les lire de même. Seul un analyseur placé *sur le réseau*, comme Wireshark, le montre directement.
+
+??? corrige "Corrigé"
+
+    **1.** Non, si l’on pensait que `password` protégeait le transport : le mot de passe circule en clair, dans le corps de la requête. **2.** Le point d’accès Wi-Fi du café, sa box, les routeurs du fournisseur d’accès et ceux d’Internet jusqu’au serveur. Tous *pourraient* le lire, ainsi que toute personne qui écoute le Wi-Fi s’il n’est pas protégé. **3.** Non. Un routeur honnête n’en a pas besoin, mais rien ne l’empêche techniquement d’ouvrir les enveloppes suivantes : TCP, puis HTTP, sont lisibles par quiconque détient le paquet. L’encapsulation range les informations, elle ne les cache pas. **4.** Avec `https`, la partie HTTP entière (ligne de requête, en-têtes, corps) est chiffrée : Wireshark n’afficherait que des paquets `TLS`, « Application Data », illisibles. Resteraient visibles les adresses IP et les ports (`443`), la taille et l’instant des échanges, et le nom du site (requête DNS, début de la connexion chiffrée). **5.** `POST` seul ne protège rien sur le réseau : il évite seulement que le mot de passe s’affiche dans l’URL, l’historique et les journaux. `https` avec `GET` chiffre bien le transport, mais le mot de passe reste dans l’historique et les journaux du serveur. Règle : un formulaire de connexion s’envoie en `POST` **et** sur une page `https` ; et, comme le dit le cours, le cadenas ne garantit pas que le site est honnête.
+
+    !!! remarque "Remarque — Prolongement possible (démonstration du professeur)"
+
+        Sur sa propre machine, capturer quelques secondes de trafic avec le filtre `tls` pendant le chargement d’un site en `https` : on voit `Client Hello` (avec le nom du site), puis seulement des `Application Data`. Le chiffrement sera étudié en Terminale (*Cryptographie*).
+
+??? corrige "Corrigé"
+
+    ```python
+    livre = []      # liste de dictionnaires {"pseudo": ..., "texte": ...}
+
+    def ajouter_message(livre, pseudo, texte):
+        """Ajoute {"pseudo": pseudo, "texte": texte} a la fin de livre et renvoie True,
+        sauf si pseudo ou texte est vide, ou si texte depasse 200 caracteres :
+        dans ce cas, livre n'est pas modifie et la fonction renvoie False."""
+        # TESTER
+        if pseudo == "" or texte == "" or len(texte) > 200:
+            # RENVOYER
+            return False
+        # METTRE A JOUR
+        livre.append({"pseudo": pseudo, "texte": texte})
+        # RENVOYER
+        return True
+
+    def tester_livre():
+        essai = []
+        assert ajouter_message(essai, "Léa", "Super site !")                   # fourni
+        assert essai == [{"pseudo": "Léa", "texte": "Super site !"}]
+        assert ajouter_message(essai, "Tom", "x" * 200)                        # cas limite : 200 caracteres
+        assert not ajouter_message(essai, "", "Message sans pseudo")           # piege : pseudo vide
+        assert not ajouter_message(essai, "Zoé", "x" * 201)                    # piege : trop long
+        assert len(essai) == 2                                                 # rien n'a ete ajoute
+        print("ajouter_message : tous les tests passent.")
+
+    @app.route("/livre")
+    def livre_or():
+        return render_template("livre.html", messages=livre, erreur="")
+
+    @app.route("/livre/ecrire", methods=["POST"])
+    def livre_ecrire():
+        if ajouter_message(livre, request.form["pseudo"], request.form["texte"]):
+            erreur = ""
+        else:
+            erreur = "Message refusé : pseudo et texte obligatoires, 200 caractères au plus."
+        return render_template("livre.html", messages=livre, erreur=erreur)
+    ```
+
+    Formulaire de `livre.html` : <code>&lt;form action="/livre/ecrire" method="post"&gt;</code> avec deux champs texte `pseudo` et `texte` et un bouton (même forme qu’à l’exercice 6). Attention au nom de la fonction de la route : `livre` est déjà le nom de la liste, d’où `livre_or`.
+
+    **3.** Oui : la liste est sur le serveur, partagée par tous les clients (comme le compteur). **4.** Le message est publié une deuxième fois : actualiser renvoie la même requête `POST`, avec les mêmes données. Les vrais sites répondent à un `POST` par une *redirection* vers une page en `GET` pour éviter ce doublon <span class="horsprog">au-delà du programme</span>. **5.** Le texte s’affiche tel quel, balises comprises, et non en gras : dans le code source, `<` est devenu `&lt;` (et `>` `&gt;`). Le moteur de modèles « neutralise » ainsi le HTML écrit par un visiteur ; sinon, un visiteur pourrait glisser dans la page de *tous* les autres une balise <code>&lt;script&gt;</code> et y faire exécuter son programme (attaque dite XSS). Encore une fois : ne jamais faire confiance aux données reçues.

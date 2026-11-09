@@ -194,10 +194,10 @@ L’arbre de l’exercice précédent était **complet** : tous ses niveaux éta
 
     ```python
     def prefixe(a):
-        if a is not None:
-            print(a.valeur)       # <-- pour l'infixe : deplacer cette ligne ICI...
-            prefixe(a.gauche)
-            prefixe(a.droite)     # ...(entre les deux appels) ; pour le suffixe : APRES
+        if a is not None:         # CAS DE BASE : arbre vide, rien a afficher
+            print(a.valeur)       # visiter : la ligne a deplacer
+            prefixe(a.gauche)     # APPEL RECURSIF
+            prefixe(a.droite)     # APPEL RECURSIF
     ```
 
     **Infixe** : placer `print(a.valeur)` *entre* `prefixe(a.gauche)` et `prefixe(a.droite)`. **Suffixe** : placer `print(a.valeur)` *après* les deux appels.
@@ -227,17 +227,17 @@ L’arbre de l’exercice précédent était **complet** : tous ses niveaux éta
 
     ```python
     def largeur(a):
-        if a is None:
+        if a is None:                # TESTER : arbre vide, rien a afficher
             return
-        f = File()
-        f.enfiler(a)
-        while not f.est_vide():
+        f = File()                   # INITIALISER
+        f.enfiler(a)                 # INITIALISER : la racine attend son tour
+        while not f.est_vide():      # PARCOURIR
             n = f.defiler()
             print(n.valeur)
-            if n.gauche is not None:
-                f.enfiler(n.gauche)
-            if n.droite is not None:
-                f.enfiler(n.droite)
+            if n.gauche is not None: # TESTER
+                f.enfiler(n.gauche)  # METTRE A JOUR : le fils passe en fin de file
+            if n.droite is not None: # TESTER
+                f.enfiler(n.droite)  # METTRE A JOUR
     ```
 
 ### Mesurer un arbre
@@ -256,9 +256,9 @@ L’arbre de l’exercice précédent était **complet** : tous ses niveaux éta
 
     ```python
     def taille(a):
-        if a is None:
+        if a is None:                                      # CAS DE BASE : arbre vide
             return 0
-        return 1 + taille(a.gauche) + taille(a.droite)
+        return 1 + taille(a.gauche) + taille(a.droite)     # APPEL RECURSIF x 2, COMBINER
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 9</span> — Hauteur <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-9 }
@@ -273,15 +273,26 @@ L’arbre de l’exercice précédent était **complet** : tous ses niveaux éta
 
     Condition d’arrêt : l’arbre vide. Sinon, la hauteur se déduit de la plus **grande** des hauteurs des deux sous-arbres (fonction `max`). Pour les arêtes : quelle valeur donner à l’arbre vide pour qu’une feuille obtienne la hauteur $0$ avec la même formule ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    a = Noeud(1, Noeud(2), Noeud(3, None, Noeud(4)))
+    assert hauteur(a) == 3            # cas normal : chemin 1, 3, 4
+    assert hauteur(None) == 0         # cas limite : arbre vide
+    assert hauteur(Noeud(5)) == 1     # cas piege : une feuille compte 1 noeud, pas 0
+    ```
 
     **Démarche :** condition d’arrêt : l’arbre vide, de hauteur $0$. Sinon, la racine ajoute un niveau au plus haut des deux sous-arbres.
 
     ```python
     def hauteur(a):
-        if a is None:
+        if a is None:                                          # CAS DE BASE : arbre vide
             return 0
-        return 1 + max(hauteur(a.gauche), hauteur(a.droite))
+        return 1 + max(hauteur(a.gauche), hauteur(a.droite))   # APPEL RECURSIF x 2, COMBINER
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `1 + hauteur(a.gauche) + hauteur(a.droite)` : on additionne les deux sous-arbres (on obtient presque la taille) au lieu de garder le plus haut des deux.
@@ -290,9 +301,9 @@ L’arbre de l’exercice précédent était **complet** : tous ses niveaux éta
 
     ```python
     def hauteur_aretes(a):
-        if a is None:
+        if a is None:                                                      # CAS DE BASE
             return -1
-        return 1 + max(hauteur_aretes(a.gauche), hauteur_aretes(a.droite))
+        return 1 + max(hauteur_aretes(a.gauche), hauteur_aretes(a.droite))   # COMBINER
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 10</span> — Nombre de feuilles <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-10 }
@@ -303,17 +314,28 @@ L’arbre de l’exercice précédent était **complet** : tous ses niveaux éta
 
     Deux cas immédiats : l’arbre vide, et le nœud qui est lui-même une feuille. Dans les autres cas, que faire des nombres de feuilles des deux sous-arbres ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    a = Noeud(1, Noeud(2), Noeud(3, None, Noeud(4)))
+    assert nb_feuilles(a) == 2                          # cas normal : 2 et 4
+    assert nb_feuilles(None) == 0                       # cas limite : arbre vide
+    assert nb_feuilles(Noeud(3, None, Noeud(4))) == 1   # cas piege : 3 a un fils, pas une feuille
+    ```
 
     **Démarche :** deux conditions d’arrêt : l’arbre vide ($0$ feuille) et le nœud sans fils ($1$ feuille). Sinon, on additionne les nombres de feuilles des deux sous-arbres.
 
     ```python
     def nb_feuilles(a):
-        if a is None:
+        if a is None:                                     # CAS DE BASE : arbre vide
             return 0
-        if a.gauche is None and a.droite is None:
+        if a.gauche is None and a.droite is None:         # CAS DE BASE : une feuille
             return 1
-        return nb_feuilles(a.gauche) + nb_feuilles(a.droite)
+        return nb_feuilles(a.gauche) + nb_feuilles(a.droite)   # APPEL RECURSIF x 2, COMBINER
     ```
 
 ### Arbres binaires de recherche
@@ -328,34 +350,45 @@ L’arbre de l’exercice précédent était **complet** : tous ses niveaux éta
 
     Comparer `x` à la racine : trois cas. Un seul appel récursif, du côté où `x` peut encore se trouver. Pour le coût : combien de nœuds au plus sur un chemin de la racine à une feuille ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    a = Noeud(8, Noeud(3, Noeud(1), Noeud(6)), Noeud(10, None, Noeud(14)))   # l'ABR du cours
+    assert recherche(a, 6)            # cas normal
+    assert not recherche(None, 5)     # cas limite : arbre vide
+    assert not recherche(a, 7)        # cas piege : absent, mais encadre par 6 et 8
+    ```
 
     **Démarche :** on compare `x` à la racine : égal, il est trouvé ; plus petit, on cherche à gauche ; plus grand, à droite. Un seul appel récursif ; condition d’arrêt : l’arbre vide (`x` est absent).
 
     ```python
     def recherche(a, x):
-        if a is None:
+        if a is None:                       # CAS DE BASE : x est absent
             return False
-        if x == a.valeur:
+        if x == a.valeur:                   # TESTER : trouve
             return True
-        if x < a.valeur:
-            return recherche(a.gauche, x)   # les plus petits sont a gauche
+        if x < a.valeur:                    # TESTER : de quel cote descendre ?
+            return recherche(a.gauche, x)   # APPEL RECURSIF : les plus petits sont a gauche
         else:
-            return recherche(a.droite, x)   # les plus grands sont a droite
+            return recherche(a.droite, x)   # APPEL RECURSIF : les plus grands sont a droite
     ```
 
     *Autre méthode :* comme il n’y a qu’**un seul** appel récursif, on peut aussi descendre avec une boucle : tant qu’on n’est pas sorti de l’arbre, on compare et on part à gauche ou à droite.
 
     ```python
     def recherche(a, x):
-        while a is not None:
-            if x == a.valeur:
+        while a is not None:          # PARCOURIR : on descend dans l'arbre
+            if x == a.valeur:         # TESTER
                 return True
-            if x < a.valeur:
-                a = a.gauche
+            if x < a.valeur:          # TESTER
+                a = a.gauche          # METTRE A JOUR
             else:
-                a = a.droite
-        return False
+                a = a.droite          # METTRE A JOUR
+        return False                  # RENVOYER : sorti de l'arbre, x est absent
     ```
 
     Au plus **`h` nœuds visités** (un par niveau), où `h` est la hauteur de l’arbre.
@@ -401,6 +434,8 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
         Q1 : `if x < a.valeur:`  
         `a.gauche = inserer(a.gauche, x)`
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Partant de l’arbre vide, insérer dans cet ordre `5`, `3`, `8`, `3`, `9`, `5`. Dessiner l’ABR obtenu : où sont placés les deux doublons ? Vérifier que le parcours infixe donne les valeurs triées.
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> En déduire une fonction `tri_abr(t)` qui renvoie une nouvelle liste contenant les valeurs de la liste `t` triées (doublons compris), à l’aide d’un ABR.
@@ -413,17 +448,25 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
 
 ??? corrige "Corrigé"
 
-    **1.** **Démarche :** trois cas : l’arbre vide (la valeur devient une nouvelle feuille), `x` plus petit que la racine (on insère à gauche), sinon à droite. On réaffecte le sous-arbre modifié, puis on renvoie `a`.
+    **1.** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert inserer(Noeud(5), 3).gauche.valeur == 3   # cas normal : plus petit, a gauche
+    assert inserer(None, 4).valeur == 4              # cas limite : arbre vide, une feuille est creee
+    assert inserer(Noeud(5), 5).droite.valeur == 5   # cas piege : doublon, a droite (convention)
+    ```
+
+    **Démarche :** trois cas : l’arbre vide (la valeur devient une nouvelle feuille), `x` plus petit que la racine (on insère à gauche), sinon à droite. On réaffecte le sous-arbre modifié, puis on renvoie `a`.
 
     ```python
     def inserer(a, x):
-        if a is None:
-            return Noeud(x)                 # place vide : nouvelle feuille
-        if x < a.valeur:
-            a.gauche = inserer(a.gauche, x)     # plus petit : a gauche
+        if a is None:                           # CAS DE BASE : place vide
+            return Noeud(x)                     # nouvelle feuille
+        if x < a.valeur:                        # TESTER
+            a.gauche = inserer(a.gauche, x)     # APPEL RECURSIF : plus petit, a gauche
         else:
-            a.droite = inserer(a.droite, x)     # plus grand ou egal : a droite
-        return a
+            a.droite = inserer(a.droite, x)     # APPEL RECURSIF : plus grand ou egal, a droite
+        return a                                # RENVOYER
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `inserer(a.gauche, x)` sans la réaffectation `a.gauche = …` : quand `a.gauche` vaut `None`, le nœud créé est perdu.
@@ -438,15 +481,15 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
 
     ```python
     def infixe(a):
-        if a is None:
+        if a is None:                                             # CAS DE BASE
             return []
-        return infixe(a.gauche) + [a.valeur] + infixe(a.droite)
+        return infixe(a.gauche) + [a.valeur] + infixe(a.droite)   # COMBINER : gauche, racine, droite
 
     def tri_abr(t):
-        a = None
-        for v in t:
-            a = inserer(a, v)
-        return infixe(a)
+        a = None                                                  # INITIALISER : ABR vide
+        for v in t:                                               # PARCOURIR
+            a = inserer(a, v)                                     # METTRE A JOUR
+        return infixe(a)                                          # RENVOYER
     ```
 
     Par exemple `tri_abr([5, 3, 8, 3, 9, 5, 1])` vaut `[1, 3, 3, 5, 5, 8, 9]`.
@@ -478,13 +521,25 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
 
 ![](../figures/f4e2b52582f5cc08.svg){ .tikz loading=lazy } $\longrightarrow$ ![](../figures/7b44dfde28bdcf6c.svg){ .tikz loading=lazy }
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    a = Noeud(1, Noeud(2, Noeud(4)), Noeud(3))                    # l'arbre de l'enonce
+    m = miroir(a)
+    assert m.gauche.valeur == 3 and m.droite.droite.valeur == 4   # cas normal
+    assert miroir(None) is None                                   # cas limite : arbre vide
+    assert a.gauche.valeur == 2                                   # cas piege : a n'est pas modifie
+    ```
 
     ```python
     def miroir(a):
-        if a is None:
+        if a is None:                                               # CAS DE BASE
             return None
-        return Noeud(a.valeur, miroir(a.droite), miroir(a.gauche))  # on echange g et d
+        return Noeud(a.valeur, miroir(a.droite), miroir(a.gauche))  # COMBINER : g et d echanges
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 15</span> — Défi — maximum d’un arbre <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-15 }
@@ -504,16 +559,26 @@ On reprend la classe `Noeud` du cours. Convention du cours : une valeur **égale
     `if a.gauche is not None:`  
     `m = max(m, maximum(a.gauche))`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert maximum(Noeud(3, Noeud(9), Noeud(1, Noeud(12)))) == 12   # cas normal : pas un ABR
+    assert maximum(Noeud(5)) == 5                                   # cas limite : un seul noeud
+    assert maximum(Noeud(-4, Noeud(-2), Noeud(-7))) == -2           # cas piege : que des negatifs
+    ```
 
     ```python
     def maximum(a):
-        m = a.valeur
-        if a.gauche is not None:
-            m = max(m, maximum(a.gauche))
-        if a.droite is not None:
-            m = max(m, maximum(a.droite))
-        return m
+        m = a.valeur                         # INITIALISER : la racine
+        if a.gauche is not None:             # TESTER : sous-arbre non vide
+            m = max(m, maximum(a.gauche))    # APPEL RECURSIF, METTRE A JOUR
+        if a.droite is not None:             # TESTER
+            m = max(m, maximum(a.droite))    # APPEL RECURSIF, METTRE A JOUR
+        return m                             # RENVOYER
     ```
 
 ### Vers le bac
@@ -621,6 +686,8 @@ class ArbreBinaire:
 
         Même structure que la fonction `taille` du cours : seule change la façon d’obtenir les sous-arbres (des appels de méthodes au lieu d’attributs).
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **Barème indicatif** (sur 3) : Q1 : 0,5 ; Q2 : 1 ; Q3 : 1,5
@@ -631,13 +698,24 @@ class ArbreBinaire:
 
     ![](../figures/1d33c9bbf656713d.svg){ .tikz loading=lazy }
 
-    **3.** **Démarche :** même structure que la fonction `taille` du cours ; seuls changent les accès aux sous-arbres, par les accesseurs.
+    **3.** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    t = ArbreBinaire(1)
+    t.insert_gauche(2)
+    t.insert_gauche(3)
+    assert taille(r) == 4         # cas normal : l'arbre de la question 2
+    assert taille(None) == 0      # cas limite : arbre vide
+    assert taille(t) == 3         # cas piege : le second insert_gauche n'ecrase pas le premier
+    ```
+
+    **Démarche :** même structure que la fonction `taille` du cours ; seuls changent les accès aux sous-arbres, par les accesseurs.
 
     ```python
     def taille(arbre):
-        if arbre is None:
+        if arbre is None:                                                    # CAS DE BASE
             return 0
-        return 1 + taille(arbre.get_gauche()) + taille(arbre.get_droit())
+        return 1 + taille(arbre.get_gauche()) + taille(arbre.get_droit())   # COMBINER
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 18</span> — Un arbre de décision (d’après Amérique du Nord 2025, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-18 }
@@ -672,6 +750,8 @@ class Feuille:
 
         Q3 : chaque classe a sa propre version de la méthode. Dans la classe `Noeud`, sur quels objets faut-il appeler la méthode `nb_resultats` ? Où se trouve alors la condition d’arrêt de cette récursion ?
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 4.  <span class="run" title="À programmer et tester sur machine">▶</span> *(Défi)* Écrire une fonction `diagnostic(arbre)` qui pose les questions à l’utilisateur (fonction `input`) en descendant l’arbre, et renvoie le résultat de la feuille atteinte. *(On répondra `"oui"` ou `"non"`.)*
 
     ??? pouce "Coup de pouce"
@@ -694,11 +774,19 @@ class Feuille:
 
     **2.** Dans la classe `Feuille` : `def est_resultat(self): return True`. Dans la classe `Noeud` : `def est_resultat(self): return False`.
 
-    **3.** Dans `Feuille` : `def nb_resultats(self): return 1`. Dans `Noeud` :
+    **3.** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert arbre.nb_resultats() == 3                     # cas normal : l'arbre de la question 1
+    assert Feuille("Oiseau").nb_resultats() == 1         # cas limite : une feuille seule
+    assert Noeud("?", Feuille("Chat"), Feuille("Chat")).nb_resultats() == 2   # cas piege : resultats identiques
+    ```
+
+    Dans `Feuille` : `def nb_resultats(self): return 1` (le cas de base). Dans `Noeud` :
 
     ```python
     def nb_resultats(self):
-        return self.sioui.nb_resultats() + self.sinon.nb_resultats()
+        return self.sioui.nb_resultats() + self.sinon.nb_resultats()   # APPEL RECURSIF x 2, COMBINER
     ```
 
     *Remarque : chaque classe a sa propre version de la méthode ; à l’appel `self.sioui.nb_resultats()`, Python exécute celle de la classe de l’objet (`Feuille` ou `Noeud`). C’est le **polymorphisme**, au-delà du programme.*
@@ -707,13 +795,13 @@ class Feuille:
 
     ```python
     def diagnostic(arbre):
-        while not arbre.est_resultat():
+        while not arbre.est_resultat():                       # PARCOURIR : on descend
             reponse = input(arbre.question + " (oui/non) ")
-            if reponse == "oui":
-                arbre = arbre.sioui
+            if reponse == "oui":                              # TESTER
+                arbre = arbre.sioui                           # METTRE A JOUR
             else:
-                arbre = arbre.sinon
-        return arbre.resultat
+                arbre = arbre.sinon                           # METTRE A JOUR
+        return arbre.resultat                                 # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 19</span> — Un arbre représenté par des listes (d’après Amérique du Sud 2023, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-19 }
@@ -759,6 +847,8 @@ a  = [4, [n1, n8]]
 
         Q3 : parcourir la liste des sous-arbres : chacun doit avoir le même poids que le premier, **et** être lui-même un mobile (appel récursif). Si aucun ne fait défaut, renvoyer `True`.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **Barème indicatif** (sur 4) : Q1 : 0,75 ; Q2 : 1,25 ; Q3 : 2
@@ -769,19 +859,25 @@ a  = [4, [n1, n8]]
 
     **2.** ligne 7 : `while not est_vide(file):` ; ligne 8 : `arbre = defiler(file)` ; ligne 11 : `p = p + arbre[0]`.
 
-    **3.**
+    **3.** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert est_mobile([1, [[4, []], [4, []]]])   # cas normal : deux feuilles de meme poids
+    assert est_mobile([7, []])                   # cas limite : une feuille
+    assert not est_mobile(a)                     # cas piege : n1 et n8 pesent 8, mais n1 n'est pas un mobile
+    ```
 
     ```python
     def est_mobile(arbre):
-        if arbre == []:
-            return True                 # l'arbre vide est un mobile
+        if arbre == []:                              # CAS DE BASE : l'arbre vide est un mobile
+            return True
         sous_arbres = arbre[1]
-        for sa in sous_arbres:          # meme poids + chacun mobile
-            if poids(sa) != poids(sous_arbres[0]):
+        for sa in sous_arbres:                       # PARCOURIR : meme poids + chacun mobile
+            if poids(sa) != poids(sous_arbres[0]):   # TESTER
                 return False
-            if not est_mobile(sa):
+            if not est_mobile(sa):                   # APPEL RECURSIF
                 return False
-        return True
+        return True                                  # RENVOYER : aucun defaut trouve
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 20</span> — La plus grande somme racine-feuille (d’après Amérique du Sud 2022, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-20 }
@@ -808,23 +904,33 @@ Dans un arbre binaire étiqueté par des entiers, un **chemin racine-feuille** p
         `if a.gauche is None:`  
         `return a.valeur + somme_max(a.droite)`
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **Barème indicatif** (sur 3) : Q1 : 1 ; Q2 : 2
 
     **1.** Les chemins racine-feuille et leurs sommes : `2-7-4-2`$=15$ ; `2-7-4-3`$=16$ ; `2-7-1-5`$=15$ ; `2-5-9-6`$=\textbf{22}$. La plus grande somme est **22**.
 
-    **2.**
+    **2.** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    e = Noeud(2, Noeud(7, Noeud(4, Noeud(2), Noeud(3)), Noeud(1, None, Noeud(5))),
+               Noeud(5, None, Noeud(9, Noeud(6))))   # l'arbre de l'enonce
+    assert somme_max(e) == 22                           # cas normal
+    assert somme_max(Noeud(5)) == 5                     # cas limite : une feuille seule
+    assert somme_max(Noeud(1, None, Noeud(-4))) == -3   # cas piege : un seul fils (et negatif)
+    ```
 
     ```python
     def somme_max(a):
-        if a.gauche is None and a.droite is None:      # feuille
+        if a.gauche is None and a.droite is None:      # CAS DE BASE : une feuille
             return a.valeur
-        if a.gauche is None:                           # un seul sous-arbre (droit)
-            return a.valeur + somme_max(a.droite)
-        if a.droite is None:                           # un seul sous-arbre (gauche)
-            return a.valeur + somme_max(a.gauche)
-        return a.valeur + max(somme_max(a.gauche), somme_max(a.droite))
+        if a.gauche is None:                           # TESTER : un seul sous-arbre (droit)
+            return a.valeur + somme_max(a.droite)      # APPEL RECURSIF
+        if a.droite is None:                           # TESTER : un seul sous-arbre (gauche)
+            return a.valeur + somme_max(a.gauche)      # APPEL RECURSIF
+        return a.valeur + max(somme_max(a.gauche), somme_max(a.droite))   # COMBINER
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 21</span> — Puissance 4 : l’arbre de coups et l’algorithme min-max (d’après Amérique du Nord 2026, jour 1, parties B et C) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-21 }
@@ -870,6 +976,8 @@ Figure 1. Schéma partiel de l’arbre de coups pour `niveau_max = 2` (valeur de
     ```
 
 2.  Écrire une méthode `colonne_score_min(self)` de la classe `Noeud` qui renvoie le couple `(colonne, score)` du fils de **plus petit score** (l’un d’eux en cas d’égalité). On suppose que le nœud a au moins un fils.
+
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
 
 On suppose écrite de même une méthode `colonne_score_max` (fils de score le plus grand), et ajoutées à la classe `Grille` les méthodes suivantes :
 
@@ -935,15 +1043,31 @@ On suppose écrite de même une méthode `colonne_score_max` (fils de score le p
                 self.suivants = []
         ```
 
-    2.  On cherche le minimum en parcourant la liste des fils :
+    2.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        def avec_scores(scores):           # outil de test : des fils de colonnes 0, 1, 2...
+            n = Noeud(-1)
+            for c in range(len(scores)):
+                fils = Noeud(c)
+                fils.score = scores[c]
+                n.suivants.append(fils)
+            return n
+
+        assert avec_scores([4, -30, 7]).colonne_score_min() == (1, -30)   # cas normal
+        assert avec_scores([12]).colonne_score_min() == (0, 12)           # cas limite : un seul fils
+        assert avec_scores([5, 8]).colonne_score_min() == (0, 5)          # cas piege : scores positifs
+        ```
+
+        On cherche le minimum en parcourant la liste des fils (partir d’un score $0$ ferait échouer le cas piège) :
 
         ```python
         def colonne_score_min(self):
-            meilleur = self.suivants[0]
-            for fils in self.suivants:
-                if fils.score < meilleur.score:
-                    meilleur = fils
-            return (meilleur.colonne, meilleur.score)
+            meilleur = self.suivants[0]            # INITIALISER : le premier fils
+            for fils in self.suivants:             # PARCOURIR
+                if fils.score < meilleur.score:    # TESTER
+                    meilleur = fils                # METTRE A JOUR
+            return (meilleur.colonne, meilleur.score)   # RENVOYER
         ```
 
     3.  La méthode est **récursive** : chaque fils calcule son propre score (au niveau suivant et pour l’autre joueur, `3 - joueur`), puis le nœud prend le minimum ou le maximum des scores de ses fils.
@@ -951,20 +1075,20 @@ On suppose écrite de même une méthode `colonne_score_max` (fils de score le p
         ```python
         def calcule_score(self, niveau, joueur, grille):
             g = grille.gagnant()
-            if g == 1:
+            if g == 1:                                     # CAS DE BASE : coup gagnant
                 self.score = -(100 + 10 * (niveau_max - niveau))
-            elif g == 2:
+            elif g == 2:                                   # CAS DE BASE : coup gagnant
                 self.score = 100 + 10 * (niveau_max - niveau)
-            elif niveau == niveau_max:
+            elif niveau == niveau_max:                     # CAS DE BASE : profondeur maximale
                 self.score = grille.score()
             else:
-                for colonne in range(7):
+                for colonne in range(7):                   # PARCOURIR : chaque coup possible
                     grille2 = grille.copie_grille()
-                    if grille2.joue(colonne, joueur):
+                    if grille2.joue(colonne, joueur):      # TESTER : colonne non pleine
                         nouveau_noeud = Noeud(colonne)
                         self.suivants.append(nouveau_noeud)
-                        nouveau_noeud.calcule_score(niveau + 1, 3 - joueur, grille2)
-                if joueur == 1:
+                        nouveau_noeud.calcule_score(niveau + 1, 3 - joueur, grille2)   # APPEL RECURSIF
+                if joueur == 1:                            # COMBINER : min ou max des fils
                     self.score = self.colonne_score_min()[1]
                 else:
                     self.score = self.colonne_score_max()[1]
@@ -1023,13 +1147,13 @@ def est_abr(a):
 
     ```python
     def est_abr(a, mini=None, maxi=None):
-        if a is None:
+        if a is None:                                # CAS DE BASE
             return True
-        if mini is not None and a.valeur < mini:     # a droite : >= mini
+        if mini is not None and a.valeur < mini:     # TESTER : a droite, >= mini
             return False
-        if maxi is not None and a.valeur >= maxi:    # a gauche : < maxi
+        if maxi is not None and a.valeur >= maxi:    # TESTER : a gauche, < maxi
             return False
-        return est_abr(a.gauche, mini, a.valeur) and est_abr(a.droite, a.valeur, maxi)
+        return est_abr(a.gauche, mini, a.valeur) and est_abr(a.droite, a.valeur, maxi)   # COMBINER
     ```
 
     Avec cette version, l’arbre de la question 1 donne `False`, et l’ABR du cours (racine `8`, fils `3` et `10`, feuilles `1`, `6`, `14`) donne bien `True`.

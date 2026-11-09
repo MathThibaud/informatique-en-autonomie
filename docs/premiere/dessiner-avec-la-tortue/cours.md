@@ -97,6 +97,8 @@ t.done()
 
 … mais **répéter**, c’est exactement le rôle d’une boucle `for`. Le même carré, en bien plus court :
 
+<span class="routine">▷ Je prédis.</span> Quelle figure ? La tracer à main levée (point de départ, sens de rotation), puis comparer au dessin ci-dessous.
+
 ```python
 import turtle as t
 for cote in range(4):
@@ -116,6 +118,8 @@ t.done()
     <span id="lex-polygoneT" class="ancre"></span>Pour fermer un polygone régulier à `n` côtés, la tortue doit avoir tourné en tout de $360^\circ$. À chaque sommet, elle tourne donc de $\dfrac{360}{n}$ degrés.
 
 Un hexagone (6 côtés, on tourne de $360/6 = 60^\circ$) devient immédiat ; l’étoile, dessinée à côté, demande deux tours complets ($720^\circ$) : ce sera un exercice.
+
+<span class="routine">▷ Je prédis.</span> Quelle figure ? La tracer à main levée (point de départ, sens de rotation), puis comparer au dessin ci-dessous.
 
 ```python
 import turtle as t
@@ -184,6 +188,8 @@ polygone(8, 60)    # octogone
 ## Le plus beau : les rosaces
 
 Une <span id="lex-rosaceT" class="ancre"></span>**rosace** s’obtient en répétant une même figure tout en **tournant** un peu à chaque fois. Ici, 12 carrés, pivotés de $360/12 = 30^\circ$ :
+
+<span class="routine">▷ Je prédis.</span> Quelle figure ? La tracer à main levée (point de départ, sens de rotation), puis comparer au dessin ci-dessous.
 
 ```python
 import turtle as t

@@ -45,6 +45,10 @@ Pour chercher un mot dans un dictionnaire de $2\,000$ pages, on ouvre *au milieu
 
     Comme les sous-problèmes sont « du même type mais plus petits », on les résout en **rappelant la même fonction** : les algorithmes « diviser pour régner » sont donc presque toujours **récursifs**. On retrouve la mécanique du chapitre **Récursivité** : une **condition d’arrêt** (un problème si petit qu’on sait répondre directement) et un **cas récursif** qui se rapproche de cette condition d’arrêt.
 
+!!! encadre "Méthode — Les étiquettes d’étapes"
+
+    Dans les exemples et les corrigés, un commentaire en **majuscules** nomme le **rôle** des lignes importantes, toujours avec les mêmes mots. Pour un algorithme « diviser pour régner » : `CAS DE BASE` (la condition d’arrêt), `DIVISER` (découper le problème), `APPEL RECURSIF` (régner sur un morceau), `COMBINER` (recoller les solutions). Devant un nouveau problème, on répond à ces quatre questions avant d’écrire la moindre ligne.
+
 ## Un premier exemple : la recherche dichotomique
 
 <span id="lex-dichotomie07" class="ancre"></span> Reprenons le dictionnaire. On dispose d’un tableau **déjà trié** et on veut savoir si une valeur `cible` s’y trouve.
@@ -59,15 +63,15 @@ Pour chercher un mot dans un dictionnaire de $2\,000$ pages, on ouvre *au milieu
 
     ```python
     def recherche(tab, cible, debut, fin):
-        if debut > fin:                 # condition d'arret : intervalle vide
+        if debut > fin:                                       # CAS DE BASE : intervalle vide
             return False
-        milieu = (debut + fin) // 2
-        if tab[milieu] == cible:
-            return True
+        milieu = (debut + fin) // 2                           # DIVISER
+        if tab[milieu] == cible:                              # TESTER
+            return True                                       # RENVOYER : trouve
         elif cible < tab[milieu]:
-            return recherche(tab, cible, debut, milieu - 1)   # moitie gauche
+            return recherche(tab, cible, debut, milieu - 1)   # APPEL RECURSIF : moitie gauche
         else:
-            return recherche(tab, cible, milieu + 1, fin)     # moitie droite
+            return recherche(tab, cible, milieu + 1, fin)     # APPEL RECURSIF : moitie droite
     ```
 
     ??? corrige "Correction"
@@ -75,6 +79,12 @@ Pour chercher un mot dans un dictionnaire de $2\,000$ pages, on ouvre *au milieu
         On doit l’appeler sur un tableau **trié** dans l’ordre croissant : sinon, comparer `cible` au milieu ne dit pas de quel côté chercher. Le premier appel porte sur **tout** le tableau : pour chercher `17` dans `t`, on écrit `recherche(t, 17, 0, len(t) - 1)`. À chaque appel, l’**intervalle de recherche est coupé en deux**.
 
 ![](../figures/43d999724d3a5b26.svg){ .tikz loading=lazy }
+
+<span class="routine">▷ Je prédis.</span> Sur ce même tableau `t`, que renvoie `recherche(t, 20, 0, 8)`, et combien d’appels à `recherche` sont effectués en tout ?
+
+??? verifie "Je vérifie"
+
+    `False`, après **5** appels : on regarde `21`, `8`, `13`, `17`, puis l’intervalle devient vide (`debut = 4 > fin = 3`). L’appel de la condition d’arrêt compte aussi.
 
 !!! propriete "Propriété 1 — Coût de la recherche dichotomique"
 
@@ -187,19 +197,25 @@ En Python :
 
 ```python
 def fusion(gauche, droite):
-    resultat = []
-    i = j = 0
-    while i < len(gauche) and j < len(droite):
-        if gauche[i] <= droite[j]:
-            resultat.append(gauche[i])
+    resultat = []                                # INITIALISER
+    i = j = 0                                    # INITIALISER : un doigt par liste
+    while i < len(gauche) and j < len(droite):   # PARCOURIR
+        if gauche[i] <= droite[j]:               # TESTER : le plus petit des deux
+            resultat.append(gauche[i])           # METTRE A JOUR
             i = i + 1
         else:
-            resultat.append(droite[j])
+            resultat.append(droite[j])           # METTRE A JOUR
             j = j + 1
-    resultat = resultat + gauche[i:]   # reste de gauche (ou rien)
-    resultat = resultat + droite[j:]   # reste de droite (ou rien)
-    return resultat
+    resultat = resultat + gauche[i:]             # METTRE A JOUR : reste de gauche (ou rien)
+    resultat = resultat + droite[j:]             # METTRE A JOUR : reste de droite (ou rien)
+    return resultat                              # RENVOYER
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoie `fusion([2, 7], [2, 3, 9])` ? Lequel des deux `2` est recopié en premier ?
+
+??? verifie "Je vérifie"
+
+    `[2, 2, 3, 7, 9]`. Le `2` de `gauche` passe en premier : le test est `<=`, pas `<`. Quand la boucle s’arrête (`gauche` épuisée après le `7`), le `9` restant est recopié par `droite[j:]`.
 
 !!! encadre "À retenir — le coût linéaire de la fusion"
 
@@ -213,13 +229,19 @@ Il ne reste qu’à écrire les trois temps. La condition d’arrêt tient sur `
 
 ```python
 def tri_fusion(tab):
-    if len(tab) <= 1:              # condition d'arret : deja trie
+    if len(tab) <= 1:                   # CAS DE BASE : deja trie
         return tab
-    milieu = len(tab) // 2
-    gauche = tri_fusion(tab[:milieu])   # regner (recursif) sur la 1re moitie
-    droite = tri_fusion(tab[milieu:])   # regner (recursif) sur la 2e moitie
-    return fusion(gauche, droite)       # combiner
+    milieu = len(tab) // 2              # DIVISER
+    gauche = tri_fusion(tab[:milieu])   # APPEL RECURSIF : regner sur la 1re moitie
+    droite = tri_fusion(tab[milieu:])   # APPEL RECURSIF : regner sur la 2e moitie
+    return fusion(gauche, droite)       # COMBINER
 ```
+
+<span class="routine">▷ Je prédis.</span> Lors de l’appel `tri_fusion([6, 1, 4])`, que valent `gauche` et `droite` juste avant la fusion ?
+
+??? verifie "Je vérifie"
+
+    `milieu = 3 // 2 = 1` : `gauche = [6]` et `droite = [1, 4]`. La moitié droite est la plus longue, et elle revient **déjà triée** de son appel récursif ; la fusion donne `[1, 4, 6]`.
 
 Suivons l’algorithme sur `[5, 2, 8, 1, 9, 3, 7, 4]`. On **descend** en coupant en deux (diviser), jusqu’aux singletons ; puis on **remonte** en fusionnant (combiner).
 
@@ -305,10 +327,10 @@ Le paradigme dépasse largement le tri. En voici trois illustrations à connaît
 
 ```python
 def tri_rapide(tab, bas, haut):
-    if bas < haut:
-        p = partition(tab, bas, haut)   # place le pivot a sa position finale
-        tri_rapide(tab, bas, p - 1)     # regner a gauche du pivot
-        tri_rapide(tab, p + 1, haut)    # regner a droite du pivot
+    if bas < haut:                      # TESTER : sinon CAS DE BASE, rien a faire
+        p = partition(tab, bas, haut)   # DIVISER : le pivot va a sa position finale
+        tri_rapide(tab, bas, p - 1)     # APPEL RECURSIF : a gauche du pivot
+        tri_rapide(tab, p + 1, haut)    # APPEL RECURSIF : a droite du pivot
 ```
 
 La **partition** range les éléments autour du pivot ; celui-ci se retrouve à sa **place définitive**, les petits à gauche, les grands à droite. On trie ensuite *récursivement* chaque zone.

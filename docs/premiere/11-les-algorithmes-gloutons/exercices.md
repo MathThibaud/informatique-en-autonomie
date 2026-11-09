@@ -119,29 +119,37 @@ def rendre(somme):
 
         Pour b), garder la structure de `rendre`, mais remplacer la liste `rendu` par un compteur qui part de 0.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
-    **a)** `rendre(48)` $=$ `[20, 20, 5, 2, 1]` (5 coupures) ; `rendre(88)` $=$ `[50, 20, 10, 5, 2, 1]` (6 coupures). **b)**
+    **a)** `rendre(48)` $=$ `[20, 20, 5, 2, 1]` (5 coupures) ; `rendre(88)` $=$ `[50, 20, 10, 5, 2, 1]` (6 coupures). **b)** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert nb_pieces(48) == 5      # cas normal : 20 + 20 + 5 + 2 + 1
+    assert nb_pieces(0) == 0       # cas limite : rien a rendre
+    assert nb_pieces(4) == 2       # cas piege : 2 + 2, la meme coupure deux fois
+    ```
 
     ```python
     def nb_pieces(somme):
-        n = 0
-        for p in pieces:
-            while somme >= p:
-                n = n + 1
-                somme = somme - p
-        return n
+        n = 0                      # INITIALISER : le compteur remplace la liste
+        for p in pieces:           # PARCOURIR
+            while somme >= p:      # TESTER
+                n = n + 1          # METTRE A JOUR
+                somme = somme - p  # METTRE A JOUR
+        return n                   # RENVOYER
     ```
 
     **c)** <span class="horsprog">au-delà du programme</span> Avec une division :
 
     ```python
     def rendre(somme):
-        rendu = []
-        for p in pieces:
-            rendu = rendu + [p] * (somme // p)   # autant de p que possible
-            somme = somme % p                    # ce qui reste apres ces p
-        return rendu
+        rendu = []                               # INITIALISER
+        for p in pieces:                         # PARCOURIR
+            rendu = rendu + [p] * (somme // p)   # METTRE A JOUR : autant de p que possible
+            somme = somme % p                    # METTRE A JOUR : ce qui reste apres ces p
+        return rendu                             # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — Un système qui piège le glouton <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-11-6 }
@@ -212,12 +220,12 @@ for p in systeme:
 
     ```python
     def rendre_general(systeme, somme):
-        rendu = []
-        for p in systeme:
-            while somme >= p:
-                rendu.append(p)
-                somme = somme - p
-        return rendu
+        rendu = []                 # INITIALISER
+        for p in systeme:          # PARCOURIR
+            while somme >= p:      # TESTER
+                rendu.append(p)    # METTRE A JOUR
+                somme = somme - p  # METTRE A JOUR
+        return rendu               # RENVOYER
     ```
 
     **b)** `[4, 1, 1]` : 3 pièces. Ce n’est **pas** le minimum, car $3 + 3 = 6$ n’utilise que 2 pièces : le système {4, 3, 1} n’est pas canonique.
@@ -243,22 +251,32 @@ Un système est **canonique** si le glouton y est toujours optimal. On ne teste 
         `for p in systeme:`  
         …
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus pour `rendre_sys`, écrits avant de coder :*
+
+    ```python
+    assert rendre_sys([5, 2, 1], 9) == 3       # cas normal : 5 + 2 + 2
+    assert rendre_sys([5, 2, 1], 0) == 0       # cas limite : rien a rendre
+    assert rendre_sys([3, 2], 4) is None       # cas piege : il reste 1, le glouton n'aboutit pas
+    ```
 
     ```python
     def rendre_sys(systeme, somme):
-        n = 0
-        for p in systeme:          # systeme deja trie a l'envers
-            while somme >= p:
-                n = n + 1
-                somme = somme - p
-        if somme == 0:
-            return n
-        return None            # le glouton n'aboutit pas
+        n = 0                      # INITIALISER
+        for p in systeme:          # PARCOURIR : systeme deja trie a l'envers
+            while somme >= p:      # TESTER
+                n = n + 1          # METTRE A JOUR
+                somme = somme - p  # METTRE A JOUR
+        if somme == 0:             # TESTER : tout a-t-il ete rendu ?
+            return n               # RENVOYER
+        return None                # RENVOYER : le glouton n'aboutit pas
 
     def tester(systeme):
-        for s in range(1, 31):
-            if rendre_sys(systeme, s) != optimal(systeme, s):
+        for s in range(1, 31):                                  # PARCOURIR
+            if rendre_sys(systeme, s) != optimal(systeme, s):   # TESTER
                 print("premier ecart pour la somme", s)
                 return
         print("canonique jusqu'a 30")

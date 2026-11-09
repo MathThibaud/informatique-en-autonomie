@@ -54,6 +54,8 @@ On enveloppe l’arbre dans une classe `ABR` : l’attribut privé `_racine` dé
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 2</span> — Insérer sans récursivité <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-tp-1-2 }
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 <span class="run" title="À programmer et tester sur machine">▶</span> Compléter la méthode `inserer(x)` avec une boucle `while` : si l’arbre est vide, le nouveau nœud devient la racine ; sinon, on descend depuis la racine, à gauche si `x` est plus petit que la valeur du nœud courant, à droite s’il est plus grand, jusqu’à trouver une place libre (`None`) où l’on accroche `Noeud(x)`. La méthode renvoie `True` si `x` a été ajouté, `False` s’il était déjà présent (l’arbre est alors inchangé). Penser à mettre `_taille` à jour.
 
 ??? pouce "Coup de pouce"
@@ -588,6 +590,8 @@ On considère les grilles `"XO.OX...X"`, `"XOX.OX.O."` et `"XOXOOX..."`.
     **4.** Lignes `(0, 1, 2)`, `(3, 4, 5)`, `(6, 7, 8)` ; colonnes `(0, 3, 6)`, `(1, 4, 7)`, `(2, 5, 8)` ; diagonales `(0, 4, 8)` et `(2, 4, 6)`.
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 2</span> — Les règles en Python <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-arbres-tp-2-2 }
+
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `coups_possibles(grille)`, qui renvoie la liste croissante des numéros des cases vides. Une liste par compréhension suffit.
 

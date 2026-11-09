@@ -126,6 +126,8 @@ Un joueur malhonnête répond au hasard. Que fait votre programme ?
 
 La fonction `charger_annuaire()`, fournie, renvoie deux tableaux de même longueur : `noms` (des chaînes `"NOM Prénom"`, triées par ordre alphabétique) et `numeros` : `numeros[i]` est le numéro de `noms[i]`. *Tous ces abonnés et numéros sont inventés.*
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Afficher la longueur de l’annuaire, son premier et son dernier abonné.
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `est_trie(t)` (s’arrêter dès qu’on trouve deux voisins dans le désordre) et vérifier que `noms` est trié. Pourquoi est-ce indispensable pour la suite ?

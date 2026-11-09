@@ -269,6 +269,8 @@ On admet que l’autonomie d’un appareil, en heures, est égale à la capacit�
 
     Écrire une fonction `autonomie(capacite_mAh, conso_mA)` qui renvoie l’autonomie en heures, puis une fonction `puces_compatibles(puces, capacite_mAh, heures_min)` qui renvoie la liste des **noms** des puces offrant une autonomie d’au moins `heures_min` heures. Que renvoie `puces_compatibles(puces, 300, 72)` ?
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 6.  Pour concilier les deux exigences, les ingénieurs retiennent **deux** puces : la puce A fonctionne en permanence ($24$ h sur $24$) pour lire le capteur cardiaque, et la puce B n’est réveillée que $2$ heures par jour au total. Calculer la charge consommée en une journée (en mAh), puis l’autonomie de la montre, en jours.
 
 7.  Le capteur cardiaque doit être lu toutes les $20$ millisecondes, sans jamais prendre de retard. Expliquer pourquoi cette tâche est confiée à la puce A plutôt qu’à la puce B.
@@ -293,7 +295,15 @@ On admet que l’autonomie d’un appareil, en heures, est égale à la capacit�
 
     4.  Les puces **A** et **C** tiennent au moins $24$ h (la puce B seulement $15$ h). Pourtant, seule la puce **B** peut faire tourner les applications : elles nécessitent un **système d’exploitation**, et beaucoup de mémoire et de puissance, ce qu’un microcontrôleur n’a pas.
 
-    5.  Par exemple :
+    5.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert puces_compatibles(puces, 300, 24) == ["A", "C"]   # cas normal
+        assert puces_compatibles(puces, 300, 200) == []           # cas limite : aucune puce
+        assert puces_compatibles(puces, 300, 150) == ["A"]        # cas piege : 150 h tout juste suffit
+        ```
+
+        Par exemple :
 
         ```python
         def autonomie(capacite_mAh, conso_mA):
@@ -308,11 +318,11 @@ On admet que l’autonomie d’un appareil, en heures, est égale à la capacit�
 
         ```python
         def puces_compatibles(puces, capacite_mAh, heures_min):
-            resultat = []
-            for puce in puces:
+            resultat = []                         # INITIALISER
+            for puce in puces:                    # PARCOURIR
                 if autonomie(capacite_mAh, puce["conso_mA"]) >= heures_min:
-                    resultat.append(puce["nom"])
-            return resultat
+                    resultat.append(puce["nom"])  # METTRE A JOUR
+            return resultat                       # RENVOYER
         ```
 
         `puces_compatibles(puces, 300, 72)` renvoie `["A"]` (seule la puce A dépasse $72$ h ; la puce C n’atteint que $37{,}5$ h).
@@ -340,6 +350,8 @@ Le club de sciences du lycée installe sur le toit une station météo. Elle est
     Écrire une fonction `convertir(valeur)` qui renvoie la température correspondant à une valeur lue. Que renvoie `convertir(512)` (à l’arrondi près) ? Quelle est la plus haute température mesurable ?
 
 5.  Écrire une fonction `alerte_gel(mesures)` qui prend en paramètre une liste (non vide) de valeurs brutes lues sur le convertisseur et qui renvoie `True` si l’une d’elles correspond à une température strictement négative, `False` sinon. Que renvoie `alerte_gel([412, 405, 398, 401, 420])` ?
+
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
 
 6.  On dispose des fonctions `lire_capteur_temperature()`, qui renvoie la valeur brute lue sur le convertisseur, `allumer_led()` et `eteindre_led()`. L’alerte porte sur la **dernière** mesure lue. Recopier et compléter la boucle principale du programme :
 
@@ -390,14 +402,22 @@ Le club de sciences du lycée installe sur le toit une station météo. Elle est
 
         `convertir(512)` renvoie $51{,}2 - 40 = \mathbf{11{,}2}$ ° C (Python affiche une valeur approchée, comme `11.200000000000003`, à cause du codage des flottants). Plus haute température mesurable : $1\,023 \times 0{,}1 - 40 = \mathbf{62{,}3}$ ° C.
 
-    5.  Par exemple :
+    5.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert alerte_gel([412, 398, 420]) == True   # cas normal
+        assert alerte_gel([400]) == False            # cas limite : 0 degre, pas strictement negatif
+        assert alerte_gel([420, 410, 390]) == True   # cas piege : le gel n'arrive qu'a la fin
+        ```
+
+        Par exemple :
 
         ```python
         def alerte_gel(mesures):
-            for valeur in mesures:
-                if convertir(valeur) < 0:
-                    return True
-            return False
+            for valeur in mesures:         # PARCOURIR
+                if convertir(valeur) < 0:  # TESTER
+                    return True            # RENVOYER des qu'il gele
+            return False                   # RENVOYER : aucune mesure negative
         ```
 
         Les températures sont $1{,}2$ ; $0{,}5$ ; $-0{,}2$ ; $0{,}1$ ; $2{,}0$ ° C : la valeur $398$ donne $-0{,}2$ ° C, donc la fonction renvoie `True`.
@@ -435,6 +455,8 @@ La salle est utilisée $8$ heures par jour, $160$ jours par an. On rappelle que 
 
     Écrire une fonction `energie_salle(postes, puissances, heures)` qui renvoie l’énergie, en kWh, consommée par tous les postes de la liste `postes` pendant `heures` heures. Que renvoie `energie_salle(["mini", "tour", "mini"], puissances, 10)` ?
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 5.  Dans trois ans, les logiciels utilisés demanderont deux fois plus de mémoire vive. Expliquer ce que l’on pourra faire avec la solution 1, et ce qu’il faudra faire avec la solution 2.
 
 6.  Un mini-PC tombe en panne à cause d’un seul transistor défectueux de sa puce. Peut-on le réparer ? Quelle conséquence environnementale cela a-t-il, et quelle réponse la société tente-t-elle d’y apporter ?
@@ -459,14 +481,22 @@ La salle est utilisée $8$ heures par jour, $160$ jours par an. On rappelle que 
 
     3.  Solution 1 : $150 \times 30 \times 8 \times 160 = 5\,760\,000$ Wh $= \mathbf{5\,760}$ **kWh**. Solution 2 : $15 \times 30 \times 8 \times 160 = 576\,000$ Wh $= \mathbf{576}$ **kWh**. Économie : $5\,760 - 576 = \mathbf{5\,184}$ **kWh**, soit $5\,184 \times 0{,}20 = \mathbf{1\,036{,}80}$ **€ par an**.
 
-    4.  Par exemple :
+    4.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert energie_salle(["mini", "tour", "mini"], puissances, 10) == 1.8   # cas normal
+        assert energie_salle([], puissances, 10) == 0                           # cas limite : aucun poste
+        assert energie_salle(["tour"], puissances, 1) == 0.15                   # cas piege : en kWh, pas en Wh
+        ```
+
+        Par exemple :
 
         ```python
         def energie_salle(postes, puissances, heures):
-            total = 0
-            for poste in postes:
-                total = total + puissances[poste] * heures   # en Wh
-            return total / 1000                               # en kWh
+            total = 0                                       # INITIALISER
+            for poste in postes:                            # PARCOURIR
+                total = total + puissances[poste] * heures  # METTRE A JOUR : en Wh
+            return total / 1000                             # RENVOYER : en kWh
         ```
 
         `energie_salle(["mini", "tour", "mini"], puissances, 10)` : $(15 + 150 + 15) \times 10 = 1\,800$ Wh, la fonction renvoie `1.8` (kWh).
@@ -547,10 +577,10 @@ Le schéma ci-dessous décrit la puce **Azur X1** (fictive) d’un smartphone so
 
         ```python
         def annee_prevue(transistors, annee, objectif):
-            while transistors < objectif:
-                transistors = transistors * 2
-                annee = annee + 2
-            return annee
+            while transistors < objectif:      # TESTER : objectif atteint ?
+                transistors = transistors * 2  # METTRE A JOUR : un doublement...
+                annee = annee + 2              # METTRE A JOUR : ... tous les deux ans
+            return annee                       # RENVOYER
         ```
 
     3.  Il faut passer de $1$ à $16$ milliards : $16 = 2^4$, soit $4$ doublements, donc $8$ ans : la fonction renvoie `2023`. L’Azur X1 (2025) arrive avec **$2$ ans de retard** sur la prévision.

@@ -120,23 +120,31 @@ On admet disponible une classe `Pile` d’interface `empiler`, `depiler`, `est_v
     `if c in "([{":`  
     `p.empiler(c)`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
-    **Démarche :** on reprend l’algorithme du cours : chaque ouvrante est empilée ; une fermante doit trouver au sommet l’ouvrante qui lui correspond (un dictionnaire donne cette correspondance) ; à la fin, la pile doit être vide.
+    **Démarche :** on reprend l’algorithme du cours : chaque ouvrante est empilée ; une fermante doit trouver au sommet l’ouvrante qui lui correspond (un dictionnaire donne cette correspondance) ; à la fin, la pile doit être vide. *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert parenthesage_correct("{[()]}")       # cas normal
+    assert parenthesage_correct("")             # cas limite : chaine vide
+    assert not parenthesage_correct("([)]")     # cas piege : bons nombres, mauvais ordre
+    ```
 
     ```python
     def parenthesage_correct(expr):
-        p = Pile()
+        p = Pile()                             # INITIALISER
         correspond = {')': '(', ']': '[', '}': '{'}
-        for c in expr:
-            if c in "([{":                     # ouvrante : en attente
-                p.empiler(c)
-            elif c in ")]}":                   # fermante : doit solder une ouvrante
-                if p.est_vide():
-                    return False
-                if p.depiler() != correspond[c]:
-                    return False
-        return p.est_vide()                    # tout doit avoir ete referme
+        for c in expr:                         # PARCOURIR
+            if c in "([{":                     # TESTER : ouvrante, en attente
+                p.empiler(c)                   # METTRE A JOUR
+            elif c in ")]}":                   # TESTER : fermante
+                if p.est_vide():               # TESTER : rien a refermer
+                    return False               # RENVOYER
+                if p.depiler() != correspond[c]:   # TESTER : mauvais appariement
+                    return False               # RENVOYER
+        return p.est_vide()                    # RENVOYER : tout est-il referme ?
     ```
 
     Tests : `{[()]}` $\to$ `True` ; `(]` $\to$ `False` ; `([]` $\to$ `False` ; `())(` $\to$ `False`.
@@ -153,6 +161,8 @@ On admet disponible une classe `Pile` d’interface `empiler`, `depiler`, `est_v
 
     Tout empiler, puis dépiler tant que la pile n’est pas vide, en ajoutant chaque élément dépilé à la nouvelle liste.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ```text
 >>> renverser([1, 2, 3, 4])
 [4, 3, 2, 1]
@@ -160,17 +170,24 @@ On admet disponible une classe `Pile` d’interface `empiler`, `depiler`, `est_v
 
 ??? corrige "Corrigé"
 
-    **Démarche :** une pile inverse l’ordre : on empile tous les éléments de `tab`, puis on dépile tant que la pile n’est pas vide, en ajoutant chaque élément dépilé à la nouvelle liste.
+    **Démarche :** une pile inverse l’ordre : on empile tous les éléments de `tab`, puis on dépile tant que la pile n’est pas vide, en ajoutant chaque élément dépilé à la nouvelle liste. *Appels attendus, écrits avant de coder :*
+
+    ```python
+    t = [4, 7, 2]
+    assert renverser(t) == [2, 7, 4]       # cas normal
+    assert renverser([]) == []             # cas limite : liste vide
+    assert t == [4, 7, 2]                  # cas piege : tab n'est pas modifie
+    ```
 
     ```python
     def renverser(tab):
-        p = Pile()
-        for x in tab:            # on empile tout
-            p.empiler(x)
-        resultat = []
-        while not p.est_vide():  # on depile tout : ordre inverse
-            resultat.append(p.depiler())
-        return resultat
+        p = Pile()                         # INITIALISER
+        for x in tab:                      # PARCOURIR : on empile tout
+            p.empiler(x)                   # METTRE A JOUR
+        resultat = []                      # INITIALISER
+        while not p.est_vide():            # PARCOURIR : on depile tout
+            resultat.append(p.depiler())   # METTRE A JOUR : ordre inverse
+        return resultat                    # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 6</span> — La structure de pile (d’après Asie 2024, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-6 }
@@ -218,7 +235,7 @@ On dispose d’une classe `Pile` dont les objets représentent une pile, munie d
 
     ```python
     def vider(p):
-        while not p.estVide():
+        while not p.estVide():       # PARCOURIR : jusqu'a la pile vide
             print(p.depiler())
     ```
 
@@ -249,6 +266,8 @@ La classe `Pile` du cours n’a **pas** de méthode `taille` : on ne dispose que
 
         Les éléments dépilés doivent être rangés quelque part pour être remis ensuite : dans une seconde pile, par exemple. Dans quel ordre en ressortent-ils ?
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 3.  Avec la pile `p` de la question 1, représenter `p` et la pile auxiliaire au moment où l’on a fini de compter, puis à la fin de l’appel.
 
 ??? corrige "Corrigé"
@@ -257,18 +276,27 @@ La classe `Pile` du cours n’a **pas** de méthode `taille` : on ne dispose que
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Répondre que le programme affiche deux fois `3` : la fonction a vidé la pile lors du premier appel, le second trouve une pile vide.
 
-    **2.** On range chaque élément dépilé dans une pile auxiliaire, puis on le remet dans `p` :
+    **2.** On range chaque élément dépilé dans une pile auxiliaire, puis on le remet dans `p` : *Appels attendus, écrits avant de coder :*
+
+    ```python
+    p = Pile()
+    for x in [4, 7, 2]:
+        p.empiler(x)
+    assert taille(p) == 3                       # cas normal
+    assert taille(Pile()) == 0                  # cas limite : pile vide
+    assert taille(p) == 3 and p.sommet() == 2   # cas piege : p n'a pas ete videe
+    ```
 
     ```python
     def taille(p):
-        aux = Pile()
-        n = 0
-        while not p.est_vide():          # on vide p dans aux en comptant
-            aux.empiler(p.depiler())
-            n = n + 1
-        while not aux.est_vide():        # on remet chaque element dans p
-            p.empiler(aux.depiler())
-        return n
+        aux = Pile()                     # INITIALISER
+        n = 0                            # INITIALISER
+        while not p.est_vide():          # PARCOURIR : on vide p dans aux
+            aux.empiler(p.depiler())     # METTRE A JOUR
+            n = n + 1                    # METTRE A JOUR : on compte
+        while not aux.est_vide():        # PARCOURIR : on remet tout dans p
+            p.empiler(aux.depiler())     # METTRE A JOUR
+        return n                         # RENVOYER
     ```
 
     **3.** Fin du comptage : `p` est vide et `aux` contient, du fond vers le sommet, `2`, `7`, `4` (l’ordre est **inversé**). Fin de l’appel : `aux` est vide et `p` contient de nouveau `4`, `7`, `2` (`2` au sommet) : le second transvasement inverse une seconde fois l’ordre, ce qui le rétablit.
@@ -295,25 +323,37 @@ On veut écrire une fonction `copier_pile(p)` qui renvoie une **nouvelle** pile 
         `aux.empiler(p.depiler())`  
         `q = Pile()`
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **1.** `q = p` ne crée aucune pile : `q` et `p` sont **deux noms pour le même objet**. `q.depiler()` retire donc aussi le sommet `2` de `p`.
 
     **2.** À la fin, `p` est vide et `q` contient `2`, `7`, `4` (`4` au sommet). Deux défauts : l’ordre est **inversé** (le sommet de `q` est le fond de `p`) et `p` a été **détruite**.
 
-    **3.** Deux transvasements ; pendant le second, chaque élément est empilé à la fois dans `p` (restauration) et dans la copie :
+    **3.** Deux transvasements ; pendant le second, chaque élément est empilé à la fois dans `p` (restauration) et dans la copie : *Appels attendus, écrits avant de coder :*
+
+    ```python
+    p = Pile()
+    for x in [4, 7, 2]:
+        p.empiler(x)
+    q = copier_pile(p)
+    assert q.depiler() == 2 and q.depiler() == 7   # cas normal : meme ordre
+    assert copier_pile(Pile()).est_vide()          # cas limite : pile vide
+    assert p.sommet() == 2                         # cas piege : p intacte
+    ```
 
     ```python
     def copier_pile(p):
-        aux = Pile()
-        while not p.est_vide():          # p renversee dans aux
-            aux.empiler(p.depiler())
-        q = Pile()
-        while not aux.est_vide():        # aux renversee : ordre d'origine
+        aux = Pile()                     # INITIALISER
+        while not p.est_vide():          # PARCOURIR : p renversee dans aux
+            aux.empiler(p.depiler())     # METTRE A JOUR
+        q = Pile()                       # INITIALISER
+        while not aux.est_vide():        # PARCOURIR : retour a l'ordre d'origine
             x = aux.depiler()
-            p.empiler(x)                 # on restaure p
-            q.empiler(x)                 # on construit la copie
-        return q
+            p.empiler(x)                 # METTRE A JOUR : on restaure p
+            q.empiler(x)                 # METTRE A JOUR : on construit la copie
+        return q                         # RENVOYER
     ```
 
     Test : avec `p` contenant `4`, `7`, `2`, `q = copier_pile(p)` puis `q.depiler()` renvoie `2`, et `p.sommet()` vaut toujours `2` : les deux piles sont bien indépendantes.
@@ -338,21 +378,31 @@ Dans un document, les balises s’écrivent <code>&lt;b&gt;</code> (ouvrante) et
     <code>if b&#91;:2&#93; != "&lt;/":</code>  
     `p.empiler(b)`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert balises_ok(["<b>", "<i>", "</i>", "</b>"])       # cas normal
+    assert balises_ok([])                                    # cas limite : aucune balise
+    assert not balises_ok(["<b>", "<i>", "</b>", "</i>"])   # cas piege : mauvais ordre
+    ```
 
     ```python
     def balises_ok(liste):
-        p = Pile()
-        for b in liste:
-            if b[:2] != "</":                  # ouvrante <x>
-                p.empiler(b)
+        p = Pile()                             # INITIALISER
+        for b in liste:                        # PARCOURIR
+            if b[:2] != "</":                  # TESTER : ouvrante <x>
+                p.empiler(b)                   # METTRE A JOUR
             else:                              # fermante </x>
-                if p.est_vide():
-                    return False
+                if p.est_vide():               # TESTER : rien a fermer
+                    return False               # RENVOYER
                 ouvrante = p.depiler()
-                if ouvrante != "<" + b[2:]:     # "</b>" -> b[2:]="b>" -> "<b>"
-                    return False
-        return p.est_vide()
+                if ouvrante != "<" + b[2:]:    # TESTER : "</b>" attend "<b>"
+                    return False               # RENVOYER
+        return p.est_vide()                    # RENVOYER
     ```
 
     <code>&#91;"&lt;b&gt;", "&lt;i&gt;", "&lt;/i&gt;", "&lt;/b&gt;"&#93;</code> $\to$ `True` ; <code>&#91;"&lt;b&gt;", "&lt;i&gt;", "&lt;/b&gt;", "&lt;/i&gt;"&#93;</code> $\to$ `False` (à <code>&lt;/b&gt;</code>, on dépile <code>&lt;i&gt;</code> qui ne correspond pas).
@@ -378,24 +428,34 @@ En **notation polonaise inverse** (NPI), on écrit les opérateurs *après* leur
     `b = p.depiler()`  
     `a = p.depiler()`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert evaluer_npi("3 4 +") == 7      # cas normal
+    assert evaluer_npi("42") == 42        # cas limite : un seul nombre, aucun operateur
+    assert evaluer_npi("10 4 -") == 6     # cas piege : l'ordre des operandes (pas -6)
+    ```
 
     ```python
     def evaluer_npi(expr):
-        p = Pile()
-        for jeton in expr.split():
-            if jeton in "+-*":
+        p = Pile()                       # INITIALISER
+        for jeton in expr.split():       # PARCOURIR
+            if jeton in "+-*":           # TESTER : un operateur
                 b = p.depiler()          # 2e operande (depile en premier)
                 a = p.depiler()          # 1er operande
                 if jeton == "+":
-                    p.empiler(a + b)
+                    p.empiler(a + b)     # METTRE A JOUR
                 elif jeton == "-":
-                    p.empiler(a - b)     # attention a l'ordre : a - b
+                    p.empiler(a - b)     # METTRE A JOUR : attention, a - b
                 else:
-                    p.empiler(a * b)
+                    p.empiler(a * b)     # METTRE A JOUR
             else:
-                p.empiler(int(jeton))
-        return p.depiler()
+                p.empiler(int(jeton))    # METTRE A JOUR : un nombre
+        return p.depiler()               # RENVOYER : le nombre restant
     ```
 
     `"3 4 +"` $\to$ `7` ; `"5 1 2 + 4 * +"` $\to$ `17` (on empile `5`, puis `1+2=3`, puis `3*4=12`, puis `5+12=17`).
@@ -614,13 +674,13 @@ On considère la file `f` suivante **(tête à droite)** :
 
     ```python
     def ajouter_file_prio(f, t, p):
-        f_aux = File()
-        while (not f.est_vide()) and f.examiner()[1] > p:
-            f_aux.enfiler(f.defiler())     # les plus prioritaires passent devant
-        f_aux.enfiler((t, p))              # on insere (t, p) a sa place
-        while not f.est_vide():
-            f_aux.enfiler(f.defiler())     # on transvase le reste
-        return f_aux
+        f_aux = File()                     # INITIALISER
+        while (not f.est_vide()) and f.examiner()[1] > p:   # PARCOURIR
+            f_aux.enfiler(f.defiler())     # METTRE A JOUR : les plus prioritaires
+        f_aux.enfiler((t, p))              # METTRE A JOUR : (t, p) a sa place
+        while not f.est_vide():            # PARCOURIR : le reste
+            f_aux.enfiler(f.defiler())     # METTRE A JOUR : on transvase
+        return f_aux                       # RENVOYER
     ```
 
     *(Attention : avec la condition stricte `> p`, la boucle s’arrête dès qu’elle rencontre une tâche de *même* priorité ; `(t, p)` est donc placé *devant* les tâches de même priorité déjà présentes et passe en premier. Pour respecter l’ordre d’arrivée à priorité égale, il faudrait écrire `>= p`.)*
@@ -633,14 +693,14 @@ On considère la file `f` suivante **(tête à droite)** :
 
     ```python
     def planning(f):
-        resultat = []
-        while not f.est_vide():
+        resultat = []                      # INITIALISER
+        while not f.est_vide():            # PARCOURIR
             tache, prio = f.defiler()
             tache.avancer(25)
-            resultat.append(tache)
-            if not tache.est_terminee():
-                f = ajouter_file_prio(f, tache, prio)  # reinseree a sa place
-        return resultat
+            resultat.append(tache)         # METTRE A JOUR
+            if not tache.est_terminee():   # TESTER
+                f = ajouter_file_prio(f, tache, prio)  # METTRE A JOUR : reinseree
+        return resultat                    # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 15</span> — Une file écrite par un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-03-15 }
@@ -706,25 +766,37 @@ On dispose d’une classe `File` d’interface `est_vide`, `enfiler`, `defiler` 
 
         Une file auxiliaire garde les éléments retirés, le temps de les remettre dans `f` une fois la copie terminée. Contrairement à une pile, un transvasement de file à file conserve l’ordre.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **1.** Oui : la file est FIFO, le premier défilé est le premier enfilé dans `copie`, qui reçoit donc les éléments dans le même ordre. Avec une pile, la même méthode *inverse* l’ordre (exercice 8). Il manque la restauration : `f` a été vidée.
 
     **2.** Chaque tour de boucle défile un élément puis le réenfile : `f` garde toujours le même nombre d’éléments et n’est **jamais vide**. La condition `not f.est_vide()` reste vraie : boucle infinie (et `copie` grossit sans fin).
 
-    **3.** Une file auxiliaire garde les éléments, puis on les remet dans `f` :
+    **3.** Une file auxiliaire garde les éléments, puis on les remet dans `f` : *Appels attendus, écrits avant de coder :*
+
+    ```python
+    f = File()
+    for x in [3, 8, 5]:
+        f.enfiler(x)
+    c = copier_file(f)
+    assert c.defiler() == 3 and c.defiler() == 8   # cas normal : meme ordre
+    assert copier_file(File()).est_vide()          # cas limite : file vide
+    assert f.tete() == 3                           # cas piege : f n'a pas ete videe
+    ```
 
     ```python
     def copier_file(f):
-        aux = File()
-        copie = File()
-        while not f.est_vide():
+        aux = File()                     # INITIALISER
+        copie = File()                   # INITIALISER
+        while not f.est_vide():          # PARCOURIR
             x = f.defiler()
-            copie.enfiler(x)             # la copie, dans l'ordre
-            aux.enfiler(x)               # de quoi restaurer f
-        while not aux.est_vide():        # f retrouve son etat d'origine
-            f.enfiler(aux.defiler())
-        return copie
+            copie.enfiler(x)             # METTRE A JOUR : la copie, dans l'ordre
+            aux.enfiler(x)               # METTRE A JOUR : de quoi restaurer f
+        while not aux.est_vide():        # PARCOURIR : f retrouve son etat
+            f.enfiler(aux.defiler())     # METTRE A JOUR
+        return copie                     # RENVOYER
     ```
 
     Le transvasement de `aux` vers `f` conserve l’ordre : `f` retrouve les mêmes éléments, avec la même tête.
@@ -845,16 +917,16 @@ def parcours(graphe, depart):
 
     ```python
     def parcours2(graphe, depart):
-        p = Pile()
-        p.empiler(depart)
-        visite = []
-        while not p.est_vide():
+        p = Pile()                   # INITIALISER
+        p.empiler(depart)            # INITIALISER
+        visite = []                  # INITIALISER
+        while not p.est_vide():      # PARCOURIR
             x = p.depiler()
-            if x not in visite:
-                visite.append(x)
-                for v in graphe[x]:
-                    p.empiler(v)
-        return visite
+            if x not in visite:      # TESTER
+                visite.append(x)     # METTRE A JOUR
+                for v in graphe[x]:  # PARCOURIR : les voisins
+                    p.empiler(v)     # METTRE A JOUR
+        return visite                # RENVOYER
     ```
 
     **4.** Un résultat possible : `[’A’, ’C’, ’D’, ’B’]` (l’ordre dépend de l’ordre d’empilement des voisins). Avec la pile, on repart toujours du dernier sommet ajouté : l’ordre de visite diffère de celui de la question 2.
@@ -909,18 +981,27 @@ On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux p
 
     Quelle variable sert de « curseur » sur les cellules, et comment avance-t-elle d’une cellule à la suivante ? Quand faut-il s’arrêter ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
-    **Démarche :** une variable `c` sert de curseur : elle part de la première cellule et avance en suivant le lien `suivante` ; on compte une cellule à chaque tour, et l’on s’arrête quand le curseur vaut `None`.
+    **Démarche :** une variable `c` sert de curseur : elle part de la première cellule et avance en suivant le lien `suivante` ; on compte une cellule à chaque tour, et l’on s’arrête quand le curseur vaut `None`. *Appels attendus, écrits avant de coder :*
+
+    ```python
+    lst = Cellule(1, Cellule(2, Cellule(3, None)))
+    assert longueur(lst) == 3                  # cas normal
+    assert longueur(None) == 0                 # cas limite : liste vide
+    assert longueur(Cellule(5, None)) == 1     # cas piege : la derniere cellule compte
+    ```
 
     ```python
     def longueur(lst):
-        n = 0
-        c = lst
-        while c is not None:
-            n = n + 1
-            c = c.suivante        # on avance d'une cellule
-        return n
+        n = 0                     # INITIALISER
+        c = lst                   # INITIALISER : le curseur
+        while c is not None:      # PARCOURIR
+            n = n + 1             # METTRE A JOUR
+            c = c.suivante        # METTRE A JOUR : on avance d'une cellule
+        return n                  # RENVOYER
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `while c.suivante is not None` : la dernière cellule n’est pas comptée, et la liste vide provoque une erreur (`None` n’a pas d’attribut `suivante`).
@@ -933,30 +1014,39 @@ On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux p
 
     Avec une boucle : même parcours que pour la longueur, mais le compteur n’augmente que sous condition. En récursif : condition d’arrêt `lst is None`, puis l’appel porte sur `lst.suivante`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
-    **Démarche :** même parcours que pour la longueur, mais le compteur n’augmente que si la valeur de la cellule est `x`.
+    **Démarche :** même parcours que pour la longueur, mais le compteur n’augmente que si la valeur de la cellule est `x`. *Appels attendus, écrits avant de coder :*
+
+    ```python
+    lst = Cellule(2, Cellule(5, Cellule(2, None)))
+    assert occurrences(5, lst) == 1      # cas normal
+    assert occurrences(2, None) == 0     # cas limite : liste vide
+    assert occurrences(2, lst) == 2      # cas piege : en tete et en derniere cellule
+    ```
 
     ```python
     def occurrences(x, lst):
-        n = 0
-        c = lst
-        while c is not None:
-            if c.valeur == x:
-                n = n + 1
-            c = c.suivante
-        return n
+        n = 0                     # INITIALISER
+        c = lst                   # INITIALISER
+        while c is not None:      # PARCOURIR
+            if c.valeur == x:     # TESTER
+                n = n + 1         # METTRE A JOUR
+            c = c.suivante        # METTRE A JOUR : on avance
+        return n                  # RENVOYER
     ```
 
     *Autre méthode :* récursivement, la liste vide contient `0` fois `x` ; sinon, on compte la première cellule (`1` ou `0`) et on ajoute les occurrences dans le reste.
 
     ```python
     def occurrences(x, lst):
-        if lst is None:
+        if lst is None:                              # CAS DE BASE : liste vide
             return 0
-        if lst.valeur == x:
-            return 1 + occurrences(x, lst.suivante)
-        return occurrences(x, lst.suivante)
+        if lst.valeur == x:                          # TESTER
+            return 1 + occurrences(x, lst.suivante)  # APPEL RECURSIF, COMBINER
+        return occurrences(x, lst.suivante)          # APPEL RECURSIF
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Le n-ième élément <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-23 }
@@ -967,31 +1057,40 @@ On ne dispose que de **piles**. On veut fabriquer une file en utilisant **deux p
 
     Combien de fois faut-il suivre le lien `suivante` pour atteindre l’indice `n` ? Que vaut le curseur si la liste est trop courte ? L’erreur se lève avec `raise IndexError("indice invalide")` (voir le cours du chapitre *Programmation orientée objet*, « Signaler une erreur »).
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
-    **Démarche :** en récursif, deux conditions d’arrêt : la liste est vide (l’indice est trop grand : on lève `IndexError`) ou `n == 0` (on renvoie la valeur de la première cellule). Sinon, l’élément d’indice `n` de la liste est l’élément d’indice `n - 1` du reste.
+    **Démarche :** en récursif, deux conditions d’arrêt : la liste est vide (l’indice est trop grand : on lève `IndexError`) ou `n == 0` (on renvoie la valeur de la première cellule). Sinon, l’élément d’indice `n` de la liste est l’élément d’indice `n - 1` du reste. *Appels attendus, écrits avant de coder :*
+
+    ```python
+    lst = Cellule(4, Cellule(7, Cellule(2, None)))
+    assert nieme(1, lst) == 7      # cas normal
+    assert nieme(0, lst) == 4      # cas limite : l'indice 0, la tete
+    assert nieme(2, lst) == 2      # cas piege : le dernier indice est longueur - 1
+    ```
 
     ```python
     def nieme(n, lst):
-        if lst is None:
+        if lst is None:                         # CAS DE BASE : liste trop courte
             raise IndexError("indice invalide")
-        if n == 0:
-            return lst.valeur
-        return nieme(n - 1, lst.suivante)
+        if n == 0:                              # CAS DE BASE : on y est
+            return lst.valeur                   # RENVOYER
+        return nieme(n - 1, lst.suivante)       # APPEL RECURSIF
     ```
 
     *Autre méthode :* avec une boucle, on suit `n` fois le lien `suivante` ; si l’on tombe sur `None` en chemin, la liste est trop courte.
 
     ```python
     def nieme(n, lst):
-        c = lst
-        for i in range(n):
-            if c is None:
+        c = lst                                 # INITIALISER
+        for i in range(n):                      # PARCOURIR : n liens a suivre
+            if c is None:                       # TESTER : liste trop courte
                 raise IndexError("indice invalide")
-            c = c.suivante
-        if c is None:
+            c = c.suivante                      # METTRE A JOUR
+        if c is None:                           # TESTER
             raise IndexError("indice invalide")
-        return c.valeur
+        return c.valeur                         # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — Le collier de bonbons : maillons chaînés (d’après Amérique du Nord 2025, jour 2) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-24 }
@@ -1033,6 +1132,8 @@ zero.pred = deux ; un.pred = zero ;   deux.pred = un
 
         Q3 : créer le premier bonbon, puis, dans une boucle, chaque nouveau bonbon en le reliant au précédent dans les deux sens (une variable retient le précédent). Après la boucle, refermer le collier entre le dernier et le premier.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 4.  Écrire les **deux instructions** qui « mangent » le bonbon `deux`, c’est-à-dire le **retirent** du collier en reliant directement son prédécesseur et son successeur.
 
 5.  Quelle égalité caractérise un collier réduit à **un seul** bonbon `b` ?
@@ -1056,20 +1157,28 @@ zero.pred = deux ; un.pred = zero ;   deux.pred = un
     **2.** `a = zero.succ.valeur` : `zero.succ` est `un`, donc `a = 1`.  
     `b = un.succ.succ.pred.valeur` : `un.succ` $=$ `deux`, `deux.succ` $=$ `zero`, `zero.pred` $=$ `deux`, donc `b = 2`.
 
-    **3.** **Démarche :** une variable `precedent` retient le dernier bonbon créé ; chaque nouveau bonbon lui est relié dans les deux sens ; après la boucle, on referme le collier entre le dernier et le premier.
+    **3.** **Démarche :** une variable `precedent` retient le dernier bonbon créé ; chaque nouveau bonbon lui est relié dans les deux sens ; après la boucle, on referme le collier entre le dernier et le premier. *Appels attendus, écrits avant de coder :*
+
+    ```python
+    b = creer_collier(3)
+    u = creer_collier(1)
+    assert b.succ.valeur == 1 and b.succ.succ.succ == b   # cas normal : referme
+    assert u.succ == u and u.pred == u                    # cas limite : un seul bonbon
+    assert b.pred.valeur == 2                             # cas piege : chainage arriere
+    ```
 
     ```python
     def creer_collier(n):
-        premier = Bonbon(0)
-        precedent = premier
-        for i in range(1, n):
+        premier = Bonbon(0)                # INITIALISER
+        precedent = premier                # INITIALISER
+        for i in range(1, n):              # PARCOURIR
             courant = Bonbon(i)
-            precedent.succ = courant       # chainage avant
-            courant.pred = precedent       # chainage arriere
-            precedent = courant
+            precedent.succ = courant       # METTRE A JOUR : chainage avant
+            courant.pred = precedent       # METTRE A JOUR : chainage arriere
+            precedent = courant            # METTRE A JOUR
         precedent.succ = premier           # on referme le collier
         premier.pred = precedent
-        return premier
+        return premier                     # RENVOYER
     ```
 
     *(Pour `n = 1`, la boucle ne s’exécute pas : `premier.succ` et `premier.pred` pointent sur `premier` lui-même.)*
@@ -1087,13 +1196,13 @@ zero.pred = deux ; un.pred = zero ;   deux.pred = un
 
     ```python
     def dernier_chaine(n):
-        b = creer_collier(n)
-        while b.succ != b:              # tant qu'il reste plus d'un bonbon
+        b = creer_collier(n)           # INITIALISER
+        while b.succ != b:             # PARCOURIR : plus d'un bonbon
             mange = b.succ             # b mange son successeur
-            b.succ = mange.succ        # on retire "mange" du collier
-            mange.succ.pred = b
-            b = b.succ                 # on passe au bonbon suivant
-        return b.valeur
+            b.succ = mange.succ        # METTRE A JOUR : "mange" retire
+            mange.succ.pred = b        # METTRE A JOUR
+            b = b.succ                 # METTRE A JOUR : bonbon suivant
+        return b.valeur                # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 25</span> — Copier une liste chaînée <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-03-25 }
@@ -1112,19 +1221,30 @@ zero.pred = deux ; un.pred = zero ;   deux.pred = un
 
         Condition d’arrêt : la liste vide. Sinon, la copie commence par une nouvelle cellule : quelle valeur contient-elle, et que doit valoir sa cellule suivante ?
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 3.  Vérifier qu’après `c = copier_liste(lst)`, l’instruction `c.valeur = 10` ne modifie pas `lst`.
 
 ??? corrige "Corrigé"
 
     **1.** `lst.valeur` vaut `10`. L’instruction `autre = lst` ne crée aucune cellule : `autre` et `lst` désignent la **même** première cellule, donc la modifier par l’un des noms la modifie pour l’autre.
 
-    **2.** **Démarche :** condition d’arrêt : la liste vide, dont la copie est vide ; sinon, une **nouvelle** cellule de même valeur, suivie de la copie du reste.
+    **2.** **Démarche :** condition d’arrêt : la liste vide, dont la copie est vide ; sinon, une **nouvelle** cellule de même valeur, suivie de la copie du reste. *Appels attendus, écrits avant de coder :*
+
+    ```python
+    lst = Cellule(1, Cellule(2, None))
+    c = copier_liste(lst)
+    assert c.valeur == 1 and c.suivante.valeur == 2   # cas normal
+    assert copier_liste(None) is None                 # cas limite : liste vide
+    assert c.suivante is not lst.suivante             # cas piege : le reste aussi est neuf
+    ```
 
     ```python
     def copier_liste(lst):
-        if lst is None:                  # condition d'arret : liste vide
+        if lst is None:                       # CAS DE BASE : liste vide
             return None
-        return Cellule(lst.valeur, copier_liste(lst.suivante))
+        reste = copier_liste(lst.suivante)    # APPEL RECURSIF : copie du reste
+        return Cellule(lst.valeur, reste)     # COMBINER : une cellule neuve devant
     ```
 
     Chaque appel crée une **nouvelle** cellule (`Cellule(…)`) avec la même valeur, suivie de la copie du reste.
@@ -1149,13 +1269,25 @@ zero.pred = deux ; un.pred = zero ;   deux.pred = un
     `if lst is None or x <= lst.valeur:`  
     `return Cellule(x, lst)`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    lst = Cellule(1, Cellule(2, Cellule(5, None)))
+    assert nieme(2, inserer(3, lst)) == 3     # cas normal : au milieu
+    assert inserer(3, None).valeur == 3       # cas limite : liste vide
+    assert nieme(3, inserer(9, lst)) == 9     # cas piege : tout a la fin
+    ```
 
     ```python
     def inserer(x, lst):
-        if lst is None or x <= lst.valeur:
-            return Cellule(x, lst)                 # x se place ici, devant le reste
-        return Cellule(lst.valeur, inserer(x, lst.suivante))
+        if lst is None or x <= lst.valeur:    # CAS DE BASE : x se place ici
+            return Cellule(x, lst)            # devant le reste
+        reste = inserer(x, lst.suivante)      # APPEL RECURSIF
+        return Cellule(lst.valeur, reste)     # COMBINER : la premiere valeur devant
     ```
 
     Insérer `3` dans `1, 2, 5, 8` : `3 > 1` et `3 > 2`, puis `3 <= 5` $\Rightarrow$ on obtient `1, 2, 3, 5, 8`.
@@ -1260,6 +1392,8 @@ On dispose de l’interface du cours : `liste_vide()`, `est_vide(L)`, `ajouter_t
 
         Condition d’arrêt : la liste vide ne contient rien. Sinon, soit la tête est `x`, soit il faut chercher dans la queue.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> Toujours avec la seule interface, écrire `renverser(L)` qui renvoie une **nouvelle** liste contenant les éléments de `L` dans l’ordre inverse.
 
     ??? pouce "Coup de pouce"
@@ -1274,16 +1408,23 @@ On dispose de l’interface du cours : `liste_vide()`, `est_vide(L)`, `ajouter_t
 
     **1.** On lit de l’intérieur vers l’extérieur : `1`, puis `8` devant, puis `3` devant. `L` est la liste `3, 8, 1`. `tete(L)` $\to$ `3` ; `tete(queue(L))` $\to$ `8` ; après trois `queue`, il ne reste rien : `est_vide(…)` $\to$ `True`.
 
-    **2.**
+    **2.** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    L = ajouter_tete(3, ajouter_tete(8, ajouter_tete(1, liste_vide())))
+    assert appartient(8, L)                  # cas normal
+    assert not appartient(8, liste_vide())   # cas limite : liste vide
+    assert appartient(1, L)                  # cas piege : la derniere valeur
+    ```
 
     ```python
     def appartient(x, L):
         """Renvoie True si x est un element de la liste L."""
-        if est_vide(L):                  # condition d'arret : liste vide
+        if est_vide(L):                  # CAS DE BASE : liste vide
             return False
-        if tete(L) == x:
+        if tete(L) == x:                 # CAS DE BASE : x trouve en tete
             return True
-        return appartient(x, queue(L))   # on cherche dans la queue
+        return appartient(x, queue(L))   # APPEL RECURSIF : dans la queue
     ```
 
     `appartient(8, L)` $\to$ `True` ; `appartient(5, L)` $\to$ `False`. Variant : la longueur de `L`, qui diminue de 1 à chaque appel.
@@ -1293,11 +1434,11 @@ On dispose de l’interface du cours : `liste_vide()`, `est_vide(L)`, `ajouter_t
     ```python
     def renverser(L):
         """Renvoie une nouvelle liste : les elements de L dans l'ordre inverse."""
-        r = liste_vide()
-        while not est_vide(L):
-            r = ajouter_tete(tete(L), r)   # l'element lu passe devant r
-            L = queue(L)
-        return r
+        r = liste_vide()                   # INITIALISER
+        while not est_vide(L):             # PARCOURIR
+            r = ajouter_tete(tete(L), r)   # METTRE A JOUR : passe devant r
+            L = queue(L)                   # METTRE A JOUR : on avance
+        return r                           # RENVOYER
     ```
 
     Sur `3, 8, 1`, `r` vaut successivement `3`, puis `8, 3`, puis `1, 8, 3`. La variable locale `L` avance dans la liste, mais la liste reçue n’est pas modifiée.

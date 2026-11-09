@@ -440,6 +440,8 @@ L’appel `nb_progressions([12, 8, 10])` renvoie `2` au lieu de `1`, **sans aucu
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Des garde-fous <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-05-specifier-et-mettre-au-point-ses-program-tp-1-7 }
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire `notes_valides(notes)` qui renvoie `True` si toutes les notes sont entre 0 et 20, `False` sinon. La tester (penser à `0`, `20`, `-1`, `20.5` et au tableau vide).
 
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Ajouter des `assert` avec message pour **toutes** les préconditions du cahier des charges : notes valides, même longueur pour `notes` et `coefs`, coefficients strictement positifs, `x` positif, `m` présente dans `moyennes`… Vérifier que `moyenne_ponderee([12, 25], [1, 1])` s’arrête avec un message clair.

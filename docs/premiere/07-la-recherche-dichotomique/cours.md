@@ -60,18 +60,24 @@ On repère la zone de recherche par deux indices : `deb` (début) et `fin`. Le m
 ```python
 def recherche_dichotomique(t, x):
     """Renvoie True si x est dans le tableau TRIE t, False sinon."""
-    deb = 0
-    fin = len(t) - 1
-    while deb <= fin:                 # tant que la zone n'est pas vide
+    deb = 0                           # INITIALISER : premier indice
+    fin = len(t) - 1                  # INITIALISER : dernier indice
+    while deb <= fin:                 # PARCOURIR : tant que la zone n'est pas vide
         mil = (deb + fin) // 2        # indice du milieu
-        if t[mil] == x:
-            return True               # trouve !
-        elif x > t[mil]:
-            deb = mil + 1             # on garde la moitie DROITE
+        if t[mil] == x:               # TESTER
+            return True               # RENVOYER : trouve !
+        elif x > t[mil]:              # TESTER
+            deb = mil + 1             # METTRE A JOUR : on garde la moitie DROITE
         else:
-            fin = mil - 1             # on garde la moitie GAUCHE
-    return False                      # zone vide : x est absent
+            fin = mil - 1             # METTRE A JOUR : on garde la moitie GAUCHE
+    return False                      # RENVOYER : zone vide, x est absent
 ```
+
+<span class="routine">▷ Je prédis.</span> Avec `t = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91]`, combien de tours de boucle font `recherche_dichotomique(t, 91)` et `recherche_dichotomique(t, 4)` ?
+
+??? verifie "Je vérifie"
+
+    `4` tours pour `91` (milieux d’indices 4, 7, 8, puis 9 : trouvé), `3` tours pour `4` (milieux 4, 1, 0, puis `deb = 1 > fin = 0` : `False`). Un absent ne coûte pas forcément plus qu’un présent.
 
 !!! remarque "Remarque — Les deux façons de sortir de la boucle"
 
@@ -138,6 +144,12 @@ $$n \to \frac{n}{2} \to \frac{n}{4} \to \frac{n}{8} \to \cdots \to 1.$$
     <span id="lex-logarithme07" class="ancre"></span>Diviser `n` par 2 un nombre $a$ de fois pour tomber sur 1 revient à écrire $n = 2^a$. Ce nombre $a$ d’étapes se note $a = \log_2(n)$ : c’est la **réciproque** de la puissance de 2.
 
 Retenez surtout l’ordre de grandeur : **doubler la taille du tableau n’ajoute qu’*une seule* étape** (un tour de plus, au plus).
+
+<span class="routine">▷ Je prédis.</span> Au plus combien de tours pour un tableau trié de `1000` éléments ? Et de `2000` ?
+
+??? verifie "Je vérifie"
+
+    `10` : $1000 \to 500 \to 250 \to 125 \to 62 \to 31 \to 15 \to 7 \to 3 \to 1$ fait 9 divisions, plus le dernier tour. Pour `2000`, une division de plus : `11`.
 
 Le tableau ci-dessous donne le nombre *maximal* de comparaisons. Le contraste avec la recherche séquentielle est saisissant. À droite, pour `n = 1000`, la largeur de la zone de recherche *avant* chacune des 10 comparaisons, dans le pire des cas (élément absent, plus grand que tous) : chaque barre est la **moitié** de la précédente.
 

@@ -135,29 +135,39 @@ On veut classer la fleur $x = (5.2 ; 1.9)$.
 
         `distance2` : un accumulateur et une boucle sur les indices. `vote` : compter d’abord chaque étiquette dans un dictionnaire, puis chercher l’étiquette de compte maximal (invariant du champion).
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     `distance2` : un accumulateur et une boucle sur les indices des descripteurs. `vote` : un dictionnaire d’occurrences, puis une recherche du champion (l’étiquette de plus grand compte).
 
+    *Appels attendus pour `vote`, écrits avant de coder :*
+
+    ```python
+    assert vote(["pomme", "poire", "pomme"]) == "pomme"  # cas normal
+    assert vote(["poire"]) == "poire"                    # cas limite : un seul voisin
+    assert vote(["poire", "pomme", "pomme"]) == "pomme"  # cas piege : la majorite n'est pas en tete
+    ```
+
     ```python
     def distance2(a, b):
-        s = 0
-        for i in range(len(a)):
-            s = s + (a[i] - b[i]) ** 2
-        return s            # distance au carre (racine inutile pour comparer)
+        s = 0                                                       # INITIALISER
+        for i in range(len(a)):                                     # PARCOURIR
+            s = s + (a[i] - b[i]) ** 2                              # METTRE A JOUR
+        return s                                                    # RENVOYER : d2, sans racine
 
     def vote(etiquettes):
-        compte = {}
-        for e in etiquettes:
-            if e in compte:
-                compte[e] += 1
+        compte = {}                                                 # INITIALISER
+        for e in etiquettes:                                        # PARCOURIR
+            if e in compte:                                         # TESTER
+                compte[e] += 1                                      # METTRE A JOUR
             else:
-                compte[e] = 1
-        meilleure = None
-        for e in compte:
-            if meilleure is None or compte[e] > compte[meilleure]:
-                meilleure = e
-        return meilleure
+                compte[e] = 1                                       # METTRE A JOUR
+        meilleure = None                                            # INITIALISER : le champion
+        for e in compte:                                            # PARCOURIR
+            if meilleure is None or compte[e] > compte[meilleure]:  # TESTER
+                meilleure = e                                       # METTRE A JOUR
+        return meilleure                                            # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — <span class="run" title="À programmer et tester sur machine">▶</span>  Le plus proche voisin, à trous <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-12-6 }
@@ -189,11 +199,11 @@ def plus_proche(exemples, x):
 
     ```python
     def plus_proche(exemples, x):
-        dists = []
-        for descripteurs, etiquette in exemples:
-            dists.append((distance2(x, descripteurs), etiquette))
-        dists.sort(key=lambda couple: couple[0])
-        return dists[0][1]
+        dists = []                                                 # INITIALISER
+        for descripteurs, etiquette in exemples:                   # PARCOURIR
+            dists.append((distance2(x, descripteurs), etiquette))  # METTRE A JOUR
+        dists.sort(key=lambda couple: couple[0])                   # tri par distance croissante
+        return dists[0][1]                                         # RENVOYER : l'etiquette du plus proche
     ```
 
     **b)** Après le tri, `dists` contient les couples `(distance au carré, etiquette)` rangés par distance **croissante**. `dists[0]` est le couple le plus proche ; `dists[0][1]` est donc l’étiquette du plus proche voisin. **c)** `plus_proche(iris, [4.7, 1.4])` renvoie `’versicolor’` (distance au carré $0.05$).
@@ -221,17 +231,27 @@ Tester sur la table des iris de l’exercice 4 avec `x = [4.7, 1.4]` et $k=3$.
     `for descripteurs, etiquette in exemples:`  
     …
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     On range les couples `(distance, etiquette)`, on les trie par distance, on garde les étiquettes des $k$ premiers, puis on vote avec la fonction `vote`.
 
+    *Appels attendus pour `classer`, écrits avant de coder (`iris` : les six exemples de l’exercice 4) :*
+
+    ```python
+    assert classer(iris, [4.7, 1.4], 3) == "versicolor"   # cas normal
+    assert classer(iris, [1.4, 0.2], 1) == "setosa"       # cas limite : x est un exemple (distance 0)
+    assert classer(iris, [5.4, 1.5], 3) == "virginica"    # cas piege : le plus proche (versicolor) perd le vote
+    ```
+
     ```python
     def k_plus_proches(exemples, x, k):
-        dists = []
-        for descripteurs, classe in exemples:
-            dists.append((distance2(x, descripteurs), classe))
-        dists.sort(key=lambda couple: couple[0])
-        return [classe for (d, classe) in dists[:k]]
+        dists = []                                              # INITIALISER
+        for descripteurs, classe in exemples:                   # PARCOURIR
+            dists.append((distance2(x, descripteurs), classe))  # METTRE A JOUR
+        dists.sort(key=lambda couple: couple[0])                # tri par distance croissante
+        return [classe for (d, classe) in dists[:k]]            # RENVOYER : les k premiers
 
     def classer(exemples, x, k):
         return vote(k_plus_proches(exemples, x, k))
@@ -287,32 +307,40 @@ Le vote peut aboutir à une **égalité**. Une règle courante : en cas d’éga
     `compte = compter(voisins[:n])`  
     …
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
-    **a)** Voisins rangés : versicolor, versicolor, virginica, virginica, setosa, setosa. Égalité pour $k = 4$ (2 contre 2), $k = 5$ (2, 2 et 1) et $k = 6$ (2, 2 et 2). **b)**
+    **a)** Voisins rangés : versicolor, versicolor, virginica, virginica, setosa, setosa. Égalité pour $k = 4$ (2 contre 2), $k = 5$ (2, 2 et 1) et $k = 6$ (2, 2 et 2). **b)** *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert vote_departage(["A", "B", "B", "A", "C"]) == "B"   # cas normal (enonce)
+    assert vote_departage(["A"]) == "A"                       # cas limite : un seul voisin
+    assert vote_departage(["B", "A", "A", "B"]) == "A"        # cas piege : on retire le B lointain, pas le A
+    ```
 
     ```python
     def compter(voisins):
-        compte = {}
-        for c in voisins:
-            if c in compte:
-                compte[c] += 1
+        compte = {}                   # INITIALISER
+        for c in voisins:             # PARCOURIR
+            if c in compte:           # TESTER
+                compte[c] += 1        # METTRE A JOUR
             else:
-                compte[c] = 1
-        return compte
+                compte[c] = 1         # METTRE A JOUR
+        return compte                 # RENVOYER
 
     def vote_departage(voisins):
-        n = len(voisins)
+        n = len(voisins)              # INITIALISER : tous les voisins
         while n > 0:
             compte = compter(voisins[:n])
-            maxi = 0
-            for c in compte:
-                if compte[c] > maxi:
-                    maxi = compte[c]
+            maxi = 0                  # INITIALISER
+            for c in compte:          # PARCOURIR
+                if compte[c] > maxi:  # TESTER
+                    maxi = compte[c]  # METTRE A JOUR
             gagnants = [c for c in compte if compte[c] == maxi]
-            if len(gagnants) == 1:
-                return gagnants[0]
-            n = n - 1          # egalite : on retire le voisin le plus lointain
+            if len(gagnants) == 1:    # TESTER : une seule classe en tete ?
+                return gagnants[0]    # RENVOYER
+            n = n - 1                 # METTRE A JOUR : on retire le plus lointain
     ```
 
     La boucle s’arrête : avec un seul voisin, il ne peut pas y avoir d’égalité. **c)** Avec 5 voisins : A 2, B 2, C 1 (égalité) ; avec 4 : A 2, B 2 (égalité) ; avec 3 : A 1, B 2 $\to$ `"B"`. Le plus proche voisin est un A, mais une fois les voisins lointains retirés, B reste majoritaire : la règle départage par le **vote**, pas par le premier voisin. Sur les iris, avec $k = 4$, 5 ou 6, on obtient `’versicolor’`.
@@ -440,17 +468,26 @@ On dispose d’exemples **d’entraînement** (étiquetés) et d’exemples **de
         `for descripteurs, etiquette in test:`  
         …
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
-    **a)**
+    **a)** *Appels attendus, écrits avant de coder (`iris` : les six exemples de l’exercice 4) :*
+
+    ```python
+    deux = [([4.7, 1.4], "versicolor"), ([5.4, 1.5], "versicolor")]
+    assert taux_reussite(iris, deux, 3) == 0.5       # cas normal : une bonne reponse sur deux
+    assert taux_reussite(iris, iris, 1) == 1.0       # cas limite : test = entrainement, score trompeur
+    assert taux_reussite(iris, deux[1:], 3) == 0.0   # cas piege : le plus proche est versicolor, le vote dit virginica
+    ```
 
     ```python
     def taux_reussite(train, test, k):
-        bons = 0
-        for descripteurs, vraie in test:
-            if classer(train, descripteurs, k) == vraie:
-                bons += 1
-        return bons / len(test)
+        bons = 0                                          # INITIALISER
+        for descripteurs, vraie in test:                  # PARCOURIR
+            if classer(train, descripteurs, k) == vraie:  # TESTER : bonne prediction ?
+                bons += 1                                 # METTRE A JOUR
+        return bons / len(test)                           # RENVOYER : une proportion
     ```
 
     **b)** Sur les exemples d’entraînement, l’évaluation est **trompeuse** (avec $k=1$, chaque exemple est son propre voisin $\to$ 100 %). Seul un jeu de **test** (jamais vu) mesure la capacité à **généraliser**. **c)** Le meilleur $k$ dépend des données : aucune valeur ne convient à tous les problèmes, d’où l’essai de plusieurs valeurs sur le jeu de test (c’est la façon habituelle de **choisir** $k$). Avec $k$ trop petit ($k=1$), on copie le plus proche voisin, même aberrant : très sensible au bruit. Avec $k$ trop grand, on interroge des voisins lointains ; à l’extrême, on répond toujours la classe la plus fréquente. Le bon $k$ est un **compromis**.

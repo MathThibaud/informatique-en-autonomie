@@ -130,10 +130,10 @@ On veut décider le problème « $n$ est-il premier ? » pour un entier $n \ge
 
         ```python
         def est_premier(n):
-            for d in range(2, n):       # (a) on teste 2, 3, ..., n-1
-                if n % d == 0:
-                    return False        # (b) un diviseur -> pas premier
-            return True                 # (c) aucun diviseur -> premier
+            for d in range(2, n):  # PARCOURIR : (a) on teste 2, 3, ..., n-1
+                if n % d == 0:     # TESTER
+                    return False   # RENVOYER : (b) un diviseur -> pas premier
+            return True            # RENVOYER : (c) aucun diviseur -> premier
         ```
 
         <span class="erreurfreq">▷ Erreur fréquente.</span> Placer `return True` dans la boucle (dans un `else`) : la fonction conclurait « premier » dès le premier entier testé qui ne divise pas $n$ (`est_premier(9)` renverrait `True`).
@@ -473,7 +473,7 @@ On dispose d’une variable `code_paradoxe` contenant le code de `paradoxe`, et 
 
         ```python
         def infini(n):
-            return infini(n)      # appel recursif sans condition d'arret
+            return infini(n)  # APPEL RECURSIF, sans aucun CAS DE BASE
         ```
 
         (aucune valeur de `n` ne fait terminer l’appel.)
@@ -531,6 +531,8 @@ On cherche une fonction `arret` telle que `arret(programme)` renvoie `True` si `
 
         Q5 : il faut un cas où elle répond `False` à tort et un cas où elle répond `True` à tort. Une boucle `while` est-elle le seul moyen de ne pas s’arrêter ?
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 3.  On suppose finalement disposer d’une vraie fonction `arret(programme)` (renvoyant `True` si `exec(programme)` termine, `False` sinon). Écrire `terminaison_inverse(programme)` qui **termine** si `programme` ne termine pas, et **ne termine pas** si `programme` termine.
 
     ??? pouce "Coup de pouce 2 (début de solution)"
@@ -558,15 +560,21 @@ On cherche une fonction `arret` telle que `arret(programme)` renvoie `True` si `
 
     4.  `arret_essai1` **exécute** le programme puis renvoie `True`. Cela ne décide **rien** : si le programme passé **ne s’arrête pas**, alors `exec(programme)` ne s’arrête pas non plus, et la fonction **elle-même ne termine pas** — donc ne renverra jamais `False`. Or un *décideur* doit s’arrêter dans **tous** les cas. Ce code ne convient pas.
 
-    5.
+    5.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert arret_essai2("x = 0\nwhile x > 0:\n    x = x - 1") == False   # cas normal
+        assert arret_essai2("") == True                                     # cas limite : programme vide
+        assert arret_essai2("# while") == False                             # cas piege : mot en toute fin
+        ```
 
         ```python
         def arret_essai2(programme):
             m = len("while")
-            for i in range(len(programme) - m + 1):
-                if programme[i:i + m] == "while":     # fenetre glissante
-                    return False
-            return True
+            for i in range(len(programme) - m + 1):  # PARCOURIR les positions
+                if programme[i:i + m] == "while":    # TESTER : fenetre glissante
+                    return False                     # RENVOYER des qu'on le trouve
+            return True                              # RENVOYER
         ```
 
         *Autre méthode :* avec l’opérateur `in` des chaînes (`present` du TP du chapitre 12), `return "while" not in programme`.
@@ -673,12 +681,12 @@ tests = [(0, 0), (2, 4), (3, 9)]
 
         ```python
         def carre_c(n):
-            resultat = 0
-            i = 0
+            resultat = 0                      # INITIALISER
+            i = 0                             # INITIALISER
             while i < abs(n):
-                resultat = resultat + abs(n)
+                resultat = resultat + abs(n)  # METTRE A JOUR
                 i = i + 1
-            return resultat
+            return resultat                   # RENVOYER
         ```
 
         On ajoute $|n|$ exactement $|n|$ fois, donc on obtient $|n| \times |n| = n^2$. **Variant** : $|n| - i$ est un entier positif tant qu’on est dans la boucle et il **diminue de $1$** à chaque tour ; il ne peut pas décroître indéfiniment, donc la boucle s’arrête (après $|n|$ tours).
@@ -711,6 +719,8 @@ Une jeune entreprise affirme avoir mis au point un antivirus « infaillible »
         `def contient(texte, motif):`  
         `n = len(motif)`  
         `for i in range(len(texte) - n + 1):`
+
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
 
 3.  On pose :
 
@@ -755,15 +765,23 @@ On suppose maintenant qu’une fonction `dangereux(code)` parfaite existe : elle
 
     1.  **Oui** : la donnée d’entrée est le code source d’un programme (une chaîne de caractères), et la réponse est *oui* (`True`) ou *non* (`False`).
 
-    2.  Par exemple :
+    2.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert contient("x = 1\nformater_disque()", "formater_disque") == True   # cas normal
+        assert contient("abc", "") == True                                     # cas limite : motif vide
+        assert contient("disq", "disque") == False                             # cas piege : motif trop long
+        ```
+
+        Par exemple :
 
         ```python
         def contient(texte, motif):
             n = len(motif)
-            for i in range(len(texte) - n + 1):
-                if texte[i:i + n] == motif:
-                    return True
-            return False
+            for i in range(len(texte) - n + 1):  # PARCOURIR les positions
+                if texte[i:i + n] == motif:      # TESTER la tranche
+                    return True                  # RENVOYER des qu'on le trouve
+            return False                         # RENVOYER
         ```
 
     3.  **Oui**, elle s’arrête toujours : la boucle `for` parcourt un nombre **fini** de positions. Mais elle décide le problème « le **texte** du programme contient-il le mot `formater_disque` ? », qui porte sur le *texte* du programme et non sur son *comportement*.

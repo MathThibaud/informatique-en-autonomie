@@ -373,6 +373,8 @@ On dispose de la variable `alphabet` (liste des $26$ lettres dans l’ordre) acc
         `for lettre in chaine:`  
         `...`
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 On dispose aussi de `indices_vers_lettres` (réciproque, non demandée). Voici la fonction `chiffrement`, incomplète :
 
 ```python
@@ -429,19 +431,27 @@ def chiffrement(msg, cle):
 
         ```python
         def indice(L, element):
-            for i in range(len(L)):
-                if L[i] == element:
-                    return i
+            for i in range(len(L)):  # PARCOURIR les indices
+                if L[i] == element:  # TESTER
+                    return i         # RENVOYER des qu'on trouve
         ```
 
-    3.  **Démarche :** une liste vide que l’on remplit en parcourant la chaîne : à chaque lettre, on ajoute son indice dans `alphabet`.
+    3.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert lettres_vers_indices('HELLO') == [7, 4, 11, 11, 14]   # cas normal
+        assert lettres_vers_indices('') == []                        # cas limite : chaine vide
+        assert lettres_vers_indices('AZ') == [0, 25]                 # cas piege : premiere et derniere lettres
+        ```
+
+        **Démarche :** une liste vide que l’on remplit en parcourant la chaîne : à chaque lettre, on ajoute son indice dans `alphabet`.
 
         ```python
         def lettres_vers_indices(chaine):
-            resultat = []
-            for lettre in chaine:
-                resultat.append(indice(alphabet, lettre))
-            return resultat
+            resultat = []                                  # INITIALISER
+            for lettre in chaine:                          # PARCOURIR
+                resultat.append(indice(alphabet, lettre))  # METTRE A JOUR
+            return resultat                                # RENVOYER
         ```
 
         *Autre méthode :* on construit directement la liste des indices par compréhension.
@@ -467,13 +477,13 @@ def chiffrement(msg, cle):
             indices_msg = lettres_vers_indices(msg)
             indices_cle = lettres_vers_indices(cle)
             n = len(msg)
-            indices_msg_dechiffre = []
-            for k in range(n):
+            indices_msg_dechiffre = []                          # INITIALISER
+            for k in range(n):                                  # PARCOURIR
                 ind = indices_msg[k] - indices_cle[k]
-                if ind < 0:
+                if ind < 0:                                     # TESTER
                     ind = ind + 26
-                indices_msg_dechiffre.append(ind)
-            return indices_vers_lettres(indices_msg_dechiffre)
+                indices_msg_dechiffre.append(ind)               # METTRE A JOUR
+            return indices_vers_lettres(indices_msg_dechiffre)  # RENVOYER
         ```
 
     **Partie B.**
@@ -561,6 +571,8 @@ def generer_ordre(cle):
         `for i in range(6):`  
         `for j in range(6):`
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 5.  Alice et Bob changent de clé chaque jour et souhaitent se l’échanger par un chiffrement **asymétrique**. Expliquer la différence entre chiffrement symétrique et asymétrique.
 
 ??? corrige "Corrigé"
@@ -588,31 +600,37 @@ def generer_ordre(cle):
 
         ```python
         def grille_vide(n):
-            grille = []
-            for i in range(n):
-                ligne = []
-                for j in range(n):
-                    ligne.append("")
-                grille.append(ligne)
-            return grille
+            grille = []               # INITIALISER
+            for i in range(n):        # PARCOURIR les lignes
+                ligne = []            # INITIALISER une ligne neuve
+                for j in range(n):    # PARCOURIR les colonnes
+                    ligne.append("")  # METTRE A JOUR
+                grille.append(ligne)  # METTRE A JOUR
+            return grille             # RENVOYER
         ```
 
     6.  `(a)` `range(6)` ; `(b)` `range(6)` ; `(c)` `ordre_insertion[indice]`.
 
-    7.
+    7.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert chiffrer('SECURITY1024', 'BAC') == [(3, 2), (3, 1), (1, 3)]   # cas normal
+        assert chiffrer('SECURITY1024', '') == []                            # cas limite : message vide
+        assert chiffrer('SECURITY1024', 'S') == [(1, 1)]                     # cas piege : numeros a partir de 1
+        ```
 
         ```python
         def generer_dico(cle):
             grille = generer_grille(cle)
-            dico = {}
-            for i in range(6):
-                for j in range(6):
-                    dico[grille[i][j]] = (i + 1, j + 1)
-            return dico
+            dico = {}                                    # INITIALISER
+            for i in range(6):                           # PARCOURIR les lignes
+                for j in range(6):                       # PARCOURIR les colonnes
+                    dico[grille[i][j]] = (i + 1, j + 1)  # METTRE A JOUR : numeros a partir de 1
+            return dico                                  # RENVOYER
 
         def chiffrer(cle, message):
             dico = generer_dico(cle)
-            return [dico[c] for c in message]    # le couple de chaque caractere
+            return [dico[c] for c in message]            # le couple de chaque caractere
         ```
 
     8.  Symétrique : *une* clé partagée (ici la grille) ; le problème est de **se l’échanger** en sécurité. Asymétrique : *deux* clés (publique/privée), ce qui permet justement d’échanger la clé symétrique quotidienne sans l’avoir jamais transmise en clair.
@@ -777,6 +795,8 @@ On suppose que les mots présents dans un mot de passe sont entiers et séparés
         `return False`  
         `for mot in recherche_mot(mdp):`
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **Barème indicatif** (sur 6) : Q1 : 1,5 ; Q2 : 1,5 ; Q3 : 1,5 ; Q4 : 1,5
@@ -785,21 +805,21 @@ On suppose que les mots présents dans un mot de passe sont entiers et séparés
 
         ```python
         def mdp_fort(mdp):
-            if len(mdp) < 12:
+            if len(mdp) < 12:                    # VERIFIER la longueur
                 return False
-            majuscules = 0
-            chiffres = 0
-            symboles = 0
-            for caractere in mdp:
-                if caractere.isupper():
-                    majuscules += 1
-                if '0' <= caractere <= '9':
-                    chiffres += 1
-                if caractere in liste_symboles:
-                    symboles += 1
+            majuscules = 0                       # INITIALISER
+            chiffres = 0                         # INITIALISER
+            symboles = 0                         # INITIALISER
+            for caractere in mdp:                # PARCOURIR
+                if caractere.isupper():          # TESTER
+                    majuscules += 1              # METTRE A JOUR
+                if '0' <= caractere <= '9':      # TESTER
+                    chiffres += 1                # METTRE A JOUR
+                if caractere in liste_symboles:  # TESTER
+                    symboles += 1                # METTRE A JOUR
             if majuscules < 2 or chiffres < 2 or symboles < 2:
                 return False
-            return True
+            return True                          # RENVOYER
         ```
 
         Ligne 10 : plutôt que la méthode `isdigit` proposée par l’énoncé, on compare le caractère aux bornes `’0’` et `’9’` : les chiffres se suivent dans la table des caractères, donc `’0’ <= caractere <= ’9’` teste exactement « est-ce un chiffre ? » (les deux écritures sont acceptées). De même, `’A’ <= c <= ’Z’` teste une majuscule non accentuée.
@@ -827,10 +847,10 @@ On suppose que les mots présents dans un mot de passe sont entiers et séparés
         ```python
         def recherche_mot(mdp):
             mot = transforme(mdp)
-            trouve = []
-            i = 0
-            while i < len(mot):
-                if '0' <= mot[i] <= '9':   # si le caractere est un chiffre
+            trouve = []                    # INITIALISER
+            i = 0                          # INITIALISER
+            while i < len(mot):            # PARCOURIR
+                if '0' <= mot[i] <= '9':   # TESTER : si le caractere est un chiffre
                     i = i + 1
                 elif mot[i] in liste_symboles:
                     i = i + 1
@@ -842,22 +862,30 @@ On suppose que les mots présents dans un mot de passe sont entiers et séparés
                     while i < len(mot) and not ('0' <= mot[i] <= '9') and mot[i] not in liste_symboles:
                         chaine = chaine + mot[i]
                         i = i + 1
-                    trouve.append(chaine)
-            return trouve
+                    trouve.append(chaine)  # METTRE A JOUR
+            return trouve                  # RENVOYER
         ```
 
         La condition `i < len(mot)` doit être testée *en premier* (évaluation paresseuse du `and`) pour ne pas lire `mot[i]` hors de la chaîne quand le mot de passe se termine par une lettre.
 
-    4.  Un mot de passe extra fort est d’abord fort, puis ne contient aucun mot d’au moins $4$ lettres présent dans `dicoFR` :
+    4.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert mdp_extra_fort('Chef!14Neuro@') == False    # cas normal : fort, mais contient le mot chef
+        assert mdp_extra_fort('Lit!14Bus@7#') == True      # cas limite : mots de 3 lettres seulement
+        assert mdp_extra_fort('xq7!zr') == False           # cas piege : aucun mot, mais pas fort
+        ```
+
+        Un mot de passe extra fort est d’abord fort, puis ne contient aucun mot d’au moins $4$ lettres présent dans `dicoFR` :
 
         ```python
         def mdp_extra_fort(mdp):
-            if not mdp_fort(mdp):
+            if not mdp_fort(mdp):                # VERIFIER d'abord qu'il est fort
                 return False
-            for m in recherche_mot(mdp):
-                if len(m) >= 4 and m in dicoFR:
-                    return False
-            return True
+            for m in recherche_mot(mdp):         # PARCOURIR les mots trouves
+                if len(m) >= 4 and m in dicoFR:  # TESTER
+                    return False                 # RENVOYER des qu'un mot est trouve
+            return True                          # RENVOYER
         ```
 
         Ainsi `mdp_extra_fort(’@20!HôPiTaL&24#’)` renvoie `False` (il contient « hôpital »).
@@ -910,6 +938,8 @@ def chiffrer_xor(codes, cle):
         `cle = []`  
         `for i in range(n):`
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 3.  Le cours présente le masque jetable comme un chiffrement **inviolable**. Citer les conditions qu’il impose et expliquer lesquelles ne sont pas respectées ici.
 
 **Partie B — Échanger une clé neuve avec RSA.** Pour corriger le défaut, l’application tire au hasard une **nouvelle clé** à chaque ouverture et l’envoie d’abord au casier, chiffrée avec RSA. Le casier possède une paire de clés fabriquée avec $p = 17$, $q = 19$ et $e = 5$.
@@ -940,11 +970,11 @@ def chiffrer_xor(codes, cle):
 
         ```python
         def chiffrer_xor(codes, cle):
-            resultat = []
-            for i in range(len(codes)):
-                k = cle[i % len(cle)]         # la cle est repetee
-                resultat.append(codes[i] ^ k)
-            return resultat
+            resultat = []                      # INITIALISER
+            for i in range(len(codes)):        # PARCOURIR
+                k = cle[i % len(cle)]          # la cle est repetee
+                resultat.append(codes[i] ^ k)  # METTRE A JOUR
+            return resultat                    # RENVOYER
         ```
 
         Pour `i` $= 0, 1, 2, 3, 4, 5, 6$, l’indice `i % 3` vaut $0, 1, 2, 0, 1, 2, 0$ : la clé est reprise depuis le début tous les trois caractères.
@@ -961,7 +991,15 @@ def chiffrer_xor(codes, cle):
 
         Elle retrouve la clé `[23, 5, 42]`.
 
-    5.  On applique la question 4 à chaque position : le nombre d’indice `i` de la clé vaut `intercepte[i] ^ debut_connu[i]`.
+    5.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert retrouver_cle([88, 80, 124], [79, 85, 86], 3) == [23, 5, 42]   # cas normal
+        assert retrouver_cle([88, 80, 124], [79, 85, 86], 0) == []            # cas limite : n = 0
+        assert retrouver_cle([88, 80, 124, 69], [79, 85, 86, 82], 3) == [23, 5, 42]   # cas piege : s'arreter a n
+        ```
+
+        On applique la question 4 à chaque position : le nombre d’indice `i` de la clé vaut `intercepte[i] ^ debut_connu[i]`.
 
         ```python
         def retrouver_cle(intercepte, debut_connu, n):

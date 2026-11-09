@@ -124,9 +124,9 @@ def fact(n):
 
     ```python
     def somme(n):
-        if n == 0:
+        if n == 0:                   # CAS DE BASE : enfin present
             return 0
-        return n + somme(n - 1)
+        return n + somme(n - 1)      # APPEL RECURSIF, COMBINER
     ```
 
     **(B)** la condition d’arrêt `n == 1` n’est **jamais atteinte** si on appelle `fact(0)` : on enchaîne `fact(-1)`, `fact(-2)`… $\Rightarrow$ `RecursionError`. Correction : mettre `if n == 0` (ou `if n <= 1`).
@@ -188,11 +188,11 @@ def fib(n):
 
     ```python
     def moutons(n):
-        if n == 0:
+        if n == 0:                   # CAS DE BASE
             print("Je dors !")
         else:
             print("Encore un mouton")
-            moutons(n - 1)
+            moutons(n - 1)           # APPEL RECURSIF : les autres moutons
     ```
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — Somme des nombres impairs <span class="ia ia-rouge" title="Sans IA : le but est l'automatisme lui-même"></span> { #ex-01-6 }
@@ -211,9 +211,9 @@ def fib(n):
 
     ```python
     def somme_impairs(n):
-        if n == 0:
+        if n == 0:                                    # CAS DE BASE : aucun terme
             return 0
-        return (2 * n - 1) + somme_impairs(n - 1)
+        return (2 * n - 1) + somme_impairs(n - 1)     # APPEL RECURSIF, COMBINER
 
     for n in range(1, 7):
         print(somme_impairs(n))
@@ -237,9 +237,9 @@ def fib(n):
 
     ```python
     def produit(a, n):
-        if n == 0:
+        if n == 0:                    # CAS DE BASE : a x 0 = 0
             return 0
-        return a + produit(a, n - 1)
+        return a + produit(a, n - 1)  # APPEL RECURSIF, COMBINER : + a
 
     print(produit(7, 6))      # 42
     print(produit(1000, 3))   # 3000
@@ -257,15 +257,25 @@ def fib(n):
 
     Que vaut `n // 10` ? Pour quels entiers la réponse est-elle immédiate (condition d’arrêt) ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert nombre_de_chiffres(34126) == 5    # cas normal
+    assert nombre_de_chiffres(7) == 1        # cas limite : un seul chiffre (cas de base)
+    assert nombre_de_chiffres(1000) == 4     # cas piege : des zeros a la fin
+    ```
 
     **Démarche :** condition d’arrêt : un nombre à un seul chiffre (`n < 10`) ; `n // 10` supprime le dernier chiffre, ce qui rapproche de la condition d’arrêt ; on combine en ajoutant $1$ pour le chiffre supprimé.
 
     ```python
     def nombre_de_chiffres(n):
-        if n < 10:
+        if n < 10:                               # CAS DE BASE : un seul chiffre
             return 1
-        return 1 + nombre_de_chiffres(n // 10)
+        return 1 + nombre_de_chiffres(n // 10)   # APPEL RECURSIF, COMBINER : + 1
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> Écrire `return nombre_de_chiffres(n // 10)` sans le `1 +` : on ne combine pas le résultat de l’appel, et la fonction renvoie toujours $1$.
@@ -278,15 +288,25 @@ def fib(n):
 
     `n % 2` donne le dernier bit de `n` et `n // 2` le supprime. Que renvoyer pour `n == 0` ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert nombre_de_bits(10) == 2       # cas normal
+    assert nombre_de_bits(0) == 0        # cas limite : le cas de base
+    assert nombre_de_bits(256) == 1      # cas piege : une puissance de 2, un seul 1
+    ```
 
     **Démarche :** même idée qu’à l’exercice précédent, mais en base $2$. Condition d’arrêt `n == 0` (aucun bit à $1$) ; `n // 2` enlève le dernier bit ; on combine en ajoutant ce dernier bit `n % 2`, qui vaut $1$ ou $0$.
 
     ```python
     def nombre_de_bits(n):
-        if n == 0:
+        if n == 0:                                # CAS DE BASE : aucun bit a 1
             return 0
-        return (n % 2) + nombre_de_bits(n // 2)
+        return (n % 2) + nombre_de_bits(n // 2)   # APPEL RECURSIF, COMBINER
     ```
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 10</span> — PGCD (algorithme d’Euclide) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-10 }
@@ -307,9 +327,9 @@ On rappelle que $\text{pgcd}(a, b) = \text{pgcd}(b,\ a \,\%\, b)$ et que $\text{
 
     ```python
     def pgcd(a, b):
-        if b == 0:
+        if b == 0:                   # CAS DE BASE : pgcd(a, 0) = a
             return a
-        return pgcd(b, a % b)
+        return pgcd(b, a % b)        # APPEL RECURSIF (rien a combiner)
     ```
 
     *Variant : `b`, qui décroît strictement (`a % b < b`) jusqu’à $0$.*
@@ -332,11 +352,11 @@ $$u_n = \left\lbrace \begin{array}{ll} a & \text{si } n = 0\\ b & \text{si } n =
 
     ```python
     def suite(n, a, b):
-        if n == 0:
+        if n == 0:                   # CAS DE BASE (1er)
             return a
-        if n == 1:
+        if n == 1:                   # CAS DE BASE (2e)
             return b
-        return 3 * suite(n - 1, a, b) + 2 * suite(n - 2, a, b) + 5
+        return 3 * suite(n - 1, a, b) + 2 * suite(n - 2, a, b) + 5   # APPEL RECURSIF x 2, COMBINER
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 12</span> — Suite de Syracuse <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-12 }
@@ -358,11 +378,11 @@ $$u_n = \left\lbrace \begin{array}{ll} a & \text{si } n = 0\\ b & \text{si } n =
     ```python
     def syracuse(u):
         print(u)
-        if u > 1:
-            if u % 2 == 0:
-                syracuse(u // 2)
+        if u > 1:                    # sinon CAS DE BASE : u == 1, on s'arrete
+            if u % 2 == 0:           # TESTER : u pair ?
+                syracuse(u // 2)     # APPEL RECURSIF
             else:
-                syracuse(3 * u + 1)
+                syracuse(3 * u + 1)  # APPEL RECURSIF
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Exponentiation rapide <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-13 }
@@ -385,18 +405,28 @@ On peut calculer $x^n$ bien plus vite en remarquant que $x^n = \left(x^{n/2}\rig
     `if n % 2 == 0:`  
     `p = puissance_rapide(x, n // 2)`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert puissance_rapide(2, 10) == 1024   # cas normal
+    assert puissance_rapide(5, 0) == 1       # cas limite : le cas de base
+    assert puissance_rapide(-2, 3) == -8     # cas piege : x negatif et n impair
+    ```
 
     Si `n` est pair, un seul appel sur `n // 2` suffit (on élève au carré).
 
     ```python
     def puissance_rapide(x, n):
-        if n == 0:
+        if n == 0:                                # CAS DE BASE
             return 1
-        if n % 2 == 0:
-            p = puissance_rapide(x, n // 2)
-            return p * p
-        return x * puissance_rapide(x, n - 1)
+        if n % 2 == 0:                            # TESTER : n pair ?
+            p = puissance_rapide(x, n // 2)       # APPEL RECURSIF : un seul
+            return p * p                          # COMBINER : au carre
+        return x * puissance_rapide(x, n - 1)     # APPEL RECURSIF, COMBINER : fois x
     ```
 
 ### Chaînes de caractères et listes
@@ -417,22 +447,22 @@ On peut calculer $x^n$ bien plus vite en remarquant que $x^n = \left(x^{n/2}\rig
 
     ```python
     def compter(s, c):
-        if s == "":                  # condition d'arret : chaine vide
+        if s == "":                       # CAS DE BASE : chaine vide
             return 0
-        if s[0] == c:
-            return 1 + compter(s[1:], c)
-        return compter(s[1:], c)
+        if s[0] == c:                     # TESTER : le premier caractere
+            return 1 + compter(s[1:], c)  # APPEL RECURSIF, COMBINER : + 1
+        return compter(s[1:], c)          # APPEL RECURSIF
     ```
 
     *Autre méthode* (itérative) : on parcourt la chaîne et on incrémente un compteur.
 
     ```python
     def compter(s, c):
-        nb = 0
-        for lettre in s:
-            if lettre == c:
-                nb += 1
-        return nb
+        nb = 0                       # INITIALISER
+        for lettre in s:             # PARCOURIR
+            if lettre == c:          # TESTER
+                nb += 1              # METTRE A JOUR
+        return nb                    # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 15</span> — Inverser une chaîne <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-15 }
@@ -449,19 +479,19 @@ On peut calculer $x^n$ bien plus vite en remarquant que $x^n = \left(x^{n/2}\rig
 
     ```python
     def inverser(s):
-        if s == "":
+        if s == "":                       # CAS DE BASE : chaine vide
             return ""
-        return inverser(s[1:]) + s[0]
+        return inverser(s[1:]) + s[0]     # APPEL RECURSIF, COMBINER : s[0] a la fin
     ```
 
     *Autre méthode* (itérative) : on parcourt la chaîne et on place chaque caractère *devant* ceux déjà lus.
 
     ```python
     def inverser(s):
-        resultat = ""
-        for lettre in s:
-            resultat = lettre + resultat
-        return resultat
+        resultat = ""                     # INITIALISER
+        for lettre in s:                  # PARCOURIR
+            resultat = lettre + resultat  # METTRE A JOUR : lettre devant
+        return resultat                   # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 16</span> — Palindrome (contexte ADN) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-16 }
@@ -474,17 +504,27 @@ Dans cet exercice, une chaîne (par exemple un brin d’ADN écrit avec les lett
 
     Quels caractères doivent être égaux dans un palindrome ? Sur quelle chaîne plus courte peut-on alors reposer la question ? Quelles chaînes sont des palindromes sans rien vérifier (condition d’arrêt) ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert palindrome("GATTACATTAG")     # cas normal
+    assert palindrome("")                # cas limite : chaine vide (cas de base)
+    assert not palindrome("GATCAG")      # cas piege : bords egaux, mais pas le milieu
+    ```
 
     **Démarche :** condition d’arrêt : une chaîne de moins de deux caractères est un palindrome ; si les deux bords diffèrent, ce n’en est pas un ; sinon, on recommence sur le milieu `s[1:-1]`, plus court de deux caractères (c’est la fonction du cours).
 
     ```python
     def palindrome(s):
-        if len(s) < 2:
+        if len(s) < 2:               # CAS DE BASE : 0 ou 1 caractere
             return True
-        if s[0] != s[-1]:
+        if s[0] != s[-1]:            # TESTER : les deux bords
             return False
-        return palindrome(s[1:-1])
+        return palindrome(s[1:-1])   # APPEL RECURSIF : sans les bords
     ```
 
     *Remarque : `palindrome("GATTACATTAG")` renvoie bien `True` (la chaîne se lit pareil dans les deux sens).*
@@ -503,21 +543,31 @@ Dans cet exercice, une chaîne (par exemple un brin d’ADN écrit avec les lett
 
         La liste étant non vide, la condition d’arrêt est une liste d’**un seul** élément. Pour le maximum : comparer `tab[0]` au maximum du reste `tab[1:]`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert maximum([3, 9, 4]) == 9           # cas normal
+    assert maximum([5]) == 5                 # cas limite : un seul element (cas de base)
+    assert maximum([-7, -2, -5]) == -2       # cas piege : que des negatifs
+    ```
 
     **Démarche :** condition d’arrêt : la liste à **un seul** élément (la liste est non vide) ; appel récursif sur le reste `tab[1:]` ; on combine `tab[0]` avec le résultat obtenu pour le reste (addition, ou comparaison pour le maximum).
 
     ```python
     def somme_liste(tab):
-        if len(tab) == 1:
+        if len(tab) == 1:                     # CAS DE BASE : un seul element
             return tab[0]
-        return tab[0] + somme_liste(tab[1:])
+        return tab[0] + somme_liste(tab[1:])  # APPEL RECURSIF, COMBINER
 
     def maximum(tab):
-        if len(tab) == 1:
+        if len(tab) == 1:                     # CAS DE BASE : un seul element
             return tab[0]
-        m = maximum(tab[1:])         # maximum du reste
-        if tab[0] > m:
+        m = maximum(tab[1:])                  # APPEL RECURSIF : maximum du reste
+        if tab[0] > m:                        # COMBINER : comparer tab[0] a m
             return tab[0]
         return m
     ```
@@ -532,17 +582,27 @@ Dans cet exercice, une chaîne (par exemple un brin d’ADN écrit avec les lett
 
     Il y a deux façons de s’arrêter : lesquelles ? Quel paramètre change d’un appel à l’autre pour se rapprocher de la fin du tableau ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert appartient(4, [7, 4, 1], 0)          # cas normal
+    assert not appartient(7, [7, 4, 1], 3)      # cas limite : i == len(t), rien a examiner
+    assert not appartient(7, [7, 4, 1], 1)      # cas piege : present, mais avant l'indice i
+    ```
 
     **Démarche :** deux conditions d’arrêt : on a dépassé la fin du tableau (`i == len(t)` : la valeur est absente) ou `t[i]` est la valeur cherchée. Sinon, on se rapproche de la fin du tableau en appelant avec `i + 1`.
 
     ```python
     def appartient(v, t, i):
-        if i == len(t):
+        if i == len(t):                  # CAS DE BASE : fin du tableau, absent
             return False
-        if t[i] == v:
+        if t[i] == v:                    # CAS DE BASE : trouve
             return True
-        return appartient(v, t, i + 1)
+        return appartient(v, t, i + 1)   # APPEL RECURSIF : a partir de i + 1
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 19</span> — Recherche dichotomique récursive <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-19 }
@@ -564,20 +624,31 @@ On dispose d’un tableau `t` **trié** par ordre croissant.
     `return -1`  
     `milieu = (gauche + droite) // 2`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    t = [2, 5, 8, 12, 16]
+    assert dicho(t, 12, 0, 4) == 3          # cas normal
+    assert dicho([], 5, 0, -1) == -1        # cas limite : tableau vide
+    assert dicho(t, 9, 0, 4) == -1          # cas piege : absent, entre deux valeurs
+    ```
 
     On compare au milieu, et on ne garde qu’une moitié.
 
     ```python
     def dicho(t, v, gauche, droite):
-        if gauche > droite:
-            return -1                # intervalle vide : absent
-        milieu = (gauche + droite) // 2
-        if t[milieu] == v:
+        if gauche > droite:                           # CAS DE BASE : zone vide, absent
+            return -1
+        milieu = (gauche + droite) // 2               # DIVISER
+        if t[milieu] == v:                            # TESTER
             return milieu
-        if t[milieu] < v:
-            return dicho(t, v, milieu + 1, droite)
-        return dicho(t, v, gauche, milieu - 1)
+        if t[milieu] < v:                             # TESTER : quelle moitie garder ?
+            return dicho(t, v, milieu + 1, droite)    # APPEL RECURSIF : moitie droite
+        return dicho(t, v, gauche, milieu - 1)        # APPEL RECURSIF : moitie gauche
     ```
 
 ### Dénombrement et combinatoire
@@ -592,19 +663,29 @@ On dispose d’un tableau `t` **trié** par ordre croissant.
 
     Combien existe-t-il de mots de longueur `0`, et lequel ? Un mot de longueur `n` s’obtient à partir d’un mot de longueur `n - 1` : comment ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert frises(2) == ['AA', 'AB', 'BA', 'BB']    # cas normal
+    assert frises(0) == ['']                        # cas limite : un seul mot, le mot vide
+    assert len(frises(3)) == 8                      # cas piege : 2 ** 3 mots, et non 2 * 3
+    ```
 
     **Démarche :** condition d’arrêt : il existe un seul mot de longueur $0$, le mot vide (d’où la liste `[""]`) ; appel récursif sur `n - 1` ; on combine en prolongeant chaque mot obtenu par un `A`, puis par un `B`.
 
     ```python
     def frises(n):
-        if n == 0:
+        if n == 0:                       # CAS DE BASE : le mot vide
             return [""]
-        resultat = []
-        for mot in frises(n - 1):
-            resultat.append(mot + "A")
-            resultat.append(mot + "B")
-        return resultat
+        resultat = []                    # INITIALISER
+        for mot in frises(n - 1):        # APPEL RECURSIF, puis PARCOURIR ses mots
+            resultat.append(mot + "A")   # COMBINER
+            resultat.append(mot + "B")   # COMBINER
+        return resultat                  # RENVOYER
     ```
 
     *Test : `frises(2)` renvoie `[’AA’, ’AB’, ’BA’, ’BB’]`.*
@@ -627,14 +708,14 @@ On dispose d’un tableau `t` **trié** par ordre croissant.
 
     ```python
     def decoupe(n, debut=""):
-        if n == 0:                   # plus rien a decomposer
+        if n == 0:                           # CAS DE BASE : plus rien a decomposer
             print(debut)
         else:
             if debut != "":
                 debut = debut + " + "
-            decoupe(n - 1, debut + "1")
+            decoupe(n - 1, debut + "1")      # APPEL RECURSIF : on continue par 1
             if n >= 2:
-                decoupe(n - 2, debut + "2")
+                decoupe(n - 2, debut + "2")  # APPEL RECURSIF : ou par 2
     ```
 
     *Le nombre de décompositions de `n` est $u_{n+1}$, où $(u_n)$ est la suite de **Fibonacci** ($u_0=0$, $u_1=1$) : on trouve $1, 2, 3, 5, 8\dots$ pour $n = 1, 2, 3, 4, 5$.*
@@ -653,15 +734,25 @@ $$\binom{n}{p} = \left\lbrace \begin{array}{ll} 1 & \text{si } p = 0 \text{ ou }
 
     La définition donne directement la condition d’arrêt et l’appel récursif : la traduire ligne à ligne. Pour le défi : deux boucles imbriquées, `p` allant de `0` à `n`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert pascal(4, 2) == 6     # cas normal
+    assert pascal(0, 0) == 1     # cas limite : la premiere ligne
+    assert pascal(5, 5) == 1     # cas piege : p == n, le bord droit du triangle
+    ```
 
     **Démarche :** on traduit la définition ligne à ligne : $p = 0$ ou $n = p$ donnent les conditions d’arrêt ; la somme des deux coefficients de la ligne $n - 1$ donne les deux appels récursifs ($n$ diminue de $1$ à chaque appel).
 
     ```python
     def pascal(n, p):
-        if p == 0 or n == p:
+        if p == 0 or n == p:                            # CAS DE BASE : les bords
             return 1
-        return pascal(n - 1, p - 1) + pascal(n - 1, p)
+        return pascal(n - 1, p - 1) + pascal(n - 1, p)  # APPEL RECURSIF x 2, COMBINER
     ```
 
     *Défi.* Pour chaque ligne `n`, on construit une chaîne avec les valeurs `pascal(n, p)`, `p` allant de `0` à `n`, puis on l’affiche :
@@ -710,10 +801,10 @@ On veut déplacer une pile de `n` disques d’un piquet `depart` vers un piquet 
 
     ```python
     def hanoi(n, depart, inter, arrivee):
-        if n > 0:
-            hanoi(n - 1, depart, arrivee, inter)
-            print(depart, "->", arrivee)
-            hanoi(n - 1, inter, depart, arrivee)
+        if n > 0:                                 # sinon CAS DE BASE : rien a faire
+            hanoi(n - 1, depart, arrivee, inter)  # APPEL RECURSIF : n - 1 disques de cote
+            print(depart, "->", arrivee)          # le grand disque
+            hanoi(n - 1, inter, depart, arrivee)  # APPEL RECURSIF : n - 1 disques dessus
     ```
 
     *Nombre de déplacements : $H(n) = 2\,H(n-1) + 1$ avec $H(0)=0$, soit $H(n) = 2^n - 1$.*
@@ -746,51 +837,61 @@ On veut déplacer une pile de `n` disques d’un piquet `depart` vers un piquet 
 
 3.  Pour le **palindrome**, écrire la version **itérative** `est_palindrome(s)` (deux indices qui se rapprochent). Comparer sa lisibilité à la version récursive.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert factorielle(5) == 120     # cas normal
+    assert factorielle(0) == 1       # cas limite : la boucle ne tourne pas
+    assert factorielle(1) == 1       # cas piege : range(2, 2) est vide, lui aussi
+    ```
 
     **1. Versions itératives.** **Démarche :** un accumulateur initialisé avec la valeur de la condition d’arrêt (`1` pour un produit, `0` pour une somme), mis à jour à chaque tour d’une boucle `for`.
 
     ```python
     def factorielle(n):
-        p = 1
-        for k in range(2, n + 1):
-            p = p * k
-        return p
+        p = 1                        # INITIALISER : la valeur du cas de base
+        for k in range(2, n + 1):    # PARCOURIR
+            p = p * k                # METTRE A JOUR
+        return p                     # RENVOYER
 
     def somme(n):
-        s = 0
-        for k in range(n + 1):
-            s = s + k
-        return s
+        s = 0                        # INITIALISER
+        for k in range(n + 1):       # PARCOURIR
+            s = s + k                # METTRE A JOUR
+        return s                     # RENVOYER
 
     def puissance(x, n):
-        p = 1
-        for _ in range(n):
-            p = p * x
-        return p
+        p = 1                        # INITIALISER
+        for _ in range(n):           # PARCOURIR
+            p = p * x                # METTRE A JOUR
+        return p                     # RENVOYER
     ```
 
     **2. Version récursive de `f`** (qui calcule la **somme des éléments** d’une liste). **Démarche :** condition d’arrêt : la liste vide, de somme $0$ ; on combine le premier élément avec la somme du reste `t[1:]` :
 
     ```python
     def f(t):
-        if t == []:
+        if t == []:                  # CAS DE BASE : liste vide
             return 0
-        return t[0] + f(t[1:])
+        return t[0] + f(t[1:])       # APPEL RECURSIF, COMBINER
     ```
 
     **3. Palindrome itératif** (deux indices qui se rapprochent) :
 
     ```python
     def est_palindrome(s):
-        i = 0
-        j = len(s) - 1
-        while i < j:
-            if s[i] != s[j]:
-                return False
-            i = i + 1
-            j = j - 1
-        return True
+        i = 0                        # INITIALISER
+        j = len(s) - 1               # INITIALISER
+        while i < j:                 # PARCOURIR
+            if s[i] != s[j]:         # TESTER
+                return False         # RENVOYER
+            i = i + 1                # METTRE A JOUR
+            j = j - 1                # METTRE A JOUR
+        return True                  # RENVOYER
     ```
 
     La version récursive colle mieux à la définition ; l’itérative évite d’empiler un appel par caractère.
@@ -813,7 +914,7 @@ On veut déplacer une pile de `n` disques d’un piquet `depart` vers un piquet 
     import turtle as t
 
     def carres(cote):
-        if cote < 10:                 # condition d'arret
+        if cote < 10:                 # CAS DE BASE : trop petit, on s'arrete
             return
         for _ in range(4):
             t.forward(cote)
@@ -825,7 +926,7 @@ On veut déplacer une pile de `n` disques d’un piquet `depart` vers un piquet 
         t.forward(d)
         t.right(90)
         t.pendown()
-        carres(cote * 0.7)
+        carres(cote * 0.7)            # APPEL RECURSIF : un carre plus petit
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 26</span> — Le flocon de Koch <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-26 }
@@ -892,12 +993,12 @@ Le triangle de Sierpiński, aux ordres $n = 0, 1, 2, 3, 4$.
         t.end_fill()
 
     def sierpinski(a, b, c, n):
-        if n == 0:
+        if n == 0:                                            # CAS DE BASE
             tracer_triangle(a, b, c)
         else:
-            sierpinski(a, milieu(a, b), milieu(a, c), n - 1)
-            sierpinski(milieu(a, b), b, milieu(b, c), n - 1)
-            sierpinski(milieu(a, c), milieu(b, c), c, n - 1)
+            sierpinski(a, milieu(a, b), milieu(a, c), n - 1)  # APPEL RECURSIF : coin a
+            sierpinski(milieu(a, b), b, milieu(b, c), n - 1)  # APPEL RECURSIF : coin b
+            sierpinski(milieu(a, c), milieu(b, c), c, n - 1)  # APPEL RECURSIF : coin c
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 28</span> — La courbe de Hilbert <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-28 }
@@ -929,18 +1030,18 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
 
     ```python
     def hilbert(n, angle, longueur):
-        if n == 0:
+        if n == 0:                           # CAS DE BASE : rien a tracer
             return
         t.left(angle)
-        hilbert(n - 1, -angle, longueur)
+        hilbert(n - 1, -angle, longueur)     # APPEL RECURSIF : copie pivotee
         t.forward(longueur)
         t.right(angle)
-        hilbert(n - 1, angle, longueur)
+        hilbert(n - 1, angle, longueur)      # APPEL RECURSIF
         t.forward(longueur)
-        hilbert(n - 1, angle, longueur)
+        hilbert(n - 1, angle, longueur)      # APPEL RECURSIF
         t.right(angle)
         t.forward(longueur)
-        hilbert(n - 1, -angle, longueur)
+        hilbert(n - 1, -angle, longueur)     # APPEL RECURSIF : copie pivotee
         t.left(angle)
 
     # appel : hilbert(4, 90, 10)
@@ -1001,6 +1102,8 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
 
 4.  Écrire une fonction **non récursive** (itérative) `somme_entiers(n)` qui renvoie le même résultat que `somme_entiers_rec`. Exemple : `somme_entiers(4)` renvoie `10`.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **Barème indicatif** (sur 3) : Q1.a : 0,5 ; Q1.b : 0,5 ; Q2 : 0,5 ; Q3.a : 0,5 ; Q3.b : 0,25 ; Q4 : 0,75
@@ -1013,10 +1116,10 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
 
         ```python
         def fact(n):
-            if n == 0:
+            if n == 0:                   # CAS DE BASE
                 return 1
             else:
-                return n * fact(n - 1)
+                return n * fact(n - 1)   # APPEL RECURSIF, COMBINER : x n
         ```
 
     3.  1.  Le `print(n)` est exécuté *avant* l’appel récursif, pour `n = 3, 2, 1` (pas pour `0`). La console affiche :
@@ -1031,14 +1134,22 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
 
         2.  `res` reçoit $0+1+2+3 = \mathbf{6}$.
 
-    4.  **Démarche :** un accumulateur initialisé à $0$, auquel une boucle `for` ajoute chaque entier de $0$ à `n`.
+    4.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert somme_entiers(4) == 10    # cas normal
+        assert somme_entiers(0) == 0     # cas limite
+        assert somme_entiers(1) == 1     # cas piege : n est compris, range(n + 1)
+        ```
+
+        **Démarche :** un accumulateur initialisé à $0$, auquel une boucle `for` ajoute chaque entier de $0$ à `n`.
 
         ```python
         def somme_entiers(n):
-            s = 0
-            for k in range(n + 1):
-                s = s + k
-            return s
+            s = 0                        # INITIALISER
+            for k in range(n + 1):       # PARCOURIR : de 0 a n inclus
+                s = s + k                # METTRE A JOUR
+            return s                     # RENVOYER
         ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 30</span> — Les scores au rugby (d’après Polynésie 2024, jour 1) <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-01-30 }
@@ -1060,6 +1171,8 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
         Pour chaque $n$ de $1$ à $6$, chercher à la main les combinaisons de 3, 5 et 7 dont la somme vaut $n$.
 
 3.  Écrire la fonction récursive `nb_solutions(score)` qui renvoie le nombre de façons d’obtenir `score`.
+
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
 
 4.  Lors de l’appel de `nb_solutions(score)`, le nombre d’appels récursifs augmente très vite quand `score` grandit. **Nommer** une méthode algorithmique qui optimise le nombre d’appels.
 
@@ -1091,11 +1204,11 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
 
         ```python
         def possible_avec_penalites_seules(score):
-            if score == 0:
+            if score == 0:                                    # CAS DE BASE : atteint
                 return True
-            if score < 0:
+            if score < 0:                                     # CAS DE BASE : depasse
                 return False
-            return possible_avec_penalites_seules(score - 3)
+            return possible_avec_penalites_seules(score - 3)  # APPEL RECURSIF : une penalite de moins
         ```
 
     2.  Cas de base (et $f(n)=0$ pour $n<0$) :
@@ -1104,15 +1217,25 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
 
         <span class="erreurfreq">▷ Erreur fréquente.</span> Remplacer la convention $f(0) = 1$ par $f(0) = 0$ : il y a bien *une* façon d’obtenir $0$ point, ne rien marquer. Avec $f(0) = 0$, tous les appels renverraient $0$.
 
-    3.  Avec ces cas de base, la relation $f(n)=f(n-3)+f(n-5)+f(n-7)$ est en fait valable pour tout $n \geqslant 1$ :
+    3.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert nb_solutions(10) == 3     # cas normal
+        assert nb_solutions(0) == 1      # cas limite : une seule facon, ne rien marquer
+        assert nb_solutions(4) == 0      # cas piege : un score impossible
+        ```
+
+        Avec ces cas de base, la relation $f(n)=f(n-3)+f(n-5)+f(n-7)$ est en fait valable pour tout $n \geqslant 1$ :
 
         ```python
         def nb_solutions(score):
-            if score < 0:
+            if score < 0:                      # CAS DE BASE : score depasse
                 return 0
-            if score == 0:
+            if score == 0:                     # CAS DE BASE : une facon
                 return 1
-            return nb_solutions(score - 3) + nb_solutions(score - 5) + nb_solutions(score - 7)
+            return (nb_solutions(score - 3)    # APPEL RECURSIF x 3,
+                    + nb_solutions(score - 5)  # puis COMBINER : la somme
+                    + nb_solutions(score - 7))
         ```
 
     4.  La **programmation dynamique** (mémoïsation) : on garde en mémoire les valeurs déjà calculées pour ne pas les recalculer (méthode étudiée au chapitre 11).
@@ -1121,18 +1244,18 @@ La courbe de Hilbert, aux ordres $n = 1, 2, 3$ puis $4$.
 
         ```python
         def solutions_possibles(score):
-            if score < 0:
+            if score < 0:                                      # CAS DE BASE : aucune solution
                 resultat = []
-            elif score == 0:
+            elif score == 0:                                   # CAS DE BASE : une solution, [0]
                 resultat = [[0]]
             else:
-                resultat = []
-                for coup in [3, 5, 7]:
-                    liste = solutions_possibles(score - coup)
-                    for solution in liste:
-                        solution.append(score)
-                        resultat.append(solution)
-            return resultat
+                resultat = []                                  # INITIALISER
+                for coup in [3, 5, 7]:                         # PARCOURIR les coups
+                    liste = solutions_possibles(score - coup)  # APPEL RECURSIF
+                    for solution in liste:                     # PARCOURIR ses solutions
+                        solution.append(score)                 # COMBINER : prolonger par score
+                        resultat.append(solution)              # METTRE A JOUR
+            return resultat                                    # RENVOYER
         ```
 
         *Test : `solutions_possibles(8)` renvoie `[[0, 5, 8], [0, 3, 8]]`.*
@@ -1194,6 +1317,8 @@ La fonction `itineraire_aleatoire(m, n)` renvoie un itinéraire aléatoire compo
 
 3.  <span class="run" title="À programmer et tester sur machine">▶</span> En utilisant les questions précédentes, écrire une fonction récursive `nombre_chemins(m, n)` qui renvoie le nombre de chemins possibles dans une grille rectangulaire de dimension $m \times n$.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
 
     **Barème indicatif** (sur 4) : Q1 : 1,5 ; Q2 : 0,5 ; Q3 : 1 ; Q4 : 1
@@ -1204,15 +1329,15 @@ La fonction `itineraire_aleatoire(m, n)` renvoie un itinéraire aléatoire compo
         from random import choice
 
         def itineraire_aleatoire(m, n):
-            itineraire = ''
-            i, j = 0, 0
-            while i != m and j != n:
+            itineraire = ''                            # INITIALISER
+            i, j = 0, 0                                # INITIALISER
+            while i != m and j != n:                   # PARCOURIR : jusqu'a un bord
                 deplacement = choice(['D', 'B'])
-                itineraire = itineraire + deplacement
-                if deplacement == 'D':
-                    j = j + 1
+                itineraire = itineraire + deplacement  # METTRE A JOUR
+                if deplacement == 'D':                 # TESTER
+                    j = j + 1                          # METTRE A JOUR
                 else:
-                    i = i + 1
+                    i = i + 1                          # METTRE A JOUR
             if i == m:
                 itineraire = itineraire + 'D' * (n - j)
             if j == n:
@@ -1226,13 +1351,21 @@ La fonction `itineraire_aleatoire(m, n)` renvoie un itinéraire aléatoire compo
 
     3.  Le premier déplacement est soit vers la droite, soit vers le bas, et ces deux familles de chemins sont disjointes. Après un pas vers le bas, il reste à traverser une grille de $(m-1) \times n$ cases : $N(m-1, n)$ chemins ; après un pas vers la droite, une grille de $m \times (n-1)$ cases : $N(m, n-1)$ chemins. D’où $N(m, n) = N(m-1, n) + N(m, n-1)$.
 
-    4.  Les cas de base (conditions d’arrêt) sont $m = 1$ ou $n = 1$ :
+    4.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert nombre_chemins(3, 3) == 6     # cas normal
+        assert nombre_chemins(1, 5) == 1     # cas limite : une seule ligne
+        assert nombre_chemins(5, 1) == 1     # cas piege : une seule colonne, l'autre cas de base
+        ```
+
+        Les cas de base (conditions d’arrêt) sont $m = 1$ ou $n = 1$ :
 
         ```python
         def nombre_chemins(m, n):
-            if m == 1 or n == 1:
+            if m == 1 or n == 1:                                        # CAS DE BASE
                 return 1
-            return nombre_chemins(m - 1, n) + nombre_chemins(m, n - 1)
+            return nombre_chemins(m - 1, n) + nombre_chemins(m, n - 1)  # APPEL RECURSIF x 2, COMBINER
         ```
 
         <span class="erreurfreq">▷ Erreur fréquente.</span> Ne tester que `m == 1` : l’appel `nombre_chemins(m, n - 1)` fait alors descendre `n` à $0$, puis en dessous, sans jamais s’arrêter (`RecursionError`). Il faut les deux conditions d’arrêt.
@@ -1279,6 +1412,8 @@ Les premières fonctions exécutées vérifient que la chaîne transmise au robo
 Pour vérifier le parenthésage, on initialise une variable `parenthese` à `0`, puis on parcourt les caractères de `chaine` : si le caractère lu est `’(’`, on augmente `parenthese` de 1 ; si c’est `’)’`, on la diminue de 1 ; si `parenthese` devient strictement négative, la fonction renvoie `False`. Si le parcours s’achève, la fonction renvoie `True` si `parenthese` vaut `0`, et `False` sinon.
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire la fonction `parenthesage_correct(chaine)` qui applique cet algorithme.
+
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
 
 La fonction `lire_nombre` prend en paramètres une chaîne `chaine` et un indice `indice` ; elle renvoie la valeur du nombre dont l’écriture commence à `indice`, ainsi que l’indice de son dernier chiffre. Par exemple, `lire_nombre(’AD179AGA’, 2)` renvoie `(179, 4)`.
 
@@ -1360,19 +1495,27 @@ def lire_parcours(chaine):
 
     3.  Ligne 4 : `return False` (entier en fin de chaîne) ; ligne 8 : `return False` (entier juste avant une parenthèse fermante) ; ligne 9 : `return True`. *Le test de la ligne 6 porte sur la parenthèse **fermante** : un entier juste avant une parenthèse ouvrante, comme dans `’3(AD)’`, est au contraire la répétition normale d’un bloc.*
 
-    4.  **Démarche :** on traduit l’algorithme de l’énoncé : un compteur qui augmente sur `’(’` et diminue sur `’)’`, un échec dès qu’il devient négatif, un succès s’il vaut $0$ à la fin.
+    4.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert parenthesage_correct('2(3(AD)G)2A')    # cas normal
+        assert parenthesage_correct('3ADA')           # cas limite : aucune parenthese
+        assert not parenthesage_correct(')A(')        # cas piege : autant de ( que de ), mal ordonnees
+        ```
+
+        **Démarche :** on traduit l’algorithme de l’énoncé : un compteur qui augmente sur `’(’` et diminue sur `’)’`, un échec dès qu’il devient négatif, un succès s’il vaut $0$ à la fin.
 
         ```python
         def parenthesage_correct(chaine):
-            parenthese = 0
-            for c in chaine:
-                if c == '(':
-                    parenthese = parenthese + 1
-                elif c == ')':
-                    parenthese = parenthese - 1
-                if parenthese < 0:
+            parenthese = 0                       # INITIALISER
+            for c in chaine:                     # PARCOURIR
+                if c == '(':                     # TESTER
+                    parenthese = parenthese + 1  # METTRE A JOUR
+                elif c == ')':                   # TESTER
+                    parenthese = parenthese - 1  # METTRE A JOUR
+                if parenthese < 0:               # TESTER : fermante en trop
                     return False
-            return parenthese == 0
+            return parenthese == 0               # RENVOYER
         ```
 
     5.  | Fin de l’itération | `nombre` | `indice` |
@@ -1438,6 +1581,8 @@ Pour vérifier si une proposition est une anagramme du bon mot, il est inutile d
 
 1.  <span class="run" title="À programmer et tester sur machine">▶</span> Écrire une fonction **récursive** `retirer(mot, lettre)` qui renvoie le mot privé de la **première** apparition de `lettre` (et le mot inchangé si `lettre` n’y figure pas). Par exemple, `retirer(’ALLO’, ’L’)` renvoie `’ALO’`.
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 2.  <span class="run" title="À programmer et tester sur machine">▶</span> Recopier et compléter la fonction récursive `est_anagramme`, qui renvoie `True` si `mot1` est une anagramme de `mot2`, `False` sinon. Dérouler ensuite l’appel `est_anagramme(’ALLO’, ’LOLA’)`.
 
     ```python
@@ -1459,9 +1604,9 @@ Pour vérifier si une proposition est une anagramme du bon mot, il est inutile d
 
         ```python
         def nb_anagrammes(n):
-            if n <= 1:                    # condition d'arret
+            if n <= 1:                         # CAS DE BASE
                 return 1
-            return n * nb_anagrammes(n - 1)
+            return n * nb_anagrammes(n - 1)    # APPEL RECURSIF, COMBINER : x n
         ```
 
         `nb_anagrammes(3)` renvoie `6`, `nb_anagrammes(4)` renvoie `24`.
@@ -1479,13 +1624,13 @@ Pour vérifier si une proposition est une anagramme du bon mot, il est inutile d
 
         ```python
         def anagrammes(mot):
-            if len(mot) <= 1:                     # condition d'arret
+            if len(mot) <= 1:                                 # CAS DE BASE
                 return [mot]
-            resultat = []
-            for i in range(len(mot)):
-                for fin in anagrammes(sans_lettre(mot, i)):
-                    resultat.append(mot[i] + fin)
-            return resultat
+            resultat = []                                     # INITIALISER
+            for i in range(len(mot)):                         # PARCOURIR : la lettre de tete
+                for fin in anagrammes(sans_lettre(mot, i)):   # APPEL RECURSIF
+                    resultat.append(mot[i] + fin)             # COMBINER
+            return resultat                                   # RENVOYER
         ```
 
         `anagrammes(’ABC’)` renvoie `[’ABC’, ’ACB’, ’BAC’, ’BCA’, ’CAB’, ’CBA’]` (même ordre qu’à la question 1).
@@ -1500,15 +1645,21 @@ Pour vérifier si une proposition est une anagramme du bon mot, il est inutile d
 
     8.  La fonction ne distingue pas les deux `L` : elle les traite comme deux lettres différentes. La liste contient $4\times 3\times 2\times 1 = \mathbf{24}$ mots, mais chaque mot y figure deux fois (une fois pour chaque façon de placer les deux `L`, qui donnent le même mot) : il n’y a que $24 / 2 = \mathbf{12}$ mots différents. La formule $P(n) = n!$ ne vaut que pour des lettres toutes différentes.
 
-    9.
+    9.  *Appels attendus, écrits avant de coder :*
+
+        ```python
+        assert retirer('ALLO', 'L') == 'ALO'      # cas normal
+        assert retirer('', 'L') == ''             # cas limite : mot vide (cas de base)
+        assert retirer('ALLO', 'Z') == 'ALLO'     # cas piege : lettre absente
+        ```
 
         ```python
         def retirer(mot, lettre):
-            if mot == '':                     # condition d'arret : mot vide
+            if mot == '':                             # CAS DE BASE : mot vide
                 return ''
-            if mot[0] == lettre:              # premiere apparition trouvee
+            if mot[0] == lettre:                      # TESTER : premiere apparition ?
                 return mot[1:]
-            return mot[0] + retirer(mot[1:], lettre)
+            return mot[0] + retirer(mot[1:], lettre)  # APPEL RECURSIF, COMBINER
         ```
 
         `retirer(’ALLO’, ’L’)` renvoie `’ALO’` et `retirer(’ALLO’, ’Z’)` renvoie `’ALLO’`.
@@ -1517,11 +1668,11 @@ Pour vérifier si une proposition est une anagramme du bon mot, il est inutile d
 
         ```python
         def est_anagramme(mot1, mot2):
-            if mot1 == '':                        # condition d'arret
+            if mot1 == '':                                          # CAS DE BASE
                 return mot2 == ''
-            if mot1[0] not in mot2:
+            if mot1[0] not in mot2:                                 # TESTER
                 return False
-            return est_anagramme(mot1[1:], retirer(mot2, mot1[0]))
+            return est_anagramme(mot1[1:], retirer(mot2, mot1[0]))  # APPEL RECURSIF
         ```
 
         Déroulement de `est_anagramme(’ALLO’, ’LOLA’)` :
@@ -1570,7 +1721,7 @@ def est_triee(tab):
     **2.** L’erreur : l’appel récursif `tab[2:]` saute deux éléments à la fois, si bien que la paire `(tab[1], tab[2])` n’est **jamais comparée**. Il faut avancer d’un seul élément :
 
     ```python
-        return est_triee(tab[1:])         # on garde tab[1] pour la comparaison suivante
+        return est_triee(tab[1:])         # APPEL RECURSIF : on garde tab[1] pour la suite
     ```
 
     Avec cette ligne, `est_triee([1, 5, 2, 8])` renvoie `False` et `est_triee([1, 2, 5, 8])` renvoie `True`.

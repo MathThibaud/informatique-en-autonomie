@@ -209,6 +209,8 @@ def dijkstra(graphe, depart):
 
 ### <span class="exo-num">Exercice 4</span> — Reconstruire le chemin { #ex-08-graphes-tp-1-4 }
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 <span class="run" title="À programmer et tester sur machine">▶</span> Pour obtenir le **chemin** lui-même, écrire (dans le fichier, à la place de `# A COMPLETER`) la fonction `chemin(precedent, depart, arrivee)` qui reconstruit la liste des sommets, du départ à l’arrivée, en remontant les prédécesseurs (renvoyer `None` si l’arrivée n’a pas été atteinte). Vérifier que le chemin de `A` à `C` est bien celui trouvé à la main.
 
 ## Dijkstra avec une matrice d’adjacence

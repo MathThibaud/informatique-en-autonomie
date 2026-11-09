@@ -128,6 +128,8 @@ On applique directement la définition : on additionne les poids des rangs qui p
 
     Python parle binaire couramment. Un littéral binaire s’écrit avec le préfixe <span id="lex-binlit02" class="ancre"></span>`0b`. À tester :
 
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
     ```text
     >>> 0b10111001      # ecrire un nombre en binaire
     185
@@ -219,6 +221,8 @@ Le ou et le ou exclusif ne diffèrent que sur la dernière ligne.
 
     Python n’a pas de mot-clé `xor`. Mais puisque « ou exclusif » signifie « différents », sur deux booléens il suffit d’écrire `a != b` :
 
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
     ```text
     >>> True != False      # exactement un des deux est vrai
     True
@@ -308,6 +312,8 @@ Pour passer du **décimal** à l’hexadécimal, on divise par 16 (au lieu de 2)
 $$\texttt{3E8}_{16} = 3{\cdot}16^2 + 14{\cdot}16^1 + 8{\cdot}16^0 = 768 + 224 + 8 = 1000_{10} \quad (\texttt{E} \text{ vaut } 14).$$
 
 !!! remarque "Remarque — sur machine"
+
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
     ```text
     >>> hex(217)        # decimal -> hexadecimal
@@ -431,6 +437,8 @@ Le motif se **répète sans fin** : $0{,}1_{10} = \texttt{0,0001100110011}\ldots
 
     La démonstration tient en une ligne :
 
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
     ```text
     >>> 0.1 + 0.2
     0.30000000000000004
@@ -506,6 +514,8 @@ Deux régularités bien pratiques : les chiffres, les majuscules et les minuscul
 
     <span id="lex-ordchr02" class="ancre"></span>En Python, `ord` donne le code d’un caractère, et `chr` fait l’inverse.
 
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
+
     ```text
     >>> ord("A")        # caractere -> code
     65
@@ -530,6 +540,8 @@ UTF-8 a une qualité décisive : pour un caractère ASCII, il produit *exactemen
 !!! remarque "Remarque — sur machine"
 
     <span id="lex-encode02" class="ancre"></span>On <span id="lex-encodage02" class="ancre"></span>**encode** un texte (caractères $\to$ octets) et on **décode** (octets $\to$ caractères).
+
+    <span class="routine">▷ Je prédis.</span> Cacher les réponses, prévoir chaque résultat, puis vérifier.
 
     ```text
     >>> "e".encode("utf-8")     # ASCII : 1 octet

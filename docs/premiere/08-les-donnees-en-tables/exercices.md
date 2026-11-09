@@ -124,7 +124,17 @@ Avec la variable `jeux` précédente, que renvoient ces expressions ?
 ['prenom', 'sexe', 'annee', 'nombre']
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert descripteurs([{"a": "1", "b": "2"}]) == ["a", "b"]  # cas normal
+    assert descripteurs([{"nom": "Ada"}]) == ["nom"]           # cas limite : une seule colonne
+    assert descripteurs([{"x": "1"}, {"x": "2"}]) == ["x"]     # cas piege : chaque nom une seule fois
+    ```
 
     Les noms de colonnes sont les clés de la première fiche ; une compréhension sur ce dictionnaire parcourt ses clés.
 
@@ -248,11 +258,11 @@ Expliquer la différence entre les deux dernières lignes.
 
     ```python
     def selection(table, sexe, annee):
-        resultat = []
-        for ligne in table:
-            if ligne["sexe"] == sexe and ligne["annee"] == annee:
-                resultat.append(ligne)
-        return resultat
+        resultat = []                                              # INITIALISER : liste vide
+        for ligne in table:                                        # PARCOURIR
+            if ligne["sexe"] == sexe and ligne["annee"] == annee:  # TESTER
+                resultat.append(ligne)                             # METTRE A JOUR
+        return resultat                                            # RENVOYER
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> appeler `selection(prenoms, "F", 2023)` avec l’entier `2023` : `"2023" == 2023` est faux, et la sélection est vide, sans aucun message d’erreur.
@@ -267,7 +277,17 @@ Réécrire `selection` en **une seule ligne** avec une compréhension de liste.
 
     Une compréhension avec filtre a la forme `[expression for element in liste if condition]` : quelle condition reprendre de `selection` ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert len(selection(prenoms, "F", "2023")) == 10  # cas normal
+    assert selection(prenoms, "F", "1990") == []       # cas limite : aucune fiche ne convient
+    assert selection(prenoms, "F", 2023) == []         # cas piege : l'annee est une chaine
+    ```
 
     La condition du `if` de `selection` devient le filtre de la compréhension, et l’élément gardé est la fiche elle-même.
 
@@ -293,16 +313,26 @@ Réécrire `selection` en **une seule ligne** avec une compréhension de liste.
 None
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert chercher(prenoms, "Gabriel", "2023")["nombre"] == "4527"  # cas normal
+    assert chercher(prenoms, "Kevin", "2025") == None                # cas limite : prenom absent
+    assert chercher(prenoms, "Jade", "2025")["nombre"] == "2925"     # cas piege : la Jade de 2023 vient avant
+    ```
 
     Recherche séquentielle : on renvoie la fiche dès que les deux critères sont vérifiés, et `None` seulement après avoir tout parcouru.
 
     ```python
     def chercher(table, prenom, annee):
-        for ligne in table:
-            if ligne["prenom"] == prenom and ligne["annee"] == annee:
-                return ligne
-        return None
+        for ligne in table:                                            # PARCOURIR
+            if ligne["prenom"] == prenom and ligne["annee"] == annee:  # TESTER
+                return ligne                                           # RENVOYER : trouvee, on s'arrete
+        return None                                                    # RENVOYER : parcours fini sans succes
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> placer `return None` dans un `else`, à l’intérieur de la boucle : la fonction répond dès la première fiche et ne trouve que le premier prénom de la table.
@@ -345,11 +375,11 @@ None
 
     ```python
     def compter(table, sexe):
-        n = 0
-        for ligne in table:
-            if ligne["sexe"] == sexe:
-                n += 1
-        return n
+        n = 0                          # INITIALISER
+        for ligne in table:            # PARCOURIR
+            if ligne["sexe"] == sexe:  # TESTER
+                n += 1                 # METTRE A JOUR
+        return n                       # RENVOYER
     ```
 
     `compter(prenoms, "G")` $\rightarrow$ `20`.
@@ -372,23 +402,35 @@ None
 
         La moyenne, c’est la somme des valeurs divisée par le nombre de fiches, `len(table)`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus pour `total`, écrits avant de coder :*
+
+    ```python
+    assert total(prenoms, "G", "2023") == 32684  # cas normal
+    assert total(prenoms, "G", "1990") == 0      # cas limite : aucune fiche retenue
+    t = [{"sexe": "F", "annee": "2023", "nombre": "900"},
+         {"sexe": "F", "annee": "2023", "nombre": "3070"}]
+    assert total(t, "F", "2023") == 3970         # cas piege : additionner des nombres, pas du texte
+    ```
 
     Patron de l’accumulateur : on ajoute `int(ligne["nombre"])` pour chaque fiche retenue ; la moyenne divise la somme par `len(table)`.
 
     ```python
     def total(table, sexe, annee):
-        s = 0
-        for ligne in table:
-            if ligne["sexe"] == sexe and ligne["annee"] == annee:
-                s = s + int(ligne["nombre"])
-        return s
+        s = 0                                                      # INITIALISER
+        for ligne in table:                                        # PARCOURIR
+            if ligne["sexe"] == sexe and ligne["annee"] == annee:  # TESTER
+                s = s + int(ligne["nombre"])                       # METTRE A JOUR : convertir !
+        return s                                                   # RENVOYER
 
     def nombre_moyen(table):
-        total_val = 0
-        for ligne in table:
-            total_val = total_val + int(ligne["nombre"])
-        return total_val / len(table)
+        total_val = 0                                              # INITIALISER
+        for ligne in table:                                        # PARCOURIR
+            total_val = total_val + int(ligne["nombre"])           # METTRE A JOUR
+        return total_val / len(table)                              # RENVOYER
     ```
 
     `total(prenoms, "G", "2023")` $\rightarrow$ `32684`. `nombre_moyen(filles23)` $\rightarrow$ `2628.7`.
@@ -409,22 +451,33 @@ None
 
 3.  Tester sur `prenoms` entier. *Pourquoi faut-il convertir avec `int` pour que ce soit correct ?*
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus pour `plus_donne`, écrits avant de coder :*
+
+    ```python
+    assert plus_donne(prenoms) == ("Gabriel", 4625)                        # cas normal
+    assert plus_donne([{"prenom": "Ada", "nombre": "12"}]) == ("Ada", 12)  # cas limite : une seule fiche
+    t = [{"prenom": "Ana", "nombre": "900"}, {"prenom": "Eve", "nombre": "3070"}]
+    assert plus_donne(t) == ("Eve", 3070)                                  # cas piege : "900" > "3070" en texte
+    ```
 
     ```python
     def plus_donne(table):
-        champion = table[0]
-        for ligne in table:
-            if int(ligne["nombre"]) > int(champion["nombre"]):
-                champion = ligne
-        return champion["prenom"], int(champion["nombre"])
+        champion = table[0]                                     # INITIALISER : la premiere fiche
+        for ligne in table:                                     # PARCOURIR
+            if int(ligne["nombre"]) > int(champion["nombre"]):  # TESTER
+                champion = ligne                                # METTRE A JOUR
+        return champion["prenom"], int(champion["nombre"])      # RENVOYER
 
     def moins_donne(table):
-        champion = table[0]
-        for ligne in table:
-            if int(ligne["nombre"]) < int(champion["nombre"]):
-                champion = ligne
-        return champion["prenom"], int(champion["nombre"])
+        champion = table[0]                                     # INITIALISER
+        for ligne in table:                                     # PARCOURIR
+            if int(ligne["nombre"]) < int(champion["nombre"]):  # TESTER
+                champion = ligne                                # METTRE A JOUR
+        return champion["prenom"], int(champion["nombre"])      # RENVOYER
     ```
 
     `plus_donne(prenoms)` $\rightarrow$ `(’Gabriel’, 4625)` ; `moins_donne(prenoms)` $\rightarrow$ `(’Anna’, 2129)`. Sans `int`, on comparerait des *chaînes*. Sur ce fichier, le champion serait le bon *par chance* : tous les effectifs ont 4 chiffres. Mais dès que les longueurs diffèrent, `"900"` serait jugé « plus grand » que `"3070"` (comparaison caractère par caractère) et le champion serait faux.
@@ -472,7 +525,18 @@ Pourquoi le coût devient-il **quadratique** ? Comment le rendre **linéaire** ?
 
     `sorted` avec `key` (sur quoi comparer ?) et `reverse=True` ; pour la clé, penser au réflexe n<sup>o</sup> 1. Pour les 3 premiers : filtrer avec `selection`, trier, puis une tranche `[:3]`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert trier_par_nombre(filles23)[0]["prenom"] == "Louise"  # cas normal
+    assert trier_par_nombre([]) == []                           # cas limite : table vide
+    t = [{"prenom": "Ana", "nombre": "900"}, {"prenom": "Eve", "nombre": "3070"}]
+    assert trier_par_nombre(t)[0]["prenom"] == "Eve"            # cas piege : comparer des entiers
+    ```
 
     `sorted` avec une clé qui convertit le `nombre` en entier, et `reverse=True` pour aller du plus donné au moins donné ; on filtre d’abord, on garde les 3 premiers à la fin.
 
@@ -544,15 +608,15 @@ for c in ld:
 
     ```python
     def jointure(gauche, droite, cle):
-        resultat = []                 # la table fusionnee, vide au depart
-        for lg in gauche:             # chaque fiche de gauche...
-            for ld in droite:         # ... est comparee a chaque fiche de droite
-                if lg[cle] == ld[cle]:          # meme valeur de la cle
-                    fusion = {c: lg[c] for c in lg}   # copie de la fiche de gauche
+        resultat = []                                # INITIALISER : la table fusionnee, vide au depart
+        for lg in gauche:                            # PARCOURIR : chaque fiche de gauche...
+            for ld in droite:                        # PARCOURIR : ... comparee a chaque fiche de droite
+                if lg[cle] == ld[cle]:               # TESTER : meme valeur de la cle
+                    fusion = {c: lg[c] for c in lg}  # copie de la fiche de gauche
                     for c in ld:
-                        fusion[c] = ld[c]       # on ajoute les colonnes de droite
-                    resultat.append(fusion)     # on range la fiche combinee
-        return resultat
+                        fusion[c] = ld[c]            # on ajoute les colonnes de droite
+                    resultat.append(fusion)          # METTRE A JOUR : on range la fiche combinee
+        return resultat                              # RENVOYER
     ```
 
     À noter : `resultat = []` est *avant* les boucles (sinon on le vide à chaque tour) ; `resultat.append(fusion)` est dans le `if`, *après* la boucle sur `c` (sinon on ajouterait des fiches incomplètes) ; `return resultat` est au niveau de la fonction, après toutes les boucles.
@@ -573,19 +637,30 @@ On charge `communes = charger("communes.csv")` et `departements = charger("depar
 
         Pour la fiche d’Ajaccio, la condition `lg[cle] == ld[cle]` est-elle vraie pour au moins une fiche de droite ? Que se passe-t-il alors dans la boucle ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    villes = jointure(communes, departements, "dep")
+    assert villes[0]["region"] == "Provence-Alpes-Cote d'Azur"  # cas normal
+    assert jointure([], departements, "dep") == []              # cas limite : aucune commune
+    assert len(villes) == 7                                     # cas piege : Ajaccio (2A) disparait
+    ```
 
     ```python
     def jointure(gauche, droite, cle):
-        resultat = []
-        for lg in gauche:
-            for ld in droite:
-                if lg[cle] == ld[cle]:
+        resultat = []                        # INITIALISER
+        for lg in gauche:                    # PARCOURIR
+            for ld in droite:                # PARCOURIR
+                if lg[cle] == ld[cle]:       # TESTER
                     fusion = {c: lg[c] for c in lg}
                     for c in ld:
                         fusion[c] = ld[c]
-                    resultat.append(fusion)
-        return resultat
+                    resultat.append(fusion)  # METTRE A JOUR
+        return resultat                      # RENVOYER
 
     villes = jointure(communes, departements, "dep")
     ```
@@ -606,11 +681,11 @@ On charge `communes = charger("communes.csv")` et `departements = charger("depar
 
     ```python
     villes = jointure(communes, departements, "dep")
-    n = 0
-    for ligne in villes:
-        if ligne["region"] == "Provence-Alpes-Cote d'Azur":
-            n += 1
-    print(n)   # 3  (Nice, Menton, Marseille)
+    n = 0                                                    # INITIALISER
+    for ligne in villes:                                     # PARCOURIR
+        if ligne["region"] == "Provence-Alpes-Cote d'Azur":  # TESTER
+            n += 1                                           # METTRE A JOUR
+    print(n)                                                 # 3  (Nice, Menton, Marseille)
     ```
 
     *Autre méthode :* construire par compréhension la liste des communes de la région, puis prendre sa longueur.
@@ -679,15 +754,25 @@ On veut comparer 2023 et 2025 chez les **garçons**.
     `for i in range(len(lignes)):`  
     `...`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus pour `rang`, écrits avant de coder :*
+
+    ```python
+    assert rang(prenoms, "G", "2023")["Gabriel"] == 1  # cas normal
+    assert rang(prenoms, "G", "1990") == {}            # cas limite : aucune fiche
+    assert rang(prenoms, "G", "2025")["Mael"] == 10    # cas piege : le rang commence a 1, pas a 0
+    ```
 
     ```python
     def rang(table, sexe, annee):
         lignes = trier_par_nombre(selection(table, sexe, annee))
-        resultat = {}
-        for i in range(len(lignes)):
-            resultat[lignes[i]["prenom"]] = i + 1
-        return resultat
+        resultat = {}                              # INITIALISER
+        for i in range(len(lignes)):               # PARCOURIR
+            resultat[lignes[i]["prenom"]] = i + 1  # METTRE A JOUR : le rang commence a 1
+        return resultat                            # RENVOYER
 
     r23 = rang(prenoms, "G", "2023")
     r25 = rang(prenoms, "G", "2025")
@@ -729,10 +814,10 @@ On note `noms2023` et `noms2025` les listes des prénoms du top 10 des filles en
     *Autre méthode :* sans compréhension, avec une boucle et `append` (même idée : on garde les prénoms de 2023 absents de 2025).
 
     ```python
-    sortis = []
-    for p in noms2023:
-        if p not in noms2025:
-            sortis.append(p)
+    sortis = []                # INITIALISER
+    for p in noms2023:         # PARCOURIR
+        if p not in noms2025:  # TESTER
+            sortis.append(p)   # METTRE A JOUR
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 26</span> — Écrire un CSV <span class="horsprog">au-delà du programme</span> <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-08-26 }
@@ -751,19 +836,32 @@ On note `noms2023` et `noms2025` les listes des prénoms du top 10 des filles en
     `ecrivain = csv.DictWriter(f, fieldnames=descripteurs(table))`  
     `ecrivain.writeheader()`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    exporter(filles23, "essai.csv")
+    assert charger("essai.csv") == filles23                  # cas normal
+    exporter([{"nom": "Ada"}], "essai.csv")
+    assert charger("essai.csv") == [{"nom": "Ada"}]          # cas limite : une fiche, une colonne
+    exporter([{"nom": "Dupont, Jean", "ville": "Nice"}], "essai.csv")
+    assert charger("essai.csv")[0]["nom"] == "Dupont, Jean"  # cas piege : une virgule dans une valeur
+    ```
 
     ```python
     def exporter(table, fichier):
         with open(fichier, "w", encoding="utf-8", newline="") as f:
             ecrivain = csv.DictWriter(f, fieldnames=[cle for cle in table[0]])
             ecrivain.writeheader()
-            for ligne in table:
-                ecrivain.writerow(ligne)
+            for ligne in table:           # PARCOURIR
+                ecrivain.writerow(ligne)  # une ligne du fichier par fiche
 
     exporter(filles23, "filles_2023.csv")
     verif = charger("filles_2023.csv")
-    print(len(verif))   # 10
+    print(len(verif))                     # 10
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 27</span> — Une moyenne selon un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-08-27 }
@@ -805,10 +903,10 @@ def moyenne_nombre(table):
 
     ```python
     def moyenne_nombre(table):
-        total = 0
-        for ligne in table:
-            total = total + int(ligne["nombre"])
-        return total / len(table)
+        total = 0                                 # INITIALISER
+        for ligne in table:                       # PARCOURIR
+            total = total + int(ligne["nombre"])  # METTRE A JOUR : int, car csv lit du texte
+        return total / len(table)                 # RENVOYER
     ```
 
     **3.** Regarder une fiche avant de calculer : `prenoms[0]` affiche `’nombre’: ’3177’`, avec des guillemets, donc du texte (ou demander `type(prenoms[0]["nombre"])`). C’est le réflexe du cours : dès qu’on calcule sur une colonne, on convertit.
@@ -904,7 +1002,18 @@ On considère qu’un élève est identifié par son `nom` **et** sa `classe`.
 
     Pour les doublons, garder une liste `deja_vus` des couples `(nom, classe)` rencontrés, comme dans le cours ; une fiche est un doublon si son couple est déjà dans cette liste.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus pour `doublons`, écrits avant de coder :*
+
+    ```python
+    assert len(doublons(notes)) == 1  # cas normal
+    assert doublons([]) == []         # cas limite : table vide
+    t = [{"nom": "Ada", "classe": "1A"}, {"nom": "Ada", "classe": "1B"}]
+    assert doublons(t) == []          # cas piege : meme nom, autre classe
+    ```
 
     **1.** Un test de cohérence est un filtre (sans oublier `int`) :
 
@@ -920,15 +1029,15 @@ On considère qu’un élève est identifié par son `nom` **et** sa `classe`.
 
     ```python
     def doublons(table):
-        deja_vus = []
-        resultat = []
-        for ligne in table:
+        deja_vus = []                   # INITIALISER : identifiants rencontres
+        resultat = []                   # INITIALISER
+        for ligne in table:             # PARCOURIR
             cle = (ligne["nom"], ligne["classe"])
-            if cle in deja_vus:
-                resultat.append(ligne)
+            if cle in deja_vus:         # TESTER
+                resultat.append(ligne)  # METTRE A JOUR : c'est un doublon
             else:
-                deja_vus.append(cle)
-        return resultat
+                deja_vus.append(cle)    # METTRE A JOUR : premiere rencontre
+        return resultat                 # RENVOYER
     ```
 
     Il y a **1** doublon : la troisième fiche (Ada, 1A). La dernière fiche est une autre élève, Ada de **1B** : même nom, mais pas même identifiant (`nom`, `classe`).
@@ -937,15 +1046,15 @@ On considère qu’un élève est identifié par son `nom` **et** sa `classe`.
 
     ```python
     def nettoyer(table):
-        propre = []
-        deja_vus = []
-        for ligne in table:
+        propre = []                                               # INITIALISER
+        deja_vus = []                                             # INITIALISER
+        for ligne in table:                                       # PARCOURIR
             cle = (ligne["nom"], ligne["classe"])
             note = int(ligne["note"])
-            if note >= 0 and note <= 20 and cle not in deja_vus:
-                deja_vus.append(cle)
-                propre.append(ligne)
-        return propre
+            if note >= 0 and note <= 20 and cle not in deja_vus:  # TESTER
+                deja_vus.append(cle)                              # METTRE A JOUR
+                propre.append(ligne)                              # METTRE A JOUR
+        return propre                                             # RENVOYER
     ```
 
     Avant nettoyage : $(15 + 9 + 15 + 23 - 2 + 11) / 6 = 71 / 6 \approx 11{,}83$. Après : il reste Ada (1A), Léo et Ada (1B), soit $(15 + 9 + 11) / 3 = 35 / 3 \approx 11{,}67$.

@@ -82,6 +82,8 @@ L’image classique est une **pile d’assiettes** : on ne peut poser ou prendre
 
     On part d’une pile vide `p`. La colonne de droite montre la pile après chaque instruction. Pour gagner de la place, la pile y est **écrite en ligne**, le **sommet à droite** (dessinée verticalement, ce serait le sommet en haut).
 
+    <span class="routine">▷ Je prédis.</span> Cacher les deux colonnes de droite, prévoir ce que renvoie chaque instruction et le contenu de la pile, puis vérifier.
+
     | **Instruction** | **Renvoie** | **Pile écrite en ligne (sommet à droite)** |
     |:----------------|:------------|:-------------------------------------------|
     | `p.empiler(5)`  | —           | $5$                                        |
@@ -120,18 +122,24 @@ L’algorithme ci-dessous n’utilise **que l’interface** de la pile : on **ad
 
 ```python
 def parenthesage_correct(expr):
-    p = Pile()                       # on admet qu'une implementation existe
+    p = Pile()                       # INITIALISER : on admet que Pile existe
     correspond = {')': '(', ']': '[', '}': '{'}
-    for c in expr:
-        if c in "([{":               # une ouvrante : on la met en attente
-            p.empiler(c)
-        elif c in ")]}":             # une fermante : elle doit solder une ouvrante
-            if p.est_vide():         # rien a refermer -> incorrect
-                return False
-            if p.depiler() != correspond[c]:   # mauvais appariement
-                return False
-    return p.est_vide()              # correct seulement si tout a ete referme
+    for c in expr:                   # PARCOURIR
+        if c in "([{":               # TESTER : une ouvrante est mise en attente
+            p.empiler(c)             # METTRE A JOUR
+        elif c in ")]}":             # TESTER : une fermante solde une ouvrante
+            if p.est_vide():         # TESTER : rien a refermer
+                return False         # RENVOYER : incorrect
+            if p.depiler() != correspond[c]:   # TESTER : mauvais appariement
+                return False         # RENVOYER : incorrect
+    return p.est_vide()              # RENVOYER : correct si tout est referme
 ```
+
+<span class="routine">▷ Je prédis.</span> Que renvoient `parenthesage_correct("(()")` et `parenthesage_correct("())")` ?
+
+??? verifie "Je vérifie"
+
+    `False` dans les deux cas, mais pas au même endroit : pour `"(()"`, la boucle se termine avec une `(` encore dans la pile, c’est le dernier `return` qui renvoie `False` ; pour `"())"`, la seconde `)` trouve la pile vide.
 
 !!! exemple "Exemple — Dérouler l’algorithme sur ([]{}), puis sur ([)]"
 
@@ -226,6 +234,8 @@ L’image est la **file d’attente** devant un guichet : on rejoint la file par
 
     On part d’une file vide `f`.
 
+    <span class="routine">▷ Je prédis.</span> Cacher les deux colonnes de droite, prévoir ce que renvoie chaque instruction et le contenu de la file, puis vérifier.
+
     | **Instruction** | **Renvoie** | **File (tête à droite)** |
     |:----------------|:------------|:-------------------------|
     | `f.enfiler(22)` | —           | $22$                     |
@@ -277,6 +287,12 @@ class Pile:
             return self._contenu[-1]
 ```
 
+<span class="routine">▷ Je prédis.</span> Après `p = Pile()`, `p.empiler(4)`, `p.empiler(9)`, `p.depiler()` et `p.empiler(1)`, que vaut `p._contenu` ? Que renvoient ensuite trois appels `p.depiler()` ?
+
+??? verifie "Je vérifie"
+
+    `[4, 1]` : le sommet est la *fin* de la liste. Les trois appels renvoient `1`, `4`, puis `None` : la pile est vide, la méthode ne fait rien.
+
 De la même façon, une **file** se construit en cachant une `list` : on ajoute à la queue avec `append`, et on retire la tête, c’est-à-dire le *premier* élément, avec <span id="lex-pyappendpop03" class="ancre"></span>`pop(0)`.
 
 ```python
@@ -298,6 +314,12 @@ class File:
         if not self.est_vide():
             return self._contenu[0]
 ```
+
+<span class="routine">▷ Je prédis.</span> Après `f = File()`, `f.enfiler(4)`, `f.enfiler(9)`, `f.defiler()` et `f.enfiler(1)`, que vaut `f._contenu` ? Que renvoie `f.tete()` ?
+
+??? verifie "Je vérifie"
+
+    `[9, 1]` et `9` : la tête est le *début* de la liste Python. Dessinée tête à droite comme dans ce cours, la file s’écrit $1\ ;\ 9$. Avec la pile ci-dessus, les mêmes opérations laissaient `1` au sommet.
 
 !!! remarque "Remarque — Une interface volontairement minimale"
 
@@ -390,10 +412,10 @@ Insérer un maillon ne demande que de **rebrancher deux liens**, sans déplacer 
 
         ```python
         def afficher(lst):
-            c = lst                    # cellule courante
-            while c is not None:
+            c = lst                    # INITIALISER : la cellule courante
+            while c is not None:       # PARCOURIR : jusqu'a la fin (None)
                 print(c.valeur)
-                c = c.suivante         # on avance d'un maillon
+                c = c.suivante         # METTRE A JOUR : on avance d'un maillon
         ```
 
         Pour `lst = Cellule(4, Cellule(7, Cellule(2, None)))`, la boucle fait trois tours et affiche `4`, `7` puis `2`. Le même schéma (`c = lst`, <span id="lex-pyisnone03" class="ancre"></span>`while c is not None:`, `c = c.suivante`) sert à tous les parcours : calculer la longueur, chercher une valeur, faire une somme, accéder au $n$-ième élément…
@@ -462,6 +484,8 @@ Depuis la Première, vous connaissez deux façons de ranger des données : la **
     - Attention : ce sont les **clés** qui se cherchent vite. Chercher une **valeur** (`v in dico.values()`) parcourt toutes les valeurs : O($n$), comme pour une liste.
 
 !!! exemple "Exemple — Mesurer la différence"
+
+    <span class="routine">▷ Je prédis.</span> Laquelle des deux durées affichées est la plus petite ? Que devient chacune si `n` est multiplié par 10 ?
 
     ```python
     import time

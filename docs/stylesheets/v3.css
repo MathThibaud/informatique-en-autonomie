@@ -118,6 +118,10 @@ body { background: var(--fond-image) center / cover fixed, var(--md-default-bg-c
 .md-typeset .duree, .md-typeset .essentiel { font-size: .75em; color: var(--c-teal); white-space: nowrap; }
 .md-typeset .erreurfreq { color: var(--c-orange); font-weight: 700; }
 .md-typeset .retouract { color: var(--c-green); font-weight: 700; }
+.md-typeset .routine { color: var(--c-teal); font-weight: 700; }
+.md-typeset .etage { font-family: var(--font-mono); font-size: .7em; font-weight: 400; color: var(--c-teal);
+  background: color-mix(in srgb, var(--c-teal) 15%, transparent); border-radius: 4px; padding: .05em .45em;
+  white-space: nowrap; vertical-align: .1em; }
 .md-typeset .credit { font-size: .8em; color: var(--text-dim); }
 
 /* Feu tricolore « usage de l'IA » */
@@ -216,7 +220,8 @@ body { background: var(--fond-image) center / cover fixed, var(--md-default-bg-c
 .md-typeset .admonition, .md-typeset details { border-width: 0 0 0 4px; border-radius: 6px;
   background: var(--bg-card); box-shadow: none; font-size: .78rem; }
 .md-typeset .admonition-title, .md-typeset summary { font-weight: 700; }
-.md-typeset details.corrige, .md-typeset details.pouce, .md-typeset details.reponse { margin-top: .6em; }
+.md-typeset details.corrige, .md-typeset details.pouce, .md-typeset details.reponse,
+  .md-typeset details.verifie { margin-top: .6em; }
 
 :root { --md-admonition-icon--definition: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%2021.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65%200-3.35.3-4.75%201.05-.1.05-.15.05-.25.05-.25%200-.5-.25-.5-.5V6c.6-.45%201.25-.75%202-1%201.11-.35%202.33-.5%203.5-.5%201.95%200%204.05.4%205.5%201.5%201.45-1.1%203.55-1.5%205.5-1.5%201.17%200%202.39.15%203.5.5.75.25%201.4.55%202%201v14.6c0%20.25-.25.5-.5.5-.1%200-.15%200-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7%200-4.15.65-5.5%201.5M12%208v11.5c1.35-.85%203.8-1.5%205.5-1.5%201.2%200%202.4.15%203.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7%200-4.15.65-5.5%201.5m1%203.5c1.11-.68%202.6-1%204.5-1%20.91%200%201.76.09%202.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655%200-4.5.84zm4.5.17c-1.71%200-3.21.26-4.5.79v1.69c1.11-.65%202.6-.99%204.5-.99%201.04%200%201.88.08%202.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5%202.9c-.87-.16-1.71-.24-2.5-.24-1.83%200-3.33.27-4.5.8v1.69c1.11-.66%202.6-.99%204.5-.99%201.04%200%201.88.08%202.5.24z%22/%3E%3C/svg%3E'); }
 .md-typeset .admonition.definition, .md-typeset details.definition { border-color: var(--c-blue); }
@@ -323,6 +328,11 @@ body { background: var(--fond-image) center / cover fixed, var(--md-default-bg-c
 .md-typeset .pouce > .admonition-title, .md-typeset .pouce > summary { background-color: color-mix(in srgb, var(--c-yellow) 12%, transparent); }
 .md-typeset .pouce > .admonition-title::before, .md-typeset .pouce > summary::before { background-color: var(--c-yellow); -webkit-mask-image: var(--md-admonition-icon--pouce); mask-image: var(--md-admonition-icon--pouce); }
 .md-typeset .pouce > summary::after { color: var(--c-yellow); }
+:root { --md-admonition-icon--verifie: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22m23.5%2017-5%205-3.5-3.5%201.5-1.5%202%202%203.5-3.5zM12%209a3%203%200%200%201%203%203%203%203%200%200%201-3%203%203%203%200%200%201-3-3%203%203%200%200%201%203-3m0-4.5c5%200%209.27%203.11%2011%207.5-.25.65-.56%201.26-.92%201.85a5.8%205.8%200%200%200-1.9-.73l.64-1.12a9.821%209.821%200%200%200-17.64%200A9.82%209.82%200%200%200%2012%2017.5l1.21-.07c-.14.5-.21%201.03-.21%201.57v.46l-1%20.04c-5%200-9.27-3.11-11-7.5%201.73-4.39%206-7.5%2011-7.5%22/%3E%3C/svg%3E'); }
+.md-typeset .admonition.verifie, .md-typeset details.verifie { border-color: var(--c-teal); }
+.md-typeset .verifie > .admonition-title, .md-typeset .verifie > summary { background-color: color-mix(in srgb, var(--c-teal) 12%, transparent); }
+.md-typeset .verifie > .admonition-title::before, .md-typeset .verifie > summary::before { background-color: var(--c-teal); -webkit-mask-image: var(--md-admonition-icon--verifie); mask-image: var(--md-admonition-icon--verifie); }
+.md-typeset .verifie > summary::after { color: var(--c-teal); }
 :root { --md-admonition-icon--fichiers: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22m14%202%206%206v12a2%202%200%200%201-2%202H6a2%202%200%200%201-2-2V4a2%202%200%200%201%202-2zm4%2018V9h-5V4H6v16zm-6-1-4-4h2.5v-3h3v3H16z%22/%3E%3C/svg%3E'); }
 .md-typeset .admonition.fichiers, .md-typeset details.fichiers { border-color: var(--c-blue); }
 .md-typeset .fichiers > .admonition-title, .md-typeset .fichiers > summary { background-color: color-mix(in srgb, var(--c-blue) 12%, transparent); }

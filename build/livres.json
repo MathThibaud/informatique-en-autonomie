@@ -65,192 +65,192 @@
  "premiere": {
   "livre": {
    "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-premiere.pdf",
-   "mo": 7.2,
-   "date": "7 novembre 2026"
+   "mo": 7.4,
+   "date": "8 novembre 2026"
   },
   "chapitres": {
    "1. Les bases de la programmation Python": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-premiere-01-les-bases-de-la-programmation-python.pdf",
     "mo": 1.7,
-    "pages": 72,
-    "date": "7 novembre 2026"
+    "pages": 76,
+    "date": "8 novembre 2026"
    },
    "Complément : dessiner avec la tortue": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-premiere-dessiner-avec-la-tortue.pdf",
     "mo": 1.1,
     "pages": 31,
-    "date": "7 novembre 2026"
+    "date": "8 novembre 2026"
    },
    "2. Le binaire et l'écriture des nombres": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-premiere-02-le-binaire-et-l-ecriture-des-nombres.pdf",
     "mo": 1.5,
-    "pages": 62,
-    "date": "7 novembre 2026"
+    "pages": 63,
+    "date": "8 novembre 2026"
    },
    "3. Les types construits": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-premiere-03-les-types-construits.pdf",
-    "mo": 1.2,
-    "pages": 50,
-    "date": "7 novembre 2026"
+    "mo": 1.3,
+    "pages": 53,
+    "date": "8 novembre 2026"
    },
    "4. Algorithmique : le parcours séquentiel": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-premiere-04-algorithmique-le-parcours-sequentiel.pdf",
     "mo": 1.1,
-    "pages": 46,
-    "date": "7 novembre 2026"
+    "pages": 47,
+    "date": "8 novembre 2026"
    },
    "5. Spécifier et mettre au point ses programmes": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-premiere-05-specifier-et-mettre-au-point-ses-program.pdf",
     "mo": 1.3,
-    "pages": 51,
-    "date": "7 novembre 2026"
+    "pages": 53,
+    "date": "8 novembre 2026"
    },
    "6. Les algorithmes de tri": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-premiere-06-les-algorithmes-de-tri.pdf",
     "mo": 1.1,
-    "pages": 44,
-    "date": "7 novembre 2026"
+    "pages": 47,
+    "date": "8 novembre 2026"
    },
    "7. La recherche dichotomique": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-premiere-07-la-recherche-dichotomique.pdf",
     "mo": 1.0,
-    "pages": 41,
-    "date": "7 novembre 2026"
+    "pages": 42,
+    "date": "8 novembre 2026"
    },
    "8. Les données en tables": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-premiere-08-les-donnees-en-tables.pdf",
     "mo": 1.4,
-    "pages": 55,
-    "date": "7 novembre 2026"
+    "pages": 57,
+    "date": "8 novembre 2026"
    },
    "9. Architecture des ordinateurs et systèmes d'exploitation": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-premiere-09-architecture-des-ordinateurs-et-systemes.pdf",
     "mo": 1.2,
     "pages": 49,
-    "date": "7 novembre 2026"
+    "date": "8 novembre 2026"
    },
    "10. Le Web : réseaux et interactions homme-machine": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-premiere-10-le-web-reseaux-et-interactions-homme-mac.pdf",
-    "mo": 1.2,
-    "pages": 67,
-    "date": "7 novembre 2026"
+    "mo": 1.4,
+    "pages": 81,
+    "date": "8 novembre 2026"
    },
    "11. Les algorithmes gloutons": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-premiere-11-les-algorithmes-gloutons.pdf",
     "mo": 1.0,
     "pages": 40,
-    "date": "7 novembre 2026"
+    "date": "8 novembre 2026"
    },
    "12. Les k plus proches voisins": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-premiere-12-les-k-plus-proches-voisins.pdf",
     "mo": 1.2,
     "pages": 47,
-    "date": "7 novembre 2026"
+    "date": "8 novembre 2026"
    },
    "Problèmes de synthèse": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-premiere-synthese.pdf",
     "mo": 0.7,
     "pages": 16,
-    "date": "7 novembre 2026"
+    "date": "8 novembre 2026"
    }
   }
  },
  "terminale": {
   "livre": {
    "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-terminale.pdf",
-   "mo": 9.7,
-   "date": "7 novembre 2026"
+   "mo": 10.3,
+   "date": "8 novembre 2026"
   },
   "chapitres": {
    "1. Récursivité": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-terminale-01-recursivite.pdf",
     "mo": 1.5,
-    "pages": 64,
-    "date": "7 novembre 2026"
+    "pages": 68,
+    "date": "8 novembre 2026"
    },
    "2. Programmation orientée objet et paradigmes": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-terminale-02-programmation-orientee-objet-et-paradigm.pdf",
-    "mo": 1.2,
-    "pages": 66,
-    "date": "7 novembre 2026"
+    "mo": 1.3,
+    "pages": 75,
+    "date": "8 novembre 2026"
    },
    "3. Structures linéaires : piles, files, listes chaînées": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-terminale-03-structures-lineaires-piles-files-listes.pdf",
     "mo": 1.2,
     "pages": 71,
-    "date": "7 novembre 2026"
+    "date": "8 novembre 2026"
    },
    "4. Processus et ordonnancement": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-terminale-04-processus-et-ordonnancement.pdf",
     "mo": 1.4,
-    "pages": 67,
-    "date": "7 novembre 2026"
+    "pages": 68,
+    "date": "8 novembre 2026"
    },
    "5. Arbres": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-terminale-05-arbres.pdf",
     "mo": 1.6,
-    "pages": 81,
-    "date": "7 novembre 2026"
+    "pages": 84,
+    "date": "8 novembre 2026"
    },
    "6. Bases de données et SQL": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-terminale-06-bases-de-donnees-et-sql.pdf",
-    "mo": 1.2,
-    "pages": 63,
-    "date": "7 novembre 2026"
+    "mo": 1.4,
+    "pages": 78,
+    "date": "8 novembre 2026"
    },
    "7. Diviser pour régner": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-terminale-07-diviser-pour-regner.pdf",
     "mo": 1.7,
-    "pages": 73,
-    "date": "7 novembre 2026"
+    "pages": 75,
+    "date": "8 novembre 2026"
    },
    "8. Graphes": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-terminale-08-graphes.pdf",
     "mo": 1.4,
-    "pages": 71,
-    "date": "7 novembre 2026"
+    "pages": 72,
+    "date": "8 novembre 2026"
    },
    "9. Réseaux": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-terminale-09-reseaux.pdf",
     "mo": 1.5,
     "pages": 53,
-    "date": "7 novembre 2026"
+    "date": "8 novembre 2026"
    },
    "10. Cryptographie": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-terminale-10-cryptographie.pdf",
     "mo": 1.3,
     "pages": 65,
-    "date": "7 novembre 2026"
+    "date": "8 novembre 2026"
    },
    "11. Programmation dynamique": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-terminale-11-programmation-dynamique.pdf",
-    "mo": 1.5,
-    "pages": 66,
-    "date": "7 novembre 2026"
+    "mo": 1.6,
+    "pages": 75,
+    "date": "8 novembre 2026"
    },
    "12. Recherche textuelle": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-terminale-12-recherche-textuelle.pdf",
     "mo": 1.2,
     "pages": 58,
-    "date": "7 novembre 2026"
+    "date": "8 novembre 2026"
    },
    "13. Calculabilité et décidabilité": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-terminale-13-calculabilite-et-decidabilite.pdf",
     "mo": 1.3,
     "pages": 61,
-    "date": "7 novembre 2026"
+    "date": "8 novembre 2026"
    },
    "14. Systèmes sur puce et informatique embarquée": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-terminale-14-systemes-sur-puce-et-informatique-embarq.pdf",
     "mo": 1.3,
-    "pages": 52,
-    "date": "7 novembre 2026"
+    "pages": 53,
+    "date": "8 novembre 2026"
    },
    "Problèmes de synthèse et exercices type bac": {
     "url": "https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-terminale-synthese.pdf",
     "mo": 0.7,
     "pages": 19,
-    "date": "7 novembre 2026"
+    "date": "8 novembre 2026"
    }
   }
  }

@@ -61,16 +61,16 @@ Que calcule cette fonction en général ? Renvoie-t-elle un résultat correct si
 
     ```python
     def produit(t):
-        p = 1                     # element neutre de la multiplication
-        for x in t:
-            p = p * x
-        return p
+        p = 1                          # INITIALISER : neutre de la multiplication
+        for x in t:                    # PARCOURIR
+            p = p * x                  # METTRE A JOUR
+        return p                       # RENVOYER
 
     def concatener(mots):
-        resultat = ""             # element neutre de la concatenation
-        for mot in mots:
-            resultat = resultat + mot
-        return resultat
+        resultat = ""                  # INITIALISER : neutre de la concatenation
+        for mot in mots:               # PARCOURIR
+            resultat = resultat + mot  # METTRE A JOUR
+        return resultat                # RENVOYER
     ```
 
 ### Décliner : comptages, moyennes
@@ -103,11 +103,11 @@ def nb_entre(t, a, b):
 
     ```python
     def nb_entre(t, a, b):
-        c = 0                       # compteur : element neutre 0
-        for x in t:
-            if x >= a and x <= b:   # mise a jour conditionnelle
-                c = c + 1
-        return c
+        c = 0                      # INITIALISER : compteur, neutre 0
+        for x in t:                # PARCOURIR
+            if x >= a and x <= b:  # TESTER : mise a jour conditionnelle
+                c = c + 1          # METTRE A JOUR
+        return c                   # RENVOYER
     ```
 
     `nb_entre([12, 5, 18, 9, 15], 10, 15)` renvoie bien `2` (les éléments `12` et `15`). Les deux conditions sont reliées par `and` : il faut *à la fois* `x >= a` et `x <= b`.
@@ -142,23 +142,33 @@ def nb_entre(t, a, b):
     `total_coefs = 0`  
     `for i in range(len(notes)):`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus pour `moyenne_ponderee`, écrits avant de coder :*
+
+    ```python
+    assert moyenne_ponderee([12, 8, 15], [2, 1, 1]) == 11.75  # cas normal
+    assert moyenne_ponderee([14], [3]) == 14.0                # cas limite : une seule note
+    assert moyenne_ponderee([10, 20], [1, 3]) == 17.5         # cas piege : diviser par 4, pas par 2
+    ```
 
     ```python
     def taux_reussite(notes):
-        c = 0
-        for note in notes:
-            if note >= 10:
-                c = c + 1
-        return 100 * c / len(notes)
+        c = 0                                     # INITIALISER
+        for note in notes:                        # PARCOURIR
+            if note >= 10:                        # TESTER
+                c = c + 1                         # METTRE A JOUR
+        return 100 * c / len(notes)               # RENVOYER
 
     def moyenne_ponderee(notes, coefs):
-        total = 0                   # somme des notes[i] * coefs[i]
-        total_coefs = 0             # somme des coefficients
-        for i in range(len(notes)):
-            total = total + notes[i] * coefs[i]
-            total_coefs = total_coefs + coefs[i]
-        return total / total_coefs
+        total = 0                                 # INITIALISER : somme ponderee
+        total_coefs = 0                           # INITIALISER : somme des coefficients
+        for i in range(len(notes)):               # PARCOURIR
+            total = total + notes[i] * coefs[i]   # METTRE A JOUR
+            total_coefs = total_coefs + coefs[i]  # METTRE A JOUR
+        return total / total_coefs                # RENVOYER
     ```
 
     Pour `moyenne_ponderee`, on parcourt par **indice** : le même `i` donne la note et son coefficient. Les deux accumulateurs sont mis à jour dans la même boucle : un seul parcours. Sur l’exemple : $(12 \times 2 + 8 + 15) / (2 + 1 + 1) = 47 / 4 = 11{,}75$.
@@ -181,10 +191,10 @@ def nb_entre(t, a, b):
 
     ```python
     def a_un_multiple(t, k):
-        for x in t:
-            if x % k == 0:
-                return True       # on s'arrete des qu'on trouve
-        return False              # parcours fini sans succes
+        for x in t:          # PARCOURIR
+            if x % k == 0:   # TESTER
+                return True  # RENVOYER : on s'arrete des qu'on trouve
+        return False         # RENVOYER : parcours fini sans succes
     ```
 
     `a_un_multiple([7, 10, 3, 20], 5)` fait **2** tours : `10` est trouvé au deuxième tour, et `return` arrête aussitôt la fonction. `a_un_multiple([7, 10, 3, 20], 6)` fait **4** tours : aucun multiple de 6, il faut tout parcourir avant de répondre `False`. C’est le pire cas.
@@ -210,33 +220,43 @@ def nb_entre(t, a, b):
 
     Première voyelle : parcourir par indice, tester `mot[i] in "aeiouy"` et s’arrêter dès qu’on trouve. Dernière occurrence : soit parcourir tout le tableau en mémorisant le dernier indice rencontré, soit parcourir les indices à l’envers.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus pour `dernier_indice`, écrits avant de coder :*
+
+    ```python
+    assert dernier_indice([6, 3, 8], 3) == 1     # cas normal
+    assert dernier_indice([], 3) == -1           # cas limite : tableau vide
+    assert dernier_indice([4, 1, 4, 2], 4) == 2  # cas piege : la derniere, pas la premiere
+    ```
 
     Pour la **première** voyelle, on renvoie dès qu’on trouve. Pour la **dernière** occurrence, en parcourant de gauche à droite, on ne peut pas s’arrêter tôt : une autre occurrence peut encore venir. On retient donc le dernier indice vu, jusqu’au bout du tableau.
 
     ```python
     def premiere_voyelle(mot):
-        for i in range(len(mot)):
-            if mot[i] in "aeiouy":
-                return i
-        return -1
+        for i in range(len(mot)):   # PARCOURIR
+            if mot[i] in "aeiouy":  # TESTER
+                return i            # RENVOYER
+        return -1                   # RENVOYER : aucune voyelle
 
     def dernier_indice(t, x):
-        resultat = -1
-        for i in range(len(t)):
-            if t[i] == x:
-                resultat = i      # on ecrase : on garde le dernier
-        return resultat
+        resultat = -1               # INITIALISER : absent jusqu'ici
+        for i in range(len(t)):     # PARCOURIR
+            if t[i] == x:           # TESTER
+                resultat = i        # METTRE A JOUR : on ecrase, on garde le dernier
+        return resultat             # RENVOYER
     ```
 
     *Autre méthode* pour `dernier_indice` : parcourir les indices **à l’envers**, du dernier au premier : la première occurrence rencontrée est alors la dernière du tableau, et on peut s’arrêter dès qu’on la trouve.
 
     ```python
     def dernier_indice(t, x):
-        for i in range(len(t) - 1, -1, -1):
-            if t[i] == x:
-                return i
-        return -1
+        for i in range(len(t) - 1, -1, -1):  # PARCOURIR : a l'envers
+            if t[i] == x:                    # TESTER
+                return i                     # RENVOYER
+        return -1                            # RENVOYER : absent
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Recherche sous condition <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-7 }
@@ -252,16 +272,26 @@ def nb_entre(t, a, b):
 
     Même structure que `a_un_multiple` : on renvoie l’élément dès que la condition est vraie. Que renvoyer si la boucle se termine sans succès ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert premier_negatif([4, 7, -2, 9, -5]) == -2  # cas normal
+    assert premier_negatif([]) == None               # cas limite : tableau vide
+    assert premier_negatif([3, 0, 5]) == None        # cas piege : 0 n'est pas negatif
+    ```
 
     Recherche séquentielle : on renvoie l’élément dès que la condition `x < 0` est vraie ; si la boucle se termine sans succès, on renvoie `None`.
 
     ```python
     def premier_negatif(t):
-        for x in t:
-            if x < 0:
-                return x
-        return None
+        for x in t:       # PARCOURIR
+            if x < 0:     # TESTER
+                return x  # RENVOYER
+        return None       # RENVOYER : aucun negatif
     ```
 
 ### Minimum, maximum et champion
@@ -280,11 +310,11 @@ def nb_entre(t, a, b):
 
     ```python
     def minimum(t):
-        m = t[0]
-        for x in t:
-            if x < m:
-                m = x
-        return m
+        m = t[0]       # INITIALISER : un vrai element
+        for x in t:    # PARCOURIR
+            if x < m:  # TESTER
+                m = x  # METTRE A JOUR
+        return m       # RENVOYER
     ```
 
     **Invariant** : à chaque tour, `m` est le minimum des éléments déjà visités. Initialiser `m` à `0` serait faux : sur `[3, 8, 5]`, aucun élément n’est inférieur à `0`, et la fonction renverrait `0`, qui n’est même pas dans le tableau (c’est le défaut de l’exercice « Lecture de trace »). On initialise avec un élément *existant* : `t[0]`.
@@ -312,11 +342,11 @@ for mot in mots:
 
     ```python
     def mot_le_plus_long(mots):
-        champion = mots[0]
-        for mot in mots:
-            if len(mot) > len(champion):
-                champion = mot
-        return champion
+        champion = mots[0]                # INITIALISER
+        for mot in mots:                  # PARCOURIR
+            if len(mot) > len(champion):  # TESTER : strict
+                champion = mot            # METTRE A JOUR
+        return champion                   # RENVOYER
     ```
 
     À noter : `champion = mots[0]` se place **avant** la boucle (initialisation du champion) ; `return champion` est au niveau de la boucle, **après** elle (sinon on renverrait dès le premier tour). Sur l’exemple, on obtient `"girafe"` : quand arrive `"souris"`, le test `len(mot) > len(champion)` compare `6 > 6`, qui est faux. La comparaison **stricte** garde donc le **premier** mot de longueur maximale.
@@ -329,17 +359,27 @@ for mot in mots:
 
     Retenir l’*indice* du champion, pas sa valeur : parcourir par indice et comparer `t[i]` à la valeur du champion. Faut-il `<` ou `<=` pour garder le premier en cas d’égalité ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert indice_du_min([5, 2, 8]) == 1     # cas normal
+    assert indice_du_min([7]) == 0           # cas limite : un seul element
+    assert indice_du_min([4, 1, 6, 1]) == 1  # cas piege : egalite, le premier
+    ```
 
     On retient l’**indice** du champion, `i_min`, initialisé à `0` ; on parcourt par indice et l’on compare `t[i]` à la valeur du champion, `t[i_min]`.
 
     ```python
     def indice_du_min(t):
-        i_min = 0
-        for i in range(len(t)):
-            if t[i] < t[i_min]:   # strict : on garde le PREMIER en cas d'egalite
-                i_min = i
-        return i_min
+        i_min = 0                # INITIALISER
+        for i in range(len(t)):  # PARCOURIR
+            if t[i] < t[i_min]:  # TESTER : strict, on garde le PREMIER
+                i_min = i        # METTRE A JOUR
+        return i_min             # RENVOYER
     ```
 
     <span class="erreurfreq">▷ Erreur fréquente.</span> écrire `t[i] <= t[i_min]` : en cas d’égalité, le champion est remplacé, et l’on renvoie le *dernier* indice du minimum.
@@ -352,18 +392,28 @@ for mot in mots:
 
     Il faut deux « champions » : le plus grand et le plus petit. Peut-on les mettre à jour dans la même boucle ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert amplitude([3, 9, 1, 4]) == 8      # cas normal
+    assert amplitude([5]) == 0               # cas limite : un seul element
+    assert amplitude([-2, -7, -4]) == 5      # cas piege : que des negatifs
+    ```
 
     ```python
     def amplitude(t):
-        plus_petit = t[0]
-        plus_grand = t[0]
-        for x in t:
-            if x < plus_petit:
-                plus_petit = x
-            if x > plus_grand:
-                plus_grand = x
-        return plus_grand - plus_petit
+        plus_petit = t[0]                    # INITIALISER
+        plus_grand = t[0]                    # INITIALISER
+        for x in t:                          # PARCOURIR
+            if x < plus_petit:               # TESTER
+                plus_petit = x               # METTRE A JOUR
+            if x > plus_grand:               # TESTER
+                plus_grand = x               # METTRE A JOUR
+        return plus_grand - plus_petit       # RENVOYER
     ```
 
     Cette solution fait **un seul** parcours (on cherche min et max en même temps). Deux parcours séparés donneraient le même résultat, en deux fois plus de tours.
@@ -381,19 +431,29 @@ for mot in mots:
 
     Faut-il vraiment retirer la note du tableau ? Une fois la pire note enlevée, que deviennent la somme des notes et leur nombre ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert moyenne_sans_pire([10, 4, 14, 12]) == 12.0  # cas normal
+    assert moyenne_sans_pire([9, 15]) == 15.0          # cas limite : deux notes
+    assert moyenne_sans_pire([6, 12, 6]) == 9.0        # cas piege : pire note en double
+    ```
 
     On retire une fois la plus mauvaise note de la somme, et on divise par `len(t) - 1`. La somme et la pire note se calculent dans le même parcours.
 
     ```python
     def moyenne_sans_pire(t):
-        pire = t[0]
-        total = 0
-        for x in t:
-            total = total + x
-            if x < pire:
-                pire = x
-        return (total - pire) / (len(t) - 1)
+        pire = t[0]                           # INITIALISER : champion du minimum
+        total = 0                             # INITIALISER
+        for x in t:                           # PARCOURIR
+            total = total + x                 # METTRE A JOUR
+            if x < pire:                      # TESTER
+                pire = x                      # METTRE A JOUR
+        return (total - pire) / (len(t) - 1)  # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 3 sur 3">★★★</span> <span class="exo-num">Exercice 13</span> — Le deuxième plus grand <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-13 }
@@ -418,22 +478,32 @@ for mot in mots:
     `for x in t:`  
     puis distinguer deux cas : `x` bat `premier` ; `x` se place entre `second` et `premier`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert deuxieme_max([4, 9, 7, 2]) == 7     # cas normal
+    assert deuxieme_max([5, 3]) == 3           # cas limite : deux valeurs
+    assert deuxieme_max([3, 9, 9, 7, 2]) == 7  # cas piege : le maximum en double
+    ```
 
     On tient à jour **deux** champions : le plus grand (`premier`) et le deuxième plus grand *distinct* (`second`), initialisés à `None` (« pas encore de champion »). Pour chaque élément `x`, deux cas utiles : `x` bat le record (l’ancien premier passe deuxième) ; ou `x` est strictement plus petit que `premier` et bat `second`. Un élément *égal* à `premier` ne change rien.
 
     ```python
     def deuxieme_max(t):
-        premier = None       # plus grand vu
-        second = None        # 2e plus grand DISTINCT
-        for x in t:
-            if premier == None or x > premier:     # nouveau record
-                second = premier
-                premier = x
-            elif x < premier:                      # entre second et premier ?
+        premier = None                          # INITIALISER : plus grand vu
+        second = None                           # INITIALISER : 2e plus grand DISTINCT
+        for x in t:                             # PARCOURIR
+            if premier == None or x > premier:  # TESTER : nouveau record
+                second = premier                # METTRE A JOUR
+                premier = x                     # METTRE A JOUR
+            elif x < premier:                   # TESTER : entre second et premier ?
                 if second == None or x > second:
-                    second = x
-        return second
+                    second = x                  # METTRE A JOUR
+        return second                           # RENVOYER
     ```
 
     On écrit ici `== None` ; le chapitre *Spécifier et mettre au point ses programmes* présentera l’écriture recommandée `is None`.
@@ -562,18 +632,28 @@ def f(t):                          def g(t):
 
     Deux champions initialisés avec `t[0]`, et deux tests dans le même tour de boucle. Combien de tours font deux parcours séparés ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert mini_maxi([4, 9, 1, 6]) == (1, 9)    # cas normal
+    assert mini_maxi([5]) == (5, 5)             # cas limite : un seul element
+    assert mini_maxi([-3, -8, -1]) == (-8, -1)  # cas piege : que des negatifs
+    ```
 
     ```python
     def mini_maxi(t):
-        mini = t[0]
-        maxi = t[0]
-        for x in t:
-            if x < mini:
-                mini = x
-            if x > maxi:
-                maxi = x
-        return mini, maxi
+        mini = t[0]        # INITIALISER
+        maxi = t[0]        # INITIALISER
+        for x in t:        # PARCOURIR
+            if x < mini:   # TESTER
+                mini = x   # METTRE A JOUR
+            if x > maxi:   # TESTER
+                maxi = x   # METTRE A JOUR
+        return mini, maxi  # RENVOYER
     ```
 
     Un seul parcours ($n$ tours) au lieu de deux ($2n$ tours) : deux fois moins de **tours de boucle**, mais autant de **comparaisons** (deux par tour, soit $2n$ dans les deux cas). Le coût reste **linéaire**.
@@ -586,17 +666,27 @@ def f(t):                          def g(t):
 
     Comparer chaque élément à ceux qui sont *après* lui : deux boucles imbriquées sur les indices. Attention à ne jamais comparer un élément à lui-même.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert a_un_doublon([3, 7, 2, 7]) == True  # cas normal
+    assert a_un_doublon([5]) == False          # cas limite : un seul element
+    assert a_un_doublon([1, 2, 3]) == False    # cas piege : ne pas comparer x a lui-meme
+    ```
 
     Deux boucles imbriquées sur les indices : on compare chaque élément à ceux qui sont *après* lui (`j` part de `i + 1`), et l’on s’arrête dès qu’on trouve deux éléments égaux.
 
     ```python
     def a_un_doublon(t):
-        for i in range(len(t)):
-            for j in range(i + 1, len(t)):   # on ne compare chaque paire qu'une fois
-                if t[i] == t[j]:
-                    return True
-        return False
+        for i in range(len(t)):             # PARCOURIR
+            for j in range(i + 1, len(t)):  # PARCOURIR : chaque paire une fois
+                if t[i] == t[j]:            # TESTER
+                    return True             # RENVOYER
+        return False                        # RENVOYER : aucun doublon
     ```
 
     Dans le pire cas (aucun doublon), on examine toutes les paires, soit environ $\dfrac{n^2}{2}$ comparaisons : coût **quadratique**. <span class="horsprog">au-delà du programme</span>
@@ -617,15 +707,25 @@ def f(t):                          def g(t):
     `for y in t2:`  
     `if x == y:`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert element_commun([1, 5, 9], [4, 9, 2]) == True  # cas normal
+    assert element_commun([], [1, 2]) == False           # cas limite : un tableau vide
+    assert element_commun([1, 2], [5, 2]) == True        # cas piege : le commun n'est pas en tete
+    ```
 
     ```python
     def element_commun(t1, t2):
-        for x in t1:
-            for y in t2:
-                if x == y:
-                    return True
-        return False
+        for x in t1:             # PARCOURIR
+            for y in t2:         # PARCOURIR
+                if x == y:       # TESTER
+                    return True  # RENVOYER
+        return False             # RENVOYER : aucun element commun
     ```
 
     Dans le pire cas (aucun élément commun), on compare chaque élément de `t1` à chaque élément de `t2`, soit $n \times n = n^2$ comparaisons : coût **quadratique**. <span class="horsprog">au-delà du programme</span>
@@ -657,31 +757,41 @@ C’est **l’exercice central** du chapitre. La variance <span class="horsprog"
     `s = 0`  
     `for x in t:`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus pour `variance`, écrits avant de coder :*
+
+    ```python
+    assert variance([2, 4, 4, 4, 5, 5, 7, 9]) == 4.0  # cas normal
+    assert variance([5]) == 0.0                       # cas limite : une seule valeur
+    assert variance([1, 2]) == 0.25                   # cas piege : moyenne non entiere (1.5)
+    ```
 
     **1, 2, 4.** Les trois fonctions :
 
     ```python
-    def moyenne(t):              # 1.
-        s = 0
-        for x in t:
-            s = s + x
-        return s / len(t)
+    def moyenne(t):                        # 1.
+        s = 0                              # INITIALISER
+        for x in t:                        # PARCOURIR
+            s = s + x                      # METTRE A JOUR
+        return s / len(t)                  # RENVOYER
 
-    def variance_naive(t):        # 2.
+    def variance_naive(t):                 # 2.
         n = len(t)
-        s = 0
-        for x in t:
-            s = s + (x - moyenne(t)) ** 2     # moyenne(t) recalculee a chaque tour
-        return s / n
+        s = 0                              # INITIALISER
+        for x in t:                        # PARCOURIR
+            s = s + (x - moyenne(t)) ** 2  # METTRE A JOUR : moyenne(t) a CHAQUE tour
+        return s / n                       # RENVOYER
 
-    def variance(t):              # 4.
+    def variance(t):                       # 4.
         n = len(t)
-        m = moyenne(t)            # calculee UNE seule fois
-        s = 0
-        for x in t:
-            s = s + (x - m) ** 2
-        return s / n
+        m = moyenne(t)                     # calculee UNE seule fois
+        s = 0                              # INITIALISER
+        for x in t:                        # PARCOURIR
+            s = s + (x - m) ** 2           # METTRE A JOUR
+        return s / n                       # RENVOYER
     ```
 
     **2.** `variance_naive` est **correcte** : elle calcule bien la variance. **3.** À chacun des `n` tours, `moyenne(t)` effectue `n` additions : total $\approx n \times n = n^2$ additions. Coût **quadratique**. **4.** `variance` fait un parcours pour la moyenne puis un pour la somme : $\approx 2n$ opérations, coût **linéaire**. **5.** Les deux renvoient `4.0` sur l’exemple. Sur un million de valeurs, on utilise `variance` : la version naïve demanderait $\approx 10^{12}$ opérations (des heures), la version efficace $\approx 2\times 10^6$ (immédiat).
@@ -709,36 +819,46 @@ C’est **l’exercice central** du chapitre. La variance <span class="horsprog"
     `for temp in temperatures:`  
     `if temp > seuil:`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus pour `plus_longue_serie_chaude`, écrits avant de coder :*
+
+    ```python
+    assert plus_longue_serie_chaude([25, 31, 28, 33, 34, 35], 30) == 3  # cas normal
+    assert plus_longue_serie_chaude([], 30) == 0                        # cas limite : aucun jour
+    assert plus_longue_serie_chaude([30, 30, 30], 30) == 0              # cas piege : 30 n'est pas > 30
+    ```
 
     1 : position du champion (on retient l’indice du maximum) ; 2 : un compteur ; 3 : deux variables, la longueur de la série en cours (remise à `0` un jour plus froid) et le record.
 
     ```python
     def jour_le_plus_chaud(temperatures):
-        i_max = 0
-        for i in range(len(temperatures)):
-            if temperatures[i] > temperatures[i_max]:
-                i_max = i
-        return i_max
+        i_max = 0                                      # INITIALISER
+        for i in range(len(temperatures)):             # PARCOURIR
+            if temperatures[i] > temperatures[i_max]:  # TESTER
+                i_max = i                              # METTRE A JOUR
+        return i_max                                   # RENVOYER
 
     def nb_jours_gel(temperatures):
-        c = 0
-        for temp in temperatures:
-            if temp < 0:
-                c = c + 1
-        return c
+        c = 0                                          # INITIALISER
+        for temp in temperatures:                      # PARCOURIR
+            if temp < 0:                               # TESTER
+                c = c + 1                              # METTRE A JOUR
+        return c                                       # RENVOYER
 
-    def plus_longue_serie_chaude(temperatures, seuil):   # au-dela du programme
-        record = 0
-        courante = 0
-        for temp in temperatures:
-            if temp > seuil:
-                courante = courante + 1
-                if courante > record:
-                    record = courante
+    def plus_longue_serie_chaude(temperatures, seuil):  # au-dela du programme
+        record = 0                                     # INITIALISER
+        courante = 0                                   # INITIALISER : serie en cours
+        for temp in temperatures:                      # PARCOURIR
+            if temp > seuil:                           # TESTER
+                courante = courante + 1                # METTRE A JOUR
+                if courante > record:                  # TESTER
+                    record = courante                  # METTRE A JOUR
             else:
-                courante = 0
-        return record
+                courante = 0                           # METTRE A JOUR : serie cassee
+        return record                                  # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 23</span> — Vers le bac — contrôle de saisie <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-04-23 }
@@ -753,16 +873,26 @@ C’est **l’exercice central** du chapitre. La variance <span class="horsprog"
 
     1 : renvoyer `False` dès qu’une note sort de l’intervalle, et `True` seulement après la boucle. 2 : partir d’un tableau vide et y ajouter des *indices*, donc parcourir par indice.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus pour `toutes_valides`, écrits avant de coder :*
+
+    ```python
+    assert toutes_valides([12, 8, 15]) == True   # cas normal
+    assert toutes_valides([0, 20]) == True       # cas limite : les bornes sont valides
+    assert toutes_valides([12, 8, -3]) == False  # cas piege : l'intrus est en dernier
+    ```
 
     1 : recherche séquentielle d’une note invalide : on renvoie `False` dès qu’on en trouve une, `True` seulement après la boucle. 2 : on garde les *indices* des notes hors de l’intervalle.
 
     ```python
     def toutes_valides(notes):
-        for note in notes:
-            if note < 0 or note > 20:
-                return False      # une seule note hors bornes suffit : on s'arrete
-        return True
+        for note in notes:             # PARCOURIR
+            if note < 0 or note > 20:  # TESTER
+                return False           # RENVOYER : une note hors bornes suffit
+        return True                    # RENVOYER
 
     def indices_invalides(notes):
         return [i for i in range(len(notes)) if notes[i] < 0 or notes[i] > 20]
@@ -772,11 +902,11 @@ C’est **l’exercice central** du chapitre. La variance <span class="horsprog"
 
     ```python
     def indices_invalides(notes):
-        resultat = []
-        for i in range(len(notes)):
-            if notes[i] < 0 or notes[i] > 20:
-                resultat.append(i)
-        return resultat
+        resultat = []                          # INITIALISER
+        for i in range(len(notes)):            # PARCOURIR
+            if notes[i] < 0 or notes[i] > 20:  # TESTER
+                resultat.append(i)             # METTRE A JOUR
+        return resultat                        # RENVOYER
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 24</span> — Une recherche selon un assistant d’IA <span class="ia ia-vert" title="IA intégrée : l'exercice s'appuie sur une réponse d'IA"></span> { #ex-04-24 }
@@ -811,10 +941,10 @@ def est_present(t, x):
 
     ```python
     def est_present(t, x):
-        for element in t:
-            if element == x:
-                return True
-        return False          # parcours fini sans succes : absent
+        for element in t:     # PARCOURIR
+            if element == x:  # TESTER
+                return True   # RENVOYER
+        return False          # RENVOYER : parcours fini sans succes
     ```
 
     Avec cette correction, `est_present([3, 8, 5], 5)` renvoie `True` et `est_present([3, 8, 5], 7)` renvoie `False`. **3.** Tester la fonction sur un exemple où `x` n’est *pas* en première position : un seul appel suffisait. Un `return False` placé dans un `for` est presque toujours suspect.

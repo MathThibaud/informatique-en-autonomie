@@ -150,6 +150,8 @@ Le protocole <span id="lex-rip09" class="ancre"></span>**RIP** (*Routing Informa
 
     Table de routage de **A** par RIP (destinations $=$ réseaux locaux de B, C, D, E) :
 
+    <span class="routine">▷ Je prédis.</span> Avant de lire la table : pour atteindre le réseau de E, vers quel voisin A envoie-t-il le paquet, et en combien de sauts ?
+
     |   Réseau    | Sortir vers | Sauts |
     |:-----------:|:-----------:|:-----:|
     | réseau de B |      B      |   1   |
@@ -210,6 +212,8 @@ Le protocole <span id="lex-rip09" class="ancre"></span>**RIP** (*Routing Informa
     | Coût $=10^8/\text{débit}$ |     $1$      |    $10$     |   $100$    |
 
     Les liens à $100$ Mbit/s coûtent donc $1$, le lien A–C (à seulement $1$ Mbit/s) coûte $100$, et C–D (à $10$ Mbit/s) coûte $10$. Table de routage de **A** par OSPF :
+
+    <span class="routine">▷ Je prédis.</span> Avant de lire la table : pour atteindre le réseau de C, A emprunte-t-il encore le lien direct A–C ? Quel est le coût de la meilleure route ?
 
     |   Réseau    | Sortir vers |          Coût          |
     |:-----------:|:-----------:|:----------------------:|

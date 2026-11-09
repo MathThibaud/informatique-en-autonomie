@@ -82,7 +82,13 @@ def compte(n):              def bavard():
     return "fini"           # ne s'arrete JAMAIS
 ```
 
-`compte(10)` s’arrête (elle renvoie `"fini"`). Mais `compte(10.5)` ne s’arrête **jamais** : `n` vaut $10.5,\ 9.5,\ 8.5,\dots$ et **ne tombe jamais sur $0$**. Un œil exercé le « voit ». La question naturelle :
+<span class="routine">▷ Je prédis.</span> Les appels `compte(10)`, `compte(10.5)` et `compte(-3)` s’arrêtent-ils ?
+
+??? verifie "Je vérifie"
+
+    `compte(10)` s’arrête (elle renvoie `"fini"`). Mais `compte(10.5)` ne s’arrête **jamais** : `n` vaut $10.5,\ 9.5,\ 8.5,\dots,\ 0.5,\ -0.5,\dots$ et **ne tombe jamais sur $0$**. `compte(-3)` non plus : `n` vaut $-3,\ -4,\ -5,\dots$ et s’éloigne de $0$.
+
+Un œil exercé le « voit ». La question naturelle :
 
 *Pourrait-on écrire un programme qui **analyse un autre programme** et prédit, à notre place, s’il va s’arrêter ?*
 
@@ -114,6 +120,12 @@ def paradoxe(prog):
 ```
 
 Lisons-le lentement. `paradoxe` prend un programme `prog` et fait **le contraire** de ce que fait `prog` lancé sur lui-même : si `prog(prog)` s’arrête, alors `paradoxe` boucle ; si `prog(prog)` boucle, alors `paradoxe` s’arrête. (On a le droit d’écrire `halt(prog, prog)` : un programme peut se prendre lui-même en donnée, on l’a vu au <span class="smallcaps">I</span>.)
+
+<span class="routine">▷ Je prédis.</span> Soit `zero` la fonction définie par `def zero(x): return 0`. Si `halt` existait, l’appel `paradoxe(zero)` s’arrêterait-il ?
+
+??? verifie "Je vérifie"
+
+    Non : `zero(zero)` s’arrête (il renvoie `0`), donc `halt(zero, zero)` vaut `True` et `paradoxe` entre dans le `while True`. Il fait toujours le *contraire* de `prog(prog)`.
 
 Maintenant, la question fatale. Puisque `paradoxe` est un programme, donnons-le **à lui-même** :
 

@@ -277,6 +277,8 @@ Tester un programme embarqué sur la carte est lent et peu reproductible (on ne 
 
 ### <span class="stars" title="Niveau 1 sur 3">★</span> <span class="exo-num">Exercice 6</span> — Les fonctions de traitement <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-14-systemes-sur-puce-et-informatique-embarq-tp-1-6 }
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 <span class="run" title="À programmer et tester sur machine">▶</span>  Compléter, dans l’ordre, `veilleuse`, `nb_basculements`, `nb_led`, `alarme`, `mise_a_jour`, `norme`, `compter_pas_naif` et `compter_pas` (leur rôle est décrit dans le fichier), jusqu’à ce que tous les tests affichent `OK`. On y retrouve les décisions de la partie B (nombre de LED, alarme, podomètre à deux seuils), plus deux variantes : une veilleuse **tout ou rien** qui s’allume sous $40$ et ne s’éteint qu’au-dessus de $80$ (hystérésis, comme l’alarme), et un compteur de pas **naïf** à un seul seuil ($1200$).
 
 ??? corrige "Corrigé"

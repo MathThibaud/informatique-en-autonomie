@@ -131,17 +131,17 @@ def recherche_dichotomique(t, x):
 
     ```python
     def recherche_dichotomique(t, x):
-        deb = 0
-        fin = len(t) - 1
-        while deb <= fin:
+        deb = 0                # INITIALISER : premier indice
+        fin = len(t) - 1       # INITIALISER : dernier indice
+        while deb <= fin:      # PARCOURIR : tant que la zone n'est pas vide
             mil = (deb + fin) // 2
-            if t[mil] == x:
-                return True
-            elif x > t[mil]:
-                deb = mil + 1
+            if t[mil] == x:    # TESTER
+                return True    # RENVOYER : trouve
+            elif x > t[mil]:   # TESTER
+                deb = mil + 1  # METTRE A JOUR : moitie droite
             else:
-                fin = mil - 1
-        return False
+                fin = mil - 1  # METTRE A JOUR : moitie gauche
+        return False           # RENVOYER : zone vide, x absent
     ```
 
     Avec `t = [3, 8, 11, 16, 19, 24, 30, 33, 38, 47, 52]`, l’appel avec `24` renvoie `True` et l’appel avec `10` renvoie `False`. À noter : `fin` est le **dernier indice** (`len(t) - 1`, pas `len(t)`) ; on écrit `mil + 1` et `mil - 1` car `mil` vient d’être testé.
@@ -163,23 +163,33 @@ def recherche_dichotomique(t, x):
     `while deb <= fin:`  
     `mil = (deb + fin) // 2`
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert recherche_dichotomique([3, 8, 11, 16, 19], 16) == True  # cas normal
+    assert recherche_dichotomique([], 5) == False                  # cas limite : tableau vide
+    assert recherche_dichotomique([3, 8, 11, 16, 19], 19) == True  # cas piege : x dans la derniere case
+    ```
 
     La zone de recherche va de `deb` à `fin`. Tant qu’elle n’est pas vide, on compare `x` au milieu : trouvé, on renvoie `True` ; sinon on garde la moitié où `x` peut encore être. Zone vide : `x` est absent.
 
     ```python
     def recherche_dichotomique(t, x):
-        deb = 0
-        fin = len(t) - 1
-        while deb <= fin:
+        deb = 0                # INITIALISER : premier indice
+        fin = len(t) - 1       # INITIALISER : dernier indice
+        while deb <= fin:      # PARCOURIR : tant que la zone n'est pas vide
             mil = (deb + fin) // 2
-            if t[mil] == x:
-                return True
-            elif x > t[mil]:
-                deb = mil + 1
+            if t[mil] == x:    # TESTER
+                return True    # RENVOYER : trouve
+            elif x > t[mil]:   # TESTER
+                deb = mil + 1  # METTRE A JOUR : moitie droite
             else:
-                fin = mil - 1
-        return False
+                fin = mil - 1  # METTRE A JOUR : moitie gauche
+        return False           # RENVOYER : zone vide, x absent
     ```
 
     `recherche_dichotomique(t, 38)` renvoie `True` ; `recherche_dichotomique(t, 25)` renvoie `False`.
@@ -197,23 +207,33 @@ def recherche_dichotomique(t, x):
 
     Partir de `recherche_dichotomique` : que faut-il renvoyer à la place de `True` quand `t[mil] == x` ? et à la place de `False` ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert indice_dichotomique([3, 8, 11, 16, 19], 16) == 3  # cas normal
+    assert indice_dichotomique([7], 7) == 0                  # cas limite : un seul element
+    assert indice_dichotomique([3, 8, 11], 9) == -1          # cas piege : absent, entre deux valeurs
+    ```
 
     On renvoie `mil` au lieu de `True`, et `-1` au lieu de `False`.
 
     ```python
     def indice_dichotomique(t, x):
-        deb = 0
-        fin = len(t) - 1
-        while deb <= fin:
+        deb = 0                # INITIALISER
+        fin = len(t) - 1       # INITIALISER
+        while deb <= fin:      # PARCOURIR
             mil = (deb + fin) // 2
-            if t[mil] == x:
-                return mil
-            elif x > t[mil]:
-                deb = mil + 1
+            if t[mil] == x:    # TESTER
+                return mil     # RENVOYER : la position
+            elif x > t[mil]:   # TESTER
+                deb = mil + 1  # METTRE A JOUR
             else:
-                fin = mil - 1
-        return -1
+                fin = mil - 1  # METTRE A JOUR
+        return -1              # RENVOYER : absent
     ```
 
 ### <span class="stars" title="Niveau 2 sur 3">★★</span> <span class="exo-num">Exercice 7</span> — Compter les tours <span class="ia ia-orange" title="IA en appui : déboguer, reformuler, vérifier ; la réponse finale est la vôtre"></span> { #ex-07-7 }
@@ -223,6 +243,8 @@ def recherche_dichotomique(t, x):
 ??? pouce "Coup de pouce"
 
     Un compteur initialisé à `0`, augmenté de 1 au début de chaque tour ; attention, il y a deux sorties possibles (trouvé, absent) et il faut le renvoyer dans les deux.
+
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
 
 1.  Combien de valeurs sont examinées pour chercher `7` dans `[0, 1, 1, 2, 3, 5, 8, 13, 21]` ?
 
@@ -234,23 +256,31 @@ def recherche_dichotomique(t, x):
 
 ??? corrige "Corrigé"
 
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert nb_tours([3, 8, 11, 16, 19], 16) == 2  # cas normal
+    assert nb_tours([], 5) == 0                   # cas limite : tableau vide, aucun tour
+    assert nb_tours([3, 8, 11, 16, 19], 20) == 3  # cas piege : absent, on compte aussi
+    ```
+
     On ajoute à la recherche un compteur `n`, augmenté au début de chaque tour et renvoyé aux *deux* sorties (trouvé ou zone vide).
 
     ```python
     def nb_tours(t, x):
-        deb = 0
-        fin = len(t) - 1
-        n = 0
-        while deb <= fin:
-            n = n + 1
+        deb = 0                # INITIALISER
+        fin = len(t) - 1       # INITIALISER
+        n = 0                  # INITIALISER : le compteur de tours
+        while deb <= fin:      # PARCOURIR
+            n = n + 1          # METTRE A JOUR : un tour de plus
             mil = (deb + fin) // 2
-            if t[mil] == x:
-                return n
-            elif x > t[mil]:
-                deb = mil + 1
+            if t[mil] == x:    # TESTER
+                return n       # RENVOYER : sortie "trouve"
+            elif x > t[mil]:   # TESTER
+                deb = mil + 1  # METTRE A JOUR
             else:
-                fin = mil - 1
-        return n
+                fin = mil - 1  # METTRE A JOUR
+        return n               # RENVOYER : sortie "zone vide"
     ```
 
     **1.** Pour `7` dans `[0, 1, 1, 2, 3, 5, 8, 13, 21]` (9 éléments), on examine `3` (mil 4), `8` (mil 6), `5` (mil 5), puis la zone est vide : **3 tours**, et `7` est absent.  
@@ -281,25 +311,35 @@ Dans un tableau trié qui contient des **doublons**, `indice_dichotomique` renvo
 
     Quand `t[mil] == x` : mémoriser `mil` dans une variable `resultat` (initialisée à `-1`), puis **continuer** la recherche à gauche avec `fin = mil - 1` au lieu de s’arrêter.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert premiere_occurrence([1, 3, 5, 5, 8], 5) == 2  # cas normal
+    assert premiere_occurrence([], 4) == -1              # cas limite : tableau vide
+    assert premiere_occurrence([4, 4, 4, 4], 4) == 0     # cas piege : que des x, la premiere est en tete
+    ```
 
     **1.** Quand on trouve `x`, on le **mémorise** comme candidat, puis on continue à chercher dans la moitié **gauche**, où peut se trouver une occurrence plus à gauche. La zone diminue toujours de moitié : le coût reste logarithmique.
 
     ```python
     def premiere_occurrence(t, x):
-        deb = 0
-        fin = len(t) - 1
-        resultat = -1
-        while deb <= fin:
+        deb = 0                 # INITIALISER
+        fin = len(t) - 1        # INITIALISER
+        resultat = -1           # INITIALISER : pas encore trouve
+        while deb <= fin:       # PARCOURIR
             mil = (deb + fin) // 2
-            if t[mil] == x:
-                resultat = mil      # candidat : on cherche encore a gauche
-                fin = mil - 1
-            elif x > t[mil]:
-                deb = mil + 1
+            if t[mil] == x:     # TESTER
+                resultat = mil  # METTRE A JOUR : candidat, on cherche encore a gauche
+                fin = mil - 1   # METTRE A JOUR
+            elif x > t[mil]:    # TESTER
+                deb = mil + 1   # METTRE A JOUR
             else:
-                fin = mil - 1
-        return resultat
+                fin = mil - 1   # METTRE A JOUR
+        return resultat         # RENVOYER
     ```
 
     Sur `[2, 4, 4, 4, 7, 9]` avec `x = 4` : `mil = 2` (trouvé, `resultat = 2`, `fin = 1`), puis `mil = 0` (`2 < 4`, `deb = 1`), puis `mil = 1` (trouvé, `resultat = 1`, `fin = 0`) ; la zone est vide, on renvoie `1`.  
@@ -368,18 +408,28 @@ Sans machine, donner le nombre *maximal* de comparaisons d’une recherche dicho
 
     Garder deux variables : `k` et la puissance $2^k$ correspondante, que l’on double à chaque tour. Vérifier à la main avec `n = 1` puis `n = 2`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert nb_tours_max(100) == 7  # cas normal
+    assert nb_tours_max(1) == 1    # cas limite : un seul element
+    assert nb_tours_max(8) == 4    # cas piege : 2**3 = 8 n'est pas > 8
+    ```
 
     On double une puissance de 2 tant qu’elle ne dépasse pas `n`, en comptant les doublements.
 
     ```python
     def nb_tours_max(n):
-        k = 0
-        puissance = 1          # vaut 2**k
-        while puissance <= n:
-            puissance = puissance * 2
-            k = k + 1
-        return k
+        k = 0                          # INITIALISER
+        puissance = 1                  # INITIALISER : vaut 2**k
+        while puissance <= n:          # PARCOURIR : tant que 2**k ne depasse pas n
+            puissance = puissance * 2  # METTRE A JOUR
+            k = k + 1                  # METTRE A JOUR
+        return k                       # RENVOYER
     ```
 
     `nb_tours_max(100)` vaut `7` (car $2^6 = 64 \leq 100 < 128 = 2^7$).
@@ -503,23 +553,33 @@ Combien de tours de boucle environ pour `n = 1000000` ? Comparer avec l’essai 
 
     Même schéma que « La première occurrence » : `deb = 0`, `fin = n`, `r = 0` ; dans la boucle, quand `mil * mil <= n`, on mémorise `r = mil` puis `deb = mil + 1`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert racine_entiere(50) == 7  # cas normal
+    assert racine_entiere(0) == 0   # cas limite : n = 0
+    assert racine_entiere(49) == 7  # cas piege : carre parfait, 7 * 7 <= 49
+    ```
 
     On cherche, dans l’intervalle des entiers de `0` à `n`, le plus grand `r` tel que `r * r <= n`. Même schéma que pour la première occurrence : on mémorise le meilleur candidat et on continue à chercher du côté où il pourrait y en avoir un meilleur.
 
     ```python
     def racine_entiere(n):
-        deb = 0
-        fin = n
-        r = 0
-        while deb <= fin:
+        deb = 0                 # INITIALISER
+        fin = n                 # INITIALISER
+        r = 0                   # INITIALISER : meilleur candidat
+        while deb <= fin:       # PARCOURIR
             mil = (deb + fin) // 2
-            if mil * mil <= n:
-                r = mil             # mil convient ; peut-etre plus grand ?
-                deb = mil + 1
+            if mil * mil <= n:  # TESTER
+                r = mil         # METTRE A JOUR : mil convient ; peut-etre plus grand ?
+                deb = mil + 1   # METTRE A JOUR
             else:
-                fin = mil - 1       # mil est trop grand
-        return r
+                fin = mil - 1   # METTRE A JOUR : mil est trop grand
+        return r                # RENVOYER
     ```
 
     `racine_entiere(50)` et `racine_entiere(49)` renvoient `7`.
@@ -528,10 +588,10 @@ Combien de tours de boucle environ pour `n = 1000000` ? Comparer avec l’essai 
 
     ```python
     def racine_entiere(n):
-        r = 0
-        while (r + 1) * (r + 1) <= n:
-            r = r + 1
-        return r
+        r = 0                          # INITIALISER
+        while (r + 1) * (r + 1) <= n:  # PARCOURIR : tant que le carre suivant convient
+            r = r + 1                  # METTRE A JOUR
+        return r                       # RENVOYER
     ```
 
     Plus simple, mais bien plus lente : pour `n = 1000000`, l’intervalle contient environ $10^6$ entiers ; la dichotomie le réduit en environ **20** tours ($2^{20} \approx 10^6$), contre $1\,000$ essais en testant `0, 1, 2`… un par un jusqu’à `1000`.
@@ -546,6 +606,8 @@ Un dictionnaire de langue (le livre !) est une liste de mots triée par ordre al
 
         Les opérateurs `<`, `>` et `==` comparent aussi des chaînes : que reste-t-il à changer dans le code ?
 
+    <span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 2.  Sur un dictionnaire de $100\,000$ mots, combien de comparaisons faut-il au maximum pour savoir si un mot y figure ?
 
     ??? pouce "Coup de pouce"
@@ -554,21 +616,29 @@ Un dictionnaire de langue (le livre !) est une liste de mots triée par ordre al
 
 ??? corrige "Corrigé"
 
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert est_dans_dico(["chat", "chien", "loup", "ours"], "loup") == True  # cas normal
+    assert est_dans_dico([], "chat") == False                                # cas limite : dictionnaire vide
+    assert est_dans_dico(["chat", "chien", "loup"], "Chat") == False         # cas piege : majuscule
+    ```
+
     **1.** L’algorithme est *identique* : les comparaisons `<`, `==` fonctionnent déjà sur les chaînes (ordre alphabétique).
 
     ```python
     def est_dans_dico(dico, mot):
-        deb = 0
-        fin = len(dico) - 1
-        while deb <= fin:
+        deb = 0                    # INITIALISER
+        fin = len(dico) - 1        # INITIALISER
+        while deb <= fin:          # PARCOURIR
             mil = (deb + fin) // 2
-            if dico[mil] == mot:
-                return True
-            elif mot > dico[mil]:
-                deb = mil + 1
+            if dico[mil] == mot:   # TESTER
+                return True        # RENVOYER
+            elif mot > dico[mil]:  # TESTER : ordre alphabetique
+                deb = mil + 1      # METTRE A JOUR
             else:
-                fin = mil - 1
-        return False
+                fin = mil - 1      # METTRE A JOUR
+        return False               # RENVOYER
     ```
 
     **2.** $\log_2(100\,000) \approx 16{,}6$, donc au plus **17** comparaisons pour un dictionnaire de cent mille mots. La puissance de la dichotomie !

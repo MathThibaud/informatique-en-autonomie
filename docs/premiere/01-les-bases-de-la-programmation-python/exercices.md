@@ -189,7 +189,17 @@ Que réalise, au final, ce programme sur `x` et `y` ?0
 6
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert dizaines(347) == 4       # cas normal
+    assert dizaines(5) == 0         # cas limite : un seul chiffre
+    assert dizaines(305) == 0       # cas piege : le chiffre des dizaines est 0
+    ```
 
     `n % 10` isole le dernier chiffre ; `n // 10` « décale » le nombre d’un cran vers la droite.
 
@@ -342,7 +352,17 @@ Que réalise, au final, ce programme sur `x` et `y` ?0
 
         Reprendre l’exemple du cours sur `elif` : Python exécute le *premier* bloc dont la condition est vraie. Tester à la main la note `18` avec votre ordre de tests.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert mention(13) == "Assez bien"     # cas normal
+    assert mention(16) == "Tres bien"      # cas limite : le seuil est inclus
+    assert mention(9.5) == "Refuse"        # cas piege : une note a virgule sous 10
+    ```
 
     On teste les seuils du plus haut au plus bas avec `if`/`elif`, et le `else` final recueille les notes inférieures à 10.
 
@@ -381,7 +401,17 @@ False
 True
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert est_bissextile(2024) == True     # cas normal
+    assert est_bissextile(2400) == True     # cas limite : divisible par 400
+    assert est_bissextile(2100) == False    # cas piege : divisible par 4 et par 100
+    ```
 
     On traduit la phrase mot à mot : « divisible par 400 » donne `annee % 400 == 0`, « *ou* divisible par 4 *et* pas par 100 » donne `or (... and ...)`. Un seul booléen suffit :
 
@@ -411,7 +441,17 @@ True
 
     Retenir un « champion provisoire » `m`, égal à `a` au départ, puis le comparer successivement à `b` et à `c`.
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert maximum3(3, 7, 5) == 7        # cas normal
+    assert maximum3(4, 4, 4) == 4        # cas limite : trois valeurs egales
+    assert maximum3(-2, -8, -5) == -2    # cas piege : que des negatifs
+    ```
 
     On garde un « champion provisoire » que l’on met à jour :
 
@@ -451,7 +491,17 @@ True
 'scalene'
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert type_triangle(3, 4, 5) == "scalene"        # cas normal
+    assert type_triangle(2, 2, 2) == "equilateral"    # cas limite : trois cotes egaux
+    assert type_triangle(5, 3, 5) == "isocele"        # cas piege : a et c egaux, pas a et b
+    ```
 
     On teste l’égalité des trois côtés, puis d’exactement deux (grâce à l’ordre : si les trois étaient égaux, on serait déjà sorti).
 
@@ -493,7 +543,17 @@ True
 270.0
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert prix_reduit(200) == 190.0     # cas normal
+    assert prix_reduit(100) == 95.0      # cas limite : 100 est deja au palier de 5 %
+    assert prix_reduit(300) == 270.0     # cas piege : 300 est au palier de 10 %
+    ```
 
     On choisit d’abord le taux avec `if`/`elif`/`else` (bornes : `< 100`, puis `< 300`, donc `300` est au palier de 10 %), puis on calcule une seule fois le prix réduit.
 
@@ -549,10 +609,10 @@ for i in range(a, b + 1):
 
     ```python
     def somme_entre(a, b):
-        total = 0
-        for i in range(a, b + 1):
-            total = total + i
-        return total
+        total = 0                  # INITIALISER
+        for i in range(a, b + 1):  # PARCOURIR
+            total = total + i      # METTRE A JOUR
+        return total               # RENVOYER
     ```
 
     On teste dans la console :
@@ -586,16 +646,16 @@ for i in range(a, b + 1):
 
     ```python
     def somme(n):
-        total = 0
-        for i in range(1, n + 1):
-            total = total + i
-        return total
+        total = 0                  # INITIALISER
+        for i in range(1, n + 1):  # PARCOURIR
+            total = total + i      # METTRE A JOUR
+        return total               # RENVOYER
 
     def somme_carres(n):
-        total = 0
-        for i in range(1, n + 1):
-            total = total + i * i
-        return total
+        total = 0                  # INITIALISER
+        for i in range(1, n + 1):  # PARCOURIR
+            total = total + i * i  # METTRE A JOUR
+        return total               # RENVOYER
     ```
 
     On teste dans la console :
@@ -651,16 +711,26 @@ for i in range(a, b + 1):
 '*****'
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert ligne_etoiles(3) == "***"     # cas normal
+    assert ligne_etoiles(0) == ""        # cas limite : aucune etoile
+    assert ligne_etoiles(1) == "*"       # cas piege : un seul tour de boucle
+    ```
 
     On part d’une chaîne vide et on ajoute une étoile à chaque tour (accumulateur de texte, exactement comme l’accumulateur numérique ci-dessus).
 
     ```python
     def ligne_etoiles(n):
-        chaine = ""
-        for i in range(n):
-            chaine = chaine + "*"
-        return chaine
+        chaine = ""                # INITIALISER : la chaine vide
+        for i in range(n):         # PARCOURIR
+            chaine = chaine + "*"  # METTRE A JOUR
+        return chaine              # RENVOYER
     ```
 
     On teste dans la console :
@@ -682,16 +752,26 @@ for i in range(a, b + 1):
 
     C’est le motif de la somme du cours, avec une multiplication. Mais si l’accumulateur part de `0`, que vaut le produit à la fin ? Par quelle valeur faut-il l’initialiser ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert factorielle(5) == 120     # cas normal
+    assert factorielle(1) == 1       # cas limite : un seul coureur
+    assert factorielle(0) == 1       # cas piege : 0! vaut 1, pas 0
+    ```
 
     L’accumulateur d’un *produit* s’initialise à `1`. La boucle `range(2, n+1)` ne fait aucun tour si `n` vaut `0` ou `1`, ce qui donne bien `1`.
 
     ```python
     def factorielle(n):
-        produit = 1
-        for i in range(2, n + 1):
-            produit = produit * i
-        return produit
+        produit = 1                # INITIALISER : element neutre du produit
+        for i in range(2, n + 1):  # PARCOURIR
+            produit = produit * i  # METTRE A JOUR
+        return produit             # RENVOYER
     ```
 
     On teste dans la console :
@@ -724,17 +804,27 @@ for i in range(a, b + 1):
 3
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert compter_voyelles("bonjour") == 3    # cas normal
+    assert compter_voyelles("") == 0           # cas limite : mot vide
+    assert compter_voyelles("rythme") == 2     # cas piege : le y compte
+    ```
 
     Motif du **compteur** : `n` part de `0`, on parcourt le mot lettre par lettre et on ajoute `1` seulement quand la lettre est une voyelle.
 
     ```python
     def compter_voyelles(mot):
-        n = 0
-        for lettre in mot:
-            if lettre in "aeiouyAEIOUY":
-                n = n + 1
-        return n
+        n = 0                             # INITIALISER
+        for lettre in mot:                # PARCOURIR
+            if lettre in "aeiouyAEIOUY":  # TESTER
+                n = n + 1                 # METTRE A JOUR
+        return n                          # RENVOYER
     ```
 
     On teste dans la console :
@@ -769,24 +859,34 @@ for i in range(a, b + 1):
 True
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert somme_diviseurs(6) == 12    # cas normal : 1 + 2 + 3 + 6
+    assert somme_diviseurs(1) == 1     # cas limite : 1 n'a qu'un diviseur
+    assert somme_diviseurs(7) == 8     # cas piege : n lui-meme compte (1 + 7)
+    ```
 
     Accumulateur sous condition : on essaie tous les `d` de `1` à `n` et on n’ajoute que ceux qui vérifient `n % d == 0`. `est_parfait` réutilise ensuite `somme_diviseurs`.
 
     ```python
     def somme_diviseurs(n):
-        total = 0
-        for d in range(1, n + 1):
-            if n % d == 0:
-                total = total + d
-        return total
+        total = 0                  # INITIALISER
+        for d in range(1, n + 1):  # PARCOURIR
+            if n % d == 0:         # TESTER : d divise-t-il n ?
+                total = total + d  # METTRE A JOUR
+        return total               # RENVOYER
 
     def est_parfait(n):
         return somme_diviseurs(n) == 2 * n
 
     for k in range(1, 100):
         if est_parfait(k):
-            print(k)          # affiche 6 puis 28
+            print(k)               # affiche 6 puis 28
     ```
 
     On teste dans la console :
@@ -815,17 +915,27 @@ True
 3
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert occurrences("a", "banana") == 3    # cas normal
+    assert occurrences("a", "") == 0          # cas limite : mot vide
+    assert occurrences("A", "banana") == 0    # cas piege : "A" et "a" sont differents
+    ```
 
     Même compteur que « Compter les voyelles » ; seule la condition change : `lettre == caractere`.
 
     ```python
     def occurrences(caractere, mot):
-        n = 0
-        for lettre in mot:
-            if lettre == caractere:
-                n = n + 1
-        return n
+        n = 0                        # INITIALISER
+        for lettre in mot:           # PARCOURIR
+            if lettre == caractere:  # TESTER
+                n = n + 1            # METTRE A JOUR
+        return n                     # RENVOYER
     ```
 
     On teste dans la console :
@@ -852,16 +962,26 @@ True
 1
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert puissance(2, 10) == 1024    # cas normal
+    assert puissance(5, 0) == 1        # cas limite : exposant nul
+    assert puissance(-2, 3) == -8      # cas piege : base negative
+    ```
 
     L’accumulateur d’un produit s’initialise à `1`. La boucle fait `n` tours ; si `n` vaut `0`, elle n’en fait aucun et renvoie `1`.
 
     ```python
     def puissance(a, n):
-        resultat = 1
-        for i in range(n):
-            resultat = resultat * a
-        return resultat
+        resultat = 1                 # INITIALISER : a puissance 0
+        for i in range(n):           # PARCOURIR : n tours
+            resultat = resultat * a  # METTRE A JOUR
+        return resultat              # RENVOYER
     ```
 
     On teste dans la console :
@@ -967,9 +1087,9 @@ Buzz
 
     ```python
     def compte_a_rebours(n):
-        while n > 0:
+        while n > 0:   # PARCOURIR : de n jusqu'a 1
             print(n)
-            n = n - 1
+            n = n - 1  # METTRE A JOUR : le variant diminue
     ```
 
     **Terminaison.** La variable `n` est un **variant** : elle est positive tant qu’on entre dans la boucle (`n > 0`) et diminue de `1` à chaque tour. Une suite d’entiers positifs qui décroît strictement atteint forcément `0`, ce qui rend la condition fausse : la boucle se termine.
@@ -997,26 +1117,36 @@ Buzz
 14
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert nombre_de_chiffres(347) == 3    # cas normal
+    assert nombre_de_chiffres(0) == 1      # cas limite : 0 s'ecrit avec un chiffre
+    assert nombre_de_chiffres(100) == 3    # cas piege : les zeros comptent
+    ```
 
     On ne sait pas d’avance combien de chiffres a `n` : boucle `while n > 0`. À chaque tour, on traite le dernier chiffre (`n % 10`), puis on le retire (`n = n // 10`).
 
     ```python
     def nombre_de_chiffres(n):
         if n == 0:
-            return 1
-        compteur = 0
-        while n > 0:
-            n = n // 10
-            compteur = compteur + 1
-        return compteur
+            return 1                 # RENVOYER : 0 s'ecrit avec un chiffre
+        compteur = 0                 # INITIALISER
+        while n > 0:                 # PARCOURIR : chiffre par chiffre
+            n = n // 10              # METTRE A JOUR : on retire le dernier chiffre
+            compteur = compteur + 1  # METTRE A JOUR
+        return compteur              # RENVOYER
 
     def somme_chiffres(n):
-        total = 0
-        while n > 0:
-            total = total + n % 10
-            n = n // 10
-        return total
+        total = 0                    # INITIALISER
+        while n > 0:                 # PARCOURIR
+            total = total + n % 10   # METTRE A JOUR
+            n = n // 10              # METTRE A JOUR
+        return total                 # RENVOYER
     ```
 
     On teste dans la console :
@@ -1049,16 +1179,26 @@ Buzz
 4
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert racine_entiere(15) == 3    # cas normal
+    assert racine_entiere(0) == 0     # cas limite : aucune dalle
+    assert racine_entiere(16) == 4    # cas piege : carre parfait, 4 * 4 = 16 convient
+    ```
 
     On part de `k = 0` et on augmente `k` tant que le carré du *suivant* ne dépasse pas `n` ; en sortie, `k` convient et `k + 1` ne convient plus.
 
     ```python
     def racine_entiere(n):
-        k = 0
-        while (k + 1) * (k + 1) <= n:
-            k = k + 1
-        return k
+        k = 0                          # INITIALISER
+        while (k + 1) * (k + 1) <= n:  # TESTER : k + 1 convient-il encore ?
+            k = k + 1                  # METTRE A JOUR
+        return k                       # RENVOYER
     ```
 
     On teste dans la console :
@@ -1082,18 +1222,28 @@ Buzz
 
     Deux variables évoluent ensemble : l’entier `n` et le total `1 + 2 + ... + n`. Quelle condition écrire dans le `while` pour continuer *tant que* le seuil n’est pas dépassé ?
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert seuil(1000) == 45    # cas normal
+    assert seuil(0) == 1        # cas limite : des le premier jour
+    assert seuil(10) == 5       # cas piege : 1 + 2 + 3 + 4 = 10 ne depasse pas 10
+    ```
 
     Deux variables avancent ensemble (le jour `n` et le contenu `total`) ; on continue *tant que* le seuil n’est pas dépassé, c’est-à-dire tant que `total <= s`.
 
     ```python
     def seuil(s):
-        n = 0
-        total = 0
-        while total <= s:
-            n = n + 1
-            total = total + n
-        return n
+        n = 0                  # INITIALISER : le jour
+        total = 0              # INITIALISER : le contenu de la tirelire
+        while total <= s:      # PARCOURIR : jour apres jour
+            n = n + 1          # METTRE A JOUR
+            total = total + n  # METTRE A JOUR
+        return n               # RENVOYER
     ```
 
     On teste dans la console :
@@ -1133,16 +1283,26 @@ Buzz
 6
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert pgcd(12, 18) == 6    # cas normal
+    assert pgcd(7, 7) == 7      # cas limite : a et b egaux, aucun tour
+    assert pgcd(17, 5) == 1     # cas piege : aucun diviseur commun sauf 1
+    ```
 
     ```python
     def pgcd(a, b):
-        while a != b:
+        while a != b:      # TESTER : on continue tant qu'ils different
             if a > b:
-                a = a - b
+                a = a - b  # METTRE A JOUR
             else:
-                b = b - a
-        return a
+                b = b - a  # METTRE A JOUR
+        return a           # RENVOYER
     ```
 
     On teste dans la console :
@@ -1183,12 +1343,22 @@ Buzz
 6
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert racine_numerique(347) == 5    # cas normal
+    assert racine_numerique(7) == 7      # cas limite : deja un seul chiffre
+    assert racine_numerique(19) == 1     # cas piege : 19 -> 10 -> 1, deux tours
+    ```
 
     Tant que `n` a plus d’un chiffre, on le remplace par la somme de ses chiffres.
 
     ```python
-    def somme_chiffres(n):        # deja ecrite plus haut
+    def somme_chiffres(n):         # deja ecrite plus haut
         total = 0
         while n > 0:
             total = total + n % 10
@@ -1196,9 +1366,9 @@ Buzz
         return total
 
     def racine_numerique(n):
-        while n >= 10:
-            n = somme_chiffres(n)
-        return n
+        while n >= 10:             # TESTER : plus d'un chiffre ?
+            n = somme_chiffres(n)  # METTRE A JOUR
+        return n                   # RENVOYER
     ```
 
     On teste dans la console :
@@ -1238,16 +1408,16 @@ Buzz
     def est_premier(n):
         if n < 2:
             return False
-        for d in range(2, n):
-            if n % d == 0:
-                return False
-        return True
+        for d in range(2, n):       # PARCOURIR : les diviseurs possibles
+            if n % d == 0:          # TESTER
+                return False        # RENVOYER : un diviseur trouve, on sort
+        return True                 # RENVOYER : aucun diviseur
 
-    assert est_premier(2) == True      # cas limite
+    assert est_premier(2) == True   # cas limite
     assert est_premier(7) == True
     assert est_premier(97) == True
-    assert est_premier(0) == False     # cas limite
-    assert est_premier(1) == False     # cas limite
+    assert est_premier(0) == False  # cas limite
+    assert est_premier(1) == False  # cas limite
     assert est_premier(9) == False
     ```
 
@@ -1270,24 +1440,34 @@ True
 False
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert est_palindrome("kayak") == True    # cas normal
+    assert est_palindrome("") == True         # cas limite : mot vide
+    assert est_palindrome("abca") == False    # cas piege : memes bords, mais pas le reste
+    ```
 
     On compare les caractères par paires, en partant des deux bords et en se rapprochant du centre avec deux indices `i` et `j`. La quantité `j - i` est un variant : elle diminue de 2 à chaque tour.
 
     ```python
     def est_palindrome(mot):
-        i = 0
-        j = len(mot) - 1
-        while i < j:
-            if mot[i] != mot[j]:
-                return False
-            i = i + 1
-            j = j - 1
-        return True
+        i = 0                          # INITIALISER
+        j = len(mot) - 1               # INITIALISER
+        while i < j:                   # PARCOURIR : des deux bords vers le centre
+            if mot[i] != mot[j]:       # TESTER
+                return False           # RENVOYER
+            i = i + 1                  # METTRE A JOUR
+            j = j - 1                  # METTRE A JOUR
+        return True                    # RENVOYER
 
     assert est_palindrome("radar") == True
     assert est_palindrome("bonjour") == False
-    assert est_palindrome("") == True      # cas limites
+    assert est_palindrome("") == True  # cas limites
     assert est_palindrome("a") == True
     ```
 
@@ -1310,7 +1490,17 @@ True
 True
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert meme_bord("radar") == True     # cas normal
+    assert meme_bord("a") == True         # cas limite : une seule lettre
+    assert meme_bord("Radar") == False    # cas piege : "R" et "r" sont differents
+    ```
 
     Aucune boucle : on compare directement la première lettre (`mot[0]`) et la dernière (`mot[-1]`), après avoir écarté le mot vide, qui n’a pas de première lettre.
 
@@ -1407,7 +1597,17 @@ Sur une ligne de bus de Monaco, le premier bus part à **6 h 30**, puis il en 
 -1
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert prochain_bus(400) == 402      # cas normal
+    assert prochain_bus(390) == 390      # cas limite : un bus part pile a cet instant
+    assert prochain_bus(1255) == -1      # cas piege : avant 21 h, mais apres le dernier bus
+    ```
 
     On part du premier bus (390) et on passe au suivant (`+ 12`) tant qu’il part avant l’instant `t`. En sortie de boucle, il reste à vérifier que ce bus part encore avant 21 h 00, soit $21 \times 60 = 1260$.
 
@@ -1416,12 +1616,12 @@ Sur une ligne de bus de Monaco, le premier bus part à **6 h 30**, puis il en 
         return h * 60 + m
 
     def prochain_bus(t):
-        depart = 390                  # 6 h 30
-        while depart < t:
-            depart = depart + 12      # bus suivant
-        if depart > 1260:             # apres 21 h 00 : plus de bus
+        depart = 390                 # INITIALISER : 6 h 30
+        while depart < t:            # PARCOURIR : bus apres bus
+            depart = depart + 12     # METTRE A JOUR : bus suivant
+        if depart > 1260:            # TESTER : apres 21 h 00, plus de bus
             return -1
-        return depart
+        return depart                # RENVOYER
 
     def attente(h, m):
         t = en_minutes(h, m)
@@ -1432,8 +1632,8 @@ Sur une ligne de bus de Monaco, le premier bus part à **6 h 30**, puis il en 
 
     assert en_minutes(6, 30) == 390
     assert prochain_bus(400) == 402
-    assert prochain_bus(0) == 390       # avant le premier bus
-    assert prochain_bus(402) == 402     # un bus part pile a cet instant
+    assert prochain_bus(0) == 390    # avant le premier bus
+    assert prochain_bus(402) == 402  # un bus part pile a cet instant
     assert attente(8, 0) == 6
     assert attente(22, 15) == -1
     ```
@@ -1482,30 +1682,30 @@ False
 
     ```python
     def compter_chiffres(mdp):
-        n = 0
-        for c in mdp:
-            if c in "0123456789":
-                n = n + 1
-        return n
+        n = 0                                 # INITIALISER
+        for c in mdp:                         # PARCOURIR
+            if c in "0123456789":             # TESTER
+                n = n + 1                     # METTRE A JOUR
+        return n                              # RENVOYER
 
     def est_robuste(mdp):
-        majuscules = 0
-        speciaux = 0
-        for c in mdp:
+        majuscules = 0                        # INITIALISER
+        speciaux = 0                          # INITIALISER
+        for c in mdp:                         # PARCOURIR
             if c in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
-                majuscules = majuscules + 1
+                majuscules = majuscules + 1   # METTRE A JOUR
             if c in "!?@#$%&*":
-                speciaux = speciaux + 1
+                speciaux = speciaux + 1       # METTRE A JOUR
         return (len(mdp) >= 8 and majuscules >= 1
                 and compter_chiffres(mdp) >= 1 and speciaux >= 1)
 
     assert compter_chiffres("Monaco98") == 2
     assert compter_chiffres("") == 0
     assert est_robuste("Monaco98!") == True
-    assert est_robuste("Mon98!") == False       # trop court
-    assert est_robuste("monaco98!") == False    # pas de majuscule
-    assert est_robuste("Monacooo!") == False    # pas de chiffre
-    assert est_robuste("Monaco98") == False     # pas de caractere special
+    assert est_robuste("Mon98!") == False     # trop court
+    assert est_robuste("monaco98!") == False  # pas de majuscule
+    assert est_robuste("Monacooo!") == False  # pas de chiffre
+    assert est_robuste("Monaco98") == False   # pas de caractere special
     ```
 
     Chaque mot de passe refusé n’enfreint qu’**une seule** règle : si un test échoue, on sait immédiatement quelle condition est mal écrite.
@@ -1587,13 +1787,13 @@ def somme_impairs(n):
 
     ```python
     def somme_impairs(n):
-        somme = 0
-        for i in range(1, n + 1, 2):
-            somme = somme + i
-        return somme
+        somme = 0                     # INITIALISER
+        for i in range(1, n + 1, 2):  # PARCOURIR : 1, 3, 5... jusqu'a n inclus
+            somme = somme + i         # METTRE A JOUR
+        return somme                  # RENVOYER
 
-    print(somme_impairs(5))    # 9
-    print(somme_impairs(6))    # 9  (1 + 3 + 5)
+    print(somme_impairs(5))           # 9
+    print(somme_impairs(6))           # 9  (1 + 3 + 5)
     ```
 
     **3.** Exécuter l’exemple que l’assistant donne lui-même : il annonce `9` pour `somme_impairs(5)`, la console affiche `4`. La réponse se contredit ; un seul appel suffisait. Le cas où `n` est lui-même impair est justement le cas limite à tester.
@@ -1625,7 +1825,17 @@ L’algorithme de l’exercice « PGCD (algorithme d’Euclide) » est décrit p
 21
 ```
 
+<span class="routine">▷ Avant de coder.</span> Écrire trois appels attendus sous forme d’`assert` : un cas **normal**, un cas **limite**, un cas **piège**.
+
 ??? corrige "Corrigé"
+
+    *Appels attendus, écrits avant de coder :*
+
+    ```python
+    assert pgcd_rapide(1071, 462) == 21    # cas normal
+    assert pgcd_rapide(12, 12) == 12       # cas limite : a et b egaux
+    assert pgcd_rapide(12, 18) == 6        # cas piege : a < b, le premier tour echange
+    ```
 
     **1.** On ajoute un compteur à la fonction de l’exercice « PGCD » :
 
@@ -1654,18 +1864,18 @@ L’algorithme de l’exercice « PGCD (algorithme d’Euclide) » est décrit p
     ```python
     def pgcd_rapide(a, b):
         """Renvoie le PGCD de a et b (entiers strictement positifs)."""
-        tours = 0
-        while b != 0:
-            r = a % b
-            a = b
-            b = r
-            tours = tours + 1
+        tours = 0                  # INITIALISER
+        while b != 0:              # TESTER
+            r = a % b              # METTRE A JOUR : le reste d'abord
+            a = b                  # METTRE A JOUR
+            b = r                  # METTRE A JOUR
+            tours = tours + 1      # METTRE A JOUR
         print(tours, "tours")
-        return a
+        return a                   # RENVOYER
 
-    print(pgcd_rapide(1000, 3))     # 2 tours, puis 1
-    print(pgcd_rapide(12, 18))      # 3 tours, puis 6
-    print(pgcd_rapide(1071, 462))   # 3 tours, puis 21
+    print(pgcd_rapide(1000, 3))    # 2 tours, puis 1
+    print(pgcd_rapide(12, 18))     # 3 tours, puis 6
+    print(pgcd_rapide(1071, 462))  # 3 tours, puis 21
     ```
 
     Pour `pgcd_rapide(1000, 3)`, **2 tours** suffisent au lieu de 335. Si `a < b`, le premier tour échange simplement les deux nombres (`12 % 18` vaut `12`).
