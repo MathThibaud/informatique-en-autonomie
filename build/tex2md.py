@@ -1204,6 +1204,24 @@ class Converter:
         return '\n'.join(out)
 
     @staticmethod
+    def ajuster_formule_centree(f):
+        """Adapte une formule centrée du PDF à MathJax et à la largeur d'écran :
+        - « \\text{\\scriptsize x} » : MathJax ignore les tailles de police en mode texte
+          (« \\scriptsize » s'afficherait en clair) → « {\\scriptstyle\\text{x}} » ;
+        - tableaux côte à côte (« \\end{array} \\qquad … ») : coupés en formules empilées,
+          sinon la ligne déborde du cadre et la fin est rognée."""
+        f = re.sub(r'\\text\{\\(?:scriptsize|footnotesize|small|tiny)\s*([^{}]*)\}',
+                   r'{\\scriptstyle\\text{\1}}', f)
+        morceaux, prof, debut = [], 0, 0
+        for m in re.finditer(r'\\(begin|end)\{[^}]*\}((?:\s*\\qquad)+\s*)?', f):
+            prof += 1 if m.group(1) == 'begin' else -1
+            if m.group(1) == 'end' and prof == 0 and m.group(2) and f[m.end():].strip():
+                morceaux.append(f[debut:m.start(2)].rstrip())
+                debut = m.end()
+        morceaux.append(f[debut:])
+        return '$$$$'.join(morceaux)
+
+    @staticmethod
     def display_math_blocks(md):
         """Isole chaque $$…$$ (même sur plusieurs lignes) collé à du texte : arithmatex ne lit
         une formule centrée que si elle forme son propre bloc (sinon « $ … $ » brut à l'écran)."""
@@ -1218,6 +1236,7 @@ class Converter:
         md = re.sub(r'`[^`\n]*`', cacher, md)
         # « $$$…$$$ » (formule en ligne dans une formule centrée) et « $$a$$$$b$$ » (deux collées)
         md = re.sub(r'\$\$\$(.+?)\$\$\$', r'$$\1$$', md, flags=re.S)
+        md = disp.sub(lambda m: '$$' + Converter.ajuster_formule_centree(m.group(1)) + '$$', md)
         md = md.replace('$$$$', '$$ $$')
         out, pos = [], 0
         for m in disp.finditer(md):

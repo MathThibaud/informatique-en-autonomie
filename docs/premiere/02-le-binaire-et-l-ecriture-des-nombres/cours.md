@@ -148,13 +148,16 @@ On pose l’addition comme en base 10, rang par rang **de droite à gauche**, en
 !!! exemple "Exemple — Poser $13 + 11$ en binaire"
 
     $$\begin{array}{r@{\quad}c@{\,}c@{\,}c@{\,}c@{\,}c}
-    \text{\scriptsize retenues} & {\scriptstyle 1} & {\scriptstyle 1} & {\scriptstyle 1} & {\scriptstyle 1} & \\
+    {\scriptstyle\text{retenues}} & {\scriptstyle 1} & {\scriptstyle 1} & {\scriptstyle 1} & {\scriptstyle 1} & \\
      & & \texttt{1} & \texttt{1} & \texttt{0} & \texttt{1} \\
     + & & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{1} \\
     \hline
      & \texttt{1} & \texttt{1} & \texttt{0} & \texttt{0} & \texttt{0}
-    \end{array}
-    \qquad\qquad \texttt{11000}_2 = 16 + 8 = 24 = 13 + 11.$$
+    \end{array}$$
+
+    
+
+    $$\texttt{11000}_2 = 16 + 8 = 24 = 13 + 11.$$
 
     Une retenue qui sort à gauche ajoute un rang : la somme de deux nombres de 4 bits peut demander 5 bits. Cette addition, que le processeur effectue sans cesse, resservira plus loin pour coder les entiers négatifs (complément à deux).
 

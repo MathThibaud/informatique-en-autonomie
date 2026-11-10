@@ -75,18 +75,22 @@
      6 &=& 2 \times 3 + \mathbf{0}\\
      3 &=& 2 \times 1 + \mathbf{1}\\
      1 &=& 2 \times 0 + \mathbf{1}
-    \end{array}
-    \qquad
-    \begin{array}{rcl}
+    \end{array}$$
+
+    
+
+    $$\begin{array}{rcl}
     42 &=& 2 \times 21 + \mathbf{0}\\
     21 &=& 2 \times 10 + \mathbf{1}\\
     10 &=& 2 \times\phantom{0}5 + \mathbf{0}\\
      5 &=& 2 \times\phantom{0}2 + \mathbf{1}\\
      2 &=& 2 \times\phantom{0}1 + \mathbf{0}\\
      1 &=& 2 \times\phantom{0}0 + \mathbf{1}
-    \end{array}
-    \qquad
-    \begin{array}{rcl}
+    \end{array}$$
+
+    
+
+    $$\begin{array}{rcl}
     200 &=& 2 \times 100 + \mathbf{0}\\
     100 &=& 2 \times\phantom{0}50 + \mathbf{0}\\
      50 &=& 2 \times\phantom{0}25 + \mathbf{0}\\
@@ -398,9 +402,11 @@
     $$\begin{array}{rcl}
     255 &=& 16 \times 15 + \mathbf{15}\ (\texttt{F})\\
      15 &=& 16 \times\phantom{0}0 + \mathbf{15}\ (\texttt{F})
-    \end{array}
-    \qquad\qquad
-    \begin{array}{rcl}
+    \end{array}$$
+
+    
+
+    $$\begin{array}{rcl}
     3000 &=& 16 \times 187 + \mathbf{8}\\
      187 &=& 16 \times\phantom{0}11 + \mathbf{11}\ (\texttt{B})\\
       11 &=& 16 \times\phantom{00}0 + \mathbf{11}\ (\texttt{B})
