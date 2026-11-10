@@ -358,9 +358,10 @@ lst = Cellule(3, Cellule(1, Cellule(4, None)))
     ```python
     def renverser_iteratif(lst):
         resultat = None
-        while lst is not None:
-            resultat = Cellule(lst.valeur, resultat)
-            lst = lst.suivante
+        c = lst
+        while c is not None:
+            resultat = Cellule(c.valeur, resultat)
+            c = c.suivante
         return resultat
     ```
 

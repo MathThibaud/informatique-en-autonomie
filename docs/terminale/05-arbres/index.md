@@ -15,7 +15,7 @@
 <!-- pdf-chapitre -->
 !!! livre "Le chapitre en PDF"
 
-    Les pages du manuel pour ce chapitre — activités, cours, exercices, TP, fiche de révision — suivies de leurs corrigés, avec les numéros de page du manuel (84 pages, version du 9 novembre 2026).
+    Les pages du manuel pour ce chapitre — activités, cours, exercices, TP, fiche de révision — suivies de leurs corrigés, avec les numéros de page du manuel (84 pages, version du 10 novembre 2026).
 
     [:material-download: Télécharger le chapitre (1,7 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/chapitre-terminale-05-arbres.pdf){ .md-button .md-button--primary }
 <!-- /pdf-chapitre -->

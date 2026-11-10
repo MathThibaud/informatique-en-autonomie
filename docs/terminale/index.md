@@ -17,7 +17,7 @@ hide:
 
 !!! livre "Le manuel complet en PDF"
 
-    Tout le cours, les exercices et les corrigés de l'année, dans la version distribuée en classe (version du 9 novembre 2026).
+    Tout le cours, les exercices et les corrigés de l'année, dans la version distribuée en classe (version du 10 novembre 2026).
 
     [:material-download: Télécharger le manuel (10,3 Mo)](https://github.com/MathThibaud/informatique-en-autonomie/releases/download/livres/manuel-terminale.pdf){ .md-button .md-button--primary }
 

@@ -420,6 +420,16 @@ Insérer un maillon ne demande que de **rebrancher deux liens**, sans déplacer 
 
         Pour `lst = Cellule(4, Cellule(7, Cellule(2, None)))`, la boucle fait trois tours et affiche `4`, `7` puis `2`. Le même schéma (`c = lst`, <span id="lex-pyisnone03" class="ancre"></span>`while c is not None:`, `c = c.suivante`) sert à tous les parcours : calculer la longueur, chercher une valeur, faire une somme, accéder au $n$-ième élément…
 
+!!! remarque "Remarque — Pourquoi un curseur c ?"
+
+    On pourrait avancer directement avec `lst = lst.suivante` : cela fonctionne aussi. En effet, `lst` est une variable **locale** de la fonction : lui faire désigner la cellule suivante ne modifie aucune cellule, et la liste de l’appelant reste intacte. On prend pourtant l’habitude du curseur, pour trois raisons.
+
+    - **Lisibilité** : `lst` reste « la liste », `c` est « la cellule où l’on en est ».
+
+    - **La tête reste disponible** : après la boucle, `lst` désigne toujours la première cellule, si la fonction en a encore besoin (second parcours, liste à renvoyer…).
+
+    - **Le même réflexe marche dans une classe** : si la tête est rangée dans un attribut, par exemple `self._tete` d’une classe `Pile`, écrire `self._tete = self._tete.suivante` modifie vraiment l’objet : après un simple affichage, la pile serait vide ! Avec `c = self._tete`, aucun risque.
+
 <span id="cours-03-21" class="ancre"></span>
 
 <span class="afaire">▶ Exercices d'application :</span> exercices **[21](exercices.md#ex-03-21) à [26](exercices.md#ex-03-26)** (listes chaînées)
